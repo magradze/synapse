@@ -1,8 +1,22 @@
 var searchData=
 [
-  ['benchmarks_20guide_0',['ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)',['../md_docs_2performance_2performance__benchmarks.html',1,'']]],
-  ['best_20practices_1',['best practices',['../md_docs_2performance_2performance__best__practices.html',1,'საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)'],['../md_docs_2security_2security__best__practices.html',1,'უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)']]],
-  ['best_20practices_20extending_20the_20framework_2',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
-  ['branching_20strategy_3',['Synapse Branching Strategy',['../md_docs_2contributing_2branching__strategy.html',1,'']]],
-  ['bus_20api_20reference_4',['Synapse Event Bus API Reference',['../md_docs_2api__reference_2event__api.html',1,'']]]
+  ['changelog_5f2025_2006_2024_0',['CHANGELOG_2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
+  ['code_5fof_5fconduct_1',['code_of_conduct',['../md_docs_2contributing_2code__of__conduct.html',1,'']]],
+  ['coding_5fdoxygen_5fstandard_2',['coding_doxygen_standard',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]],
+  ['commit_5fmessage_5fguidelines_3',['commit_message_guidelines',['../md_docs_2contributing_2commit__message__guidelines.html',1,'']]],
+  ['common_5fissues_4',['common_issues',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
+  ['communication_5fapi_5',['communication_api',['../md_docs_2api__reference_2communication__api.html',1,'']]],
+  ['communication_5fchoices_6',['communication_choices',['../md_docs_2design__decisions_2communication__choices.html',1,'']]],
+  ['communication_5fpatterns_7',['communication_patterns',['../md_docs_2structure_2communication__patterns.html',1,'communication_patterns'],['../md_docs_2convention_2communication__patterns.html',1,'communication_patterns']]],
+  ['configuration_5fapi_8',['configuration_api',['../md_docs_2api__reference_2configuration__api.html',1,'']]],
+  ['configuration_5fflow_9',['configuration_flow',['../md_docs_2structure_2configuration__flow.html',1,'']]],
+  ['configuration_5fmanagement_10',['configuration_management',['../md_docs_2convention_2configuration__management.html',1,'']]],
+  ['contributing_5fguide_11',['contributing_guide',['../md_docs_2contributing_2contributing__guide.html',1,'']]],
+  ['contributing_5findex_12',['contributing_index',['../md_docs_2contributing_2contributing__index.html',1,'']]],
+  ['convention_5findex_13',['convention_index',['../md_docs_2convention_2convention__index.html',1,'']]],
+  ['convention_5flinter_5fguide_14',['convention_linter_guide',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
+  ['core_5fapi_15',['core_api',['../md_docs_2api__reference_2core__api.html',1,'']]],
+  ['core_5fcomponents_16',['core_components',['../md_docs_2design__decisions_2core__components.html',1,'core_components'],['../md_docs_2structure_2core__components.html',1,'core_components']]],
+  ['create_5ffirst_5fmodule_17',['create_first_module',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
+  ['custom_5fapi_18',['custom_api',['../md_docs_2api__reference_2custom__api.html',1,'']]]
 ];

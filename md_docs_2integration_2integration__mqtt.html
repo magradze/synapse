@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)</title>
+<title>Synapse ESP Framework: integration_mqtt</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,76 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2integration_2integration__mqt
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)</div></div>
+  <div class="headertitle"><div class="title">integration_mqtt</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1003"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1005"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ში MQTT ბროკერთან ინტეგრაციის სახელმძღვანელოს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1007"></a>
-ძირითადი ნაბიჯები</h1>
-<ol type="1">
-<li><b>MQTT მოდულის ჩართვა და კონფიგურაცია</b><ul>
-<li>დაამატეთ mqtt_module system_config.json-ში: <div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;type&quot;: &quot;mqtt_module&quot;,</div>
-<div class="line">    &quot;enabled&quot;: true,</div>
-<div class="line">    &quot;config&quot;: {</div>
-<div class="line">        &quot;instance_name&quot;: &quot;main_broker&quot;,</div>
-<div class="line">        &quot;broker_uri&quot;: &quot;mqtt://broker.synapse.local:1883&quot;,</div>
-<div class="line">        &quot;base_topic&quot;: &quot;/synapse/device&quot;,</div>
-<div class="line">        &quot;username&quot;: &quot;user&quot;,</div>
-<div class="line">        &quot;password&quot;: &quot;pass&quot;</div>
-<div class="line">    }</div>
-<div class="line">}</div>
-</div><!-- fragment --></li>
-<li>ჩართეთ მოდული Kconfig-ში</li>
-</ul>
-</li>
-<li><b>Publish/Subscribe API-ის გამოყენება</b><ul>
-<li>Publish: <div class="fragment"><div class="line">mqtt_module_publish(<span class="stringliteral">&quot;/synapse/device/relay1/state&quot;</span>, <span class="stringliteral">&quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;</span>);</div>
-</div><!-- fragment --></li>
-<li>Subscribe: <div class="fragment"><div class="line">esp_err_t mqtt_handle_command(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <span class="keyword">const</span> <span class="keywordtype">char</span> *payload) {</div>
-<div class="line">    <span class="comment">// ... process incoming command ...</span></div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line">mqtt_module_subscribe(<span class="stringliteral">&quot;/synapse/device/relay1/cmd&quot;</span>, mqtt_handle_command);</div>
-</div><!-- fragment --></li>
-</ul>
-</li>
-<li><b>უსაფრთხოების რეკომენდაციები</b><ul>
-<li>გამოიყენეთ TLS/SSL (mqtts://) პროტოკოლი</li>
-<li>credentials შეინახეთ მხოლოდ კონფიგურაციაში (NVS)</li>
-<li>არ ჩაწეროთ პაროლები ლოგებში</li>
-</ul>
-</li>
-<li><b>Debug და ტესტირება</b><ul>
-<li>გამოიყენეთ ESP_LOGI/ESP_LOGE MQTT მოდულში</li>
-<li>დააკვირდით MQTT კავშირის სტატუსს და შეცდომებს</li>
-</ul>
-</li>
-</ol>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1009"></a>
-Best Practices</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ public API-ები MQTT მოდულთან მუშაობისას</li>
-<li>დაიცავით naming და structure კონვენციები</li>
-<li>ჩაატარეთ ტესტირება სხვადასხვა ბროკერზე</li>
-<li>გამოიყენეთ ლოგირება და დეტალური კონტექსტი</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1011"></a>
-დაკავშირებული დოკუმენტები</h1>
-<ul>
-<li><a class="el" href="md_docs_2integration_2integration__index.html">integration_index.md</a></li>
-<li><a class="el" href="md_docs_2api__reference_2communication__api.html">api_reference/communication_api.md</a></li>
-<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
-</ul>
-<hr  />
-<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი integration დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

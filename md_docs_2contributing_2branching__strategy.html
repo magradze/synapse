@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: Synapse Branching Strategy</title>
+<title>Synapse ESP Framework: branching_strategy</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,76 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2branching__stra
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Synapse Branching Strategy</div></div>
+  <div class="headertitle"><div class="title">branching_strategy</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md435"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md437"></a>
-მიმოხილვა</h1>
-<p>ეს დოკუმენტი განსაზღვრავს Synapse Framework-ში ბრენჩინგის (Branching) სტრატეგიას, სახელდების წესებსა და სამუშაო პროცესს. მიზანია კოდის სტაბილურობის, გამჭვირვალობისა და ეფექტური თანამშრომლობის უზრუნველყოფა.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md439"></a>
-ძირითადი ბრენჩები</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Branch   </th><th class="markdownTableHeadNone">დანიშნულება    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">main   </td><td class="markdownTableBodyNone">სტაბილური, გამოშვებადი კოდი    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">develop   </td><td class="markdownTableBodyNone">მიმდინარე განვითარების ძირითადი ბრენჩი    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">release/x.y.z   </td><td class="markdownTableBodyNone">კონკრეტული ვერსიის გამოშვების მოსამზადებელი    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">feature/*   </td><td class="markdownTableBodyNone">ახალი ფუნქციონალის ან დიდი ცვლილების ბრენჩი    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">bugfix/*   </td><td class="markdownTableBodyNone">ბაგების გასწორების ბრენჩი    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">hotfix/*   </td><td class="markdownTableBodyNone">კრიტიკული ბაგების სწრაფი გასწორება   </td></tr>
-</table>
-<hr  />
-<h1><a class="anchor" id="autotoc_md441"></a>
-ბრენჩის სახელდების წესები</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ პატარა ასოები, ციფრები და ტირეები</li>
-<li>feature/ და bugfix/ ბრენჩებისთვის მიუთითეთ მოკლე აღწერა ან issue-ის ნომერი</li>
-<li>მაგალითები:<ul>
-<li>feature/authentication-module</li>
-<li>bugfix/connection-timeout-123</li>
-<li>release/1.2.0</li>
-<li>hotfix/login-crash</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md443"></a>
-სამუშაო პროცესი</h1>
-<ol type="1">
-<li>შექმენით ახალი ბრენჩი develop-დან (feature, bugfix ან release საჭიროების მიხედვით)</li>
-<li>განახორციელეთ ცვლილებები და ატვირთეთ შესაბამის ბრენჩზე</li>
-<li>შექმენით Pull Request develop ან main ბრენჩში (release/hotfix შემთხვევაში)</li>
-<li>გაიარეთ კოდის მიმოხილვა და ტესტირება</li>
-<li>შერწყმის (merge) შემდეგ წაშალეთ დროებითი ბრენჩი</li>
-</ol>
-<hr  />
-<h1><a class="anchor" id="autotoc_md445"></a>
-საუკეთესო პრაქტიკები</h1>
-<ul>
-<li>არასდროს იმუშავოთ პირდაპირ main ან develop ბრენჩზე</li>
-<li>გამოიყენეთ აღწერითი სახელები ბრენჩებისთვის</li>
-<li>ხშირად გააკეთეთ commit-ები და push-ები</li>
-<li>Pull Request-ი უნდა იყოს მცირე და ფოკუსირებული ერთ ამოცანაზე</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md447"></a>
-რესურსები</h1>
-<ul>
-<li><a class="el" href="md_docs_2contributing_2contributing__guide.html">კონტრიბუციის სახელმძღვანელო</a></li>
-<li><a class="el" href="md_docs_2convention_2convention__index.html">კონვენციების ინდექსი</a></li>
-<li><a class="el" href="md_docs_2contributing_2code__of__conduct.html">ქცევის კოდექსი</a></li>
-</ul>
-<hr  />
-<p><em>დაიცავით ეს სტრატეგია, რათა გუნდური მუშაობა იყოს ეფექტური, გამჭვირვალე და სტაბილური.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

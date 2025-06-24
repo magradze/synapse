@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: Synapse Configuration Manager API Reference</title>
+<title>Synapse ESP Framework: configuration_api</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,77 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2configuration
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Synapse Configuration Manager API Reference</div></div>
+  <div class="headertitle"><div class="title">configuration_api</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md62"></a> </p>
-<h1><a class="anchor" id="autotoc_md63"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse Framework-ის კონფიგურაციის მენეჯერის (Configuration Manager) API-ს, naming და structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md65"></a>
-ძირითადი API ფუნქციები</h1>
-<h2><a class="anchor" id="autotoc_md66"></a>
-esp_err_t fmw_config_get_string(const char *key, char *value, size_t size);</h2>
-<ul>
-<li>კითხულობს სტრიქონის ტიპის პარამეტრს კონფიგურაციიდან.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md67"></a>
-esp_err_t fmw_config_get_int(const char *key, int *value);</h2>
-<ul>
-<li>კითხულობს მთელი რიცხვის ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md68"></a>
-esp_err_t fmw_config_get_bool(const char *key, bool *value);</h2>
-<ul>
-<li>კითხულობს ლოგიკური ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md69"></a>
-const cJSON *fmw_config_get_module_config(const char *module_instance_name);</h2>
-<ul>
-<li>აბრუნებს მოდულის სრულ კონფიგურაციას instance_name-ით.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md70"></a>
-esp_err_t fmw_config_set_string(const char *key, const char *value);</h2>
-<ul>
-<li>ცვლის ან ამატებს სტრიქონის ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md71"></a>
-esp_err_t fmw_config_set_int(const char *key, int value);</h2>
-<ul>
-<li>ცვლის ან ამატებს მთელი რიცხვის ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md72"></a>
-esp_err_t fmw_config_set_bool(const char *key, bool value);</h2>
-<ul>
-<li>ცვლის ან ამატებს ლოგიკური ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md73"></a>
-esp_err_t fmw_config_save(void);</h2>
-<ul>
-<li>ინახავს ყველა ცვლილებას მუდმივ მეხსიერებაში.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md75"></a>
-Naming &amp; Structure</h1>
-<ul>
-<li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
-<li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md77"></a>
-მაგალითები</h1>
-<p><b>სტრიქონის წაკითხვა:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> broker_url[128];</div>
-<div class="line"><a class="code hl_function" href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a>(<span class="stringliteral">&quot;mqtt_module.config.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
-<div class="ttc" id="aconfig__manager_8h_html_ad83c96bb47fc292873d5d630e44e2fd6"><div class="ttname"><a href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a></div><div class="ttdeci">esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_size)</div><div class="ttdoc">კითხულობს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებიდან.</div></div>
-</div><!-- fragment --><p><b>მთელი რიცხვის წაკითხვა:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> update_interval;</div>
-<div class="line">fmw_config_get_int(<span class="stringliteral">&quot;dht22_module.config.update_interval_sec&quot;</span>, &amp;update_interval);</div>
-</div><!-- fragment --><p><b>პარამეტრის შეცვლა და შენახვა:</b> </p><div class="fragment"><div class="line"><a class="code hl_function" href="config__manager_8h.html#ac8d23ec96bf481d508ffbf0c9a1a76e2">fmw_config_set_string</a>(<span class="stringliteral">&quot;relay_module.config.instance_name&quot;</span>, <span class="stringliteral">&quot;relay2&quot;</span>);</div>
-<div class="line">fmw_config_save();</div>
-<div class="ttc" id="aconfig__manager_8h_html_ac8d23ec96bf481d508ffbf0c9a1a76e2"><div class="ttname"><a href="config__manager_8h.html#ac8d23ec96bf481d508ffbf0c9a1a76e2">fmw_config_set_string</a></div><div class="ttdeci">esp_err_t fmw_config_set_string(const char *key, const char *value)</div><div class="ttdoc">ინახავს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებაში.</div></div>
-</div><!-- fragment --><hr  />
-<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

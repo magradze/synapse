@@ -1,10 +1,16 @@
 var searchData=
 [
-  ['record_20template_0',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
-  ['reference_1',['reference',['../md_docs_2api__reference_2actuators__api.html',1,'Synapse Actuators Module API Reference'],['../md_docs_2api__reference_2communication__api.html',1,'Synapse Communication Module API Reference'],['../md_docs_2api__reference_2configuration__api.html',1,'Synapse Configuration Manager API Reference'],['../md_docs_2api__reference_2core__api.html',1,'Synapse Core API Reference'],['../md_docs_2api__reference_2custom__api.html',1,'Synapse Custom API Reference'],['../md_docs_2api__reference_2display__api.html',1,'Synapse Display Module API Reference'],['../md_docs_2api__reference_2drivers__api.html',1,'Synapse Drivers Module API Reference'],['../md_docs_2api__reference_2event__api.html',1,'Synapse Event Bus API Reference'],['../md_docs_2api__reference_2health__monitor__api.html',1,'Synapse Health Monitor Module API Reference'],['../md_docs_2api__reference_2local__ctrl__api.html',1,'Synapse Local Control Module API Reference'],['../md_docs_2api__reference_2module__api.html',1,'Synapse Module API Reference'],['../md_docs_2api__reference_2ota__api.html',1,'Synapse OTA (Over-the-Air) Module API Reference'],['../md_docs_2api__reference_2provisioning__api.html',1,'Synapse Provisioning Module API Reference'],['../md_docs_2api__reference_2sensor__api.html',1,'Synapse Sensor Module API Reference'],['../md_docs_2api__reference_2storage__api.html',1,'Synapse Storage Module API Reference'],['../md_docs_2api__reference_2system__api.html',1,'Synapse System Module API Reference'],['../md_docs_2api__reference_2time__sync__api.html',1,'Synapse Time Sync Module API Reference'],['../md_docs_2api__reference_2utility__api.html',1,'Synapse Utility Module API Reference'],['../md_docs_2api__reference_2version__api.html',1,'Synapse Version Module API Reference']]],
-  ['reference_20index_2',['reference index',['../md_docs_2api__reference_2api__index.html',1,'Synapse API Reference Index'],['../md_docs_2contributing_2contributing__index.html',1,'Synapse Contributing Reference Index'],['../md_docs_2convention_2convention__index.html',1,'Synapse Convention Reference Index']]],
-  ['request_20template_3',['Synapse Pull Request Template',['../md_docs_2contributing_2pull__request__template.html',1,'']]],
-  ['resource_20usage_20guide_4',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
-  ['rest_20api_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20rest_20api_5',['REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)',['../md_docs_2integration_2integration__rest.html',1,'']]],
-  ['review_20guidelines_6',['Synapse Review Guidelines',['../md_docs_2contributing_2review__guidelines.html',1,'']]]
+  ['security_5fbest_5fpractices_0',['security_best_practices',['../md_docs_2security_2security__best__practices.html',1,'']]],
+  ['security_5fchecklist_1',['security_checklist',['../md_docs_2security_2security__checklist.html',1,'']]],
+  ['security_5fconsiderations_2',['security_considerations',['../md_docs_2design__decisions_2security__considerations.html',1,'']]],
+  ['security_5fguidelines_3',['security_guidelines',['../md_docs_2security_2security__guidelines.html',1,'']]],
+  ['security_5findex_4',['security_index',['../md_docs_2security_2security__index.html',1,'']]],
+  ['security_5fvulnerability_5fdisclosure_5',['security_vulnerability_disclosure',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
+  ['sensor_5fapi_6',['sensor_api',['../md_docs_2api__reference_2sensor__api.html',1,'']]],
+  ['storage_5fapi_7',['storage_api',['../md_docs_2api__reference_2storage__api.html',1,'']]],
+  ['storage_5fstrategy_8',['storage_strategy',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]],
+  ['synapse_20esp_20framework_9',['Synapse ESP Framework',['../index.html',1,'']]],
+  ['synapse_5fchecklist_10',['synapse_checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
+  ['system_5fapi_11',['system_api',['../md_docs_2api__reference_2system__api.html',1,'']]],
+  ['system_5fconfiguration_12',['system_configuration',['../md_docs_2tutorials_2system__configuration.html',1,'']]]
 ];

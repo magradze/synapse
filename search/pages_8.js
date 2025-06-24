@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['faq_0',['faq',['../md_docs_2contributing_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)'],['../md_docs_2structure_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)'],['../md_docs_2troubleshooting_2faq.html',1,'ხშირად დასმული კითხვები (Troubleshooting FAQ)']]],
-  ['feature_20addition_1',['მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension &amp; Feature Addition)',['../md_docs_2tutorials_2module__extension.html',1,'']]],
-  ['first_20module_2',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
-  ['flow_3',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]],
-  ['framework_4',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
-  ['framework_20—_20არქიტექტურის_20მიმოხილვა_5',['Synapse ESP Framework — არქიტექტურის მიმოხილვა',['../md_docs_2design__decisions_2architecture__overview.html',1,'']]],
-  ['framework_20—_20documentation_20module_20design_20checklist_6',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
+  ['getting_5fstarted_0',['getting_started',['../md_docs_2tutorials_2getting__started.html',1,'']]],
+  ['glossary_5fapi_1',['glossary_api',['../md_docs_2glossary_2glossary__api.html',1,'']]],
+  ['glossary_5farchitecture_2',['glossary_architecture',['../md_docs_2glossary_2glossary__architecture.html',1,'']]],
+  ['glossary_5fconfig_3',['glossary_config',['../md_docs_2glossary_2glossary__config.html',1,'']]],
+  ['glossary_5findex_4',['glossary_index',['../md_docs_2glossary_2glossary__index.html',1,'']]],
+  ['glossary_5fsecurity_5',['glossary_security',['../md_docs_2glossary_2glossary__security.html',1,'']]]
 ];

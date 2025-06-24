@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)</title>
+<title>Synapse ESP Framework: performance_tradeoffs</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,90 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2performanc
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)</div></div>
+  <div class="headertitle"><div class="title">performance_tradeoffs</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md894"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md896"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში წარმადობისა და რესურსების არქიტექტურულ კომპრომისებს, არჩეულ სტრატეგიებს, მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md898"></a>
-კონტექსტი</h1>
-<p>ფრეიმვორქი უნდა იყოს ოპტიმიზირებული როგორც მცირე რესურსების მქონე, ისე მაღალი წარმადობის მოთხოვნების მქონე სისტემებისთვის. საჭიროა ბალანსი მოდულურობასა და მინიმალურ footprint-ს შორის, ასევე latency-სა და გაფართოებადობას შორის.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md900"></a>
-არჩეული სტრატეგიები</h1>
-<ul>
-<li><b>მოდულური არქიტექტურა:</b> მხოლოდ არჩეული მოდულები შედის საბოლოო firmware-ში</li>
-<li><b>კონფიგურირებადი ბილდი:</b> Kconfig და CMake უზრუნველყოფს არასაჭირო კომპონენტების გამორთვას</li>
-<li><b>Static Allocation სადაც შესაძლებელია:</b> stack/queue-ების ზომები წინასწარ განისაზღვრება</li>
-<li><b>Lazy Initialization:</b> რესურსები ინიციალიზდება მხოლოდ საჭიროებისას</li>
-<li><b>Async Event Bus:</b> ასინქრონული კომუნიკაცია ამცირებს latency-ს და ზრდის responsiveness-ს</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md902"></a>
-არგუმენტები და მოტივაცია</h1>
-<ul>
-<li>მოდულური არქიტექტურა ამცირებს firmware-ს ზომას და RAM-ის მოხმარებას</li>
-<li>Static allocation ამცირებს fragmentation-ს და runtime შეცდომებს</li>
-<li>Lazy initialization ამცირებს startup დროს და რესურსების ზედმეტ გამოყენებას</li>
-<li>Async Event Bus ზრდის სისტემის რეაგირების სისწრაფეს</li>
-<li>ალტერნატივა (მონოლითური არქიტექტურა, მხოლოდ dynamic allocation) უარყოფილია footprint-ის ზრდისა და სტაბილურობის გამო</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md904"></a>
-შედეგები და გავლენა</h1>
-<ul>
-<li>firmware-ს ზომა და RAM-ის მოხმარება მინიმუმამდეა დაყვანილი</li>
-<li>სისტემის რეაგირების დრო (latency) დაბალია</li>
-<li>შესაძლებელია სისტემის ოპტიმიზაცია კონკრეტული აპლიკაციისთვის</li>
-<li>Static allocation ამცირებს მოქნილობას ზოგიერთ სცენარში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md906"></a>
-გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md907"></a>
-მოდულის გამორთვა ბილდიდან</h2>
-<div class="fragment"><div class="line"><span class="comment">// Kconfig-ში მოდულის გამორთვა</span></div>
-<div class="line">CONFIG_RELAY_MODULE=n</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md908"></a>
-Static allocation</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#define COMMAND_QUEUE_SIZE 8</span></div>
-<div class="line"><span class="keyword">static</span> QueueHandle_t command_queue;</div>
-<div class="line">command_queue = xQueueCreate(COMMAND_QUEUE_SIZE, <span class="keyword">sizeof</span>(command_t));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md909"></a>
-Lazy initialization</h2>
-<div class="fragment"><div class="line"><span class="keywordflow">if</span> (!global_ssd1306_instance) {</div>
-<div class="line">    global_ssd1306_instance = malloc(<span class="keyword">sizeof</span>(ssd1306_private_data_t));</div>
-<div class="line">    <span class="comment">// ...init...</span></div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md911"></a>
-აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>ყველა მოდულის ჩართვა ერთ ბილდში საჭიროების გარეშე</li>
-<li>მხოლოდ dynamic allocation-ის გამოყენება</li>
-<li>რესურსების გამოუყენებლად დატოვება</li>
-</ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>გამოიყენეთ მხოლოდ საჭირო მოდულები</li>
-<li>გამოიყენეთ static allocation სადაც შესაძლებელია</li>
-<li>lazy initialization რესურსების ოპტიმალური გამოყენებისთვის</li>
-<li>ჩაწერეთ ყველა ცვლილება და ოპტიმიზაციის გადაწყვეტილება დოკუმენტაციაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md913"></a>
-დაკავშირებული დოკუმენტები</h1>
-<ul>
-<li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
-<li><a class="el" href="md_docs_2design__decisions_2architecture__overview.html">architecture_overview.md</a></li>
-<li><a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
-<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
-</ul>
-<hr  />
-<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი დოკუმენტაცია ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

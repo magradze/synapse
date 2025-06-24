@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)</title>
+<title>Synapse ESP Framework: lifecycle_and_init</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,150 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)</div></div>
+  <div class="headertitle"><div class="title">lifecycle_and_init</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1254"></a> </p>
-<h1><a class="anchor" id="autotoc_md1255"></a>
-მიზანი</h1>
-<p>მოდულის სიცოცხლის ციკლის მართვის მიზანია უზრუნველყოს თითოეული მოდულის სწორი ინიციალიზაცია, რესურსების გამოყოფა, ჩართვა/გამორთვა და უსაფრთხო გათავისუფლება სისტემის მუშაობის განმავლობაში.</p>
-<h1><a class="anchor" id="autotoc_md1256"></a>
-სიცოცხლის ციკლის ეტაპები</h1>
-<ol type="1">
-<li><b>Create</b> — მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)</li>
-<li><b>Init</b> — ინიციალიზაცია (მაგ: static esp_err_t ssd1306_init)</li>
-<li><b>Enable/Disable</b> — ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)</li>
-<li><b>Deinit</b> — რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md1257"></a>
-დეტალური აღწერა</h1>
-<h2><a class="anchor" id="autotoc_md1258"></a>
-1. Create</h2>
-<ul>
-<li>ხდება მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა</li>
-<li>გამოიყენება Factory-ის მიერ</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config);</div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მთავარი მოდულის სტრუქტურა</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1259"></a>
-2. Init</h2>
-<ul>
-<li>ხდება hardware-ის ან სხვა რესურსების ინიციალიზაცია</li>
-<li>ყველა აუცილებელი პარამეტრი მოწმდება და ინახება</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1260"></a>
-3. Enable/Disable</h2>
-<ul>
-<li>უზრუნველყოფს მოდულის აქტივაციას ან დროებით გათიშვას</li>
-<li>გამოიყენება სისტემის ან მომხმარებლის მიერ</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_enable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_disable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1261"></a>
-4. Deinit</h2>
-<ul>
-<li>ხდება ყველა გამოყოფილი რესურსის გათავისუფლება</li>
-<li>გამოიყენება სისტემის გათიშვის ან მოდულის ამოღებისას</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-</div><!-- fragment --></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1262"></a>
-სიცოცხლის ციკლის დიაგრამა</h1>
-<div class="fragment"><div class="line">graph TD</div>
-<div class="line">    subgraph &quot;System Startup / Module Factory&quot;</div>
-<div class="line">        A(Start) --&gt; B{Config Parsing};</div>
-<div class="line">        B -- OK --&gt; C(fmw_module_create);</div>
-<div class="line">        B -- Fail --&gt; D[Module Disabled];</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    subgraph &quot;Module Lifecycle Management&quot;</div>
-<div class="line">        C --&gt; E{Init};</div>
-<div class="line">        E -- OK --&gt; F[Initialized / Inactive];</div>
-<div class="line">        E -- Fail --&gt; G[Error State];</div>
-<div class="line"> </div>
-<div class="line">        F --&gt; H{Enable};</div>
-<div class="line">        H -- OK --&gt; I[Enabled / Running];</div>
-<div class="line">        H -- Fail --&gt; G;</div>
-<div class="line"> </div>
-<div class="line">        I -- Disable --&gt; J[Disabled / Suspended];</div>
-<div class="line">        J -- Enable --&gt; I;</div>
-<div class="line"> </div>
-<div class="line">        I -- Reconfigure --&gt; K{Reconfigure};</div>
-<div class="line">        K -- OK --&gt; I;</div>
-<div class="line">        K -- Fail --&gt; G;</div>
-<div class="line"> </div>
-<div class="line">        J -- Reconfigure --&gt; L{Reconfigure};</div>
-<div class="line">        L -- OK --&gt; J;</div>
-<div class="line">        L -- Fail --&gt; G;</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    subgraph &quot;System Shutdown / Module Unload&quot;</div>
-<div class="line">        I -- Deinit --&gt; M{Deinit};</div>
-<div class="line">        J -- Deinit --&gt; M;</div>
-<div class="line">        G -- Deinit --&gt; M;</div>
-<div class="line"> </div>
-<div class="line">        M -- OK --&gt; N(Resources Freed);</div>
-<div class="line">        M -- Fail --&gt; O[Cleanup Error];</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    style D fill:#f9f,stroke:#333,stroke-width:2px</div>
-<div class="line">    style G fill:#ff6347,stroke:#333,stroke-width:2px</div>
-<div class="line">    style O fill:#ff6347,stroke:#333,stroke-width:2px</div>
-<div class="line">    style I fill:#90ee90,stroke:#333,stroke-width:2px</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1263"></a>
-მაგალითი მოდულის სიცოცხლის ციკლის მართვის</h1>
-<div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config) {</div>
-<div class="line">    <span class="comment">// ... კონფიგურაციის დამუშავება ...</span></div>
-<div class="line">    ssd1306_private_data_t *ssd1306_data = malloc(<span class="keyword">sizeof</span>(ssd1306_private_data_t));</div>
-<div class="line">    <span class="comment">// ... პარამეტრების ინიციალიზაცია ...</span></div>
-<div class="line">    ssd1306_init(module);</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
-<div class="line">    <span class="comment">// ... hardware init ...</span></div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_enable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
-<div class="line">    <span class="comment">// ... enable logic ...</span></div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_disable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
-<div class="line">    <span class="comment">// ... disable logic ...</span></div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
-<div class="line">    <span class="comment">// ... free resources ...</span></div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1264"></a>
-აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p>
-<ul>
-<li>რესურსების გამოუყენებლად დატოვება</li>
-<li>არასტანდარტული სახელების გამოყენება</li>
-<li>სიცოცხლის ციკლის ეტაპების გამოტოვება</li>
-</ul>
-<p>✅ <b>ყოველთვის:</b></p>
-<ul>
-<li>დაიცავით სტანდარტული სახელები და სტრუქტურა</li>
-<li>გაათავისუფლეთ ყველა გამოყოფილი რესურსი</li>
-<li>გამოიყენეთ დეტალური ლოგირება თითოეულ ეტაპზე</li>
-</ul>
-<hr  />
-<p>შემდეგი ნაბიჯი: დეტალურად განვიხილოთ შეცდომების დამუშავების და ლოგირების სტანდარტები. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

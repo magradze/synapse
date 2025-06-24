@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)</title>
+<title>Synapse ESP Framework: storage_strategy</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,81 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2storage__s
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)</div></div>
+  <div class="headertitle"><div class="title">storage_strategy</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md936"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md938"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში მონაცემთა შენახვის არქიტექტურულ არჩევანს, არჩეული ტექნოლოგიების მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md940"></a>
-კონტექსტი</h1>
-<p>ფრეიმვორქს სჭირდება მოქნილი, საიმედო და სტანდარტიზებული მონაცემთა შენახვის მექანიზმი როგორც სისტემური კონფიგურაციისთვის, ისე მოდულების runtime მონაცემებისთვის. აუცილებელია მხარდაჭერა როგორც მუდმივი (persistent), ისე დროებითი (volatile) მონაცემებისთვის.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md942"></a>
-არჩეული გადაწყვეტილება</h1>
-<ul>
-<li><b>NVS (Non-Volatile Storage):</b> გამოიყენება სისტემური და მოდულების კონფიგურაციის მუდმივი შენახვისთვის.</li>
-<li><b>Flash Storage:</b> გამოიყენება დიდი მოცულობის მონაცემებისთვის ან firmware განახლებებისთვის.</li>
-<li><b>RAM/Stack:</b> გამოიყენება დროებითი, ოპერაციული მონაცემებისთვის.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md944"></a>
-არგუმენტები და მოტივაცია</h1>
-<ul>
-<li><b>NVS</b> უზრუნველყოფს key-value სტრუქტურას, საიმედოობას და მარტივ ინტეგრაციას ESP-IDF ეკოსისტემაში.</li>
-<li><b>Flash</b> აუცილებელია firmware განახლებისთვის (OTA) და დიდი მონაცემების შენახვისთვის.</li>
-<li><b>RAM/Stack</b> ოპტიმალურია სწრაფი, დროებითი ოპერაციებისთვის.</li>
-<li>ალტერნატივა (გარე SD-ბარათი, FATFS) უარყოფილია კომპლექსურობისა და რესურსების გამო.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md946"></a>
-შედეგები და გავლენა</h1>
-<ul>
-<li>სისტემური და მოდულების კონფიგურაცია ინახება უსაფრთხოდ და სტანდარტულად</li>
-<li>შესაძლებელია მონაცემების სწრაფი წაკითხვა/ჩაწერა</li>
-<li>OTA განახლებები და firmware-ს მენეჯმენტი მარტივია</li>
-<li>Flash-ის ცვეთა (wear) საჭიროებს ყურადღებას დიდი მოცულობის მონაცემების შემთხვევაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md948"></a>
-გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md949"></a>
-NVS-ში სტრიქონის შენახვა</h2>
-<div class="fragment"><div class="line">nvs_storage_module_set_string(<span class="stringliteral">&quot;device_name&quot;</span>, <span class="stringliteral">&quot;synapse_node_1&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md950"></a>
-NVS-დან სტრიქონის წაკითხვა</h2>
-<div class="fragment"><div class="line"><span class="keywordtype">char</span> device_name[32];</div>
-<div class="line">nvs_storage_module_get_string(<span class="stringliteral">&quot;device_name&quot;</span>, device_name, <span class="keyword">sizeof</span>(device_name));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md951"></a>
-Flash-ში მონაცემების შენახვა (OTA)</h2>
-<div class="fragment"><div class="line"><span class="comment">// OTA განახლების პროცესში გამოიყენება esp_ota APIs</span></div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md953"></a>
-აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>მონაცემების hardcoded შენახვა კოდში</li>
-<li>არასტანდარტული ან არადოკუმენტირებული შენახვის მექანიზმების გამოყენება</li>
-<li>Flash-ის ზედმეტი გამოყენება მცირე მონაცემებისთვის</li>
-</ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>გამოიყენეთ მხოლოდ სტანდარტული storage API-ები (NVS, esp_ota)</li>
-<li>დაიცავით naming და structure კონვენციები</li>
-<li>ჩაწერეთ ყველა ცვლილება და შენახვის არქიტექტურული გადაწყვეტილება დოკუმენტაციაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md955"></a>
-დაკავშირებული დოკუმენტები</h1>
-<ul>
-<li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
-<li><a class="el" href="md_docs_2design__decisions_2architecture__overview.html">architecture_overview.md</a></li>
-<li><a class="el" href="md_docs_2api__reference_2storage__api.html">api_reference/storage_api.md</a></li>
-<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
-</ul>
-<hr  />
-<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი დოკუმენტაცია ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

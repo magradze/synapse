@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)</title>
+<title>Synapse ESP Framework: common_issues</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,132 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2common__issu
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)</div></div>
+  <div class="headertitle"><div class="title">common_issues</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1296"></a> </p>
-<h1><a class="anchor" id="autotoc_md1297"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse Framework-ის გამოყენებისას ყველაზე ხშირად წარმოქმნილ პრობლემებს, მათი დიაგნოსტიკისა და გადაჭრის გზებს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1299"></a>
-1. ბილდის შეცდომები</h1>
-<h2><a class="anchor" id="autotoc_md1300"></a>
-პრობლემა: მოდული არ იბილდება</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> მოდული არ არის ჩართული Kconfig-ში ან არასწორადაა მითითებული CMakeLists.txt-ში</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გადაამოწმეთ, რომ მოდული ჩართულია Kconfig-ში</li>
-<li>გადაამოწმეთ CMakeLists.txt-ში INCLUDE_DIRS და REQUIRES პარამეტრები</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1301"></a>
-პრობლემა: include file not found</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> include დირექტორია არ არის მითითებული CMakeLists.txt-ში</li>
-<li><b>გადაჭრა:</b><ul>
-<li>დაამატეთ "include" INCLUDE_DIRS-ში</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1303"></a>
-2. კონფიგურაციის პრობლემები</h1>
-<h2><a class="anchor" id="autotoc_md1304"></a>
-პრობლემა: მოდული არ ინიციალიზდება</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> system_config.json-ში არასწორადაა მითითებული instance_name ან პარამეტრები</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გადაამოწმეთ instance_name და ყველა აუცილებელი პარამეტრი</li>
-<li>გამოიყენეთ fmw_config_get_* API-ები</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1305"></a>
-პრობლემა: default მნიშვნელობები არ მუშაობს</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> parse_module_config ფუნქციაში არასწორადაა აღწერილი fallback ლოგიკა</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გადაამოწმეთ parse_module_config ფუნქცია და გამოიყენეთ სწორი default მნიშვნელობები</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1307"></a>
-3. კომუნიკაციის პრობლემები</h1>
-<h2><a class="anchor" id="autotoc_md1308"></a>
-პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> მოდული არ არის გამოწერილი შესაბამის event-ზე</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გამოიყენეთ event_bus_subscribe სწორი event_id-ით</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1309"></a>
-პრობლემა: Service Locator-ით API არ იძებნება</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> სერვისი არ არის რეგისტრირებული ან instance_name არასწორია</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გადაამოწმეთ fmw_service_register და fmw_service_get გამოძახებები</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1311"></a>
-4. ლოგირების და შეცდომების დიაგნოსტიკა</h1>
-<h2><a class="anchor" id="autotoc_md1312"></a>
-პრობლემა: ლოგები არ ჩანს</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> DEFINE_COMPONENT_TAG არ არის გამოყენებული ან log level დაბალია</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გამოიყენეთ DEFINE_COMPONENT_TAG ყველა მოდულში</li>
-<li>გადაამოწმეთ log level პარამეტრები</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1313"></a>
-პრობლემა: შეცდომის კოდი არ იკითხება</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> esp_err_to_name არ გამოიყენება</li>
-<li><b>გადაჭრა:</b><ul>
-<li>ყველა ESP_LOGE-ში გამოიყენეთ esp_err_to_name(ret)</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1315"></a>
-5. Runtime პრობლემები</h1>
-<h2><a class="anchor" id="autotoc_md1316"></a>
-პრობლემა: მოდული არ რეაგირებს enable/disable-ზე</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> enable/disable API არასწორადაა იმპლემენტირებული ან არ ხდება სტატუსის განახლება</li>
-<li><b>გადაჭრა:</b><ul>
-<li>გადაამოწმეთ enable/disable ფუნქციები და სტატუსის განახლება</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1317"></a>
-პრობლემა: რესურსების გაჟონვა (memory leak)</h2>
-<ul>
-<li><b>შესაძლო მიზეზი:</b> deinit ან cleanup ფუნქციები არ არის სრულად იმპლემენტირებული</li>
-<li><b>გადაჭრა:</b><ul>
-<li>დაამატეთ ყველა გამოყოფილი რესურსის გათავისუფლება deinit-ში</li>
-</ul>
-</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1319"></a>
-6. დამატებითი რჩევები</h1>
-<ul>
-<li>გამოიყენეთ <a class="el" href="md_docs_2convention_2logging__standards.html">logging_standards.md</a> და <a class="el" href="md_docs_2convention_2error__handling.html">error_handling.md</a></li>
-<li>ყველა ცვლილება და პრობლემა აღწერეთ <a class="el" href="md_docs_2structure_2faq.html">faq.md</a>-ში</li>
-<li>მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს რთული შემთხვევებისას</li>
-</ul>
-<hr  />
-<p>დამატებითი პრობლემების შემთხვევაში იხილეთ სხვა troubleshooting დოკუმენტები ან გახსენით issue პროექტის რეპოზიტორიაში. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

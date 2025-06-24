@@ -1,18 +1,16 @@
 var searchData=
 [
-  ['6_20აკრძალული_20პრაქტიკები_0',['6. აკრძალული პრაქტიკები',['../md_docs_2contributing_2contributing__guide.html#autotoc_md487',1,'']]],
-  ['6_20დამატებითი_20რესურსები_1',['6. დამატებითი რესურსები',['../md_docs_2tutorials_2getting__started.html#autotoc_md1371',1,'']]],
-  ['6_20დამატებითი_20რჩევები_2',['6. დამატებითი რჩევები',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1319',1,'']]],
-  ['6_20ოპტიმიზაცია_20და_20რესურსების_20მართვა_3',['6. ოპტიმიზაცია და რესურსების მართვა',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1351',1,'']]],
-  ['6_20როგორ_20გავიგო_20რომელი_20მოდული_20იწვევს_20პრობლემას_4',['6. როგორ გავიგო რომელი მოდული იწვევს პრობლემას?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1339',1,'']]],
-  ['6_20როგორ_20დავიცვა_20naming_20და_20structure_20სტანდარტები_5',['6. როგორ დავიცვა naming და structure სტანდარტები?',['../md_docs_2structure_2faq.html#autotoc_md1248',1,'']]],
-  ['6_20როგორ_20მოვაგვარო_20გარემოს_20ან_20ბილდის_20პრობლემები_6',['6. როგორ მოვაგვარო გარემოს ან ბილდის პრობლემები?',['../md_docs_2contributing_2faq.html#autotoc_md512',1,'']]],
-  ['6_20ტესტირება_20და_20ლოგირება_7',['6 ტესტირება და ლოგირება',['../md_docs_2tutorials_2create__first__module.html#autotoc_md1361',1,'6. ტესტირება და ლოგირება'],['../md_docs_2tutorials_2module__extension.html#autotoc_md1390',1,'6. ტესტირება და ლოგირება']]],
-  ['6_20best_20practices_8',['6 best practices',['../md_docs_2tutorials_2integration__example.html#autotoc_md1380',1,'6. Best Practices'],['../md_docs_2tutorials_2system__configuration.html#autotoc_md1402',1,'6. Best Practices']]],
-  ['6_20error_20context_20logging_9',['6. Error Context Logging',['../md_docs_2convention_2logging__standards.html#autotoc_md720',1,'']]],
-  ['6_20event_20და_20service_20debugging_10',['6. Event და Service Debugging',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1329',1,'']]],
-  ['6_20logging_11',['6 logging',['../md_docs_2structure_2core__components.html#autotoc_md1215',1,'6. Logging'],['../md_docs_2design__decisions_2core__components.html#autotoc_md811',1,'6. Logging']]],
-  ['6_20network_20diagnostics_12',['6. Network Diagnostics',['../md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1293',1,'']]],
-  ['6_20quality_20security_13',['6. Quality &amp; Security',['../md_docs_2internal_2synapse__checklist.html#autotoc_md1039',1,'']]],
-  ['6_20relay_20configuration_14',['6. Relay Configuration',['../md_docs_2convention_2configuration__management.html#autotoc_md634',1,'']]]
+  ['enable_0',['enable',['../structbase__module__interface__t.html#abacb0858df26d87e717ea83fdb12768c',1,'base_module_interface_t']]],
+  ['error_5fhandling_1',['error_handling',['../md_docs_2convention_2error__handling.html',1,'']]],
+  ['error_5fhandling_5fand_5flogging_2',['error_handling_and_logging',['../md_docs_2structure_2error__handling__and__logging.html',1,'']]],
+  ['error_5fhandling_5fdecisions_3',['error_handling_decisions',['../md_docs_2design__decisions_2error__handling__decisions.html',1,'']]],
+  ['esp_20framework_4',['Synapse ESP Framework',['../index.html',1,'']]],
+  ['event_20bus_20კონფიგურაცია_5',['Event Bus კონფიგურაცია',['../group__EventBusConfig.html',1,'']]],
+  ['event_5fapi_6',['event_api',['../md_docs_2api__reference_2event__api.html',1,'']]],
+  ['event_5fbus_2eh_7',['event_bus.h',['../event__bus_8h.html',1,'']]],
+  ['event_5fbus_5finit_8',['event_bus_init',['../event__bus_8h.html#a7fa7b2c2cf299d9df23a081f13f68e76',1,'event_bus.h']]],
+  ['event_5fbus_5fpost_9',['event_bus_post',['../event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340',1,'event_bus.h']]],
+  ['event_5fbus_5fsubscribe_10',['event_bus_subscribe',['../event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504',1,'event_bus.h']]],
+  ['extending_5fframework_11',['extending_framework',['../md_docs_2structure_2extending__framework.html',1,'']]],
+  ['extensibility_5fand_5fmodularity_12',['extensibility_and_modularity',['../md_docs_2design__decisions_2extensibility__and__modularity.html',1,'']]]
 ];

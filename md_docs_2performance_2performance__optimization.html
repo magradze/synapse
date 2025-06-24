@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)</title>
+<title>Synapse ESP Framework: performance_optimization</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,74 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__opt
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)</div></div>
+  <div class="headertitle"><div class="title">performance_optimization</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1089"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1091"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის ოპტიმიზაციის სახელმძღვანელოს — კოდის, კონფიგურაციისა და მოდულების ოპტიმიზაციის რჩევებს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1093"></a>
-კოდის ოპტიმიზაცია</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ საჭირო მოდულები და ფუნქციები</li>
-<li>ამოიღეთ გამოუყენებელი კოდი და include-ები</li>
-<li>გამოიყენეთ static allocation სადაც შესაძლებელია</li>
-<li>მინიმუმამდე დაიყვანეთ ციკლების და ფუნქციების სიღრმე</li>
-<li>გამოიყენეთ inline ფუნქციები მცირე ოპერაციებისთვის</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1095"></a>
-კონფიგურაციის ოპტიმიზაცია</h1>
-<ul>
-<li>გამორთეთ არასაჭირო მოდულები Kconfig-ით</li>
-<li>გამოიყენეთ მინიმალური საჭირო პარამეტრები system_config.json-ში</li>
-<li>დააყენეთ ოპტიმალური მნიშვნელობები stack/queue ზომებისთვის</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1097"></a>
-მოდულების ოპტიმიზაცია</h1>
-<ul>
-<li>გამოიყენეთ lazy initialization რესურსების დაზოგვისთვის</li>
-<li>გაანაწილეთ მძიმე ოპერაციები task-ებში ან timer-ებში</li>
-<li>გამოიყენეთ Event Bus ასინქრონული ოპერაციებისთვის</li>
-<li>მონიტორინგი ჩართეთ მხოლოდ საჭიროების შემთხვევაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1099"></a>
-მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1100"></a>
-Static allocation</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#define COMMAND_QUEUE_SIZE 8</span></div>
-<div class="line"><span class="keyword">static</span> QueueHandle_t command_queue;</div>
-<div class="line">command_queue = xQueueCreate(COMMAND_QUEUE_SIZE, <span class="keyword">sizeof</span>(command_t));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1101"></a>
-Lazy initialization</h2>
-<div class="fragment"><div class="line"><span class="keywordflow">if</span> (!global_ssd1306_instance) {</div>
-<div class="line">    global_ssd1306_instance = malloc(<span class="keyword">sizeof</span>(ssd1306_private_data_t));</div>
-<div class="line">    <span class="comment">// ...init...</span></div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1103"></a>
-Best Practices</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ საჭირო რესურსები</li>
-<li>ჩაატარეთ რეგულარული ბენჩმარკი და მონიტორინგი</li>
-<li>აღწერეთ ყველა ოპტიმიზაციის ნაბიჯი დოკუმენტაციაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1105"></a>
-დაკავშირებული დოკუმენტები</h1>
-<ul>
-<li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>
-<li><a class="el" href="md_docs_2performance_2performance__benchmarks.html">performance_benchmarks.md</a></li>
-<li><a class="el" href="md_docs_2performance_2performance__resource__usage.html">performance_resource_usage.md</a></li>
-<li><a class="el" href="md_docs_2performance_2performance__best__practices.html">performance_best_practices.md</a></li>
-</ul>
-<hr  />
-<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი performance დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

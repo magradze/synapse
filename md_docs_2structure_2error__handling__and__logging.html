@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)</title>
+<title>Synapse ESP Framework: error_handling_and_logging</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,85 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2error__handling__a
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)</div></div>
+  <div class="headertitle"><div class="title">error_handling_and_logging</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1226"></a> </p>
-<h1><a class="anchor" id="autotoc_md1227"></a>
-მიზანი</h1>
-<p>სისტემის საიმედოობისა და დიაგნოსტიკის გასაუმჯობესებლად აუცილებელია შეცდომების სწორი დამუშავება და სტანდარტიზებული ლოგირება ყველა მოდულსა და კომპონენტში.</p>
-<h1><a class="anchor" id="autotoc_md1228"></a>
-შეცდომების დამუშავების პრინციპები</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ esp_err_t ტიპის დაბრუნებადი მნიშვნელობები</li>
-<li>ყველა ფუნქციამ უნდა დააბრუნოს ESP_OK წარმატების შემთხვევაში</li>
-<li>გამოიყენეთ სტანდარტული ESP-IDF და Framework-ის error code-ები</li>
-<li>ყველა ფუნქციაში შეამოწმეთ პარამეტრების ვალიდურობა და რესურსების გამოყოფა</li>
-<li>ყველა შეცდომა და მნიშვნელოვანი მოვლენა უნდა ჩაიწეროს ლოგში</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1229"></a>
-შეცდომების კოდები</h1>
-<ul>
-<li>ESP_OK — წარმატება</li>
-<li>ESP_ERR_INVALID_ARG — არასწორი არგუმენტი</li>
-<li>ESP_ERR_INVALID_STATE — არასწორი მდგომარეობა</li>
-<li>ESP_ERR_NO_MEM — მეხსიერების ნაკლებობა</li>
-<li>ESP_ERR_TIMEOUT — ოპერაციის ვადა ამოიწურა</li>
-<li>ESP_ERR_NOT_FOUND — რესურსი ვერ მოიძებნა</li>
-<li>ESP_ERR_NOT_SUPPORTED — ოპერაცია არ არის მხარდაჭერილი</li>
-<li>ESP_ERR_FMW_* — Framework-ის სპეციფიკური შეცდომები</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1230"></a>
-შეცდომების დამუშავების მაგალითები</h1>
-<div class="fragment"><div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line) {</div>
-<div class="line">    <span class="keywordflow">if</span> (!text) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Text parameter is NULL&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> (line &gt;= MAX_LINES) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Invalid line number: %d (max: %d)&quot;</span>, line, MAX_LINES - 1);</div>
-<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> (!global_ssd1306_instance) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Module not initialized&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_STATE;</div>
-<div class="line">    }</div>
-<div class="line">    <span class="comment">// ...</span></div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1231"></a>
-ლოგირების სტანდარტები</h1>
-<ul>
-<li>გამოიყენეთ DEFINE_COMPONENT_TAG("MODULE_NAME") ყველა მოდულში</li>
-<li>გამოიყენეთ ESP_LOGE, ESP_LOGW, ESP_LOGI, ESP_LOGD, ESP_LOGV შესაბამისი მნიშვნელობისთვის</li>
-<li>ყველა ლოგში მიუთითეთ კონტექსტი და დეტალები</li>
-<li>გამოიყენეთ დესკრიპტიული ცვლადების სახელები ლოგში</li>
-<li>შეცდომის კოდები ყოველთვის გამოიტანეთ esp_err_to_name(ret)-ით</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1232"></a>
-ლოგირების მაგალითები</h1>
-<div class="fragment"><div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;MQTT_MODULE&quot;</span>);</div>
-<div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT connected to broker: %s&quot;</span>, broker_url);</div>
-<div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to connect: %s&quot;</span>, esp_err_to_name(operation_result));</div>
-<div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Configuration key &#39;%s&#39; not found, using default: %d&quot;</span>, config_key, default_value);</div>
-<div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">კომპონენტის TAG-ის განსაზღვრა ლოგირებისთვის</div><div class="ttdef"><b>Definition</b> logging.h:37</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1233"></a>
-აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>არალოგიკური ან ზოგადი ლოგები ("Error", "OK")</li>
-<li>სტატიკური TAG ცვლადის გამოყენება</li>
-<li>შეცდომის კოდის პირდაპირი დაბეჭდვა (გამოიყენეთ esp_err_to_name(ret))</li>
-<li>კონტექსტის გარეშე ლოგირება</li>
-</ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>გამოიყენეთ DEFINE_COMPONENT_TAG</li>
-<li>მიუთითეთ დეტალური კონტექსტი</li>
-<li>გამოიყენეთ სტანდარტული error code-ები</li>
-<li>ჩაწერეთ ყველა მნიშვნელოვანი შეცდომა და მოვლენა ლოგში</li>
-</ul>
-<hr  />
-<p>შემდეგი ნაბიჯი: დეტალურად განვიხილოთ მოდულის გაფართოების პროცესი და best practices. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

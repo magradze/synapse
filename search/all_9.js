@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['9_20როგორ_20დავამატო_20ახალი_20კითხვა_20ამ_20faq_20ში_0',['9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1342',1,'']]],
-  ['9_20როგორ_20დავამატო_20დოკუმენტაცია_20ან_20განვაახლო_20არსებული_1',['9. როგორ დავამატო დოკუმენტაცია ან განვაახლო არსებული?',['../md_docs_2structure_2faq.html#autotoc_md1251',1,'']]],
-  ['9_20როგორ_20დავიცვა_20ქცევის_20კოდექსი_2',['9. როგორ დავიცვა ქცევის კოდექსი?',['../md_docs_2contributing_2faq.html#autotoc_md515',1,'']]],
-  ['9_20doxygen_20კომენტარების_20სტანდარტი_20v1_200_3',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]]
+  ['handle_5fevent_0',['handle_event',['../structbase__module__interface__t.html#a4583e1a3b989dd78af7407a7cb81a94d',1,'base_module_interface_t']]],
+  ['health_5fmonitor_5fapi_1',['health_monitor_api',['../md_docs_2api__reference_2health__monitor__api.html',1,'']]],
+  ['health_5fpong_5fpayload_5ft_2',['health_pong_payload_t',['../structhealth__pong__payload__t.html',1,'']]]
 ];

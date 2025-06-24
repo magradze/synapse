@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)</title>
+<title>Synapse ESP Framework: performance_benchmarks</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,82 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__ben
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)</div></div>
+  <div class="headertitle"><div class="title">performance_benchmarks</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1041"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1043"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის ბენჩმარკების ჩატარების წესებს, შედეგების აღწერას და მაგალითებს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1045"></a>
-ბენჩმარკის ჩატარების ძირითადი ნაბიჯები</h1>
-<ol type="1">
-<li><b>ბენჩმარკის მიზნის განსაზღვრა</b><ul>
-<li>განსაზღვრეთ, რომელი კომპონენტის ან ოპერაციის ბენჩმარკი გსურთ (მაგ: მოდულის ინიციალიზაცია, სენსორის კითხვა, MQTT publish latency)</li>
-</ul>
-</li>
-<li><b>ტესტის გარემოს მომზადება</b><ul>
-<li>გამოიყენეთ სტანდარტული ან განმეორებადი გარემო (ერთნაირი კონფიგურაცია, იგივე მოწყობილობა)</li>
-<li>გამორთეთ არასაჭირო მოდულები</li>
-</ul>
-</li>
-<li><b>ბენჩმარკის კოდის იმპლემენტაცია</b><ul>
-<li>გამოიყენეთ esp_timer_get_time() ოპერაციების დროის გასაზომად</li>
-<li>ჩაწერეთ შედეგები ლოგში</li>
-<li>მაგალითი: <div class="fragment"><div class="line">int64_t start = esp_timer_get_time();</div>
-<div class="line"><span class="comment">// ...operation...</span></div>
-<div class="line">int64_t end = esp_timer_get_time();</div>
-<div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Operation took %lld us&quot;</span>, (end - start));</div>
-</div><!-- fragment --></li>
-</ul>
-</li>
-<li><b>შედეგების ანალიზი</b><ul>
-<li>შეადარეთ სხვადასხვა კონფიგურაციის ან მოდულის შედეგები</li>
-<li>მოძებნეთ bottleneck-ები და ოპტიმიზაციის შესაძლებლობები</li>
-</ul>
-</li>
-<li><b>დოკუმენტირება</b><ul>
-<li>აღწერეთ ბენჩმარკის შედეგები performance_benchmarks.md-ში</li>
-<li>მიუთითეთ გარემო, პარამეტრები და გამოყენებული კოდი</li>
-</ul>
-</li>
-</ol>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1047"></a>
-მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1048"></a>
-სენსორის კითხვა</h2>
-<div class="fragment"><div class="line">int64_t start = esp_timer_get_time();</div>
-<div class="line">read_sensor();</div>
-<div class="line">int64_t end = esp_timer_get_time();</div>
-<div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Sensor read: %lld us&quot;</span>, (end - start));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1049"></a>
-MQTT publish latency</h2>
-<div class="fragment"><div class="line">int64_t start = esp_timer_get_time();</div>
-<div class="line">mqtt_module_publish(topic, payload);</div>
-<div class="line">int64_t end = esp_timer_get_time();</div>
-<div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT publish: %lld us&quot;</span>, (end - start));</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1051"></a>
-Best Practices</h1>
-<ul>
-<li>გამოიყენეთ განმეორებადი გარემო და პარამეტრები</li>
-<li>ჩაწერეთ ყველა შედეგი და გარემო დეტალურად</li>
-<li>Bottleneck-ის აღმოჩენისას განახორციელეთ ოპტიმიზაცია და ხელახლა ჩაატარეთ ბენჩმარკი</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1053"></a>
-დაკავშირებული დოკუმენტები</h1>
-<ul>
-<li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>
-<li><a class="el" href="md_docs_2performance_2performance__optimization.html">performance_optimization.md</a></li>
-<li><a class="el" href="md_docs_2performance_2performance__resource__usage.html">performance_resource_usage.md</a></li>
-<li><a class="el" href="md_docs_2performance_2performance__best__practices.html">performance_best_practices.md</a></li>
-</ul>
-<hr  />
-<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი performance დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

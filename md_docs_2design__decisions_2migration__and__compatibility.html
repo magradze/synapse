@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)</title>
+<title>Synapse ESP Framework: migration_and_compatibility</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,91 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2migration_
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)</div></div>
+  <div class="headertitle"><div class="title">migration_and_compatibility</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md873"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md875"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში მიგრაციისა და თავსებადობის არქიტექტურულ გადაწყვეტილებებს, არჩეულ სტრატეგიებს, მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md877"></a>
-კონტექსტი</h1>
-<p>ფრეიმვორქის განვითარებასთან ერთად საჭიროა ძველი ვერსიებიდან ახალზე უსაფრთხო და პროგნოზირებადი მიგრაცია, ასევე სხვადასხვა მოდულისა და სისტემის თავსებადობის უზრუნველყოფა. აუცილებელია მინიმალური ცვლილებებით არსებული პროექტების განახლება და backwards compatibility-ის შენარჩუნება.</p>
-<hr  />
-<h1><a class="anchor" id="autotoc_md879"></a>
-არჩეული სტრატეგიები</h1>
-<ul>
-<li><b>სქემის ვერსიონირება:</b> ყველა კონფიგურაციის ფაილს (system_config.json, module.json) აქვს ვერსიის ველი (version)</li>
-<li><b>Deprecated API-ების შენარჩუნება:</b> ძველი API-ები ინახება გარკვეული პერიოდის განმავლობაში, მაგრამ მონიშნულია როგორც deprecated</li>
-<li><b>მიგრაციის სკრიპტები:</b> საჭიროების შემთხვევაში უზრუნველყოფილია ავტომატური მიგრაციის სკრიპტები (მაგ: config upgrade tools)</li>
-<li><b>კონფიგურაციის ვალიდაცია:</b> ახალი ვერსიის ჩატვირთვისას ხდება კონფიგურაციის ვალიდაცია და საჭიროების შემთხვევაში fallback/default მნიშვნელობების გამოყენება</li>
-<li><b>დოკუმენტირებული ცვლილებები:</b> ყველა breaking change და მიგრაციის ნაბიჯი აღწერილია დოკუმენტაციაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md881"></a>
-არგუმენტები და მოტივაცია</h1>
-<ul>
-<li>სქემის ვერსიონირება ამარტივებს ძველი და ახალი კონფიგურაციების მართვას</li>
-<li>Deprecated API-ების შენარჩუნება ამცირებს მიგრაციის რისკებს</li>
-<li>მიგრაციის სკრიპტები ამარტივებს პროექტების ავტომატურ განახლებას</li>
-<li>დოკუმენტირებული ცვლილებები ზრდის დეველოპერების ნდობას და ამცირებს შეცდომების ალბათობას</li>
-<li>ალტერნატივა (breaking changes ყოველ ვერსიაზე) უარყოფილია backwards compatibility-ის არქონის გამო</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md883"></a>
-შედეგები და გავლენა</h1>
-<ul>
-<li>შესაძლებელია ძველი პროექტების უსაფრთხო განახლება ახალ ვერსიაზე</li>
-<li>დეველოპერებს მარტივად შეუძლიათ მიგრაცია და ახალი ფუნქციონალის გამოყენება</li>
-<li>სისტემის სტაბილურობა და მომხმარებლის ნდობა იზრდება</li>
-<li>Deprecated API-ების შენარჩუნება ზრდის კოდის მოცულობას გარკვეული პერიოდის განმავლობაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md885"></a>
-გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md886"></a>
-სქემის ვერსიონირება</h2>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;firmware&quot;: {</div>
-<div class="line">        &quot;version&quot;: &quot;2.0.0&quot;,</div>
-<div class="line">        &quot;description&quot;: &quot;New config schema&quot;</div>
-<div class="line">    },</div>
-<div class="line">    ...</div>
-<div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md887"></a>
-Deprecated API-ის მონიშვნა</h2>
-<div class="fragment"><div class="line"> </div>
-<div class="line">esp_err_t old_sensor_module_enable(<span class="keywordtype">void</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md888"></a>
-მიგრაციის სკრიპტის გამოყენება</h2>
-<div class="fragment"><div class="line">python tools/migrate_config.py --from 1.0.0 --to 2.0.0 system_config.json</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md890"></a>
-აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>breaking changes დოკუმენტაციის და მიგრაციის ინსტრუქციის გარეშე</li>
-<li>ძველი კონფიგურაციის ან API-ის დაუფიქრებელი წაშლა</li>
-<li>არასტანდარტული მიგრაციის პროცედურები</li>
-</ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>გამოიყენეთ ვერსიონირება ყველა კონფიგურაციაში</li>
-<li>შეინარჩუნეთ deprecated API-ები განსაზღვრული პერიოდის განმავლობაში</li>
-<li>უზრუნველყავით მიგრაციის ინსტრუქციები და/ან სკრიპტები</li>
-<li>აღწერეთ ყველა ცვლილება და მიგრაციის ნაბიჯი დოკუმენტაციაში</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md892"></a>
-დაკავშირებული დოკუმენტები</h1>
-<ul>
-<li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
-<li><a class="el" href="md_docs_2design__decisions_2architecture__overview.html">architecture_overview.md</a></li>
-<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
-<li><a class="el" href="md_docs_2structure_2faq.html">faq.md</a></li>
-</ul>
-<hr  />
-<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი დოკუმენტაცია ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

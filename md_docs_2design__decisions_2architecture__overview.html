@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: Synapse ESP Framework — არქიტექტურის მიმოხილვა</title>
+<title>Synapse ESP Framework: architecture_overview</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,99 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Synapse ESP Framework — არქიტექტურის მიმოხილვა</div></div>
+  <div class="headertitle"><div class="title">architecture_overview</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md771"></a> </p>
-<h1><a class="anchor" id="autotoc_md772"></a>
-მიზანი</h1>
-<p>Synapse ESP Framework-ის არქიტექტურა შექმნილია იმისთვის, რომ უზრუნველყოს მოდულური, გაფართოებადი და სტანდარტიზებული ჩაშენებული სისტემების (embedded systems) განვითარება ESP-IDF ეკოსისტემაში. მთავარი პრინციპებია მოდულურობა, იზოლაცია, ავტომატიზაცია და მაღალი ხარისხის კოდის უზრუნველყოფა.</p>
-<h1><a class="anchor" id="autotoc_md773"></a>
-ძირითადი არქიტექტურული პრინციპები</h1>
-<ul>
-<li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
-<li><b>იზოლაცია:</b> მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ Service Locator-ის ან Event Bus-ის მეშვეობით.</li>
-<li><b>სტანდარტიზაცია:</b> ყველა მოდული და ინფრასტრუქტურა მიჰყვება ერთიან naming, structure და communication სტანდარტებს.</li>
-<li><b>გაფართოებადობა:</b> ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით.</li>
-<li><b>ავტომატიზაცია:</b> მოდულების ჩართვა/გამორთვა და ბილდში მოხვედრა სრულად ავტომატიზირებულია Kconfig და CMake სისტემების გამოყენებით.</li>
-<li><b>დოკუმენტირებულობა:</b> ყველა არქიტექტურული გადაწყვეტილება და სტანდარტი აღწერილია შესაბამის დოკუმენტებში.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md774"></a>
-არქიტექტურული ფენები და ძირითადი კომპონენტები</h1>
-<ol type="1">
-<li><b>Core (ბირთვი):</b><ul>
-<li>Service Locator — მოდულებს შორის API-ს მოძიება და გამოძახება იზოლაციის დაცვით</li>
-<li>Event Bus — broadcast/notification ტიპის კომუნიკაცია მოდულებს შორის</li>
-<li>Module Register — მოდულების რეგისტრაცია, ინიციალიზაცია და მართვა</li>
-<li>Module Factory — მოდულების დინამიური შექმნა კონფიგურაციიდან</li>
-<li>Configuration Manager — სისტემის და მოდულების კონფიგურაციის მართვა</li>
-<li>Logging — სტანდარტიზებული ლოგირება</li>
-</ul>
-</li>
-<li><b>Interfaces:</b><ul>
-<li>გლობალური ინტერფეისები, რომლებიც უზრუნველყოფს მოდულებს შორის კონტრაქტებს</li>
-</ul>
-</li>
-<li><b>Modules:</b><ul>
-<li>კატეგორიებად დაყოფილი ფუნქციონალური გაფართოებები (სენსორები, აქტუატორები, კომუნიკაციები, ეკრანები, დრაივერები, სისტემური და დამხმარე მოდულები)</li>
-</ul>
-</li>
-<li><b>Configuration:</b><ul>
-<li>მოქნილი და სტანდარტიზებული კონფიგურაციის სისტემა (system_config.json, module.json, Kconfig)</li>
-</ul>
-</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md775"></a>
-მოდულებს შორის კომუნიკაციის პატერნები</h1>
-<ul>
-<li><b>Service Locator Pattern:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის. უზრუნველყოფს მოდულებს შორის მინიმალურ დამოკიდებულებას.</li>
-<li><b>Event Bus Pattern:</b> გამოიყენება broadcast/notification სცენარებისთვის, როცა ერთზე მეტ მოდულს სჭირდება ერთი მოვლენის მიღება.</li>
-<li><b>აკრძალულია:</b> პირდაპირი დამოკიდებულება მოდულებს შორის და სხვა მოდულის header-ის პირდაპირი ჩასმა (#include).</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md776"></a>
-სიცოცხლის ციკლი</h1>
-<ul>
-<li><b>Create:</b> მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა</li>
-<li><b>Init:</b> hardware-ის ან სხვა რესურსების ინიციალიზაცია</li>
-<li><b>Enable/Disable:</b> მოდულის აქტივაცია ან დროებით გათიშვა</li>
-<li><b>Deinit:</b> ყველა გამოყოფილი რესურსის გათავისუფლება</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md777"></a>
-საქაღალდეებისა და ფაილების სტრუქტურა</h1>
-<ul>
-<li><b>main/</b> — მთავარი აპლიკაცია (app_main და ძირითადი ლოგიკა)</li>
-<li><b>components/core/</b> — ბირთვი: service locator, event bus, module register და სხვა</li>
-<li><b>components/interfaces/</b> — გლობალური ინტერფეისები</li>
-<li><b>components/modules/</b> — კატეგორიებად დაყოფილი მოდულები</li>
-<li><b>docs/</b> — დოკუმენტაცია და სტანდარტები</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md778"></a>
-არქიტექტურული დიაგრამა (მოკლე)</h1>
-<div class="fragment"><div class="line">┌──────────────┐      Service Locator     ┌──────────────┐</div>
-<div class="line">│   Module A   │ ───────────────────────► │   Module B   │</div>
-<div class="line">└──────────────┘                          └──────────────┘</div>
-<div class="line">        │</div>
-<div class="line">        │ Event Bus</div>
-<div class="line">        ▼</div>
-<div class="line">┌──────────────┐</div>
-<div class="line">│   Module C   │</div>
-<div class="line">└──────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md779"></a>
-სტანდარტები და დოკუმენტაცია</h1>
-<p>ყველა naming, structure, communication და სხვა წესები აღწერილია შესაბამის convention დოკუმენტებში:</p><ul>
-<li>variable_naming.md</li>
-<li>function_naming.md</li>
-<li>module_structure.md</li>
-<li>configuration_management.md</li>
-<li>communication_patterns.md</li>
-<li>error_handling.md</li>
-<li>logging_standards.md</li>
-<li>coding_doxygen_standard.md</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md780"></a>
-დასკვნა</h1>
-<p>Synapse ESP Framework-ის არქიტექტურა უზრუნველყოფს მოქნილ, სტანდარტიზებულ და გაფართოებად ჩაშენებულ სისტემებს, სადაც თითოეული მოდული დამოუკიდებელია, ადვილად ტესტირებადი და დოკუმენტირებულია. ყველა გადაწყვეტილება და სტანდარტი დეტალურადაა აღწერილი დოკუმენტაციაში, რაც ამარტივებს როგორც ახალ, ისე გამოცდილ დეველოპერებს ჩართვას და განვითარებას. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

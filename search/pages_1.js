@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['2025_2006_2024_0',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
-  ['24_1',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]]
+  ['24_0',['CHANGELOG_2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]]
 ];

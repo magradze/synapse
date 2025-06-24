@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: სისტემის კონფიგურაცია (System Configuration)</title>
+<title>Synapse ESP Framework: system_configuration</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,93 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">სისტემის კონფიგურაცია (System Configuration)</div></div>
+  <div class="headertitle"><div class="title">system_configuration</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1395"></a> </p>
-<h1><a class="anchor" id="autotoc_md1396"></a>
-მიზანი</h1>
-<p>ეს სახელმძღვანელო დაგეხმარებათ სწორად და სტანდარტულად აღწეროთ და მართოთ სისტემის და მოდულების კონფიგურაცია Synapse ESP Framework-ში.</p>
-<h1><a class="anchor" id="autotoc_md1397"></a>
-1. system_config.json-ის როლი</h1>
-<ul>
-<li>მთავარი კონფიგურაციის ფაილი, სადაც აღწერილია ყველა მოდული, მათი პარამეტრები და გლობალური პარამეტრები</li>
-<li>გამოიყენება როგორც ბილდის, ასევე runtime-ის დროს</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1398"></a>
-2. სტრუქტურა და მაგალითი</h1>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;firmware&quot;: {</div>
-<div class="line">        &quot;version&quot;: &quot;1.0.0&quot;,</div>
-<div class="line">        &quot;description&quot;: &quot;My first ESP project&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;global_config&quot;: {</div>
-<div class="line">        &quot;device.id.prefix&quot;: &quot;SYNAPSE_DEVICE_UNIQUE_ID&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;modules&quot;: [</div>
-<div class="line">        {</div>
-<div class="line">            &quot;type&quot;: &quot;relay_module&quot;,</div>
-<div class="line">            &quot;enabled&quot;: true,</div>
-<div class="line">            &quot;config&quot;: {</div>
-<div class="line">                &quot;instance_name&quot;: &quot;relay1&quot;,</div>
-<div class="line">                &quot;pin&quot;: 23</div>
-<div class="line">            }</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            &quot;type&quot;: &quot;dht22_module&quot;,</div>
-<div class="line">            &quot;enabled&quot;: true,</div>
-<div class="line">            &quot;config&quot;: {</div>
-<div class="line">                &quot;instance_name&quot;: &quot;indoor_sensor&quot;,</div>
-<div class="line">                &quot;pin&quot;: 4,</div>
-<div class="line">                &quot;update_interval_sec&quot;: 30</div>
-<div class="line">            }</div>
-<div class="line">        }</div>
-<div class="line">    ]</div>
-<div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1399"></a>
-3. მოდულის დამატება და პარამეტრების აღწერა</h1>
-<ul>
-<li>თითოეული მოდული აღწერილია modules მასივში</li>
-<li>აუცილებელია უნიკალური <code>instance_name</code> და ყველა საჭირო პარამეტრი</li>
-<li>მაგალითი: <div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;type&quot;: &quot;mqtt_module&quot;,</div>
-<div class="line">    &quot;enabled&quot;: true,</div>
-<div class="line">    &quot;config&quot;: {</div>
-<div class="line">        &quot;instance_name&quot;: &quot;main_broker&quot;,</div>
-<div class="line">        &quot;broker_uri&quot;: &quot;mqtt://192.168.1.160:1883&quot;,</div>
-<div class="line">        &quot;base_topic&quot;: &quot;/synapse/device&quot;</div>
-<div class="line">    }</div>
-<div class="line">}</div>
-</div><!-- fragment --></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1400"></a>
-4. გლობალური პარამეტრების გამოყენება</h1>
-<ul>
-<li>გამოიყენეთ <code>global_config</code> სექცია საერთო მნიშვნელობებისთვის</li>
-<li>წვდომა ხდება fmw_config_get_* API-ებით</li>
-<li>მაგალითი: <div class="fragment"><div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
-<div class="line"><a class="code hl_function" href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a>(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
-<div class="ttc" id="aconfig__manager_8h_html_ad83c96bb47fc292873d5d630e44e2fd6"><div class="ttname"><a href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a></div><div class="ttdeci">esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_size)</div><div class="ttdoc">კითხულობს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებიდან.</div></div>
-</div><!-- fragment --></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1401"></a>
-5. კონფიგურაციის ვალიდაცია და შეცდომების თავიდან აცილება</h1>
-<ul>
-<li>ყველა მოდული ვალიდაციას გადის parse_module_config ფუნქციაში</li>
-<li>არასწორი ან არარსებული მნიშვნელობების შემთხვევაში გამოიყენება default მნიშვნელობები</li>
-<li>ყველა შეცდომა ლოგირდება</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1402"></a>
-6. Best Practices</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ დესკრიპტიული და კონტექსტური სახელები</li>
-<li>არასდროს გამოიყენოთ hardcoded მნიშვნელობები კოდში</li>
-<li>ყველა ცვლილება და ახალი პარამეტრი აღწერეთ დოკუმენტაციაში</li>
-<li>გამოიყენეთ <a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a> და <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
-</ul>
-<hr  />
-<p>თუ შეგექმნათ პრობლემა, იხილეთ <a href="../troubleshooting/">troubleshooting</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

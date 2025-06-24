@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)</title>
+<title>Synapse ESP Framework: extending_framework</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,84 +90,10 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2extending__framewo
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)</div></div>
+  <div class="headertitle"><div class="title">extending_framework</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1235"></a> </p>
-<h1><a class="anchor" id="autotoc_md1236"></a>
-მიზანი</h1>
-<p>ფრეიმვორქის გაფართოების მიზანია დეველოპერებმა მარტივად და სტანდარტულად დაამატონ ახალი მოდულები, კომპონენტები ან ფუნქციონალი ისე, რომ არ დაირღვეს არქიტექტურული პრინციპები და სტანდარტები.</p>
-<h1><a class="anchor" id="autotoc_md1237"></a>
-ახალი მოდულის დამატების პროცესი</h1>
-<ol type="1">
-<li><b>კატეგორიის არჩევა</b><ul>
-<li>განსაზღვრეთ, რომელ კატეგორიაში უნდა დაემატოს ახალი მოდული (მაგ: sensors, actuators, communications და ა.შ.)</li>
-</ul>
-</li>
-<li><b>საქაღალდის შექმნა</b><ul>
-<li>შექმენით ახალი საქაღალდე: <code>components/modules/{category}/{new_module}/</code></li>
-</ul>
-</li>
-<li><b>სავალდებულო ფაილები</b><ul>
-<li><code>CMakeLists.txt</code> — ბილდის სკრიპტი</li>
-<li><code>module.json</code> — მოდულის აღწერა და default კონფიგურაცია</li>
-<li><code>README.md</code> — მოკლე აღწერა და გამოყენების მაგალითები</li>
-<li><code>include/{new_module}.h</code> — public API</li>
-<li><code>src/{new_module}.c</code> — იმპლემენტაცია</li>
-</ul>
-</li>
-<li><b>კონვენციების დაცვა</b><ul>
-<li>გამოიყენეთ variable_naming და function_naming წესები</li>
-<li>დაიცავით module_structure და communication_patterns</li>
-<li>გამოიყენეთ სტანდარტული ლოგირება და შეცდომების დამუშავება</li>
-</ul>
-</li>
-<li><b>კონფიგურაციის აღწერა</b><ul>
-<li>module.json-ში აღწერეთ ყველა საჭირო პარამეტრი</li>
-<li>საჭიროების შემთხვევაში დაამატეთ მაგალითი system_config.json-ში</li>
-</ul>
-</li>
-<li><b>ინტეგრაცია და ტესტირება</b><ul>
-<li>ჩართეთ მოდული მთავარ კონფიგურაციაში (Kconfig)</li>
-<li>გაატარეთ ტესტირება და დაადასტურეთ სტანდარტებთან შესაბამისობა</li>
-</ul>
-</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md1238"></a>
-Best Practices</h1>
-<ul>
-<li>გამოიყენეთ მხოლოდ public API-ები მოდულებს შორის</li>
-<li>ყველა მოდულს ჰქონდეს README და მაგალითები</li>
-<li>გამოიყენეთ სტანდარტული ლოგირება და შეცდომების დამუშავება</li>
-<li>არ გამოიყენოთ hardcoded მნიშვნელობები</li>
-<li>ყველა ცვლილება და ახალი ფუნქციონალი აღწერეთ დოკუმენტაციაში</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1239"></a>
-აკრძალული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>პირდაპირი დამოკიდებულება სხვა მოდულზე</li>
-<li>არასტანდარტული სტრუქტურა ან სახელები</li>
-<li>კონფიგურაციის მნიშვნელობების hardcode</li>
-<li>დოკუმენტაციის გარეშე ახალი კოდის დამატება</li>
-</ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>დაიცავით ყველა კონვენცია და სტანდარტი</li>
-<li>ჩაატარეთ ტესტირება</li>
-<li>აღწერეთ ცვლილებები და ახალი ფუნქციონალი დოკუმენტაციაში</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1240"></a>
-მაგალითი ახალი მოდულის დამატების</h1>
-<div class="fragment"><div class="line">components/modules/sensors/new_sensor_module/</div>
-<div class="line">├── CMakeLists.txt</div>
-<div class="line">├── module.json</div>
-<div class="line">├── README.md</div>
-<div class="line">├── include/</div>
-<div class="line">│   └── new_sensor_module.h</div>
-<div class="line">├── src/</div>
-<div class="line">│   └── new_sensor_module.c</div>
-</div><!-- fragment --><hr  />
-<p>შემდეგი ნაბიჯი: ხშირად დასმული კითხვები (FAQ) და მოკლე რჩევები. </p>
-</div></div><!-- contents -->
+<div class="textblock"></div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -14,42 +14,90 @@
 ## დეტალური აღწერა
 
 ### 1. Create
+
 - ხდება მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა
 - გამოიყენება Factory-ის მიერ
 - მაგალითი:
+
   ```c
   module_t *ssd1306_module_create(const cJSON *config);
   ```
 
 ### 2. Init
+
 - ხდება hardware-ის ან სხვა რესურსების ინიციალიზაცია
 - ყველა აუცილებელი პარამეტრი მოწმდება და ინახება
 - მაგალითი:
+
   ```c
   static esp_err_t ssd1306_init(module_t *module);
   ```
 
 ### 3. Enable/Disable
+
 - უზრუნველყოფს მოდულის აქტივაციას ან დროებით გათიშვას
 - გამოიყენება სისტემის ან მომხმარებლის მიერ
 - მაგალითი:
+
   ```c
   static esp_err_t ssd1306_enable(module_t *module);
   static esp_err_t ssd1306_disable(module_t *module);
   ```
 
 ### 4. Deinit
+
 - ხდება ყველა გამოყოფილი რესურსის გათავისუფლება
 - გამოიყენება სისტემის გათიშვის ან მოდულის ამოღებისას
 - მაგალითი:
+
   ```c
   static esp_err_t ssd1306_deinit(module_t *module);
   ```
 
 ## სიცოცხლის ციკლის დიაგრამა
 
-```
-[create] -> [init] -> [enable] <-> [disable] -> [deinit]
+```mermaid
+graph TD
+    subgraph "System Startup / Module Factory"
+        A(Start) --> B{Config Parsing};
+        B -- OK --> C(fmw_module_create);
+        B -- Fail --> D[Module Disabled];
+    end
+
+    subgraph "Module Lifecycle Management"
+        C --> E{Init};
+        E -- OK --> F[Initialized / Inactive];
+        E -- Fail --> G[Error State];
+
+        F --> H{Enable};
+        H -- OK --> I[Enabled / Running];
+        H -- Fail --> G;
+
+        I -- Disable --> J[Disabled / Suspended];
+        J -- Enable --> I;
+
+        I -- Reconfigure --> K{Reconfigure};
+        K -- OK --> I;
+        K -- Fail --> G;
+
+        J -- Reconfigure --> L{Reconfigure};
+        L -- OK --> J;
+        L -- Fail --> G;
+    end
+
+    subgraph "System Shutdown / Module Unload"
+        I -- Deinit --> M{Deinit};
+        J -- Deinit --> M;
+        G -- Deinit --> M;
+
+        M -- OK --> N(Resources Freed);
+        M -- Fail --> O[Cleanup Error];
+    end
+
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style G fill:#ff6347,stroke:#333,stroke-width:2px
+    style O fill:#ff6347,stroke:#333,stroke-width:2px
+    style I fill:#90ee90,stroke:#333,stroke-width:2px
 ```
 
 ## მაგალითი მოდულის სიცოცხლის ციკლის მართვის
@@ -87,11 +135,13 @@ static esp_err_t ssd1306_deinit(module_t *module) {
 ## აკრძალული და რეკომენდებული პრაქტიკები
 
 ❌ **არასდროს:**
+
 - რესურსების გამოუყენებლად დატოვება
 - არასტანდარტული სახელების გამოყენება
 - სიცოცხლის ციკლის ეტაპების გამოტოვება
 
 ✅ **ყოველთვის:**
+
 - დაიცავით სტანდარტული სახელები და სტრუქტურა
 - გაათავისუფლეთ ყველა გამოყოფილი რესურსი
 - გამოიყენეთ დეტალური ლოგირება თითოეულ ეტაპზე
@@ -99,4 +149,3 @@ static esp_err_t ssd1306_deinit(module_t *module) {
 ---
 
 შემდეგი ნაბიჯი: დეტალურად განვიხილოთ შეცდომების დამუშავების და ლოგირების სტანდარტები.
-

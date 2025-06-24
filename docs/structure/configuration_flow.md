@@ -45,6 +45,35 @@
    - შესაძლებელია კონფიგურაციის განახლება (reconfigure) სპეციალური API-ით
    - ცვლილებები ვალიდირდება და ინერგება მოდულში
 
+```mermaid
+graph LR
+    subgraph "Build-Time Configuration"
+        A[Kconfig] -- "Enable/Disable Modules" --> B(CMake Build System);
+    end
+
+    subgraph "Runtime Configuration"
+        C(system_config.json) -- "Loads at Startup" --> D[Config Manager];
+        E(module.json) -- "Provides Defaults" --> D;
+    end
+
+    subgraph "Module Initialization"
+        D -- "Provides JSON object" --> F(Module Factory);
+        F -- "Calls `_create(config)`" --> G(Module Instance);
+    end
+
+    subgraph "Module Internal Logic"
+        G -- "Calls `parse_module_config`" --> H{Internal Data Struct};
+        D -- "Provides `fmw_config_get_*` APIs" --> H;
+        I[Module's Logic] -- "Accesses values" --> H;
+    end
+
+    style A fill:#cde4ff,stroke:#333
+    style C fill:#f9f,stroke:#333
+    style D fill:#b0e0e6,stroke:#333
+    style F fill:#b0e0e6,stroke:#333
+    style G fill:#90ee90,stroke:#333
+```
+
 ## კონფიგურაციის წვდომის მაგალითები
 
 ```c

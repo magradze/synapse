@@ -18,6 +18,7 @@ jobs:
           sudo apt-get install -y doxygen graphviz
 
       - name: Generate Doxygen Documentation
+        # დარწმუნდით, რომ Doxyfile არსებობს პროექტის root-ში
         run: doxygen Doxyfile
 
       - name: Deploy to GitHub Pages
@@ -25,5 +26,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/doxygen_html
-          # შეგიძლიათ მიუთითოთ სასურველი branch-ი, სადაც აიტვირთება დოკუმენტაცია
-          # publish_branch: gh-pages
+          publish_branch: gh-pages

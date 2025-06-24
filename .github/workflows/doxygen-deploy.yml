@@ -3,7 +3,10 @@ name: Deploy Doxygen to GitHub Pages
 on:
   push:
     branches:
-      - main  # გაეშვება მხოლოდ main ბრენჩზე ცვლილებისას
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -18,7 +21,6 @@ jobs:
           sudo apt-get install -y doxygen graphviz
 
       - name: Generate Doxygen Documentation
-        # დარწმუნდით, რომ Doxyfile არსებობს პროექტის root-ში
         run: doxygen Doxyfile
 
       - name: Deploy to GitHub Pages

@@ -18,14 +18,7 @@ jobs:
       - name: Install Doxygen, Graphviz, and PlantUML dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz default-jre
-
-      - name: Download PlantUML
-        run: |
-          wget -O plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
-
-      - name: Make filter script executable
-        run: chmod +x tools/doxygen_filter.py
+          sudo apt-get install -y doxygen graphviz
 
       - name: Generate Doxygen Documentation
         run: doxygen Doxyfile

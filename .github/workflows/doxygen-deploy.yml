@@ -23,9 +23,17 @@ jobs:
       - name: Generate Doxygen Documentation
         run: doxygen Doxyfile
 
+      - name: Check Doxygen Output Directory
+        run: |
+          echo "Checking contents of docs/doxygen_html..."
+          ls -R docs/doxygen_html
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/doxygen_html
           publish_branch: gh-pages
+          allow_empty_commit: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

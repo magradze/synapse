@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['ფაილების_20სტრუქტურა_0',['ფაილების სტრუქტურა',['../md_docs_2design__decisions_2architecture__overview.html#autotoc_md777',1,'საქაღალდეებისა და ფაილების სტრუქტურა'],['../structure_docs.html#struct_dir_sec',1,'საქაღალდეებისა და ფაილების სტრუქტურა']]],
+  ['ფაილების_20სტრუქტურა_20directory_20structure_1',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
+  ['ფაილების_20შაბლონები_2',['3. Header და Source ფაილების შაბლონები',['../md_docs_2tutorials_2create__first__module.html#autotoc_md1358',1,'']]],
+  ['ფაილების_20შექმნა_3',['2. საქაღალდის და ფაილების შექმნა',['../md_docs_2tutorials_2create__first__module.html#autotoc_md1357',1,'']]],
+  ['ფაილები_4',['დამატებული და განახლებული ფაილები',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md415',1,'']]],
+  ['ფაილის_20კონფიგურაცია_5',['sdkconfig ფაილის კონფიგურაცია',['../md_docs_2contributing_2local__setup.html#autotoc_md548',1,'']]],
+  ['ფაილის_20სათაურის_20header_20კომენტარი_6',['2. ფაილის სათაურის (Header) კომენტარი',['../md_docs_2convention_2coding__doxygen__standard.html#autotoc_md590',1,'']]],
+  ['ფაილის_20სტრუქტურა_7',['ფაილის სტრუქტურა',['../md_docs_2convention_2module__structure.html#autotoc_md736',1,'']]],
+  ['ფაილი_20tt_20include_20module_5fname_20h_20tt_8',['1. Header ფაილი (&lt;tt&gt;include/{module_name}.h&lt;/tt&gt;)',['../md_docs_2convention_2module__structure.html#autotoc_md737',1,'']]],
+  ['ფაილი_20tt_20module_5fname_20c_20tt_9',['2. Source ფაილი (&lt;tt&gt;{module_name}.c&lt;/tt&gt;)',['../md_docs_2convention_2module__structure.html#autotoc_md738',1,'']]],
+  ['ფაქტობრივი_20შედეგი_10',['ფაქტობრივი შედეგი',['../md_docs_2contributing_2issue__template.html#autotoc_md530',1,'']]],
+  ['ფენები_20და_20ძირითადი_20კომპონენტები_11',['არქიტექტურული ფენები და ძირითადი კომპონენტები',['../md_docs_2design__decisions_2architecture__overview.html#autotoc_md774',1,'']]],
+  ['ფლეში_12',['4. ბილდი და ფლეში',['../md_docs_2tutorials_2getting__started.html#autotoc_md1369',1,'']]],
+  ['ფორმატი_13',['ფორმატი',['../md_docs_2convention_2logging__standards.html#autotoc_md706',1,'სტანდარტული ფორმატი'],['../md_docs_2convention_2configuration__management.html#autotoc_md626',1,'სტანდარტული ფორმატი']]],
+  ['ფრეიმვორქის_20გაფართოება_14',['ფრეიმვორქის გაფართოება',['../structure_docs.html#struct_extending_sec',1,'']]],
+  ['ფრეიმვორქის_20გაფართოება_20და_20best_20practices_20extending_20the_20framework_15',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
+  ['ფუნქციების_20დასახელება_16',['ფუნქციების დასახელება',['../conventions_docs.html#conv_func_name_sec',1,'']]],
+  ['ფუნქციების_20დასახელების_20წესები_17',['ფუნქციების დასახელების წესები',['../md_docs_2convention_2function__naming.html',1,'']]],
+  ['ფუნქციები_18',['ფუნქციები',['../md_docs_2api__reference_2configuration__api.html#autotoc_md65',1,'ძირითადი API ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md698',1,'1. Module Lifecycle ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md699',1,'2. Runtime Management ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md700',1,'3. Event Handler ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md701',1,'4. Task ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md690',1,'Framework API ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md688',1,'Public API ფუნქციები'],['../md_docs_2convention_2function__naming.html#autotoc_md689',1,'Static/Private ფუნქციები']]],
+  ['ფუნქციის_20დამატება_19',['3. ახალი API ან ფუნქციის დამატება',['../md_docs_2tutorials_2module__extension.html#autotoc_md1387',1,'']]],
+  ['ფუნქციის_20კომენტარი_20',['3. ფუნქციის კომენტარი',['../md_docs_2convention_2coding__doxygen__standard.html#autotoc_md593',1,'']]],
+  ['ფუნქციონალის_20დამატება_20module_20extension_20feature_20addition_21',['მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension &amp; Feature Addition)',['../md_docs_2tutorials_2module__extension.html',1,'']]]
+];

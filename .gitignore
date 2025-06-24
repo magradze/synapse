@@ -1,0 +1,39 @@
+# ESP-IDF build output
+/build/
+/cmake-build-debug/
+
+# Compiled binary files
+*.bin
+*.elf
+*.map
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+build.ninja
+
+# ESP-IDF generated files
+sdkconfig
+sdkconfig.old
+sdkconfig.*
+project_description.json
+flasher_args.json
+
+# Partition table
+partition_table/
+
+# Logs
+log/
+
+# IDE files
+*.swp
+*.swo
+*.user
+*.vscode/
+.idea/
+
+# Misc
+*.zip
+*.pyc
+__pycache__/

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: display_api</title>
+<title>Synapse ESP Framework: Synapse Display Module API Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,107 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2display__api.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">display_api</div></div>
+  <div class="headertitle"><div class="title">Synapse Display Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md122"></a> </p>
+<h1><a class="anchor" id="autotoc_md123"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse Framework-ის ეკრანის (display) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md125"></a>
+მოდულის შექმნა და სიცოცხლის ციკლი</h1>
+<h2><a class="anchor" id="autotoc_md126"></a>
+module_t &lt;em&gt;ssd1306_module_create(const cJSON *config);</h2>
+<ul>
+<li>ქმნის ახალი SSD1306 მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
+<li>არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)</li>
+<li>აბრუნებს: <a class="el" href="structmodule__t.html" title="მთავარი მოდულის სტრუქტურა">module_t</a> წარმატების შემთხვევაში, NULL შეცდომისას.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md127"></a>
+static esp_err_t ssd1306_init(module_t *module);</h2>
+<ul>
+<li>ახორციელებს მოდულის ინიციალიზაციას (hardware, პარამეტრები და ა.შ.)</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md128"></a>
+static esp_err_t ssd1306_enable(module_t *module);</h2>
+<ul>
+<li>აქტივაციას უკეთებს მოდულს (enable logic)</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md129"></a>
+static esp_err_t ssd1306_disable(module_t *module);</h2>
+<ul>
+<li>დეაქტივაციას უკეთებს მოდულს (disable logic)</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md130"></a>
+static esp_err_t ssd1306_deinit(module_t *module);</h2>
+<ul>
+<li>ასუფთავებს ყველა გამოყოფილ რესურსს</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md132"></a>
+Service API (Service Locator-ისთვის)</h1>
+<h2><a class="anchor" id="autotoc_md133"></a>
+esp_err_t ssd1306_api_enable(void);</h2>
+<ul>
+<li>Service Locator-ით გამოძახებული enable ფუნქცია</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md134"></a>
+esp_err_t ssd1306_api_disable(void);</h2>
+<ul>
+<li>Service Locator-ით გამოძახებული disable ფუნქცია</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md135"></a>
+esp_err_t ssd1306_api_clear(void);</h2>
+<ul>
+<li>Service Locator-ით გამოძახებული ეკრანის გასუფთავება</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md136"></a>
+esp_err_t ssd1306_api_write_text(const char *text, uint8_t line);</h2>
+<ul>
+<li>Service Locator-ით გამოძახებული ტექსტის ჩაწერა ეკრანზე</li>
+<li>არგუმენტები: ტექსტი, ხაზის ნომერი</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md138"></a>
+Event Handling API</h1>
+<h2><a class="anchor" id="autotoc_md139"></a>
+static void ssd1306_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
+<ul>
+<li>ამუშავებს მიღებულ მოვლენებს Event Bus-დან (მაგ: refresh, notify)</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md141"></a>
+Configuration Parsing API</h1>
+<h2><a class="anchor" id="autotoc_md142"></a>
+static esp_err_t parse_ssd1306_config(const cJSON *config, ssd1306_private_data_t *ssd1306_data);</h2>
+<ul>
+<li>კითხულობს და ამოწმებს მოდულის კონფიგურაციას</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md144"></a>
+Status &amp; Monitoring API</h1>
+<h2><a class="anchor" id="autotoc_md145"></a>
+static module_status_t ssd1306_get_status(module_t *module);</h2>
+<ul>
+<li>აბრუნებს მოდულის მიმდინარე სტატუსს</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md147"></a>
+Naming &amp; Structure</h1>
+<ul>
+<li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
+<li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md149"></a>
+მაგალითები</h1>
+<p><b>ეკრანის ჩართვა:</b> </p><div class="fragment"><div class="line">ssd1306_api_enable();</div>
+</div><!-- fragment --><p><b>ტექსტის ჩაწერა:</b> </p><div class="fragment"><div class="line">ssd1306_api_write_text(<span class="stringliteral">&quot;Hello, Synapse!&quot;</span>, 0);</div>
+</div><!-- fragment --><p><b>ეკრანის გასუფთავება:</b> </p><div class="fragment"><div class="line">ssd1306_api_clear();</div>
+</div><!-- fragment --><hr  />
+<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

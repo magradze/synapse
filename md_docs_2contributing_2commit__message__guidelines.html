@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: commit_message_guidelines</title>
+<title>Synapse ESP Framework: Synapse Commit Message Guidelines</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,89 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2commit__message
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">commit_message_guidelines</div></div>
+  <div class="headertitle"><div class="title">Synapse Commit Message Guidelines</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md463"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md465"></a>
+მიმოხილვა</h1>
+<p>ეს დოკუმენტი განსაზღვრავს კომიტის შეტყობინებების (commit message) წერის წესებს Synapse Framework-ში. სწორი და სტრუქტურირებული შეტყობინებები ამარტივებს ცვლილებების ისტორიაში გარკვევას და კოდის მიმოხილვას.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md467"></a>
+ძირითადი სტრუქტურა</h1>
+<p>კომიტის შეტყობინება უნდა შედგებოდეს სამი ნაწილისგან:</p>
+<ol type="1">
+<li><b>სათაური (Header):</b> მოკლე, ერთსტრიქონიანი აღწერა (50 სიმბოლომდე)</li>
+<li><b>დეტალური აღწერა (Body):</b> (არასავალდებულო) ცვლილებების დეტალური ახსნა</li>
+<li><b>Footer:</b> (არასავალდებულო) დამატებითი ინფორმაცია, issue-ების ან breaking change-ის მითითება</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md469"></a>
+სათაურის წერის წესები</h1>
+<ul>
+<li>გამოიყენეთ ქვემოთ ჩამოთვლილი სტანდარტული ფორმები სათაურის დასაწყისში:<ul>
+<li><b>დაემატა</b> (Added)</li>
+<li><b>გასწორდა</b> / <b>შესწორდა</b> (Fixed)</li>
+<li><b>წაიშალა</b> (Removed)</li>
+<li><b>განახლდა</b> (Updated)</li>
+<li><b>გადაკეთდა</b> / <b>გადაისახა</b> (Refactored)</li>
+<li><b>გაუმჯობესდა</b> (Improved)</li>
+<li><b>გადაერქვა</b> (Renamed)</li>
+<li><b>მოძველდა</b> (Deprecated)</li>
+<li><b>დაბრუნდა წინა მდგომარეობაზე</b> (Reverted)</li>
+</ul>
+</li>
+<li>არ გამოიყენოთ წერტილი ბოლოს</li>
+<li>მაქსიმუმ 50 სიმბოლო</li>
+<li>აღწერეთ რა შეიცვალა, არა როგორ</li>
+</ul>
+<p><b>მაგალითი:</b></p>
+<div class="fragment"><div class="line">დაემატა ახალი ლოგირების მოდული</div>
+<div class="line">გასწორდა სენსორის ინიციალიზაციის ლოგიკა</div>
+<div class="line">წაიშალა მოძველებული ფუნქცია</div>
+<div class="line">განახლდა კონფიგურაციის მენეჯერი</div>
+<div class="line">გადაკეთდა მოდულის სტრუქტურა</div>
+<div class="line">გაუმჯობესდა შესრულების ეფექტურობა</div>
+<div class="line">გადაერქვა ფუნქციის სახელი</div>
+<div class="line">მოძველდა პარამეტრი</div>
+<div class="line">დაბრუნდა წინა მდგომარეობაზე კონფიგურაცია</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md471"></a>
+დეტალური აღწერის წერის წესები</h1>
+<ul>
+<li>აღწერეთ ცვლილების მიზეზი და კონტექსტი</li>
+<li>მიუთითეთ, რა გავლენა აქვს ცვლილებას სისტემაზე</li>
+<li>გამოიყენეთ პუნქტები ან ცხრილები საჭიროების შემთხვევაში</li>
+</ul>
+<p><b>მაგალითი:</b></p>
+<div class="fragment"><div class="line">- შეცვლილია სენსორის ინიციალიზაციის ალგორითმი</div>
+<div class="line">- გაუმჯობესებულია შეცდომების დამუშავება</div>
+<div class="line">- დამატებულია ლოგირება</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md473"></a>
+Footer-ის წერის წესები</h1>
+<ul>
+<li>მიუთითეთ დაკავშირებული issue-ები (მაგ: "Related: #123")</li>
+<li>მიუთითეთ breaking change, თუ საჭიროა</li>
+</ul>
+<p><b>მაგალითი:</b></p>
+<div class="fragment"><div class="line">Related: #123</div>
+<div class="line">BREAKING CHANGE: საჭიროებს კონფიგურაციის განახლებას</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md475"></a>
+აკრძალული პრაქტიკები</h1>
+<p>❌ ზოგადი სათაურები (მაგ: "ცვლილებები", "ფიქსი") ❌ მხოლოდ კოდის აღწერა სათაურში ("if statement შეცვლილია") ❌ ზედმეტად გრძელი სათაურები</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md477"></a>
+რესურსები</h1>
+<ul>
+<li><a class="el" href="md_docs_2contributing_2contributing__guide.html">კონტრიბუციის სახელმძღვანელო</a></li>
+<li><a class="el" href="md_docs_2convention_2convention__index.html">კონვენციების ინდექსი</a></li>
+<li><a class="el" href="md_docs_2contributing_2code__of__conduct.html">ქცევის კოდექსი</a></li>
+</ul>
+<hr  />
+<p><em>დაიცავით ეს სახელმძღვანელო, რათა ცვლილებების ისტორია იყოს მკაფიო, გასაგები და პროფესიონალური.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

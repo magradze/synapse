@@ -1,6 +1,6 @@
 var indexSectionsWithContent =
 {
-  0: "02abcdefghijlmnoprstuvეკ",
+  0: "0123456789:_abcdefghijklmnopqrstuvwyაბგდევზთიკლმნოპჟრსტუფქყშჩცძწხ—✅❌",
   1: "bchmt",
   2: "bceflmrst",
   3: "efs",
@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "fm",
   8: "dfgims",
   9: "belmoprstეკ",
-  10: "02abcdefghilmoprstuv"
+  10: "029abcdefghilmoprstuvwyაბგდეთიკლმოპჟრსტუფქშჩცწხ—✅"
 };
 
 var indexSectionNames =

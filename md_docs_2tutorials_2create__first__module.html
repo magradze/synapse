@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: create_first_module</title>
+<title>Synapse ESP Framework: პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,122 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">create_first_module</div></div>
+  <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1354"></a> </p>
+<h1><a class="anchor" id="autotoc_md1355"></a>
+მიზანი</h1>
+<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი მოდული Synapse ESP Framework-ში naming, structure და communication კონვენციების დაცვით.</p>
+<h1><a class="anchor" id="autotoc_md1356"></a>
+1. საჭიროების განსაზღვრა</h1>
+<ul>
+<li>განსაზღვრეთ, რა ფუნქციონალი გჭირდებათ (მაგ: ახალი სენსორი, აქტუატორი, კომუნიკაცია)</li>
+<li>აირჩიეთ შესაბამისი კატეგორია (მაგ: sensors, actuators, communications)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1357"></a>
+2. საქაღალდის და ფაილების შექმნა</h1>
+<ul>
+<li>შექმენით ახალი საქაღალდე: <code>components/modules/{category}/{new_module}/</code></li>
+<li>დაამატეთ შემდეგი ფაილები:<ul>
+<li><code>CMakeLists.txt</code></li>
+<li><code>module.json</code></li>
+<li><code>README.md</code></li>
+<li><code>include/{new_module}.h</code></li>
+<li><code>src/{new_module}.c</code></li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1358"></a>
+3. Header და Source ფაილების შაბლონები</h1>
+<p>**Header (<code>include/{new_module}.h</code>):** </p><div class="fragment"><div class="line"><span class="preprocessor">#ifndef {MODULE_NAME}_H</span></div>
+<div class="line"><span class="preprocessor">#define {MODULE_NAME}_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;cJSON.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    esp_err_t (*enable)(void);</div>
+<div class="line">    esp_err_t (*disable)(void);</div>
+<div class="line">    <span class="comment">// საჭიროების მიხედვით სხვა API ფუნქციები</span></div>
+<div class="line">}} {module_name}_api_t;</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *{module_name}_create(<span class="keyword">const</span> cJSON *config);</div>
+<div class="line">esp_err_t {module_name}_api_enable(<span class="keywordtype">void</span>);</div>
+<div class="line">esp_err_t {module_name}_api_disable(<span class="keywordtype">void</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif </span><span class="comment">// {MODULE_NAME}_H</span></div>
+<div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მთავარი მოდულის სტრუქტურა</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
+</div><!-- fragment --><p>**Source (<code>src/{new_module}.c</code>):** </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;{module_name}.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="config__manager_8h.html">config_manager.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="logging_8h.html">logging.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;{MODULE_NAME}&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *global_{module_name}_instance = NULL;</div>
+<div class="line"><span class="keyword">static</span> {module_name}_api_t {module_name}_service_api = {</div>
+<div class="line">    .enable = {module_name}_api_enable,</div>
+<div class="line">    .disable = {module_name}_api_disable,</div>
+<div class="line">    <span class="comment">// საჭიროების მიხედვით სხვა ფუნქციები</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    <span class="keywordtype">char</span> module_instance_name[32];</div>
+<div class="line">    <span class="comment">// კონფიგურაციის პარამეტრები</span></div>
+<div class="line">    <span class="comment">// runtime ცვლადები</span></div>
+<div class="line">    <span class="comment">// hardware handles</span></div>
+<div class="line">}} {module_name}_private_data_t;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ...function declarations, implementation...</span></div>
+<div class="ttc" id="aconfig__manager_8h_html"><div class="ttname"><a href="config__manager_8h.html">config_manager.h</a></div><div class="ttdoc">კონფიგურაციის მენეჯერის API</div></div>
+<div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის API.</div></div>
+<div class="ttc" id="alogging_8h_html"><div class="ttname"><a href="logging_8h.html">logging.h</a></div><div class="ttdoc">Synapse ESP Framework-ის ლოგირების ინტერფეისი</div></div>
+<div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">კომპონენტის TAG-ის განსაზღვრა ლოგირებისთვის</div><div class="ttdef"><b>Definition</b> logging.h:37</div></div>
+<div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1359"></a>
+4. Naming და Structure კონვენციების გამოყენება</h1>
+<ul>
+<li>გამოიყენეთ <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a></li>
+<li>დაიცავით <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
+<li>ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიული და კონტექსტური</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1360"></a>
+5. მოდულის რეგისტრაცია და ჩართვა</h1>
+<ul>
+<li>დაამატეთ მოდული <code>system_config.json</code>-ში: <div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;type&quot;: &quot;{module_name}&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;{instance_name}&quot;,</div>
+<div class="line">        // სხვა საჭირო პარამეტრები</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+<li>ჩართეთ მოდული Kconfig-ში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1361"></a>
+6. ტესტირება და ლოგირება</h1>
+<ul>
+<li>გამოიყენეთ ESP-IDF-ის build და flash ბრძანებები</li>
+<li>დააკვირდით ლოგებს (ESP_LOGI, ESP_LOGE და სხვ.)</li>
+<li>დარწმუნდით, რომ ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგში ჩანს</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1362"></a>
+7. დამატებითი რესურსები</h1>
+<ul>
+<li><a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
+<li><a class="el" href="md_docs_2structure_2configuration__flow.html">configuration_flow.md</a></li>
+<li><a class="el" href="md_docs_2structure_2error__handling__and__logging.html">error_handling_and_logging.md</a></li>
+</ul>
+<hr  />
+<p>თუ შეგექმნათ პრობლემა, იხილეთ <a href="../troubleshooting/">troubleshooting</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

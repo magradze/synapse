@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: review_guidelines</title>
+<title>Synapse ESP Framework: Synapse Review Guidelines</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,72 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2review__guideli
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">review_guidelines</div></div>
+  <div class="headertitle"><div class="title">Synapse Review Guidelines</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md574"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md576"></a>
+მიმოხილვის მიზანი</h1>
+<p>ეს დოკუმენტი განსაზღვრავს კოდის მიმოხილვის (Code Review) პროცესს, სტანდარტებსა და საუკეთესო პრაქტიკებს Synapse Framework-ში. მიზანია ხარისხიანი, სტაბილური და სტანდარტიზებული კოდის უზრუნველყოფა.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md578"></a>
+მიმოხილვის პროცესი</h1>
+<ol type="1">
+<li><b>Pull Request-ის წარდგენა:</b> ავტორი ავსებს <a class="el" href="md_docs_2contributing_2pull__request__template.html">pull_request_template.md</a>-ს და ქმნის PR-ს.</li>
+<li><b>ავტომატური ტესტირება:</b> ყველა ტესტი და სტატიკური ანალიზი ავტომატურად გაეშვება.</li>
+<li><b>მიმოხილვის დანიშვნა:</b> მინიმუმ ერთი მიმომხილველი ინიშნება PR-ზე.</li>
+<li><b>კომენტარები და რეკომენდაციები:</b> მიმომხილველი ამატებს კომენტარებს, რეკომენდაციებს ან ცვლილებების მოთხოვნას.</li>
+<li><b>ცვლილებების შეტანა:</b> ავტორი ასწორებს კოდს და აახლებს PR-ს საჭიროებისამებრ.</li>
+<li><b>დადასტურება და შერწყმა:</b> ყველა მოთხოვნის შესრულების შემდეგ PR ერთიანდება მთავარ ბრენჩში.</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md580"></a>
+მიმოხილვის კრიტერიუმები</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">კრიტერიუმი   </th><th class="markdownTableHeadNone">აღწერა    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">სტრუქტურა   </td><td class="markdownTableBodyNone">კოდის და ფაილების სტრუქტურა შეესაბამება <a class="el" href="md_docs_2convention_2convention__index.html">კონვენციებს</a>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">დასახელება   </td><td class="markdownTableBodyNone">ცვლადების, ფუნქციების და მოდულების სახელები სწორია    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ლოგიკა   </td><td class="markdownTableBodyNone">კოდის ლოგიკა მკაფიო და გასაგებია    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">დოკუმენტაცია   </td><td class="markdownTableBodyNone">ყველა ცვლილება დოკუმენტირებულია    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ტესტირება   </td><td class="markdownTableBodyNone">დამატებულია ან განახლებულია შესაბამისი ტესტები    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">უსაფრთხოება   </td><td class="markdownTableBodyNone">არ არსებობს უსაფრთხოების რისკები    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">შესრულება   </td><td class="markdownTableBodyNone">კოდი ეფექტურია და არ შეიცავს არასაჭირო ოპერაციებს    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">სტანდარტები   </td><td class="markdownTableBodyNone">დაცულია ყველა პროექტის სტანდარტი და ქცევის კოდექსი   </td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="autotoc_md582"></a>
+საუკეთესო პრაქტიკები</h1>
+<ul>
+<li>გამოიყენეთ მკაფიო და კონსტრუქციული კომენტარები</li>
+<li>მიუთითეთ კონკრეტული სტრიქონები ან სექციები, სადაც საჭიროა ცვლილება</li>
+<li>შეამოწმეთ ყველა შესაბამისი დოკუმენტაცია და ტესტი</li>
+<li>წაახალისეთ ცოდნის გაზიარება და გუნდური მუშაობა</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md584"></a>
+აკრძალული პრაქტიკები</h1>
+<p>❌ პირადი თავდასხმები ან შეურაცხმყოფელი კომენტარები ❌ დაუზუსტებელი ან ზოგადი შენიშვნები (მაგ: "ეს არ მომწონს") ❌ დაუმოწმებელი ცვლილებების მოთხოვნა</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md586"></a>
+რესურსები</h1>
+<ul>
+<li><a class="el" href="md_docs_2contributing_2contributing__guide.html">კონტრიბუციის სახელმძღვანელო</a></li>
+<li><a class="el" href="md_docs_2convention_2convention__index.html">კონვენციები</a></li>
+<li><a class="el" href="md_docs_2contributing_2code__of__conduct.html">ქცევის კოდექსი</a></li>
+<li><a class="el" href="md_docs_2contributing_2pull__request__template.html">Pull Request-ის შაბლონი</a></li>
+</ul>
+<hr  />
+<p><em>მიმოხილვის მიზანია ხარისხიანი და პროფესიონალური კოდის უზრუნველყოფა. დაიცავით ყველა სტანდარტი და წაახალისეთ გუნდური განვითარება!</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

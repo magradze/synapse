@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: performance_display</title>
+<title>Synapse ESP Framework: ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,61 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__dis
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">performance_display</div></div>
+  <div class="headertitle"><div class="title">ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1067"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1069"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის ეკრანის (Display) მოდულების ოპტიმიზაციის რჩევებსა და საუკეთესო პრაქტიკებს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1071"></a>
+ოპტიმიზაციის რეკომენდაციები</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ საჭირო refresh rate და update interval</li>
+<li>მინიმუმამდე დაიყვანეთ redraw ოპერაციები (მხოლოდ საჭიროებისას განაახლეთ ეკრანი)</li>
+<li>გამოიყენეთ double buffering თუ ეკრანის დრაივერი უჭერს მხარს</li>
+<li>გამოიყენეთ DMA (Direct Memory Access) ეკრანის მონაცემების სწრაფად გადასაცემად</li>
+<li>გამორთეთ ეკრანი ან შეამცირეთ update ინტერვალი ენერგიის დაზოგვისთვის</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1073"></a>
+მაგალითები</h1>
+<h2><a class="anchor" id="autotoc_md1074"></a>
+Refresh interval-ის ოპტიმიზაცია</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#define DISPLAY_UPDATE_INTERVAL_MS 500</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> display_task(<span class="keywordtype">void</span> *arg) {</div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        update_display();</div>
+<div class="line">        vTaskDelay(pdMS_TO_TICKS(DISPLAY_UPDATE_INTERVAL_MS));</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1075"></a>
+Conditional redraw</h2>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (display_data_changed) {</div>
+<div class="line">    update_display();</div>
+<div class="line">}</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md1077"></a>
+Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ საჭირო refresh და redraw ოპერაციები</li>
+<li>ჩაატარეთ ბენჩმარკი ეკრანის update latency-ზე</li>
+<li>გამოიყენეთ ლოგირება ეკრანის ოპერაციების მონიტორინგისთვის</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1079"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__optimization.html">performance_optimization.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__benchmarks.html">performance_benchmarks.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__resource__usage.html">performance_resource_usage.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__best__practices.html">performance_best_practices.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი performance დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

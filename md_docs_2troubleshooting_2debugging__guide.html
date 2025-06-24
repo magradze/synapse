@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: debugging_guide</title>
+<title>Synapse ESP Framework: Debugging Guide (დიბაგინგის სახელმძღვანელო)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,68 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2debugging__g
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">debugging_guide</div></div>
+  <div class="headertitle"><div class="title">Debugging Guide (დიბაგინგის სახელმძღვანელო)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1321"></a> </p>
+<h1><a class="anchor" id="autotoc_md1322"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი დაგეხმარებათ Synapse Framework-ის დიბაგინგის პროცესში, ლოგირების, დიაგნოსტიკისა და პრობლემების სწრაფად აღმოჩენის საუკეთესო პრაქტიკებით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1324"></a>
+1. ლოგირების ჩართვა და გამოყენება</h1>
+<ul>
+<li>გამოიყენეთ DEFINE_COMPONENT_TAG ყველა მოდულში</li>
+<li>ჩართეთ საჭირო log level (INFO, DEBUG, VERBOSE)</li>
+<li>გამოიყენეთ ESP_LOGE, ESP_LOGW, ESP_LOGI, ESP_LOGD, ESP_LOGV შესაბამისი მნიშვნელობისთვის</li>
+<li>ლოგებში მიუთითეთ კონტექსტი და დეტალები</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1325"></a>
+2. Debug Build-ის კონფიგურაცია</h1>
+<ul>
+<li>გამოიყენეთ <code>idf.py menuconfig</code> და ჩართეთ Debug/Verbose ლოგირება</li>
+<li>გადაამოწმეთ UART პარამეტრები და ბაფერის ზომა</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1326"></a>
+3. GDB და Breakpoint-ების გამოყენება</h1>
+<ul>
+<li>გამოიყენეთ <code>idf.py gdb</code> ან VSCode-ის ESP-IDF გაფართოება</li>
+<li>დააყენეთ breakpoints პრობლემურ ადგილებში</li>
+<li>გამოიყენეთ stack trace და variable inspection</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1327"></a>
+4. Task და Stack Usage მონიტორინგი</h1>
+<ul>
+<li>გამოიყენეთ <code>uxTaskGetSystemState()</code> და <code>uxTaskGetStackHighWaterMark()</code> FreeRTOS-ისთვის</li>
+<li>მონიტორინგი დაგეხმარებათ stack overflow ან task starvation-ის აღმოჩენაში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1328"></a>
+5. Heap და Memory Usage</h1>
+<ul>
+<li>გამოიყენეთ <code>heap_caps_get_free_size()</code> და <code>heap_caps_print_heap_info()</code> მეხსიერების მონიტორინგისთვის</li>
+<li>ჩართეთ heap corruption detection ESP-IDF-ში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1329"></a>
+6. Event და Service Debugging</h1>
+<ul>
+<li>გამოიყენეთ ლოგები Event Bus-ზე მოვლენების გასავლელად</li>
+<li>გადაამოწმეთ Service Locator-ში სერვისების რეგისტრაცია და მოძიება</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1330"></a>
+7. Assertion-ები და Error Checking</h1>
+<ul>
+<li>გამოიყენეთ assert() და ESP_ERROR_CHECK() კრიტიკულ ადგილებში</li>
+<li>ყველა ფუნქციაში შეამოწმეთ დაბრუნებული მნიშვნელობები</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1331"></a>
+8. დამატებითი ინსტრუმენტები</h1>
+<ul>
+<li>გამოიყენეთ <code>idf.py monitor</code> ლოგების რეალურ დროში სანახავად</li>
+<li>გამოიყენეთ <code>esp-idf monitor</code> და სხვა ESP-IDF-ის დიბაგინგის ხელსაწყოები</li>
+</ul>
+<hr  />
+<p>დამატებითი რჩევებისთვის იხილეთ <a class="el" href="md_docs_2troubleshooting_2common__issues.html">common_issues.md</a>, <a class="el" href="md_docs_2troubleshooting_2faq.html">faq.md</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

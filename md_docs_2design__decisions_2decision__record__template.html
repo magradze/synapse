@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: decision_record_template</title>
+<title>Synapse ESP Framework: არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,69 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2decision__
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">decision_record_template</div></div>
+  <div class="headertitle"><div class="title">არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md817"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md819"></a>
+გადაწყვეტილების ID</h1>
+<p><em>მაგ: ADR-001</em></p>
+<h1><a class="anchor" id="autotoc_md820"></a>
+თარიღი</h1>
+<p><em>მაგ: 2025-06-23</em></p>
+<h1><a class="anchor" id="autotoc_md821"></a>
+სტატუსი</h1>
+<ul>
+<li>[ ] შემოთავაზებული</li>
+<li>[ ] მიღებული</li>
+<li>[ ] უარყოფილი</li>
+<li>[ ] მოძველებული</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md822"></a>
+კონტექსტი</h1>
+<p>მოკლედ აღწერეთ პრობლემა ან საჭიროება, რომელმაც გამოიწვია ეს გადაწყვეტილება. მიუთითეთ არსებული მდგომარეობა, შეზღუდვები ან არქიტექტურული გარემო.</p>
+<p>მაგალითი: </p><blockquote class="doxtable">
+<p>&zwj;MQTT მოდულის ინტეგრაციისას საჭირო გახდა მოდულებს შორის კომუნიკაციის სტანდარტიზაცია, რათა თავიდან ავიცილოთ პირდაპირი დამოკიდებულებები და გავაუმჯობესოთ გაფართოებადობა. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md823"></a>
+გადაწყვეტილება</h1>
+<p>მოკლედ ჩამოაყალიბეთ მიღებული გადაწყვეტილება. აღწერეთ არჩეული მიდგომა, არქიტექტურული შაბლონი ან ტექნოლოგია.</p>
+<p>მაგალითი: </p><blockquote class="doxtable">
+<p>&zwj;არჩეული იქნა Event Bus პატერნი მოდულებს შორის ასინქრონული კომუნიკაციისთვის. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md824"></a>
+არგუმენტები და მოტივაცია</h1>
+<p>დასაბუთეთ, რატომ იქნა არჩეული ეს გადაწყვეტილება. მიუთითეთ ალტერნატივები და მათი უარყოფის მიზეზები.</p>
+<p>მაგალითი:</p><ul>
+<li>Event Bus უზრუნველყოფს მოდულებს შორის მინიმალურ დამოკიდებულებას</li>
+<li>ალტერნატივა: პირდაპირი API-კოლები — უარყოფილია იზოლაციის დარღვევის გამო</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md825"></a>
+შედეგები და გავლენა</h1>
+<p>აღწერეთ, რა გავლენა ექნება ამ გადაწყვეტილებას სისტემაზე, მოდულებზე, დეველოპერებზე ან მომხმარებლებზე. მიუთითეთ დადებითი და უარყოფითი მხარეები.</p>
+<p>მაგალითი:</p><ul>
+<li>დადებითი: მოდულების დამოუკიდებლობა, მარტივი გაფართოება</li>
+<li>უარყოფითი: Event-ის debug რთულდება</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md826"></a>
+განხორციელების ნაბიჯები</h1>
+<ol type="1">
+<li>Event Bus-ის ძირითადი API-ს იმპლემენტაცია (event_bus_post, event_bus_subscribe)</li>
+<li>ყველა მოდულის გადაყვანა Event Bus-ზე კომუნიკაციისთვის</li>
+<li>დოკუმენტაციის განახლება (communication_patterns.md)</li>
+<li>ტესტირება და მაგალითების დამატება</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md827"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2design__decisions_2architecture__overview.html">architecture_overview.md</a></li>
+<li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
+<li><a class="el" href="md_docs_2convention_2communication__patterns.html">communication_patterns.md</a></li>
+<li><a class="el" href="md_docs_2structure_2faq.html">structure/faq.md</a></li>
+</ul>
+<hr  />
+<p><em>შეავსეთ ეს შაბლონი თითოეული მნიშვნელოვანი არქიტექტურული ან ტექნოლოგიური გადაწყვეტილებისთვის.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: integration_example</title>
+<title>Synapse ESP Framework: ინტეგრაციის მაგალითი (Integration Example)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,115 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">integration_example</div></div>
+  <div class="headertitle"><div class="title">ინტეგრაციის მაგალითი (Integration Example)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1373"></a> </p>
+<h1><a class="anchor" id="autotoc_md1374"></a>
+მიზანი</h1>
+<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ ინტეგრირდეთ Synapse Framework-ში სხვადასხვა გარე სისტემასთან ან სერვისთან (მაგალითად, MQTT, REST API, WebSocket) naming, structure და communication კონვენციების დაცვით.</p>
+<h1><a class="anchor" id="autotoc_md1375"></a>
+1. ინტეგრაციის საჭიროების განსაზღვრა</h1>
+<ul>
+<li>განსაზღვრეთ, რომელი გარე სერვისთან გსურთ დაკავშირება (მაგ: MQTT ბროკერი, REST API, WebSocket სერვერი)</li>
+<li>აირჩიეთ შესაბამისი მოდული ან შექმენით ახალი</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1376"></a>
+2. საჭირო მოდულების ჩართვა და კონფიგურაცია</h1>
+<ul>
+<li>ჩართეთ საჭირო მოდული system_config.json-ში</li>
+<li>მაგალითი MQTT-სთვის: <div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;type&quot;: &quot;mqtt_module&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;main_broker&quot;,</div>
+<div class="line">        &quot;broker_uri&quot;: &quot;mqtt://broker.synapse.local:1883&quot;,</div>
+<div class="line">        &quot;base_topic&quot;: &quot;/synapse/device&quot;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1377"></a>
+3. MQTT Integration (Publish/Subscribe)</h1>
+<p><b>Publish:</b> </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *topic = <span class="stringliteral">&quot;/synapse/device/relay1/state&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *payload = <span class="stringliteral">&quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;</span>;</div>
+<div class="line">mqtt_module_publish(topic, payload);</div>
+</div><!-- fragment --><p><b>Subscribe:</b> </p><div class="fragment"><div class="line">esp_err_t mqtt_handle_command(<span class="keyword">const</span> <span class="keywordtype">char</span> *topic, <span class="keyword">const</span> <span class="keywordtype">char</span> *payload) {</div>
+<div class="line">    <span class="comment">// ... process incoming command ...</span></div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+<div class="line">mqtt_module_subscribe(<span class="stringliteral">&quot;/synapse/device/relay1/cmd&quot;</span>, mqtt_handle_command);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1378"></a>
+4. REST API Integration</h1>
+<p><b>HTTP GET:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;esp_http_client.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">esp_err_t rest_api_get_example(<span class="keywordtype">void</span>) {</div>
+<div class="line">    esp_http_client_config_t config = {</div>
+<div class="line">        .url = <span class="stringliteral">&quot;https://api.synapse.local/v1/status&quot;</span></div>
+<div class="line">    };</div>
+<div class="line">    esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
+<div class="line">    esp_err_t ret = esp_http_client_perform(client);</div>
+<div class="line">    <span class="keywordflow">if</span> (ret == ESP_OK) {</div>
+<div class="line">        <span class="keywordtype">int</span> status = esp_http_client_get_status_code(client);</div>
+<div class="line">        <span class="comment">// ... process response ...</span></div>
+<div class="line">    }</div>
+<div class="line">    esp_http_client_cleanup(client);</div>
+<div class="line">    <span class="keywordflow">return</span> ret;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>HTTP POST:</b> </p><div class="fragment"><div class="line">esp_err_t rest_api_post_example(<span class="keyword">const</span> <span class="keywordtype">char</span> *json_payload) {</div>
+<div class="line">    esp_http_client_config_t config = {</div>
+<div class="line">        .url = <span class="stringliteral">&quot;https://api.synapse.local/v1/data&quot;</span></div>
+<div class="line">    };</div>
+<div class="line">    esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
+<div class="line">    esp_http_client_set_method(client, HTTP_METHOD_POST);</div>
+<div class="line">    esp_http_client_set_header(client, <span class="stringliteral">&quot;Content-Type&quot;</span>, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
+<div class="line">    esp_http_client_set_post_field(client, json_payload, strlen(json_payload));</div>
+<div class="line">    esp_err_t ret = esp_http_client_perform(client);</div>
+<div class="line">    <span class="comment">// ... process response ...</span></div>
+<div class="line">    esp_http_client_cleanup(client);</div>
+<div class="line">    <span class="keywordflow">return</span> ret;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1379"></a>
+5. WebSocket Integration</h1>
+<p><b>WebSocket კავშირის დამყარება და შეტყობინების გაგზავნა:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;esp_websocket_client.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> websocket_event_handler(<span class="keywordtype">void</span> *handler_args, esp_event_base_t base, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
+<div class="line">    <span class="comment">// ... process websocket events ...</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> websocket_example(<span class="keywordtype">void</span>) {</div>
+<div class="line">    esp_websocket_client_config_t websocket_cfg = {</div>
+<div class="line">        .uri = <span class="stringliteral">&quot;ws://ws.synapse.local:8080/ws&quot;</span></div>
+<div class="line">    };</div>
+<div class="line">    esp_websocket_client_handle_t client = esp_websocket_client_init(&amp;websocket_cfg);</div>
+<div class="line">    esp_websocket_register_events(client, WEBSOCKET_EVENT_ANY, websocket_event_handler, NULL);</div>
+<div class="line">    esp_websocket_client_start(client);</div>
+<div class="line">    <span class="comment">// გაგზავნეთ შეტყობინება</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *msg = <span class="stringliteral">&quot;{\&quot;type\&quot;:\&quot;ping\&quot;}&quot;</span>;</div>
+<div class="line">    esp_websocket_client_send_text(client, msg, strlen(msg), portMAX_DELAY);</div>
+<div class="line">    <span class="comment">// ... მიიღეთ და დაამუშავეთ შეტყობინებები ...</span></div>
+<div class="line">    <span class="comment">// კავშირის დახურვა</span></div>
+<div class="line">    esp_websocket_client_stop(client);</div>
+<div class="line">    esp_websocket_client_destroy(client);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1380"></a>
+6. Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ public API-ები მოდულებს შორის</li>
+<li>დაიცავით naming და structure კონვენციები</li>
+<li>ყველა ინტეგრაცია აღწერეთ დოკუმენტაციაში</li>
+<li>გამოიყენეთ დეტალური ლოგირება და შეცდომების დამუშავება</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1381"></a>
+7. Troubleshooting</h1>
+<ul>
+<li>დარწმუნდით, რომ ყველა საჭირო მოდული ჩართულია და სწორად კონფიგურირებულია</li>
+<li>გამოიყენეთ ლოგები პრობლემების დიაგნოსტიკისთვის</li>
+<li>იხილეთ <a href="../troubleshooting/">troubleshooting</a> დამატებითი რჩევებისთვის</li>
+</ul>
+<hr  />
+<p>თუ გაქვთ კითხვები ან გჭირდებათ დახმარება, მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

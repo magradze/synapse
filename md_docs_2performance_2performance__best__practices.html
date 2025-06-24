@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: performance_best_practices</title>
+<title>Synapse ESP Framework: საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,55 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__bes
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">performance_best_practices</div></div>
+  <div class="headertitle"><div class="title">საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1055"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1057"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის საუკეთესო პრაქტიკებს წარმადობის გასაუმჯობესებლად naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1059"></a>
+ძირითადი რეკომენდაციები</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ საჭირო მოდულები და ფუნქციები</li>
+<li>გამორთეთ არასაჭირო კომპონენტები Kconfig-ით</li>
+<li>გამოიყენეთ static allocation სადაც შესაძლებელია</li>
+<li>ჩაატარეთ რეგულარული ბენჩმარკი და usage მონიტორინგი</li>
+<li>Bottleneck-ის აღმოჩენისას განახორციელეთ ოპტიმიზაცია</li>
+<li>გამოიყენეთ lazy initialization რესურსების დაზოგვისთვის</li>
+<li>მძიმე ოპერაციები გაანაწილეთ task-ებში ან timer-ებში</li>
+<li>გამოიყენეთ Event Bus ასინქრონული ოპერაციებისთვის</li>
+<li>ჩაწერეთ ყველა usage და ოპტიმიზაციის ნაბიჯი ლოგში</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1061"></a>
+მაგალითები</h1>
+<ul>
+<li>Static allocation: xQueueCreate(), malloc() მხოლოდ საჭიროებისას</li>
+<li>Lazy initialization: რესურსების გამოყოფა მხოლოდ საჭიროებისას</li>
+<li>Usage მონიტორინგი: heap_caps_get_free_size(), uxTaskGetStackHighWaterMark()</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1063"></a>
+Best Practices</h1>
+<ul>
+<li>დაიცავით naming და structure კონვენციები</li>
+<li>გამოიყენეთ მხოლოდ public API-ები</li>
+<li>აღწერეთ ყველა ოპტიმიზაციის ნაბიჯი დოკუმენტაციაში</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1065"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__optimization.html">performance_optimization.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__benchmarks.html">performance_benchmarks.md</a></li>
+<li><a class="el" href="md_docs_2performance_2performance__resource__usage.html">performance_resource_usage.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი performance დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

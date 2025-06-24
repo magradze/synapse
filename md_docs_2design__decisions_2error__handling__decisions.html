@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: error_handling_decisions</title>
+<title>Synapse ESP Framework: შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,105 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">error_handling_decisions</div></div>
+  <div class="headertitle"><div class="title">შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md833"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md835"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში შეცდომების დამუშავების არქიტექტურულ მიდგომებს, არჩეულ სტრატეგიას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md837"></a>
+კონტექსტი</h1>
+<p>ფრეიმვორქს სჭირდება ერთიანი, პროგნოზირებადი და სტანდარტიზებული შეცდომების დამუშავების მექანიზმი, რომელიც უზრუნველყოფს როგორც სისტემური, ისე მოდულების შეცდომების მართვას, დიაგნოსტიკას და ლოგირებას.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md839"></a>
+არჩეული გადაწყვეტილება</h1>
+<ul>
+<li><b>esp_err_t ტიპის დაბრუნებადი მნიშვნელობები:</b> ყველა public და private ფუნქცია აბრუნებს esp_err_t-ს.</li>
+<li><b>სტანდარტული ESP-IDF და Framework-ის error code-ები:</b> გამოიყენება ESP_OK, ESP_ERR_INVALID_ARG, ESP_ERR_NO_MEM, ESP_ERR_FMW_* და სხვა.</li>
+<li><b>პარამეტრების ვალიდაცია:</b> ყველა ფუნქციაში მოწმდება პარამეტრების ვალიდურობა.</li>
+<li><b>ლოგირება:</b> ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგდება შესაბამისი log level-ით (ESP_LOGE, ESP_LOGW).</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md841"></a>
+არგუმენტები და მოტივაცია</h1>
+<ul>
+<li>ერთიანი შეცდომების დამუშავება ამარტივებს დიაგნოსტიკას და ტესტირებას</li>
+<li>ESP-IDF-ის სტანდარტებთან შესაბამისობა უზრუნველყოფს ინტეგრაციის სიმარტივეს</li>
+<li>დეტალური ლოგირება ამარტივებს პრობლემების აღმოჩენას</li>
+<li>ალტერნატივა (გლობალური errno, exception-style) უარყოფილია portability-სა და სტანდარტიზაციის არქონის გამო</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md843"></a>
+შედეგები და გავლენა</h1>
+<ul>
+<li>შეცდომების მართვა ხდება პროგნოზირებადი და სტანდარტიზებული</li>
+<li>ყველა შეცდომა ადვილად იძებნება ლოგებში</li>
+<li>მოდულების ტესტირება და მხარდაჭერა მარტივდება</li>
+<li>შესაძლებელია შეცდომების კოდის გაფართოება Framework-ის საჭიროებებზე</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md845"></a>
+გამოყენების მაგალითები</h1>
+<h2><a class="anchor" id="autotoc_md846"></a>
+პარამეტრების ვალიდაცია</h2>
+<div class="fragment"><div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line) {</div>
+<div class="line">    <span class="keywordflow">if</span> (!text) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Text parameter is NULL&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (line &gt;= MAX_LINES) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Invalid line number: %d (max: %d)&quot;</span>, line, MAX_LINES - 1);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (!global_ssd1306_instance) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Module not initialized&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_STATE;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md847"></a>
+რესურსების გამოყოფის შემოწმება</h2>
+<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t create_module_resources(module_private_data_t *module_private_data) {</div>
+<div class="line">    <span class="keywordflow">if</span> (!module_private_data) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Private data pointer is NULL&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
+<div class="line">    }</div>
+<div class="line">    module_private_data-&gt;command_queue = xQueueCreate(COMMAND_QUEUE_SIZE, <span class="keyword">sizeof</span>(command_t));</div>
+<div class="line">    <span class="keywordflow">if</span> (!module_private_data-&gt;command_queue) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to create command queue&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_NO_MEM;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md849"></a>
+აკრძალული და რეკომენდებული პრაქტიკები</h1>
+<p>❌ <b>არასდროს:</b></p><ul>
+<li>გლობალური errno ან exception-style შეცდომების გამოყენება</li>
+<li>არალოგიკური ან ზოგადი ლოგები ("Error", "OK")</li>
+<li>შეცდომის კოდის პირდაპირი დაბეჭდვა (გამოიყენეთ esp_err_to_name(ret))</li>
+</ul>
+<p>✅ <b>ყოველთვის:</b></p><ul>
+<li>გამოიყენეთ esp_err_t და სტანდარტული error code-ები</li>
+<li>ჩაწერეთ ყველა შეცდომა ლოგში დეტალური კონტექსტით</li>
+<li>დაიცავით naming და structure კონვენციები</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md851"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
+<li><a class="el" href="md_docs_2design__decisions_2architecture__overview.html">architecture_overview.md</a></li>
+<li><a class="el" href="md_docs_2convention_2error__handling.html">error_handling.md</a></li>
+<li><a class="el" href="md_docs_2convention_2logging__standards.html">logging_standards.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი დოკუმენტაცია ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: integration_rest</title>
+<title>Synapse ESP Framework: REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,82 @@ $(document).ready(function(){initNavTree('md_docs_2integration_2integration__res
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">integration_rest</div></div>
+  <div class="headertitle"><div class="title">REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1013"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1015"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ში REST API-სთან ინტეგრაციის სახელმძღვანელოს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1017"></a>
+ძირითადი ნაბიჯები</h1>
+<ol type="1">
+<li><b>HTTP კლიენტის გამოყენება</b><ul>
+<li>გამოიყენეთ ESP-IDF-ის esp_http_client ბიბლიოთეკა</li>
+<li>მაგალითი GET მოთხოვნისთვის: <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;esp_http_client.h&quot;</span></div>
+<div class="line">esp_err_t rest_api_get_example(<span class="keywordtype">void</span>) {</div>
+<div class="line">    esp_http_client_config_t config = {</div>
+<div class="line">        .url = <span class="stringliteral">&quot;https://api.synapse.local/v1/status&quot;</span></div>
+<div class="line">    };</div>
+<div class="line">    esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
+<div class="line">    esp_err_t ret = esp_http_client_perform(client);</div>
+<div class="line">    <span class="keywordflow">if</span> (ret == ESP_OK) {</div>
+<div class="line">        <span class="keywordtype">int</span> status = esp_http_client_get_status_code(client);</div>
+<div class="line">        <span class="comment">// ... process response ...</span></div>
+<div class="line">    }</div>
+<div class="line">    esp_http_client_cleanup(client);</div>
+<div class="line">    <span class="keywordflow">return</span> ret;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+<li>მაგალითი POST მოთხოვნისთვის: <div class="fragment"><div class="line">esp_err_t rest_api_post_example(<span class="keyword">const</span> <span class="keywordtype">char</span> *json_payload) {</div>
+<div class="line">    esp_http_client_config_t config = {</div>
+<div class="line">        .url = <span class="stringliteral">&quot;https://api.synapse.local/v1/data&quot;</span></div>
+<div class="line">    };</div>
+<div class="line">    esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
+<div class="line">    esp_http_client_set_method(client, HTTP_METHOD_POST);</div>
+<div class="line">    esp_http_client_set_header(client, <span class="stringliteral">&quot;Content-Type&quot;</span>, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
+<div class="line">    esp_http_client_set_post_field(client, json_payload, strlen(json_payload));</div>
+<div class="line">    esp_err_t ret = esp_http_client_perform(client);</div>
+<div class="line">    <span class="comment">// ... process response ...</span></div>
+<div class="line">    esp_http_client_cleanup(client);</div>
+<div class="line">    <span class="keywordflow">return</span> ret;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+</li>
+<li><b>უსაფრთხოების რეკომენდაციები</b><ul>
+<li>გამოიყენეთ მხოლოდ HTTPS (TLS/SSL)</li>
+<li>გამოიყენეთ ავტორიზაცია (მაგ: API token, OAuth)</li>
+<li>არ ჩაწეროთ სენსიტიური ინფორმაცია ლოგებში</li>
+</ul>
+</li>
+<li><b>Debug და ტესტირება</b><ul>
+<li>გამოიყენეთ ESP_LOGI/ESP_LOGE REST მოდულში</li>
+<li>დააკვირდით HTTP სტატუს კოდებს და შეცდომებს</li>
+</ul>
+</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1019"></a>
+Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ public API-ები REST ინტეგრაციისთვის</li>
+<li>დაიცავით naming და structure კონვენციები</li>
+<li>ჩაატარეთ ტესტირება სხვადასხვა REST სერვისზე</li>
+<li>გამოიყენეთ ლოგირება და დეტალური კონტექსტი</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1021"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2integration_2integration__index.html">integration_index.md</a></li>
+<li><a class="el" href="md_docs_2api__reference_2communication__api.html">api_reference/communication_api.md</a></li>
+<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი integration დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

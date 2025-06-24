@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: glossary_api</title>
+<title>Synapse ESP Framework: API-სა და კოდის ტერმინები (Glossary — API &amp; Code)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,32 @@ $(document).ready(function(){initNavTree('md_docs_2glossary_2glossary__api.html'
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">glossary_api</div></div>
+  <div class="headertitle"><div class="title">API-სა და კოდის ტერმინები (Glossary — API &amp; Code)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md957"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md959"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის API-სა და კოდის ტერმინებსა და მათ განმარტებებს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<ul>
+<li><b>API (Application Programming Interface):</b> ფუნქციების, სტრუქტურებისა და კონტრაქტების ერთობლიობა, რომელიც უზრუნველყოფს მოდულებს შორის ურთიერთქმედებას.</li>
+<li><b>Handler:</b> ფუნქცია ან ობიექტი, რომელიც ამუშავებს კონკრეტულ მოვლენას ან მოთხოვნას.</li>
+<li><b>Status:</b> მოდულის ან სისტემის მიმდინარე მდგომარეობა (მაგ: ENABLED, DISABLED, ERROR).</li>
+<li><b>Enable/Disable:</b> მოდულის ან ფუნქციის ჩართვა/გამორთვა.</li>
+<li><b>Firmware:</b> მოწყობილობისთვის განკუთვნილი პროგრამული უზრუნველყოფა, რომელიც მუშაობს ჩაშენებულ სისტემაში.</li>
+<li><b>Logging:</b> სისტემის ან მოდულის მუშაობის პროცესში ინფორმაციის ჩაწერა (log) სხვადასხვა დონეზე (INFO, ERROR, DEBUG და სხვ.).</li>
+<li><b>Error Code:</b> სტანდარტული კოდი, რომელიც მიუთითებს ოპერაციის შედეგს ან შეცდომის ტიპს (მაგ: ESP_OK, ESP_ERR_INVALID_ARG).</li>
+<li><b>Public API:</b> ფუნქციები და სტრუქტურები, რომლებიც ხელმისაწვდომია სხვა მოდულებისთვის ან გარე მომხმარებლისთვის.</li>
+<li><b>Private API:</b> მხოლოდ შიდა გამოყენებისთვის განკუთვნილი ფუნქციები და სტრუქტურები.</li>
+<li><b>Callback:</b> ფუნქცია, რომელიც გადაეცემა სხვა ფუნქციას ან მოდულს ასინქრონული ან კონკრეტული მოვლენის დასამუშავებლად.</li>
+<li><b>Event ID:</b> უნიკალური იდენტიფიკატორი, რომელიც განსაზღვრავს კონკრეტულ Event-ს Event Bus-ში.</li>
+<li><b>Service API:</b> სტრუქტურა ან ფუნქციების ნაკრები, რომელიც რეგისტრირდება Service Locator-ში და ხელმისაწვდომია სხვა მოდულებისთვის.</li>
+<li><b>Instance Name:</b> მოდულის ან ობიექტის უნიკალური სახელი სისტემაში.</li>
+</ul>
+<hr  />
+<p><em>ახალი ტერმინის დამატებისას შეიტანეთ ცვლილება ამ ფაილში pull request-ით.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

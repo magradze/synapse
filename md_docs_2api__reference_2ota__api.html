@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: ota_api</title>
+<title>Synapse ESP Framework: Synapse OTA (Over-the-Air) Module API Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,62 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2ota__api.html
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">ota_api</div></div>
+  <div class="headertitle"><div class="title">Synapse OTA (Over-the-Air) Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md246"></a> </p>
+<h1><a class="anchor" id="autotoc_md247"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse Framework-ის OTA (Over-the-Air update) მოდულის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md249"></a>
+OTA Module API</h1>
+<h2><a class="anchor" id="autotoc_md250"></a>
+module_t *ota_module_create(const cJSON *config);</h2>
+<ul>
+<li>ქმნის ახალი OTA მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md251"></a>
+esp_err_t ota_module_start_update(const char *url);</h2>
+<ul>
+<li>იწყებს OTA განახლებას მითითებული URL-დან.</li>
+<li>არგუმენტები: firmware-ის ბმული (URL)</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md252"></a>
+esp_err_t ota_module_get_status(ota_status_t *status);</h2>
+<ul>
+<li>აბრუნებს მიმდინარე OTA პროცესის სტატუსს.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md253"></a>
+esp_err_t ota_module_abort(void);</h2>
+<ul>
+<li>აჩერებს მიმდინარე OTA განახლებას.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md255"></a>
+Event Handling API</h1>
+<h2><a class="anchor" id="autotoc_md256"></a>
+static void ota_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
+<ul>
+<li>ამუშავებს OTA მოდულის მიერ მიღებულ მოვლენებს (მაგ: update started, update finished, error)</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md258"></a>
+Naming &amp; Structure</h1>
+<ul>
+<li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
+<li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md260"></a>
+მაგალითები</h1>
+<p><b>OTA განახლების დაწყება:</b> </p><div class="fragment"><div class="line">ota_module_start_update(<span class="stringliteral">&quot;https://update.synapse.local/firmware.bin&quot;</span>);</div>
+</div><!-- fragment --><p><b>OTA სტატუსის მიღება:</b> </p><div class="fragment"><div class="line">ota_status_t status;</div>
+<div class="line">ota_module_get_status(&amp;status);</div>
+</div><!-- fragment --><p><b>OTA განახლების შეწყვეტა:</b> </p><div class="fragment"><div class="line">ota_module_abort();</div>
+</div><!-- fragment --><hr  />
+<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2system__api.html">system_api.md</a>, <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

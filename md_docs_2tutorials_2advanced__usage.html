@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: advanced_usage</title>
+<title>Synapse ESP Framework: Advanced Usage (გაფართოებული გამოყენება)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,94 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">advanced_usage</div></div>
+  <div class="headertitle"><div class="title">Advanced Usage (გაფართოებული გამოყენება)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1344"></a> </p>
+<h1><a class="anchor" id="autotoc_md1345"></a>
+მიზანი</h1>
+<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ გამოიყენოთ Synapse Framework-ის გაფართოებული შესაძლებლობები, როგორ დააკონფიგურიროთ რთული სცენარები და როგორ მოახდინოთ სისტემის ოპტიმიზაცია.</p>
+<h1><a class="anchor" id="autotoc_md1346"></a>
+1. მრავალმოდულიანი კონფიგურაცია</h1>
+<ul>
+<li>ერთზე მეტი ერთი და იმავე ტიპის მოდულის დამატება (მაგ: რამდენიმე რელე, რამდენიმე სენსორი)</li>
+<li>მაგალითი: <div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;type&quot;: &quot;relay_module&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;relay1&quot;,</div>
+<div class="line">        &quot;pin&quot;: 23</div>
+<div class="line">    }</div>
+<div class="line">},</div>
+<div class="line">{</div>
+<div class="line">    &quot;type&quot;: &quot;relay_module&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;relay2&quot;,</div>
+<div class="line">        &quot;pin&quot;: 25</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1347"></a>
+2. მოდულის დინამიური ჩართვა/გამორთვა</h1>
+<ul>
+<li>მოდულის enable/disable ფუნქციების გამოყენება runtime-ზე</li>
+<li>მაგალითი: <div class="fragment"><div class="line"><span class="comment">// მოდულის ჩართვა</span></div>
+<div class="line">ssd1306_api_enable();</div>
+<div class="line"><span class="comment">// მოდულის გამორთვა</span></div>
+<div class="line">ssd1306_api_disable();</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1348"></a>
+3. Runtime Reconfiguration</h1>
+<ul>
+<li>მოდულის კონფიგურაციის შეცვლა მუშაობის დროს</li>
+<li>გამოიყენეთ module_reconfigure API</li>
+<li>მაგალითი: <div class="fragment"><div class="line">cJSON *new_config = ...; <span class="comment">// ახალი კონფიგურაცია</span></div>
+<div class="line">module_reconfigure(module, new_config);</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1349"></a>
+4. Custom Event-ების გამოყენება</h1>
+<ul>
+<li>საკუთარი მოვლენის განსაზღვრა და გამოყენება Event Bus-ში</li>
+<li>მაგალითი: <div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID  0x1001</span></div>
+<div class="line"><a class="code hl_function" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a>(CUSTOM_EVENT_ID, &amp;custom_data);</div>
+<div class="line"><a class="code hl_function" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504">event_bus_subscribe</a>(CUSTOM_EVENT_ID, custom_event_handler);</div>
+<div class="ttc" id="aevent__bus_8h_html_a16b5d62734d183c1d6be00e0a3dff340"><div class="ttname"><a href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a></div><div class="ttdeci">esp_err_t event_bus_post(system_event_id_t event_id, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div></div>
+<div class="ttc" id="aevent__bus_8h_html_a9b819126a00bf4d7d03c170cc3f67504"><div class="ttname"><a href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504">event_bus_subscribe</a></div><div class="ttdeci">esp_err_t event_bus_subscribe(system_event_id_t event_id, struct module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div></div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1350"></a>
+5. მოდულის სტატუსის მონიტორინგი</h1>
+<ul>
+<li>გამოიყენეთ get_status API მოდულის მდგომარეობის მისაღებად</li>
+<li>მაგალითი: <div class="fragment"><div class="line"><a class="code hl_enumeration" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a> status = ssd1306_get_status(module);</div>
+<div class="line"><span class="keywordflow">if</span> (status == <a class="code hl_enumvalue" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa221822b277cd2086df989161c82d0f3d">MODULE_STATUS_ENABLED</a>) {</div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">}</div>
+<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">მოდულის სტატუსის ენუმერაცია</div><div class="ttdef"><b>Definition</b> base_module.h:32</div></div>
+<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65fa221822b277cd2086df989161c82d0f3d"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa221822b277cd2086df989161c82d0f3d">MODULE_STATUS_ENABLED</a></div><div class="ttdeci">@ MODULE_STATUS_ENABLED</div><div class="ttdef"><b>Definition</b> base_module.h:34</div></div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1351"></a>
+6. ოპტიმიზაცია და რესურსების მართვა</h1>
+<ul>
+<li>გამოიყენეთ ლოგირება და performance monitoring</li>
+<li>ყურადღება მიაქციეთ მეხსიერების გამოყენებას და task-ების რაოდენობას</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1352"></a>
+7. Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ public API-ები</li>
+<li>დაიცავით naming და structure კონვენციები</li>
+<li>ჩაატარეთ ტესტირება რთულ სცენარებზე</li>
+<li>გამოიყენეთ დეტალური ლოგირება</li>
+</ul>
+<hr  />
+<p>თუ გაქვთ კითხვები ან გჭირდებათ დახმარება, იხილეთ <a class="el" href="md_docs_2structure_2faq.html">faq.md</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

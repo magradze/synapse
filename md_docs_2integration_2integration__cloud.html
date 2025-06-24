@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: integration_cloud</title>
+<title>Synapse ESP Framework: Cloud ინტეგრაციის სახელმძღვანელო (Integration — Cloud)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,75 @@ $(document).ready(function(){initNavTree('md_docs_2integration_2integration__clo
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">integration_cloud</div></div>
+  <div class="headertitle"><div class="title">Cloud ინტეგრაციის სახელმძღვანელო (Integration — Cloud)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md985"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md987"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ში Cloud სერვისებთან ინტეგრაციის სახელმძღვანელოს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md989"></a>
+ძირითადი ნაბიჯები</h1>
+<ol type="1">
+<li><b>Cloud მოდულის ან ინტეგრაციის არჩევა</b><ul>
+<li>აირჩიეთ შესაბამისი cloud სერვისი (მაგ: AWS IoT, Azure IoT, Google Cloud IoT, custom REST/MQTT cloud)</li>
+<li>ჩართეთ საჭირო მოდული ან შექმენით integration მოდული</li>
+</ul>
+</li>
+<li><b>Cloud სერვისის კონფიგურაცია</b><ul>
+<li>დაამატეთ cloud მოდული system_config.json-ში: <div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;type&quot;: &quot;cloud_module&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;main_cloud&quot;,</div>
+<div class="line">        &quot;endpoint&quot;: &quot;mqtts://cloud.example.com:8883&quot;,</div>
+<div class="line">        &quot;auth_token&quot;: &quot;&lt;token&gt;&quot;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+<li>ჩართეთ მოდული Kconfig-ში</li>
+</ul>
+</li>
+<li><b>Cloud API-ის გამოყენება</b><ul>
+<li>მონაცემების ატვირთვა (publish): <div class="fragment"><div class="line">cloud_module_publish(<span class="stringliteral">&quot;/cloud/device/telemetry&quot;</span>, telemetry_json);</div>
+</div><!-- fragment --></li>
+<li>მონაცემების მიღება (subscribe): <div class="fragment"><div class="line">cloud_module_subscribe(<span class="stringliteral">&quot;/cloud/device/command&quot;</span>, cloud_command_handler);</div>
+</div><!-- fragment --></li>
+</ul>
+</li>
+<li><b>უსაფრთხოების რეკომენდაციები</b><ul>
+<li>გამოიყენეთ მხოლოდ დაშიფრული კავშირი (TLS/SSL)</li>
+<li>გამოიყენეთ სერტიფიკატები ან access token-ები</li>
+<li>არ ჩაწეროთ credentials ლოგებში</li>
+</ul>
+</li>
+<li><b>Debug და ტესტირება</b><ul>
+<li>გამოიყენეთ ESP_LOGI/ESP_LOGE Cloud მოდულში</li>
+<li>დააკვირდით კავშირის სტატუსს და შეცდომებს</li>
+</ul>
+</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md991"></a>
+Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ public API-ები Cloud ინტეგრაციისთვის</li>
+<li>დაიცავით naming და structure კონვენციები</li>
+<li>ჩაატარეთ ტესტირება სხვადასხვა cloud სერვისზე</li>
+<li>გამოიყენეთ ლოგირება და დეტალური კონტექსტი</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md993"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2integration_2integration__index.html">integration_index.md</a></li>
+<li><a class="el" href="md_docs_2api__reference_2communication__api.html">api_reference/communication_api.md</a></li>
+<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი integration დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

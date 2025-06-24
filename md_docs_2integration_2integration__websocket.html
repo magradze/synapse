@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: integration_websocket</title>
+<title>Synapse ESP Framework: WebSocket ინტეგრაციის სახელმძღვანელო (Integration — WebSocket)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,69 @@ $(document).ready(function(){initNavTree('md_docs_2integration_2integration__web
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">integration_websocket</div></div>
+  <div class="headertitle"><div class="title">WebSocket ინტეგრაციის სახელმძღვანელო (Integration — WebSocket)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1023"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1025"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ში WebSocket სერვისებთან ინტეგრაციის სახელმძღვანელოს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1027"></a>
+ძირითადი ნაბიჯები</h1>
+<ol type="1">
+<li><b>WebSocket კლიენტის გამოყენება</b><ul>
+<li>გამოიყენეთ ESP-IDF-ის esp_websocket_client ბიბლიოთეკა</li>
+<li>კავშირის დამყარება: <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;esp_websocket_client.h&quot;</span></div>
+<div class="line"><span class="keywordtype">void</span> websocket_event_handler(<span class="keywordtype">void</span> *handler_args, esp_event_base_t base, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
+<div class="line">    <span class="comment">// ... process websocket events ...</span></div>
+<div class="line">}</div>
+<div class="line"><span class="keywordtype">void</span> websocket_example(<span class="keywordtype">void</span>) {</div>
+<div class="line">    esp_websocket_client_config_t websocket_cfg = {</div>
+<div class="line">        .uri = <span class="stringliteral">&quot;ws://ws.synapse.local:8080/ws&quot;</span></div>
+<div class="line">    };</div>
+<div class="line">    esp_websocket_client_handle_t client = esp_websocket_client_init(&amp;websocket_cfg);</div>
+<div class="line">    esp_websocket_register_events(client, WEBSOCKET_EVENT_ANY, websocket_event_handler, NULL);</div>
+<div class="line">    esp_websocket_client_start(client);</div>
+<div class="line">    <span class="comment">// გაგზავნეთ შეტყობინება</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *msg = <span class="stringliteral">&quot;{\&quot;type\&quot;:\&quot;ping\&quot;}&quot;</span>;</div>
+<div class="line">    esp_websocket_client_send_text(client, msg, strlen(msg), portMAX_DELAY);</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+</li>
+<li><b>უსაფრთხოების რეკომენდაციები</b><ul>
+<li>გამოიყენეთ მხოლოდ WSS (TLS/SSL) პროტოკოლი საჭიროების შემთხვევაში</li>
+<li>გამოიყენეთ ავტორიზაცია (მაგ: access token)</li>
+<li>არ ჩაწეროთ სენსიტიური ინფორმაცია ლოგებში</li>
+</ul>
+</li>
+<li><b>Debug და ტესტირება</b><ul>
+<li>გამოიყენეთ ESP_LOGI/ESP_LOGE WebSocket მოდულში</li>
+<li>დააკვირდით კავშირის სტატუსს და შეცდომებს</li>
+</ul>
+</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1029"></a>
+Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ public API-ები WebSocket ინტეგრაციისთვის</li>
+<li>დაიცავით naming და structure კონვენციები</li>
+<li>ჩაატარეთ ტესტირება სხვადასხვა WebSocket სერვისზე</li>
+<li>გამოიყენეთ ლოგირება და დეტალური კონტექსტი</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1031"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2integration_2integration__index.html">integration_index.md</a></li>
+<li><a class="el" href="md_docs_2api__reference_2communication__api.html">api_reference/communication_api.md</a></li>
+<li><a class="el" href="md_docs_2convention_2configuration__management.html">configuration_management.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი integration დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

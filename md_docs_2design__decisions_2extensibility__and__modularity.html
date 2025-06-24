@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: extensibility_and_modularity</title>
+<title>Synapse ESP Framework: გაფართოებადობისა და მოდულარობის არქიტექტურული გადაწყვეტილებები (Extensibility &amp; Modularity)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,89 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2extensibil
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">extensibility_and_modularity</div></div>
+  <div class="headertitle"><div class="title">გაფართოებადობისა და მოდულარობის არქიტექტურული გადაწყვეტილებები (Extensibility &amp; Modularity)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md853"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md855"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში გაფართოებადობისა და მოდულარობის არქიტექტურულ გადაწყვეტილებებს, არჩეულ სტრატეგიებს, მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md857"></a>
+კონტექსტი</h1>
+<p>ფრეიმვორქის მთავარი ღირებულებაა მარტივად გაფართოებადი და მოდულური არქიტექტურა, რომელიც საშუალებას აძლევს დეველოპერებს დაამატონ ან შეცვალონ ფუნქციონალი ძირითადი სისტემის ცვლილების გარეშე. აუცილებელია მკაფიო სტანდარტები და სტრუქტურა, რათა უზრუნველყოფილი იყოს კოდის ერთგვაროვნება და მარტივი მხარდაჭერა.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md859"></a>
+არჩეული სტრატეგიები</h1>
+<ul>
+<li><b>მოდულური არქიტექტურა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით</li>
+<li><b>სტანდარტული საქაღალდეებისა და ფაილების სტრუქტურა:</b> თითოეულ მოდულს აქვს საკუთარი საქაღალდე, header/source ფაილები, README და კონფიგურაცია</li>
+<li><b>Public API-ების გამოყენება:</b> მოდულებს შორის ურთიერთქმედება ხდება მხოლოდ public API-ების მეშვეობით</li>
+<li><b>Service Locator და Event Bus:</b> კომუნიკაციისთვის გამოიყენება მხოლოდ ეს პატერნები</li>
+<li><b>კონვენციების დაცვა:</b> ყველა მოდული მიჰყვება naming, structure და documentation სტანდარტებს</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md861"></a>
+არგუმენტები და მოტივაცია</h1>
+<ul>
+<li>მოდულური არქიტექტურა ამარტივებს ახალი ფუნქციონალის დამატებას და ტესტირებას</li>
+<li>სტანდარტული სტრუქტურა ამცირებს შეცდომების ალბათობას და ამარტივებს მხარდაჭერას</li>
+<li>Public API-ები უზრუნველყოფს მოდულების იზოლაციას</li>
+<li>Service Locator/Event Bus ამცირებს დამოკიდებულებებს და ზრდის მოქნილობას</li>
+<li>ალტერნატივა (მონოლითური კოდი, პირდაპირი დამოკიდებულებები) უარყოფილია გაფართოებადობისა და ტესტირებადობის არქონის გამო</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md863"></a>
+შედეგები და გავლენა</h1>
+<ul>
+<li>ახალი მოდულის დამატება ან არსებული მოდულის გაფართოება შესაძლებელია მინიმალური ძალისხმევით</li>
+<li>სისტემის მხარდაჭერა და ტესტირება მარტივდება</li>
+<li>კოდის ერთგვაროვნება და სტანდარტიზაცია უზრუნველყოფილია</li>
+<li>მოდულების დამოუკიდებლობა ზრდის სისტემის სტაბილურობას</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md865"></a>
+გამოყენების მაგალითები</h1>
+<h2><a class="anchor" id="autotoc_md866"></a>
+ახალი მოდულის დამატება</h2>
+<div class="fragment"><div class="line">components/modules/sensors/new_sensor_module/</div>
+<div class="line">├── CMakeLists.txt</div>
+<div class="line">├── module.json</div>
+<div class="line">├── README.md</div>
+<div class="line">├── include/</div>
+<div class="line">│   └── new_sensor_module.h</div>
+<div class="line">├── src/</div>
+<div class="line">│   └── new_sensor_module.c</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md867"></a>
+Public API-ის გამოყენება</h2>
+<div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *new_sensor_module_create(<span class="keyword">const</span> cJSON *config);</div>
+<div class="line">esp_err_t new_sensor_module_api_enable(<span class="keywordtype">void</span>);</div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მთავარი მოდულის სტრუქტურა</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md869"></a>
+აკრძალული და რეკომენდებული პრაქტიკები</h1>
+<p>❌ <b>არასდროს:</b></p><ul>
+<li>პირდაპირი დამოკიდებულება სხვა მოდულზე</li>
+<li>არასტანდარტული სტრუქტურა ან სახელები</li>
+<li>დოკუმენტაციის გარეშე ახალი ფუნქციონალის დამატება</li>
+</ul>
+<p>✅ <b>ყოველთვის:</b></p><ul>
+<li>დაიცავით ყველა naming, structure და documentation კონვენცია</li>
+<li>გამოიყენეთ მხოლოდ public API-ები მოდულებს შორის</li>
+<li>ჩაატარეთ ტესტირება და აღწერეთ ცვლილებები დოკუმენტაციაში</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md871"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
+<li><a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
+<li><a class="el" href="md_docs_2design__decisions_2architecture__overview.html">architecture_overview.md</a></li>
+<li><a class="el" href="md_docs_2structure_2faq.html">faq.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი დოკუმენტაცია ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

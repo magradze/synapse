@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: synapse_checklist</title>
+<title>Synapse ESP Framework: ✅ Synapse Framework — Documentation &amp; Module Design Checklist</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,121 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">synapse_checklist</div></div>
+  <div class="headertitle"><div class="title">✅ Synapse Framework — Documentation &amp; Module Design Checklist</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1033"></a> </p>
+<h1><a class="anchor" id="autotoc_md1034"></a>
+1. API Naming &amp; Structure</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ ფუნქციის სახელი   </td><td class="markdownTableBodyNone">იყენებს ფორმატს: <code>prefix_module_action()</code> ან <code>fmw_*</code> core-თვის   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ ლოგის TAG   </td><td class="markdownTableBodyNone">განსაზღვრულია <code><a class="el" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9" title="კომპონენტის TAG-ის განსაზღვრა ლოგირებისთვის">DEFINE_COMPONENT_TAG(TAG_NAME)</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ ფაილის სახელები   </td><td class="markdownTableBodyNone">lowercase + <code>_api.md</code> ან <code>_module.c</code> სტილით   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ მოდულის სახელები   </td><td class="markdownTableBodyNone">უნიკალურია სისტემაში (<code>module_instance_name</code>)   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1035"></a>
+2. Module Implementation</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ არსებობს <code>*_create(config)</code> ფუნქცია   </td><td class="markdownTableBodyNone">იღებს <code>cJSON*</code> და ასრულებს ინიციალიზაციას   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ კონფიგურაციის წაკითხვა   </td><td class="markdownTableBodyNone"><code>fmw_config_get_*</code> ფუნქციების მეშვეობით   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ ლოგირება   </td><td class="markdownTableBodyNone">ყველა მნიშვნელოვანი ქმედება ილოგება   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ error handling   </td><td class="markdownTableBodyNone">აბრუნებს <code>esp_err_t</code>, ლოგავს შეცდომებს   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ ინდივიდუალური enable/disable   </td><td class="markdownTableBodyNone">განსაზღვრულია მოდულის ჩართვა/გამორთვის მეთოდები   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ event handler   </td><td class="markdownTableBodyNone">საჭიროების შემთხვევაში რეგისტრირებულია <code><a class="el" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504" title="არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.">event_bus_subscribe()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ სერვისის რეგისტრაცია   </td><td class="markdownTableBodyNone">იყენებს <code><a class="el" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით">fmw_service_register()</a></code> საჭიროების შემთხვევაში   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1036"></a>
+3. Communication Integration (MQTT/WiFi/ESP-NOW)</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ MQTT publish/subscribe   </td><td class="markdownTableBodyNone">გამოიყენება <code>mqtt_module_publish</code>, <code>subscribe</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ topic სტრუქტურა   </td><td class="markdownTableBodyNone">მიჰყვება <code>mqtt_topics_generated.h</code> ან დოკში აღწერილ სქემას   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ QoS   </td><td class="markdownTableBodyNone">(თუ საჭიროა) მომხმარებელს შეუძლია QoS განსაზღვროს   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ WiFi provisioning   </td><td class="markdownTableBodyNone">შესაძლებელია SSID/Password-ის დინამიური მიწოდება ან provisioning   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ reconnect logic   </td><td class="markdownTableBodyNone">აღწერილია ან განხორციელებულია fallback/reconnect   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1037"></a>
+4. Core Interaction</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Service Locator   </td><td class="markdownTableBodyNone">სერვისები რეგისტრირდება <code><a class="el" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით">fmw_service_register()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Event Bus   </td><td class="markdownTableBodyNone">მოიცავს <code><a class="el" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340" title="აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.">event_bus_post()</a></code> ან <code><a class="el" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504" title="არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.">event_bus_subscribe()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Module Register   </td><td class="markdownTableBodyNone">ყველა მოდული რეგისტრირდება <code>fmw_module_register()</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Module Factory   </td><td class="markdownTableBodyNone">მართულია <code>fmw_module_factory_create()</code>   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1038"></a>
+5. Documentation</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ API Reference   </td><td class="markdownTableBodyNone">აღწერილია ყოველი public ფუნქცია <code>*_api.md</code> ფაილში   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ ფუნქცია დოკუმენტაცია   </td><td class="markdownTableBodyNone">Signature, Description, Args, Returns   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Tutorials   </td><td class="markdownTableBodyNone">მინიმუმ 1 მაგალითი გამოყენების შესახებ   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Naming standards   </td><td class="markdownTableBodyNone">მოყვანილია <code>naming.md</code> ფაილში   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Troubleshooting / FAQ   </td><td class="markdownTableBodyNone">გავრცელებული შეცდომები დაფარულია შესაბამის ფაილში   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1039"></a>
+6. Quality &amp; Security</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Static analysis   </td><td class="markdownTableBodyNone"><code>idf.py build</code> warnings არ უნდა იყოს   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Memory leakage   </td><td class="markdownTableBodyNone">დამთავრებისას freed-resources   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Use-after-free დაცვა   </td><td class="markdownTableBodyNone">pointer reuse დაცულია   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Safe concurrency   </td><td class="markdownTableBodyNone">locks გამოყენებულია საჭირო ადგილას   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Secret mgmt   </td><td class="markdownTableBodyNone">პაროლები/კონფიდენციალური info არ hardcoded-დება   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1040"></a>
+7. Testability</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Unit tests   </td><td class="markdownTableBodyNone">ძირითადი ფუნქციების დაფარვა   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Mocking support   </td><td class="markdownTableBodyNone">hardware abstraction თავსებადია mock-სთან   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ Config validation test   </td><td class="markdownTableBodyNone">არასწორი კონფიგების მოწმობა   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ Logging test   </td><td class="markdownTableBodyNone">იგზავნება სწორი log შეტყობინებები   </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

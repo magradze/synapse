@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: contributing_guide</title>
+<title>Synapse ESP Framework: კონტრიბუციის სახელმძღვანელო (Contributing Guide)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,68 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2contributing__g
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">contributing_guide</div></div>
+  <div class="headertitle"><div class="title">კონტრიბუციის სახელმძღვანელო (Contributing Guide)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md479"></a> </p>
+<h1><a class="anchor" id="autotoc_md480"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი განსაზღვრავს Synapse Framework-ში კონტრიბუციის წესებს, პროცესებსა და საუკეთესო პრაქტიკებს naming/structure კონვენციების სრული დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md482"></a>
+1. კონტრიბუციის პროცესი</h1>
+<ul>
+<li>შექმენით ახალი branch თქვენი ცვლილებებისთვის</li>
+<li>ყველა ცვლილება და ახალი ფუნქციონალი აღწერეთ შესაბამის დოკუმენტაციაში</li>
+<li>გაუშვით ყველა ტესტი და გადაამოწმეთ ბილდი</li>
+<li>შექმენით Pull Request (PR) მთავარ რეპოზიტორიაში</li>
+<li>მიუთითეთ მოკლე აღწერა და ცვლილებების მიზანი PR-ში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md483"></a>
+2. კოდის სტანდარტები</h1>
+<ul>
+<li>დაიცავით <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a>, <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a>, <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
+<li>გამოიყენეთ მხოლოდ დესკრიპტიული სახელები</li>
+<li>არ გამოიყენოთ hardcoded მნიშვნელობები</li>
+<li>ყველა მოდულს ჰქონდეს README და მაგალითები</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md484"></a>
+3. დოკუმენტაციის მოთხოვნები</h1>
+<ul>
+<li>ყველა ახალი ფუნქციონალი ან მოდული უნდა იყოს დოკუმენტირებული</li>
+<li>განაახლეთ შესაბამისი .md ფაილები (tutorials, api_reference, structure, convention)</li>
+<li>გამოიყენეთ მაგალითები და კოდის ფრაგმენტები</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md485"></a>
+4. Pull Request-ის მიმოხილვა</h1>
+<ul>
+<li>ყველა PR გადის code review-ს</li>
+<li>მიმომხილველს აქვს უფლება მოითხოვოს naming/structure/logic-ის ცვლილება</li>
+<li>PR მიიღება მხოლოდ ყველა ტესტის წარმატებით გავლის შემდეგ</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md486"></a>
+5. Best Practices</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ public API-ები მოდულებს შორის</li>
+<li>ჩაატარეთ ტესტირება ყველა ახალ ფუნქციონალზე</li>
+<li>გამოიყენეთ დეტალური ლოგირება და შეცდომების დამუშავება</li>
+<li>ყველა ცვლილება აღწერეთ დოკუმენტაციაში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md487"></a>
+6. აკრძალული პრაქტიკები</h1>
+<p>❌ <b>არასდროს:</b></p><ul>
+<li>პირდაპირი დამოკიდებულება სხვა მოდულზე</li>
+<li>არასტანდარტული სტრუქტურა ან სახელები</li>
+<li>დოკუმენტაციის გარეშე ახალი ფუნქციონალის დამატება</li>
+</ul>
+<p>✅ <b>ყოველთვის:</b></p><ul>
+<li>დაიცავით ყველა კონვენცია და სტანდარტი</li>
+<li>ჩაატარეთ ტესტირება</li>
+<li>აღწერეთ ცვლილებები და ახალი ფუნქციონალი დოკუმენტაციაში</li>
+</ul>
+<hr  />
+<p>დამატებითი კითხვებისთვის იხილეთ <a class="el" href="md_docs_2structure_2faq.html">faq.md</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

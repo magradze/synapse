@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: security_best_practices</title>
+<title>Synapse ESP Framework: უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,62 @@ $(document).ready(function(){initNavTree('md_docs_2security_2security__best__pra
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">security_best_practices</div></div>
+  <div class="headertitle"><div class="title">უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1124"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1126"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის უსაფრთხოების საუკეთესო პრაქტიკებს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1128"></a>
+ძირითადი რეკომენდაციები</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ დაშიფრული კომუნიკაცია (TLS/SSL) გარე სერვისებთან (MQTT, REST, Cloud)</li>
+<li>credentials, პაროლები და ტოკენები შეინახეთ მხოლოდ NVS-ში ან დაშიფრულ storage-ში</li>
+<li>firmware განახლებებისთვის გამოიყენეთ სიგნირებული და დაშიფრული OTA</li>
+<li>ჩართეთ input validation ყველა მოდულში</li>
+<li>ლოგებში არ ჩაწეროთ სენსიტიური ინფორმაცია (პაროლები, ტოკენები)</li>
+<li>გამოიყენეთ ავტორიზაცია ყველა გარე სერვისთან (username/password, API token)</li>
+<li>რეგულარულად განაახლეთ dependencies და firmware</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1130"></a>
+მაგალითები</h1>
+<h2><a class="anchor" id="autotoc_md1131"></a>
+TLS/SSL ჩართვა MQTT-ში</h2>
+<div class="fragment"><div class="line">mqtt_module_config_t mqtt_cfg = {</div>
+<div class="line">    .broker_uri = <span class="stringliteral">&quot;mqtts://broker.synapse.local:8883&quot;</span>,</div>
+<div class="line">    .username = <span class="stringliteral">&quot;user&quot;</span>,</div>
+<div class="line">    .password = <span class="stringliteral">&quot;pass&quot;</span>,</div>
+<div class="line">    .use_tls = <span class="keyword">true</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1132"></a>
+OTA განახლების სიგნირება</h2>
+<div class="fragment"><div class="line"><span class="comment">// გამოიყენეთ esp_ota_set_boot_partition და სიგნირებული firmware</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1133"></a>
+ლოგირების კონტროლი</h2>
+<div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT connected to broker: %s&quot;</span>, broker_url); <span class="comment">// არ ჩაწეროთ პაროლი ლოგში</span></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md1135"></a>
+Best Practices</h1>
+<ul>
+<li>დაიცავით ყველა უსაფრთხოების სახელმძღვანელო და პოლიტიკა</li>
+<li>გამოიყენეთ მხოლოდ public API-ები უსაფრთხოების ინტეგრაციისთვის</li>
+<li>აღწერეთ ყველა უსაფრთხოების ნაბიჯი დოკუმენტაციაში</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1137"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2security_2security__index.html">security_index.md</a></li>
+<li><a class="el" href="md_docs_2security_2security__guidelines.html">security_guidelines.md</a></li>
+<li><a class="el" href="md_docs_2security_2security__vulnerability__disclosure.html">security_vulnerability_disclosure.md</a></li>
+<li><a class="el" href="md_docs_2security_2security__checklist.html">security_checklist.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი security დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

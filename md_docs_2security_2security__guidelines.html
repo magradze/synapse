@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: security_guidelines</title>
+<title>Synapse ESP Framework: უსაფრთხოების სახელმძღვანელოები (Security Guidelines)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,74 @@ $(document).ready(function(){initNavTree('md_docs_2security_2security__guideline
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">security_guidelines</div></div>
+  <div class="headertitle"><div class="title">უსაფრთხოების სახელმძღვანელოები (Security Guidelines)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md1150"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1152"></a>
+მიზანი</h1>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის უსაფრთხოების სახელმძღვანელოებს naming/structure კონვენციების დაცვით.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1154"></a>
+TLS/SSL</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ დაშიფრული კავშირი (TLS/SSL) ყველა გარე სერვისთან (MQTT, REST, Cloud)</li>
+<li>სერტიფიკატები შეინახეთ უსაფრთხოდ და განაახლეთ რეგულარულად</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1155"></a>
+Authentication &amp; Authorization</h1>
+<ul>
+<li>გამოიყენეთ ძლიერი პაროლები და access token-ები</li>
+<li>ჩართეთ authentication ყველა გარე სერვისთან</li>
+<li>role-based access control გამოიყენეთ საჭიროების შემთხვევაში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1156"></a>
+Input Validation</h1>
+<ul>
+<li>შეამოწმეთ ყველა შემომავალი მონაცემი და პარამეტრი</li>
+<li>გამოიყენეთ whitelist/blacklist საჭიროების მიხედვით</li>
+<li>თავიდან აიცილეთ buffer overflow და injection ტიპის შეტევები</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1157"></a>
+Credentials Management</h1>
+<ul>
+<li>credentials შეინახეთ მხოლოდ NVS-ში ან დაშიფრულ storage-ში</li>
+<li>არასდროს ჩაწეროთ პაროლები, ტოკენები ან სენსიტიური ინფორმაცია ლოგებში</li>
+<li>გამოიყენეთ environment variables ან secure provisioning საჭიროების შემთხვევაში</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1158"></a>
+OTA და Firmware Security</h1>
+<ul>
+<li>firmware განახლებებისთვის გამოიყენეთ სიგნირებული და დაშიფრული OTA</li>
+<li>firmware-ს განახლებისას შეამოწმეთ სიგნატურა და ვერსია</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1159"></a>
+Logging</h1>
+<ul>
+<li>გამოიყენეთ მხოლოდ საჭირო log level-ები</li>
+<li>არ ჩაწეროთ სენსიტიური ინფორმაცია ლოგებში</li>
+<li>რეგულარულად შეამოწმეთ ლოგების არქივაცია და წვდომა</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1161"></a>
+Best Practices</h1>
+<ul>
+<li>დაიცავით ყველა უსაფრთხოების სახელმძღვანელო და პოლიტიკა</li>
+<li>გამოიყენეთ მხოლოდ public API-ები უსაფრთხოების ინტეგრაციისთვის</li>
+<li>აღწერეთ ყველა უსაფრთხოების ნაბიჯი დოკუმენტაციაში</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md1163"></a>
+დაკავშირებული დოკუმენტები</h1>
+<ul>
+<li><a class="el" href="md_docs_2security_2security__index.html">security_index.md</a></li>
+<li><a class="el" href="md_docs_2security_2security__best__practices.html">security_best_practices.md</a></li>
+<li><a class="el" href="md_docs_2security_2security__vulnerability__disclosure.html">security_vulnerability_disclosure.md</a></li>
+<li><a class="el" href="md_docs_2security_2security__checklist.html">security_checklist.md</a></li>
+</ul>
+<hr  />
+<p><em>დამატებითი კითხვებისთვის იხილეთ შესაბამისი security დოკუმენტი ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.</em> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

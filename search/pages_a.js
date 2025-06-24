@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['integration_5fcloud_0',['integration_cloud',['../md_docs_2integration_2integration__cloud.html',1,'']]],
-  ['integration_5fexample_1',['integration_example',['../md_docs_2tutorials_2integration__example.html',1,'']]],
-  ['integration_5findex_2',['integration_index',['../md_docs_2integration_2integration__index.html',1,'']]],
-  ['integration_5fmqtt_3',['integration_mqtt',['../md_docs_2integration_2integration__mqtt.html',1,'']]],
-  ['integration_5frest_4',['integration_rest',['../md_docs_2integration_2integration__rest.html',1,'']]],
-  ['integration_5fwebsocket_5',['integration_websocket',['../md_docs_2integration_2integration__websocket.html',1,'']]],
-  ['issue_5ftemplate_6',['issue_template',['../md_docs_2contributing_2issue__template.html',1,'']]]
+  ['handling_20ის_20წესები_0',['Error Handling-ის წესები',['../md_docs_2convention_2error__handling.html',1,'']]],
+  ['handling_20decisions_1',['შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)',['../md_docs_2design__decisions_2error__handling__decisions.html',1,'']]],
+  ['handling_20logging_2',['შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)',['../md_docs_2structure_2error__handling__and__logging.html',1,'']]],
+  ['health_20monitor_20module_20api_20reference_3',['Synapse Health Monitor Module API Reference',['../md_docs_2api__reference_2health__monitor__api.html',1,'']]]
 ];

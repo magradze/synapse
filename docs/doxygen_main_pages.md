@@ -73,7 +73,7 @@
     \verbinclude docs/contributing/convention_linter_guide.md
 */
 
-/*! \page tutorials_docs самоучители и примеры
+/*! \page tutorials_docs სახელმძღვანელოები და მაგალითები
     \tableofcontents
 
     \section tut_getting_started_sec სწრაფი სტარტი

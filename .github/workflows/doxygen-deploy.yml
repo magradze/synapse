@@ -26,4 +26,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/doxygen_html
           # შეგიძლიათ მიუთითოთ სასურველი branch-ი, სადაც აიტვირთება დოკუმენტაცია
-          publish_branch: gh-pages
+          # publish_branch: gh-pages

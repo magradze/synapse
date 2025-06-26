@@ -190,11 +190,14 @@ module_t *{module_name}_create(const cJSON *config);
  */
 
 #include "{module_name}.h"
+#include "base_module.h"
+#include "event_bus.h"
+#include "logging.h"
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>
 
-static const char *TAG = "{module_name.upper()}";
+DEFINE_COMPONENT_TAG("{module_name.upper()}");
 
 /**
  * @brief {module_name.title()} მოდულის private მონაცემების სტრუქტურა

@@ -112,24 +112,57 @@ esp_err_t fmw_config_save(void) {
 
 const cJSON* fmw_config_get_module_config(const char *module_name) {
     if (!config_root_node || !module_name) return NULL;
-    
+
+    // DEBUG: Log request
+    ESP_LOGI(TAG, "DEBUG: Looking for module config: %s", module_name);
+
     if (xSemaphoreTake(config_mutex, portMAX_DELAY) != pdTRUE) return NULL;
 
     const cJSON *modules_array = cJSON_GetObjectItem(config_root_node, "modules");
     const cJSON *result = NULL;
 
     if (cJSON_IsArray(modules_array)) {
+        int array_size = cJSON_GetArraySize(modules_array);
+        ESP_LOGI(TAG, "DEBUG: Modules array size in get_module_config: %d", array_size);
+
         const cJSON* module_item = NULL;
+        int index = 0;
         cJSON_ArrayForEach(module_item, modules_array) {
             const cJSON* config = cJSON_GetObjectItem(module_item, "config");
-            if (!config) continue;
-            const cJSON* instance_name = cJSON_GetObjectItem(config, "instance_name");
-            if (cJSON_IsString(instance_name) && strcmp(instance_name->valuestring, module_name) == 0) {
-                result = config;
-                break;
+            if (!config)
+            {
+                ESP_LOGW(TAG, "DEBUG: Module[%d] has no config", index);
+                index++;
+                continue;
             }
+            const cJSON* instance_name = cJSON_GetObjectItem(config, "instance_name");
+            if (cJSON_IsString(instance_name))
+            {
+                ESP_LOGI(TAG, "DEBUG: Module[%d] instance_name: %s", index, instance_name->valuestring);
+                if (strcmp(instance_name->valuestring, module_name) == 0)
+                {
+                    ESP_LOGI(TAG, "DEBUG: Found matching module: %s", module_name);
+                    result = config;
+                    break;
+                }
+            }
+            else
+            {
+                ESP_LOGW(TAG, "DEBUG: Module[%d] has no instance_name", index);
+            }
+            index++;
         }
     }
+    else
+    {
+        ESP_LOGE(TAG, "DEBUG: modules_array is not an array or is NULL!");
+    }
+
+    if (!result)
+    {
+        ESP_LOGW(TAG, "DEBUG: Module config not found for: %s", module_name);
+    }
+
     xSemaphoreGive(config_mutex);
     return result;
 }
@@ -260,15 +293,62 @@ static esp_err_t load_config_from_nvs(void) {
 static esp_err_t load_config_from_defaults(void) {
     extern const uint8_t _binary_system_config_json_start[] asm("_binary_system_config_json_start");
     extern const uint8_t _binary_system_config_json_end[] asm("_binary_system_config_json_end");
-    
+
+    // DEBUG: Check embedded JSON size
+    size_t json_size = _binary_system_config_json_end - _binary_system_config_json_start;
+    ESP_LOGI(TAG, "DEBUG: Embedded JSON size: %zu bytes", json_size);
+
     if (xSemaphoreTake(config_mutex, portMAX_DELAY) == pdTRUE) {
         if (config_root_node) cJSON_Delete(config_root_node);
         config_root_node = cJSON_ParseWithLength((const char*)_binary_system_config_json_start, _binary_system_config_json_end - _binary_system_config_json_start);
-        xSemaphoreGive(config_mutex);
+
+        // DEBUG: Check parsing result
         if (config_root_node == NULL) {
             ESP_LOGE(TAG, "Failed to parse embedded system_config.json!");
+            ESP_LOGE(TAG, "DEBUG: JSON parsing error: %s", cJSON_GetErrorPtr());
+            xSemaphoreGive(config_mutex);
             return ESP_FAIL;
         }
+
+        // DEBUG: Print parsed configuration
+        char *json_debug = cJSON_Print(config_root_node);
+        if (json_debug)
+        {
+            ESP_LOGI(TAG, "DEBUG: Parsed configuration:\n%s", json_debug);
+            free(json_debug);
+        }
+
+        // DEBUG: Check modules array specifically
+        const cJSON *modules_array = cJSON_GetObjectItem(config_root_node, "modules");
+        if (cJSON_IsArray(modules_array))
+        {
+            int module_count = cJSON_GetArraySize(modules_array);
+            ESP_LOGI(TAG, "DEBUG: Found %d modules in configuration", module_count);
+
+            // DEBUG: List each module
+            const cJSON *module_item = NULL;
+            int index = 0;
+            cJSON_ArrayForEach(module_item, modules_array)
+            {
+                const cJSON *config = cJSON_GetObjectItem(module_item, "config");
+                if (config)
+                {
+                    const cJSON *instance_name = cJSON_GetObjectItem(config, "instance_name");
+                    const cJSON *enabled = cJSON_GetObjectItem(config, "enabled");
+                    ESP_LOGI(TAG, "DEBUG: Module[%d]: %s, enabled: %s",
+                             index,
+                             cJSON_IsString(instance_name) ? instance_name->valuestring : "unknown",
+                             cJSON_IsTrue(enabled) ? "true" : "false");
+                }
+                index++;
+            }
+        }
+        else
+        {
+            ESP_LOGE(TAG, "DEBUG: modules array not found or not an array!");
+        }
+
+        xSemaphoreGive(config_mutex);
     }
     return ESP_OK;
 }

@@ -8,6 +8,7 @@ menu "Synapse Framework"
     rsource "Kconfig"
 
     # --- Module Configuration ---
+    rsource "../modules/testing/led_blinker/Kconfig"
     rsource "../modules/testing/test_module/Kconfig"
     rsource "../modules/utilities/logger_module/Kconfig"
 

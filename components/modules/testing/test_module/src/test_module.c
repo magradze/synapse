@@ -8,11 +8,15 @@
  */
 
 #include "test_module.h"
+#include "base_module.h"
+#include "event_bus.h"
+#include "system_event_ids.h"
+#include "logging.h"
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>
 
-static const char *TAG = "TEST_MODULE";
+DEFINE_COMPONENT_TAG("TEST_MODULE");
 
 /**
  * @brief Test_Module მოდულის private მონაცემების სტრუქტურა
@@ -87,7 +91,7 @@ static esp_err_t test_module_init(module_t *self)
         ESP_LOGW(TAG, "Module already initialized");
         return ESP_ERR_INVALID_STATE;
     }
-    
+
     // Parse configuration if provided
     if (self->current_config) {
         const cJSON *instance_name = cJSON_GetObjectItem(self->current_config, "instance_name");
@@ -226,14 +230,14 @@ static void test_module_handle_event(module_t *self, core_framework_event_id_t e
     
     // TODO: Implement event handling logic based on event_id
     switch (event_id) {
-        case FMW_EVENT_SYSTEM_INIT:
-            ESP_LOGD(TAG, "System initialization event received");
-            break;
-        case FMW_EVENT_SYSTEM_START:
-            ESP_LOGD(TAG, "System start event received");
-            break;
-        default:
-            ESP_LOGD(TAG, "Unhandled event: %d", event_id);
-            break;
+    case FRAMEWORK_EVENT_SYSTEM_INIT:
+        ESP_LOGD(TAG, "System initialization event received");
+        break;
+    case FRAMEWORK_EVENT_SYSTEM_START:
+        ESP_LOGD(TAG, "System start event received");
+        break;
+    default:
+        ESP_LOGD(TAG, "Unhandled event: %d", event_id);
+        break;
     }
 }

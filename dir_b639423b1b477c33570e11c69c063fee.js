@@ -1,6 +1,5 @@
 var dir_b639423b1b477c33570e11c69c063fee =
 [
-    [ "build", "dir_ec0f0b6dd92b9ffd6f4bd45099790916.html", "dir_ec0f0b6dd92b9ffd6f4bd45099790916" ],
     [ "include", "dir_f454a6bd7508de8f6fbe7e30e70e33ac.html", "dir_f454a6bd7508de8f6fbe7e30e70e33ac" ],
     [ "config_manager.c", "config__manager_8c.html", "config__manager_8c" ],
     [ "event_bus.c", "event__bus_8c.html", "event__bus_8c" ],

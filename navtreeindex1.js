@@ -1,5 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"md_docs_2api__reference_2communication__api.html#autotoc_md85":[4,6],
+"md_docs_2api__reference_2communication__api.html#autotoc_md87":[4,7],
+"md_docs_2api__reference_2configuration__api.html":[5],
+"md_docs_2api__reference_2configuration__api.html#autotoc_md100":[5,1,7],
 "md_docs_2api__reference_2configuration__api.html#autotoc_md102":[5,2],
 "md_docs_2api__reference_2configuration__api.html#autotoc_md104":[5,3],
 "md_docs_2api__reference_2configuration__api.html#autotoc_md90":[5,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX1 =
 "md_docs_2api__reference_2time__sync__api.html#autotoc_md426":[20,1,3],
 "md_docs_2api__reference_2time__sync__api.html#autotoc_md427":[20,1,4],
 "md_docs_2api__reference_2time__sync__api.html#autotoc_md429":[20,2],
-"md_docs_2api__reference_2time__sync__api.html#autotoc_md430":[20,2,0],
-"md_docs_2api__reference_2time__sync__api.html#autotoc_md432":[20,3],
-"md_docs_2api__reference_2time__sync__api.html#autotoc_md434":[20,4],
-"md_docs_2api__reference_2utility__api.html":[21],
-"md_docs_2api__reference_2utility__api.html#autotoc_md437":[21,0]
+"md_docs_2api__reference_2time__sync__api.html#autotoc_md430":[20,2,0]
 };

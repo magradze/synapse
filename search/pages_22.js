@@ -6,7 +6,8 @@ var searchData=
   ['პრაქტიკები_20წარმადობისთვის_20performance_20best_20practices_3',['საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)',['../md_docs_2performance_2performance__best__practices.html',1,'']]],
   ['პრაქტიკები_20security_20best_20practices_4',['უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)',['../md_docs_2security_2security__best__practices.html',1,'']]],
   ['პრობლემები_20და_20გადაჭრის_20გზები_20common_20issues_20solutions_5',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
-  ['პროექტის_20მიმოხილვა_20project_20overview_6',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],
-  ['პროცედურა_7',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['პროცესი_20configuration_20flow_8',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]]
+  ['პრობლემის_20დიაგნოსტიკა_20და_20გამოსწორება_6',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
+  ['პროექტის_20მიმოხილვა_20project_20overview_7',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],
+  ['პროცედურა_8',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
+  ['პროცესი_20configuration_20flow_9',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]]
 ];

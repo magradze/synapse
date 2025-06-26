@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
   <div class="headertitle"><div class="title">მოდულების არქიტექტურა (Module Architecture)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1408"></a> </p>
-<h1><a class="anchor" id="autotoc_md1409"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1416"></a> </p>
+<h1><a class="anchor" id="autotoc_md1417"></a>
 ძირითადი პრინციპები</h1>
 <ul>
 <li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <li><b>სტანდარტიზაცია:</b> ყველა მოდული მიჰყვება ერთიან naming, structure და communication სტანდარტებს.</li>
 <li><b>გაფართოებადობა:</b> ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1410"></a>
+<h1><a class="anchor" id="autotoc_md1418"></a>
 მოდულის ტიპები</h1>
 <ol type="1">
 <li><b>Service-driven Module</b><ul>
@@ -125,14 +125,14 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1411"></a>
+<h1><a class="anchor" id="autotoc_md1419"></a>
 მოდულების ურთიერთქმედება</h1>
 <ul>
 <li><b>Service Locator:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის</li>
 <li><b>Event Bus:</b> გამოიყენება broadcast/notification სცენარებისთვის</li>
 <li><b>აკრძალულია:</b> პირდაპირი #include სხვა მოდულის header-ების</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1412"></a>
+<h1><a class="anchor" id="autotoc_md1420"></a>
 მოდულის სიცოცხლის ციკლი (Lifecycle)</h1>
 <ol type="1">
 <li><b>Create:</b> მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)</li>
@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <li><b>Enable/Disable:</b> ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)</li>
 <li><b>Deinit:</b> რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1413"></a>
+<h1><a class="anchor" id="autotoc_md1421"></a>
 მოდულის სტრუქტურის მაგალითი</h1>
 <div class="fragment"><div class="line">components/modules/display/ssd1306_module/</div>
 <div class="line">├── CMakeLists.txt</div>
@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <div class="line">│   └── ssd1306_module.h</div>
 <div class="line">├── src/</div>
 <div class="line">│   └── ssd1306_module.c</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1414"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1422"></a>
 Header (include/ssd1306_module.h)</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#ifndef SSD1306_MODULE_H</span></div>
 <div class="line"><span class="preprocessor">#define SSD1306_MODULE_H</span></div>
@@ -179,7 +179,7 @@ Header (include/ssd1306_module.h)</h2>
 <div class="line"><span class="preprocessor">#endif </span><span class="comment">// SSD1306_MODULE_H</span></div>
 <div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1415"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1423"></a>
 Source (src/ssd1306_module.c)</h2>
 <div class="fragment"><div class="line"><span class="comment">// ...existing code...</span></div>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *global_ssd1306_instance = NULL;</div>
@@ -199,7 +199,7 @@ Source (src/ssd1306_module.c)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// ...function declarations, implementation...</span></div>
 <div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:130</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1416"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1424"></a>
 მოდულის გაფართოება/დამატება</h1>
 <ol type="1">
 <li>შექმენით ახალი საქაღალდე შესაბამის კატეგორიაში (მაგ: sensors/new_sensor_module)</li>
@@ -208,7 +208,7 @@ Source (src/ssd1306_module.c)</h2>
 <li>აღწერეთ API და საჭირო კონფიგურაცია</li>
 <li>ჩართეთ მოდული მთავარ კონფიგურაციაში (Kconfig)</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1417"></a>
+<h1><a class="anchor" id="autotoc_md1425"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>პირდაპირი #include სხვა მოდულის header-ების</li>

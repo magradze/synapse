@@ -11,11 +11,11 @@ var searchData=
   ['updated_5fkey_8',['updated_key',['../structfmw__config__updated__payload__t.html#a81fedf3181c56afb2a889f0ff2e8b2d5',1,'fmw_config_updated_payload_t']]],
   ['uri_20http_5fmethod_5ft_20method_20local_5fctrl_5fhandler_5ft_20handler_9',['esp_err_t local_ctrl_module_register_endpoint(const char *uri, http_method_t method, local_ctrl_handler_t handler);',['../md_docs_2api__reference_2local__ctrl__api.html#autotoc_md239',1,'']]],
   ['url_10',['url',['../md_docs_2api__reference_2ota__api.html#autotoc_md278',1,'esp_err_t ota_module_start_update(const char *url);'],['../md_docs_2api__reference_2system__api.html#autotoc_md398',1,'esp_err_t ota_module_start_update(const char *url);']]],
-  ['usage_11',['usage',['../md_docs_2convention_2logging__standards.html#autotoc_md782',1,'2. Memory Usage'],['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1470',1,'5. Heap და Memory Usage'],['../md_docs_2convention_2communication__patterns.html#autotoc_md671',1,'Event Bus Usage'],['../md_docs_2convention_2communication__patterns.html#autotoc_md668',1,'Service Locator Usage']]],
+  ['usage_11',['usage',['../md_docs_2convention_2logging__standards.html#autotoc_md790',1,'2. Memory Usage'],['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1478',1,'5. Heap და Memory Usage'],['../md_docs_2convention_2communication__patterns.html#autotoc_md679',1,'Event Bus Usage'],['../md_docs_2convention_2communication__patterns.html#autotoc_md676',1,'Service Locator Usage']]],
   ['usage_20გაფართოებული_20გამოყენება_12',['Advanced Usage (გაფართოებული გამოყენება)',['../md_docs_2tutorials_2advanced__usage.html',1,'']]],
-  ['usage_20მონიტორინგი_13',['4. Task და Stack Usage მონიტორინგი',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1469',1,'']]],
+  ['usage_20მონიტორინგი_13',['4. Task და Stack Usage მონიტორინგი',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1477',1,'']]],
   ['usage_20guide_14',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
-  ['usage_20mqtt_20module_15',['2. Service Usage (MQTT Module)',['../md_docs_2convention_2communication__patterns.html#autotoc_md670',1,'']]],
-  ['using_20config_20manager_16',['Using Config Manager',['../md_docs_2convention_2configuration__management.html#autotoc_md702',1,'']]],
+  ['usage_20mqtt_20module_15',['2. Service Usage (MQTT Module)',['../md_docs_2convention_2communication__patterns.html#autotoc_md678',1,'']]],
+  ['using_20config_20manager_16',['Using Config Manager',['../md_docs_2convention_2configuration__management.html#autotoc_md710',1,'']]],
   ['utility_20module_20api_20reference_17',['Synapse Utility Module API Reference',['../md_docs_2api__reference_2utility__api.html',1,'']]]
 ];

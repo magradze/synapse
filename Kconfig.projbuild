@@ -9,4 +9,7 @@ source "components/core/Kconfig"
 # --- Logger Module Configuration ---
 source "components/modules/utilities/logger_module/Kconfig"
 
+# --- LED Blinker Module Configuration ---
+source "components/modules/testing/led_blinker/Kconfig"
+
 endmenu

@@ -35,7 +35,7 @@ struct module_t;
  * @retval ESP_OK თუ ინიციალიზაცია წარმატებით დასრულდა.
  * @retval ESP_FAIL თუ ტასკის ან რიგის შექმნა ვერ მოხერხდა.
  */
-esp_err_t event_bus_init(void);
+esp_err_t fmw_event_bus_init(void);
 
 /**
  * @brief აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.
@@ -55,7 +55,7 @@ esp_err_t event_bus_init(void);
  * @retval ESP_OK თუ ივენთი წარმატებით დაემატა რიგში.
  * @retval ESP_FAIL თუ რიგი სავსეა ან სხვა შეცდომა მოხდა.
  */
-esp_err_t event_bus_post(system_event_id_t event_id, event_data_wrapper_t *data_wrapper);
+esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper);
 
 /**
  * @brief არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.
@@ -71,6 +71,6 @@ esp_err_t event_bus_post(system_event_id_t event_id, event_data_wrapper_t *data_
  * @retval ESP_ERR_NO_MEM თუ მეხსიერება არასაკმარისია ახალი გამომწერის დასამატებლად.
  * @retval ESP_ERR_INVALID_ARG თუ `module` არასწორია.
  */
-esp_err_t event_bus_subscribe(system_event_id_t event_id, struct module_t *module);
+esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module);
 
 #endif // EVENT_BUS_H

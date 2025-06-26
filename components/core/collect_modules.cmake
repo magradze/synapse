@@ -45,8 +45,8 @@ endfunction()
 # და განსაზღვრავს რომელი მოდულები უნდა იყოს ჩართული აგებაში.
 #
 
-# --- ნაბიჯი 1: მოძებნეთ ყველა module.json ფაილი ---
-file(GLOB_RECURSE MODULE_JSON_FILES "${CMAKE_CURRENT_LIST_DIR}/../modules/*/module.json")
+# --- ნაბიჯი 1: მოძებნეთ ყველა module.json ფაილი რეკურსიულად ---
+file(GLOB_RECURSE MODULE_JSON_FILES "${CMAKE_CURRENT_LIST_DIR}/../modules/**/module.json")
 
 # --- ნაბიჯი 2: დაამუშავეთ თითოეული მოდული ---
 set(MODULE_CREATE_FUNCTIONS "")
@@ -57,44 +57,90 @@ set(ENABLED_MODULE_PATHS "")
 foreach(MODULE_JSON_FILE ${MODULE_JSON_FILES})
     file(READ ${MODULE_JSON_FILE} MODULE_JSON_CONTENT)
 
-    # --- შეამოწმეთ, ჩართულია თუ არა მოდული აგებისთვის ---
+    # --- ნაწილები მოდულის ინფორმაციისთვის ---
+    string(JSON MODULE_NAME GET ${MODULE_JSON_CONTENT} name)
+    get_filename_component(MODULE_DIR ${MODULE_JSON_FILE} DIRECTORY)
+    get_filename_component(COMPONENT_NAME ${MODULE_DIR} NAME)
+
+    # --- შეამოწმეთ Kconfig-ის მხარდაჭერა ---
+    # ვეძებთ module.json-ში conditional compilation ველს
+    string(JSON CONDITIONAL_CONFIG ERROR_VARIABLE json_error GET ${MODULE_JSON_CONTENT} "conditional_config")
+    set(HAS_CONDITIONAL_CONFIG FALSE)
+    set(CONFIG_VARIABLE "")
+    
+    if(NOT json_error AND CONDITIONAL_CONFIG)
+        set(HAS_CONDITIONAL_CONFIG TRUE)
+        set(CONFIG_VARIABLE ${CONDITIONAL_CONFIG})
+        message(STATUS "მოდული ${MODULE_NAME} იყენებს კონდიციურ კონფიგურაციას: ${CONFIG_VARIABLE}")
+    endif()
+    
+    # --- შეამოწმეთ, ჩართულია თუ არა მოდული აგებისთვის module.json-ით ---
     string(JSON BUILD_ENABLED GET ${MODULE_JSON_CONTENT} build_enabled)
 
     # თუ "build_enabled" მნიშვნელობა არის "false", გამოტოვეთ მოდული
     if("${BUILD_ENABLED}" STREQUAL "false")
-        string(JSON MODULE_NAME GET ${MODULE_JSON_CONTENT} name)
-        message(STATUS "აგებიდან გამოტოვებულია გამორთული მოდული: ${MODULE_NAME}")
+        message(STATUS "აგებიდან გამოტოვებულია module.json-ით გამორთული მოდული: ${MODULE_NAME}")
         continue()
     endif()
 
     # --- თუ ჩართულია, დაამატეთ აგებაში ---
-    string(JSON MODULE_NAME GET ${MODULE_JSON_CONTENT} name)
     string(JSON INIT_FUNCTION GET ${MODULE_JSON_CONTENT} init_function)
-    get_filename_component(MODULE_DIR ${MODULE_JSON_FILE} DIRECTORY)
-    get_filename_component(COMPONENT_NAME ${MODULE_DIR} NAME)
-
-    # დაამატეთ კომპონენტის სახელი core კომპონენტის დამოკიდებულებების სიაში
-    list(APPEND COLLECTED_MODULE_DEPENDENCIES ${COMPONENT_NAME})
 
     # დაამატეთ კომპონენტის ბილიკი EXTRA_COMPONENT_DIRS სიაში
     get_filename_component(MODULE_PATH ${MODULE_JSON_FILE} DIRECTORY)
     list(APPEND ENABLED_MODULE_PATHS ${MODULE_PATH})
 
-    # გენერაცია factory-სთვის include სტეიტმენტის
-    string(APPEND MODULE_INCLUDE_HEADERS "#include \"${COMPONENT_NAME}.h\"\n")
+    # --- გენერაცია factory-სთვის include სტეიტმენტის (კონდიციურად თუ საჭიროა)
+    if(HAS_CONDITIONAL_CONFIG)
+        string(APPEND MODULE_INCLUDE_HEADERS "#ifdef ${CONFIG_VARIABLE}\n")
+        string(APPEND MODULE_INCLUDE_HEADERS "#include \"${COMPONENT_NAME}.h\"\n")
+        string(APPEND MODULE_INCLUDE_HEADERS "#endif\n")
+    else()
+        # თუ არ არის კონდიციური, მაინც ჩავსვათ კონდიციური include უსაფრთხოებისთვის
+        # ვინაიდან ყველა მოდული CMake-ში რეგისტრირდება, მაგრამ runtime-ში ჩართვა კონტროლდება Kconfig-ით
+        # logger_module-ისთვის ვიყენებთ არსებულ CONFIG_MODULE_LOGGER_ENABLED კონფიგურაციას
+        if("${COMPONENT_NAME}" STREQUAL "logger_module")
+            string(APPEND MODULE_INCLUDE_HEADERS "#ifdef CONFIG_MODULE_LOGGER_ENABLED\n")
+            string(APPEND MODULE_INCLUDE_HEADERS "#include \"${COMPONENT_NAME}.h\"\n")
+            string(APPEND MODULE_INCLUDE_HEADERS "#endif\n")
+        else()
+            # სხვა მოდულებისთვის ვიყენებთ ზოგად ფორმატს
+            string(TOUPPER "${MODULE_NAME}" MODULE_NAME_UPPER)
+            string(APPEND MODULE_INCLUDE_HEADERS "#ifdef CONFIG_MODULE_${MODULE_NAME_UPPER}_ENABLED\n")
+            string(APPEND MODULE_INCLUDE_HEADERS "#include \"${COMPONENT_NAME}.h\"\n")
+            string(APPEND MODULE_INCLUDE_HEADERS "#endif\n")
+        endif()
+    endif()
 
-    # გენერაცია factory-ს ჩანაწერის შესაბამისი function pointer-ის ტიპით
-    string(APPEND MODULE_CREATE_FUNCTIONS "    { \"${MODULE_NAME}\", (module_create_fn_t)&${INIT_FUNCTION} },\n")
+    # გენერაცია factory-ს ჩანაწერის შესაბამისი function pointer-ის ტიპით (კონდიციურად)
+    if(HAS_CONDITIONAL_CONFIG)
+        string(APPEND MODULE_CREATE_FUNCTIONS "#ifdef ${CONFIG_VARIABLE}\n")
+        string(APPEND MODULE_CREATE_FUNCTIONS "    { \"${MODULE_NAME}\", (module_create_fn_t)&${INIT_FUNCTION} },\n")
+        string(APPEND MODULE_CREATE_FUNCTIONS "#endif\n")
+    else()
+        # თუ არ არის კონდიციური, მაინც ჩავსვათ კონდიციური factory უსაფრთხოებისთვის
+        if("${COMPONENT_NAME}" STREQUAL "logger_module")
+            string(APPEND MODULE_CREATE_FUNCTIONS "#ifdef CONFIG_MODULE_LOGGER_ENABLED\n")
+            string(APPEND MODULE_CREATE_FUNCTIONS "    { \"${MODULE_NAME}\", (module_create_fn_t)&${INIT_FUNCTION} },\n")
+            string(APPEND MODULE_CREATE_FUNCTIONS "#endif\n")
+        else()
+            # სხვა მოდულებისთვის ვიყენებთ ზოგად ფორმატს
+            string(APPEND MODULE_CREATE_FUNCTIONS "#ifdef CONFIG_MODULE_${MODULE_NAME_UPPER}_ENABLED\n")
+            string(APPEND MODULE_CREATE_FUNCTIONS "    { \"${MODULE_NAME}\", (module_create_fn_t)&${INIT_FUNCTION} },\n")
+            string(APPEND MODULE_CREATE_FUNCTIONS "#endif\n")
+        endif()
+    endif()
+    
+    # ყველა მოდული (conditional და unconditional) დამოკიდებულებების სიაში ემატება
+    list(APPEND COLLECTED_MODULE_DEPENDENCIES ${COMPONENT_NAME})
 endforeach()
 
 # --- ნაბიჯი 3: ლოგირება დებაგისთვის ---
 message(STATUS "საბოლოო აგების დამოკიდებულებები: ${COLLECTED_MODULE_DEPENDENCIES}")
 message(STATUS "ჩართული მოდულების ბილიკები: ${ENABLED_MODULE_PATHS}")
 
-# აქ ცვლადების სახელები უნდა ემთხვეოდეს .in ფაილებში არსებულ placeholders-ს.
-set(MODULE_INCLUDE_HEADERS "${MODULE_INCLUDE_HEADERS}")
-set(MODULE_CREATE_FUNCTIONS "${MODULE_CREATE_FUNCTIONS}")
-set(ENABLED_MODULE_PATHS ${ENABLED_MODULE_PATHS} PARENT_SCOPE)
+# Export the enabled module paths for use in main CMakeLists.txt
+# Note: Since this script is included (not called as function), we don't need PARENT_SCOPE
 
 message(STATUS "--- გენერირებული factory ფაილების კონფიგურაცია ---")
 message(STATUS "სათაურები ჩასასმელად:\n${MODULE_INCLUDE_HEADERS}")
@@ -111,5 +157,42 @@ configure_file(
 )
 
 # --- ნაბიჯი 5: დაამატეთ გენერირებული ფაილი კომპონენტის წყაროების სიაში ---
+# Note: SRCS is used within the core component's CMakeLists.txt context
 list(APPEND SRCS "${CMAKE_CURRENT_BINARY_DIR}/generated_module_factory.c")
-set(SRCS ${SRCS} PARENT_SCOPE)
+
+# --- ნაბიჯი 6: გენერირება Kconfig.projbuild ფაილისა ---
+# მოძებნეთ ყველა მოდულის Kconfig ფაილი
+set(MODULE_KCONFIG_SOURCES "")
+foreach(MODULE_JSON_FILE ${MODULE_JSON_FILES})
+    get_filename_component(MODULE_DIR ${MODULE_JSON_FILE} DIRECTORY)
+    set(KCONFIG_PATH "${MODULE_DIR}/Kconfig")
+    
+    # შევამოწმოთ არსებობს თუ არა Kconfig ფაილი
+    if(EXISTS ${KCONFIG_PATH})
+        # გადავაკეთოთ relative path core დირექტორიიდან
+        file(RELATIVE_PATH RELATIVE_KCONFIG_PATH "${CMAKE_CURRENT_LIST_DIR}" "${KCONFIG_PATH}")
+        # დაამატოთ rsource ბრძანება
+        string(APPEND MODULE_KCONFIG_SOURCES "    rsource \"${RELATIVE_KCONFIG_PATH}\"\n")
+        message(STATUS "ნაპოვნია მოდულის Kconfig: ${RELATIVE_KCONFIG_PATH}")
+    endif()
+endforeach()
+
+# შევქმნათ ავტომატური Kconfig.projbuild ფაილი
+set(AUTO_KCONFIG_CONTENT "# Auto-generated Kconfig.projbuild for Synapse Framework
+# This file is automatically generated by collect_modules.cmake
+# Do not edit manually!
+
+menu \"Synapse Framework\"
+
+    # --- Framework Core Configuration ---
+    rsource \"Kconfig\"
+
+    # --- Module Configuration ---
+${MODULE_KCONFIG_SOURCES}
+endmenu
+")
+
+# ჩავწეროთ ფაილში
+file(WRITE "${CMAKE_CURRENT_LIST_DIR}/Kconfig.projbuild" "${AUTO_KCONFIG_CONTENT}")
+message(STATUS "აგენერირებულია ავტომატური Kconfig.projbuild ფაილი")
+message(STATUS "ნაპოვნია ${CMAKE_MATCH_COUNT} მოდულის Kconfig ფაილი")

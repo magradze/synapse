@@ -1,82 +1,44 @@
 /**
  * @file logging.h
- * @brief Synapse ESP Framework-ის ლოგირების ინტერფეისი
+ * @brief Synapse ESP Framework-ის ლოგირების დამხმარე ინტერფეისი.
  * @author Giorgi Magradze
- * @version 1.0.0
- * @date 2025-06-24
+ * @version 2.0
+ * @date 2025-06-26
  *
  * @details
- * ეს ფაილი განსაზღვრავს ლოგირების მაკროებს და კონსტანტებს,
- * რომლებიც გამოიყენება Synapse ESP Framework-ის ყველა მოდულში.
- * უზრუნველყოფს ერთიან ლოგირების სტილს და კომპონენტების იდენტიფიკაციას.
+ * ეს ფაილი განსაზღვრავს ლოგირების დამხმარე მაკროს, რომელიც უზრუნველყოფს
+ * ერთიან სტილს კომპონენტის ლოგირების ტეგის (TAG) განსაზღვრისთვის.
+ * ფრეიმვორქი იყენებს სტანდარტულ `esp_log.h` ბიბლიოთეკას ლოგირებისთვის.
  *
- * @note ყველა მოდულმა უნდა გამოიყენოს DEFINE_COMPONENT_TAG მაკრო
- * @warning არ შეცვალოთ არსებული TAG კონსტანტები
+ * @note ყველა .c ფაილმა, რომელსაც სჭირდება ლოგირება, უნდა გამოიყენოს
+ *       `DEFINE_COMPONENT_TAG` მაკრო საკუთარი, უნიკალური ტეგის შესაქმნელად.
  */
 
-#ifndef LOGGING_H
-#define LOGGING_H
+#ifndef FMW_LOGGING_H
+#define FMW_LOGGING_H
 
 #include "esp_log.h"
 
 /**
- * @brief კომპონენტის TAG-ის განსაზღვრა ლოგირებისთვის
+ * @brief განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.
  *
- * @details ეს მაკრო ქმნის static const char* TAG ცვლადს კომპონენტის სახელით.
- * გამოყენება: DEFINE_COMPONENT_TAG("MY_COMPONENT")
+ * @details ეს მაკრო ქმნის `static const char* TAG` ცვლადს, რომელიც გამოიყენება
+ *          `ESP_LOGx` მაკროებში. მისი გამოყენება უზრუნველყოფს, რომ თითოეული
+ *          კომპონენტიდან წამოსული ლოგი ადვილად იდენტიფიცირებადი იყოს.
  *
- * __attribute__((unused)) ამცირებს კომპაილერის გაფრთხილებებს, როდესაც TAG
- * არ გამოიყენება ზოგიერთ ფაილში, მაგრამ მაინც საშუალებას იძლევა გამოყენება
- * საჭიროების შემთხვევაში.
+ *          გამოყენების მაგალითი .c ფაილში:
+ *          @code
+ *          #include "logging.h"
+ *          DEFINE_COMPONENT_TAG("MY_MODULE");
  *
- * @param[in] component_name კომპონენტის სახელი, რომელიც გამოჩნდება ლოგებში
+ *          void my_function() {
+ *              ESP_LOGI(TAG, "Hello from my module!");
+ *          }
+ *          @endcode
  *
- * @note ეს მაკრო უნდა გამოყენდეს ყველა მოდულის .c ფაილის დასაწყისში
- * @warning component_name პარამეტრი უნდა იყოს უნიკალური მოდულისთვის
+ * @param component_name კომპონენტის/მოდულის სახელი (სტრიქონი), რომელიც გამოჩნდება ლოგებში.
  */
 #define DEFINE_COMPONENT_TAG(component_name) \
-  static const char *TAG __attribute__((unused)) = component_name
+  static const char *TAG = component_name
 
-/**
- * @defgroup ComponentTags კომპონენტების TAG-ები
- * @{
- */
-
-/**
- * @brief Event Bus კომპონენტის TAG
- */
-#define TAG_EVENT_BUS "EVENT_BUS"
-
-/**
- * @brief Config Manager კომპონენტის TAG
- */
-#define TAG_CONFIG_MANAGER "CONFIG_MANAGER"
-
-/**
- * @brief Module Registry კომპონენტის TAG
- */
-#define TAG_MODULE_REGISTRY "MODULE_REGISTRY"
-
-/**
- * @brief Service Locator კომპონენტის TAG
- */
-#define TAG_SERVICE_LOCATOR "SERVICE_LOCATOR"
-
-/**
- * @brief Event Wrapper კომპონენტის TAG
- */
-#define TAG_EVENT_WRAPPER "EVENT_WRAPPER"
-
-/**
- * @brief System Manager კომპონენტის TAG
- */
-#define TAG_SYSTEM_MANAGER "SYSTEM_MANAGER"
-
-/**
- * @brief Resource Manager კომპონენტის TAG
- */
-#define TAG_RESOURCE_MANAGER "RESOURCE_MANAGER"
-
-/** @} */
-
-#endif // LOGGING_H
+#endif // FMW_LOGGING_H

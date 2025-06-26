@@ -1,10 +1,10 @@
 # ძირითადი კომპონენტის წყარო ფაილების სია
-enable_language(C)
 set(SRCS
     "event_bus.c"
     "config_manager.c"
     "system_manager.c"
     "module_registry.c"
+    "module_factory.c"
     "resource_manager.c"
     "event_data_wrapper.c"
     "service_locator.c"
@@ -19,7 +19,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/collect_modules.cmake)
 # include(${CMAKE_CURRENT_LIST_DIR}/collect_mqtt_topics.cmake)
 
 # გენერაცია MQTT თემების header ფაილის module.json-ებიდან
-collect_mqtt_topics()
+# collect_mqtt_topics()
 
 # collect_modules სკრიპტი აგენერირებს ამ C ფაილს, ამიტომ უნდა დავამატოთ ჩვენს წყაროებში.
 list(APPEND SRCS "${CMAKE_CURRENT_BINARY_DIR}/generated_module_factory.c")

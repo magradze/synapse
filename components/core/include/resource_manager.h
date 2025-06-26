@@ -1,69 +1,105 @@
 /**
  * @file resource_manager.h
- * @brief რესურსების (GPIO და სხვა) მართვის API
- * @version 1.0
- * @date 2025-06-24
+ * @brief რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API
+ * @version 2.0
+ * @date 2025-06-25
  * @author Giorgi Magradze
- * @details ეს კომპონენტი უზრუნველყოფს სისტემაში საერთო რესურსების (მაგ: GPIO პინების) უსაფრთხო და ექსკლუზიურ გამოყენებას.
+ * @details ეს კომპონენტი უზრუნველყოფს სისტემაში საერთო რესურსების უსაფრთხო და ექსკლუზიურ გამოყენებას.
  *          თითოეულ მოდულს შეუძლია "დალოქოს" რესურსი, რათა თავიდან აიცილოს კონფლიქტი სხვა მოდულებთან. რესურსის გათავისუფლება
  *          აუცილებელია მოდულის გაჩერების ან გამორთვისას. ეს ხელს უწყობს სისტემის სტაბილურობას და მოდულებს შორის იზოლაციას.
+ *          განახლებული ვერსია იყენებს გენერიკულ მიდგომას, რათა მართოს სხვადასხვა ტიპის რესურსი.
  */
-#ifndef RESOURCE_MANAGER_H
-#define RESOURCE_MANAGER_H
+#ifndef FMW_RESOURCE_MANAGER_H
+#define FMW_RESOURCE_MANAGER_H
 
 #include "esp_err.h"
-#include "driver/gpio.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 /**
- * @brief რესურს მენეჯერის ინიციალიზაცია
+ * @enum fmw_resource_type_t
+ * @brief სისტემაში სამართავი რესურსების ტიპების ჩამონათვალი.
+ */
+typedef enum
+{
+  FMW_RESOURCE_TYPE_GPIO,        /**< @brief GPIO პინი. `resource_id` არის `gpio_num_t`. */
+  FMW_RESOURCE_TYPE_I2C_PORT,    /**< @brief I2C პორტი. `resource_id` არის `i2c_port_t`. */
+  FMW_RESOURCE_TYPE_SPI_HOST,    /**< @brief SPI ჰოსტი. `resource_id` არის `spi_host_device_t`. */
+  FMW_RESOURCE_TYPE_ADC_CHANNEL, /**< @brief ADC არხი. `resource_id` არის `adc_channel_t`. */
+  FMW_RESOURCE_TYPE_TIMER_GROUP, /**< @brief ტაიმერების ჯგუფი. `resource_id` არის `timer_group_t`. */
+  FMW_RESOURCE_TYPE_RMT_CHANNEL, /**< @brief RMT არხი. `resource_id` არის `rmt_channel_t`. */
+  FMW_RESOURCE_TYPE_UART_PORT,   /**< @brief UART პორტი. `resource_id` არის `uart_port_t`. */
+  FMW_RESOURCE_TYPE_MAX,         /**< @brief ჩამონათვალის დასასრული, გამოიყენება შიდა ვალიდაციისთვის. */
+} fmw_resource_type_t;
+
+/**
+ * @brief რესურს მენეჯერის ინიციალიზაცია.
  *
  * ასუფთავებს ყველა დაკავებული რესურსის სიას. უნდა გამოიძახოს System Manager-მა ერთხელ სისტემის გაშვებისას.
  *
  * @return esp_err_t
- *         - ESP_OK: რესურს მენეჯერი წარმატებით ინიციალიზდა
- *         - ESP_ERR_NO_MEM: მეხსიერების გამოყოფა ვერ მოხერხდა
+ * @retval ESP_OK თუ რესურს მენეჯერი წარმატებით ინიციალიზდა.
+ * @retval ESP_ERR_NO_MEM თუ მეხსიერების გამოყოფა ვერ მოხერხდა.
  */
 esp_err_t fmw_resource_manager_init(void);
 
 /**
- * @brief GPIO პინის "დალოქვა" (დაკავება) კონკრეტული მოდულისთვის
+ * @brief რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის.
  *
- * სანამ მოდული გამოიყენებს GPIO პინს, მან უნდა "დალოქოს" იგი, რათა სხვა მოდულმა ვერ გამოიყენოს იგივე პინი.
+ * სანამ მოდული გამოიყენებს რესურსს, მან უნდა "დალოქოს" იგი, რათა სხვა მოდულმა ვერ გამოიყენოს.
  *
- * @param[in] pin დასალოქი GPIO პინის ნომერი
- * @param[in] owner მოდულის სახელი, რომელიც იკავებს პინს (დაბგისთვის სასარგებლოა)
- *
- * @return esp_err_t
- *         - ESP_OK: პინი წარმატებით დაილოქა
- *         - ESP_ERR_INVALID_ARG: არასწორი პინის ნომერი
- *         - ESP_ERR_INVALID_STATE: პინი უკვე დაკავებულია სხვა მოდულის მიერ
- *         - ESP_ERR_NO_MEM: მეხსიერების გამოყოფა ვერ მოხერხდა
- */
-esp_err_t fmw_resource_lock_gpio(gpio_num_t pin, const char* owner);
-
-/**
- * @brief დაკავებული GPIO პინის გათავისუფლება
- *
- * როდესაც მოდული ასრულებს მუშაობას პინზე (მაგ: stop ფუნქციაში), მან უნდა გაათავისუფლოს რესურსი.
- *
- * @param[in] pin გასათავისუფლებელი GPIO პინის ნომერი
- * @param[in] owner მოდულის სახელი, რომელიც ათავისუფლებს პინს
+ * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] resource_id რესურსის უნიკალური იდენტიფიკატორი (მაგ: პინის ნომერი, პორტის ნომერი).
+ * @param[in] owner მოდულის სახელი, რომელიც იკავებს რესურსს (სასარგებლოა დიაგნოსტიკისთვის).
  *
  * @return esp_err_t
- *         - ESP_OK: პინი წარმატებით გათავისუფლდა
- *         - ESP_ERR_INVALID_ARG: არასწორი პინის ნომერი
- *         - ESP_ERR_NOT_FOUND: პინი დაკავებული არ იყო
- *         - ESP_ERR_INVALID_STATE: გათავისუფლება სცადა არა მფლობელმა მოდულმა
+ * @retval ESP_OK თუ რესურსი წარმატებით დაილოქა.
+ * @retval ESP_ERR_INVALID_ARG თუ `type`, `resource_id` ან `owner` არავალიდურია.
+ * @retval ESP_ERR_INVALID_STATE თუ რესურსი უკვე დაკავებულია სხვა მოდულის მიერ.
+ * @retval ESP_ERR_NO_MEM თუ მეხსიერების გამოყოფა ვერ მოხერხდა.
  */
-esp_err_t fmw_resource_release_gpio(gpio_num_t pin, const char* owner);
+esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner);
 
 /**
- * @brief ამოწმებს დაკავებულია თუ არა GPIO პინი
+ * @brief დაკავებული რესურსის გათავისუფლება.
  *
- * @param[in] pin შესამოწმებელი GPIO პინის ნომერი
- * @return true თუ პინი დაკავებულია
- * @return false თუ პინი თავისუფალია
+ * როდესაც მოდული ასრულებს მუშაობას რესურსზე (მაგ: `deinit` ფუნქციაში), მან უნდა გაათავისუფლოს იგი.
+ *
+ * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] resource_id გასათავისუფლებელი რესურსის იდენტიფიკატორი.
+ * @param[in] owner მოდულის სახელი, რომელიც ათავისუფლებს რესურსს.
+ *
+ * @return esp_err_t
+ * @retval ESP_OK თუ რესურსი წარმატებით გათავისუფლდა.
+ * @retval ESP_ERR_INVALID_ARG თუ `type` ან `resource_id` არავალიდურია.
+ * @retval ESP_ERR_NOT_FOUND თუ მითითებული რესურსი დაკავებული არ იყო.
+ * @retval ESP_ERR_INVALID_STATE თუ გათავისუფლება სცადა არა მფლობელმა მოდულმა.
  */
-bool fmw_resource_is_gpio_locked(gpio_num_t pin);
+esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner);
 
-#endif /* RESOURCE_MANAGER_H */
+/**
+ * @brief ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი.
+ *
+ * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] resource_id შესამოწმებელი რესურსის იდენტიფიკატორი.
+ *
+ * @return true თუ რესურსი დაკავებულია.
+ * @return false თუ რესურსი თავისუფალია.
+ */
+bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id);
+
+/**
+ * @brief აბრუნებს რესურსის მფლობელის სახელს.
+ *
+ * სასარგებლოა დიაგნოსტიკისთვის, რათა გაირკვეს, რომელი მოდული იყენებს კონკრეტულ რესურსს.
+ *
+ * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] resource_id შესამოწმებელი რესურსის იდენტიფიკატორი.
+ *
+ * @return const char*
+ * @retval რესურსის მფლობელი მოდულის სახელის მაჩვენებელი, თუ რესურსი დაკავებულია.
+ * @retval NULL თუ რესურსი თავისუფალია ან ვერ მოიძებნა.
+ */
+const char *fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id);
+
+#endif /* FMW_RESOURCE_MANAGER_H */

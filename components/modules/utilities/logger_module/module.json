@@ -1,0 +1,14 @@
+{
+  "name": "logger_module",
+  "version": "1.1.0",
+  "description": "Centralized logging module for event monitoring and debugging.",
+  "type": "logger_module",
+  "dependencies": [],
+  "init_function": "logger_module_create",
+  "init_level": 10,
+  "build_enabled": "true",
+  "runtime_commands": {
+    "enable": "Enable logger output",
+    "disable": "Disable logger output"
+  }
+}

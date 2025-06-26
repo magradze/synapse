@@ -11,10 +11,11 @@
  * @version 1.0
  */
 
-#ifndef SERVICE_LOCATOR_H
-#define SERVICE_LOCATOR_H
+#ifndef FMW_SERVICE_LOCATOR_H
+#define FMW_SERVICE_LOCATOR_H
 
 #include "esp_err.h"
+#include "service_types.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -42,20 +43,25 @@ extern "C"
   esp_err_t fmw_service_locator_init(void);
 
   /**
-   * @brief ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით
+   * @brief ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.
    *
-   * @param[in] service_name სერვისის უნიკალური სახელი (მაგ: მოდულის instance_name)
-   * @param[in] service_type სერვისის ტიპი (მაგ: "display_api", "sensor_api", "actuator_api")
-   * @param[in] service_handle მაჩვენებელი სერვისის API სტრუქტურაზე
+   * @details ეს ფუნქცია ამატებს სერვისს ცენტრალურ რეესტრში. რეგისტრაცია არ
+   *          განხორციელდება, თუ ამ სახელით სერვისი უკვე არსებობს. ოპერაცია
+   *          ნაკად-უსაფრთხოა (thread-safe).
    *
-   * @return esp_err_t
-   * @retval ESP_OK სერვისი წარმატებით დარეგისტრირდა
-   * @retval ESP_ERR_INVALID_ARG თუ service_name, service_type ან service_handle არის NULL
-   * @retval ESP_ERR_NO_MEM თუ მეხსიერება ვერ გამოიყო ახალი სერვისისთვის
-   * @retval ESP_ERR_INVALID_STATE თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია
+   * @param[in] service_name სერვისის უნიკალური სახელი (მაგ: მოდულის `instance_name`).
+   * @param[in] service_type სერვისის ტიპი `fmw_service_type_t` enum-იდან (მაგ: `SERVICE_TYPE_DISPLAY_API`).
+   * @param[in] service_handle მაჩვენებელი სერვისის API სტრუქტურაზე.
+   *
+   * @return esp_err_t ოპერაციის წარმატების კოდი.
+   * @retval ESP_OK სერვისი წარმატებით დარეგისტრირდა.
+   * @retval ESP_ERR_INVALID_ARG თუ `service_name`, `service_handle` არის NULL, ან `service_type` არავალიდურია.
+   * @retval ESP_ERR_NO_MEM თუ მეხსიერება ვერ გამოიყო ახალი სერვისისთვის.
+   * @retval ESP_ERR_INVALID_STATE თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია.
+   * @retval ESP_ERR_TIMEOUT თუ mutex-ის დაკავება ვერ მოხერხდა.
    */
   esp_err_t fmw_service_register(const char *service_name,
-                                 const char *service_type,
+                                 fmw_service_type_t service_type,
                                  service_handle_t service_handle);
 
   /**
@@ -70,15 +76,22 @@ extern "C"
   service_handle_t fmw_service_get(const char *service_name);
 
   /**
-   * @brief აბრუნებს სერვისის ტიპს სახელით
+   * @brief აბრუნებს სერვისის ტიპს `enum` სახით.
    *
-   * @param[in] service_name მოსაძებნი სერვისის სახელი
+   * @details ეძებს სერვისს მისი სახელით და აბრუნებს მის `fmw_service_type_t`
+   *          ტიპს. ეს საშუალებას გაძლევთ, პროგრამულად შეამოწმოთ, თუ რა ტიპის
+   *          სერვისთან გაქვთ საქმე.
    *
-   * @return const char*
-   * @retval სერვისის ტიპის სტრინგი თუ სერვისი მოიძებნა
-   * @retval NULL თუ ასეთი სახელით სერვისი არ არის რეგისტრირებული
+   * @param[in] service_name მოსაძებნი სერვისის სახელი.
+   * @param[out] out_service_type მაჩვენებელი, სადაც ჩაიწერება ნაპოვნი სერვისის ტიპი.
+   *
+   * @return esp_err_t ოპერაციის წარმატების კოდი.
+   * @retval ESP_OK თუ სერვისი მოიძებნა და ტიპი წარმატებით იქნა მიღებული.
+   * @retval ESP_ERR_INVALID_ARG თუ `service_name` ან `out_service_type` არის NULL.
+   * @retval ESP_ERR_NOT_FOUND თუ მითითებული სახელით სერვისი ვერ მოიძებნა.
+   * @retval ESP_ERR_TIMEOUT თუ mutex-ის დაკავება ვერ მოხერხდა.
    */
-  const char *fmw_service_get_type(const char *service_name);
+  esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type);
 
   /**
    * @brief აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს
@@ -97,4 +110,4 @@ extern "C"
 }
 #endif
 
-#endif /* SERVICE_LOCATOR_H */
+#endif /* FMW_SERVICE_LOCATOR_H */

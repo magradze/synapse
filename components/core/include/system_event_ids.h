@@ -17,8 +17,8 @@
  * - ota_events.h (OTA მოდულის ივენთები)
  * - health_events.h (ჯანმრთელობის მონიტორინგის ივენთები)
  */
-#ifndef SYSTEM_EVENT_IDS_H
-#define SYSTEM_EVENT_IDS_H
+#ifndef FMW_SYSTEM_EVENT_IDS_H
+#define FMW_SYSTEM_EVENT_IDS_H
 
 /**
  * @brief ბირთვის ივენთების იდენტიფიკატორები, რომლებიც სისტემურია და არ არის მიბმული კონკრეტულ მოდულზე.
@@ -86,6 +86,6 @@ typedef enum
  * @brief მოძველებული ალისის ტიპი უკუ თავსებადობისთვის.
  * @deprecated გამოიყენეთ core_framework_event_id_t ამის ნაცვლად.
  */
-typedef core_framework_event_id_t system_event_id_t;
+typedef core_framework_event_id_t system_event_id_t __attribute__((deprecated("Use core_framework_event_id_t instead")));
 
-#endif // SYSTEM_EVENT_IDS_H
+#endif // FMW_SYSTEM_EVENT_IDS_H

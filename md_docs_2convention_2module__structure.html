@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
   <div class="headertitle"><div class="title">მოდულის სტრუქტურის წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md732"></a> </p>
-<h1><a class="anchor" id="autotoc_md733"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md788"></a> </p>
+<h1><a class="anchor" id="autotoc_md789"></a>
 საქაღალდის სტრუქტურა</h1>
-<h2><a class="anchor" id="autotoc_md734"></a>
+<h2><a class="anchor" id="autotoc_md790"></a>
 სტანდარტული მოდულის layout</h2>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
 <div class="line">├── CMakeLists.txt</div>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">├── include/</div>
 <div class="line">│   └── {module_name}.h</div>
 <div class="line">└── {module_name}.c</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md735"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md791"></a>
 კატეგორიები</h2>
 <div class="fragment"><div class="line">components/modules/</div>
 <div class="line">├── actuators/          # მოქმედი მოწყობილობები</div>
@@ -128,9 +128,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">│   └── version_module/</div>
 <div class="line">└── utility/           # დამხმარე მოდულები</div>
 <div class="line">    └── logger_module/</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md736"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md792"></a>
 ფაილის სტრუქტურა</h1>
-<h2><a class="anchor" id="autotoc_md737"></a>
+<h2><a class="anchor" id="autotoc_md793"></a>
 1. Header ფაილი (&lt;tt&gt;include/{module_name}.h&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#ifndef {MODULE_NAME}_H</span></div>
 <div class="line"><span class="preprocessor">#define {MODULE_NAME}_H</span></div>
@@ -154,9 +154,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">esp_err_t {module_name}_api_disable(<span class="keywordtype">void</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#endif </span><span class="comment">// {MODULE_NAME}_H</span></div>
-<div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მთავარი მოდულის სტრუქტურა</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md738"></a>
+<div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md794"></a>
 2. Source ფაილი (&lt;tt&gt;{module_name}.c&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"><span class="comment">// === Includes ===</span></div>
 <div class="line"><span class="preprocessor">#include &quot;{module_name}.h&quot;</span></div>
@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line"><span class="comment">// === Global Variables (თუ Service Locator API აქვს) ===</span></div>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *global_{module_name}_instance = NULL;</div>
 <div class="line"><span class="keyword">static</span> {module_name}_api_t {module_name}_service_api = {</div>
-<div class="line">    .enable = {module_name}_api_enable,</div>
+<div class="line">    .<a class="code hl_variable" href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">enable</a> = {module_name}_api_enable,</div>
 <div class="line">    .disable = {module_name}_api_disable,</div>
 <div class="line">    <span class="comment">// სხვა ფუნქციები...</span></div>
 <div class="line">};</div>
@@ -226,15 +226,16 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> {module_name}_enable(global_{module_name}_instance);</div>
 <div class="line">}</div>
-<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">მოდულის სტატუსის ენუმერაცია</div><div class="ttdef"><b>Definition</b> base_module.h:32</div></div>
-<div class="ttc" id="aconfig__manager_8h_html"><div class="ttname"><a href="config__manager_8h.html">config_manager.h</a></div><div class="ttdoc">კონფიგურაციის მენეჯერის API</div></div>
+<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">მოდულის შესაძლო სტატუსების ენუმერაცია.</div><div class="ttdef"><b>Definition</b> base_module.h:29</div></div>
+<div class="ttc" id="aconfig__manager_8h_html"><div class="ttname"><a href="config__manager_8h.html">config_manager.h</a></div><div class="ttdoc">კონფიგურაციის მენეჯერის API.</div></div>
 <div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის API.</div></div>
-<div class="ttc" id="alogging_8h_html"><div class="ttname"><a href="logging_8h.html">logging.h</a></div><div class="ttdoc">Synapse ESP Framework-ის ლოგირების ინტერფეისი</div></div>
-<div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">კომპონენტის TAG-ის განსაზღვრა ლოგირებისთვის</div><div class="ttdef"><b>Definition</b> logging.h:37</div></div>
+<div class="ttc" id="alogging_8h_html"><div class="ttname"><a href="logging_8h.html">logging.h</a></div><div class="ttdoc">Synapse ESP Framework-ის ლოგირების დამხმარე ინტერფეისი.</div></div>
+<div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md739"></a>
+<div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:130</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md795"></a>
 მოდულის ტიპები</h1>
-<h2><a class="anchor" id="autotoc_md740"></a>
+<h2><a class="anchor" id="autotoc_md796"></a>
 1. Event-Driven Module (მაგ., DHT22)</h2>
 <ul>
 <li><b>იყენებს:</b> Event Bus-ს მონაცემების გასაგზავნად</li>
@@ -245,7 +246,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> dht22_task(<span class="keywordtype">void</span> *pvParameters);</div>
 <div class="line"><span class="keyword">static</span> esp_err_t publish_sensor_data(dht22_private_data_t *dht22_data, <span class="keywordtype">float</span> temperature, <span class="keywordtype">float</span> humidity);</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> dht22_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md741"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md797"></a>
 2. Service-Driven Module (მაგ., SSD1306)</h2>
 <ul>
 <li><b>იყენებს:</b> Service Locator-ს API-ის გასაზიარებლად</li>
@@ -256,7 +257,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line"><span class="keyword">static</span> ssd1306_api_t ssd1306_service_api = { <span class="comment">/* API functions */</span> };</div>
 <div class="line">esp_err_t ssd1306_api_enable(<span class="keywordtype">void</span>);  <span class="comment">// Service API</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t ssd1306_enable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);  <span class="comment">// Internal implementation</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md742"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md798"></a>
 3. Driver Module (მაგ., I2C Bus)</h2>
 <ul>
 <li><b>იყენებს:</b> Service Locator-ს driver API-ის გასაზიარებლად</li>
@@ -269,7 +270,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">    esp_err_t (*write)(<span class="keywordtype">void</span> *handle, uint8_t device_address, <span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> data_length);</div>
 <div class="line">    esp_err_t (*scan)(<span class="keywordtype">void</span> *handle);</div>
 <div class="line">}} i2c_bus_api_t;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md743"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md799"></a>
 CMakeLists.txt სტრუქტურა</h1>
 <div class="fragment"><div class="line"># Standard structure</div>
 <div class="line">idf_component_register(</div>
@@ -280,7 +281,7 @@ CMakeLists.txt სტრუქტურა</h1>
 <div class="line">        interfaces </div>
 <div class="line">        # სხვა dependencies...</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md744"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md800"></a>
 Dependencies მიხედვით</h2>
 <div class="fragment"><div class="line"># Event-driven module</div>
 <div class="line">REQUIRES core interfaces</div>
@@ -293,7 +294,7 @@ Dependencies მიხედვით</h2>
 <div class="line"> </div>
 <div class="line"># Communication module</div>
 <div class="line">REQUIRES core interfaces esp_wifi mqtt</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md745"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md801"></a>
 module.json სტრუქტურა</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;name&quot;: &quot;{module_name}&quot;,</div>
@@ -305,7 +306,7 @@ module.json სტრუქტურა</h1>
 <div class="line">        &quot;interfaces&quot;</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md746"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md802"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არ გავაკეთოთ:</b></p>
 <ul>
@@ -324,7 +325,7 @@ module.json სტრუქტურა</h1>
 <li>Proper error handling</li>
 <li>Comprehensive logging</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md747"></a>
+<h1><a class="anchor" id="autotoc_md803"></a>
 მაგალითი სრული მოდული სტრუქტურა</h1>
 <div class="fragment"><div class="line">components/modules/display/ssd1306_module/</div>
 <div class="line">├── CMakeLists.txt</div>

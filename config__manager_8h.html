@@ -96,23 +96,43 @@ $(document).ready(function(){initNavTree('config__manager_8h.html',''); initResi
 </div><!--header-->
 <div class="contents">
 
-<p>კონფიგურაციის მენეჯერის API  
+<p>კონფიგურაციის მენეჯერის API.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;esp_err.h&quot;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;cJSON.h&quot;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;freertos/semphr.h&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for config_manager.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="config__manager_8h__incl.png" border="0" usemap="#acomponents_2core_2include_2config__manager_8h" alt=""/></div>
 <map name="acomponents_2core_2include_2config__manager_8h" id="acomponents_2core_2include_2config__manager_8h">
-<area shape="rect" title="კონფიგურაციის მენეჯერის API" alt="" coords="56,5,241,45"/>
+<area shape="rect" title="კონფიგურაციის მენეჯერის API." alt="" coords="191,5,376,45"/>
 <area shape="rect" title=" " alt="" coords="5,93,87,119"/>
-<area shape="poly" title=" " alt="" coords="125,48,74,87,70,83,122,43"/>
-<area shape="rect" title=" " alt="" coords="111,93,186,119"/>
-<area shape="poly" title=" " alt="" coords="151,46,151,79,146,79,146,46"/>
-<area shape="rect" title=" " alt="" coords="211,93,281,119"/>
-<area shape="poly" title=" " alt="" coords="174,43,223,82,219,87,171,48"/>
+<area shape="poly" title=" " alt="" coords="227,48,94,92,93,87,226,43"/>
+<area shape="rect" title=" " alt="" coords="111,93,184,119"/>
+<area shape="poly" title=" " alt="" coords="252,48,181,89,178,84,249,43"/>
+<area shape="rect" title=" " alt="" coords="208,93,359,119"/>
+<area shape="poly" title=" " alt="" coords="286,46,286,79,281,79,281,46"/>
+<area shape="rect" title=" " alt="" coords="383,93,520,119"/>
+<area shape="poly" title=" " alt="" coords="325,43,415,85,413,90,322,48"/>
+<area shape="rect" title=" " alt="" coords="545,93,627,119"/>
+<area shape="poly" title=" " alt="" coords="356,43,532,88,531,93,355,48"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h__dep__incl.png" border="0" usemap="#acomponents_2core_2include_2config__manager_8hdep" alt=""/></div>
+<map name="acomponents_2core_2include_2config__manager_8hdep" id="acomponents_2core_2include_2config__manager_8hdep">
+<area shape="rect" title="კონფიგურაციის მენეჯერის API." alt="" coords="208,5,393,45"/>
+<area shape="rect" href="config__manager_8c.html" title="კონფიგურაციის მენეჯერის იმპლემენტაცია." alt="" coords="5,93,183,133"/>
+<area shape="poly" title=" " alt="" coords="244,53,140,96,138,91,242,48"/>
+<area shape="rect" href="module__registry_8c.html" title="მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია." alt="" coords="207,93,394,133"/>
+<area shape="poly" title=" " alt="" coords="303,59,303,93,298,93,298,59"/>
+<area shape="rect" href="system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="418,93,605,133"/>
+<area shape="poly" title=" " alt="" coords="360,48,466,91,464,96,358,53"/>
 </map>
 </div>
 </div>
@@ -121,53 +141,80 @@ Include dependency graph for config_manager.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:adfc0f16e9882bf39fc2560b58aec6c60" id="r_adfc0f16e9882bf39fc2560b58aec6c60"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#adfc0f16e9882bf39fc2560b58aec6c60">fmw_config_manager_init</a> (void)</td></tr>
-<tr class="memdesc:adfc0f16e9882bf39fc2560b58aec6c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახდენს კონფიგურაციის მენეჯერის და NVS-ის ინიციალიზაციას.  <br /></td></tr>
+<tr class="memdesc:adfc0f16e9882bf39fc2560b58aec6c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას.  <br /></td></tr>
 <tr class="separator:adfc0f16e9882bf39fc2560b58aec6c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c6d4276b4d30322880b770053916dd0" id="r_a0c6d4276b4d30322880b770053916dd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a0c6d4276b4d30322880b770053916dd0">fmw_config_load_defaults_if_needed</a> (void)</td></tr>
-<tr class="memdesc:a0c6d4276b4d30322880b770053916dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">ამოწმებს, საჭიროა თუ არა საწყისი კონფიგურაციის ჩატვირთვა და ტვირთავს მას.  <br /></td></tr>
-<tr class="separator:a0c6d4276b4d30322880b770053916dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d23ec96bf481d508ffbf0c9a1a76e2" id="r_ac8d23ec96bf481d508ffbf0c9a1a76e2"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#ac8d23ec96bf481d508ffbf0c9a1a76e2">fmw_config_set_string</a> (const char *key, const char *value)</td></tr>
-<tr class="memdesc:ac8d23ec96bf481d508ffbf0c9a1a76e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებაში.  <br /></td></tr>
-<tr class="separator:ac8d23ec96bf481d508ffbf0c9a1a76e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad83c96bb47fc292873d5d630e44e2fd6" id="r_ad83c96bb47fc292873d5d630e44e2fd6"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a> (const char *key, char *buffer, size_t buffer_size)</td></tr>
-<tr class="memdesc:ad83c96bb47fc292873d5d630e44e2fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებიდან.  <br /></td></tr>
-<tr class="separator:ad83c96bb47fc292873d5d630e44e2fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32f436dfee7ba0ba89515270a51c429b" id="r_a32f436dfee7ba0ba89515270a51c429b"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a32f436dfee7ba0ba89515270a51c429b">fmw_config_set_i32</a> (const char *key, int32_t value)</td></tr>
-<tr class="memdesc:a32f436dfee7ba0ba89515270a51c429b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს 32-ბიტიან მთელ რიცხვს (int32_t) NVS მეხსიერებაში.  <br /></td></tr>
-<tr class="separator:a32f436dfee7ba0ba89515270a51c429b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad839b966d1337ab599817a7372c205f6" id="r_ad839b966d1337ab599817a7372c205f6"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#ad839b966d1337ab599817a7372c205f6">fmw_config_get_i32</a> (const char *key, int32_t *out_value)</td></tr>
-<tr class="memdesc:ad839b966d1337ab599817a7372c205f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს 32-ბიტიან მთელ რიცხვს (int32_t) NVS მეხსიერებიდან.  <br /></td></tr>
-<tr class="separator:ad839b966d1337ab599817a7372c205f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a452640fe20716f32fa38428b814ab5d6" id="r_a452640fe20716f32fa38428b814ab5d6"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a452640fe20716f32fa38428b814ab5d6">fmw_config_set_i8</a> (const char *key, int8_t value)</td></tr>
-<tr class="memdesc:a452640fe20716f32fa38428b814ab5d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს 8-ბიტიან მთელ რიცხვს (int8_t) NVS მეხსიერებაში.  <br /></td></tr>
-<tr class="separator:a452640fe20716f32fa38428b814ab5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d405e21c8629c8b4ad0408d0c5c7f8b" id="r_a5d405e21c8629c8b4ad0408d0c5c7f8b"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a5d405e21c8629c8b4ad0408d0c5c7f8b">fmw_config_get_i8</a> (const char *key, int8_t *out_value)</td></tr>
-<tr class="memdesc:a5d405e21c8629c8b4ad0408d0c5c7f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს 8-ბიტიან მთელ რიცხვს (int8_t) NVS მეხსიერებიდან.  <br /></td></tr>
-<tr class="separator:a5d405e21c8629c8b4ad0408d0c5c7f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf782fcfae675652d67a24618947e547" id="r_adf782fcfae675652d67a24618947e547"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#adf782fcfae675652d67a24618947e547">fmw_config_save</a> (void)</td></tr>
+<tr class="memdesc:adf782fcfae675652d67a24618947e547"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.  <br /></td></tr>
+<tr class="separator:adf782fcfae675652d67a24618947e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35834adfd4ee7bd208e842a91d0e79d4" id="r_a35834adfd4ee7bd208e842a91d0e79d4"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a35834adfd4ee7bd208e842a91d0e79d4">fmw_config_get_module_config</a> (const char *module_name)</td></tr>
+<tr class="memdesc:a35834adfd4ee7bd208e842a91d0e79d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:a35834adfd4ee7bd208e842a91d0e79d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e04f99cb76db95b008f854b5db0a06c" id="r_a8e04f99cb76db95b008f854b5db0a06c"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a8e04f99cb76db95b008f854b5db0a06c">fmw_config_get_global_config</a> (void)</td></tr>
+<tr class="memdesc:a8e04f99cb76db95b008f854b5db0a06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს გლობალური კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:a8e04f99cb76db95b008f854b5db0a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fff68d0b0a44c6a4724eeb1837148e" id="r_ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#ab5fff68d0b0a44c6a4724eeb1837148e">fmw_config_get_root</a> (void)</td></tr>
+<tr class="memdesc:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607cfc06d3d3cf60580f7be5ee9c1a81" id="r_a607cfc06d3d3cf60580f7be5ee9c1a81"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a607cfc06d3d3cf60580f7be5ee9c1a81">fmw_config_get_module_string</a> (const char *module_name, const char *key, char *buffer, size_t buffer_size)</td></tr>
+<tr class="memdesc:a607cfc06d3d3cf60580f7be5ee9c1a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს სტრიქონის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
+<tr class="separator:a607cfc06d3d3cf60580f7be5ee9c1a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eaf564a42e1badbad6648ed3d8688da" id="r_a9eaf564a42e1badbad6648ed3d8688da"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a9eaf564a42e1badbad6648ed3d8688da">fmw_config_get_module_int</a> (const char *module_name, const char *key, int *out_value)</td></tr>
+<tr class="memdesc:a9eaf564a42e1badbad6648ed3d8688da"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
+<tr class="separator:a9eaf564a42e1badbad6648ed3d8688da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1215ed44ac7a65dda68e447f35c739" id="r_a1d1215ed44ac7a65dda68e447f35c739"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a1d1215ed44ac7a65dda68e447f35c739">fmw_config_get_module_bool</a> (const char *module_name, const char *key, bool *out_value)</td></tr>
+<tr class="memdesc:a1d1215ed44ac7a65dda68e447f35c739"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
+<tr class="separator:a1d1215ed44ac7a65dda68e447f35c739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>კონფიგურაციის მენეჯერის API </p>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-06-24 </dd></dl>
+<div class="textblock"><p>კონფიგურაციის მენეჯერის API. </p>
+<dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-06-25 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
-<p>ეს კომპონენტი უზრუნველყოფს Non-Volatile Storage (NVS) მეხსიერებასთან მუშაობის აბსტრაქციას. ის საშუალებას იძლევა, მარტივად შეინახოს და წაიკითხოს სხვადასხვა ტიპის პარამეტრები (string, i32, i8). ასევე, უზრუნველყოფს საწყისი კონფიგურაციის ჩატვირთვას პირველი გაშვებისას. </p>
+<p>ეს კომპონენტი პასუხისმგებელია <code>system_config.json</code>-ის ჩატვირთვაზე, ვალიდაციასა და მასზე წვდომის უზრუნველყოფაზე. ის უზრუნველყოფს ერთიან "სიმართლის წყაროს" (Single Source of Truth) მთელი სისტემისთვის და მართავს კონფიგურაციის შენახვას NVS-ში. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad839b966d1337ab599817a7372c205f6" name="ad839b966d1337ab599817a7372c205f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad839b966d1337ab599817a7372c205f6">&#9670;&#160;</a></span>fmw_config_get_i32()</h2>
+<a id="a8e04f99cb76db95b008f854b5db0a06c" name="a8e04f99cb76db95b008f854b5db0a06c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e04f99cb76db95b008f854b5db0a06c">&#9670;&#160;</a></span>fmw_config_get_global_config()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_get_i32 </td>
+          <td class="memname">const cJSON * fmw_config_get_global_config </td>
           <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>აბრუნებს გლობალური კონფიგურაციის cJSON ობიექტს. </p>
+<dl class="section return"><dt>Returns</dt><dd>const cJSON* გლობალური კონფიგურაციის მაჩვენებელი (მხოლოდ წასაკითხად). </dd></dl>
+
+</div>
+</div>
+<a id="a1d1215ed44ac7a65dda68e447f35c739" name="a1d1215ed44ac7a65dda68e447f35c739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d1215ed44ac7a65dda68e447f35c739">&#9670;&#160;</a></span>fmw_config_get_module_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_config_get_module_bool </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>module_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int32_t *&#160;</td>
+          <td class="paramtype">bool *&#160;</td>
           <td class="paramname"><em>out_value</em>&#160;</td>
         </tr>
         <tr>
@@ -178,41 +225,104 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>კითხულობს 32-ბიტიან მთელ რიცხვს (int32_t) NVS მეხსიერებიდან. </p>
+<p>კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">module_name</td><td>მოდულის სახელი. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>პარამეტრის გასაღები. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_value</td><td>მაჩვენებელი, სადაც ჩაიწერება წაკითხული მნიშვნელობა. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_value</td><td>მაჩვენებელი, სადაც ჩაიწერება მნიშვნელობა. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ წაკითხვა წარმატებით დასრულდა. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_NOT_FOUND</td><td>თუ მითითებული გასაღები არ არსებობს. </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>თუ პარამეტრი წარმატებით იქნა წაკითხული. </td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_a1d1215ed44ac7a65dda68e447f35c739_cgraph.png" border="0" usemap="#aconfig__manager_8h_a1d1215ed44ac7a65dda68e447f35c739_cgraph" alt=""/></div>
+<map name="aconfig__manager_8h_a1d1215ed44ac7a65dda68e447f35c739_cgraph" id="aconfig__manager_8h_a1d1215ed44ac7a65dda68e447f35c739_cgraph">
+<area shape="rect" title="კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან." alt="" coords="5,13,221,38"/>
+<area shape="rect" href="config__manager_8c.html#a35834adfd4ee7bd208e842a91d0e79d4" title="აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს." alt="" coords="269,5,451,45"/>
+<area shape="poly" title=" " alt="" coords="221,23,255,23,255,28,221,28"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="a5d405e21c8629c8b4ad0408d0c5c7f8b" name="a5d405e21c8629c8b4ad0408d0c5c7f8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d405e21c8629c8b4ad0408d0c5c7f8b">&#9670;&#160;</a></span>fmw_config_get_i8()</h2>
+<a id="a35834adfd4ee7bd208e842a91d0e79d4" name="a35834adfd4ee7bd208e842a91d0e79d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35834adfd4ee7bd208e842a91d0e79d4">&#9670;&#160;</a></span>fmw_config_get_module_config()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_get_i8 </td>
+          <td class="memname">const cJSON * fmw_config_get_module_config </td>
           <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>module_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">module_name</td><td>მოდულის უნიკალური სახელი (instance_name). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>const cJSON* მოდულის კონფიგურაციის მაჩვენებელი (მხოლოდ წასაკითხად). </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">NULL</td><td>თუ მითითებული სახელით მოდული ვერ მოიძებნა. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_a35834adfd4ee7bd208e842a91d0e79d4_icgraph.png" border="0" usemap="#aconfig__manager_8h_a35834adfd4ee7bd208e842a91d0e79d4_icgraph" alt=""/></div>
+<map name="aconfig__manager_8h_a35834adfd4ee7bd208e842a91d0e79d4_icgraph" id="aconfig__manager_8h_a35834adfd4ee7bd208e842a91d0e79d4_icgraph">
+<area shape="rect" title="აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს." alt="" coords="269,47,451,87"/>
+<area shape="rect" href="config__manager_8c.html#a1d1215ed44ac7a65dda68e447f35c739" title="კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან." alt="" coords="5,5,221,31"/>
+<area shape="poly" title=" " alt="" coords="255,49,177,33,178,28,256,44"/>
+<area shape="rect" href="config__manager_8c.html#a9eaf564a42e1badbad6648ed3d8688da" title="კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან." alt="" coords="11,55,216,80"/>
+<area shape="poly" title=" " alt="" coords="256,70,216,70,216,65,256,65"/>
+<area shape="rect" href="config__manager_8c.html#a607cfc06d3d3cf60580f7be5ee9c1a81" title="კითხულობს სტრიქონის ტიპის პარამეტრს მოდულის კონფიგურაციიდან." alt="" coords="23,105,204,145"/>
+<area shape="poly" title=" " alt="" coords="261,93,201,107,199,102,260,88"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9eaf564a42e1badbad6648ed3d8688da" name="a9eaf564a42e1badbad6648ed3d8688da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eaf564a42e1badbad6648ed3d8688da">&#9670;&#160;</a></span>fmw_config_get_module_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_config_get_module_int </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>module_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int8_t *&#160;</td>
+          <td class="paramtype">int *&#160;</td>
           <td class="paramname"><em>out_value</em>&#160;</td>
         </tr>
         <tr>
@@ -223,34 +333,50 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>კითხულობს 8-ბიტიან მთელ რიცხვს (int8_t) NVS მეხსიერებიდან. </p>
+<p>კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">module_name</td><td>მოდულის სახელი. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>პარამეტრის გასაღები. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_value</td><td>მაჩვენებელი, სადაც ჩაიწერება წაკითხული მნიშვნელობა. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_value</td><td>მაჩვენებელი, სადაც ჩაიწერება მნიშვნელობა. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ წაკითხვა წარმატებით დასრულდა. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_NOT_FOUND</td><td>თუ მითითებული გასაღები არ არსებობს. </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>თუ პარამეტრი წარმატებით იქნა წაკითხული. </td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_a9eaf564a42e1badbad6648ed3d8688da_cgraph.png" border="0" usemap="#aconfig__manager_8h_a9eaf564a42e1badbad6648ed3d8688da_cgraph" alt=""/></div>
+<map name="aconfig__manager_8h_a9eaf564a42e1badbad6648ed3d8688da_cgraph" id="aconfig__manager_8h_a9eaf564a42e1badbad6648ed3d8688da_cgraph">
+<area shape="rect" title="კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან." alt="" coords="5,13,211,38"/>
+<area shape="rect" href="config__manager_8c.html#a35834adfd4ee7bd208e842a91d0e79d4" title="აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს." alt="" coords="259,5,440,45"/>
+<area shape="poly" title=" " alt="" coords="211,23,245,23,245,28,211,28"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="ad83c96bb47fc292873d5d630e44e2fd6" name="ad83c96bb47fc292873d5d630e44e2fd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad83c96bb47fc292873d5d630e44e2fd6">&#9670;&#160;</a></span>fmw_config_get_string()</h2>
+<a id="a607cfc06d3d3cf60580f7be5ee9c1a81" name="a607cfc06d3d3cf60580f7be5ee9c1a81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a607cfc06d3d3cf60580f7be5ee9c1a81">&#9670;&#160;</a></span>fmw_config_get_module_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_get_string </td>
+          <td class="memname">esp_err_t fmw_config_get_module_string </td>
           <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>module_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
@@ -274,37 +400,45 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>კითხულობს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებიდან. </p>
+<p>კითხულობს სტრიქონის ტიპის პარამეტრს მოდულის კონფიგურაციიდან. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">module_name</td><td>მოდულის სახელი. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>პარამეტრის გასაღები. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">buffer</td><td>ბუფერი, სადაც ჩაიწერება წაკითხული მნიშვნელობა. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">buffer_size</td><td>ბუფერის ზომა ბაიტებში. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">buffer</td><td>ბუფერი, სადაც ჩაიწერება მნიშვნელობა. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buffer_size</td><td>ბუფერის ზომა. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ წაკითხვა წარმატებით დასრულდა. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_NOT_FOUND</td><td>თუ მითითებული გასაღები არ არსებობს. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_INVALID_HANDLE</td><td>თუ NVS handle არასწორია. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_INVALID_NAME</td><td>თუ გასაღები არავალიდურია. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_INVALID_LENGTH</td><td>თუ ბუფერის ზომა არასაკმარისია. </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>თუ პარამეტრი წარმატებით იქნა წაკითხული. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>თუ მოდული ან გასაღები ვერ მოიძებნა. </td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_a607cfc06d3d3cf60580f7be5ee9c1a81_cgraph.png" border="0" usemap="#aconfig__manager_8h_a607cfc06d3d3cf60580f7be5ee9c1a81_cgraph" alt=""/></div>
+<map name="aconfig__manager_8h_a607cfc06d3d3cf60580f7be5ee9c1a81_cgraph" id="aconfig__manager_8h_a607cfc06d3d3cf60580f7be5ee9c1a81_cgraph">
+<area shape="rect" title="კითხულობს სტრიქონის ტიპის პარამეტრს მოდულის კონფიგურაციიდან." alt="" coords="5,5,187,45"/>
+<area shape="rect" href="config__manager_8c.html#a35834adfd4ee7bd208e842a91d0e79d4" title="აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს." alt="" coords="235,5,416,45"/>
+<area shape="poly" title=" " alt="" coords="187,23,221,23,221,28,187,28"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="a0c6d4276b4d30322880b770053916dd0" name="a0c6d4276b4d30322880b770053916dd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c6d4276b4d30322880b770053916dd0">&#9670;&#160;</a></span>fmw_config_load_defaults_if_needed()</h2>
+<a id="ab5fff68d0b0a44c6a4724eeb1837148e" name="ab5fff68d0b0a44c6a4724eeb1837148e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5fff68d0b0a44c6a4724eeb1837148e">&#9670;&#160;</a></span>fmw_config_get_root()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void fmw_config_load_defaults_if_needed </td>
+          <td class="memname">const cJSON * fmw_config_get_root </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -313,8 +447,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>ამოწმებს, საჭიროა თუ არა საწყისი კონფიგურაციის ჩატვირთვა და ტვირთავს მას. </p>
-<p>ეს ფუნქცია უნდა გამოიძახოს <code>Module Registry</code>-მ ინიციალიზაციისას. ის ამოწმებს <code>sys.init_done</code> NVS ფლაგს. თუ ფლაგირების მარკერი არ არსებობს, ეს ნიშნავს, რომ მოწყობილობა პირველად ეშვება (ან NVS გასუფთავდა). ამ შემთხვევაში, ფუნქცია <code>system_config.json</code> ფაილიდან კითხულობს პარამეტრებს და წერს მათ NVS-ში, რის შემდეგაც აყენებს ფლაგს, რათა ეს პროცესი ხელმეორედ აღარ შესრულდეს. </p>
+<p>აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს. </p>
+<dl class="section note"><dt>Note</dt><dd>გამოიყენეთ სიფრთხილით. სასურველია გამოიყენოთ უფრო სპეციფიური get ფუნქციები. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const cJSON* მთლიანი კონფიგურაციის root ობიექტის მაჩვენებელი. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph.png" border="0" usemap="#aconfig__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph" alt=""/></div>
+<map name="aconfig__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph" id="aconfig__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph">
+<area shape="rect" title="აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს." alt="" coords="428,5,587,31"/>
+<area shape="rect" href="module__registry_8c.html#a15ad8ee3953b528270916074c41f0c06" title="ინიციალიზებს მოდულების რეესტრს." alt="" coords="188,5,380,31"/>
+<area shape="poly" title=" " alt="" coords="414,21,380,21,380,15,414,15"/>
+<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
+<area shape="poly" title=" " alt="" coords="174,21,140,21,140,15,174,15"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -334,152 +481,69 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>ახდენს კონფიგურაციის მენეჯერის და NVS-ის ინიციალიზაციას. </p>
-<p>ეს ფუნქცია უნდა გამოიძახოს <code>system_manager</code>-მა სისტემის ინიციალიზაციის ადრეულ ეტაპზე, რათა მომზადდეს NVS მეხსიერება სხვა კომპონენტებისთვის. თუ NVS-ის ინიციალიზაცია ვერ ხერხდება კრიტიკული შეცდომის (მაგ. NVS დანაყოფი არ არსებობს) გამო, ფუნქცია აბრუნებს შეცდომის კოდს.</p>
+<p>ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას. </p>
+<p>ეს ფუნქცია კითხულობს კონფიგურაციას NVS-დან. თუ NVS-ში კონფიგურაცია არ არსებობს, ის ტვირთავს <code>system_config.json</code>-ის default ვერსიას ფაილური სისტემიდან. ეს ფუნქცია უნდა გამოიძახოს <code>system_manager</code>-მა ინიციალიზაციისას.</p>
 <dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ ინიციალიზაცია წარმატებით დასრულდა. </td></tr>
-    <tr><td class="paramname">ESP_FAIL</td><td>თუ ინიციალიზაცია ვერ მოხერხდა. </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>თუ კონფიგურაცია წარმატებით ჩაიტვირთა. </td></tr>
+    <tr><td class="paramname">ESP_FAIL</td><td>თუ ჩატვირთვა ვერ მოხერხდა. </td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph.png" border="0" usemap="#aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph" alt=""/></div>
+<map name="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph" id="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph">
+<area shape="rect" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="5,5,196,31"/>
+<area shape="rect" href="config__manager_8c.html#adf782fcfae675652d67a24618947e547" title="ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში." alt="" coords="244,5,379,31"/>
+<area shape="poly" title=" " alt="" coords="196,15,230,15,230,21,196,21"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph.png" border="0" usemap="#aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph" alt=""/></div>
+<map name="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph" id="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph">
+<area shape="rect" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="188,5,379,31"/>
+<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
+<area shape="poly" title=" " alt="" coords="174,21,141,21,141,15,174,15"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="a32f436dfee7ba0ba89515270a51c429b" name="a32f436dfee7ba0ba89515270a51c429b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32f436dfee7ba0ba89515270a51c429b">&#9670;&#160;</a></span>fmw_config_set_i32()</h2>
+<a id="adf782fcfae675652d67a24618947e547" name="adf782fcfae675652d67a24618947e547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf782fcfae675652d67a24618947e547">&#9670;&#160;</a></span>fmw_config_save()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_set_i32 </td>
+          <td class="memname">esp_err_t fmw_config_save </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>ინახავს 32-ბიტიან მთელ რიცხვს (int32_t) NVS მეხსიერებაში. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>პარამეტრის უნიკალური გასაღები. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>შესანახი რიცხვითი მნიშვნელობა. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ შენახვა წარმატებით დასრულდა. </td></tr>
-  </table>
-  </dd>
-</dl>
-
+<p>ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში. </p>
+<p>ეს ფუნქცია უნდა გამოიძახოთ მას შემდეგ, რაც კონფიგურაციაში ცვლილებები შევა, რათა ისინი შენარჩუნდეს მოწყობილობის გადატვირთვის შემდეგაც. </p><dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__manager_8h_adf782fcfae675652d67a24618947e547_icgraph.png" border="0" usemap="#aconfig__manager_8h_adf782fcfae675652d67a24618947e547_icgraph" alt=""/></div>
+<map name="aconfig__manager_8h_adf782fcfae675652d67a24618947e547_icgraph" id="aconfig__manager_8h_adf782fcfae675652d67a24618947e547_icgraph">
+<area shape="rect" title="ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში." alt="" coords="427,5,561,31"/>
+<area shape="rect" href="config__manager_8c.html#adfc0f16e9882bf39fc2560b58aec6c60" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="188,5,379,31"/>
+<area shape="poly" title=" " alt="" coords="413,21,379,21,379,15,413,15"/>
+<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
+<area shape="poly" title=" " alt="" coords="174,21,141,21,141,15,174,15"/>
+</map>
 </div>
-</div>
-<a id="a452640fe20716f32fa38428b814ab5d6" name="a452640fe20716f32fa38428b814ab5d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a452640fe20716f32fa38428b814ab5d6">&#9670;&#160;</a></span>fmw_config_set_i8()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_err_t fmw_config_set_i8 </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>ინახავს 8-ბიტიან მთელ რიცხვს (int8_t) NVS მეხსიერებაში. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>პარამეტრის უნიკალური გასაღები. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>შესანახი რიცხვითი მნიშვნელობა. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ შენახვა წარმატებით დასრულდა. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ac8d23ec96bf481d508ffbf0c9a1a76e2" name="ac8d23ec96bf481d508ffbf0c9a1a76e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8d23ec96bf481d508ffbf0c9a1a76e2">&#9670;&#160;</a></span>fmw_config_set_string()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_err_t fmw_config_set_string </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>ინახავს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებაში. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>პარამეტრის უნიკალური გასაღები (null-terminated string). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>შესანახი სტრიქონი. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ შენახვა წარმატებით დასრულდა. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_INVALID_NAME</td><td>თუ გასაღები არავალიდურია. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_INVALID_HANDLE</td><td>თუ NVS handle არასწორია. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NVS_READ_ONLY</td><td>თუ NVS დანაყოფი მხოლოდ წაკითხვადია. </td></tr>
-    <tr><td class="paramname">ESP_FAIL</td><td>სხვა შეცდომის შემთხვევაში. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

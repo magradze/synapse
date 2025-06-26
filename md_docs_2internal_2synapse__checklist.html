@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
   <div class="headertitle"><div class="title">✅ Synapse Framework — Documentation &amp; Module Design Checklist</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1033"></a> </p>
-<h1><a class="anchor" id="autotoc_md1034"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1132"></a> </p>
+<h1><a class="anchor" id="autotoc_md1133"></a>
 1. API Naming &amp; Structure</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -102,13 +102,13 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ ფუნქციის სახელი   </td><td class="markdownTableBodyNone">იყენებს ფორმატს: <code>prefix_module_action()</code> ან <code>fmw_*</code> core-თვის   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">✅ ლოგის TAG   </td><td class="markdownTableBodyNone">განსაზღვრულია <code><a class="el" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9" title="კომპონენტის TAG-ის განსაზღვრა ლოგირებისთვის">DEFINE_COMPONENT_TAG(TAG_NAME)</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">✅ ლოგის TAG   </td><td class="markdownTableBodyNone">განსაზღვრულია <code><a class="el" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9" title="განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.">DEFINE_COMPONENT_TAG(TAG_NAME)</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ ფაილის სახელები   </td><td class="markdownTableBodyNone">lowercase + <code>_api.md</code> ან <code>_module.c</code> სტილით   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">✅ მოდულის სახელები   </td><td class="markdownTableBodyNone">უნიკალურია სისტემაში (<code>module_instance_name</code>)   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1035"></a>
+<h1><a class="anchor" id="autotoc_md1134"></a>
 2. Module Implementation</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -124,11 +124,11 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ ინდივიდუალური enable/disable   </td><td class="markdownTableBodyNone">განსაზღვრულია მოდულის ჩართვა/გამორთვის მეთოდები   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">✅ event handler   </td><td class="markdownTableBodyNone">საჭიროების შემთხვევაში რეგისტრირებულია <code><a class="el" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504" title="არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.">event_bus_subscribe()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">✅ event handler   </td><td class="markdownTableBodyNone">საჭიროების შემთხვევაში რეგისტრირებულია <code>event_bus_subscribe()</code>   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">✅ სერვისის რეგისტრაცია   </td><td class="markdownTableBodyNone">იყენებს <code><a class="el" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით">fmw_service_register()</a></code> საჭიროების შემთხვევაში   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">✅ სერვისის რეგისტრაცია   </td><td class="markdownTableBodyNone">იყენებს <code><a class="el" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.">fmw_service_register()</a></code> საჭიროების შემთხვევაში   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1036"></a>
+<h1><a class="anchor" id="autotoc_md1135"></a>
 3. Communication Integration (MQTT/WiFi/ESP-NOW)</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -144,21 +144,21 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ reconnect logic   </td><td class="markdownTableBodyNone">აღწერილია ან განხორციელებულია fallback/reconnect   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1037"></a>
+<h1><a class="anchor" id="autotoc_md1136"></a>
 4. Core Interaction</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">რუბრიკა   </th><th class="markdownTableHeadNone">მოთხოვნა   </th><th class="markdownTableHeadNone">✓    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">✅ Service Locator   </td><td class="markdownTableBodyNone">სერვისები რეგისტრირდება <code><a class="el" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით">fmw_service_register()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">✅ Service Locator   </td><td class="markdownTableBodyNone">სერვისები რეგისტრირდება <code><a class="el" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.">fmw_service_register()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">✅ Event Bus   </td><td class="markdownTableBodyNone">მოიცავს <code><a class="el" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340" title="აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.">event_bus_post()</a></code> ან <code><a class="el" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504" title="არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.">event_bus_subscribe()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">✅ Event Bus   </td><td class="markdownTableBodyNone">მოიცავს <code>event_bus_post()</code> ან <code>event_bus_subscribe()</code>   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ Module Register   </td><td class="markdownTableBodyNone">ყველა მოდული რეგისტრირდება <code>fmw_module_register()</code>   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">✅ Module Factory   </td><td class="markdownTableBodyNone">მართულია <code>fmw_module_factory_create()</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">✅ Module Factory   </td><td class="markdownTableBodyNone">მართულია <code><a class="el" href="module__factory_8h.html#a0b5e65c02a0bd3061e6c89e01e58142a" title="მოდულის შემქმნელი (factory) ფუნქციის ტიპი.">fmw_module_factory_create()</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1038"></a>
+<h1><a class="anchor" id="autotoc_md1137"></a>
 5. Documentation</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -174,7 +174,7 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ Troubleshooting / FAQ   </td><td class="markdownTableBodyNone">გავრცელებული შეცდომები დაფარულია შესაბამის ფაილში   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1039"></a>
+<h1><a class="anchor" id="autotoc_md1138"></a>
 6. Quality &amp; Security</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -190,7 +190,7 @@ $(document).ready(function(){initNavTree('md_docs_2internal_2synapse__checklist.
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ Secret mgmt   </td><td class="markdownTableBodyNone">პაროლები/კონფიდენციალური info არ hardcoded-დება   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md1040"></a>
+<h1><a class="anchor" id="autotoc_md1139"></a>
 7. Testability</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

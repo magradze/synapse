@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['module_5fname_0',['module_name',['../structtelemetry__data__t.html#ae063bb780decedd79bdc46f26023cc55',1,'telemetry_data_t::module_name'],['../structhealth__pong__payload__t.html#aa38641cd4a204ba2bdaa1c4e5c27d988',1,'health_pong_payload_t::module_name'],['../structmodule__disable__payload__t.html#a067b47a8ddd91b4fbf3694f02c396755',1,'module_disable_payload_t::module_name'],['../structmodule__enable__payload__t.html#a91b680fe92139491fa8671b00d4f55a8',1,'module_enable_payload_t::module_name']]]
+  ['init_0',['init',['../structmodule__t.html#a9988cea19291825ba1c3f381b7ccd920',1,'module_t']]],
+  ['instance_5fname_1',['instance_name',['../structtest__module__config__t.html#ae92218c41e25a195aaa13e66a97116f8',1,'test_module_config_t']]],
+  ['is_5fenabled_2',['is_enabled',['../structtest__module__module__t.html#a863d2cb5727e1cf27d2aae183ded8e66',1,'test_module_module_t']]],
+  ['is_5finitialized_3',['is_initialized',['../structtest__module__module__t.html#af385bcac31b38eb93430ac33be105859',1,'test_module_module_t']]]
 ];

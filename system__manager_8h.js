@@ -1,12 +1,12 @@
 var system__manager_8h =
 [
-    [ "system_disable_module", "system__manager_8h.html#a600d4d2cc7f7a02686ad0e50090cb6e7", null ],
-    [ "system_enable_module", "system__manager_8h.html#aba28fadf1d1a421cdce974f712a378c2", null ],
-    [ "system_get_module_config", "system__manager_8h.html#ae67e5e57d44a5a81bf3418d30de39aa3", null ],
-    [ "system_get_module_status", "system__manager_8h.html#a648e866128ecb77cffc828f8868eb9ee", null ],
-    [ "system_get_runtime_modules", "system__manager_8h.html#a2a269d1988a11f635767f24b6a3722c1", null ],
-    [ "system_get_system_info", "system__manager_8h.html#af52b10315b7375f49cb4ba2c32906eb6", null ],
-    [ "system_init", "system__manager_8h.html#a596afcad2656a8d9fd7f168c7373031c", null ],
-    [ "system_reconfigure_module", "system__manager_8h.html#a68109906589742862448763a92a184f9", null ],
-    [ "system_start", "system__manager_8h.html#a2d500ceda1f41875eadfb23a0bdb7d93", null ]
+    [ "fmw_module_disable", "system__manager_8h.html#ad8c9b2c31ded581d735bc399d6cf503e", null ],
+    [ "fmw_module_enable", "system__manager_8h.html#aa45ded18ca208f5e8d250c04bc3c54e2", null ],
+    [ "fmw_module_get_all", "system__manager_8h.html#a30043c10d2c99667e83018c8dc65d7c6", null ],
+    [ "fmw_module_get_config", "system__manager_8h.html#a86fff6c9cb4471e4c9fc89cb22f27f6b", null ],
+    [ "fmw_module_get_status", "system__manager_8h.html#a92714f6b016d12e108ee8c70510a1cc2", null ],
+    [ "fmw_module_reconfigure", "system__manager_8h.html#a7823200ab573eaa89f287ce81d03e83e", null ],
+    [ "fmw_system_init", "system__manager_8h.html#a0a04a8681142aec11736a9ca9bc931b5", null ],
+    [ "fmw_system_start", "system__manager_8h.html#a5d90998d0fba9bd4ce66fbdbfa5f807f", null ],
+    [ "system_get_system_info", "system__manager_8h.html#a620b4e69cf4f9e69692f3a5e8bb39f0d", null ]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
   ['2025_2006_2024_0',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
-  ['24_1',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]]
+  ['2025_2006_2026_1',['CHANGELOG - 2025-06-26',['../md_docs_2changelog_2CHANGELOG__2025-06-26.html',1,'']]],
+  ['24_2',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
+  ['26_3',['CHANGELOG - 2025-06-26',['../md_docs_2changelog_2CHANGELOG__2025-06-26.html',1,'']]]
 ];

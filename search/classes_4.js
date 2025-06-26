@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['telemetry_5fdata_5ft_0',['telemetry_data_t',['../structtelemetry__data__t.html',1,'']]]
+  ['test_5fmodule_5fconfig_5ft_0',['test_module_config_t',['../structtest__module__config__t.html',1,'']]],
+  ['test_5fmodule_5fmodule_5ft_1',['test_module_module_t',['../structtest__module__module__t.html',1,'']]]
 ];

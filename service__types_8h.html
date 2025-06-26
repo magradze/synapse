@@ -91,22 +91,27 @@ $(document).ready(function(){initNavTree('service__types_8h.html',''); initResiz
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">service_types.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები  
+<p>Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for service_types.h:</div>
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="service__types_8h__incl.png" border="0" usemap="#acomponents_2interfaces_2include_2service__types_8h" alt=""/></div>
-<map name="acomponents_2interfaces_2include_2service__types_8h" id="acomponents_2interfaces_2include_2service__types_8h">
-<area shape="rect" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები" alt="" coords="5,5,184,45"/>
-<area shape="rect" title=" " alt="" coords="59,93,130,119"/>
-<area shape="poly" title=" " alt="" coords="97,46,97,79,92,79,92,46"/>
+<div class="center"><img src="service__types_8h__dep__incl.png" border="0" usemap="#acomponents_2interfaces_2include_2service__types_8hdep" alt=""/></div>
+<map name="acomponents_2interfaces_2include_2service__types_8hdep" id="acomponents_2interfaces_2include_2service__types_8hdep">
+<area shape="rect" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="154,5,333,45"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="85,93,271,133"/>
+<area shape="poly" title=" " alt="" coords="223,58,195,95,190,91,219,55"/>
+<area shape="rect" href="system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="215,181,402,221"/>
+<area shape="poly" title=" " alt="" coords="267,56,286,92,300,139,309,180,303,181,295,141,281,94,262,58"/>
+<area shape="rect" href="service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="5,181,191,221"/>
+<area shape="poly" title=" " alt="" coords="153,145,118,183,114,179,149,142"/>
+<area shape="poly" title=" " alt="" coords="220,139,281,179,278,183,217,143"/>
 </map>
 </div>
 </div>
@@ -114,204 +119,76 @@ Include dependency graph for service_types.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a9beec5919e56aa9da2993a2e17bb150b" id="r_a9beec5919e56aa9da2993a2e17bb150b"><td class="memItemLeft" align="right" valign="top"><a id="a9beec5919e56aa9da2993a2e17bb150b" name="a9beec5919e56aa9da2993a2e17bb150b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_DISPLAY_API</b>&#160;&#160;&#160;&quot;display_api&quot;</td></tr>
-<tr class="memdesc:a9beec5919e56aa9da2993a2e17bb150b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display API service type for all display modules (SSD1306, LCD1602, etc.) <br /></td></tr>
-<tr class="separator:a9beec5919e56aa9da2993a2e17bb150b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1a761ecd0342653607272b037e4534b" id="r_af1a761ecd0342653607272b037e4534b"><td class="memItemLeft" align="right" valign="top"><a id="af1a761ecd0342653607272b037e4534b" name="af1a761ecd0342653607272b037e4534b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_I2C_BUS_API</b>&#160;&#160;&#160;&quot;i2c_bus_api&quot;</td></tr>
-<tr class="memdesc:af1a761ecd0342653607272b037e4534b"><td class="mdescLeft">&#160;</td><td class="mdescRight">I2C Bus API service type for I2C bus driver modules. <br /></td></tr>
-<tr class="separator:af1a761ecd0342653607272b037e4534b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a189d28b214e08ba89f0f12d52998d068" id="r_a189d28b214e08ba89f0f12d52998d068"><td class="memItemLeft" align="right" valign="top"><a id="a189d28b214e08ba89f0f12d52998d068" name="a189d28b214e08ba89f0f12d52998d068"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_SPI_BUS_API</b>&#160;&#160;&#160;&quot;spi_bus_api&quot;</td></tr>
-<tr class="memdesc:a189d28b214e08ba89f0f12d52998d068"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI Bus API service type for SPI bus driver modules. <br /></td></tr>
-<tr class="separator:a189d28b214e08ba89f0f12d52998d068"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb0c9cd44275c3345535c6ab74f618b5" id="r_aeb0c9cd44275c3345535c6ab74f618b5"><td class="memItemLeft" align="right" valign="top"><a id="aeb0c9cd44275c3345535c6ab74f618b5" name="aeb0c9cd44275c3345535c6ab74f618b5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_UART_API</b>&#160;&#160;&#160;&quot;uart_api&quot;</td></tr>
-<tr class="memdesc:aeb0c9cd44275c3345535c6ab74f618b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART API service type for UART communication modules. <br /></td></tr>
-<tr class="separator:aeb0c9cd44275c3345535c6ab74f618b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa15d15d55e2498a8c2e4541ca370da48" id="r_aa15d15d55e2498a8c2e4541ca370da48"><td class="memItemLeft" align="right" valign="top"><a id="aa15d15d55e2498a8c2e4541ca370da48" name="aa15d15d55e2498a8c2e4541ca370da48"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_WIFI_API</b>&#160;&#160;&#160;&quot;wifi_api&quot;</td></tr>
-<tr class="memdesc:aa15d15d55e2498a8c2e4541ca370da48"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi API service type for WiFi connection modules. <br /></td></tr>
-<tr class="separator:aa15d15d55e2498a8c2e4541ca370da48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b9b8561c2eb161909a1d5d5e4a4887c" id="r_a8b9b8561c2eb161909a1d5d5e4a4887c"><td class="memItemLeft" align="right" valign="top"><a id="a8b9b8561c2eb161909a1d5d5e4a4887c" name="a8b9b8561c2eb161909a1d5d5e4a4887c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_MQTT_API</b>&#160;&#160;&#160;&quot;mqtt_api&quot;</td></tr>
-<tr class="memdesc:a8b9b8561c2eb161909a1d5d5e4a4887c"><td class="mdescLeft">&#160;</td><td class="mdescRight">MQTT API service type for MQTT communication modules. <br /></td></tr>
-<tr class="separator:a8b9b8561c2eb161909a1d5d5e4a4887c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9b76fe5afcc516f33cf89107892bd76" id="r_ab9b76fe5afcc516f33cf89107892bd76"><td class="memItemLeft" align="right" valign="top"><a id="ab9b76fe5afcc516f33cf89107892bd76" name="ab9b76fe5afcc516f33cf89107892bd76"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_HTTP_API</b>&#160;&#160;&#160;&quot;http_api&quot;</td></tr>
-<tr class="memdesc:ab9b76fe5afcc516f33cf89107892bd76"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP API service type for HTTP client/server modules. <br /></td></tr>
-<tr class="separator:ab9b76fe5afcc516f33cf89107892bd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22b41012d49e205ce0b6e779cabc780" id="r_ae22b41012d49e205ce0b6e779cabc780"><td class="memItemLeft" align="right" valign="top"><a id="ae22b41012d49e205ce0b6e779cabc780" name="ae22b41012d49e205ce0b6e779cabc780"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_BLE_API</b>&#160;&#160;&#160;&quot;ble_api&quot;</td></tr>
-<tr class="memdesc:ae22b41012d49e205ce0b6e779cabc780"><td class="mdescLeft">&#160;</td><td class="mdescRight">BLE API service type for Bluetooth Low Energy modules. <br /></td></tr>
-<tr class="separator:ae22b41012d49e205ce0b6e779cabc780"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8d9d28e782cde8c7c08729b93f2c2da" id="r_aa8d9d28e782cde8c7c08729b93f2c2da"><td class="memItemLeft" align="right" valign="top"><a id="aa8d9d28e782cde8c7c08729b93f2c2da" name="aa8d9d28e782cde8c7c08729b93f2c2da"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_FLASH_API</b>&#160;&#160;&#160;&quot;flash_api&quot;</td></tr>
-<tr class="memdesc:aa8d9d28e782cde8c7c08729b93f2c2da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flash API სერვისის ტიპი flash მეხსიერების წვდომის მოდულებისთვის <br /></td></tr>
-<tr class="separator:aa8d9d28e782cde8c7c08729b93f2c2da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67fcc1d0f054d6265374f92003cdf2b2" id="r_a67fcc1d0f054d6265374f92003cdf2b2"><td class="memItemLeft" align="right" valign="top"><a id="a67fcc1d0f054d6265374f92003cdf2b2" name="a67fcc1d0f054d6265374f92003cdf2b2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_NVRAM_API</b>&#160;&#160;&#160;&quot;nvram_api&quot;</td></tr>
-<tr class="memdesc:a67fcc1d0f054d6265374f92003cdf2b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">NVRAM API სერვისის ტიპი არავოლატური RAM მოდულებისთვის <br /></td></tr>
-<tr class="separator:a67fcc1d0f054d6265374f92003cdf2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04b1ad766225762f35842dd6302e6221" id="r_a04b1ad766225762f35842dd6302e6221"><td class="memItemLeft" align="right" valign="top"><a id="a04b1ad766225762f35842dd6302e6221" name="a04b1ad766225762f35842dd6302e6221"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_SD_CARD_API</b>&#160;&#160;&#160;&quot;sd_card_api&quot;</td></tr>
-<tr class="memdesc:a04b1ad766225762f35842dd6302e6221"><td class="mdescLeft">&#160;</td><td class="mdescRight">SD Card API სერვისის ტიპი SD ბარათის წვდომის მოდულებისთვის <br /></td></tr>
-<tr class="separator:a04b1ad766225762f35842dd6302e6221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8193862cae825889cf77eb445a6f6a9b" id="r_a8193862cae825889cf77eb445a6f6a9b"><td class="memItemLeft" align="right" valign="top"><a id="a8193862cae825889cf77eb445a6f6a9b" name="a8193862cae825889cf77eb445a6f6a9b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_TEMPERATURE_API</b>&#160;&#160;&#160;&quot;temperature_api&quot;</td></tr>
-<tr class="memdesc:a8193862cae825889cf77eb445a6f6a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temperature sensor API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a8193862cae825889cf77eb445a6f6a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a268dca886e177eeabf9db81f4ea09db7" id="r_a268dca886e177eeabf9db81f4ea09db7"><td class="memItemLeft" align="right" valign="top"><a id="a268dca886e177eeabf9db81f4ea09db7" name="a268dca886e177eeabf9db81f4ea09db7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_HUMIDITY_API</b>&#160;&#160;&#160;&quot;humidity_api&quot;</td></tr>
-<tr class="memdesc:a268dca886e177eeabf9db81f4ea09db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Humidity sensor API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a268dca886e177eeabf9db81f4ea09db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa28753eeab0c8665a183b1c3113be837" id="r_aa28753eeab0c8665a183b1c3113be837"><td class="memItemLeft" align="right" valign="top"><a id="aa28753eeab0c8665a183b1c3113be837" name="aa28753eeab0c8665a183b1c3113be837"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_PRESSURE_API</b>&#160;&#160;&#160;&quot;pressure_api&quot;</td></tr>
-<tr class="memdesc:aa28753eeab0c8665a183b1c3113be837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pressure sensor API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:aa28753eeab0c8665a183b1c3113be837"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d4e372a2c9346141cd10997857faedf" id="r_a7d4e372a2c9346141cd10997857faedf"><td class="memItemLeft" align="right" valign="top"><a id="a7d4e372a2c9346141cd10997857faedf" name="a7d4e372a2c9346141cd10997857faedf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_MOTION_API</b>&#160;&#160;&#160;&quot;motion_api&quot;</td></tr>
-<tr class="memdesc:a7d4e372a2c9346141cd10997857faedf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motion sensor API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a7d4e372a2c9346141cd10997857faedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6662e7f3f7cce57c576573596037aca" id="r_ac6662e7f3f7cce57c576573596037aca"><td class="memItemLeft" align="right" valign="top"><a id="ac6662e7f3f7cce57c576573596037aca" name="ac6662e7f3f7cce57c576573596037aca"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_DHT22_API</b>&#160;&#160;&#160;&quot;dht22_api&quot;</td></tr>
-<tr class="memdesc:ac6662e7f3f7cce57c576573596037aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">DHT22 sensor API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:ac6662e7f3f7cce57c576573596037aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca2ca8de5cd040ab3eecb3e33789e3e5" id="r_aca2ca8de5cd040ab3eecb3e33789e3e5"><td class="memItemLeft" align="right" valign="top"><a id="aca2ca8de5cd040ab3eecb3e33789e3e5" name="aca2ca8de5cd040ab3eecb3e33789e3e5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_RELAY_API</b>&#160;&#160;&#160;&quot;relay_api&quot;</td></tr>
-<tr class="memdesc:aca2ca8de5cd040ab3eecb3e33789e3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relay control API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:aca2ca8de5cd040ab3eecb3e33789e3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc8ec9c1d66440bbd92927f98fe9be53" id="r_afc8ec9c1d66440bbd92927f98fe9be53"><td class="memItemLeft" align="right" valign="top"><a id="afc8ec9c1d66440bbd92927f98fe9be53" name="afc8ec9c1d66440bbd92927f98fe9be53"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_PWM_API</b>&#160;&#160;&#160;&quot;pwm_api&quot;</td></tr>
-<tr class="memdesc:afc8ec9c1d66440bbd92927f98fe9be53"><td class="mdescLeft">&#160;</td><td class="mdescRight">PWM control API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:afc8ec9c1d66440bbd92927f98fe9be53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae121d273b2febd0bde82bfdf067661f9" id="r_ae121d273b2febd0bde82bfdf067661f9"><td class="memItemLeft" align="right" valign="top"><a id="ae121d273b2febd0bde82bfdf067661f9" name="ae121d273b2febd0bde82bfdf067661f9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_SERVO_API</b>&#160;&#160;&#160;&quot;servo_api&quot;</td></tr>
-<tr class="memdesc:ae121d273b2febd0bde82bfdf067661f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Servo motor API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:ae121d273b2febd0bde82bfdf067661f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7449457188547f1a5ea883f9a0aceb1" id="r_ac7449457188547f1a5ea883f9a0aceb1"><td class="memItemLeft" align="right" valign="top"><a id="ac7449457188547f1a5ea883f9a0aceb1" name="ac7449457188547f1a5ea883f9a0aceb1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_MOTOR_API</b>&#160;&#160;&#160;&quot;motor_api&quot;</td></tr>
-<tr class="memdesc:ac7449457188547f1a5ea883f9a0aceb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motor control API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:ac7449457188547f1a5ea883f9a0aceb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafcd9c7af3d2346623df1cd6cd72e805" id="r_aafcd9c7af3d2346623df1cd6cd72e805"><td class="memItemLeft" align="right" valign="top"><a id="aafcd9c7af3d2346623df1cd6cd72e805" name="aafcd9c7af3d2346623df1cd6cd72e805"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_LOGGER_API</b>&#160;&#160;&#160;&quot;logger_api&quot;</td></tr>
-<tr class="memdesc:aafcd9c7af3d2346623df1cd6cd72e805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger API სერვისის ტიპი ლოგირების მოდულებისთვის <br /></td></tr>
-<tr class="separator:aafcd9c7af3d2346623df1cd6cd72e805"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac800ed3fefbe6e61954d94874b50a54c" id="r_ac800ed3fefbe6e61954d94874b50a54c"><td class="memItemLeft" align="right" valign="top"><a id="ac800ed3fefbe6e61954d94874b50a54c" name="ac800ed3fefbe6e61954d94874b50a54c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_CONFIG_API</b>&#160;&#160;&#160;&quot;config_api&quot;</td></tr>
-<tr class="memdesc:ac800ed3fefbe6e61954d94874b50a54c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration API სერვისის ტიპი კონფიგურაციის მართვის მოდულებისთვის <br /></td></tr>
-<tr class="separator:ac800ed3fefbe6e61954d94874b50a54c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a891eaed76a87259eb0756711b2deca47" id="r_a891eaed76a87259eb0756711b2deca47"><td class="memItemLeft" align="right" valign="top"><a id="a891eaed76a87259eb0756711b2deca47" name="a891eaed76a87259eb0756711b2deca47"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_TIMER_API</b>&#160;&#160;&#160;&quot;timer_api&quot;</td></tr>
-<tr class="memdesc:a891eaed76a87259eb0756711b2deca47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer API სერვისის ტიპი ტაიმერის მოდულებისთვის <br /></td></tr>
-<tr class="separator:a891eaed76a87259eb0756711b2deca47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa378ad4975d48a39a2b30d2caa071073" id="r_aa378ad4975d48a39a2b30d2caa071073"><td class="memItemLeft" align="right" valign="top"><a id="aa378ad4975d48a39a2b30d2caa071073" name="aa378ad4975d48a39a2b30d2caa071073"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_WATCHDOG_API</b>&#160;&#160;&#160;&quot;watchdog_api&quot;</td></tr>
-<tr class="memdesc:aa378ad4975d48a39a2b30d2caa071073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watchdog API სერვისის ტიპი watchdog მოდულებისთვის <br /></td></tr>
-<tr class="separator:aa378ad4975d48a39a2b30d2caa071073"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fc5e7e7404badb3dc4ed5d38c1e39c2" id="r_a3fc5e7e7404badb3dc4ed5d38c1e39c2"><td class="memItemLeft" align="right" valign="top"><a id="a3fc5e7e7404badb3dc4ed5d38c1e39c2" name="a3fc5e7e7404badb3dc4ed5d38c1e39c2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_OTA_API</b>&#160;&#160;&#160;&quot;ota_api&quot;</td></tr>
-<tr class="memdesc:a3fc5e7e7404badb3dc4ed5d38c1e39c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">OTA (Over-The-Air) update API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a3fc5e7e7404badb3dc4ed5d38c1e39c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d58ca88e42f3be4634617b185bd4daf" id="r_a1d58ca88e42f3be4634617b185bd4daf"><td class="memItemLeft" align="right" valign="top"><a id="a1d58ca88e42f3be4634617b185bd4daf" name="a1d58ca88e42f3be4634617b185bd4daf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_VERSION_API</b>&#160;&#160;&#160;&quot;version_api&quot;</td></tr>
-<tr class="memdesc:a1d58ca88e42f3be4634617b185bd4daf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version management API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a1d58ca88e42f3be4634617b185bd4daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10fb07192770fb197e75b370fe4267f2" id="r_a10fb07192770fb197e75b370fe4267f2"><td class="memItemLeft" align="right" valign="top"><a id="a10fb07192770fb197e75b370fe4267f2" name="a10fb07192770fb197e75b370fe4267f2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_HEALTH_API</b>&#160;&#160;&#160;&quot;health_api&quot;</td></tr>
-<tr class="memdesc:a10fb07192770fb197e75b370fe4267f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Health monitoring API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a10fb07192770fb197e75b370fe4267f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04a811ce117527e6ddc656ef40a69fa8" id="r_a04a811ce117527e6ddc656ef40a69fa8"><td class="memItemLeft" align="right" valign="top"><a id="a04a811ce117527e6ddc656ef40a69fa8" name="a04a811ce117527e6ddc656ef40a69fa8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_CRYPTO_API</b>&#160;&#160;&#160;&quot;crypto_api&quot;</td></tr>
-<tr class="memdesc:a04a811ce117527e6ddc656ef40a69fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cryptography API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a04a811ce117527e6ddc656ef40a69fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c001a050487447a9054480aeac0d5bc" id="r_a0c001a050487447a9054480aeac0d5bc"><td class="memItemLeft" align="right" valign="top"><a id="a0c001a050487447a9054480aeac0d5bc" name="a0c001a050487447a9054480aeac0d5bc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_AUTH_API</b>&#160;&#160;&#160;&quot;auth_api&quot;</td></tr>
-<tr class="memdesc:a0c001a050487447a9054480aeac0d5bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authentication API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:a0c001a050487447a9054480aeac0d5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaf82a694e0a1588d991e7ff294c527b" id="r_aeaf82a694e0a1588d991e7ff294c527b"><td class="memItemLeft" align="right" valign="top"><a id="aeaf82a694e0a1588d991e7ff294c527b" name="aeaf82a694e0a1588d991e7ff294c527b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_TLS_API</b>&#160;&#160;&#160;&quot;tls_api&quot;</td></tr>
-<tr class="memdesc:aeaf82a694e0a1588d991e7ff294c527b"><td class="mdescLeft">&#160;</td><td class="mdescRight">TLS/SSL API სერვისის ტიპი <br /></td></tr>
-<tr class="separator:aeaf82a694e0a1588d991e7ff294c527b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adff106067963269b84ac9d577c749024" id="r_adff106067963269b84ac9d577c749024"><td class="memItemLeft" align="right" valign="top"><a id="adff106067963269b84ac9d577c749024" name="adff106067963269b84ac9d577c749024"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_AUDIO_API</b>&#160;&#160;&#160;&quot;audio_api&quot;</td></tr>
-<tr class="memdesc:adff106067963269b84ac9d577c749024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio processing API service type. <br /></td></tr>
-<tr class="separator:adff106067963269b84ac9d577c749024"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a593629b64d8a36597c12a553f700c45c" id="r_a593629b64d8a36597c12a553f700c45c"><td class="memItemLeft" align="right" valign="top"><a id="a593629b64d8a36597c12a553f700c45c" name="a593629b64d8a36597c12a553f700c45c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_SPEAKER_API</b>&#160;&#160;&#160;&quot;speaker_api&quot;</td></tr>
-<tr class="memdesc:a593629b64d8a36597c12a553f700c45c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speaker control API service type. <br /></td></tr>
-<tr class="separator:a593629b64d8a36597c12a553f700c45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e97936cea2f2c447a5d657f79d9e29" id="r_a30e97936cea2f2c447a5d657f79d9e29"><td class="memItemLeft" align="right" valign="top"><a id="a30e97936cea2f2c447a5d657f79d9e29" name="a30e97936cea2f2c447a5d657f79d9e29"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_MICROPHONE_API</b>&#160;&#160;&#160;&quot;microphone_api&quot;</td></tr>
-<tr class="memdesc:a30e97936cea2f2c447a5d657f79d9e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Microphone API service type. <br /></td></tr>
-<tr class="separator:a30e97936cea2f2c447a5d657f79d9e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec824798f980df6aee73a9ba2ad1b253" id="r_aec824798f980df6aee73a9ba2ad1b253"><td class="memItemLeft" align="right" valign="top"><a id="aec824798f980df6aee73a9ba2ad1b253" name="aec824798f980df6aee73a9ba2ad1b253"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_POWER_API</b>&#160;&#160;&#160;&quot;power_api&quot;</td></tr>
-<tr class="memdesc:aec824798f980df6aee73a9ba2ad1b253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power management API service type. <br /></td></tr>
-<tr class="separator:aec824798f980df6aee73a9ba2ad1b253"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87c03f7d81ca198e5d0b5fa293c3a7d3" id="r_a87c03f7d81ca198e5d0b5fa293c3a7d3"><td class="memItemLeft" align="right" valign="top"><a id="a87c03f7d81ca198e5d0b5fa293c3a7d3" name="a87c03f7d81ca198e5d0b5fa293c3a7d3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_BATTERY_API</b>&#160;&#160;&#160;&quot;battery_api&quot;</td></tr>
-<tr class="memdesc:a87c03f7d81ca198e5d0b5fa293c3a7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Battery monitoring API service type. <br /></td></tr>
-<tr class="separator:a87c03f7d81ca198e5d0b5fa293c3a7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a953ee507d3da2e1398c5283e2f598b87" id="r_a953ee507d3da2e1398c5283e2f598b87"><td class="memItemLeft" align="right" valign="top"><a id="a953ee507d3da2e1398c5283e2f598b87" name="a953ee507d3da2e1398c5283e2f598b87"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_CHARGER_API</b>&#160;&#160;&#160;&quot;charger_api&quot;</td></tr>
-<tr class="memdesc:a953ee507d3da2e1398c5283e2f598b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Battery charger API service type. <br /></td></tr>
-<tr class="separator:a953ee507d3da2e1398c5283e2f598b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bf67624a01f71423f4b10b34a23ca55" id="r_a0bf67624a01f71423f4b10b34a23ca55"><td class="memItemLeft" align="right" valign="top"><a id="a0bf67624a01f71423f4b10b34a23ca55" name="a0bf67624a01f71423f4b10b34a23ca55"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_GENERIC_API</b>&#160;&#160;&#160;&quot;generic_api&quot;</td></tr>
-<tr class="memdesc:a0bf67624a01f71423f4b10b34a23ca55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API service type for custom implementations. <br /></td></tr>
-<tr class="separator:a0bf67624a01f71423f4b10b34a23ca55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21ac899c0cfe3a5a7d0544fca61d6393" id="r_a21ac899c0cfe3a5a7d0544fca61d6393"><td class="memItemLeft" align="right" valign="top"><a id="a21ac899c0cfe3a5a7d0544fca61d6393" name="a21ac899c0cfe3a5a7d0544fca61d6393"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SERVICE_TYPE_CUSTOM_API</b>&#160;&#160;&#160;&quot;custom_api&quot;</td></tr>
-<tr class="memdesc:a21ac899c0cfe3a5a7d0544fca61d6393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom API service type for specialized modules. <br /></td></tr>
-<tr class="separator:a21ac899c0cfe3a5a7d0544fca61d6393"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af882e15e17ca5d2f003b4b1005832bcb" id="r_af882e15e17ca5d2f003b4b1005832bcb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__types_8h.html#af882e15e17ca5d2f003b4b1005832bcb">IS_VALID_SERVICE_TYPE</a>(target_service_type)</td></tr>
-<tr class="memdesc:af882e15e17ca5d2f003b4b1005832bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate if a service type is defined in this header.  <br /></td></tr>
-<tr class="separator:af882e15e17ca5d2f003b4b1005832bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63edf34a6dcc106abc1fb8ba34b3ab79" id="r_a63edf34a6dcc106abc1fb8ba34b3ab79"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__types_8h.html#a63edf34a6dcc106abc1fb8ba34b3ab79">GET_SERVICE_TYPE_CATEGORY</a>(input_service_type)&#160;&#160;&#160;  _get_service_category_internal(input_service_type)</td></tr>
-<tr class="memdesc:a63edf34a6dcc106abc1fb8ba34b3ab79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get service type category from service type string.  <br /></td></tr>
-<tr class="separator:a63edf34a6dcc106abc1fb8ba34b3ab79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a104486349cec8e8ee0ecf2d1427d1076" id="r_a104486349cec8e8ee0ecf2d1427d1076"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__types_8h.html#a104486349cec8e8ee0ecf2d1427d1076">IS_VALID_SERVICE_TYPE</a>(type)&#160;&#160;&#160;((type) &gt; SERVICE_TYPE_UNKNOWN &amp;&amp; (type) &lt; SERVICE_TYPE_MAX)</td></tr>
+<tr class="memdesc:a104486349cec8e8ee0ecf2d1427d1076"><td class="mdescLeft">&#160;</td><td class="mdescRight">ამოწმებს, არის თუ არა სერვისის ტიპი ვალიდური.  <br /></td></tr>
+<tr class="separator:a104486349cec8e8ee0ecf2d1427d1076"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a2147d7b6aec6913e52ceb12330fc219c" id="r_a2147d7b6aec6913e52ceb12330fc219c"><td class="memItemLeft" align="right" valign="top"><a id="a2147d7b6aec6913e52ceb12330fc219c" name="a2147d7b6aec6913e52ceb12330fc219c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> { <br />
+&#160;&#160;<b>SERVICE_TYPE_UNKNOWN</b> = 0
+, <b>SERVICE_TYPE_DISPLAY_API</b>
+, <b>SERVICE_TYPE_I2C_BUS_API</b>
+, <b>SERVICE_TYPE_SPI_BUS_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_UART_API</b>
+, <b>SERVICE_TYPE_WIFI_API</b>
+, <b>SERVICE_TYPE_MQTT_API</b>
+, <b>SERVICE_TYPE_HTTP_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_BLE_API</b>
+, <b>SERVICE_TYPE_FLASH_API</b>
+, <b>SERVICE_TYPE_NVRAM_API</b>
+, <b>SERVICE_TYPE_SD_CARD_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_TEMPERATURE_API</b>
+, <b>SERVICE_TYPE_HUMIDITY_API</b>
+, <b>SERVICE_TYPE_PRESSURE_API</b>
+, <b>SERVICE_TYPE_MOTION_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_DHT22_API</b>
+, <b>SERVICE_TYPE_RELAY_API</b>
+, <b>SERVICE_TYPE_PWM_API</b>
+, <b>SERVICE_TYPE_SERVO_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_MOTOR_API</b>
+, <b>SERVICE_TYPE_LOGGER_API</b>
+, <b>SERVICE_TYPE_CONFIG_API</b>
+, <b>SERVICE_TYPE_TIMER_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_WATCHDOG_API</b>
+, <b>SERVICE_TYPE_OTA_API</b>
+, <b>SERVICE_TYPE_VERSION_API</b>
+, <b>SERVICE_TYPE_HEALTH_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_CRYPTO_API</b>
+, <b>SERVICE_TYPE_AUTH_API</b>
+, <b>SERVICE_TYPE_TLS_API</b>
+, <b>SERVICE_TYPE_AUDIO_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_SPEAKER_API</b>
+, <b>SERVICE_TYPE_MICROPHONE_API</b>
+, <b>SERVICE_TYPE_POWER_API</b>
+, <b>SERVICE_TYPE_BATTERY_API</b>
+, <br />
+&#160;&#160;<b>SERVICE_TYPE_CHARGER_API</b>
+, <b>SERVICE_TYPE_GENERIC_API</b>
+, <b>SERVICE_TYPE_CUSTOM_API</b>
+, <b>SERVICE_TYPE_MAX</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a2147d7b6aec6913e52ceb12330fc219c"><td class="mdescLeft">&#160;</td><td class="mdescRight">სერვისის ტიპების ცენტრალიზებული ჩამონათვალი. <br /></td></tr>
+<tr class="separator:a2147d7b6aec6913e52ceb12330fc219c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები </p>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-06-24 </dd></dl>
+<div class="textblock"><p>Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები. </p>
+<dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-06-26 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
-<p>ეს ფაილი შეიცავს ყველა სერვისის ტიპის განსაზღვრებას, რომელიც გამოიყენება Service Locator-ში. ყველა მოდულმა უნდა გამოიყენოს მხოლოდ აქ განსაზღვრული სტანდარტიზებული ტიპები. ფორმატი: SERVICE_TYPE_{CATEGORY}_{API_TYPE} მაგალითები: SERVICE_TYPE_DISPLAY_API, SERVICE_TYPE_I2C_BUS_API</p>
-<dl class="section note"><dt>Note</dt><dd>ყველა მოდულმა უნდა გამოიყენოს ეს სტანდარტიზებული ტიპები </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>არასდროს განსაზღვროთ სერვისის ტიპები ამ ფაილის გარეთ </dd></dl>
+<p>ეს ფაილი განსაზღვრავს ყველა სერვისის ტიპს <code>enum</code>-ის სახით, რაც უზრუნველყოფს compile-time ტიპების შემოწმებას და გამორიცხავს "magic string"-ებს. Service Locator-ში რეგისტრაციისას, მოდულებმა უნდა გამოიყენონ მხოლოდ აქ განსაზღვრული ტიპები. ასევე, მოცემულია დამხმარე ფუნქცია <code>enum</code>-ის სტრიქონად გადასაყვანად (დიბაგინგისთვის). </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a63edf34a6dcc106abc1fb8ba34b3ab79" name="a63edf34a6dcc106abc1fb8ba34b3ab79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63edf34a6dcc106abc1fb8ba34b3ab79">&#9670;&#160;</a></span>GET_SERVICE_TYPE_CATEGORY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define GET_SERVICE_TYPE_CATEGORY</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">input_service_type</td><td>)</td>
-          <td>&#160;&#160;&#160;  _get_service_category_internal(input_service_type)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get service type category from service type string. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input_service_type</td><td>Service type string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Category string or "unknown" if not recognized </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This is a helper macro for debugging and logging </dd></dl>
-
-</div>
-</div>
-<a id="af882e15e17ca5d2f003b4b1005832bcb" name="af882e15e17ca5d2f003b4b1005832bcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af882e15e17ca5d2f003b4b1005832bcb">&#9670;&#160;</a></span>IS_VALID_SERVICE_TYPE</h2>
+<a id="a104486349cec8e8ee0ecf2d1427d1076" name="a104486349cec8e8ee0ecf2d1427d1076"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a104486349cec8e8ee0ecf2d1427d1076">&#9670;&#160;</a></span>IS_VALID_SERVICE_TYPE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,22 +197,20 @@ Macros</h2></td></tr>
           <td class="memname">#define IS_VALID_SERVICE_TYPE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">target_service_type</td><td>)</td>
-          <td></td>
+          <td class="paramname">type</td><td>)</td>
+          <td>&#160;&#160;&#160;((type) &gt; SERVICE_TYPE_UNKNOWN &amp;&amp; (type) &lt; SERVICE_TYPE_MAX)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Validate if a service type is defined in this header. </p>
+<p>ამოწმებს, არის თუ არა სერვისის ტიპი ვალიდური. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target_service_type</td><td>Service type string to validate </td></tr>
+    <tr><td class="paramname">type</td><td>შესამოწმებელი სერვისის ტიპი. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if service type is valid, false otherwise </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This is a compile-time validation helper </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>This macro performs string comparison at runtime </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true თუ ტიპი ვალიდურია, false წინააღმდეგ შემთხვევაში. </dd></dl>
 
 </div>
 </div>

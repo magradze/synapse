@@ -1,6 +1,6 @@
 var event__bus_8h =
 [
-    [ "event_bus_init", "event__bus_8h.html#a7fa7b2c2cf299d9df23a081f13f68e76", null ],
-    [ "event_bus_post", "event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340", null ],
-    [ "event_bus_subscribe", "event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504", null ]
+    [ "fmw_event_bus_init", "event__bus_8h.html#a3c30f68a850ad88e75dcb5eca6294423", null ],
+    [ "fmw_event_bus_post", "event__bus_8h.html#ad9e2b0ff452a05894f033f5d98c3cacb", null ],
+    [ "fmw_event_bus_subscribe", "event__bus_8h.html#a0eb8293ba1a9d61c01e48787b621c968", null ]
 ];

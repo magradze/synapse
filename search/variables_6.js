@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['init_0',['init',['../structbase__module__interface__t.html#a9cc9bb4fb780924aec3c7d7b87abd345',1,'base_module_interface_t']]],
-  ['init_5flevel_1',['init_level',['../structmodule__t.html#a926df3689e71807c4aed10816e919e1c',1,'module_t']]]
+  ['get_5fstatus_0',['get_status',['../structmodule__t.html#ad91ac1dc0334cbe050b7d3babcf6c639',1,'module_t']]]
 ];

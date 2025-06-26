@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
   <div class="headertitle"><div class="title">სისტემის კონფიგურაცია (System Configuration)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1395"></a> </p>
-<h1><a class="anchor" id="autotoc_md1396"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1537"></a> </p>
+<h1><a class="anchor" id="autotoc_md1538"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო დაგეხმარებათ სწორად და სტანდარტულად აღწეროთ და მართოთ სისტემის და მოდულების კონფიგურაცია Synapse ESP Framework-ში.</p>
-<h1><a class="anchor" id="autotoc_md1397"></a>
+<h1><a class="anchor" id="autotoc_md1539"></a>
 1. system_config.json-ის როლი</h1>
 <ul>
 <li>მთავარი კონფიგურაციის ფაილი, სადაც აღწერილია ყველა მოდული, მათი პარამეტრები და გლობალური პარამეტრები</li>
 <li>გამოიყენება როგორც ბილდის, ასევე runtime-ის დროს</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1398"></a>
+<h1><a class="anchor" id="autotoc_md1540"></a>
 2. სტრუქტურა და მაგალითი</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;firmware&quot;: {</div>
@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <div class="line">        }</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1399"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1541"></a>
 3. მოდულის დამატება და პარამეტრების აღწერა</h1>
 <ul>
 <li>თითოეული მოდული აღწერილია modules მასივში</li>
@@ -149,24 +149,23 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1400"></a>
+<h1><a class="anchor" id="autotoc_md1542"></a>
 4. გლობალური პარამეტრების გამოყენება</h1>
 <ul>
 <li>გამოიყენეთ <code>global_config</code> სექცია საერთო მნიშვნელობებისთვის</li>
 <li>წვდომა ხდება fmw_config_get_* API-ებით</li>
 <li>მაგალითი: <div class="fragment"><div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
-<div class="line"><a class="code hl_function" href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a>(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
-<div class="ttc" id="aconfig__manager_8h_html_ad83c96bb47fc292873d5d630e44e2fd6"><div class="ttname"><a href="config__manager_8h.html#ad83c96bb47fc292873d5d630e44e2fd6">fmw_config_get_string</a></div><div class="ttdeci">esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_size)</div><div class="ttdoc">კითხულობს სტრიქონის ტიპის პარამეტრს NVS მეხსიერებიდან.</div></div>
+<div class="line">fmw_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1401"></a>
+<h1><a class="anchor" id="autotoc_md1543"></a>
 5. კონფიგურაციის ვალიდაცია და შეცდომების თავიდან აცილება</h1>
 <ul>
 <li>ყველა მოდული ვალიდაციას გადის parse_module_config ფუნქციაში</li>
 <li>არასწორი ან არარსებული მნიშვნელობების შემთხვევაში გამოიყენება default მნიშვნელობები</li>
 <li>ყველა შეცდომა ლოგირდება</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1402"></a>
+<h1><a class="anchor" id="autotoc_md1544"></a>
 6. Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ დესკრიპტიული და კონტექსტური სახელები</li>

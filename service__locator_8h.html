@@ -100,14 +100,29 @@ $(document).ready(function(){initNavTree('service__locator_8h.html',''); initRes
 <p>Framework-ის სერვის ლოკატორის საჯარო API.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;esp_err.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="service__types_8h_source.html">service_types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for service_locator.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="service__locator_8h__incl.png" border="0" usemap="#acomponents_2core_2include_2service__locator_8h" alt=""/></div>
 <map name="acomponents_2core_2include_2service__locator_8h" id="acomponents_2core_2include_2service__locator_8h">
-<area shape="rect" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="5,5,191,45"/>
-<area shape="rect" title=" " alt="" coords="57,93,139,119"/>
-<area shape="poly" title=" " alt="" coords="101,46,101,79,95,79,95,46"/>
+<area shape="rect" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="16,5,201,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,87,119"/>
+<area shape="poly" title=" " alt="" coords="96,47,66,84,62,81,91,44"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="111,93,235,119"/>
+<area shape="poly" title=" " alt="" coords="126,44,156,81,152,84,122,47"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="service__locator_8h__dep__incl.png" border="0" usemap="#acomponents_2core_2include_2service__locator_8hdep" alt=""/></div>
+<map name="acomponents_2core_2include_2service__locator_8hdep" id="acomponents_2core_2include_2service__locator_8hdep">
+<area shape="rect" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="111,5,296,45"/>
+<area shape="rect" href="service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="5,93,191,133"/>
+<area shape="poly" title=" " alt="" coords="171,56,123,95,120,91,168,52"/>
+<area shape="rect" href="system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="215,93,402,133"/>
+<area shape="poly" title=" " alt="" coords="239,52,287,91,284,95,235,56"/>
 </map>
 </div>
 </div>
@@ -124,15 +139,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a7d1cfccf7dc45c1e15f5c9423ea1e893" id="r_a7d1cfccf7dc45c1e15f5c9423ea1e893"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a7d1cfccf7dc45c1e15f5c9423ea1e893">fmw_service_locator_init</a> (void)</td></tr>
 <tr class="memdesc:a7d1cfccf7dc45c1e15f5c9423ea1e893"><td class="mdescLeft">&#160;</td><td class="mdescRight">სერვის ლოკატორის ინიციალიზაცია  <br /></td></tr>
 <tr class="separator:a7d1cfccf7dc45c1e15f5c9423ea1e893"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fb41c5c2898bdc01a39612df4014385" id="r_a4fb41c5c2898bdc01a39612df4014385"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385">fmw_service_register</a> (const char *service_name, const char *service_type, <a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_handle)</td></tr>
-<tr class="memdesc:a4fb41c5c2898bdc01a39612df4014385"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით  <br /></td></tr>
-<tr class="separator:a4fb41c5c2898bdc01a39612df4014385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac224eef59c2b5a418e8d19f89d895ba1" id="r_ac224eef59c2b5a418e8d19f89d895ba1"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a> (const char *service_name, <a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> service_type, <a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_handle)</td></tr>
+<tr class="memdesc:ac224eef59c2b5a418e8d19f89d895ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.  <br /></td></tr>
+<tr class="separator:ac224eef59c2b5a418e8d19f89d895ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b2b027ce8a0dfecde7324ecf6e63bc" id="r_aa1b2b027ce8a0dfecde7324ecf6e63bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a> (const char *service_name)</td></tr>
 <tr class="memdesc:aa1b2b027ce8a0dfecde7324ecf6e63bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს რეგისტრირებულ სერვისს სახელით  <br /></td></tr>
 <tr class="separator:aa1b2b027ce8a0dfecde7324ecf6e63bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac03122fea3ba90503cb6c05c25da75fb" id="r_ac03122fea3ba90503cb6c05c25da75fb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#ac03122fea3ba90503cb6c05c25da75fb">fmw_service_get_type</a> (const char *service_name)</td></tr>
-<tr class="memdesc:ac03122fea3ba90503cb6c05c25da75fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს სერვისის ტიპს სახელით  <br /></td></tr>
-<tr class="separator:ac03122fea3ba90503cb6c05c25da75fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40e29f1bbbc7d7de4a7ac6b6c5a28244" id="r_a40e29f1bbbc7d7de4a7ac6b6c5a28244"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a> (const char *service_name, <a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> *out_service_type)</td></tr>
+<tr class="memdesc:a40e29f1bbbc7d7de4a7ac6b6c5a28244"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს სერვისის ტიპს <code>enum</code> სახით.  <br /></td></tr>
+<tr class="separator:a40e29f1bbbc7d7de4a7ac6b6c5a28244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cc0e2ed1685502b1bbddd2848b35685" id="r_a5cc0e2ed1685502b1bbddd2848b35685"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a5cc0e2ed1685502b1bbddd2848b35685">fmw_service_lookup_by_type</a> (const char *service_type)</td></tr>
 <tr class="memdesc:a5cc0e2ed1685502b1bbddd2848b35685"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს  <br /></td></tr>
 <tr class="separator:a5cc0e2ed1685502b1bbddd2848b35685"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,34 +211,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac03122fea3ba90503cb6c05c25da75fb" name="ac03122fea3ba90503cb6c05c25da75fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac03122fea3ba90503cb6c05c25da75fb">&#9670;&#160;</a></span>fmw_service_get_type()</h2>
+<a id="a40e29f1bbbc7d7de4a7ac6b6c5a28244" name="a40e29f1bbbc7d7de4a7ac6b6c5a28244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40e29f1bbbc7d7de4a7ac6b6c5a28244">&#9670;&#160;</a></span>fmw_service_get_type()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char * fmw_service_get_type </td>
+          <td class="memname">esp_err_t fmw_service_get_type </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>service_name</em></td><td>)</td>
+          <td class="paramname"><em>service_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> *&#160;</td>
+          <td class="paramname"><em>out_service_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>აბრუნებს სერვისის ტიპს სახელით </p>
+<p>აბრუნებს სერვისის ტიპს <code>enum</code> სახით. </p>
+<p>ეძებს სერვისს მისი სახელით და აბრუნებს მის <code>fmw_service_type_t</code> ტიპს. ეს საშუალებას გაძლევთ, პროგრამულად შეამოწმოთ, თუ რა ტიპის სერვისთან გაქვთ საქმე.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>მოსაძებნი სერვისის სახელი</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>მოსაძებნი სერვისის სახელი. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_service_type</td><td>მაჩვენებელი, სადაც ჩაიწერება ნაპოვნი სერვისის ტიპი.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const char* </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">სერვისის</td><td>ტიპის სტრინგი თუ სერვისი მოიძებნა </td></tr>
-    <tr><td class="paramname">NULL</td><td>თუ ასეთი სახელით სერვისი არ არის რეგისტრირებული </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>თუ სერვისი მოიძებნა და ტიპი წარმატებით იქნა მიღებული. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>service_name</code> ან <code>out_service_type</code> არის NULL. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>თუ მითითებული სახელით სერვისი ვერ მოიძებნა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_TIMEOUT</td><td>თუ mutex-ის დაკავება ვერ მოხერხდა. </td></tr>
   </table>
   </dd>
 </dl>
@@ -257,6 +286,16 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="service__locator_8h_a7d1cfccf7dc45c1e15f5c9423ea1e893_icgraph.png" border="0" usemap="#aservice__locator_8h_a7d1cfccf7dc45c1e15f5c9423ea1e893_icgraph" alt=""/></div>
+<map name="aservice__locator_8h_a7d1cfccf7dc45c1e15f5c9423ea1e893_icgraph" id="aservice__locator_8h_a7d1cfccf7dc45c1e15f5c9423ea1e893_icgraph">
+<area shape="rect" title="სერვის ლოკატორის ინიციალიზაცია" alt="" coords="188,5,373,31"/>
+<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
+<area shape="poly" title=" " alt="" coords="174,21,141,21,141,15,174,15"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -295,8 +334,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4fb41c5c2898bdc01a39612df4014385" name="a4fb41c5c2898bdc01a39612df4014385"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fb41c5c2898bdc01a39612df4014385">&#9670;&#160;</a></span>fmw_service_register()</h2>
+<a id="ac224eef59c2b5a418e8d19f89d895ba1" name="ac224eef59c2b5a418e8d19f89d895ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac224eef59c2b5a418e8d19f89d895ba1">&#9670;&#160;</a></span>fmw_service_register()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,7 +349,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype"><a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a>&#160;</td>
           <td class="paramname"><em>service_type</em>, </td>
         </tr>
         <tr>
@@ -327,22 +366,24 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით </p>
+<p>ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით. </p>
+<p>ეს ფუნქცია ამატებს სერვისს ცენტრალურ რეესტრში. რეგისტრაცია არ განხორციელდება, თუ ამ სახელით სერვისი უკვე არსებობს. ოპერაცია ნაკად-უსაფრთხოა (thread-safe).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>სერვისის უნიკალური სახელი (მაგ: მოდულის instance_name) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_type</td><td>სერვისის ტიპი (მაგ: "display_api", "sensor_api", "actuator_api") </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_handle</td><td>მაჩვენებელი სერვისის API სტრუქტურაზე</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>სერვისის უნიკალური სახელი (მაგ: მოდულის <code>instance_name</code>). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_type</td><td>სერვისის ტიპი <code>fmw_service_type_t</code> enum-იდან (მაგ: <code>SERVICE_TYPE_DISPLAY_API</code>). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_handle</td><td>მაჩვენებელი სერვისის API სტრუქტურაზე.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>სერვისი წარმატებით დარეგისტრირდა </td></tr>
-    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ service_name, service_type ან service_handle არის NULL </td></tr>
-    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>თუ მეხსიერება ვერ გამოიყო ახალი სერვისისთვის </td></tr>
-    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>სერვისი წარმატებით დარეგისტრირდა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>service_name</code>, <code>service_handle</code> არის NULL, ან <code>service_type</code> არავალიდურია. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>თუ მეხსიერება ვერ გამოიყო ახალი სერვისისთვის. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია. </td></tr>
+    <tr><td class="paramname">ESP_ERR_TIMEOUT</td><td>თუ mutex-ის დაკავება ვერ მოხერხდა. </td></tr>
   </table>
   </dd>
 </dl>

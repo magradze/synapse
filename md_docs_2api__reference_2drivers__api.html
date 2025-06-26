@@ -93,65 +93,65 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2drivers__api.
   <div class="headertitle"><div class="title">Synapse Drivers Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md151"></a> </p>
-<h1><a class="anchor" id="autotoc_md152"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md178"></a> </p>
+<h1><a class="anchor" id="autotoc_md179"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის დრაივერების (drivers) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md154"></a>
+<h1><a class="anchor" id="autotoc_md181"></a>
 I2C Bus Driver API</h1>
-<h2><a class="anchor" id="autotoc_md155"></a>
+<h2><a class="anchor" id="autotoc_md182"></a>
 module_t *i2c_bus_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი I2C Bus მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md156"></a>
+<h2><a class="anchor" id="autotoc_md183"></a>
 esp_err_t i2c_bus_init(i2c_bus_handle_t *i2c_bus_handle, const i2c_bus_config_t *config);</h2>
 <ul>
 <li>ინიციალიზაციას უკეთებს I2C ავტობუსს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md157"></a>
+<h2><a class="anchor" id="autotoc_md184"></a>
 esp_err_t i2c_bus_read(i2c_bus_handle_t *i2c_bus_handle, uint8_t device_address, uint8_t *data, size_t data_length);</h2>
 <ul>
 <li>კითხულობს მონაცემებს I2C მოწყობილობიდან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md158"></a>
+<h2><a class="anchor" id="autotoc_md185"></a>
 esp_err_t i2c_bus_write(i2c_bus_handle_t *i2c_bus_handle, uint8_t device_address, const uint8_t *data, size_t data_length);</h2>
 <ul>
 <li>წერს მონაცემებს I2C მოწყობილობაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md159"></a>
+<h2><a class="anchor" id="autotoc_md186"></a>
 esp_err_t i2c_bus_scan(i2c_bus_handle_t *i2c_bus_handle);</h2>
 <ul>
 <li>ასკანერებს ავტობუსზე დაკავშირებულ მოწყობილობებს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md161"></a>
+<h1><a class="anchor" id="autotoc_md188"></a>
 SPI Bus Driver API</h1>
-<h2><a class="anchor" id="autotoc_md162"></a>
+<h2><a class="anchor" id="autotoc_md189"></a>
 module_t *spi_bus_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი SPI Bus მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md163"></a>
+<h2><a class="anchor" id="autotoc_md190"></a>
 esp_err_t spi_bus_init(spi_bus_handle_t *spi_bus_handle, const spi_bus_config_t *config);</h2>
 <ul>
 <li>ინიციალიზაციას უკეთებს SPI ავტობუსს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md164"></a>
+<h2><a class="anchor" id="autotoc_md191"></a>
 esp_err_t spi_bus_transfer(spi_bus_handle_t *spi_bus_handle, const uint8_t *tx_data, uint8_t *rx_data, size_t data_length);</h2>
 <ul>
 <li>ასრულებს SPI გადაცემას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md166"></a>
+<h1><a class="anchor" id="autotoc_md193"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md168"></a>
+<h1><a class="anchor" id="autotoc_md195"></a>
 მაგალითები</h1>
 <p><b>I2C Read:</b> </p><div class="fragment"><div class="line">i2c_bus_read(i2c_bus_handle, 0x3C, data, data_length);</div>
 </div><!-- fragment --><p><b>SPI Transfer:</b> </p><div class="fragment"><div class="line">spi_bus_transfer(spi_bus_handle, tx_data, rx_data, data_length);</div>

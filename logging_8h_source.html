@@ -99,31 +99,17 @@ $(document).ready(function(){initNavTree('logging_8h_source.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 <a href="logging_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifndef LOGGING_H</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define LOGGING_H</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifndef FMW_LOGGING_H</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define FMW_LOGGING_H</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00037" data-start="" data-end="">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">   37</a></span><span class="preprocessor">#define DEFINE_COMPONENT_TAG(component_name) \</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">  static const char *TAG __attribute__((unused)) = component_name</span></div>
+<div class="foldopen" id="foldopen00041" data-start="" data-end="">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">   41</a></span><span class="preprocessor">#define DEFINE_COMPONENT_TAG(component_name) \</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">  static const char *TAG = component_name</span></div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#ga2e71c0b8abd35311bf60bf1c7fba0000">   48</a></span><span class="preprocessor">#define TAG_EVENT_BUS &quot;EVENT_BUS&quot;</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#ga9669b4172743fc734b52e78216724ca8">   53</a></span><span class="preprocessor">#define TAG_CONFIG_MANAGER &quot;CONFIG_MANAGER&quot;</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#ga7ba4af78f9d3ce3e798c1445b6538ae7">   58</a></span><span class="preprocessor">#define TAG_MODULE_REGISTRY &quot;MODULE_REGISTRY&quot;</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#ga84a3cea10966e73c817b6b306c21177e">   63</a></span><span class="preprocessor">#define TAG_SERVICE_LOCATOR &quot;SERVICE_LOCATOR&quot;</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#gae78ebf36d2c5c4fcdf532d123f0deca2">   68</a></span><span class="preprocessor">#define TAG_EVENT_WRAPPER &quot;EVENT_WRAPPER&quot;</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#ga667619e8d88a4a489aaed8e8fbe5ceb0">   73</a></span><span class="preprocessor">#define TAG_SYSTEM_MANAGER &quot;SYSTEM_MANAGER&quot;</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group__ComponentTags.html#gae477c01601c50e7e25d61e74861421bb">   78</a></span><span class="preprocessor">#define TAG_RESOURCE_MANAGER &quot;RESOURCE_MANAGER&quot;</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#endif </span><span class="comment">// LOGGING_H</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif </span><span class="comment">// FMW_LOGGING_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

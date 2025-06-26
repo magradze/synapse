@@ -93,57 +93,57 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2storage__api.
   <div class="headertitle"><div class="title">Synapse Storage Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md329"></a> </p>
-<h1><a class="anchor" id="autotoc_md330"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md377"></a> </p>
+<h1><a class="anchor" id="autotoc_md378"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის მეხსიერების (Storage) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md332"></a>
+<h1><a class="anchor" id="autotoc_md380"></a>
 NVS (Non-Volatile Storage) Module API</h1>
-<h2><a class="anchor" id="autotoc_md333"></a>
+<h2><a class="anchor" id="autotoc_md381"></a>
 module_t *nvs_storage_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი NVS Storage მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md334"></a>
+<h2><a class="anchor" id="autotoc_md382"></a>
 esp_err_t nvs_storage_module_set_string(const char *key, const char *value);</h2>
 <ul>
 <li>ინახავს სტრიქონის მნიშვნელობას NVS-ში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md335"></a>
+<h2><a class="anchor" id="autotoc_md383"></a>
 esp_err_t nvs_storage_module_get_string(const char *key, char *value, size_t size);</h2>
 <ul>
 <li>კითხულობს სტრიქონის მნიშვნელობას NVS-დან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md336"></a>
+<h2><a class="anchor" id="autotoc_md384"></a>
 esp_err_t nvs_storage_module_set_int(const char *key, int value);</h2>
 <ul>
 <li>ინახავს მთელი რიცხვის მნიშვნელობას NVS-ში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md337"></a>
+<h2><a class="anchor" id="autotoc_md385"></a>
 esp_err_t nvs_storage_module_get_int(const char *key, int *value);</h2>
 <ul>
 <li>კითხულობს მთელი რიცხვის მნიშვნელობას NVS-დან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md338"></a>
+<h2><a class="anchor" id="autotoc_md386"></a>
 esp_err_t nvs_storage_module_erase_key(const char *key);</h2>
 <ul>
 <li>შლის მითითებულ key-ს NVS-დან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md339"></a>
+<h2><a class="anchor" id="autotoc_md387"></a>
 esp_err_t nvs_storage_module_erase_all(void);</h2>
 <ul>
 <li>შლის ყველა მონაცემს NVS-დან.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md341"></a>
+<h1><a class="anchor" id="autotoc_md389"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md343"></a>
+<h1><a class="anchor" id="autotoc_md391"></a>
 მაგალითები</h1>
 <p><b>სტრიქონის შენახვა:</b> </p><div class="fragment"><div class="line">nvs_storage_module_set_string(<span class="stringliteral">&quot;device_name&quot;</span>, <span class="stringliteral">&quot;synapse_node_1&quot;</span>);</div>
 </div><!-- fragment --><p><b>მთელი რიცხვის წაკითხვა:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> counter;</div>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['reconfigure_0',['reconfigure',['../structbase__module__interface__t.html#abedb28c4b6f2da210b699ee2e0ba28df',1,'base_module_interface_t']]],
-  ['runtime_5fenabled_1',['runtime_enabled',['../structmodule__t.html#a05b0f355ad64e7fa2495de23e4cc674c',1,'module_t']]]
+  ['name_0',['name',['../structservice__entry__t.html#a56a995a275a2f565f6677fc1ed136702',1,'service_entry_t::name'],['../structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e',1,'module_t::name']]]
 ];

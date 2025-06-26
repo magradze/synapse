@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['health_5fpong_5fpayload_5ft_0',['health_pong_payload_t',['../structhealth__pong__payload__t.html',1,'']]]
+  ['module_5ffactory_5fmap_5ft_0',['module_factory_map_t',['../structmodule__factory__map__t.html',1,'']]],
+  ['module_5ft_1',['module_t',['../structmodule__t.html',1,'']]]
 ];

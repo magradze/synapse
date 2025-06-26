@@ -91,92 +91,226 @@ $(document).ready(function(){initNavTree('resource__manager_8h.html',''); initRe
 
 <div class="header">
   <div class="summary">
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">resource_manager.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>რესურსების (GPIO და სხვა) მართვის API  
+<p>რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;esp_err.h&quot;</code><br />
-<code>#include &quot;driver/gpio.h&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for resource_manager.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="resource__manager_8h__incl.png" border="0" usemap="#acomponents_2core_2include_2resource__manager_8h" alt=""/></div>
 <map name="acomponents_2core_2include_2resource__manager_8h" id="acomponents_2core_2include_2resource__manager_8h">
-<area shape="rect" title="რესურსების (GPIO და სხვა) მართვის API" alt="" coords="12,5,197,45"/>
+<area shape="rect" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="53,5,239,45"/>
 <area shape="rect" title=" " alt="" coords="5,93,87,119"/>
-<area shape="poly" title=" " alt="" coords="93,47,65,84,61,80,88,44"/>
-<area shape="rect" title=" " alt="" coords="111,93,215,119"/>
-<area shape="poly" title=" " alt="" coords="121,44,148,80,144,84,117,47"/>
+<area shape="poly" title=" " alt="" coords="123,48,73,87,70,82,120,43"/>
+<area shape="rect" title=" " alt="" coords="111,93,181,119"/>
+<area shape="poly" title=" " alt="" coords="149,46,149,79,143,79,143,46"/>
+<area shape="rect" title=" " alt="" coords="206,93,289,119"/>
+<area shape="poly" title=" " alt="" coords="172,43,223,82,220,87,169,48"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="resource__manager_8h__dep__incl.png" border="0" usemap="#acomponents_2core_2include_2resource__manager_8hdep" alt=""/></div>
+<map name="acomponents_2core_2include_2resource__manager_8hdep" id="acomponents_2core_2include_2resource__manager_8hdep">
+<area shape="rect" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="117,5,302,45"/>
+<area shape="rect" href="resource__manager_8c.html" title="რესურსების მენეჯერის იმპლემენტაცია." alt="" coords="5,93,200,133"/>
+<area shape="poly" title=" " alt="" coords="177,56,128,95,125,91,173,52"/>
+<area shape="rect" href="system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="224,93,411,133"/>
+<area shape="poly" title=" " alt="" coords="246,52,295,91,292,95,242,56"/>
 </map>
 </div>
 </div>
 <p><a href="resource__manager_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a7b7159efe4a9ab6e6f40a477c0466b15" id="r_a7b7159efe4a9ab6e6f40a477c0466b15"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> { <br />
+&#160;&#160;<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f">FMW_RESOURCE_TYPE_GPIO</a>
+, <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ac2dbc52b4ad14f9d8ae0d0dd3f4c4de5">FMW_RESOURCE_TYPE_I2C_PORT</a>
+, <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a464ad56ece3b89244a5f3f6a89c31ef9">FMW_RESOURCE_TYPE_SPI_HOST</a>
+, <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a16eade5c88f74a8bc15b056bf539580c">FMW_RESOURCE_TYPE_ADC_CHANNEL</a>
+, <br />
+&#160;&#160;<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15afe7c7b3c6e16107d034bbf7dd9dcada1">FMW_RESOURCE_TYPE_TIMER_GROUP</a>
+, <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a00db7bc611979e9448314ccbe2b51e9f">FMW_RESOURCE_TYPE_RMT_CHANNEL</a>
+, <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a74e4aa1c63b82e39094f56711922ba72">FMW_RESOURCE_TYPE_UART_PORT</a>
+, <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15af0ba234a8d0d9a70105a2d4b94474838">FMW_RESOURCE_TYPE_MAX</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a7b7159efe4a9ab6e6f40a477c0466b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">სისტემაში სამართავი რესურსების ტიპების ჩამონათვალი.  <a href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">More...</a><br /></td></tr>
+<tr class="separator:a7b7159efe4a9ab6e6f40a477c0466b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7644b52a0b11186f8a84b4b489c14f54" id="r_a7644b52a0b11186f8a84b4b489c14f54"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a7644b52a0b11186f8a84b4b489c14f54">fmw_resource_manager_init</a> (void)</td></tr>
-<tr class="memdesc:a7644b52a0b11186f8a84b4b489c14f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">რესურს მენეჯერის ინიციალიზაცია  <br /></td></tr>
+<tr class="memdesc:a7644b52a0b11186f8a84b4b489c14f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">რესურს მენეჯერის ინიციალიზაცია.  <br /></td></tr>
 <tr class="separator:a7644b52a0b11186f8a84b4b489c14f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc061f53b903f6fedc7aa92483cb4b13" id="r_afc061f53b903f6fedc7aa92483cb4b13"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#afc061f53b903f6fedc7aa92483cb4b13">fmw_resource_lock_gpio</a> (gpio_num_t pin, const char *owner)</td></tr>
-<tr class="memdesc:afc061f53b903f6fedc7aa92483cb4b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO პინის "დალოქვა" (დაკავება) კონკრეტული მოდულისთვის  <br /></td></tr>
-<tr class="separator:afc061f53b903f6fedc7aa92483cb4b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa76de5cec13693fc999a0a978ef36c26" id="r_aa76de5cec13693fc999a0a978ef36c26"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#aa76de5cec13693fc999a0a978ef36c26">fmw_resource_release_gpio</a> (gpio_num_t pin, const char *owner)</td></tr>
-<tr class="memdesc:aa76de5cec13693fc999a0a978ef36c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">დაკავებული GPIO პინის გათავისუფლება  <br /></td></tr>
-<tr class="separator:aa76de5cec13693fc999a0a978ef36c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ebb887766f23633d5c712bc55c2fe0" id="r_a77ebb887766f23633d5c712bc55c2fe0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a77ebb887766f23633d5c712bc55c2fe0">fmw_resource_is_gpio_locked</a> (gpio_num_t pin)</td></tr>
-<tr class="memdesc:a77ebb887766f23633d5c712bc55c2fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">ამოწმებს დაკავებულია თუ არა GPIO პინი  <br /></td></tr>
-<tr class="separator:a77ebb887766f23633d5c712bc55c2fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf645372eb05ee6b182e39ed57e90da" id="r_a2cf645372eb05ee6b182e39ed57e90da"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da">fmw_resource_lock</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id, const char *owner)</td></tr>
+<tr class="memdesc:a2cf645372eb05ee6b182e39ed57e90da"><td class="mdescLeft">&#160;</td><td class="mdescRight">რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის.  <br /></td></tr>
+<tr class="separator:a2cf645372eb05ee6b182e39ed57e90da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b4e49ff7f60e575bd0a97797266fb9" id="r_a92b4e49ff7f60e575bd0a97797266fb9"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a92b4e49ff7f60e575bd0a97797266fb9">fmw_resource_release</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id, const char *owner)</td></tr>
+<tr class="memdesc:a92b4e49ff7f60e575bd0a97797266fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">დაკავებული რესურსის გათავისუფლება.  <br /></td></tr>
+<tr class="separator:a92b4e49ff7f60e575bd0a97797266fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c8e1ee6abf08a2600a427d96653920" id="r_a68c8e1ee6abf08a2600a427d96653920"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a68c8e1ee6abf08a2600a427d96653920">fmw_resource_is_locked</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id)</td></tr>
+<tr class="memdesc:a68c8e1ee6abf08a2600a427d96653920"><td class="mdescLeft">&#160;</td><td class="mdescRight">ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი.  <br /></td></tr>
+<tr class="separator:a68c8e1ee6abf08a2600a427d96653920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0bce877745e54ba27ef0e67ea606c0" id="r_a2a0bce877745e54ba27ef0e67ea606c0"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8h.html#a2a0bce877745e54ba27ef0e67ea606c0">fmw_resource_get_owner</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id)</td></tr>
+<tr class="memdesc:a2a0bce877745e54ba27ef0e67ea606c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს რესურსის მფლობელის სახელს.  <br /></td></tr>
+<tr class="separator:a2a0bce877745e54ba27ef0e67ea606c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>რესურსების (GPIO და სხვა) მართვის API </p>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-06-24 </dd></dl>
+<div class="textblock"><p>რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API </p>
+<dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-06-25 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
-<p>ეს კომპონენტი უზრუნველყოფს სისტემაში საერთო რესურსების (მაგ: GPIO პინების) უსაფრთხო და ექსკლუზიურ გამოყენებას. თითოეულ მოდულს შეუძლია "დალოქოს" რესურსი, რათა თავიდან აიცილოს კონფლიქტი სხვა მოდულებთან. რესურსის გათავისუფლება აუცილებელია მოდულის გაჩერების ან გამორთვისას. ეს ხელს უწყობს სისტემის სტაბილურობას და მოდულებს შორის იზოლაციას. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a77ebb887766f23633d5c712bc55c2fe0" name="a77ebb887766f23633d5c712bc55c2fe0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77ebb887766f23633d5c712bc55c2fe0">&#9670;&#160;</a></span>fmw_resource_is_gpio_locked()</h2>
+<p>ეს კომპონენტი უზრუნველყოფს სისტემაში საერთო რესურსების უსაფრთხო და ექსკლუზიურ გამოყენებას. თითოეულ მოდულს შეუძლია "დალოქოს" რესურსი, რათა თავიდან აიცილოს კონფლიქტი სხვა მოდულებთან. რესურსის გათავისუფლება აუცილებელია მოდულის გაჩერების ან გამორთვისას. ეს ხელს უწყობს სისტემის სტაბილურობას და მოდულებს შორის იზოლაციას. განახლებული ვერსია იყენებს გენერიკულ მიდგომას, რათა მართოს სხვადასხვა ტიპის რესურსი. </p>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a7b7159efe4a9ab6e6f40a477c0466b15" name="a7b7159efe4a9ab6e6f40a477c0466b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7159efe4a9ab6e6f40a477c0466b15">&#9670;&#160;</a></span>fmw_resource_type_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool fmw_resource_is_gpio_locked </td>
-          <td>(</td>
-          <td class="paramtype">gpio_num_t&#160;</td>
-          <td class="paramname"><em>pin</em></td><td>)</td>
-          <td></td>
+          <td class="memname">enum <a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>ამოწმებს დაკავებულია თუ არა GPIO პინი </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>შესამოწმებელი GPIO პინის ნომერი </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true თუ პინი დაკავებულია </dd>
-<dd>
-false თუ პინი თავისუფალია </dd></dl>
+<p>სისტემაში სამართავი რესურსების ტიპების ჩამონათვალი. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f" name="a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f"></a>FMW_RESOURCE_TYPE_GPIO&#160;</td><td class="fielddoc"><p>GPIO პინი. <code>resource_id</code> არის <code>gpio_num_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15ac2dbc52b4ad14f9d8ae0d0dd3f4c4de5" name="a7b7159efe4a9ab6e6f40a477c0466b15ac2dbc52b4ad14f9d8ae0d0dd3f4c4de5"></a>FMW_RESOURCE_TYPE_I2C_PORT&#160;</td><td class="fielddoc"><p>I2C პორტი. <code>resource_id</code> არის <code>i2c_port_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15a464ad56ece3b89244a5f3f6a89c31ef9" name="a7b7159efe4a9ab6e6f40a477c0466b15a464ad56ece3b89244a5f3f6a89c31ef9"></a>FMW_RESOURCE_TYPE_SPI_HOST&#160;</td><td class="fielddoc"><p>SPI ჰოსტი. <code>resource_id</code> არის <code>spi_host_device_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15a16eade5c88f74a8bc15b056bf539580c" name="a7b7159efe4a9ab6e6f40a477c0466b15a16eade5c88f74a8bc15b056bf539580c"></a>FMW_RESOURCE_TYPE_ADC_CHANNEL&#160;</td><td class="fielddoc"><p>ADC არხი. <code>resource_id</code> არის <code>adc_channel_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15afe7c7b3c6e16107d034bbf7dd9dcada1" name="a7b7159efe4a9ab6e6f40a477c0466b15afe7c7b3c6e16107d034bbf7dd9dcada1"></a>FMW_RESOURCE_TYPE_TIMER_GROUP&#160;</td><td class="fielddoc"><p>ტაიმერების ჯგუფი. <code>resource_id</code> არის <code>timer_group_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15a00db7bc611979e9448314ccbe2b51e9f" name="a7b7159efe4a9ab6e6f40a477c0466b15a00db7bc611979e9448314ccbe2b51e9f"></a>FMW_RESOURCE_TYPE_RMT_CHANNEL&#160;</td><td class="fielddoc"><p>RMT არხი. <code>resource_id</code> არის <code>rmt_channel_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15a74e4aa1c63b82e39094f56711922ba72" name="a7b7159efe4a9ab6e6f40a477c0466b15a74e4aa1c63b82e39094f56711922ba72"></a>FMW_RESOURCE_TYPE_UART_PORT&#160;</td><td class="fielddoc"><p>UART პორტი. <code>resource_id</code> არის <code>uart_port_t</code>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7b7159efe4a9ab6e6f40a477c0466b15af0ba234a8d0d9a70105a2d4b94474838" name="a7b7159efe4a9ab6e6f40a477c0466b15af0ba234a8d0d9a70105a2d4b94474838"></a>FMW_RESOURCE_TYPE_MAX&#160;</td><td class="fielddoc"><p>ჩამონათვალის დასასრული, გამოიყენება შიდა ვალიდაციისთვის. </p>
+</td></tr>
+</table>
 
 </div>
 </div>
-<a id="afc061f53b903f6fedc7aa92483cb4b13" name="afc061f53b903f6fedc7aa92483cb4b13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc061f53b903f6fedc7aa92483cb4b13">&#9670;&#160;</a></span>fmw_resource_lock_gpio()</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a2a0bce877745e54ba27ef0e67ea606c0" name="a2a0bce877745e54ba27ef0e67ea606c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0bce877745e54ba27ef0e67ea606c0">&#9670;&#160;</a></span>fmw_resource_get_owner()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_resource_lock_gpio </td>
+          <td class="memname">const char * fmw_resource_get_owner </td>
           <td>(</td>
-          <td class="paramtype">gpio_num_t&#160;</td>
-          <td class="paramname"><em>pin</em>, </td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>აბრუნებს რესურსის მფლობელის სახელს. </p>
+<p>სასარგებლოა დიაგნოსტიკისთვის, რათა გაირკვეს, რომელი მოდული იყენებს კონკრეტულ რესურსს.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>შესამოწმებელი რესურსის იდენტიფიკატორი.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>const char* </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">რესურსის</td><td>მფლობელი მოდულის სახელის მაჩვენებელი, თუ რესურსი დაკავებულია. </td></tr>
+    <tr><td class="paramname">NULL</td><td>თუ რესურსი თავისუფალია ან ვერ მოიძებნა. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a68c8e1ee6abf08a2600a427d96653920" name="a68c8e1ee6abf08a2600a427d96653920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c8e1ee6abf08a2600a427d96653920">&#9670;&#160;</a></span>fmw_resource_is_locked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool fmw_resource_is_locked </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>შესამოწმებელი რესურსის იდენტიფიკატორი.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true თუ რესურსი დაკავებულია. </dd>
+<dd>
+false თუ რესურსი თავისუფალია. </dd></dl>
+
+</div>
+</div>
+<a id="a2cf645372eb05ee6b182e39ed57e90da" name="a2cf645372eb05ee6b182e39ed57e90da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf645372eb05ee6b182e39ed57e90da">&#9670;&#160;</a></span>fmw_resource_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_resource_lock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -192,22 +326,26 @@ false თუ პინი თავისუფალია </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>GPIO პინის "დალოქვა" (დაკავება) კონკრეტული მოდულისთვის </p>
-<p>სანამ მოდული გამოიყენებს GPIO პინს, მან უნდა "დალოქოს" იგი, რათა სხვა მოდულმა ვერ გამოიყენოს იგივე პინი.</p>
+<p>რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის. </p>
+<p>სანამ მოდული გამოიყენებს რესურსს, მან უნდა "დალოქოს" იგი, რათა სხვა მოდულმა ვერ გამოიყენოს.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>დასალოქი GPIO პინის ნომერი </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">owner</td><td>მოდულის სახელი, რომელიც იკავებს პინს (დაბგისთვის სასარგებლოა)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>რესურსის უნიკალური იდენტიფიკატორი (მაგ: პინის ნომერი, პორტის ნომერი). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">owner</td><td>მოდულის სახელი, რომელიც იკავებს რესურსს (სასარგებლოა დიაგნოსტიკისთვის).</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
-<li>ESP_OK: პინი წარმატებით დაილოქა</li>
-<li>ESP_ERR_INVALID_ARG: არასწორი პინის ნომერი</li>
-<li>ESP_ERR_INVALID_STATE: პინი უკვე დაკავებულია სხვა მოდულის მიერ</li>
-<li>ESP_ERR_NO_MEM: მეხსიერების გამოყოფა ვერ მოხერხდა </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>თუ რესურსი წარმატებით დაილოქა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>type</code>, <code>resource_id</code> ან <code>owner</code> არავალიდურია. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ რესურსი უკვე დაკავებულია სხვა მოდულის მიერ. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>თუ მეხსიერების გამოყოფა ვერ მოხერხდა. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -227,27 +365,46 @@ false თუ პინი თავისუფალია </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>რესურს მენეჯერის ინიციალიზაცია </p>
+<p>რესურს მენეჯერის ინიციალიზაცია. </p>
 <p>ასუფთავებს ყველა დაკავებული რესურსის სიას. უნდა გამოიძახოს System Manager-მა ერთხელ სისტემის გაშვებისას.</p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
-<li>ESP_OK: რესურს მენეჯერი წარმატებით ინიციალიზდა</li>
-<li>ESP_ERR_NO_MEM: მეხსიერების გამოყოფა ვერ მოხერხდა </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>თუ რესურს მენეჯერი წარმატებით ინიციალიზდა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>თუ მეხსიერების გამოყოფა ვერ მოხერხდა. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="resource__manager_8h_a7644b52a0b11186f8a84b4b489c14f54_icgraph.png" border="0" usemap="#aresource__manager_8h_a7644b52a0b11186f8a84b4b489c14f54_icgraph" alt=""/></div>
+<map name="aresource__manager_8h_a7644b52a0b11186f8a84b4b489c14f54_icgraph" id="aresource__manager_8h_a7644b52a0b11186f8a84b4b489c14f54_icgraph">
+<area shape="rect" title="რესურს მენეჯერის ინიციალიზაცია." alt="" coords="188,5,395,31"/>
+<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
+<area shape="poly" title=" " alt="" coords="174,21,140,21,140,15,174,15"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="aa76de5cec13693fc999a0a978ef36c26" name="aa76de5cec13693fc999a0a978ef36c26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa76de5cec13693fc999a0a978ef36c26">&#9670;&#160;</a></span>fmw_resource_release_gpio()</h2>
+<a id="a92b4e49ff7f60e575bd0a97797266fb9" name="a92b4e49ff7f60e575bd0a97797266fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b4e49ff7f60e575bd0a97797266fb9">&#9670;&#160;</a></span>fmw_resource_release()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_resource_release_gpio </td>
+          <td class="memname">esp_err_t fmw_resource_release </td>
           <td>(</td>
-          <td class="paramtype">gpio_num_t&#160;</td>
-          <td class="paramname"><em>pin</em>, </td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -263,22 +420,26 @@ false თუ პინი თავისუფალია </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>დაკავებული GPIO პინის გათავისუფლება </p>
-<p>როდესაც მოდული ასრულებს მუშაობას პინზე (მაგ: stop ფუნქციაში), მან უნდა გაათავისუფლოს რესურსი.</p>
+<p>დაკავებული რესურსის გათავისუფლება. </p>
+<p>როდესაც მოდული ასრულებს მუშაობას რესურსზე (მაგ: <code>deinit</code> ფუნქციაში), მან უნდა გაათავისუფლოს იგი.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>გასათავისუფლებელი GPIO პინის ნომერი </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">owner</td><td>მოდულის სახელი, რომელიც ათავისუფლებს პინს</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>გასათავისუფლებელი რესურსის იდენტიფიკატორი. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">owner</td><td>მოდულის სახელი, რომელიც ათავისუფლებს რესურსს.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
-<li>ESP_OK: პინი წარმატებით გათავისუფლდა</li>
-<li>ESP_ERR_INVALID_ARG: არასწორი პინის ნომერი</li>
-<li>ESP_ERR_NOT_FOUND: პინი დაკავებული არ იყო</li>
-<li>ESP_ERR_INVALID_STATE: გათავისუფლება სცადა არა მფლობელმა მოდულმა </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>თუ რესურსი წარმატებით გათავისუფლდა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>type</code> ან <code>resource_id</code> არავალიდურია. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>თუ მითითებული რესურსი დაკავებული არ იყო. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ გათავისუფლება სცადა არა მფლობელმა მოდულმა. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -14,6 +14,7 @@ var searchData=
   ['გაფართოება_20და_20best_20practices_20extending_20the_20framework_11',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
   ['გაფართოებული_20გამოყენება_12',['Advanced Usage (გაფართოებული გამოყენება)',['../md_docs_2tutorials_2advanced__usage.html',1,'']]],
   ['გაფართოებული_20დიაგნოსტიკა_13',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
-  ['გზამკვლევი_14',['კონტრიბუციის გზამკვლევი',['../contributing_docs.html',1,'']]],
-  ['გზები_20common_20issues_20solutions_15',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]]
+  ['გენერატორი_14',['გენერატორი',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'🚀 CREATE_MODULE.PY - ახალი მოდულის ავტომატური გენერატორი'],['../md_docs_2CREATE__MODULE__DOCUMENTATION.html',1,'🚀 CREATE_MODULE.PY - ახალი მოდულის ავტომატური გენერატორი']]],
+  ['გზამკვლევი_15',['კონტრიბუციის გზამკვლევი',['../contributing_docs.html',1,'']]],
+  ['გზები_20common_20issues_20solutions_16',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]]
 ];

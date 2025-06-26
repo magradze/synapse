@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
   <div class="headertitle"><div class="title">კომუნიკაციის პატერნების წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md599"></a> </p>
-<h1><a class="anchor" id="autotoc_md600"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md655"></a> </p>
+<h1><a class="anchor" id="autotoc_md656"></a>
 ძირითადი პრინციპი: მაქსიმალური იზოლაცია</h1>
 <p><b>FUNDAMENTAL RULE:</b> Synapse ESP Framework-ში უნდა შენარჩუნდეს მაქსიმალური იზოლაცია მოდულებს შორის.</p>
-<h1><a class="anchor" id="autotoc_md601"></a>
+<h1><a class="anchor" id="autotoc_md657"></a>
 ორი კომუნიკაციის პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md602"></a>
+<h2><a class="anchor" id="autotoc_md658"></a>
 1. Service Locator Pattern</h2>
 <p><b>გამოიყენება:</b> პირდაპირი API calls-ისთვის</p>
 <p><b>როდის ვიყენებთ:</b></p>
@@ -115,9 +115,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 <div class="line">    ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;disable();</div>
 <div class="line">}</div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:30</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md603"></a>
+<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:127</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md659"></a>
 2. Event Bus Pattern</h2>
 <p><b>გამოიყენება:</b> broadcast/notification scenarios-ისთვის</p>
 <p><b>როდის ვიყენებთ:</b></p>
@@ -128,49 +128,46 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 </ul>
 <p><b>მაგალითი:</b></p>
 <div class="fragment"><div class="line"><span class="comment">// DHT22 publishes data for multiple consumers</span></div>
-<div class="line"><a class="code hl_struct" href="structtelemetry__data__t.html">telemetry_data_t</a> sensor_telemetry_data = {</div>
+<div class="line">telemetry_data_t sensor_telemetry_data = {</div>
 <div class="line">    .temperature = 23.5,</div>
 <div class="line">    .humidity = 65.2</div>
 <div class="line">};</div>
-<div class="line"><a class="code hl_function" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a>(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
-<div class="ttc" id="aevent__bus_8h_html_a16b5d62734d183c1d6be00e0a3dff340"><div class="ttname"><a href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a></div><div class="ttdeci">esp_err_t event_bus_post(system_event_id_t event_id, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div></div>
-<div class="ttc" id="astructtelemetry__data__t_html"><div class="ttname"><a href="structtelemetry__data__t.html">telemetry_data_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.</div><div class="ttdef"><b>Definition</b> telemetry_events.h:41</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md604"></a>
+<div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md660"></a>
 კომუნიკაციის ტიპები</h1>
-<h2><a class="anchor" id="autotoc_md605"></a>
+<h2><a class="anchor" id="autotoc_md661"></a>
 Direct API Communication (Service Locator)</h2>
 <div class="fragment"><div class="line">[MQTT Module] --API call--&gt; [Display Module]</div>
 <div class="line">              --API call--&gt; [Relay Module]</div>
 <div class="line">              --API call--&gt; [System Module]</div>
 </div><!-- fragment --><p><b>Implementation:</b></p>
 <div class="fragment"><div class="line"><span class="comment">// Display module registers API</span></div>
-<div class="line"><a class="code hl_function" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385">fmw_service_register</a>(<span class="stringliteral">&quot;main_display&quot;</span>, <span class="stringliteral">&quot;display_api&quot;</span>, &amp;ssd1306_service_api);</div>
+<div class="line"><a class="code hl_function" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a>(<span class="stringliteral">&quot;main_display&quot;</span>, <span class="stringliteral">&quot;display_api&quot;</span>, &amp;ssd1306_service_api);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// MQTT module uses API</span></div>
 <div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
-<div class="line"><span class="keywordflow">if</span> (display_service_handle &amp;&amp; strcmp(<a class="code hl_function" href="service__locator_8h.html#ac03122fea3ba90503cb6c05c25da75fb">fmw_service_get_type</a>(<span class="stringliteral">&quot;main_display&quot;</span>), <span class="stringliteral">&quot;display_api&quot;</span>) == 0) {</div>
+<div class="line"><span class="keywordflow">if</span> (display_service_handle &amp;&amp; strcmp(<a class="code hl_function" href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a>(<span class="stringliteral">&quot;main_display&quot;</span>), <span class="stringliteral">&quot;display_api&quot;</span>) == 0) {</div>
 <div class="line">    ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;enable();</div>
 <div class="line">}</div>
-<div class="ttc" id="aservice__locator_8h_html_a4fb41c5c2898bdc01a39612df4014385"><div class="ttname"><a href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385">fmw_service_register</a></div><div class="ttdeci">esp_err_t fmw_service_register(const char *service_name, const char *service_type, service_handle_t service_handle)</div><div class="ttdoc">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით</div></div>
-<div class="ttc" id="aservice__locator_8h_html_ac03122fea3ba90503cb6c05c25da75fb"><div class="ttname"><a href="service__locator_8h.html#ac03122fea3ba90503cb6c05c25da75fb">fmw_service_get_type</a></div><div class="ttdeci">const char * fmw_service_get_type(const char *service_name)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს სახელით</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md606"></a>
+<div class="ttc" id="aservice__locator_8h_html_a40e29f1bbbc7d7de4a7ac6b6c5a28244"><div class="ttname"><a href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a></div><div class="ttdeci">esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს enum სახით.</div><div class="ttdef"><b>Definition</b> service_locator.c:158</div></div>
+<div class="ttc" id="aservice__locator_8h_html_ac224eef59c2b5a418e8d19f89d895ba1"><div class="ttname"><a href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a></div><div class="ttdeci">esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle)</div><div class="ttdoc">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.</div><div class="ttdef"><b>Definition</b> service_locator.c:85</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md662"></a>
 Broadcast Communication (Event Bus)</h2>
 <div class="fragment"><div class="line">[DHT22 Sensor] --event--&gt; [Event Bus] --event--&gt; [MQTT Module]</div>
 <div class="line">                                    --event--&gt; [Display Module]</div>
 <div class="line">                                    --event--&gt; [Logger Module]</div>
 </div><!-- fragment --><p><b>Implementation:</b></p>
 <div class="fragment"><div class="line"><span class="comment">// Sensor publishes data</span></div>
-<div class="line"><a class="code hl_struct" href="structtelemetry__data__t.html">telemetry_data_t</a> sensor_telemetry_data = { .temperature = 23.5 };</div>
-<div class="line"><a class="code hl_function" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a>(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
+<div class="line">telemetry_data_t sensor_telemetry_data = { .temperature = 23.5 };</div>
+<div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Multiple modules subscribe</span></div>
-<div class="line"><a class="code hl_function" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504">event_bus_subscribe</a>(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
-<div class="line"><a class="code hl_function" href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504">event_bus_subscribe</a>(TELEMETRY_EVENT_SENSOR_DATA, display_handle_sensor_data);</div>
-<div class="ttc" id="aevent__bus_8h_html_a9b819126a00bf4d7d03c170cc3f67504"><div class="ttname"><a href="event__bus_8h.html#a9b819126a00bf4d7d03c170cc3f67504">event_bus_subscribe</a></div><div class="ttdeci">esp_err_t event_bus_subscribe(system_event_id_t event_id, struct module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md607"></a>
+<div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
+<div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, display_handle_sensor_data);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md663"></a>
 აკრძალული პატერნები</h1>
-<h2><a class="anchor" id="autotoc_md608"></a>
+<h2><a class="anchor" id="autotoc_md664"></a>
 ❌ პირდაპირი Dependencies</h2>
 <div class="fragment"><div class="line"><span class="comment">// NEVER DO THIS</span></div>
 <div class="line"><span class="preprocessor">#include &quot;ssd1306_module.h&quot;</span>  <span class="comment">// Direct dependency!</span></div>
@@ -178,13 +175,13 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// In MQTT module</span></div>
 <div class="line">ssd1306_api_enable();  <span class="comment">// Direct function call - BAD!</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md609"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md665"></a>
 ❌ Mixed Patterns</h2>
 <div class="fragment"><div class="line"><span class="comment">// DON&#39;T MIX - choose one pattern per use case</span></div>
 <div class="line"><span class="comment">// Wrong: using both Event Bus AND Service Locator for same purpose</span></div>
-<div class="line"><a class="code hl_function" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a>(DISPLAY_ENABLE_EVENT, NULL);  <span class="comment">// Event Bus</span></div>
+<div class="line">event_bus_post(DISPLAY_ENABLE_EVENT, NULL);  <span class="comment">// Event Bus</span></div>
 <div class="line">display_api-&gt;enable();                       <span class="comment">// Service Locator</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md610"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md666"></a>
 ❌ System Manager MQTT Handling</h2>
 <div class="fragment"><div class="line"><span class="comment">// NEVER DO THIS - System Manager must not handle MQTT</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> system_manager_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
@@ -192,12 +189,12 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line">        <span class="comment">// System Manager should NEVER handle MQTT commands</span></div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მთავარი მოდულის სტრუქტურა</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md611"></a>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md667"></a>
 სწორი იმპლემენტაცია</h1>
-<h2><a class="anchor" id="autotoc_md612"></a>
+<h2><a class="anchor" id="autotoc_md668"></a>
 Service Locator Usage</h2>
-<h3><a class="anchor" id="autotoc_md613"></a>
+<h3><a class="anchor" id="autotoc_md669"></a>
 1. Service Registration (Display Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// ssd1306_module.c</span></div>
 <div class="line"><span class="keyword">static</span> ssd1306_api_t ssd1306_service_api = {</div>
@@ -210,14 +207,14 @@ Service Locator Usage</h2>
 <div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config) {</div>
 <div class="line">    <span class="comment">// ... module creation ...</span></div>
 <div class="line">    <span class="comment">// Register API in Service Locator</span></div>
-<div class="line">    esp_err_t operation_result = <a class="code hl_function" href="service__locator_8h.html#a4fb41c5c2898bdc01a39612df4014385">fmw_service_register</a>(module_instance_name, <span class="stringliteral">&quot;display_api&quot;</span>, &amp;ssd1306_service_api);</div>
+<div class="line">    esp_err_t operation_result = <a class="code hl_function" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a>(module_instance_name, <span class="stringliteral">&quot;display_api&quot;</span>, &amp;ssd1306_service_api);</div>
 <div class="line">    <span class="keywordflow">if</span> (operation_result != ESP_OK) {</div>
 <div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to register service API&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> NULL;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md614"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md670"></a>
 2. Service Usage (MQTT Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// mqtt_module.c - NO direct includes of other modules!</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t handle_display_command(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name, <span class="keyword">const</span> <span class="keywordtype">char</span> *action) {</div>
@@ -226,7 +223,7 @@ Service Locator Usage</h2>
 <div class="line">        ESP_LOGW(TAG, <span class="stringliteral">&quot;Service not found: %s&quot;</span>, module_instance_name);</div>
 <div class="line">        <span class="keywordflow">return</span> ESP_ERR_NOT_FOUND;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *service_type = <a class="code hl_function" href="service__locator_8h.html#ac03122fea3ba90503cb6c05c25da75fb">fmw_service_get_type</a>(module_instance_name);</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span> *service_type = <a class="code hl_function" href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a>(module_instance_name);</div>
 <div class="line">    <span class="keywordflow">if</span> (!service_type || strcmp(service_type, <span class="stringliteral">&quot;display_api&quot;</span>) != 0) {</div>
 <div class="line">        ESP_LOGW(TAG, <span class="stringliteral">&quot;Invalid service type for %s&quot;</span>, module_instance_name);</div>
 <div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
@@ -239,27 +236,27 @@ Service Locator Usage</h2>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md615"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md671"></a>
 Event Bus Usage</h2>
-<h3><a class="anchor" id="autotoc_md616"></a>
+<h3><a class="anchor" id="autotoc_md672"></a>
 1. Event Publishing (Sensor Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// dht22_module.c</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t publish_sensor_reading(dht22_private_data_t *dht22_data, <span class="keywordtype">float</span> temperature, <span class="keywordtype">float</span> humidity) {</div>
-<div class="line">    <a class="code hl_struct" href="structtelemetry__data__t.html">telemetry_data_t</a> sensor_telemetry_data = {</div>
+<div class="line">    telemetry_data_t sensor_telemetry_data = {</div>
 <div class="line">        .sensor_type = SENSOR_TYPE_DHT22,</div>
 <div class="line">        .temperature = temperature,</div>
 <div class="line">        .humidity = humidity,</div>
 <div class="line">        .timestamp = esp_timer_get_time()</div>
 <div class="line">    };</div>
 <div class="line">    strncpy(telemetry.instance_name, p-&gt;instance_name, <span class="keyword">sizeof</span>(telemetry.instance_name) - 1);</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="event__bus_8h.html#a16b5d62734d183c1d6be00e0a3dff340">event_bus_post</a>(TELEMETRY_EVENT_SENSOR_DATA, &amp;telemetry);</div>
+<div class="line">    <span class="keywordflow">return</span> event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;telemetry);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md617"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md673"></a>
 2. Event Subscription (MQTT Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// mqtt_module.c</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> mqtt_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (event_id == TELEMETRY_EVENT_SENSOR_DATA) {</div>
-<div class="line">        <a class="code hl_struct" href="structtelemetry__data__t.html">telemetry_data_t</a> *data = (<a class="code hl_struct" href="structtelemetry__data__t.html">telemetry_data_t</a> *)event_data;</div>
+<div class="line">        telemetry_data_t *data = (telemetry_data_t *)event_data;</div>
 <div class="line">        </div>
 <div class="line">        <span class="comment">// Build MQTT topic and publish</span></div>
 <div class="line">        <span class="keywordtype">char</span> topic[128];</div>
@@ -279,15 +276,15 @@ Event Bus Usage</h2>
 <div class="line">        cJSON_Delete(json);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md618"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md674"></a>
 პატერნის არჩევის გზამკვლევი</h1>
-<h2><a class="anchor" id="autotoc_md619"></a>
+<h2><a class="anchor" id="autotoc_md675"></a>
 Service Locator-ის გამოყენება</h2>
 <p>✅ <b>MQTT → Display enable/disable</b> ✅ <b>System Manager → I2C driver API</b> ✅ <b>Module → Configuration service</b> ✅ <b>Any direct API call between specific modules</b></p>
-<h2><a class="anchor" id="autotoc_md620"></a>
+<h2><a class="anchor" id="autotoc_md676"></a>
 Event Bus-ის გამოყენება</h2>
 <p>✅ <b>Sensor data → Multiple consumers (MQTT, Display, Logger)</b> ✅ <b>System notifications → All modules</b> ✅ <b>Framework events → Module lifecycle management</b> ✅ <b>Any broadcast scenario</b></p>
-<h1><a class="anchor" id="autotoc_md621"></a>
+<h1><a class="anchor" id="autotoc_md677"></a>
 Architecture Diagram</h1>
 <div class="fragment"><div class="line">┌─────────────────┐    Service Locator     ┌─────────────────┐</div>
 <div class="line">│   MQTT Module   │ ────────────────────► │ Display Modules │</div>
@@ -306,7 +303,7 @@ Architecture Diagram</h1>
 <div class="line">┌─────────────────┐</div>
 <div class="line">│ Logger Module   │</div>
 <div class="line">└─────────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md622"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md678"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>Service Locator</b> = პირდაპირი API calls იზოლაციით</li>

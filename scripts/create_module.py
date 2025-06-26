@@ -408,10 +408,10 @@ static void {module_name}_handle_event(module_t *self, core_framework_event_id_t
     
     // TODO: Implement event handling logic based on event_id
     switch (event_id) {{
-        case FMW_EVENT_SYSTEM_INIT:
+        case FRAMEWORK_EVENT_SYSTEM_INIT:
             ESP_LOGD(TAG, "System initialization event received");
             break;
-        case FMW_EVENT_SYSTEM_START:
+        case FRAMEWORK_EVENT_SYSTEM_START:
             ESP_LOGD(TAG, "System start event received");
             break;
         default:

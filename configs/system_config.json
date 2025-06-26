@@ -1,0 +1,18 @@
+{
+  "firmware": {
+    "version": "1.0.0",
+    "description": "Implemented Service Locator pattern for I2C bus decoupling."
+  },
+  "global_config": {
+    "device.id.prefix": "Synapse"
+  },
+  "modules": [
+    {
+      "type": "logger_module",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_logger"
+      }
+    }
+  ]
+}

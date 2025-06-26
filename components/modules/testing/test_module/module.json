@@ -1,0 +1,9 @@
+{
+    "name": "test_module",
+    "version": "1.0.0",
+    "description": "ტესტირებისთვის განკუთვნილი მოდული",
+    "author": "Synapse Framework Team",
+    "init_function": "test_module_create",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_TEST_MODULE_ENABLED"
+}

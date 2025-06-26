@@ -64,11 +64,21 @@ esp_err_t fmw_module_registry_init(void) {
         return ESP_OK; // ეს არ არის კრიტიკული შეცდომა
     }
 
+    ESP_LOGI(TAG, "DEBUG: Modules array size: %d", cJSON_GetArraySize(modules_array));
+
     /* Step 3: გავიაროთ კონფიგურაცია და შევქმნათ მოდულების ინსტანციები */
+    ESP_LOGI(TAG, "DEBUG: Starting to process modules array...");
+    int module_index = 0;
     cJSON *module_config_json;
     cJSON_ArrayForEach(module_config_json, modules_array) {
+        ESP_LOGI(TAG, "DEBUG: Processing module #%d...", module_index++);
+
         const cJSON *type_json = cJSON_GetObjectItem(module_config_json, "type");
         const cJSON *enabled_json = cJSON_GetObjectItem(module_config_json, "enabled");
+
+        ESP_LOGI(TAG, "DEBUG: Module type: %s, enabled: %s",
+                 (type_json && cJSON_IsString(type_json)) ? type_json->valuestring : "NULL",
+                 (enabled_json && cJSON_IsBool(enabled_json)) ? (cJSON_IsTrue(enabled_json) ? "true" : "false") : "NULL");
 
         if (!cJSON_IsString(type_json) || !type_json->valuestring) {
             ESP_LOGW(TAG, "Skipping module with missing or invalid 'type' field.");
@@ -80,12 +90,19 @@ esp_err_t fmw_module_registry_init(void) {
             continue;
         }
 
+        ESP_LOGI(TAG, "DEBUG: Calling fmw_module_factory_create for type: '%s'", type_json->valuestring);
         module_t *new_module = fmw_module_factory_create(type_json->valuestring, module_config_json);
 
         if (new_module) {
+            ESP_LOGI(TAG, "DEBUG: Module '%s' created successfully, registering...", type_json->valuestring);
             register_module(new_module);
         }
+        else
+        {
+            ESP_LOGE(TAG, "DEBUG: Failed to create module '%s'", type_json->valuestring);
+        }
     }
+    ESP_LOGI(TAG, "DEBUG: Finished processing modules array.");
 
     ESP_LOGI(TAG, "--- Module Registry Initialization Complete: %d modules registered ---", registered_modules_count);
     return ESP_OK;

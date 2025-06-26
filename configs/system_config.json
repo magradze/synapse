@@ -13,6 +13,20 @@
       "config": {
         "instance_name": "main_logger"
       }
+    },
+    {
+      "type": "led_blinker",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_led_blinker"
+      }
+    },
+    {
+      "type": "test_module",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_test_module"
+      }
     }
   ]
 }

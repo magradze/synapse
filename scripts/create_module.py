@@ -190,11 +190,14 @@ module_t *{module_name}_create(const cJSON *config);
  */
 
 #include "{module_name}.h"
+#include "base_module.h"
+#include "event_bus.h"
+#include "logging.h"
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>
 
-static const char *TAG = "{module_name.upper()}";
+DEFINE_COMPONENT_TAG("{module_name.upper()}");
 
 /**
  * @brief {module_name.title()} მოდულის private მონაცემების სტრუქტურა
@@ -408,10 +411,10 @@ static void {module_name}_handle_event(module_t *self, core_framework_event_id_t
     
     // TODO: Implement event handling logic based on event_id
     switch (event_id) {{
-        case FMW_EVENT_SYSTEM_INIT:
+        case FRAMEWORK_EVENT_SYSTEM_INIT:
             ESP_LOGD(TAG, "System initialization event received");
             break;
-        case FMW_EVENT_SYSTEM_START:
+        case FRAMEWORK_EVENT_SYSTEM_START:
             ESP_LOGD(TAG, "System start event received");
             break;
         default:

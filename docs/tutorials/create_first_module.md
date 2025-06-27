@@ -22,6 +22,7 @@
 ## 3. Header და Source ფაილების შაბლონები
 
 **Header (`include/{new_module}.h`):**
+
 ```c
 #ifndef {MODULE_NAME}_H
 #define {MODULE_NAME}_H
@@ -44,6 +45,7 @@ esp_err_t {module_name}_api_disable(void);
 ```
 
 **Source (`src/{new_module}.c`):**
+
 ```c
 #include "{module_name}.h"
 #include "service_locator.h"
@@ -69,6 +71,18 @@ typedef struct {
     // hardware handles
 }} {module_name}_private_data_t;
 
+static esp_err_t {module_name}_deinit(module_t *self) {
+    ESP_LOGI(TAG, "Deinitializing {module_name} module...");
+
+    // ★★★ აუცილებელი ნაბიჯი: გააუქმეთ ყველა გამოწერა! ★★★
+    // მაგალითად: fmw_event_bus_unsubscribe(SOME_EVENT_ID, self);
+
+    // ...გაათავისუფლეთ სხვა რესურსები...
+    
+    free(self); // გაათავისუფლეთ თავად მოდულის ობიექტი
+    return ESP_OK;
+}
+
 // ...function declarations, implementation...
 ```
 
@@ -76,11 +90,12 @@ typedef struct {
 
 - გამოიყენეთ [variable_naming.md](../convention/variable_naming.md) და [function_naming.md](../convention/function_naming.md)
 - დაიცავით [module_structure.md](../convention/module_structure.md)
-- ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიული და კონტექსტური
+- ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიური და კონტექსტური
 
 ## 5. მოდულის რეგისტრაცია და ჩართვა
 
 - დაამატეთ მოდული `system_config.json`-ში:
+
   ```json
   {
       "type": "{module_name}",
@@ -91,6 +106,7 @@ typedef struct {
       }
   }
   ```
+
 - ჩართეთ მოდული Kconfig-ში
 
 ## 6. ტესტირება და ლოგირება
@@ -108,4 +124,3 @@ typedef struct {
 ---
 
 თუ შეგექმნათ პრობლემა, იხილეთ [troubleshooting](../troubleshooting/) ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.
-

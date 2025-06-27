@@ -63,58 +63,81 @@ static SemaphoreHandle_t subscription_mutex = NULL;
 // --- შიდა ფუნქციების წინასწარი დეკლარაცია ---
 static void event_bus_task(void *pvParameters);
 static esp_err_t ensure_subscription_capacity(core_framework_event_id_t event_id);
-
+static void remove_subscriber(event_subscription_list_t *sub_list, int index);
+static void dispatch_event_to_subscribers(const event_message_t *msg);
 
 /**
  * @internal
  * @brief Event Bus-ის მთავარი ტასკი, რომელიც ამუშავებს ივენთებს.
  * @details ეს ტასკი უსასრულოდ ელოდება `event_bus_queue`-ში ახალ შეტყობინებას.
- *          როდესაც შეტყობინება მიიღება, ის უსაფრთხოდ (mutex-ის ქვეშ) ქმნის
- *          გამომწერების სიის ასლს და ამ ასლზე დაყრდნობით აგზავნის ივენთებს,
- *          რათა თავიდან აიცილოს race condition-ები გამოწერების სიის ცვლილებისას.
+ *          როდესაც შეტყობინება მიიღება, ის იძახებს დისპეტჩერის ფუნქციას და
+ *          შემდეგ ათავისუფლებს ივენთის მონაცემებს.
  * @param pvParameters არგუმენტები ტასკისთვის (არ გამოიყენება).
  */
-static void event_bus_task(void *pvParameters) {
+static void event_bus_task(void *pvParameters)
+{
+    (void)pvParameters; // კომპილერის გაფრთხილების თავიდან ასაცილებლად
     event_message_t msg;
-    while (1) {
-        if (xQueueReceive(event_bus_queue, &msg, portMAX_DELAY) == pdPASS) {
+    while (1)
+    {
+        if (xQueueReceive(event_bus_queue, &msg, portMAX_DELAY) == pdPASS)
+        {
             ESP_LOGD(TAG, "Processing event ID: %d", msg.event_id);
 
-            event_subscription_list_t local_sub_list;
-            bool list_found = false;
-
-            // კრიტიკული სექცია: წავიკითხოთ გამომწერების სია უსაფრთხოდ
-            if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE) {
-                if (msg.event_id < event_subscriptions_capacity && event_subscriptions[msg.event_id] != NULL) {
-                    // შევქმნათ ლოკალური ასლი, რათა მალე გავათავისუფლოთ mutex-ი
-                    memcpy(&local_sub_list, event_subscriptions[msg.event_id], sizeof(event_subscription_list_t));
-                    list_found = true;
-                }
-                xSemaphoreGive(subscription_mutex);
-            }
-
-            if (list_found) {
-                ESP_LOGD(TAG, "Dispatching event %d to %d subscribers", msg.event_id, local_sub_list.count);
-                // ვიმუშაოთ ლოკალურ ასლთან
-                for (int i = 0; i < local_sub_list.count; i++) {
-                    event_subscriber_t *sub = &local_sub_list.subscribers[i];
-                    if (sub->module && sub->module->base.handle_event) {
-                        if (msg.data_wrapper) {
-                            fmw_event_data_acquire(msg.data_wrapper); // გავზარდოთ ref_count თითოეული მიმღებისთვის
-                        }
-                        sub->module->base.handle_event(sub->module, msg.event_id, msg.data_wrapper);
-                    }
-                }
-            }
+            dispatch_event_to_subscribers(&msg);
 
             // გავათავისუფლოთ საწყისი reference, რომელიც `post` ფუნქციამ შექმნა
-            if (msg.data_wrapper) {
+            if (msg.data_wrapper)
+            {
                 fmw_event_data_release(msg.data_wrapper);
             }
         }
     }
 }
 
+/**
+ * @internal
+ * @brief ერთი ივენთის გაგზავნა ყველა მისი გამომწერისთვის.
+ * @details ეს ფუნქცია უსაფრთხოდ (mutex-ის ქვეშ) ქმნის გამომწერების სიის ასლს
+ *          და ამ ასლზე დაყრდნობით აგზავნის ივენთებს, რათა მინიმუმამდე დაიყვანოს
+ *          mutex-ის დაკავების დრო.
+ * @param msg მაჩვენებელი გასაგზავნ ივენთზე.
+ */
+static void dispatch_event_to_subscribers(const event_message_t *msg)
+{
+    event_subscription_list_t local_sub_list;
+    bool list_found = false;
+
+    // კრიტიკული სექცია: წავიკითხოთ გამომწერების სია უსაფრთხოდ
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    {
+        if (msg->event_id < event_subscriptions_capacity && event_subscriptions[msg->event_id] != NULL)
+        {
+            // შევქმნათ ლოკალური ასლი, რათა მალე გავათავისუფლოთ mutex-ი
+            memcpy(&local_sub_list, event_subscriptions[msg->event_id], sizeof(event_subscription_list_t));
+            list_found = true;
+        }
+        xSemaphoreGive(subscription_mutex);
+    }
+
+    if (list_found)
+    {
+        ESP_LOGD(TAG, "Dispatching event %d to %d subscribers", msg.event_id, local_sub_list.count);
+        // ვიმუშაოთ ლოკალურ ასლთან
+        for (int i = 0; i < local_sub_list.count; i++)
+        {
+            event_subscriber_t *sub = &local_sub_list.subscribers[i];
+            if (sub->module && sub->module->base.handle_event)
+            {
+                if (msg->data_wrapper)
+                {
+                    fmw_event_data_acquire(msg->data_wrapper); // გავზარდოთ ref_count თითოეული მიმღებისთვის
+                }
+                sub->module->base.handle_event(sub->module, msg->event_id, msg->data_wrapper);
+            }
+        }
+    }
+}
 
 /**
  * @internal
@@ -135,12 +158,33 @@ static esp_err_t ensure_subscription_capacity(core_framework_event_id_t event_id
         }
         
         // ახალი მეხსიერების განულება
-        memset(&new_array[event_subscriptions_capacity], 0, (new_capacity - event_subscriptions_capacity) * sizeof(event_subscription_list_t *));
-        
+        memset(new_array + event_subscriptions_capacity, 0, (new_capacity - event_subscriptions_capacity) * sizeof(event_subscription_list_t *));
+
         event_subscriptions = new_array;
         event_subscriptions_capacity = new_capacity;
     }
     return ESP_OK;
+}
+
+/**
+ * @internal
+ * @brief შლის გამომწერს სიიდან მითითებულ ინდექსზე.
+ * @details ეს ფუნქცია არ არის ნაკად-უსაფრთხო და უნდა გამოიძახოს კრიტიკულ სექციაში.
+ * @param sub_list გამოწერების სია.
+ * @param index წასაშლელი გამომწერის ინდექსი.
+ */
+static void remove_subscriber(event_subscription_list_t *sub_list, int index)
+{
+    if (sub_list == NULL || index < 0 || (unsigned int)index >= sub_list->count)
+    {
+        return;
+    }
+    // ელემენტების მარცხნივ გადაწევა სიცარიელის ამოსავსებლად
+    for (uint8_t i = (uint8_t)index; i < sub_list->count - 1; i++)
+    {
+        sub_list->subscribers[i] = sub_list->subscribers[i + 1];
+    }
+    sub_list->count--;
 }
 
 // --- საჯარო API ფუნქციები ---
@@ -260,5 +304,51 @@ esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct mod
         ESP_LOGE(TAG, "Failed to acquire subscription mutex for module '%s' and event %d", module->name, event_id);
         ret = ESP_ERR_TIMEOUT;
     }
+    return ret;
+}
+
+esp_err_t fmw_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)
+{
+    if (!module)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to acquire subscription mutex for unsubscribe (module '%s', event %d)", module->name, event_id);
+        return ESP_ERR_TIMEOUT;
+    }
+
+    esp_err_t ret = ESP_ERR_NOT_FOUND;
+
+    // შევამოწმოთ, რომ event_id დიაპაზონშია და გამოწერების სია არსებობს
+    if (event_id < event_subscriptions_capacity && event_subscriptions[event_id] != NULL)
+    {
+        event_subscription_list_t *sub_list = event_subscriptions[event_id];
+
+        // ვიპოვოთ და წავშალოთ გამომწერი
+        for (int i = 0; i < sub_list->count; i++)
+        {
+            if (sub_list->subscribers[i].module == module)
+            {
+                remove_subscriber(sub_list, i);
+                ESP_LOGI(TAG, "Module '%s' unsubscribed successfully from event ID %d", module->name, event_id);
+                ret = ESP_OK;
+                break; // გამოვიდეთ ციკლიდან, რადგან ვიპოვეთ და წავშალეთ
+            }
+        }
+
+        if (ret == ESP_ERR_NOT_FOUND)
+        {
+            ESP_LOGW(TAG, "Module '%s' was not subscribed to event %d", module->name, event_id);
+        }
+    }
+    else
+    {
+        ESP_LOGW(TAG, "Attempted to unsubscribe from non-existent event subscription (event %d)", event_id);
+    }
+
+    xSemaphoreGive(subscription_mutex);
     return ret;
 }

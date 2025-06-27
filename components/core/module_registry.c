@@ -1,12 +1,12 @@
 /**
  * @file module_registry.c
  * @brief მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია.
- * @version 2.0
- * @date 2025-06-26
+ * @version 2.2
+ * @date 2025-06-27
  * @author Giorgi Magradze
- * @details ეს ფაილი იყენებს Module Factory-ს, რათა მოახდინოს მოდულების
- *          დინამიური რეგისტრაცია. ის კითხულობს `system_config.json`-ს,
- *          ქმნის საჭირო მოდულების ინსტანციებს და მართავს მათ სიცოცხლის ციკლს.
+ * @details ეს ფაილი პასუხისმგებელია სისტემის ინიციალიზაციისას `system_config.json`-ის
+ *          წაკითხვაზე, Module Factory-ის გამოყენებით მოდულების დინამიურ შექმნასა
+ *          და მათ ცენტრალიზებულ რეესტრში რეგისტრაციაზე.
  */
 #include "module_registry.h"
 #include "module_factory.h"   // ვიყენებთ Factory-ს მოდულების შესაქმნელად
@@ -46,15 +46,18 @@ esp_err_t fmw_module_registry_init(void) {
         ESP_LOGE(TAG, "Failed to create registry mutex!");
         return ESP_ERR_NO_MEM;
     }
-    
-    /* Step 1: გავასუფთავოთ რეესტრის მდგომარეობა */
+
+    // Step 1: გავასუფთავოთ რეესტრის მდგომარეობა
     memset(registered_modules, 0, sizeof(registered_modules));
     registered_modules_count = 0;
 
-    /* Step 2: მივიღოთ კონფიგურაციის root ობიექტი */
+    // Step 2: მივიღოთ კონფიგურაციის root ობიექტი
     const cJSON *root = fmw_config_get_root();
     if (!root) {
         ESP_LOGE(TAG, "Failed to get configuration root. Cannot initialize modules.");
+        // Mutex-ის განადგურება რესურსის გაჟონვის თავიდან ასაცილებლად
+        vSemaphoreDelete(registry_mutex);
+        registry_mutex = NULL;
         return ESP_FAIL;
     }
 
@@ -64,53 +67,59 @@ esp_err_t fmw_module_registry_init(void) {
         return ESP_OK; // ეს არ არის კრიტიკული შეცდომა
     }
 
-    ESP_LOGI(TAG, "DEBUG: Modules array size: %d", cJSON_GetArraySize(modules_array));
+    ESP_LOGD(TAG, "Found %d module configurations to process.", cJSON_GetArraySize(modules_array));
 
-    /* Step 3: გავიაროთ კონფიგურაცია და შევქმნათ მოდულების ინსტანციები */
-    ESP_LOGI(TAG, "DEBUG: Starting to process modules array...");
-    int module_index = 0;
+    // Step 3: გავიაროთ კონფიგურაცია და შევქმნათ მოდულების ინსტანციები
     cJSON *module_config_json;
-    cJSON_ArrayForEach(module_config_json, modules_array) {
-        ESP_LOGI(TAG, "DEBUG: Processing module #%d...", module_index++);
-
+    cJSON_ArrayForEach(module_config_json, modules_array)
+    {
         const cJSON *type_json = cJSON_GetObjectItem(module_config_json, "type");
         const cJSON *enabled_json = cJSON_GetObjectItem(module_config_json, "enabled");
 
-        ESP_LOGI(TAG, "DEBUG: Module type: %s, enabled: %s",
-                 (type_json && cJSON_IsString(type_json)) ? type_json->valuestring : "NULL",
-                 (enabled_json && cJSON_IsBool(enabled_json)) ? (cJSON_IsTrue(enabled_json) ? "true" : "false") : "NULL");
-
         if (!cJSON_IsString(type_json) || !type_json->valuestring) {
-            ESP_LOGW(TAG, "Skipping module with missing or invalid 'type' field.");
+            ESP_LOGW(TAG, "Skipping module configuration with missing or invalid 'type' field.");
             continue;
         }
 
-        if (cJSON_IsBool(enabled_json) && cJSON_IsFalse(enabled_json)) {
+        // `enabled` ველი თუ არ არსებობს, ჩავთვალოთ რომ ჩართულია (default true)
+        if (enabled_json && cJSON_IsBool(enabled_json) && cJSON_IsFalse(enabled_json))
+        {
             ESP_LOGI(TAG, "Module type '%s' is disabled in config, skipping.", type_json->valuestring);
             continue;
         }
 
-        ESP_LOGI(TAG, "DEBUG: Calling fmw_module_factory_create for type: '%s'", type_json->valuestring);
         module_t *new_module = fmw_module_factory_create(type_json->valuestring, module_config_json);
 
         if (new_module) {
-            ESP_LOGI(TAG, "DEBUG: Module '%s' created successfully, registering...", type_json->valuestring);
-            register_module(new_module);
+            if (register_module(new_module) != ESP_OK)
+            {
+                // register_module ფუნქცია თავად ასუფთავებს მოდულს შეცდომისას,
+                // ამიტომ აქ დამატებითი მოქმედება არ არის საჭირო.
+                ESP_LOGE(TAG, "Failed to register created module of type '%s'.", type_json->valuestring);
+            }
         }
         else
         {
-            ESP_LOGE(TAG, "DEBUG: Failed to create module '%s'", type_json->valuestring);
+            ESP_LOGE(TAG, "Failed to create module of type '%s'.", type_json->valuestring);
         }
     }
-    ESP_LOGI(TAG, "DEBUG: Finished processing modules array.");
 
     ESP_LOGI(TAG, "--- Module Registry Initialization Complete: %d modules registered ---", registered_modules_count);
     return ESP_OK;
 }
 
 module_t* fmw_module_registry_find_by_name(const char *name) {
-    if (!name) return NULL;
-    
+    if (!name)
+    {
+        return NULL;
+    }
+
+    if (!registry_mutex)
+    {
+        ESP_LOGE(TAG, "Registry not initialized, cannot find module.");
+        return NULL;
+    }
+
     if (xSemaphoreTake(registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
         ESP_LOGE(TAG, "Failed to take mutex for find_by_name.");
         return NULL;
@@ -118,7 +127,9 @@ module_t* fmw_module_registry_find_by_name(const char *name) {
 
     module_t *found_module = NULL;
     for (uint8_t i = 0; i < registered_modules_count; i++) {
-        if (registered_modules[i] && registered_modules[i]->name[0] != '\0' && strcmp(registered_modules[i]->name, name) == 0) {
+        // ⭐️ შესწორებულია: მოშორებულია ზედმეტი `&& registered_modules[i]->name` შემოწმება
+        if (registered_modules[i] && strcmp(registered_modules[i]->name, name) == 0)
+        {
             found_module = registered_modules[i];
             break;
         }
@@ -132,8 +143,12 @@ esp_err_t fmw_module_registry_get_all(const module_t ***modules, uint8_t *count)
     if (!modules || !count) {
         return ESP_ERR_INVALID_ARG;
     }
+
+    // ეს ოპერაცია არის read-only, ამიტომ mutex-ის აღება არ არის კრიტიკული,
+    // თუ ვივარაუდებთ, რომ მოდულები runtime-ში არ ემატება/იშლება.
     *modules = (const module_t **)registered_modules;
     *count = registered_modules_count;
+
     return ESP_OK;
 }
 
@@ -144,25 +159,20 @@ esp_err_t fmw_module_registry_get_all(const module_t ***modules, uint8_t *count)
 /**
  * @internal
  * @brief არეგისტრირებს ერთ მოდულს შიდა რეესტრში.
- * @details ეს ფუნქცია ამატებს მოდულს `registered_modules` მასივში.
- *          ოპერაცია დაცულია mutex-ით, რათა უზრუნველყოს thread-safety.
- *          თუ რეგისტრაცია ვერ ხერხდება (მაგ. მასივი სავსეა), ის ასუფთავებს
- *          ახლად შექმნილი მოდულისთვის გამოყოფილ მეხსიერებას.
- * @param[in] module დასარეგისტრირებელი მოდულის მაჩვენებელი.
- * @return esp_err_t ოპერაციის სტატუსი.
- * @retval ESP_OK თუ მოდული წარმატებით დარეგისტრირდა.
- * @retval ESP_ERR_INVALID_ARG თუ `module` არის NULL.
- * @retval ESP_ERR_NO_MEM თუ მოდულების მაქსიმალური ლიმიტი მიღწეულია.
- * @retval ESP_ERR_TIMEOUT თუ mutex-ის დაკავება ვერ მოხერხდა.
  */
 static esp_err_t register_module(module_t *module) {
-    if (!module) return ESP_ERR_INVALID_ARG;
+    if (!module)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
 
     if (xSemaphoreTake(registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
-        ESP_LOGE(TAG, "Failed to take mutex for module registration.");
-        if (module->private_data) free(module->private_data);
-        if (module->current_config) cJSON_Delete(module->current_config);
-        free(module);
+        ESP_LOGE(TAG, "Failed to take mutex for module registration of '%s'.", module->name);
+        // თუ რეგისტრაციისას mutex-ს ვერ ვიღებთ, მოდული უნდა განადგურდეს, რათა არ დაიკარგოს მეხსიერება
+        if (module->base.deinit)
+        {
+            module->base.deinit(module);
+        }
         return ESP_ERR_TIMEOUT;
     }
 
@@ -170,9 +180,12 @@ static esp_err_t register_module(module_t *module) {
         ESP_LOGE(TAG, "Cannot register module '%s', max module count (%d) reached!",
                  module->name, CONFIG_FMW_MAX_MODULES);
         xSemaphoreGive(registry_mutex);
-        if (module->private_data) free(module->private_data);
-        if (module->current_config) cJSON_Delete(module->current_config);
-        free(module);
+
+        // თუ რეგისტრაციისას ადგილი არ არის, მოდული უნდა განადგურდეს
+        if (module->base.deinit)
+        {
+            module->base.deinit(module);
+        }
         return ESP_ERR_NO_MEM;
     }
 

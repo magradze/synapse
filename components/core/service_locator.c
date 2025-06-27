@@ -124,6 +124,58 @@ esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t serv
     return ESP_OK;
 }
 
+esp_err_t fmw_service_unregister(const char *service_name)
+{
+    if (!service_name)
+    {
+        ESP_LOGE(TAG, "რეგისტრაციის გაუქმება ვერ მოხერხდა: service_name არის NULL.");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Unregister ოპერაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
+        return ESP_ERR_TIMEOUT;
+    }
+
+    service_entry_t *current_entry = SLIST_FIRST(&service_registry_head);
+    service_entry_t *prev_entry = NULL;
+
+    // ხელით იტერაცია სიის გასწვრივ
+    while (current_entry != NULL)
+    {
+        if (strcmp(current_entry->name, service_name) == 0)
+        {
+            // ვიპოვეთ წასაშლელი ელემენტი
+
+            if (prev_entry == NULL)
+            {
+                // წასაშლელი ელემენტი არის სიის თავში (head)
+                SLIST_REMOVE_HEAD(&service_registry_head, entries);
+            }
+            else
+            {
+                // წასაშლელი ელემენტი არის სიის შუაში ან ბოლოში
+                SLIST_REMOVE_AFTER(prev_entry, entries);
+            }
+
+            free(current_entry); // მეხსიერების გათავისუფლება
+            xSemaphoreGive(service_registry_mutex);
+            ESP_LOGI(TAG, "სერვისი '%s' წარმატებით გაუქმდა.", service_name);
+            return ESP_OK;
+        }
+
+        // გადავდივართ შემდეგ ელემენტზე და ვიმახსოვრებთ წინას
+        prev_entry = current_entry;
+        current_entry = SLIST_NEXT(current_entry, entries);
+    }
+
+    // თუ ციკლი დასრულდა და ელემენტი ვერ მოიძებნა
+    xSemaphoreGive(service_registry_mutex);
+    ESP_LOGW(TAG, "სერვისი '%s' ვერ მოიძებნა რეგისტრაციის გაუქმებისას.", service_name);
+    return ESP_ERR_NOT_FOUND;
+}
+
 service_handle_t fmw_service_get(const char *service_name) {
     if (!service_name) {
         ESP_LOGE(TAG, "სერვისის მოძიება ვერ მოხერხდა: service_name არის NULL.");
@@ -187,11 +239,10 @@ esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out
     }
 }
 
-service_handle_t fmw_service_lookup_by_type(const char *service_type) {
-    if (!service_type) {
-        ESP_LOGE(TAG, "სერვისის მოძიება ტიპით ვერ მოხერხდა: service_type არის NULL.");
-        return NULL;
-    }
+service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type)
+{
+    // აქ შეიძლება enum-ის დიაპაზონის შემოწმება, თუ საჭიროა, მაგრამ NULL-ზე შემოწმება არასწორია.
+    // მაგალითად: if (service_type >= FMW_SERVICE_TYPE_MAX) return NULL;
 
     if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE) {
         ESP_LOGE(TAG, "Lookup_by_type ოპერაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
@@ -201,7 +252,9 @@ service_handle_t fmw_service_lookup_by_type(const char *service_type) {
     service_handle_t found_handle = NULL;
     service_entry_t *it;
     SLIST_FOREACH(it, &service_registry_head, entries) {
-        if (strcmp(fmw_service_type_to_string(it->type), service_type) == 0) {
+        // ⭐️ მთავარი შესწორება: პირდაპირი შედარება
+        if (it->type == service_type)
+        {
             found_handle = it->service_handle;
             break; // დავაბრუნოთ პირველი ნაპოვნი
         }
@@ -209,10 +262,11 @@ service_handle_t fmw_service_lookup_by_type(const char *service_type) {
 
     xSemaphoreGive(service_registry_mutex);
 
+    // ლოგირებისთვის ვიყენებთ დამხმარე ფუნქციას, რომ enum გადავიყვანოთ სტრიქონში
     if (found_handle) {
-        ESP_LOGD(TAG, "ნაპოვნია სერვისი ტიპით '%s'.", service_type);
+        ESP_LOGD(TAG, "ნაპოვნია სერვისი ტიპით '%s'.", fmw_service_type_to_string(service_type));
     } else {
-        ESP_LOGW(TAG, "სერვისი ტიპით '%s' ვერ მოიძებნა.", service_type);
+        ESP_LOGW(TAG, "სერვისი ტიპით '%s' ვერ მოიძებნა.", fmw_service_type_to_string(service_type));
     }
 
     return found_handle;

@@ -52,21 +52,29 @@ service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
 
 ## Event Bus API
 
-### event_bus_post
+### `event_bus_post`
 
 ```c
-esp_err_t event_bus_post(int32_t event_id, void *event_data);
+esp_err_t event_bus_post(int32_t event_id, event_data_wrapper_t *data_wrapper);
 ```
 
-- ავრცელებს მოვლენას ყველა გამოწერილ მოდულზე.
+ავრცელებს მოვლენას ყველა გამოწერილ მოდულზე.
 
-### event_bus_subscribe
+### `event_bus_subscribe`
 
 ```c
-esp_err_t event_bus_subscribe(int32_t event_id, event_handler_t handler);
+esp_err_t event_bus_subscribe(int32_t event_id, struct module_t *module);
 ```
 
-- აძლევს მოდულს შესაძლებლობას მიიღოს კონკრეტული მოვლენა.
+აძლევს მოდულს შესაძლებლობას, მიიღოს კონკრეტული მოვლენა.
+
+### `event_bus_unsubscribe`
+
+```c
+esp_err_t event_bus_unsubscribe(int32_t event_id, struct module_t *module);
+```
+
+**(ახალი)** აუქმებს მოდულის გამოწერას კონკრეტულ მოვლენაზე.
 
 ---
 

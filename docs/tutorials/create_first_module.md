@@ -55,8 +55,12 @@ esp_err_t {module_name}_api_disable(void);
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h" // For mutex
+#include <string.h> // strcmp-ისთვის
 
 DEFINE_COMPONENT_TAG("{MODULE_NAME}");
+
+// ივენთის სახელი, რომელსაც ჩვენი მოდული დაამუშავებს
+#define MY_TARGET_EVENT "SomeInterestingEvent"
 
 static module_t *global_{module_name}_instance = NULL;
 static {module_name}_api_t {module_name}_service_api = {
@@ -122,6 +126,9 @@ static void {module_name}_deinit(module_t *self) {
 
     // ★★★ მნიშვნელოვანი ნაბიჯი: გააუქმეთ ყველა გამოწერა! ★★★
     // მაგალითად: fmw_event_bus_unsubscribe(SOME_EVENT_ID, self);
+    // **მნიშვნელოვანია:** ყოველთვის გააუქმეთ ივენთის გამოწერა,
+    // რათა თავიდან ავიცილოთ dangling pointer-ები.
+    fmw_event_bus_unsubscribe(MY_TARGET_EVENT, self);
     
     // ★★★ გაანადგურეთ state_mutex ★★★
     if (self->state_mutex) {
@@ -137,6 +144,30 @@ static void {module_name}_deinit(module_t *self) {
     
     // გაათავისუფლეთ თავად მოდულის ობიექტი
     free(self);
+}
+
+// მოდულის ინიციალიზაცია
+static esp_err_t my_module_init(module_t* module) {
+    ESP_LOGI(TAG, "My Module initialized!");
+    // გამოიწერეთ ივენთი, რომლის მიღებაც გსურთ
+    fmw_event_bus_subscribe(MY_TARGET_EVENT, module);
+    return ESP_OK;
+}
+
+// ივენთების დამმუშავებელი
+static esp_err_t my_module_handle_event(module_t* module, const char *event_name, event_data_wrapper_t* data) {
+    // შევამოწმოთ ივენთის სახელი strcmp-ის გამოყენებით
+    if (strcmp(event_name, MY_TARGET_EVENT) == 0) {
+        ESP_LOGI(TAG, "My target event received!");
+        // აქ დაამუშავეთ ივენთის მონაცემები...
+    }
+    return ESP_OK;
+}
+
+// მოდულის გაშვება
+static esp_err_t my_module_start(module_t* module) {
+    ESP_LOGI(TAG, "My Module started!");
+    return ESP_OK;
 }
 
 // ... (სხვა ფუნქციების იმპლემენტაცია) ...

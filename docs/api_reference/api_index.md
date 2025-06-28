@@ -8,6 +8,7 @@
 - [core_api.md](core_api.md) — ძირითადი ბირთვის (Service Locator, Event Bus, Module Register, Factory, Configuration, Logging) API
 - [event_api.md](event_api.md) — Event Bus და custom event-ების დეტალური API
 - [configuration_api.md](configuration_api.md) — კონფიგურაციის მენეჯერის API
+- [event_payloads_api.md](event_payloads_api.md) — სტანდარტული მონაცემთა სტრუქტურები ივენთებისთვის
 
 ## Module API
 - [module_api.md](module_api.md) — მოდულების სიცოცხლის ციკლი, Service API, Event Handling, კონფიგურაცია

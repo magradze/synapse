@@ -20,6 +20,7 @@
 | ✅ ინდივიდუალური enable/disable | განსაზღვრულია მოდულის ჩართვა/გამორთვის მეთოდები |   |
 | ✅ event handler | საჭიროების შემთხვევაში რეგისტრირებულია `event_bus_subscribe()` |   |
 | ✅ სერვისის რეგისტრაცია | იყენებს `fmw_service_register()` საჭიროების შემთხვევაში |   |
+| ✅ **რესურსების გასუფთავება** | `deinit` ფუნქცია სრულად ათავისუფლებს ყველა დაკავებულ რესურსს (mutex, memory, event subscriptions). | ☐ |
 
 ## 3. Communication Integration (MQTT/WiFi/ESP-NOW)
 

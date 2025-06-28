@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
   <div class="headertitle"><div class="title">კონფიგურაციის მართვის პროცესი (Configuration Flow)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1358"></a> </p>
-<h1><a class="anchor" id="autotoc_md1359"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1369"></a> </p>
+<h1><a class="anchor" id="autotoc_md1370"></a>
 მიზანი</h1>
 <p>კონფიგურაციის მართვის მიზანია უზრუნველყოს მოდულების და სისტემის მოქნილი, სტანდარტიზებული და უსაფრთხო კონფიგურაცია, რომელიც ადვილად იკითხება, ვალიდირდება და გამოიყენება როგორც ბილდის, ასევე runtime-ის დროს.</p>
-<h1><a class="anchor" id="autotoc_md1360"></a>
+<h1><a class="anchor" id="autotoc_md1371"></a>
 კონფიგურაციის წყაროები</h1>
 <ul>
 <li><b>system_config.json</b> — მთავარი კონფიგურაციის ფაილი, სადაც აღწერილია ყველა მოდული, მათი პარამეტრები და გლობალური პარამეტრები.</li>
 <li><b>module.json</b> — თითოეული მოდულის აღწერითი და default კონფიგურაცია.</li>
 <li><b>Kconfig</b> — ბილდის დროის კონფიგურაციის პარამეტრები (enable/disable მოდულები).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1361"></a>
+<h1><a class="anchor" id="autotoc_md1372"></a>
 კონფიგურაციის სტრუქტურა</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;firmware&quot;: { ... },</div>
@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <div class="line">        ...</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1362"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1373"></a>
 კონფიგურაციის დამუშავების ეტაპები</h1>
 <ol type="1">
 <li><b>კონფიგურაციის წაკითხვა</b><ul>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <div class="line">    style D fill:#b0e0e6,stroke:#333</div>
 <div class="line">    style F fill:#b0e0e6,stroke:#333</div>
 <div class="line">    style G fill:#90ee90,stroke:#333</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1363"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1374"></a>
 კონფიგურაციის წვდომის მაგალითები</h1>
 <div class="fragment"><div class="line"><span class="comment">// სტრიქონის წაკითხვა</span></div>
 <div class="line"><span class="keywordtype">char</span> broker_url[128];</div>
@@ -184,21 +184,21 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
 <div class="line">ret = fmw_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
 <div class="ttc" id="aconfig__manager_8h_html_a35834adfd4ee7bd208e842a91d0e79d4"><div class="ttname"><a href="config__manager_8h.html#a35834adfd4ee7bd208e842a91d0e79d4">fmw_config_get_module_config</a></div><div class="ttdeci">const cJSON * fmw_config_get_module_config(const char *module_name)</div><div class="ttdoc">აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1364"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1375"></a>
 ვალიდაცია და Default მნიშვნელობები</h1>
 <ul>
 <li>ყველა მოდული ვალიდაციას გადის parse_module_config ფუნქციაში</li>
 <li>არასწორი ან არარსებული მნიშვნელობების შემთხვევაში გამოიყენება default მნიშვნელობები</li>
 <li>ყველა შეცდომა ლოგირდება</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1365"></a>
+<h1><a class="anchor" id="autotoc_md1376"></a>
 Runtime Reconfiguration</h1>
 <ul>
 <li>შესაძლებელია მოდულის კონფიგურაციის განახლება მუშაობის დროს</li>
 <li>გამოიყენება სპეციალური API: <code>module_reconfigure(module_t *module, const cJSON *new_config)</code></li>
 <li>ცვლილებები ინერგება მხოლოდ ვალიდაციის შემდეგ</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1366"></a>
+<h1><a class="anchor" id="autotoc_md1377"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>Hardcoded მნიშვნელობები კოდში</li>

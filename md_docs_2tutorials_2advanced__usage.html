@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
   <div class="headertitle"><div class="title">Advanced Usage (გაფართოებული გამოყენება)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1505"></a> </p>
-<h1><a class="anchor" id="autotoc_md1506"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1516"></a> </p>
+<h1><a class="anchor" id="autotoc_md1517"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ გამოიყენოთ Synapse Framework-ის გაფართოებული შესაძლებლობები, როგორ დააკონფიგურიროთ რთული სცენარები და როგორ მოახდინოთ სისტემის ოპტიმიზაცია.</p>
-<h1><a class="anchor" id="autotoc_md1507"></a>
+<h1><a class="anchor" id="autotoc_md1518"></a>
 1. მრავალმოდულიანი კონფიგურაცია</h1>
 <ul>
 <li>ერთზე მეტი ერთი და იმავე ტიპის მოდულის დამატება (მაგ: რამდენიმე რელე, რამდენიმე სენსორი)</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1508"></a>
+<h1><a class="anchor" id="autotoc_md1519"></a>
 2. მოდულის დინამიური ჩართვა/გამორთვა</h1>
 <ul>
 <li>მოდულის enable/disable ფუნქციების გამოყენება runtime-ზე</li>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">ssd1306_api_disable();</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1509"></a>
+<h1><a class="anchor" id="autotoc_md1520"></a>
 3. Runtime Reconfiguration</h1>
 <ul>
 <li>მოდულის კონფიგურაციის შეცვლა მუშაობის დროს</li>
@@ -141,17 +141,30 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">module_reconfigure(module, new_config);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1510"></a>
+<h1><a class="anchor" id="autotoc_md1521"></a>
 4. Custom Event-ების გამოყენება</h1>
-<ul>
-<li>საკუთარი მოვლენის განსაზღვრა და გამოყენება Event Bus-ში</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID  0x1001</span></div>
-<div class="line">event_bus_post(CUSTOM_EVENT_ID, &amp;custom_data);</div>
-<div class="line">event_bus_subscribe(CUSTOM_EVENT_ID, custom_event_handler);</div>
-</div><!-- fragment --></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1511"></a>
+<p>სისტემური ივენთების გარდა, შეგიძლიათ შექმნათ და გამოიყენოთ საკუთარი, აპლიკაციისთვის სპეციფიური ივენთები.</p>
+<p><b>ნაბიჯი 1: ივენთის სახელის განსაზღვრა</b></p>
+<p>შექმენით უნიკალური სტრიქონი თქვენი ივენთისთვის. რეკომენდებულია მისი <code>#define</code>-ით განსაზღვრა ცალკე ჰედერ ფაილში.</p>
+<div class="fragment"><div class="line"><span class="comment">// file: my_app_events.h</span></div>
+<div class="line"><span class="preprocessor">#define MY_COOL_EVENT &quot;MyCoolEvent&quot;</span></div>
+<div class="line"><span class="preprocessor">#define ANOTHER_EVENT &quot;DeviceStateChanged&quot;</span></div>
+</div><!-- fragment --><p><b>ნაბიჯი 2: ივენთის გამოქვეყნება (Posting)</b></p>
+<p>გამოიყენეთ <code>fmw_event_bus_post</code> ფუნქცია თქვენი ივენთის გასაგზავნად.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;my_app_events.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> do_something_and_notify() {</div>
+<div class="line">    <span class="comment">// ... რაიმე ლოგიკა ...</span></div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Posting my cool event!&quot;</span>);</div>
+<div class="line">    <span class="comment">// მეორე პარამეტრი (payload) არის NULL, რადგან მონაცემებს არ ვაგზავნით.</span></div>
+<div class="line">    <a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(MY_COOL_EVENT, NULL);</div>
+<div class="line">}</div>
+<div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
+<div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის Public API.</div></div>
+</div><!-- fragment --><p><b>ნაბიჯი 3: ივენთის გამოწერა და დამუშავება</b></p>
+<p>სხვა მოდულს შეუძლია გამოიწეროს ეს ივენთი და დაამუშავოს ის <code>handle_event</code> ფუნქციაში, როგორც ეს "პირველი მოდულის შექმნის" გაკვეთილშია ნაჩვენები.</p>
+<h1><a class="anchor" id="autotoc_md1522"></a>
 5. მოდულის სტატუსის მონიტორინგი</h1>
 <ul>
 <li>გამოიყენეთ get_status API მოდულის მდგომარეობის მისაღებად</li>
@@ -163,13 +176,13 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">მოდულის შესაძლო სტატუსების ენუმერაცია.</div><div class="ttdef"><b>Definition</b> base_module.h:34</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1512"></a>
+<h1><a class="anchor" id="autotoc_md1523"></a>
 6. ოპტიმიზაცია და რესურსების მართვა</h1>
 <ul>
 <li>გამოიყენეთ ლოგირება და performance monitoring</li>
 <li>ყურადღება მიაქციეთ მეხსიერების გამოყენებას და task-ების რაოდენობას</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1513"></a>
+<h1><a class="anchor" id="autotoc_md1524"></a>
 7. Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ public API-ები</li>

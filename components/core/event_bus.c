@@ -1,16 +1,17 @@
 /**
  * @file event_bus.c
  * @brief Event Bus კომპონენტის იმპლემენტაცია.
- * @version 2.0
- * @date 2025-06-25
+ * @version 2.1
+ * @date 2025-06-27
  * @author Giorgi Magradze
  * @details ეს ფაილი შეიცავს Event Bus-ის იმპლემენტაციას, რომელიც ამუშავებს
  *          ასინქრონულ ივენთებს FreeRTOS-ის რიგებისა და ტასკების გამოყენებით.
  */
 #include "event_bus.h"
 #include "logging.h"
-#include "base_module.h"        // საჭიროა module_t სტრუქტურის სრული დეფინიციისთვის
-#include "framework_config.h"   // Kconfig-ის პარამეტრებისთვის
+#include "base_module.h"
+#include "event_data_wrapper.h" // <--- დამატებულია სრული განმარტებისთვის
+#include "framework_config.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 #include "freertos/semphr.h"
@@ -27,7 +28,7 @@ DEFINE_COMPONENT_TAG("EVENT_BUS");
  * @brief აღწერს ერთ გამომწერს (მოდულს).
  */
 typedef struct {
-    struct module_t *module; /**< @brief მაჩვენებელი გამომწერ მოდულზე. */
+    module_t *module; /**< @brief მაჩვენებელი გამომწერ მოდულზე. */
 } event_subscriber_t;
 
 /**
@@ -41,10 +42,22 @@ typedef struct {
 
 /**
  * @internal
+ * @brief გამოწერის კვანძი, რომელიც აკავშირებს ივენთის სახელს გამომწერების სიასთან.
+ *        გამოიყენება დაკავშირებულ სიაში.
+ */
+typedef struct event_subscription_node_t
+{
+    char *event_name;                            /**< @brief ივენთის უნიკალური სახელი. */
+    event_subscription_list_t subscription_list; /**< @brief ამ ივენთის გამომწერების სია. */
+    struct event_subscription_node_t *next;      /**< @brief მაჩვენებელი შემდეგ კვანძზე სიაში. */
+} event_subscription_node_t;
+
+/**
+ * @internal
  * @brief აღწერს ერთ ივენთს, რომელიც იგზავნება რიგში.
  */
 typedef struct {
-    core_framework_event_id_t event_id;         /**< @brief ივენთის ID. */
+    char *event_name;                   /**< @brief ივენთის სახელი (დინამიურად გამოყოფილი). */
     event_data_wrapper_t *data_wrapper; /**< @brief მაჩვენებელი ივენთის მონაცემებზე. */
 } event_message_t;
 
@@ -52,101 +65,239 @@ typedef struct {
 
 /**
  * @internal
- * @brief გამოწერების სიების დინამიური მასივი. ინდექსი არის event_id.
+ * @brief გამოწერების დაკავშირებული სიის თავი.
  */
-static event_subscription_list_t **event_subscriptions = NULL;
-static size_t event_subscriptions_capacity = 0;
+static event_subscription_node_t *subscription_head = NULL;
 
 static QueueHandle_t event_bus_queue = NULL;
 static SemaphoreHandle_t subscription_mutex = NULL;
 
 // --- შიდა ფუნქციების წინასწარი დეკლარაცია ---
 static void event_bus_task(void *pvParameters);
-static esp_err_t ensure_subscription_capacity(core_framework_event_id_t event_id);
-
+static void remove_subscriber(event_subscription_list_t *sub_list, int index);
+static void dispatch_event_to_subscribers(const event_message_t *msg);
+static event_subscription_node_t *find_subscription_node(const char *event_name, bool create_if_not_found);
 
 /**
  * @internal
- * @brief Event Bus-ის მთავარი ტასკი, რომელიც ამუშავებს ივენთებს.
- * @details ეს ტასკი უსასრულოდ ელოდება `event_bus_queue`-ში ახალ შეტყობინებას.
- *          როდესაც შეტყობინება მიიღება, ის უსაფრთხოდ (mutex-ის ქვეშ) ქმნის
- *          გამომწერების სიის ასლს და ამ ასლზე დაყრდნობით აგზავნის ივენთებს,
- *          რათა თავიდან აიცილოს race condition-ები გამოწერების სიის ცვლილებისას.
- * @param pvParameters არგუმენტები ტასკისთვის (არ გამოიყენება).
+ * @brief Event Bus-ის მთავარი ტასკი, რომელიც ამუშავებს ივენთებს რიგიდან.
  */
-static void event_bus_task(void *pvParameters) {
+static void event_bus_task(void *pvParameters)
+{
+    (void)pvParameters; // კომპილერის გაფრთხილების თავიდან ასაცილებლად
     event_message_t msg;
-    while (1) {
-        if (xQueueReceive(event_bus_queue, &msg, portMAX_DELAY) == pdPASS) {
-            ESP_LOGD(TAG, "Processing event ID: %d", msg.event_id);
+    while (1)
+    {
+        if (xQueueReceive(event_bus_queue, &msg, portMAX_DELAY) == pdPASS)
+        {
+            ESP_LOGD(TAG, "Processing event: '%s'", msg.event_name);
 
-            event_subscription_list_t local_sub_list;
-            bool list_found = false;
+            dispatch_event_to_subscribers(&msg);
 
-            // კრიტიკული სექცია: წავიკითხოთ გამომწერების სია უსაფრთხოდ
-            if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE) {
-                if (msg.event_id < event_subscriptions_capacity && event_subscriptions[msg.event_id] != NULL) {
-                    // შევქმნათ ლოკალური ასლი, რათა მალე გავათავისუფლოთ mutex-ი
-                    memcpy(&local_sub_list, event_subscriptions[msg.event_id], sizeof(event_subscription_list_t));
-                    list_found = true;
-                }
-                xSemaphoreGive(subscription_mutex);
-            }
-
-            if (list_found) {
-                ESP_LOGD(TAG, "Dispatching event %d to %d subscribers", msg.event_id, local_sub_list.count);
-                // ვიმუშაოთ ლოკალურ ასლთან
-                for (int i = 0; i < local_sub_list.count; i++) {
-                    event_subscriber_t *sub = &local_sub_list.subscribers[i];
-                    if (sub->module && sub->module->base.handle_event) {
-                        if (msg.data_wrapper) {
-                            fmw_event_data_acquire(msg.data_wrapper); // გავზარდოთ ref_count თითოეული მიმღებისთვის
-                        }
-                        sub->module->base.handle_event(sub->module, msg.event_id, msg.data_wrapper);
-                    }
-                }
-            }
+            // გავათავისუფლოთ ივენთის სახელისთვის გამოყოფილი მეხსიერება
+            free(msg.event_name);
+            msg.event_name = NULL;
 
             // გავათავისუფლოთ საწყისი reference, რომელიც `post` ფუნქციამ შექმნა
-            if (msg.data_wrapper) {
+            if (msg.data_wrapper)
+            {
                 fmw_event_data_release(msg.data_wrapper);
             }
         }
     }
 }
 
+/**
+ * @internal
+ * @brief აგზავნის ერთ ივენთს ყველა შესაბამის გამომწერთან.
+ * @details ეს ფუნქცია ეძებს როგორც კონკრეტულ (`event_name`), ისე ზოგად (`*`)
+ *          გამომწერებს. რათა მინიმუმამდე დაიყვანოს Mutex-ის დაკავების დრო
+ *          და თავიდან აიცილოს `race condition`-ები, ის ჯერ ქმნის გამომწერების
+ *          სიების ლოკალურ ასლებს და მხოლოდ ამის შემდეგ იძახებს მათ `handle_event`
+ *          ფუნქციებს.
+ *
+ * @param[in] msg მაჩვენებელი გასაგზავნ ივენთის შეტყობინებაზე (`event_message_t`).
+ */
+static void dispatch_event_to_subscribers(const event_message_t *msg)
+{
+    if (!msg || !msg->event_name)
+    {
+        return; // დავიცვათ თავი NULL მაჩვენებლებისგან
+    }
+
+    event_subscription_list_t specific_subs_copy;
+    event_subscription_list_t wildcard_subs_copy;
+    bool specific_found = false;
+    bool wildcard_found = false;
+
+    // --- კრიტიკული სექციის დასაწყისი ---
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    {
+        event_subscription_node_t *node = subscription_head;
+        while (node != NULL)
+        {
+            // 1. ვეძებთ კონკრეტული ივენთის გამომწერებს
+            if (strcmp(node->event_name, msg->event_name) == 0)
+            {
+                memcpy(&specific_subs_copy, &node->subscription_list, sizeof(event_subscription_list_t));
+                specific_found = true;
+            }
+            // 2. ვეძებთ wildcard ("*") გამომწერებს
+            else if (strcmp(node->event_name, "*") == 0)
+            {
+                memcpy(&wildcard_subs_copy, &node->subscription_list, sizeof(event_subscription_list_t));
+                wildcard_found = true;
+            }
+            node = node->next;
+        }
+        xSemaphoreGive(subscription_mutex);
+    }
+    else
+    {
+        ESP_LOGE(TAG, "დისპეტჩერმა ვერ შეძლო Mutex-ის დაკავება ივენთისთვის: '%s'", msg->event_name);
+        return; // თუ Mutex-ს ვერ ვიღებთ, ოპერაციას ვაუქმებთ
+    }
+    // --- კრიტიკული სექციის დასასრული ---
+
+    // --- ივენთების გაგზავნა (Mutex-ის გარეთ) ---
+
+    // 3. ჯერ ვუგზავნით კონკრეტულ გამომწერებს
+    if (specific_found)
+    {
+        ESP_LOGD(TAG, "ივენთის '%s' გაგზავნა %d კონკრეტულ გამომწერზე", msg->event_name, specific_subs_copy.count);
+        for (int i = 0; i < specific_subs_copy.count; i++)
+        {
+            event_subscriber_t *sub = &specific_subs_copy.subscribers[i];
+            if (sub->module && sub->module->base.handle_event)
+            {
+                if (msg->data_wrapper)
+                {
+                    fmw_event_data_acquire(msg->data_wrapper);
+                }
+                sub->module->base.handle_event(sub->module, msg->event_name, msg->data_wrapper);
+            }
+        }
+    }
+
+    // 4. შემდეგ ვუგზავნით wildcard გამომწერებს (მაგ. ლოგერს)
+    if (wildcard_found)
+    {
+        ESP_LOGD(TAG, "ივენთის '%s' გაგზავნა %d ზოგად (wildcard) გამომწერზე", msg->event_name, wildcard_subs_copy.count);
+        for (int i = 0; i < wildcard_subs_copy.count; i++)
+        {
+            event_subscriber_t *sub = &wildcard_subs_copy.subscribers[i];
+            // დავრწმუნდეთ, რომ კონკრეტულმა გამომწერმა ივენთი მეორედ არ მიიღო
+            bool already_sent = false;
+            if (specific_found)
+            {
+                for (int j = 0; j < specific_subs_copy.count; j++)
+                {
+                    if (specific_subs_copy.subscribers[j].module == sub->module)
+                    {
+                        already_sent = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!already_sent && sub->module && sub->module->base.handle_event)
+            {
+                if (msg->data_wrapper)
+                {
+                    fmw_event_data_acquire(msg->data_wrapper);
+                }
+                sub->module->base.handle_event(sub->module, msg->event_name, msg->data_wrapper);
+            }
+        }
+    }
+}
 
 /**
  * @internal
- * @brief უზრუნველყოფს, რომ გამოწერების მასივი საკმარისი ზომისაა მითითებული event_id-სთვის.
- * @details ეს ფუნქცია უნდა გამოიძახოს მხოლოდ `mutex`-ით დაცულ კრიტიკულ სექციაში.
- * @param event_id შესამოწმებელი ივენთის ID.
- * @return esp_err_t ოპერაციის სტატუსი.
+ * @brief პოულობს გამოწერის კვანძს ივენთის სახელის მიხედვით.
+ * @param event_name მოსაძებნი ივენთის სახელი.
+ * @param create_if_not_found თუ true, შექმნის ახალ კვანძს თუ ვერ იპოვა.
+ * @return მაჩვენებელი ნაპოვნ ან ახლად შექმნილ კვანძზე, ან NULL თუ ვერ იპოვა და create_if_not_found არის false.
+ * @note ეს ფუნქცია უნდა გამოიძახოს მხოლოდ subscription_mutex-ის დაცულ კრიტიკულ სექციაში.
  */
-static esp_err_t ensure_subscription_capacity(core_framework_event_id_t event_id) {
-    if (event_id >= event_subscriptions_capacity) {
-        size_t new_capacity = event_id + 16; // გაზრდის სტრატეგია
-        ESP_LOGI(TAG, "Resizing subscription array from %d to %d", event_subscriptions_capacity, new_capacity);
-        
-        event_subscription_list_t **new_array = realloc(event_subscriptions, new_capacity * sizeof(event_subscription_list_t *));
-        if (!new_array) {
-            ESP_LOGE(TAG, "Failed to reallocate memory for subscriptions!");
-            return ESP_ERR_NO_MEM;
+static event_subscription_node_t *find_subscription_node(const char *event_name, bool create_if_not_found)
+{
+    event_subscription_node_t *node = subscription_head;
+    event_subscription_node_t *prev = NULL;
+
+    // კვანძის ძებნა
+    while (node != NULL)
+    {
+        if (strcmp(node->event_name, event_name) == 0)
+        {
+            return node;
         }
-        
-        // ახალი მეხსიერების განულება
-        memset(&new_array[event_subscriptions_capacity], 0, (new_capacity - event_subscriptions_capacity) * sizeof(event_subscription_list_t *));
-        
-        event_subscriptions = new_array;
-        event_subscriptions_capacity = new_capacity;
+        prev = node;
+        node = node->next;
     }
-    return ESP_OK;
+
+    // თუ კვანძი ვერ მოიძებნა და საჭიროა მისი შექმნა
+    if (create_if_not_found)
+    {
+        event_subscription_node_t *new_node = (event_subscription_node_t *)calloc(1, sizeof(event_subscription_node_t));
+        if (!new_node)
+        {
+            ESP_LOGE(TAG, "Failed to allocate memory for new subscription node for event '%s'", event_name);
+            return NULL;
+        }
+
+        new_node->event_name = strdup(event_name);
+        if (!new_node->event_name)
+        {
+            ESP_LOGE(TAG, "Failed to duplicate event name string for '%s'", event_name);
+            free(new_node);
+            return NULL;
+        }
+
+        // ახალი კვანძის დამატება სიის ბოლოში (ან თავში თუ სია ცარიელია)
+        if (prev == NULL)
+        {
+            subscription_head = new_node;
+        }
+        else
+        {
+            prev->next = new_node;
+        }
+        ESP_LOGD(TAG, "Created new subscription node for event '%s'", event_name);
+        return new_node;
+    }
+
+    return NULL;
+}
+
+/**
+ * @internal
+ * @brief შლის გამომწერს სიიდან მითითებულ ინდექსზე.
+ */
+static void remove_subscriber(event_subscription_list_t *sub_list, int index)
+{
+    if (sub_list == NULL || index < 0 || (unsigned int)index >= sub_list->count)
+    {
+        return;
+    }
+    // ელემენტების მარცხნივ გადაწევა სიცარიელის ამოსავსებლად
+    for (uint8_t i = (uint8_t)index; i < sub_list->count - 1; i++)
+    {
+        sub_list->subscribers[i] = sub_list->subscribers[i + 1];
+    }
+    sub_list->count--;
 }
 
 // --- საჯარო API ფუნქციები ---
 
 esp_err_t fmw_event_bus_init(void) {
     ESP_LOGI(TAG, "Initializing Event Bus...");
+    if (subscription_mutex != NULL)
+    {
+        ESP_LOGW(TAG, "Event Bus is already initialized.");
+        return ESP_ERR_INVALID_STATE;
+    }
+
     subscription_mutex = xSemaphoreCreateMutex();
     if (!subscription_mutex) {
         ESP_LOGE(TAG, "Failed to create subscription mutex.");
@@ -161,20 +312,13 @@ esp_err_t fmw_event_bus_init(void) {
         return ESP_ERR_NO_MEM;
     }
 
-    // საწყისი მეხსიერების გამოყოფა
-    event_subscriptions_capacity = 32; // საწყისი ზომა
-    event_subscriptions = calloc(event_subscriptions_capacity, sizeof(event_subscription_list_t *));
-     if (!event_subscriptions) {
-        ESP_LOGE(TAG, "Failed to allocate initial subscription array.");
-        vQueueDelete(event_bus_queue);
-        vSemaphoreDelete(subscription_mutex);
-        return ESP_ERR_NO_MEM;
-    }
+    // აღარ არის საჭირო `event_subscriptions` მასივის წინასწარი გამოყოფა
+    subscription_head = NULL;
 
     BaseType_t result = xTaskCreate(event_bus_task, "event_bus_task", CONFIG_FMW_EVENT_BUS_TASK_STACK_SIZE, NULL, CONFIG_FMW_EVENT_BUS_TASK_PRIORITY, NULL);
     if (result != pdPASS) {
         ESP_LOGE(TAG, "Failed to create event bus task.");
-        free(event_subscriptions);
+        // აქ საჭიროა გამოწერების სიის გასუფთავება, თუმცა ამ ეტაპზე ის ყოველთვის ცარიელია.
         vQueueDelete(event_bus_queue);
         vSemaphoreDelete(subscription_mutex);
         return ESP_FAIL;
@@ -183,25 +327,33 @@ esp_err_t fmw_event_bus_init(void) {
     return ESP_OK;
 }
 
-esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper) {
-    if (event_id >= MAX_CORE_FRAMEWORK_EVENT) { // ვალიდაცია
-        ESP_LOGE(TAG, "Invalid event ID: %d", event_id);
+esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)
+{
+    if (!event_name || strlen(event_name) == 0)
+    {
+        ESP_LOGE(TAG, "Invalid event name: NULL or empty string.");
         return ESP_ERR_INVALID_ARG;
     }
-    
+
+    char *event_name_copy = strdup(event_name);
+    if (!event_name_copy)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate event name '%s'. Out of memory.", event_name);
+        return ESP_ERR_NO_MEM;
+    }
+
     event_message_t msg = {
-        .event_id = event_id,
+        .event_name = event_name_copy,
         .data_wrapper = data_wrapper,
     };
-    
-    // გაგზავნამდე გავზარდოთ ref_count, რადგან ტასკი მას გამოიყენებს
+
     if (data_wrapper) {
         fmw_event_data_acquire(data_wrapper);
     }
 
     if (xQueueSend(event_bus_queue, &msg, pdMS_TO_TICKS(CONFIG_FMW_TASK_QUEUE_TIMEOUT_MS)) != pdPASS) {
-        ESP_LOGE(TAG, "Failed to post event %d. Queue might be full.", event_id);
-        // თუ გაგზავნა ვერ მოხერხდა, დავაკლოთ ref_count
+        ESP_LOGE(TAG, "Failed to post event '%s'. Queue might be full.", event_name);
+        free(event_name_copy); // გავათავისუფლოთ ასლი თუ რიგში ვერ ჩაიწერა
         if (data_wrapper) {
             fmw_event_data_release(data_wrapper);
         }
@@ -210,55 +362,121 @@ esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrap
     return ESP_OK;
 }
 
-esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module) {
-    if (!module || module->name[0] == '\0') {
+esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
+{
+    if ((!event_name || strlen(event_name) == 0) && (!event_name || strcmp(event_name, "*") != 0))
+    {
+        ESP_LOGE(TAG, "Subscribe failed: event_name is NULL or empty.");
         return ESP_ERR_INVALID_ARG;
     }
-    
+    if (!module || !module->base.handle_event)
+    {
+        ESP_LOGE(TAG, "Subscribe failed: module or its event handler is NULL.");
+        return ESP_ERR_INVALID_ARG;
+    }
+
     esp_err_t ret = ESP_OK;
-    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE) {
-        // 1. დავრწმუნდეთ, რომ მასივი საკმარისი ზომისაა
-        ret = ensure_subscription_capacity(event_id);
-        if (ret != ESP_OK) {
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    {
+        event_subscription_node_t *node = find_subscription_node(event_name, true);
+        if (!node)
+        {
             xSemaphoreGive(subscription_mutex);
-            return ret;
+            return ESP_ERR_NO_MEM; // find_subscription_node-მა უკვე დაწერა ლოგი
         }
 
-        // 2. შევქმნათ გამოწერების სია, თუ ის არ არსებობს
-        if (event_subscriptions[event_id] == NULL) {
-            event_subscriptions[event_id] = calloc(1, sizeof(event_subscription_list_t));
-            if (!event_subscriptions[event_id]) {
-                ESP_LOGE(TAG, "Failed to allocate memory for subscription list for event %d", event_id);
-                xSemaphoreGive(subscription_mutex);
-                return ESP_ERR_NO_MEM;
-            }
-        }
-        
-        event_subscription_list_t *sub_list = event_subscriptions[event_id];
-        
-        // 3. შევამოწმოთ, ხომ არ არის უკვე გამოწერილი
+        event_subscription_list_t *sub_list = &node->subscription_list;
+
+        // შევამოწმოთ, მოდული უკვე გამოწერილი ხომ არ არის
         for (uint8_t i = 0; i < sub_list->count; i++) {
             if (sub_list->subscribers[i].module == module) {
-                ESP_LOGW(TAG, "Module '%s' is already subscribed to event %d", module->name, event_id);
+                ESP_LOGW(TAG, "Module '%s' is already subscribed to event '%s'", module->name, event_name);
                 xSemaphoreGive(subscription_mutex);
-                return ESP_OK; // უკვე გამოწერილია, შეცდომა არ არის
+                return ESP_OK; // არ არის შეცდომა, უბრალოდ უკვე გამოწერილია
             }
         }
 
-        // 4. დავამატოთ ახალი გამომწერი, თუ ლიმიტი არ არის მიღწეული
+        // ახალი გამომწერის დამატება
         if (sub_list->count < CONFIG_FMW_MAX_SUBSCRIBERS_PER_EVENT) {
             sub_list->subscribers[sub_list->count].module = module;
             sub_list->count++;
-            ESP_LOGI(TAG, "Module '%s' subscribed successfully to event ID %d", module->name, event_id);
+            ESP_LOGI(TAG, "Module '%s' subscribed successfully to event '%s'", module->name, event_name);
         } else {
-            ESP_LOGE(TAG, "Cannot subscribe module '%s' to event %d. Subscriber limit reached.", module->name, event_id);
+            ESP_LOGE(TAG, "Cannot subscribe module '%s' to event '%s'. Subscriber limit reached.", module->name, event_name);
             ret = ESP_ERR_NO_MEM;
         }
         
         xSemaphoreGive(subscription_mutex);
-    } else {
-        ESP_LOGE(TAG, "Failed to acquire subscription mutex for module '%s' and event %d", module->name, event_id);
+    }
+    else
+    {
+        ESP_LOGE(TAG, "Failed to acquire subscription mutex for module '%s' and event '%s'", module->name, event_name);
         ret = ESP_ERR_TIMEOUT;
     }
+    return ret;
+}
+
+esp_err_t fmw_event_bus_unsubscribe(const char *event_name, module_t *module)
+{
+    if (!event_name || strlen(event_name) == 0 || !module)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to acquire subscription mutex for unsubscribe (module '%s', event '%s')", module->name, event_name);
+        return ESP_ERR_TIMEOUT;
+    }
+
+    esp_err_t ret = ESP_ERR_NOT_FOUND;
+    event_subscription_node_t *node = subscription_head;
+    event_subscription_node_t *prev = NULL;
+
+    while (node != NULL)
+    {
+        if (strcmp(node->event_name, event_name) == 0)
+        {
+            event_subscription_list_t *sub_list = &node->subscription_list;
+            for (int i = 0; i < sub_list->count; i++)
+            {
+                if (sub_list->subscribers[i].module == module)
+                {
+                    remove_subscriber(sub_list, i);
+                    ESP_LOGI(TAG, "Module '%s' unsubscribed successfully from event '%s'", module->name, event_name);
+                    ret = ESP_OK;
+
+                    // თუ ამ ივენთს გამომწერები აღარ დარჩა, წავშალოთ კვანძი
+                    if (sub_list->count == 0)
+                    {
+                        ESP_LOGD(TAG, "Removing empty subscription node for event '%s'", event_name);
+                        if (prev == NULL)
+                        { // თუ პირველი ელემენტია
+                            subscription_head = node->next;
+                        }
+                        else
+                        {
+                            prev->next = node->next;
+                        }
+                        free(node->event_name);
+                        free(node);
+                    }
+                    goto cleanup; // გამოვიდეთ ორივე ციკლიდან
+                }
+            }
+            // თუ ციკლი დასრულდა და მოდული ვერ ვიპოვეთ ამ კვანძში
+            goto cleanup;
+        }
+        prev = node;
+        node = node->next;
+    }
+
+cleanup:
+    if (ret == ESP_ERR_NOT_FOUND)
+    {
+        ESP_LOGW(TAG, "Module '%s' was not subscribed to event '%s'", module->name, event_name);
+    }
+
+    xSemaphoreGive(subscription_mutex);
     return ret;
 }

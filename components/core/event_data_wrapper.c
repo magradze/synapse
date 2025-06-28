@@ -18,7 +18,7 @@
 
 DEFINE_COMPONENT_TAG("EVENT_WRAPPER");
 
-esp_err_t fmw_event_data_wrap(void* payload, void (*free_fn)(void* payload), event_data_wrapper_t** wrapper_out)
+esp_err_t fmw_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)
 {
     if (!payload || !wrapper_out)
     {
@@ -41,7 +41,7 @@ esp_err_t fmw_event_data_wrap(void* payload, void (*free_fn)(void* payload), eve
         return ESP_ERR_NO_MEM;
     }
 
-    wrapper->payload = payload;
+    wrapper->payload = (void *)payload;
     wrapper->ref_count = 1; // საწყისი მფლობელი არის გამომძახებელი.
     wrapper->free_payload_fn = free_fn;
 

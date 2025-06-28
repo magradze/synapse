@@ -1,27 +1,25 @@
 /**
  * @file event_bus.h
- * @brief Event Bus კომპონენტის API
- * @version 1.0
- * @date 2025-06-24
+ * @brief Event Bus კომპონენტის Public API.
+ * @version 2.0
+ * @date 2025-06-27
  * @author Giorgi Magradze
  * @details ეს კომპონენტი უზრუნველყოფს ასინქრონული შეტყობინებების (events) მართვის
- *          მექანიზმს. მოდულებს შეუძლიათ გამოიწერონ კონკრეტული ტიპის ივენთები
- *          და მიიღონ შეტყობინება, როდესაც რომელიმე სხვა მოდული გამოაქვეყნებს
- *          ამ ივენთს. ეს ხელს უწყობს მოდულების ერთმანეთისგან იზოლირებას.
+ *          მექანიზმს სტრიქონზე დაფუძნებული ივენთების სახელების გამოყენებით.
+ *          მოდულებს შეუძლიათ გამოიწერონ კონკრეტული ივენთები და მიიღონ
+ *          შეტყობინება, როდესაც რომელიმე სხვა მოდული გამოაქვეყნებს ამ ივენთს.
+ *          ეს ხელს უწყობს მოდულების მაქსიმალურ იზოლაციასა და დინამიურ გაფართოებას.
  */
 
-#ifndef EVENT_BUS_H
-#define EVENT_BUS_H
+#ifndef FMW_EVENT_BUS_H
+#define FMW_EVENT_BUS_H
 
 #include <stddef.h>
 #include "esp_err.h"
 
-// Forward declaration of the module_t struct
+// Forward declarations to avoid circular dependencies
 struct module_t;
-
-// --- Framework Contracts ---
-#include "event_data_wrapper.h"
-#include "system_event_ids.h"
+struct event_data_wrapper_t;
 
 /**
  * @brief Event Bus-ის ინიციალიზაცია და ფონური ტასკის გაშვება.
@@ -42,35 +40,50 @@ esp_err_t fmw_event_bus_init(void);
  *
  * @details ეს ფუნქცია ამატებს ივენთს და მის თანდართულ მონაცემებს (თუ არსებობს)
  *          Event Bus-ის რიგში. ფონური ტასკი შემდგომში ამ ივენთს მიაწვდის
- *          ყველა იმ მოდულს, რომელსაც გამოწერილი აქვს ეს event_id.
+ *          ყველა იმ მოდულს, რომელსაც გამოწერილი აქვს ეს event_name.
  *
- * @param[in] event_id ივენთის უნიკალური იდენტიფიკატორი.
+ * @param[in] event_name ივენთის უნიკალური სახელი (სტრიქონი).
  * @param[in] data_wrapper მაჩვენებელი "შეფუთულ" მონაცემებზე. თუ ივენთს მონაცემები
  *                         არ სჭირდება, ეს პარამეტრი უნდა იყოს NULL.
- *                         მნიშვნელოვანია: Event Bus არ არის პასუხისმგებელი ამ
- *                         მეხსიერების განთავისუფლებაზე. გამომძახებელმა ან
- *                         მიმღებმა უნდა იზრუნოს ამაზე.
  *
  * @return esp_err_t ოპერაციის წარმატების კოდი.
  * @retval ESP_OK თუ ივენთი წარმატებით დაემატა რიგში.
- * @retval ESP_FAIL თუ რიგი სავსეა ან სხვა შეცდომა მოხდა.
+ * @retval ESP_ERR_NO_MEM თუ მეხსიერება ვერ გამოიყო ივენთის სახელის კოპირებისთვის.
+ * @retval ESP_FAIL თუ რიგი სავსეა.
  */
-esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper);
+esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper);
 
 /**
  * @brief არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.
  *
- * @details როდესაც მითითებული `event_id`-ის მქონე ივენთი გამოქვეყნდება,
- *          Event Bus გამოიძახებს ამ `module`-ის `on_event` ფუნქციას.
+ * @details როდესაც მითითებული `event_name`-ის მქონე ივენთი გამოქვეყნდება,
+ *          Event Bus გამოიძახებს ამ `module`-ის `handle_event` ფუნქციას.
  *
- * @param[in] event_id ივენთის ID, რომელზეც გამოწერა ხდება.
+ * @param[in] event_name ივენთის უნიკალური სახელი (სტრიქონი), რომელზეც გამოწერა ხდება.
  * @param[in] module მაჩვენებელი მოდულზე, რომელიც ამ ივენთს გამოიწერს.
  *
  * @return esp_err_t ოპერაციის წარმატების კოდი.
- * @retval ESP_OK თუ გამოწერა წარმატებით შესრულდა.
+ * @retval ESP_OK თუ გამოწერა წარმატებით შესრულდა (ან მოდული უკვე გამოწერილი იყო).
  * @retval ESP_ERR_NO_MEM თუ მეხსიერება არასაკმარისია ახალი გამომწერის დასამატებლად.
- * @retval ESP_ERR_INVALID_ARG თუ `module` არასწორია.
+ * @retval ESP_ERR_INVALID_ARG თუ `module` ან `event_name` არასწორია.
  */
-esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module);
+esp_err_t fmw_event_bus_subscribe(const char *event_name, struct module_t *module);
 
-#endif // EVENT_BUS_H
+/**
+ * @brief აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★
+ *
+ * @details ეს ფუნქცია უნდა გამოიძახოს მოდულის `deinit` ფუნქციამ, რათა უსაფრთხოდ
+ *          მოიხსნას გამოწერა და თავიდან ავიცილოთ შეცდომები, რომლებიც დაკავშირებულია
+ *          განადგურებული მოდულის გამოძახების მცდელობასთან.
+ *
+ * @param[in] event_name ივენთის უნიკალური სახელი (სტრიქონი).
+ * @param[in] module მაჩვენებელი მოდულზე, რომელიც აუქმებს გამოწერას.
+ *
+ * @return esp_err_t
+ * @retval ESP_OK თუ გამოწერა წარმატებით გაუქმდა.
+ * @retval ESP_ERR_NOT_FOUND თუ მოდული არ იყო გამოწერილი ამ ივენთზე.
+ * @retval ESP_ERR_INVALID_ARG თუ პარამეტრები არასწორია.
+ */
+esp_err_t fmw_event_bus_unsubscribe(const char *event_name, struct module_t *module);
+
+#endif // FMW_EVENT_BUS_H

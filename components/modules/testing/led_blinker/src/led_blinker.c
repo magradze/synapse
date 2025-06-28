@@ -53,8 +53,8 @@ static esp_err_t led_blinker_start(module_t *self);
 static esp_err_t led_blinker_enable(module_t *self);
 static esp_err_t led_blinker_disable(module_t *self);
 static esp_err_t led_blinker_reconfigure(module_t *self, const cJSON *new_config);
-static module_status_t led_blinker_get_status(module_t *self);
-static void led_blinker_handle_event(module_t *self, core_framework_event_id_t event_id, void *event_data);
+static void led_blinker_handle_event(module_t *self, const char *event_name, void *event_data);
+static int led_blinker_event_wrapper(module_t *self, const char *event_name, struct event_data_wrapper_t *event_data);
 
 module_t *led_blinker_create(const cJSON *config)
 {
@@ -78,9 +78,8 @@ module_t *led_blinker_create(const cJSON *config)
     module->base.base.enable = led_blinker_enable;
     module->base.base.disable = led_blinker_disable;
     module->base.base.reconfigure = led_blinker_reconfigure;
-    module->base.base.get_status = led_blinker_get_status;
     module->base.base.handle_event = led_blinker_handle_event;
-    
+
     // Set default configuration
     strncpy(module->base.name, 
 #ifdef CONFIG_LED_BLINKER_DEFAULT_INSTANCE_NAME
@@ -233,20 +232,28 @@ static esp_err_t led_blinker_disable(module_t *self)
     return ESP_OK;
 }
 
-static module_status_t led_blinker_get_status(module_t *self)
+/* static module_status_t led_blinker_get_status(module_t *self)
 {
     if (!self) {
         return MODULE_STATUS_ERROR;
     }
     return self->status;
-}
-
-static void led_blinker_handle_event(module_t *self, core_framework_event_id_t event_id, void *event_data)
+} */
+static void led_blinker_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     (void)self;
-    (void)event_id;
+    (void)event_name;
     (void)event_data;
     // ამ ეტაპზე სპეციალური event handling საჭირო არ არის
+}
+
+// Wrapper to match module_event_handler_fn signature
+static int led_blinker_event_wrapper(module_t *self, const char *event_name, struct event_data_wrapper_t *event_data)
+{
+    // If you want to map event_name to core_framework_event_id_t, do it here.
+    // For now, just call the original handler with dummy values.
+    led_blinker_handle_event(self, 0, NULL);
+    return 0;
 }
 
 static esp_err_t led_blinker_reconfigure(module_t *self, const cJSON *new_config)

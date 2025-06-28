@@ -60,9 +60,24 @@ extern "C"
    * @retval ESP_ERR_INVALID_STATE თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია.
    * @retval ESP_ERR_TIMEOUT თუ mutex-ის დაკავება ვერ მოხერხდა.
    */
-  esp_err_t fmw_service_register(const char *service_name,
-                                 fmw_service_type_t service_type,
-                                 service_handle_t service_handle);
+  esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle);
+
+  /**
+   * @brief სერვისის რეგისტრაციის გაუქმება მისი სახელით.
+   *
+   * ეს ფუნქცია შლის მითითებული სახელის მქონე სერვისს სერვის ლოკატორიდან,
+   * რის შემდეგაც ის აღარ იქნება ხელმისაწვდომი მოძიებისთვის ან გამოყენებისთვის.
+   * თუ სერვისი ვერ მოიძებნა, დაბრუნდება შესაბამისი შეცდომის კოდი.
+   *
+   * @param[in] service_name სერვისის სახელი, რომლის რეგისტრაციაც უნდა გაუქმდეს. უნდა იყოს null-ით დასრულებული სტრიქონი.
+   *
+   * @return
+   *      - ESP_OK: სერვისი წარმატებით გაუქმდა.
+   *      - ESP_ERR_NOT_FOUND: მითითებული სახელის მქონე სერვისი ვერ მოიძებნა.
+   *      - ESP_ERR_INVALID_ARG: service_name არგუმენტი არის NULL ან არასწორია.
+   *      - სხვა esp_err_t კოდები საჭიროებისამებრ.
+   */
+  esp_err_t fmw_service_unregister(const char *service_name);
 
   /**
    * @brief აბრუნებს რეგისტრირებულ სერვისს სახელით
@@ -73,7 +88,8 @@ extern "C"
    * @retval სერვისის API სტრუქტურაზე მაჩვენებელი თუ სერვისი მოიძებნა
    * @retval NULL თუ ასეთი სახელით სერვისი არ არის რეგისტრირებული
    */
-  service_handle_t fmw_service_get(const char *service_name);
+  service_handle_t
+  fmw_service_get(const char *service_name);
 
   /**
    * @brief აბრუნებს სერვისის ტიპს `enum` სახით.
@@ -104,7 +120,7 @@ extern "C"
    * @retval სერვისის API სტრუქტურაზე მაჩვენებელი თუ შესაბამისი ტიპის სერვისი მოიძებნა
    * @retval NULL თუ ასეთი ტიპის სერვისი არ არის რეგისტრირებული
    */
-  service_handle_t fmw_service_lookup_by_type(const char *service_type);
+  service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
 
 #ifdef __cplusplus
 }

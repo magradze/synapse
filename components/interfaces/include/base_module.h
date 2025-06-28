@@ -18,6 +18,11 @@
 #include "esp_err.h"
 #include "cJSON.h"
 #include "system_event_ids.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
+
+// Forward declaration for event_data_wrapper_t to break circular dependency
+struct event_data_wrapper_t;
 
 /**
  * @enum module_status_t
@@ -30,7 +35,9 @@ typedef enum
     MODULE_STATUS_UNINITIALIZED = 0, /**< @brief მოდული არ არის ინიციალიზებული. */
     MODULE_STATUS_INITIALIZED,       /**< @brief მოდული ინიციალიზებულია, მაგრამ არ მუშაობს. */
     MODULE_STATUS_RUNNING,           /**< @brief მოდული მუშაობს და მზადაა ოპერაციებისთვის. */
-    MODULE_STATUS_ERROR              /**< @brief მოდული შეცდომის მდგომარეობაშია. */
+    MODULE_STATUS_DISABLED,          /**< @brief მოდული გამორთულია და არ ასრულებს ოპერაციებს. */
+    MODULE_STATUS_ERROR,             /**< @brief მოდული შეცდომის მდგომარეობაშია. */
+    MODULE_STATUS_UNKNOWN            /**< @brief მოდულის სტატუსი უცნობია ან არ არის დადგენილი. */
 } module_status_t;
 
 // --- მოდულის ძირითადი ფუნქციების ტიპები ---
@@ -80,6 +87,12 @@ typedef esp_err_t (*module_enable_fn)(module_t *self);
 typedef esp_err_t (*module_disable_fn)(module_t *self);
 
 /**
+ * @brief მოდულის დეინიციალიზაციის (გასუფთავების) ფუნქციის ტიპი. ★★★ (ახალი) ★★★
+ * @param[in] self მაჩვენებელი გასასუფთავებელ მოდულის ინსტანციაზე.
+ */
+typedef void (*module_deinit_fn)(module_t *self);
+
+/**
  * @brief მოდულის კონფიგურაციის რეალ დროში შეცვლის ფუნქციის ტიპი.
  * @param[in] self მაჩვენებელი მოდულის ინსტანციაზე.
  * @param[in] new_config ახალი კონფიგურაციის cJSON ობიექტი.
@@ -98,12 +111,16 @@ typedef esp_err_t (*module_reconfigure_fn)(module_t *self, const cJSON *new_conf
 typedef module_status_t (*module_get_status_fn)(module_t *self);
 
 /**
- * @brief მოდულის ივენთების დამუშავების ფუნქციის ტიპი.
+ * @brief მოდულის ივენთების დამუშავების ფუნქციის ტიპი. ★★★ (შესწორებულია) ★★★
+ * @details ეს ფუნქცია არ აბრუნებს მნიშვნელობას, რადგან ის ასინქრონულად
+ *          გამოიძახება Event Bus-ის ტასკიდან.
  * @param[in] self მაჩვენებელი მოდულის ინსტანციაზე.
- * @param[in] event_id ივენთის იდენტიფიკატორი.
- * @param[in] event_data მაჩვენებელი ივენთის მონაცემებზე.
+ * @param[in] event_name ივენთის სახელი, რომელზეც მოხდა რეაგირება.
+ * @param[in] data მაჩვენებელი ივენთის მონაცემების "გარსზე" (event_data_wrapper_t*).
+ *                 მნიშვნელოვანია: ამ მონაცემების გამოყენების შემდეგ აუცილებელია
+ *                 fmw_event_data_release(data)-ის გამოძახება.
  */
-typedef void (*module_handle_event_fn)(module_t *self, core_framework_event_id_t event_id, void *event_data);
+typedef void (*module_event_handler_fn)(module_t *self, const char *event_name, void *data);
 
 /**
  * @struct module_t
@@ -117,6 +134,7 @@ struct module_t
     char name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; /**< @brief მოდულის უნიკალური სახელი (instance_name). */
     module_status_t status;                       /**< @brief მოდულის მიმდინარე სტატუსი. */
     cJSON *current_config;                        /**< @brief მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე. */
+    SemaphoreHandle_t state_mutex;                /**< @brief mutex მოდულის მდგომარეობის დაცვისთვის. */
 
     /**
      * @brief მოდულის ძირითადი API ფუნქციების კოლექცია.
@@ -127,11 +145,12 @@ struct module_t
     {
         module_init_fn init;                 /**< @brief მოდულის ინიციალიზაციის ფუნქცია. */
         module_start_fn start;               /**< @brief მოდულის გაშვების ფუნქცია. */
+        module_deinit_fn deinit;             /**< @brief მოდულის გასუფთავების (დეინიციალიზაციის) ფუნქცია. */
         module_enable_fn enable;             /**< @brief მოდულის runtime ჩართვის ფუნქცია. */
         module_disable_fn disable;           /**< @brief მოდულის runtime გამორთვის ფუნქცია. */
         module_reconfigure_fn reconfigure;   /**< @brief მოდულის კონფიგურაციის შეცვლის ფუნქცია. */
         module_get_status_fn get_status;     /**< @brief მოდულის სტატუსის მიღების ფუნქცია. */
-        module_handle_event_fn handle_event; /**< @brief მოდულის ივენთების დამუშავების ფუნქცია. */
+        module_event_handler_fn handle_event; /**< @brief მოდულის ივენთების დამუშავების ფუნქცია. */
     } base;
 
     void *private_data; /**< @brief მაჩვენებელი მოდულის შიდა მონაცემებზე. */

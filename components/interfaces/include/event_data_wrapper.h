@@ -27,7 +27,8 @@
  *          ნებისმიერი ტიპის დინამიურად შექმნილ მონაცემებზე (payload),
  *          რომლებიც Event Bus-ით გადაიცემა.
  */
-typedef struct {
+typedef struct event_data_wrapper_t
+{
     int32_t ref_count;                      /**< @brief მრიცხველი, რომელიც აჩვენებს, რამდენი მომხმარებელი იყენებს ამ მონაცემს. */
     SemaphoreHandle_t mutex;                /**< @brief Mutex, რომელიც უზრუნველყოფს ref_count-ის ატომურ (thread-safe) ცვლილებას. */
     void *payload;                          /**< @brief მაჩვენებელი რეალურ მონაცემებზე (მაგ., telemetry_data_t*). */
@@ -55,7 +56,7 @@ typedef struct {
  * @retval ESP_ERR_INVALID_ARG თუ `payload` ან `wrapper_out` არის NULL.
  * @retval ESP_ERR_NO_MEM თუ მეხსიერების გამოყოფა ვერ მოხერხდა.
  */
-esp_err_t fmw_event_data_wrap(void* payload, void (*free_fn)(void* payload), event_data_wrapper_t** wrapper_out);
+esp_err_t fmw_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out);
 
 /**
  * @brief ზრდის wrapper-ის მფლობელების (references) რაოდენობას ერთით.

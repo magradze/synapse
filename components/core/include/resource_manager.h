@@ -95,11 +95,25 @@ bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id);
  *
  * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
  * @param[in] resource_id შესამოწმებელი რესურსის იდენტიფიკატორი.
+ * @param[out] out_owner მაჩვენებელი სტრიქონზე, რომელიც მიუთითებს რესურსის მფლობელის სახელზე, თუ დაკავებულია.
  *
- * @return const char*
- * @retval რესურსის მფლობელი მოდულის სახელის მაჩვენებელი, თუ რესურსი დაკავებულია.
- * @retval NULL თუ რესურსი თავისუფალია ან ვერ მოიძებნა.
+ * @return esp_err_t
+ * @retval ESP_OK თუ რესურსი დაკავებულია და მფლობელის სახელი დაბრუნდა.
+ * @retval ESP_ERR_NOT_FOUND თუ რესურსი თავისუფალია ან ვერ მოიძებნა.
+ * @retval ESP_ERR_INVALID_ARG თუ არგუმენტები არავალიდურია.
  */
-const char *fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id);
+esp_err_t fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id, const char **out_owner);
+
+/**
+ * @brief ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს.
+ *
+ * ეს ფუნქცია გამოიყენება რესურს მენეჯერის დეინიციალიზაციისთვის. მისი გამოძახების შემდეგ,
+ * ყველა რესურსი, რომელიც მენეჯერმა გამოიყენა ან გამოყო, უნდა გათავისუფლდეს.
+ * ფუნქციის გამოძახება აუცილებელია სისტემის გამორთვამდე ან რესურს მენეჯერის ხელახლა ინიციალიზაციამდე,
+ * რათა თავიდან ავიცილოთ მეხსიერების გაჟონვა ან სხვა რესურსებთან დაკავშირებული პრობლემები.
+ *
+ * @note ფუნქცია არ იღებს პარამეტრებს და არ აბრუნებს მნიშვნელობას.
+ */
+void fmw_resource_manager_deinit(void);
 
 #endif /* FMW_RESOURCE_MANAGER_H */

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['reconfigure_0',['reconfigure',['../structmodule__t.html#a68e5d4c7041e43135876d4f0b4e39ea7',1,'module_t']]],
-  ['ref_5fcount_1',['ref_count',['../structevent__data__wrapper__t.html#a1d75bdc3d17e5c455be5bdc2ad22574b',1,'event_data_wrapper_t']]]
+  ['owner_5fnames_0',['owner_names',['../structresource__pool__t.html#aab904375ff53b6c6d69a4fb8678ba6e6',1,'resource_pool_t']]]
 ];

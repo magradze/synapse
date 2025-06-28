@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['service_5fhandle_0',['service_handle',['../structservice__entry__t.html#a648eb089bd0021180d526ecb175e2d64',1,'service_entry_t']]],
-  ['start_1',['start',['../structmodule__t.html#a0717201e28769f3eb4487ae43eeb14ad',1,'module_t']]],
-  ['status_2',['status',['../structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2',1,'module_t']]],
-  ['subscribers_3',['subscribers',['../structevent__subscription__list__t.html#a03b15fc2eb8bbed587b42209aaab8fa5',1,'event_subscription_list_t']]]
+  ['payload_0',['payload',['../structevent__data__wrapper__t.html#a6c3ad9b3de41cb310482e9173c26232b',1,'event_data_wrapper_t']]],
+  ['pool_5fmutex_1',['pool_mutex',['../structresource__pool__t.html#ae38fd9326e6c0d0dab94a940b34a1859',1,'resource_pool_t']]],
+  ['private_5fdata_2',['private_data',['../structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196',1,'module_t']]]
 ];

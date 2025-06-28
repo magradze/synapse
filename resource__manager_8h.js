@@ -10,9 +10,10 @@ var resource__manager_8h =
       [ "FMW_RESOURCE_TYPE_UART_PORT", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a74e4aa1c63b82e39094f56711922ba72", null ],
       [ "FMW_RESOURCE_TYPE_MAX", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15af0ba234a8d0d9a70105a2d4b94474838", null ]
     ] ],
-    [ "fmw_resource_get_owner", "resource__manager_8h.html#a2a0bce877745e54ba27ef0e67ea606c0", null ],
+    [ "fmw_resource_get_owner", "resource__manager_8h.html#a62e206db3497c414594319109267082b", null ],
     [ "fmw_resource_is_locked", "resource__manager_8h.html#a68c8e1ee6abf08a2600a427d96653920", null ],
     [ "fmw_resource_lock", "resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da", null ],
+    [ "fmw_resource_manager_deinit", "resource__manager_8h.html#abb1c1f1c6aadfa6f7311de08d27fae8b", null ],
     [ "fmw_resource_manager_init", "resource__manager_8h.html#a7644b52a0b11186f8a84b4b489c14f54", null ],
     [ "fmw_resource_release", "resource__manager_8h.html#a92b4e49ff7f60e575bd0a97797266fb9", null ]
 ];

@@ -142,15 +142,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ac224eef59c2b5a418e8d19f89d895ba1" id="r_ac224eef59c2b5a418e8d19f89d895ba1"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a> (const char *service_name, <a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> service_type, <a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_handle)</td></tr>
 <tr class="memdesc:ac224eef59c2b5a418e8d19f89d895ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.  <br /></td></tr>
 <tr class="separator:ac224eef59c2b5a418e8d19f89d895ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c1f012930fbf7a4f0a0b109042ff9d" id="r_ab4c1f012930fbf7a4f0a0b109042ff9d"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#ab4c1f012930fbf7a4f0a0b109042ff9d">fmw_service_unregister</a> (const char *service_name)</td></tr>
+<tr class="memdesc:ab4c1f012930fbf7a4f0a0b109042ff9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">სერვისის რეგისტრაციის გაუქმება მისი სახელით.  <br /></td></tr>
+<tr class="separator:ab4c1f012930fbf7a4f0a0b109042ff9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b2b027ce8a0dfecde7324ecf6e63bc" id="r_aa1b2b027ce8a0dfecde7324ecf6e63bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a> (const char *service_name)</td></tr>
 <tr class="memdesc:aa1b2b027ce8a0dfecde7324ecf6e63bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს რეგისტრირებულ სერვისს სახელით  <br /></td></tr>
 <tr class="separator:aa1b2b027ce8a0dfecde7324ecf6e63bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e29f1bbbc7d7de4a7ac6b6c5a28244" id="r_a40e29f1bbbc7d7de4a7ac6b6c5a28244"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a> (const char *service_name, <a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> *out_service_type)</td></tr>
 <tr class="memdesc:a40e29f1bbbc7d7de4a7ac6b6c5a28244"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს სერვისის ტიპს <code>enum</code> სახით.  <br /></td></tr>
 <tr class="separator:a40e29f1bbbc7d7de4a7ac6b6c5a28244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cc0e2ed1685502b1bbddd2848b35685" id="r_a5cc0e2ed1685502b1bbddd2848b35685"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a5cc0e2ed1685502b1bbddd2848b35685">fmw_service_lookup_by_type</a> (const char *service_type)</td></tr>
-<tr class="memdesc:a5cc0e2ed1685502b1bbddd2848b35685"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს  <br /></td></tr>
-<tr class="separator:a5cc0e2ed1685502b1bbddd2848b35685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15eb7d324559bd97c87796cac394cc8d" id="r_a15eb7d324559bd97c87796cac394cc8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8h.html#a15eb7d324559bd97c87796cac394cc8d">fmw_service_lookup_by_type</a> (<a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> service_type)</td></tr>
+<tr class="memdesc:a15eb7d324559bd97c87796cac394cc8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს  <br /></td></tr>
+<tr class="separator:a15eb7d324559bd97c87796cac394cc8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Framework-ის სერვის ლოკატორის საჯარო API. </p>
@@ -299,8 +302,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a5cc0e2ed1685502b1bbddd2848b35685" name="a5cc0e2ed1685502b1bbddd2848b35685"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cc0e2ed1685502b1bbddd2848b35685">&#9670;&#160;</a></span>fmw_service_lookup_by_type()</h2>
+<a id="a15eb7d324559bd97c87796cac394cc8d" name="a15eb7d324559bd97c87796cac394cc8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15eb7d324559bd97c87796cac394cc8d">&#9670;&#160;</a></span>fmw_service_lookup_by_type()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -308,7 +311,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> fmw_service_lookup_by_type </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype"><a class="el" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a>&#160;</td>
           <td class="paramname"><em>service_type</em></td><td>)</td>
           <td></td>
         </tr>
@@ -387,6 +390,40 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab4c1f012930fbf7a4f0a0b109042ff9d" name="ab4c1f012930fbf7a4f0a0b109042ff9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4c1f012930fbf7a4f0a0b109042ff9d">&#9670;&#160;</a></span>fmw_service_unregister()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_service_unregister </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>service_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>სერვისის რეგისტრაციის გაუქმება მისი სახელით. </p>
+<p>ეს ფუნქცია შლის მითითებული სახელის მქონე სერვისს სერვის ლოკატორიდან, რის შემდეგაც ის აღარ იქნება ხელმისაწვდომი მოძიებისთვის ან გამოყენებისთვის. თუ სერვისი ვერ მოიძებნა, დაბრუნდება შესაბამისი შეცდომის კოდი.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>სერვისის სახელი, რომლის რეგისტრაციაც უნდა გაუქმდეს. უნდა იყოს null-ით დასრულებული სტრიქონი.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>ESP_OK: სერვისი წარმატებით გაუქმდა.</li>
+<li>ESP_ERR_NOT_FOUND: მითითებული სახელის მქონე სერვისი ვერ მოიძებნა.</li>
+<li>ESP_ERR_INVALID_ARG: service_name არგუმენტი არის NULL ან არასწორია.</li>
+<li>სხვა esp_err_t კოდები საჭიროებისამებრ. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

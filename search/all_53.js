@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚨_20მნიშვნელოვანი_20შენიშვნები_0',['🚨 მნიშვნელოვანი შენიშვნები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md863',1,'🚨 მნიშვნელოვანი შენიშვნები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1259',1,'🚨 მნიშვნელოვანი შენიშვნები']]]
+  ['🔗_20base_20module_20interface_3a_0',['🔗 base module interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md863',1,'3. 🔗 Base Module Interface:'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1259',1,'3. 🔗 Base Module Interface:']]]
 ];

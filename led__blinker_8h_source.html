@@ -114,22 +114,25 @@ $(document).ready(function(){initNavTree('led__blinker_8h_source.html',''); init
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structled__blinker__config__t.html">   25</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structled__blinker__config__t.html#af4515d2975325d2c7f5d5e6fb9a83f95">   26</a></span>    <span class="keywordtype">char</span> instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];  </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structled__blinker__config__t.html#a0ef2cff0c7f1d7eef1cd1f127ea419d3">   27</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structled__blinker__config__t.html#a0ef2cff0c7f1d7eef1cd1f127ea419d3">auto_start</a>;                                        </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">// TODO: დაამატეთ მოდულის სპეციფიკური კონფიგურაციის ფილდები</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} <a class="code hl_struct" href="structled__blinker__config__t.html">led_blinker_config_t</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structled__blinker__config__t.html#ade55793ac3fbcd70b080e4a7cbbd90a0">   28</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structled__blinker__config__t.html#ade55793ac3fbcd70b080e4a7cbbd90a0">gpio_num</a>;                                           </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structled__blinker__config__t.html#a7f0198d31ee34a19cab67aca53094f79">   29</a></span>    uint32_t <a class="code hl_variable" href="structled__blinker__config__t.html#a7f0198d31ee34a19cab67aca53094f79">blink_interval_ms</a>;                             </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>} <a class="code hl_struct" href="structled__blinker__config__t.html">led_blinker_config_t</a>;</div>
 </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="led__blinker_8h.html#a58464148167e157567a7abd4cddeccea">led_blinker_create</a>(<span class="keyword">const</span> cJSON *config);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif </span><span class="comment">// LED_BLINKER_H</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="led__blinker_8h.html#a58464148167e157567a7abd4cddeccea">led_blinker_create</a>(<span class="keyword">const</span> cJSON *config);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif </span><span class="comment">// LED_BLINKER_H</span></div>
 <div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
 <div class="ttc" id="aled__blinker_8h_html_a58464148167e157567a7abd4cddeccea"><div class="ttname"><a href="led__blinker_8h.html#a58464148167e157567a7abd4cddeccea">led_blinker_create</a></div><div class="ttdeci">module_t * led_blinker_create(const cJSON *config)</div><div class="ttdoc">ქმნის ახალ led_blinker მოდულის ინსტანციას</div><div class="ttdef"><b>Definition</b> led_blinker.c:59</div></div>
 <div class="ttc" id="astructled__blinker__config__t_html"><div class="ttname"><a href="structled__blinker__config__t.html">led_blinker_config_t</a></div><div class="ttdoc">Led_Blinker მოდულის კონფიგურაციის სტრუქტურა</div><div class="ttdef"><b>Definition</b> led_blinker.h:25</div></div>
 <div class="ttc" id="astructled__blinker__config__t_html_a0ef2cff0c7f1d7eef1cd1f127ea419d3"><div class="ttname"><a href="structled__blinker__config__t.html#a0ef2cff0c7f1d7eef1cd1f127ea419d3">led_blinker_config_t::auto_start</a></div><div class="ttdeci">bool auto_start</div><div class="ttdef"><b>Definition</b> led_blinker.h:27</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
+<div class="ttc" id="astructled__blinker__config__t_html_a7f0198d31ee34a19cab67aca53094f79"><div class="ttname"><a href="structled__blinker__config__t.html#a7f0198d31ee34a19cab67aca53094f79">led_blinker_config_t::blink_interval_ms</a></div><div class="ttdeci">uint32_t blink_interval_ms</div><div class="ttdef"><b>Definition</b> led_blinker.h:29</div></div>
+<div class="ttc" id="astructled__blinker__config__t_html_ade55793ac3fbcd70b080e4a7cbbd90a0"><div class="ttname"><a href="structled__blinker__config__t.html#ade55793ac3fbcd70b080e4a7cbbd90a0">led_blinker_config_t::gpio_num</a></div><div class="ttdeci">int gpio_num</div><div class="ttdef"><b>Definition</b> led_blinker.h:28</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

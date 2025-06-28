@@ -106,8 +106,8 @@ Collaboration diagram for module_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structmodule__t__coll__graph.png" border="0" usemap="#amodule__t_coll__map" alt="Collaboration graph"/></div>
 <map name="amodule__t_coll__map" id="amodule__t_coll__map">
-<area shape="rect" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,44,88,69"/>
-<area shape="poly" title=" " alt="" coords="102,50,115,57,106,63,88,64,88,59,104,57,109,57,101,55"/>
+<area shape="rect" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,51,88,77"/>
+<area shape="poly" title=" " alt="" coords="102,58,115,64,106,70,88,71,88,66,104,65,109,64,101,63"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -125,6 +125,10 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> [CONFIG_FMW_
 cJSON *&#160;</td><td class="memItemRight" valign="bottom"><b>current_config</b></td></tr>
 <tr class="memdesc:a5a1305713cce543522141d618ca463da"><td class="mdescLeft">&#160;</td><td class="mdescRight">მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე. <br /></td></tr>
 <tr class="separator:a5a1305713cce543522141d618ca463da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab517ed6d3ea95d081a3c5c93b59529d" id="r_aab517ed6d3ea95d081a3c5c93b59529d"><td class="memItemLeft" align="right" valign="top"><a id="aab517ed6d3ea95d081a3c5c93b59529d" name="aab517ed6d3ea95d081a3c5c93b59529d"></a>
+SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>state_mutex</b></td></tr>
+<tr class="memdesc:aab517ed6d3ea95d081a3c5c93b59529d"><td class="mdescLeft">&#160;</td><td class="mdescRight">mutex მოდულის მდგომარეობის დაცვისთვის. <br /></td></tr>
+<tr class="separator:aab517ed6d3ea95d081a3c5c93b59529d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebce5933d1dc8eaa718b0a90a7e1aaed" id="r_aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="memItemLeft" >struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb745788683c435bea2c6a7294e327bb" id="r_abb745788683c435bea2c6a7294e327bb"><td class="memItemLeft" >
@@ -135,6 +139,10 @@ cJSON *&#160;</td><td class="memItemRight" valign="bottom"><b>current_config</b>
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#ab41617ef693a6a11dcbafc02f10f4b97">module_start_fn</a>&#160;&#160;&#160;<b>start</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="memdesc:a9e27d5450caeb277f513e88b811ef481"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის გაშვების ფუნქცია. <br /></td></tr>
 <tr class="separator:a9e27d5450caeb277f513e88b811ef481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d91b51c47e2a4345aeb2eb97ec891e1" id="r_a8d91b51c47e2a4345aeb2eb97ec891e1"><td class="memItemLeft" >
+&#160;&#160;&#160;<a class="el" href="base__module_8h.html#ade01ba3e5ab4ba310fe2d371818962fe">module_deinit_fn</a>&#160;&#160;&#160;<b>deinit</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a8d91b51c47e2a4345aeb2eb97ec891e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის გასუფთავების (დეინიციალიზაციის) ფუნქცია. <br /></td></tr>
+<tr class="separator:a8d91b51c47e2a4345aeb2eb97ec891e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f49e81fa92b00df4dbd8b8e5f70bd5c" id="r_a0f49e81fa92b00df4dbd8b8e5f70bd5c"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#a12c489a290559f17c955283acf60c938">module_enable_fn</a>&#160;&#160;&#160;<b>enable</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="memdesc:a0f49e81fa92b00df4dbd8b8e5f70bd5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის runtime ჩართვის ფუნქცია. <br /></td></tr>
@@ -151,10 +159,10 @@ cJSON *&#160;</td><td class="memItemRight" valign="bottom"><b>current_config</b>
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#acc9f2e92ea221066e91f1f5a7a805699">module_get_status_fn</a>&#160;&#160;&#160;<b>get_status</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="memdesc:ac52bc38e3e46b1541361cac7d00267df"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის სტატუსის მიღების ფუნქცია. <br /></td></tr>
 <tr class="separator:ac52bc38e3e46b1541361cac7d00267df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62f30e1fde15fd2220022b101812ca29" id="r_a62f30e1fde15fd2220022b101812ca29"><td class="memItemLeft" >
-&#160;&#160;&#160;<a class="el" href="base__module_8h.html#ad3faaa59b790335a8864238a009c1dfb">module_handle_event_fn</a>&#160;&#160;&#160;<b>handle_event</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a62f30e1fde15fd2220022b101812ca29"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ივენთების დამუშავების ფუნქცია. <br /></td></tr>
-<tr class="separator:a62f30e1fde15fd2220022b101812ca29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af170aa0908ad5d69a8fe3fc571c621dd" id="r_af170aa0908ad5d69a8fe3fc571c621dd"><td class="memItemLeft" >
+&#160;&#160;&#160;<a class="el" href="base__module_8h.html#a174e03215ffd614b2f100df675179307">module_event_handler_fn</a>&#160;&#160;&#160;<b>handle_event</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:af170aa0908ad5d69a8fe3fc571c621dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ივენთების დამუშავების ფუნქცია. <br /></td></tr>
+<tr class="separator:af170aa0908ad5d69a8fe3fc571c621dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebce5933d1dc8eaa718b0a90a7e1aaed" id="r_aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodule__t.html#aebce5933d1dc8eaa718b0a90a7e1aaed">base</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="memdesc:aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ძირითადი API ფუნქციების კოლექცია.  <br /></td></tr>
 <tr class="separator:aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="memSeparator" colspan="2">&#160;</td></tr>

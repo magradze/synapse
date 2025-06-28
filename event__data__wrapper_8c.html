@@ -143,9 +143,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2d4a0a1e98f150a3e2955b9398b5cc97" id="r_a2d4a0a1e98f150a3e2955b9398b5cc97"><td class="memItemLeft" align="right" valign="top"><a id="a2d4a0a1e98f150a3e2955b9398b5cc97" name="a2d4a0a1e98f150a3e2955b9398b5cc97"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;EVENT_WRAPPER&quot;)</td></tr>
 <tr class="separator:a2d4a0a1e98f150a3e2955b9398b5cc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52b696e7ce89cf706d4d5f82920aca08" id="r_a52b696e7ce89cf706d4d5f82920aca08"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__data__wrapper_8c.html#a52b696e7ce89cf706d4d5f82920aca08">fmw_event_data_wrap</a> (void *payload, void(*free_fn)(void *payload), <a class="el" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> **wrapper_out)</td></tr>
-<tr class="memdesc:a52b696e7ce89cf706d4d5f82920aca08"><td class="mdescLeft">&#160;</td><td class="mdescRight">ქმნის ახალ "შეფუთულ" მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას.  <br /></td></tr>
-<tr class="separator:a52b696e7ce89cf706d4d5f82920aca08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df3595496d466d104e1629d5435e9f7" id="r_a7df3595496d466d104e1629d5435e9f7"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a> (const void *payload, void(*free_fn)(void *payload), <a class="el" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> **wrapper_out)</td></tr>
+<tr class="memdesc:a7df3595496d466d104e1629d5435e9f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ქმნის ახალ "შეფუთულ" მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას.  <br /></td></tr>
+<tr class="separator:a7df3595496d466d104e1629d5435e9f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e82d26f36a72f0b9e1d1fb2d507a79f" id="r_a1e82d26f36a72f0b9e1d1fb2d507a79f"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__data__wrapper_8c.html#a1e82d26f36a72f0b9e1d1fb2d507a79f">fmw_event_data_acquire</a> (<a class="el" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *wrapper)</td></tr>
 <tr class="memdesc:a1e82d26f36a72f0b9e1d1fb2d507a79f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ზრდის wrapper-ის მფლობელების (references) რაოდენობას ერთით.  <br /></td></tr>
 <tr class="separator:a1e82d26f36a72f0b9e1d1fb2d507a79f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,7 +198,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="event__data__wrapper_8c_a1e82d26f36a72f0b9e1d1fb2d507a79f_icgraph.png" border="0" usemap="#aevent__data__wrapper_8c_a1e82d26f36a72f0b9e1d1fb2d507a79f_icgraph" alt=""/></div>
 <map name="aevent__data__wrapper_8c_a1e82d26f36a72f0b9e1d1fb2d507a79f_icgraph" id="aevent__data__wrapper_8c_a1e82d26f36a72f0b9e1d1fb2d507a79f_icgraph">
 <area shape="rect" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="213,5,400,31"/>
-<area shape="rect" href="event__bus_8c.html#ad9e2b0ff452a05894f033f5d98c3cacb" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="5,5,165,31"/>
+<area shape="rect" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="5,5,165,31"/>
 <area shape="poly" title=" " alt="" coords="200,21,166,21,166,15,200,15"/>
 </map>
 </div>
@@ -243,15 +243,15 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="event__data__wrapper_8c_a99c9f26cd90b553b84bf2a56db51a689_icgraph.png" border="0" usemap="#aevent__data__wrapper_8c_a99c9f26cd90b553b84bf2a56db51a689_icgraph" alt=""/></div>
 <map name="aevent__data__wrapper_8c_a99c9f26cd90b553b84bf2a56db51a689_icgraph" id="aevent__data__wrapper_8c_a99c9f26cd90b553b84bf2a56db51a689_icgraph">
 <area shape="rect" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="213,5,400,31"/>
-<area shape="rect" href="event__bus_8c.html#ad9e2b0ff452a05894f033f5d98c3cacb" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="5,5,165,31"/>
+<area shape="rect" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="5,5,165,31"/>
 <area shape="poly" title=" " alt="" coords="200,21,166,21,166,15,200,15"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a52b696e7ce89cf706d4d5f82920aca08" name="a52b696e7ce89cf706d4d5f82920aca08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52b696e7ce89cf706d4d5f82920aca08">&#9670;&#160;</a></span>fmw_event_data_wrap()</h2>
+<a id="a7df3595496d466d104e1629d5435e9f7" name="a7df3595496d466d104e1629d5435e9f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df3595496d466d104e1629d5435e9f7">&#9670;&#160;</a></span>fmw_event_data_wrap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,7 +259,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">esp_err_t fmw_event_data_wrap </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>payload</em>, </td>
         </tr>
         <tr>

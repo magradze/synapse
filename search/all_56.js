@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧪_20ტესტირების_20მეთოდები_0',['🧪 ტესტირების მეთოდები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md866',1,'🧪 ტესტირების მეთოდები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1262',1,'🧪 ტესტირების მეთოდები']]]
+  ['🛠️_20გამოყენება_0',['🛠️ გამოყენება',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md851',1,'🛠️ გამოყენება'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1247',1,'🛠️ გამოყენება']]]
 ];

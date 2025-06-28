@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['service_5fentry_5ft_0',['service_entry_t',['../structservice__entry__t.html',1,'']]]
+  ['resource_5fpool_5ft_0',['resource_pool_t',['../structresource__pool__t.html',1,'']]]
 ];

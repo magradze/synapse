@@ -1,9 +1,11 @@
 var searchData=
 [
   ['kconfig_20configuration_0',['Kconfig Configuration',['../md_components_2modules_2utilities_2logger__module_2README.html#autotoc_md4',1,'']]],
-  ['key_1',['esp_err_t nvs_storage_module_erase_key(const char *key);',['../md_docs_2api__reference_2storage__api.html#autotoc_md386',1,'']]],
-  ['key_20bool_20value_2',['key bool value',['../md_docs_2api__reference_2configuration__api.html#autotoc_md95',1,'esp_err_t fmw_config_get_bool(const char *key, bool *value);'],['../md_docs_2api__reference_2configuration__api.html#autotoc_md99',1,'esp_err_t fmw_config_set_bool(const char *key, bool value);']]],
-  ['key_20char_20value_20size_5ft_20size_3',['key char value size_t size',['../md_docs_2api__reference_2configuration__api.html#autotoc_md93',1,'esp_err_t fmw_config_get_string(const char *key, char *value, size_t size);'],['../md_docs_2api__reference_2storage__api.html#autotoc_md383',1,'esp_err_t nvs_storage_module_get_string(const char *key, char *value, size_t size);']]],
-  ['key_20const_20char_20value_4',['key const char value',['../md_docs_2api__reference_2configuration__api.html#autotoc_md97',1,'esp_err_t fmw_config_set_string(const char *key, const char *value);'],['../md_docs_2api__reference_2storage__api.html#autotoc_md382',1,'esp_err_t nvs_storage_module_set_string(const char *key, const char *value);']]],
-  ['key_20int_20value_5',['key int value',['../md_docs_2api__reference_2configuration__api.html#autotoc_md94',1,'esp_err_t fmw_config_get_int(const char *key, int *value);'],['../md_docs_2api__reference_2configuration__api.html#autotoc_md98',1,'esp_err_t fmw_config_set_int(const char *key, int value);'],['../md_docs_2api__reference_2storage__api.html#autotoc_md385',1,'esp_err_t nvs_storage_module_get_int(const char *key, int *value);'],['../md_docs_2api__reference_2storage__api.html#autotoc_md384',1,'esp_err_t nvs_storage_module_set_int(const char *key, int value);']]]
+  ['key_1',['esp_err_t nvs_storage_module_erase_key(const char *key);',['../md_docs_2api__reference_2storage__api.html#autotoc_md388',1,'']]],
+  ['key_20bool_20out_5fvalue_2',['esp_err_t fmw_config_get_bool(const char *key, bool*out_value)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md97',1,'']]],
+  ['key_20char_20buffer_20size_5ft_20buffer_5fsize_3',['esp_err_t fmw_config_get_string(const char *key, char*buffer, size_t buffer_size)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md95',1,'']]],
+  ['key_20char_20value_20size_5ft_20size_4',['esp_err_t nvs_storage_module_get_string(const char *key, char *value, size_t size);',['../md_docs_2api__reference_2storage__api.html#autotoc_md385',1,'']]],
+  ['key_20const_20char_20value_5',['esp_err_t nvs_storage_module_set_string(const char *key, const char *value);',['../md_docs_2api__reference_2storage__api.html#autotoc_md384',1,'']]],
+  ['key_20int_20out_5fvalue_6',['esp_err_t fmw_config_get_int(const char *key, int*out_value)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md96',1,'']]],
+  ['key_20int_20value_7',['key int value',['../md_docs_2api__reference_2storage__api.html#autotoc_md387',1,'esp_err_t nvs_storage_module_get_int(const char *key, int *value);'],['../md_docs_2api__reference_2storage__api.html#autotoc_md386',1,'esp_err_t nvs_storage_module_set_int(const char *key, int value);']]]
 ];

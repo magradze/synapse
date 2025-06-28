@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧠_20კონდიციური_20კომპილაცია_20smart_20system_20_3a_0',['🧠 კონდიციური კომპილაცია smart system :',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md850',1,'1. 🧠 კონდიციური კომპილაცია (SMART SYSTEM):'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1246',1,'1. 🧠 კონდიციური კომპილაცია (SMART SYSTEM):']]]
+  ['🚨_20მნიშვნელოვანი_20შენიშვნები_0',['🚨 მნიშვნელოვანი შენიშვნები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md874',1,'🚨 მნიშვნელოვანი შენიშვნები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1270',1,'🚨 მნიშვნელოვანი შენიშვნები']]]
 ];

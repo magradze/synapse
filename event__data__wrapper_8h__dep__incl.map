@@ -1,18 +1,9 @@
 <map id="components/interfaces/include/event_data_wrapper.h" name="components/interfaces/include/event_data_wrapper.h">
-<area shape="rect" id="Node000001" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="449,5,670,45"/>
-<area shape="rect" id="Node000002" href="$event__data__wrapper_8c.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) იმპლემენტაცია." alt="" coords="268,93,443,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="503,53,401,96,399,91,501,48"/>
-<area shape="rect" id="Node000003" href="$event__bus_8h.html" title="Event Bus კომპონენტის API." alt="" coords="467,93,652,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="562,59,562,93,557,93,557,59"/>
-<area shape="rect" id="Node000008" href="$logger__module_8c.html" title="Logger Module Implementation &#45; Centralized logging and event monitoring." alt="" coords="789,181,965,236"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="606,50,832,179,829,183,603,55"/>
-<area shape="rect" id="Node000004" href="$event__bus_8c.html" title="Event Bus კომპონენტის იმპლემენტაცია." alt="" coords="5,189,180,229"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="453,136,193,184,163,191,161,186,192,179,452,131"/>
-<area shape="rect" id="Node000005" href="$system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="205,189,391,229"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="495,140,352,191,350,186,493,135"/>
-<area shape="rect" id="Node000006" href="$led__blinker_8c.html" title="GPIO2&#45;ზე LED&#45;ის მარტივი ციმციმის მოდული" alt="" coords="415,181,578,236"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="541,146,517,183,512,180,537,143"/>
-<area shape="rect" id="Node000007" href="$test__module_8c.html" title="ტესტირებისთვის განკუთვნილი მოდული" alt="" coords="602,181,765,236"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="597,139,650,179,647,183,594,144"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="637,135,789,179,788,184,636,140"/>
+<area shape="rect" id="Node000001" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="181,5,402,45"/>
+<area shape="rect" id="Node000002" href="$event__bus_8c.html" title="Event Bus კომპონენტის იმპლემენტაცია." alt="" coords="5,101,180,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,54,134,103,132,98,238,49"/>
+<area shape="rect" id="Node000003" href="$event__data__wrapper_8c.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) იმპლემენტაცია." alt="" coords="204,101,379,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="294,59,294,101,289,101,289,59"/>
+<area shape="rect" id="Node000004" href="$logger__module_8c.html" title="ლოგერ მოდულის იმპლემენტაცია &#45; ცენტრალიზებული ლოგირება და ივენთების მონიტორინგი" alt="" coords="403,93,579,148"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,49,436,91,434,96,343,54"/>
 </map>

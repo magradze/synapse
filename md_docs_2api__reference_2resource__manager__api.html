@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2resource__man
   <div class="headertitle"><div class="title">Synapse Resource Manager API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md332"></a> <b>ფაილი:</b> <code><a class="el" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API">resource_manager.h</a></code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md334"></a> <b>ფაილი:</b> <code><a class="el" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API">resource_manager.h</a></code> <br  />
  <b>ვერსია:</b> 2.0 <br  />
  <b>თარიღი:</b> 2025-06-25 <br  />
  <b>ავტორი:</b> Giorgi Magradze <br  />
 </p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md334"></a>
+<h1><a class="anchor" id="autotoc_md336"></a>
 მიზანი</h1>
 <p><code>Resource Manager</code> უზრუნველყოფს სისტემაში საერთო რესურსების (მაგ: GPIO, I2C, SPI და სხვა) ექსკლუზიურ და უსაფრთხო მართვას. ეს საშუალებას აძლევს მოდულებს, დაიკავონ რესურსები ისე, რომ სხვა მოდულებმა ვერ გამოიყენონ ისინი პარალელურად, რაც კრიტიკულია სტაბილური და პროგნოზირებადი სისტემური ქცევის უზრუნველსაყოფად.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md336"></a>
+<h1><a class="anchor" id="autotoc_md338"></a>
 სამართავი რესურსების ტიპები</h1>
 <p><code>fmw_resource_type_t</code> არის ენუმერაცია, რომელიც განსაზღვრავს მართვად რესურსებს:</p>
 <table class="markdownTable">
@@ -125,9 +125,9 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2resource__man
 <td class="markdownTableBodyNone"><code>FMW_RESOURCE_TYPE_UART_PORT</code>   </td><td class="markdownTableBodyNone">UART პორტი   </td><td class="markdownTableBodyNone"><code>uart_port_t</code>   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md338"></a>
+<h1><a class="anchor" id="autotoc_md340"></a>
 API ფუნქციები</h1>
-<h2><a class="anchor" id="autotoc_md339"></a>
+<h2><a class="anchor" id="autotoc_md341"></a>
 &lt;tt&gt;esp_err_t fmw_resource_manager_init(void)&lt;/tt&gt;</h2>
 <p>ინიციალიზაციას უკეთებს რესურს მენეჯერს. უნდა გამოიძახოს System Manager-მა ერთხელ სისტემის გაშვებისას.</p>
 <table class="markdownTable">
@@ -139,7 +139,7 @@ API ფუნქციები</h1>
 <td class="markdownTableBodyNone"><code>ESP_ERR_NO_MEM</code>   </td><td class="markdownTableBodyNone">მეხსიერების გამოყოფა ვერ მოხერხდა   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md341"></a>
+<h2><a class="anchor" id="autotoc_md343"></a>
 &lt;tt&gt;esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner)&lt;/tt&gt;</h2>
 <p>დალოქავს კონკრეტულ რესურსს მითითებული მფლობელისთვის (მოდულისთვის).</p>
 <table class="markdownTable">
@@ -165,7 +165,7 @@ API ფუნქციები</h1>
 <td class="markdownTableBodyNone"><code>ESP_ERR_NO_MEM</code>   </td><td class="markdownTableBodyNone">მეხსიერება ვერ გამოეყო   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md343"></a>
+<h2><a class="anchor" id="autotoc_md345"></a>
 &lt;tt&gt;esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner)&lt;/tt&gt;</h2>
 <p>ათავისუფლებს დაკავებულ რესურსს.</p>
 <table class="markdownTable">
@@ -191,7 +191,7 @@ API ფუნქციები</h1>
 <td class="markdownTableBodyNone"><code>ESP_ERR_INVALID_STATE</code>   </td><td class="markdownTableBodyNone">გათავისუფლება სცადა არა მფლობელმა   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md345"></a>
+<h2><a class="anchor" id="autotoc_md347"></a>
 &lt;tt&gt;bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id)&lt;/tt&gt;</h2>
 <p>ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი.</p>
 <table class="markdownTable">
@@ -203,7 +203,7 @@ API ფუნქციები</h1>
 <td class="markdownTableBodyNone"><code>false</code> – რესურსი თავისუფალია   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md347"></a>
+<h2><a class="anchor" id="autotoc_md349"></a>
 &lt;tt&gt;const char *fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id)&lt;/tt&gt;</h2>
 <p>აბრუნებს რესურსის მფლობელი მოდულის სახელს. სასარგებლოა დიაგნოსტიკისთვის.</p>
 <table class="markdownTable">
@@ -215,7 +215,7 @@ API ფუნქციები</h1>
 <td class="markdownTableBodyNone"><code>NULL</code> – რესურსი თავისუფალია ან არ მოიძებნა   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md349"></a>
+<h1><a class="anchor" id="autotoc_md351"></a>
 გამოყენების მაგალითი</h1>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t relay_module_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
 <div class="line">    relay_private_data_t *private_data = (relay_private_data_t *)module-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
@@ -223,7 +223,7 @@ API ფუნქციები</h1>
 <div class="line">    <span class="comment">// 1. დალოქვა</span></div>
 <div class="line">    esp_err_t ret = <a class="code hl_function" href="resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da">fmw_resource_lock</a>(<a class="code hl_enumvalue" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f">FMW_RESOURCE_TYPE_GPIO</a>, private_data-&gt;gpio_pin, private_data-&gt;instance_name);</div>
 <div class="line">    <span class="keywordflow">if</span> (ret != ESP_OK) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span> *owner = <a class="code hl_function" href="resource__manager_8h.html#a2a0bce877745e54ba27ef0e67ea606c0">fmw_resource_get_owner</a>(<a class="code hl_enumvalue" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f">FMW_RESOURCE_TYPE_GPIO</a>, private_data-&gt;gpio_pin);</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span> *owner = <a class="code hl_function" href="resource__manager_8h.html#a62e206db3497c414594319109267082b">fmw_resource_get_owner</a>(<a class="code hl_enumvalue" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f">FMW_RESOURCE_TYPE_GPIO</a>, private_data-&gt;gpio_pin);</div>
 <div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;GPIO %d lock failed. Owner: %s&quot;</span>, private_data-&gt;gpio_pin, owner ?: <span class="stringliteral">&quot;unknown&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> ret;</div>
 <div class="line">    }</div>
@@ -240,14 +240,14 @@ API ფუნქციები</h1>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;GPIO %d released.&quot;</span>, private_data-&gt;gpio_pin);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-<div class="ttc" id="aresource__manager_8h_html_a2a0bce877745e54ba27ef0e67ea606c0"><div class="ttname"><a href="resource__manager_8h.html#a2a0bce877745e54ba27ef0e67ea606c0">fmw_resource_get_owner</a></div><div class="ttdeci">const char * fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id)</div><div class="ttdoc">აბრუნებს რესურსის მფლობელის სახელს.</div></div>
-<div class="ttc" id="aresource__manager_8h_html_a2cf645372eb05ee6b182e39ed57e90da"><div class="ttname"><a href="resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da">fmw_resource_lock</a></div><div class="ttdeci">esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner)</div><div class="ttdoc">რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის.</div></div>
+<div class="ttc" id="aresource__manager_8h_html_a2cf645372eb05ee6b182e39ed57e90da"><div class="ttname"><a href="resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da">fmw_resource_lock</a></div><div class="ttdeci">esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner)</div><div class="ttdoc">რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის.</div><div class="ttdef"><b>Definition</b> resource_manager.c:96</div></div>
+<div class="ttc" id="aresource__manager_8h_html_a62e206db3497c414594319109267082b"><div class="ttname"><a href="resource__manager_8h.html#a62e206db3497c414594319109267082b">fmw_resource_get_owner</a></div><div class="ttdeci">esp_err_t fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id, const char **out_owner)</div><div class="ttdoc">აბრუნებს რესურსის მფლობელის სახელს.</div><div class="ttdef"><b>Definition</b> resource_manager.c:211</div></div>
 <div class="ttc" id="aresource__manager_8h_html_a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f"><div class="ttname"><a href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f">FMW_RESOURCE_TYPE_GPIO</a></div><div class="ttdeci">@ FMW_RESOURCE_TYPE_GPIO</div><div class="ttdoc">GPIO პინი. resource_id არის gpio_num_t.</div><div class="ttdef"><b>Definition</b> resource_manager.h:25</div></div>
-<div class="ttc" id="aresource__manager_8h_html_a92b4e49ff7f60e575bd0a97797266fb9"><div class="ttname"><a href="resource__manager_8h.html#a92b4e49ff7f60e575bd0a97797266fb9">fmw_resource_release</a></div><div class="ttdeci">esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner)</div><div class="ttdoc">დაკავებული რესურსის გათავისუფლება.</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
-<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
+<div class="ttc" id="aresource__manager_8h_html_a92b4e49ff7f60e575bd0a97797266fb9"><div class="ttname"><a href="resource__manager_8h.html#a92b4e49ff7f60e575bd0a97797266fb9">fmw_resource_release</a></div><div class="ttdeci">esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner)</div><div class="ttdoc">დაკავებული რესურსის გათავისუფლება.</div><div class="ttdef"><b>Definition</b> resource_manager.c:131</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
+<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:156</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md351"></a>
+<h1><a class="anchor" id="autotoc_md353"></a>
 საუკეთესო პრაქტიკები</h1>
 <ul>
 <li>✅ <b>Lock Before Use</b> – დაილოქეთ რესურსები მათი გამოყენების წინ (<code>init()</code> ფუნქციაში).</li>

@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1504"></a> </p>
-<h1><a class="anchor" id="autotoc_md1505"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1515"></a> </p>
+<h1><a class="anchor" id="autotoc_md1516"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი მოდული Synapse ESP Framework-ში naming, structure და communication კონვენციების დაცვით.</p>
-<h1><a class="anchor" id="autotoc_md1506"></a>
+<h1><a class="anchor" id="autotoc_md1517"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li>განსაზღვრეთ, რა ფუნქციონალი გჭირდებათ (მაგ: ახალი სენსორი, აქტუატორი, კომუნიკაცია)</li>
 <li>აირჩიეთ შესაბამისი კატეგორია (მაგ: sensors, actuators, communications)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1507"></a>
+<h1><a class="anchor" id="autotoc_md1518"></a>
 2. საქაღალდის და ფაილების შექმნა</h1>
 <ul>
 <li>შექმენით ახალი საქაღალდე: <code>components/modules/{category}/{new_module}/</code></li>
@@ -116,9 +116,10 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1508"></a>
+<h1><a class="anchor" id="autotoc_md1519"></a>
 3. Header და Source ფაილების შაბლონები</h1>
-<p>**Header (<code>include/{new_module}.h</code>):** </p><div class="fragment"><div class="line"><span class="preprocessor">#ifndef {MODULE_NAME}_H</span></div>
+<p>**Header (<code>include/{new_module}.h</code>):**</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#ifndef {MODULE_NAME}_H</span></div>
 <div class="line"><span class="preprocessor">#define {MODULE_NAME}_H</span></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span></div>
@@ -137,14 +138,16 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#endif </span><span class="comment">// {MODULE_NAME}_H</span></div>
 <div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
-</div><!-- fragment --><p>**Source (<code>src/{new_module}.c</code>):** </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;{module_name}.h&quot;</span></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
+</div><!-- fragment --><p>**Source (<code>src/{new_module}.c</code>):**</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;{module_name}.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="config__manager_8h.html">config_manager.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="logging_8h.html">logging.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;freertos/semphr.h&quot;</span> <span class="comment">// For mutex</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;{MODULE_NAME}&quot;</span>);</div>
 <div class="line"> </div>
@@ -162,24 +165,95 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line">    <span class="comment">// hardware handles</span></div>
 <div class="line">}} {module_name}_private_data_t;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ...function declarations, implementation...</span></div>
+<div class="line"><span class="comment">// ფუნქციის დეკლარაციები</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
+<div class="line"><span class="comment">// ... სხვა დეკლარაციები</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ★★★ განახლებული create და deinit ფუნქციის შაბლონები ★★★</span></div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a>* {module_name}_create(<span class="keyword">const</span> cJSON *config) {</div>
+<div class="line">    <span class="comment">// 1. გამოყავით მეხსიერება მთავარი მოდულის სტრუქტურისთვის</span></div>
+<div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = calloc(1, sizeof(module_t));</div>
+<div class="line">    <span class="keywordflow">if</span> (!module) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to allocate memory for module_t.&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> NULL;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 2. გამოყავით მეხსიერება მოდულის პირადი მონაცემების სტრუქტურისთვის</span></div>
+<div class="line">    {module_name}_private_data_t *private_data = calloc(1, <span class="keyword">sizeof</span>({module_name}_private_data_t));</div>
+<div class="line">    <span class="keywordflow">if</span> (!private_data) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to allocate memory for private_data.&quot;</span>);</div>
+<div class="line">        free(module);</div>
+<div class="line">        <span class="keywordflow">return</span> NULL;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// 3. ★★★ შექმენით state_mutex ★★★</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;state_mutex = xSemaphoreCreateMutex();</div>
+<div class="line">    <span class="keywordflow">if</span> (!module-&gt;state_mutex) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to create state mutex.&quot;</span>);</div>
+<div class="line">        free(private_data);</div>
+<div class="line">        free(module);</div>
+<div class="line">        <span class="keywordflow">return</span> NULL;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 4. დააკავშირეთ პირადი მონაცემები და დააყენეთ საწყისი სტატუსი</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;private_data = private_data;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;status = MODULE_STATUS_UNINITIALIZED;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ... (დააყენეთ ბაზის ფუნქციები, მაგ: module-&gt;base.init = {module_name}_init;) ...</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.deinit = {module_name}_deinit; <span class="comment">// მნიშვნელოვანია: დააყენეთ deinit ფუნქცია</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// ... (წაიკითხეთ კონფიგურაცია `config`-დან და შეავსეთ პირადი მონაცემები) ...</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line">    <span class="keywordflow">if</span> (!self) <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Deinitializing {module_name} module: %s&quot;</span>, self-&gt;<a class="code hl_variable" href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">name</a>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ★★★ მნიშვნელოვანი ნაბიჯი: გააუქმეთ ყველა გამოწერა! ★★★</span></div>
+<div class="line">    <span class="comment">// მაგალითად: fmw_event_bus_unsubscribe(SOME_EVENT_ID, self);</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// ★★★ გაანადგურეთ state_mutex ★★★</span></div>
+<div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">state_mutex</a>) {</div>
+<div class="line">        vSemaphoreDelete(self-&gt;<a class="code hl_variable" href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">state_mutex</a>);</div>
+<div class="line">        self-&gt;<a class="code hl_variable" href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">state_mutex</a> = NULL;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// გაათავისუფლეთ პირადი მონაცემები</span></div>
+<div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>) {</div>
+<div class="line">        free(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>);</div>
+<div class="line">        self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a> = NULL;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// გაათავისუფლეთ თავად მოდულის ობიექტი</span></div>
+<div class="line">    free(self);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ... (სხვა ფუნქციების იმპლემენტაცია) ...</span></div>
 <div class="ttc" id="aconfig__manager_8h_html"><div class="ttname"><a href="config__manager_8h.html">config_manager.h</a></div><div class="ttdoc">კონფიგურაციის მენეჯერის API.</div></div>
-<div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის API.</div></div>
+<div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის Public API.</div></div>
 <div class="ttc" id="alogging_8h_html"><div class="ttname"><a href="logging_8h.html">logging.h</a></div><div class="ttdoc">Synapse ESP Framework-ის ლოგირების დამხმარე ინტერფეისი.</div></div>
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:130</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1509"></a>
+<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:156</div></div>
+<div class="ttc" id="astructmodule__t_html_aab517ed6d3ea95d081a3c5c93b59529d"><div class="ttname"><a href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">module_t::state_mutex</a></div><div class="ttdeci">SemaphoreHandle_t state_mutex</div><div class="ttdoc">mutex მოდულის მდგომარეობის დაცვისთვის.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
+<div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:149</div></div>
+<div class="ttc" id="astructmodule__t_html_afb5f2d3d957c8717f54cd8668e4cab5e"><div class="ttname"><a href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">module_t::name</a></div><div class="ttdeci">char name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</div><div class="ttdoc">მოდულის უნიკალური სახელი (instance_name).</div><div class="ttdef"><b>Definition</b> base_module.h:134</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1520"></a>
 4. Naming და Structure კონვენციების გამოყენება</h1>
 <ul>
 <li>გამოიყენეთ <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a></li>
 <li>დაიცავით <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
-<li>ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიული და კონტექსტური</li>
+<li>ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიური და კონტექსტური</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1510"></a>
+<h1><a class="anchor" id="autotoc_md1521"></a>
 5. მოდულის რეგისტრაცია და ჩართვა</h1>
 <ul>
-<li>დაამატეთ მოდული <code>system_config.json</code>-ში: <div class="fragment"><div class="line">{</div>
+<li><p class="startli">დაამატეთ მოდული <code>system_config.json</code>-ში:</p>
+<div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;{module_name}&quot;,</div>
 <div class="line">    &quot;enabled&quot;: true,</div>
 <div class="line">    &quot;config&quot;: {</div>
@@ -190,14 +264,14 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div><!-- fragment --></li>
 <li>ჩართეთ მოდული Kconfig-ში</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1511"></a>
+<h1><a class="anchor" id="autotoc_md1522"></a>
 6. ტესტირება და ლოგირება</h1>
 <ul>
 <li>გამოიყენეთ ESP-IDF-ის build და flash ბრძანებები</li>
 <li>დააკვირდით ლოგებს (ESP_LOGI, ESP_LOGE და სხვ.)</li>
 <li>დარწმუნდით, რომ ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგში ჩანს</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1512"></a>
+<h1><a class="anchor" id="autotoc_md1523"></a>
 7. დამატებითი რესურსები</h1>
 <ul>
 <li><a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>

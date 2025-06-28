@@ -91,12 +91,14 @@ $(document).ready(function(){initNavTree('resource__manager_8c.html',''); initRe
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">resource_manager.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>რესურსების მენეჯერის იმპლემენტაცია.  
+<p>რესურსების მენეჯერის ზოგადი იმპლემენტაცია.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="resource__manager_8h_source.html">resource_manager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="logging_8h_source.html">logging.h</a>&quot;</code><br />
@@ -104,27 +106,24 @@ $(document).ready(function(){initNavTree('resource__manager_8c.html',''); initRe
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
 <code>#include &quot;freertos/semphr.h&quot;</code><br />
-<code>#include &quot;driver/gpio.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for resource_manager.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="resource__manager_8c__incl.png" border="0" usemap="#acomponents_2core_2resource__manager_8c" alt=""/></div>
 <map name="acomponents_2core_2resource__manager_8c" id="acomponents_2core_2resource__manager_8c">
-<area shape="rect" title="რესურსების მენეჯერის იმპლემენტაცია." alt="" coords="455,5,650,45"/>
+<area shape="rect" title="რესურსების მენეჯერის ზოგადი იმპლემენტაცია." alt="" coords="405,5,599,45"/>
 <area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="55,93,210,119"/>
-<area shape="poly" title=" " alt="" coords="456,47,208,93,207,88,455,42"/>
+<area shape="poly" title=" " alt="" coords="414,48,200,93,199,88,413,43"/>
 <area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="410,93,493,119"/>
-<area shape="poly" title=" " alt="" coords="530,48,479,87,476,82,527,43"/>
+<area shape="poly" title=" " alt="" coords="492,47,469,83,464,80,487,44"/>
 <area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="235,93,385,119"/>
-<area shape="poly" title=" " alt="" coords="495,48,359,92,358,86,494,43"/>
+<area shape="poly" title=" " alt="" coords="457,48,352,91,350,86,455,43"/>
 <area shape="rect" title=" " alt="" coords="517,93,588,119"/>
-<area shape="poly" title=" " alt="" coords="555,46,555,79,550,79,550,46"/>
+<area shape="poly" title=" " alt="" coords="517,44,540,80,535,83,512,47"/>
 <area shape="rect" title=" " alt="" coords="612,93,763,119"/>
-<area shape="poly" title=" " alt="" coords="586,43,657,84,654,89,584,48"/>
+<area shape="poly" title=" " alt="" coords="547,43,649,85,647,90,545,48"/>
 <area shape="rect" title=" " alt="" coords="787,93,924,119"/>
-<area shape="poly" title=" " alt="" coords="626,43,799,87,797,92,624,48"/>
-<area shape="rect" title=" " alt="" coords="949,93,1053,119"/>
-<area shape="poly" title=" " alt="" coords="651,41,936,90,935,96,650,46"/>
+<area shape="poly" title=" " alt="" coords="587,43,791,88,790,93,586,48"/>
 <area shape="rect" title=" " alt="" coords="5,167,87,192"/>
 <area shape="poly" title=" " alt="" coords="120,121,72,160,69,156,117,117"/>
 <area shape="rect" title=" " alt="" coords="256,167,327,192"/>
@@ -137,6 +136,17 @@ Include dependency graph for resource_manager.c:</div>
 </map>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structresource__pool__t.html">resource_pool_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a9bf3476bcab6f99d25948b595a3afe8e" id="r_a9bf3476bcab6f99d25948b595a3afe8e"><td class="memItemLeft" align="right" valign="top"><a id="a9bf3476bcab6f99d25948b595a3afe8e" name="a9bf3476bcab6f99d25948b595a3afe8e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_RESOURCES_PER_POOL</b>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:a9bf3476bcab6f99d25948b595a3afe8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af6871d9d97006bb4bf958caccccb4288" id="r_af6871d9d97006bb4bf958caccccb4288"><td class="memItemLeft" align="right" valign="top"><a id="af6871d9d97006bb4bf958caccccb4288" name="af6871d9d97006bb4bf958caccccb4288"></a>
@@ -145,31 +155,217 @@ Functions</h2></td></tr>
 <tr class="memitem:a7644b52a0b11186f8a84b4b489c14f54" id="r_a7644b52a0b11186f8a84b4b489c14f54"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8c.html#a7644b52a0b11186f8a84b4b489c14f54">fmw_resource_manager_init</a> (void)</td></tr>
 <tr class="memdesc:a7644b52a0b11186f8a84b4b489c14f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">რესურს მენეჯერის ინიციალიზაცია.  <br /></td></tr>
 <tr class="separator:a7644b52a0b11186f8a84b4b489c14f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb1c1f1c6aadfa6f7311de08d27fae8b" id="r_abb1c1f1c6aadfa6f7311de08d27fae8b"><td class="memItemLeft" align="right" valign="top"><a id="abb1c1f1c6aadfa6f7311de08d27fae8b" name="abb1c1f1c6aadfa6f7311de08d27fae8b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_resource_manager_deinit</b> (void)</td></tr>
+<tr class="memitem:abb1c1f1c6aadfa6f7311de08d27fae8b" id="r_abb1c1f1c6aadfa6f7311de08d27fae8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8c.html#abb1c1f1c6aadfa6f7311de08d27fae8b">fmw_resource_manager_deinit</a> (void)</td></tr>
+<tr class="memdesc:abb1c1f1c6aadfa6f7311de08d27fae8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს.  <br /></td></tr>
 <tr class="separator:abb1c1f1c6aadfa6f7311de08d27fae8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc061f53b903f6fedc7aa92483cb4b13" id="r_afc061f53b903f6fedc7aa92483cb4b13"><td class="memItemLeft" align="right" valign="top"><a id="afc061f53b903f6fedc7aa92483cb4b13" name="afc061f53b903f6fedc7aa92483cb4b13"></a>
-esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_resource_lock_gpio</b> (gpio_num_t pin, const char *owner)</td></tr>
-<tr class="separator:afc061f53b903f6fedc7aa92483cb4b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa76de5cec13693fc999a0a978ef36c26" id="r_aa76de5cec13693fc999a0a978ef36c26"><td class="memItemLeft" align="right" valign="top"><a id="aa76de5cec13693fc999a0a978ef36c26" name="aa76de5cec13693fc999a0a978ef36c26"></a>
-esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_resource_release_gpio</b> (gpio_num_t pin, const char *owner)</td></tr>
-<tr class="separator:aa76de5cec13693fc999a0a978ef36c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ebb887766f23633d5c712bc55c2fe0" id="r_a77ebb887766f23633d5c712bc55c2fe0"><td class="memItemLeft" align="right" valign="top"><a id="a77ebb887766f23633d5c712bc55c2fe0" name="a77ebb887766f23633d5c712bc55c2fe0"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_resource_is_gpio_locked</b> (gpio_num_t pin)</td></tr>
-<tr class="separator:a77ebb887766f23633d5c712bc55c2fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf645372eb05ee6b182e39ed57e90da" id="r_a2cf645372eb05ee6b182e39ed57e90da"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8c.html#a2cf645372eb05ee6b182e39ed57e90da">fmw_resource_lock</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id, const char *owner)</td></tr>
+<tr class="memdesc:a2cf645372eb05ee6b182e39ed57e90da"><td class="mdescLeft">&#160;</td><td class="mdescRight">რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის.  <br /></td></tr>
+<tr class="separator:a2cf645372eb05ee6b182e39ed57e90da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b4e49ff7f60e575bd0a97797266fb9" id="r_a92b4e49ff7f60e575bd0a97797266fb9"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8c.html#a92b4e49ff7f60e575bd0a97797266fb9">fmw_resource_release</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id, const char *owner)</td></tr>
+<tr class="memdesc:a92b4e49ff7f60e575bd0a97797266fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">დაკავებული რესურსის გათავისუფლება.  <br /></td></tr>
+<tr class="separator:a92b4e49ff7f60e575bd0a97797266fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c8e1ee6abf08a2600a427d96653920" id="r_a68c8e1ee6abf08a2600a427d96653920"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8c.html#a68c8e1ee6abf08a2600a427d96653920">fmw_resource_is_locked</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id)</td></tr>
+<tr class="memdesc:a68c8e1ee6abf08a2600a427d96653920"><td class="mdescLeft">&#160;</td><td class="mdescRight">ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი.  <br /></td></tr>
+<tr class="separator:a68c8e1ee6abf08a2600a427d96653920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e206db3497c414594319109267082b" id="r_a62e206db3497c414594319109267082b"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="resource__manager_8c.html#a62e206db3497c414594319109267082b">fmw_resource_get_owner</a> (<a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a> type, uint8_t resource_id, const char **out_owner)</td></tr>
+<tr class="memdesc:a62e206db3497c414594319109267082b"><td class="mdescLeft">&#160;</td><td class="mdescRight">იღებს მითითებული რესურსის მფლობელის სახელს.  <br /></td></tr>
+<tr class="separator:a62e206db3497c414594319109267082b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>რესურსების მენეჯერის იმპლემენტაცია. </p>
-<dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-06-26 </dd></dl>
+<div class="textblock"><p>რესურსების მენეჯერის ზოგადი იმპლემენტაცია. </p>
+<dl class="section version"><dt>Version</dt><dd>3.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-06-27 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
-<p>ეს ფაილი შეიცავს GPIO პინების მართვის იმპლემენტაციას, რათა თავიდან აცილებულ იქნას კონფლიქტები სხვადასხვა მოდულებს შორის. ის იყენებს Bitmap-ს დაკავებული პინების ეფექტური აღრიცხვისთვის და Mutex-ს ოპერაციების ნაკად-უსაფრთხოების (thread-safety) უზრუნველსაყოფად, რაც კრიტიკულია მრავალნაკადიან RTOS გარემოში.</p>
+<p>ეს ფაილი შეიცავს Synapse Framework-ის რესურსების მენეჯერის ზოგად იმპლემენტაციას. იგი შექმნილია სხვადასხვა ტიპის გაზიარებული რესურსების (მაგ. GPIO, ADC, I2C) კონფლიქტების გარეშე მართვისთვის. თითოეული რესურსის ტიპი იმართება საკუთარ, იზოლირებულ ნაკრებში (pool), რაც უზრუნველყოფს მაღალ წარმადობას და ნაკად-უსაფრთხოებას (thread-safety) ინდივიდუალური Mutex-ების გამოყენებით.</p>
 <p>ძირითადი მახასიათებლები:</p><ul>
-<li>GPIO პინების ნაკად-უსაფრთხო დაკავება და გათავისუფლება.</li>
-<li>მფლობელის აღრიცხვა არაავტორიზებული გათავისუფლების თავიდან ასაცილებლად.</li>
-<li>დეტალური ლოგირება რესურსების კონფლიქტის მარტივი დიაგნოსტიკისთვის. </li>
+<li>სხვადასხვა ტიპის რესურსების ზოგადი მართვა.</li>
+<li>თითოეული რესურსის ტიპისთვის იზოლირებული და ნაკად-უსაფრთხო გარემო.</li>
+<li>რესურსის მფლობელის აღრიცხვა არაავტორიზებული წვდომის თავიდან ასაცილებლად.</li>
+<li>დეტალური, ქართულენოვანი ლოგირება პრობლემების მარტივი დიაგნოსტიკისთვის.</li>
+<li>"Fail-safe" მიდგომა: მდგომარეობის შემოწმებისას, თუ რესურსის სტატუსი უცნობია (მაგ. Mutex-ის დაკავების შეცდომა), ის ჩაითვლება დაკავებულად. </li>
 </ul>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a62e206db3497c414594319109267082b" name="a62e206db3497c414594319109267082b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62e206db3497c414594319109267082b">&#9670;&#160;</a></span>fmw_resource_get_owner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_resource_get_owner </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char **&#160;</td>
+          <td class="paramname"><em>out_owner</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>იღებს მითითებული რესურსის მფლობელის სახელს. </p>
+<p>აბრუნებს რესურსის მფლობელის სახელს.</p>
+<p>ეს ფუნქცია ამოწმებს, თუ ვინ არის კონკრეტული რესურსის მფლობელი. თუ რესურსი დაკავებული არ არის, <code>out_owner</code> იქნება NULL, მაგრამ ფუნქცია დააბრუნებს ESP_OK-ს.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი (<code>fmw_resource_type_t</code>). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>რესურსის უნიკალური ID (0-63). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_owner</td><td>ორმაგი პოინტერი, სადაც ჩაიწერება მფლობელის სახელის პოინტერი. შეცდომის ან თუ რესურსი თავისუფალია, იქნება NULL.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>ESP_OK: ოპერაცია წარმატებით დასრულდა.</li>
+<li>ESP_ERR_INVALID_ARG: თუ <code>type</code>, <code>resource_id</code> ან <code>out_owner</code> არავალიდურია.</li>
+<li>ESP_ERR_TIMEOUT: თუ Mutex-ის აღება ვერ მოხერხდა განსაზღვრულ დროში. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="a68c8e1ee6abf08a2600a427d96653920" name="a68c8e1ee6abf08a2600a427d96653920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c8e1ee6abf08a2600a427d96653920">&#9670;&#160;</a></span>fmw_resource_is_locked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool fmw_resource_is_locked </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>შესამოწმებელი რესურსის იდენტიფიკატორი.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true თუ რესურსი დაკავებულია. </dd>
+<dd>
+false თუ რესურსი თავისუფალია. </dd></dl>
+
+</div>
+</div>
+<a id="a2cf645372eb05ee6b182e39ed57e90da" name="a2cf645372eb05ee6b182e39ed57e90da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf645372eb05ee6b182e39ed57e90da">&#9670;&#160;</a></span>fmw_resource_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_resource_lock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>owner</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის. </p>
+<p>სანამ მოდული გამოიყენებს რესურსს, მან უნდა "დალოქოს" იგი, რათა სხვა მოდულმა ვერ გამოიყენოს.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>რესურსის უნიკალური იდენტიფიკატორი (მაგ: პინის ნომერი, პორტის ნომერი). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">owner</td><td>მოდულის სახელი, რომელიც იკავებს რესურსს (სასარგებლოა დიაგნოსტიკისთვის).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>თუ რესურსი წარმატებით დაილოქა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>type</code>, <code>resource_id</code> ან <code>owner</code> არავალიდურია. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ რესურსი უკვე დაკავებულია სხვა მოდულის მიერ. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>თუ მეხსიერების გამოყოფა ვერ მოხერხდა. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abb1c1f1c6aadfa6f7311de08d27fae8b" name="abb1c1f1c6aadfa6f7311de08d27fae8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb1c1f1c6aadfa6f7311de08d27fae8b">&#9670;&#160;</a></span>fmw_resource_manager_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fmw_resource_manager_deinit </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს. </p>
+<p>ეს ფუნქცია გამოიყენება რესურს მენეჯერის დეინიციალიზაციისთვის. მისი გამოძახების შემდეგ, ყველა რესურსი, რომელიც მენეჯერმა გამოიყენა ან გამოყო, უნდა გათავისუფლდეს. ფუნქციის გამოძახება აუცილებელია სისტემის გამორთვამდე ან რესურს მენეჯერის ხელახლა ინიციალიზაციამდე, რათა თავიდან ავიცილოთ მეხსიერების გაჟონვა ან სხვა რესურსებთან დაკავშირებული პრობლემები.</p>
+<dl class="section note"><dt>Note</dt><dd>ფუნქცია არ იღებს პარამეტრებს და არ აბრუნებს მნიშვნელობას. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="resource__manager_8c_abb1c1f1c6aadfa6f7311de08d27fae8b_icgraph.png" border="0" usemap="#aresource__manager_8c_abb1c1f1c6aadfa6f7311de08d27fae8b_icgraph" alt=""/></div>
+<map name="aresource__manager_8c_abb1c1f1c6aadfa6f7311de08d27fae8b_icgraph" id="aresource__manager_8c_abb1c1f1c6aadfa6f7311de08d27fae8b_icgraph">
+<area shape="rect" title="ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს." alt="" coords="443,5,621,45"/>
+<area shape="rect" href="resource__manager_8c.html#a7644b52a0b11186f8a84b4b489c14f54" title="რესურს მენეჯერის ინიციალიზაცია." alt="" coords="188,13,395,38"/>
+<area shape="poly" title=" " alt="" coords="429,28,395,28,395,23,429,23"/>
+<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,13,140,38"/>
+<area shape="poly" title=" " alt="" coords="174,28,140,28,140,23,174,23"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a7644b52a0b11186f8a84b4b489c14f54" name="a7644b52a0b11186f8a84b4b489c14f54"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7644b52a0b11186f8a84b4b489c14f54">&#9670;&#160;</a></span>fmw_resource_manager_init()</h2>
 
@@ -197,6 +393,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_resource_is_gpio_
   </dd>
 </dl>
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="resource__manager_8c_a7644b52a0b11186f8a84b4b489c14f54_cgraph.png" border="0" usemap="#aresource__manager_8c_a7644b52a0b11186f8a84b4b489c14f54_cgraph" alt=""/></div>
+<map name="aresource__manager_8c_a7644b52a0b11186f8a84b4b489c14f54_cgraph" id="aresource__manager_8c_a7644b52a0b11186f8a84b4b489c14f54_cgraph">
+<area shape="rect" title="რესურს მენეჯერის ინიციალიზაცია." alt="" coords="5,13,212,38"/>
+<area shape="rect" href="resource__manager_8c.html#abb1c1f1c6aadfa6f7311de08d27fae8b" title="ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს." alt="" coords="260,5,439,45"/>
+<area shape="poly" title=" " alt="" coords="212,23,246,23,246,28,212,28"/>
+</map>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="resource__manager_8c_a7644b52a0b11186f8a84b4b489c14f54_icgraph.png" border="0" usemap="#aresource__manager_8c_a7644b52a0b11186f8a84b4b489c14f54_icgraph" alt=""/></div>
@@ -206,6 +412,61 @@ Here is the caller graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="174,21,140,21,140,15,174,15"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a92b4e49ff7f60e575bd0a97797266fb9" name="a92b4e49ff7f60e575bd0a97797266fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b4e49ff7f60e575bd0a97797266fb9">&#9670;&#160;</a></span>fmw_resource_release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t fmw_resource_release </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15">fmw_resource_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>resource_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>owner</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>დაკავებული რესურსის გათავისუფლება. </p>
+<p>როდესაც მოდული ასრულებს მუშაობას რესურსზე (მაგ: <code>deinit</code> ფუნქციაში), მან უნდა გაათავისუფლოს იგი.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>რესურსის ტიპი <code>fmw_resource_type_t</code>-დან. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resource_id</td><td>გასათავისუფლებელი რესურსის იდენტიფიკატორი. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">owner</td><td>მოდულის სახელი, რომელიც ათავისუფლებს რესურსს.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>თუ რესურსი წარმატებით გათავისუფლდა. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>type</code> ან <code>resource_id</code> არავალიდურია. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>თუ მითითებული რესურსი დაკავებული არ იყო. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ გათავისუფლება სცადა არა მფლობელმა მოდულმა. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

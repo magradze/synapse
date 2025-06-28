@@ -95,70 +95,69 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2configuration
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md89"></a> </p>
 <h1><a class="anchor" id="autotoc_md90"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse Framework-ის კონფიგურაციის მენეჯერის (Configuration Manager) API-ს, naming და structure კონვენციების დაცვით.</p>
+🎯 მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse Framework-ის კონფიგურაციის მენეჯერის (Configuration Manager) API-ს. ეს API უზრუნველყოფს ერთიან, უსაფრთხო და მოქნილ წვდომას სისტემის ყველა კონფიგურაციულ პარამეტრზე <code>system_config.json</code>-დან.</p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md92"></a>
-ძირითადი API ფუნქციები</h1>
-<h2><a class="anchor" id="autotoc_md93"></a>
-esp_err_t fmw_config_get_string(const char *key, char *value, size_t size);</h2>
+🔑 გასაღების ფორმატი (Dot-Notation)</h1>
+<p>ყველა <code>fmw_config_get_*</code> ფუნქცია იყენებს <b>წერტილით გამოყოფილ გასაღებს (dot-notation)</b> პარამეტრების მისაღებად. ფორმატი დამოკიდებულია იმაზე, გლობალურ პარამეტრს ითხოვთ თუ კონკრეტული მოდულისას.</p>
 <ul>
-<li>კითხულობს სტრიქონის ტიპის პარამეტრს კონფიგურაციიდან.</li>
+<li><b>გლობალური პარამეტრისთვის:</b> <code>"global_config.parameter_name"</code> <em>მაგალითი:</em> <code>"global_config.device.id.prefix"</code></li>
+<li><b>მოდულის პარამეტრისთვის:</b> <code>"module_instance_name.parameter_name"</code> <em>მაგალითი:</em> <code>"main_broker.broker_uri"</code> ან <code>"indoor_sensor.update_interval_sec"</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md94"></a>
-esp_err_t fmw_config_get_int(const char *key, int *value);</h2>
-<ul>
-<li>კითხულობს მთელი რიცხვის ტიპის პარამეტრს.</li>
-</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md94"></a>
+⚙️ ძირითადი API ფუნქციები</h1>
 <h2><a class="anchor" id="autotoc_md95"></a>
-esp_err_t fmw_config_get_bool(const char *key, bool *value);</h2>
+esp_err_t fmw_config_get_string(const char *key, char*buffer, size_t buffer_size)</h2>
 <ul>
-<li>კითხულობს ლოგიკური ტიპის პარამეტრს.</li>
+<li>კითხულობს სტრიქონის ტიპის პარამეტრს კონფიგურაციიდან მითითებული <code>key</code>-ს მიხედვით.</li>
+<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, <code>ESP_ERR_NOT_FOUND</code> თუ გასაღები ვერ მოიძებნა, <code>ESP_ERR_NVS_TYPE_MISMATCH</code> თუ ტიპი არასწორია.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md96"></a>
-const cJSON *fmw_config_get_module_config(const char *module_instance_name);</h2>
+esp_err_t fmw_config_get_int(const char *key, int*out_value)</h2>
 <ul>
-<li>აბრუნებს მოდულის სრულ კონფიგურაციას instance_name-ით.</li>
+<li>კითხულობს მთელი რიცხვის (<code>int</code>) ტიპის პარამეტრს.</li>
+<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, ან შესაბამის შეცდომის კოდს.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md97"></a>
-esp_err_t fmw_config_set_string(const char *key, const char *value);</h2>
+esp_err_t fmw_config_get_bool(const char *key, bool*out_value)</h2>
 <ul>
-<li>ცვლის ან ამატებს სტრიქონის ტიპის პარამეტრს.</li>
+<li>კითხულობს ლოგიკური (<code>bool</code>) ტიპის პარამეტრს.</li>
+<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, ან შესაბამის შეცდომის კოდს.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md98"></a>
-esp_err_t fmw_config_set_int(const char *key, int value);</h2>
+esp_err_t fmw_config_save(void)</h2>
 <ul>
-<li>ცვლის ან ამატებს მთელი რიცხვის ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md99"></a>
-esp_err_t fmw_config_set_bool(const char *key, bool value);</h2>
-<ul>
-<li>ცვლის ან ამატებს ლოგიკური ტიპის პარამეტრს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md100"></a>
-esp_err_t fmw_config_save(void);</h2>
-<ul>
-<li>ინახავს ყველა ცვლილებას მუდმივ მეხსიერებაში.</li>
+<li>ინახავს ყველა ცვლილებას, რომელიც runtime-ში განხორციელდა, NVS მუდმივ მეხსიერებაში.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md102"></a>
-Naming &amp; Structure</h1>
-<ul>
-<li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
-<li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md104"></a>
-მაგალითები</h1>
-<p><b>სტრიქონის წაკითხვა:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> broker_url[128];</div>
-<div class="line">fmw_config_get_string(<span class="stringliteral">&quot;mqtt_module.config.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
-</div><!-- fragment --><p><b>მთელი რიცხვის წაკითხვა:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> update_interval;</div>
-<div class="line">fmw_config_get_int(<span class="stringliteral">&quot;dht22_module.config.update_interval_sec&quot;</span>, &amp;update_interval);</div>
-</div><!-- fragment --><p><b>პარამეტრის შეცვლა და შენახვა:</b> </p><div class="fragment"><div class="line">fmw_config_set_string(<span class="stringliteral">&quot;relay_module.config.instance_name&quot;</span>, <span class="stringliteral">&quot;relay2&quot;</span>);</div>
-<div class="line"><a class="code hl_function" href="config__manager_8c.html#adf782fcfae675652d67a24618947e547">fmw_config_save</a>();</div>
-<div class="ttc" id="aconfig__manager_8c_html_adf782fcfae675652d67a24618947e547"><div class="ttname"><a href="config__manager_8c.html#adf782fcfae675652d67a24618947e547">fmw_config_save</a></div><div class="ttdeci">esp_err_t fmw_config_save(void)</div><div class="ttdoc">ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.</div><div class="ttdef"><b>Definition</b> config_manager.c:77</div></div>
-</div><!-- fragment --><hr  />
-<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
+<h1><a class="anchor" id="autotoc_md100"></a>
+🚀 გამოყენების მაგალითები</h1>
+<h2><a class="anchor" id="autotoc_md101"></a>
+გლობალური პარამეტრის წაკითხვა</h2>
+<div class="fragment"><div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
+<div class="line">esp_err_t ret = fmw_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
+<div class="line"><span class="keywordflow">if</span> (ret == ESP_OK) {</div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Device prefix is: %s&quot;</span>, device_prefix);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md102"></a>
+მოდულის პარამეტრის წაკითხვა</h2>
+<div class="fragment"><div class="line"><span class="comment">// დავუშვათ, ჩვენ ვიმყოფებით მოდულში, რომლის instance_name არის &quot;main_broker&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">char</span> broker_uri[128];</div>
+<div class="line">esp_err_t ret = fmw_config_get_string(<span class="stringliteral">&quot;main_broker.broker_uri&quot;</span>, broker_uri, <span class="keyword">sizeof</span>(broker_uri));</div>
+<div class="line"><span class="keywordflow">if</span> (ret != ESP_OK) {</div>
+<div class="line">    <span class="comment">// Handle error, maybe use a default value</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> update_interval;</div>
+<div class="line"><span class="comment">// ვკითხულობთ სხვა მოდულის (&quot;indoor_sensor&quot;) პარამეტრს</span></div>
+<div class="line">ret = fmw_config_get_int(<span class="stringliteral">&quot;indoor_sensor.update_interval_sec&quot;</span>, &amp;update_interval);</div>
+<div class="line"><span class="keywordflow">if</span> (ret == ESP_OK) {</div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Sensor update interval: %d seconds&quot;</span>, update_interval);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

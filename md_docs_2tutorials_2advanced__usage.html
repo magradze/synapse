@@ -93,15 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
   <div class="headertitle"><div class="title">Advanced Usage (გაფართოებული გამოყენება)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1494"></a> </p>
-<h1><a class="anchor" id="autotoc_md1495"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1505"></a> </p>
+<h1><a class="anchor" id="autotoc_md1506"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ გამოიყენოთ Synapse Framework-ის გაფართოებული შესაძლებლობები, როგორ დააკონფიგურიროთ რთული სცენარები და როგორ მოახდინოთ სისტემის ოპტიმიზაცია.</p>
-<h1><a class="anchor" id="autotoc_md1496"></a>
+<h1><a class="anchor" id="autotoc_md1507"></a>
 1. მრავალმოდულიანი კონფიგურაცია</h1>
 <ul>
 <li>ერთზე მეტი ერთი და იმავე ტიპის მოდულის დამატება (მაგ: რამდენიმე რელე, რამდენიმე სენსორი)</li>
-<li>მაგალითი: <div class="fragment"><div class="line">{</div>
+<li><p class="startli">მაგალითი:</p>
+<div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;relay_module&quot;,</div>
 <div class="line">    &quot;enabled&quot;: true,</div>
 <div class="line">    &quot;config&quot;: {</div>
@@ -119,52 +120,56 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1497"></a>
+<h1><a class="anchor" id="autotoc_md1508"></a>
 2. მოდულის დინამიური ჩართვა/გამორთვა</h1>
 <ul>
 <li>მოდულის enable/disable ფუნქციების გამოყენება runtime-ზე</li>
-<li>მაგალითი: <div class="fragment"><div class="line"><span class="comment">// მოდულის ჩართვა</span></div>
+<li><p class="startli">მაგალითი:</p>
+<div class="fragment"><div class="line"><span class="comment">// მოდულის ჩართვა</span></div>
 <div class="line">ssd1306_api_enable();</div>
 <div class="line"><span class="comment">// მოდულის გამორთვა</span></div>
 <div class="line">ssd1306_api_disable();</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1498"></a>
+<h1><a class="anchor" id="autotoc_md1509"></a>
 3. Runtime Reconfiguration</h1>
 <ul>
 <li>მოდულის კონფიგურაციის შეცვლა მუშაობის დროს</li>
 <li>გამოიყენეთ module_reconfigure API</li>
-<li>მაგალითი: <div class="fragment"><div class="line">cJSON *new_config = ...; <span class="comment">// ახალი კონფიგურაცია</span></div>
+<li><p class="startli">მაგალითი:</p>
+<div class="fragment"><div class="line">cJSON *new_config = ...; <span class="comment">// ახალი კონფიგურაცია</span></div>
 <div class="line">module_reconfigure(module, new_config);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1499"></a>
+<h1><a class="anchor" id="autotoc_md1510"></a>
 4. Custom Event-ების გამოყენება</h1>
 <ul>
 <li>საკუთარი მოვლენის განსაზღვრა და გამოყენება Event Bus-ში</li>
-<li>მაგალითი: <div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID  0x1001</span></div>
+<li><p class="startli">მაგალითი:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID  0x1001</span></div>
 <div class="line">event_bus_post(CUSTOM_EVENT_ID, &amp;custom_data);</div>
 <div class="line">event_bus_subscribe(CUSTOM_EVENT_ID, custom_event_handler);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1500"></a>
+<h1><a class="anchor" id="autotoc_md1511"></a>
 5. მოდულის სტატუსის მონიტორინგი</h1>
 <ul>
 <li>გამოიყენეთ get_status API მოდულის მდგომარეობის მისაღებად</li>
-<li>მაგალითი: <div class="fragment"><div class="line"><a class="code hl_enumeration" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a> status = ssd1306_get_status(module);</div>
+<li><p class="startli">მაგალითი:</p>
+<div class="fragment"><div class="line"><a class="code hl_enumeration" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a> status = ssd1306_get_status(module);</div>
 <div class="line"><span class="keywordflow">if</span> (status == MODULE_STATUS_ENABLED) {</div>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">მოდულის შესაძლო სტატუსების ენუმერაცია.</div><div class="ttdef"><b>Definition</b> base_module.h:29</div></div>
+<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">მოდულის შესაძლო სტატუსების ენუმერაცია.</div><div class="ttdef"><b>Definition</b> base_module.h:34</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1501"></a>
+<h1><a class="anchor" id="autotoc_md1512"></a>
 6. ოპტიმიზაცია და რესურსების მართვა</h1>
 <ul>
 <li>გამოიყენეთ ლოგირება და performance monitoring</li>
 <li>ყურადღება მიაქციეთ მეხსიერების გამოყენებას და task-ების რაოდენობას</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1502"></a>
+<h1><a class="anchor" id="autotoc_md1513"></a>
 7. Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ public API-ები</li>

@@ -101,36 +101,95 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2event__api.ht
 <h1><a class="anchor" id="autotoc_md200"></a>
 Event Bus API</h1>
 <h2><a class="anchor" id="autotoc_md201"></a>
-esp_err_t event_bus_init(void);</h2>
+&lt;tt&gt;esp_err_t fmw_event_bus_init(void)&lt;/tt&gt;</h2>
 <ul>
-<li>ინიციალიზაციას უკეთებს Event Bus-ს.</li>
+<li>ინიციალიზაციას უკეთებს Event Bus-ს. ქმნის ივენთების რიგს (queue) და იწყებს დამმუშავებელ ტასკს. უნდა გამოიძახოს მხოლოდ სისტემის ბირთვმა ერთხელ.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md202"></a>
-esp_err_t event_bus_post(int32_t event_id, void *event_data);</h2>
+&lt;tt&gt;esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)&lt;/tt&gt;</h2>
 <ul>
-<li>ავრცელებს მოვლენას ყველა გამოწერილ მოდულზე.</li>
-<li>არგუმენტები: event_id (უნიკალური იდენტიფიკატორი), event_data (მონაცემები)</li>
+<li>ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.</li>
+<li><b>არგუმენტები:</b><ul>
+<li><code>event_id</code>: მოვლენის უნიკალური იდენტიფიკატორი (<code>enum</code>).</li>
+<li><code>data_wrapper</code>: მაჩვენებელი ივენთის მონაცემების "გარსზე" (<code>wrapper</code>). თუ მონაცემები არ არის საჭირო, გადაეცემა <code>NULL</code>.</li>
+</ul>
+</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md203"></a>
-esp_err_t event_bus_subscribe(int32_t event_id, event_handler_t handler);</h2>
+&lt;tt&gt;esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
 <ul>
-<li>აძლევს მოდულს შესაძლებლობას მიიღოს კონკრეტული მოვლენა.</li>
-<li>არგუმენტები: event_id, handler (callback ფუნქცია)</li>
+<li>**(განახლებული)** აძლევს მოდულს შესაძლებლობას, მიიღოს კონკრეტული მოვლენა. Event Bus-ი ავტომატურად გამოიძახებს ამ მოდულის <code>handle_event</code> ფუნქციას.</li>
+<li><b>არგუმენტები:</b><ul>
+<li><code>event_id</code>: მოვლენის ID, რომელზეც ხდება გამოწერა.</li>
+<li><code>module</code>: მაჩვენებელი გამომწერ მოდულზე (<code>self</code>).</li>
+</ul>
+</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md204"></a>
-esp_err_t event_bus_unsubscribe(int32_t event_id, event_handler_t handler);</h2>
+&lt;tt&gt;esp_err_t fmw_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
 <ul>
-<li>წაშლის გამოწერას კონკრეტულ event-ზე.</li>
+<li>**(ახალი)** აუქმებს მოდულის გამოწერას კონკრეტულ მოვლენაზე.</li>
+<li><b>მნიშვნელოვანია:</b> ეს ფუნქცია აუცილებლად უნდა გამოიძახოს მოდულის <code>deinit</code> ფუნქციამ ყველა იმ ივენთისთვის, რომელზეც ის იყო გამოწერილი, რათა თავიდან ავიცილოთ Use-After-Free შეცდომები.</li>
+<li><b>არგუმენტები:</b><ul>
+<li><code>event_id</code>: მოვლენის ID.</li>
+<li><code>module</code>: მაჩვენებელი მოდულზე, რომელიც აუქმებს გამოწერას.</li>
+</ul>
+</li>
 </ul>
 <hr  />
 <h1><a class="anchor" id="autotoc_md206"></a>
+ივენთის მონაცემების მართვა (Reference Counting)</h1>
+<p><b>მნიშვნელოვანია:</b> როდესაც ივენთს გადასცემთ მონაცემებს (<code>data_wrapper</code>), Synapse Framework იყენებს <b>reference counting</b> მექანიზმს მეხსიერების უსაფრთხოდ სამართავად.</p>
+<ul>
+<li><code><a class="el" href="structevent__data__wrapper__t.html" title="ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.">event_data_wrapper_t</a> *fmw_event_data_create(void *data, size_t size, event_data_free_fn_t free_fn);</code><ul>
+<li>ქმნის მონაცემების "გარსს". <code>free_fn</code> არის callback, რომელიც გამოიძახება, როცა მონაცემები აღარავის სჭირდება.</li>
+</ul>
+</li>
+<li><code>void <a class="el" href="event__data__wrapper_8c.html#a1e82d26f36a72f0b9e1d1fb2d507a79f" title="ზრდის wrapper-ის მფლობელების (references) რაოდენობას ერთით.">fmw_event_data_acquire(event_data_wrapper_t *wrapper)</a>;</code><ul>
+<li>ზრდის მითითებების მრიცხველს.</li>
+</ul>
+</li>
+<li><code>void <a class="el" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689" title="ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.">fmw_event_data_release(event_data_wrapper_t *wrapper)</a>;</code><ul>
+<li>ამცირებს მითითებების მრიცხველს. როცა მრიცხველი 0 გახდება, გამოიძახება <code>free_fn</code> და მეხსიერება თავისუფლდება.</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md208"></a>
+Event Handler-ის მაგალითი</h1>
+<div class="fragment"><div class="line"><span class="comment">// ეს არის მოდულის შიდა ფუნქცია, რომელსაც Event Bus-ი იძახებს.</span></div>
+<div class="line"><span class="comment">// მესამე პარამეტრი არის მაჩვენებელი მონაცემთა wrapper-ზე.</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> my_module_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self, <a class="code hl_enumeration" href="system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046">core_framework_event_id_t</a> event_id, <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *wrapper) {</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (event_id == TELEMETRY_EVENT_SENSOR_DATA) {</div>
+<div class="line">        <span class="comment">// დარწმუნდით, რომ wrapper და მისი მონაცემები არ არის NULL</span></div>
+<div class="line">        <span class="keywordflow">if</span> (wrapper &amp;&amp; wrapper-&gt;data) {</div>
+<div class="line">            <span class="comment">// უსაფრთხოდ მივიღოთ წვდომა მონაცემებზე</span></div>
+<div class="line">            telemetry_data_t *data = (telemetry_data_t *)wrapper-&gt;data;</div>
+<div class="line">            ESP_LOGI(TAG, <span class="stringliteral">&quot;მივიღე ტემპერატურა: %.2f&quot;</span>, data-&gt;temperature);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ★★★ მნიშვნელოვანია: Event Bus-ი გადასცემს wrapper-ის მფლობელობას (ownership) ★★★</span></div>
+<div class="line">    <span class="comment">// ★★★ ამ ფუნქციას. ამიტომ, დამუშავების შემდეგ აუცილებელია fmw_event_data_release-ის გამოძახება, ★★★</span></div>
+<div class="line">    <span class="comment">// ★★★ რათა თავიდან ავიცილოთ მეხსიერების გაჟონვა. ★★★</span></div>
+<div class="line">    <span class="keywordflow">if</span> (wrapper) {</div>
+<div class="line">        <a class="code hl_function" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>(wrapper);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aevent__data__wrapper_8c_html_a99c9f26cd90b553b84bf2a56db51a689"><div class="ttname"><a href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a></div><div class="ttdeci">esp_err_t fmw_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
+<div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
+<div class="ttc" id="asystem__event__ids_8h_html_a14be883083731f631af5eb44a5f3a046"><div class="ttname"><a href="system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046">core_framework_event_id_t</a></div><div class="ttdeci">core_framework_event_id_t</div><div class="ttdoc">ბირთვის ივენთების იდენტიფიკატორები, რომლებიც სისტემურია და არ არის მიბმული კონკრეტულ მოდულზე.</div><div class="ttdef"><b>Definition</b> system_event_ids.h:32</div></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md210"></a>
 Custom Event-ების აღწერა</h1>
 <ul>
 <li>ყველა custom event-ს უნდა ჰქონდეს უნიკალური იდენტიფიკატორი (მაგ: #define MY_EVENT_ID 0x1001)</li>
 <li>რეკომენდებულია event-ისთვის შესაბამისი მონაცემების სტრუქტურის აღწერა</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md207"></a>
-მაგალითი Custom Event-ის აღწერისა:</h2>
+<h2><a class="anchor" id="autotoc_md211"></a>
+მაგალითი Custom Event-ის აღწერისა</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define TELEMETRY_EVENT_SENSOR_DATA  0x2001</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
@@ -140,28 +199,21 @@ Custom Event-ების აღწერა</h1>
 <div class="line">    int64_t timestamp;</div>
 <div class="line">} telemetry_data_t;</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md209"></a>
-Event Handler-ის მაგალითი</h1>
-<div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> mqtt_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
-<div class="line">    <span class="keywordflow">if</span> (event_id == TELEMETRY_EVENT_SENSOR_DATA) {</div>
-<div class="line">        telemetry_data_t *data = (telemetry_data_t *)event_data;</div>
-<div class="line">        <span class="comment">// ... process data ...</span></div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:116</div></div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md211"></a>
+<h1><a class="anchor" id="autotoc_md213"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md213"></a>
+<h1><a class="anchor" id="autotoc_md215"></a>
 მაგალითები</h1>
-<p><b>Event-ის გამოქვეყნება:</b> </p><div class="fragment"><div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
-</div><!-- fragment --><p><b>Event-ზე გამოწერა:</b> </p><div class="fragment"><div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_event);</div>
-</div><!-- fragment --><p><b>Custom Event-ის აღწერა და გამოყენება:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID 0x3001</span></div>
+<p><b>Event-ის გამოქვეყნება:</b></p>
+<div class="fragment"><div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
+</div><!-- fragment --><p><b>Event-ზე გამოწერა:</b></p>
+<div class="fragment"><div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_event);</div>
+</div><!-- fragment --><p><b>Custom Event-ის აღწერა და გამოყენება:</b></p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID 0x3001</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line">    <span class="keywordtype">int</span> value;</div>

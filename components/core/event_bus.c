@@ -10,6 +10,7 @@
 #include "event_bus.h"
 #include "logging.h"
 #include "base_module.h"
+#include "event_data_wrapper.h" // <--- დამატებულია სრული განმარტებისთვის
 #include "framework_config.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
@@ -108,44 +109,102 @@ static void event_bus_task(void *pvParameters)
 
 /**
  * @internal
- * @brief ერთი ივენთის გაგზავნა ყველა მისი გამომწერისთვის.
+ * @brief აგზავნის ერთ ივენთს ყველა შესაბამის გამომწერთან.
+ * @details ეს ფუნქცია ეძებს როგორც კონკრეტულ (`event_name`), ისე ზოგად (`*`)
+ *          გამომწერებს. რათა მინიმუმამდე დაიყვანოს Mutex-ის დაკავების დრო
+ *          და თავიდან აიცილოს `race condition`-ები, ის ჯერ ქმნის გამომწერების
+ *          სიების ლოკალურ ასლებს და მხოლოდ ამის შემდეგ იძახებს მათ `handle_event`
+ *          ფუნქციებს.
+ *
+ * @param[in] msg მაჩვენებელი გასაგზავნ ივენთის შეტყობინებაზე (`event_message_t`).
  */
 static void dispatch_event_to_subscribers(const event_message_t *msg)
 {
-    event_subscription_list_t local_sub_list;
-    bool list_found = false;
+    if (!msg || !msg->event_name)
+    {
+        return; // დავიცვათ თავი NULL მაჩვენებლებისგან
+    }
 
-    // კრიტიკული სექცია: წავიკითხოთ გამომწერების სია უსაფრთხოდ
+    event_subscription_list_t specific_subs_copy;
+    event_subscription_list_t wildcard_subs_copy;
+    bool specific_found = false;
+    bool wildcard_found = false;
+
+    // --- კრიტიკული სექციის დასაწყისი ---
     if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
     {
         event_subscription_node_t *node = subscription_head;
-        while (node)
+        while (node != NULL)
         {
+            // 1. ვეძებთ კონკრეტული ივენთის გამომწერებს
             if (strcmp(node->event_name, msg->event_name) == 0)
             {
-                // შევქმნათ ლოკალური ასლი, რათა მალე გავათავისუფლოთ mutex-ი
-                memcpy(&local_sub_list, &node->subscription_list, sizeof(event_subscription_list_t));
-                list_found = true;
-                break;
+                memcpy(&specific_subs_copy, &node->subscription_list, sizeof(event_subscription_list_t));
+                specific_found = true;
+            }
+            // 2. ვეძებთ wildcard ("*") გამომწერებს
+            else if (strcmp(node->event_name, "*") == 0)
+            {
+                memcpy(&wildcard_subs_copy, &node->subscription_list, sizeof(event_subscription_list_t));
+                wildcard_found = true;
             }
             node = node->next;
         }
         xSemaphoreGive(subscription_mutex);
     }
-
-    if (list_found)
+    else
     {
-        ESP_LOGD(TAG, "Dispatching event '%s' to %d subscribers", msg->event_name, local_sub_list.count);
+        ESP_LOGE(TAG, "დისპეტჩერმა ვერ შეძლო Mutex-ის დაკავება ივენთისთვის: '%s'", msg->event_name);
+        return; // თუ Mutex-ს ვერ ვიღებთ, ოპერაციას ვაუქმებთ
+    }
+    // --- კრიტიკული სექციის დასასრული ---
 
-        // ვიმუშაოთ ლოკალურ ასლთან
-        for (int i = 0; i < local_sub_list.count; i++)
+    // --- ივენთების გაგზავნა (Mutex-ის გარეთ) ---
+
+    // 3. ჯერ ვუგზავნით კონკრეტულ გამომწერებს
+    if (specific_found)
+    {
+        ESP_LOGD(TAG, "ივენთის '%s' გაგზავნა %d კონკრეტულ გამომწერზე", msg->event_name, specific_subs_copy.count);
+        for (int i = 0; i < specific_subs_copy.count; i++)
         {
-            event_subscriber_t *sub = &local_sub_list.subscribers[i];
+            event_subscriber_t *sub = &specific_subs_copy.subscribers[i];
             if (sub->module && sub->module->base.handle_event)
             {
                 if (msg->data_wrapper)
                 {
-                    fmw_event_data_acquire(msg->data_wrapper); // გავზარდოთ ref_count თითოეული მიმღებისთვის
+                    fmw_event_data_acquire(msg->data_wrapper);
+                }
+                sub->module->base.handle_event(sub->module, msg->event_name, msg->data_wrapper);
+            }
+        }
+    }
+
+    // 4. შემდეგ ვუგზავნით wildcard გამომწერებს (მაგ. ლოგერს)
+    if (wildcard_found)
+    {
+        ESP_LOGD(TAG, "ივენთის '%s' გაგზავნა %d ზოგად (wildcard) გამომწერზე", msg->event_name, wildcard_subs_copy.count);
+        for (int i = 0; i < wildcard_subs_copy.count; i++)
+        {
+            event_subscriber_t *sub = &wildcard_subs_copy.subscribers[i];
+            // დავრწმუნდეთ, რომ კონკრეტულმა გამომწერმა ივენთი მეორედ არ მიიღო
+            bool already_sent = false;
+            if (specific_found)
+            {
+                for (int j = 0; j < specific_subs_copy.count; j++)
+                {
+                    if (specific_subs_copy.subscribers[j].module == sub->module)
+                    {
+                        already_sent = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!already_sent && sub->module && sub->module->base.handle_event)
+            {
+                if (msg->data_wrapper)
+                {
+                    fmw_event_data_acquire(msg->data_wrapper);
                 }
                 sub->module->base.handle_event(sub->module, msg->event_name, msg->data_wrapper);
             }
@@ -305,9 +364,14 @@ esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_
 
 esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
 {
-    if (!event_name || strlen(event_name) == 0 || !module || !module->base.handle_event)
+    if ((!event_name || strlen(event_name) == 0) && (!event_name || strcmp(event_name, "*") != 0))
     {
-        ESP_LOGE(TAG, "Subscribe failed: invalid arguments (event_name, module, or handler is NULL).");
+        ESP_LOGE(TAG, "Subscribe failed: event_name is NULL or empty.");
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!module || !module->base.handle_event)
+    {
+        ESP_LOGE(TAG, "Subscribe failed: module or its event handler is NULL.");
         return ESP_ERR_INVALID_ARG;
     }
 

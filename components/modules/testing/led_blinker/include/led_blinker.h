@@ -25,7 +25,8 @@ extern "C" {
 typedef struct {
     char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];  /**< მოდულის ინსტანციის სახელი */
     bool auto_start;                                        /**< ავტომატური გაშვება */
-    // TODO: დაამატეთ მოდულის სპეციფიკური კონფიგურაციის ფილდები
+    int gpio_num;                                           /**< GPIO პინის ნომერი, სადაც მიერთებულია LED */
+    uint32_t blink_interval_ms;                             /**< ციმციმის ინტერვალი მილიწამებში */
 } led_blinker_config_t;
 
 /**

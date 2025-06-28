@@ -1,32 +1,55 @@
 /**
  * @file module_factory.c
  * @brief მოდულების შემქმნელი (Factory) კომპონენტის იმპლემენტაცია.
- * @version 1.0
- * @date 2025-06-26
+ * @version 1.2
+ * @date 2025-06-27
  * @author Giorgi Magradze
  * @details ეს ფაილი შეიცავს Module Factory-ის Public API-ს იმპლემენტაციას.
  *          იგი იყენებს ავტომატურად გენერირებულ `fmw_module_factory_get` ფუნქციას,
  *          რათა დააკავშიროს მოდულის ტიპის სტრიქონი მის შესაბამის შემქმნელ ფუნქციასთან.
+ *          ეს მიდგომა უზრუნველყოფს, რომ Factory-ის კოდი არ საჭიროებს ცვლილებას
+ *          ახალი მოდულების დამატებისას.
  */
 #include "module_factory.h"
 #include "logging.h"
 #include <stddef.h> // NULL-ისთვის
 
 // ეს არის ავტომატურად გენერირებული ჰედერი, რომელიც შეიცავს fmw_module_factory_get-ის დეკლარაციას.
-// ის რეალურად იქმნება build/esp-idf/core/generated_module_factory.h-ში.
-// Temporary workaround: forward declare the function to avoid header dependency issues
+// იდეალურ შემთხვევაში, ბილდ-სისტემამ უნდა უზრუნველყოს ამ ჰედერის ხელმისაწვდომობა.
+// Forward declaration გამოიყენება როგორც ალტერნატივა, თუ include-ის დამატება რთულია.
+#if defined(FMW_USE_GENERATED_FACTORY_HEADER)
+#include "generated_module_factory.h"
+#else
+// Forward-declare the function if the generated header is not used/available.
 module_create_fn_t fmw_module_factory_get(const char *module_type);
-// #include "generated_module_factory.h" 
+#endif
 
 DEFINE_COMPONENT_TAG("MODULE_FACTORY");
 
 // --- Public API იმპლემენტაცია ---
 
+/**
+ * @brief ქმნის მოდულის ახალ ინსტანციას მითითებული ტიპისა და კონფიგურაციის მიხედვით.
+ *
+ * @details ეს ფუნქცია არის Synapse Framework-ის მოდულების დინამიური შექმნის
+ *          ცენტრალური წერტილი. ის იღებს მოდულის ტიპს სტრიქონის სახით,
+ *          პოულობს შესაბამის `_create` ფუნქციას და იძახებს მას.
+ *
+ * @param[in] module_type შესაქმნელი მოდულის ტიპის სტრიქონი (მაგ., "relay_module").
+ * @param[in] config მაჩვენებელი cJSON ობიექტზე, რომელიც შეიცავს მოდულის კონფიგურაციას.
+ *
+ * @return module_t* მაჩვენებელი ახლად შექმნილ მოდულზე წარმატების შემთხვევაში.
+ * @return NULL თუ მოხდა შეცდომა (მაგ., ტიპი არ მოიძებნა, მეხსიერება ვერ გამოიყო).
+ */
 module_t* fmw_module_factory_create(const char *module_type, const cJSON *config) {
     if (!module_type) {
-        ESP_LOGE(TAG, "Cannot create module: module_type is NULL.");
+        // ⭐️ შესწორებულია: მოშორებულია ზედმეტი არგუმენტი
+        ESP_LOGE(TAG, "Cannot create module: %s", "module_type is NULL");
         return NULL;
     }
+
+    // config შეიძლება იყოს NULL ზოგიერთი მოდულისთვის, ამიტომ მას არ ვამოწმებთ აქ.
+    // თავად create_fn ფუნქციაა პასუხისმგებელი მის ვალიდაციაზე.
 
     // 1. მოვძებნოთ შესაბამისი create ფუნქცია ავტომატურად გენერირებულ რუქაში.
     module_create_fn_t create_fn = fmw_module_factory_get(module_type);
@@ -35,8 +58,8 @@ module_t* fmw_module_factory_create(const char *module_type, const cJSON *config
         ESP_LOGW(TAG, "No factory function found for module type: '%s'", module_type);
         return NULL;
     }
-    
-    ESP_LOGI(TAG, "Found factory for '%s'. Creating module instance...", module_type);
+
+    ESP_LOGD(TAG, "Found factory for '%s'. Creating module instance...", module_type);
 
     // 2. გამოვიძახოთ ნაპოვნი create ფუნქცია და გადავცეთ კონფიგურაცია.
     module_t *new_module = create_fn(config);

@@ -53,14 +53,37 @@
 
 ## 4. Custom Event-ების გამოყენება
 
-- საკუთარი მოვლენის განსაზღვრა და გამოყენება Event Bus-ში
-- მაგალითი:
+სისტემური ივენთების გარდა, შეგიძლიათ შექმნათ და გამოიყენოთ საკუთარი, აპლიკაციისთვის სპეციფიური ივენთები.
 
-  ```c
-  #define CUSTOM_EVENT_ID  0x1001
-  event_bus_post(CUSTOM_EVENT_ID, &custom_data);
-  event_bus_subscribe(CUSTOM_EVENT_ID, custom_event_handler);
-  ```
+**ნაბიჯი 1: ივენთის სახელის განსაზღვრა**
+
+შექმენით უნიკალური სტრიქონი თქვენი ივენთისთვის. რეკომენდებულია მისი `#define`-ით განსაზღვრა ცალკე ჰედერ ფაილში.
+
+```c
+// file: my_app_events.h
+#define MY_COOL_EVENT "MyCoolEvent"
+#define ANOTHER_EVENT "DeviceStateChanged"
+```
+
+**ნაბიჯი 2: ივენთის გამოქვეყნება (Posting)**
+
+გამოიყენეთ `fmw_event_bus_post` ფუნქცია თქვენი ივენთის გასაგზავნად.
+
+```c
+#include "my_app_events.h"
+#include "event_bus.h"
+
+void do_something_and_notify() {
+    // ... რაიმე ლოგიკა ...
+    ESP_LOGI(TAG, "Posting my cool event!");
+    // მეორე პარამეტრი (payload) არის NULL, რადგან მონაცემებს არ ვაგზავნით.
+    fmw_event_bus_post(MY_COOL_EVENT, NULL);
+}
+```
+
+**ნაბიჯი 3: ივენთის გამოწერა და დამუშავება**
+
+სხვა მოდულს შეუძლია გამოიწეროს ეს ივენთი და დაამუშავოს ის `handle_event` ფუნქციაში, როგორც ეს "პირველი მოდულის შექმნის" გაკვეთილშია ნაჩვენები.
 
 ## 5. მოდულის სტატუსის მონიტორინგი
 

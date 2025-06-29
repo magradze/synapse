@@ -204,6 +204,8 @@ module_t *{module_name}_create(const cJSON *config);
 #include "{module_name}.h"
 #include "base_module.h"
 #include "event_bus.h"
+#include "event_data_wrapper.h"
+#include "framework_config.h"
 #include "logging.h"
 #include "esp_log.h"
 #include <string.h>

@@ -1,0 +1,21 @@
+{
+    "name": "wifi_manager",
+    "version": "1.0.0",
+    "description": "WiFi connection management",
+    "author": "Synapse Framework Team",
+    "init_function": "wifi_manager_create",
+    "init_level": 10,
+    "dependencies": [],
+    "type": "communications",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_WIFI_MANAGER_ENABLED",
+    "runtime_commands": {
+        "start": "wifi_manager_start",
+        "stop": "wifi_manager_disable",
+        "enable": "wifi_manager_enable",
+        "disable": "wifi_manager_disable",
+        "reconfigure": "wifi_manager_reconfigure",
+        "status": "wifi_manager_get_status",
+        "handle_event": "wifi_manager_handle_event"
+    }
+}

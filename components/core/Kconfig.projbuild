@@ -9,7 +9,10 @@ menu "Synapse Framework"
 
     # --- Module Configuration ---
     menu "Modules"
-            rsource "../modules/testing/led_blinker/Kconfig"
+            rsource "../modules/communications/wifi_manager/Kconfig"
+    rsource "../modules/displays/oled_display/Kconfig"
+    rsource "../modules/provisioning/ble_provisioning/Kconfig"
+    rsource "../modules/testing/led_blinker/Kconfig"
     rsource "../modules/testing/test_module/Kconfig"
     rsource "../modules/utilities/logger_module/Kconfig"
 

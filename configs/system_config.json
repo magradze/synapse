@@ -8,6 +8,20 @@
   },
   "modules": [
     {
+      "type": "wifi_manager",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_wifi_manager"
+      }
+    },
+    {
+      "type": "ble_provisioning",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_ble_provisioning"
+      }
+    },
+    {
       "type": "logger_module",
       "enabled": true,
       "config": {
@@ -16,9 +30,16 @@
     },
     {
       "type": "led_blinker",
-      "enabled": true,
+      "enabled": false,
       "config": {
         "instance_name": "main_led_blinker"
+      }
+    },
+    {
+      "type": "oled_display",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_oled_display"
       }
     }
   ]

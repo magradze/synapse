@@ -34,6 +34,31 @@ static SemaphoreHandle_t registry_mutex = NULL;
 // --- შიდა ფუნქციების წინასწარი დეკლარაცია ---
 static esp_err_t register_module(module_t *module);
 
+/**
+ * @internal
+ * @brief qsort-ისთვის განკუთვნილი შედარების ფუნქცია.
+ * @details ადარებს ორ მოდულს მათი init_level ველის მიხედვით.
+ *          არგუმენტები a და b არიან მაჩვენებლები module_t*-ზე (ანუ module_t**).
+ */
+static int compare_modules_by_init_level(const void *a, const void *b)
+{
+    // 1. არგუმენტების სწორი ტიპზე მიყვანა: void* -> module_t**
+    // 2. Dereference (*), რომ მივიღოთ module_t*
+    const module_t *mod_a = *(const module_t **)a;
+    const module_t *mod_b = *(const module_t **)b;
+
+    // შედარება
+    if (mod_a->init_level < mod_b->init_level)
+    {
+        return -1; // a უნდა იყოს b-ზე წინ
+    }
+    if (mod_a->init_level > mod_b->init_level)
+    {
+        return 1; // b უნდა იყოს a-ზე წინ
+    }
+    return 0; // თანმიმდევრობას მნიშვნელობა არ აქვს
+}
+
 // =========================================================================
 //                      Public API Implementation
 // =========================================================================
@@ -102,6 +127,12 @@ esp_err_t fmw_module_registry_init(void) {
         {
             ESP_LOGE(TAG, "Failed to create module of type '%s'.", type_json->valuestring);
         }
+    }
+
+    if (registered_modules_count > 1)
+    {
+        ESP_LOGI(TAG, "Sorting %d modules by init_level...", registered_modules_count);
+        qsort(registered_modules, registered_modules_count, sizeof(module_t *), compare_modules_by_init_level);
     }
 
     ESP_LOGI(TAG, "--- Module Registry Initialization Complete: %d modules registered ---", registered_modules_count);

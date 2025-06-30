@@ -197,6 +197,7 @@ module_t *ble_provisioning_create(const cJSON *config)
     module->status = MODULE_STATUS_UNINITIALIZED;
 
     // Set function pointers
+    module->init_level = 2;
     module->base.init = ble_provisioning_init;
     module->base.start = ble_provisioning_start;
     module->base.handle_event = ble_provisioning_handle_event;

@@ -1,26 +1,17 @@
-# Changelog
-
-## [v2.1.0] - 2025-06-30
-
-### ✨ Features
-
-- **Module Initialization Prioritization:** Implemented a robust module sorting mechanism based on an `init_level` parameter. The `Module Registry` now automatically sorts all registered modules by their `init_level` before initialization, ensuring that modules with lower `init_level` values (higher priority) are started first. This eliminates dependencies on the module order in `system_config.json`.
-- **RGB LED Indicator Enhancements:** The `rgb_led_indicator` module now supports a `PULSE` effect and uses a table-driven approach for event handling, making it more scalable and readable. The `release_control` API now correctly restores the last known system state.
-
-### 🐛 Bug Fixes
-
-- **Fixed Race Condition in Module Initialization:** Resolved a critical timing issue where modules (like `rgb_led_indicator`) could miss early system events (e.g., `WIFI_CREDENTIALS_NOT_FOUND`) because they were initialized after the event-publishing module. The new `init_level` sorting mechanism guarantees the correct initialization order.
-- **Corrected LEDC Driver Usage:** Refactored the `rgb_led_indicator` module to initialize LEDC channels only once during `init`. This resolves the `GPIO is not usable, maybe conflict with others` warning and ensures smooth, flicker-free operation of LED effects.
-- **Fixed `qsort` Comparator Logic:** Corrected the pointer casting in the `compare_modules_by_init_level` function to ensure proper sorting of the module array.
-
-### ♻️ Refactoring
-
-- **Centralized `init_level` Management:** The responsibility for setting `init_level` is now delegated to each module's `_create` function, reading the value from its corresponding `module.json` (via the merged config object). This makes the module's priority self-contained and independent of `system_config.json`.
-- **Improved Event Handling in `rgb_led_indicator`:** Replaced a chain of `if-else` statements with a static `event_map` table for cleaner and more maintainable event-to-command mapping.
-
-
----- 
 # ცვლილებების ისტორია (Changelog)
+
+## [v2.1.1] - 2025-07-01
+
+### 🐛 შეცდომების გასწორება
+
+- **გასწორდა NVS-დან მონაცემების წაკითხვის შეცდომა:** მოგვარდა კრიტიკული შეცდომა `wifi_manager`-ში, რომლის დროსაც WiFi-ს მონაცემები არასწორად იკითხებოდა NVS მეხსიერებიდან მოწყობილობის გადატვირთვის შემდეგ. პრობლემა გამოწვეული იყო მეხსიერების არასწორი მართვით. `load_credentials_from_nvs` ფუნქცია გადაკეთდა უფრო მტკიცე, დაცვით მექანიზმზე, რომელიც იყენებს დროებით ბუფერებს და `memcpy`-ს მონაცემთა მთლიანობის უზრუნველსაყოფად.
+- **გაუმჯობესდა Reconnect-Provisioning ციკლი:** `ble_provisioning` მოდული ახლა კორექტულად ამუშავებს `PROV_START_REQUESTED` ივენთს, რაც საშუალებას აძლევს მას, ხელახლა დაიწყოს provisioning პროცესი WiFi-სთან დაკავშირების მრავალჯერადი წარუმატებელი მცდელობის შემდეგ. ამით სრულდება აღდგენის სრული და გამართული ციკლი.
+
+### ✨ ახალი ფუნქციონალი
+
+- **დაკავშირების მცდელობების ლიმიტი და Provisioning-ზე გადასვლა:** `wifi_manager`-ს დაემატა დაკავშირების მცდელობების კონფიგურირებადი ლიმიტი (`CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS`). ლიმიტის ამოწურვის შემდეგ, მოდული ავტომატურად შლის არასწორ მონაცემებს NVS-დან და ითხოვს provisioning პროცესის დაწყებას, რაც მომხმარებელს საშუალებას აძლევს, მარტივად განაახლოს WiFi-ს პარამეტრები.
+
+---
 
 ## [v2.1.0] - 2025-06-30
 

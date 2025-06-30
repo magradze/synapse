@@ -33,6 +33,7 @@ DEFINE_COMPONENT_TAG("BLE_PROV");
 #define EVT_WIFI_DISCONNECTED "WIFI_EVENT_DISCONNECTED"
 #define EVT_WIFI_IP_ASSIGNED "WIFI_EVENT_IP_ASSIGNED"
 #define EVT_PROV_STARTED "PROV_STARTED"
+#define EVT_PROV_START_REQUESTED "PROV_START_REQUESTED"
 
 // Private data structure
 typedef struct
@@ -77,9 +78,9 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
     case WIFI_PROV_CRED_RECV:
     {
         wifi_sta_config_t *wifi_sta_cfg = (wifi_sta_config_t *)event_data;
-        ESP_LOGI(TAG, "Received Wi-Fi credentials: SSID: %s", wifi_sta_cfg->ssid);
+        ESP_LOGI(TAG, "Received Wi-Fi credentials: SSID: %s", (char *)wifi_sta_cfg->ssid);
 
-        // Send credentials to WiFi Manager via event bus
+        // ★★★ ვიყენებთ პირდაპირ კასტინგს, რადგან cJSON ამას უმკლავდება ★★★
         cJSON *creds = cJSON_CreateObject();
         cJSON_AddStringToObject(creds, "ssid", (char *)wifi_sta_cfg->ssid);
         cJSON_AddStringToObject(creds, "password", (char *)wifi_sta_cfg->password);
@@ -87,10 +88,10 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
         char *json_str = cJSON_PrintUnformatted(creds);
         if (json_str)
         {
+            ESP_LOGI(TAG, "Publishing credentials JSON: %s", json_str);
             event_data_wrapper_t *wrapper = NULL;
             if (fmw_event_data_wrap(json_str, free, &wrapper) == ESP_OK)
             {
-                ESP_LOGI(TAG, "Publishing WiFi credentials to event bus");
                 fmw_event_bus_post(EVT_PROV_CREDENTIALS_RECEIVED, wrapper);
             }
             else
@@ -237,6 +238,12 @@ static esp_err_t ble_provisioning_init(module_t *self)
         ESP_LOGE(TAG, "Failed to subscribe to WiFi disconnected event");
     }
 
+    ret = fmw_event_bus_subscribe(EVT_PROV_START_REQUESTED, self);
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to subscribe to provisioning start request event");
+    }
+
     self->status = MODULE_STATUS_INITIALIZED;
     ESP_LOGI(TAG, "BLE Provisioning module initialized successfully");
     return ESP_OK;
@@ -351,6 +358,98 @@ static module_status_t ble_provisioning_get_status(module_t *self)
     return self->status;
 }
 
+static void ble_provisioning_handle_event(module_t *self, const char *event_name, void *event_data)
+{
+    if (!self || !self->private_data)
+    {
+        if (event_data)
+        {
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
+        }
+        return;
+    }
+
+    ble_provisioning_private_data_t *private_data = (ble_provisioning_private_data_t *)self->private_data;
+
+    if (!private_data->enabled)
+    {
+        if (event_data)
+        {
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
+        }
+        return;
+    }
+
+    if (event_name)
+    {
+        ESP_LOGD(TAG, "[%s] Event received: '%s'", private_data->instance_name, event_name);
+
+        if (strcmp(event_name, EVT_PROV_START_REQUESTED) == 0)
+        {
+            ESP_LOGW(TAG, "Provisioning start requested. Re-initializing provisioning manager...");
+
+            // თუ provisioning უკვე აქტიურია, ჯერ გავაჩეროთ
+            if (private_data->provisioning_active)
+            {
+                wifi_prov_mgr_stop_provisioning();
+                private_data->provisioning_active = false;
+            }
+            // დეინიციალიზაცია, რათა სუფთად დავიწყოთ
+            wifi_prov_mgr_deinit();
+
+            // 1. ხელახლა დავაკონფიგურიროთ და დავაინიციალიზოთ provisioning manager-ი
+            wifi_prov_mgr_config_t config = {
+                .scheme = wifi_prov_scheme_ble,
+                .scheme_event_handler = WIFI_PROV_SCHEME_BLE_EVENT_HANDLER_FREE_BTDM,
+                .app_event_handler = {
+                    .event_cb = prov_event_handler,
+                    .user_data = self}};
+            ESP_ERROR_CHECK(wifi_prov_mgr_init(config));
+
+            // 2. დავიწყოთ provisioning პროცესი
+            const char *service_name = private_data->device_name;
+            const char *pop = private_data->pop;
+            wifi_prov_security_t security = private_data->security_version == 0 ? WIFI_PROV_SECURITY_0 : WIFI_PROV_SECURITY_1;
+
+            ESP_LOGI(TAG, "Starting provisioning with:");
+            ESP_LOGI(TAG, "  Device Name: %s", service_name);
+            ESP_LOGI(TAG, "  Security: v%d", private_data->security_version);
+            if (security == WIFI_PROV_SECURITY_1)
+            {
+                ESP_LOGI(TAG, "  POP: %s", pop);
+            }
+            ESP_ERROR_CHECK(wifi_prov_mgr_start_provisioning(security, pop, service_name, NULL));
+
+            // 3. განვაახლოთ მოდულის სტატუსი
+            self->status = MODULE_STATUS_RUNNING;
+        }
+
+        if (strcmp(event_name, EVT_WIFI_CONNECTED) == 0)
+        {
+            ESP_LOGI(TAG, "WiFi connected, stopping provisioning");
+            // if (private_data->provisioning_active)
+            // {
+            //     wifi_prov_mgr_stop_provisioning();
+            // }
+        }
+
+        if (strcmp(event_name, EVT_WIFI_IP_ASSIGNED) == 0)
+        {
+            ESP_LOGI(TAG, "Provisioning: Got IP assigned, finishing BLE provisioning");
+            // if (private_data->provisioning_active)
+            // {
+            //     wifi_prov_mgr_stop_provisioning();
+            // }
+        }
+    }
+
+    // Always release event data
+    if (event_data)
+    {
+        fmw_event_data_release((event_data_wrapper_t *)event_data);
+    }
+}
+
 static void ble_provisioning_deinit(module_t *self)
 {
     if (!self)
@@ -362,6 +461,7 @@ static void ble_provisioning_deinit(module_t *self)
     // Unsubscribe from events
     fmw_event_bus_unsubscribe(EVT_WIFI_CONNECTED, self);
     fmw_event_bus_unsubscribe(EVT_WIFI_DISCONNECTED, self);
+    fmw_event_bus_unsubscribe(EVT_PROV_START_REQUESTED, self);
 
     // Stop provisioning if active
     if (private_data->provisioning_active)
@@ -389,56 +489,4 @@ static void ble_provisioning_deinit(module_t *self)
     free(self);
 
     ESP_LOGI(TAG, "Module deinitialized successfully");
-}
-
-static void ble_provisioning_handle_event(module_t *self, const char *event_name, void *event_data)
-{
-    if (!self || !self->private_data)
-    {
-        if (event_data)
-        {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
-        }
-        return;
-    }
-
-    ble_provisioning_private_data_t *private_data = (ble_provisioning_private_data_t *)self->private_data;
-
-    if (!private_data->enabled)
-    {
-        if (event_data)
-        {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
-        }
-        return;
-    }
-
-    if (event_name)
-    {
-        ESP_LOGD(TAG, "[%s] Event received: '%s'", private_data->instance_name, event_name);
-
-        if (strcmp(event_name, EVT_WIFI_CONNECTED) == 0)
-        {
-            ESP_LOGI(TAG, "WiFi connected, stopping provisioning");
-            // if (private_data->provisioning_active)
-            // {
-            //     wifi_prov_mgr_stop_provisioning();
-            // }
-        }
-
-        if (strcmp(event_name, EVT_WIFI_IP_ASSIGNED) == 0)
-        {
-            ESP_LOGI(TAG, "Provisioning: Got IP assigned, finishing BLE provisioning");
-            // if (private_data->provisioning_active)
-            // {
-            //     wifi_prov_mgr_stop_provisioning();
-            // }
-        }
-    }
-
-    // Always release event data
-    if (event_data)
-    {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
-    }
 }

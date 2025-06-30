@@ -116,6 +116,8 @@ module_t *logger_module_create(const cJSON *config)
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
 
+    module->init_level = 1;
+
     // საბაზისო ფუნქციების მიბმა
     module->base.init = logger_module_init;
     module->base.start = logger_module_start;

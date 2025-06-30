@@ -132,6 +132,7 @@ typedef void (*module_event_handler_fn)(module_t *self, const char *event_name, 
 struct module_t
 {
     char name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; /**< @brief მოდულის უნიკალური სახელი (instance_name). */
+    uint8_t init_level;                           /**< @brief მოდულის ლეველი */
     module_status_t status;                       /**< @brief მოდულის მიმდინარე სტატუსი. */
     cJSON *current_config;                        /**< @brief მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე. */
     SemaphoreHandle_t state_mutex;                /**< @brief mutex მოდულის მდგომარეობის დაცვისთვის. */

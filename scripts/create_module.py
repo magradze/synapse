@@ -284,6 +284,7 @@ module_t *{module_name}_create(const cJSON *config)
     module->status = MODULE_STATUS_UNINITIALIZED;
     
     // დავაყენოთ ფუნქციების pointers
+    module->init_level = 100;  // TODO:შეცვალე საჭირო ლეველზე
     module->base.init = {module_name}_init;
     module->base.start = {module_name}_start;
     module->base.handle_event = {module_name}_handle_event;

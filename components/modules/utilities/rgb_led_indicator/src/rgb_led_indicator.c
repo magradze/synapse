@@ -99,8 +99,8 @@ typedef struct
 
 static const event_to_command_map_t event_map[] = {
     {"WIFI_CREDENTIALS_NOT_FOUND", {LED_MODE_PULSE, 255, 162, 0, 3000, false}}, // ყვითელი (Provisioning)
-    {"WIFI_EVENT_CONNECTED", {LED_MODE_BLINK, 0, 255, 0, 300, false}},        // მწვანე ციმციმი
-    {"WIFI_EVENT_DISCONNECTED", {LED_MODE_STATIC, 255, 0, 0, 0, false}},      // წითელი
+    {"WIFI_EVENT_CONNECTED", {LED_MODE_BLINK, 0, 255, 0, 300, false}},          // მწვანე ციმციმი
+    {"WIFI_EVENT_DISCONNECTED", {LED_MODE_STATIC, 255, 0, 0, 0, false}},        // წითელი
     // მომავალში აქ დაემატება სხვა ივენთები...
 };
 static const size_t event_map_size = sizeof(event_map) / sizeof(event_map[0]);
@@ -168,6 +168,8 @@ module_t *rgb_led_indicator_create(const cJSON *config)
         module->current_config = cJSON_Duplicate(config, true);
     }
 
+    module->init_level = 1;
+
     module->status = MODULE_STATUS_UNINITIALIZED;
     module->base.init = rgb_led_indicator_init;
     module->base.start = rgb_led_indicator_start;
@@ -195,11 +197,28 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->green_pin, self->name);
     fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->blue_pin, self->name);
 
-    // LEDC კონფიგურაცია (უცვლელია)
+    // LEDC კონფიგურაცია
     ledc_timer_config_t ledc_timer = {
         .speed_mode = LEDC_MODE, .timer_num = LEDC_TIMER, .duty_resolution = LEDC_RESOLUTION, .freq_hz = LEDC_FREQUENCY, .clk_cfg = LEDC_USE_APB_CLK};
     ESP_ERROR_CHECK(ledc_timer_config(&ledc_timer));
+
+    ledc_channel_config_t ledc_channel_conf = {
+        .speed_mode = LEDC_MODE, .timer_sel = LEDC_TIMER, .duty = 0, .hpoint = 0, .intr_type = LEDC_INTR_DISABLE};
+
+    ledc_channel_conf.channel = LEDC_CHANNEL_R;
+    ledc_channel_conf.gpio_num = private_data->red_pin;
+    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_conf));
+
+    ledc_channel_conf.channel = LEDC_CHANNEL_G;
+    ledc_channel_conf.gpio_num = private_data->green_pin;
+    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_conf));
+
+    ledc_channel_conf.channel = LEDC_CHANNEL_B;
+    ledc_channel_conf.gpio_num = private_data->blue_pin;
+    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_conf));
+
     ESP_ERROR_CHECK(ledc_fade_func_install(0));
+    private_data->is_ledc_active = true; // LEDC ახლა ყოველთვის აქტიურია
 
     // Queue-ს შექმნა (უცვლელია)
     private_data->command_queue = xQueueCreate(COMMAND_QUEUE_LENGTH, sizeof(led_command_t));
@@ -217,8 +236,7 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     // სერვისის რეგისტრაცია (უცვლელია)
     fmw_service_register(self->name, FMW_SERVICE_TYPE_GENERIC_API, &rgb_led_service_api);
 
-    // LED-ის საწყისი გამორთვა (უცვლელია)
-    private_data->is_ledc_active = false;
+    // LED-ის საწყისი გამორთვა
     set_led_color(private_data, 0, 0, 0);
 
     self->status = MODULE_STATUS_INITIALIZED;
@@ -411,11 +429,6 @@ static esp_err_t parse_config(const cJSON *config, rgb_led_private_data_t *priva
     return ESP_OK;
 }
 
-/**
- * @brief Enhanced diagnostic version of set_led_color with deep LEDC debugging
- * @details This version adds extensive logging and verification steps to identify
- *          why LEDC channels are not producing output despite no errors.
- */
 static void set_led_color(rgb_led_private_data_t *private_data, uint8_t r, uint8_t g, uint8_t b)
 {
     if (!private_data)
@@ -424,59 +437,27 @@ static void set_led_color(rgb_led_private_data_t *private_data, uint8_t r, uint8
         return;
     }
 
-    ESP_LOGI(TAG, "set_led_color: Request to set RGB(%u, %u, %u)", r, g, b);
+    ESP_LOGD(TAG, "set_led_color: Request to set RGB(%u, %u, %u)", r, g, b);
 
-    if (r == 0 && g == 0 && b == 0)
-    {
-        ESP_LOGI(TAG, "set_led_color: Turning LED OFF using GPIO.");
-        if (private_data->is_ledc_active)
-        {
-            ledc_stop(LEDC_MODE, LEDC_CHANNEL_R, 0);
-            ledc_stop(LEDC_MODE, LEDC_CHANNEL_G, 0);
-            ledc_stop(LEDC_MODE, LEDC_CHANNEL_B, 0);
-            private_data->is_ledc_active = false;
-        }
-        uint32_t off_level = private_data->is_common_anode ? 1 : 0;
-        gpio_set_direction(private_data->red_pin, GPIO_MODE_OUTPUT);
-        gpio_set_level(private_data->red_pin, off_level);
-        gpio_set_direction(private_data->green_pin, GPIO_MODE_OUTPUT);
-        gpio_set_level(private_data->green_pin, off_level);
-        gpio_set_direction(private_data->blue_pin, GPIO_MODE_OUTPUT);
-        gpio_set_level(private_data->blue_pin, off_level);
-        return;
-    }
-
-    ESP_LOGI(TAG, "set_led_color: Setting color via LEDC.");
-    if (!private_data->is_ledc_active)
-    {
-        ESP_LOGW(TAG, "set_led_color: LEDC was inactive. Re-initializing channels...");
-        ledc_channel_config_t conf = {
-            .speed_mode = LEDC_MODE, .timer_sel = LEDC_TIMER, .duty = 0, .hpoint = 0, .intr_type = LEDC_INTR_DISABLE};
-        conf.channel = LEDC_CHANNEL_R;
-        conf.gpio_num = private_data->red_pin;
-        ESP_ERROR_CHECK(ledc_channel_config(&conf));
-        conf.channel = LEDC_CHANNEL_G;
-        conf.gpio_num = private_data->green_pin;
-        ESP_ERROR_CHECK(ledc_channel_config(&conf));
-        conf.channel = LEDC_CHANNEL_B;
-        conf.gpio_num = private_data->blue_pin;
-        ESP_ERROR_CHECK(ledc_channel_config(&conf));
-        private_data->is_ledc_active = true;
-        ESP_LOGI(TAG, "set_led_color: LEDC channels re-initialized.");
-    }
-
+    // გამოვთვალოთ duty cycle-ები is_common_anode-ის გათვალისწინებით
     uint32_t duty_r = private_data->is_common_anode ? (255 - r) : r;
     uint32_t duty_g = private_data->is_common_anode ? (255 - g) : g;
     uint32_t duty_b = private_data->is_common_anode ? (255 - b) : b;
-    ESP_LOGI(TAG, "set_led_color: Calculated duties - R:%" PRIu32 ", G:%" PRIu32 ", B:%" PRIu32, duty_r, duty_g, duty_b);
 
-    ledc_set_duty_and_update(LEDC_MODE, LEDC_CHANNEL_R, duty_r, 0);
-    ledc_set_duty_and_update(LEDC_MODE, LEDC_CHANNEL_G, duty_g, 0);
-    ledc_set_duty_and_update(LEDC_MODE, LEDC_CHANNEL_B, duty_b, 0);
+    ESP_LOGD(TAG, "set_led_color: Calculated duties - R:%" PRIu32 ", G:%" PRIu32 ", B:%" PRIu32, duty_r, duty_g, duty_b);
 
-    ESP_LOGI(TAG, "set_led_color: Duties updated.");
+    // დავაყენოთ duty და განვაახლოთ LEDC არხები
+    ledc_set_duty(LEDC_MODE, LEDC_CHANNEL_R, duty_r);
+    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_R);
+
+    ledc_set_duty(LEDC_MODE, LEDC_CHANNEL_G, duty_g);
+    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_G);
+
+    ledc_set_duty(LEDC_MODE, LEDC_CHANNEL_B, duty_b);
+    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_B);
+
+    ESP_LOGD(TAG, "set_led_color: Duties updated.");
 }
-
 /**
  * @brief LED-ის მმართველი ტასკი.
  * @details ეს არის მოდულის "გული", რომელიც მუშაობს ფონურ რეჟიმში. ის იღებს

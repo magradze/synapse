@@ -1,0 +1,21 @@
+{
+    "name": "ble_provisioning",
+    "version": "2.0.0",
+    "description": "ESP-IDF native BLE-based WiFi provisioning service",
+    "author": "Synapse Framework Team",
+    "init_function": "ble_provisioning_create",
+    "init_level": 2,
+    "dependencies": [],
+    "type": "ble_provisioning",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_BLE_PROVISIONING_ENABLED",
+    "runtime_commands": {
+        "start": "ble_provisioning_start",
+        "stop": "ble_provisioning_disable",
+        "enable": "ble_provisioning_enable",
+        "disable": "ble_provisioning_disable",
+        "reconfigure": "ble_provisioning_reconfigure",
+        "status": "ble_provisioning_get_status",
+        "handle_event": "ble_provisioning_handle_event"
+    }
+}

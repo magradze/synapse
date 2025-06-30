@@ -1,0 +1,21 @@
+{
+    "name": "oled_display",
+    "version": "1.0.0",
+    "description": "OLED display driver",
+    "author": "Synapse Framework Team",
+    "init_function": "oled_display_create",
+    "init_level": 10,
+    "dependencies": [],
+    "type": "displays",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_OLED_DISPLAY_ENABLED",
+    "runtime_commands": {
+        "start": "oled_display_start",
+        "stop": "oled_display_disable",
+        "enable": "oled_display_enable",
+        "disable": "oled_display_disable",
+        "reconfigure": "oled_display_reconfigure",
+        "status": "oled_display_get_status",
+        "handle_event": "oled_display_handle_event"
+    }
+}

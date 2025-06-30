@@ -188,7 +188,9 @@ menu \"Synapse Framework\"
     rsource \"Kconfig\"
 
     # --- Module Configuration ---
-${MODULE_KCONFIG_SOURCES}
+    menu \"Modules\"
+        ${MODULE_KCONFIG_SOURCES}
+    endmenu
 endmenu
 ")
 

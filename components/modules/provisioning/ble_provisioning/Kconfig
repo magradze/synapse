@@ -1,0 +1,55 @@
+menu "BLE_Provisioning Module Configuration"
+
+    config MODULE_BLE_PROVISIONING_ENABLED
+        bool "Enable BLE Provisioning module"
+        default y
+        help
+            Enable or disable BLE Provisioning module at compile time
+
+    config BLE_PROVISIONING_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_ble_provisioning"
+        depends on MODULE_BLE_PROVISIONING_ENABLED
+        help
+            Default instance name for the ble_provisioning module.
+
+    config BLE_PROVISIONING_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_BLE_PROVISIONING_ENABLED
+        help
+            Maximum length for the ble_provisioning module instance name string.
+
+    if MODULE_BLE_PROVISIONING_ENABLED
+
+        config ESP_PROV_DEVICE_NAME
+            string "BLE Device Name"
+            default "Synapse-Prov"
+            help
+                Device name that will appear during BLE scanning
+
+        config ESP_PROV_SECURITY_VERSION
+            int "Security Version (0 or 1)"
+            range 0 1
+            default 1
+            help
+                Security version:
+                0 - No security (for testing only)
+                1 - Secure communication with POP
+
+        config ESP_PROV_POP
+            string "Proof of Possession (8 characters)"
+            default "abcd1234"
+            depends on ESP_PROV_SECURITY_VERSION = 1
+            help
+                8-character proof of possession string for secure provisioning
+
+        config ESP_PROV_AUTO_STOP
+            bool "Auto stop provisioning after WiFi connection"
+            default y
+            help
+                Automatically stop provisioning service when WiFi connects
+
+    endif # MODULE_BLE_PROVISIONING_ENABLED
+endmenu

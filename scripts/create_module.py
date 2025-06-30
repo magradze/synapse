@@ -29,8 +29,20 @@ def create_module_structure(module_name, module_type, description, author="Giorg
         "description": description,
         "author": author,
         "init_function": f"{module_name}_create",
+        "init_level": 10,  # ინიციალიზაციის დონე
+        "dependencies": [],  # აქ შეგიძლიათ დაამატოთ დამოკიდებულებები
+        "type": module_type,
         "build_enabled": True,
-        "conditional_config": f"CONFIG_MODULE_{module_name.upper()}_ENABLED"
+        "conditional_config": f"CONFIG_MODULE_{module_name.upper()}_ENABLED",
+        "runtime_commands": {
+            "start": f"{module_name}_start",
+            "stop": f"{module_name}_disable",
+            "enable": f"{module_name}_enable",
+            "disable": f"{module_name}_disable",
+            "reconfigure": f"{module_name}_reconfigure",
+            "status": f"{module_name}_get_status",
+            "handle_event": f"{module_name}_handle_event"
+        }
     }
     
     with open(module_path / "module.json", "w", encoding="utf-8") as f:
@@ -192,6 +204,8 @@ module_t *{module_name}_create(const cJSON *config);
 #include "{module_name}.h"
 #include "base_module.h"
 #include "event_bus.h"
+#include "event_data_wrapper.h"
+#include "framework_config.h"
 #include "logging.h"
 #include "esp_log.h"
 #include <string.h>
@@ -204,59 +218,83 @@ DEFINE_COMPONENT_TAG("{module_name.upper()}");
  * @details შეიცავს მოდულის შიდა მდგომარეობას და კონფიგურაციას
  */
 typedef struct {{
-    module_t base;                          /**< საბაზისო მოდულის სტრუქტურა */
-    {module_name}_config_t config;          /**< მოდულის კონფიგურაცია */
-    bool is_initialized;                    /**< ინიციალიზაციის ფლაგი */
-    bool is_enabled;                        /**< ჩართვის ფლაგი */
-}} {module_name}_module_t;
+    bool enabled;                                           /**< ჩართვის ფლაგი */
+    char instance_name[CONFIG_{module_name.upper()}_INSTANCE_NAME_MAX_LEN]; /**< მოდულის ინსტანციის სახელი */
+    // TODO: დაამატეთ მოდულის სპეციფიკური ველები
+}} {module_name}_private_data_t;
 
 // --- Forward declarations ---
 static esp_err_t {module_name}_init(module_t *self);
 static esp_err_t {module_name}_start(module_t *self);
 static esp_err_t {module_name}_enable(module_t *self);
 static esp_err_t {module_name}_disable(module_t *self);
+static void {module_name}_deinit(module_t *self);
 static esp_err_t {module_name}_reconfigure(module_t *self, const cJSON *new_config);
 static module_status_t {module_name}_get_status(module_t *self);
-static void {module_name}_handle_event(module_t *self, core_framework_event_id_t event_id, void *event_data);
+static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data);
 
 module_t *{module_name}_create(const cJSON *config)
 {{
     ESP_LOGI(TAG, "Creating {module_name} module instance");
     
-    {module_name}_module_t *module = calloc(1, sizeof({module_name}_module_t));
+    // გამოვყოთ მეხსიერება module_t სტრუქტურისთვის
+    module_t *module = (module_t *)calloc(1, sizeof(module_t));
     if (!module) {{
-        ESP_LOGE(TAG, "Failed to allocate memory for {module_name} module");
+        ESP_LOGE(TAG, "Failed to allocate memory for module");
         return NULL;
     }}
     
-    // Initialize base module structure
-    module->base.status = MODULE_STATUS_UNINITIALIZED;
-    module->base.current_config = NULL;
-    module->base.private_data = module;
+    // გამოვყოთ მეხსიერება private data-სთვის
+    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)calloc(1, sizeof({module_name}_private_data_t));
+    if (!private_data) {{
+        ESP_LOGE(TAG, "Failed to allocate memory for private data");
+        free(module);
+        return NULL;
+    }}
     
-    // Set up function pointers
-    module->base.base.init = {module_name}_init;
-    module->base.base.start = {module_name}_start;
-    module->base.base.enable = {module_name}_enable;
-    module->base.base.disable = {module_name}_disable;
-    module->base.base.reconfigure = {module_name}_reconfigure;
-    module->base.base.get_status = {module_name}_get_status;
-    module->base.base.handle_event = {module_name}_handle_event;
+    // შევქმნათ state mutex
+    module->state_mutex = xSemaphoreCreateMutex();
+    if (!module->state_mutex) {{
+        ESP_LOGE(TAG, "Failed to create state mutex");
+        free(private_data);
+        free(module);
+        return NULL;
+    }}
     
-    // Set default configuration
-    strncpy(module->base.name, 
-#ifdef CONFIG_{module_name.upper()}_DEFAULT_INSTANCE_NAME
-            CONFIG_{module_name.upper()}_DEFAULT_INSTANCE_NAME,
-#else
-            "main_{module_name}",
-#endif
-            sizeof(module->base.name) - 1);
+    // დავაკავშიროთ private data
+    module->private_data = private_data;
     
-    strncpy(module->config.instance_name, module->base.name, sizeof(module->config.instance_name) - 1);
-    module->config.auto_start = true;
+    // დავაყენოთ default კონფიგურაცია
+    const char *instance_name = CONFIG_{module_name.upper()}_DEFAULT_INSTANCE_NAME;
+    if (config) {{
+        const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+        if (cJSON_IsObject(config_node)) {{
+            const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+            if (cJSON_IsString(name_node) && name_node->valuestring) {{
+                instance_name = name_node->valuestring;
+            }}
+        }}
+        module->current_config = cJSON_Duplicate(config, true);
+    }}
     
-    ESP_LOGI(TAG, "{module_name.title()} module created successfully with name: %s", module->base.name);
-    return (module_t *)module;
+    // ინიციალიზაცია
+    private_data->enabled = true;
+    strncpy(private_data->instance_name, instance_name, CONFIG_{module_name.upper()}_INSTANCE_NAME_MAX_LEN - 1);
+    snprintf(module->name, sizeof(module->name), "%s", instance_name);
+    module->status = MODULE_STATUS_UNINITIALIZED;
+    
+    // დავაყენოთ ფუნქციების pointers
+    module->base.init = {module_name}_init;
+    module->base.start = {module_name}_start;
+    module->base.handle_event = {module_name}_handle_event;
+    module->base.deinit = {module_name}_deinit;
+    module->base.enable = {module_name}_enable;
+    module->base.disable = {module_name}_disable;
+    module->base.reconfigure = {module_name}_reconfigure;
+    module->base.get_status = {module_name}_get_status;
+    
+    ESP_LOGI(TAG, "{module_name.title()} module created: '%s'", instance_name);
+    return module;
 }}
 
 static esp_err_t {module_name}_init(module_t *self)
@@ -265,37 +303,14 @@ static esp_err_t {module_name}_init(module_t *self)
         return ESP_ERR_INVALID_ARG;
     }}
     
-    {module_name}_module_t *{module_name}_mod = ({module_name}_module_t *)self->private_data;
+    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing {module_name} module: %s", self->name);
     
-    if ({module_name}_mod->is_initialized) {{
-        ESP_LOGW(TAG, "Module already initialized");
-        return ESP_ERR_INVALID_STATE;
-    }}
+    // TODO: დაამატეთ ინიციალიზაციის ლოგიკა
+    // მაგალითად, Event Bus-ზე გამოწერა:
+    // esp_err_t ret = fmw_event_bus_subscribe("some_event", self);
     
-    // Parse configuration if provided
-    if (self->current_config) {{
-        const cJSON *instance_name = cJSON_GetObjectItem(self->current_config, "instance_name");
-        if (cJSON_IsString(instance_name)) {{
-            strncpy({module_name}_mod->config.instance_name, 
-                   instance_name->valuestring, 
-                   sizeof({module_name}_mod->config.instance_name) - 1);
-            strncpy(self->name, instance_name->valuestring, sizeof(self->name) - 1);
-        }}
-        
-        const cJSON *auto_start = cJSON_GetObjectItem(self->current_config, "auto_start");
-        if (cJSON_IsBool(auto_start)) {{
-            {module_name}_mod->config.auto_start = cJSON_IsTrue(auto_start);
-        }}
-        
-        // TODO: Parse other configuration parameters
-    }}
-    
-    // TODO: Implement initialization logic here
-    
-    {module_name}_mod->is_initialized = true;
     self->status = MODULE_STATUS_INITIALIZED;
-    
     ESP_LOGI(TAG, "{module_name.title()} module initialized successfully");
     return ESP_OK;
 }}
@@ -306,9 +321,9 @@ static esp_err_t {module_name}_start(module_t *self)
         return ESP_ERR_INVALID_ARG;
     }}
     
-    {module_name}_module_t *{module_name}_mod = ({module_name}_module_t *)self->private_data;
+    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)self->private_data;
     
-    if (!{module_name}_mod->is_initialized) {{
+    if (self->status != MODULE_STATUS_INITIALIZED) {{
         ESP_LOGE(TAG, "Cannot start uninitialized module");
         return ESP_ERR_INVALID_STATE;
     }}
@@ -323,7 +338,7 @@ static esp_err_t {module_name}_start(module_t *self)
     // TODO: Implement module start logic
     
     self->status = MODULE_STATUS_RUNNING;
-    {module_name}_mod->is_enabled = true;
+    private_data->enabled = true;
     
     ESP_LOGI(TAG, "{module_name.title()} module started successfully");
     return ESP_OK;
@@ -335,18 +350,19 @@ static esp_err_t {module_name}_enable(module_t *self)
         return ESP_ERR_INVALID_ARG;
     }}
     
-    {module_name}_module_t *{module_name}_mod = ({module_name}_module_t *)self->private_data;
+    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)self->private_data;
     
     ESP_LOGI(TAG, "Enabling {module_name} module: %s", self->name);
     
-    if ({module_name}_mod->is_enabled) {{
+    if (private_data->enabled) {{
         ESP_LOGW(TAG, "Module already enabled");
         return ESP_OK;
     }}
     
     // TODO: Implement enable logic
     
-    {module_name}_mod->is_enabled = true;
+    private_data->enabled = true;
+    self->status = MODULE_STATUS_RUNNING;
     ESP_LOGI(TAG, "{module_name.title()} module enabled");
     
     return ESP_OK;
@@ -358,18 +374,19 @@ static esp_err_t {module_name}_disable(module_t *self)
         return ESP_ERR_INVALID_ARG;
     }}
     
-    {module_name}_module_t *{module_name}_mod = ({module_name}_module_t *)self->private_data;
+    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)self->private_data;
     
     ESP_LOGI(TAG, "Disabling {module_name} module: %s", self->name);
     
-    if (!{module_name}_mod->is_enabled) {{
+    if (!private_data->enabled) {{
         ESP_LOGW(TAG, "Module already disabled");
         return ESP_OK;
     }}
     
     // TODO: Implement disable logic
     
-    {module_name}_mod->is_enabled = false;
+    private_data->enabled = false;
+    self->status = MODULE_STATUS_DISABLED;
     ESP_LOGI(TAG, "{module_name.title()} module disabled");
     
     return ESP_OK;
@@ -386,6 +403,11 @@ static esp_err_t {module_name}_reconfigure(module_t *self, const cJSON *new_conf
     // TODO: Implement reconfiguration logic
     // Update self->current_config with new_config
     
+    if (self->current_config) {{
+        cJSON_Delete(self->current_config);
+    }}
+    self->current_config = cJSON_Duplicate(new_config, true);
+    
     ESP_LOGI(TAG, "{module_name.title()} module reconfigured");
     return ESP_OK;
 }}
@@ -399,28 +421,66 @@ static module_status_t {module_name}_get_status(module_t *self)
     return self->status;
 }}
 
-static void {module_name}_handle_event(module_t *self, core_framework_event_id_t event_id, void *event_data)
+static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data)
+{{
+    if (!self || !self->private_data) {{
+        if (event_data) {{
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
+        }}
+        return;
+    }}
+    
+    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)self->private_data;
+    
+    if (!private_data->enabled) {{
+        if (event_data) {{
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
+        }}
+        return;
+    }}
+    
+    if (event_name) {{
+        ESP_LOGD(TAG, "[%s] Event received: '%s'", private_data->instance_name, event_name);
+        
+        // TODO: Handle specific events
+        // მაგალითად:
+        // if (strcmp(event_name, "some_event") == 0) {{
+        //     // Handle the event
+        // }}
+    }}
+    
+    // Always release event data
+    if (event_data) {{
+        fmw_event_data_release((event_data_wrapper_t *)event_data);
+    }}
+}}
+
+static void {module_name}_deinit(module_t *self)
 {{
     if (!self) {{
         return;
     }}
     
-    {module_name}_module_t *{module_name}_mod = ({module_name}_module_t *)self->private_data;
+    ESP_LOGI(TAG, "Deinitializing %s module", self->name);
     
-    ESP_LOGD(TAG, "Module %s handling event: %d", self->name, event_id);
+    // TODO: Unsubscribe from events if needed
+    // fmw_event_bus_unsubscribe("some_event", self);
     
-    // TODO: Implement event handling logic based on event_id
-    switch (event_id) {{
-        case FRAMEWORK_EVENT_SYSTEM_INIT:
-            ESP_LOGD(TAG, "System initialization event received");
-            break;
-        case FRAMEWORK_EVENT_SYSTEM_START:
-            ESP_LOGD(TAG, "System start event received");
-            break;
-        default:
-            ESP_LOGD(TAG, "Unhandled event: %d", event_id);
-            break;
+    if (self->private_data) {{
+        free(self->private_data);
     }}
+    
+    if (self->current_config) {{
+        cJSON_Delete(self->current_config);
+    }}
+    
+    if (self->state_mutex) {{
+        vSemaphoreDelete(self->state_mutex);
+    }}
+    
+    free(self);
+    
+    ESP_LOGI(TAG, "Module deinitialized successfully");
 }}
 '''
     

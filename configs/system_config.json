@@ -8,6 +8,31 @@
   },
   "modules": [
     {
+      "type": "rgb_led_indicator",
+      "enabled": true,
+      "config": {
+          "instance_name": "status_led",
+          "red_pin": 18,
+          "green_pin": 19,
+          "blue_pin": 5,
+          "is_common_anode": true
+      }
+    },
+    {
+      "type": "wifi_manager",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_wifi_manager"
+      }
+    },
+    {
+      "type": "ble_provisioning",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_ble_provisioning"
+      }
+    },
+    {
       "type": "logger_module",
       "enabled": true,
       "config": {
@@ -16,16 +41,16 @@
     },
     {
       "type": "led_blinker",
-      "enabled": true,
+      "enabled": false,
       "config": {
         "instance_name": "main_led_blinker"
       }
     },
     {
-      "type": "test_module",
+      "type": "oled_display",
       "enabled": true,
       "config": {
-        "instance_name": "main_test_module"
+        "instance_name": "main_oled_display"
       }
     }
   ]

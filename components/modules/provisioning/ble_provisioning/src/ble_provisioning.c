@@ -32,6 +32,7 @@ DEFINE_COMPONENT_TAG("BLE_PROV");
 #define EVT_WIFI_CONNECTED "WIFI_EVENT_CONNECTED"
 #define EVT_WIFI_DISCONNECTED "WIFI_EVENT_DISCONNECTED"
 #define EVT_WIFI_IP_ASSIGNED "WIFI_EVENT_IP_ASSIGNED"
+#define EVT_PROV_STARTED "PROV_STARTED"
 
 // Private data structure
 typedef struct
@@ -70,6 +71,7 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
     case WIFI_PROV_START:
         ESP_LOGI(TAG, "Provisioning started");
         private_data->provisioning_active = true;
+        fmw_event_bus_post(EVT_PROV_STARTED, NULL);
         break;
 
     case WIFI_PROV_CRED_RECV:

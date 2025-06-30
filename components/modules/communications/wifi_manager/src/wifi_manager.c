@@ -67,7 +67,7 @@ static void wifi_manager_deinit(module_t *self);
 static void wifi_manager_handle_event(module_t *self, const char *event_name, void *event_data);
 
 static esp_err_t load_credentials_from_nvs(wifi_manager_private_data_t *data);
-static esp_err_t save_credentials_to_nvs(const wifi_manager_private_data_t *data);
+static esp_err_t save_credentials_to_nvs(const char *ssid, const char *password);
 static void start_wifi_connection(module_t *self);
 static void reconnect_timer_callback(TimerHandle_t xTimer);
 
@@ -184,6 +184,8 @@ static esp_err_t wifi_manager_init(module_t *self)
     {
         ESP_LOGI(TAG, "No saved credentials found. Waiting for provisioning...");
     }
+
+    esp_log_level_set("nvs", ESP_LOG_DEBUG);
 
     self->status = MODULE_STATUS_INITIALIZED;
     ESP_LOGI(TAG, "WiFi Manager module initialized successfully");
@@ -367,6 +369,15 @@ static void wifi_manager_deinit(module_t *self)
 //  Synapse და ESP-IDF ივენთების დამუშავებლები
 // ==============================================================================
 
+/**
+ * @brief ამუშავებს Synapse Event Bus-იდან მიღებულ ივენთებს.
+ * @details ამჟამად, რეაგირებს მხოლოდ PROV_CREDENTIALS_RECEIVED ივენთზე,
+ *          რომელიც მოდის provisioning მოდულიდან. იღებს WiFi-ს მონაცემებს,
+ *          ინახავს მათ NVS-ში და იწყებს კავშირის დამყარების პროცესს.
+ * @param self მაჩვენებელი მოდულის ინსტანციაზე.
+ * @param event_name მიღებული ივენთის სახელი.
+ * @param event_data მაჩვენებელი ივენთის მონაცემებზე.
+ */
 static void wifi_manager_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     if (!self || !self->private_data)
@@ -392,8 +403,6 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
     if (event_name && strcmp(event_name, EVT_PROV_CREDENTIALS_RECEIVED) == 0)
     {
         ESP_LOGI(TAG, "[%s] Received provisioning credentials", private_data->instance_name);
-
-        // მონიშნეთ რომ provisioning მიმდინარეობს
         private_data->is_provisioning = true;
 
         event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
@@ -403,17 +412,32 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
             cJSON *creds_json = cJSON_Parse(json_string);
             if (creds_json)
             {
-                const cJSON *ssid = cJSON_GetObjectItem(creds_json, "ssid");
-                const cJSON *password = cJSON_GetObjectItem(creds_json, "password");
-                if (cJSON_IsString(ssid) && cJSON_IsString(password))
+                const cJSON *ssid_json = cJSON_GetObjectItem(creds_json, "ssid");
+                const cJSON *password_json = cJSON_GetObjectItem(creds_json, "password");
+
+                if (cJSON_IsString(ssid_json) && cJSON_IsString(password_json) && ssid_json->valuestring && password_json->valuestring)
                 {
+                    // 1. ვასუფთავებთ ძველ კონფიგურაციას
                     memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-                    strncpy((char *)private_data->wifi_config.sta.ssid, ssid->valuestring,
-                            sizeof(private_data->wifi_config.sta.ssid) - 1);
-                    strncpy((char *)private_data->wifi_config.sta.password, password->valuestring,
-                            sizeof(private_data->wifi_config.sta.password) - 1);
-                    save_credentials_to_nvs(private_data);
-                    start_wifi_connection(self);
+
+                    // 2. უსაფრთხოდ ვაკოპირებთ ახალ მონაცემებს private_data-ში
+                    strncpy((char *)private_data->wifi_config.sta.ssid, ssid_json->valuestring, sizeof(private_data->wifi_config.sta.ssid) - 1);
+                    strncpy((char *)private_data->wifi_config.sta.password, password_json->valuestring, sizeof(private_data->wifi_config.sta.password) - 1);
+
+                    if (save_credentials_to_nvs(ssid_json->valuestring, password_json->valuestring) == ESP_OK)
+                    {
+                        // ვაახლებთ private_data-ს მხოლოდ შენახვის შემდეგ
+                        memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
+                        strncpy((char *)private_data->wifi_config.sta.ssid, ssid_json->valuestring, sizeof(private_data->wifi_config.sta.ssid) - 1);
+                        strncpy((char *)private_data->wifi_config.sta.password, password_json->valuestring, sizeof(private_data->wifi_config.sta.password) - 1);
+                        private_data->has_saved_credentials = true;
+
+                        start_wifi_connection(self);
+                    }
+                    else
+                    {
+                        ESP_LOGE(TAG, "Failed to save new credentials to NVS.");
+                    }
                 }
                 cJSON_Delete(creds_json);
             }
@@ -467,13 +491,12 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t e
 
         case WIFI_EVENT_STA_DISCONNECTED:
             ESP_LOGW(TAG, "Disconnected from WiFi network");
+
             fmw_event_bus_post(EVT_WIFI_DISCONNECTED, NULL);
 
-            if (private_data->enabled &&
-                (CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS < 0 ||
-                 private_data->retry_num < CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS))
+            if (private_data->retry_num < CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS)
             {
-
+                // ექსპონენციალური backoff ლოგიკა (უცვლელია)
                 uint32_t delay_ms = CONFIG_WIFI_MANAGER_RECONNECT_DELAY_MS * (1 << private_data->retry_num);
                 if (delay_ms > CONFIG_WIFI_MANAGER_MAX_RECONNECT_DELAY_MS)
                 {
@@ -485,6 +508,17 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t e
 
                 xTimerChangePeriod(private_data->reconnect_timer, pdMS_TO_TICKS(delay_ms), 0);
                 xTimerStart(private_data->reconnect_timer, 0);
+            }
+            else
+            {
+                ESP_LOGE(TAG, "Failed to connect to WiFi after %d attempts. Starting provisioning.", CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS);
+                // გავასუფთავოთ ძველი, არასწორი credentials
+                nvs_flash_erase_partition(CONFIG_WIFI_MANAGER_NVS_NAMESPACE);
+                private_data->has_saved_credentials = false;
+                memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
+
+                // გავუშვათ provisioning ივენთი
+                fmw_event_bus_post("PROV_START_REQUESTED", NULL); // ვივარაუდოთ, რომ provisioning მოდული ამ ივენთს უსმენს
             }
             break;
 
@@ -549,93 +583,62 @@ static void start_wifi_connection(module_t *self)
     ESP_ERROR_CHECK(esp_wifi_start());
 }
 
-static esp_err_t load_credentials_from_nvs(wifi_manager_private_data_t *private_data)
+static esp_err_t save_credentials_to_nvs(const char *ssid, const char *password)
 {
+    if (!ssid || !password)
+    {
+        ESP_LOGE(TAG, "Invalid parameters: SSID or password is NULL");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    // Validate input lengths
+    size_t ssid_len = strlen(ssid);
+    size_t pass_len = strlen(password);
+
+    if (ssid_len == 0 || ssid_len >= sizeof(((wifi_config_t *)0)->sta.ssid))
+    {
+        ESP_LOGE(TAG, "SSID length invalid: %zu (max: %zu)", ssid_len, sizeof(((wifi_config_t *)0)->sta.ssid) - 1);
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (pass_len >= sizeof(((wifi_config_t *)0)->sta.password))
+    {
+        ESP_LOGE(TAG, "Password length invalid: %zu (max: %zu)", pass_len, sizeof(((wifi_config_t *)0)->sta.password) - 1);
+        return ESP_ERR_INVALID_ARG;
+    }
+
     nvs_handle_t nvs_handle;
     esp_err_t err;
 
-    ESP_LOGI(TAG, "Opening NVS with READONLY access to load credentials...");
-    err = nvs_open(CONFIG_WIFI_MANAGER_NVS_NAMESPACE, NVS_READONLY, &nvs_handle);
+    ESP_LOGI(TAG, "Opening NVS for saving WiFi credentials...");
+    err = nvs_open("wifi_creds", NVS_READWRITE, &nvs_handle);
     if (err != ESP_OK)
     {
-        ESP_LOGD(TAG, "NVS namespace not found. Normal on first boot.");
+        ESP_LOGE(TAG, "Failed to open NVS: %s", esp_err_to_name(err));
         return err;
     }
 
-    // ვასუფთავებთ კონფიგურაციის სტრუქტურას, სანამ შევავსებთ
-    memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-
-    // --- ვკითხულობთ SSID-ს ---
-    size_t required_size = sizeof(private_data->wifi_config.sta.ssid);
-    err = nvs_get_str(nvs_handle, CONFIG_WIFI_MANAGER_NVS_SSID_KEY, (char *)private_data->wifi_config.sta.ssid, &required_size);
+    // Save SSID with explicit length
+    ESP_LOGI(TAG, "Saving SSID (length: %zu): %.32s", ssid_len, ssid);
+    err = nvs_set_str(nvs_handle, "wifi_ssid", ssid);
     if (err != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to read SSID from NVS: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG, "Failed to save SSID: %s", esp_err_to_name(err));
         nvs_close(nvs_handle);
         return err;
     }
 
-    // --- ვკითხულობთ პაროლს ---
-    required_size = sizeof(private_data->wifi_config.sta.password);
-    err = nvs_get_str(nvs_handle, CONFIG_WIFI_MANAGER_NVS_PASSWORD_KEY, (char *)private_data->wifi_config.sta.password, &required_size);
+    // Save Password with explicit length
+    ESP_LOGI(TAG, "Saving password (length: %zu)", pass_len);
+    err = nvs_set_str(nvs_handle, "wifi_pass", password);
     if (err != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to read password from NVS: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG, "Failed to save password: %s", esp_err_to_name(err));
         nvs_close(nvs_handle);
         return err;
     }
 
-    nvs_close(nvs_handle);
-
-    // თუ SSID ცარიელია, ეს ნიშნავს, რომ მონაცემები არასწორია
-    if (strlen((const char *)private_data->wifi_config.sta.ssid) == 0)
-    {
-        ESP_LOGW(TAG, "SSID read from NVS is empty. Treating as no valid credentials.");
-        private_data->has_saved_credentials = false;
-        return ESP_ERR_NOT_FOUND;
-    }
-
-    private_data->has_saved_credentials = true;
-    ESP_LOGI(TAG, "Successfully loaded credentials from NVS for SSID: [%s]", private_data->wifi_config.sta.ssid);
-
-    return ESP_OK;
-}
-
-static esp_err_t save_credentials_to_nvs(const wifi_manager_private_data_t *private_data)
-{
-    nvs_handle_t nvs_handle;
-    esp_err_t err;
-
-    ESP_LOGI(TAG, "Opening NVS with READWRITE access...");
-    err = nvs_open(CONFIG_WIFI_MANAGER_NVS_NAMESPACE, NVS_READWRITE, &nvs_handle);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Error opening NVS handle: %s", esp_err_to_name(err));
-        return err;
-    }
-
-    // --- ვინახავთ SSID-ს ---
-    ESP_LOGI(TAG, "Saving SSID to NVS: [%s]", (const char *)private_data->wifi_config.sta.ssid);
-    err = nvs_set_str(nvs_handle, CONFIG_WIFI_MANAGER_NVS_SSID_KEY, (const char *)private_data->wifi_config.sta.ssid);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to save SSID to NVS: %s", esp_err_to_name(err));
-        nvs_close(nvs_handle);
-        return err;
-    }
-
-    // --- ვინახავთ პაროლს ---
-    ESP_LOGI(TAG, "Saving Password to NVS: [***]"); // არ ვბეჭდავთ პაროლს
-    err = nvs_set_str(nvs_handle, CONFIG_WIFI_MANAGER_NVS_PASSWORD_KEY, (const char *)private_data->wifi_config.sta.password);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to save password to NVS: %s", esp_err_to_name(err));
-        nvs_close(nvs_handle);
-        return err;
-    }
-
-    // --- ვინახავთ ცვლილებებს ---
-    ESP_LOGI(TAG, "Committing changes to NVS...");
+    // Commit changes
     err = nvs_commit(nvs_handle);
     if (err != ESP_OK)
     {
@@ -643,11 +646,94 @@ static esp_err_t save_credentials_to_nvs(const wifi_manager_private_data_t *priv
     }
     else
     {
-        ESP_LOGI(TAG, "WiFi credentials saved to NVS successfully");
-        // დროებით ვცვლით private_data-ს, თუმცა ეს const-ია. უკეთესი იქნება, თუ ამ ფუნქციას non-const არგუმენტს გადავცემთ.
-        ((wifi_manager_private_data_t *)private_data)->has_saved_credentials = true;
+        ESP_LOGI(TAG, "Successfully saved WiFi credentials to NVS");
     }
 
     nvs_close(nvs_handle);
     return err;
+}
+
+static esp_err_t load_credentials_from_nvs(wifi_manager_private_data_t *private_data)
+{
+    if (!private_data)
+    {
+        ESP_LOGE(TAG, "Invalid parameter: private_data is NULL");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    nvs_handle_t nvs_handle;
+    esp_err_t err;
+
+    ESP_LOGI(TAG, "Opening NVS with READONLY access to load credentials...");
+    err = nvs_open("wifi_creds", NVS_READONLY, &nvs_handle);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to open NVS: %s", esp_err_to_name(err));
+        return err;
+    }
+
+    // Clear the WiFi configuration first
+    memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
+
+    // Use temporary buffers for safer reading
+    char temp_ssid[33] = {0};     // 32 + 1 for null terminator
+    char temp_password[65] = {0}; // 64 + 1 for null terminator
+
+    // Read SSID - get required size first
+    size_t required_size = sizeof(temp_ssid);
+    err = nvs_get_str(nvs_handle, "wifi_ssid", temp_ssid, &required_size);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to read SSID from NVS: %s", esp_err_to_name(err));
+        nvs_close(nvs_handle);
+        return err;
+    }
+
+    ESP_LOGI(TAG, "Read SSID from NVS: %s", temp_ssid);
+
+    // Validate SSID length
+    size_t ssid_len = strlen(temp_ssid);
+    if (ssid_len == 0 || ssid_len >= sizeof(private_data->wifi_config.sta.ssid))
+    {
+        ESP_LOGE(TAG, "Invalid SSID length: %zu", ssid_len);
+        nvs_close(nvs_handle);
+        return ESP_ERR_INVALID_SIZE;
+    }
+
+    // Read Password
+    required_size = sizeof(temp_password);
+    err = nvs_get_str(nvs_handle, "wifi_pass", temp_password, &required_size);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to read password from NVS: %s", esp_err_to_name(err));
+        nvs_close(nvs_handle);
+        return err;
+    }
+
+    ESP_LOGI(TAG, "Read Password from NVS: [***]");
+
+    // Validate password length
+    size_t pass_len = strlen(temp_password);
+    if (pass_len >= sizeof(private_data->wifi_config.sta.password))
+    {
+        ESP_LOGE(TAG, "Invalid password length: %zu", pass_len);
+        nvs_close(nvs_handle);
+        return ESP_ERR_INVALID_SIZE;
+    }
+
+    nvs_close(nvs_handle);
+
+    // Copy to final destination with explicit bounds checking
+    strncpy((char *)private_data->wifi_config.sta.ssid, temp_ssid, sizeof(private_data->wifi_config.sta.ssid) - 1);
+    strncpy((char *)private_data->wifi_config.sta.password, temp_password, sizeof(private_data->wifi_config.sta.password) - 1);
+
+    // Ensure null termination (though wifi_config fields are not strings, this is defensive)
+    private_data->wifi_config.sta.ssid[sizeof(private_data->wifi_config.sta.ssid) - 1] = '\0';
+    private_data->wifi_config.sta.password[sizeof(private_data->wifi_config.sta.password) - 1] = '\0';
+
+    ESP_LOGI(TAG, "Successfully loaded and validated credentials from NVS for SSID: %s",
+             (char *)private_data->wifi_config.sta.ssid);
+
+    private_data->has_saved_credentials = true;
+    return ESP_OK;
 }

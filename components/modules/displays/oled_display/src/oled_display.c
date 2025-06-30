@@ -90,6 +90,7 @@ module_t *oled_display_create(const cJSON *config)
     module->status = MODULE_STATUS_UNINITIALIZED;
     
     // დავაყენოთ ფუნქციების pointers
+    module->init_level = 1;
     module->base.init = oled_display_init;
     module->base.start = oled_display_start;
     module->base.handle_event = oled_display_handle_event;

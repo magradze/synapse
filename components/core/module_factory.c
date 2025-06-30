@@ -66,9 +66,9 @@ module_t* fmw_module_factory_create(const char *module_type, const cJSON *config
 
     if (!new_module) {
         ESP_LOGE(TAG, "Factory function for '%s' failed to create module instance.", module_type);
-    } else {
-        ESP_LOGI(TAG, "Module instance for '%s' created successfully at %p.", module_type, new_module);
     }
-    
+
+    ESP_LOGI(TAG, "Module instance for '%s' created successfully at %p.", module_type, new_module);
+
     return new_module;
 }

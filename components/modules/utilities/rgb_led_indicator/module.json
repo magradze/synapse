@@ -1,0 +1,24 @@
+{
+    "name": "rgb_led_indicator",
+    "version": "1.0.0",
+    "description": "Universal RGB LED indicator for system status",
+    "author": "Giorgi Magradze & Synapse AI",
+    "init_function": "rgb_led_indicator_create",
+    "init_level": 1,
+    "dependencies": [
+        "core",
+        "driver"
+    ],
+    "type": "utilities",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_RGB_LED_INDICATOR_ENABLED",
+    "runtime_commands": {
+        "start": "rgb_led_indicator_start",
+        "stop": "rgb_led_indicator_disable",
+        "enable": "rgb_led_indicator_enable",
+        "disable": "rgb_led_indicator_disable",
+        "reconfigure": "rgb_led_indicator_reconfigure",
+        "status": "rgb_led_indicator_get_status",
+        "handle_event": "rgb_led_indicator_handle_event"
+    }
+}

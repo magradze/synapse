@@ -1,0 +1,64 @@
+menu "Rgb_Led_Indicator Module Configuration"
+
+    config MODULE_RGB_LED_INDICATOR_ENABLED
+        bool "Enable Rgb_Led_Indicator Module"
+        default y
+        help
+            Enables the rgb_led_indicator module for System LED indicator.
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config RGB_LED_INDICATOR_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_rgb_led_indicator"
+        depends on MODULE_RGB_LED_INDICATOR_ENABLED
+        help
+            Default instance name for the rgb_led_indicator module.
+
+    config RGB_LED_INDICATOR_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_RGB_LED_INDICATOR_ENABLED
+        help
+            Maximum length for the rgb_led_indicator module instance name string.
+
+    if MODULE_RGB_LED_INDICATOR_ENABLED
+    
+        config RGB_LED_INDICATOR_LEDC_TIMER
+            int "LEDC Timer Number"
+            default 0
+            range 0 3
+            depends on MODULE_RGB_LED_INDICATOR_ENABLED
+            help
+                Select the LEDC timer to use for PWM generation.
+                Usually, TIMER_0 is a safe choice.
+
+        config RGB_LED_INDICATOR_LEDC_CHANNEL_R
+            int "LEDC Channel for RED"
+            default 0
+            range 0 7
+            depends on MODULE_RGB_LED_INDICATOR_ENABLED
+            help
+                Select the LEDC channel for the RED color component.
+
+        config RGB_LED_INDICATOR_LEDC_CHANNEL_G
+            int "LEDC Channel for GREEN"
+            default 1
+            range 0 7
+            depends on MODULE_RGB_LED_INDICATOR_ENABLED
+            help
+                Select the LEDC channel for the GREEN color component.
+
+        config RGB_LED_INDICATOR_LEDC_CHANNEL_B
+            int "LEDC Channel for BLUE"
+            default 2
+            range 0 7
+            depends on MODULE_RGB_LED_INDICATOR_ENABLED
+            help
+                Select the LEDC channel for the BLUE color component.
+    
+    endif
+
+endmenu

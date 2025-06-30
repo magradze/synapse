@@ -15,6 +15,7 @@ menu "Synapse Framework"
     rsource "../modules/testing/led_blinker/Kconfig"
     rsource "../modules/testing/test_module/Kconfig"
     rsource "../modules/utilities/logger_module/Kconfig"
+    rsource "../modules/utilities/rgb_led_indicator/Kconfig"
 
     endmenu
 endmenu

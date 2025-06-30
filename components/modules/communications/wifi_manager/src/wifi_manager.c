@@ -129,6 +129,8 @@ module_t *wifi_manager_create(const cJSON *config)
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
 
+    module->init_level = 2;
+
     // დავაყენოთ ფუნქციების pointers
     module->base.init = wifi_manager_init;
     module->base.start = wifi_manager_start;

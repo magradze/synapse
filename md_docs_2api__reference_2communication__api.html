@@ -93,111 +93,111 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
   <div class="headertitle"><div class="title">Synapse Communication Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md57"></a> </p>
-<h1><a class="anchor" id="autotoc_md58"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md65"></a> </p>
+<h1><a class="anchor" id="autotoc_md66"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის კომუნიკაციის (communication) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md60"></a>
+<h1><a class="anchor" id="autotoc_md68"></a>
 MQTT Module API</h1>
-<h2><a class="anchor" id="autotoc_md61"></a>
+<h2><a class="anchor" id="autotoc_md69"></a>
 module_t &lt;em&gt;mqtt_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი MQTT მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 <li>არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)</li>
 <li>აბრუნებს: <a class="el" href="structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.">module_t</a> წარმატების შემთხვევაში, NULL შეცდომისას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md62"></a>
+<h2><a class="anchor" id="autotoc_md70"></a>
 esp_err_t mqtt_module_connect(const char *broker_url);</h2>
 <ul>
 <li>აკავშირებს MQTT მოდულს ბროკერთან</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md63"></a>
+<h2><a class="anchor" id="autotoc_md71"></a>
 esp_err_t mqtt_module_publish(const char *topic, const char *message);</h2>
 <ul>
 <li>აქვეყნებს შეტყობინებას მითითებულ topic-ზე</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md72"></a>
 esp_err_t mqtt_module_subscribe(const char *topic, mqtt_message_handler_t handler);</h2>
 <ul>
 <li>იწერს მითითებულ topic-ზე და ამუშავებს მიღებულ შეტყობინებებს handler-ით</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md66"></a>
+<h1><a class="anchor" id="autotoc_md74"></a>
 WiFi Module API</h1>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<h2><a class="anchor" id="autotoc_md75"></a>
 module_t *wifi_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი WiFi მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md68"></a>
+<h2><a class="anchor" id="autotoc_md76"></a>
 esp_err_t wifi_module_connect(const char *ssid, const char *password);</h2>
 <ul>
 <li>აკავშირებს WiFi მოდულს მითითებულ ქსელთან</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md69"></a>
+<h2><a class="anchor" id="autotoc_md77"></a>
 esp_err_t wifi_module_disconnect(void);</h2>
 <ul>
 <li>წყვეტს WiFi კავშირს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md71"></a>
+<h1><a class="anchor" id="autotoc_md79"></a>
 ESP-NOW Module API</h1>
-<h2><a class="anchor" id="autotoc_md72"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 module_t *espnow_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი ESP-NOW მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md73"></a>
+<h2><a class="anchor" id="autotoc_md81"></a>
 esp_err_t espnow_module_init(const cJSON *config);</h2>
 <ul>
 <li>ინიციალიზაციას უკეთებს ESP-NOW მოდულს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md74"></a>
+<h2><a class="anchor" id="autotoc_md82"></a>
 esp_err_t espnow_module_send(const uint8_t *peer_mac, const uint8_t *data, size_t data_length);</h2>
 <ul>
 <li>აგზავნის მონაცემებს მითითებულ peer MAC მისამართზე.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md83"></a>
 esp_err_t espnow_module_register_receive_handler(espnow_receive_handler_t handler);</h2>
 <ul>
 <li>რეგისტრირებს მიღებული მონაცემების დამმუშავებელ handler-ს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md77"></a>
+<h1><a class="anchor" id="autotoc_md85"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md86"></a>
 static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს MQTT მოდულის მიერ მიღებულ მოვლენებს</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md79"></a>
+<h2><a class="anchor" id="autotoc_md87"></a>
 static void wifi_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს WiFi მოდულის მიერ მიღებულ მოვლენებს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md81"></a>
+<h1><a class="anchor" id="autotoc_md89"></a>
 Configuration Parsing API</h1>
-<h2><a class="anchor" id="autotoc_md82"></a>
+<h2><a class="anchor" id="autotoc_md90"></a>
 static esp_err_t parse_mqtt_config(const cJSON *config, mqtt_private_data_t *mqtt_data);</h2>
 <ul>
 <li>კითხულობს და ამოწმებს MQTT მოდულის კონფიგურაციას</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md83"></a>
+<h2><a class="anchor" id="autotoc_md91"></a>
 static esp_err_t parse_wifi_config(const cJSON *config, wifi_private_data_t *wifi_data);</h2>
 <ul>
 <li>კითხულობს და ამოწმებს WiFi მოდულის კონფიგურაციას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md85"></a>
+<h1><a class="anchor" id="autotoc_md93"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md87"></a>
+<h1><a class="anchor" id="autotoc_md95"></a>
 მაგალითები</h1>
 <p><b>MQTT Publish:</b> </p><div class="fragment"><div class="line">mqtt_module_publish(<span class="stringliteral">&quot;/synapse/device/relay1/state&quot;</span>, <span class="stringliteral">&quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;</span>);</div>
 </div><!-- fragment --><p><b>WiFi Connect:</b> </p><div class="fragment"><div class="line">wifi_module_connect(<span class="stringliteral">&quot;MyWiFi&quot;</span>, <span class="stringliteral">&quot;password123&quot;</span>);</div>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔍_20ხელით_20მორგება_0',['🔍 ხელით მორგება',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md878',1,'🔍 ხელით მორგება'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1277',1,'🔍 ხელით მორგება']]]
+  ['🔄_20სრული_20workflow_0',['🔄 სრული Workflow',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md880',1,'']]],
+  ['🔄_20სრული_20workflow_20განახლებული_1',['🔄 სრული Workflow (განახლებული)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1279',1,'']]]
 ];

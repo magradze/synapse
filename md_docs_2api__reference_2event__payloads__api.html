@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2event__payloa
   <div class="headertitle"><div class="title">API რეფერენსი: Event Payloads (event_payloads.h)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md217"></a> </p>
-<h1><a class="anchor" id="autotoc_md218"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md225"></a> </p>
+<h1><a class="anchor" id="autotoc_md226"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს სტანდარტული მონაცემთა სტრუქტურებს (payloads), რომლებიც გამოიყენება Synapse Framework-ის Event Bus-ში, როგორც ივენთებთან ასოცირებული მონაცემები. ეს სტრუქტურები უზრუნველყოფენ ტიპიზირებულ და უსაფრთხო მონაცემთა გაცვლას მოდულებს შორის.</p>
-<h1><a class="anchor" id="autotoc_md219"></a>
+<h1><a class="anchor" id="autotoc_md227"></a>
 Payload სტრუქტურები</h1>
 <p>ქვემოთ მოცემულია ძირითადი payload სტრუქტურები და მათი დანიშნულება.</p>
-<h2><a class="anchor" id="autotoc_md220"></a>
+<h2><a class="anchor" id="autotoc_md228"></a>
 fmw_telemetry_payload_t</h2>
 <p>ეს სტრუქტურა გამოიყენება ტელემეტრიული მონაცემების ან ბრძანებების გადასაცემად.</p>
 <ul>
@@ -108,20 +108,20 @@ fmw_telemetry_payload_t</h2>
 <li><code>const char* json_data</code>: მონაცემები JSON ფორმატის სტრიქონში.</li>
 <li><code>void* user_context</code>: დამატებითი, მომხმარებლის მიერ განსაზღვრული კონტექსტი.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md221"></a>
+<h2><a class="anchor" id="autotoc_md229"></a>
 fmw_config_updated_payload_t</h2>
 <p>გამოიყენება <code>FRAMEWORK_EVENT_CONFIG_UPDATED</code> ივენთთან ერთად, რათა ამცნოს მოდულებს კონფიგურაციის ცვლილების შესახებ.</p>
 <ul>
 <li><code>const char* module_name</code>: იმ მოდულის სახელი, ვისი კონფიგურაციაც განახლდა.</li>
 <li><code>const cJSON* new_config</code>: cJSON ობიექტი, რომელიც შეიცავს ახალ კონფიგურაციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md222"></a>
+<h1><a class="anchor" id="autotoc_md230"></a>
 მეხსიერების მართვის ფუნქციები</h1>
 <p>Payload-ების დინამიური ბუნებიდან გამომდინარე, აუცილებელია მეხსიერების სწორი მართვა. <code>fmw_event_data_wrap</code> ფუნქციასთან ერთად გამოიყენება სპეციალური გასუფთავების ფუნქციები.</p>
-<h2><a class="anchor" id="autotoc_md223"></a>
+<h2><a class="anchor" id="autotoc_md231"></a>
 fmw_payload_common_free</h2>
 <p>ეს არის ზოგადი დანიშნულების ფუნქცია, რომელიც ათავისუფლებს <code>calloc</code>-ით გამოყოფილ მეხსიერებას payload-ისთვის. ის უნდა გამოიყენოთ მარტივი სტრუქტურებისთვის, რომლებიც არ შეიცავენ დამატებით დინამიურ მეხსიერებას.</p>
-<h2><a class="anchor" id="autotoc_md224"></a>
+<h2><a class="anchor" id="autotoc_md232"></a>
 fmw_telemetry_payload_free</h2>
 <p>ეს ფუნქცია სპეციალურად <code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code> სტრუქტურისთვისაა შექმნილი. ის ათავისუფლებს არა მხოლოდ თავად სტრუქტურას, არამედ მის შიგნით არსებულ <code>module_name</code> და <code>json_data</code> სტრიქონებსაც, რომლებიც დინამიურად არის გამოყოფილი.</p>
 <p><b>გამოყენების მაგალითი:</b></p>
@@ -134,7 +134,7 @@ fmw_telemetry_payload_free</h2>
 <div class="line"><span class="comment">// fmw_telemetry_payload_free ფუნქცია ავტომატურად გამოიძახება,</span></div>
 <div class="line"><span class="comment">// როდესაც მონაცემებს აღარავინ გამოიყენებს.</span></div>
 <div class="line">fmw_event_data_wrapper_t* wrapper;</div>
-<div class="line"><a class="code hl_function" href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a>(telemetry, fmw_telemetry_payload_free, &amp;wrapper);</div>
+<div class="line"><a class="code hl_function" href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a>(telemetry, <a class="code hl_function" href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a>, &amp;wrapper);</div>
 <div class="line"><a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(<span class="stringliteral">&quot;TELEMETRY_EVENT&quot;</span>, wrapper);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// wrapper-ის გათავისუფლება, როცა ის აღარ გვჭირდება</span></div>
@@ -142,9 +142,10 @@ fmw_telemetry_payload_free</h2>
 <div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
 <div class="ttc" id="aevent__data__wrapper_8c_html_a7df3595496d466d104e1629d5435e9f7"><div class="ttname"><a href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a></div><div class="ttdeci">esp_err_t fmw_event_data_wrap(const void *payload, void(*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)</div><div class="ttdoc">ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:21</div></div>
 <div class="ttc" id="aevent__data__wrapper_8c_html_a99c9f26cd90b553b84bf2a56db51a689"><div class="ttname"><a href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a></div><div class="ttdeci">esp_err_t fmw_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
-<div class="ttc" id="astructfmw__telemetry__payload__t_html"><div class="ttname"><a href="structfmw__telemetry__payload__t.html">fmw_telemetry_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.</div><div class="ttdef"><b>Definition</b> telemetry_events.h:30</div></div>
-<div class="ttc" id="astructfmw__telemetry__payload__t_html_a0dc2b3ff532053a87a736f8fc9ba2110"><div class="ttname"><a href="structfmw__telemetry__payload__t.html#a0dc2b3ff532053a87a736f8fc9ba2110">fmw_telemetry_payload_t::module_name</a></div><div class="ttdeci">char module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</div><div class="ttdoc">მოდულის სახელი, რომელიც აქვეყნებს მონაცემებს.</div><div class="ttdef"><b>Definition</b> telemetry_events.h:31</div></div>
-<div class="ttc" id="astructfmw__telemetry__payload__t_html_aeb33ae17a71357922d651f116a5eff92"><div class="ttname"><a href="structfmw__telemetry__payload__t.html#aeb33ae17a71357922d651f116a5eff92">fmw_telemetry_payload_t::json_data</a></div><div class="ttdeci">char * json_data</div><div class="ttdoc">მონაცემები JSON სტრიქონის სახით (დინამიურად გამოყოფილი).</div><div class="ttdef"><b>Definition</b> telemetry_events.h:32</div></div>
+<div class="ttc" id="aevent__payloads_8h_html_abf1197131be8a1f26057673d01917cbd"><div class="ttname"><a href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a></div><div class="ttdeci">void fmw_telemetry_payload_free(void *data)</div><div class="ttdoc">ათავისუფლებს ტელემეტრიის პეილოდს.</div><div class="ttdef"><b>Definition</b> telemetry_events.c:26</div></div>
+<div class="ttc" id="astructfmw__telemetry__payload__t_html"><div class="ttname"><a href="structfmw__telemetry__payload__t.html">fmw_telemetry_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.</div><div class="ttdef"><b>Definition</b> event_payloads.h:30</div></div>
+<div class="ttc" id="astructfmw__telemetry__payload__t_html_a0dc2b3ff532053a87a736f8fc9ba2110"><div class="ttname"><a href="structfmw__telemetry__payload__t.html#a0dc2b3ff532053a87a736f8fc9ba2110">fmw_telemetry_payload_t::module_name</a></div><div class="ttdeci">char module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</div><div class="ttdoc">მოდულის სახელი, რომელიც აქვეყნებს მონაცემებს.</div><div class="ttdef"><b>Definition</b> event_payloads.h:31</div></div>
+<div class="ttc" id="astructfmw__telemetry__payload__t_html_aeb33ae17a71357922d651f116a5eff92"><div class="ttname"><a href="structfmw__telemetry__payload__t.html#aeb33ae17a71357922d651f116a5eff92">fmw_telemetry_payload_t::json_data</a></div><div class="ttdeci">char * json_data</div><div class="ttdoc">მონაცემები JSON სტრიქონის სახით (დინამიურად გამოყოფილი).</div><div class="ttdef"><b>Definition</b> event_payloads.h:32</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

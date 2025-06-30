@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['system_5fget_5fsystem_5finfo_0',['system_get_system_info',['../system__manager_8h.html#a620b4e69cf4f9e69692f3a5e8bb39f0d',1,'system_manager.h']]]
+  ['oled_5fdisplay_5fcreate_0',['oled_display_create',['../oled__display_8h.html#a6832fbdda1b314619422393df5e52508',1,'oled_display_create(const cJSON *config):&#160;oled_display.c'],['../oled__display_8c.html#a6832fbdda1b314619422393df5e52508',1,'oled_display_create(const cJSON *config):&#160;oled_display.c']]]
 ];

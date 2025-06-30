@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📡_20wifi_20მოდული_3a_0',['📡 wifi მოდული:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md862',1,'📡 WiFi მოდული:'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1261',1,'📡 WiFi მოდული:']]]
+  ['📋_20რა_20არის_20create_5fmodule_20py_0',['📋 რა არის create_module py',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md863',1,'📋 რა არის create_module.py?'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1262',1,'📋 რა არის create_module.py?']]]
 ];

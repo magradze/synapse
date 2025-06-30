@@ -7,5 +7,6 @@ var searchData=
   ['resource_20manager_20api_20reference_4',['Synapse Resource Manager API Reference',['../md_docs_2api__reference_2resource__manager__api.html',1,'']]],
   ['resource_20usage_20guide_5',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
   ['rest_20api_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20rest_20api_6',['REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)',['../md_docs_2integration_2integration__rest.html',1,'']]],
-  ['review_20guidelines_7',['Synapse Review Guidelines',['../md_docs_2contributing_2review__guidelines.html',1,'']]]
+  ['review_20guidelines_7',['Synapse Review Guidelines',['../md_docs_2contributing_2review__guidelines.html',1,'']]],
+  ['rgb_5fled_5findicator_20tt_8',['მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]]
 ];

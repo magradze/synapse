@@ -6,5 +6,6 @@ var searchData=
   ['time_20sync_20module_20api_20reference_3',['Synapse Time Sync Module API Reference',['../md_docs_2api__reference_2time__sync__api.html',1,'']]],
   ['trade_20offs_4',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],
   ['troubleshooting_20faq_5',['ხშირად დასმული კითხვები (Troubleshooting FAQ)',['../md_docs_2troubleshooting_2faq.html',1,'']]],
-  ['tt_20check_5fconventions_20py_20tt_6',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]]
+  ['tt_20check_5fconventions_20py_20tt_6',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
+  ['tt_20rgb_5fled_5findicator_20tt_7',['მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]]
 ];

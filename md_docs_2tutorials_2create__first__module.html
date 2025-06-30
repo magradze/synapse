@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1526"></a> </p>
-<h1><a class="anchor" id="autotoc_md1527"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1521"></a> </p>
+<h1><a class="anchor" id="autotoc_md1522"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი მოდული Synapse ESP Framework-ში naming, structure და communication კონვენციების დაცვით.</p>
-<h1><a class="anchor" id="autotoc_md1528"></a>
+<h1><a class="anchor" id="autotoc_md1523"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li>განსაზღვრეთ, რა ფუნქციონალი გჭირდებათ (მაგ: ახალი სენსორი, აქტუატორი, კომუნიკაცია)</li>
 <li>აირჩიეთ შესაბამისი კატეგორია (მაგ: sensors, actuators, communications)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1529"></a>
+<h1><a class="anchor" id="autotoc_md1524"></a>
 2. საქაღალდის და ფაილების შექმნა</h1>
 <ul>
 <li>შექმენით ახალი საქაღალდე: <code>components/modules/{category}/{new_module}/</code></li>
@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1530"></a>
+<h1><a class="anchor" id="autotoc_md1525"></a>
 3. Header და Source ფაილების შაბლონები</h1>
 <p>**Header (<code>include/{new_module}.h</code>):**</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#ifndef {MODULE_NAME}_H</span></div>
@@ -276,14 +276,14 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="astructmodule__t_html_aab517ed6d3ea95d081a3c5c93b59529d"><div class="ttname"><a href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">module_t::state_mutex</a></div><div class="ttdeci">SemaphoreHandle_t state_mutex</div><div class="ttdoc">mutex მოდულის მდგომარეობის დაცვისთვის.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
 <div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:149</div></div>
 <div class="ttc" id="astructmodule__t_html_afb5f2d3d957c8717f54cd8668e4cab5e"><div class="ttname"><a href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">module_t::name</a></div><div class="ttdeci">char name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</div><div class="ttdoc">მოდულის უნიკალური სახელი (instance_name).</div><div class="ttdef"><b>Definition</b> base_module.h:134</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1531"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1526"></a>
 4. Naming და Structure კონვენციების გამოყენება</h1>
 <ul>
 <li>გამოიყენეთ <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a></li>
 <li>დაიცავით <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
 <li>ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიური და კონტექსტური</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1532"></a>
+<h1><a class="anchor" id="autotoc_md1527"></a>
 5. მოდულის რეგისტრაცია და ჩართვა</h1>
 <ul>
 <li><p class="startli">დაამატეთ მოდული <code>system_config.json</code>-ში:</p>
@@ -298,14 +298,14 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div><!-- fragment --></li>
 <li>ჩართეთ მოდული Kconfig-ში</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1533"></a>
+<h1><a class="anchor" id="autotoc_md1528"></a>
 6. ტესტირება და ლოგირება</h1>
 <ul>
 <li>გამოიყენეთ ESP-IDF-ის build და flash ბრძანებები</li>
 <li>დააკვირდით ლოგებს (ESP_LOGI, ESP_LOGE და სხვ.)</li>
 <li>დარწმუნდით, რომ ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგში ჩანს</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1534"></a>
+<h1><a class="anchor" id="autotoc_md1529"></a>
 7. დამატებითი რესურსები</h1>
 <ul>
 <li><a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>

@@ -25,7 +25,7 @@
 #include "event_bus.h"
 #include "logging.h"
 #include "event_data_wrapper.h"
-#include "telemetry_events.h" // ვივარაუდოთ, რომ fmw_telemetry_payload_t აქ არის
+#include "event_payloads.h" // ვივარაუდოთ, რომ fmw_telemetry_payload_t აქ არის
 
 /** @brief კომპონენტის ტეგი ESP-IDF ლოგირების სისტემისთვის */
 DEFINE_COMPONENT_TAG("LOGGER_MODULE");

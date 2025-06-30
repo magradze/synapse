@@ -9,7 +9,7 @@
  *          ზოგადი `fmw_payload_common_free` ფუნქციით.
  */
 
-#include "telemetry_events.h" // ამ ფაილის შესაბამისი ჰედერი
+#include "event_payloads.h" // ამ ფაილის შესაბამისი ჰედერი
 #include <stdlib.h>         // free() ფუნქციისთვის
 
 /**

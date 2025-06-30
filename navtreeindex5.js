@@ -249,5 +249,5 @@ var NAVTREEINDEX5 =
 "structlogger__private__data__t.html":[111,0,15],
 "structmodule__factory__map__t.html":[111,0,16],
 "structmodule__t.html":[111,0,17],
-"structmodule__t.html#a0717201e28769f3eb4487ae43eeb14ad":[111,0,17,11]
+"structmodule__t.html#a0717201e28769f3eb4487ae43eeb14ad":[111,0,17,12]
 };

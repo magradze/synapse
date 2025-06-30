@@ -8,6 +8,7 @@ var structmodule__t =
     [ "get_status", "structmodule__t.html#ad91ac1dc0334cbe050b7d3babcf6c639", null ],
     [ "handle_event", "structmodule__t.html#ad61ef7d88cab888c19653f8ea0a608e9", null ],
     [ "init", "structmodule__t.html#a9988cea19291825ba1c3f381b7ccd920", null ],
+    [ "init_level", "structmodule__t.html#ae50465ce0627de2f517d79199fd276c7", null ],
     [ "name", "structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e", null ],
     [ "private_data", "structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196", null ],
     [ "reconfigure", "structmodule__t.html#a68e5d4c7041e43135876d4f0b4e39ea7", null ],

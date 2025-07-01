@@ -101,6 +101,7 @@ static const event_to_command_map_t event_map[] = {
     {"WIFI_CREDENTIALS_NOT_FOUND", {LED_MODE_PULSE, 255, 162, 0, 3000, false}}, // ყვითელი (Provisioning)
     {"WIFI_EVENT_CONNECTED", {LED_MODE_BLINK, 0, 255, 0, 300, false}},          // მწვანე ციმციმი
     {"WIFI_EVENT_DISCONNECTED", {LED_MODE_STATIC, 255, 0, 0, 0, false}},        // წითელი
+    {"SYSTEM_HEALTH_ALERT", {LED_MODE_BLINK, 255, 0, 0, 150, false}},
     // მომავალში აქ დაემატება სხვა ივენთები...
 };
 static const size_t event_map_size = sizeof(event_map) / sizeof(event_map[0]);
@@ -232,6 +233,7 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     fmw_event_bus_subscribe("WIFI_CREDENTIALS_NOT_FOUND", self); // ამას wifi_manager აქვეყნებს
     fmw_event_bus_subscribe("WIFI_EVENT_DISCONNECTED", self);    // ამას wifi_manager აქვეყნებს
     fmw_event_bus_subscribe("WIFI_EVENT_CONNECTED", self);       // ამას wifi_manager აქვეყნებს
+    fmw_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);        // ამას health_monitor აქვეყნებს
 
     // სერვისის რეგისტრაცია (უცვლელია)
     fmw_service_register(self->name, FMW_SERVICE_TYPE_GENERIC_API, &rgb_led_service_api);
@@ -385,6 +387,7 @@ static void rgb_led_indicator_deinit(module_t *self)
     fmw_event_bus_unsubscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
     fmw_event_bus_unsubscribe("WIFI_EVENT_DISCONNECTED", self);
     fmw_event_bus_unsubscribe("WIFI_EVENT_CONNECTED", self);
+    fmw_event_bus_unsubscribe("SYSTEM_HEALTH_ALERT", self);
 
     fmw_service_unregister(self->name);
     global_rgb_led_instance = NULL;

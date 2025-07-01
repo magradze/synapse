@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['wifi_5fmanager_2ec_0',['wifi_manager.c',['../wifi__manager_8c.html',1,'']]],
-  ['wifi_5fmanager_2eh_1',['wifi_manager.h',['../wifi__manager_8h.html',1,'']]]
+  ['telemetry_5fevents_2ec_0',['telemetry_events.c',['../telemetry__events_8c.html',1,'']]],
+  ['test_5fmodule_2ec_1',['test_module.c',['../test__module_8c.html',1,'']]],
+  ['test_5fmodule_2eh_2',['test_module.h',['../test__module_8h.html',1,'']]]
 ];

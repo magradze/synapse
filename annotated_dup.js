@@ -2,6 +2,7 @@ var annotated_dup =
 [
     [ "ble_provisioning_config_t", "structble__provisioning__config__t.html", "structble__provisioning__config__t" ],
     [ "ble_provisioning_private_data_t", "structble__provisioning__private__data__t.html", null ],
+    [ "custom_check_t", "structcustom__check__t.html", null ],
     [ "event_data_wrapper_t", "structevent__data__wrapper__t.html", "structevent__data__wrapper__t" ],
     [ "event_message_t", "structevent__message__t.html", "structevent__message__t" ],
     [ "event_subscriber_t", "structevent__subscriber__t.html", null ],
@@ -12,6 +13,9 @@ var annotated_dup =
     [ "fmw_health_pong_payload_t", "structfmw__health__pong__payload__t.html", "structfmw__health__pong__payload__t" ],
     [ "fmw_module_control_payload_t", "structfmw__module__control__payload__t.html", "structfmw__module__control__payload__t" ],
     [ "fmw_telemetry_payload_t", "structfmw__telemetry__payload__t.html", "structfmw__telemetry__payload__t" ],
+    [ "health_api_t", "structhealth__api__t.html", "structhealth__api__t" ],
+    [ "health_monitor_private_data_t", "structhealth__monitor__private__data__t.html", null ],
+    [ "health_thresholds_t", "structhealth__thresholds__t.html", null ],
     [ "led_blinker_config_t", "structled__blinker__config__t.html", "structled__blinker__config__t" ],
     [ "led_blinker_module_t", "structled__blinker__module__t.html", "structled__blinker__module__t" ],
     [ "led_command_t", "structled__command__t.html", null ],

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['oled_5fdisplay_5fcreate_0',['oled_display_create',['../oled__display_8h.html#a6832fbdda1b314619422393df5e52508',1,'oled_display_create(const cJSON *config):&#160;oled_display.c'],['../oled__display_8c.html#a6832fbdda1b314619422393df5e52508',1,'oled_display_create(const cJSON *config):&#160;oled_display.c']]]
+  ['led_5fblinker_5fcreate_0',['led_blinker_create',['../led__blinker_8h.html#a58464148167e157567a7abd4cddeccea',1,'led_blinker_create(const cJSON *config):&#160;led_blinker.c'],['../led__blinker_8c.html#a58464148167e157567a7abd4cddeccea',1,'led_blinker_create(const cJSON *config):&#160;led_blinker.c']]],
+  ['logger_5fmodule_5fcreate_1',['logger_module_create',['../logger__module_8h.html#a43e3a3a59f4f51311e997fcd358871da',1,'logger_module_create(const cJSON *config):&#160;logger_module.c'],['../logger__module_8c.html#a43e3a3a59f4f51311e997fcd358871da',1,'logger_module_create(const cJSON *config):&#160;logger_module.c']]]
 ];

@@ -17,5 +17,6 @@ var searchData=
   ['მოდულის_20სტრუქტურის_20წესები_14',['მოდულის სტრუქტურის წესები',['../md_docs_2convention_2module__structure.html',1,'']]],
   ['მოდულის_20შექმნა_20create_20your_20first_20module_15',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
   ['მოდული_20tt_20rgb_5fled_5findicator_20tt_16',['მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]],
-  ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_17',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]
+  ['მოდული_3a_20health_20monitor_17',['მოდული: Health Monitor',['../md_components_2modules_2system_2health__monitor_2README.html',1,'']]],
+  ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_18',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]
 ];

@@ -93,37 +93,37 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2coding__doxygen__
   <div class="headertitle"><div class="title">9. Doxygen კომენტარების სტანდარტი (v1.0)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md679"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md687"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <br  />
  <b>ავტორი:</b> Synapse ESP Framework Team</p>
-<h1><a class="anchor" id="autotoc_md680"></a>
+<h1><a class="anchor" id="autotoc_md688"></a>
 1. შესავალი</h1>
 <p>ეს დოკუმენტი განსაზღვრავს <b>ერთიან, სავალდებულო სტანდარტს</b> კოდის დოკუმენტირებისთვის Doxygen სტილის კომენტარების გამოყენებით. ამ სტანდარტის მიზანია კოდის წაკითხვადობის გაუმჯობესება, API-ს ავტომატური დოკუმენტაციის გენერაცია და გუნდის წევრებს შორის ერთიანი სტილის დამკვიდრება.</p>
 <p><b>ამ წესის დაცვა არ არის რეკომენდაცია - ეს არის პროექტის უმკაცრესი მოთხოვნა. ნებისმიერი კოდი, რომელიც არ შეესაბამება ამ სტანდარტს, ჩაითვლება დაუსრულებლად.</b></p>
-<h1><a class="anchor" id="autotoc_md681"></a>
+<h1><a class="anchor" id="autotoc_md689"></a>
 2. ფაილის სათაურის (Header) კომენტარი</h1>
 <p>ყველა <code>.h</code> და <code>.c</code> ფაილი უნდა იწყებოდეს სტანდარტული Doxygen სათაურით.</p>
-<h2><a class="anchor" id="autotoc_md682"></a>
+<h2><a class="anchor" id="autotoc_md690"></a>
 2.1. სტრუქტურა</h2>
 <div class="fragment"><div class="line"> </div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md683"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md691"></a>
 2.2. მაგალითი (&lt;tt&gt;i2c_bus_module.h&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"> </div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md684"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md692"></a>
 3. ფუნქციის კომენტარი</h1>
 <p>ყველა public ფუნქცია (განსაკუთრებით <code>.h</code> ფაილებში დეკლარირებული) და ყველა რთული private ფუნქცია უნდა იყოს დოკუმენტირებული.</p>
-<h2><a class="anchor" id="autotoc_md685"></a>
+<h2><a class="anchor" id="autotoc_md693"></a>
 3.1. სტრუქტურა</h2>
 <div class="fragment"><div class="line"> </div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md686"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md694"></a>
 3.2. მაგალითი (&lt;tt&gt;service_locator.h&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name, <span class="keyword">const</span> <span class="keywordtype">char</span> *service_type, <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_api_handle);</div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_ac224eef59c2b5a418e8d19f89d895ba1"><div class="ttname"><a href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a></div><div class="ttdeci">esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle)</div><div class="ttdoc">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.</div><div class="ttdef"><b>Definition</b> service_locator.c:85</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md687"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md695"></a>
 4. სტრუქტურების და ტიპების კომენტარები</h1>
 <p>ყველა public სტრუქტურა, enum და type definition უნდა იყოს დოკუმენტირებული.</p>
-<h2><a class="anchor" id="autotoc_md688"></a>
+<h2><a class="anchor" id="autotoc_md696"></a>
 4.1. სტრუქტურის მაგალითი</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>i2c_bus_handle_t</div>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2coding__doxygen__
 <div class="line">    <span class="keywordtype">void</span> *module_private_data; </div>
 <div class="line">} i2c_bus_handle_t;</div>
 </div><!-- fragment --><p><b>ყურადღება:</b> სტრუქტურის შიდა ველების კომენტარები იწერება <code>/**&lt; @brief ... */</code> ფორმატით, იმავე ხაზზე.</p>
-<h1><a class="anchor" id="autotoc_md689"></a>
+<h1><a class="anchor" id="autotoc_md697"></a>
 5. Doxygen ტეგების გამოყენების წესები</h1>
 <ul>
 <li><code>@brief</code>: ყოველთვის უნდა იყოს პირველი ტეგი და უნდა იყოს მოკლე.</li>

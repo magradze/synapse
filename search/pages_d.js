@@ -10,6 +10,7 @@ var searchData=
   ['module_20design_20checklist_7',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
   ['module_20extension_20feature_20addition_8',['მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension &amp; Feature Addition)',['../md_docs_2tutorials_2module__extension.html',1,'']]],
   ['modules_9',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
-  ['monitor_20module_20api_20reference_10',['Synapse Health Monitor Module API Reference',['../md_docs_2api__reference_2health__monitor__api.html',1,'']]],
-  ['mqtt_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20mqtt_11',['MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)',['../md_docs_2integration_2integration__mqtt.html',1,'']]]
+  ['monitor_10',['მოდული: Health Monitor',['../md_components_2modules_2system_2health__monitor_2README.html',1,'']]],
+  ['monitor_20module_20api_20reference_11',['Synapse Health Monitor Module API Reference',['../md_docs_2api__reference_2health__monitor__api.html',1,'']]],
+  ['mqtt_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20mqtt_12',['MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)',['../md_docs_2integration_2integration__mqtt.html',1,'']]]
 ];

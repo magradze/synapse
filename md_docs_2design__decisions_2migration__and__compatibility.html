@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2migration_
   <div class="headertitle"><div class="title">მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1010"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1012"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1018"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1020"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში მიგრაციისა და თავსებადობის არქიტექტურულ გადაწყვეტილებებს, არჩეულ სტრატეგიებს, მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1014"></a>
+<h1><a class="anchor" id="autotoc_md1022"></a>
 კონტექსტი</h1>
 <p>ფრეიმვორქის განვითარებასთან ერთად საჭიროა ძველი ვერსიებიდან ახალზე უსაფრთხო და პროგნოზირებადი მიგრაცია, ასევე სხვადასხვა მოდულისა და სისტემის თავსებადობის უზრუნველყოფა. აუცილებელია მინიმალური ცვლილებებით არსებული პროექტების განახლება და backwards compatibility-ის შენარჩუნება.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1016"></a>
+<h1><a class="anchor" id="autotoc_md1024"></a>
 არჩეული სტრატეგიები</h1>
 <ul>
 <li><b>სქემის ვერსიონირება:</b> ყველა კონფიგურაციის ფაილს (system_config.json, module.json) აქვს ვერსიის ველი (version)</li>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2migration_
 <li><b>დოკუმენტირებული ცვლილებები:</b> ყველა breaking change და მიგრაციის ნაბიჯი აღწერილია დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1018"></a>
+<h1><a class="anchor" id="autotoc_md1026"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li>სქემის ვერსიონირება ამარტივებს ძველი და ახალი კონფიგურაციების მართვას</li>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2migration_
 <li>ალტერნატივა (breaking changes ყოველ ვერსიაზე) უარყოფილია backwards compatibility-ის არქონის გამო</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1020"></a>
+<h1><a class="anchor" id="autotoc_md1028"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>შესაძლებელია ძველი პროექტების უსაფრთხო განახლება ახალ ვერსიაზე</li>
@@ -131,9 +131,9 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2migration_
 <li>Deprecated API-ების შენარჩუნება ზრდის კოდის მოცულობას გარკვეული პერიოდის განმავლობაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1022"></a>
+<h1><a class="anchor" id="autotoc_md1030"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1023"></a>
+<h2><a class="anchor" id="autotoc_md1031"></a>
 სქემის ვერსიონირება</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;firmware&quot;: {</div>
@@ -142,15 +142,15 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2migration_
 <div class="line">    },</div>
 <div class="line">    ...</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1024"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1032"></a>
 Deprecated API-ის მონიშვნა</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line">esp_err_t old_sensor_module_enable(<span class="keywordtype">void</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1025"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1033"></a>
 მიგრაციის სკრიპტის გამოყენება</h2>
 <div class="fragment"><div class="line">python tools/migrate_config.py --from 1.0.0 --to 2.0.0 system_config.json</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1027"></a>
+<h1><a class="anchor" id="autotoc_md1035"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>breaking changes დოკუმენტაციის და მიგრაციის ინსტრუქციის გარეშე</li>
@@ -164,7 +164,7 @@ Deprecated API-ის მონიშვნა</h2>
 <li>აღწერეთ ყველა ცვლილება და მიგრაციის ნაბიჯი დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1029"></a>
+<h1><a class="anchor" id="autotoc_md1037"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>

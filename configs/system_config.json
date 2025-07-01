@@ -52,6 +52,18 @@
           "blue_pin": 5,
           "is_common_anode": true
       }
+    },
+    {
+      "type": "health_monitor",
+      "enabled": true,
+      "config": {
+          "instance_name": "health_monitor",
+          "check_interval_sec": 60,
+          "thresholds": {
+              "min_free_heap_kb": 40,
+              "task_stack_watermark_percent": 90
+          }
+      }
     }
   ]
 }

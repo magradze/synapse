@@ -19,19 +19,6 @@ extern "C" {
 #endif
 
 /**
- * @brief rgb_led_indicator მოდულის Service API.
- * @details ეს სტრუქტურა გადაეცემა Service Locator-ს და საშუალებას აძლევს
- *          სხვა მოდულებს, მართონ LED ინდიკატორი.
- */
-typedef struct {
-    esp_err_t (*set_color)(uint8_t r, uint8_t g, uint8_t b);
-    esp_err_t (*turn_off)();
-    esp_err_t (*start_blink)(uint8_t r, uint8_t g, uint8_t b, uint32_t interval_ms);
-    esp_err_t (*start_pulse)(uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms);
-    esp_err_t (*release_control)();
-} rgb_led_api_t;
-
-/**
  * @brief ქმნის ახალ rgb_led_indicator მოდულის ინსტანციას
  * 
  * @param[in] config მოდულის კონფიგურაცია (JSON ობიექტი) ან NULL default-ებისთვის

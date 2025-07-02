@@ -1,0 +1,21 @@
+{
+    "name": "ota_update_manager",
+    "version": "1.0.0",
+    "description": "Handles secure Over-The-Air firmware updates",
+    "author": "Synapse Framework Team",
+    "init_function": "ota_update_manager_create",
+    "init_level": 80,
+    "dependencies": [],
+    "type": "system",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_OTA_UPDATE_MANAGER_ENABLED",
+    "runtime_commands": {
+        "start": "ota_update_manager_start",
+        "stop": "ota_update_manager_disable",
+        "enable": "ota_update_manager_enable",
+        "disable": "ota_update_manager_disable",
+        "reconfigure": "ota_update_manager_reconfigure",
+        "status": "ota_update_manager_get_status",
+        "handle_event": "ota_update_manager_handle_event"
+    }
+}

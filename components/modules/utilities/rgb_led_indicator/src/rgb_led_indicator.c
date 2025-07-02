@@ -9,6 +9,7 @@
 
 // --- Includes ---
 #include "rgb_led_indicator.h"
+#include "rgb_led_interface.h"
 #include "base_module.h"
 #include "event_bus.h"
 #include "event_data_wrapper.h"
@@ -236,7 +237,7 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     fmw_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);        // ამას health_monitor აქვეყნებს
 
     // სერვისის რეგისტრაცია (უცვლელია)
-    fmw_service_register(self->name, FMW_SERVICE_TYPE_GENERIC_API, &rgb_led_service_api);
+    fmw_service_register(self->name, FMW_SERVICE_TYPE_RGB_LED_API, &rgb_led_service_api);
 
     // LED-ის საწყისი გამორთვა
     set_led_color(private_data, 0, 0, 0);

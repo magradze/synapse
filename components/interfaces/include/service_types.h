@@ -85,6 +85,9 @@ extern "C"
     FMW_SERVICE_TYPE_GENERIC_API,
     FMW_SERVICE_TYPE_CUSTOM_API,
 
+    // ---RGB Led Indicator Services ---
+    FMW_SERVICE_TYPE_RGB_LED_API,
+
     // ეს ელემენტი ყოველთვის უნდა იყოს ბოლო, ვალიდაციისთვის
     FMW_SERVICE_TYPE_MAX
   } fmw_service_type_t;

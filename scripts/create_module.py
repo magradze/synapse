@@ -107,7 +107,7 @@ endif()
         f.write(cmake_content)
     
     # 3. Kconfig
-    kconfig_content = f'''menu "{module_name.title()} Module Configuration"
+    kconfig_content = f'''menu "{module_name.title()}"
 
     config MODULE_{module_name.upper()}_ENABLED
         bool "Enable {module_name.title()} Module"

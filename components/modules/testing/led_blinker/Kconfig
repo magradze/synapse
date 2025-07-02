@@ -1,7 +1,7 @@
-menu "Led_Blinker Module Configuration"
+menu "Led Blinker"
 
     config MODULE_LED_BLINKER_ENABLED
-        bool "Enable Led_Blinker Module"
+        bool "Enable Led Blinker Module"
         default y
         help
             Enables the led_blinker module for GPIO2-ზე LED-ის მარტივი ციმციმის მოდული.

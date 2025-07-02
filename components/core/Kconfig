@@ -187,35 +187,3 @@
                 SPI რესურსების მაქსიმალური რაოდენობა.
 
     endmenu
-
-    menu "SSD1306 Display Module"
-
-        config FMW_SSD1306_QUEUE_LENGTH
-            int "SSD1306 ბრძანებების რიგის სიგრძე"
-            default 5
-            help
-                SSD1306 მოდულის შიდა ბრძანებების რიგის ზომა.
-
-        config FMW_SSD1306_LINE_BUFFER_SIZE
-            int "SSD1306 ხაზის ბუფერის ზომა"
-            default 21 # 20 სიმბოლო + null-terminator
-            help
-                მაქსიმალური სიგრძე (სიმბოლოებში) ტექსტისა, რომელიც შეიძლება გამოჩნდეს ერთ ხაზზე.
-
-    endmenu
-
-    menu "LCD1602 Display Module"
-
-        config FMW_LCD1602_QUEUE_LENGTH
-            int "LCD1602 ბრძანებების რიგის სიგრძე"
-            default 10
-            help
-                LCD1602 მოდულის შიდა ბრძანებების რიგის ზომა.
-
-        config FMW_LCD1602_LINE_BUFFER_SIZE
-            int "LCD1602 ხაზის ბუფერის ზომა"
-            default 17 # 16 სიმბოლო + null-terminator
-            help
-                მაქსიმალური სიგრძე (სიმბოლოებში) ტექსტისა, რომელიც შეიძლება გამოჩნდეს ერთ ხაზზე.
-
-    endmenu

@@ -1,0 +1,41 @@
+menu "Watchdog Manager Module Configuration"
+
+    config MODULE_WATCHDOG_MANAGER_ENABLED
+        bool "Enable Watchdog Manager Module"
+        default y
+        help
+            Enables the intelligent Watchdog Manager module.
+
+    if MODULE_WATCHDOG_MANAGER_ENABLED
+
+        config WATCHDOG_MANAGER_DEFAULT_INSTANCE_NAME
+            string "Default Instance Name"
+            default "main_watchdog"
+
+        config WATCHDOG_MANAGER_INSTANCE_NAME_MAX_LEN
+            int "Maximum Instance Name Length"
+            default 32
+
+        config WATCHDOG_MANAGER_TASK_STACK_SIZE
+            int "Task Stack Size"
+            default 3072
+            help
+                Stack size for the watchdog background task.
+
+        config WATCHDOG_MANAGER_TASK_PRIORITY
+            int "Task Priority"
+            default 20
+            range 1 24
+            help
+                High priority to ensure the watchdog task runs reliably.
+
+        config WATCHDOG_MANAGER_MAX_HEARTBEAT_MODULES
+            int "Max Monitored Modules"
+            default 10
+            range 1 20
+            help
+                Maximum number of modules that can register for heartbeat monitoring.
+
+    endif # MODULE_WATCHDOG_MANAGER_ENABLED
+
+endmenu

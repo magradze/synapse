@@ -10,7 +10,7 @@ import json
 import argparse
 from pathlib import Path
 
-def create_module_structure(module_name, module_type, description, author="Giorgi Magradze"):
+def create_module_structure(module_name, module_title, module_type, description, author="Giorgi Magradze"):
     """
     ქმნის მოდულის სრულ სტრუქტურას
     """
@@ -49,7 +49,7 @@ def create_module_structure(module_name, module_type, description, author="Giorg
         json.dump(module_json, f, indent=4, ensure_ascii=False)
     
     # 2. CMakeLists.txt
-    cmake_content = f'''# {module_name.title()} Module CMake Configuration
+    cmake_content = f'''# {module_title} Module CMake Configuration
 # Component for {description}
 # Author: {author}
 # Version: 1.0.0
@@ -64,7 +64,7 @@ if(DEFINED CONFIG_MODULE_{module_name.upper()}_ENABLED)
     # CONFIG ცვლადი არსებობს - ვამოწმებთ მნიშვნელობას
     if(CONFIG_MODULE_{module_name.upper()}_ENABLED)
         # მოდული ჩართულია - სრული რეგისტრაცია
-        message(STATUS "{module_name.title()} Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
+        message(STATUS "{module_title} Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
         idf_component_register(
             SRCS "src/{module_name}.c"
             INCLUDE_DIRS "include"
@@ -76,7 +76,7 @@ if(DEFINED CONFIG_MODULE_{module_name.upper()}_ENABLED)
         )
     else()
         # მოდული გამორთულია - ცარიელი placeholder
-        message(STATUS "{module_name.title()} Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
+        message(STATUS "{module_title} Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
         
         # შევქმნათ ცარიელი source ფაილი რათა CMake არ ჩავარდეს
         set(EMPTY_SOURCE_CONTENT "// {module_name} module disabled by Kconfig\\n// This is an empty placeholder to prevent CMake errors\\n")
@@ -90,7 +90,7 @@ if(DEFINED CONFIG_MODULE_{module_name.upper()}_ENABLED)
     endif()
 else()
     # CONFIG ცვლადი ჯერ არ არსებობს (configure ეტაპი) - default რეგისტრაცია
-    message(STATUS "{module_name.title()} Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
+    message(STATUS "{module_title} Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
     idf_component_register(
         SRCS "src/{module_name}.c"
         INCLUDE_DIRS "include"
@@ -107,10 +107,10 @@ endif()
         f.write(cmake_content)
     
     # 3. Kconfig
-    kconfig_content = f'''menu "{module_name.title()}"
+    kconfig_content = f'''menu "{module_title}"
 
     config MODULE_{module_name.upper()}_ENABLED
-        bool "Enable {module_name.title()} Module"
+        bool "Enable {module_title} Module"
         default y
         help
             Enables the {module_name} module for {description}.
@@ -145,7 +145,7 @@ endmenu
  * @brief {description}
  * @author {author}
  * @version 1.0.0
- * @details {module_name.title()} მოდული რომელიც აღზევს {description} ფუნქციონალურობას.
+ * @details {module_title} მოდული რომელიც აღზევს {description} ფუნქციონალურობას.
  *          მოდული მუშაობს Synapse Framework-ის base_module interface-ის საფუძველზე.
  */
 
@@ -161,7 +161,7 @@ extern "C" {{
 #endif
 
 /**
- * @brief {module_name.title()} მოდულის კონფიგურაციის სტრუქტურა
+ * @brief {module_title} მოდულის კონფიგურაციის სტრუქტურა
  * @details შეიცავს მოდულის ყველა კონფიგურაციის პარამეტრს
  */
 typedef struct {{
@@ -197,7 +197,7 @@ module_t *{module_name}_create(const cJSON *config);
  * @brief {description}
  * @author {author}
  * @version 1.0.0
- * @details {module_name.title()} მოდულის იმპლემენტაცია Synapse Framework-ისთვის.
+ * @details {module_title} მოდულის იმპლემენტაცია Synapse Framework-ისთვის.
  *          აღზევს ყველა საჭირო base_module interface ფუნქციას.
  */
 
@@ -214,7 +214,7 @@ module_t *{module_name}_create(const cJSON *config);
 DEFINE_COMPONENT_TAG("{module_name.upper()}");
 
 /**
- * @brief {module_name.title()} მოდულის private მონაცემების სტრუქტურა
+ * @brief {module_title} მოდულის private მონაცემების სტრუქტურა
  * @details შეიცავს მოდულის შიდა მდგომარეობას და კონფიგურაციას
  */
 typedef struct {{
@@ -294,7 +294,7 @@ module_t *{module_name}_create(const cJSON *config)
     module->base.reconfigure = {module_name}_reconfigure;
     module->base.get_status = {module_name}_get_status;
     
-    ESP_LOGI(TAG, "{module_name.title()} module created: '%s'", instance_name);
+    ESP_LOGI(TAG, "{module_title} module created: '%s'", instance_name);
     return module;
 }}
 
@@ -312,7 +312,7 @@ static esp_err_t {module_name}_init(module_t *self)
     // esp_err_t ret = fmw_event_bus_subscribe("some_event", self);
     
     self->status = MODULE_STATUS_INITIALIZED;
-    ESP_LOGI(TAG, "{module_name.title()} module initialized successfully");
+    ESP_LOGI(TAG, "{module_title} module initialized successfully");
     return ESP_OK;
 }}
 
@@ -341,7 +341,7 @@ static esp_err_t {module_name}_start(module_t *self)
     self->status = MODULE_STATUS_RUNNING;
     private_data->enabled = true;
     
-    ESP_LOGI(TAG, "{module_name.title()} module started successfully");
+    ESP_LOGI(TAG, "{module_title} module started successfully");
     return ESP_OK;
 }}
 
@@ -364,7 +364,7 @@ static esp_err_t {module_name}_enable(module_t *self)
     
     private_data->enabled = true;
     self->status = MODULE_STATUS_RUNNING;
-    ESP_LOGI(TAG, "{module_name.title()} module enabled");
+    ESP_LOGI(TAG, "{module_title} module enabled");
     
     return ESP_OK;
 }}
@@ -388,7 +388,7 @@ static esp_err_t {module_name}_disable(module_t *self)
     
     private_data->enabled = false;
     self->status = MODULE_STATUS_DISABLED;
-    ESP_LOGI(TAG, "{module_name.title()} module disabled");
+    ESP_LOGI(TAG, "{module_title} module disabled");
     
     return ESP_OK;
 }}
@@ -409,7 +409,7 @@ static esp_err_t {module_name}_reconfigure(module_t *self, const cJSON *new_conf
     }}
     self->current_config = cJSON_Duplicate(new_config, true);
     
-    ESP_LOGI(TAG, "{module_name.title()} module reconfigured");
+    ESP_LOGI(TAG, "{module_title} module reconfigured");
     return ESP_OK;
 }}
 
@@ -499,17 +499,31 @@ static void {module_name}_deinit(module_t *self)
 
 def main():
     parser = argparse.ArgumentParser(description="Create new Synapse Framework module")
-    parser.add_argument("module_name", help="Module name (e.g., wifi_manager)")
+    # არგუმენტის სახელი შევცვალოთ, რომ უფრო გასაგები იყოს
+    parser.add_argument("module_title", help="Module title (e.g., 'OTA Update Manager')")
     parser.add_argument("--type", default="utilities", help="Module type (utilities, sensors, displays, etc.)")
     parser.add_argument("--description", help="Module description")
     parser.add_argument("--author", default="Synapse Framework Team", help="Author name")
     
     args = parser.parse_args()
     
-    if not args.description:
-        args.description = f"{args.module_name.replace('_', ' ').title()} functionality"
+    # 1. ვქმნით კოდისთვის უსაფრთხო იდენტიფიკატორს
+    # "OTA Update Manager" -> "ota_update_manager"
+    module_identifier = args.module_title.lower().replace(' ', '_')
     
-    create_module_structure(args.module_name, args.type, args.description, args.author)
+    # 2. აღწერას ვქმნით სათაურის მიხედვით, თუ ის არაა მოცემული
+    if not args.description:
+        args.description = f"{args.module_title.title()} functionality"
+
+    # 3. მთავარ ფუნქციას გადავცემთ ორივე ვერსიას: იდენტიფიკატორს და სათაურს
+    # ყურადღება მიაქციეთ, რომ პირველი არგუმენტი გახდა module_identifier
+    create_module_structure(
+        module_name=module_identifier, 
+        module_title=args.module_title.title(), # გადავცეთ Title Case ვერსია
+        module_type=args.type, 
+        description=args.description, 
+        author=args.author
+    )
 
 if __name__ == "__main__":
     main()

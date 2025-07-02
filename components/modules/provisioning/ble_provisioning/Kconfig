@@ -1,4 +1,4 @@
-menu "BLE_Provisioning Module Configuration"
+menu "BLE Provisioning"
 
     config MODULE_BLE_PROVISIONING_ENABLED
         bool "Enable BLE Provisioning module"

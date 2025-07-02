@@ -1,4 +1,4 @@
-menu "Rgb Led Indicator Module Configuration"
+menu "Rgb Led Indicator"
 
     config MODULE_RGB_LED_INDICATOR_ENABLED
         bool "Enable Rgb Led Indicator Module"

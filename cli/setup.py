@@ -8,6 +8,9 @@ setup(
     install_requires=[
         'click',
         'pyyaml',
+        'rich',
+        'pyfiglet',
+        'rich_click',
     ],
     entry_points={
         'console_scripts': [

@@ -64,6 +64,24 @@
               "task_stack_watermark_percent": 90
           }
       }
+    },
+    {
+      "type": "ota_update_manager",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_ota_manager",
+          "server_cert_pem_start": "-----BEGIN CERTIFICATE-----\n...",
+          "pre_check_min_heap_kb": 80
+      }
+    },
+    {
+      "type": "watchdog_manager",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_watchdog",
+          "check_interval_ms": 2000,
+          "heartbeat_timeout_ms": 5000
+      }
     }
   ]
 }

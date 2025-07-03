@@ -1,4 +1,4 @@
-menu "Logger Module Configuration"
+menu "Logger"
 
     config MODULE_LOGGER_ENABLED
         bool "Enable Logger Module"

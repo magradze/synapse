@@ -1,7 +1,7 @@
-menu "Rgb_Led_Indicator Module Configuration"
+menu "Rgb Led Indicator"
 
     config MODULE_RGB_LED_INDICATOR_ENABLED
-        bool "Enable Rgb_Led_Indicator Module"
+        bool "Enable Rgb Led Indicator Module"
         default y
         help
             Enables the rgb_led_indicator module for System LED indicator.

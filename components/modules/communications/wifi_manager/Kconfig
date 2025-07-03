@@ -1,7 +1,7 @@
-menu "Wifi_Manager Module Configuration"
+menu "Wifi Manager"
 
     config MODULE_WIFI_MANAGER_ENABLED
-        bool "Enable Wifi_Manager Module"
+        bool "Enable Wifi Manager Module"
         default y
         help
             Enables the wifi_manager module for WiFi connection management.

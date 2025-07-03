@@ -1,4 +1,4 @@
-menu "Health Monitor Module Configuration"
+menu "Health Monitor"
 
     config MODULE_HEALTH_MONITOR_ENABLED
         bool "Enable Health Monitor Module"

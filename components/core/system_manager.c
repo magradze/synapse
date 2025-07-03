@@ -21,6 +21,7 @@
 // #include "event_payloads.h" // წაშლილია, რადგან ფაილი არ არსებობს
 #include "freertos/FreeRTOS.h" // დაკარგული ჰედერები
 #include "freertos/task.h"
+#include "system_manager_interface.h"
 
 DEFINE_COMPONENT_TAG("SYSTEM_MANAGER");
 
@@ -30,6 +31,19 @@ DEFINE_COMPONENT_TAG("SYSTEM_MANAGER");
  */
 static const module_t **g_modules = NULL;
 static uint8_t g_module_count = 0;
+
+// --- Forward declarations for API implementation ---
+static esp_err_t system_manager_get_all_modules_api(const module_t ***modules, uint8_t *count);
+static esp_err_t system_manager_reboot_api(void);
+
+/**
+ * @internal
+ * @brief The static instance of the System Manager's service API.
+ */
+static system_manager_api_t system_manager_service_api = {
+    .get_all_modules = system_manager_get_all_modules_api,
+    .reboot_system = system_manager_reboot_api,
+};
 
 esp_err_t fmw_system_init(void)
 {
@@ -53,6 +67,15 @@ esp_err_t fmw_system_init(void)
     err = fmw_event_bus_init();
     if (err != ESP_OK) { ESP_LOGE(TAG, "Failed to initialize Event Bus: %s", esp_err_to_name(err)); return err; }
     ESP_LOGI(TAG, "Event Bus initialized.");
+
+    // Register the System Manager's own service API
+    err = fmw_service_register("system_manager", FMW_SERVICE_TYPE_SYSTEM_API, &system_manager_service_api);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register System Manager service: %s", esp_err_to_name(err));
+        return err;
+    }
+    ESP_LOGI(TAG, "System Manager service registered.");
 
     err = fmw_module_registry_init();
     if (err != ESP_OK) { ESP_LOGE(TAG, "Failed to initialize Module Registry: %s", esp_err_to_name(err)); return err; }
@@ -171,4 +194,30 @@ const cJSON* fmw_module_get_config(const char *module_name)
     if (!module) return NULL;
     
     return module->current_config;
+}
+
+// =========================================================================
+//                      Service API Implementation
+// =========================================================================
+
+/**
+ * @internal
+ * @brief Service API function to get the list of all modules.
+ */
+static esp_err_t system_manager_get_all_modules_api(const module_t ***modules, uint8_t *count)
+{
+    // This simply wraps the module registry's internal function
+    return fmw_module_registry_get_all(modules, count);
+}
+
+/**
+ * @internal
+ * @brief Service API function to reboot the system.
+ */
+static esp_err_t system_manager_reboot_api(void)
+{
+    ESP_LOGW(TAG, "Reboot requested via API. Rebooting in 100ms...");
+    vTaskDelay(pdMS_TO_TICKS(100));
+    esp_restart();
+    return ESP_OK; // This line will not be reached
 }

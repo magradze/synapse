@@ -1,6 +1,6 @@
 {
   "firmware": {
-    "version": "2.1.1",
+    "version": "2.6.0",
     "description": "Implemented Service Locator pattern for I2C bus decoupling."
   },
   "global_config": {
@@ -29,20 +29,6 @@
       }
     },
     {
-      "type": "led_blinker",
-      "enabled": false,
-      "config": {
-        "instance_name": "main_led_blinker"
-      }
-    },
-    {
-      "type": "oled_display",
-      "enabled": true,
-      "config": {
-        "instance_name": "main_oled_display"
-      }
-    },
-        {
       "type": "rgb_led_indicator",
       "enabled": true,
       "config": {
@@ -81,6 +67,15 @@
           "instance_name": "main_watchdog",
           "check_interval_ms": 2000,
           "heartbeat_timeout_ms": 5000
+      }
+    },
+    {
+      "type": "command_router",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_cmd_router",
+        "enable_serial_shell": true,
+        "serial_shell_prompt": "SYNAPSE> "
       }
     }
   ]

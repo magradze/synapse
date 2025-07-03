@@ -1,0 +1,1 @@
+# This file makes the 'synapse_cli' directory a Python package.

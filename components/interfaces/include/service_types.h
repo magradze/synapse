@@ -58,6 +58,7 @@ extern "C"
     FMW_SERVICE_TYPE_MOTOR_API,
 
     // --- System Services ---
+    FMW_SERVICE_TYPE_SYSTEM_API,
     FMW_SERVICE_TYPE_LOGGER_API,
     FMW_SERVICE_TYPE_CONFIG_API,
     FMW_SERVICE_TYPE_TIMER_API,
@@ -87,6 +88,9 @@ extern "C"
 
     // ---RGB Led Indicator Services ---
     FMW_SERVICE_TYPE_RGB_LED_API,
+
+    // --- Command Router API ---
+    FMW_SERVICE_TYPE_CMD_ROUTER_API,
 
     // ეს ელემენტი ყოველთვის უნდა იყოს ბოლო, ვალიდაციისთვის
     FMW_SERVICE_TYPE_MAX
@@ -195,6 +199,14 @@ extern "C"
       return "battery_api";
     case FMW_SERVICE_TYPE_CHARGER_API:
       return "charger_api";
+
+    // RGB Led Indicator Services
+    case FMW_SERVICE_TYPE_RGB_LED_API:
+      return "rgb_led_api";
+
+    // Command Router API
+    case FMW_SERVICE_TYPE_CMD_ROUTER_API:
+      return "cmd_router_api";
 
     // Generic Services
     case FMW_SERVICE_TYPE_GENERIC_API:

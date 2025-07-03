@@ -1,8 +1,12 @@
 import click
-import subprocess
 import serial
 import time
 import os
+from rich.console import Console
+from rich.panel import Panel
+from .. import utils
+
+console = Console()
 
 # --- Helper Function ---
 def find_serial_port():
@@ -19,29 +23,19 @@ def device_group():
     """Commands for interacting with a connected device."""
     pass
 
-# --- Commands ---
 @device_group.command(name="shell")
 @click.option("--port", "-p", default=None, help="Serial port for the shell.")
 def shell_command(port):
     """Opens an interactive shell to the device."""
-    port = port or find_serial_port()
-    if not port:
-        click.secho("Could not find device serial port. Please specify with -p.", fg="red")
+    port_to_use = port or find_serial_port()
+    if not port_to_use:
+        console.print("[bold red]Error:[/bold red] Could not find device serial port. Please specify with -p.")
         return
         
-    click.echo(f"Starting interactive shell on {port}... (Press Ctrl+] to exit)")
+    console.print(f"🔌 Starting interactive shell on [bold cyan]{port_to_use}[/bold cyan]... (Press Ctrl+] to exit)")
     
-    # We use idf.py monitor for the interactive shell experience
-    idf_path = os.getenv("IDF_PATH")
-    if not idf_path:
-        click.secho("IDF_PATH environment variable is not set.", fg="red")
-        return
-        
-    command = f"source {idf_path}/export.sh && idf.py -p {port} monitor"
-    try:
-        subprocess.run(command, shell=True, check=True, executable="/bin/bash")
-    except subprocess.CalledProcessError:
-        click.secho("Monitor command failed.", fg="red")
+    # ვიყენებთ ცენტრალიზებულ ფუნქციას
+    utils.run_idf_command(["-p", port_to_use, "monitor"], shell_mode=True)
 
 
 @device_group.command(name="cmd")
@@ -49,32 +43,35 @@ def shell_command(port):
 @click.option("--port", "-p", default=None, help="Serial port to send the command.")
 def cmd_command(command_string, port):
     """Sends a single command to the device and prints the output."""
-    port = port or find_serial_port()
-    if not port:
-        click.secho("Could not find device serial port. Please specify with -p.", fg="red")
+    port_to_use = port or find_serial_port()
+    if not port_to_use:
+        console.print("[bold red]Error:[/bold red] Could not find device serial port. Please specify with -p.")
         return
 
     if not command_string:
-        click.secho("Error: No command provided.", fg="red")
+        console.print("[bold red]Error:[/bold red] No command provided.")
         return
 
     full_command = " ".join(command_string)
     
     try:
-        with serial.Serial(port, 115200, timeout=1) as ser:
-            click.echo(f"Sending to {port}: '{full_command}'")
+        with serial.Serial(port_to_use, 115200, timeout=1) as ser:
+            console.print(f"➡️  Sending to [cyan]{port_to_use}[/cyan]: '[yellow]{full_command}[/yellow]'")
             ser.write(f"{full_command}\r\n".encode('utf-8'))
             
-            # Give the device a moment to respond
             time.sleep(0.5) 
             
-            response = ser.read_all().decode('utf-8', errors='ignore')
-            click.echo("--- Device Response ---")
-            click.echo(response)
-            click.echo("-----------------------")
+            response = ser.read_all().decode('utf-8', errors='ignore').strip()
+            
+            console.print(Panel(
+                response if response else "[dim]No response from device.[/dim]",
+                title="[green]Device Response[/green]",
+                border_style="blue",
+                expand=False
+            ))
 
     except serial.SerialException as e:
-        click.secho(f"Serial error: {e}", fg="red")
+        console.print(f"❌ [bold red]Serial error:[/bold red] {e}")
 
 @device_group.command(name="health")
 @click.option("--port", "-p", default=None, help="Serial port.")

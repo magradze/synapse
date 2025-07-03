@@ -1,6 +1,11 @@
 import click
 import os
 import subprocess
+from rich.console import Console
+from rich.panel import Panel
+from rich.progress import track
+
+console = Console()
 
 @click.group(name="module")
 def module_group():
@@ -15,15 +20,14 @@ def module_create(module_name, type, desc):
     """
     Creates a new module skeleton using create_module.py.
     """
-    click.echo(f"Creating new module: {module_name}")
-    
+    console.print(f"🛠️ Creating new module: [bold cyan]{module_name}[/bold cyan]")
+
     # ვიპოვოთ create_module.py სკრიპტის გზა
     script_path = os.path.join(os.getcwd(), "scripts", "create_module.py")
     if not os.path.exists(script_path):
-        click.secho("Error: create_module.py not found in 'scripts' directory!", fg="red")
+        console.print("❌ [bold red]Error:[/bold red] create_module.py not found in 'scripts' directory!")
         return
 
-    # გამოვიძახოთ ჩვენი არსებული Python სკრიპტი
     command = [
         "python3",
         script_path,
@@ -31,10 +35,14 @@ def module_create(module_name, type, desc):
         "--type", type,
         "--description", desc
     ]
-    
-    try:
-        subprocess.run(command, check=True)
-        click.secho(f"Module '{module_name}' created successfully!", fg="green")
-        click.echo("Don't forget to run 'idf.py reconfigure' to let the build system find it.")
-    except subprocess.CalledProcessError as e:
-        click.secho(f"Failed to create module. Error: {e}", fg="red")
+
+    # დააყენე progress bar
+    for _ in track(range(1), description="🚀 [green]Running module generator...[/green]"):
+        try:
+            subprocess.run(command, check=True)
+        except subprocess.CalledProcessError as e:
+            console.print(f"❌ [bold red]Failed to create module:[/bold red] {e}")
+            return
+
+    console.print(f"✅ [bold green]Module '{module_name}' created successfully![/bold green]")
+    console.print("[yellow]💡 Tip:[/yellow] Don't forget to run 'idf.py reconfigure' to let the build system find it.")

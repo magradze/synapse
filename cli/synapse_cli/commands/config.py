@@ -2,6 +2,11 @@ import click
 import json
 import os
 from glob import glob
+from rich.console import Console
+from rich.table import Table
+from rich.progress import Progress
+
+console = Console()
 
 # --- Helper Functions ---
 
@@ -25,7 +30,7 @@ def load_all_module_schemas(project_root):
                 if 'name' in schema:
                     schemas[schema['name']] = schema
         except (json.JSONDecodeError, IOError) as e:
-            click.secho(f"Warning: Could not parse {path}: {e}", fg='yellow')
+            console.print(f"Warning: Could not parse {path}: {e}", fg='yellow')
     return schemas
 
 # --- Command Group ---
@@ -45,65 +50,79 @@ def validate_command(file):
     """
     project_root = find_project_root()
     if not project_root:
-        click.secho("Error: Could not find project root. Run this command from within a Synapse project.", fg="red")
+        console.print("[bold red]Error:[/bold red] Could not find project root. Run this from within a Synapse project.")
         return
 
     config_path = os.path.join(project_root, file)
     if not os.path.exists(config_path):
-        click.secho(f"Error: Config file not found at {config_path}", fg="red")
+        console.print(f"[bold red]Error:[/bold red] Config file not found at [yellow]{config_path}[/yellow]")
         return
 
-    click.echo(f"Validating '{config_path}'...")
+    console.print(f"🔎 Validating [cyan]'{config_path}'[/cyan]...")
 
-    # 1. Load all available module schemas
-    module_schemas = load_all_module_schemas(project_root)
-    if not module_schemas:
-        click.secho("Warning: No module schemas found. Cannot perform detailed validation.", fg='yellow')
-        return
+    with Progress() as progress:
+        task1 = progress.add_task("[green]Loading schemas...", total=1)
+        module_schemas = load_all_module_schemas(project_root)
+        progress.update(task1, advance=1)
+
+        if not module_schemas:
+            console.print("[yellow]Warning:[/yellow] No module schemas found. Cannot perform detailed validation.")
+            return
+        
+        console.print(f"Found [bold green]{len(module_schemas)}[/bold green] module schemas to validate against.")
+
+        task2 = progress.add_task("[green]Parsing config...", total=1)
+        try:
+            with open(config_path, 'r') as f:
+                system_config = json.load(f)
+        except (json.JSONDecodeError, IOError) as e:
+            console.print(f"[bold red]Error:[/bold red] Failed to parse {config_path}: {e}")
+            return
+        progress.update(task2, advance=1)
     
-    click.echo(f"Found {len(module_schemas)} module schemas to validate against.")
+    # ცხრილის შექმნა შედეგებისთვის
+    table = Table(title="Configuration Validation Results", show_lines=True)
+    table.add_column("Module Instance", style="cyan", no_wrap=True)
+    table.add_column("Module Type", style="magenta")
+    table.add_column("Status", justify="center")
+    table.add_column("Details", style="yellow")
 
-    # 2. Load the system config
-    try:
-        with open(config_path, 'r') as f:
-            system_config = json.load(f)
-    except (json.JSONDecodeError, IOError) as e:
-        click.secho(f"Error: Failed to parse {config_path}: {e}", fg="red")
-        return
-
-    # 3. Perform validation
     errors = 0
-    warnings = 0
-
     if 'modules' not in system_config or not isinstance(system_config['modules'], list):
-        click.secho("Error: 'modules' key is missing or is not an array.", fg="red")
+        console.print("[bold red]Fatal Error:[/bold red] 'modules' key is missing or is not an array in config file.")
         return
 
     for i, module_config in enumerate(system_config['modules']):
         module_type = module_config.get('type')
-        instance_name = module_config.get('config', {}).get('instance_name', f"module_{i}")
+        instance_name = module_config.get('config', {}).get('instance_name', f"Unnamed Module #{i+1}")
 
-        # Check if module type exists
         if not module_type:
-            click.secho(f"  [ERROR] Module '{instance_name}': 'type' field is missing.", fg='red')
+            table.add_row(instance_name, "[dim]N/A[/dim]", "❌ [red]FAIL[/red]", "Field 'type' is missing.")
             errors += 1
             continue
 
         if module_type not in module_schemas:
-            click.secho(f"  [ERROR] Module '{instance_name}': Unknown module type '{module_type}'.", fg='red')
+            table.add_row(instance_name, f"'{module_type}'", "❌ [red]FAIL[/red]", "Unknown module type.")
             errors += 1
             continue
         
-        # Check for required config parameters (if defined in module.json)
         schema = module_schemas[module_type]
+        missing_params = []
         if 'required_config' in schema:
             for required_param in schema['required_config']:
                 if required_param not in module_config.get('config', {}):
-                    click.secho(f"  [ERROR] Module '{instance_name}' (type: {module_type}): Missing required config parameter '{required_param}'.", fg='red')
-                    errors += 1
+                    missing_params.append(f"'{required_param}'")
+        
+        if missing_params:
+            errors += len(missing_params)
+            details = f"Missing required config parameter(s): {', '.join(missing_params)}"
+            table.add_row(instance_name, module_type, "❌ [red]FAIL[/red]", details)
+        else:
+            table.add_row(instance_name, module_type, "✅ [green]PASS[/green]", "[dim]All required parameters are present.[/dim]")
 
-    click.echo("-" * 30)
+    console.print(table)
+    
     if errors == 0:
-        click.secho("Validation successful! No errors found.", fg='green')
+        console.print("\n[bold green]✅ Validation successful! No errors found.[/bold green]")
     else:
-        click.secho(f"Validation failed with {errors} error(s).", fg='red')
+        console.print(f"\n[bold red]❌ Validation failed with {errors} error(s).[/bold red]")

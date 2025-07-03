@@ -59,6 +59,25 @@ typedef struct
     char module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; /**< @brief სამიზნე მოდულის სახელი. */
 } fmw_module_control_payload_t;
 
+/**
+ * @struct fmw_command_payload_t
+ * @brief Defines the data structure for the FMW_EVENT_EXECUTE_COMMAND_STRING event.
+ */
+
+typedef struct
+{
+    /**
+     * @brief The full command string to be executed (e.g., "relay main_light on").
+     */
+    char command_string[CONFIG_COMMAND_ROUTER_MAX_CMD_LEN];
+
+    /**
+     * @brief A string identifying the source of the command (e.g., "mqtt", "serial", "http").
+     */
+    char source[16];
+
+} fmw_command_payload_t;
+
 // =========================================================================
 //                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები
 // =========================================================================

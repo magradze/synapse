@@ -1,11 +1,15 @@
 <map id="components/core/include/service_locator.h" name="components/core/include/service_locator.h">
-<area shape="rect" id="Node000001" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="319,5,504,45"/>
+<area shape="rect" id="Node000001" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="533,5,719,45"/>
 <area shape="rect" id="Node000002" href="$service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="5,101,191,141"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="336,52,162,103,161,98,334,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,43,370,66,204,96,171,103,170,98,203,91,369,61,519,38"/>
 <area shape="rect" id="Node000003" href="$system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="215,101,402,141"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="382,57,331,103,328,99,379,53"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="550,52,374,103,372,98,548,47"/>
 <area shape="rect" id="Node000004" href="$health__monitor_8c.html" title="Monitors system health metrics like heap, CPU, and tasks." alt="" coords="427,93,604,148"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="444,52,488,91,484,95,441,56"/>
-<area shape="rect" id="Node000005" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="628,93,819,148"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="488,47,636,91,635,96,487,52"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="595,56,548,95,545,91,592,52"/>
+<area shape="rect" id="Node000005" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="629,93,845,148"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="660,52,707,91,704,95,657,56"/>
+<area shape="rect" id="Node000006" href="$watchdog__manager_8c.html" title="Intelligent watchdog timer management with heartbeat monitoring." alt="" coords="869,93,1076,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="710,46,876,91,874,96,708,51"/>
+<area shape="rect" id="Node000007" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="1100,93,1291,148"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="733,36,901,59,1089,91,1100,93,1099,98,1088,96,900,64,732,42"/>
 </map>

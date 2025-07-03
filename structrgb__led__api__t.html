@@ -97,34 +97,146 @@ $(document).ready(function(){initNavTree('structrgb__led__api__t.html',''); init
 </div><!--header-->
 <div class="contents">
 
-<p>rgb_led_indicator მოდულის Service API.  
+<p>RGB LED Indicator Service API structure.  
  <a href="structrgb__led__api__t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="rgb__led__indicator_8h_source.html">rgb_led_indicator.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="rgb__led__interface_8h_source.html">rgb_led_interface.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afaf3de1102a25d5460d2428b9018a48e" id="r_afaf3de1102a25d5460d2428b9018a48e"><td class="memItemLeft" align="right" valign="top"><a id="afaf3de1102a25d5460d2428b9018a48e" name="afaf3de1102a25d5460d2428b9018a48e"></a>
-esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>set_color</b> )(uint8_t r, uint8_t g, uint8_t b)</td></tr>
+<tr class="memitem:afaf3de1102a25d5460d2428b9018a48e" id="r_afaf3de1102a25d5460d2428b9018a48e"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrgb__led__api__t.html#afaf3de1102a25d5460d2428b9018a48e">set_color</a> )(uint8_t r, uint8_t g, uint8_t b)</td></tr>
+<tr class="memdesc:afaf3de1102a25d5460d2428b9018a48e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a static color on the LED.  <br /></td></tr>
 <tr class="separator:afaf3de1102a25d5460d2428b9018a48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c59bb26340c411b27803a742e42649e" id="r_a3c59bb26340c411b27803a742e42649e"><td class="memItemLeft" align="right" valign="top"><a id="a3c59bb26340c411b27803a742e42649e" name="a3c59bb26340c411b27803a742e42649e"></a>
-esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>turn_off</b> )()</td></tr>
-<tr class="separator:a3c59bb26340c411b27803a742e42649e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e88408572b2a6d6bd8fe3d91fd70376" id="r_a6e88408572b2a6d6bd8fe3d91fd70376"><td class="memItemLeft" align="right" valign="top"><a id="a6e88408572b2a6d6bd8fe3d91fd70376" name="a6e88408572b2a6d6bd8fe3d91fd70376"></a>
-esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>start_blink</b> )(uint8_t r, uint8_t g, uint8_t b, uint32_t interval_ms)</td></tr>
+<tr class="memitem:a1e7bd763888a4afbe12354d27250ecd3" id="r_a1e7bd763888a4afbe12354d27250ecd3"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrgb__led__api__t.html#a1e7bd763888a4afbe12354d27250ecd3">turn_off</a> )(void)</td></tr>
+<tr class="memdesc:a1e7bd763888a4afbe12354d27250ecd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns the LED off.  <br /></td></tr>
+<tr class="separator:a1e7bd763888a4afbe12354d27250ecd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e88408572b2a6d6bd8fe3d91fd70376" id="r_a6e88408572b2a6d6bd8fe3d91fd70376"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrgb__led__api__t.html#a6e88408572b2a6d6bd8fe3d91fd70376">start_blink</a> )(uint8_t r, uint8_t g, uint8_t b, uint32_t interval_ms)</td></tr>
+<tr class="memdesc:a6e88408572b2a6d6bd8fe3d91fd70376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a blinking effect with a specified color and interval.  <br /></td></tr>
 <tr class="separator:a6e88408572b2a6d6bd8fe3d91fd70376"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2575b85a2ae0e83ef233c8d72cf434a5" id="r_a2575b85a2ae0e83ef233c8d72cf434a5"><td class="memItemLeft" align="right" valign="top"><a id="a2575b85a2ae0e83ef233c8d72cf434a5" name="a2575b85a2ae0e83ef233c8d72cf434a5"></a>
-esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>start_pulse</b> )(uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms)</td></tr>
+<tr class="memitem:a2575b85a2ae0e83ef233c8d72cf434a5" id="r_a2575b85a2ae0e83ef233c8d72cf434a5"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrgb__led__api__t.html#a2575b85a2ae0e83ef233c8d72cf434a5">start_pulse</a> )(uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms)</td></tr>
+<tr class="memdesc:a2575b85a2ae0e83ef233c8d72cf434a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a pulsing (breathing) effect with a specified color and period.  <br /></td></tr>
 <tr class="separator:a2575b85a2ae0e83ef233c8d72cf434a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c182919edf892a66036363ac7fc0445" id="r_a8c182919edf892a66036363ac7fc0445"><td class="memItemLeft" align="right" valign="top"><a id="a8c182919edf892a66036363ac7fc0445" name="a8c182919edf892a66036363ac7fc0445"></a>
-esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>release_control</b> )()</td></tr>
-<tr class="separator:a8c182919edf892a66036363ac7fc0445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51197765d41c0532713fa702fe463f88" id="r_a51197765d41c0532713fa702fe463f88"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrgb__led__api__t.html#a51197765d41c0532713fa702fe463f88">release_control</a> )(void)</td></tr>
+<tr class="memdesc:a51197765d41c0532713fa702fe463f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases manual control of the LED.  <br /></td></tr>
+<tr class="separator:a51197765d41c0532713fa702fe463f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>rgb_led_indicator მოდულის Service API. </p>
-<p>ეს სტრუქტურა გადაეცემა Service Locator-ს და საშუალებას აძლევს სხვა მოდულებს, მართონ LED ინდიკატორი. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>components/modules/utilities/rgb_led_indicator/include/<a class="el" href="rgb__led__indicator_8h_source.html">rgb_led_indicator.h</a></li>
+<div class="textblock"><p>RGB LED Indicator Service API structure. </p>
+<p>This is the "contract" that the rgb_led_indicator module implements and other modules (like ota_manager) consume. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a51197765d41c0532713fa702fe463f88" name="a51197765d41c0532713fa702fe463f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51197765d41c0532713fa702fe463f88">&#9670;&#160;</a></span>release_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* rgb_led_api_t::release_control) (void)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Releases manual control of the LED. </p>
+<p>Returns the LED to its automatic, event-driven state, where it reflects the overall system status (e.g., WiFi connection). </p><dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="afaf3de1102a25d5460d2428b9018a48e" name="afaf3de1102a25d5460d2428b9018a48e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaf3de1102a25d5460d2428b9018a48e">&#9670;&#160;</a></span>set_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* rgb_led_api_t::set_color) (uint8_t r, uint8_t g, uint8_t b)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets a static color on the LED. </p>
+<p>This action overrides any active effect (blink, pulse) and takes manual control over the LED. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Red component (0-255). </td></tr>
+    <tr><td class="paramname">g</td><td>Green component (0-255). </td></tr>
+    <tr><td class="paramname">b</td><td>Blue component (0-255). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="a6e88408572b2a6d6bd8fe3d91fd70376" name="a6e88408572b2a6d6bd8fe3d91fd70376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e88408572b2a6d6bd8fe3d91fd70376">&#9670;&#160;</a></span>start_blink</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* rgb_led_api_t::start_blink) (uint8_t r, uint8_t g, uint8_t b, uint32_t interval_ms)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts a blinking effect with a specified color and interval. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Red component (0-255). </td></tr>
+    <tr><td class="paramname">g</td><td>Green component (0-255). </td></tr>
+    <tr><td class="paramname">b</td><td>Blue component (0-255). </td></tr>
+    <tr><td class="paramname">interval_ms</td><td>The interval for one on/off cycle in milliseconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="a2575b85a2ae0e83ef233c8d72cf434a5" name="a2575b85a2ae0e83ef233c8d72cf434a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2575b85a2ae0e83ef233c8d72cf434a5">&#9670;&#160;</a></span>start_pulse</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* rgb_led_api_t::start_pulse) (uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts a pulsing (breathing) effect with a specified color and period. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Red component (0-255). </td></tr>
+    <tr><td class="paramname">g</td><td>Green component (0-255). </td></tr>
+    <tr><td class="paramname">b</td><td>Blue component (0-255). </td></tr>
+    <tr><td class="paramname">period_ms</td><td>The period for a full brightness cycle in milliseconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="a1e7bd763888a4afbe12354d27250ecd3" name="a1e7bd763888a4afbe12354d27250ecd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e7bd763888a4afbe12354d27250ecd3">&#9670;&#160;</a></span>turn_off</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* rgb_led_api_t::turn_off) (void)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Turns the LED off. </p>
+<p>Equivalent to <a class="el" href="structrgb__led__api__t.html#afaf3de1102a25d5460d2428b9018a48e" title="Sets a static color on the LED.">set_color(0, 0, 0)</a>. </p><dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>components/interfaces/include/<a class="el" href="rgb__led__interface_8h_source.html">rgb_led_interface.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

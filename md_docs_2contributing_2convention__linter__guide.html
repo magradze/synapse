@@ -93,41 +93,41 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2convention__lin
   <div class="headertitle"><div class="title">კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md593"></a> </p>
-<h1><a class="anchor" id="autotoc_md594"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md610"></a> </p>
+<h1><a class="anchor" id="autotoc_md611"></a>
 1. შესავალი</h1>
 <p>ეს დოკუმენტი აღწერს <code>check_conventions.py</code> სკრიპტის დანიშნულებას, გამოყენების წესებს და მის როლს Synapse Framework-ის კოდის ხარისხის ავტომატურ კონტროლში. ეს სკრიპტი წარმოადგენს პროექტის "კონსტიტუციის" – ჩვენი კონვენციების – ციფრულ მცველს.</p>
 <p>მისი მთავარი მიზანია, დაზოგოს დეველოპერებისა და მიმომხილველების (reviewers) დრო და უზრუნველყოს, რომ ყველა ცვლილება პროექტში ავტომატურად შეესაბამებოდეს დადგენილ სტანდარტებს.</p>
-<h1><a class="anchor" id="autotoc_md595"></a>
+<h1><a class="anchor" id="autotoc_md612"></a>
 2. რას ამოწმებს სკრიპტი?</h1>
 <p>სკრიპტი ავტომატურად ამოწმებს პროექტის <code>components/modules/</code> საქაღალდეში არსებულ ყველა მოდულს შემდეგი კრიტერიუმების მიხედვით:</p>
-<h3><a class="anchor" id="autotoc_md596"></a>
+<h3><a class="anchor" id="autotoc_md613"></a>
 ✅ &lt;strong&gt;სტრუქტურული მთლიანობა:&lt;/strong&gt;</h3>
 <ul>
 <li>ამოწმებს, რომ ყველა მოდულს აქვს სავალდებულო ფაილები: <code>CMakeLists.txt</code>, <code>module.json</code>, <code>README.md</code>.</li>
 <li>დარწმუნდება, რომ არსებობს <code>include/{module_name}.h</code> და <code>src/</code> საქაღალდე მინიმუმ ერთი <code>.c</code> ფაილით.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md597"></a>
+<h3><a class="anchor" id="autotoc_md614"></a>
 ✅ &lt;strong&gt;ლოგირების სტანდარტი:&lt;/strong&gt;</h3>
 <ul>
 <li>ამოწმებს, რომ ყველა <code>.c</code> ფაილში გამოყენებულია ლოგირების ტეგი <code><a class="el" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9" title="განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.">DEFINE_COMPONENT_TAG(...)</a></code>-ის მეშვეობით.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md598"></a>
+<h3><a class="anchor" id="autotoc_md615"></a>
 ✅ &lt;strong&gt;დოკუმენტაციის ხარისხი:&lt;/strong&gt;</h3>
 <ul>
 <li>ამოწმებს, რომ <code>.h</code> ფაილებში ყველა public (გარე გამოყენების) ფუნქციას აქვს Doxygen-ის სტილის (<code>/** ... */</code>) კომენტარი.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md599"></a>
+<h3><a class="anchor" id="autotoc_md616"></a>
 ✅ &lt;strong&gt;მოდულების იზოლაცია (ყველაზე მნიშვნელოვანი შემოწმება):&lt;/strong&gt;</h3>
 <ul>
 <li>კრძალავს ერთი მოდულიდან მეორის ჰედერ ფაილის პირდაპირ ჩართვას (<code>#include "another_module.h"</code>). ეს უზრუნველყოფს, რომ კომუნიკაცია მხოლოდ Service Locator-ით ან Event Bus-ით განხორციელდეს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md600"></a>
+<h1><a class="anchor" id="autotoc_md617"></a>
 3. როგორ გამოვიყენოთ ლოკალურად?</h1>
 <p>სანამ Pull Request-ს შექმნით, რეკომენდებულია, სკრიპტი ლოკალურად გაუშვათ, რათა დარწმუნდეთ, რომ თქვენი ცვლილებები კონვენციებს არ არღვევს.</p>
 <p>პროექტის მთავარი საქაღალდიდან შეასრულეთ შემდეგი ბრძანება:</p>
 <div class="fragment"><div class="line">python3 tools/check_conventions.py</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md601"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md618"></a>
 შედეგების ინტერპრეტაცია</h3>
 <ul>
 <li><p class="startli"><b>წარმატება:</b> თუ ყველაფერი რიგზეა, ტერმინალში გამოჩნდება მწვანე შეტყობინება:</p>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2convention__lin
 <div class="line">==================================================</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md602"></a>
+<h1><a class="anchor" id="autotoc_md619"></a>
 4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)</h1>
 <p>ეს სკრიპტი ინტეგრირებულია ჩვენს CI/CD პროცესში <code>.github/workflows/conventions-check.yml</code> ფაილის მეშვეობით.</p>
 <p><b>როგორ მუშაობს?</b></p>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('md_docs_2contributing_2convention__lin
 <li>თქვენ შეგიძლიათ დააჭიროთ "Details" ბმულს და ნახოთ ლოგი, სადაც დეტალურად იქნება აღწერილი ყველა პრობლემა.</li>
 </ol>
 <p><b>მნიშვნელოვანია:</b> Pull Request-ი ვერ გაერთიანდება (merge) მთავარ ტოტში, სანამ კონვენციების შემოწმება წარმატებით არ დასრულდება.</p>
-<h1><a class="anchor" id="autotoc_md603"></a>
+<h1><a class="anchor" id="autotoc_md620"></a>
 5. როგორ გამოვასწოროთ გავრცელებული შეცდომები?</h1>
 <p>თუ სკრიპტმა შეცდომა დააფიქსირა, მიჰყევით ტერმინალში გამოტანილ ინსტრუქციას:</p>
 <table class="markdownTable">

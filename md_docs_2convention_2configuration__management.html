@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
   <div class="headertitle"><div class="title">კონფიგურაციის მართვის წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md722"></a> </p>
-<h1><a class="anchor" id="autotoc_md723"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md739"></a> </p>
+<h1><a class="anchor" id="autotoc_md740"></a>
 ძირითადი პრინციპი</h1>
 <p><b>ყველა კონფიგურაციული პარამეტრი უნდა იყოს <code>system_config.json</code>-ში, არ უნდა იყოს hardcoded კოდში.</b></p>
-<h1><a class="anchor" id="autotoc_md724"></a>
+<h1><a class="anchor" id="autotoc_md741"></a>
 system_config.json სტრუქტურა</h1>
-<h2><a class="anchor" id="autotoc_md725"></a>
+<h2><a class="anchor" id="autotoc_md742"></a>
 სტანდარტული ფორმატი</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;firmware&quot;: {</div>
@@ -120,7 +120,7 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        }</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md726"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md743"></a>
 მაგალითი სრული კონფიგურაცია</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;firmware&quot;: {</div>
@@ -191,9 +191,9 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        }</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md727"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md744"></a>
 კონფიგურაციის ტიპები</h1>
-<h2><a class="anchor" id="autotoc_md728"></a>
+<h2><a class="anchor" id="autotoc_md745"></a>
 1. Hardware Configuration (Sensor Module)</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;dht22_module&quot;,</div>
@@ -205,7 +205,7 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        &quot;update_interval_sec&quot;: 30</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md729"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md746"></a>
 2. Display Configuration (SSD1306)</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;ssd1306_module&quot;,</div>
@@ -220,7 +220,7 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        &quot;init_text&quot;: &quot;MINDLAB&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md730"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md747"></a>
 3. LCD Display Configuration</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;lcd1602_module&quot;,</div>
@@ -237,7 +237,7 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        &quot;init_text_line2&quot;: &quot;Ready...&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md731"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md748"></a>
 4. Communication Configuration (MQTT)</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;mqtt_module&quot;,</div>
@@ -250,7 +250,7 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        &quot;base_topic&quot;: &quot;/mindlab/device&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md732"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md749"></a>
 5. I2C Bus Configuration</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;i2c_bus_module&quot;,</div>
@@ -263,7 +263,7 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        &quot;clk_speed_hz&quot;: 100000</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md733"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md750"></a>
 6. Relay Configuration</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;relay_module&quot;,</div>
@@ -274,9 +274,9 @@ system_config.json სტრუქტურა</h1>
 <div class="line">        &quot;active_low&quot;: true</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md734"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md751"></a>
 კონფიგურაციის Parsing</h1>
-<h2><a class="anchor" id="autotoc_md735"></a>
+<h2><a class="anchor" id="autotoc_md752"></a>
 Private Data Structure</h2>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line">    <span class="keywordtype">char</span> instance_name[32];</div>
@@ -293,7 +293,7 @@ Private Data Structure</h2>
 <div class="line">    <span class="keywordtype">bool</span> task_suspended;</div>
 <div class="line">    <span class="comment">// hardware handles...</span></div>
 <div class="line">} module_private_data_t;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md736"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md753"></a>
 Configuration Parsing Function</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t parse_module_config(<span class="keyword">const</span> cJSON *config, module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!config || !module_private_data) {</div>
@@ -339,9 +339,9 @@ Configuration Parsing Function</h2>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md737"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md754"></a>
 Default Values</h1>
-<h2><a class="anchor" id="autotoc_md738"></a>
+<h2><a class="anchor" id="autotoc_md755"></a>
 Constants Definition</h2>
 <div class="fragment"><div class="line"><span class="comment">// Default configuration values</span></div>
 <div class="line"><span class="preprocessor">#define DEFAULT_GPIO_PIN           4</span></div>
@@ -351,7 +351,7 @@ Constants Definition</h2>
 <div class="line"><span class="preprocessor">#define DEFAULT_INIT_TEXT          &quot;MindLab ESP32&quot;</span></div>
 <div class="line"><span class="preprocessor">#define DEFAULT_TEMPERATURE_OFFSET 0.0</span></div>
 <div class="line"><span class="preprocessor">#define DEFAULT_HUMIDITY_OFFSET    0.0</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md739"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md756"></a>
 Fallback Logic</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t apply_default_config(module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="comment">// Apply defaults if config parsing failed</span></div>
@@ -364,9 +364,9 @@ Fallback Logic</h2>
 <div class="line">    ESP_LOGW(TAG, <span class="stringliteral">&quot;Applied default configuration&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md740"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md757"></a>
 Runtime Configuration Changes</h1>
-<h2><a class="anchor" id="autotoc_md741"></a>
+<h2><a class="anchor" id="autotoc_md758"></a>
 Reconfiguration Support</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t module_reconfigure(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, <span class="keyword">const</span> cJSON *new_config) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module || !new_config) {</div>
@@ -394,9 +394,9 @@ Reconfiguration Support</h2>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md742"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md759"></a>
 Configuration Validation</h1>
-<h2><a class="anchor" id="autotoc_md743"></a>
+<h2><a class="anchor" id="autotoc_md760"></a>
 Input Validation</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t validate_module_config(<span class="keyword">const</span> module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="comment">// Validate GPIO pin</span></div>
@@ -419,9 +419,9 @@ Input Validation</h2>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md744"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md761"></a>
 Configuration Access Patterns</h1>
-<h2><a class="anchor" id="autotoc_md745"></a>
+<h2><a class="anchor" id="autotoc_md762"></a>
 Using Config Manager</h2>
 <div class="fragment"><div class="line"><span class="comment">// მოდულის კონფიგურაცია იღება modules მასივიდან type-ის მიხედვით</span></div>
 <div class="line"><span class="comment">// Config Manager ავტომატურად პოულობს შესაბამის მოდულს</span></div>
@@ -448,7 +448,7 @@ Using Config Manager</h2>
 <div class="line"><span class="keywordflow">if</span> (ret != ESP_OK) {</div>
 <div class="line">    strncpy(device_prefix, <span class="stringliteral">&quot;MINDLAB&quot;</span>, <span class="keyword">sizeof</span>(device_prefix) - 1);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md746"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md763"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არ გავაკეთოთ:</b></p>
 <div class="fragment"><div class="line"><span class="comment">// Hardcoded values in code</span></div>
@@ -464,9 +464,9 @@ Using Config Manager</h2>
 <div class="line">ssd1306_init(module_private_data-&gt;display_width, module_private_data-&gt;display_height);</div>
 <div class="line">gpio_set_level(module_private_data-&gt;gpio_pin, module_private_data-&gt;active_level);</div>
 <div class="line">mqtt_connect(module_private_data-&gt;broker_url, module_private_data-&gt;client_id);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md747"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md764"></a>
 Configuration Categories</h1>
-<h2><a class="anchor" id="autotoc_md748"></a>
+<h2><a class="anchor" id="autotoc_md765"></a>
 1. Hardware Parameters</h2>
 <ul>
 <li>GPIO pins</li>
@@ -474,7 +474,7 @@ Configuration Categories</h1>
 <li>SPI frequencies</li>
 <li>UART baud rates</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md749"></a>
+<h2><a class="anchor" id="autotoc_md766"></a>
 2. Timing Parameters</h2>
 <ul>
 <li>Task intervals</li>
@@ -482,7 +482,7 @@ Configuration Categories</h1>
 <li>Retry delays</li>
 <li>Watchdog periods</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md750"></a>
+<h2><a class="anchor" id="autotoc_md767"></a>
 3. Display Parameters</h2>
 <ul>
 <li>Screen dimensions</li>
@@ -490,7 +490,7 @@ Configuration Categories</h1>
 <li>Default text</li>
 <li>Brightness levels</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md751"></a>
+<h2><a class="anchor" id="autotoc_md768"></a>
 4. Network Parameters</h2>
 <ul>
 <li>MQTT broker URLs</li>
@@ -498,7 +498,7 @@ Configuration Categories</h1>
 <li>Connection timeouts</li>
 <li>QoS levels</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md752"></a>
+<h2><a class="anchor" id="autotoc_md769"></a>
 5. Sensor Parameters</h2>
 <ul>
 <li>Calibration offsets</li>
@@ -506,7 +506,7 @@ Configuration Categories</h1>
 <li>Sampling rates</li>
 <li>Threshold values</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md753"></a>
+<h1><a class="anchor" id="autotoc_md770"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>ყველაფერი</b> <code>system_config.json</code>-ში</li>

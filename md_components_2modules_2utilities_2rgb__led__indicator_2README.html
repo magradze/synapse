@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
   <div class="headertitle"><div class="title">მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md35"></a> </p>
-<h1><a class="anchor" id="autotoc_md36"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md52"></a> </p>
+<h1><a class="anchor" id="autotoc_md53"></a>
 1. მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>rgb_led_indicator</code> <br  />
  <b>კატეგორია:</b> <code>displays</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
  <b>ავტორი:</b> გიორგი მაგრაძე &amp; Synapse AI Assistant</p>
 <p><code>rgb_led_indicator</code> მოდული უზრუნველყოფს უნივერსალურ, მაღალი დონის ინტერფეისს RGB LED ინდიკატორის სამართავად. ის შექმნილია სისტემის სტატუსის ინდიკატორის როლის შესასრულებლად, რომელიც ავტონომიურად რეაგირებს ფრეიმვორქის კრიტიკულ ივენთებზე და, ამავდროულად, აწვდის სერვისის API-ს სხვა მოდულებს, რათა მათ მოითხოვონ სპეციფიკური ვიზუალური შეტყობინებები.</p>
 <p>მოდულს აქვს სტატიკური ფერების, ციმციმის და პულსაციის ეფექტების მხარდაჭერა, რომლებიც იმართება ცალკე FreeRTOS ტასკის საშუალებით, რათა უზრუნველყოფილი იყოს ოპერაციების არაბლოკირებადი, ასინქრონული შესრულება.</p>
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md54"></a>
 2. არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>ჰიბრიდული კომუნიკაცია:</b> მოდული ერთდროულად არის <b>Service-driven</b> და <b>Event-driven</b>.<ul>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <li><b>ასინქრონული ოპერაციები:</b> LED ეფექტები (ციმციმი, პულსაცია) იმართება გამოყოფილი ტასკის მიერ, რაც უზრუნველყოფს, რომ API გამოძახებები არ იყოს მბლოკავი.</li>
 <li><b>პრიორიტეტების სისტემა:</b> მარტივი პრიორიტეტული მექანიზმი მართავს კონფლიქტს "მექანიკურ" მართვასა და სისტემის სტატუსის ავტომატურ ჩვენებას შორის. მექანიკურ მართვას (Service API-ს გამოძახებით) ყოველთვის უმაღლესი პრიორიტეტი აქვს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md38"></a>
+<h1><a class="anchor" id="autotoc_md55"></a>
 3. კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>is_common_anode</code>   </td><td class="markdownTableBodyLeft">boolean   </td><td class="markdownTableBodyLeft"><code>true</code>, თუ გამოიყენება საერთო ანოდის მქონე RGB LED.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>false</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<h1><a class="anchor" id="autotoc_md56"></a>
 4. Service API (&lt;tt&gt;rgb_led_api_t&lt;/tt&gt;)</h1>
 <p>მოდული არეგისტრირებს სერვისს, რომლის ტიპი შეიძლება იყოს <code>FMW_SERVICE_TYPE_GENERIC_API</code> ან ახლად განსაზღვრული <code>FMW_SERVICE_TYPE_RGB_LED_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <li>**<code>esp_err_t release_control();</code>** <br  />
  ათავისუფლებს "მექანიკურ" მართვას და აბრუნებს ინდიკატორს მის ავტომატურ, ივენთებზე დამოკიდებულ რეჟიმში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md57"></a>
 5. ივენთების დამუშავება</h1>
 <p>მოდული გამოიწერს შემდეგ ივენთებს სტატუსის ავტომატურად საჩვენებლად:</p>
 <table class="markdownTable">
@@ -177,21 +177,21 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft">(ნებისმიერი Service API გამოძახება)   </td><td class="markdownTableBodyLeft">API გამოძახების შესაბამისად   </td><td class="markdownTableBodyCenter">მექანიკური   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md41"></a>
+<h1><a class="anchor" id="autotoc_md58"></a>
 6. ტექნიკური იმპლემენტაციის დეტალები</h1>
 <ul>
 <li><b>დრაივერი:</b> გამოიყენება ESP-IDF-ის <code>ledc</code> (LED Control) პერიფერია, ფერისა და სიკაშკაშის ზუსტი, PWM-ზე დაფუძნებული მართვისთვის.</li>
 <li><b>ტასკების მართვა:</b> გამოყოფილი FreeRTOS ტასკი (<code>rgb_led_task</code>) მართავს LED-ის მდგომარეობების მანქანას და ეფექტებს.</li>
 <li><b>სინქრონიზაცია:</b> გამოიყენება FreeRTOS <code>Queue</code> ბრძანებების (API ფუნქციებიდან) <code>rgb_led_task</code>-ისთვის უსაფრთხოდ გადასაცემად.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md59"></a>
 7. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, რომ <code>ota_update_module</code>-ს სურს, აცნობოს მომხმარებელს განახლების პროცესის შესახებ <code>rgb_led_indicator</code>-ის მეშვეობით, რომლის <code>instance_name</code> არის <code>"status_led"</code>.</p>
 <p>```c #include "service_locator.h" #include "rgb_led_indicator_api.h" // პირობითი ჰედერი, რომელიც აღწერს API-ს</p>
 <p>// OTA მოდულის შიგნით... void start_ota_process() { // 1. 🚦 ვიღებთ LED სერვისს Service Locator-იდან service_handle_t led_service_handle = fmw_service_get("status_led");</p>
 <p>if (!led_service_handle) { ESP_LOGW(TAG, "RGB LED Indicator service 'status_led' not found."); // განაგრძე მუშაობა LED-ის გარეშე... return; }</p>
 <p>// 2. 🤖 ვამოწმებთ სერვისის ტიპს (უსაფრთხოებისთვის) if (fmw_service_get_type(led_service_handle) != FMW_SERVICE_TYPE_RGB_LED_API) { ESP_LOGE(TAG, "Service 'status_led' is not a valid RGB LED API."); return; }</p>
-<p>// 3. कास्टინგით ვიღებთ API-ს <a class="el" href="structrgb__led__api__t.html" title="rgb_led_indicator მოდულის Service API.">rgb_led_api_t</a> *led_api = (<a class="el" href="structrgb__led__api__t.html" title="rgb_led_indicator მოდულის Service API.">rgb_led_api_t</a> *)led_service_handle;</p>
+<p>// 3. कास्टინგით ვიღებთ API-ს <a class="el" href="structrgb__led__api__t.html" title="RGB LED Indicator Service API structure.">rgb_led_api_t</a> *led_api = (<a class="el" href="structrgb__led__api__t.html" title="RGB LED Indicator Service API structure.">rgb_led_api_t</a> *)led_service_handle;</p>
 <p>// 4. 💙 ვიწყებთ "პულსაციის" ეფექტს ლურჯ ფერში, რათა ვაჩვენოთ, რომ OTA მიმდინარეობს ESP_LOGI(TAG, "Starting OTA update... Setting LED to pulsing blue."); led_api-&gt;start_pulse(0, 0, 255, 2000); // ლურჯი, 2 წამის პერიოდით</p>
 <p>// ... მიმდინარეობს OTA განახლება ...</p>
 <p>// 5. ✅ განახლება წარმატებულია, ვატყობინებთ მომხმარებელს ESP_LOGI(TAG, "OTA update successful!"); led_api-&gt;set_color(0, 255, 0); // ვანათებთ მწვანედ vTaskDelay(pdMS_TO_TICKS(3000)); // 3 წამი</p>

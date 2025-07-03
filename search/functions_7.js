@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['parse_5fmodule_5ftopics_0',['parse_module_topics',['../namespacegenerate__mqtt__topics.html#ae8601a1584348b7adc4bffb9fce7cf31',1,'generate_mqtt_topics']]],
-  ['parse_5fsystem_5fconfig_5finstances_1',['parse_system_config_instances',['../namespacegenerate__mqtt__topics.html#a3ff45c853abf34bafd2faaa3f4d20557',1,'generate_mqtt_topics']]]
+  ['oled_5fdisplay_5fcreate_0',['oled_display_create',['../oled__display_8h.html#a6832fbdda1b314619422393df5e52508',1,'oled_display_create(const cJSON *config):&#160;oled_display.c'],['../oled__display_8c.html#a6832fbdda1b314619422393df5e52508',1,'oled_display_create(const cJSON *config):&#160;oled_display.c']]],
+  ['ota_5fupdate_5fmanager_5fcreate_1',['ota_update_manager_create',['../ota__update__manager_8h.html#a792fc2704dda3f70481bb8073fcc1c4e',1,'ota_update_manager_create(const cJSON *config):&#160;ota_update_manager.c'],['../ota__update__manager_8c.html#a792fc2704dda3f70481bb8073fcc1c4e',1,'ota_update_manager_create(const cJSON *config):&#160;ota_update_manager.c']]]
 ];

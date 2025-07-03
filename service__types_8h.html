@@ -104,22 +104,25 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="service__types_8h__dep__incl.png" border="0" usemap="#acomponents_2interfaces_2include_2service__types_8hdep" alt=""/></div>
 <map name="acomponents_2interfaces_2include_2service__types_8hdep" id="acomponents_2interfaces_2include_2service__types_8hdep">
-<area shape="rect" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="217,5,396,45"/>
-<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="422,93,607,133"/>
-<area shape="poly" title=" " alt="" coords="366,48,470,91,468,96,364,53"/>
+<area shape="rect" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="647,5,825,45"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="643,93,829,133"/>
+<area shape="poly" title=" " alt="" coords="739,59,739,93,733,93,733,59"/>
 <area shape="rect" href="system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="5,189,192,229"/>
-<area shape="poly" title=" " alt="" coords="276,56,122,191,118,187,273,52"/>
+<area shape="poly" title=" " alt="" coords="657,52,166,191,164,186,656,47"/>
+<area shape="rect" href="command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="1314,181,1505,236"/>
+<area shape="poly" title=" " alt="" coords="820,46,1314,179,1313,184,819,52"/>
 <area shape="rect" href="service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="217,189,402,229"/>
-<area shape="poly" title=" " alt="" coords="462,141,352,191,350,186,460,136"/>
-<area shape="poly" title=" " alt="" coords="411,139,205,184,174,191,173,186,203,179,410,134"/>
+<area shape="poly" title=" " alt="" coords="631,138,414,184,383,191,382,186,413,179,630,133"/>
+<area shape="poly" title=" " alt="" coords="630,127,432,149,204,184,170,191,169,186,204,179,431,144,629,122"/>
 <area shape="rect" href="health__monitor_8c.html" title="Monitors system health metrics like heap, CPU, and tasks." alt="" coords="426,181,603,236"/>
-<area shape="poly" title=" " alt="" coords="517,147,517,181,512,181,512,147"/>
+<area shape="poly" title=" " alt="" coords="680,141,578,184,576,179,678,136"/>
 <area shape="rect" href="ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="628,181,844,236"/>
-<area shape="poly" title=" " alt="" coords="573,136,675,179,673,184,571,141"/>
+<area shape="poly" title=" " alt="" coords="739,147,739,181,733,181,733,147"/>
 <area shape="rect" href="watchdog__manager_8c.html" title="Intelligent watchdog timer management with heartbeat monitoring." alt="" coords="869,181,1075,236"/>
-<area shape="poly" title=" " alt="" coords="621,132,857,179,869,181,868,187,855,184,620,137"/>
+<area shape="poly" title=" " alt="" coords="798,136,907,179,905,184,796,141"/>
+<area shape="poly" title=" " alt="" coords="843,121,1056,143,1180,159,1303,179,1314,181,1313,186,1302,184,1179,164,1055,148,842,126"/>
 <area shape="rect" href="rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="1099,181,1290,236"/>
-<area shape="poly" title=" " alt="" coords="621,120,837,142,963,159,1088,179,1099,181,1098,186,1088,184,963,164,837,148,621,126"/>
+<area shape="poly" title=" " alt="" coords="843,131,1089,179,1099,181,1098,186,1087,184,842,136"/>
 </map>
 </div>
 </div>
@@ -160,31 +163,33 @@ Enumerations</h2></td></tr>
 , <b>FMW_SERVICE_TYPE_SERVO_API</b>
 , <br />
 &#160;&#160;<b>FMW_SERVICE_TYPE_MOTOR_API</b>
+, <b>FMW_SERVICE_TYPE_SYSTEM_API</b>
 , <b>FMW_SERVICE_TYPE_LOGGER_API</b>
 , <b>FMW_SERVICE_TYPE_CONFIG_API</b>
-, <b>FMW_SERVICE_TYPE_TIMER_API</b>
 , <br />
-&#160;&#160;<b>FMW_SERVICE_TYPE_WATCHDOG_API</b>
+&#160;&#160;<b>FMW_SERVICE_TYPE_TIMER_API</b>
+, <b>FMW_SERVICE_TYPE_WATCHDOG_API</b>
 , <b>FMW_SERVICE_TYPE_OTA_API</b>
 , <b>FMW_SERVICE_TYPE_VERSION_API</b>
-, <b>FMW_SERVICE_TYPE_HEALTH_API</b>
 , <br />
-&#160;&#160;<b>FMW_SERVICE_TYPE_CRYPTO_API</b>
+&#160;&#160;<b>FMW_SERVICE_TYPE_HEALTH_API</b>
+, <b>FMW_SERVICE_TYPE_CRYPTO_API</b>
 , <b>FMW_SERVICE_TYPE_AUTH_API</b>
 , <b>FMW_SERVICE_TYPE_TLS_API</b>
-, <b>FMW_SERVICE_TYPE_AUDIO_API</b>
 , <br />
-&#160;&#160;<b>FMW_SERVICE_TYPE_SPEAKER_API</b>
+&#160;&#160;<b>FMW_SERVICE_TYPE_AUDIO_API</b>
+, <b>FMW_SERVICE_TYPE_SPEAKER_API</b>
 , <b>FMW_SERVICE_TYPE_MICROPHONE_API</b>
 , <b>FMW_SERVICE_TYPE_POWER_API</b>
-, <b>FMW_SERVICE_TYPE_BATTERY_API</b>
 , <br />
-&#160;&#160;<b>FMW_SERVICE_TYPE_CHARGER_API</b>
+&#160;&#160;<b>FMW_SERVICE_TYPE_BATTERY_API</b>
+, <b>FMW_SERVICE_TYPE_CHARGER_API</b>
 , <b>FMW_SERVICE_TYPE_GENERIC_API</b>
 , <b>FMW_SERVICE_TYPE_CUSTOM_API</b>
-, <b>FMW_SERVICE_TYPE_RGB_LED_API</b>
 , <br />
-&#160;&#160;<b>FMW_SERVICE_TYPE_MAX</b>
+&#160;&#160;<b>FMW_SERVICE_TYPE_RGB_LED_API</b>
+, <b>FMW_SERVICE_TYPE_CMD_ROUTER_API</b>
+, <b>FMW_SERVICE_TYPE_MAX</b>
 <br />
  }</td></tr>
 <tr class="memdesc:a2147d7b6aec6913e52ceb12330fc219c"><td class="mdescLeft">&#160;</td><td class="mdescRight">სერვისის ტიპების ცენტრალიზებული ჩამონათვალი. <br /></td></tr>

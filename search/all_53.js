@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔑_20გასაღების_20ფორმატი_20dot_20notation_0',['🔑 გასაღების ფორმატი (Dot-Notation)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md125',1,'']]]
+  ['📡_20wifi_20მოდული_0',['📡 WiFi მოდული',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1315',1,'']]],
+  ['📡_20wifi_20მოდული_3a_1',['📡 WiFi მოდული:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md916',1,'']]]
 ];

@@ -23,6 +23,7 @@ var service__types_8h =
       [ "FMW_SERVICE_TYPE_PWM_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca445d4ce24837e4c1805823bec66f39cc", null ],
       [ "FMW_SERVICE_TYPE_SERVO_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219cacf1ca48ed845de465b577b1d7350184a", null ],
       [ "FMW_SERVICE_TYPE_MOTOR_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219cab17910e4918e7c5104fb060fe09b10fc", null ],
+      [ "FMW_SERVICE_TYPE_SYSTEM_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219caabc1043a1968ba7e63156aad2521f484", null ],
       [ "FMW_SERVICE_TYPE_LOGGER_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219cabd83e2d5b44c64108304ca3f45c69372", null ],
       [ "FMW_SERVICE_TYPE_CONFIG_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219caa0dc0a58491aaa237cbb12c651fe99ec", null ],
       [ "FMW_SERVICE_TYPE_TIMER_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219caa08d796df270cae9289f8f55ec7322cf", null ],
@@ -42,6 +43,7 @@ var service__types_8h =
       [ "FMW_SERVICE_TYPE_GENERIC_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca579a418d7c18b927ef34b45d0e66c9cf", null ],
       [ "FMW_SERVICE_TYPE_CUSTOM_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca4462b1cc3816ea2e7035f4138871d81e", null ],
       [ "FMW_SERVICE_TYPE_RGB_LED_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca429fbb261311e62cce6df53a395f1b1f", null ],
+      [ "FMW_SERVICE_TYPE_CMD_ROUTER_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca8f1ee8206757514ed977e857d4c64bbd", null ],
       [ "FMW_SERVICE_TYPE_MAX", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca353e9dbb8c1214b5c7c9324a55d1ca8f", null ]
     ] ]
 ];

@@ -24,6 +24,7 @@ if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
                 esp_event
                 nvs_flash
                 wifi_provisioning
+                storage_manager
             PRIV_REQUIRES
                 json
                 esp_system
@@ -55,6 +56,7 @@ else()
             esp_event
             nvs_flash
             wifi_provisioning
+            storage_manager
         PRIV_REQUIRES
             json
             esp_system

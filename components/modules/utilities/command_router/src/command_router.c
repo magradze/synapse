@@ -394,18 +394,58 @@ static void serial_shell_task(void *pvParameters)
             continue;
         }
 
+        if (line == NULL)
+        { // NULL on Ctrl-D or error
+            // On Ctrl-D, linenoise returns NULL. We can break the loop or continue.
+            // Let's continue to allow recovery from errors.
+            vTaskDelay(pdMS_TO_TICKS(10)); // Small delay to prevent busy-looping on error
+            continue;
+        }
+
         if (strlen(line) > 0) {
             linenoiseHistoryAdd(line);
-            
-            int ret_code;
-            esp_err_t err = esp_console_run(line, &ret_code);
-            
-            if (err == ESP_ERR_NOT_FOUND) {
-                printf("Error: Command not found: %s\n", line);
-            } else if (err == ESP_ERR_INVALID_ARG) {
-                // The handler should have printed usage info
-            } else if (err != ESP_OK) {
-                printf("Error: Command returned 0x%x (%s)\n", err, esp_err_to_name(err));
+
+            // --- ★★★ ძველი, პრობლემური კოდი ★★★ ---
+            // int ret_code;
+            // esp_err_t err = esp_console_run(line, &ret_code);
+            // if (err == ESP_ERR_NOT_FOUND) {
+            //     printf("Error: Command not found: %s\n", line);
+            // } ...
+
+            // --- ★★★ ახალი, შესწორებული ლოგიკა ★★★ ---
+            // ჩვენ თვითონ ვყოფთ არგუმენტებად და ვიძახებთ ჩვენს executor-ს.
+            // ეს გვაძლევს სრულ კონტროლს და გვერდს უვლის esp_console_run-ის პრობლემას.
+            char *argv[CONFIG_COMMAND_ROUTER_MAX_ARGS];
+            int argc = esp_console_split_argv(line, argv, CONFIG_COMMAND_ROUTER_MAX_ARGS);
+
+            if (argc > 0)
+            {
+                // ვამოწმებთ, არსებობს თუ არა ასეთი ბრძანება ჩვენს რეესტრში
+                cmd_router_private_data_t *private_data = (cmd_router_private_data_t *)self->private_data;
+                bool command_exists = false;
+                if (xSemaphoreTake(private_data->commands_mutex, portMAX_DELAY) == pdTRUE)
+                {
+                    for (int i = 0; i < private_data->command_count; i++)
+                    {
+                        if (strcmp(argv[0], private_data->registered_commands[i]->command) == 0)
+                        {
+                            command_exists = true;
+                            break;
+                        }
+                    }
+                    xSemaphoreGive(private_data->commands_mutex);
+                }
+
+                if (command_exists)
+                {
+                    // თუ ბრძანება არსებობს, პირდაპირ ვიძახებთ ჩვენს executor-ს.
+                    generic_command_executor(argc, argv);
+                }
+                else
+                {
+                    // თუ არ არსებობს, მაშინ ვბეჭდავთ შეცდომას.
+                    printf("Error: Command not found: %s\n", argv[0]);
+                }
             }
         }
         linenoiseFree(line);

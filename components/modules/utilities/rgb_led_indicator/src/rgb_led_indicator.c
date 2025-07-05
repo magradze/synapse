@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <inttypes.h>
+#include "cmd_router_interface.h"
 
 // --- Component Tag ---
 DEFINE_COMPONENT_TAG("RGB_LED_INDICATOR");
@@ -90,6 +91,11 @@ static esp_err_t api_turn_off();
 static esp_err_t api_start_blink(uint8_t r, uint8_t g, uint8_t b, uint32_t interval_ms);
 static esp_err_t api_start_pulse(uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms);
 static esp_err_t api_release_control();
+
+// Command Router-ისთვის საჭირო ფუნქციები
+static esp_err_t led_cmd_handler(int argc, char **argv, void *context);
+static void register_cli_commands(module_t *self);
+static void unregister_cli_commands(module_t *self);
 
 // --- Event to Command Mapping ---
 typedef struct
@@ -170,7 +176,7 @@ module_t *rgb_led_indicator_create(const cJSON *config)
         module->current_config = cJSON_Duplicate(config, true);
     }
 
-    module->init_level = 1;
+    module->init_level = 60;
 
     module->status = MODULE_STATUS_UNINITIALIZED;
     module->base.init = rgb_led_indicator_init;
@@ -238,6 +244,9 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
 
     // სერვისის რეგისტრაცია (უცვლელია)
     fmw_service_register(self->name, FMW_SERVICE_TYPE_RGB_LED_API, &rgb_led_service_api);
+
+    // დავარეგისტრიროთ ჩვენი ბრძანებები Command Router-ში
+    register_cli_commands(self);
 
     // LED-ის საწყისი გამორთვა
     set_led_color(private_data, 0, 0, 0);
@@ -391,6 +400,10 @@ static void rgb_led_indicator_deinit(module_t *self)
     fmw_event_bus_unsubscribe("SYSTEM_HEALTH_ALERT", self);
 
     fmw_service_unregister(self->name);
+
+    // გავაუქმოთ ჩვენი ბრძანებების რეგისტრაცია
+    unregister_cli_commands(self);
+
     global_rgb_led_instance = NULL;
 
     if (self->private_data)
@@ -639,4 +652,145 @@ static esp_err_t api_release_control()
     // 2. ვაგზავნით ბოლო შენახულ სისტემურ ბრძანებას ტასკში
     //    ეს ბრძანება ინახება handle_event ფუნქციაში ყოველი სისტემური ივენთისას.
     return send_command_to_task(global_rgb_led_instance, &private_data->last_system_command);
+}
+
+// =========================================================================
+//                      Command Router Integration
+// =========================================================================
+
+/**
+ * @internal
+ * @brief ბრძანების დამმუშავებელი (handler) ფუნქცია, რომელიც რეგისტრირდება Command Router-ში.
+ * @details ეს ფუნქცია პარსავს არგუმენტებს და იძახებს შესაბამის Service API ფუნქციას.
+ */
+static esp_err_t led_cmd_handler(int argc, char **argv, void *context)
+{
+    if (argc < 2)
+    {
+        printf("Error: Missing subcommand for 'led'.\nUsage: led <set|blink|pulse|off|release> [params...]\n");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    const char *sub_command = argv[1];
+
+    if (strcmp(sub_command, "set") == 0)
+    {
+        if (argc != 5)
+        {
+            printf("Usage: led set <r> <g> <b>\n");
+            return ESP_ERR_INVALID_ARG;
+        }
+        uint8_t r = atoi(argv[2]);
+        uint8_t g = atoi(argv[3]);
+        uint8_t b = atoi(argv[4]);
+        printf("Setting color to R:%d G:%d B:%d\n", r, g, b);
+        return api_set_color(r, g, b);
+    }
+    else if (strcmp(sub_command, "blink") == 0)
+    {
+        if (argc != 6)
+        {
+            printf("Usage: led blink <r> <g> <b> <interval_ms>\n");
+            return ESP_ERR_INVALID_ARG;
+        }
+        uint8_t r = atoi(argv[2]);
+        uint8_t g = atoi(argv[3]);
+        uint8_t b = atoi(argv[4]);
+        uint32_t interval = atoi(argv[5]);
+        printf("Starting blink with R:%d G:%d B:%d, Interval:%" PRIu32 "ms\n", r, g, b, interval);
+        return api_start_blink(r, g, b, interval);
+    }
+    else if (strcmp(sub_command, "pulse") == 0)
+    {
+        if (argc != 6)
+        {
+            printf("Usage: led pulse <r> <g> <b> <period_ms>\n");
+            return ESP_ERR_INVALID_ARG;
+        }
+        uint8_t r = atoi(argv[2]);
+        uint8_t g = atoi(argv[3]);
+        uint8_t b = atoi(argv[4]);
+        uint32_t period = atoi(argv[5]);
+        printf("Starting pulse with R:%d G:%d B:%d, Period:%" PRIu32 "ms\n", r, g, b, period);
+        return api_start_pulse(r, g, b, period);
+    }
+    else if (strcmp(sub_command, "off") == 0)
+    {
+        printf("Turning LED off.\n");
+        return api_turn_off();
+    }
+    else if (strcmp(sub_command, "release") == 0)
+    {
+        printf("Releasing manual control.\n");
+        return api_release_control();
+    }
+    else
+    {
+        printf("Error: Unknown subcommand '%s'.\n", sub_command);
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @internal
+ * @brief დამხმარე ფუნქცია, რომელიც არეგისტრირებს 'led' ბრძანებას.
+ */
+static void register_cli_commands(module_t *self)
+{
+    // 1. მოვამზადოთ ბრძანების აღწერის სტრუქტურა.
+    // ის უნდა იყოს static, რათა მისი მეხსიერება ვალიდური დარჩეს.
+    static cmd_t led_command;
+    led_command = (cmd_t){
+        .command = "led",
+        .help = "Control the RGB LED indicator.",
+        .usage = "led <set|blink|pulse|off|release> [params...]",
+        .min_args = 2, // მაგ: led off
+        .max_args = 6, // მაგ: led pulse 255 0 255 2000
+        .handler = led_cmd_handler,
+        .context = self // გადავცეთ module_t* როგორც კონტექსტი
+    };
+
+    // 2. მოვძებნოთ Command Router სერვისი.
+    service_handle_t handle = fmw_service_get("main_cmd_router");
+    if (handle)
+    {
+        cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
+        esp_err_t err = cmd_api->register_command(&led_command);
+        if (err != ESP_OK)
+        {
+            ESP_LOGE(TAG, "Failed to register 'led' command: %s", esp_err_to_name(err));
+        }
+        else
+        {
+            ESP_LOGI(TAG, "'led' command registered successfully.");
+        }
+    }
+    else
+    {
+        ESP_LOGW(TAG, "Command Router service not found. CLI commands will not be available.");
+    }
+}
+
+/**
+ * @internal
+ * @brief დამხმარე ფუნქცია, რომელიც აუქმებს 'led' ბრძანების რეგისტრაციას.
+ */
+static void unregister_cli_commands(module_t *self)
+{
+    service_handle_t handle = fmw_service_get("main_cmd_router");
+    if (handle)
+    {
+        cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
+        esp_err_t err = cmd_api->unregister_command("led");
+        if (err != ESP_OK)
+        {
+            ESP_LOGE(TAG, "Failed to unregister 'led' command: %s", esp_err_to_name(err));
+        }
+        else
+        {
+            ESP_LOGI(TAG, "'led' command unregistered successfully.");
+        }
+    }
 }

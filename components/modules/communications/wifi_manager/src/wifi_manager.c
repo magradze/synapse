@@ -12,6 +12,8 @@
 #include "event_data_wrapper.h"
 #include "framework_config.h"
 #include "logging.h"
+#include "service_locator.h"
+#include "cmd_router_interface.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -74,6 +76,10 @@ static void reconnect_timer_callback(TimerHandle_t xTimer);
 static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
 static void ip_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
 
+static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context);
+static void register_cli_commands(module_t *self);
+static void unregister_cli_commands(module_t *self);
+
 // ==============================================================================
 //  Public API - მოდულის შემქმნელი ფუნქცია
 // ==============================================================================
@@ -129,7 +135,7 @@ module_t *wifi_manager_create(const cJSON *config)
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
 
-    module->init_level = 2;
+    module->init_level = 40;
 
     // დავაყენოთ ფუნქციების pointers
     module->base.init = wifi_manager_init;
@@ -188,6 +194,16 @@ static esp_err_t wifi_manager_init(module_t *self)
     esp_log_level_set("nvs", ESP_LOG_DEBUG);
 
     self->status = MODULE_STATUS_INITIALIZED;
+
+    // გამოვიწეროთ სისტემის გაშვების დასრულების ივენთზე.
+    // ბრძანებებს დავარეგისტრირებთ მაშინ, როცა ამ ივენთს მივიღებთ.
+    esp_err_t err = fmw_event_bus_subscribe("FMW_EVENT_SYSTEM_START_COMPLETE", self);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to subscribe to system start event: %s", esp_err_to_name(err));
+        // ეს არ არის კრიტიკული შეცდომა, მოდულმა შეიძლება გააგრძელოს მუშაობა CLI-ს გარეშე.
+    }
+
     ESP_LOGI(TAG, "WiFi Manager module initialized successfully");
     return ESP_OK;
 }
@@ -330,6 +346,9 @@ static void wifi_manager_deinit(module_t *self)
     // Event Bus-დან გამოწერის გაუქმება
     fmw_event_bus_unsubscribe(EVT_PROV_CREDENTIALS_RECEIVED, self);
 
+    fmw_event_bus_unsubscribe("FMW_EVENT_SYSTEM_START_COMPLETE", self);
+    unregister_cli_commands(self);
+
     // ESP event handlers-ის გაუქმება
     esp_event_handler_instance_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler);
     esp_event_handler_instance_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler);
@@ -444,6 +463,13 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
         }
     }
 
+    // ★★★ ახალი ლოგიკა ★★★
+    if (strcmp(event_name, "FMW_EVENT_SYSTEM_START_COMPLETE") == 0)
+    {
+        ESP_LOGI(TAG, "System start complete. Registering CLI commands now.");
+        register_cli_commands(self);
+    }
+
     // ყოველთვის გავათავისუფლოთ event data
     if (event_data)
     {
@@ -490,6 +516,8 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t e
             break;
 
         case WIFI_EVENT_STA_DISCONNECTED:
+            private_data->is_connected = false;
+
             ESP_LOGW(TAG, "Disconnected from WiFi network");
 
             fmw_event_bus_post(EVT_WIFI_DISCONNECTED, NULL);
@@ -539,6 +567,9 @@ static void ip_event_handler(void *arg, esp_event_base_t event_base, int32_t eve
 
     if (event_id == IP_EVENT_STA_GOT_IP)
     {
+        wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)arg;
+        private_data->is_connected = true;
+
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
         ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
 
@@ -736,4 +767,362 @@ static esp_err_t load_credentials_from_nvs(wifi_manager_private_data_t *private_
 
     private_data->has_saved_credentials = true;
     return ESP_OK;
+}
+
+// =========================================================================
+//                      Command Router Integration
+// =========================================================================
+
+/**
+ * @internal
+ * @brief Handles 'wifi' command from the CLI.
+ * @details Parses subcommands and arguments to manage and query the WiFi state.
+ *          This function is registered with the Command Router.
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ * @param context Pointer to the module_t instance.
+ * @return ESP_OK on success, or an error code on failure.
+ */
+static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
+{
+    module_t *self = (module_t *)context;
+    if (!self || !self->private_data)
+    {
+        printf("Error: Module context is not valid.\n");
+        return ESP_ERR_INVALID_STATE;
+    }
+
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+
+    if (argc < 2)
+    {
+        printf("Error: Missing subcommand for 'wifi'.\n");
+        printf("Usage: wifi <status|scan|connect|disconnect|enable|disable|erase_creds|set_hostname|set_power_save>\n");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    const char *sub_command = argv[1];
+
+    // --- ℹ️ Status and Info Commands ---
+    if (strcmp(sub_command, "status") == 0)
+    {
+        printf("---------------- WiFi Status ----------------\n");
+        printf("  Module State:      %s\n", private_data->enabled ? "Enabled" : "Disabled");
+        printf("  Connection Status: %s\n", private_data->is_connected ? "Connected" : "Disconnected");
+
+        if (private_data->is_connected)
+        {
+            wifi_ap_record_t ap_info;
+            if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
+            {
+                printf("  SSID:              %s\n", ap_info.ssid);
+                printf("  Channel:           %d\n", ap_info.primary);
+                printf("  RSSI:              %d dBm\n", ap_info.rssi);
+            }
+
+            esp_netif_ip_info_t ip_info;
+            esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+            if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
+            {
+                printf("  IP Address:        " IPSTR "\n", IP2STR(&ip_info.ip));
+                printf("  Gateway:           " IPSTR "\n", IP2STR(&ip_info.gw));
+            }
+        }
+
+        uint8_t mac[6];
+        esp_wifi_get_mac(WIFI_IF_STA, mac);
+        printf("  MAC Address:       %02X:%02X:%02X:%02X:%02X:%02X\n",
+               mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+        const char *hostname;
+        esp_netif_get_hostname(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &hostname);
+        printf("  Hostname:          %s\n", hostname ? hostname : "N/A");
+
+        printf("-------------------------------------------\n");
+        return ESP_OK;
+    }
+    else if (strcmp(sub_command, "scan") == 0)
+    {
+        printf("Scanning for WiFi networks...\n");
+        wifi_scan_config_t scan_config = {.show_hidden = true};
+
+        if (esp_wifi_scan_start(&scan_config, true) != ESP_OK)
+        {
+            printf("Error: Failed to start WiFi scan.\n");
+            return ESP_FAIL;
+        }
+
+        uint16_t ap_count = 0;
+        esp_wifi_scan_get_ap_num(&ap_count);
+        if (ap_count == 0)
+        {
+            printf("No networks found.\n");
+            return ESP_OK;
+        }
+
+        wifi_ap_record_t *ap_list = (wifi_ap_record_t *)malloc(ap_count * sizeof(wifi_ap_record_t));
+        if (!ap_list)
+        {
+            printf("Error: Failed to allocate memory for scan results.\n");
+            return ESP_ERR_NO_MEM;
+        }
+
+        if (esp_wifi_scan_get_ap_records(&ap_count, ap_list) == ESP_OK)
+        {
+            printf("------------------------------------------------------------------\n");
+            printf("  %-32s | %-4s | %-4s | %s\n", "SSID", "RSSI", "CHAN", "AUTH");
+            printf("------------------------------------------------------------------\n");
+            for (int i = 0; i < ap_count; i++)
+            {
+                const char *auth_mode;
+                switch (ap_list[i].authmode)
+                {
+                case WIFI_AUTH_OPEN:
+                    auth_mode = "OPEN";
+                    break;
+                case WIFI_AUTH_WEP:
+                    auth_mode = "WEP";
+                    break;
+                case WIFI_AUTH_WPA_PSK:
+                    auth_mode = "WPA_PSK";
+                    break;
+                case WIFI_AUTH_WPA2_PSK:
+                    auth_mode = "WPA2_PSK";
+                    break;
+                case WIFI_AUTH_WPA_WPA2_PSK:
+                    auth_mode = "WPA/WPA2";
+                    break;
+                case WIFI_AUTH_WPA2_ENTERPRISE:
+                    auth_mode = "WPA2_ENT";
+                    break;
+                case WIFI_AUTH_WPA3_PSK:
+                    auth_mode = "WPA3_PSK";
+                    break;
+                case WIFI_AUTH_WPA2_WPA3_PSK:
+                    auth_mode = "WPA2/WPA3";
+                    break;
+                default:
+                    auth_mode = "UNKNOWN";
+                    break;
+                }
+                printf("  %-32s | %-4d | %-4d | %s\n", (char *)ap_list[i].ssid, ap_list[i].rssi, ap_list[i].primary, auth_mode);
+            }
+            printf("------------------------------------------------------------------\n");
+        }
+        free(ap_list);
+        return ESP_OK;
+    }
+
+    // --- ⚙️ Control and Action Commands ---
+    else if (strcmp(sub_command, "enable") == 0)
+    {
+        printf("Enabling WiFi module...\n");
+        return wifi_manager_enable(self);
+    }
+    else if (strcmp(sub_command, "disable") == 0)
+    {
+        printf("Disabling WiFi module...\n");
+        return wifi_manager_disable(self);
+    }
+    else if (strcmp(sub_command, "disconnect") == 0)
+    {
+        printf("Disconnecting from WiFi network...\n");
+        return esp_wifi_disconnect();
+    }
+    else if (strcmp(sub_command, "connect") == 0)
+    {
+        if (argc != 4)
+        {
+            printf("Error: Incorrect arguments for 'connect'.\nUsage: wifi connect <ssid> <password>\n");
+            return ESP_ERR_INVALID_ARG;
+        }
+        const char *ssid = argv[2];
+        const char *password = argv[3];
+        printf("Attempting to connect to '%s'...\n", ssid);
+
+        if (save_credentials_to_nvs(ssid, password) == ESP_OK)
+        {
+            memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
+            strncpy((char *)private_data->wifi_config.sta.ssid, ssid, sizeof(private_data->wifi_config.sta.ssid) - 1);
+            strncpy((char *)private_data->wifi_config.sta.password, password, sizeof(private_data->wifi_config.sta.password) - 1);
+            private_data->has_saved_credentials = true;
+            start_wifi_connection(self);
+        }
+        else
+        {
+            printf("Error: Failed to save new credentials.\n");
+            return ESP_FAIL;
+        }
+        return ESP_OK;
+    }
+    else if (strcmp(sub_command, "erase_creds") == 0)
+    {
+        printf("Erasing saved WiFi credentials from NVS...\n");
+        nvs_handle_t nvs_handle;
+        if (nvs_open("wifi_creds", NVS_READWRITE, &nvs_handle) == ESP_OK)
+        {
+            nvs_erase_all(nvs_handle);
+            nvs_commit(nvs_handle);
+            nvs_close(nvs_handle);
+            printf("Credentials erased. Please reboot or provision the device.\n");
+            // გაასუფთავეთ მიმდინარე credentials-იც
+            memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
+            private_data->has_saved_credentials = false;
+        }
+        else
+        {
+            printf("Error: Could not open NVS to erase credentials.\n");
+            return ESP_FAIL;
+        }
+        return ESP_OK;
+    }
+    else if (strcmp(sub_command, "set_hostname") == 0)
+    {
+        if (argc < 3)
+        {
+            printf("Error: Missing hostname.\nUsage: wifi set_hostname <new_hostname> [--reconnect]\n");
+            return ESP_ERR_INVALID_ARG;
+        }
+        const char *hostname = argv[2];
+        esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+        if (esp_netif_set_hostname(netif, hostname) == ESP_OK)
+        {
+            printf("Hostname set to '%s'.\n", hostname);
+
+            // შევამოწმოთ, მომხმარებელს სურს თუ არა დაუყოვნებლივ ხელახლა დაკავშირება
+            bool reconnect = (argc == 4 && strcmp(argv[3], "--reconnect") == 0);
+
+            if (reconnect)
+            {
+                printf("Reconnecting to apply new hostname...\n");
+                esp_wifi_disconnect();
+                // მცირე დაყოვნება, რათა disconnect-მა მოასწროს დამუშავება
+                vTaskDelay(pdMS_TO_TICKS(500));
+                esp_wifi_connect();
+            }
+            else
+            {
+                printf("The new hostname will be effective on the next connection.\n");
+            }
+        }
+        else
+        {
+            printf("Error: Failed to set hostname.\n");
+            return ESP_FAIL;
+        }
+        return ESP_OK;
+    }
+    else if (strcmp(sub_command, "set_power_save") == 0)
+    {
+        if (argc != 3)
+        {
+            printf("Error: Missing power save mode.\nUsage: wifi set_power_save <off|min|max>\n");
+            return ESP_ERR_INVALID_ARG;
+        }
+        const char *mode_str = argv[2];
+        wifi_ps_type_t ps_mode;
+        if (strcmp(mode_str, "off") == 0)
+        {
+            ps_mode = WIFI_PS_NONE;
+        }
+        else if (strcmp(mode_str, "min") == 0)
+        {
+            ps_mode = WIFI_PS_MIN_MODEM;
+        }
+        else if (strcmp(mode_str, "max") == 0)
+        {
+            ps_mode = WIFI_PS_MAX_MODEM;
+        }
+        else
+        {
+            printf("Error: Invalid power save mode '%s'.\n", mode_str);
+            return ESP_ERR_INVALID_ARG;
+        }
+
+        if (esp_wifi_set_ps(ps_mode) == ESP_OK)
+        {
+            printf("WiFi power save mode set to '%s'.\n", mode_str);
+        }
+        else
+        {
+            printf("Error: Failed to set power save mode.\n");
+            return ESP_FAIL;
+        }
+        return ESP_OK;
+    }
+
+    // --- Fallback for unknown command ---
+    else
+    {
+        printf("Error: Unknown subcommand '%s'.\n", sub_command);
+        printf("Usage: wifi <status|scan|connect|disconnect|enable|disable|erase_creds|set_hostname|set_power_save>\n");
+        return ESP_ERR_INVALID_ARG;
+    }
+}
+
+/**
+ * @internal
+ * @brief Registers the 'wifi' command and its subcommands with the Command Router.
+ * @details This function prepares the command structure and uses the Command Router
+ *          service to make the 'wifi' command available in the system shell.
+ * @param self Pointer to the module_t instance.
+ */
+static void register_cli_commands(module_t *self)
+{
+    // cmd_t სტრუქტურა უნდა იყოს static, რათა მისი მეხსიერება ვალიდური დარჩეს
+    // რეგისტრაციის შემდეგაც.
+    static cmd_t wifi_command;
+
+    // შევავსოთ სტრუქტურა განახლებული ინფორმაციით
+    wifi_command = (cmd_t){
+        .command = "wifi",
+        .help = "Manage and query WiFi status and configuration.",
+        .usage = "wifi <status|scan|connect|disconnect|enable|disable|erase_creds|set_hostname|set_power_save>",
+        .min_args = 2, // მინიმალური ბრძანება, მაგ: `wifi status`
+        .max_args = 4, // მაქსიმალური ბრძანება, მაგ: `wifi connect <ssid> <password>`
+        .handler = wifi_cmd_handler,
+        .context = self // გადავცეთ მოდულის ინსტანცია, როგორც კონტექსტი
+    };
+
+    // მოვძებნოთ Command Router სერვისი Service Locator-ის მეშვეობით
+    service_handle_t handle = fmw_service_get("main_cmd_router");
+    if (handle)
+    {
+        // თუ სერვისი ნაპოვნია, ავიღოთ მისი API
+        cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
+
+        // დავარეგისტრიროთ ჩვენი ბრძანება
+        esp_err_t err = cmd_api->register_command(&wifi_command);
+        if (err != ESP_OK)
+        {
+            ESP_LOGE(TAG, "Failed to register 'wifi' command: %s", esp_err_to_name(err));
+        }
+        else
+        {
+            ESP_LOGI(TAG, "'wifi' command registered successfully.");
+        }
+    }
+    else
+    {
+        // თუ სერვისი ვერ მოიძებნა, დავწეროთ გაფრთხილება
+        ESP_LOGW(TAG, "Command Router service not found. CLI commands for WiFi will not be available.");
+    }
+}
+
+static void unregister_cli_commands(module_t *self)
+{
+    service_handle_t handle = fmw_service_get("main_cmd_router");
+    if (handle)
+    {
+        cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
+        esp_err_t err = cmd_api->unregister_command("wifi");
+        if (err != ESP_OK)
+        {
+            ESP_LOGE(TAG, "Failed to unregister 'wifi' command: %s", esp_err_to_name(err));
+        }
+        else
+        {
+            ESP_LOGI(TAG, "'wifi' command unregistered successfully.");
+        }
+    }
 }

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['⚙️_20მოდული_3a_20command_20router_20system_20shell_0',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
-  ['⚙️_20ძირითადი_20api_20ფუნქციები_1',['⚙️ ძირითადი API ფუნქციები',['../md_docs_2api__reference_2configuration__api.html#autotoc_md148',1,'']]],
-  ['⚙️_20api_20სტრუქტურა_20tt_20cmd_5frouter_5fapi_5ft_20tt_2',['⚙️ API სტრუქტურა (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md101',1,'']]]
+  ['⌨️_20cli_20ბრძანებები_20command_20line_20interface_0',['⌨️ cli ბრძანებები command line interface',['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md7',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md74',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)']]]
 ];

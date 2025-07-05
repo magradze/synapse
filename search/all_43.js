@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['✅_20ავტომატური_20ინტეგრაცია_0',['✅ ავტომატური ინტეგრაცია',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1311',1,'']]],
-  ['✅_20ავტომატური_20ინტეგრაცია_3a_1',['✅ ავტომატური ინტეგრაცია:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md912',1,'']]],
-  ['✅_20რაც_20უნდა_20გახსოვდეთ_2',['✅ რაც უნდა გახსოვდეთ',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1331',1,'']]],
-  ['✅_20რაც_20უნდა_20გახსოვდეთ_3a_3',['✅ რაც უნდა გახსოვდეთ:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md937',1,'']]],
-  ['✅_20სწორი_4',['✅ სწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md906',1,'']]],
-  ['✅_20შექმნილი_20ფაილები_205_20ფაილი_5',['✅ შექმნილი ფაილები (5 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1310',1,'']]],
-  ['✅_20შექმნილი_20ფაილები_205_20ფაილი_20_3a_6',['✅ შექმნილი ფაილები (5 ფაილი):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md911',1,'']]],
-  ['✅_20strong_20დოკუმენტაციის_20ხარისხი_3a_20strong_7',['✅ &lt;strong&gt;დოკუმენტაციის ხარისხი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md636',1,'']]],
-  ['✅_20strong_20ლოგირების_20სტანდარტი_3a_20strong_8',['✅ &lt;strong&gt;ლოგირების სტანდარტი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md635',1,'']]],
-  ['✅_20strong_20მოდულების_20იზოლაცია_20ყველაზე_20მნიშვნელოვანი_20შემოწმება_20_3a_20strong_9',['✅ &lt;strong&gt;მოდულების იზოლაცია (ყველაზე მნიშვნელოვანი შემოწმება):&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md637',1,'']]],
-  ['✅_20strong_20სტრუქტურული_20მთლიანობა_3a_20strong_10',['✅ &lt;strong&gt;სტრუქტურული მთლიანობა:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md634',1,'']]],
-  ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_11',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
+  ['⚙️_20კონფიგურაცია_0',['3. ⚙️ კონფიგურაცია',['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md3',1,'']]],
+  ['⚙️_20მოდული_3a_20command_20router_20system_20shell_1',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
+  ['⚙️_20როგორ_20მუშაობს_2',['⚙️ როგორ მუშაობს?',['../md_docs_2convention_2initialization__levels.html#autotoc_md853',1,'']]],
+  ['⚙️_20ძირითადი_20api_20ფუნქციები_3',['⚙️ ძირითადი API ფუნქციები',['../md_docs_2api__reference_2configuration__api.html#autotoc_md158',1,'']]],
+  ['⚙️_20api_20სტრუქტურა_20tt_20cmd_5frouter_5fapi_5ft_20tt_4',['⚙️ API სტრუქტურა (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md111',1,'']]]
 ];

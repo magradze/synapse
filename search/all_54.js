@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['📺_20დისპლეის_20დრაივერი_0',['📺 დისპლეის დრაივერი',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1317',1,'']]],
-  ['📺_20დისპლეის_20დრაივერი_3a_1',['📺 დისპლეის დრაივერი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md918',1,'']]]
+  ['📝_20როგორ_20განვსაზღვროთ_20tt_20init_5flevel_20tt_20ახალი_20მოდულისთვის_0',['📝 როგორ განვსაზღვროთ &lt;tt&gt;init_level&lt;/tt&gt; ახალი მოდულისთვის?',['../md_docs_2convention_2initialization__levels.html#autotoc_md868',1,'']]]
 ];

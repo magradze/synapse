@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
   <div class="headertitle"><div class="title">კომუნიკაციის პატერნები (Communication Patterns)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1399"></a> </p>
-<h1><a class="anchor" id="autotoc_md1400"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1427"></a> </p>
+<h1><a class="anchor" id="autotoc_md1428"></a>
 მიზანი</h1>
 <p>მოდულებს შორის კომუნიკაციის მიზანია უზრუნველყოს მაქსიმალური იზოლაცია, მოქნილობა და გაფართოებადობა, რათა სისტემის ნებისმიერი ნაწილი იყოს დამოუკიდებელი და მარტივად შესაცვლელი.</p>
-<h1><a class="anchor" id="autotoc_md1401"></a>
+<h1><a class="anchor" id="autotoc_md1429"></a>
 ძირითადი პატერნები</h1>
-<h2><a class="anchor" id="autotoc_md1402"></a>
+<h2><a class="anchor" id="autotoc_md1430"></a>
 1. Service Locator Pattern</h2>
 <ul>
 <li>გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის</li>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1403"></a>
+<h2><a class="anchor" id="autotoc_md1431"></a>
 2. Event Bus Pattern</h2>
 <ul>
 <li>გამოიყენება broadcast/notification სცენარებისთვის</li>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, display_handle_sensor_data);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1404"></a>
+<h1><a class="anchor" id="autotoc_md1432"></a>
 სწორი გამოყენების წესები</h1>
 <ul>
 <li>Service Locator გამოიყენეთ მხოლოდ კონკრეტული API-ს გამოძახებისთვის</li>
@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <li>არასდროს გამოიყენოთ ორივე პატერნი ერთსა და იმავე მიზნისთვის</li>
 <li>აკრძალულია პირდაპირი #include სხვა მოდულის header-ების</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1405"></a>
+<h1><a class="anchor" id="autotoc_md1433"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>
@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <li>Event Bus და Service Locator-ის არასწორი მიქსი</li>
 <li>System Manager-ის მიერ MQTT-ის პირდაპირი მართვა</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1406"></a>
+<h1><a class="anchor" id="autotoc_md1434"></a>
 მაგალითები</h1>
 <div class="fragment"><div class="line">sequenceDiagram</div>
 <div class="line">    participant Cloud as MQTT Broker</div>
@@ -183,7 +183,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <div class="line"> </div>
 <div class="line">    EventBus-&gt;&gt;LoggerMod: 12. Forwards event</div>
 <div class="line">    LoggerMod-&gt;&gt;LoggerMod: 13. Logs: &quot;INFO: Relay &#39;relay1&#39; state changed to ON&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1407"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1435"></a>
 Service Locator</h2>
 <div class="fragment"><div class="line"><span class="comment">// Display module API-ის გამოძახება</span></div>
 <div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
@@ -191,7 +191,7 @@ Service Locator</h2>
 <div class="line">    ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;disable();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1408"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1436"></a>
 Event Bus</h2>
 <div class="fragment"><div class="line"><span class="comment">// სენსორის მონაცემების გავრცელება</span></div>
 <div class="line">telemetry_data_t sensor_telemetry_data = {</div>

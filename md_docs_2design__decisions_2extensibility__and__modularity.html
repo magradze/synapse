@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2extensibil
   <div class="headertitle"><div class="title">გაფართოებადობისა და მოდულარობის არქიტექტურული გადაწყვეტილებები (Extensibility &amp; Modularity)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1036"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1038"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1064"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1066"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში გაფართოებადობისა და მოდულარობის არქიტექტურულ გადაწყვეტილებებს, არჩეულ სტრატეგიებს, მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1040"></a>
+<h1><a class="anchor" id="autotoc_md1068"></a>
 კონტექსტი</h1>
 <p>ფრეიმვორქის მთავარი ღირებულებაა მარტივად გაფართოებადი და მოდულური არქიტექტურა, რომელიც საშუალებას აძლევს დეველოპერებს დაამატონ ან შეცვალონ ფუნქციონალი ძირითადი სისტემის ცვლილების გარეშე. აუცილებელია მკაფიო სტანდარტები და სტრუქტურა, რათა უზრუნველყოფილი იყოს კოდის ერთგვაროვნება და მარტივი მხარდაჭერა.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1042"></a>
+<h1><a class="anchor" id="autotoc_md1070"></a>
 არჩეული სტრატეგიები</h1>
 <ul>
 <li><b>მოდულური არქიტექტურა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით</li>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2extensibil
 <li><b>კონვენციების დაცვა:</b> ყველა მოდული მიჰყვება naming, structure და documentation სტანდარტებს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1044"></a>
+<h1><a class="anchor" id="autotoc_md1072"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li>მოდულური არქიტექტურა ამარტივებს ახალი ფუნქციონალის დამატებას და ტესტირებას</li>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2extensibil
 <li>ალტერნატივა (მონოლითური კოდი, პირდაპირი დამოკიდებულებები) უარყოფილია გაფართოებადობისა და ტესტირებადობის არქონის გამო</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1046"></a>
+<h1><a class="anchor" id="autotoc_md1074"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>ახალი მოდულის დამატება ან არსებული მოდულის გაფართოება შესაძლებელია მინიმალური ძალისხმევით</li>
@@ -131,9 +131,9 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2extensibil
 <li>მოდულების დამოუკიდებლობა ზრდის სისტემის სტაბილურობას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1048"></a>
+<h1><a class="anchor" id="autotoc_md1076"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1049"></a>
+<h2><a class="anchor" id="autotoc_md1077"></a>
 ახალი მოდულის დამატება</h2>
 <div class="fragment"><div class="line">components/modules/sensors/new_sensor_module/</div>
 <div class="line">├── CMakeLists.txt</div>
@@ -143,13 +143,13 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2extensibil
 <div class="line">│   └── new_sensor_module.h</div>
 <div class="line">├── src/</div>
 <div class="line">│   └── new_sensor_module.c</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1050"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1078"></a>
 Public API-ის გამოყენება</h2>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *new_sensor_module_create(<span class="keyword">const</span> cJSON *config);</div>
 <div class="line">esp_err_t new_sensor_module_api_enable(<span class="keywordtype">void</span>);</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1052"></a>
+<h1><a class="anchor" id="autotoc_md1080"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>პირდაპირი დამოკიდებულება სხვა მოდულზე</li>
@@ -162,7 +162,7 @@ Public API-ის გამოყენება</h2>
 <li>ჩაატარეთ ტესტირება და აღწერეთ ცვლილებები დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1054"></a>
+<h1><a class="anchor" id="autotoc_md1082"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>

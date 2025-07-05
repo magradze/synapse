@@ -24,5 +24,6 @@ var searchData=
   ['და_20best_20practices_20extending_20the_20framework_21',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
   ['დიაგნოსტიკა_22',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
   ['დიაგნოსტიკა_20და_20გამოსწორება_23',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
-  ['დიბაგინგის_20სახელმძღვანელო_24',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]]
+  ['დიბაგინგის_20სახელმძღვანელო_24',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
+  ['დონეები_20initialization_20levels_25',['🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)',['../md_docs_2convention_2initialization__levels.html',1,'']]]
 ];

@@ -1,21 +1,23 @@
 <map id="components/interfaces/include/service_types.h" name="components/interfaces/include/service_types.h">
-<area shape="rect" id="Node000001" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="647,5,825,45"/>
-<area shape="rect" id="Node000002" href="$service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="643,93,829,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="739,59,739,93,733,93,733,59"/>
+<area shape="rect" id="Node000001" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="772,5,951,45"/>
+<area shape="rect" id="Node000002" href="$service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="769,93,954,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="864,59,864,93,859,93,859,59"/>
 <area shape="rect" id="Node000004" href="$system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="5,189,192,229"/>
-<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="657,52,166,191,164,186,656,47"/>
-<area shape="rect" id="Node000008" href="$command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="1314,181,1505,236"/>
-<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="820,46,1314,179,1313,184,819,52"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="768,51,205,184,175,191,173,186,203,179,767,46"/>
+<area shape="rect" id="Node000009" href="$command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="1550,181,1741,236"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="959,46,1539,179,1551,181,1549,187,1538,184,958,51"/>
 <area shape="rect" id="Node000003" href="$service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="217,189,402,229"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="631,138,414,184,383,191,382,186,413,179,630,133"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="630,127,432,149,204,184,170,191,169,186,204,179,431,144,629,122"/>
-<area shape="rect" id="Node000005" href="$health__monitor_8c.html" title="Monitors system health metrics like heap, CPU, and tasks." alt="" coords="426,181,603,236"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="680,141,578,184,576,179,678,136"/>
-<area shape="rect" id="Node000006" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="628,181,844,236"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="739,147,739,181,733,181,733,147"/>
-<area shape="rect" id="Node000007" href="$watchdog__manager_8c.html" title="Intelligent watchdog timer management with heartbeat monitoring." alt="" coords="869,181,1075,236"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="798,136,907,179,905,184,796,141"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="843,121,1056,143,1180,159,1303,179,1314,181,1313,186,1302,184,1179,164,1055,148,842,126"/>
-<area shape="rect" id="Node000009" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="1099,181,1290,236"/>
-<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="843,131,1089,179,1099,181,1098,186,1087,184,842,136"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="755,130,594,153,414,184,381,191,380,186,413,179,593,148,755,125"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="755,123,503,144,353,162,204,184,169,191,168,186,204,179,353,156,502,139,755,118"/>
+<area shape="rect" id="Node000005" href="$wifi__manager_8c.html" title="WiFi კავშირის და კავშირის აღდგენის მართვის იმპლემენტაცია." alt="" coords="426,181,638,236"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="782,140,625,184,624,179,781,135"/>
+<area shape="rect" id="Node000006" href="$health__monitor_8c.html" title="Monitors system health metrics like heap, CPU, and tasks." alt="" coords="662,181,839,236"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="830,144,784,183,780,179,827,140"/>
+<area shape="rect" id="Node000007" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="864,181,1080,236"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="896,140,943,179,939,183,892,144"/>
+<area shape="rect" id="Node000008" href="$watchdog__manager_8c.html" title="Intelligent watchdog timer management with heartbeat monitoring." alt="" coords="1105,181,1311,236"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="945,134,1111,179,1110,184,944,139"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="968,118,1229,139,1384,156,1539,179,1550,181,1549,186,1538,184,1384,161,1228,144,968,123"/>
+<area shape="rect" id="Node000010" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="1335,181,1526,236"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="968,124,1136,147,1324,179,1335,181,1334,186,1324,184,1135,152,968,130"/>
 </map>

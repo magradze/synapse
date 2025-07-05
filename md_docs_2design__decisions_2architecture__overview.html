@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
   <div class="headertitle"><div class="title">Synapse ESP Framework — არქიტექტურის მიმოხილვა</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md951"></a> </p>
-<h1><a class="anchor" id="autotoc_md952"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md979"></a> </p>
+<h1><a class="anchor" id="autotoc_md980"></a>
 მიზანი</h1>
 <p>Synapse ESP Framework-ის არქიტექტურა შექმნილია იმისთვის, რომ უზრუნველყოს მოდულური, გაფართოებადი და სტანდარტიზებული ჩაშენებული სისტემების (embedded systems) განვითარება ESP-IDF ეკოსისტემაში. მთავარი პრინციპებია მოდულურობა, იზოლაცია, ავტომატიზაცია და მაღალი ხარისხის კოდის უზრუნველყოფა.</p>
-<h1><a class="anchor" id="autotoc_md953"></a>
+<h1><a class="anchor" id="autotoc_md981"></a>
 ძირითადი არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>ავტომატიზაცია:</b> მოდულების ჩართვა/გამორთვა და ბილდში მოხვედრა სრულად ავტომატიზირებულია Kconfig და CMake სისტემების გამოყენებით.</li>
 <li><b>დოკუმენტირებულობა:</b> ყველა არქიტექტურული გადაწყვეტილება და სტანდარტი აღწერილია შესაბამის დოკუმენტებში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md954"></a>
+<h1><a class="anchor" id="autotoc_md982"></a>
 არქიტექტურული ფენები და ძირითადი კომპონენტები</h1>
 <ol type="1">
 <li><b>Core (ბირთვი):</b><ul>
@@ -132,14 +132,14 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md955"></a>
+<h1><a class="anchor" id="autotoc_md983"></a>
 მოდულებს შორის კომუნიკაციის პატერნები</h1>
 <ul>
 <li><b>Service Locator Pattern:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის. უზრუნველყოფს მოდულებს შორის მინიმალურ დამოკიდებულებას.</li>
 <li><b>Event Bus Pattern:</b> გამოიყენება broadcast/notification სცენარებისთვის, როცა ერთზე მეტ მოდულს სჭირდება ერთი მოვლენის მიღება.</li>
 <li><b>აკრძალულია:</b> პირდაპირი დამოკიდებულება მოდულებს შორის და სხვა მოდულის header-ის პირდაპირი ჩასმა (#include).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md956"></a>
+<h1><a class="anchor" id="autotoc_md984"></a>
 სიცოცხლის ციკლი</h1>
 <ul>
 <li><b>Create:</b> მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა</li>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>Enable/Disable:</b> მოდულის აქტივაცია ან დროებით გათიშვა</li>
 <li><b>Deinit:</b> ყველა გამოყოფილი რესურსის გათავისუფლება</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md957"></a>
+<h1><a class="anchor" id="autotoc_md985"></a>
 საქაღალდეებისა და ფაილების სტრუქტურა</h1>
 <ul>
 <li><b>main/</b> — მთავარი აპლიკაცია (app_main და ძირითადი ლოგიკა)</li>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>components/modules/</b> — კატეგორიებად დაყოფილი მოდულები</li>
 <li><b>docs/</b> — დოკუმენტაცია და სტანდარტები</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md958"></a>
+<h1><a class="anchor" id="autotoc_md986"></a>
 არქიტექტურული დიაგრამა (მოკლე)</h1>
 <div class="fragment"><div class="line">┌──────────────┐      Service Locator     ┌──────────────┐</div>
 <div class="line">│   Module A   │ ───────────────────────► │   Module B   │</div>
@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <div class="line">┌──────────────┐</div>
 <div class="line">│   Module C   │</div>
 <div class="line">└──────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md959"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md987"></a>
 სტანდარტები და დოკუმენტაცია</h1>
 <p>ყველა naming, structure, communication და სხვა წესები აღწერილია შესაბამის convention დოკუმენტებში:</p><ul>
 <li>variable_naming.md</li>
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li>logging_standards.md</li>
 <li>coding_doxygen_standard.md</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md960"></a>
+<h1><a class="anchor" id="autotoc_md988"></a>
 დასკვნა</h1>
 <p>Synapse ESP Framework-ის არქიტექტურა უზრუნველყოფს მოქნილ, სტანდარტიზებულ და გაფართოებად ჩაშენებულ სისტემებს, სადაც თითოეული მოდული დამოუკიდებელია, ადვილად ტესტირებადი და დოკუმენტირებულია. ყველა გადაწყვეტილება და სტანდარტი დეტალურადაა აღწერილი დოკუმენტაციაში, რაც ამარტივებს როგორც ახალ, ისე გამოცდილ დეველოპერებს ჩართვას და განვითარებას. </p>
 </div></div><!-- contents -->

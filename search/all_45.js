@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['🌡️_20ტემპერატურის_20სენსორი_0',['🌡️ ტემპერატურის სენსორი',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1316',1,'']]],
-  ['🌡️_20ტემპერატურის_20სენსორი_3a_1',['🌡️ ტემპერატურის სენსორი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md917',1,'']]]
+  ['❌_20არასწორი_0',['❌ არასწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md933',1,'']]],
+  ['❌_20პირდაპირი_20dependencies_1',['❌ პირდაპირი Dependencies',['../md_docs_2convention_2communication__patterns.html#autotoc_md755',1,'']]],
+  ['❌_20ჩვეული_20შეცდომები_2',['❌ ჩვეული შეცდომები',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1360',1,'']]],
+  ['❌_20ჩვეული_20შეცდომები_3a_3',['❌ ჩვეული შეცდომები:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md966',1,'']]],
+  ['❌_20mixed_20patterns_4',['❌ Mixed Patterns',['../md_docs_2convention_2communication__patterns.html#autotoc_md756',1,'']]],
+  ['❌_20system_20manager_20mqtt_20handling_5',['❌ System Manager MQTT Handling',['../md_docs_2convention_2communication__patterns.html#autotoc_md757',1,'']]]
 ];

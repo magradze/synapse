@@ -1,0 +1,21 @@
+{
+    "name": "storage_manager",
+    "version": "1.0.0",
+    "description": "Centralized non-volatile storage (NVS) management service.",
+    "author": "Synapse Framework Team",
+    "init_function": "storage_manager_create",
+    "init_level": 10,
+    "dependencies": [],
+    "type": "storage",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_STORAGE_MANAGER_ENABLED",
+    "runtime_commands": {
+        "start": "storage_manager_start",
+        "stop": "storage_manager_disable",
+        "enable": "storage_manager_enable",
+        "disable": "storage_manager_disable",
+        "reconfigure": "storage_manager_reconfigure",
+        "status": "storage_manager_get_status",
+        "handle_event": "storage_manager_handle_event"
+    }
+}

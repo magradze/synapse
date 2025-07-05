@@ -1,5 +1,5 @@
-# Wifi_Manager Module CMake Configuration
-# Component for WiFi connection management
+# System Timer Module CMake Configuration
+# Component for A centralized service for scheduling events.
 # Author: Synapse Framework Team
 # Version: 1.0.0
 
@@ -9,32 +9,27 @@
 # 3. თუ CONFIG variable არსებობს და გამორთულია, რეგისტრირდება ცარიელი placeholder-ით
 
 # შევამოწმოთ არსებობს თუ არა CONFIG ცვლადი (configure ეტაპის შემდეგ)
-if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
+if(DEFINED CONFIG_MODULE_SYSTEM_TIMER_ENABLED)
     # CONFIG ცვლადი არსებობს - ვამოწმებთ მნიშვნელობას
-    if(CONFIG_MODULE_WIFI_MANAGER_ENABLED)
+    if(CONFIG_MODULE_SYSTEM_TIMER_ENABLED)
         # მოდული ჩართულია - სრული რეგისტრაცია
-        message(STATUS "Wifi_Manager Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
+        message(STATUS "System Timer Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
         idf_component_register(
-            SRCS "src/wifi_manager.c"
+            SRCS "src/system_timer.c"
             INCLUDE_DIRS "include"
             REQUIRES 
                 core 
                 interfaces
-                esp_wifi
-                esp_event
-                nvs_flash
-                wifi_provisioning
-                storage_manager
+                esp_timer
             PRIV_REQUIRES
                 json
-                esp_system
         )
     else()
         # მოდული გამორთულია - ცარიელი placeholder
-        message(STATUS "Wifi_Manager Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
+        message(STATUS "System Timer Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
         
         # შევქმნათ ცარიელი source ფაილი რათა CMake არ ჩავარდეს
-        set(EMPTY_SOURCE_CONTENT "// wifi_manager module disabled by Kconfig\n// This is an empty placeholder to prevent CMake errors\n")
+        set(EMPTY_SOURCE_CONTENT "// system_timer module disabled by Kconfig\n// This is an empty placeholder to prevent CMake errors\n")
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/empty_placeholder.c" "${EMPTY_SOURCE_CONTENT}")
         
         idf_component_register(
@@ -45,20 +40,15 @@ if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
     endif()
 else()
     # CONFIG ცვლადი ჯერ არ არსებობს (configure ეტაპი) - default რეგისტრაცია
-    message(STATUS "Wifi_Manager Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
+    message(STATUS "System Timer Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
     idf_component_register(
-        SRCS "src/wifi_manager.c"
+        SRCS "src/system_timer.c"
         INCLUDE_DIRS "include"
         REQUIRES 
             core 
             interfaces
-            esp_wifi
-            esp_event
-            nvs_flash
-            wifi_provisioning
-            storage_manager
+            esp_timer
         PRIV_REQUIRES
             json
-            esp_system
     )
 endif()

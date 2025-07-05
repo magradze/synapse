@@ -1,0 +1,14 @@
+{
+  "name": "timer_test",
+  "version": "1.0.0",
+  "description": "A module to test the System Timer and RGB LED services.",
+  "author": "Synapse Framework Team",
+  "init_function": "timer_test_create",
+  "dependencies": [
+    "system_timer",
+    "rgb_led_indicator"
+  ],
+  "type": "timer_test",
+  "build_enabled": true,
+  "conditional_config": "CONFIG_MODULE_TIMER_TEST_ENABLED"
+}

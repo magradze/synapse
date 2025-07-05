@@ -10,6 +10,7 @@
 // --- Includes ---
 #include "rgb_led_indicator.h"
 #include "rgb_led_interface.h"
+#include "ble_prov_interface.h"
 #include "base_module.h"
 #include "event_bus.h"
 #include "event_data_wrapper.h"
@@ -272,6 +273,24 @@ static esp_err_t rgb_led_indicator_start(module_t *self)
     {
         ESP_LOGE(TAG, "Failed to create LED control task");
         return ESP_FAIL;
+    }
+
+    // ★★★ ახალი ლოგიკა: შევამოწმოთ provisioning-ის სტატუსი ★★★
+    service_handle_t prov_handle = fmw_service_get("main_ble_provisioning");
+    if (prov_handle)
+    {
+        ble_prov_api_t *prov_api = (ble_prov_api_t *)prov_handle;
+        if (prov_api->is_provisioning_active())
+        {
+            ESP_LOGI(TAG, "Provisioning is already active. Starting pulse effect.");
+            // პირდაპირ გავუშვათ პულსაციის ბრძანება
+            led_command_t cmd = {LED_MODE_PULSE, 255, 162, 0, 3000, false};
+            send_command_to_task(self, &cmd);
+        }
+    }
+    else
+    {
+        ESP_LOGW(TAG, "BLE Provisioning service not found. Cannot check initial state.");
     }
 
     self->status = MODULE_STATUS_RUNNING;

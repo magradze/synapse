@@ -1,5 +1,5 @@
-# Wifi_Manager Module CMake Configuration
-# Component for WiFi connection management
+# Timer Test Module Module CMake Configuration
+# Component for A module to test the System Timer and RGB LED services.
 # Author: Synapse Framework Team
 # Version: 1.0.0
 
@@ -9,32 +9,28 @@
 # 3. თუ CONFIG variable არსებობს და გამორთულია, რეგისტრირდება ცარიელი placeholder-ით
 
 # შევამოწმოთ არსებობს თუ არა CONFIG ცვლადი (configure ეტაპის შემდეგ)
-if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
+if(DEFINED CONFIG_MODULE_TIMER_TEST_ENABLED)
     # CONFIG ცვლადი არსებობს - ვამოწმებთ მნიშვნელობას
-    if(CONFIG_MODULE_WIFI_MANAGER_ENABLED)
+    if(CONFIG_MODULE_TIMER_TEST_ENABLED)
         # მოდული ჩართულია - სრული რეგისტრაცია
-        message(STATUS "Wifi_Manager Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
+        message(STATUS "Timer Test Module Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
         idf_component_register(
-            SRCS "src/wifi_manager.c"
+            SRCS "src/timer_test_module.c"
             INCLUDE_DIRS "include"
             REQUIRES 
                 core 
                 interfaces
-                esp_wifi
-                esp_event
-                nvs_flash
-                wifi_provisioning
-                storage_manager
+                system_timer      # ★★★ დამოკიდებულება ტაიმერის სერვისზე ★★★
+                rgb_led_indicator # ★★★ დამოკიდებულება LED-ის სერვისზე ★★★
             PRIV_REQUIRES
                 json
-                esp_system
         )
     else()
         # მოდული გამორთულია - ცარიელი placeholder
-        message(STATUS "Wifi_Manager Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
+        message(STATUS "Timer Test Module Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
         
         # შევქმნათ ცარიელი source ფაილი რათა CMake არ ჩავარდეს
-        set(EMPTY_SOURCE_CONTENT "// wifi_manager module disabled by Kconfig\n// This is an empty placeholder to prevent CMake errors\n")
+        set(EMPTY_SOURCE_CONTENT "// timer_test_module module disabled by Kconfig\n// This is an empty placeholder to prevent CMake errors\n")
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/empty_placeholder.c" "${EMPTY_SOURCE_CONTENT}")
         
         idf_component_register(
@@ -45,20 +41,16 @@ if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
     endif()
 else()
     # CONFIG ცვლადი ჯერ არ არსებობს (configure ეტაპი) - default რეგისტრაცია
-    message(STATUS "Wifi_Manager Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
+    message(STATUS "Timer Test Module Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
     idf_component_register(
-        SRCS "src/wifi_manager.c"
+        SRCS "src/timer_test_module.c"
         INCLUDE_DIRS "include"
         REQUIRES 
             core 
             interfaces
-            esp_wifi
-            esp_event
-            nvs_flash
-            wifi_provisioning
-            storage_manager
+            system_timer      # ★★★ დამოკიდებულება ტაიმერის სერვისზე ★★★
+            rgb_led_indicator # ★★★ დამოკიდებულება LED-ის სერვისზე ★★★
         PRIV_REQUIRES
             json
-            esp_system
     )
 endif()

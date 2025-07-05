@@ -1,4 +1,20 @@
-# Name,   Type, SubType, Offset,  Size, Flags
-nvs,      data, nvs,     0x9000,  0x6000,
-phy_init, data, phy,     0xf000,  0x1000,
-factory,  app,  factory, 0x10000, 0x200000,
+# Synapse Framework Standard Partition Table for 4MB Flash with OTA and SPIFFS
+#
+# Each line contains: name, type, subtype, offset, size, flags
+# The 'Offset' column is left blank to allow the build system to automatically
+# calculate the starting address for each partition.
+
+# 1. NVS partition for key-value storage (used by Storage Manager's NVS backend)
+nvs,      data, nvs,     ,        24K
+
+# 2. PHY data partition for RF calibration data
+phy_init, data, phy,     ,        4K
+
+# 3. OTA app partitions (two partitions for safe updates)
+# Size is set to 1.8MB per app partition
+ota_0,    app,  ota_0,   ,        1856K
+ota_1,    app,  ota_1,   ,        1856K
+
+# 4. SPIFFS partition for file storage (used by Storage Manager's SPIFFS backend)
+# The label 'spiffs' must match the one in Kconfig.
+spiffs,   data, spiffs,  ,        256K

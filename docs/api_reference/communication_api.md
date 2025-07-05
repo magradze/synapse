@@ -1,111 +1,116 @@
-# Synapse Communication Module API Reference
+# 📡 Synapse Communication Module API Reference
 
-## მიზანი
+## 🎯 მიზანი
 
-ეს დოკუმენტი აღწერს Synapse Framework-ის კომუნიკაციის (communication) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.
-
----
-
-## MQTT Module API
-
-### module_t *mqtt_module_create(const cJSON *config);
-- ქმნის ახალი MQTT მოდულის ინსტანციას გადაცემული კონფიგურაციით.
-- არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)
-- აბრუნებს: module_t* წარმატების შემთხვევაში, NULL შეცდომისას.
-
-### esp_err_t mqtt_module_connect(const char *broker_url);
-- აკავშირებს MQTT მოდულს ბროკერთან
-
-### esp_err_t mqtt_module_publish(const char *topic, const char *message);
-- აქვეყნებს შეტყობინებას მითითებულ topic-ზე
-
-### esp_err_t mqtt_module_subscribe(const char *topic, mqtt_message_handler_t handler);
-- იწერს მითითებულ topic-ზე და ამუშავებს მიღებულ შეტყობინებებს handler-ით
+ეს დოკუმენტი აღწერს Synapse Framework-ის საკომუნიკაციო მოდულების მიერ მოწოდებულ **სტანდარტულ სერვისის API-ებს**. ეს API-ები ხელმისაწვდომია `Service Locator`-ის მეშვეობით და საშუალებას აძლევს სხვა მოდულებს, გამოიყენონ ქსელური ფუნქციონალი (WiFi, MQTT, ESP-NOW) იზოლირებულად და უსაფრთხოდ.
 
 ---
 
-## WiFi Module API
+## 📶 WiFi Manager Service API
 
-### module_t *wifi_module_create(const cJSON *config);
-- ქმნის ახალი WiFi მოდულის ინსტანციას გადაცემული კონფიგურაციით.
+**სერვისის ტიპი:** `FMW_SERVICE_TYPE_WIFI_API`  
+**ინტერფეისის სტრუქტურა:** `wifi_api_t` (განსაზღვრულია `wifi_interface.h`-ში)
 
-### esp_err_t wifi_module_connect(const char *ssid, const char *password);
-- აკავშირებს WiFi მოდულს მითითებულ ქსელთან
+### ძირითადი ფუნქციები
 
-### esp_err_t wifi_module_disconnect(void);
-- წყვეტს WiFi კავშირს
+- **`esp_err_t connect(const char *ssid, const char *password);`**  
+    აკავშირებს მოწყობილობას მითითებულ WiFi ქსელთან. თუ მონაცემები სწორია, ისინი ასევე ინახება `Storage Manager`-ის მეშვეობით.
 
----
+- **`esp_err_t disconnect(void);`**  
+    წყვეტს მიმდინარე WiFi კავშირს.
 
-## ESP-NOW Module API
+- **`bool is_connected(void);`**  
+    აბრუნებს `true`-ს, თუ მოწყობილობა დაკავშირებულია ქსელთან და აქვს IP მისამართი.
 
-### module_t *espnow_module_create(const cJSON *config);
-- ქმნის ახალი ESP-NOW მოდულის ინსტანციას გადაცემული კონფიგურაციით.
+- **`esp_err_t get_ip_info(esp_netif_ip_info_t *ip_info);`**  
+    აბრუნებს მიმდინარე IP კონფიგურაციას.
 
-### esp_err_t espnow_module_init(const cJSON *config);
-- ინიციალიზაციას უკეთებს ESP-NOW მოდულს.
+### 💡 WiFi API-ს გამოყენების მაგალითი
 
-### esp_err_t espnow_module_send(const uint8_t *peer_mac, const uint8_t *data, size_t data_length);
-- აგზავნის მონაცემებს მითითებულ peer MAC მისამართზე.
-
-### esp_err_t espnow_module_register_receive_handler(espnow_receive_handler_t handler);
-- რეგისტრირებს მიღებული მონაცემების დამმუშავებელ handler-ს.
-
----
-
-## Event Handling API
-
-### static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_data);
-- ამუშავებს MQTT მოდულის მიერ მიღებულ მოვლენებს
-
-### static void wifi_handle_event(module_t *module, int32_t event_id, void *event_data);
-- ამუშავებს WiFi მოდულის მიერ მიღებულ მოვლენებს
-
----
-
-## Configuration Parsing API
-
-### static esp_err_t parse_mqtt_config(const cJSON *config, mqtt_private_data_t *mqtt_data);
-- კითხულობს და ამოწმებს MQTT მოდულის კონფიგურაციას
-
-### static esp_err_t parse_wifi_config(const cJSON *config, wifi_private_data_t *wifi_data);
-- კითხულობს და ამოწმებს WiFi მოდულის კონფიგურაციას
-
----
-
-## Naming & Structure
-- ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს [variable_naming.md](../convention/variable_naming.md) და [function_naming.md](../convention/function_naming.md) წესებს.
-- იხილეთ [module_structure.md](../convention/module_structure.md) სრული სტრუქტურისთვის.
-
----
-
-## მაგალითები
-
-**MQTT Publish:**
 ```c
-mqtt_module_publish("/synapse/device/relay1/state", "{\"state\":\"on\"}");
-```
+#include "service_locator.h"
+#include "wifi_interface.h" // უნდა შეიქმნას interfaces დირექტორიაში
 
-**WiFi Connect:**
-```c
-wifi_module_connect("MyWiFi", "password123");
-```
-
-**ESP-NOW მონაცემის გაგზავნა:**
-```c
-uint8_t peer_mac[6] = {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0xCC};
-uint8_t payload[] = "Hello, Synapse!";
-espnow_module_send(peer_mac, payload, sizeof(payload));
-```
-
-**ESP-NOW მიღებული მონაცემის დამუშავება:**
-```c
-void my_espnow_receive_handler(const uint8_t *src_mac, const uint8_t *data, size_t data_length) {
-    // ... process received data ...
+void check_wifi_status() {
+    service_handle_t wifi_handle = fmw_service_get("main_wifi");
+    if (wifi_handle) {
+        wifi_api_t *wifi_api = (wifi_api_t *)wifi_handle;
+        
+        if (wifi_api->is_connected()) {
+            ESP_LOGI(TAG, "WiFi is connected.");
+        } else {
+            ESP_LOGW(TAG, "WiFi is disconnected.");
+        }
+    }
 }
-espnow_module_register_receive_handler(my_espnow_receive_handler);
 ```
 
 ---
 
-დამატებითი დეტალებისთვის იხილეთ [core_api.md](core_api.md), [module_api.md](module_api.md) და [structure] დოკუმენტები.
+## ☁️ MQTT Client Service API
+
+**სერვისის ტიპი:** `FMW_SERVICE_TYPE_MQTT_API`  
+**ინტერფეისის სტრუქტურა:** `mqtt_api_t` (განსაზღვრულია `mqtt_interface.h`-ში)
+
+### ძირითადი ფუნქციები
+
+- **`esp_err_t connect(void);`**  
+    იწყებს კავშირს კონფიგურაციაში მითითებულ MQTT ბროკერთან.
+
+- **`esp_err_t publish(const char *topic, const char *data, int qos, bool retain);`**  
+    აქვეყნებს შეტყობინებას მითითებულ თემაზე (topic).
+
+- **`esp_err_t subscribe(const char *topic, int qos);`**  
+    იწერს მითითებულ თემას. მიღებული შეტყობინებები დამუშავდება მოდულის შიდა ლოგიკით.
+
+- **`bool is_connected(void);`**  
+    აბრუნებს `true`-ს, თუ MQTT კლიენტი დაკავშირებულია ბროკერთან.
+
+### 💡 MQTT API-ს გამოყენების მაგალითი
+
+```c
+#include "service_locator.h"
+#include "mqtt_interface.h"
+
+void publish_sensor_data(float temperature) {
+    service_handle_t mqtt_handle = fmw_service_get("main_mqtt_broker");
+    if (mqtt_handle) {
+        mqtt_api_t *mqtt_api = (mqtt_api_t *)mqtt_handle;
+        
+        if (mqtt_api->is_connected()) {
+            char payload[32];
+            snprintf(payload, sizeof(payload), "{\"temp\": %.2f}", temperature);
+            mqtt_api->publish("/sensors/temperature", payload, 1, false);
+        }
+    }
+}
+```
+
+---
+
+## ⚡ ESP-NOW Service API
+
+**სერვისის ტიპი:** `FMW_SERVICE_TYPE_ESPNOW_API` (უნდა დაემატოს `service_types.h`-ში)  
+**ინტერფეისის სტრუქტურა:** `espnow_api_t` (განსაზღვრულია `espnow_interface.h`-ში)
+
+### ძირითადი ფუნქციები
+
+- **`esp_err_t add_peer(const uint8_t *mac_addr, uint8_t channel);`**  
+    ამატებს ახალ ESP-NOW მოწყობილობას (peer) სანდო სიაში.
+
+- **`esp_err_t send_data(const uint8_t *mac_addr, const uint8_t *data, size_t len);`**  
+    აგზავნის მონაცემებს მითითებულ MAC მისამართზე.
+
+- **`esp_err_t register_receive_callback(espnow_recv_cb_t callback);`**  
+    არეგისტრირებს callback ფუნქციას, რომელიც გამოიძახება მონაცემების მიღებისას.
+
+---
+
+## 📜 Naming & Structure კონვენციები
+
+- ყველა საკომუნიკაციო სერვისის API სტრუქტურა უნდა იყოს განსაზღვრული `components/interfaces/include` დირექტორიაში შესაბამის `*_interface.h` ფაილში.
+- ფუნქციების სახელები უნდა მიჰყვებოდეს [function_naming.md](../convention/function_naming.md) წესებს.
+
+---
+
+დამატებითი დეტალებისთვის იხილეთ [core_api.md](core_api.md) და შესაბამისი მოდულების `README.md` ფაილები.

@@ -1,6 +1,6 @@
 {
   "firmware": {
-    "version": "2.6.0",
+    "version": "3.0.0",
     "description": "Implemented Service Locator pattern for I2C bus decoupling."
   },
   "global_config": {
@@ -76,6 +76,27 @@
         "instance_name": "main_cmd_router",
         "enable_serial_shell": true,
         "serial_shell_prompt": "SYNAPSE> "
+      }
+    },
+    {
+      "type": "storage_manager",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_storage"
+      }
+    },
+    {
+      "type": "system_timer",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_timer_service"
+      }
+    },
+    {
+      "type": "timer_test",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_timer_test"
       }
     }
   ]

@@ -1,0 +1,21 @@
+{
+    "name": "system_timer",
+    "version": "1.0.0",
+    "description": "A centralized service for scheduling events.",
+    "author": "Synapse Framework Team",
+    "init_function": "system_timer_create",
+    "init_level": 35,
+    "dependencies": [],
+    "type": "system_timer",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_SYSTEM_TIMER_ENABLED",
+    "runtime_commands": {
+        "start": "system_timer_start",
+        "stop": "system_timer_disable",
+        "enable": "system_timer_enable",
+        "disable": "system_timer_disable",
+        "reconfigure": "system_timer_reconfigure",
+        "status": "system_timer_get_status",
+        "handle_event": "system_timer_handle_event"
+    }
+}

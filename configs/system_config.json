@@ -84,6 +84,20 @@
       "config": {
         "instance_name": "main_storage"
       }
+    },
+    {
+      "type": "system_timer",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_timer_service"
+      }
+    },
+    {
+      "type": "timer_test",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_timer_test"
+      }
     }
   ]
 }

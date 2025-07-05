@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🧩_20strong_20დონე_205_3a_20მაღალი_20დონის_20კომპოზიტური_20მოდულები_2080_20100_20strong_0',['🧩 &lt;strong&gt;დონე 5: მაღალი დონის კომპოზიტური მოდულები (80-100)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md866',1,'']]]
+  ['🔗_20base_20module_20interface_20კრიტიკულად_20განახლებული_0',['3. 🔗 Base Module Interface (კრიტიკულად განახლებული)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1359',1,'']]],
+  ['🔗_20base_20module_20interface_3a_1',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md961',1,'']]]
 ];

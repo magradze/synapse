@@ -14,7 +14,7 @@ var searchData=
   ['practices_11',['practices',['../md_docs_2performance_2performance__best__practices.html',1,'საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)'],['../md_docs_2security_2security__best__practices.html',1,'უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)']]],
   ['practices_20extending_20the_20framework_12',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
   ['project_20overview_13',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],
-  ['provisioning_20module_20api_20reference_14',['Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]],
+  ['provisioning_20module_20api_20reference_14',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]],
   ['pull_20request_20template_15',['Synapse Pull Request Template',['../md_docs_2contributing_2pull__request__template.html',1,'']]],
   ['py_20ახალი_20მოდულის_20ავტომატური_20გენერატორი_16',['🚀 CREATE_MODULE.PY - ახალი მოდულის ავტომატური გენერატორი',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html',1,'']]],
   ['py_20tt_17',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],

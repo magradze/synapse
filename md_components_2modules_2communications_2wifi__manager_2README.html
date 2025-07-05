@@ -98,13 +98,13 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>wifi_manager</code> <br  />
  <b>კატეგორია:</b> <code>communications</code> <br  />
- <b>ვერსია:</b> 2.0.0 <br  />
+ <b>ვერსია:</b> 2.1.0 <br  />
  <b>ავტორი:</b> გიორგი მაგრაძე &amp; Synapse AI Assistant</p>
-<p><code>wifi_manager</code> არის Synapse Framework-ის ფუნდამენტური საკომუნიკაციო მოდული, რომელიც უზრუნველყოფს WiFi კავშირის სრულფასოვან მართვას. მისი მთავარი ამოცანებია:</p>
+<p><code>wifi_manager</code> არის Synapse Framework-ის ფუნდამენტური საკომუნიკაციო მოდული, რომელიც უზრუნველყოფს WiFi კავშირის სრულფასოვან, ავტომატიზებულ მართვას. მისი მთავარი ამოცანებია:</p>
 <ul>
-<li><b>კავშირის ავტომატური მართვა:</b> შენახული მონაცემებით (credentials) ქსელთან ავტომატური დაკავშირება.</li>
+<li><b>კავშირის ავტომატური მართვა:</b> შენახული მონაცემებით (credentials) ქსელთან ავტომატური დაკავშირება მოწყობილობის ჩართვისას.</li>
 <li><b>კავშირის აღდგენა:</b> კავშირის გაწყვეტის შემთხვევაში, მისი ავტომატურად აღდგენის მცდელობა ექსპონენციალური backoff სტრატეგიით.</li>
-<li><b>Provisioning-თან ინტეგრაცია:</b> ახალი ქსელის მონაცემების მიღება და შენახვა <code>provisioning</code> მოდულებიდან.</li>
+<li><b>Provisioning-თან ინტეგრაცია:</b> ახალი ქსელის მონაცემების მიღება <code>provisioning</code> მოდულებიდან და მათი უსაფრთხოდ შენახვა.</li>
 <li><b>სისტემური ივენთების გენერაცია:</b> სხვა მოდულების ინფორმირება WiFi კავშირის სტატუსის ცვლილების შესახებ (<code>CONNECTED</code>, <code>DISCONNECTED</code>, <code>IP_ASSIGNED</code>).</li>
 <li><b>CLI ინტეგრაცია:</b> სრული, ინტერაქტიული მართვა და დიაგნოსტიკა სერიული კონსოლიდან.</li>
 </ul>
@@ -112,13 +112,13 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 2. 🏗️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Event-driven არქიტექტურა:</b> მოდული აქტიურად იყენებს <code>Event Bus</code>-ს. ის როგორც <b>აქვეყნებს</b> ივენთებს საკუთარი სტატუსის შესახებ, ისე <b>გამოიწერს</b> სხვა მოდულების (მაგ., <code>provisioning</code>, <code>system_manager</code>) ივენთებს.</li>
-<li><b>მდგრადობა (Persistence):</b> ქსელის მონაცემები (SSID და პაროლი) უსაფრთხოდ ინახება <b>NVS (Non-Volatile Storage)</b> მეხსიერებაში, რაც უზრუნველყოფს, რომ მოწყობილობამ გადატვირთვის შემდეგ ავტომატურად შეძლოს ქსელთან დაკავშირება.</li>
+<li><b>აბსტრაგირებული მდგრადობა (Abstracted Persistence):</b> ქსელის მონაცემები (SSID და პაროლი) ინახება ცენტრალიზებული **<code>Storage Manager</code>** სერვისის მეშვეობით. ეს ნიშნავს, რომ <code>wifi_manager</code>-მა არ "იცის", მონაცემები ფიზიკურად NVS-ში ინახება თუ SPIFFS ფაილში, რაც სისტემას უკიდურესად მოქნილს ხდის.</li>
 <li><b>ფონური ოპერაციები:</b> მოდული ეყრდნობა ESP-IDF-ის <code>event loop</code> სისტემას და FreeRTOS ტაიმერებს, რათა კავშირის მართვის ყველა ოპერაცია ასინქრონულად, ფონურ რეჟიმში შესრულდეს.</li>
-<li><b>დეკაპლინგი (Decoupling):</b> მოდული არ არის პირდაპირ დამოკიდებული <code>command_router</code>-ზე. ის იყენებს <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთს, რათა ბრძანებების რეგისტრაცია მოახდინოს მხოლოდ მას შემდეგ, რაც დარწმუნდება, რომ <code>command_router</code>-ის სერვისი უკვე ხელმისაწვდომია.</li>
+<li><b>დაგვიანებული ინიციალიზაცია (Lazy Initialization of Dependencies):</b> მოდული არ არის პირდაპირ დამოკიდებული <code>command_router</code>-ზე. ის იყენებს <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთს, რათა ბრძანებების რეგისტრაცია მოახდინოს მხოლოდ მას შემდეგ, რაც დარწმუნდება, რომ <code>command_router</code>-ის სერვისი უკვე ხელმისაწვდომია.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
 3. ⚙️ კონფიგურაცია</h1>
-<p>მოდულის საბაზისო კონფიგურაცია ხდება <code>system_config.json</code> ფაილში, თუმცა მისი პარამეტრების უმეტესობა იმართება <code>Kconfig</code>-ის (<code>menuconfig</code>) საშუალებით.</p>
+<p>მოდულის საბაზისო კონფიგურაცია ხდება <code>system_config.json</code> ფაილში, თუმცა მისი ქცევის პარამეტრების უმეტესობა იმართება <code>Kconfig</code>-ის (<code>idf.py menuconfig</code>) საშუალებით.</p>
 <p>**<code>system_config.json</code> მაგალითი:**</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;wifi_manager&quot;,</div>
@@ -132,7 +132,6 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <ul>
 <li><b>Reconnect Attempts:</b> ხელახალი დაკავშირების მცდელობების მაქსიმალური რაოდენობა.</li>
 <li><b>Reconnect Delay:</b> საწყისი დაყოვნება ხელახალი დაკავშირებისას.</li>
-<li><b>NVS Namespace:</b> NVS-ის სახელი, სადაც ინახება მონაცემები.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
 4. 📢 ივენთები (Events)</h1>
@@ -143,24 +142,24 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">მონაცემები (Payload)   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>WIFI_EVENT_CONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">მოწყობილობა წარმატებით დაუკავშირდა WiFi ქსელს.    </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_EVENT_CONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">✅ მოწყობილობა წარმატებით დაუკავშირდა WiFi ქსელს (L2 კავშირი).    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>WIFI_EVENT_DISCONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">მოწყობილობამ დაკარგა კავშირი WiFi ქსელთან.    </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_EVENT_DISCONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">❌ მოწყობილობამ დაკარგა კავშირი WiFi ქსელთან.    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>WIFI_EVENT_IP_ASSIGNED</code>   </td><td class="markdownTableBodyLeft"><code>esp_netif_ip_info_t*</code>   </td><td class="markdownTableBodyLeft">მოწყობილობამ მიიღო IP მისამართი DHCP სერვერისგან.    </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_EVENT_IP_ASSIGNED</code>   </td><td class="markdownTableBodyLeft"><code>esp_netif_ip_info_t*</code>   </td><td class="markdownTableBodyLeft">🌐 მოწყობილობამ მიიღო IP მისამართი DHCP სერვერისგან.    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>WIFI_CREDENTIALS_NOT_FOUND</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">NVS-ში ვერ მოიძებნა შენახული მონაცემები, საჭიროა provisioning.   </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_CREDENTIALS_NOT_FOUND</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">❓ საცავში ვერ მოიძებნა შენახული მონაცემები, საჭიროა provisioning.   </td></tr>
 </table>
 <h2><a class="anchor" id="autotoc_md6"></a>
 გამოწერილი ივენთები</h2>
 <p><code>wifi_manager</code> გამოიწერს შემდეგ ივენთებს:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
+<th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">რეაქცია    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>PROV_CREDENTIALS_RECEIVED</code>   </td><td class="markdownTableBodyLeft">მიიღო ახალი WiFi მონაცემები <code>provisioning</code> მოდულისგან.    </td></tr>
+<td class="markdownTableBodyLeft"><code>PROV_CREDENTIALS_RECEIVED</code>   </td><td class="markdownTableBodyLeft">იღებს ახალ WiFi მონაცემებს და ინახავს მათ <code>Storage Manager</code>-ის მეშვეობით.    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">სისტემის გაშვება დასრულდა, შესაძლებელია CLI ბრძანებების რეგისტრაცია.   </td></tr>
+<td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md7"></a>
 5. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
@@ -173,7 +172,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>wifi scan</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">📡 ასკანერებს და გამოაქვს ხელმისაწვდომი WiFi ქსელების სია.    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>wifi connect</code>   </td><td class="markdownTableBodyLeft"><code>&lt;ssid&gt; &lt;password&gt;</code>   </td><td class="markdownTableBodyLeft">🔗 ცდილობს მითითებულ ქსელთან დაკავშირებას და ინახავს მონაცემებს NVS-ში.    </td></tr>
+<td class="markdownTableBodyLeft"><code>wifi connect</code>   </td><td class="markdownTableBodyLeft"><code>&lt;ssid&gt; &lt;password&gt;</code>   </td><td class="markdownTableBodyLeft">🔗 ცდილობს მითითებულ ქსელთან დაკავშირებას და ინახავს მონაცემებს.    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>wifi disconnect</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🔌 წყვეტს მიმდინარე WiFi კავშირს.    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -181,7 +180,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>wifi disable</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">❌ თიშავს <code>wifi_manager</code> მოდულს და წყვეტს კავშირს.    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>wifi erase_creds</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🗑️ შლის NVS-ში შენახულ ყველა WiFi მონაცემს.    </td></tr>
+<td class="markdownTableBodyLeft"><code>wifi erase_creds</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🗑️ შლის შენახულ ყველა WiFi მონაცემს <code>Storage Manager</code>-ის გამოყენებით.    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>wifi set_hostname</code>   </td><td class="markdownTableBodyLeft"><code>&lt;name&gt; [--reconnect]</code>   </td><td class="markdownTableBodyLeft">📝 ცვლის მოწყობილობის Hostname-ს. <code>--reconnect</code> არგუმენტით დაუყოვნებლივ განაახლებს კავშირს.    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -191,10 +190,38 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 6. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, რომ <code>mqtt_module</code>-ს სურს კავშირის დამყარება მხოლოდ მას შემდეგ, რაც მოწყობილობა მიიღებს IP მისამართს.</p>
 <p>**<code>mqtt_module.c</code>-ში:**</p>
-<p>```c // 1. init ფუნქციაში, გამოვიწეროთ საჭირო ივენთზე static esp_err_t mqtt_module_init(module_t *self) { // ... fmw_event_bus_subscribe("WIFI_EVENT_IP_ASSIGNED", self); // ... return ESP_OK; }</p>
-<p>// 2. დავამუშაოთ ივენთი handle_event ფუნქციაში static void mqtt_module_handle_event(module_t *self, const char *event_name, void *event_data) { if (strcmp(event_name, "WIFI_EVENT_IP_ASSIGNED") == 0) { ESP_LOGI(TAG, "WiFi is connected and has an IP. Starting MQTT connection...");</p>
-<p>// აქ ვიწყებთ MQTT კავშირის დამყარების ლოგიკას start_mqtt_connection(); }</p>
-<p>// არ დაგვავიწყდეს wrapper-ის გათავისუფლება if (event_data) { fmw_event_data_release((event_data_wrapper_t *)event_data); } } </p>
+<div class="fragment"><div class="line"><span class="comment">// 1. init ფუნქციაში, გამოვიწეროთ საჭირო ივენთზე</span></div>
+<div class="line"><span class="keyword">static</span> esp_err_t mqtt_module_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">    <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(<span class="stringliteral">&quot;WIFI_EVENT_IP_ASSIGNED&quot;</span>, self);</div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 2. დავამუშაოთ ივენთი handle_event ფუნქციაში</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> mqtt_module_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keywordtype">void</span> *event_data) {</div>
+<div class="line">    <span class="keywordflow">if</span> (strcmp(event_name, <span class="stringliteral">&quot;WIFI_EVENT_IP_ASSIGNED&quot;</span>) == 0) {</div>
+<div class="line">        ESP_LOGI(TAG, <span class="stringliteral">&quot;WiFi is connected and has an IP. Starting MQTT connection...&quot;</span>);</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// აქ ვიწყებთ MQTT კავშირის დამყარების ლოგიკას</span></div>
+<div class="line">        start_mqtt_connection(); </div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// არ დაგვავიწყდეს wrapper-ის გათავისუფლება</span></div>
+<div class="line">    <span class="keywordflow">if</span> (event_data) {</div>
+<div class="line">        <a class="code hl_function" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>((<a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *)event_data);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aevent__bus_8c_html_a1bb409daa4df05a7f65b3531e3231e7f"><div class="ttname"><a href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:365</div></div>
+<div class="ttc" id="aevent__data__wrapper_8c_html_a99c9f26cd90b553b84bf2a56db51a689"><div class="ttname"><a href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a></div><div class="ttdeci">esp_err_t fmw_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
+<div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+7. ❗ მნიშვნელოვანი შენიშვნები</h1>
+<ul>
+<li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>wifi_manager</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>storage_manager</code>, რადგან ის იყენებს ამ სერვისს.</li>
+<li>**<code>init_level</code>:** ამ მოდულის <code>init_level</code> (<code>40</code>) უნდა იყოს უფრო მაღალი, ვიდრე <code>storage_manager</code>-ის (<code>20</code>), მაგრამ უფრო დაბალი, ვიდრე <code>command_router</code>-ის (<code>50</code>), რათა დაცული იყოს დამოკიდებულებების იერარქია. </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

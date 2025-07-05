@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🌡️_20ტემპერატურის_20სენსორი_0',['🌡️ ტემპერატურის სენსორი',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1344',1,'']]],
-  ['🌡️_20ტემპერატურის_20სენსორი_3a_1',['🌡️ ტემპერატურის სენსორი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md945',1,'']]]
+  ['⚡_20esp_20now_20service_20api_0',['⚡ ESP-NOW Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md166',1,'']]]
 ];

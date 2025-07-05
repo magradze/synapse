@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: Synapse Communication Module API Reference</title>
+<title>Synapse ESP Framework: 📡 Synapse Communication Module API Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,126 +90,108 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Synapse Communication Module API Reference</div></div>
+  <div class="headertitle"><div class="title">📡 Synapse Communication Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md121"></a> </p>
-<h1><a class="anchor" id="autotoc_md122"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse Framework-ის კომუნიკაციის (communication) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md155"></a> </p>
+<h1><a class="anchor" id="autotoc_md156"></a>
+🎯 მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse Framework-ის საკომუნიკაციო მოდულების მიერ მოწოდებულ <b>სტანდარტულ სერვისის API-ებს</b>. ეს API-ები ხელმისაწვდომია <code>Service Locator</code>-ის მეშვეობით და საშუალებას აძლევს სხვა მოდულებს, გამოიყენონ ქსელური ფუნქციონალი (WiFi, MQTT, ESP-NOW) იზოლირებულად და უსაფრთხოდ.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md124"></a>
-MQTT Module API</h1>
-<h2><a class="anchor" id="autotoc_md125"></a>
-module_t &lt;em&gt;mqtt_module_create(const cJSON *config);</h2>
+<h1><a class="anchor" id="autotoc_md158"></a>
+📶 WiFi Manager Service API</h1>
+<p><b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_WIFI_API</code> <br  />
+ <b>ინტერფეისის სტრუქტურა:</b> <code>wifi_api_t</code> (განსაზღვრულია <code>wifi_interface.h</code>-ში)</p>
+<h2><a class="anchor" id="autotoc_md159"></a>
+ძირითადი ფუნქციები</h2>
 <ul>
-<li>ქმნის ახალი MQTT მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
-<li>არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)</li>
-<li>აბრუნებს: <a class="el" href="structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.">module_t</a> წარმატების შემთხვევაში, NULL შეცდომისას.</li>
+<li>**<code>esp_err_t connect(const char *ssid, const char *password);</code>** <br  />
+ აკავშირებს მოწყობილობას მითითებულ WiFi ქსელთან. თუ მონაცემები სწორია, ისინი ასევე ინახება <code>Storage Manager</code>-ის მეშვეობით.</li>
+<li>**<code>esp_err_t disconnect(void);</code>** <br  />
+ წყვეტს მიმდინარე WiFi კავშირს.</li>
+<li>**<code>bool is_connected(void);</code>** <br  />
+ აბრუნებს <code>true</code>-ს, თუ მოწყობილობა დაკავშირებულია ქსელთან და აქვს IP მისამართი.</li>
+<li>**<code>esp_err_t get_ip_info(esp_netif_ip_info_t *ip_info);</code>** <br  />
+ აბრუნებს მიმდინარე IP კონფიგურაციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md126"></a>
-esp_err_t mqtt_module_connect(const char *broker_url);</h2>
-<ul>
-<li>აკავშირებს MQTT მოდულს ბროკერთან</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md127"></a>
-esp_err_t mqtt_module_publish(const char *topic, const char *message);</h2>
-<ul>
-<li>აქვეყნებს შეტყობინებას მითითებულ topic-ზე</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md128"></a>
-esp_err_t mqtt_module_subscribe(const char *topic, mqtt_message_handler_t handler);</h2>
-<ul>
-<li>იწერს მითითებულ topic-ზე და ამუშავებს მიღებულ შეტყობინებებს handler-ით</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md130"></a>
-WiFi Module API</h1>
-<h2><a class="anchor" id="autotoc_md131"></a>
-module_t *wifi_module_create(const cJSON *config);</h2>
-<ul>
-<li>ქმნის ახალი WiFi მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md132"></a>
-esp_err_t wifi_module_connect(const char *ssid, const char *password);</h2>
-<ul>
-<li>აკავშირებს WiFi მოდულს მითითებულ ქსელთან</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md133"></a>
-esp_err_t wifi_module_disconnect(void);</h2>
-<ul>
-<li>წყვეტს WiFi კავშირს</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md135"></a>
-ESP-NOW Module API</h1>
-<h2><a class="anchor" id="autotoc_md136"></a>
-module_t *espnow_module_create(const cJSON *config);</h2>
-<ul>
-<li>ქმნის ახალი ESP-NOW მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md137"></a>
-esp_err_t espnow_module_init(const cJSON *config);</h2>
-<ul>
-<li>ინიციალიზაციას უკეთებს ESP-NOW მოდულს.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md138"></a>
-esp_err_t espnow_module_send(const uint8_t *peer_mac, const uint8_t *data, size_t data_length);</h2>
-<ul>
-<li>აგზავნის მონაცემებს მითითებულ peer MAC მისამართზე.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md139"></a>
-esp_err_t espnow_module_register_receive_handler(espnow_receive_handler_t handler);</h2>
-<ul>
-<li>რეგისტრირებს მიღებული მონაცემების დამმუშავებელ handler-ს.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md141"></a>
-Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md142"></a>
-static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
-<ul>
-<li>ამუშავებს MQTT მოდულის მიერ მიღებულ მოვლენებს</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md143"></a>
-static void wifi_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
-<ul>
-<li>ამუშავებს WiFi მოდულის მიერ მიღებულ მოვლენებს</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md145"></a>
-Configuration Parsing API</h1>
-<h2><a class="anchor" id="autotoc_md146"></a>
-static esp_err_t parse_mqtt_config(const cJSON *config, mqtt_private_data_t *mqtt_data);</h2>
-<ul>
-<li>კითხულობს და ამოწმებს MQTT მოდულის კონფიგურაციას</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md147"></a>
-static esp_err_t parse_wifi_config(const cJSON *config, wifi_private_data_t *wifi_data);</h2>
-<ul>
-<li>კითხულობს და ამოწმებს WiFi მოდულის კონფიგურაციას</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md149"></a>
-Naming &amp; Structure</h1>
-<ul>
-<li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
-<li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md151"></a>
-მაგალითები</h1>
-<p><b>MQTT Publish:</b> </p><div class="fragment"><div class="line">mqtt_module_publish(<span class="stringliteral">&quot;/synapse/device/relay1/state&quot;</span>, <span class="stringliteral">&quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;</span>);</div>
-</div><!-- fragment --><p><b>WiFi Connect:</b> </p><div class="fragment"><div class="line">wifi_module_connect(<span class="stringliteral">&quot;MyWiFi&quot;</span>, <span class="stringliteral">&quot;password123&quot;</span>);</div>
-</div><!-- fragment --><p><b>ESP-NOW მონაცემის გაგზავნა:</b> </p><div class="fragment"><div class="line">uint8_t peer_mac[6] = {0x24, 0x6F, 0x28, 0xAA, 0xBB, 0xCC};</div>
-<div class="line">uint8_t payload[] = <span class="stringliteral">&quot;Hello, Synapse!&quot;</span>;</div>
-<div class="line">espnow_module_send(peer_mac, payload, <span class="keyword">sizeof</span>(payload));</div>
-</div><!-- fragment --><p><b>ESP-NOW მიღებული მონაცემის დამუშავება:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> my_espnow_receive_handler(<span class="keyword">const</span> uint8_t *src_mac, <span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> data_length) {</div>
-<div class="line">    <span class="comment">// ... process received data ...</span></div>
+<h2><a class="anchor" id="autotoc_md160"></a>
+💡 WiFi API-ს გამოყენების მაგალითი</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;wifi_interface.h&quot;</span> <span class="comment">// უნდა შეიქმნას interfaces დირექტორიაში</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> check_wifi_status() {</div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> wifi_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_wifi&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (wifi_handle) {</div>
+<div class="line">        wifi_api_t *wifi_api = (wifi_api_t *)wifi_handle;</div>
+<div class="line">        </div>
+<div class="line">        <span class="keywordflow">if</span> (wifi_api-&gt;is_connected()) {</div>
+<div class="line">            ESP_LOGI(TAG, <span class="stringliteral">&quot;WiFi is connected.&quot;</span>);</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">            ESP_LOGW(TAG, <span class="stringliteral">&quot;WiFi is disconnected.&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
 <div class="line">}</div>
-<div class="line">espnow_module_register_receive_handler(my_espnow_receive_handler);</div>
+<div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
+<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 </div><!-- fragment --><hr  />
-<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
+<h1><a class="anchor" id="autotoc_md162"></a>
+☁️ MQTT Client Service API</h1>
+<p><b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_MQTT_API</code> <br  />
+ <b>ინტერფეისის სტრუქტურა:</b> <code>mqtt_api_t</code> (განსაზღვრულია <code>mqtt_interface.h</code>-ში)</p>
+<h2><a class="anchor" id="autotoc_md163"></a>
+ძირითადი ფუნქციები</h2>
+<ul>
+<li>**<code>esp_err_t connect(void);</code>** <br  />
+ იწყებს კავშირს კონფიგურაციაში მითითებულ MQTT ბროკერთან.</li>
+<li>**<code>esp_err_t publish(const char *topic, const char *data, int qos, bool retain);</code>** <br  />
+ აქვეყნებს შეტყობინებას მითითებულ თემაზე (topic).</li>
+<li>**<code>esp_err_t subscribe(const char *topic, int qos);</code>** <br  />
+ იწერს მითითებულ თემას. მიღებული შეტყობინებები დამუშავდება მოდულის შიდა ლოგიკით.</li>
+<li>**<code>bool is_connected(void);</code>** <br  />
+ აბრუნებს <code>true</code>-ს, თუ MQTT კლიენტი დაკავშირებულია ბროკერთან.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md164"></a>
+💡 MQTT API-ს გამოყენების მაგალითი</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;mqtt_interface.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> publish_sensor_data(<span class="keywordtype">float</span> temperature) {</div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> mqtt_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_mqtt_broker&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (mqtt_handle) {</div>
+<div class="line">        mqtt_api_t *mqtt_api = (mqtt_api_t *)mqtt_handle;</div>
+<div class="line">        </div>
+<div class="line">        <span class="keywordflow">if</span> (mqtt_api-&gt;is_connected()) {</div>
+<div class="line">            <span class="keywordtype">char</span> payload[32];</div>
+<div class="line">            snprintf(payload, <span class="keyword">sizeof</span>(payload), <span class="stringliteral">&quot;{\&quot;temp\&quot;: %.2f}&quot;</span>, temperature);</div>
+<div class="line">            mqtt_api-&gt;publish(<span class="stringliteral">&quot;/sensors/temperature&quot;</span>, payload, 1, <span class="keyword">false</span>);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md166"></a>
+⚡ ESP-NOW Service API</h1>
+<p><b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_ESPNOW_API</code> (უნდა დაემატოს <code><a class="el" href="service__types_8h.html" title="Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები.">service_types.h</a></code>-ში) <br  />
+ <b>ინტერფეისის სტრუქტურა:</b> <code>espnow_api_t</code> (განსაზღვრულია <code>espnow_interface.h</code>-ში)</p>
+<h2><a class="anchor" id="autotoc_md167"></a>
+ძირითადი ფუნქციები</h2>
+<ul>
+<li>**<code>esp_err_t add_peer(const uint8_t *mac_addr, uint8_t channel);</code>** <br  />
+ ამატებს ახალ ESP-NOW მოწყობილობას (peer) სანდო სიაში.</li>
+<li>**<code>esp_err_t send_data(const uint8_t *mac_addr, const uint8_t *data, size_t len);</code>** <br  />
+ აგზავნის მონაცემებს მითითებულ MAC მისამართზე.</li>
+<li>**<code>esp_err_t register_receive_callback(espnow_recv_cb_t callback);</code>** <br  />
+ არეგისტრირებს callback ფუნქციას, რომელიც გამოიძახება მონაცემების მიღებისას.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md169"></a>
+📜 Naming &amp; Structure კონვენციები</h1>
+<ul>
+<li>ყველა საკომუნიკაციო სერვისის API სტრუქტურა უნდა იყოს განსაზღვრული <code>components/interfaces/include</code> დირექტორიაში შესაბამის <code>*_interface.h</code> ფაილში.</li>
+<li>ფუნქციების სახელები უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
+</ul>
+<hr  />
+<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a> და შესაბამისი მოდულების <code>README.md</code> ფაილები. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

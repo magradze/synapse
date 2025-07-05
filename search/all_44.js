@@ -1,15 +1,5 @@
 var searchData=
 [
-  ['✅_20ავტომატური_20ინტეგრაცია_0',['✅ ავტომატური ინტეგრაცია',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1339',1,'']]],
-  ['✅_20ავტომატური_20ინტეგრაცია_3a_1',['✅ ავტომატური ინტეგრაცია:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md940',1,'']]],
-  ['✅_20რაც_20უნდა_20გახსოვდეთ_2',['✅ რაც უნდა გახსოვდეთ',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1359',1,'']]],
-  ['✅_20რაც_20უნდა_20გახსოვდეთ_3a_3',['✅ რაც უნდა გახსოვდეთ:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md965',1,'']]],
-  ['✅_20სწორი_4',['✅ სწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md934',1,'']]],
-  ['✅_20შექმნილი_20ფაილები_205_20ფაილი_5',['✅ შექმნილი ფაილები (5 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1338',1,'']]],
-  ['✅_20შექმნილი_20ფაილები_205_20ფაილი_20_3a_6',['✅ შექმნილი ფაილები (5 ფაილი):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md939',1,'']]],
-  ['✅_20strong_20დოკუმენტაციის_20ხარისხი_3a_20strong_7',['✅ &lt;strong&gt;დოკუმენტაციის ხარისხი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md646',1,'']]],
-  ['✅_20strong_20ლოგირების_20სტანდარტი_3a_20strong_8',['✅ &lt;strong&gt;ლოგირების სტანდარტი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md645',1,'']]],
-  ['✅_20strong_20მოდულების_20იზოლაცია_20ყველაზე_20მნიშვნელოვანი_20შემოწმება_20_3a_20strong_9',['✅ &lt;strong&gt;მოდულების იზოლაცია (ყველაზე მნიშვნელოვანი შემოწმება):&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md647',1,'']]],
-  ['✅_20strong_20სტრუქტურული_20მთლიანობა_3a_20strong_10',['✅ &lt;strong&gt;სტრუქტურული მთლიანობა:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md644',1,'']]],
-  ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_11',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
+  ['☁️_20cloud_20provisioning_20api_0',['☁️ Cloud Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md404',1,'']]],
+  ['☁️_20mqtt_20client_20service_20api_1',['☁️ MQTT Client Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md162',1,'']]]
 ];

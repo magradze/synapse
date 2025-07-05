@@ -1,0 +1,19 @@
+<map id="components/interfaces/include/storage_interface.h" name="components/interfaces/include/storage_interface.h">
+<area shape="rect" id="Node000001" title="Public Service API contract for the Storage Manager module." alt="" coords="505,5,707,45"/>
+<area shape="rect" id="Node000002" href="$wifi__manager_8c.html" title="WiFi კავშირის და კავშირის აღდგენის მართვის იმპლემენტაცია." alt="" coords="5,101,217,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="492,47,366,68,231,96,201,103,200,98,229,91,365,63,491,41"/>
+<area shape="rect" id="Node000003" href="$storage__backend__nvs_8h.html" title="Header for the NVS storage backend implementation." alt="" coords="242,101,471,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="547,53,423,103,421,98,545,48"/>
+<area shape="rect" id="Node000005" href="$storage__backend__sd_8h.html" title="Header for the SD Card storage backend implementation." alt="" coords="495,101,717,155"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="609,59,609,100,603,100,603,59"/>
+<area shape="rect" id="Node000007" href="$storage__backend__spiffs_8h.html" title="Header for the SPIFFS storage backend implementation." alt="" coords="741,93,935,163"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="663,48,761,91,759,96,661,53"/>
+<area shape="rect" id="Node000009" href="$storage__manager_8c.html" title="Centralized, multi&#45;backend storage management service." alt="" coords="959,101,1152,155"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="721,43,832,64,948,91,975,98,974,103,947,96,830,70,720,49"/>
+<area shape="rect" id="Node000004" href="$storage__backend__nvs_8c.html" title="NVS (Non&#45;Volatile Storage) backend implementation for the Storage Manager." alt="" coords="257,211,457,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="359,170,359,210,354,210,354,170"/>
+<area shape="rect" id="Node000006" href="$storage__backend__sd_8c.html" title="SD Card (FAT filesystem) backend for the Storage Manager." alt="" coords="509,211,703,265"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="609,170,609,210,603,210,603,170"/>
+<area shape="rect" id="Node000008" href="$storage__backend__spiffs_8c.html" title="SPIFFS (SPI Flash File System) backend for the Storage Manager." alt="" coords="732,211,944,265"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="841,176,841,210,835,210,835,176"/>
+</map>

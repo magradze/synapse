@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: Synapse Storage Module API Reference</title>
+<title>Synapse ESP Framework: 💾 Synapse Storage Manager API Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,67 +90,83 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2storage__api.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Synapse Storage Module API Reference</div></div>
+  <div class="headertitle"><div class="title">💾 Synapse Storage Manager API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md451"></a> </p>
-<h1><a class="anchor" id="autotoc_md452"></a>
-მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს Synapse Framework-ის მეხსიერების (Storage) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md465"></a> </p>
+<h1><a class="anchor" id="autotoc_md466"></a>
+🎯 მიზანი</h1>
+<p>ეს დოკუმენტი აღწერს Synapse Framework-ის ცენტრალიზებული <b>Storage Manager</b> სერვისის საჯარო API-ს. ეს API უზრუნველყოფს ერთიან ინტერფეისს სხვადასხვა ფიზიკურ საცავთან (NVS, SPIFFS, SD Card) სამუშაოდ, რაც მოდულებს საშუალებას აძლევს, შეინახონ და წაიკითხონ მონაცემები შენახვის კონკრეტული ტექნოლოგიის ცოდნის გარეშე.</p>
+<p>სერვისის მისაღებად გამოიყენეთ <code>fmw_service_get("main_storage")</code>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md454"></a>
-NVS (Non-Volatile Storage) Module API</h1>
-<h2><a class="anchor" id="autotoc_md455"></a>
-module_t *nvs_storage_module_create(const cJSON *config);</h2>
+<h1><a class="anchor" id="autotoc_md468"></a>
+⚙️ API-ს სტრუქტურა (&lt;tt&gt;storage_api_t&lt;/tt&gt;)</h1>
+<p>ყველა ფუნქცია ხელმისაწვდომია <code><a class="el" href="structstorage__api__t.html" title="The public Service API structure for the Storage Manager.">storage_api_t</a></code> სტრუქტურის მაჩვენებლის საშუალებით.</p>
+<h2><a class="anchor" id="autotoc_md469"></a>
+🔑 Key-Value ოპერაციები</h2>
+<p>ეს ფუნქციები იდეალურია მცირე ზომის კონფიგურაციული მონაცემების შესანახად.</p>
 <ul>
-<li>ქმნის ახალი NVS Storage მოდულის ინსტანციას.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md456"></a>
-esp_err_t nvs_storage_module_set_string(const char *key, const char *value);</h2>
-<ul>
-<li>ინახავს სტრიქონის მნიშვნელობას NVS-ში.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md457"></a>
-esp_err_t nvs_storage_module_get_string(const char *key, char *value, size_t size);</h2>
-<ul>
-<li>კითხულობს სტრიქონის მნიშვნელობას NVS-დან.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md458"></a>
-esp_err_t nvs_storage_module_set_int(const char *key, int value);</h2>
-<ul>
-<li>ინახავს მთელი რიცხვის მნიშვნელობას NVS-ში.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md459"></a>
-esp_err_t nvs_storage_module_get_int(const char *key, int *value);</h2>
-<ul>
-<li>კითხულობს მთელი რიცხვის მნიშვნელობას NVS-დან.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md460"></a>
-esp_err_t nvs_storage_module_erase_key(const char *key);</h2>
-<ul>
-<li>შლის მითითებულ key-ს NVS-დან.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md461"></a>
-esp_err_t nvs_storage_module_erase_all(void);</h2>
-<ul>
-<li>შლის ყველა მონაცემს NVS-დან.</li>
+<li>**<code>esp_err_t set_string(const char* owner, const char* key, const char* value);</code>** <br  />
+ ინახავს სტრიქონს. <code>owner</code> პარამეტრი გამოიყენება როგორც namespace (NVS-თვის) ან დირექტორია (SPIFFS/SD-სთვის).</li>
+<li>**<code>esp_err_t get_string(const char* owner, const char* key, char* buffer, size_t* buffer_size);</code>** <br  />
+ კითხულობს შენახულ სტრიქონს.</li>
+<li>**<code>esp_err_t set_i32(const char* owner, const char* key, int32_t value);</code>** <br  />
+ ინახავს 32-ბიტიან მთელ რიცხვს.</li>
+<li>**<code>esp_err_t get_i32(const char* owner, const char* key, int32_t* out_value);</code>** <br  />
+ კითხულობს შენახულ 32-ბიტიან რიცხვს.</li>
+<li>**<code>esp_err_t set_bool(const char* owner, const char* key, bool value);</code>** <br  />
+ ინახავს ლოგიკურ მნიშვნელობას (<code>true</code>/<code>false</code>).</li>
+<li>**<code>esp_err_t get_bool(const char* owner, const char* key, bool* out_value);</code>** <br  />
+ კითხულობს შენახულ ლოგიკურ მნიშვნელობას.</li>
+<li>**<code>esp_err_t erase_key(const char* owner, const char* key);</code>** <br  />
+ შლის მითითებულ key-value წყვილს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md463"></a>
-Naming &amp; Structure</h1>
+<h2><a class="anchor" id="autotoc_md471"></a>
+🗂️ ფაილური ოპერაციები</h2>
+<p>ეს ფუნქციები ხელმისაწვდომია მხოლოდ მაშინ, როდესაც <code>Kconfig</code>-ში არჩეულია <b>SPIFFS</b> ან <b>SD Card</b> backend-ი. NVS backend-ის შემთხვევაში, ისინი დააბრუნებენ <code>ESP_ERR_NOT_SUPPORTED</code> შეცდომას.</p>
 <ul>
-<li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
-<li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
+<li>**<code>esp_err_t write_file(const char* file_path, const void* data, size_t size);</code>** <br  />
+ წერს მონაცემებს ფაილში მითითებულ მისამართზე (მაგ., <code>/spiffs/logs/today.log</code>). თუ ფაილი არსებობს, გადააწერს.</li>
+<li>**<code>esp_err_t read_file(const char* file_path, void* buffer, size_t* buffer_size);</code>** <br  />
+ კითხულობს ფაილის სრულ შიგთავსს.</li>
+<li>**<code>esp_err_t delete_file(const char* file_path);</code>** <br  />
+ შლის მითითებულ ფაილს.</li>
+<li>**<code>bool file_exists(const char* file_path);</code>** <br  />
+ ამოწმებს, არსებობს თუ არა ფაილი მითითებულ მისამართზე.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md465"></a>
-მაგალითები</h1>
-<p><b>სტრიქონის შენახვა:</b> </p><div class="fragment"><div class="line">nvs_storage_module_set_string(<span class="stringliteral">&quot;device_name&quot;</span>, <span class="stringliteral">&quot;synapse_node_1&quot;</span>);</div>
-</div><!-- fragment --><p><b>მთელი რიცხვის წაკითხვა:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> counter;</div>
-<div class="line">nvs_storage_module_get_int(<span class="stringliteral">&quot;boot_count&quot;</span>, &amp;counter);</div>
-</div><!-- fragment --><p><b>ყველა მონაცემის წაშლა:</b> </p><div class="fragment"><div class="line">nvs_storage_module_erase_all();</div>
+<h1><a class="anchor" id="autotoc_md473"></a>
+💡 გამოყენების მაგალითი</h1>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="storage__interface_8h.html">storage_interface.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> example_storage_usage() {</div>
+<div class="line">    <span class="comment">// 1. სერვისის მიღება</span></div>
+<div class="line">    <a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *storage = (<a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_storage&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (!storage) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Storage service is not available!&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span>;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 2. Key-Value ოპერაცია</span></div>
+<div class="line">    storage-&gt;<a class="code hl_variable" href="structstorage__api__t.html#ae80b21d7dd517917cfaefa9a4d1d291c">set_i32</a>(<span class="stringliteral">&quot;my_app&quot;</span>, <span class="stringliteral">&quot;boot_count&quot;</span>, 42);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 3. ფაილური ოპერაცია (იმუშავებს მხოლოდ SPIFFS/SD-ზე)</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span>* message = <span class="stringliteral">&quot;Hello, Synapse!&quot;</span>;</div>
+<div class="line">    esp_err_t err = storage-&gt;<a class="code hl_variable" href="structstorage__api__t.html#a2b1e5f5932275b92b01be2bb1eb9c3ac">write_file</a>(<span class="stringliteral">&quot;/spiffs/welcome.txt&quot;</span>, message, strlen(message));</div>
+<div class="line">    <span class="keywordflow">if</span> (err == ESP_ERR_NOT_SUPPORTED) {</div>
+<div class="line">        ESP_LOGW(TAG, <span class="stringliteral">&quot;File operations are not supported by the current storage backend (NVS).&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="astorage__interface_8h_html"><div class="ttname"><a href="storage__interface_8h.html">storage_interface.h</a></div><div class="ttdoc">Public Service API contract for the Storage Manager module.</div></div>
+<div class="ttc" id="astructstorage__api__t_html"><div class="ttname"><a href="structstorage__api__t.html">storage_api_t</a></div><div class="ttdoc">The public Service API structure for the Storage Manager.</div><div class="ttdef"><b>Definition</b> storage_interface.h:24</div></div>
+<div class="ttc" id="astructstorage__api__t_html_a2b1e5f5932275b92b01be2bb1eb9c3ac"><div class="ttname"><a href="structstorage__api__t.html#a2b1e5f5932275b92b01be2bb1eb9c3ac">storage_api_t::write_file</a></div><div class="ttdeci">esp_err_t(* write_file)(const char *file_path, const void *data, size_t size)</div><div class="ttdoc">Writes data to a file in the selected backend.</div><div class="ttdef"><b>Definition</b> storage_interface.h:97</div></div>
+<div class="ttc" id="astructstorage__api__t_html_ae80b21d7dd517917cfaefa9a4d1d291c"><div class="ttname"><a href="structstorage__api__t.html#ae80b21d7dd517917cfaefa9a4d1d291c">storage_api_t::set_i32</a></div><div class="ttdeci">esp_err_t(* set_i32)(const char *owner, const char *key, int32_t value)</div><div class="ttdoc">Sets a 32-bit integer value.</div><div class="ttdef"><b>Definition</b> storage_interface.h:51</div></div>
 </div><!-- fragment --><hr  />
-<p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და [structure] დოკუმენტები. </p>
+<p>დამატებითი დეტალებისთვის იხილეთ storage_manager-ის README და <a href="../interfaces/include/storage_interface.h">storage_interface.h</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

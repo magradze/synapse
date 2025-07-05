@@ -93,51 +93,51 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2ota__api.html
   <div class="headertitle"><div class="title">Synapse OTA (Over-the-Air) Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md347"></a> </p>
-<h1><a class="anchor" id="autotoc_md348"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md365"></a> </p>
+<h1><a class="anchor" id="autotoc_md366"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის OTA (Over-the-Air update) მოდულის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md350"></a>
+<h1><a class="anchor" id="autotoc_md368"></a>
 OTA Module API</h1>
-<h2><a class="anchor" id="autotoc_md351"></a>
+<h2><a class="anchor" id="autotoc_md369"></a>
 module_t *ota_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი OTA მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md352"></a>
+<h2><a class="anchor" id="autotoc_md370"></a>
 esp_err_t ota_module_start_update(const char *url);</h2>
 <ul>
 <li>იწყებს OTA განახლებას მითითებული URL-დან.</li>
 <li>არგუმენტები: firmware-ის ბმული (URL)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md353"></a>
+<h2><a class="anchor" id="autotoc_md371"></a>
 esp_err_t ota_module_get_status(ota_status_t *status);</h2>
 <ul>
 <li>აბრუნებს მიმდინარე OTA პროცესის სტატუსს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md354"></a>
+<h2><a class="anchor" id="autotoc_md372"></a>
 esp_err_t ota_module_abort(void);</h2>
 <ul>
 <li>აჩერებს მიმდინარე OTA განახლებას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md356"></a>
+<h1><a class="anchor" id="autotoc_md374"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md357"></a>
+<h2><a class="anchor" id="autotoc_md375"></a>
 static void ota_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს OTA მოდულის მიერ მიღებულ მოვლენებს (მაგ: update started, update finished, error)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md359"></a>
+<h1><a class="anchor" id="autotoc_md377"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md361"></a>
+<h1><a class="anchor" id="autotoc_md379"></a>
 მაგალითები</h1>
 <p><b>OTA განახლების დაწყება:</b> </p><div class="fragment"><div class="line">ota_module_start_update(<span class="stringliteral">&quot;https://update.synapse.local/firmware.bin&quot;</span>);</div>
 </div><!-- fragment --><p><b>OTA სტატუსის მიღება:</b> </p><div class="fragment"><div class="line">ota_status_t status;</div>

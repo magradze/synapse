@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📶_20მოდული_20tt_20wifi_5fmanager_20tt_0',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]]
+  ['💡_20მოდული_20tt_20rgb_5fled_5findicator_20tt_0',['💡 მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]]
 ];

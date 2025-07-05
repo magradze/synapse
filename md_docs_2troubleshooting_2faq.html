@@ -93,54 +93,54 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2faq.html',''
   <div class="headertitle"><div class="title">ხშირად დასმული კითხვები (Troubleshooting FAQ)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1574"></a> </p>
-<h1><a class="anchor" id="autotoc_md1575"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1582"></a> </p>
+<h1><a class="anchor" id="autotoc_md1583"></a>
 1. რატომ არ იბილდება ჩემი მოდული?</h1>
 <ul>
 <li>გადაამოწმეთ, რომ მოდული ჩართულია Kconfig-ში და სწორადაა მითითებული CMakeLists.txt-ში.</li>
 <li>იხილეთ <a class="el" href="md_docs_2troubleshooting_2common__issues.html">common_issues.md</a> ბილდის პრობლემების სექცია.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1576"></a>
+<h1><a class="anchor" id="autotoc_md1584"></a>
 2. რატომ არ ჩანს ლოგები?</h1>
 <ul>
 <li>გამოიყენეთ DEFINE_COMPONENT_TAG ყველა მოდულში.</li>
 <li>გადაამოწმეთ log level პარამეტრები და UART კონფიგურაცია.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1577"></a>
+<h1><a class="anchor" id="autotoc_md1585"></a>
 3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?</h1>
 <ul>
 <li>გადაამოწმეთ, რომ სერვისი რეგისტრირებულია fmw_service_register-ით და instance_name სწორია.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1578"></a>
+<h1><a class="anchor" id="autotoc_md1586"></a>
 4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?</h1>
 <ul>
 <li>დარწმუნდით, რომ მოდული გამოწერილია event_bus_subscribe-ით.</li>
 <li>გადაამოწმეთ event_id და handler-ის სისწორე.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1579"></a>
+<h1><a class="anchor" id="autotoc_md1587"></a>
 5. რატომ არ ინიციალიზდება მოდული?</h1>
 <ul>
 <li>გადაამოწმეთ system_config.json-ში instance_name და ყველა აუცილებელი პარამეტრი.</li>
 <li>გამოიყენეთ fmw_config_get_* API-ები.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1580"></a>
+<h1><a class="anchor" id="autotoc_md1588"></a>
 6. როგორ გავიგო რომელი მოდული იწვევს პრობლემას?</h1>
 <ul>
 <li>გამოიყენეთ დეტალური ლოგირება და კონტექსტური TAG-ები.</li>
 <li>ჩართეთ DEBUG/VERBOSE ლოგები საჭიროების შემთხვევაში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1581"></a>
+<h1><a class="anchor" id="autotoc_md1589"></a>
 7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?</h1>
 <ul>
 <li>გადაამოწმეთ ყველა deinit/cleanup ფუნქცია და დარწმუნდით, რომ ყველა გამოყოფილი რესურსი თავისუფლდება.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1582"></a>
+<h1><a class="anchor" id="autotoc_md1590"></a>
 8. როგორ დავადგინო კონფიგურაციის შეცდომა?</h1>
 <ul>
 <li>გამოიყენეთ ლოგები და fmw_config_get_* API-ები.</li>
 <li>გადაამოწმეთ parse_module_config ფუნქციაში fallback/default ლოგიკა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1583"></a>
+<h1><a class="anchor" id="autotoc_md1591"></a>
 9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?</h1>
 <ul>
 <li>დაამატეთ ახალი კითხვა და პასუხი ამ ფაილში pull request-ით.</li>

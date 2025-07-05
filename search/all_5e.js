@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🔗_20base_20module_20interface_20კრიტიკულად_20განახლებული_0',['3. 🔗 Base Module Interface (კრიტიკულად განახლებული)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1351',1,'']]],
-  ['🔗_20base_20module_20interface_3a_1',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md953',1,'']]]
+  ['📺_20დისპლეის_20დრაივერი_0',['📺 დისპლეის დრაივერი',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1353',1,'']]],
+  ['📺_20დისპლეის_20დრაივერი_3a_1',['📺 დისპლეის დრაივერი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md954',1,'']]]
 ];

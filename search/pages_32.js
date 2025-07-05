@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💡_20მოდული_20tt_20rgb_5fled_5findicator_20tt_0',['💡 მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]]
+  ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_0',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
 ];

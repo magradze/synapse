@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📝_20როგორ_20განვსაზღვროთ_20tt_20init_5flevel_20tt_20ახალი_20მოდულისთვის_0',['📝 როგორ განვსაზღვროთ &lt;tt&gt;init_level&lt;/tt&gt; ახალი მოდულისთვის?',['../md_docs_2convention_2initialization__levels.html#autotoc_md868',1,'']]]
+  ['📋_20რა_20არის_20create_5fmodule_20py_0',['📋 რა არის create_module py',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md945',1,'📋 რა არის create_module.py?'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1344',1,'📋 რა არის create_module.py?']]]
 ];

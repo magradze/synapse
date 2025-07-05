@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🧠_20კონდიციური_20კომპილაცია_20smart_20system_20_3a_0',['1. 🧠 კონდიციური კომპილაცია (SMART SYSTEM):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md951',1,'']]],
-  ['🧠_20პირობითი_20კომპილაცია_20გამარტივებული_1',['1. 🧠 პირობითი კომპილაცია (გამარტივებული)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1349',1,'']]]
+  ['🔑_20გასაღების_20ფორმატი_20dot_20notation_0',['🔑 გასაღების ფორმატი (Dot-Notation)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md174',1,'']]],
+  ['🔑_20key_20value_20ოპერაციები_1',['🔑 Key-Value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md469',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔌_20service_20api_20tt_20cmd_5frouter_5fapi_5ft_20tt_0',['4. 🔌 Service API (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)',['../md_components_2modules_2utilities_2command__router_2README.html#autotoc_md38',1,'']]]
+  ['📦_20strong_20დონე_201_3a_20ფუნდამენტური_20დრაივერები_20და_20რესურსები_200_2019_20strong_0',['📦 &lt;strong&gt;დონე 1: ფუნდამენტური დრაივერები და რესურსები (0-19)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md866',1,'']]]
 ];

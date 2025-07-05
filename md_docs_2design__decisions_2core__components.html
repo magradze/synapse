@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
   <div class="headertitle"><div class="title">Core კომპონენტები (Core Components)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1012"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1014"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1020"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1022"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ის ბირთვის (core) ძირითად კომპონენტებს, მათ დანიშნულებას, მთავარ ფუნქციებსა და გამოყენების მაგალითებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1016"></a>
+<h1><a class="anchor" id="autotoc_md1024"></a>
 ძირითადი კომპონენტები</h1>
-<h2><a class="anchor" id="autotoc_md1017"></a>
+<h2><a class="anchor" id="autotoc_md1025"></a>
 1. Service Locator</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.</li>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1018"></a>
+<h2><a class="anchor" id="autotoc_md1026"></a>
 2. Event Bus</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს broadcast/notification ტიპის კომუნიკაციას მოდულებს შორის.</li>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1019"></a>
+<h2><a class="anchor" id="autotoc_md1027"></a>
 3. Module Register</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას და მართვას.</li>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1020"></a>
+<h2><a class="anchor" id="autotoc_md1028"></a>
 4. Module Factory</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების დინამიურ შექმნას და ინიციალიზაციას კონფიგურაციის მიხედვით.</li>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1021"></a>
+<h2><a class="anchor" id="autotoc_md1029"></a>
 5. Configuration Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.</li>
@@ -166,7 +166,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="line">fmw_config_get_string(<span class="stringliteral">&quot;mqtt_module.config.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1022"></a>
+<h2><a class="anchor" id="autotoc_md1030"></a>
 6. Logging</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სტანდარტიზებულ და კონტექსტურ ლოგირებას ყველა კომპონენტსა და მოდულში.</li>
@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </div><!-- fragment --></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1024"></a>
+<h1><a class="anchor" id="autotoc_md1032"></a>
 ურთიერთქმედება მოდულებთან</h1>
 <ul>
 <li>ყველა მოდული core-ის კომპონენტებს იყენებს მხოლოდ მათი public API-ების მეშვეობით.</li>
@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <li>core უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას, კონფიგურაციას და ლოგირებას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1026"></a>
+<h1><a class="anchor" id="autotoc_md1034"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>პირდაპირი #include სხვა მოდულის header-ების</li>

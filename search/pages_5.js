@@ -14,7 +14,7 @@ var searchData=
   ['commit_20message_20guidelines_11',['Synapse Commit Message Guidelines',['../md_docs_2contributing_2commit__message__guidelines.html',1,'']]],
   ['common_20issues_20solutions_12',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
   ['communication_20choices_13',['კომუნიკაციის არქიტექტურული არჩევანი (Communication Choices)',['../md_docs_2design__decisions_2communication__choices.html',1,'']]],
-  ['communication_20module_20api_20reference_14',['Synapse Communication Module API Reference',['../md_docs_2api__reference_2communication__api.html',1,'']]],
+  ['communication_20module_20api_20reference_14',['📡 Synapse Communication Module API Reference',['../md_docs_2api__reference_2communication__api.html',1,'']]],
   ['communication_20patterns_15',['კომუნიკაციის პატერნები (Communication Patterns)',['../md_docs_2structure_2communication__patterns.html',1,'']]],
   ['compatibility_16',['მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)',['../md_docs_2design__decisions_2migration__and__compatibility.html',1,'']]],
   ['components_17',['components',['../md_docs_2design__decisions_2core__components.html',1,'Core კომპონენტები (Core Components)'],['../md_docs_2structure_2core__components.html',1,'Core კომპონენტები (Core Components)']]],

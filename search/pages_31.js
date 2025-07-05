@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_0',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
+  ['⚙️_20მოდული_3a_20command_20router_20system_20shell_0',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]]
 ];

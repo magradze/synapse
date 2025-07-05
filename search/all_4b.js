@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🏛️_20არქიტექტურული_20პრინციპები_0',['2. 🏛️ არქიტექტურული პრინციპები',['../md_components_2modules_2utilities_2command__router_2README.html#autotoc_md36',1,'']]]
+  ['🎓_20best_20practices_0',['🎓 Best Practices',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md981',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧪_20ტესტირების_20მეთოდები_0',['🧪 ტესტირების მეთოდები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md967',1,'🧪 ტესტირების მეთოდები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1361',1,'🧪 ტესტირების მეთოდები']]]
+  ['🔳_20qr_20code_20provisioning_20api_0',['🔳 QR Code Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md394',1,'']]]
 ];

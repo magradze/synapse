@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📢_20ივენთები_20events_0',['4. 📢 ივენთები (Events)',['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md4',1,'']]]
+  ['📚_20api_20ფუნქციები_0',['📚 API ფუნქციები',['../md_docs_2api__reference_2command__router__api.html#autotoc_md147',1,'']]]
 ];

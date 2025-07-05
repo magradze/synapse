@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📶_20მოდული_20tt_20wifi_5fmanager_20tt_0',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]]
+  ['📝_20როგორ_20განვსაზღვროთ_20tt_20init_5flevel_20tt_20ახალი_20მოდულისთვის_0',['📝 როგორ განვსაზღვროთ &lt;tt&gt;init_level&lt;/tt&gt; ახალი მოდულისთვის?',['../md_docs_2convention_2initialization__levels.html#autotoc_md876',1,'']]]
 ];

@@ -92,6 +92,9 @@ extern "C"
     // --- Command Router API ---
     FMW_SERVICE_TYPE_CMD_ROUTER_API,
 
+    // --- Device Identity API ---
+    FMW_SERVICE_TYPE_DEVICE_IDENTITY_API,
+
     // ეს ელემენტი ყოველთვის უნდა იყოს ბოლო, ვალიდაციისთვის
     FMW_SERVICE_TYPE_MAX
   } fmw_service_type_t;
@@ -207,6 +210,10 @@ extern "C"
     // Command Router API
     case FMW_SERVICE_TYPE_CMD_ROUTER_API:
       return "cmd_router_api";
+
+    // Device Identity API
+    case FMW_SERVICE_TYPE_DEVICE_IDENTITY_API:
+      return "device_identity_api";
 
     // Generic Services
     case FMW_SERVICE_TYPE_GENERIC_API:

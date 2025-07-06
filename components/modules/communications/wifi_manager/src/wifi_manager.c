@@ -16,6 +16,7 @@
 #include "cmd_router_interface.h"
 #include "storage_interface.h"
 #include "service_locator.h" // თუ უკვე არ არის დამატებული
+#include "framework_events.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -142,12 +143,12 @@ module_t *wifi_manager_create(const cJSON *config)
     // დავაყენოთ ფუნქციების pointers
     module->base.init = wifi_manager_init;
     module->base.start = wifi_manager_start;
-    module->base.handle_event = wifi_manager_handle_event;
     module->base.deinit = wifi_manager_deinit;
     module->base.enable = wifi_manager_enable;
     module->base.disable = wifi_manager_disable;
     module->base.reconfigure = wifi_manager_reconfigure;
     module->base.get_status = wifi_manager_get_status;
+    module->base.handle_event = wifi_manager_handle_event;
 
     ESP_LOGI(TAG, "WiFi Manager module created: '%s'", instance_name);
     return module;
@@ -199,7 +200,7 @@ static esp_err_t wifi_manager_init(module_t *self)
 
     // გამოვიწეროთ სისტემის გაშვების დასრულების ივენთზე.
     // ბრძანებებს დავარეგისტრირებთ მაშინ, როცა ამ ივენთს მივიღებთ.
-    esp_err_t err = fmw_event_bus_subscribe("FMW_EVENT_SYSTEM_START_COMPLETE", self);
+    esp_err_t err = fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to subscribe to system start event: %s", esp_err_to_name(err));
@@ -348,7 +349,7 @@ static void wifi_manager_deinit(module_t *self)
     // Event Bus-დან გამოწერის გაუქმება
     fmw_event_bus_unsubscribe(EVT_PROV_CREDENTIALS_RECEIVED, self);
 
-    fmw_event_bus_unsubscribe("FMW_EVENT_SYSTEM_START_COMPLETE", self);
+    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
     unregister_cli_commands(self);
 
     // ESP event handlers-ის გაუქმება
@@ -466,7 +467,7 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
     }
 
     // ★★★ ახალი ლოგიკა ★★★
-    if (strcmp(event_name, "FMW_EVENT_SYSTEM_START_COMPLETE") == 0)
+    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0)
     {
         ESP_LOGI(TAG, "System start complete. Registering CLI commands now.");
         register_cli_commands(self);

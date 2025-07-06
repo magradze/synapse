@@ -98,6 +98,42 @@
       "config": {
         "instance_name": "main_timer_test"
       }
+    },
+    {
+      "type": "alarms_manager",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_alarms_manager",
+          "alarms": [
+              {
+                  "name": "LowMemoryAlert",
+                  "trigger_event": "SYSTEM_HEALTH_ALERT",
+                  "condition_payload_key": "alert_type",
+                  "condition_payload_value": "LOW_HEAP_MEMORY",
+                  "actions": [
+                      { "type": "log_critical", "message": "Critical: Low heap memory detected!" },
+                      { "type": "set_led", "service_name": "status_led", "r": 255, "g": 0, "b": 0 }
+                  ]
+              },
+              {
+                  "name": "WiFiDisconnectLoop",
+                  "trigger_event": "WIFI_EVENT_DISCONNECTED",
+                  "threshold_count": 5,
+                  "time_window_sec": 300,
+                  "actions": [
+                      { "type": "log_critical", "message": "WiFi disconnected 5 times in 5 minutes. Rebooting system." },
+                      { "type": "reboot_system", "delay_ms": 1000 }
+                  ]
+              }
+          ]
+      }
+    },
+    {
+      "type": "device_identity_service",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_identity_service"
+      }
     }
   ]
 }

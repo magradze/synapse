@@ -6,8 +6,9 @@
 #include "driver/gpio.h"
 #include "hal/gpio_types.h"
 #include "system_manager.h"
+#include "logging.h"
 
-static const char *TAG = "MAIN";
+DEFINE_COMPONENT_TAG("MAIN");
 
 void app_main(void)
 {
@@ -30,4 +31,9 @@ void app_main(void)
     }
 
     ESP_LOGI(TAG, "=== Synapse Framework Started Successfully ===");
+
+    while (1)
+    {
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
 }

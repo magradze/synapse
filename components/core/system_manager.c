@@ -127,8 +127,8 @@ esp_err_t fmw_system_start(void)
 
     // ★★★ ახალი ლოგიკა ★★★
     // ვაქვეყნებთ ივენთს, რომ სისტემის გაშვება დასრულდა.
-    ESP_LOGI(TAG, "Publishing FMW_EVENT_SYSTEM_START_COMPLETE event.");
-    fmw_event_bus_post("FMW_EVENT_SYSTEM_START_COMPLETE", NULL); // მონაცემები არ გვჭირდება
+    ESP_LOGI(TAG, "Publishing FMW_SYSTEM_START_COMPLETE event."); // firmware_eventsფაილში განსაზღვრულია ასე: FMW_EVENT_SYSTEM_START_COMPLETE
+    fmw_event_bus_post("FMW_SYSTEM_START_COMPLETE", NULL);        // მონაცემები არ გვჭირდება
 
     return ESP_OK;
 }

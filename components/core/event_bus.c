@@ -143,7 +143,7 @@ static void dispatch_event_to_subscribers(const event_message_t *msg)
                 specific_found = true;
             }
             // 2. ვეძებთ wildcard ("*") გამომწერებს
-            else if (strcmp(node->event_name, "*") == 0)
+            if (strcmp(node->event_name, "*") == 0)
             {
                 memcpy(&wildcard_subs_copy, &node->subscription_list, sizeof(event_subscription_list_t));
                 wildcard_found = true;
@@ -364,11 +364,12 @@ esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_
 
 esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
 {
-    if ((!event_name || strlen(event_name) == 0) && (!event_name || strcmp(event_name, "*") != 0))
+    if (!event_name || strlen(event_name) == 0)
     {
         ESP_LOGE(TAG, "Subscribe failed: event_name is NULL or empty.");
         return ESP_ERR_INVALID_ARG;
     }
+
     if (!module || !module->base.handle_event)
     {
         ESP_LOGE(TAG, "Subscribe failed: module or its event handler is NULL.");
@@ -379,8 +380,10 @@ esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
     if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
     {
         event_subscription_node_t *node = find_subscription_node(event_name, true);
+
         if (!node)
         {
+            ESP_LOGE(TAG, "Failed to find or create subscription node for event '%s'", event_name);
             xSemaphoreGive(subscription_mutex);
             return ESP_ERR_NO_MEM; // find_subscription_node-მა უკვე დაწერა ლოგი
         }

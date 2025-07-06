@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
   <div class="headertitle"><div class="title">შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1052"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1054"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1070"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1072"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში შეცდომების დამუშავების არქიტექტურულ მიდგომებს, არჩეულ სტრატეგიას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1056"></a>
+<h1><a class="anchor" id="autotoc_md1074"></a>
 კონტექსტი</h1>
 <p>ფრეიმვორქს სჭირდება ერთიანი, პროგნოზირებადი და სტანდარტიზებული შეცდომების დამუშავების მექანიზმი, რომელიც უზრუნველყოფს როგორც სისტემური, ისე მოდულების შეცდომების მართვას, დიაგნოსტიკას და ლოგირებას.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1058"></a>
+<h1><a class="anchor" id="autotoc_md1076"></a>
 არჩეული გადაწყვეტილება</h1>
 <ul>
 <li><b>esp_err_t ტიპის დაბრუნებადი მნიშვნელობები:</b> ყველა public და private ფუნქცია აბრუნებს esp_err_t-ს.</li>
@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 <li><b>ლოგირება:</b> ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგდება შესაბამისი log level-ით (ESP_LOGE, ESP_LOGW).</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1060"></a>
+<h1><a class="anchor" id="autotoc_md1078"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li>ერთიანი შეცდომების დამუშავება ამარტივებს დიაგნოსტიკას და ტესტირებას</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 <li>ალტერნატივა (გლობალური errno, exception-style) უარყოფილია portability-სა და სტანდარტიზაციის არქონის გამო</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1062"></a>
+<h1><a class="anchor" id="autotoc_md1080"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>შეცდომების მართვა ხდება პროგნოზირებადი და სტანდარტიზებული</li>
@@ -129,9 +129,9 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 <li>შესაძლებელია შეცდომების კოდის გაფართოება Framework-ის საჭიროებებზე</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1064"></a>
+<h1><a class="anchor" id="autotoc_md1082"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1065"></a>
+<h2><a class="anchor" id="autotoc_md1083"></a>
 პარამეტრების ვალიდაცია</h2>
 <div class="fragment"><div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!text) {</div>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1066"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1084"></a>
 რესურსების გამოყოფის შემოწმება</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t create_module_resources(module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module_private_data) {</div>
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1068"></a>
+<h1><a class="anchor" id="autotoc_md1086"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>გლობალური errno ან exception-style შეცდომების გამოყენება</li>
@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2error__han
 <li>დაიცავით naming და structure კონვენციები</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1070"></a>
+<h1><a class="anchor" id="autotoc_md1088"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>

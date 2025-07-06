@@ -44,6 +44,7 @@ var service__types_8h =
       [ "FMW_SERVICE_TYPE_CUSTOM_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca4462b1cc3816ea2e7035f4138871d81e", null ],
       [ "FMW_SERVICE_TYPE_RGB_LED_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca429fbb261311e62cce6df53a395f1b1f", null ],
       [ "FMW_SERVICE_TYPE_CMD_ROUTER_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca8f1ee8206757514ed977e857d4c64bbd", null ],
+      [ "FMW_SERVICE_TYPE_DEVICE_IDENTITY_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca992f99c6654f35e3ddfcaee76aa635bb", null ],
       [ "FMW_SERVICE_TYPE_MAX", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca353e9dbb8c1214b5c7c9324a55d1ca8f", null ]
     ] ]
 ];

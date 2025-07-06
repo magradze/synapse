@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
   <div class="headertitle"><div class="title">მოდული: OTA Update Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md37"></a> </p>
-<h1><a class="anchor" id="autotoc_md38"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md55"></a> </p>
+<h1><a class="anchor" id="autotoc_md56"></a>
 1. მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>ota_update_manager</code> <br  />
  <b>კატეგორია:</b> <code>system</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
  <b>ავტორი:</b> Synapse Framework Team</p>
 <p><code>OTA Update Manager</code> მოდული უზრუნველყოფს Synapse Framework-ისთვის უსაფრთხო და საიმედო Over-the-Air (OTA) firmware განახლების მექანიზმს. ის მოქმედებს როგორც მაღალი დონის "მენეჯერი", რომელიც კოორდინაციას უწევს განახლების პროცესის ყველა ეტაპს: სისტემის რესურსების შემოწმებას, firmware-ის გადმოწერას, ვალიდაციას და მოწყობილობის გადატვირთვას.</p>
 <p>მოდული შექმნილია ფრეიმვორქის ძირითადი პრინციპების სრული დაცვით, რაც უზრუნველყოფს მის იზოლირებულ და ივენთებზე დაფუძნებულ მუშაობას.</p>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<h1><a class="anchor" id="autotoc_md57"></a>
 2. წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
 <p>ამ მოდულის გამართული მუშაობისთვის აუცილებელია ESP-IDF-ის კონფიგურაციაში (<code>menuconfig</code>) შემდეგი ოფციების ჩართვა:</p>
 <ol type="1">
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md58"></a>
 3. არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Service-driven:</b> მოდული აწვდის <code><a class="el" href="structota__api__t.html" title="OTA Update Manager Service API structure.">ota_api_t</a></code> სერვისს <code>Service Locator</code>-ის მეშვეობით, რათა სხვა მოდულებმა (მაგ., <code>mqtt_client</code>, <code>cmd_router</code>) შეძლონ განახლების პროცესის ინიცირება.</li>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
 <li><b>სისტემის მდგრადობა:</b> განახლების დაწყებამდე, <code>Health Monitor</code> მოდულის მეშვეობით ამოწმებს სისტემის რესურსებს (მაგ., თავისუფალი მეხსიერება), რათა თავიდან აიცილოს განახლების პროცესში სისტემის გაჭედვა.</li>
 <li><b>ვიზუალური უკუკავშირი:</b> <code>RGB LED Indicator</code> მოდულის გამოყენებით, მომხმარებელს აწვდის ვიზუალურ ინფორმაციას განახლების სტატუსის შესახებ.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md41"></a>
+<h1><a class="anchor" id="autotoc_md59"></a>
 4. კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>pre_check_min_heap_kb</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">თავისუფალი მეხსიერების მინიმალური ზღვარი (KB), რომელიც საჭიროა განახლების დასაწყებად.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>80</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md60"></a>
 5. Service API (&lt;tt&gt;ota_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა OTA მენეჯერის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>FMW_SERVICE_TYPE_OTA_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
 <li>**<code>esp_err_t start_update(const char *firmware_url);</code>** <br  />
  იწყებს OTA განახლების პროცესს მითითებული URL-დან. ფუნქცია არ არის მბლოკავი; ის ქმნის ფონურ ტასკს განახლების შესასრულებლად და მყისიერად აბრუნებს პასუხს. პროცესის სტატუსის მონიტორინგი შესაძლებელია ივენთების საშუალებით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md61"></a>
 6. გამოქვეყნებული ივენთები</h1>
 <ul>
 <li>**<code>OTA_STARTED</code>**<ul>
@@ -195,7 +195,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md44"></a>
+<h1><a class="anchor" id="autotoc_md62"></a>
 7. 💡 გამოყენების მაგალითი</h1>
 <p><code>cmd_router</code> მოდული არეგისტრირებს <code>ota_start</code> ბრძანებას, რომელიც იღებს URL-ს და იწყებს განახლებას.</p>
 <div class="fragment"><div class="line"><span class="comment">// cmd_router.c-ში რეგისტრირებული handler</span></div>
@@ -231,7 +231,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2ota__u
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 <div class="ttc" id="astructota__api__t_html"><div class="ttname"><a href="structota__api__t.html">ota_api_t</a></div><div class="ttdoc">OTA Update Manager Service API structure.</div><div class="ttdef"><b>Definition</b> ota_interface.h:19</div></div>
 <div class="ttc" id="astructota__api__t_html_a703e74e9a46ad90a96775f7ebd1e19dc"><div class="ttname"><a href="structota__api__t.html#a703e74e9a46ad90a96775f7ebd1e19dc">ota_api_t::start_update</a></div><div class="ttdeci">esp_err_t(* start_update)(const char *firmware_url)</div><div class="ttdoc">Starts the OTA update process from the given URL.</div><div class="ttdef"><b>Definition</b> ota_interface.h:32</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md45"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md63"></a>
 8. განახლების ვალიდაცია და Rollback</h2>
 <p><code>ota_manager</code> მოდული სრულად იყენებს ESP-IDF-ის ჩაშენებულ Rollback მექანიზმს, რათა უზრუნველყოს განახლების პროცესის უსაფრთხოება.</p>
 <ul>

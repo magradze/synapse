@@ -1,8 +1,21 @@
 var searchData=
 [
-  ['watchdog_5finterface_2eh_0',['watchdog_interface.h',['../watchdog__interface_8h.html',1,'']]],
-  ['watchdog_5fmanager_2ec_1',['watchdog_manager.c',['../watchdog__manager_8c.html',1,'']]],
-  ['watchdog_5fmanager_2eh_2',['watchdog_manager.h',['../watchdog__manager_8h.html',1,'']]],
-  ['wifi_5fmanager_2ec_3',['wifi_manager.c',['../wifi__manager_8c.html',1,'']]],
-  ['wifi_5fmanager_2eh_4',['wifi_manager.h',['../wifi__manager_8h.html',1,'']]]
+  ['service_5flocator_2ec_0',['service_locator.c',['../service__locator_8c.html',1,'']]],
+  ['service_5flocator_2eh_1',['service_locator.h',['../service__locator_8h.html',1,'']]],
+  ['service_5ftypes_2eh_2',['service_types.h',['../service__types_8h.html',1,'']]],
+  ['storage_5fbackend_5fnvs_2ec_3',['storage_backend_nvs.c',['../storage__backend__nvs_8c.html',1,'']]],
+  ['storage_5fbackend_5fnvs_2eh_4',['storage_backend_nvs.h',['../storage__backend__nvs_8h.html',1,'']]],
+  ['storage_5fbackend_5fsd_2ec_5',['storage_backend_sd.c',['../storage__backend__sd_8c.html',1,'']]],
+  ['storage_5fbackend_5fsd_2eh_6',['storage_backend_sd.h',['../storage__backend__sd_8h.html',1,'']]],
+  ['storage_5fbackend_5fspiffs_2ec_7',['storage_backend_spiffs.c',['../storage__backend__spiffs_8c.html',1,'']]],
+  ['storage_5fbackend_5fspiffs_2eh_8',['storage_backend_spiffs.h',['../storage__backend__spiffs_8h.html',1,'']]],
+  ['storage_5finterface_2eh_9',['storage_interface.h',['../storage__interface_8h.html',1,'']]],
+  ['storage_5fmanager_2ec_10',['storage_manager.c',['../storage__manager_8c.html',1,'']]],
+  ['storage_5fmanager_2eh_11',['storage_manager.h',['../storage__manager_8h.html',1,'']]],
+  ['system_5fevent_5fids_2eh_12',['system_event_ids.h',['../system__event__ids_8h.html',1,'']]],
+  ['system_5fmanager_2ec_13',['system_manager.c',['../system__manager_8c.html',1,'']]],
+  ['system_5fmanager_2eh_14',['system_manager.h',['../system__manager_8h.html',1,'']]],
+  ['system_5fmanager_5finterface_2eh_15',['system_manager_interface.h',['../system__manager__interface_8h.html',1,'']]],
+  ['system_5ftimer_2ec_16',['system_timer.c',['../system__timer_8c.html',1,'']]],
+  ['system_5ftimer_2eh_17',['system_timer.h',['../system__timer_8h.html',1,'']]]
 ];

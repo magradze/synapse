@@ -1,7 +1,9 @@
 <map id="components/interfaces/include/rgb_led_interface.h" name="components/interfaces/include/rgb_led_interface.h">
-<area shape="rect" id="Node000001" title="Public Service API contract for the RGB LED Indicator module." alt="" coords="125,5,328,45"/>
-<area shape="rect" id="Node000002" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="5,93,221,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,56,147,95,144,91,192,52"/>
-<area shape="rect" id="Node000003" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="246,93,437,148"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="262,52,311,91,307,95,259,56"/>
+<area shape="rect" id="Node000001" title="Public Service API contract for the RGB LED Indicator module." alt="" coords="225,5,427,45"/>
+<area shape="rect" id="Node000002" href="$alarms__manager_8c.html" title="Implementation of the System Alarms Manager module." alt="" coords="5,93,193,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,53,164,96,162,91,266,48"/>
+<area shape="rect" id="Node000003" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="218,93,434,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="329,59,329,93,323,93,323,59"/>
+<area shape="rect" id="Node000004" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="459,93,649,148"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="386,48,491,91,489,96,384,53"/>
 </map>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🧪_20მოდული_20tt_20timer_5ftest_20tt_0',['🧪 მოდული &lt;tt&gt;timer_test&lt;/tt&gt;',['../md_components_2modules_2testing_2timer__test__module_2README.html',1,'']]],
-  ['🧪_20ტესტირების_20მეთოდები_1',['🧪 ტესტირების მეთოდები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md975',1,'🧪 ტესტირების მეთოდები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1369',1,'🧪 ტესტირების მეთოდები']]]
+  ['🧩_20strong_20დონე_205_3a_20მაღალი_20დონის_20კომპოზიტური_20მოდულები_2080_20100_20strong_0',['🧩 &lt;strong&gt;დონე 5: მაღალი დონის კომპოზიტური მოდულები (80-100)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md892',1,'']]]
 ];

@@ -1,5 +1,9 @@
 var annotated_dup =
 [
+    [ "alarm_action_t", "structalarm__action__t.html", null ],
+    [ "alarm_rule_t", "structalarm__rule__t.html", null ],
+    [ "alarm_state_t", "structalarm__state__t.html", null ],
+    [ "alarms_manager_private_data_t", "structalarms__manager__private__data__t.html", null ],
     [ "ble_prov_api_t", "structble__prov__api__t.html", "structble__prov__api__t" ],
     [ "ble_provisioning_config_t", "structble__provisioning__config__t.html", "structble__provisioning__config__t" ],
     [ "ble_provisioning_private_data_t", "structble__provisioning__private__data__t.html", "structble__provisioning__private__data__t" ],
@@ -7,6 +11,8 @@ var annotated_dup =
     [ "cmd_router_private_data_t", "structcmd__router__private__data__t.html", null ],
     [ "cmd_t", "structcmd__t.html", "structcmd__t" ],
     [ "custom_check_t", "structcustom__check__t.html", null ],
+    [ "device_identity_api_t", "structdevice__identity__api__t.html", "structdevice__identity__api__t" ],
+    [ "device_identity_private_data_t", "structdevice__identity__private__data__t.html", "structdevice__identity__private__data__t" ],
     [ "event_data_wrapper_t", "structevent__data__wrapper__t.html", "structevent__data__wrapper__t" ],
     [ "event_message_t", "structevent__message__t.html", "structevent__message__t" ],
     [ "event_subscriber_t", "structevent__subscriber__t.html", null ],

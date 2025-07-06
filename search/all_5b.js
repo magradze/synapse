@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📦_20strong_20დონე_201_3a_20ფუნდამენტური_20დრაივერები_20და_20რესურსები_200_2019_20strong_0',['📦 &lt;strong&gt;დონე 1: ფუნდამენტური დრაივერები და რესურსები (0-19)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md866',1,'']]]
+  ['📢_20ივენთების_20დამუშავება_0',['📢 ივენთების დამუშავება',['../md_components_2modules_2system_2alarms__manager_2README.html#autotoc_md36',1,'5. 📢 ივენთების დამუშავება'],['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md119',1,'6. 📢 ივენთების დამუშავება']]],
+  ['📢_20ივენთები_20events_1',['📢 ივენთები events',['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md4',1,'4. 📢 ივენთები (Events)'],['../md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md15',1,'5. 📢 ივენთები (Events)']]]
 ];

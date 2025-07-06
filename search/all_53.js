@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📊_20განსხვავება_20სხვა_20სისტემებისგან_0',['📊 განსხვავება სხვა სისტემებისგან',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md980',1,'📊 განსხვავება სხვა სისტემებისგან'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1370',1,'📊 განსხვავება სხვა სისტემებისგან']]],
-  ['📊_20ინიციალიზაციის_20დონეების_20რეკომენდებული_20დიაპაზონები_1',['📊 ინიციალიზაციის დონეების რეკომენდებული დიაპაზონები',['../md_docs_2convention_2initialization__levels.html#autotoc_md864',1,'']]]
+  ['📁_20შექმნილი_20სტრუქტურა_0',['2. 📁 შექმნილი სტრუქტურა',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1376',1,'']]],
+  ['📁_20შექმნილი_20სტრუქტურა_3a_1',['2. 📁 შექმნილი სტრუქტურა:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md978',1,'']]]
 ];

@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['watchdog_5fapi_5ft_0',['watchdog_api_t',['../structwatchdog__api__t.html',1,'']]],
-  ['watchdog_5fmanager_5fconfig_5ft_1',['watchdog_manager_config_t',['../structwatchdog__manager__config__t.html',1,'']]],
-  ['watchdog_5fmanager_5fprivate_5fdata_5ft_2',['watchdog_manager_private_data_t',['../structwatchdog__manager__private__data__t.html',1,'']]],
-  ['wifi_5fmanager_5fconfig_5ft_3',['wifi_manager_config_t',['../structwifi__manager__config__t.html',1,'']]],
-  ['wifi_5fmanager_5fprivate_5fdata_5ft_4',['wifi_manager_private_data_t',['../structwifi__manager__private__data__t.html',1,'']]]
+  ['service_5fentry_5ft_0',['service_entry_t',['../structservice__entry__t.html',1,'']]],
+  ['storage_5fapi_5ft_1',['storage_api_t',['../structstorage__api__t.html',1,'']]],
+  ['storage_5fmanager_5fconfig_5ft_2',['storage_manager_config_t',['../structstorage__manager__config__t.html',1,'']]],
+  ['storage_5fmanager_5fprivate_5fdata_5ft_3',['storage_manager_private_data_t',['../structstorage__manager__private__data__t.html',1,'']]],
+  ['system_5fmanager_5fapi_5ft_4',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
+  ['system_5ftimer_5fconfig_5ft_5',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
+  ['system_5ftimer_5fprivate_5fdata_5ft_6',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
 ];

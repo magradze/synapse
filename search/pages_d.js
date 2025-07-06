@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['manager_0',['manager',['../md_components_2modules_2system_2ota__update__manager_2README.html',1,'მოდული: OTA Update Manager'],['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'მოდული: Watchdog Manager']]],
+  ['manager_0',['manager',['../md_components_2modules_2system_2ota__update__manager_2README.html',1,'მოდული: OTA Update Manager'],['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'მოდული: Watchdog Manager'],['../md_components_2modules_2system_2alarms__manager_2README.html',1,'🚨 მოდული: System Alarms Manager']]],
   ['manager_20api_20reference_1',['manager api reference',['../md_docs_2api__reference_2storage__api.html',1,'💾 Synapse Storage Manager API Reference'],['../md_docs_2api__reference_2configuration__api.html',1,'Synapse Configuration Manager API Reference'],['../md_docs_2api__reference_2resource__manager__api.html',1,'Synapse Resource Manager API Reference']]],
   ['message_20guidelines_2',['Synapse Commit Message Guidelines',['../md_docs_2contributing_2commit__message__guidelines.html',1,'']]],
   ['migration_20compatibility_3',['მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)',['../md_docs_2design__decisions_2migration__and__compatibility.html',1,'']]],

@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['📢_20ივენთების_20დამუშავება_0',['6. 📢 ივენთების დამუშავება',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md101',1,'']]],
-  ['📢_20ივენთები_20events_1',['📢 ივენთები events',['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md4',1,'4. 📢 ივენთები (Events)'],['../md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md15',1,'5. 📢 ივენთები (Events)']]]
+  ['📡_20softap_20provisioning_20module_20api_0',['📡 SoftAP Provisioning Module API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md405',1,'']]],
+  ['📡_20strong_20დონე_203_3a_20ქსელი_20კონტროლი_20და_20კომუნიკაცია_2040_2059_20strong_1',['📡 &lt;strong&gt;დონე 3: ქსელი, კონტროლი და კომუნიკაცია (40-59)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md888',1,'']]],
+  ['📡_20synapse_20communication_20module_20api_20reference_2',['📡 Synapse Communication Module API Reference',['../md_docs_2api__reference_2communication__api.html',1,'']]],
+  ['📡_20wifi_20მოდული_3',['📡 WiFi მოდული',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1369',1,'']]],
+  ['📡_20wifi_20მოდული_3a_4',['📡 WiFi მოდული:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md970',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ble_5fprovisioning_5fcreate_0',['ble_provisioning_create',['../ble__provisioning_8h.html#a8e072fac4f72bee5b1899e3c56e9519a',1,'ble_provisioning_create(const cJSON *config):&#160;ble_provisioning.c'],['../ble__provisioning_8c.html#a8e072fac4f72bee5b1899e3c56e9519a',1,'ble_provisioning_create(const cJSON *config):&#160;ble_provisioning.c']]]
+  ['alarms_5fmanager_5fcreate_0',['alarms_manager_create',['../alarms__manager_8h.html#a21c2e56f4dbd41109e70885096506b5f',1,'alarms_manager_create(const cJSON *config):&#160;alarms_manager.c'],['../alarms__manager_8c.html#a21c2e56f4dbd41109e70885096506b5f',1,'alarms_manager_create(const cJSON *config):&#160;alarms_manager.c']]]
 ];

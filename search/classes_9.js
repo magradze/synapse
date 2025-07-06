@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['service_5fentry_5ft_0',['service_entry_t',['../structservice__entry__t.html',1,'']]],
-  ['storage_5fapi_5ft_1',['storage_api_t',['../structstorage__api__t.html',1,'']]],
-  ['storage_5fmanager_5fconfig_5ft_2',['storage_manager_config_t',['../structstorage__manager__config__t.html',1,'']]],
-  ['storage_5fmanager_5fprivate_5fdata_5ft_3',['storage_manager_private_data_t',['../structstorage__manager__private__data__t.html',1,'']]],
-  ['system_5fmanager_5fapi_5ft_4',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
-  ['system_5ftimer_5fconfig_5ft_5',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
-  ['system_5ftimer_5fprivate_5fdata_5ft_6',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
+  ['oled_5fdisplay_5fconfig_5ft_0',['oled_display_config_t',['../structoled__display__config__t.html',1,'']]],
+  ['oled_5fdisplay_5fprivate_5fdata_5ft_1',['oled_display_private_data_t',['../structoled__display__private__data__t.html',1,'']]],
+  ['ota_5fapi_5ft_2',['ota_api_t',['../structota__api__t.html',1,'']]],
+  ['ota_5fupdate_5fmanager_5fconfig_5ft_3',['ota_update_manager_config_t',['../structota__update__manager__config__t.html',1,'']]],
+  ['ota_5fupdate_5fmanager_5fprivate_5fdata_5ft_4',['ota_update_manager_private_data_t',['../structota__update__manager__private__data__t.html',1,'']]]
 ];

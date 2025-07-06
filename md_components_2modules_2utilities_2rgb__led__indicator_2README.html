@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
   <div class="headertitle"><div class="title">💡 მოდული &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md95"></a> </p>
-<h1><a class="anchor" id="autotoc_md96"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md113"></a> </p>
+<h1><a class="anchor" id="autotoc_md114"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>rgb_led_indicator</code> <br  />
  <b>კატეგორია:</b> <code>displays</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
  <b>ავტორი:</b> გიორგი მაგრაძე &amp; Synapse AI Assistant</p>
 <p><code>rgb_led_indicator</code> მოდული უზრუნველყოფს უნივერსალურ, მაღალი დონის ინტერფეისს RGB LED ინდიკატორის სამართავად. ის შექმნილია სისტემის სტატუსის ინდიკატორის როლის შესასრულებლად, რომელიც ავტონომიურად რეაგირებს ფრეიმვორქის კრიტიკულ ივენთებზე და, ამავდროულად, აწვდის სერვისის API-ს და CLI ბრძანებებს სხვა მოდულებისა და მომხმარებლებისთვის, რათა მათ მოითხოვონ სპეციფიკური ვიზუალური შეტყობინებები.</p>
 <p>მოდულს აქვს სტატიკური ფერების, ციმციმის და პულსაციის ეფექტების მხარდაჭერა, რომლებიც იმართება ცალკე FreeRTOS ტასკის საშუალებით, რათა უზრუნველყოფილი იყოს ოპერაციების არაბლოკირებადი, ასინქრონული შესრულება.</p>
-<h1><a class="anchor" id="autotoc_md97"></a>
+<h1><a class="anchor" id="autotoc_md115"></a>
 2. 🏗️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>ჰიბრიდული კომუნიკაცია:</b> მოდული ერთდროულად არის <b>Service-driven</b> და <b>Event-driven</b>.<ul>
@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <li><b>პრიორიტეტების სისტემა:</b> მარტივი პრიორიტეტული მექანიზმი მართავს კონფლიქტს "მექანიკურ" მართვასა და სისტემის სტატუსის ავტომატურ ჩვენებას შორის. მექანიკურ მართვას (Service API-ს ან CLI ბრძანების გამოძახებით) ყოველთვის უმაღლესი პრიორიტეტი აქვს.</li>
 <li><b>CLI ინტეგრაცია:</b> მოდული არეგისტრირებს ბრძანებებს <code>Command Router</code>-ში, რაც იძლევა სერიული პორტიდან ინტერაქტიული მართვის საშუალებას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md98"></a>
+<h1><a class="anchor" id="autotoc_md116"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>is_common_anode</code>   </td><td class="markdownTableBodyLeft">boolean   </td><td class="markdownTableBodyLeft"><code>true</code>, თუ გამოიყენება საერთო ანოდის მქონე RGB LED.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>false</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md99"></a>
+<h1><a class="anchor" id="autotoc_md117"></a>
 4. 🛠️ Service API (&lt;tt&gt;rgb_led_api_t&lt;/tt&gt;)</h1>
 <p>მოდული არეგისტრირებს სერვისს, რომლის ტიპია <code>FMW_SERVICE_TYPE_RGB_LED_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <li>**<code>esp_err_t release_control();</code>** <br  />
  ათავისუფლებს "მექანიკურ" მართვას და აბრუნებს ინდიკატორს მის ავტომატურ, ივენთებზე დამოკიდებულ რეჟიმში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md100"></a>
+<h1><a class="anchor" id="autotoc_md118"></a>
 5. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
 <p>მოდული არეგისტრირებს <code>led</code> ბრძანებას <code>Command Router</code>-ში, რაც იძლევა სერიული კონსოლიდან LED-ის სრული მართვის საშუალებას.</p>
 <table class="markdownTable">
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>led release</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🔄 ათავისუფლებს მექანიკურ კონტროლს და აბრუნებს LED-ს ავტომატურ რეჟიმში.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md101"></a>
+<h1><a class="anchor" id="autotoc_md119"></a>
 6. 📢 ივენთების დამუშავება</h1>
 <p>მოდული გამოიწერს შემდეგ ივენთებს სტატუსის ავტომატურად საჩვენებლად:</p>
 <table class="markdownTable">
@@ -196,14 +196,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft">(ნებისმიერი Service API/CLI გამოძახება)   </td><td class="markdownTableBodyLeft">გამოძახების შესაბამისად   </td><td class="markdownTableBodyCenter">მექანიკური   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md102"></a>
+<h1><a class="anchor" id="autotoc_md120"></a>
 7. ტექნიკური იმპლემენტაციის დეტალები</h1>
 <ul>
 <li><b>დრაივერი:</b> გამოიყენება ESP-IDF-ის <code>ledc</code> (LED Control) პერიფერია, ფერისა და სიკაშკაშის ზუსტი, PWM-ზე დაფუძნებული მართვისთვის.</li>
 <li><b>ტასკების მართვა:</b> გამოყოფილი FreeRTOS ტასკი (<code>led_control_task</code>) მართავს LED-ის მდგომარეობების მანქანას და ეფექტებს.</li>
 <li><b>სინქრონიზაცია:</b> გამოიყენება FreeRTOS <code>Queue</code> ბრძანებების (API ფუნქციებიდან და CLI-დან) <code>led_control_task</code>-ისთვის უსაფრთხოდ გადასაცემად.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md103"></a>
+<h1><a class="anchor" id="autotoc_md121"></a>
 8. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, რომ <code>ota_update_module</code>-ს სურს, აცნობოს მომხმარებელს განახლების პროცესის შესახებ <code>rgb_led_indicator</code>-ის მეშვეობით, რომლის <code>instance_name</code> არის <code>"status_led"</code>.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
@@ -254,7 +254,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2rgb
 <div class="ttc" id="astructrgb__led__api__t_html_a2575b85a2ae0e83ef233c8d72cf434a5"><div class="ttname"><a href="structrgb__led__api__t.html#a2575b85a2ae0e83ef233c8d72cf434a5">rgb_led_api_t::start_pulse</a></div><div class="ttdeci">esp_err_t(* start_pulse)(uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms)</div><div class="ttdoc">Starts a pulsing (breathing) effect with a specified color and period.</div><div class="ttdef"><b>Definition</b> rgb_led_interface.h:67</div></div>
 <div class="ttc" id="astructrgb__led__api__t_html_a51197765d41c0532713fa702fe463f88"><div class="ttname"><a href="structrgb__led__api__t.html#a51197765d41c0532713fa702fe463f88">rgb_led_api_t::release_control</a></div><div class="ttdeci">esp_err_t(* release_control)(void)</div><div class="ttdoc">Releases manual control of the LED.</div><div class="ttdef"><b>Definition</b> rgb_led_interface.h:75</div></div>
 <div class="ttc" id="astructrgb__led__api__t_html_afaf3de1102a25d5460d2428b9018a48e"><div class="ttname"><a href="structrgb__led__api__t.html#afaf3de1102a25d5460d2428b9018a48e">rgb_led_api_t::set_color</a></div><div class="ttdeci">esp_err_t(* set_color)(uint8_t r, uint8_t g, uint8_t b)</div><div class="ttdoc">Sets a static color on the LED.</div><div class="ttdef"><b>Definition</b> rgb_led_interface.h:40</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md104"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md122"></a>
 9. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>rgb_led_indicator</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>interfaces</code> და <code>core</code>. <code>ble_provisioning</code>-ზე პირდაპირი დამოკიდებულება საჭირო არ არის, რადგან კომუნიკაცია ხდება აბსტრაქტული სერვისის საშუალებით.</li>

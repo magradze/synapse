@@ -6,13 +6,14 @@ var searchData=
   ['deprecated_20list_3',['Deprecated List',['../deprecated.html',1,'']]],
   ['design_20checklist_4',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
   ['design_20decisions_5',['Synapse Design Decisions',['../md_docs_2design__decisions_2design__decisions__index.html',1,'']]],
-  ['diagnostics_20გაფართოებული_20დიაგნოსტიკა_6',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
-  ['directory_20structure_7',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
-  ['disclosure_20policy_20უსაფრთხოების_20ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_8',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['display_20module_20api_20reference_9',['Synapse Display Module API Reference',['../md_docs_2api__reference_2display__api.html',1,'']]],
-  ['display_20modules_10',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
-  ['documentation_20module_20design_20checklist_11',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
-  ['doxygen_20კომენტარების_20სტანდარტი_20v1_200_12',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]],
-  ['doxygen_5fmain_5fpages_13',['doxygen_main_pages',['../md_docs_2doxygen__main__pages.html',1,'']]],
-  ['drivers_20module_20api_20reference_14',['Synapse Drivers Module API Reference',['../md_docs_2api__reference_2drivers__api.html',1,'']]]
+  ['device_20identity_20service_6',['🆔 მოდული: Device Identity Service',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
+  ['diagnostics_20გაფართოებული_20დიაგნოსტიკა_7',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
+  ['directory_20structure_8',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
+  ['disclosure_20policy_20უსაფრთხოების_20ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_9',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
+  ['display_20module_20api_20reference_10',['Synapse Display Module API Reference',['../md_docs_2api__reference_2display__api.html',1,'']]],
+  ['display_20modules_11',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
+  ['documentation_20module_20design_20checklist_12',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
+  ['doxygen_20კომენტარების_20სტანდარტი_20v1_200_13',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]],
+  ['doxygen_5fmain_5fpages_14',['doxygen_main_pages',['../md_docs_2doxygen__main__pages.html',1,'']]],
+  ['drivers_20module_20api_20reference_15',['Synapse Drivers Module API Reference',['../md_docs_2api__reference_2drivers__api.html',1,'']]]
 ];

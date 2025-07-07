@@ -17,5 +17,11 @@
         "reconfigure": "device_identity_service_reconfigure",
         "status": "device_identity_service_get_status",
         "handle_event": "device_identity_service_handle_event"
+    },
+    "mqtt_interface": {
+        "publishes": {
+            "INFO": "state/device/info"
+        },
+        "subscribes": {}
     }
 }

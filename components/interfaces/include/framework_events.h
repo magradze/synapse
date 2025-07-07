@@ -20,4 +20,8 @@
 #define FMW_EVENT_MODULE_ENABLED "FMW_MODULE_ENABLED"
 #define FMW_EVENT_MODULE_DISABLED "FMW_MODULE_DISABLED"
 
+// --- Module-specific Status/Data Events ---
+#define FMW_EVENT_WIFI_STATUS_READY "WIFI_STATUS_READY" // WiFi module reports its status
+#define FMW_EVENT_DEVICE_INFO_READY "DEVICE_INFO_READY" // Device identity service reports its information
+
 #endif // FRAMEWORK_EVENTS_H

@@ -1,0 +1,27 @@
+{
+    "name": "mqtt_manager",
+    "version": "1.0.0",
+    "description": "Manages MQTT connection, command forwarding, and status publishing.",
+    "author": "Synapse Framework Team",
+    "init_function": "mqtt_manager_create",
+    "init_level": 45,
+    "dependencies": [],
+    "type": "communications",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_MQTT_MANAGER_ENABLED",
+    "runtime_commands": {
+        "start": null,
+        "stop": null,
+        "enable": null,
+        "disable": null,
+        "reconfigure": null,
+        "status": null,
+        "handle_event": "mqtt_manager_handle_event"
+    },
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {
+            "COMMAND_IN": "cmd/in"
+        }
+    }
+}

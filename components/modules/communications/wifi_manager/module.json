@@ -17,5 +17,12 @@
         "reconfigure": "wifi_manager_reconfigure",
         "status": "wifi_manager_get_status",
         "handle_event": "wifi_manager_handle_event"
+    },
+    "mqtt_interface": {
+        "publishes": {
+            "STATUS": "state/wifi/status",
+            "SCAN_RESULT": "data/wifi/scan_result"
+        },
+        "subscribes": {}
     }
 }

@@ -293,11 +293,21 @@ static const char* api_get_firmware_version(void)
 
 /**
  * @internal
- * @brief Handler function for the 'device info' command.
+ * @brief Handler function for the 'device' command.
+ * @details
+ * This function is executed when the 'device info' command is received from
+ * any source (CLI, MQTT, etc.). It performs two main actions:
+ * 1. Prints the device identity information directly to the console for
+ *    immediate feedback to the user.
+ * 2. Creates a cJSON object with the same information, and publishes it
+ *    to the Event Bus under the `FMW_EVENT_DEVICE_INFO_READY` event. This
+ *    allows other modules, like the mqtt_manager, to react to the command
+ *    and forward the response to external systems.
+ *
  * @param[in] argc Argument count.
  * @param[in] argv Argument vector.
- * @param[in] context User-defined context (pointer to the module instance).
- * @return ESP_OK on success, or ESP_ERR_INVALID_ARG on error.
+ * @param[in] context User-defined context (not used in this handler).
+ * @return ESP_OK on success, or an error code on failure.
  */
 static esp_err_t cmd_handler_device(int argc, char **argv, void *context)
 {
@@ -307,12 +317,46 @@ static esp_err_t cmd_handler_device(int argc, char **argv, void *context)
     }
 
     if (strcmp(argv[1], "info") == 0) {
+
+        // --- Action 1: Print information to the console (for direct CLI users) ---
         printf("----------------------------------\n");
         printf("  Device Information\n");
         printf("----------------------------------\n");
         printf("  %-20s: %s\n", "Device ID", api_get_device_id());
         printf("  %-20s: %s\n", "Firmware Version", api_get_firmware_version());
         printf("----------------------------------\n");
+
+        // --- Action 2: Create JSON and publish an event (for remote/async responses) ---
+        cJSON *info_json = cJSON_CreateObject();
+        if (info_json == NULL)
+        {
+            ESP_LOGE(TAG, "Failed to create cJSON object for device info.");
+            return ESP_ERR_NO_MEM;
+        }
+
+        // Populate the JSON object
+        cJSON_AddStringToObject(info_json, "device_id", api_get_device_id());
+        cJSON_AddStringToObject(info_json, "firmware_version", api_get_firmware_version());
+
+        // Convert the JSON object to a string
+        char *json_string = cJSON_PrintUnformatted(info_json);
+        if (json_string)
+        {
+            ESP_LOGI(TAG, "Publishing DEVICE_INFO_READY event.");
+
+            event_data_wrapper_t *wrapper;
+            // Wrap the dynamically allocated string so it can be safely freed by the event bus
+            if (fmw_event_data_wrap(strdup(json_string), free, &wrapper) == ESP_OK)
+            {
+                fmw_event_bus_post(FMW_EVENT_DEVICE_INFO_READY, wrapper);
+                fmw_event_data_release(wrapper); // Release our ownership
+            }
+
+            free(json_string);
+        }
+
+        // Clean up the cJSON object
+        cJSON_Delete(info_json);
     } else {
         printf("Error: Unknown subcommand '%s'.\nUsage: device info\n", argv[1]);
         return ESP_ERR_INVALID_ARG;

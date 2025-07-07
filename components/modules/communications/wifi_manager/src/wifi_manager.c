@@ -717,12 +717,19 @@ static esp_err_t load_credentials(wifi_manager_private_data_t *private_data)
 
 /**
  * @internal
- * @brief Handles 'wifi' command from the CLI.
- * @details Parses subcommands and arguments to manage and query the WiFi state.
- *          This function is registered with the Command Router.
- * @param argc Argument count.
- * @param argv Argument vector.
- * @param context Pointer to the module_t instance.
+ * @brief Handles 'wifi' command from the CLI and remote sources.
+ * @details
+ * This function serves as the central handler for all 'wifi' related commands.
+ * It parses subcommands and arguments to manage and query the WiFi state.
+ * For the 'status' subcommand, in addition to printing to the console,
+ * it now also gathers the status information into a JSON object and
+ * publishes it to the Event Bus via a `FMW_EVENT_WIFI_STATUS_READY` event.
+ * This allows other modules, like the mqtt_manager, to receive and forward
+ * the status to external systems.
+ *
+ * @param[in] argc Argument count.
+ * @param[in] argv Argument vector.
+ * @param[in] context Pointer to the module_t instance.
  * @return ESP_OK on success, or an error code on failure.
  */
 static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
@@ -748,6 +755,59 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
     // --- ℹ️ Status and Info Commands ---
     if (strcmp(sub_command, "status") == 0)
     {
+        // --- ★★★ ახალი ლოგიკა ივენთის გამოსაქვეყნებლად ★★★ ---
+        cJSON *status_json = cJSON_CreateObject();
+        if (status_json == NULL)
+        {
+            ESP_LOGE(TAG, "Failed to create cJSON object for status.");
+            // We don't return here, we can still print to console.
+        }
+        else
+        {
+            // Populate the JSON object with the same info we are about to print
+            cJSON_AddStringToObject(status_json, "module_state", private_data->enabled ? "Enabled" : "Disabled");
+            cJSON_AddStringToObject(status_json, "connection_status", private_data->is_connected ? "Connected" : "Disconnected");
+
+            if (private_data->is_connected)
+            {
+                wifi_ap_record_t ap_info;
+                if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
+                {
+                    cJSON_AddStringToObject(status_json, "ssid", (const char *)ap_info.ssid);
+                    cJSON_AddNumberToObject(status_json, "channel", ap_info.primary);
+                    cJSON_AddNumberToObject(status_json, "rssi", ap_info.rssi);
+                }
+
+                esp_netif_ip_info_t ip_info;
+                esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+                if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
+                {
+                    char ip_str[16];
+                    sprintf(ip_str, IPSTR, IP2STR(&ip_info.ip));
+                    cJSON_AddStringToObject(status_json, "ip_address", ip_str);
+                }
+            }
+
+            // Convert JSON object to string
+            char *json_string = cJSON_PrintUnformatted(status_json);
+            if (json_string)
+            {
+                // Publish the event to the Event Bus
+                ESP_LOGI(TAG, "Publishing WIFI_STATUS_READY event with payload: %s", json_string);
+                event_data_wrapper_t *wrapper;
+                if (fmw_event_data_wrap(strdup(json_string), free, &wrapper) == ESP_OK)
+                {
+                    fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
+                    fmw_event_data_release(wrapper);
+                }
+                free(json_string);
+            }
+
+            cJSON_Delete(status_json);
+        }
+        // --- ★★★ ახალი ლოგიკის დასასრული ★★★ ---
+
+        // The original console output logic remains for direct CLI feedback
         printf("---------------- WiFi Status ----------------\n");
         printf("  Module State:      %s\n", private_data->enabled ? "Enabled" : "Disabled");
         printf("  Connection Status: %s\n", private_data->is_connected ? "Connected" : "Disconnected");
@@ -854,8 +914,6 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
         free(ap_list);
         return ESP_OK;
     }
-
-    // --- ⚙️ Control and Action Commands ---
     else if (strcmp(sub_command, "enable") == 0)
     {
         printf("Enabling WiFi module...\n");
@@ -899,7 +957,9 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
     }
     else if (strcmp(sub_command, "erase_creds") == 0)
     {
-        printf("Erasing saved WiFi credentials from NVS...\n");
+        printf("Erasing saved WiFi credentials...\n");
+        // This part should ideally use the Storage Manager service
+        // For now, we keep the direct NVS call as it was
         nvs_handle_t nvs_handle;
         if (nvs_open("wifi_creds", NVS_READWRITE, &nvs_handle) == ESP_OK)
         {
@@ -907,7 +967,6 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
             nvs_commit(nvs_handle);
             nvs_close(nvs_handle);
             printf("Credentials erased. Please reboot or provision the device.\n");
-            // გაასუფთავეთ მიმდინარე credentials-იც
             memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
             private_data->has_saved_credentials = false;
         }
@@ -930,15 +989,11 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
         if (esp_netif_set_hostname(netif, hostname) == ESP_OK)
         {
             printf("Hostname set to '%s'.\n", hostname);
-
-            // შევამოწმოთ, მომხმარებელს სურს თუ არა დაუყოვნებლივ ხელახლა დაკავშირება
             bool reconnect = (argc == 4 && strcmp(argv[3], "--reconnect") == 0);
-
             if (reconnect)
             {
                 printf("Reconnecting to apply new hostname...\n");
                 esp_wifi_disconnect();
-                // მცირე დაყოვნება, რათა disconnect-მა მოასწროს დამუშავება
                 vTaskDelay(pdMS_TO_TICKS(500));
                 esp_wifi_connect();
             }
@@ -964,17 +1019,11 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
         const char *mode_str = argv[2];
         wifi_ps_type_t ps_mode;
         if (strcmp(mode_str, "off") == 0)
-        {
             ps_mode = WIFI_PS_NONE;
-        }
         else if (strcmp(mode_str, "min") == 0)
-        {
             ps_mode = WIFI_PS_MIN_MODEM;
-        }
         else if (strcmp(mode_str, "max") == 0)
-        {
             ps_mode = WIFI_PS_MAX_MODEM;
-        }
         else
         {
             printf("Error: Invalid power save mode '%s'.\n", mode_str);
@@ -992,8 +1041,6 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
         }
         return ESP_OK;
     }
-
-    // --- Fallback for unknown command ---
     else
     {
         printf("Error: Unknown subcommand '%s'.\n", sub_command);

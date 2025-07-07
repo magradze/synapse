@@ -100,25 +100,22 @@ $(document).ready(function(){initNavTree('namespacegenerate__mqtt__topics.html',
 Functions</h2></td></tr>
 <tr class="memitem:aab31d4af90135e6c3b8ea2b02c140785" id="r_aab31d4af90135e6c3b8ea2b02c140785"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenerate__mqtt__topics.html#aab31d4af90135e6c3b8ea2b02c140785">find_module_json_files</a> (modules_dir)</td></tr>
 <tr class="separator:aab31d4af90135e6c3b8ea2b02c140785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ff45c853abf34bafd2faaa3f4d20557" id="r_a3ff45c853abf34bafd2faaa3f4d20557"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenerate__mqtt__topics.html#a3ff45c853abf34bafd2faaa3f4d20557">parse_system_config_instances</a> (system_config_file)</td></tr>
-<tr class="separator:a3ff45c853abf34bafd2faaa3f4d20557"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8601a1584348b7adc4bffb9fce7cf31" id="r_ae8601a1584348b7adc4bffb9fce7cf31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenerate__mqtt__topics.html#ae8601a1584348b7adc4bffb9fce7cf31">parse_module_topics</a> (module_json_file)</td></tr>
 <tr class="separator:ae8601a1584348b7adc4bffb9fce7cf31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92711bac10cb14bfb9b95aa94dd89c02" id="r_a92711bac10cb14bfb9b95aa94dd89c02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenerate__mqtt__topics.html#a92711bac10cb14bfb9b95aa94dd89c02">generate_topic_defines</a> (module_type, topics, instance_names)</td></tr>
-<tr class="separator:a92711bac10cb14bfb9b95aa94dd89c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57f427bf6ab3178e29e28a2279900a73" id="r_a57f427bf6ab3178e29e28a2279900a73"><td class="memItemLeft" align="right" valign="top"><a id="a57f427bf6ab3178e29e28a2279900a73" name="a57f427bf6ab3178e29e28a2279900a73"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
+<tr class="memitem:a155412cdaa45b16a0a5c3cfaf05f27c0" id="r_a155412cdaa45b16a0a5c3cfaf05f27c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenerate__mqtt__topics.html#a155412cdaa45b16a0a5c3cfaf05f27c0">generate_topic_defines</a> (module_name, interface_data)</td></tr>
+<tr class="separator:a155412cdaa45b16a0a5c3cfaf05f27c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f427bf6ab3178e29e28a2279900a73" id="r_a57f427bf6ab3178e29e28a2279900a73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegenerate__mqtt__topics.html#a57f427bf6ab3178e29e28a2279900a73">main</a> ()</td></tr>
 <tr class="separator:a57f427bf6ab3178e29e28a2279900a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">MindLab ESP Framework - MQTT Topics Auto-Generation Script
+<div class="textblock"><pre class="fragment">Synapse ESP Framework - MQTT Topics Auto-Generation Script
 
 This script collects MQTT topic definitions from all module.json files
 and generates a centralized mqtt_topics_generated.h header file.
+It uses a new 'mqtt_interface' section in module.json to define
+published and subscribed topics, making the system more robust and maintainable.
 
-Usage: python generate_mqtt_topics.py [source_dir] [system_config] [output_file] [template_file]
-Author: MindLab Development Team
-Version: 1.0
+Usage: Called automatically by CMake during the build process.
 </pre> </div><h2 class="groupheader">Function Documentation</h2>
 <a id="aab31d4af90135e6c3b8ea2b02c140785" name="aab31d4af90135e6c3b8ea2b02c140785"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab31d4af90135e6c3b8ea2b02c140785">&#9670;&#160;</a></span>find_module_json_files()</h2>
@@ -135,22 +132,29 @@ Version: 1.0
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Find all module.json files recursively.</pre> <div class="dynheader">
+<pre class="fragment">Recursively finds all 'module.json' files within the specified directory.
+
+Args:
+    modules_dir (str): The root directory to search for modules.
+    
+Returns:
+    list: A list of paths to the found module.json files.
+</pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacegenerate__mqtt__topics_aab31d4af90135e6c3b8ea2b02c140785_icgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_aab31d4af90135e6c3b8ea2b02c140785_icgraph" alt=""/></div>
 <map name="anamespacegenerate__mqtt__topics_aab31d4af90135e6c3b8ea2b02c140785_icgraph" id="anamespacegenerate__mqtt__topics_aab31d4af90135e6c3b8ea2b02c140785_icgraph">
-<area shape="rect" title=" " alt="" coords="280,29,472,69"/>
-<area shape="rect" href="namespacegenerate__mqtt__topics.html#a92711bac10cb14bfb9b95aa94dd89c02" title=" " alt="" coords="5,29,232,69"/>
-<area shape="poly" title=" " alt="" coords="266,52,232,52,232,47,266,47"/>
-<area shape="poly" title=" " alt="" coords="162,18,147,11,119,8,94,10,79,15,73,21,76,28,71,30,68,20,76,10,93,5,119,3,148,6,165,13"/>
+<area shape="rect" title=" " alt="" coords="255,22,447,62"/>
+<area shape="rect" href="namespacegenerate__mqtt__topics.html#a57f427bf6ab3178e29e28a2279900a73" title=" " alt="" coords="5,29,207,55"/>
+<area shape="poly" title=" " alt="" coords="241,45,207,45,207,39,241,39"/>
+<area shape="poly" title=" " alt="" coords="149,20,146,15,139,12,106,8,80,10,66,15,63,20,71,27,67,31,58,21,63,11,79,5,106,3,140,7,150,11,154,17"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a92711bac10cb14bfb9b95aa94dd89c02" name="a92711bac10cb14bfb9b95aa94dd89c02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92711bac10cb14bfb9b95aa94dd89c02">&#9670;&#160;</a></span>generate_topic_defines()</h2>
+<a id="a155412cdaa45b16a0a5c3cfaf05f27c0" name="a155412cdaa45b16a0a5c3cfaf05f27c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a155412cdaa45b16a0a5c3cfaf05f27c0">&#9670;&#160;</a></span>generate_topic_defines()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,19 +163,13 @@ Here is the caller graph for this function:</div>
           <td class="memname">generate_mqtt_topics.generate_topic_defines </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>module_type</em>, </td>
+          <td class="paramname"><em>module_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>topics</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>instance_names</em>&#160;</td>
+          <td class="paramname"><em>interface_data</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -180,28 +178,66 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Generate #define statements for each instance of a module.</pre> <div class="dynheader">
+<pre class="fragment">Generates C-style #define statements and Doxygen comments for each topic.
+
+Args:
+    module_name (str): The name of the module (e.g., 'wifi_manager').
+    interface_data (dict): The 'mqtt_interface' dictionary from module.json.
+    
+Returns:
+    tuple: A tuple containing (list_of_defines, list_of_docs, topic_count).
+</pre> <div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacegenerate__mqtt__topics_a155412cdaa45b16a0a5c3cfaf05f27c0_icgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_a155412cdaa45b16a0a5c3cfaf05f27c0_icgraph" alt=""/></div>
+<map name="anamespacegenerate__mqtt__topics_a155412cdaa45b16a0a5c3cfaf05f27c0_icgraph" id="anamespacegenerate__mqtt__topics_a155412cdaa45b16a0a5c3cfaf05f27c0_icgraph">
+<area shape="rect" title=" " alt="" coords="255,22,481,62"/>
+<area shape="rect" href="namespacegenerate__mqtt__topics.html#a57f427bf6ab3178e29e28a2279900a73" title=" " alt="" coords="5,29,207,55"/>
+<area shape="poly" title=" " alt="" coords="241,45,207,45,207,39,241,39"/>
+<area shape="poly" title=" " alt="" coords="153,20,150,16,142,12,106,8,78,10,63,15,60,20,68,27,64,31,55,21,59,11,77,5,106,3,143,7,154,12,157,18"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a57f427bf6ab3178e29e28a2279900a73" name="a57f427bf6ab3178e29e28a2279900a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57f427bf6ab3178e29e28a2279900a73">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">generate_mqtt_topics.main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Main execution function. Parses arguments, finds modules, generates topics,
+and writes the final header file from a template.
+</pre> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_cgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_cgraph" alt=""/></div>
-<map name="anamespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_cgraph" id="anamespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_cgraph">
-<area shape="rect" title=" " alt="" coords="5,69,232,109"/>
-<area shape="poly" title=" " alt="" coords="70,70,67,60,75,50,92,45,119,43,149,46,165,53,163,58,148,51,119,48,93,50,78,55,72,61,75,68"/>
-<area shape="rect" href="namespacegenerate__mqtt__topics.html#aab31d4af90135e6c3b8ea2b02c140785" title=" " alt="" coords="286,5,478,45"/>
-<area shape="poly" title=" " alt="" coords="201,67,285,46,287,51,202,72"/>
-<area shape="rect" href="namespacegenerate__mqtt__topics.html#ae8601a1584348b7adc4bffb9fce7cf31" title=" " alt="" coords="280,69,484,109"/>
-<area shape="poly" title=" " alt="" coords="232,87,266,87,266,92,232,92"/>
-<area shape="rect" href="namespacegenerate__mqtt__topics.html#a3ff45c853abf34bafd2faaa3f4d20557" title=" " alt="" coords="280,133,484,173"/>
-<area shape="poly" title=" " alt="" coords="202,107,287,127,285,133,201,112"/>
+<div class="center"><img src="namespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_cgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_cgraph" alt=""/></div>
+<map name="anamespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_cgraph" id="anamespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_cgraph">
+<area shape="rect" title=" " alt="" coords="5,77,207,102"/>
+<area shape="poly" title=" " alt="" coords="64,78,55,68,59,58,77,52,106,50,143,54,154,59,157,65,153,68,150,63,142,59,106,55,78,57,63,62,60,68,68,75"/>
+<area shape="rect" href="namespacegenerate__mqtt__topics.html#aab31d4af90135e6c3b8ea2b02c140785" title=" " alt="" coords="272,5,464,45"/>
+<area shape="poly" title=" " alt="" coords="159,74,271,46,273,51,160,79"/>
+<area shape="rect" href="namespacegenerate__mqtt__topics.html#a155412cdaa45b16a0a5c3cfaf05f27c0" title=" " alt="" coords="255,69,481,109"/>
+<area shape="poly" title=" " alt="" coords="207,87,241,87,241,92,207,92"/>
+<area shape="rect" href="namespacegenerate__mqtt__topics.html#ae8601a1584348b7adc4bffb9fce7cf31" title=" " alt="" coords="266,133,470,173"/>
+<area shape="poly" title=" " alt="" coords="160,100,273,127,271,133,159,105"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_icgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_icgraph" alt=""/></div>
-<map name="anamespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_icgraph" id="anamespacegenerate__mqtt__topics_a92711bac10cb14bfb9b95aa94dd89c02_icgraph">
-<area shape="rect" title=" " alt="" coords="5,29,232,69"/>
-<area shape="poly" title=" " alt="" coords="157,18,144,11,119,8,97,10,84,15,79,21,81,28,76,30,74,20,81,10,96,5,119,3,145,6,160,13"/>
+<div class="center"><img src="namespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_icgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_icgraph" alt=""/></div>
+<map name="anamespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_icgraph" id="anamespacegenerate__mqtt__topics_a57f427bf6ab3178e29e28a2279900a73_icgraph">
+<area shape="rect" title=" " alt="" coords="5,29,207,55"/>
+<area shape="poly" title=" " alt="" coords="142,20,132,11,106,8,85,10,74,15,71,20,77,28,73,31,66,21,70,11,83,5,106,3,134,6,145,16"/>
 </map>
 </div>
 
@@ -222,44 +258,22 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Parse MQTT topics from a module.json file.</pre> <div class="dynheader">
+<pre class="fragment">Parses MQTT topics from a module.json file using the 'mqtt_interface' structure.
+
+Args:
+    module_json_file (str): Path to the module.json file.
+    
+Returns:
+    tuple: A tuple containing (module_name, mqtt_interface_data), or (None, None) if not found.
+</pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacegenerate__mqtt__topics_ae8601a1584348b7adc4bffb9fce7cf31_icgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_ae8601a1584348b7adc4bffb9fce7cf31_icgraph" alt=""/></div>
 <map name="anamespacegenerate__mqtt__topics_ae8601a1584348b7adc4bffb9fce7cf31_icgraph" id="anamespacegenerate__mqtt__topics_ae8601a1584348b7adc4bffb9fce7cf31_icgraph">
-<area shape="rect" title=" " alt="" coords="280,29,484,69"/>
-<area shape="rect" href="namespacegenerate__mqtt__topics.html#a92711bac10cb14bfb9b95aa94dd89c02" title=" " alt="" coords="5,29,232,69"/>
-<area shape="poly" title=" " alt="" coords="266,52,232,52,232,47,266,47"/>
-<area shape="poly" title=" " alt="" coords="163,18,148,11,119,8,93,10,78,15,72,21,75,28,70,30,67,20,75,10,92,5,119,3,149,6,165,13"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a3ff45c853abf34bafd2faaa3f4d20557" name="a3ff45c853abf34bafd2faaa3f4d20557"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ff45c853abf34bafd2faaa3f4d20557">&#9670;&#160;</a></span>parse_system_config_instances()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">generate_mqtt_topics.parse_system_config_instances </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>system_config_file</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<pre class="fragment">Parse system_config.json to get a map of module_type to instance_names.</pre> <div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespacegenerate__mqtt__topics_a3ff45c853abf34bafd2faaa3f4d20557_icgraph.png" border="0" usemap="#anamespacegenerate__mqtt__topics_a3ff45c853abf34bafd2faaa3f4d20557_icgraph" alt=""/></div>
-<map name="anamespacegenerate__mqtt__topics_a3ff45c853abf34bafd2faaa3f4d20557_icgraph" id="anamespacegenerate__mqtt__topics_a3ff45c853abf34bafd2faaa3f4d20557_icgraph">
-<area shape="rect" title=" " alt="" coords="280,29,484,69"/>
-<area shape="rect" href="namespacegenerate__mqtt__topics.html#a92711bac10cb14bfb9b95aa94dd89c02" title=" " alt="" coords="5,29,232,69"/>
-<area shape="poly" title=" " alt="" coords="266,52,232,52,232,47,266,47"/>
-<area shape="poly" title=" " alt="" coords="163,18,148,11,119,8,93,10,78,15,72,21,75,28,70,30,67,20,75,10,92,5,119,3,149,6,165,13"/>
+<area shape="rect" title=" " alt="" coords="255,22,459,62"/>
+<area shape="rect" href="namespacegenerate__mqtt__topics.html#a57f427bf6ab3178e29e28a2279900a73" title=" " alt="" coords="5,29,207,55"/>
+<area shape="poly" title=" " alt="" coords="241,45,207,45,207,39,241,39"/>
+<area shape="poly" title=" " alt="" coords="151,20,148,15,140,12,106,8,79,10,65,15,62,20,69,27,65,31,57,21,61,11,78,5,106,3,141,7,151,11,155,17"/>
 </map>
 </div>
 

@@ -9,6 +9,7 @@ var dir_8b2a2187e6ebda03a762b8631ac4d34a =
     [ "framework_events.h", "framework__events_8h.html", null ],
     [ "health_interface.h", "health__interface_8h.html", "health__interface_8h" ],
     [ "logging.h", "logging_8h.html", "logging_8h" ],
+    [ "mqtt_topics_generated.h", "mqtt__topics__generated_8h.html", "mqtt__topics__generated_8h" ],
     [ "ota_interface.h", "ota__interface_8h.html", "ota__interface_8h" ],
     [ "rgb_led_interface.h", "rgb__led__interface_8h.html", "rgb__led__interface_8h" ],
     [ "service_types.h", "service__types_8h.html", "service__types_8h" ],

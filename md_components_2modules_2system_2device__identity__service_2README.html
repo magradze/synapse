@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: 🆔 მოდული: Device Identity Service</title>
+<title>Synapse ESP Framework: 🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,27 +90,29 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">🆔 მოდული: Device Identity Service</div></div>
+  <div class="headertitle"><div class="title">🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md39"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
- <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
- <b>🔖 ვერსია:</b> 1.1.0</p>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md51"></a> </p>
+<h1><a class="anchor" id="autotoc_md52"></a>
 1. 📜 მიმოხილვა</h1>
-<p><code>Device Identity Service</code> არის Synapse Framework-ის ფუნდამენტური, სისტემური მოდული, რომელიც უზრუნველყოფს ცენტრალიზებულ და მარტივ წვდომას მოწყობილობის უნიკალურ იდენტიფიკატორებსა და firmware-ის ინფორმაციაზე.</p>
-<p>მისი მთავარი ამოცანაა, სისტემის გაშვებისას ერთხელ წაიკითხოს მოწყობილობის აპარატურული მონაცემები (მაგ., MAC მისამართი) და პროგრამული ვერსია, შეინახოს ისინი და შემდეგ, <code>Service Locator</code>-ის მეშვეობით, მიაწოდოს ეს ინფორმაცია ნებისმიერ სხვა მოდულს, რომელსაც ის დასჭირდება. ეს გამორიცხავს კოდის დუბლირებას და უზრუნველყოფს, რომ ყველა კომპონენტი იყენებდეს ერთსა და იმავე, თანმიმდევრულ საიდენტიფიკაციო მონაცემებს.</p>
-<h1><a class="anchor" id="autotoc_md41"></a>
+<p><b>მოდულის სახელი:</b> <code>device_identity_service</code> <br  />
+ <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
+ <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
+ <b>🔖 ვერსია:</b> 1.2.0</p>
+<p><code>Device Identity Service</code> არის Synapse Framework-ის <b>ფუნდამენტური, სისტემური მოდული</b>, რომელიც უზრუნველყოფს ცენტრალიზებულ და მარტივ წვდომას მოწყობილობის უნიკალურ იდენტიფიკატორებსა და firmware-ის ინფორმაციაზე.</p>
+<p>მისი მთავარი ამოცანაა, სისტემის გაშვებისას ერთხელ წაიკითხოს მოწყობილობის აპარატურული მონაცემები (MAC მისამართი) და პროგრამული ვერსია, შეინახოს ისინი და შემდეგ, <code>Service Locator</code>-ის მეშვეობით, მიაწოდოს ეს ინფორმაცია ნებისმიერ სხვა მოდულს. ეს გამორიცხავს კოდის დუბლირებას და უზრუნველყოფს, რომ ყველა კომპონენტი იყენებდეს ერთსა და იმავე, თანმიმდევრულ საიდენტიფიკაციო მონაცემებს.</p>
+<h1><a class="anchor" id="autotoc_md53"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისზე-ორიენტირებული (Service-driven):</b> მოდული არის სუფთა სერვისის მომწოდებელი. ის არეგისტრირებს <code><a class="el" href="structdevice__identity__api__t.html" title="The public Service API structure for the Device Identity Service.">device_identity_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
-<li>**ადრეული ინიციალიზაცია (<code>init_level: 20</code>):** როგორც ფუნდამენტური სერვისი, ის ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა მისი სერვისი ხელმისაწვდომი იყოს თითქმის ყველა სხვა მოდულისთვის მათი ინიციალიზაციის პროცესში.</li>
-<li><b>მონაცემთა კეშირება:</b> მოდული კითხულობს აპარატურულ მონაცემებს მხოლოდ ერთხელ, <code>init</code> ფაზაში და ინახავს მათ თავის <code>private_data</code> სტრუქტურაში. შემდგომი API გამოძახებები მყისიერად აბრუნებენ ამ კეშირებულ მონაცემებს, რაც ოპერაციას ძალიან სწრაფს და ეფექტურს ხდის.</li>
-<li><b>CLI ინტეგრაცია:</b> მოდული იყენებს "დაგვიანებული რეგისტრაციის" პატერნს. ის გამოიწერს <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთს და თავის CLI ბრძანებას (<code>device info</code>) არეგისტრირებს მხოლოდ მას შემდეგ, რაც დარწმუნდება, რომ <code>Command Router</code> სერვისი სრულად მზად არის.</li>
+<li>**ადრეული ინიციალიზაცია (<code>init_level: 20</code>):** როგორც ფუნდამენტური სერვისი, ის ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა მისი სერვისი ხელმისაწვდომი იყოს თითქმის ყველა სხვა მოდულისთვის.</li>
+<li><b>მონაცემთა კეშირება:</b> მოდული კითხულობს აპარატურულ მონაცემებს მხოლოდ ერთხელ, <code>init</code> ფაზაში და ინახავს მათ თავის <code>private_data</code> სტრუქტურაში. შემდგომი API გამოძახებები მყისიერად აბრუნებენ ამ კეშირებულ მონაცემებს.</li>
+<li><b>CLI ინტეგრაცია და ივენთების გამოქვეყნება:</b> <code>device info</code> ბრძანების შესრულებისას, მოდული არა მხოლოდ ბეჭდავს ინფორმაციას კონსოლში, არამედ აქვეყნებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს, რაც საშუალებას აძლევს <code>mqtt_manager</code>-ს, ეს ინფორმაცია MQTT-ით გაავრცელოს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md54"></a>
 3. ⚙️ კონფიგურაცია</h1>
-<p>ამ მოდულს არ გააჩნია რთული, მომხმარებლის მიერ კონფიგურირებადი პარამეტრები, რადგან ის თავის მონაცემებს პირდაპირ აპარატურიდან და firmware-ის აღწერიდან იღებს. ერთადერთი პარამეტრი არის <code>instance_name</code>.</p>
+<p>ამ მოდულს არ გააჩნია რთული, მომხმარებლის მიერ კონფიგურირებადი პარამეტრები. ერთადერთი პარამეტრი არის <code>instance_name</code>.</p>
 <p>**<code>system_config.json</code>-ში ჩაწერის მაგალითი:**</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;device_identity_service&quot;,</div>
@@ -119,31 +121,53 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <div class="line">        &quot;instance_name&quot;: &quot;main_identity_service&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><b>კონფიგურაციის პარამეტრები:</b></p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadCenter">სავალდებულო   </th><th class="markdownTableHeadLeft">Default (<code>Kconfig</code>)    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მოდულის ინსტანციის უნიკალური სახელი.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>main_identity_service</code>   </td></tr>
-</table>
-<h1><a class="anchor" id="autotoc_md43"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md55"></a>
 4. 🔌 Service API (&lt;tt&gt;device_identity_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_DEVICE_IDENTITY_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>const char* get_device_id(void);</code>** <br  />
- 🆔 აბრუნებს მოწყობილობის უნიკალურ ID-ს, რომელიც გენერირებულია MAC მისამართისგან (მაგ., <code>"5C013B7246E4"</code>). დაბრუნებული სტრიქონის მეხსიერების მართვაზე პასუხისმგებელია თავად სერვისი.</li>
+ 🆔 აბრუნებს მოწყობილობის უნიკალურ ID-ს, რომელიც გენერირებულია MAC მისამართისგან (მაგ., <code>"5C013B7246E4"</code>).</li>
 <li>**<code>const char* get_firmware_version(void);</code>** <br  />
- 🔖 აბრუნებს firmware-ის მიმდინარე ვერსიას, რომელიც აღებულია პროექტის აღწერიდან (მაგ., <code>"v3.2.0"</code>).</li>
+ 🔖 აბრუნებს firmware-ის მიმდინარე ვერსიას (მაგ., <code>"v3.2.1"</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md44"></a>
-5. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
-<p>მოდული არეგისტრირებს <code>device</code> ბრძანებას, რომელიც იძლევა საიდენტიფიკაციო ინფორმაციის სწრაფად მიღების საშუალებას.</p>
+<h1><a class="anchor" id="autotoc_md56"></a>
+5. 📢 ივენთები (Events)</h1>
+<h2><a class="anchor" id="autotoc_md57"></a>
+გამოქვეყნებული ივენთები</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">მონაცემები (Payload)   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><code>FMW_EVENT_DEVICE_INFO_READY</code>   </td><td class="markdownTableBodyLeft"><code>char*</code> (JSON)   </td><td class="markdownTableBodyLeft">📊 <code>device info</code> ბრძანების პასუხი JSON ფორმატში.   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md58"></a>
+გამოწერილი ივენთები</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">რეაქცია    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md59"></a>
+6. 📡 MQTT ინტერფეისი</h1>
+<ul>
+<li><b>გამოსაქვეყნებელი თემა:</b> <code>synapse/devices/{id}/state/device/info</code></li>
+<li><b>როდის ქვეყნდება:</b> როდესაც <code>mqtt_manager</code> მიიღებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს.</li>
+<li><p class="startli"><b>Payload (მაგალითი):</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;device_id&quot;: &quot;5C013B7246E4&quot;,</div>
+<div class="line">  &quot;firmware_version&quot;: &quot;v3.2.1&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md60"></a>
+7. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ბრძანება   </th><th class="markdownTableHeadLeft">არგუმენტები   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>device info</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">ℹ️ გამოაქვს მოწყობილობის უნიკალური ID და firmware-ის ვერსია სერიულ კონსოლში.   </td></tr>
+<td class="markdownTableBodyLeft"><code>device info</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">ℹ️ გამოაქვს ინფორმაცია კონსოლში <b>და</b> აქვეყნებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს.   </td></tr>
 </table>
 <p><b>ბრძანების მაგალითი და შედეგი:</b></p>
 <div class="fragment"><div class="line">SYNAPSE&gt; device info</div>
@@ -151,52 +175,40 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <div class="line">  Device Information</div>
 <div class="line">----------------------------------</div>
 <div class="line">  Device ID           : 5C013B7246E4</div>
-<div class="line">  Firmware Version    : v3.2.0</div>
+<div class="line">  Firmware Version    : v3.2.1</div>
 <div class="line">----------------------------------</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md45"></a>
-6. 💡 გამოყენების მაგალითი</h1>
-<p>წარმოვიდგინოთ, რომ <code>mqtt_module</code>-ს სურს, გამოიყენოს უნიკალური <code>ClientID</code> ბროკერთან დასაკავშირებლად.</p>
-<p>**<code>mqtt_module.c</code>-ში:**</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="device__identity__interface_8h.html">device_identity_interface.h</a>&quot;</span> <span class="comment">// ★★★ მნიშვნელოვანია ამ ინტერფეისის ჩართვა</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ...</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> connect_to_mqtt_broker() {</div>
-<div class="line">    <span class="comment">// 1. 🚦 ვიღებთ Identity სერვისს</span></div>
-<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> id_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_identity_service&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">if</span> (!id_service_handle) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Device Identity Service not found! Cannot generate ClientID.&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span>;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <a class="code hl_struct" href="structdevice__identity__api__t.html">device_identity_api_t</a> *id_api = (<a class="code hl_struct" href="structdevice__identity__api__t.html">device_identity_api_t</a> *)id_service_handle;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// 2. 🆔 ვიღებთ უნიკალურ ID-ს</span></div>
-<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span>* device_id = id_api-&gt;<a class="code hl_variable" href="structdevice__identity__api__t.html#a6ce92f397b78dbb4ad6fc610966d1b64">get_device_id</a>();</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// 3. 🤖 ვაფორმირებთ ClientID-ს</span></div>
-<div class="line">    <span class="keywordtype">char</span> client_id_buffer[64];</div>
-<div class="line">    snprintf(client_id_buffer, <span class="keyword">sizeof</span>(client_id_buffer), <span class="stringliteral">&quot;synapse-device-%s&quot;</span>, device_id);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// 4. ვიყენებთ ClientID-ს MQTT კავშირის კონფიგურაციაში</span></div>
-<div class="line">    esp_mqtt_client_config_t mqtt_cfg = {</div>
-<div class="line">        .broker.address.uri = <span class="stringliteral">&quot;mqtt://...&quot;</span>,</div>
-<div class="line">        .credentials.client_id = client_id_buffer,</div>
-<div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// ... ვაგრძელებთ კავშირის დამყარებას ...</span></div>
-<div class="line">}</div>
-<div class="ttc" id="adevice__identity__interface_8h_html"><div class="ttname"><a href="device__identity__interface_8h.html">device_identity_interface.h</a></div><div class="ttdoc">Public Service API contract for the Device Identity Service.</div></div>
-<div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
-<div class="ttc" id="astructdevice__identity__api__t_html"><div class="ttname"><a href="structdevice__identity__api__t.html">device_identity_api_t</a></div><div class="ttdoc">The public Service API structure for the Device Identity Service.</div><div class="ttdef"><b>Definition</b> device_identity_interface.h:22</div></div>
-<div class="ttc" id="astructdevice__identity__api__t_html_a6ce92f397b78dbb4ad6fc610966d1b64"><div class="ttname"><a href="structdevice__identity__api__t.html#a6ce92f397b78dbb4ad6fc610966d1b64">device_identity_api_t::get_device_id</a></div><div class="ttdeci">const char *(* get_device_id)(void)</div><div class="ttdoc">Retrieves the unique device identifier string.</div><div class="ttdef"><b>Definition</b> device_identity_interface.h:32</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md46"></a>
-7. ❗ მნიშვნელოვანი შენიშვნები</h1>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md61"></a>
+8. 💡 გამოყენების მაგალითი (მოთხოვნა-პასუხი)</h1>
+<ol type="1">
+<li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
+<li><b>გამოიწერს:</b> <code>synapse/devices/+/state/device/info</code></li>
+<li><b>აქვეყნებს:</b><ul>
+<li><b>Topic:</b> <code>synapse/devices/5C013B7246E4/cmd/in</code></li>
+<li><b>Payload:</b> <code>"device info"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><b>⚙️ მოწყობილობა (Synapse Framework):</b><ul>
+<li><code>mqtt_manager</code> იღებს ბრძანებას და აგზავნის ივენთს <code>Command Router</code>-ში.</li>
+<li><code>command_router</code> იძახებს <code>device_identity_service</code>-ის <code>cmd_handler</code>-ს.</li>
+<li><code>device_identity_service</code> აგროვებს ინფორმაციას, ქმნის JSON-ს და აგზავნის <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს.</li>
+<li><code>mqtt_manager</code> იღებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს და აქვეყნებს MQTT-ში.</li>
+</ul>
+</li>
+<li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
+<li><b>იღებს შეტყობინებას:</b><ul>
+<li><b>Topic:</b> <code>synapse/devices/5C013B7246E4/state/device/info</code></li>
+<li><b>Payload:</b> <code>{"device_id":"5C013B7246E4", "firmware_version":"v3.2.1"}</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md62"></a>
+9. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
-<li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>device_identity_service</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>cmd_router_interface</code>, რათა მას ჰქონდეს წვდომა ბრძანების რეგისტრაციის API-ზე.</li>
+<li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>device_identity_service</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>interfaces</code>, რათა მას ჰქონდეს წვდომა <code>Command Router</code>-ის API კონტრაქტზე.</li>
 <li><b>დაგვიანებული რეგისტრაცია:</b> CLI ბრძანების რეგისტრაცია ხდება <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთის შემდეგ, რაც უზრუნველყოფს, რომ <code>Command Router</code> სერვისი ამ დროს უკვე გარანტირებულად ხელმისაწვდომია. </li>
 </ul>
 </div></div><!-- contents -->

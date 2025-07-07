@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
   <div class="headertitle"><div class="title">📡 Synapse Communication Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md173"></a> </p>
-<h1><a class="anchor" id="autotoc_md174"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md189"></a> </p>
+<h1><a class="anchor" id="autotoc_md190"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის საკომუნიკაციო მოდულების მიერ მოწოდებულ <b>სტანდარტულ სერვისის API-ებს</b>. ეს API-ები ხელმისაწვდომია <code>Service Locator</code>-ის მეშვეობით და საშუალებას აძლევს სხვა მოდულებს, გამოიყენონ ქსელური ფუნქციონალი (WiFi, MQTT, ESP-NOW) იზოლირებულად და უსაფრთხოდ.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md176"></a>
+<h1><a class="anchor" id="autotoc_md192"></a>
 📶 WiFi Manager Service API</h1>
 <p><b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_WIFI_API</code> <br  />
  <b>ინტერფეისის სტრუქტურა:</b> <code>wifi_api_t</code> (განსაზღვრულია <code>wifi_interface.h</code>-ში)</p>
-<h2><a class="anchor" id="autotoc_md177"></a>
+<h2><a class="anchor" id="autotoc_md193"></a>
 ძირითადი ფუნქციები</h2>
 <ul>
 <li>**<code>esp_err_t connect(const char *ssid, const char *password);</code>** <br  />
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
 <li>**<code>esp_err_t get_ip_info(esp_netif_ip_info_t *ip_info);</code>** <br  />
  აბრუნებს მიმდინარე IP კონფიგურაციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md178"></a>
+<h2><a class="anchor" id="autotoc_md194"></a>
 💡 WiFi API-ს გამოყენების მაგალითი</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;wifi_interface.h&quot;</span> <span class="comment">// უნდა შეიქმნას interfaces დირექტორიაში</span></div>
@@ -135,11 +135,11 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md180"></a>
+<h1><a class="anchor" id="autotoc_md196"></a>
 ☁️ MQTT Client Service API</h1>
 <p><b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_MQTT_API</code> <br  />
  <b>ინტერფეისის სტრუქტურა:</b> <code>mqtt_api_t</code> (განსაზღვრულია <code>mqtt_interface.h</code>-ში)</p>
-<h2><a class="anchor" id="autotoc_md181"></a>
+<h2><a class="anchor" id="autotoc_md197"></a>
 ძირითადი ფუნქციები</h2>
 <ul>
 <li>**<code>esp_err_t connect(void);</code>** <br  />
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
 <li>**<code>bool is_connected(void);</code>** <br  />
  აბრუნებს <code>true</code>-ს, თუ MQTT კლიენტი დაკავშირებულია ბროკერთან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md182"></a>
+<h2><a class="anchor" id="autotoc_md198"></a>
 💡 MQTT API-ს გამოყენების მაგალითი</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;mqtt_interface.h&quot;</span></div>
@@ -169,11 +169,11 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md184"></a>
+<h1><a class="anchor" id="autotoc_md200"></a>
 ⚡ ESP-NOW Service API</h1>
 <p><b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_ESPNOW_API</code> (უნდა დაემატოს <code><a class="el" href="service__types_8h.html" title="Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები.">service_types.h</a></code>-ში) <br  />
  <b>ინტერფეისის სტრუქტურა:</b> <code>espnow_api_t</code> (განსაზღვრულია <code>espnow_interface.h</code>-ში)</p>
-<h2><a class="anchor" id="autotoc_md185"></a>
+<h2><a class="anchor" id="autotoc_md201"></a>
 ძირითადი ფუნქციები</h2>
 <ul>
 <li>**<code>esp_err_t add_peer(const uint8_t *mac_addr, uint8_t channel);</code>** <br  />
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2communication
  არეგისტრირებს callback ფუნქციას, რომელიც გამოიძახება მონაცემების მიღებისას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md187"></a>
+<h1><a class="anchor" id="autotoc_md203"></a>
 📜 Naming &amp; Structure კონვენციები</h1>
 <ul>
 <li>ყველა საკომუნიკაციო სერვისის API სტრუქტურა უნდა იყოს განსაზღვრული <code>components/interfaces/include</code> დირექტორიაში შესაბამის <code>*_interface.h</code> ფაილში.</li>

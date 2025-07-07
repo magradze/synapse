@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
   <div class="headertitle"><div class="title">მოდული: Watchdog Manager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md64"></a> </p>
-<h1><a class="anchor" id="autotoc_md65"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md80"></a> </p>
+<h1><a class="anchor" id="autotoc_md81"></a>
 1. მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>watchdog_manager</code> <br  />
  <b>კატეგორია:</b> <code>system</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
  <b>ავტორი:</b> Synapse Framework Team</p>
 <p><code>Watchdog Manager</code> მოდული არის Synapse Framework-ის თვითაღდგენის და საიმედოობის კრიტიკული კომპონენტი. მისი მთავარი ამოცანაა, დაიცვას სისტემა პროგრამული უზრუნველყოფის გაჭედვისგან (software freeze/hang).</p>
 <p>ტრადიციული watchdog-ებისგან განსხვავებით, რომლებიც უბრალოდ პერიოდულად "იკვებებიან", ეს მოდული ახდენს **"ჭკვიანი" ანუ აპლიკაციაზე მორგებული (application-aware)** watchdog-ის იმპლემენტაციას. ის გადატვირთავს ESP-IDF-ის Task Watchdog Timer-ს (TWDT) მხოლოდ იმ შემთხვევაში, თუ სისტემის <b>ყველა</b> კრიტიკულად მნიშვნელოვანი კომპონენტი გამართულად და დროულად ფუნქციონირებს.</p>
-<h1><a class="anchor" id="autotoc_md66"></a>
+<h1><a class="anchor" id="autotoc_md82"></a>
 2. წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
 <p>ამ მოდულის გამართული მუშაობისთვის აუცილებელია ESP-IDF-ის კონფიგურაციაში (<code>menuconfig</code>) შემდეგი ოფციების ჩართვა:</p>
 <ol type="1">
@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md67"></a>
+<h1><a class="anchor" id="autotoc_md83"></a>
 3. არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>განაწილებული "გულისცემა" (Distributed Heartbeat):</b> მოდული არ ეყრდნობა ერთ ცენტრალურ ტასკს. ამის ნაცვლად, ის ელოდება "გულისცემის" სიგნალებს სხვადასხვა კრიტიკული მოდულისგან. Watchdog-ი "იკვებება" მხოლოდ მაშინ, როცა ყველა რეგისტრირებული მოდულისგან მიღებულია სიგნალი.</li>
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 </ol>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md68"></a>
+<h1><a class="anchor" id="autotoc_md84"></a>
 4. კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>heartbeat_timeout_ms</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">მაქსიმალური დრო (მილიწამებში), რომლის განმავლობაშიც მოდული ელოდება "გულისცემას" რეგისტრირებული კომპონენტისგან.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>5000</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md69"></a>
+<h1><a class="anchor" id="autotoc_md85"></a>
 5. Service API (&lt;tt&gt;watchdog_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა Watchdog მენეჯერის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>FMW_SERVICE_TYPE_WATCHDOG_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 <li>**<code>esp_err_t unregister_heartbeat(const char *module_name);</code>** <br  />
  შლის მოდულს მონიტორინგის სიიდან. უნდა გამოიძახოს მოდულის <code>deinit</code> ფუნქციამ.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md70"></a>
+<h1><a class="anchor" id="autotoc_md86"></a>
 6. გამოქვეყნებული ივენთები</h1>
 <ul>
 <li>**<code>WATCHDOG_HEARTBEAT_MISSED</code>**<ul>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md71"></a>
+<h1><a class="anchor" id="autotoc_md87"></a>
 7. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, <code>mqtt_client</code> მოდული არის კრიტიკული კომპონენტი.</p>
 <p>**1. რეგისტრაცია (<code>mqtt_client.c</code>-ში):**</p>

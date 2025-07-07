@@ -93,49 +93,49 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__res
   <div class="headertitle"><div class="title">რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1344"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1346"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1391"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1393"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის რესურსების (RAM, Flash, CPU, Stack) გამოყენების რჩევებსა და მონიტორინგის მეთოდებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1348"></a>
+<h1><a class="anchor" id="autotoc_md1395"></a>
 RAM-ის გამოყენება</h1>
 <ul>
 <li>გამოიყენეთ static allocation სადაც შესაძლებელია</li>
 <li>მონიტორინგისთვის გამოიყენეთ heap_caps_get_free_size(), heap_caps_print_heap_info()</li>
 <li>თავიდან აიცილეთ დიდი მასივების ან ობიექტების stack-ზე გამოყოფა</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1349"></a>
+<h1><a class="anchor" id="autotoc_md1396"></a>
 Flash-ის გამოყენება</h1>
 <ul>
 <li>firmware-სა და მონაცემების შენახვისთვის გამოიყენეთ მხოლოდ საჭირო მოცულობა</li>
 <li>გამორთეთ არასაჭირო მოდულები და ფუნქციები</li>
 <li>გამოიყენეთ partition table ოპტიმალური განაწილებისთვის</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1350"></a>
+<h1><a class="anchor" id="autotoc_md1397"></a>
 CPU-ის გამოყენება</h1>
 <ul>
 <li>მძიმე ოპერაციები გაანაწილეთ task-ებში ან timer-ებში</li>
 <li>გამოიყენეთ yield() ან delay() ხანგრძლივი ციკლებისას</li>
 <li>მონიტორინგისთვის გამოიყენეთ perf counters ან ESP_LOGI</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1351"></a>
+<h1><a class="anchor" id="autotoc_md1398"></a>
 Stack-ის გამოყენება</h1>
 <ul>
 <li>დააყენეთ ოპტიმალური stack ზომები თითოეული task-ისთვის</li>
 <li>გამოიყენეთ uxTaskGetStackHighWaterMark() stack usage-ის გასაკონტროლებლად</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1353"></a>
+<h1><a class="anchor" id="autotoc_md1400"></a>
 მონიტორინგის მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1354"></a>
+<h2><a class="anchor" id="autotoc_md1401"></a>
 RAM</h2>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Free heap: %d bytes&quot;</span>, heap_caps_get_free_size(MALLOC_CAP_DEFAULT));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1355"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1402"></a>
 Stack</h2>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Stack high water mark: %d&quot;</span>, uxTaskGetStackHighWaterMark(NULL));</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1357"></a>
+<h1><a class="anchor" id="autotoc_md1404"></a>
 Best Practices</h1>
 <ul>
 <li>რეგულარულად შეამოწმეთ რესურსების გამოყენება</li>
@@ -143,7 +143,7 @@ Best Practices</h1>
 <li>Bottleneck-ის აღმოჩენისას განახორციელეთ ოპტიმიზაცია</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1359"></a>
+<h1><a class="anchor" id="autotoc_md1406"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>

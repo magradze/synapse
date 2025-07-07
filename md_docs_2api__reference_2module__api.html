@@ -93,85 +93,85 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2module__api.h
   <div class="headertitle"><div class="title">Synapse Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md358"></a> </p>
-<h1><a class="anchor" id="autotoc_md359"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md385"></a> </p>
+<h1><a class="anchor" id="autotoc_md386"></a>
 Module Creation &amp; Lifecycle</h1>
-<h2><a class="anchor" id="autotoc_md360"></a>
+<h2><a class="anchor" id="autotoc_md387"></a>
 module_t *{module_name}_module_create(const cJSON &lt;em&gt;config);</h2>
 <ul>
 <li>ქმნის ახალი მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 <li>არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)</li>
 <li>აბრუნებს: <a class="el" href="structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.">module_t</a> წარმატების შემთხვევაში, NULL შეცდომისას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md361"></a>
+<h2><a class="anchor" id="autotoc_md388"></a>
 static esp_err_t {module_name}_init(module_t *module);</h2>
 <ul>
 <li>ახორციელებს მოდულის ინიციალიზაციას (hardware, პარამეტრები და ა.შ.)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md362"></a>
+<h2><a class="anchor" id="autotoc_md389"></a>
 static esp_err_t {module_name}_enable(module_t *module);</h2>
 <ul>
 <li>აქტივაციას უკეთებს მოდულს (enable logic)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md363"></a>
+<h2><a class="anchor" id="autotoc_md390"></a>
 static esp_err_t {module_name}_disable(module_t *module);</h2>
 <ul>
 <li>დეაქტივაციას უკეთებს მოდულს (disable logic)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md364"></a>
+<h2><a class="anchor" id="autotoc_md391"></a>
 static esp_err_t {module_name}_deinit(module_t *module);</h2>
 <ul>
 <li>ასუფთავებს ყველა გამოყოფილ რესურსს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md366"></a>
+<h1><a class="anchor" id="autotoc_md393"></a>
 Service API (Service Locator-ისთვის)</h1>
-<h2><a class="anchor" id="autotoc_md367"></a>
+<h2><a class="anchor" id="autotoc_md394"></a>
 esp_err_t {module_name}_api_enable(void);</h2>
 <ul>
 <li>Service Locator-ით გამოძახებული enable ფუნქცია</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md368"></a>
+<h2><a class="anchor" id="autotoc_md395"></a>
 esp_err_t {module_name}_api_disable(void);</h2>
 <ul>
 <li>Service Locator-ით გამოძახებული disable ფუნქცია</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md369"></a>
+<h2><a class="anchor" id="autotoc_md396"></a>
 esp_err_t {module_name}_api_clear(void);</h2>
 <ul>
 <li>Service Locator-ით გამოძახებული clear ფუნქცია (თუ საჭიროა)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md370"></a>
+<h2><a class="anchor" id="autotoc_md397"></a>
 esp_err_t {module_name}_api_write_text(const char *text, uint8_t line);</h2>
 <ul>
 <li>Service Locator-ით გამოძახებული ტექსტის ჩაწერა (მაგალითად, ეკრანზე)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md372"></a>
+<h1><a class="anchor" id="autotoc_md399"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md373"></a>
+<h2><a class="anchor" id="autotoc_md400"></a>
 static void {module_name}_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს მიღებულ მოვლენებს Event Bus-დან</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md375"></a>
+<h1><a class="anchor" id="autotoc_md402"></a>
 Configuration Parsing API</h1>
-<h2><a class="anchor" id="autotoc_md376"></a>
+<h2><a class="anchor" id="autotoc_md403"></a>
 static esp_err_t parse_{module_name}_config(const cJSON *config, {module_name}_private_data_t *module_private_data);</h2>
 <ul>
 <li>კითხულობს და ამოწმებს მოდულის კონფიგურაციას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md378"></a>
+<h1><a class="anchor" id="autotoc_md405"></a>
 Status &amp; Monitoring API</h1>
-<h2><a class="anchor" id="autotoc_md379"></a>
+<h2><a class="anchor" id="autotoc_md406"></a>
 static module_status_t {module_name}_get_status(module_t *module);</h2>
 <ul>
 <li>აბრუნებს მოდულის მიმდინარე სტატუსს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md381"></a>
+<h1><a class="anchor" id="autotoc_md408"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>

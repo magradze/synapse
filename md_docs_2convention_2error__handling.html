@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2error__handling.h
   <div class="headertitle"><div class="title">Error Handling-ის წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md834"></a> </p>
-<h1><a class="anchor" id="autotoc_md835"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md881"></a> </p>
+<h1><a class="anchor" id="autotoc_md882"></a>
 ძირითადი პრინციპები</h1>
-<h2><a class="anchor" id="autotoc_md836"></a>
+<h2><a class="anchor" id="autotoc_md883"></a>
 1. ESP Error Codes გამოყენება</h2>
 <ul>
 <li><b>ყოველთვის</b> გამოვიყენოთ <code>esp_err_t</code> return type</li>
 <li><b>ყოველთვის</b> დავაბრუნოთ <code>ESP_OK</code> წარმატების შემთხვევაში</li>
 <li><b>ყოველთვის</b> გამოვიყენოთ სტანდარტული ESP error codes</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md837"></a>
+<h2><a class="anchor" id="autotoc_md884"></a>
 2. Comprehensive Error Checking</h2>
 <ul>
 <li><b>ყველა</b> function call-ი უნდა იყოს checked</li>
 <li><b>ყველა</b> pointer parameter უნდა იყოს validated</li>
 <li><b>ყველა</b> resource allocation უნდა იყოს checked</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md838"></a>
+<h1><a class="anchor" id="autotoc_md885"></a>
 Standard Error Codes</h1>
-<h2><a class="anchor" id="autotoc_md839"></a>
+<h2><a class="anchor" id="autotoc_md886"></a>
 Framework-Specific Errors</h2>
 <div class="fragment"><div class="line"><span class="comment">// components/core/include/framework_errors.h</span></div>
 <div class="line"><span class="preprocessor">#define ESP_ERR_FMW_BASE                    0x8000</span></div>
@@ -121,7 +121,7 @@ Framework-Specific Errors</h2>
 <div class="line"><span class="preprocessor">#define ESP_ERR_FMW_INVALID_MODULE_STATE   (ESP_ERR_FMW_BASE + 3)</span></div>
 <div class="line"><span class="preprocessor">#define ESP_ERR_FMW_CONFIG_PARSE_FAILED    (ESP_ERR_FMW_BASE + 4)</span></div>
 <div class="line"><span class="preprocessor">#define ESP_ERR_FMW_RESOURCE_BUSY          (ESP_ERR_FMW_BASE + 5)</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md840"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md887"></a>
 Common ESP Error Codes</h2>
 <div class="fragment"><div class="line">ESP_OK                    <span class="comment">// Success</span></div>
 <div class="line">ESP_ERR_INVALID_ARG       <span class="comment">// Invalid argument</span></div>
@@ -130,9 +130,9 @@ Common ESP Error Codes</h2>
 <div class="line">ESP_ERR_NO_MEM           <span class="comment">// Out of memory</span></div>
 <div class="line">ESP_ERR_TIMEOUT          <span class="comment">// Operation timeout</span></div>
 <div class="line">ESP_ERR_NOT_SUPPORTED    <span class="comment">// Operation not supported</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md841"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md888"></a>
 Error Handling Patterns</h1>
-<h2><a class="anchor" id="autotoc_md842"></a>
+<h2><a class="anchor" id="autotoc_md889"></a>
 1. Parameter Validation</h2>
 <div class="fragment"><div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line) {</div>
 <div class="line">    <span class="comment">// Validate parameters first</span></div>
@@ -154,7 +154,7 @@ Error Handling Patterns</h1>
 <div class="line">    <span class="comment">// Continue with implementation...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md843"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md890"></a>
 2. Resource Allocation Checking</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t create_module_resources(module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module_private_data) {</div>
@@ -183,7 +183,7 @@ Error Handling Patterns</h1>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Module resources created successfully&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md844"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md891"></a>
 3. Service Locator Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t get_i2c_service(i2c_bus_api_t **api) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!api) {</div>
@@ -212,7 +212,7 @@ Error Handling Patterns</h1>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a40e29f1bbbc7d7de4a7ac6b6c5a28244"><div class="ttname"><a href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a></div><div class="ttdeci">esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს enum სახით.</div><div class="ttdef"><b>Definition</b> service_locator.c:210</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md845"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md892"></a>
 4. Configuration Parsing Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t parse_display_config(<span class="keyword">const</span> cJSON *config, display_config_t *display_config) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!config || !display_config) {</div>
@@ -251,7 +251,7 @@ Error Handling Patterns</h1>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Display config parsed: %dx%d&quot;</span>, display_config-&gt;width, display_config-&gt;height);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md846"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md893"></a>
 5. Hardware Operation Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t write_display_data(ssd1306_private_data_t *ssd1306_data, <span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!ssd1306_data || !data || len == 0) {</div>
@@ -284,9 +284,9 @@ Error Handling Patterns</h1>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md847"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md894"></a>
 Cleanup and Resource Management</h1>
-<h2><a class="anchor" id="autotoc_md848"></a>
+<h2><a class="anchor" id="autotoc_md895"></a>
 1. Proper Cleanup on Errors</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t module_init_with_cleanup(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module) {</div>
@@ -320,7 +320,7 @@ Cleanup and Resource Management</h1>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md849"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md896"></a>
 2. Resource Cleanup Functions</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> cleanup_module_resources(module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module_private_data) {</div>
@@ -350,16 +350,16 @@ Cleanup and Resource Management</h1>
 <div class="line">        ESP_LOGI(TAG, <span class="stringliteral">&quot;I2C handle released&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md850"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md897"></a>
 Logging Standards</h1>
-<h2><a class="anchor" id="autotoc_md851"></a>
+<h2><a class="anchor" id="autotoc_md898"></a>
 1. Error Levels</h2>
 <div class="fragment"><div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Critical error occurred: %s&quot;</span>, esp_err_to_name(ret));  <span class="comment">// Errors</span></div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Warning: using default value&quot;</span>);                       <span class="comment">// Warnings  </span></div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Module initialized successfully&quot;</span>);                    <span class="comment">// Info</span></div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Debug: processing command %d&quot;</span>, cmd_id);              <span class="comment">// Debug</span></div>
 <div class="line">ESP_LOGV(TAG, <span class="stringliteral">&quot;Verbose: internal state changed&quot;</span>);                   <span class="comment">// Verbose</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md852"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md899"></a>
 2. Error Context Information</h2>
 <div class="fragment"><div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to create module &#39;%s&#39;: %s&quot;</span>, </div>
 <div class="line">         instance_name, esp_err_to_name(ret));</div>
@@ -369,9 +369,9 @@ Logging Standards</h1>
 <div class="line"> </div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Configuration parsing failed for key &#39;%s&#39;: %s&quot;</span>, </div>
 <div class="line">         config_key, esp_err_to_name(ret));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md853"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md900"></a>
 Error Recovery Strategies</h1>
-<h2><a class="anchor" id="autotoc_md854"></a>
+<h2><a class="anchor" id="autotoc_md901"></a>
 1. Retry Logic</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t operation_with_retry(operation_params_t *params) {</div>
 <div class="line">    esp_err_t ret;</div>
@@ -398,7 +398,7 @@ Error Recovery Strategies</h1>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> ret;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md855"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md902"></a>
 2. Graceful Degradation</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t initialize_display_with_fallback(ssd1306_private_data_t *ssd1306_data) {</div>
 <div class="line">    esp_err_t ret;</div>
@@ -419,7 +419,7 @@ Error Recovery Strategies</h1>
 <div class="line">    ssd1306_data-&gt;display_mode = DISPLAY_MODE_DISABLED;</div>
 <div class="line">    <span class="keywordflow">return</span> ret;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md856"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md903"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>ყოველთვის</b> გამოვიყენოთ <code>esp_err_t</code> return codes</li>

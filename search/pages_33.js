@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🆔_20მოდული_3a_20device_20identity_20service_0',['🆔 მოდული: Device Identity Service',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]]
+  ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_0',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
 ];

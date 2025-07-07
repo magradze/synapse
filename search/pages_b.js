@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['identity_20service_0',['🆔 მოდული: Device Identity Service',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
+  ['identity_20service_20api_20reference_0',['Synapse Device Identity Service API Reference',['../md_docs_2api__reference_2device__identity__api.html',1,'']]],
   ['index_1',['index',['../md_docs_2api__reference_2api__index.html',1,'Synapse API Reference Index'],['../md_docs_2contributing_2contributing__index.html',1,'Synapse Contributing Reference Index'],['../md_docs_2convention_2convention__index.html',1,'Synapse Convention Reference Index']]],
   ['index_20ინტეგრაციის_20სახელმძღვანელოების_20ინდექსი_2',['Integration Index (ინტეგრაციის სახელმძღვანელოების ინდექსი)',['../md_docs_2integration_2integration__index.html',1,'']]],
   ['index_20უსაფრთხოების_20სახელმძღვანელოების_20ინდექსი_3',['Security Index (უსაფრთხოების სახელმძღვანელოების ინდექსი)',['../md_docs_2security_2security__index.html',1,'']]],

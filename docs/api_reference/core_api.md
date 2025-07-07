@@ -14,11 +14,11 @@ esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t serv
 
 ### fmw_service_unregister
 
-```C
+```c
 esp_err_t fmw_service_unregister(const char *service_name);
 ```
 
-- (ახალი) აუქმებს სერვისის რეგისტრაციას და ათავისუფლებს დაკავშირებულ რესურსებს.
+- აუქმებს სერვისის რეგისტრაციას და ათავისუფლებს დაკავშირებულ რესურსებს.
 - არგუმენტები: რეგისტრაციიდან მოსახსნელი სერვისის უნიკალური სახელი.
 - აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_NOT_FOUND თუ სერვისი ვერ მოიძებნა.
 
@@ -40,11 +40,11 @@ esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out
 
 ### fmw_service_lookup_by_type
 
-```C
+```c
 service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
 ```
 
-- (ახალი) ეძებს და აბრუნებს პირველ ნაპოვნ სერვისს მითითებული ტიპის მიხედვით.
+- ეძებს და აბრუნებს პირველ ნაპოვნ სერვისს მითითებული ტიპის მიხედვით.
 - არგუმენტები: მოსაძებნი სერვისის ტიპი (enum).
 - აბრუნებს: ნაპოვნი სერვისის handle, ან NULL თუ ვერ მოიძებნა.
 
@@ -52,29 +52,35 @@ service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
 
 ## Event Bus API
 
-### `event_bus_post`
+### `fmw_event_bus_post`
 
 ```c
-esp_err_t event_bus_post(int32_t event_id, event_data_wrapper_t *data_wrapper);
+esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper);
 ```
 
-ავრცელებს მოვლენას ყველა გამოწერილ მოდულზე.
+- **აღწერა:** ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.
+- **`event_name`:** ივენთის უნიკალური სახელი (სტრიქონი).
+- **`data_wrapper`:** მაჩვენებელი "შეფუთულ" მონაცემებზე. თუ მონაცემები არ არის საჭირო, გადაეცემა `NULL`.
 
-### `event_bus_subscribe`
+### `fmw_event_bus_subscribe`
 
 ```c
-esp_err_t event_bus_subscribe(int32_t event_id, struct module_t *module);
+esp_err_t fmw_event_bus_subscribe(const char *event_name, struct module_t *module);
 ```
 
-აძლევს მოდულს შესაძლებლობას, მიიღოს კონკრეტული მოვლენა.
+- **აღწერა:** არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.
+- **`event_name`:** ივენთის სახელი, რომელზეც ხდება გამოწერა. `*` (wildcard) გამოიწერს ყველა ივენთს.
+- **`module`:** მაჩვენებელი გამომწერ მოდულზე.
 
-### `event_bus_unsubscribe`
+### `fmw_event_bus_unsubscribe`
 
 ```c
-esp_err_t event_bus_unsubscribe(int32_t event_id, struct module_t *module);
+esp_err_t fmw_event_bus_unsubscribe(const char *event_name, struct module_t *module);
 ```
 
-**(ახალი)** აუქმებს მოდულის გამოწერას კონკრეტულ მოვლენაზე.
+- **აღწერა:** აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. აუცილებლად უნდა გამოიძახოს მოდულის `deinit` ფუნქციამ.
+- **`event_name`:** ივენთის სახელი, რომლიდანაც გამოწერა უნდა მოიხსნას.
+- **`module`:** მაჩვენებელი მოდულზე, რომელიც აუქმებს გამოწერას.
 
 ---
 
@@ -160,4 +166,4 @@ const cJSON *fmw_config_get_module_config(const char *module_instance_name);
 
 ---
 
-დამატებითი დეტალებისთვის იხილეთ [convention] და [structure] დოკუმენტები.
+დამატებითი დეტალებისთვის იხილეთ [convention.md](../convention/convention.md) და [structure.md](../convention/structure.md) დოკუმენტები.

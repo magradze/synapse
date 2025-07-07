@@ -16,10 +16,10 @@ set(SRCS
 include(${CMAKE_CURRENT_LIST_DIR}/collect_modules.cmake)
 
 # ჩასვით სკრიპტი, რომელიც აგროვებს MQTT თემებს მოდულებიდან და ქმნის ცენტრალიზებულ header-ს
-# include(${CMAKE_CURRENT_LIST_DIR}/collect_mqtt_topics.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/collect_mqtt_topics.cmake)
 
 # გენერაცია MQTT თემების header ფაილის module.json-ებიდან
-# collect_mqtt_topics()
+collect_mqtt_topics()
 
 # collect_modules სკრიპტი აგენერირებს ამ C ფაილს, ამიტომ უნდა დავამატოთ ჩვენს წყაროებში.
 list(APPEND SRCS "${CMAKE_CURRENT_BINARY_DIR}/generated_module_factory.c")

@@ -9,7 +9,8 @@ menu "Synapse Framework"
 
     # --- Module Configuration ---
     menu "Modules"
-            rsource "../modules/communications/wifi_manager/Kconfig"
+            rsource "../modules/communications/mqtt_manager/Kconfig"
+    rsource "../modules/communications/wifi_manager/Kconfig"
     rsource "../modules/displays/oled_display/Kconfig"
     rsource "../modules/provisioning/ble_provisioning/Kconfig"
     rsource "../modules/storage/storage_manager/Kconfig"

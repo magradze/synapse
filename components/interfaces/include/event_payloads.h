@@ -78,6 +78,20 @@ typedef struct
 
 } fmw_command_payload_t;
 
+/**
+ * @struct fmw_connectivity_payload_t
+ * @brief Defines the data structure for connectivity-related events.
+ * @details Used with FMW_EVENT_CONNECTIVITY_ESTABLISHED and FMW_EVENT_CONNECTIVITY_LOST.
+ */
+typedef struct
+{
+    /**
+     * @brief The name of the check that changed state (e.g., "MQTT_Heartbeat", "PING_8.8.8.8").
+     *        This name must match a check name defined in the Connectivity Watchdog's config.
+     */
+    char check_name[32];
+} fmw_connectivity_payload_t;
+
 // =========================================================================
 //                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები
 // =========================================================================

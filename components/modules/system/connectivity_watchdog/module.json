@@ -1,0 +1,32 @@
+{
+    "name": "connectivity_watchdog",
+    "version": "1.0.0",
+    "description": "Monitors network and service connectivity",
+    "author": "Synapse Framework Team",
+    "init_function": "connectivity_watchdog_create",
+    "init_level": 40,
+    "dependencies": [
+        "core",
+        "interfaces"
+    ],
+    "type": "system",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_CONNECTIVITY_WATCHDOG_ENABLED",
+    "runtime_commands": {
+        "start": "connectivity_watchdog_start",
+        "stop": null,
+        "enable": null,
+        "disable": null,
+        "reconfigure": null,
+        "status": null,
+        "handle_event": "connectivity_watchdog_handle_event"
+    },
+    "mqtt_interface": {
+        "publishes": {
+            
+        },
+        "subscribes": {
+
+        }
+    }
+}

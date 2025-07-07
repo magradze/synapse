@@ -1,0 +1,54 @@
+menu "Connectivity Watchdog"
+
+    config MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        bool "Enable Connectivity Watchdog Module"
+        default y
+        help
+            Enables the connectivity_watchdog module for monitoring network and service connectivity.
+
+    config CONNECTIVITY_WATCHDOG_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_conn_watchdog"
+        depends on MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        help
+            Default instance name for the connectivity_watchdog module.
+
+    config CONNECTIVITY_WATCHDOG_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        help
+            Maximum length for the connectivity_watchdog module instance name string.
+
+    config CONNECTIVITY_WATCHDOG_GRACE_PERIOD_SEC
+        int "Grace Period (seconds)"
+        default 30
+        depends on MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        help
+            The initial period after startup (in seconds) during which the watchdog is inactive.
+
+    config CONNECTIVITY_WATCHDOG_CHECK_INTERVAL_SEC
+        int "Check Interval (seconds)"
+        default 60
+        depends on MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        help
+            The interval (in seconds) at which the watchdog performs its connectivity checks.
+
+    config CONNECTIVITY_WATCHDOG_MAX_CHECKS
+        int "Maximum Monitored Checks"
+        default 4
+        range 1 10
+        depends on MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        help
+            The maximum number of different connectivity checks (e.g., MQTT, PING).
+
+    config CONNECTIVITY_WATCHDOG_MAX_ACTIONS_PER_CHECK
+        int "Maximum Actions per Check"
+        default 5
+        range 1 10
+        depends on MODULE_CONNECTIVITY_WATCHDOG_ENABLED
+        help
+            The maximum number of recovery actions that can be defined for a single check.
+
+endmenu

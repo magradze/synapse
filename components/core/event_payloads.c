@@ -1,5 +1,5 @@
 /**
- * @file telemetry_events.c
+ * @file event_payloads.c
  * @brief ივენთების მონაცემთა სტრუქტურების (payloads) დამხმარე ფუნქციების იმპლემენტაცია.
  * @version 1.0
  * @date 2025-06-26

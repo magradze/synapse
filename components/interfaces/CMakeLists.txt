@@ -1,3 +1,3 @@
-idf_component_register(SRCS "telemetry_events.c"
+idf_component_register(
                     INCLUDE_DIRS "include"
                     REQUIRES core)

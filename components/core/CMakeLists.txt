@@ -8,6 +8,7 @@ set(SRCS
     "resource_manager.c"
     "event_data_wrapper.c"
     "service_locator.c"
+    "event_payloads.c"
 )
 
 # ჩასვით სკრიპტი, რომელიც ავტომატურად აღმოაჩენს მოდულებს და გენერირებს factory-ს.

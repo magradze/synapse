@@ -1,6 +1,6 @@
 {
   "firmware": {
-    "version": "3.3.0",
+    "version": "3.5.0",
     "description": "Implemented Service Locator pattern for I2C bus decoupling."
   },
   "global_config": {
@@ -177,6 +177,14 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "type": "self_test_manager",
+      "enabled": true,
+      "config": {
+        "instance_name": "selftest",
+        "storage_service_instance": "main_storage"
       }
     }
   ]

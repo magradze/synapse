@@ -1,6 +1,6 @@
 {
   "firmware": {
-    "version": "3.0.0",
+    "version": "3.5.0",
     "description": "Implemented Service Locator pattern for I2C bus decoupling."
   },
   "global_config": {
@@ -148,6 +148,43 @@
           "lwt_message": "{\"status\":\"offline\"}",
           "lwt_qos": 1,
           "lwt_retain": true
+      }
+    },
+    {
+      "type": "connectivity_watchdog",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_conn_watchdog",
+        "grace_period_sec": 30,
+        "check_interval_sec": 60,
+        "layers": [
+          {
+            "type": "MQTT",
+            "timeout_sec": 300,
+            "actions": [
+                { "on_failure_count": 1, "do": "log_warning", "message": "MQTT connection lost." },
+                { "on_failure_count": 3, "do": "reconnect_mqtt" },
+                { "on_failure_count": 5, "do": "trigger_alarm", "alarm_name": "CriticalMQTTLost" }
+            ]
+          },
+          {
+            "type": "PING",
+            "target": "8.8.8.8",
+            "timeout_sec": 600,
+            "actions": [
+                { "on_failure_count": 2, "do": "reconnect_wifi" },
+                { "on_failure_count": 4, "do": "reboot_system", "delay_ms": 5000 }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "self_test_manager",
+      "enabled": true,
+      "config": {
+        "instance_name": "selftest",
+        "storage_service_instance": "main_storage"
       }
     }
   ]

@@ -18,7 +18,7 @@
 #include <sdkconfig.h>
 #include <stdlib.h> // for free(), malloc()
 #include <string.h> // for strncpy()
-
+#include "cJSON.h"
 // =========================================================================
 //                      Payload სტრუქტურები
 // =========================================================================
@@ -77,6 +77,20 @@ typedef struct
     char source[16];
 
 } fmw_command_payload_t;
+
+/**
+ * @struct fmw_connectivity_payload_t
+ * @brief Defines the data structure for connectivity-related events.
+ * @details Used with FMW_EVENT_CONNECTIVITY_ESTABLISHED and FMW_EVENT_CONNECTIVITY_LOST.
+ */
+typedef struct
+{
+    /**
+     * @brief The name of the check that changed state (e.g., "MQTT_Heartbeat", "PING_8.8.8.8").
+     *        This name must match a check name defined in the Connectivity Watchdog's config.
+     */
+    char check_name[32];
+} fmw_connectivity_payload_t;
 
 // =========================================================================
 //                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები

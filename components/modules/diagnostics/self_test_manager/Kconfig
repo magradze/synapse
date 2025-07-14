@@ -1,0 +1,41 @@
+menu "Self Test Manager"
+
+    config MODULE_SELF_TEST_MANAGER_ENABLED
+        bool "Enable Self Test Manager Module"
+        default y
+        help
+            Enables the self_test_manager module for Performs system-wide self-diagnostics and health checks..
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config SELF_TEST_MANAGER_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_self_test"
+        depends on MODULE_SELF_TEST_MANAGER_ENABLED
+        help
+            Default instance name for the self_test_manager module.
+
+    config SELF_TEST_MANAGER_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_SELF_TEST_MANAGER_ENABLED
+        help
+            Maximum length for the self_test_manager module instance name string.
+
+    config SELF_TEST_MANAGER_TASK_STACK_SIZE
+        int "Self-Test Task Stack Size"
+        default 4096
+        depends on MODULE_SELF_TEST_MANAGER_ENABLED
+        help
+            Stack size for the temporary task that runs the self-tests.
+
+    config SELF_TEST_MANAGER_REPORT_MAX_LINES
+        int "Maximum Lines in Test Report"
+        default 20
+        depends on MODULE_SELF_TEST_MANAGER_ENABLED
+        help
+            Maximum number of result lines the test report can store.
+
+endmenu

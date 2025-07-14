@@ -24,4 +24,19 @@
 #define FMW_EVENT_WIFI_STATUS_READY "WIFI_STATUS_READY" // WiFi module reports its status
 #define FMW_EVENT_DEVICE_INFO_READY "DEVICE_INFO_READY" // Device identity service reports its information
 
+// --- Self Test Events ---
+#define FMW_EVENT_SELF_TEST_REPORT_READY "FMW_SELF_TEST_REPORT_READY" // Self Test Manager publishes this when a report is ready
+
+/**
+ * @brief Generic event published by any module that establishes a critical external connection.
+ * @details The payload should be of type fmw_connectivity_payload_t.
+ */
+#define FMW_EVENT_CONNECTIVITY_ESTABLISHED "FMW_CONNECTIVITY_ESTABLISHED"
+
+/**
+ * @brief Generic event published by any module that loses a critical external connection.
+ * @details The payload should be of type fmw_connectivity_payload_t.
+ */
+#define FMW_EVENT_CONNECTIVITY_LOST "FMW_CONNECTIVITY_LOST"
+
 #endif // FRAMEWORK_EVENTS_H

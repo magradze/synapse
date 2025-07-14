@@ -23,7 +23,7 @@
 #include "service_locator.h"
 #include "device_identity_interface.h"
 #include "mqtt_topics_generated.h" // ★★★ Auto-generated MQTT topics ★★★
-
+#include "timer_interface.h"
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"
 #include "mqtt_client.h"
@@ -54,8 +54,9 @@ typedef struct {
  *          to the corresponding MQTT topic.
  */
 static const event_to_topic_map_t event_topic_map[] = {
-    { FMW_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS },
-    { FMW_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO },
+    {FMW_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS},
+    {FMW_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO},
+    {FMW_EVENT_SELF_TEST_REPORT_READY, MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT},
 };
 static const int event_topic_map_size = sizeof(event_topic_map) / sizeof(event_topic_map[0]);
 
@@ -78,6 +79,7 @@ typedef struct {
     mqtt_manager_config_t config;
     esp_mqtt_client_handle_t client_handle;
     bool is_connected;
+    fmw_timer_handle_t heartbeat_timer;
 } mqtt_manager_private_data_t;
 
 
@@ -167,6 +169,8 @@ static esp_err_t mqtt_manager_init(module_t *self)
     // Subscribe to the event that signals WiFi is connected and has an IP
     fmw_event_bus_subscribe("WIFI_EVENT_IP_ASSIGNED", self);
 
+    fmw_event_bus_subscribe("MQTT_HEARTBEAT_TICK", self);
+
     // Automatically subscribe to all events in the map
     for (int i = 0; i < event_topic_map_size; i++) {
         fmw_event_bus_subscribe(event_topic_map[i].event_name, self);
@@ -223,26 +227,67 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
         goto cleanup; // We are done with this event
     }
 
+    if (strcmp(event_name, "MQTT_HEARTBEAT_TICK") == 0)
+    {
+        if (p_data->is_connected)
+        {
+            // გამოვაქვეყნოთ ზოგადი "ცოცხალი ვარ" სიგნალი
+            fmw_connectivity_payload_t *payload = malloc(sizeof(fmw_connectivity_payload_t));
+            if (payload)
+            {
+                snprintf(payload->check_name, sizeof(payload->check_name), "MQTT_Heartbeat");
+                event_data_wrapper_t *wrapper;
+                if (fmw_event_data_wrap(payload, free, &wrapper) == ESP_OK)
+                {
+                    fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
+                    fmw_event_data_release(wrapper);
+                }
+                else
+                {
+                    free(payload);
+                }
+            }
+        }
+    }
+
     // Handle all other events from the map
     for (int i = 0; i < event_topic_map_size; i++) {
         if (strcmp(event_name, event_topic_map[i].event_name) == 0) {
             if (p_data->is_connected && event_data) {
                 event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
-                char *json_payload = (char *)wrapper->payload;
 
-                char final_topic[128];
-                service_handle_t id_service_handle = fmw_service_get("main_identity_service");
-                if (id_service_handle) {
-                    device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
-                    
-                    // Build the topic using the template from the map
-                    MQTT_BUILD_TOPIC(final_topic, sizeof(final_topic), 
-                                     event_topic_map[i].mqtt_topic_template, 
-                                     id_api->get_device_id());
-                    
-                    ESP_LOGI(TAG, "Publishing event '%s' to topic: %s", event_name, final_topic);
-                    esp_mqtt_client_publish(p_data->client_handle, final_topic, json_payload, 0, 1, true);
+                // ★★★ FIX START: Handle the generic telemetry payload structure ★★★
+                if (wrapper->payload)
+                {
+                    fmw_telemetry_payload_t *telemetry_payload = (fmw_telemetry_payload_t *)wrapper->payload;
+
+                    // We need the JSON data string from within the payload structure
+                    char *json_to_publish = telemetry_payload->json_data;
+
+                    if (json_to_publish)
+                    {
+                        char final_topic[128];
+                        service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+                        if (id_service_handle)
+                        {
+                            device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
+
+                            MQTT_BUILD_TOPIC(final_topic, sizeof(final_topic),
+                                             event_topic_map[i].mqtt_topic_template,
+                                             id_api->get_device_id());
+
+                            ESP_LOGI(TAG, "Publishing event '%s' to topic: %s", event_name, final_topic);
+                            ESP_LOGD(TAG, "Payload: %s", json_to_publish);
+
+                            esp_mqtt_client_publish(p_data->client_handle, final_topic, json_to_publish, 0, 1, true);
+                        }
+                    }
+                    else
+                    {
+                        ESP_LOGW(TAG, "Telemetry payload for event '%s' has NULL json_data.", event_name);
+                    }
                 }
+                // ★★★ FIX END: Handle the generic telemetry payload structure ★★★
             }
             goto cleanup; // Found and processed, exit loop
         }
@@ -261,7 +306,7 @@ cleanup:
 static void start_mqtt_connection(module_t *self) {
     mqtt_manager_private_data_t *p_data = (mqtt_manager_private_data_t *)self->private_data;
 
-    service_handle_t id_service_handle = fmw_service_get("main_identity_service");
+    service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
     if (!id_service_handle) {
         ESP_LOGE(TAG, "Device Identity Service not found! Cannot start MQTT.");
         return;
@@ -302,6 +347,14 @@ static void start_mqtt_connection(module_t *self) {
     self->status = MODULE_STATUS_RUNNING;
 }
 
+/**
+ * @internal
+ * @brief Callback function for handling MQTT client events.
+ * @param handler_args User-defined arguments (pointer to the module instance).
+ * @param base The event base.
+ * @param event_id The specific event ID.
+ * @param event_data The data associated with the event.
+ */
 static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
 {
     module_t *self = (module_t *)handler_args;
@@ -310,27 +363,95 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
 
     switch ((esp_mqtt_event_id_t)event_id) {
         case MQTT_EVENT_CONNECTED:
+        { // --- FIX: Start of local scope for this case ---
             ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
             p_data->is_connected = true;
 
+            // Publish generic connectivity event
+            fmw_connectivity_payload_t *conn_payload = malloc(sizeof(fmw_connectivity_payload_t));
+            if (conn_payload)
+            {
+                snprintf(conn_payload->check_name, sizeof(conn_payload->check_name), "MQTT_Heartbeat");
+                event_data_wrapper_t *wrapper;
+                if (fmw_event_data_wrap(conn_payload, free, &wrapper) == ESP_OK)
+                {
+                    fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
+                    fmw_event_data_release(wrapper);
+                }
+                else
+                {
+                    free(conn_payload);
+                }
+            }
+
+            // Schedule periodic heartbeat
+            service_handle_t timer_service = fmw_service_get("main_timer_service");
+            if (timer_service)
+            {
+                timer_api_t *timer_api = (timer_api_t *)timer_service;
+                if (p_data->heartbeat_timer)
+                { // Cancel previous timer if it exists
+                    timer_api->cancel_event(p_data->heartbeat_timer);
+                }
+                p_data->heartbeat_timer = timer_api->schedule_event("MQTT_HEARTBEAT_TICK", 120000, true);
+                if (p_data->heartbeat_timer)
+                {
+                    ESP_LOGI(TAG, "MQTT heartbeat timer scheduled.");
+                }
+                else
+                {
+                    ESP_LOGE(TAG, "Failed to schedule MQTT heartbeat timer.");
+                }
+            }
+
+            // Subscribe to command topic
             char cmd_topic[128];
-            service_handle_t id_service_handle = fmw_service_get("main_identity_service");
+            service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
             if (id_service_handle) {
                 device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
-                MQTT_BUILD_TOPIC(cmd_topic, sizeof(cmd_topic), 
-                                 MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN, 
-                                 id_api->get_device_id());
+                MQTT_BUILD_TOPIC(cmd_topic, sizeof(cmd_topic), MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN, id_api->get_device_id());
                 esp_mqtt_client_subscribe(p_data->client_handle, cmd_topic, 1);
                 ESP_LOGI(TAG, "Subscribed to command topic: %s", cmd_topic);
             }
             break;
+        } // --- FIX: End of local scope ---
 
         case MQTT_EVENT_DISCONNECTED:
+        { // --- FIX: Start of local scope for this case ---
             ESP_LOGW(TAG, "MQTT_EVENT_DISCONNECTED");
             p_data->is_connected = false;
+
+            // Cancel heartbeat timer
+            service_handle_t timer_service = fmw_service_get("main_timer_service");
+            if (timer_service && p_data->heartbeat_timer)
+            {
+                timer_api_t *timer_api = (timer_api_t *)timer_service;
+                timer_api->cancel_event(p_data->heartbeat_timer);
+                p_data->heartbeat_timer = NULL;
+                ESP_LOGI(TAG, "MQTT heartbeat timer cancelled.");
+            }
+
+            // Publish generic connectivity lost event
+            fmw_connectivity_payload_t *disconn_payload = malloc(sizeof(fmw_connectivity_payload_t));
+            if (disconn_payload)
+            {
+                snprintf(disconn_payload->check_name, sizeof(disconn_payload->check_name), "MQTT_Heartbeat");
+                event_data_wrapper_t *wrapper;
+                if (fmw_event_data_wrap(disconn_payload, free, &wrapper) == ESP_OK)
+                {
+                    fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_LOST, wrapper);
+                    fmw_event_data_release(wrapper);
+                }
+                else
+                {
+                    free(disconn_payload);
+                }
+            }
             break;
+        } // --- FIX: End of local scope ---
 
         case MQTT_EVENT_DATA:
+        { // --- FIX: Start of local scope for this case ---
             ESP_LOGI(TAG, "MQTT_EVENT_DATA received on topic '%.*s'", event->topic_len, event->topic);
             
             fmw_command_payload_t* payload = malloc(sizeof(fmw_command_payload_t));
@@ -350,6 +471,7 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
                 }
             }
             break;
+        } // --- FIX: End of local scope ---
 
         case MQTT_EVENT_ERROR:
             ESP_LOGE(TAG, "MQTT_EVENT_ERROR");

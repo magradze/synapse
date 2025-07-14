@@ -54,8 +54,9 @@ typedef struct {
  *          to the corresponding MQTT topic.
  */
 static const event_to_topic_map_t event_topic_map[] = {
-    { FMW_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS },
-    { FMW_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO },
+    {FMW_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS},
+    {FMW_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO},
+    {FMW_EVENT_SELF_TEST_REPORT_READY, MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT},
 };
 static const int event_topic_map_size = sizeof(event_topic_map) / sizeof(event_topic_map[0]);
 
@@ -254,21 +255,39 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
         if (strcmp(event_name, event_topic_map[i].event_name) == 0) {
             if (p_data->is_connected && event_data) {
                 event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
-                char *json_payload = (char *)wrapper->payload;
 
-                char final_topic[128];
-                service_handle_t id_service_handle = fmw_service_get("main_identity_service");
-                if (id_service_handle) {
-                    device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
-                    
-                    // Build the topic using the template from the map
-                    MQTT_BUILD_TOPIC(final_topic, sizeof(final_topic), 
-                                     event_topic_map[i].mqtt_topic_template, 
-                                     id_api->get_device_id());
-                    
-                    ESP_LOGI(TAG, "Publishing event '%s' to topic: %s", event_name, final_topic);
-                    esp_mqtt_client_publish(p_data->client_handle, final_topic, json_payload, 0, 1, true);
+                // ★★★ FIX START: Handle the generic telemetry payload structure ★★★
+                if (wrapper->payload)
+                {
+                    fmw_telemetry_payload_t *telemetry_payload = (fmw_telemetry_payload_t *)wrapper->payload;
+
+                    // We need the JSON data string from within the payload structure
+                    char *json_to_publish = telemetry_payload->json_data;
+
+                    if (json_to_publish)
+                    {
+                        char final_topic[128];
+                        service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+                        if (id_service_handle)
+                        {
+                            device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
+
+                            MQTT_BUILD_TOPIC(final_topic, sizeof(final_topic),
+                                             event_topic_map[i].mqtt_topic_template,
+                                             id_api->get_device_id());
+
+                            ESP_LOGI(TAG, "Publishing event '%s' to topic: %s", event_name, final_topic);
+                            ESP_LOGD(TAG, "Payload: %s", json_to_publish);
+
+                            esp_mqtt_client_publish(p_data->client_handle, final_topic, json_to_publish, 0, 1, true);
+                        }
+                    }
+                    else
+                    {
+                        ESP_LOGW(TAG, "Telemetry payload for event '%s' has NULL json_data.", event_name);
+                    }
                 }
+                // ★★★ FIX END: Handle the generic telemetry payload structure ★★★
             }
             goto cleanup; // Found and processed, exit loop
         }
@@ -287,7 +306,7 @@ cleanup:
 static void start_mqtt_connection(module_t *self) {
     mqtt_manager_private_data_t *p_data = (mqtt_manager_private_data_t *)self->private_data;
 
-    service_handle_t id_service_handle = fmw_service_get("main_identity_service");
+    service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
     if (!id_service_handle) {
         ESP_LOGE(TAG, "Device Identity Service not found! Cannot start MQTT.");
         return;
@@ -387,7 +406,7 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
 
             // Subscribe to command topic
             char cmd_topic[128];
-            service_handle_t id_service_handle = fmw_service_get("main_identity_service");
+            service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
             if (id_service_handle) {
                 device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
                 MQTT_BUILD_TOPIC(cmd_topic, sizeof(cmd_topic), MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN, id_api->get_device_id());

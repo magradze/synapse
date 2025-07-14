@@ -1,6 +1,7 @@
 var dir_6a88773b00803615fafb700ddfe362d0 =
 [
     [ "communications", "dir_79ce5a45e64aa41943e4a49e641c7bd0.html", "dir_79ce5a45e64aa41943e4a49e641c7bd0" ],
+    [ "diagnostics", "dir_e3c6631bd8dd5a9c8890e7b6b1f1a6a5.html", "dir_e3c6631bd8dd5a9c8890e7b6b1f1a6a5" ],
     [ "displays", "dir_d94aee959dd344eb9bfcbc67761ff2e9.html", "dir_d94aee959dd344eb9bfcbc67761ff2e9" ],
     [ "provisioning", "dir_0b5d4bcb533ec2cbaa23b07ca8adbc0d.html", "dir_0b5d4bcb533ec2cbaa23b07ca8adbc0d" ],
     [ "storage", "dir_d6fdf8e2d3780c4f79b060b2e6392e60.html", "dir_d6fdf8e2d3780c4f79b060b2e6392e60" ],

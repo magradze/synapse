@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['⏱️_20მოდული_20tt_20system_5ftimer_20tt_0',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utilities_2system__timer_2README.html',1,'']]]
+  ['⌨️_20cli_20ბრძანებები_20command_20line_20interface_0',['⌨️ cli ბრძანებები command line interface',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html#autotoc_md26',1,'4. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md156',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md19',1,'6. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2system_2device__identity__service_2README.html#autotoc_md82',1,'7. ⌨️ CLI ბრძანებები (Command Line Interface)']]]
 ];

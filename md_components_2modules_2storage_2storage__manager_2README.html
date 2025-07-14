@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2storage_2stora
   <div class="headertitle"><div class="title">💾 მოდული &lt;tt&gt;storage_manager&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md32"></a> </p>
-<h1><a class="anchor" id="autotoc_md33"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md40"></a> </p>
+<h1><a class="anchor" id="autotoc_md41"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>storage_manager</code> <br  />
  <b>კატეგორია:</b> <code>storage</code> <br  />
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2storage_2stora
 <li><b>SD Card:</b> 🗃️ დიდი მოცულობის ფაილური საცავი გარე SD ბარათზე, გამოიყენება ვიდეოების, სენსორების დიდი ისტორიის და სხვა მოცულობითი მონაცემებისთვის.</li>
 </ul>
 <p>მოდულის მთავარი მიზანია, სრულად მოახდინოს შენახვის ტექნოლოგიის აბსტრაგირება, რათა სხვა მოდულებმა გამოიყენონ ერთიანი, მარტივი ინტერფეისი ისე, რომ არ "ფიქრობდნენ" იმაზე, თუ სად და როგორ ინახება მონაცემები ფიზიკურად.</p>
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md42"></a>
 2. 🏗️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Strategy Pattern:</b> მოდული იყენებს Strategy დიზაინ-პატერნს. <code>Kconfig</code>-ში არჩეული backend-ის მიხედვით, ის დინამიურად ირჩევს შესაბამის "სტრატეგიას" (იმპლემენტაციას) და მის API-ს არეგისტრირებს <code>Service Locator</code>-ში.</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2storage_2stora
 <li>**დაბალი ინიციალიზაციის დონე (<code>init_level: 20</code>):** როგორც ფუნდამენტური სერვისი, ის ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე.</li>
 <li><b>ერთიანი API:</b> მიუხედავად არჩეული backend-ისა, სხვა მოდულები ყოველთვის იყენებენ ერთსა და იმავე <code><a class="el" href="structstorage__api__t.html" title="The public Service API structure for the Storage Manager.">storage_api_t</a></code> ინტერფეისს, რომელიც მხარს უჭერს როგორც key-value, ისე ფაილურ ოპერაციებს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md35"></a>
+<h1><a class="anchor" id="autotoc_md43"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის სრული კონფიგურაცია ხდება <code>Kconfig</code>-ის (<code>idf.py menuconfig</code>) საშუალებით, სადაც შეგიძლიათ აირჩიოთ backend-ი და დააკონფიგურიროთ მისი პარამეტრები.</p>
 <p>**<code>system_config.json</code> მაგალითი:**</p>
@@ -138,10 +138,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2storage_2stora
 <li><b>დააკონფიგურიროთ SPIFFS:</b> მიუთითოთ პარტიციის სახელი, მაქსიმალური ფაილების რაოდენობა და ა.შ.</li>
 <li><b>დააკონფიგურიროთ SD Card:</b> მიუთითოთ mount point-ი და SPI პინების ნომრები (MISO, MOSI, CLK, CS).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md44"></a>
 4. 🛠️ Service API (&lt;tt&gt;storage_api_t&lt;/tt&gt;)</h1>
 <p>მოდული არეგისტრირებს სერვისს ტიპით <code>FMW_SERVICE_TYPE_NVRAM_API</code>. სხვა მოდულებს შეუძლიათ ამ სერვისის მიღება <code>fmw_service_get("main_storage")</code> გამოძახებით.</p>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Key-Value ოპერაციები</h2>
 <ul>
 <li>**<code>set_string(owner, key, value)</code> / <code>get_string(owner, key, ...)</code>**: 💾/📥 ინახავს/კითხულობს სტრიქონს.</li>
@@ -149,7 +149,7 @@ Key-Value ოპერაციები</h2>
 <li>**<code>set_bool(owner, key, value)</code> / <code>get_bool(owner, key, ...)</code>**: 💾/📥 ინახავს/კითხულობს ლოგიკურ მნიშვნელობას.</li>
 <li>**<code>erase_key(owner, key)</code>**: 🗑️ შლის კონკრეტულ key-value წყვილს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md46"></a>
 ფაილური ოპერაციები (მხარდაჭერილია SPIFFS და SD Card backend-ებზე)</h2>
 <ul>
 <li>**<code>write_file(file_path, data, size)</code>**: 📝 წერს მონაცემებს ფაილში. ქმნის ფაილს თუ არ არსებობს, ან გადააწერს არსებულს.</li>
@@ -158,7 +158,7 @@ Key-Value ოპერაციები</h2>
 <li>**<code>file_exists(file_path)</code>**: ❓ ამოწმებს, არსებობს თუ არა ფაილი.</li>
 </ul>
 <p><b>შენიშვნა:</b> თუ არჩეულია NVS backend-ი, ფაილური ოპერაციების გამოძახება დააბრუნებს <code>ESP_ERR_NOT_SUPPORTED</code> შეცდომას.</p>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<h1><a class="anchor" id="autotoc_md47"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, რომ <code>web_server</code> მოდულს სურს, შეინახოს <code>index.html</code> ფაილი, ხოლო <code>wifi_manager</code>-ს - თავისი კონფიგურაცია.</p>
 <p>**<code>web_server.c</code>-ში (SPIFFS/SD არჩეულია):**</p>
@@ -197,7 +197,7 @@ Key-Value ოპერაციები</h2>
 <div class="line">}</div>
 <div class="ttc" id="astructstorage__api__t_html_a291230ea486664e21554fde8fdc3ac84"><div class="ttname"><a href="structstorage__api__t.html#a291230ea486664e21554fde8fdc3ac84">storage_api_t::set_string</a></div><div class="ttdeci">esp_err_t(* set_string)(const char *owner, const char *key, const char *value)</div><div class="ttdoc">Sets a string value for a specific owner (module) and key.</div><div class="ttdef"><b>Definition</b> storage_interface.h:32</div></div>
 </div><!-- fragment --><p>ამ მაგალითში, <code>wifi_manager</code>-მა არც კი "იცის", სად ინახება მისი <code>ssid</code> - NVS-ში თუ <code>/spiffs/wifi_manager/ssid</code> ფაილში. ეს არის <code>Storage Manager</code>-ის აბსტრაქციის მთავარი ძალა.</p>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md48"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>Backend-ის არჩევა:</b> <code>menuconfig</code>-ში სწორად უნდა აირჩიოთ და დააკონფიგურიროთ სასურველი backend-ი.</li>

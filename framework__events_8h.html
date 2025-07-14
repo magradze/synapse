@@ -103,15 +103,19 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="framework__events_8h__dep__incl.png" border="0" usemap="#acomponents_2interfaces_2include_2framework__events_8hdep" alt=""/></div>
 <map name="acomponents_2interfaces_2include_2framework__events_8hdep" id="acomponents_2interfaces_2include_2framework__events_8hdep">
-<area shape="rect" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="366,5,577,45"/>
+<area shape="rect" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="570,5,781,45"/>
 <area shape="rect" href="mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing." alt="" coords="5,101,225,155"/>
-<area shape="poly" title=" " alt="" coords="392,52,209,103,207,98,391,46"/>
+<area shape="poly" title=" " alt="" coords="557,44,404,66,237,96,206,103,205,98,236,91,403,60,556,38"/>
 <area shape="rect" href="wifi__manager_8c.html" title="WiFi კავშირის და კავშირის აღდგენის მართვის იმპლემენტაცია." alt="" coords="249,101,461,155"/>
-<area shape="poly" title=" " alt="" coords="441,56,388,102,384,98,437,52"/>
-<area shape="rect" href="device__identity__service_8c.html" title="Implementation of the Device Identity Service module with CLI support." alt="" coords="486,93,689,163"/>
-<area shape="poly" title=" " alt="" coords="505,52,550,91,546,95,502,57"/>
-<area shape="rect" href="command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="713,101,904,155"/>
-<area shape="poly" title=" " alt="" coords="551,47,701,91,725,98,724,103,700,96,549,52"/>
+<area shape="poly" title=" " alt="" coords="603,52,440,103,438,98,601,47"/>
+<area shape="rect" href="self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="486,93,657,163"/>
+<area shape="poly" title=" " alt="" coords="648,57,608,95,605,91,644,53"/>
+<area shape="rect" href="connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="681,93,880,163"/>
+<area shape="poly" title=" " alt="" coords="707,53,747,91,743,95,703,57"/>
+<area shape="rect" href="device__identity__service_8c.html" title="Implementation of the Device Identity Service module with CLI support." alt="" coords="905,93,1107,163"/>
+<area shape="poly" title=" " alt="" coords="751,47,905,93,903,98,749,52"/>
+<area shape="rect" href="command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="1132,101,1323,155"/>
+<area shape="poly" title=" " alt="" coords="795,37,950,59,1120,91,1148,98,1147,103,1119,96,949,64,794,42"/>
 </map>
 </div>
 </div>
@@ -140,11 +144,55 @@ Macros</h2></td></tr>
 <tr class="memitem:a4900a35f29be6dee2dae089777601b6b" id="r_a4900a35f29be6dee2dae089777601b6b"><td class="memItemLeft" align="right" valign="top"><a id="a4900a35f29be6dee2dae089777601b6b" name="a4900a35f29be6dee2dae089777601b6b"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FMW_EVENT_DEVICE_INFO_READY</b>&#160;&#160;&#160;&quot;DEVICE_INFO_READY&quot;</td></tr>
 <tr class="separator:a4900a35f29be6dee2dae089777601b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8be8836b5f654cd0700bdcdceff507e9" id="r_a8be8836b5f654cd0700bdcdceff507e9"><td class="memItemLeft" align="right" valign="top"><a id="a8be8836b5f654cd0700bdcdceff507e9" name="a8be8836b5f654cd0700bdcdceff507e9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FMW_EVENT_SELF_TEST_REPORT_READY</b>&#160;&#160;&#160;&quot;FMW_SELF_TEST_REPORT_READY&quot;</td></tr>
+<tr class="separator:a8be8836b5f654cd0700bdcdceff507e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a316aab26053206b80037aa48ef1f00e1" id="r_a316aab26053206b80037aa48ef1f00e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="framework__events_8h.html#a316aab26053206b80037aa48ef1f00e1">FMW_EVENT_CONNECTIVITY_ESTABLISHED</a>&#160;&#160;&#160;&quot;FMW_CONNECTIVITY_ESTABLISHED&quot;</td></tr>
+<tr class="memdesc:a316aab26053206b80037aa48ef1f00e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic event published by any module that establishes a critical external connection.  <br /></td></tr>
+<tr class="separator:a316aab26053206b80037aa48ef1f00e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab934f9e26cc046dfd8e231aeb0e3bdaa" id="r_ab934f9e26cc046dfd8e231aeb0e3bdaa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="framework__events_8h.html#ab934f9e26cc046dfd8e231aeb0e3bdaa">FMW_EVENT_CONNECTIVITY_LOST</a>&#160;&#160;&#160;&quot;FMW_CONNECTIVITY_LOST&quot;</td></tr>
+<tr class="memdesc:ab934f9e26cc046dfd8e231aeb0e3bdaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic event published by any module that loses a critical external connection.  <br /></td></tr>
+<tr class="separator:ab934f9e26cc046dfd8e231aeb0e3bdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines standardized, framework-wide event identifiers. </p>
 <p>This file contains event names that are considered part of the Synapse Framework's public eventing API. Any module can rely on these events being present and having a consistent meaning. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a316aab26053206b80037aa48ef1f00e1" name="a316aab26053206b80037aa48ef1f00e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a316aab26053206b80037aa48ef1f00e1">&#9670;&#160;</a></span>FMW_EVENT_CONNECTIVITY_ESTABLISHED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FMW_EVENT_CONNECTIVITY_ESTABLISHED&#160;&#160;&#160;&quot;FMW_CONNECTIVITY_ESTABLISHED&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic event published by any module that establishes a critical external connection. </p>
+<p>The payload should be of type <a class="el" href="structfmw__connectivity__payload__t.html" title="Defines the data structure for connectivity-related events.">fmw_connectivity_payload_t</a>. </p>
+
+</div>
+</div>
+<a id="ab934f9e26cc046dfd8e231aeb0e3bdaa" name="ab934f9e26cc046dfd8e231aeb0e3bdaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab934f9e26cc046dfd8e231aeb0e3bdaa">&#9670;&#160;</a></span>FMW_EVENT_CONNECTIVITY_LOST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FMW_EVENT_CONNECTIVITY_LOST&#160;&#160;&#160;&quot;FMW_CONNECTIVITY_LOST&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic event published by any module that loses a critical external connection. </p>
+<p>The payload should be of type <a class="el" href="structfmw__connectivity__payload__t.html" title="Defines the data structure for connectivity-related events.">fmw_connectivity_payload_t</a>. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

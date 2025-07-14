@@ -116,6 +116,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a71006e4007fa0ac0b74fb552c6b8ba98" id="r_a71006e4007fa0ac0b74fb552c6b8ba98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mqtt__topics__generated_8h.html#a71006e4007fa0ac0b74fb552c6b8ba98">MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO</a>&#160;&#160;&#160;&quot;synapse/devices/%s/state/device/info&quot;</td></tr>
 <tr class="memdesc:a71006e4007fa0ac0b74fb552c6b8ba98"><td class="mdescLeft">&#160;</td><td class="mdescRight">ავტომატურად გენერირებული MQTT თემების კონსტანტები  <br /></td></tr>
 <tr class="separator:a71006e4007fa0ac0b74fb552c6b8ba98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a477930d2d79bbc29e2a96578e2b23fad" id="r_a477930d2d79bbc29e2a96578e2b23fad"><td class="memItemLeft" align="right" valign="top"><a id="a477930d2d79bbc29e2a96578e2b23fad" name="a477930d2d79bbc29e2a96578e2b23fad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT</b>&#160;&#160;&#160;&quot;synapse/devices/%s/data/selftest/report&quot;</td></tr>
+<tr class="separator:a477930d2d79bbc29e2a96578e2b23fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a856b7819512e4d2b2477eeb54cabd3a4" id="r_a856b7819512e4d2b2477eeb54cabd3a4"><td class="memItemLeft" align="right" valign="top"><a id="a856b7819512e4d2b2477eeb54cabd3a4" name="a856b7819512e4d2b2477eeb54cabd3a4"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN</b>&#160;&#160;&#160;&quot;synapse/devices/%s/cmd/in&quot;</td></tr>
 <tr class="separator:a856b7819512e4d2b2477eeb54cabd3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,14 +135,14 @@ Macros</h2></td></tr>
 <tr class="memdesc:a874dc60d63763257bd6a8b2c9ba3539b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base MQTT topic format.  <br /></td></tr>
 <tr class="separator:a874dc60d63763257bd6a8b2c9ba3539b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac41205c656ae0d2c34d094554523bec7" id="r_ac41205c656ae0d2c34d094554523bec7"><td class="memItemLeft" align="right" valign="top"><a id="ac41205c656ae0d2c34d094554523bec7" name="ac41205c656ae0d2c34d094554523bec7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPICS_GENERATION_TIMESTAMP</b>&#160;&#160;&#160;&quot;2025-07-06 23:18:50 UTC&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPICS_GENERATION_TIMESTAMP</b>&#160;&#160;&#160;&quot;2025-07-14 02:57:49 UTC&quot;</td></tr>
 <tr class="memdesc:ac41205c656ae0d2c34d094554523bec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ავტომატური გენერაციის მეტამონაცემები <br /></td></tr>
 <tr class="separator:ac41205c656ae0d2c34d094554523bec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e4752bc3a1d77e3878bd200dca3d4bc" id="r_a8e4752bc3a1d77e3878bd200dca3d4bc"><td class="memItemLeft" align="right" valign="top"><a id="a8e4752bc3a1d77e3878bd200dca3d4bc" name="a8e4752bc3a1d77e3878bd200dca3d4bc"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPICS_TOTAL_COUNT</b>&#160;&#160;&#160;4</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPICS_TOTAL_COUNT</b>&#160;&#160;&#160;5</td></tr>
 <tr class="separator:a8e4752bc3a1d77e3878bd200dca3d4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c200fe7b2afc8cd67ace806d0fcc917" id="r_a4c200fe7b2afc8cd67ace806d0fcc917"><td class="memItemLeft" align="right" valign="top"><a id="a4c200fe7b2afc8cd67ace806d0fcc917" name="a4c200fe7b2afc8cd67ace806d0fcc917"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPICS_GENERATED_FROM_MODULES</b>&#160;&#160;&#160;&quot;device_identity_service, mqtt_manager, wifi_manager&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_TOPICS_GENERATED_FROM_MODULES</b>&#160;&#160;&#160;&quot;connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, wifi_manager&quot;</td></tr>
 <tr class="separator:a4c200fe7b2afc8cd67ace806d0fcc917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -151,11 +154,11 @@ Macros</h2></td></tr>
 <li>გაუშვით build - ეს ფაილი ავტომატურად განახლდება</li>
 </ol>
 <p>ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}</p>
-<dl class="section note"><dt>Note</dt><dd>გენერირების თარიღი: 2025-07-06 23:18:50 UTC </dd>
+<dl class="section note"><dt>Note</dt><dd>გენერირების თარიღი: 2025-07-14 02:57:49 UTC </dd>
 <dd>
-თემების რაოდენობა: 4 </dd>
+თემების რაოდენობა: 5 </dd>
 <dd>
-დამუშავებული მოდულები: device_identity_service, mqtt_manager, wifi_manager </dd></dl>
+დამუშავებული მოდულები: connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, wifi_manager </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>MindLab Auto-Generation System </dd></dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -245,7 +248,8 @@ Macros</h2></td></tr>
 <ul>
 <li>MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO: .../state/device/info</li>
 </ul>
-<p>MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN: .../cmd/in</p><ul>
+<p>MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT: .../data/selftest/report</p><ul>
+<li>MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN: .../cmd/in</li>
 <li>MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS: .../state/wifi/status</li>
 <li>MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT: .../data/wifi/scan_result </li>
 </ul>

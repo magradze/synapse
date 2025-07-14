@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
   <div class="headertitle"><div class="title">Synapse Command Router API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md176"></a> </p>
-<h1><a class="anchor" id="autotoc_md177"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md198"></a> </p>
+<h1><a class="anchor" id="autotoc_md199"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code>Command Router</code> მოდულის საჯარო Service API-ს, რომელიც ხელმისაწვდომია სხვა მოდულებისთვის <code>Service Locator</code>-ის მეშვეობით. ეს API საშუალებას აძლევს ნებისმიერ მოდულს, დაარეგისტრიროს და მართოს საკუთარი ბრძანებები ცენტრალიზებულად.</p>
 <p><b>სერვისის სახელი:</b> <code>main_cmd_router</code> (ან როგორც მითითებულია <code>system_config.json</code>-ში) <br  />
  <b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_CMD_ROUTER_API</code> <br  />
  <b>ინტერფეისის ჰედერი:</b> <code><a class="el" href="cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module.">cmd_router_interface.h</a></code></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md179"></a>
+<h1><a class="anchor" id="autotoc_md201"></a>
 ⚙️ API სტრუქტურა (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)</h1>
 <p>ეს არის სტრუქტურა, რომელიც შეიცავს ფუნქციის მაჩვენებლებს <code>Command Router</code>-ის სამართავად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
@@ -112,9 +112,9 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 <div class="ttc" id="astructcmd__router__api__t_html"><div class="ttname"><a href="structcmd__router__api__t.html">cmd_router_api_t</a></div><div class="ttdoc">The public Service API structure for the Command Router.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:79</div></div>
 <div class="ttc" id="astructcmd__t_html"><div class="ttname"><a href="structcmd__t.html">cmd_t</a></div><div class="ttdoc">Defines the structure for a single command to be registered.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:29</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md181"></a>
+<h1><a class="anchor" id="autotoc_md203"></a>
 📚 API ფუნქციები</h1>
-<h2><a class="anchor" id="autotoc_md182"></a>
+<h2><a class="anchor" id="autotoc_md204"></a>
 esp_err_t register_command(const cmd_t *command)</h2>
 <p>არეგისტრირებს ახალ ბრძანებას სისტემის <code>Command Router</code>-ში. რეგისტრაციის შემდეგ, ბრძანება ხელმისაწვდომი ხდება ყველა წყაროდან (Serial, Event Bus და ა.შ.).</p>
 <ul>
@@ -139,7 +139,7 @@ esp_err_t register_command(const cmd_t *command)</h2>
 </b></b></li>
 </ul>
 <p><b><b></b></b></p>
-<h2><a class="anchor" id="autotoc_md184"></a>
+<h2><a class="anchor" id="autotoc_md206"></a>
 esp_err_t unregister_command(const char *command_name)</h2>
 <p><b><b></b></b></p>
 <p><b><b>შლის (აუქმებს რეგისტრაციას) ადრე დარეგისტრირებულ ბრძანებას.</b></b></p>
@@ -163,7 +163,7 @@ esp_err_t unregister_command(const char *command_name)</h2>
 </ul>
 <p></b></b></p>
 <p><b><b><b><b><b></b></b></b></b></b></p>
-<h1><a class="anchor" id="autotoc_md186"></a>
+<h1><a class="anchor" id="autotoc_md208"></a>
 📖 დამხმარე სტრუქტურა (&lt;tt&gt;cmd_t&lt;/tt&gt;)</h1>
 <p><b><b><b><b><b></b></b></b></b></b></p>
 <p><b><b><b><b><b>ეს სტრუქტურა გამოიყენება <code>register_command</code> ფუნქციისთვის ბრძანების სრულად აღსაწერად.</b></b></b></b></b></p>
@@ -184,7 +184,7 @@ esp_err_t unregister_command(const char *command_name)</h2>
 <p><b><b><b><b><b></p><hr  />
 <p></b></b></b></b></b></p>
 <p><b><b><b><b><b></b></b></b></b></b></p>
-<h1><a class="anchor" id="autotoc_md188"></a>
+<h1><a class="anchor" id="autotoc_md210"></a>
 💡 გამოყენების მაგალითი</h1>
 <p><b><b><b><b><b></b></b></b></b></b></p>
 <p><b><b><b><b><b><code>relay_module</code>-ის <code>init</code> ფუნქციაში ბრძანების რეგისტრაცია:</b></b></b></b></b></p>

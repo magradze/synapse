@@ -93,55 +93,55 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2health__monit
   <div class="headertitle"><div class="title">Synapse Health Monitor Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md352"></a> </p>
-<h1><a class="anchor" id="autotoc_md353"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md374"></a> </p>
+<h1><a class="anchor" id="autotoc_md375"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის Health Monitor მოდულის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md355"></a>
+<h1><a class="anchor" id="autotoc_md377"></a>
 Health Monitor Module API</h1>
-<h2><a class="anchor" id="autotoc_md356"></a>
+<h2><a class="anchor" id="autotoc_md378"></a>
 module_t *health_monitor_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი Health Monitor მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md357"></a>
+<h2><a class="anchor" id="autotoc_md379"></a>
 esp_err_t health_monitor_module_start(module_t *module);</h2>
 <ul>
 <li>იწყებს სისტემის ჯანმრთელობის მონიტორინგს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md358"></a>
+<h2><a class="anchor" id="autotoc_md380"></a>
 esp_err_t health_monitor_module_stop(module_t *module);</h2>
 <ul>
 <li>აჩერებს მონიტორინგს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md359"></a>
+<h2><a class="anchor" id="autotoc_md381"></a>
 esp_err_t health_monitor_module_get_status(module_t *module, health_status_t *status);</h2>
 <ul>
 <li>აბრუნებს მიმდინარე ჯანმრთელობის სტატუსს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md360"></a>
+<h2><a class="anchor" id="autotoc_md382"></a>
 esp_err_t health_monitor_module_register_check(module_t *module, health_check_fn_t check_fn);</h2>
 <ul>
 <li>რეგისტრირებს დამატებით ჯანმრთელობის შემოწმების ფუნქციას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md362"></a>
+<h1><a class="anchor" id="autotoc_md384"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md363"></a>
+<h2><a class="anchor" id="autotoc_md385"></a>
 static void health_monitor_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს Health Monitor მოდულის მიერ მიღებულ მოვლენებს (მაგ: alert, notify)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md365"></a>
+<h1><a class="anchor" id="autotoc_md387"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md367"></a>
+<h1><a class="anchor" id="autotoc_md389"></a>
 მაგალითები</h1>
 <p><b>მონიტორინგის დაწყება:</b> </p><div class="fragment"><div class="line">health_monitor_module_start(module);</div>
 </div><!-- fragment --><p><b>ჯანმრთელობის სტატუსის მიღება:</b> </p><div class="fragment"><div class="line">health_status_t status;</div>

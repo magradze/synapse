@@ -103,20 +103,23 @@ $(document).ready(function(){initNavTree('event__payloads_8h.html',''); initResi
 <code>#include &lt;sdkconfig.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;cJSON.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for event_payloads.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="event__payloads_8h__incl.png" border="0" usemap="#acomponents_2interfaces_2include_2event__payloads_8h" alt=""/></div>
 <map name="acomponents_2interfaces_2include_2event__payloads_8h" id="acomponents_2interfaces_2include_2event__payloads_8h">
-<area shape="rect" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="186,5,378,45"/>
+<area shape="rect" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="241,5,433,45"/>
 <area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="5,93,156,119"/>
-<area shape="poly" title=" " alt="" coords="235,48,124,91,122,86,233,43"/>
+<area shape="poly" title=" " alt="" coords="276,48,132,92,130,87,275,43"/>
 <area shape="rect" title=" " alt="" coords="181,93,277,119"/>
-<area shape="poly" title=" " alt="" coords="271,47,247,83,242,80,267,44"/>
+<area shape="poly" title=" " alt="" coords="312,48,258,87,255,83,309,43"/>
 <area shape="rect" title=" " alt="" coords="301,93,372,119"/>
-<area shape="poly" title=" " alt="" coords="297,44,323,80,319,84,293,47"/>
+<area shape="poly" title=" " alt="" coords="339,46,339,79,334,79,334,46"/>
 <area shape="rect" title=" " alt="" coords="396,93,467,119"/>
-<area shape="poly" title=" " alt="" coords="319,43,398,84,396,89,317,48"/>
+<area shape="poly" title=" " alt="" coords="361,43,408,82,405,86,358,48"/>
+<area shape="rect" title=" " alt="" coords="491,93,564,119"/>
+<area shape="poly" title=" " alt="" coords="383,43,488,86,486,91,381,48"/>
 <area shape="rect" title=" " alt="" coords="45,167,116,192"/>
 <area shape="poly" title=" " alt="" coords="83,119,83,153,78,153,78,119"/>
 </map>
@@ -126,17 +129,21 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="event__payloads_8h__dep__incl.png" border="0" usemap="#acomponents_2interfaces_2include_2event__payloads_8hdep" alt=""/></div>
 <map name="acomponents_2interfaces_2include_2event__payloads_8hdep" id="acomponents_2interfaces_2include_2event__payloads_8hdep">
-<area shape="rect" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="437,5,629,45"/>
-<area shape="rect" href="telemetry__events_8c.html" title="ივენთების მონაცემთა სტრუქტურების (payloads) დამხმარე ფუნქციების იმპლემენტაცია." alt="" coords="5,101,176,141"/>
-<area shape="poly" title=" " alt="" coords="425,48,189,96,159,103,158,98,187,91,423,43"/>
-<area shape="rect" href="mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing." alt="" coords="201,93,421,148"/>
-<area shape="poly" title=" " alt="" coords="477,53,374,96,372,91,475,48"/>
-<area shape="rect" href="health__monitor_8c.html" title="Monitors system health metrics like heap, CPU, and tasks." alt="" coords="445,93,622,148"/>
-<area shape="poly" title=" " alt="" coords="536,59,536,93,531,93,531,59"/>
-<area shape="rect" href="command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="646,93,837,148"/>
-<area shape="poly" title=" " alt="" coords="589,49,684,91,682,96,587,53"/>
-<area shape="rect" href="logger__module_8c.html" title="ლოგერ მოდულის იმპლემენტაცია &#45; ცენტრალიზებული ლოგირება და ივენთების მონიტორინგი" alt="" coords="861,93,1037,148"/>
-<area shape="poly" title=" " alt="" coords="641,45,850,91,862,94,860,99,849,96,640,51"/>
+<area shape="rect" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="647,5,839,45"/>
+<area shape="rect" href="event__payloads_8c.html" title="ივენთების მონაცემთა სტრუქტურების (payloads) დამხმარე ფუნქციების იმპლემენტაცია." alt="" coords="5,108,180,148"/>
+<area shape="poly" title=" " alt="" coords="634,36,428,56,309,73,192,96,143,110,141,105,191,91,308,68,427,51,633,31"/>
+<area shape="rect" href="mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing." alt="" coords="204,101,424,155"/>
+<area shape="poly" title=" " alt="" coords="639,51,437,96,409,103,407,98,436,91,638,46"/>
+<area shape="rect" href="self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="449,93,619,163"/>
+<area shape="poly" title=" " alt="" coords="693,54,605,96,603,91,691,49"/>
+<area shape="rect" href="connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="644,93,843,163"/>
+<area shape="poly" title=" " alt="" coords="746,59,746,93,741,93,741,59"/>
+<area shape="rect" href="health__monitor_8c.html" title="Monitors system health metrics like heap, CPU, and tasks." alt="" coords="867,101,1044,155"/>
+<area shape="poly" title=" " alt="" coords="796,49,901,98,899,103,794,54"/>
+<area shape="rect" href="command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="1068,101,1259,155"/>
+<area shape="poly" title=" " alt="" coords="854,45,1057,91,1083,98,1082,103,1056,96,852,50"/>
+<area shape="rect" href="logger__module_8c.html" title="ლოგერ მოდულის იმპლემენტაცია &#45; ცენტრალიზებული ლოგირება და ივენთების მონიტორინგი" alt="" coords="1283,101,1459,155"/>
+<area shape="poly" title=" " alt="" coords="853,32,1049,52,1161,69,1272,91,1299,98,1298,103,1271,96,1161,74,1049,58,853,37"/>
 </map>
 </div>
 </div>
@@ -158,6 +165,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfmw__command__payload__t.html">fmw_command_payload_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the data structure for the FMW_EVENT_EXECUTE_COMMAND_STRING event.  <a href="structfmw__command__payload__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfmw__connectivity__payload__t.html">fmw_connectivity_payload_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the data structure for connectivity-related events.  <a href="structfmw__connectivity__payload__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>

@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['⚙️_20კონფიგურაცია_0',['⚙️ კონფიგურაცია',['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md3',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md14',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md25',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2storage_2storage__manager_2README.html#autotoc_md35',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2system_2alarms__manager_2README.html#autotoc_md44',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2system_2device__identity__service_2README.html#autotoc_md54',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2testing_2timer__test__module_2README.html#autotoc_md91',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md132',1,'3. ⚙️ კონფიგურაცია'],['../md_components_2modules_2utilities_2system__timer_2README.html#autotoc_md142',1,'3. ⚙️ კონფიგურაცია']]],
-  ['⚙️_20მოდული_3a_20command_20router_20system_20shell_1',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
-  ['⚙️_20როგორ_20მუშაობს_2',['⚙️ როგორ მუშაობს?',['../md_docs_2convention_2initialization__levels.html#autotoc_md926',1,'']]],
-  ['⚙️_20ძირითადი_20api_20ფუნქციები_3',['⚙️ ძირითადი API ფუნქციები',['../md_docs_2api__reference_2configuration__api.html#autotoc_md210',1,'']]],
-  ['⚙️_20api_20სტრუქტურა_20tt_20cmd_5frouter_5fapi_5ft_20tt_4',['⚙️ API სტრუქტურა (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md179',1,'']]],
-  ['⚙️_20api_20ს_20სტრუქტურა_20tt_20storage_5fapi_5ft_20tt_5',['⚙️ API-ს სტრუქტურა (&lt;tt&gt;storage_api_t&lt;/tt&gt;)',['../md_docs_2api__reference_2storage__api.html#autotoc_md523',1,'']]]
+  ['☁️_20მოდული_20tt_20mqtt_5fmanager_20tt_0',['☁️ მოდული &lt;tt&gt;mqtt_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2mqtt__manager_2README.html',1,'']]],
+  ['☁️_20cloud_20provisioning_20api_1',['☁️ Cloud Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md481',1,'']]],
+  ['☁️_20mqtt_20client_20service_20api_2',['☁️ MQTT Client Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md218',1,'']]]
 ];

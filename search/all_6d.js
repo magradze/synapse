@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['🧪_20მოდული_20tt_20timer_5ftest_20tt_0',['🧪 მოდული &lt;tt&gt;timer_test&lt;/tt&gt;',['../md_components_2modules_2testing_2timer__test__module_2README.html',1,'']]],
-  ['🧪_20ტესტირების_20მეთოდები_1',['🧪 ტესტირების მეთოდები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1040',1,'🧪 ტესტირების მეთოდები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1434',1,'🧪 ტესტირების მეთოდები']]]
+  ['🧠_20იმპლემენტაციის_20ლოგიკა_0',['5. 🧠 იმპლემენტაციის ლოგიკა',['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md5',1,'']]],
+  ['🧠_20კონდიციური_20კომპილაცია_20smart_20system_20_3a_1',['1. 🧠 კონდიციური კომპილაცია (SMART SYSTEM):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1046',1,'']]],
+  ['🧠_20პირობითი_20კომპილაცია_20გამარტივებული_2',['1. 🧠 პირობითი კომპილაცია (გამარტივებული)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1444',1,'']]]
 ];

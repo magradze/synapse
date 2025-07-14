@@ -25,10 +25,12 @@ var searchData=
   ['მოდული_20tt_20timer_5ftest_20tt_22',['🧪 მოდული &lt;tt&gt;timer_test&lt;/tt&gt;',['../md_components_2modules_2testing_2timer__test__module_2README.html',1,'']]],
   ['მოდული_20tt_20wifi_5fmanager_20tt_23',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]],
   ['მოდული_3a_20command_20router_20system_20shell_24',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
-  ['მოდული_3a_20health_20monitor_25',['მოდული: Health Monitor',['../md_components_2modules_2system_2health__monitor_2README.html',1,'']]],
-  ['მოდული_3a_20ota_20update_20manager_26',['მოდული: OTA Update Manager',['../md_components_2modules_2system_2ota__update__manager_2README.html',1,'']]],
-  ['მოდული_3a_20system_20alarms_20manager_27',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]],
-  ['მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_28',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
-  ['მოდული_3a_20watchdog_20manager_29',['მოდული: Watchdog Manager',['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'']]],
-  ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_30',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]
+  ['მოდული_3a_20connectivity_20watchdog_25',['🛰️ მოდული: Connectivity Watchdog',['../md_components_2modules_2system_2connectivity__watchdog_2README.html',1,'']]],
+  ['მოდული_3a_20health_20monitor_26',['მოდული: Health Monitor',['../md_components_2modules_2system_2health__monitor_2README.html',1,'']]],
+  ['მოდული_3a_20ota_20update_20manager_27',['მოდული: OTA Update Manager',['../md_components_2modules_2system_2ota__update__manager_2README.html',1,'']]],
+  ['მოდული_3a_20system_20alarms_20manager_28',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]],
+  ['მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_29',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
+  ['მოდული_3a_20tt_20self_5ftest_5fmanager_20tt_30',['🩺 მოდული: &lt;tt&gt;self_test_manager&lt;/tt&gt;',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html',1,'']]],
+  ['მოდული_3a_20watchdog_20manager_31',['მოდული: Watchdog Manager',['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'']]],
+  ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_32',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]
 ];

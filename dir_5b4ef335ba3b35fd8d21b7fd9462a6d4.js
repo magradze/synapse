@@ -1,6 +1,7 @@
 var dir_5b4ef335ba3b35fd8d21b7fd9462a6d4 =
 [
     [ "alarms_manager", "dir_0457364f0a90ad123a6a5ab5ea39b16f.html", "dir_0457364f0a90ad123a6a5ab5ea39b16f" ],
+    [ "connectivity_watchdog", "dir_d9d0cfb5293b5edbe96c7b57c59b05eb.html", "dir_d9d0cfb5293b5edbe96c7b57c59b05eb" ],
     [ "device_identity_service", "dir_34a2a43e482034a7a8f79a110ebcfccd.html", "dir_34a2a43e482034a7a8f79a110ebcfccd" ],
     [ "health_monitor", "dir_3dd8d4020ce7199e941a162f4419ca7a.html", "dir_3dd8d4020ce7199e941a162f4419ca7a" ],
     [ "ota_update_manager", "dir_1b20ead005d20ee51adc12476aac0a62.html", "dir_1b20ead005d20ee51adc12476aac0a62" ],

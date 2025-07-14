@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
   <div class="headertitle"><div class="title">⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md139"></a> </p>
-<h1><a class="anchor" id="autotoc_md140"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md161"></a> </p>
+<h1><a class="anchor" id="autotoc_md162"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>system_timer</code> <br  />
  <b>კატეგორია:</b> <code>utils</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
  <b>ავტორი:</b> Synapse Framework Team</p>
 <p><code>system_timer</code> არის Synapse Framework-ის ცენტრალიზებული, სერვისზე-დაფუძნებული მოდული, რომელიც უზრუნველყოფს დროზე-დაფუძნებული ივენთების დაგეგმვას. ის წარმოადგენს ESP-IDF-ის მაღალი რეზოლუციის **<code>esp_timer</code>** კომპონენტის მაღალი დონის აბსტრაქციას.</p>
 <p>მოდულის მთავარი მიზანია, გაამარტივოს პერიოდული ან ერთჯერადი ამოცანების შესრულება. იმის ნაცვლად, რომ თითოეულმა მოდულმა თავად შექმნას და მართოს FreeRTOS ტაიმერები, მათ შეუძლიათ, უბრალოდ, "სთხოვონ" <code>system_timer</code>-ს, რომ নির্দিষ্ট დროის შემდეგ <code>Event Bus</code>-ზე გამოაქვეყნოს კონკრეტული ივენთი.</p>
-<h1><a class="anchor" id="autotoc_md141"></a>
+<h1><a class="anchor" id="autotoc_md163"></a>
 2. 🏗️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისზე-ორიენტირებული (Service-driven):</b> მოდული არის სუფთა სერვისის მომწოდებელი. ის არეგისტრირებს <code><a class="el" href="structtimer__api__t.html" title="The public Service API structure for the System Timer Service.">timer_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <li><b>რესურსების ეფექტურობა:</b> მოდული იყენებს <code>esp_timer</code>-ს, რომელიც უფრო მსუბუქი და ეფექტურია, ვიდრე FreeRTOS ტაიმერები, განსაკუთრებით დიდი რაოდენობით ტაიმერების შემთხვევაში. ის ასევე ზღუდავს ერთდროულად აქტიური ტაიმერების რაოდენობას (<code>CONFIG_SYSTEM_TIMER_MAX_TIMERS</code>), რაც იცავს სისტემას რესურსების გადატვირთვისგან.</li>
 <li>**საშუალო ინიციალიზაციის დონე (<code>init_level: 35</code>):** როგორც სისტემური სერვისი, ის ინიციალიზდება ბირთვის ძირითადი კომპონენტების შემდეგ, მაგრამ აპლიკაციის დონის მოდულების უმეტესობამდე, რათა მათ შეძლონ მისი გამოყენება თავიანთ <code>start</code> ფაზაში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md142"></a>
+<h1><a class="anchor" id="autotoc_md164"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>Kconfig</code>-ის (<code>idf.py menuconfig</code>) საშუალებით.</p>
 <p>**<code>Kconfig</code> პარამეტრები:**</p>
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <div class="line">        &quot;instance_name&quot;: &quot;main_timer_service&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md143"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md165"></a>
 4. 🛠️ Service API (&lt;tt&gt;timer_api_t&lt;/tt&gt;)</h1>
 <p>მოდული არეგისტრირებს სერვისს ტიპით <code>FMW_SERVICE_TYPE_TIMER_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <li>**<code>esp_err_t cancel_event(fmw_timer_handle_t handle);</code>** <br  />
  ❌ აუქმებს ადრე დაგეგმილ ივენთს მისი <code>handle</code>-ის გამოყენებით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md144"></a>
+<h1><a class="anchor" id="autotoc_md166"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, რომ <code>dht22_sensor</code> მოდულს სურს, ყოველ 60 წამში ერთხელ წაიკითხოს სენსორის მონაცემები.</p>
 <p>**<code>dht22_sensor.c</code>-ში:**</p>
@@ -203,7 +203,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <div class="ttc" id="astructtimer__api__t_html_a362c2f5fb2285918b2579c0ae273b24e"><div class="ttname"><a href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">timer_api_t::schedule_event</a></div><div class="ttdeci">fmw_timer_handle_t(* schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules an event to be posted on the Event Bus after a specified interval.</div><div class="ttdef"><b>Definition</b> timer_interface.h:41</div></div>
 <div class="ttc" id="atimer__interface_8h_html"><div class="ttname"><a href="timer__interface_8h.html">timer_interface.h</a></div><div class="ttdoc">Public Service API contract for the System Timer Service module.</div></div>
 <div class="ttc" id="atimer__interface_8h_html_ade6f29151e54d5c129f8b052f6ec3e8a"><div class="ttname"><a href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a></div><div class="ttdeci">void * fmw_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md145"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md167"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li>**<code>event_name</code>-ის სიცოცხლის ციკლი:** <code>schedule_event</code> ფუნქციას გადაცემული <code>event_name</code> სტრიქონი არ კოპირდება. მოდული ინახავს მხოლოდ მის მაჩვენებელს. ამიტომ, ეს სტრიქონი უნდა იყოს ვალიდური ტაიმერის მთელი სიცოცხლის განმავლობაში. საუკეთესო პრაქტიკაა <code>#define</code>-ის ან <code>static const char*</code>-ის გამოყენება.</li>

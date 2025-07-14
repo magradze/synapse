@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['❗_20მნიშვნელოვანი_20შენიშვნები_0',['❗ მნიშვნელოვანი შენიშვნები',['../md_components_2modules_2testing_2timer__test__module_2README.html#autotoc_md93',1,'5. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2storage_2storage__manager_2README.html#autotoc_md40',1,'6. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2utilities_2system__timer_2README.html#autotoc_md145',1,'6. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md10',1,'7. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md31',1,'7. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2system_2alarms__manager_2README.html#autotoc_md50',1,'7. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md21',1,'8. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2system_2device__identity__service_2README.html#autotoc_md62',1,'9. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md138',1,'9. ❗ მნიშვნელოვანი შენიშვნები']]]
+  ['❌_20არასწორი_0',['❌ არასწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md1028',1,'']]],
+  ['❌_20პირდაპირი_20dependencies_1',['❌ პირდაპირი Dependencies',['../md_docs_2convention_2communication__patterns.html#autotoc_md850',1,'']]],
+  ['❌_20ჩვეული_20შეცდომები_2',['❌ ჩვეული შეცდომები',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1455',1,'']]],
+  ['❌_20ჩვეული_20შეცდომები_3a_3',['❌ ჩვეული შეცდომები:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1061',1,'']]],
+  ['❌_20mixed_20patterns_4',['❌ Mixed Patterns',['../md_docs_2convention_2communication__patterns.html#autotoc_md851',1,'']]],
+  ['❌_20system_20manager_20mqtt_20handling_5',['❌ System Manager MQTT Handling',['../md_docs_2convention_2communication__patterns.html#autotoc_md852',1,'']]]
 ];

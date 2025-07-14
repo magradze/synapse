@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2core__api.htm
   <div class="headertitle"><div class="title">Synapse Core API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md219"></a> </p>
-<h1><a class="anchor" id="autotoc_md220"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md241"></a> </p>
+<h1><a class="anchor" id="autotoc_md242"></a>
 Service Locator API</h1>
-<h2><a class="anchor" id="autotoc_md221"></a>
+<h2><a class="anchor" id="autotoc_md243"></a>
 fmw_service_register</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name, <a class="code hl_enumeration" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> service_type, <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_api_handle);</div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
@@ -107,7 +107,7 @@ fmw_service_register</h2>
 <li>არგუმენტები: უნიკალური სახელი, ტიპი, API-ის მაჩვენებელი.</li>
 <li>აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_INVALID_ARG ან ESP_ERR_NO_MEM შეცდომისას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md222"></a>
+<h2><a class="anchor" id="autotoc_md244"></a>
 fmw_service_unregister</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#ab4c1f012930fbf7a4f0a0b109042ff9d">fmw_service_unregister</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name);</div>
 <div class="ttc" id="aservice__locator_8h_html_ab4c1f012930fbf7a4f0a0b109042ff9d"><div class="ttname"><a href="service__locator_8h.html#ab4c1f012930fbf7a4f0a0b109042ff9d">fmw_service_unregister</a></div><div class="ttdeci">esp_err_t fmw_service_unregister(const char *service_name)</div><div class="ttdoc">სერვისის რეგისტრაციის გაუქმება მისი სახელით.</div><div class="ttdef"><b>Definition</b> service_locator.c:127</div></div>
@@ -116,21 +116,21 @@ fmw_service_unregister</h2>
 <li>არგუმენტები: რეგისტრაციიდან მოსახსნელი სერვისის უნიკალური სახელი.</li>
 <li>აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_NOT_FOUND თუ სერვისი ვერ მოიძებნა.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md223"></a>
+<h2><a class="anchor" id="autotoc_md245"></a>
 fmw_service_get</h2>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name);</div>
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 </div><!-- fragment --><ul>
 <li>აბრუნებს სერვისის API-ს მაჩვენებელს სახელით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md224"></a>
+<h2><a class="anchor" id="autotoc_md246"></a>
 fmw_service_get_type</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name, <a class="code hl_enumeration" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> *out_service_type);</div>
 <div class="ttc" id="aservice__locator_8h_html_a40e29f1bbbc7d7de4a7ac6b6c5a28244"><div class="ttname"><a href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a></div><div class="ttdeci">esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს enum სახით.</div><div class="ttdef"><b>Definition</b> service_locator.c:210</div></div>
 </div><!-- fragment --><ul>
 <li>აბრუნებს სერვისის ტიპს სახელით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md225"></a>
+<h2><a class="anchor" id="autotoc_md247"></a>
 fmw_service_lookup_by_type</h2>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> <a class="code hl_function" href="service__locator_8h.html#a15eb7d324559bd97c87796cac394cc8d">fmw_service_lookup_by_type</a>(<a class="code hl_enumeration" href="service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219c">fmw_service_type_t</a> service_type);</div>
 <div class="ttc" id="aservice__locator_8h_html_a15eb7d324559bd97c87796cac394cc8d"><div class="ttname"><a href="service__locator_8h.html#a15eb7d324559bd97c87796cac394cc8d">fmw_service_lookup_by_type</a></div><div class="ttdeci">service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type)</div><div class="ttdoc">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს</div><div class="ttdef"><b>Definition</b> service_locator.c:242</div></div>
@@ -140,9 +140,9 @@ fmw_service_lookup_by_type</h2>
 <li>აბრუნებს: ნაპოვნი სერვისის handle, ან NULL თუ ვერ მოიძებნა.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md227"></a>
+<h1><a class="anchor" id="autotoc_md249"></a>
 Event Bus API</h1>
-<h2><a class="anchor" id="autotoc_md228"></a>
+<h2><a class="anchor" id="autotoc_md250"></a>
 &lt;tt&gt;fmw_event_bus_post&lt;/tt&gt;</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *data_wrapper);</div>
 <div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
@@ -152,7 +152,7 @@ Event Bus API</h1>
 <li>**<code>event_name</code>:** ივენთის უნიკალური სახელი (სტრიქონი).</li>
 <li>**<code>data_wrapper</code>:** მაჩვენებელი "შეფუთულ" მონაცემებზე. თუ მონაცემები არ არის საჭირო, გადაეცემა <code>NULL</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md229"></a>
+<h2><a class="anchor" id="autotoc_md251"></a>
 &lt;tt&gt;fmw_event_bus_subscribe&lt;/tt&gt;</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 <div class="ttc" id="aevent__bus_8c_html_a1bb409daa4df05a7f65b3531e3231e7f"><div class="ttname"><a href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:365</div></div>
@@ -162,7 +162,7 @@ Event Bus API</h1>
 <li>**<code>event_name</code>:** ივენთის სახელი, რომელზეც ხდება გამოწერა. <code>*</code> (wildcard) გამოიწერს ყველა ივენთს.</li>
 <li>**<code>module</code>:** მაჩვენებელი გამომწერ მოდულზე.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md230"></a>
+<h2><a class="anchor" id="autotoc_md252"></a>
 &lt;tt&gt;fmw_event_bus_unsubscribe&lt;/tt&gt;</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 <div class="ttc" id="aevent__bus_8c_html_ae3df84e5063b0dff1e0f0dbdb69c5455"><div class="ttname"><a href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_unsubscribe(const char *event_name, module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:422</div></div>
@@ -172,24 +172,24 @@ Event Bus API</h1>
 <li>**<code>module</code>:** მაჩვენებელი მოდულზე, რომელიც აუქმებს გამოწერას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md232"></a>
+<h1><a class="anchor" id="autotoc_md254"></a>
 Module Register API</h1>
-<h2><a class="anchor" id="autotoc_md233"></a>
+<h2><a class="anchor" id="autotoc_md255"></a>
 fmw_module_register</h2>
 <div class="fragment"><div class="line">esp_err_t fmw_module_register(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name, <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 </div><!-- fragment --><ul>
 <li>რეგისტრირებს ახალ მოდულს სისტემაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md234"></a>
+<h2><a class="anchor" id="autotoc_md256"></a>
 fmw_module_find_by_name</h2>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *fmw_module_find_by_name(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name);</div>
 </div><!-- fragment --><ul>
 <li>პოულობს მოდულს instance_name-ით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md236"></a>
+<h1><a class="anchor" id="autotoc_md258"></a>
 Module Factory API</h1>
-<h2><a class="anchor" id="autotoc_md237"></a>
+<h2><a class="anchor" id="autotoc_md259"></a>
 fmw_module_factory_create</h2>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="module__factory_8h.html#a0b5e65c02a0bd3061e6c89e01e58142a">fmw_module_factory_create</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *type, <span class="keyword">const</span> cJSON *config);</div>
 <div class="ttc" id="amodule__factory_8h_html_a0b5e65c02a0bd3061e6c89e01e58142a"><div class="ttname"><a href="module__factory_8h.html#a0b5e65c02a0bd3061e6c89e01e58142a">fmw_module_factory_create</a></div><div class="ttdeci">module_t * fmw_module_factory_create(const char *module_type, const cJSON *config)</div><div class="ttdoc">მოდულის შემქმნელი (factory) ფუნქციის ტიპი.</div><div class="ttdef"><b>Definition</b> module_factory.c:44</div></div>
@@ -197,21 +197,21 @@ fmw_module_factory_create</h2>
 <li>ქმნის მოდულის ახალ ინსტანციას ტიპისა და კონფიგურაციის მიხედვით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md239"></a>
+<h1><a class="anchor" id="autotoc_md261"></a>
 Configuration Manager API</h1>
-<h2><a class="anchor" id="autotoc_md240"></a>
+<h2><a class="anchor" id="autotoc_md262"></a>
 fmw_config_get_string</h2>
 <div class="fragment"><div class="line">esp_err_t fmw_config_get_string(<span class="keyword">const</span> <span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *value, <span class="keywordtype">size_t</span> size);</div>
 </div><!-- fragment --><ul>
 <li>კითხულობს სტრიქონის ტიპის პარამეტრს კონფიგურაციიდან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md241"></a>
+<h2><a class="anchor" id="autotoc_md263"></a>
 fmw_config_get_int</h2>
 <div class="fragment"><div class="line">esp_err_t fmw_config_get_int(<span class="keyword">const</span> <span class="keywordtype">char</span> *key, <span class="keywordtype">int</span> *value);</div>
 </div><!-- fragment --><ul>
 <li>კითხულობს მთელი რიცხვის ტიპის პარამეტრს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md242"></a>
+<h2><a class="anchor" id="autotoc_md264"></a>
 fmw_config_get_module_config</h2>
 <div class="fragment"><div class="line"><span class="keyword">const</span> cJSON *<a class="code hl_function" href="config__manager_8h.html#a35834adfd4ee7bd208e842a91d0e79d4">fmw_config_get_module_config</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name);</div>
 <div class="ttc" id="aconfig__manager_8h_html_a35834adfd4ee7bd208e842a91d0e79d4"><div class="ttname"><a href="config__manager_8h.html#a35834adfd4ee7bd208e842a91d0e79d4">fmw_config_get_module_config</a></div><div class="ttdeci">const cJSON * fmw_config_get_module_config(const char *module_name)</div><div class="ttdoc">აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.</div></div>
@@ -219,15 +219,15 @@ fmw_config_get_module_config</h2>
 <li>აბრუნებს მოდულის სრულ კონფიგურაციას instance_name-ით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md244"></a>
+<h1><a class="anchor" id="autotoc_md266"></a>
 Logging API</h1>
-<h2><a class="anchor" id="autotoc_md245"></a>
+<h2><a class="anchor" id="autotoc_md267"></a>
 DEFINE_COMPONENT_TAG</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define DEFINE_COMPONENT_TAG(NAME)</span></div>
 </div><!-- fragment --><ul>
 <li>განსაზღვრავს კომპონენტის უნიკალურ ტეგს ლოგირებისთვის.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md246"></a>
+<h2><a class="anchor" id="autotoc_md268"></a>
 ESP_LOGE, ESP_LOGW, ESP_LOGI, ESP_LOGD, ESP_LOGV</h2>
 <ul>
 <li>გამოიყენეთ შესაბამისი log level-ისთვის.</li>

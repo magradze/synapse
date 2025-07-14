@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('event__payloads_8h_source.html',''); i
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;sdkconfig.h&gt;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span> <span class="comment">// for free(), malloc()</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;string.h&gt;</span> <span class="comment">// for strncpy()</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;cJSON.h&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// =========================================================================</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//                      Payload სტრუქტურები</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// =========================================================================</span></div>
@@ -149,25 +149,33 @@ $(document).ready(function(){initNavTree('event__payloads_8h_source.html',''); i
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>} <a class="code hl_struct" href="structfmw__command__payload__t.html">fmw_command_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">//                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> fmw_payload_common_free(<span class="keywordtype">void</span> *data)</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>{</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">if</span> (data)</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        free(data);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="};">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structfmw__connectivity__payload__t.html">   86</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">   92</a></span>    <span class="keywordtype">char</span> check_name[32];</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>} <a class="code hl_struct" href="structfmw__connectivity__payload__t.html">fmw_connectivity_payload_t</a>;</div>
+</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">// =========================================================================</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">//                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">// =========================================================================</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keywordtype">void</span> <a class="code hl_function" href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a>(<span class="keywordtype">void</span> *data);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#endif </span><span class="comment">// FMW_EVENT_PAYLOADS_H</span></div>
-<div class="ttc" id="aevent__payloads_8h_html_abf1197131be8a1f26057673d01917cbd"><div class="ttname"><a href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a></div><div class="ttdeci">void fmw_telemetry_payload_free(void *data)</div><div class="ttdoc">ათავისუფლებს ტელემეტრიის პეილოდს.</div><div class="ttdef"><b>Definition</b> telemetry_events.c:26</div></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> fmw_payload_common_free(<span class="keywordtype">void</span> *data)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>{</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">if</span> (data)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        free(data);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keywordtype">void</span> <a class="code hl_function" href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a>(<span class="keywordtype">void</span> *data);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#endif </span><span class="comment">// FMW_EVENT_PAYLOADS_H</span></div>
+<div class="ttc" id="aevent__payloads_8h_html_abf1197131be8a1f26057673d01917cbd"><div class="ttname"><a href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a></div><div class="ttdeci">void fmw_telemetry_payload_free(void *data)</div><div class="ttdoc">ათავისუფლებს ტელემეტრიის პეილოდს.</div><div class="ttdef"><b>Definition</b> event_payloads.c:26</div></div>
 <div class="ttc" id="aframework__config_8h_html"><div class="ttname"><a href="framework__config_8h.html">framework_config.h</a></div><div class="ttdoc">Framework-ის გლობალური კონფიგურაციის მაკროები</div></div>
 <div class="ttc" id="astructfmw__command__payload__t_html"><div class="ttname"><a href="structfmw__command__payload__t.html">fmw_command_payload_t</a></div><div class="ttdoc">Defines the data structure for the FMW_EVENT_EXECUTE_COMMAND_STRING event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:68</div></div>
 <div class="ttc" id="astructfmw__config__updated__payload__t_html"><div class="ttname"><a href="structfmw__config__updated__payload__t.html">fmw_config_updated_payload_t</a></div><div class="ttdoc">განსაზღვრავს მონაცემთა სტრუქტურას FRAMEWORK_EVENT_CONFIG_UPDATED ივენთისთვის.</div><div class="ttdef"><b>Definition</b> event_payloads.h:40</div></div>
+<div class="ttc" id="astructfmw__connectivity__payload__t_html"><div class="ttname"><a href="structfmw__connectivity__payload__t.html">fmw_connectivity_payload_t</a></div><div class="ttdoc">Defines the data structure for connectivity-related events.</div><div class="ttdef"><b>Definition</b> event_payloads.h:87</div></div>
 <div class="ttc" id="astructfmw__health__pong__payload__t_html"><div class="ttname"><a href="structfmw__health__pong__payload__t.html">fmw_health_pong_payload_t</a></div><div class="ttdoc">განსაზღვრავს მონაცემთა სტრუქტურას FRAMEWORK_EVENT_HEALTH_PONG ივენთისთვის.</div><div class="ttdef"><b>Definition</b> event_payloads.h:49</div></div>
 <div class="ttc" id="astructfmw__module__control__payload__t_html"><div class="ttname"><a href="structfmw__module__control__payload__t.html">fmw_module_control_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა მოდულის მართვის ივენთებისთვის (enable/disable).</div><div class="ttdef"><b>Definition</b> event_payloads.h:58</div></div>
 <div class="ttc" id="astructfmw__telemetry__payload__t_html"><div class="ttname"><a href="structfmw__telemetry__payload__t.html">fmw_telemetry_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.</div><div class="ttdef"><b>Definition</b> event_payloads.h:30</div></div>

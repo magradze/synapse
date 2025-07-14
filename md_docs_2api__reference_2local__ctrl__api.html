@@ -93,50 +93,50 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2local__ctrl__
   <div class="headertitle"><div class="title">Synapse Local Control Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md369"></a> </p>
-<h1><a class="anchor" id="autotoc_md370"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md391"></a> </p>
+<h1><a class="anchor" id="autotoc_md392"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის ადგილობრივი კონტროლის (Local Control, Web UI, REST API) მოდულის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md372"></a>
+<h1><a class="anchor" id="autotoc_md394"></a>
 Local Control Module API</h1>
-<h2><a class="anchor" id="autotoc_md373"></a>
+<h2><a class="anchor" id="autotoc_md395"></a>
 module_t *local_ctrl_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი Local Control მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md374"></a>
+<h2><a class="anchor" id="autotoc_md396"></a>
 esp_err_t local_ctrl_module_start(module_t *module);</h2>
 <ul>
 <li>იწყებს ადგილობრივი კონტროლის სერვისს (მაგ: Web UI, REST API).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md375"></a>
+<h2><a class="anchor" id="autotoc_md397"></a>
 esp_err_t local_ctrl_module_stop(module_t *module);</h2>
 <ul>
 <li>აჩერებს ადგილობრივი კონტროლის სერვისს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md376"></a>
+<h2><a class="anchor" id="autotoc_md398"></a>
 esp_err_t local_ctrl_module_register_endpoint(const char *uri, http_method_t method, local_ctrl_handler_t handler);</h2>
 <ul>
 <li>რეგისტრირებს ახალ REST/Web UI endpoint-ს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md378"></a>
+<h1><a class="anchor" id="autotoc_md400"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md379"></a>
+<h2><a class="anchor" id="autotoc_md401"></a>
 static void local_ctrl_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს Local Control მოდულის მიერ მიღებულ მოვლენებს (მაგ: user action, config update)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md381"></a>
+<h1><a class="anchor" id="autotoc_md403"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md383"></a>
+<h1><a class="anchor" id="autotoc_md405"></a>
 მაგალითები</h1>
 <p><b>Web UI სერვისის დაწყება:</b> </p><div class="fragment"><div class="line">local_ctrl_module_start(module);</div>
 </div><!-- fragment --><p><b>REST Endpoint-ის რეგისტრაცია:</b> </p><div class="fragment"><div class="line">local_ctrl_module_register_endpoint(<span class="stringliteral">&quot;/api/relay/on&quot;</span>, HTTP_POST, relay_on_handler);</div>

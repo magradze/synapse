@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2mqtt__api.htm
   <div class="headertitle"><div class="title">Synapse MQTT Manager Service API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md410"></a> </p>
-<h1><a class="anchor" id="autotoc_md411"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md432"></a> </p>
+<h1><a class="anchor" id="autotoc_md433"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის <code>MQTT Manager</code>-ის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md413"></a>
+<h1><a class="anchor" id="autotoc_md435"></a>
 MQTT Manager API</h1>
 <p>ამჟამად, <code>mqtt_manager</code> მოდული არ აწვდის საჯარო Service API-ს სხვა მოდულებისთვის. მისი მთავარი როლია, იმოქმედოს როგორც "ხიდი" Synapse Framework-ის შიდა <code>Event Bus</code>-სა და გარე MQTT ბროკერს შორის.</p>
 <p>მოდულის სრული მართვა და მასთან ურთიერთქმედება ხდება შემდეგი მექანიზმებით:</p>
@@ -107,7 +107,7 @@ MQTT Manager API</h1>
 <li><b>ბრძანებების მიღება MQTT-ით:</b> ის გამოიწერს ერთ, ცენტრალიზებულ MQTT თემას (<code>.../cmd/in</code>) და მიღებულ ბრძანებებს გადაამისამართებს <code>Command Router</code>-ში <code>FMW_EVENT_EXECUTE_COMMAND_STRING</code> ივენთის საშუალებით.</li>
 </ol>
 <p>ეს არქიტექტურა უზრუნველყოფს, რომ სხვა მოდულებს არ სჭირდებათ <code>mqtt_manager</code>-ის პირდაპირი გამოძახება.</p>
-<h2><a class="anchor" id="autotoc_md414"></a>
+<h2><a class="anchor" id="autotoc_md436"></a>
 სამომავლო გაფართოება</h2>
 <p>თუ მომავალში გაჩნდება საჭიროება, რომ რომელიმე მოდულმა პირდაპირ, ივენთის გარეშე გამოაქვეყნოს შეტყობინება MQTT-ში, შესაძლებელია შემდეგი API-ს დამატება:</p>
 <div class="fragment"><div class="line"><span class="comment">// პოტენციური API სტრუქტურა</span></div>
@@ -117,14 +117,14 @@ MQTT Manager API</h1>
 <div class="line">} mqtt_api_t;</div>
 </div><!-- fragment --><p><b>ამჟამად, ეს API არ არის იმპლემენტირებული.</b></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md416"></a>
+<h1><a class="anchor" id="autotoc_md438"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md418"></a>
+<h1><a class="anchor" id="autotoc_md440"></a>
 მაგალითები</h1>
 <p>ამჟამად API არ არსებობს. მოდულთან ურთიერთქმედება ხდება ივენთებით.</p>
 <p><b>სტატუსის გამოქვეყნება (არაპირდაპირი გზა):</b></p>

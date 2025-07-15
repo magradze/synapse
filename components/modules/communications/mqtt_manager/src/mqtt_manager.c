@@ -57,6 +57,7 @@ static const event_to_topic_map_t event_topic_map[] = {
     {FMW_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS},
     {FMW_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO},
     {FMW_EVENT_SELF_TEST_REPORT_READY, MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT},
+    {FMW_EVENT_AGGREGATED_SENSOR_REPORT, MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT},
 };
 static const int event_topic_map_size = sizeof(event_topic_map) / sizeof(event_topic_map[0]);
 
@@ -253,6 +254,7 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
     // Handle all other events from the map
     for (int i = 0; i < event_topic_map_size; i++) {
         if (strcmp(event_name, event_topic_map[i].event_name) == 0) {
+
             if (p_data->is_connected && event_data) {
                 event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
 
@@ -268,6 +270,7 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
                     {
                         char final_topic[128];
                         service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+
                         if (id_service_handle)
                         {
                             device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
@@ -279,7 +282,17 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
                             ESP_LOGI(TAG, "Publishing event '%s' to topic: %s", event_name, final_topic);
                             ESP_LOGD(TAG, "Payload: %s", json_to_publish);
 
-                            esp_mqtt_client_publish(p_data->client_handle, final_topic, json_to_publish, 0, 1, true);
+                            // esp_mqtt_client_publish(p_data->client_handle, final_topic, json_to_publish, 0, 1, true);
+
+                            int msg_id = esp_mqtt_client_publish(p_data->client_handle, final_topic, json_to_publish, 0, 1, true);
+                            if (msg_id > 0)
+                            {
+                                ESP_LOGI(TAG, "Successfully published event '%s', msg_id=%d", event_name, msg_id);
+                            }
+                            else
+                            {
+                                ESP_LOGE(TAG, "Failed to publish event '%s'. MQTT client error.", event_name);
+                            }
                         }
                     }
                     else

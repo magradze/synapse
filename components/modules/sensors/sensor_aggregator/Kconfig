@@ -1,0 +1,41 @@
+menu "Sensor Aggregator"
+
+    config MODULE_SENSOR_AGGREGATOR_ENABLED
+        bool "Enable Sensor Aggregator Module"
+        default y
+        help
+            Enables the sensor_aggregator module for Aggregates data from multiple sensors into a single report..
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config SENSOR_AGGREGATOR_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_sensor_aggregator"
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            Default instance name for the sensor_aggregator module.
+
+    config SENSOR_AGGREGATOR_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            Maximum length for the sensor_aggregator module instance name string.
+
+    config SENSOR_AGGREGATOR_MAX_SENSORS
+        int "Maximum sensors to aggregate"
+        default 10
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            The maximum number of individual sensor events that the aggregator can listen for.
+
+    config SENSOR_AGGREGATOR_EVENT_NAME_MAX_LEN
+        int "Maximum length for sensor event names"
+        default 48
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            The maximum buffer size for storing the names of events that the
+            aggregator subscribes to.
+endmenu

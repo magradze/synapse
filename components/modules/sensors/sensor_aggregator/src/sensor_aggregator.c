@@ -44,11 +44,35 @@ typedef enum
     STRATEGY_ON_TRIGGER,
 } aggregation_strategy_t;
 
+/** @internal @enum aggregation_mode_t Defines the data aggregation mode for a sensor. */
+typedef enum
+{
+    AGG_MODE_LAST, /**< Report the last received value. */
+    AGG_MODE_AVG,  /**< Report the average of all received values in the window. */
+    AGG_MODE_MIN,  /**< Report the minimum value received in the window. */
+    AGG_MODE_MAX   /**< Report the maximum value received in the window. */
+} aggregation_mode_t;
+
+/** @internal @struct sensor_runtime_data_t Holds the runtime aggregated data for a single sensor. */
+typedef struct
+{
+    uint8_t count;     /**< Number of readings received in the current window. */
+    double sum;        /**< Sum of all readings for calculating the average. */
+    double min;        /**< Minimum value recorded in the window. */
+    double max;        /**< Maximum value recorded in the window. */
+    double last_value; /**< The most recent value received. */
+} sensor_runtime_data_t;
+
 /** @internal @struct sensor_mapping_t Maps an event name to a JSON key. */
 typedef struct
 {
     char event_name[CONFIG_SENSOR_AGGREGATOR_EVENT_NAME_MAX_LEN];
     char json_key[32];
+    aggregation_mode_t mode;
+    bool has_valid_range;
+    double valid_min;
+    double valid_max;
+    sensor_runtime_data_t runtime_data;
 } sensor_mapping_t;
 
 /** @internal @brief Private data structure for the Sensor Aggregator module. */
@@ -222,48 +246,70 @@ static void sensor_aggregator_deinit(module_t *self)
     free(self);
 }
 
-static void sensor_aggregator_handle_event(module_t *self, const char *event_name, void *event_data) {
-    if (!self || !event_name) {
-        if (event_data) fmw_event_data_release((event_data_wrapper_t *)event_data);
+static void sensor_aggregator_handle_event(module_t *self, const char *event_name, void *event_data)
+{
+    if (!self || !event_name)
+    {
+        if (event_data)
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
     sensor_aggregator_private_data_t *private_data = (sensor_aggregator_private_data_t *)self->private_data;
 
-    if (strcmp(event_name, AGGREGATOR_PUBLISH_TICK_EVENT) == 0) {
+    if (strcmp(event_name, AGGREGATOR_PUBLISH_TICK_EVENT) == 0)
+    {
         publish_report(self);
         goto cleanup;
     }
 
-    for (int i = 0; i < private_data->num_sensors; i++) {
-        if (strcmp(event_name, private_data->sensors[i].event_name) == 0) {
-            if (event_data) {
-                event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
-                cJSON *payload_json = cJSON_Parse((char*)wrapper->payload);
-                if (payload_json) {
-                    const cJSON *value_node = cJSON_GetObjectItem(payload_json, "value");
-                    if (value_node) {
-                        if (xSemaphoreTake(private_data->snapshot_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
-                            
-                            // ★★★ THE FIX IS HERE ★★★
-                            // Detach the value from the parsed payload to use it.
-                            cJSON *value_to_add = cJSON_DetachItemFromObject(payload_json, "value");
+    for (int i = 0; i < private_data->num_sensors; i++)
+    {
+        if (strcmp(event_name, private_data->sensors[i].event_name) == 0)
+        {
+            sensor_mapping_t *sensor_map = &private_data->sensors[i];
 
-                            // Check if an item with this key already exists. If so, replace it.
-                            // Otherwise, add it as a new item.
-                            if (cJSON_HasObjectItem(private_data->current_snapshot, private_data->sensors[i].json_key)) {
-                                cJSON_ReplaceItemInObject(private_data->current_snapshot, private_data->sensors[i].json_key, value_to_add);
-                            } else {
-                                cJSON_AddItemToObject(private_data->current_snapshot, private_data->sensors[i].json_key, value_to_add);
+            if (event_data)
+            {
+                event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
+                cJSON *payload_json = cJSON_Parse((char *)wrapper->payload);
+                if (payload_json)
+                {
+                    const cJSON *value_node = cJSON_GetObjectItem(payload_json, "value");
+                    if (cJSON_IsNumber(value_node))
+                    {
+                        double value = value_node->valuedouble;
+
+                        // 1. Validate data if range is specified
+                        if (sensor_map->has_valid_range && (value < sensor_map->valid_min || value > sensor_map->valid_max))
+                        {
+                            ESP_LOGW(TAG, "Sensor '%s' value %.2f is out of valid range (%.2f to %.2f). Ignoring.",
+                                     sensor_map->event_name, value, sensor_map->valid_min, sensor_map->valid_max);
+                            // Optionally, post a SENSOR_DATA_INVALID event here
+                        }
+                        else
+                        {
+                            // 2. Accumulate data
+                            if (xSemaphoreTake(private_data->snapshot_mutex, pdMS_TO_TICKS(50)) == pdTRUE)
+                            {
+                                sensor_runtime_data_t *rt_data = &sensor_map->runtime_data;
+                                rt_data->last_value = value;
+                                rt_data->sum += value;
+                                rt_data->count++;
+                                if (value < rt_data->min)
+                                    rt_data->min = value;
+                                if (value > rt_data->max)
+                                    rt_data->max = value;
+                                xSemaphoreGive(private_data->snapshot_mutex);
+                                ESP_LOGD(TAG, "Aggregated data for '%s'", sensor_map->json_key);
                             }
-                            
-                            xSemaphoreGive(private_data->snapshot_mutex);
-                            ESP_LOGD(TAG, "Updated/Added data for '%s'", private_data->sensors[i].json_key);
                         }
                     }
                     cJSON_Delete(payload_json);
                 }
             }
-            if (private_data->strategy == STRATEGY_ON_TRIGGER && strcmp(event_name, private_data->trigger_event) == 0) {
+            // Check for on_trigger strategy
+            if (private_data->strategy == STRATEGY_ON_TRIGGER && strcmp(event_name, private_data->trigger_event) == 0)
+            {
                 publish_report(self);
             }
             goto cleanup;
@@ -271,7 +317,8 @@ static void sensor_aggregator_handle_event(module_t *self, const char *event_nam
     }
 
 cleanup:
-    if (event_data) {
+    if (event_data)
+    {
         fmw_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
@@ -282,50 +329,99 @@ cleanup:
 
 /**
  * @internal
- * @brief Publishes the aggregated sensor report.
- * @details This function creates a JSON string from the current snapshot,
- *          wraps it in a telemetry payload, and posts it to the Event Bus.
- *          Crucially, it then deletes the old snapshot and creates a new
- *          empty one for the next aggregation cycle to prevent data duplication.
+ * @brief Generates and publishes the aggregated sensor report.
+ * @details This function is the core of the reporting logic. It iterates
+ *          through all monitored sensors, calculates the final value for each
+ *          based on its configured aggregation mode (last, avg, min, max),
+ *          builds a new cJSON object with the results, and posts it to the
+ *          Event Bus. After publishing, it resets the runtime data for each
+ *          sensor to prepare for the next aggregation window.
  * @param[in] self A pointer to the module instance.
  */
 static void publish_report(module_t *self) {
     sensor_aggregator_private_data_t *private_data = (sensor_aggregator_private_data_t *)self->private_data;
 
-    if (xSemaphoreTake(private_data->snapshot_mutex, pdMS_TO_TICKS(100)) != pdTRUE) {
-        ESP_LOGE(TAG, "Failed to lock snapshot for publishing.");
+    // Create a new JSON object for this specific report.
+    cJSON *report_json = cJSON_CreateObject();
+    if (!report_json)
+    {
+        ESP_LOGE(TAG, "Failed to create cJSON object for report.");
         return;
     }
 
-    // Check if there is any data to report
-    if (cJSON_GetArraySize(private_data->current_snapshot) == 0) {
-        ESP_LOGI(TAG, "Snapshot is empty, skipping report publication.");
-        xSemaphoreGive(private_data->snapshot_mutex);
+    bool has_data_to_report = false;
+
+    // Lock the mutex to safely access and then reset the runtime data.
+    if (xSemaphoreTake(private_data->snapshot_mutex, pdMS_TO_TICKS(100)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to lock runtime data for publishing.");
+        cJSON_Delete(report_json);
         return;
     }
 
-    // Add timestamp to the report
-    cJSON_AddNumberToObject(private_data->current_snapshot, "timestamp", esp_timer_get_time() / 1000);
+    // Iterate through all configured sensors to build the report
+    for (int i = 0; i < private_data->num_sensors; i++)
+    {
+        sensor_mapping_t *sensor_map = &private_data->sensors[i];
+        sensor_runtime_data_t *rt_data = &sensor_map->runtime_data;
 
-    char *json_string = cJSON_PrintUnformatted(private_data->current_snapshot);
-    
-    // ★★★ FIX: Clear the snapshot for the next cycle ★★★
-    cJSON_Delete(private_data->current_snapshot);
-    private_data->current_snapshot = cJSON_CreateObject();
-    if (!private_data->current_snapshot) {
-        ESP_LOGE(TAG, "Failed to re-create snapshot cJSON object! This will cause issues.");
+        // Only include sensors that have received at least one valid reading
+        if (rt_data->count > 0)
+        {
+            has_data_to_report = true;
+            double final_value = 0.0;
+
+            // Calculate the final value based on the configured aggregation mode
+            switch (sensor_map->mode)
+            {
+            case AGG_MODE_AVG:
+                final_value = rt_data->sum / rt_data->count;
+                break;
+            case AGG_MODE_MIN:
+                final_value = rt_data->min;
+                break;
+            case AGG_MODE_MAX:
+                final_value = rt_data->max;
+                break;
+            case AGG_MODE_LAST:
+            default:
+                final_value = rt_data->last_value;
+                break;
+            }
+            cJSON_AddNumberToObject(report_json, sensor_map->json_key, final_value);
+
+            // Reset runtime data for the next aggregation window
+            rt_data->count = 0;
+            rt_data->sum = 0;
+            rt_data->min = __DBL_MAX__;
+            rt_data->max = -__DBL_MAX__;
+        }
     }
-    
+
     xSemaphoreGive(private_data->snapshot_mutex);
 
+    // If no sensors reported any data in this window, don't send an empty report.
+    if (!has_data_to_report)
+    {
+        ESP_LOGI(TAG, "No new sensor data in this window, skipping report publication.");
+        cJSON_Delete(report_json);
+        return;
+    }
+
+    // Add a timestamp to the final report
+    cJSON_AddNumberToObject(report_json, "timestamp", esp_timer_get_time() / 1000);
+
+    char *json_string = cJSON_PrintUnformatted(report_json);
+    cJSON_Delete(report_json); // We are done with the cJSON object, free its memory.
+
     if (!json_string) {
-        ESP_LOGE(TAG, "Failed to generate JSON string from snapshot.");
+        ESP_LOGE(TAG, "Failed to generate JSON string from report object.");
         return;
     }
 
     ESP_LOGI(TAG, "Generated aggregated JSON: %s", json_string);
 
-    // Create and post the event
+    // Create and post the event with the generated JSON string
     fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
     if (payload) {
         strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
@@ -439,12 +535,47 @@ static esp_err_t parse_aggregator_config(const cJSON *config, sensor_aggregator_
             ESP_LOGW(TAG, "Max sensors to aggregate reached (%d). Ignoring further entries.", CONFIG_SENSOR_AGGREGATOR_MAX_SENSORS);
             break;
         }
+        sensor_mapping_t *sensor_map = &private_data->sensors[private_data->num_sensors];
+        // Initialize runtime data for this sensor
+        memset(&sensor_map->runtime_data, 0, sizeof(sensor_runtime_data_t));
+        sensor_map->runtime_data.min = __DBL_MAX__;
+        sensor_map->runtime_data.max = -__DBL_MAX__;
+
         const cJSON *event_name = cJSON_GetObjectItem(sensor_item, "event_name");
         const cJSON *json_key = cJSON_GetObjectItem(sensor_item, "json_key");
+
         if (cJSON_IsString(event_name) && cJSON_IsString(json_key))
         {
-            strncpy(private_data->sensors[private_data->num_sensors].event_name, event_name->valuestring, 31);
-            strncpy(private_data->sensors[private_data->num_sensors].json_key, json_key->valuestring, 31);
+            strncpy(sensor_map->event_name, event_name->valuestring, sizeof(sensor_map->event_name) - 1);
+            strncpy(sensor_map->json_key, json_key->valuestring, sizeof(sensor_map->json_key) - 1);
+
+            // Parse aggregation_mode (optional, default is "last")
+            sensor_map->mode = AGG_MODE_LAST; // Default
+            const cJSON *mode_node = cJSON_GetObjectItem(sensor_item, "aggregation_mode");
+            if (cJSON_IsString(mode_node))
+            {
+                if (strcmp(mode_node->valuestring, "avg") == 0)
+                    sensor_map->mode = AGG_MODE_AVG;
+                else if (strcmp(mode_node->valuestring, "min") == 0)
+                    sensor_map->mode = AGG_MODE_MIN;
+                else if (strcmp(mode_node->valuestring, "max") == 0)
+                    sensor_map->mode = AGG_MODE_MAX;
+            }
+
+            // Parse valid_range (optional)
+            sensor_map->has_valid_range = false;
+            const cJSON *range_node = cJSON_GetObjectItem(sensor_item, "valid_range");
+            if (cJSON_IsObject(range_node))
+            {
+                const cJSON *min_node = cJSON_GetObjectItem(range_node, "min");
+                const cJSON *max_node = cJSON_GetObjectItem(range_node, "max");
+                if (cJSON_IsNumber(min_node) && cJSON_IsNumber(max_node))
+                {
+                    sensor_map->has_valid_range = true;
+                    sensor_map->valid_min = min_node->valuedouble;
+                    sensor_map->valid_max = max_node->valuedouble;
+                }
+            }
             private_data->num_sensors++;
         }
     }

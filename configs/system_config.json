@@ -186,6 +186,36 @@
         "instance_name": "selftest",
         "storage_service_instance": "main_storage"
       }
+    },
+    {
+      "type": "sensor_aggregator",
+      "enabled": true,
+      "config": {
+        "instance_name": "main_aggregator",
+        "aggregation_strategy": "time_window",
+        "aggregation_period_sec": 30,
+        "sensors_to_aggregate": [
+          {
+            "event_name": "SENSOR_DATA_TEMPERATURE",
+            "json_key": "temperature"
+          },
+          {
+            "event_name": "SENSOR_DATA_HUMIDITY",
+            "json_key": "humidity"
+          },
+          {
+            "event_name": "SENSOR_DATA_LIGHT",
+            "json_key": "light_lux"
+          }
+        ]
+      }
+    },
+    {
+      "type": "sensor_simulator",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_sensor_sim"
+      }
     }
   ]
 }

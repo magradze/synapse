@@ -17,7 +17,7 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-07-15 16:00:17 UTC
+ * @note გენერირების თარიღი: 2025-07-15 19:17:37 UTC
  * @note თემების რაოდენობა: 6
  * @note დამუშავებული მოდულები: connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, sensor_aggregator, wifi_manager
  * @version 1.0
@@ -79,7 +79,7 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-07-15 16:00:17 UTC"
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-07-15 19:17:37 UTC"
 #define MQTT_TOPICS_TOTAL_COUNT 6
 #define MQTT_TOPICS_GENERATED_FROM_MODULES "connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, sensor_aggregator, wifi_manager"
 

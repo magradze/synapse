@@ -19,7 +19,7 @@
 #include "service_locator.h"
 #include "timer_interface.h"
 #include "framework_events.h"
-
+#include "storage_interface.h"
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"
 #include "esp_timer.h"
@@ -29,6 +29,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "sdkconfig.h"
+#include <sys/stat.h> // For stat() and mkdir()
+#include <dirent.h>   // For opendir(), readdir(), closedir()
+#include "esp_vfs.h"
 
 DEFINE_COMPONENT_TAG("SENSOR_AGGR");
 
@@ -92,6 +95,9 @@ typedef struct
     fmw_timer_handle_t publish_timer;
     SemaphoreHandle_t snapshot_mutex;
 
+    bool buffering_enabled;
+    bool is_offline;
+
 } sensor_aggregator_private_data_t;
 
 // --- Forward Declarations ---
@@ -101,6 +107,7 @@ static void sensor_aggregator_deinit(module_t *self);
 static void sensor_aggregator_handle_event(module_t *self, const char *event_name, void *event_data);
 static esp_err_t parse_aggregator_config(const cJSON *config_json, sensor_aggregator_private_data_t *private_data);
 static void publish_report(module_t *self);
+static void publish_buffered_reports(module_t *self);
 
 // =========================================================================
 //                      Module Lifecycle & Core Logic
@@ -157,6 +164,9 @@ module_t *sensor_aggregator_create(const cJSON *config)
     module->base.deinit = sensor_aggregator_deinit;
     module->base.handle_event = sensor_aggregator_handle_event;
 
+    private_data->buffering_enabled = CONFIG_SENSOR_AGGREGATOR_BUFFERING_ENABLED;
+    private_data->is_offline = true; // Assume offline until connectivity is confirmed
+
     ESP_LOGI(TAG, "Sensor Aggregator module created: '%s'", private_data->instance_name);
     return module;
 }
@@ -179,6 +189,13 @@ static esp_err_t sensor_aggregator_init(module_t *self)
     if (private_data->strategy == STRATEGY_TIME_WINDOW)
     {
         fmw_event_bus_subscribe(AGGREGATOR_PUBLISH_TICK_EVENT, self);
+    }
+
+    // Subscribe to connectivity events if buffering is enabled
+    if (private_data->buffering_enabled)
+    {
+        fmw_event_bus_subscribe(FMW_EVENT_CONNECTIVITY_ESTABLISHED, self);
+        fmw_event_bus_subscribe(FMW_EVENT_CONNECTIVITY_LOST, self);
     }
 
     self->status = MODULE_STATUS_INITIALIZED;
@@ -255,6 +272,24 @@ static void sensor_aggregator_handle_event(module_t *self, const char *event_nam
         return;
     }
     sensor_aggregator_private_data_t *private_data = (sensor_aggregator_private_data_t *)self->private_data;
+
+    // Handle connectivity events for buffering
+    if (private_data->buffering_enabled)
+    {
+        if (strcmp(event_name, FMW_EVENT_CONNECTIVITY_ESTABLISHED) == 0)
+        {
+            ESP_LOGI(TAG, "Connectivity established. Flushing buffered reports.");
+            private_data->is_offline = false;
+            publish_buffered_reports(self); // Publish any stored reports
+            goto cleanup;
+        }
+        else if (strcmp(event_name, FMW_EVENT_CONNECTIVITY_LOST) == 0)
+        {
+            ESP_LOGW(TAG, "Connectivity lost. Buffering will be enabled.");
+            private_data->is_offline = true;
+            goto cleanup;
+        }
+    }
 
     if (strcmp(event_name, AGGREGATOR_PUBLISH_TICK_EVENT) == 0)
     {
@@ -338,7 +373,8 @@ cleanup:
  *          sensor to prepare for the next aggregation window.
  * @param[in] self A pointer to the module instance.
  */
-static void publish_report(module_t *self) {
+static void publish_report(module_t *self)
+{
     sensor_aggregator_private_data_t *private_data = (sensor_aggregator_private_data_t *)self->private_data;
 
     // Create a new JSON object for this specific report.
@@ -414,29 +450,82 @@ static void publish_report(module_t *self) {
     char *json_string = cJSON_PrintUnformatted(report_json);
     cJSON_Delete(report_json); // We are done with the cJSON object, free its memory.
 
-    if (!json_string) {
+    if (!json_string)
+    {
         ESP_LOGE(TAG, "Failed to generate JSON string from report object.");
         return;
+    }
+
+    // If buffering is enabled and we are offline, save to file instead of publishing
+    if (private_data->buffering_enabled && private_data->is_offline)
+    {
+        ESP_LOGI(TAG, "Device is offline. Buffering report to filesystem.");
+        service_handle_t storage_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+        if (storage_handle)
+        {
+            storage_api_t *storage_api = (storage_api_t *)storage_handle;
+            // Use a buffer that is guaranteed to be safe for the path
+            char file_path[CONFIG_SENSOR_AGGREGATOR_PATH_BUFFER_SIZE];
+
+            // Create a filename that is guaranteed to be short enough for SPIFFS
+            // Use %lu for uint32_t and cast to unsigned long for strict type matching.
+            uint32_t short_ts = (uint32_t)(esp_timer_get_time() & 0xFFFFFFFF);
+            int path_len = snprintf(file_path, sizeof(file_path), "%s/%lu.json", CONFIG_SENSOR_AGGREGATOR_CACHE_DIR, (unsigned long)short_ts);
+
+            // Check for truncation
+            if (path_len < 0 || (size_t)path_len >= sizeof(file_path))
+            {
+                ESP_LOGE(TAG, "Failed to construct file path (too long).");
+                free(json_string);
+                return;
+            }
+
+            // Ensure cache directory exists
+            // Note: This simple mkdir might not be sufficient for nested dirs on all backends.
+            // For SPIFFS, it's not needed. For SD, it is.
+            struct stat st;
+            if (stat(CONFIG_SENSOR_AGGREGATOR_CACHE_DIR, &st) != 0)
+            {
+                mkdir(CONFIG_SENSOR_AGGREGATOR_CACHE_DIR, 0755);
+            }
+
+            if (storage_api->write_file(file_path, json_string, strlen(json_string)) != ESP_OK)
+            {
+                ESP_LOGE(TAG, "Failed to write buffered report to %s", file_path);
+            }
+        }
+        else
+        {
+            ESP_LOGE(TAG, "Storage service not found. Cannot buffer report.");
+        }
+        free(json_string); // Free the string as it's now saved or failed to save
+        return;            // Do not proceed to publish
     }
 
     ESP_LOGI(TAG, "Generated aggregated JSON: %s", json_string);
 
     // Create and post the event with the generated JSON string
     fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
-    if (payload) {
+    if (payload)
+    {
         strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
         payload->json_data = json_string; // Ownership of json_string is transferred
 
         event_data_wrapper_t *wrapper;
-        if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK) {
+        if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+        {
             ESP_LOGI(TAG, "Publishing aggregated report event: %s", FMW_EVENT_AGGREGATED_SENSOR_REPORT);
             fmw_event_bus_post(FMW_EVENT_AGGREGATED_SENSOR_REPORT, wrapper);
             fmw_event_data_release(wrapper);
-        } else {
+        }
+        else
+        {
             free(json_string);
             free(payload);
         }
-    } else {
+    }
+    else
+    {
         free(json_string);
         ESP_LOGE(TAG, "Failed to allocate memory for telemetry payload.");
     }
@@ -582,4 +671,106 @@ static esp_err_t parse_aggregator_config(const cJSON *config, sensor_aggregator_
 
     ESP_LOGI(TAG, "Parsed %d sensors to aggregate.", private_data->num_sensors);
     return ESP_OK;
+}
+
+/**
+ * @internal
+ * @brief Reads and publishes all cached reports from the filesystem.
+ */
+static void publish_buffered_reports(module_t *self)
+{
+    service_handle_t storage_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+    if (!storage_handle)
+    {
+        ESP_LOGE(TAG, "Storage service not found. Cannot publish buffered reports.");
+        return;
+    }
+    storage_api_t *storage_api = (storage_api_t *)storage_handle;
+
+    DIR *dir = opendir(CONFIG_SENSOR_AGGREGATOR_CACHE_DIR);
+    if (!dir)
+    {
+        ESP_LOGI(TAG, "Cache directory '%s' not found or empty. Nothing to publish.", CONFIG_SENSOR_AGGREGATOR_CACHE_DIR);
+        return;
+    }
+
+    ESP_LOGI(TAG, "Found cached reports. Starting to publish...");
+
+    struct dirent *entry;
+    // Use a buffer that is guaranteed to be large enough
+    char file_path[CONFIG_SENSOR_AGGREGATOR_PATH_BUFFER_SIZE];
+    char *file_buffer = malloc(CONFIG_SENSOR_AGGREGATOR_FILE_BUFFER_SIZE);
+    if (!file_buffer)
+    {
+        ESP_LOGE(TAG, "Failed to allocate buffer for reading cached files.");
+        closedir(dir);
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL)
+    {
+        if (entry->d_type == DT_REG)
+        {
+            const char *cache_dir = CONFIG_SENSOR_AGGREGATOR_CACHE_DIR;
+            const char *filename = entry->d_name;
+            size_t cache_dir_len = strlen(cache_dir);
+            size_t filename_len = strlen(filename);
+
+            // Check if the path will fit: dir + '/' + file + '\0'
+            if (cache_dir_len + 1 + filename_len + 1 > sizeof(file_path))
+            {
+                ESP_LOGE(TAG, "Constructed file path for '%s' is too long, skipping.", filename);
+                continue;
+            }
+
+            // Manually and safely construct the path
+            strcpy(file_path, cache_dir);
+            strcat(file_path, "/");
+            strcat(file_path, filename);
+
+            size_t buffer_size = CONFIG_SENSOR_AGGREGATOR_FILE_BUFFER_SIZE;
+            if (storage_api->read_file(file_path, file_buffer, &buffer_size) == ESP_OK)
+            {
+                if (buffer_size < CONFIG_SENSOR_AGGREGATOR_FILE_BUFFER_SIZE)
+                {
+                    file_buffer[buffer_size] = '\0'; // Ensure null termination
+                }
+                else
+                {
+                    file_buffer[CONFIG_SENSOR_AGGREGATOR_FILE_BUFFER_SIZE - 1] = '\0';
+                }
+
+                // ... (The rest of the publishing logic remains the same) ...
+                fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+                if (payload)
+                {
+                    strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
+                    payload->json_data = strdup(file_buffer);
+
+                    event_data_wrapper_t *wrapper;
+                    if (payload->json_data && fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+                    {
+                        ESP_LOGI(TAG, "Publishing buffered report from %s", file_path);
+                        fmw_event_bus_post(FMW_EVENT_AGGREGATED_SENSOR_REPORT, wrapper);
+                        fmw_event_data_release(wrapper);
+                        storage_api->delete_file(file_path);
+                    }
+                    else
+                    {
+                        if (payload->json_data)
+                            free(payload->json_data);
+                        free(payload);
+                    }
+                }
+            }
+            else
+            {
+                ESP_LOGE(TAG, "Failed to read buffered report: %s", file_path);
+            }
+            vTaskDelay(pdMS_TO_TICKS(100));
+        }
+    }
+
+    free(file_buffer);
+    closedir(dir);
 }

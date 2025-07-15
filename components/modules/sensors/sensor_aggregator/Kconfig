@@ -38,4 +38,48 @@ menu "Sensor Aggregator"
         help
             The maximum buffer size for storing the names of events that the
             aggregator subscribes to.
+
+    config SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        bool "Enable offline data buffering"
+        default y
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            If enabled, the aggregator will cache reports to the filesystem
+            when the device is offline and send them when connectivity is restored.
+            Requires a filesystem backend (SPIFFS or SD Card) for Storage Manager.
+
+    config SENSOR_AGGREGATOR_CACHE_DIR
+        string "Cache directory for buffered reports"
+        default "/spiffs/aggr_cache"
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The directory path where offline reports will be stored.
+
+    config SENSOR_AGGREGATOR_MAX_CACHED_FILES
+        int "Maximum number of cached report files"
+        default 50
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The maximum number of report files to store offline. When the limit
+            is reached, the oldest files may be deleted.
+
+    config SENSOR_AGGREGATOR_PATH_BUFFER_SIZE
+        int "File Path Buffer Size"
+        default 128
+        range 64 256
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The buffer size in bytes for constructing file paths when reading
+            or writing cached reports. Should be large enough for the cache
+            directory path plus the longest possible filename.
+
+    config SENSOR_AGGREGATOR_FILE_BUFFER_SIZE
+        int "File Read Buffer Size"
+        default 1024
+        range 256 4096
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The buffer size in bytes for reading a single cached report file
+            from the filesystem. This value limits the maximum size of a
+            single aggregated report that can be buffered.
 endmenu

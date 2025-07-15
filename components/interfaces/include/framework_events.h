@@ -27,6 +27,9 @@
 // --- Self Test Events ---
 #define FMW_EVENT_SELF_TEST_REPORT_READY "FMW_SELF_TEST_REPORT_READY" // Self Test Manager publishes this when a report is ready
 
+// --- Sensor Aggregator Events ---
+#define FMW_EVENT_AGGREGATED_SENSOR_REPORT "FMW_AGGREGATED_SENSOR_REPORT" // Sensor Aggregator publishes this when it has aggregated data
+
 /**
  * @brief Generic event published by any module that establishes a critical external connection.
  * @details The payload should be of type fmw_connectivity_payload_t.

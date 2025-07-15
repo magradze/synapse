@@ -30,6 +30,7 @@
 #include "esp_wifi.h"
 #include <wifi_provisioning/manager.h>
 #include <wifi_provisioning/scheme_ble.h>
+#include "esp_bt.h"
 
 // --- Component Tag ---
 DEFINE_COMPONENT_TAG("BLE_PROV");
@@ -377,7 +378,14 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
     case WIFI_PROV_END:
         ESP_LOGI(TAG, "Provisioning process ended.");
         private_data->is_active = false;
+
+        // De-initialize the provisioning manager
         wifi_prov_mgr_deinit();
+
+        // ★★★ THE FIX: Use the high-level public API to release all BT memory ★★★
+        ESP_LOGI(TAG, "Releasing all Bluetooth memory for mode BLE...");
+        esp_bt_mem_release(ESP_BT_MODE_BLE);
+
         fmw_event_bus_post(EVT_PROV_ENDED, NULL);
         break;
 

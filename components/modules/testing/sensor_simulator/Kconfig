@@ -1,0 +1,27 @@
+menu "Sensor Simulator"
+
+    config MODULE_SENSOR_SIMULATOR_ENABLED
+        bool "Enable Sensor Simulator Module"
+        default y
+        help
+            Enables the sensor_simulator module for Simulates sensor data for testing purposes..
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config SENSOR_SIMULATOR_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_sensor_simulator"
+        depends on MODULE_SENSOR_SIMULATOR_ENABLED
+        help
+            Default instance name for the sensor_simulator module.
+
+    config SENSOR_SIMULATOR_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_SENSOR_SIMULATOR_ENABLED
+        help
+            Maximum length for the sensor_simulator module instance name string.
+
+endmenu

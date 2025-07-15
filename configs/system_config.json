@@ -1,6 +1,6 @@
 {
   "firmware": {
-    "version": "3.5.0",
+    "version": "3.8.0",
     "description": "Implemented Service Locator pattern for I2C bus decoupling."
   },
   "global_config": {
@@ -185,6 +185,47 @@
       "config": {
         "instance_name": "selftest",
         "storage_service_instance": "main_storage"
+      }
+    },
+    {
+      "type": "sensor_aggregator",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_aggregator",
+          "aggregation_strategy": "time_window",
+          "aggregation_period_sec": 60,
+          "sensors_to_aggregate": [
+              {
+                  "event_name": "SENSOR_DATA_TEMPERATURE",
+                  "json_key": "temperature",
+                  "aggregation_mode": "avg",
+                  "valid_range": {
+                      "min": -40.0,
+                      "max": 85.0
+                  }
+              },
+              {
+                  "event_name": "SENSOR_DATA_HUMIDITY",
+                  "json_key": "humidity",
+                  "aggregation_mode": "last",
+                  "valid_range": {
+                      "min": 0.0,
+                      "max": 100.0
+                  }
+              },
+              {
+                  "event_name": "SENSOR_DATA_LIGHT",
+                  "json_key": "light_lux",
+                  "aggregation_mode": "max"
+              }
+          ]
+        }
+    },
+    {
+      "type": "sensor_simulator",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_sensor_sim"
       }
     }
   ]

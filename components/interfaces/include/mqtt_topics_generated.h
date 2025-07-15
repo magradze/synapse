@@ -17,9 +17,9 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-07-14 02:57:49 UTC
- * @note თემების რაოდენობა: 5
- * @note დამუშავებული მოდულები: connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, wifi_manager
+ * @note გენერირების თარიღი: 2025-07-15 19:17:37 UTC
+ * @note თემების რაოდენობა: 6
+ * @note დამუშავებული მოდულები: connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, sensor_aggregator, wifi_manager
  * @version 1.0
  * @author MindLab Auto-Generation System
  */
@@ -42,6 +42,7 @@ extern "C"
  * - MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN: .../cmd/in
  * - MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS: .../state/wifi/status
  * - MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT: .../data/wifi/scan_result
+ * - MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT: .../data/sensors/aggregated
    */
 
   #define MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO "synapse/devices/%s/state/device/info"
@@ -49,6 +50,7 @@ extern "C"
 #define MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN "synapse/devices/%s/cmd/in"
 #define MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS "synapse/devices/%s/state/wifi/status"
 #define MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT "synapse/devices/%s/data/wifi/scan_result"
+#define MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT "synapse/devices/%s/data/sensors/aggregated"
 
 // =============================================================================
 // დამხმარე მაკროები (თავსებადი ხელით შექმნილ mqtt_topics.h-თან)
@@ -77,9 +79,9 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-07-14 02:57:49 UTC"
-#define MQTT_TOPICS_TOTAL_COUNT 5
-#define MQTT_TOPICS_GENERATED_FROM_MODULES "connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, wifi_manager"
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-07-15 19:17:37 UTC"
+#define MQTT_TOPICS_TOTAL_COUNT 6
+#define MQTT_TOPICS_GENERATED_FROM_MODULES "connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, sensor_aggregator, wifi_manager"
 
 #ifdef __cplusplus
 }

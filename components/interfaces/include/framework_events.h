@@ -30,6 +30,9 @@
 // --- Sensor Aggregator Events ---
 #define FMW_EVENT_AGGREGATED_SENSOR_REPORT "FMW_AGGREGATED_SENSOR_REPORT" // Sensor Aggregator publishes this when it has aggregated data
 
+// --- Security Status Events ---
+#define FMW_EVENT_SECURITY_STATUS_READY "FMW_SECURITY_STATUS_READY"
+
 /**
  * @brief Generic event published by any module that establishes a critical external connection.
  * @details The payload should be of type fmw_connectivity_payload_t.

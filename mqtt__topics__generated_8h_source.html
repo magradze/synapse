@@ -110,35 +110,36 @@ $(document).ready(function(){initNavTree('mqtt__topics__generated_8h_source.html
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">// ავტომატურად გენერირებული MQTT თემების განსაზღვრებები</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">// =============================================================================</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#a71006e4007fa0ac0b74fb552c6b8ba98">   47</a></span><span class="preprocessor">  #define MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO &quot;synapse/devices/%s/state/device/info&quot;</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#define MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT &quot;synapse/devices/%s/data/selftest/report&quot;</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN &quot;synapse/devices/%s/cmd/in&quot;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#define MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS &quot;synapse/devices/%s/state/wifi/status&quot;</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT &quot;synapse/devices/%s/data/wifi/scan_result&quot;</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">// =============================================================================</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">// დამხმარე მაკროები (თავსებადი ხელით შექმნილ mqtt_topics.h-თან)</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#a71006e4007fa0ac0b74fb552c6b8ba98">   48</a></span><span class="preprocessor">  #define MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO &quot;synapse/devices/%s/state/device/info&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT &quot;synapse/devices/%s/data/selftest/report&quot;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#define MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN &quot;synapse/devices/%s/cmd/in&quot;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS &quot;synapse/devices/%s/state/wifi/status&quot;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#define MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT &quot;synapse/devices/%s/data/wifi/scan_result&quot;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#define MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT &quot;synapse/devices/%s/data/sensors/aggregated&quot;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">// =============================================================================</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="foldopen" id="foldopen00065" data-start="" data-end="">
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#a2e4ade90acfcb092265469ba76125e8e">   65</a></span><span class="preprocessor">#define MQTT_BUILD_TOPIC(buffer, buffer_size, topic_template, device_id) \</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">  snprintf(buffer, buffer_size, topic_template, device_id)</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">// დამხმარე მაკროები (თავსებადი ხელით შექმნილ mqtt_topics.h-თან)</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">// =============================================================================</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="" data-end="">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#a2e4ade90acfcb092265469ba76125e8e">   67</a></span><span class="preprocessor">#define MQTT_BUILD_TOPIC(buffer, buffer_size, topic_template, device_id) \</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">  snprintf(buffer, buffer_size, topic_template, device_id)</span></div>
 </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#a874dc60d63763257bd6a8b2c9ba3539b">   72</a></span><span class="preprocessor">#define MQTT_TOPIC_BASE &quot;synapse/devices/%s&quot;</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">// =============================================================================</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">// გენერირების ინფორმაცია</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#a874dc60d63763257bd6a8b2c9ba3539b">   74</a></span><span class="preprocessor">#define MQTT_TOPIC_BASE &quot;synapse/devices/%s&quot;</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">// =============================================================================</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#ac41205c656ae0d2c34d094554523bec7">   80</a></span><span class="preprocessor">#define MQTT_TOPICS_GENERATION_TIMESTAMP &quot;2025-07-14 02:57:49 UTC&quot;</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">#define MQTT_TOPICS_TOTAL_COUNT 5</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#define MQTT_TOPICS_GENERATED_FROM_MODULES &quot;connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, wifi_manager&quot;</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif </span><span class="comment">// MQTT_TOPICS_GENERATED_H</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">// გენერირების ინფორმაცია</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">// =============================================================================</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="mqtt__topics__generated_8h.html#ac41205c656ae0d2c34d094554523bec7">   82</a></span><span class="preprocessor">#define MQTT_TOPICS_GENERATION_TIMESTAMP &quot;2025-07-15 19:17:37 UTC&quot;</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#define MQTT_TOPICS_TOTAL_COUNT 6</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#define MQTT_TOPICS_GENERATED_FROM_MODULES &quot;connectivity_watchdog, device_identity_service, mqtt_manager, self_test_manager, sensor_aggregator, wifi_manager&quot;</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#endif </span><span class="comment">// MQTT_TOPICS_GENERATED_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
   <div class="headertitle"><div class="title">მოდული: Health Monitor</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md85"></a> </p>
-<h1><a class="anchor" id="autotoc_md86"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md95"></a> </p>
+<h1><a class="anchor" id="autotoc_md96"></a>
 1. მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>health_monitor</code> <br  />
  <b>კატეგორია:</b> <code>system</code> <br  />
  <b>ვერსია:</b> 1.0.0 <br  />
  <b>ავტორი:</b> Synapse Framework Team</p>
 <p><code>Health Monitor</code> მოდული არის Synapse Framework-ის სასიცოცხლოდ მნიშვნელოვანი კომპონენტი, რომელიც უზრუნველყოფს სისტემის მდგრადობის, საიმედოობისა და თვითდიაგნოსტიკის მექანიზმებს რეალურ დროში. ის მუდმივად აკვირდება სისტემის კრიტიკულ პარამეტრებს, როგორიცაა მეხსიერების გამოყენება და ტასკების მდგომარეობა, აღმოაჩენს ანომალიებს და ახდენს შესაბამის რეაგირებას ივენთების გამოქვეყნებით.</p>
-<h1><a class="anchor" id="autotoc_md87"></a>
+<h1><a class="anchor" id="autotoc_md97"></a>
 2. წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
 <p>ამ მოდულის სრული ფუნქციონირებისთვის, განსაკუთრებით ტასკების სტატუსის მონიტორინგისთვის, აუცილებელია ESP-IDF-ის კონფიგურაციაში (<code>menuconfig</code>) შემდეგი ოფციების ჩართვა:</p>
 <ol type="1">
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 </li>
 </ol>
 <p><b>გაფრთხილება:</b> ამ ოფციების ჩართვის გარეშე, <code>uxTaskGetSystemState</code> ფუნქცია არ იქნება ხელმისაწვდომი და პროექტის კომპილაცია დასრულდება <code>undefined reference</code> შეცდომით.</p>
-<h1><a class="anchor" id="autotoc_md88"></a>
+<h1><a class="anchor" id="autotoc_md98"></a>
 3. არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>პერიოდული მონიტორინგი:</b> მოდულს აქვს საკუთარი FreeRTOS ტასკი, რომელიც კონფიგურირებადი ინტერვალით ამოწმებს სისტემის "პულსს".</li>
@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <li><b>გაფართოებადობა:</b> სხვა მოდულებს შეუძლიათ დაარეგისტრირონ საკუთარი "ჯანმრთელობის შემოწმების" ფუნქციები.</li>
 <li><b>Service-driven:</b> მოდული აწვდის <code><a class="el" href="structhealth__api__t.html" title="Health Monitor-ის საჯარო Service API სტრუქტურა.">health_api_t</a></code> სერვისს <code>Service Locator</code>-ის მეშვეობით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md89"></a>
+<h1><a class="anchor" id="autotoc_md99"></a>
 4. კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>thresholds.task_stack_watermark_percent</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ტასკის სტეკის გამოყენების მაქსიმალური ზღვარი პროცენტებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>85</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md90"></a>
+<h1><a class="anchor" id="autotoc_md100"></a>
 5. Service API (&lt;tt&gt;health_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა <code>Health Monitor</code>-ის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>FMW_SERVICE_TYPE_HEALTH_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -166,7 +166,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <li>**<code>esp_err_t unregister_custom_check(const char* check_name);</code>** <br  />
  შლის რეგისტრირებულ შემოწმებას. (ამჟამად არ არის იმპლემენტირებული).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md91"></a>
+<h1><a class="anchor" id="autotoc_md101"></a>
 6. გამოქვეყნებული ივენთები</h1>
 <ul>
 <li>**<code>SYSTEM_HEALTH_ALERT</code>**<ul>
@@ -180,7 +180,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md92"></a>
+<h1><a class="anchor" id="autotoc_md102"></a>
 7. 💡 გამოყენების მაგალითი</h1>
 <p><code>ota_update_module</code>-ს სურს, განახლების დაწყებამდე შეამოწმოს, არის თუ არა სისტემაში საკმარისი რესურსი.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>

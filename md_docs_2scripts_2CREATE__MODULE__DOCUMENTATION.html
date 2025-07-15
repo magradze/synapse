@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
   <div class="headertitle"><div class="title">🚀 create_module.py: Synapse მოდულის გენერატორი (v2.0)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1430"></a> </p>
-<h1><a class="anchor" id="autotoc_md1431"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1446"></a> </p>
+<h1><a class="anchor" id="autotoc_md1447"></a>
 📋 რა არის create_module.py?</h1>
 <p><code>create_module.py</code> არის <b>განახლებული, მძლავრი სკრიპტი</b>, რომელიც <b>სრულად ავტომატურად</b> ქმნის მოდულის ჩონჩხს Synapse Framework-ის <b>ახალი არქიტექტურისთვის</b>. ის გენერირებს ყველა საჭირო ფაილს, სწორი სტრუქტურით, ფუნქციის პროტოტიპებით და კონფიგურაციით, რაც დეველოპმენტის პროცესს აჩქარებს და ამარტივებს.</p>
-<h1><a class="anchor" id="autotoc_md1432"></a>
+<h1><a class="anchor" id="autotoc_md1448"></a>
 🎯 რას აკეთებს?</h1>
-<h2><a class="anchor" id="autotoc_md1433"></a>
+<h2><a class="anchor" id="autotoc_md1449"></a>
 ✅ შექმნილი ფაილები (5 ფაილი)</h2>
 <ol type="1">
 <li>**<code>module.json</code>** - მოდულის მეტამონაცემები (სახელი, ვერსია, ავტორი, შემქმნელი ფუნქცია).</li>
@@ -108,30 +108,30 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <li>**<code>include/{module_name}.h</code>** - Public API-ს Header ფაილი.</li>
 <li>**<code>src/{module_name}.c</code>** - Source ფაილი <code>base_module</code> ინტერფეისის სრული, მზა იმპლემენტაციით.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1434"></a>
+<h2><a class="anchor" id="autotoc_md1450"></a>
 ✅ ავტომატური ინტეგრაცია</h2>
 <ul>
 <li>🔧 <b>Build სისტემის მიერ აღმოჩენა</b> - <code>idf.py reconfigure</code> ბრძანებისას, build-სისტემა ავტომატურად პოულობს ახალ მოდულს.</li>
 <li>🔧 <b>Kconfig-ში დამატება</b> - მოდულის <code>Kconfig</code> ფაილი ავტომატურად ერთვება პროექტის კონფიგურაციაში.</li>
 <li>🔧 <b>პირობითი კომპილაცია</b> - კოდი კომპილირდება მხოლოდ იმ შემთხვევაში, თუ მოდული ჩართულია <code>menuconfig</code>-ში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1435"></a>
+<h1><a class="anchor" id="autotoc_md1451"></a>
 🛠️ გამოყენება</h1>
-<h2><a class="anchor" id="autotoc_md1436"></a>
+<h2><a class="anchor" id="autotoc_md1452"></a>
 1. ძირითადი სინტაქსი</h2>
 <div class="fragment"><div class="line">python3 scripts/create_module.py &quot;მოდულის სრული სახელი&quot; --category &lt;კატეგორია&gt; --description &quot;მოკლე აღწერა&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1437"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1453"></a>
 2. მაგალითები</h2>
-<h3><a class="anchor" id="autotoc_md1438"></a>
+<h3><a class="anchor" id="autotoc_md1454"></a>
 📡 WiFi მოდული</h3>
 <div class="fragment"><div class="line">python3 scripts/create_module.py &quot;WiFi Manager&quot; --category comms --description &quot;WiFi კავშირის მართვა&quot;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1439"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1455"></a>
 🌡️ ტემპერატურის სენსორი</h3>
 <div class="fragment"><div class="line">python3 scripts/create_module.py &quot;DHT22 Temperature Sensor&quot; --category sensors --description &quot;ტემპერატურისა და ტენიანობის წაკითხვა&quot;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1440"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1456"></a>
 📺 დისპლეის დრაივერი</h3>
 <div class="fragment"><div class="line">python3 scripts/create_module.py &quot;OLED Display&quot; --category displays --description &quot;SSD1306 OLED დისპლეის დრაივერი&quot; --author &quot;შენი სახელი&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1441"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1457"></a>
 3. პარამეტრები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>--author</code>   </td><td class="markdownTableBodyLeft"></td><td class="markdownTableBodyLeft">მოდულის ავტორი. თუ არ მიუთითებთ, გამოიყენებს Git-ის სახელს.   </td><td class="markdownTableBodyLeft">❌   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md1442"></a>
+<h2><a class="anchor" id="autotoc_md1458"></a>
 4. ხელმისაწვდომი კატეგორიები</h2>
 <ul>
 <li><code>utils</code> (დამხმარე)</li>
@@ -156,9 +156,9 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <li><code>security</code> (უსაფრთხოება)</li>
 <li><code>testing</code> (სატესტო)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1443"></a>
+<h1><a class="anchor" id="autotoc_md1459"></a>
 🏗️ არქიტექტურა და ლოგიკა (ახალი)</h1>
-<h2><a class="anchor" id="autotoc_md1444"></a>
+<h2><a class="anchor" id="autotoc_md1460"></a>
 1. 🧠 პირობითი კომპილაცია (გამარტივებული)</h2>
 <p>ძველი, 3-ეტაპიანი CMake ლოგიკა ჩანაცვლდა ბევრად მარტივი და გასაგები პირობით:</p>
 <div class="fragment"><div class="line"># ✅ ახალი, გამარტივებული ლოგიკა:</div>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <div class="line">            interfaces</div>
 <div class="line">    )</div>
 <div class="line">endif()</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1445"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1461"></a>
 2. 📁 შექმნილი სტრუქტურა</h2>
 <p>სტრუქტურა უცვლელია, მაგრამ შიგთავსი განახლებულია:</p>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
@@ -182,7 +182,7 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <div class="line">│   └── {module_name}.h   # Public API (create ფუნქციით)</div>
 <div class="line">└── src/</div>
 <div class="line">    └── {module_name}.c   # იმპლემენტაცია (ახალი არქიტექტურით)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1446"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1462"></a>
 3. 🔗 Base Module Interface (კრიტიკულად განახლებული)</h2>
 <p>თითოეული მოდული ახლა იმპლემენტირებს <code><a class="el" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.">base_module.h</a></code>-ის განახლებულ, "ბრტყელ" ინტერფეისს:</p>
 <div class="fragment"><div class="line"><span class="comment">// მოდულის შემქმნელი ფუნქცია (Public)</span></div>
@@ -194,7 +194,7 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self); <span class="comment">// ყურადღება: აბრუნებს void!</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self, <span class="keyword">const</span> <span class="keywordtype">char</span>* event_name, <span class="keywordtype">void</span>* event_data); <span class="comment">// ყურადღება: აბრუნებს void!</span></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1447"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1463"></a>
 4. 🎛️ ხელით მორგება (ახალი პატერნი)</h2>
 <p>ძველი, ჩადგმული <code>struct</code>-ების ნაცვლად, ახლა ვიყენებთ <code>private_data</code> პატერნს:</p>
 <div class="fragment"><div class="line"><span class="comment">// 1. გააფართოვეთ პრივატული მონაცემების სტრუქტურა:</span></div>
@@ -220,12 +220,12 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <div class="line">    <span class="comment">// ახლა შეგიძლიათ გამოიყენოთ p_data-&gt;sensor_pin</span></div>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1448"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1464"></a>
 🔄 სრული Workflow (განახლებული)</h1>
-<h2><a class="anchor" id="autotoc_md1449"></a>
+<h2><a class="anchor" id="autotoc_md1465"></a>
 1. მოდულის შექმნა</h2>
 <div class="fragment"><div class="line">python3 scripts/create_module.py &quot;My New Sensor&quot; --category sensors --description &quot;ახალი სენსორის მართვა&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1450"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1466"></a>
 2. სისტემის reconfigure</h2>
 <div class="fragment"><div class="line">idf.py reconfigure</div>
 </div><!-- fragment --><p><b>რა ხდება:</b></p>
@@ -233,11 +233,11 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <li>Build-სისტემა <b>აღმოაჩენს</b> ახალ მოდულს <code>module.json</code>-ის მეშვეობით.</li>
 <li><b>ამატებს</b> მის <code>Kconfig</code> ფაილს <code>menuconfig</code>-ში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1451"></a>
+<h2><a class="anchor" id="autotoc_md1467"></a>
 3. კონფიგურაცია</h2>
 <div class="fragment"><div class="line">idf.py menuconfig</div>
 </div><!-- fragment --><p><b>სად ნახავთ:</b> <code>Component config</code> → <code>My New Sensor Module Configuration</code></p>
-<h2><a class="anchor" id="autotoc_md1452"></a>
+<h2><a class="anchor" id="autotoc_md1468"></a>
 4. Build</h2>
 <div class="fragment"><div class="line">idf.py build</div>
 </div><!-- fragment --><p><b>რა ხდება:</b></p>
@@ -245,9 +245,9 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <li>თუ მოდული ჩართულია: კომპილირდება სრული კოდი.</li>
 <li>თუ გამორთულია: <code>CMakeLists.txt</code>-ში არსებული <code>if</code> პირობა არ სრულდება და კოდი არ ემატება build-ში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1453"></a>
+<h1><a class="anchor" id="autotoc_md1469"></a>
 🚨 მნიშვნელოვანი შენიშვნები (განახლებული)</h1>
-<h2><a class="anchor" id="autotoc_md1454"></a>
+<h2><a class="anchor" id="autotoc_md1470"></a>
 ✅ რაც უნდა გახსოვდეთ</h2>
 <ol type="1">
 <li><b>ყოველთვის გაუშვით <code>idf.py reconfigure</code></b> ახალი მოდულის შექმნის შემდეგ.</li>
@@ -256,7 +256,7 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <li><b>Header ფაილი საჭიროა</b>, რათა System Manager-მა შეძლოს <code>_create</code> ფუნქციის გამოძახება.</li>
 <li><b>ყველა რესურსი უნდა გათავისუფლდეს <code>_deinit</code> ფუნქციაში</b>: <code>private_data</code>, <code>mutex</code>, <code>current_config</code> და ა.შ.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1455"></a>
+<h2><a class="anchor" id="autotoc_md1471"></a>
 ❌ ჩვეული შეცდომები</h2>
 <ol type="1">
 <li>**<code>reconfigure</code>-ის გამოტოვება** → Build-სისტემა ვერ ხედავს ახალ მოდულს.</li>
@@ -264,10 +264,10 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <li>**<code>module.json</code>-ის წაშლა ან არასწორი <code>init_function</code>** → მოდული ვერ ჩაიტვირთება.</li>
 <li>**<code>private_data</code>-სთვის გამოყოფილი მეხსიერების არ გათავისუფლება <code>_deinit</code>-ში** → გამოიწვევს Memory Leak-ს.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1456"></a>
+<h1><a class="anchor" id="autotoc_md1472"></a>
 🧪 ტესტირების მეთოდები</h1>
 <p>ტესტირების მეთოდები იგივე რჩება, მაგრამ ყურადღება მიაქციეთ განახლებულ <code>Kconfig</code> მენიუს და <code>CMake</code> ლოგიკას.</p>
-<h1><a class="anchor" id="autotoc_md1457"></a>
+<h1><a class="anchor" id="autotoc_md1473"></a>
 📊 განსხვავება სხვა სისტემებისგან</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -286,7 +286,7 @@ $(document).ready(function(){initNavTree('md_docs_2scripts_2CREATE__MODULE__DOCU
 <td class="markdownTableBodyLeft">დახარჯული დრო   </td><td class="markdownTableBodyLeft">20-30 წუთი   </td><td class="markdownTableBodyLeft">✅ <b>10 წამი</b>   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1459"></a>
+<h1><a class="anchor" id="autotoc_md1475"></a>
 🎯 შეჯამება</h1>
 <p><b>create_module.py</b> არის <b>სწრაფი, უსაფრთხო და თანამედროვე</b> გზა Synapse Framework-ის მოდულების შესაქმნელად. ის:</p>
 <p>✅ <b>აჩქარებს დეველოპმენტს</b> რადიკალურად. ✅ <b>გამორიცხავს შეცდომებს</b> არქიტექტურის არცოდნით. ✅ <b>უზრუნველყოფს კონსისტენტურობას</b> ყველა მოდულს შორის. ✅ <b>სრულად თავსებადია</b> უახლეს არქიტექტურასთან.</p>

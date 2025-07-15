@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2event__payloa
   <div class="headertitle"><div class="title">API რეფერენსი: Event Payloads (event_payloads.h)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md366"></a> </p>
-<h1><a class="anchor" id="autotoc_md367"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md382"></a> </p>
+<h1><a class="anchor" id="autotoc_md383"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს სტანდარტული მონაცემთა სტრუქტურებს (payloads), რომლებიც გამოიყენება Synapse Framework-ის Event Bus-ში, როგორც ივენთებთან ასოცირებული მონაცემები. ეს სტრუქტურები უზრუნველყოფენ ტიპიზირებულ და უსაფრთხო მონაცემთა გაცვლას მოდულებს შორის.</p>
-<h1><a class="anchor" id="autotoc_md368"></a>
+<h1><a class="anchor" id="autotoc_md384"></a>
 Payload სტრუქტურები</h1>
 <p>ქვემოთ მოცემულია ძირითადი payload სტრუქტურები და მათი დანიშნულება.</p>
-<h2><a class="anchor" id="autotoc_md369"></a>
+<h2><a class="anchor" id="autotoc_md385"></a>
 fmw_telemetry_payload_t</h2>
 <p>ეს სტრუქტურა გამოიყენება ტელემეტრიული მონაცემების ან ბრძანებების გადასაცემად.</p>
 <ul>
@@ -108,20 +108,20 @@ fmw_telemetry_payload_t</h2>
 <li><code>const char* json_data</code>: მონაცემები JSON ფორმატის სტრიქონში.</li>
 <li><code>void* user_context</code>: დამატებითი, მომხმარებლის მიერ განსაზღვრული კონტექსტი.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md370"></a>
+<h2><a class="anchor" id="autotoc_md386"></a>
 fmw_config_updated_payload_t</h2>
 <p>გამოიყენება <code>FRAMEWORK_EVENT_CONFIG_UPDATED</code> ივენთთან ერთად, რათა ამცნოს მოდულებს კონფიგურაციის ცვლილების შესახებ.</p>
 <ul>
 <li><code>const char* module_name</code>: იმ მოდულის სახელი, ვისი კონფიგურაციაც განახლდა.</li>
 <li><code>const cJSON* new_config</code>: cJSON ობიექტი, რომელიც შეიცავს ახალ კონფიგურაციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md371"></a>
+<h1><a class="anchor" id="autotoc_md387"></a>
 მეხსიერების მართვის ფუნქციები</h1>
 <p>Payload-ების დინამიური ბუნებიდან გამომდინარე, აუცილებელია მეხსიერების სწორი მართვა. <code>fmw_event_data_wrap</code> ფუნქციასთან ერთად გამოიყენება სპეციალური გასუფთავების ფუნქციები.</p>
-<h2><a class="anchor" id="autotoc_md372"></a>
+<h2><a class="anchor" id="autotoc_md388"></a>
 fmw_payload_common_free</h2>
 <p>ეს არის ზოგადი დანიშნულების ფუნქცია, რომელიც ათავისუფლებს <code>calloc</code>-ით გამოყოფილ მეხსიერებას payload-ისთვის. ის უნდა გამოიყენოთ მარტივი სტრუქტურებისთვის, რომლებიც არ შეიცავენ დამატებით დინამიურ მეხსიერებას.</p>
-<h2><a class="anchor" id="autotoc_md373"></a>
+<h2><a class="anchor" id="autotoc_md389"></a>
 fmw_telemetry_payload_free</h2>
 <p>ეს ფუნქცია სპეციალურად <code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code> სტრუქტურისთვისაა შექმნილი. ის ათავისუფლებს არა მხოლოდ თავად სტრუქტურას, არამედ მის შიგნით არსებულ <code>module_name</code> და <code>json_data</code> სტრიქონებსაც, რომლებიც დინამიურად არის გამოყოფილი.</p>
 <p><b>გამოყენების მაგალითი:</b></p>

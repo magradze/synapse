@@ -31,6 +31,8 @@ var searchData=
   ['მოდული_3a_20system_20alarms_20manager_28',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]],
   ['მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_29',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
   ['მოდული_3a_20tt_20self_5ftest_5fmanager_20tt_30',['🩺 მოდული: &lt;tt&gt;self_test_manager&lt;/tt&gt;',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html',1,'']]],
-  ['მოდული_3a_20watchdog_20manager_31',['მოდული: Watchdog Manager',['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'']]],
-  ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_32',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]
+  ['მოდული_3a_20tt_20sensor_5faggregator_20tt_31',['🌡️ მოდული: &lt;tt&gt;sensor_aggregator&lt;/tt&gt;',['../md_components_2modules_2sensors_2sensor__aggregator_2README.html',1,'']]],
+  ['მოდული_3a_20tt_20sensor_5fsimulator_20tt_32',['🧪 მოდული: &lt;tt&gt;sensor_simulator&lt;/tt&gt;',['../md_components_2modules_2testing_2sensor__simulator_2README.html',1,'']]],
+  ['მოდული_3a_20watchdog_20manager_33',['მოდული: Watchdog Manager',['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'']]],
+  ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_34',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['core_5fframework_5fevent_5fid_5ft_0',['core_framework_event_id_t',['../system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046',1,'system_event_ids.h']]]
+  ['aggregation_5fmode_5ft_0',['aggregation_mode_t',['../sensor__aggregator_8c.html#ab5e16d2e175e00fb1e6764e1c5564ba0',1,'sensor_aggregator.c']]]
 ];

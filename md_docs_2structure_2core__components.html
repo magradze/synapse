@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
   <div class="headertitle"><div class="title">Core კომპონენტები (Core Components)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1543"></a> </p>
-<h1><a class="anchor" id="autotoc_md1544"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1559"></a> </p>
+<h1><a class="anchor" id="autotoc_md1560"></a>
 დანიშნულება</h1>
 <p>Core წარმოადგენს ფრეიმვორქის ბირთვს და უზრუნველყოფს მოდულებს შორის იზოლირებულ, სტანდარტიზებულ და უსაფრთხო ურთიერთქმედებას. ყველა ინფრასტრუქტურული სერვისი და მექანიზმი თავმოყრილია core-ში, რაც უზრუნველყოფს სისტემის სტაბილურობასა და გაფართოებადობას.</p>
-<h1><a class="anchor" id="autotoc_md1545"></a>
+<h1><a class="anchor" id="autotoc_md1561"></a>
 ძირითადი კომპონენტები</h1>
-<h2><a class="anchor" id="autotoc_md1546"></a>
+<h2><a class="anchor" id="autotoc_md1562"></a>
 1. Service Locator</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.</li>
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1547"></a>
+<h2><a class="anchor" id="autotoc_md1563"></a>
 2. Event Bus</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს broadcast/notification ტიპის კომუნიკაციას მოდულებს შორის.</li>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1548"></a>
+<h2><a class="anchor" id="autotoc_md1564"></a>
 3. Module Register</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას და მართვას.</li>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1549"></a>
+<h2><a class="anchor" id="autotoc_md1565"></a>
 4. Module Factory (ყოფილი Fabrique)</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების დინამიურ შექმნას და ინიციალიზაციას კონფიგურაციის მიხედვით.</li>
@@ -152,7 +152,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1550"></a>
+<h2><a class="anchor" id="autotoc_md1566"></a>
 5. Configuration Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.</li>
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <div class="line">fmw_config_get_string(<span class="stringliteral">&quot;mqtt_module.config.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1551"></a>
+<h2><a class="anchor" id="autotoc_md1567"></a>
 6. Logging</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სტანდარტიზებულ და კონტექსტურ ლოგირებას ყველა კომპონენტსა და მოდულში.</li>
@@ -179,14 +179,14 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1552"></a>
+<h1><a class="anchor" id="autotoc_md1568"></a>
 ურთიერთქმედება მოდულებთან</h1>
 <ul>
 <li>ყველა მოდული core-ის კომპონენტებს იყენებს მხოლოდ მათი public API-ების მეშვეობით.</li>
 <li>პირდაპირი დამოკიდებულება მოდულებს შორის აკრძალულია.</li>
 <li>core უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას, კონფიგურაციას და ლოგირებას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1553"></a>
+<h1><a class="anchor" id="autotoc_md1569"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>პირდაპირი #include სხვა მოდულის header-ების</li>

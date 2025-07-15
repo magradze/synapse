@@ -7,10 +7,10 @@ var indexSectionsWithContent =
   4: "abcdfghlmoprstw",
   5: "abcdefghijlmnoprstuw",
   6: "_efhms",
-  7: "cfmt",
-  8: "fmt",
+  7: "acfmt",
+  8: "afmt",
   9: "dfilm",
-  10: "029abcdefghilmoprstuvwyაბგდეთიკლმოპჟრსტუფქშჩცწხ—⏱☁⚙✅🆔💡💾📡📲📶🚀🚨🛰🧪🩺"
+  10: "029abcdefghilmoprstuvwyაბგდეთიკლმოპჟრსტუფქშჩცწხ—⏱☁⚙✅🆔🌡💡💾📡📲📶🚀🚨🛰🧪🩺"
 };
 
 var indexSectionNames =

@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['test_5fresult_5ffail_0',['TEST_RESULT_FAIL',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1ae705a406cd468034f29e2cfe794071bd',1,'self_test_manager.c']]],
-  ['test_5fresult_5fnot_5frun_1',['TEST_RESULT_NOT_RUN',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1a612fff5b65a9c17a74657dbb0fc13e7c',1,'self_test_manager.c']]],
-  ['test_5fresult_5fpass_2',['TEST_RESULT_PASS',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1a5915015357cf50b371e59de2436faa63',1,'self_test_manager.c']]],
-  ['test_5fresult_5fskipped_3',['TEST_RESULT_SKIPPED',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1ae5302228b05358d3f94a6f22cd11a1e8',1,'self_test_manager.c']]],
-  ['test_5fresult_5fwarn_4',['TEST_RESULT_WARN',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1abba7234292b3e3c39c4a734b92235a1f',1,'self_test_manager.c']]]
+  ['module_5fstatus_5fdisabled_0',['MODULE_STATUS_DISABLED',['../base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa89efee996a1d8d634faeaf965948a88b',1,'base_module.h']]],
+  ['module_5fstatus_5ferror_1',['MODULE_STATUS_ERROR',['../base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faf13198a2f52d5ab5b86acdba313903c8',1,'base_module.h']]],
+  ['module_5fstatus_5finitialized_2',['MODULE_STATUS_INITIALIZED',['../base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87',1,'base_module.h']]],
+  ['module_5fstatus_5frunning_3',['MODULE_STATUS_RUNNING',['../base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c',1,'base_module.h']]],
+  ['module_5fstatus_5funinitialized_4',['MODULE_STATUS_UNINITIALIZED',['../base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faaaee3d66574812424c9c27ea3e038e5f',1,'base_module.h']]],
+  ['module_5fstatus_5funknown_5',['MODULE_STATUS_UNKNOWN',['../base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa7ba07fa85d7bb1b2323e706963e97ead',1,'base_module.h']]]
 ];

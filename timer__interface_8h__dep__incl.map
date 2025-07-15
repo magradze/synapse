@@ -1,9 +1,13 @@
 <map id="components/interfaces/include/timer_interface.h" name="components/interfaces/include/timer_interface.h">
-<area shape="rect" id="Node000001" title="Public Service API contract for the System Timer Service module." alt="" coords="254,5,443,45"/>
+<area shape="rect" id="Node000001" title="Public Service API contract for the System Timer Service module." alt="" coords="479,5,669,45"/>
 <area shape="rect" id="Node000002" href="$mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing." alt="" coords="5,101,225,155"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,53,177,103,175,98,291,48"/>
-<area shape="rect" id="Node000003" href="$connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="249,93,448,163"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="351,59,351,93,346,93,346,59"/>
-<area shape="rect" id="Node000004" href="$system__timer_8c.html" title="A centralized service for scheduling event publishing." alt="" coords="472,101,641,155"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="401,49,504,98,501,103,399,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="466,49,237,96,208,103,207,98,236,91,465,43"/>
+<area shape="rect" id="Node000003" href="$sensor__aggregator_8c.html" title="Implementation of the Sensor Aggregator module." alt="" coords="249,101,451,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="521,53,410,103,407,98,518,49"/>
+<area shape="rect" id="Node000004" href="$connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="475,93,673,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="577,59,577,93,571,93,571,59"/>
+<area shape="rect" id="Node000005" href="$sensor__simulator_8c.html" title="Simulates sensor data for testing purposes." alt="" coords="698,101,885,155"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="628,49,736,98,734,103,626,54"/>
+<area shape="rect" id="Node000006" href="$system__timer_8c.html" title="A centralized service for scheduling event publishing." alt="" coords="909,101,1079,155"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="683,43,787,64,897,91,922,98,920,103,896,96,786,69,682,48"/>
 </map>

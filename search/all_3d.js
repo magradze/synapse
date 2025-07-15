@@ -2,17 +2,17 @@ var searchData=
 [
   ['ცვლადების_20დასახელება_0',['ცვლადების დასახელება',['../conventions_docs.html#conv_var_name_sec',1,'']]],
   ['ცვლადების_20დასახელების_20წესები_1',['ცვლადების დასახელების წესები',['../md_docs_2convention_2variable__naming.html',1,'']]],
-  ['ცვლადები_2',['ცვლადები',['../md_docs_2convention_2variable__naming.html#autotoc_md1022',1,'API Structure ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1018',1,'Global ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1020',1,'Mutex/Semaphore ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1021',1,'Queue ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1019',1,'Static ცვლადები']]],
-  ['ცვლილება_3a_20enum_20დან_20სტრიქონებზე_20გადასვლა_3',['არქიტექტურული ცვლილება: Enum-დან სტრიქონებზე გადასვლა',['../md_docs_2design__decisions_2communication__choices.html#autotoc_md1105',1,'']]],
-  ['ცვლილებების_20დეტალური_20აღწერა_4',['ცვლილებების დეტალური აღწერა',['../md_docs_2contributing_2pull__request__template.html#autotoc_md806',1,'']]],
+  ['ცვლადები_2',['ცვლადები',['../md_docs_2convention_2variable__naming.html#autotoc_md1038',1,'API Structure ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1034',1,'Global ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1036',1,'Mutex/Semaphore ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1037',1,'Queue ცვლადები'],['../md_docs_2convention_2variable__naming.html#autotoc_md1035',1,'Static ცვლადები']]],
+  ['ცვლილება_3a_20enum_20დან_20სტრიქონებზე_20გადასვლა_3',['არქიტექტურული ცვლილება: Enum-დან სტრიქონებზე გადასვლა',['../md_docs_2design__decisions_2communication__choices.html#autotoc_md1121',1,'']]],
+  ['ცვლილებების_20დეტალური_20აღწერა_4',['ცვლილებების დეტალური აღწერა',['../md_docs_2contributing_2pull__request__template.html#autotoc_md822',1,'']]],
   ['ცვლილებების_20ჟურნალი_20—_202025_2006_2024_5',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
-  ['ცვლილებები_6',['ძირითადი ცვლილებები',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md658',1,'']]],
-  ['ცვლილებები_20კოდში_7',['ცვლილებები კოდში',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md636',1,'']]],
-  ['ციკლის_20დიაგრამა_8',['სიცოცხლის ციკლის დიაგრამა',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1598',1,'']]],
-  ['ციკლის_20ეტაპები_9',['სიცოცხლის ციკლის ეტაპები',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1592',1,'']]],
-  ['ციკლის_20მართვის_10',['მაგალითი მოდულის სიცოცხლის ციკლის მართვის',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1599',1,'']]],
-  ['ციკლი_11',['ციკლი',['../structure_docs.html#struct_lifecycle_sec',1,'მოდულის სიცოცხლის ციკლი'],['../md_docs_2api__reference_2sensor__api.html#autotoc_md521',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2api__reference_2display__api.html#autotoc_md301',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2design__decisions_2architecture__overview.html#autotoc_md1079',1,'სიცოცხლის ციკლი'],['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md9',1,'6. 💡 გამოყენების მაგალითი (მოთხოვნა-პასუხის ციკლი)']]],
+  ['ცვლილებები_6',['ძირითადი ცვლილებები',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md674',1,'']]],
+  ['ცვლილებები_20კოდში_7',['ცვლილებები კოდში',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md652',1,'']]],
+  ['ციკლის_20დიაგრამა_8',['სიცოცხლის ციკლის დიაგრამა',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1614',1,'']]],
+  ['ციკლის_20ეტაპები_9',['სიცოცხლის ციკლის ეტაპები',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1608',1,'']]],
+  ['ციკლის_20მართვის_10',['მაგალითი მოდულის სიცოცხლის ციკლის მართვის',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1615',1,'']]],
+  ['ციკლი_11',['ციკლი',['../structure_docs.html#struct_lifecycle_sec',1,'მოდულის სიცოცხლის ციკლი'],['../md_docs_2api__reference_2sensor__api.html#autotoc_md537',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2api__reference_2display__api.html#autotoc_md317',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2design__decisions_2architecture__overview.html#autotoc_md1095',1,'სიცოცხლის ციკლი'],['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md9',1,'6. 💡 გამოყენების მაგალითი (მოთხოვნა-პასუხის ციკლი)']]],
   ['ციკლი_20და_20ინიციალიზაცია_20lifecycle_20initialization_12',['მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)',['../md_docs_2structure_2lifecycle__and__init.html',1,'']]],
-  ['ციკლი_20lifecycle_13',['მოდულის სიცოცხლის ციკლი (Lifecycle)',['../md_docs_2structure_2module__architecture.html#autotoc_md1606',1,'']]],
-  ['ცნობილი_20პრობლემები_14',['ცნობილი პრობლემები',['../md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md676',1,'']]]
+  ['ციკლი_20lifecycle_13',['მოდულის სიცოცხლის ციკლი (Lifecycle)',['../md_docs_2structure_2module__architecture.html#autotoc_md1622',1,'']]],
+  ['ცნობილი_20პრობლემები_14',['ცნობილი პრობლემები',['../md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md692',1,'']]]
 ];

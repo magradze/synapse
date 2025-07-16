@@ -61,13 +61,13 @@
       }
     },
     {
-      "type": "watchdog_manager",
-      "enabled": true,
-      "config": {
-          "instance_name": "main_watchdog",
-          "check_interval_ms": 2000,
-          "heartbeat_timeout_ms": 5000
-      }
+        "type": "watchdog_manager",
+        "enabled": true,
+        "config": {
+            "instance_name": "main_watchdog",
+            "check_interval_ms": 2000,
+            "heartbeat_timeout_ms": 5000
+        }
     },
     {
       "type": "command_router",

@@ -71,6 +71,7 @@ extern "C"
     FMW_SERVICE_TYPE_CRYPTO_API,
     FMW_SERVICE_TYPE_AUTH_API,
     FMW_SERVICE_TYPE_TLS_API,
+    FMW_SERVICE_TYPE_SECURITY_API,
 
     // --- Audio Services ---
     FMW_SERVICE_TYPE_AUDIO_API,
@@ -186,6 +187,8 @@ extern "C"
       return "auth_api";
     case FMW_SERVICE_TYPE_TLS_API:
       return "tls_api";
+    case FMW_SERVICE_TYPE_SECURITY_API:
+      return "security_api";
 
     // Audio Services
     case FMW_SERVICE_TYPE_AUDIO_API:

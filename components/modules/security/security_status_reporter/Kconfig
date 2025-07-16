@@ -1,0 +1,27 @@
+menu "Security Status Reporter"
+
+    config MODULE_SECURITY_STATUS_REPORTER_ENABLED
+        bool "Enable Security Status Reporter Module"
+        default y
+        help
+            Enables the security_status_reporter module for Reports Secure Boot and Flash Encryption status..
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config SECURITY_STATUS_REPORTER_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_security_status_reporter"
+        depends on MODULE_SECURITY_STATUS_REPORTER_ENABLED
+        help
+            Default instance name for the security_status_reporter module.
+
+    config SECURITY_STATUS_REPORTER_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_SECURITY_STATUS_REPORTER_ENABLED
+        help
+            Maximum length for the security_status_reporter module instance name string.
+
+endmenu

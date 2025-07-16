@@ -25,6 +25,7 @@
 #include "storage_interface.h"
 #include "system_manager_interface.h"
 #include "event_payloads.h" // For telemetry payloads
+#include "security_status_interface.h"
 
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"
@@ -135,6 +136,7 @@ static void run_core_services_check(self_test_private_data_t *private_data);
 static void run_system_health_check(self_test_private_data_t *private_data);
 static void run_storage_check(self_test_private_data_t *private_data);
 static void run_connectivity_check(self_test_private_data_t *private_data);
+static void run_security_check(self_test_private_data_t *private_data);
 
 // =========================================================================
 //                      Module Lifecycle & Core Logic
@@ -266,7 +268,7 @@ static void self_test_manager_handle_event(module_t *self, const char *event_nam
             static cmd_t selftest_cmd = {
                 .command = "selftest",
                 .help = "Run system self-diagnostics.",
-                .usage = "selftest [--run [all|core|health|storage|conn]] [--report]",
+                .usage = "selftest [--run [all|core|health|storage|conn|security]] [--report]",
                 .min_args = 2,
                 .max_args = 3,
                 .handler = cmd_handler,
@@ -526,6 +528,13 @@ static void run_tests_task(void *pvParameters)
         vTaskDelay(pdMS_TO_TICKS(50));
     }
 
+    if (run_all || strcmp(suite_to_run, "security") == 0)
+    {
+        printf("Running Security Status Check...\n");
+        run_security_check(private_data);
+        vTaskDelay(pdMS_TO_TICKS(50));
+    }
+
     printf("\nSelf-test sequence complete. Use 'selftest --report' to see results.\n");
 
 cleanup:
@@ -734,4 +743,44 @@ static cJSON* generate_report_json(self_test_private_data_t *private_data) {
 
     xSemaphoreGive(private_data->report_mutex);
     return root;
+}
+
+/**
+ * @internal
+ * @brief Test suite for the Security Status Reporter service.
+ * @details It finds the security service by its type and checks the status
+ *          of Secure Boot and Flash Encryption. For a production device,
+ *          it's expected that both are enabled.
+ * @param[in] private_data Pointer to the module's private data to store results.
+ */
+static void run_security_check(self_test_private_data_t *private_data)
+{
+    service_handle_t sec_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_SECURITY_API);
+    if (!sec_handle)
+    {
+        add_report_line(private_data, "Security Check", TEST_RESULT_SKIPPED, "Service not found");
+        return;
+    }
+    security_status_api_t *sec_api = (security_status_api_t *)sec_handle;
+
+    bool sb_enabled = sec_api->is_secure_boot_enabled();
+    bool fe_enabled = sec_api->is_flash_encryption_enabled();
+
+    add_report_line(private_data, "Secure Boot",
+                    sb_enabled ? TEST_RESULT_PASS : TEST_RESULT_WARN,
+                    sb_enabled ? "Enabled" : "Disabled (OK for Dev)");
+
+    add_report_line(private_data, "Flash Encryption",
+                    fe_enabled ? TEST_RESULT_PASS : TEST_RESULT_WARN,
+                    fe_enabled ? "Enabled" : "Disabled (OK for Dev)");
+
+    // Overall check
+    if (sb_enabled && fe_enabled)
+    {
+        add_report_line(private_data, "Overall Security", TEST_RESULT_PASS, "Device is secured");
+    }
+    else
+    {
+        add_report_line(private_data, "Overall Security", TEST_RESULT_WARN, "Device not in production secure state");
+    }
 }

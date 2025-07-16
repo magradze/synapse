@@ -33,6 +33,9 @@
 // --- Security Status Events ---
 #define FMW_EVENT_SECURITY_STATUS_READY "FMW_SECURITY_STATUS_READY"
 
+// --- Relay Actuator Events ---
+#define FMW_EVENT_RELAY_STATE_CHANGED "FMW_RELAY_STATE_CHANGED"
+
 /**
  * @brief Generic event published by any module that establishes a critical external connection.
  * @details The payload should be of type fmw_connectivity_payload_t.

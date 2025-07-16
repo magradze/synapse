@@ -29,6 +29,7 @@
 - [system_api.md](system_api.md) — სისტემური მოდულების (OTA, Version, Watchdog, Diagnostics) API
 - [device_identity_api.md](device_identity_api.md) — Device Identity Service-ის API
 - [ota_api.md](ota_api.md) — OTA განახლების მოდულის API
+- [security_api.md](security_api.md) — უსაფრთხოების სტატუსის API
 - [version_api.md](version_api.md) — Firmware ვერსიის მოდულის API
 - [health_monitor_api.md](health_monitor_api.md) — სისტემის ჯანმრთელობის მონიტორინგის მოდულის API
 - [storage_api.md](storage_api.md) — მეხსიერების (NVS/Flash) მოდულების API

@@ -1,6 +1,6 @@
 {
   "firmware": {
-    "version": "3.8.0",
+    "version": "4.0.0",
     "description": "Implemented Service Locator pattern for I2C bus decoupling."
   },
   "global_config": {
@@ -226,6 +226,23 @@
       "enabled": true,
       "config": {
           "instance_name": "main_sensor_sim"
+      }
+    },
+    {
+      "type": "security_status_reporter",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_security_status"
+      }
+    },
+    {
+      "type": "relay_actuator",
+      "enabled": true,
+      "config": {
+          "instance_name": "main_light",
+          "gpio_pin": 23,
+          "active_level": 0,
+          "initial_state": "off"
       }
     }
   ]

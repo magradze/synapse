@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
   <div class="headertitle"><div class="title">📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md11"></a> </p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md18"></a> </p>
+<h1><a class="anchor" id="autotoc_md19"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>wifi_manager</code> <br  />
  <b>კატეგორია:</b> <code>communication</code> <br  />
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <li><b>📡 დისტანციური პასუხები:</b> <code>wifi status</code> ბრძანების შესრულებისას, აქვეყნებს დეტალურ სტატუსს JSON ფორმატში <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთის სახით, რაც <code>mqtt_manager</code>-ს საშუალებას აძლევს, ეს ინფორმაცია გარე სისტემებს მიაწოდოს.</li>
 <li><b>⌨️ CLI ინტეგრაცია:</b> სრული, ინტერაქტიული მართვა და დიაგნოსტიკა სერიული კონსოლიდან.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Event-driven არქიტექტურა:</b> მოდული აქტიურად იყენებს <code>Event Bus</code>-ს. ის როგორც <b>აქვეყნებს</b> ივენთებს საკუთარი სტატუსის შესახებ, ისე <b>გამოიწერს</b> სხვა მოდულების (მაგ., <code>provisioning</code>, <code>system_manager</code>) ივენთებს.</li>
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <li><b>ფონური ოპერაციები:</b> მოდული ეყრდნობა ESP-IDF-ის <code>event loop</code> სისტემას და FreeRTOS ტაიმერებს, რათა კავშირის მართვის ყველა ოპერაცია ასინქრონულად, ფონურ რეჟიმში შესრულდეს.</li>
 <li><b>დაგვიანებული ინიციალიზაცია (Lazy Initialization of Dependencies):</b> მოდული არ არის პირდაპირ დამოკიდებული <code>command_router</code>-ზე. ის იყენებს <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთს, რათა ბრძანებების რეგისტრაცია მოახდინოს მხოლოდ მას შემდეგ, რაც დარწმუნდება, რომ <code>command_router</code>-ის სერვისი უკვე ხელმისაწვდომია.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის საბაზისო კონფიგურაცია ხდება <code>system_config.json</code> ფაილში, თუმცა მისი ქცევის პარამეტრების უმეტესობა იმართება <code>Kconfig</code>-ის (<code>idf.py menuconfig</code>) საშუალებით.</p>
 <p>**<code>system_config.json</code> მაგალითი:**</p>
@@ -134,9 +134,9 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <li><b>Reconnect Attempts:</b> ხელახალი დაკავშირების მცდელობების მაქსიმალური რაოდენობა.</li>
 <li><b>Reconnect Delay:</b> საწყისი დაყოვნება ხელახალი დაკავშირებისას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 4. 📢 ივენთები (Events)</h1>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 გამოქვეყნებული ივენთები</h2>
 <p><code>wifi_manager</code> აქვეყნებს შემდეგ ივენთებს, რომლებზეც სხვა მოდულებს შეუძლიათ გამოწერა:</p>
 <table class="markdownTable">
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>FMW_EVENT_WIFI_STATUS_READY</code>   </td><td class="markdownTableBodyLeft"><code>char*</code> (JSON)   </td><td class="markdownTableBodyLeft">📊 <code>wifi status</code> ბრძანების პასუხი JSON ფორმატში.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 გამოწერილი ივენთები</h2>
 <p><code>wifi_manager</code> გამოიწერს შემდეგ ივენთებს:</p>
 <table class="markdownTable">
@@ -164,7 +164,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 5. 📡 MQTT ინტერფეისი</h1>
 <p>ეს მოდული პირდაპირ არ უკავშირდება MQTT-ს, მაგრამ ის აწვდის ინფორმაციას <code>mqtt_manager</code>-ს <code>Event Bus</code>-ის საშუალებით.</p>
 <ul>
@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 6. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
 <p>მოდული არეგისტრირებს <code>wifi</code> ბრძანებას, რომელიც იძლევა WiFi-ს სრული მართვისა და დიაგნოსტიკის საშუალებას.</p>
 <table class="markdownTable">
@@ -206,7 +206,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>wifi set_power_save</code>   </td><td class="markdownTableBodyLeft"><code>&lt;off\|min\|max&gt;</code>   </td><td class="markdownTableBodyLeft">🔋 აყენებს WiFi-ს ენერგიის დაზოგვის რეჟიმს.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 7. 💡 გამოყენების მაგალითი (მოთხოვნა-პასუხი)</h1>
 <ol type="1">
 <li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
@@ -234,7 +234,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 8. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>wifi_manager</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>storage_manager</code>, რადგან ის იყენებს ამ სერვისს.</li>

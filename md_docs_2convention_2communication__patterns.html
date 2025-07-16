@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
   <div class="headertitle"><div class="title">კომუნიკაციის პატერნების წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md857"></a> </p>
-<h1><a class="anchor" id="autotoc_md858"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md889"></a> </p>
+<h1><a class="anchor" id="autotoc_md890"></a>
 ძირითადი პრინციპი: მაქსიმალური იზოლაცია</h1>
 <p><b>FUNDAMENTAL RULE:</b> Synapse ESP Framework-ში უნდა შენარჩუნდეს მაქსიმალური იზოლაცია მოდულებს შორის.</p>
-<h1><a class="anchor" id="autotoc_md859"></a>
+<h1><a class="anchor" id="autotoc_md891"></a>
 ორი კომუნიკაციის პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md860"></a>
+<h2><a class="anchor" id="autotoc_md892"></a>
 1. Service Locator Pattern</h2>
 <p><b>გამოიყენება:</b> პირდაპირი API calls-ისთვის</p>
 <p><b>როდის ვიყენებთ:</b></p>
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md861"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md893"></a>
 2. Event Bus Pattern</h2>
 <p><b>გამოიყენება:</b> broadcast/notification scenarios-ისთვის</p>
 <p><b>როდის ვიყენებთ:</b></p>
@@ -133,9 +133,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 <div class="line">    .humidity = 65.2</div>
 <div class="line">};</div>
 <div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md862"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md894"></a>
 კომუნიკაციის ტიპები</h1>
-<h2><a class="anchor" id="autotoc_md863"></a>
+<h2><a class="anchor" id="autotoc_md895"></a>
 Direct API Communication (Service Locator)</h2>
 <div class="fragment"><div class="line">[MQTT Module] --API call--&gt; [Display Module]</div>
 <div class="line">              --API call--&gt; [Relay Module]</div>
@@ -152,7 +152,7 @@ Direct API Communication (Service Locator)</h2>
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html_a40e29f1bbbc7d7de4a7ac6b6c5a28244"><div class="ttname"><a href="service__locator_8h.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244">fmw_service_get_type</a></div><div class="ttdeci">esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს enum სახით.</div><div class="ttdef"><b>Definition</b> service_locator.c:210</div></div>
 <div class="ttc" id="aservice__locator_8h_html_ac224eef59c2b5a418e8d19f89d895ba1"><div class="ttname"><a href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a></div><div class="ttdeci">esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle)</div><div class="ttdoc">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.</div><div class="ttdef"><b>Definition</b> service_locator.c:85</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md864"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md896"></a>
 Broadcast Communication (Event Bus)</h2>
 <div class="fragment"><div class="line">[DHT22 Sensor] --event--&gt; [Event Bus] --event--&gt; [MQTT Module]</div>
 <div class="line">                                    --event--&gt; [Display Module]</div>
@@ -165,9 +165,9 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line"><span class="comment">// Multiple modules subscribe</span></div>
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, display_handle_sensor_data);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md865"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md897"></a>
 აკრძალული პატერნები</h1>
-<h2><a class="anchor" id="autotoc_md866"></a>
+<h2><a class="anchor" id="autotoc_md898"></a>
 ❌ პირდაპირი Dependencies</h2>
 <div class="fragment"><div class="line"><span class="comment">// NEVER DO THIS</span></div>
 <div class="line"><span class="preprocessor">#include &quot;ssd1306_module.h&quot;</span>  <span class="comment">// Direct dependency!</span></div>
@@ -175,13 +175,13 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// In MQTT module</span></div>
 <div class="line">ssd1306_api_enable();  <span class="comment">// Direct function call - BAD!</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md867"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md899"></a>
 ❌ Mixed Patterns</h2>
 <div class="fragment"><div class="line"><span class="comment">// DON&#39;T MIX - choose one pattern per use case</span></div>
 <div class="line"><span class="comment">// Wrong: using both Event Bus AND Service Locator for same purpose</span></div>
 <div class="line">event_bus_post(DISPLAY_ENABLE_EVENT, NULL);  <span class="comment">// Event Bus</span></div>
 <div class="line">display_api-&gt;enable();                       <span class="comment">// Service Locator</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md868"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md900"></a>
 ❌ System Manager MQTT Handling</h2>
 <div class="fragment"><div class="line"><span class="comment">// NEVER DO THIS - System Manager must not handle MQTT</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> system_manager_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
@@ -190,11 +190,11 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md869"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md901"></a>
 სწორი იმპლემენტაცია</h1>
-<h2><a class="anchor" id="autotoc_md870"></a>
+<h2><a class="anchor" id="autotoc_md902"></a>
 Service Locator Usage</h2>
-<h3><a class="anchor" id="autotoc_md871"></a>
+<h3><a class="anchor" id="autotoc_md903"></a>
 1. Service Registration (Display Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// ssd1306_module.c</span></div>
 <div class="line"><span class="keyword">static</span> ssd1306_api_t ssd1306_service_api = {</div>
@@ -214,7 +214,7 @@ Service Locator Usage</h2>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md872"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md904"></a>
 2. Service Usage (MQTT Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// mqtt_module.c - NO direct includes of other modules!</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t handle_display_command(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name, <span class="keyword">const</span> <span class="keywordtype">char</span> *action) {</div>
@@ -236,9 +236,9 @@ Service Locator Usage</h2>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md873"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md905"></a>
 Event Bus Usage</h2>
-<h3><a class="anchor" id="autotoc_md874"></a>
+<h3><a class="anchor" id="autotoc_md906"></a>
 1. Event Publishing (Sensor Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// dht22_module.c</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t publish_sensor_reading(dht22_private_data_t *dht22_data, <span class="keywordtype">float</span> temperature, <span class="keywordtype">float</span> humidity) {</div>
@@ -251,7 +251,7 @@ Event Bus Usage</h2>
 <div class="line">    strncpy(telemetry.instance_name, p-&gt;instance_name, <span class="keyword">sizeof</span>(telemetry.instance_name) - 1);</div>
 <div class="line">    <span class="keywordflow">return</span> event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;telemetry);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md875"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md907"></a>
 2. Event Subscription (MQTT Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// mqtt_module.c</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> mqtt_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
@@ -276,17 +276,54 @@ Event Bus Usage</h2>
 <div class="line">        cJSON_Delete(json);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md876"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md908"></a>
+დინამიური MQTT თემები &lt;tt&gt;{module_name}&lt;/tt&gt; Placeholder-ით</h1>
+<p><code>mqtt_manager</code> მოდული მხარს უჭერს დინამიური თემების გენერაციას, რაც განსაკუთრებით სასარგებლოა, როდესაც სისტემაში გვაქვს ერთი ტიპის რამდენიმე მოწყობილობა (მაგ., რამდენიმე რელე).</p>
+<h2><a class="anchor" id="autotoc_md909"></a>
+პატერნის აღწერა</h2>
+<ol type="1">
+<li><p class="startli">**<code>module.json</code>:** მოდული, რომლის სტატუსის გამოქვეყნებაც გვინდა (მაგ., <code>relay_actuator</code>), თავის <code>module.json</code>-ში, <code>mqtt_interface</code>-ის <code>publishes</code> სექციაში, განსაზღვრავს თემის შაბლონს, რომელიც შეიცავს <code>{module_name}</code> placeholder-ს.</p>
+<div class="fragment"><div class="line">&quot;publishes&quot;: {</div>
+<div class="line">    &quot;state_changed&quot;: &quot;state/relay/{module_name}/status&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+<li><b>ივენთის Payload:</b> როდესაც ეს მოდული აქვეყნებს ივენთს (<code>FMW_EVENT_RELAY_STATE_CHANGED</code>), ის <code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code> სტრუქტურის <code>module_name</code> ველში სვამს თავის უნიკალურ <code>instance_name</code>-ს (მაგ., <code>"main_light"</code>).</li>
+<li>**<code>mqtt_manager</code>-ის ლოგიკა:** <code>mqtt_manager</code> იღებს ამ ივენთს, ხედავს, რომ თემის შაბლონი შეიცავს <code>{module_name}</code>-ს, და ცვლის ამ placeholder-ს <code>payload</code>-იდან მოსული კონკრეტული სახელით.</li>
+<li><b>საბოლოო თემა:</b> შედეგად, იქმნება უნიკალური თემა თითოეული ინსტანციისთვის, მაგ., <code>.../state/relay/main_light/status</code>.</li>
+</ol>
+<p>ეს პატერნი უზრუნველყოფს მაქსიმალურ მოქნილობას და გამორიცხავს <code>mqtt_manager</code>-ში <code>hardcoded</code> ლოგიკის საჭიროებას.</p>
+<h1><a class="anchor" id="autotoc_md910"></a>
 პატერნის არჩევის გზამკვლევი</h1>
-<h2><a class="anchor" id="autotoc_md877"></a>
+<h2><a class="anchor" id="autotoc_md911"></a>
 Service Locator-ის გამოყენება</h2>
 <p>✅ <b>MQTT → Display enable/disable</b> ✅ <b>System Manager → I2C driver API</b> ✅ <b>Module → Configuration service</b> ✅ <b>Any direct API call between specific modules</b></p>
-<h2><a class="anchor" id="autotoc_md878"></a>
+<h2><a class="anchor" id="autotoc_md912"></a>
 Event Bus-ის გამოყენება</h2>
 <p>✅ <b>Sensor data → Multiple consumers (MQTT, Display, Logger)</b> ✅ <b>System notifications → All modules</b> ✅ <b>Framework events → Module lifecycle management</b> ✅ <b>Any broadcast scenario</b></p>
-<h1><a class="anchor" id="autotoc_md879"></a>
+<h1><a class="anchor" id="autotoc_md913"></a>
 Architecture Diagram</h1>
-<div class="fragment"><div class="line">┌─────────────────┐    Service Locator     ┌─────────────────┐</div>
+<div class="fragment"><div class="line">sequenceDiagram</div>
+<div class="line">    participant User as MQTT Client</div>
+<div class="line">    participant Broker as MQTT Broker</div>
+<div class="line">    participant MqttManager as MQTT Manager</div>
+<div class="line">    participant EventBus as Event Bus</div>
+<div class="line">    participant CmdRouter as Command Router</div>
+<div class="line">    participant RelayMod as Relay Actuator (&quot;main_light&quot;)</div>
+<div class="line"> </div>
+<div class="line">    Note over User, RelayMod: Scenario: Turn on a relay via MQTT and get status back.</div>
+<div class="line"> </div>
+<div class="line">    User-&gt;&gt;Broker: 1. Publish to &#39;.../cmd/in&#39;&lt;br&gt;Payload: &quot;relay main_light on&quot;</div>
+<div class="line">    Broker--&gt;&gt;MqttManager: 2. Forwards command</div>
+<div class="line">    MqttManager-&gt;&gt;EventBus: 3. Post FMW_EVENT_EXECUTE_COMMAND_STRING</div>
+<div class="line">    EventBus--&gt;&gt;CmdRouter: 4. Delivers event</div>
+<div class="line">    CmdRouter-&gt;&gt;RelayMod: 5. Executes cmd_handler for &quot;relay&quot;</div>
+<div class="line">    RelayMod-&gt;&gt;RelayMod: 6. Sets GPIO ON</div>
+<div class="line">    RelayMod-&gt;&gt;EventBus: 7. Post FMW_EVENT_RELAY_STATE_CHANGED&lt;br&gt;Payload: {module_name:&quot;main_light&quot;, json_data:&quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;}</div>
+<div class="line">    EventBus--&gt;&gt;MqttManager: 8. Delivers event</div>
+<div class="line">    MqttManager-&gt;&gt;MqttManager: 9. Builds dynamic topic:&lt;br&gt;&#39;.../state/relay/main_light/status&#39;</div>
+<div class="line">    MqttManager-&gt;&gt;Broker: 10. Publish to dynamic topic&lt;br&gt;Payload: &quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;</div>
+<div class="line">    Broker--&gt;&gt;User: 11. Forwards status update</div>
+</div><!-- fragment --><div class="fragment"><div class="line">┌─────────────────┐    Service Locator     ┌─────────────────┐</div>
 <div class="line">│   MQTT Module   │ ────────────────────► │ Display Modules │</div>
 <div class="line">└─────────────────┘    (Direct API)       └─────────────────┘</div>
 <div class="line">         │</div>
@@ -303,7 +340,7 @@ Architecture Diagram</h1>
 <div class="line">┌─────────────────┐</div>
 <div class="line">│ Logger Module   │</div>
 <div class="line">└─────────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md880"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md914"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>Service Locator</b> = პირდაპირი API calls იზოლაციით</li>

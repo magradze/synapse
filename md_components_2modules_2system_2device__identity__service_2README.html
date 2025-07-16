@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
   <div class="headertitle"><div class="title">🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md83"></a> </p>
-<h1><a class="anchor" id="autotoc_md84"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md98"></a> </p>
+<h1><a class="anchor" id="autotoc_md99"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>device_identity_service</code> <br  />
  <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
  <b>🔖 ვერსია:</b> 1.2.0</p>
 <p><code>Device Identity Service</code> არის Synapse Framework-ის <b>ფუნდამენტური, სისტემური მოდული</b>, რომელიც უზრუნველყოფს ცენტრალიზებულ და მარტივ წვდომას მოწყობილობის უნიკალურ იდენტიფიკატორებსა და firmware-ის ინფორმაციაზე.</p>
 <p>მისი მთავარი ამოცანაა, სისტემის გაშვებისას ერთხელ წაიკითხოს მოწყობილობის აპარატურული მონაცემები (MAC მისამართი) და პროგრამული ვერსია, შეინახოს ისინი და შემდეგ, <code>Service Locator</code>-ის მეშვეობით, მიაწოდოს ეს ინფორმაცია ნებისმიერ სხვა მოდულს. ეს გამორიცხავს კოდის დუბლირებას და უზრუნველყოფს, რომ ყველა კომპონენტი იყენებდეს ერთსა და იმავე, თანმიმდევრულ საიდენტიფიკაციო მონაცემებს.</p>
-<h1><a class="anchor" id="autotoc_md85"></a>
+<h1><a class="anchor" id="autotoc_md100"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისზე-ორიენტირებული (Service-driven):</b> მოდული არის სუფთა სერვისის მომწოდებელი. ის არეგისტრირებს <code><a class="el" href="structdevice__identity__api__t.html" title="The public Service API structure for the Device Identity Service.">device_identity_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <li><b>მონაცემთა კეშირება:</b> მოდული კითხულობს აპარატურულ მონაცემებს მხოლოდ ერთხელ, <code>init</code> ფაზაში და ინახავს მათ თავის <code>private_data</code> სტრუქტურაში. შემდგომი API გამოძახებები მყისიერად აბრუნებენ ამ კეშირებულ მონაცემებს.</li>
 <li><b>CLI ინტეგრაცია და ივენთების გამოქვეყნება:</b> <code>device info</code> ბრძანების შესრულებისას, მოდული არა მხოლოდ ბეჭდავს ინფორმაციას კონსოლში, არამედ აქვეყნებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს, რაც საშუალებას აძლევს <code>mqtt_manager</code>-ს, ეს ინფორმაცია MQTT-ით გაავრცელოს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md86"></a>
+<h1><a class="anchor" id="autotoc_md101"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>ამ მოდულს არ გააჩნია რთული, მომხმარებლის მიერ კონფიგურირებადი პარამეტრები. ერთადერთი პარამეტრი არის <code>instance_name</code>.</p>
 <p>**<code>system_config.json</code>-ში ჩაწერის მაგალითი:**</p>
@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <div class="line">        &quot;instance_name&quot;: &quot;main_identity_service&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md87"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md102"></a>
 4. 🔌 Service API (&lt;tt&gt;device_identity_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_DEVICE_IDENTITY_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -131,9 +131,9 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <li>**<code>const char* get_firmware_version(void);</code>** <br  />
  🔖 აბრუნებს firmware-ის მიმდინარე ვერსიას (მაგ., <code>"v3.2.1"</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md88"></a>
+<h1><a class="anchor" id="autotoc_md103"></a>
 5. 📢 ივენთები (Events)</h1>
-<h2><a class="anchor" id="autotoc_md89"></a>
+<h2><a class="anchor" id="autotoc_md104"></a>
 გამოქვეყნებული ივენთები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>FMW_EVENT_DEVICE_INFO_READY</code>   </td><td class="markdownTableBodyLeft"><code>char*</code> (JSON)   </td><td class="markdownTableBodyLeft">📊 <code>device info</code> ბრძანების პასუხი JSON ფორმატში.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md90"></a>
+<h2><a class="anchor" id="autotoc_md105"></a>
 გამოწერილი ივენთები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md91"></a>
+<h1><a class="anchor" id="autotoc_md106"></a>
 6. 📡 MQTT ინტერფეისი</h1>
 <ul>
 <li><b>გამოსაქვეყნებელი თემა:</b> <code>synapse/devices/{id}/state/device/info</code></li>
@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md92"></a>
+<h1><a class="anchor" id="autotoc_md107"></a>
 7. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <div class="line">  Device ID           : 5C013B7246E4</div>
 <div class="line">  Firmware Version    : v3.2.1</div>
 <div class="line">----------------------------------</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md93"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md108"></a>
 8. 💡 გამოყენების მაგალითი (მოთხოვნა-პასუხი)</h1>
 <ol type="1">
 <li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
@@ -205,7 +205,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md94"></a>
+<h1><a class="anchor" id="autotoc_md109"></a>
 9. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>device_identity_service</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>interfaces</code>, რათა მას ჰქონდეს წვდომა <code>Command Router</code>-ის API კონტრაქტზე.</li>

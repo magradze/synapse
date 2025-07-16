@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🗂️_20ფაილური_20ოპერაციები_0',['🗂️ ფაილური ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md564',1,'']]]
+  ['🗂️_20ფაილური_20ოპერაციები_0',['🗂️ ფაილური ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md596',1,'']]]
 ];

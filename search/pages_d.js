@@ -16,5 +16,5 @@ var searchData=
   ['monitor_20module_20api_20reference_13',['Synapse Health Monitor Module API Reference',['../md_docs_2api__reference_2health__monitor__api.html',1,'']]],
   ['mqtt_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20mqtt_14',['MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)',['../md_docs_2integration_2integration__mqtt.html',1,'']]],
   ['mqtt_20manager_20service_20api_20reference_15',['Synapse MQTT Manager Service API Reference',['../md_docs_2api__reference_2mqtt__api.html',1,'']]],
-  ['mqtt_5fmanager_20tt_16',['☁️ მოდული &lt;tt&gt;mqtt_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2mqtt__manager_2README.html',1,'']]]
+  ['mqtt_5fmanager_20tt_16',['☁️ მოდული: &lt;tt&gt;mqtt_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2mqtt__manager_2README.html',1,'']]]
 ];

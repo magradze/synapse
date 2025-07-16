@@ -223,6 +223,26 @@ static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_da
 }
 ```
 
+## დინამიური MQTT თემები `{module_name}` Placeholder-ით
+
+`mqtt_manager` მოდული მხარს უჭერს დინამიური თემების გენერაციას, რაც განსაკუთრებით სასარგებლოა, როდესაც სისტემაში გვაქვს ერთი ტიპის რამდენიმე მოწყობილობა (მაგ., რამდენიმე რელე).
+
+### პატერნის აღწერა
+
+1. **`module.json`:** მოდული, რომლის სტატუსის გამოქვეყნებაც გვინდა (მაგ., `relay_actuator`), თავის `module.json`-ში, `mqtt_interface`-ის `publishes` სექციაში, განსაზღვრავს თემის შაბლონს, რომელიც შეიცავს `{module_name}` placeholder-ს.
+
+    ```json
+    "publishes": {
+        "state_changed": "state/relay/{module_name}/status"
+    }
+    ```
+
+2. **ივენთის Payload:** როდესაც ეს მოდული აქვეყნებს ივენთს (`FMW_EVENT_RELAY_STATE_CHANGED`), ის `fmw_telemetry_payload_t` სტრუქტურის `module_name` ველში სვამს თავის უნიკალურ `instance_name`-ს (მაგ., `"main_light"`).
+3. **`mqtt_manager`-ის ლოგიკა:** `mqtt_manager` იღებს ამ ივენთს, ხედავს, რომ თემის შაბლონი შეიცავს `{module_name}`-ს, და ცვლის ამ placeholder-ს `payload`-იდან მოსული კონკრეტული სახელით.
+4. **საბოლოო თემა:** შედეგად, იქმნება უნიკალური თემა თითოეული ინსტანციისთვის, მაგ., `.../state/relay/main_light/status`.
+
+ეს პატერნი უზრუნველყოფს მაქსიმალურ მოქნილობას და გამორიცხავს `mqtt_manager`-ში `hardcoded` ლოგიკის საჭიროებას.
+
 ## პატერნის არჩევის გზამკვლევი
 
 ### Service Locator-ის გამოყენება
@@ -241,7 +261,31 @@ static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_da
 
 ## Architecture Diagram
 
+```mermaid
+sequenceDiagram
+    participant User as MQTT Client
+    participant Broker as MQTT Broker
+    participant MqttManager as MQTT Manager
+    participant EventBus as Event Bus
+    participant CmdRouter as Command Router
+    participant RelayMod as Relay Actuator ("main_light")
+
+    Note over User, RelayMod: Scenario: Turn on a relay via MQTT and get status back.
+
+    User->>Broker: 1. Publish to '.../cmd/in'<br>Payload: "relay main_light on"
+    Broker-->>MqttManager: 2. Forwards command
+    MqttManager->>EventBus: 3. Post FMW_EVENT_EXECUTE_COMMAND_STRING
+    EventBus-->>CmdRouter: 4. Delivers event
+    CmdRouter->>RelayMod: 5. Executes cmd_handler for "relay"
+    RelayMod->>RelayMod: 6. Sets GPIO ON
+    RelayMod->>EventBus: 7. Post FMW_EVENT_RELAY_STATE_CHANGED<br>Payload: {module_name:"main_light", json_data:"{\"state\":\"on\"}"}
+    EventBus-->>MqttManager: 8. Delivers event
+    MqttManager->>MqttManager: 9. Builds dynamic topic:<br>'.../state/relay/main_light/status'
+    MqttManager->>Broker: 10. Publish to dynamic topic<br>Payload: "{\"state\":\"on\"}"
+    Broker-->>User: 11. Forwards status update
 ```
+
+```bash
 ┌─────────────────┐    Service Locator     ┌─────────────────┐
 │   MQTT Module   │ ────────────────────► │ Display Modules │
 └─────────────────┘    (Direct API)       └─────────────────┘

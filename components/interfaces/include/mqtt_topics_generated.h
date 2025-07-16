@@ -17,9 +17,9 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-07-15 23:07:36 UTC
- * @note თემების რაოდენობა: 8
- * @note დამუშავებული მოდულები: connectivity_watchdog, device_identity_service, mqtt_manager, security_status_reporter, self_test_manager, sensor_aggregator, wifi_manager
+ * @note გენერირების თარიღი: 2025-07-16 13:51:08 UTC
+ * @note თემების რაოდენობა: 9
+ * @note დამუშავებული მოდულები: connectivity_watchdog, device_identity_service, mqtt_manager, relay_actuator, security_status_reporter, self_test_manager, sensor_aggregator, wifi_manager
  * @version 1.0
  * @author MindLab Auto-Generation System
  */
@@ -45,6 +45,7 @@ extern "C"
  * - MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS: .../state/wifi/status
  * - MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT: .../data/wifi/scan_result
  * - MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT: .../data/sensors/aggregated
+ * - MQTT_TOPIC_PUB_RELAY_ACTUATOR_STATE_CHANGED: .../state/relay/{module_name}/status
    */
 
   #define MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO "synapse/devices/%s/state/device/info"
@@ -55,6 +56,7 @@ extern "C"
 #define MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS "synapse/devices/%s/state/wifi/status"
 #define MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT "synapse/devices/%s/data/wifi/scan_result"
 #define MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT "synapse/devices/%s/data/sensors/aggregated"
+#define MQTT_TOPIC_PUB_RELAY_ACTUATOR_STATE_CHANGED "synapse/devices/%s/state/relay/{module_name}/status"
 
 // =============================================================================
 // დამხმარე მაკროები (თავსებადი ხელით შექმნილ mqtt_topics.h-თან)
@@ -83,9 +85,9 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-07-15 23:07:36 UTC"
-#define MQTT_TOPICS_TOTAL_COUNT 8
-#define MQTT_TOPICS_GENERATED_FROM_MODULES "connectivity_watchdog, device_identity_service, mqtt_manager, security_status_reporter, self_test_manager, sensor_aggregator, wifi_manager"
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-07-16 13:51:08 UTC"
+#define MQTT_TOPICS_TOTAL_COUNT 9
+#define MQTT_TOPICS_GENERATED_FROM_MODULES "connectivity_watchdog, device_identity_service, mqtt_manager, relay_actuator, security_status_reporter, self_test_manager, sensor_aggregator, wifi_manager"
 
 #ifdef __cplusplus
 }

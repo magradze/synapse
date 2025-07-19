@@ -14,6 +14,7 @@
 
 // --- Framework & System Includes ---
 #include "mqtt_manager.h"
+
 #include "base_module.h"
 #include "logging.h"
 #include "event_bus.h"

@@ -9,9 +9,9 @@
 # 3. თუ CONFIG variable არსებობს და გამორთულია, რეგისტრირდება ცარიელი placeholder-ით
 
 # შევამოწმოთ არსებობს თუ არა CONFIG ცვლადი (configure ეტაპის შემდეგ)
-if(DEFINED CONFIG_MODULE_MQTT_CLIENT_ENABLED)
+if(DEFINED MODULE_MQTT_MANAGER_ENABLED)
     # CONFIG ცვლადი არსებობს - ვამოწმებთ მნიშვნელობას
-    if(CONFIG_MODULE_MQTT_CLIENT_ENABLED)
+    if(MODULE_MQTT_MANAGER_ENABLED)
         # მოდული ჩართულია - სრული რეგისტრაცია
         message(STATUS "Mqtt Client Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
         idf_component_register(

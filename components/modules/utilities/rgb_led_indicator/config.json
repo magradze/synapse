@@ -1,0 +1,13 @@
+[
+  {
+    "type": "rgb_led_indicator",
+    "enabled": true,
+    "config": {
+        "instance_name": "status_led",
+        "red_pin": 18,
+        "green_pin": 19,
+        "blue_pin": 5,
+        "is_common_anode": true
+    }
+  }
+]

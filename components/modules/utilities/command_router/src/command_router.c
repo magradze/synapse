@@ -39,6 +39,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#include "nvs.h"
+#include "nvs_flash.h"
+
 // --- Component Tag ---
 DEFINE_COMPONENT_TAG("CMD_ROUTER");
 
@@ -73,6 +76,7 @@ static int generic_command_executor(int argc, char **argv);
 static esp_err_t register_all_commands_to_console(void);
 static esp_err_t cmd_handler_help(int argc, char **argv, void *context);
 static esp_err_t cmd_handler_modules(int argc, char **argv, void *context);
+static esp_err_t cmd_handler_nvs_inspect(int argc, char **argv, void *context);
 static esp_err_t cmd_handler_reboot(int argc, char **argv, void *context);
 static esp_err_t service_api_register_command(const cmd_t *command);
 static esp_err_t service_api_unregister_command(const char *command_name);
@@ -190,12 +194,16 @@ static esp_err_t command_router_init(module_t *self)
     
     static cmd_t modules_cmd;
     modules_cmd = (cmd_t){"modules", "List all registered modules and their status", "modules", 1, 1, cmd_handler_modules, self};
-    
+
+    static cmd_t nvs_inspect_cmd;
+    nvs_inspect_cmd = (cmd_t){"nvs_inspect", "Inspect NVS entries", "nvs_inspect", 1, 2, cmd_handler_nvs_inspect, self};
+
     static cmd_t reboot_cmd;
     reboot_cmd = (cmd_t){"reboot", "Reboot the device", "reboot", 1, 1, cmd_handler_reboot, self};
     
     service_api_register_command(&help_cmd);
     service_api_register_command(&modules_cmd);
+    service_api_register_command(&nvs_inspect_cmd);
     service_api_register_command(&reboot_cmd);
 
     err = fmw_event_bus_subscribe(FMW_EVENT_EXECUTE_COMMAND_STRING, self);
@@ -644,6 +652,53 @@ static esp_err_t cmd_handler_modules(int argc, char **argv, void *context)
     }
     printf("--------------------------------------------------\n");
     printf("Total modules: %u\n", module_count);
+    return ESP_OK;
+}
+
+static esp_err_t cmd_handler_nvs_inspect(int argc, char **argv, void *context)
+{
+    nvs_handle_t handle;
+    if (nvs_open("synapse_cfg", NVS_READONLY, &handle) != ESP_OK)
+    {
+        printf("❌ Failed to open NVS namespace 'synapse_cfg'\n");
+        return ESP_FAIL;
+    }
+
+    nvs_iterator_t it = NULL;
+    esp_err_t err = nvs_entry_find("nvs", "synapse_cfg", NVS_TYPE_STR, &it);
+    if (err != ESP_OK || it == NULL)
+    {
+        printf("ℹ️ No string entries found in NVS.\n");
+        nvs_close(handle);
+        return ESP_OK;
+    }
+
+    printf("🔍 NVS Entries in 'synapse_cfg':\n");
+    while (it != NULL)
+    {
+        nvs_entry_info_t info;
+        nvs_entry_info(it, &info);
+
+        size_t len = 0;
+        if (nvs_get_str(handle, info.key, NULL, &len) == ESP_OK && len > 0)
+        {
+            char *value = malloc(len);
+            if (value)
+            {
+                if (nvs_get_str(handle, info.key, value, &len) == ESP_OK)
+                {
+                    printf("  🗝️  %-16s => %s\n", info.key, value);
+                }
+                free(value);
+            }
+        }
+
+        if (nvs_entry_next(&it) != ESP_OK)
+            break;
+    }
+
+    nvs_release_iterator(it);
+    nvs_close(handle);
     return ESP_OK;
 }
 

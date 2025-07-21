@@ -69,7 +69,7 @@ typedef struct
     /**
      * @brief The full command string to be executed (e.g., "relay main_light on").
      */
-    char command_string[CONFIG_COMMAND_ROUTER_MAX_CMD_LEN];
+    char command_string[CONFIG_FMW_COMMAND_ROUTER_MAX_CMD_LEN];
 
     /**
      * @brief A string identifying the source of the command (e.g., "mqtt", "serial", "http").

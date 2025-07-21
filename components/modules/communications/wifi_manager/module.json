@@ -6,7 +6,7 @@
     "init_function": "wifi_manager_create",
     "init_level": 2,
     "dependencies": [],
-    "type": "communications",
+    "type": "wifi_manager",
     "build_enabled": true,
     "conditional_config": "CONFIG_MODULE_WIFI_MANAGER_ENABLED",
     "runtime_commands": {

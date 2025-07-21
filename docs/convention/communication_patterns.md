@@ -4,49 +4,68 @@
 
 **FUNDAMENTAL RULE:** Synapse ESP Framework-ში უნდა შენარჩუნდეს მაქსიმალური იზოლაცია მოდულებს შორის.
 
-## ორი კომუნიკაციის პატერნი
+## სამი ძირითადი პატერნი
 
 ### 1. Service Locator Pattern
 
-**გამოიყენება:** პირდაპირი API calls-ისთვის
+- **გამოიყენება:** პირდაპირი, სინქრონული API გამოძახებებისთვის.
+- **როდის ვიყენებთ:**
+  - როდესაც ერთ მოდულს სჭირდება მეორე მოდულის კონკრეტული ფუნქციის **დაუყოვნებლივ** გამოძახება.
+  - მაგალითად: `ota_manager`-ს სჭირდება `rgb_led_indicator`-ის ფერის შეცვლა.
+- **მაგალითი:**
 
-**როდის ვიყენებთ:**
-
-- MQTT module-მა უნდა გამოიძახოს display-ის enable/disable
-- System Manager-მა უნდა მიიღოს I2C handle
-- Module-მა უნდა მიიღოს კონკრეტული service-ის API
-
-**მაგალითი:**
-
-```c
-// MQTT module calls display API directly
-service_handle_t display_service_handle = fmw_service_get("main_display");
-if (display_service_handle) {
-    ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
-    ssd1306_service_api->disable();
-}
-```
+    ```c
+    // MQTT module calls display API directly
+    service_handle_t display_service_handle = fmw_service_get("main_display");
+    if (display_service_handle) {
+        ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
+        ssd1306_service_api->disable();
+    }
+    ```
 
 ### 2. Event Bus Pattern
 
-**გამოიყენება:** broadcast/notification scenarios-ისთვის
+- **გამოიყენება:** ასინქრონული, "გამოაქვეყნე-გამოიწერე" (Publish/Subscribe) სცენარებისთვის.
+- **როდის ვიყენებთ:**
+  - როდესაც ინფორმაცია უნდა მიეწოდოს **ერთ ან მეტ** (პოტენციურად არცერთ) მსმენელს.
+  - როდესაც გამომგზავნმა არ "იცის" და არ უნდა იცოდეს, ვინ მიიღებს ინფორმაციას.
+  - მაგალითად: სენსორი აქვეყნებს მონაცემებს, რომელსაც შეიძლება უსმენდეს `logger`, `mqtt_manager` და `sensor_aggregator`.
+- **მაგალითი:**
 
-**როდის ვიყენებთ:**
+    ```c
+    // DHT22 publishes data for multiple consumers
+    telemetry_data_t sensor_telemetry_data = {
+        .temperature = 23.5,
+        .humidity = 65.2
+    };
+    fmw_event_bus_post("SENSOR_DATA_TEMPERATURE", wrapper);
+    ```
 
-- Sensor data-ს რამდენიმე module უნდა მიიღოს
-- System-wide notification-ები (shutdown, restart)
-- Multiple modules-მა უნდა იმოქმედოს ერთი event-ზე
+### 3. Command Router Pattern (ახალი სექცია)
 
-**მაგალითი:**
+- **გამოიყენება:** მომხმარებლის მიერ ინიცირებული, ტექსტური ბრძანებების ცენტრალიზებული მართვისთვის.
+- **როდის ვიყენებთ:**
+  - როდესაც ფუნქციონალი უნდა იყოს ხელმისაწვდომი ნებისმიერი ინტერფეისიდან (Serial, MQTT, HTTP).
+  - როდესაც გვჭირდება ერთიანი `help` სისტემა და არგუმენტების პარსინგი.
+- **პატერნის აღწერა:**
+    1. მოდული, რომელსაც სურს, ჰქონდეს CLI ბრძანება, იყენებს `Command Router`-ის Service API-ს.
+    2. ის ამოწმებს, არის თუ არა სასურველი ბრძანება (`"relay"`, `"wifi"`) უკვე რეგისტრირებული `is_command_registered` ფუნქციით.
+    3. **თუ ბრძანება არ არის რეგისტრირებული**, ის არეგისტრირებს მას და აწვდის ზოგად `handler` ფუნქციას.
+    4. ეს `handler` ფუნქცია იღებს არგუმენტებს (მაგ., `instance_name`) და `Service Locator`-ის მეშვეობით პოულობს და მართავს კონკრეტულ ინსტანციას.
+- **მაგალითი (`relay_actuator.c`-დან):**
 
-```c
-// DHT22 publishes data for multiple consumers
-telemetry_data_t sensor_telemetry_data = {
-    .temperature = 23.5,
-    .humidity = 65.2
-};
-event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &sensor_telemetry_data);
-```
+    ```c
+    // FMW_SYSTEM_START_COMPLETE ივენთის მიღებისას
+    cmd_router_api_t *cmd_api = (cmd_router_api_t *)fmw_service_get("main_cmd_router");
+    if (cmd_api && !cmd_api->is_command_registered("relay")) {
+        static cmd_t relay_cmd = {
+            .command = "relay",
+            .handler = generic_relay_cmd_handler,
+            // ...
+        };
+        cmd_api->register_command(&relay_cmd);
+    }
+    ```
 
 ## კომუნიკაციის ტიპები
 
@@ -62,11 +81,12 @@ event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &sensor_telemetry_data);
 
 ```c
 // Display module registers API
-fmw_service_register("main_display", "display_api", &ssd1306_service_api);
+fmw_service_register("main_display", FMW_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
 
 // MQTT module uses API
 service_handle_t display_service_handle = fmw_service_get("main_display");
-if (display_service_handle && strcmp(fmw_service_get_type("main_display"), "display_api") == 0) {
+fmw_service_type_t type;
+if (display_service_handle && fmw_service_get_type("main_display", &type) == ESP_OK && type == FMW_SERVICE_TYPE_DISPLAY_API) {
     ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
     ssd1306_service_api->enable();
 }
@@ -85,32 +105,35 @@ if (display_service_handle && strcmp(fmw_service_get_type("main_display"), "disp
 ```c
 // Sensor publishes data
 telemetry_data_t sensor_telemetry_data = { .temperature = 23.5 };
-event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &sensor_telemetry_data);
+event_data_wrapper_t* wrapper;
+fmw_event_data_wrap(&sensor_telemetry_data, NULL, &wrapper);
+fmw_event_bus_post("TELEMETRY_EVENT_SENSOR_DATA", wrapper);
+fmw_event_data_release(wrapper);
 
 // Multiple modules subscribe
-event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);
-event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, display_handle_sensor_data);
+fmw_event_bus_subscribe("TELEMETRY_EVENT_SENSOR_DATA", mqtt_module_instance);
+fmw_event_bus_subscribe("TELEMETRY_EVENT_SENSOR_DATA", display_module_instance);
 ```
 
 ## აკრძალული პატერნები
 
-### ❌ პირდაპირი Dependencies
+### ❌ პირდაპირი დამოკიდებულებები
 
 ```c
 // NEVER DO THIS
-#include "ssd1306_module.h"  // Direct dependency!
+#include "ssd1306_module.h"  // Direct dependency! Violates isolation!
 #include "relay_module.h"    // Violates isolation!
 
 // In MQTT module
 ssd1306_api_enable();  // Direct function call - BAD!
 ```
 
-### ❌ Mixed Patterns
+### ❌ პატერნების არასწორი შერევა
 
 ```c
 // DON'T MIX - choose one pattern per use case
-// Wrong: using both Event Bus AND Service Locator for same purpose
-event_bus_post(DISPLAY_ENABLE_EVENT, NULL);  // Event Bus
+// Wrong: using both Event Bus AND Service Locator for the same purpose
+fmw_event_bus_post("DISPLAY_ENABLE_EVENT", NULL);  // Event Bus
 display_api->enable();                       // Service Locator
 ```
 
@@ -118,8 +141,8 @@ display_api->enable();                       // Service Locator
 
 ```c
 // NEVER DO THIS - System Manager must not handle MQTT
-static void system_manager_handle_event(module_t *module, int32_t event_id, void *event_data) {
-    if (event_id == MQTT_EVENT_COMMAND_RECEIVED) {  // FORBIDDEN!
+static void system_manager_handle_event(module_t *module, const char *event_name, void *event_data) {
+    if (strcmp(event_name, "MQTT_EVENT_COMMAND_RECEIVED") == 0) {  // FORBIDDEN!
         // System Manager should NEVER handle MQTT commands
     }
 }
@@ -127,7 +150,7 @@ static void system_manager_handle_event(module_t *module, int32_t event_id, void
 
 ## სწორი იმპლემენტაცია
 
-### Service Locator Usage
+### Service Locator-ის გამოყენება
 
 #### 1. Service Registration (Display Module)
 
@@ -143,9 +166,10 @@ static ssd1306_api_t ssd1306_service_api = {
 module_t *ssd1306_module_create(const cJSON *config) {
     // ... module creation ...
     // Register API in Service Locator
-    esp_err_t operation_result = fmw_service_register(module_instance_name, "display_api", &ssd1306_service_api);
+    esp_err_t operation_result = fmw_service_register(module->name, FMW_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
     if (operation_result != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register service API");
+        // ... cleanup ...
         return NULL;
     }
     return module;
@@ -162,11 +186,13 @@ static esp_err_t handle_display_command(const char *module_instance_name, const 
         ESP_LOGW(TAG, "Service not found: %s", module_instance_name);
         return ESP_ERR_NOT_FOUND;
     }
-    const char *service_type = fmw_service_get_type(module_instance_name);
-    if (!service_type || strcmp(service_type, "display_api") != 0) {
+    
+    fmw_service_type_t service_type;
+    if (fmw_service_get_type(module_instance_name, &service_type) != ESP_OK || service_type != FMW_SERVICE_TYPE_DISPLAY_API) {
         ESP_LOGW(TAG, "Invalid service type for %s", module_instance_name);
         return ESP_ERR_INVALID_ARG;
     }
+
     ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
     if (strcmp(action, "enable") == 0) {
         return ssd1306_service_api->enable();
@@ -177,21 +203,19 @@ static esp_err_t handle_display_command(const char *module_instance_name, const 
 }
 ```
 
-### Event Bus Usage
+### Event Bus-ის გამოყენება
 
 #### 1. Event Publishing (Sensor Module)
 
 ```c
 // dht22_module.c
 static esp_err_t publish_sensor_reading(dht22_private_data_t *dht22_data, float temperature, float humidity) {
-    telemetry_data_t sensor_telemetry_data = {
-        .sensor_type = SENSOR_TYPE_DHT22,
-        .temperature = temperature,
-        .humidity = humidity,
-        .timestamp = esp_timer_get_time()
-    };
-    strncpy(telemetry.instance_name, p->instance_name, sizeof(telemetry.instance_name) - 1);
-    return event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &telemetry);
+    // ... create payload ...
+    event_data_wrapper_t *wrapper;
+    fmw_event_data_wrap(payload, free_payload_fn, &wrapper);
+    esp_err_t err = fmw_event_bus_post("TELEMETRY_EVENT_SENSOR_DATA", wrapper);
+    fmw_event_data_release(wrapper);
+    return err;
 }
 ```
 
@@ -199,26 +223,16 @@ static esp_err_t publish_sensor_reading(dht22_private_data_t *dht22_data, float 
 
 ```c
 // mqtt_module.c
-static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_data) {
-    if (event_id == TELEMETRY_EVENT_SENSOR_DATA) {
-        telemetry_data_t *data = (telemetry_data_t *)event_data;
+static void mqtt_handle_event(module_t *module, const char *event_name, void *event_data) {
+    if (strcmp(event_name, "TELEMETRY_EVENT_SENSOR_DATA") == 0) {
+        event_data_wrapper_t* wrapper = (event_data_wrapper_t*)event_data;
+        telemetry_data_t *data = (telemetry_data_t *)wrapper->payload;
         
-        // Build MQTT topic and publish
-        char topic[128];
-        snprintf(topic, sizeof(topic), "Synapse/v1/%s/data/%s", 
-                 device_id, data->instance_name);
-        
-        // Create JSON payload
-        cJSON *json = cJSON_CreateObject();
-        cJSON_AddStringToObject(json, "sensor_type", "DHT22");
-        cJSON_AddNumberToObject(json, "temperature", data->temperature);
-        cJSON_AddNumberToObject(json, "humidity", data->humidity);
-        
-        char *payload = cJSON_Print(json);
-        mqtt_publish(topic, payload);
-        
-        free(payload);
-        cJSON_Delete(json);
+        // ... Build MQTT topic and publish ...
+    }
+    
+    if (event_data) {
+        fmw_event_data_release((event_data_wrapper_t*)event_data);
     }
 }
 ```
@@ -247,17 +261,16 @@ static void mqtt_handle_event(module_t *module, int32_t event_id, void *event_da
 
 ### Service Locator-ის გამოყენება
 
-✅ **MQTT → Display enable/disable**
-✅ **System Manager → I2C driver API**
-✅ **Module → Configuration service**
-✅ **Any direct API call between specific modules**
+✅ **`ota_manager` → `rgb_led_indicator` `set_color`**
+✅ **`wifi_manager` → `storage_manager` `set_string`**
+✅ **ნებისმიერი პირდაპირი, სინქრონული API გამოძახება**
 
 ### Event Bus-ის გამოყენება
 
-✅ **Sensor data → Multiple consumers (MQTT, Display, Logger)**
-✅ **System notifications → All modules**
-✅ **Framework events → Module lifecycle management**
-✅ **Any broadcast scenario**
+✅ **`dht22_sensor` → `logger`, `mqtt_manager`, `aggregator`**
+✅ **`wifi_manager` → `WIFI_EVENT_CONNECTED` (სისტემური შეტყობინება)**
+✅ **`system_timer` → ნებისმიერი დაგეგმილი მოქმედება**
+✅ **ნებისმიერი ასინქრონული, "ერთი-მრავალთან" სცენარი**
 
 ## Architecture Diagram
 
@@ -307,9 +320,8 @@ sequenceDiagram
 
 ## შეჯამება
 
-1. **Service Locator** = პირდაპირი API calls იზოლაციით
-2. **Event Bus** = broadcast events decoupling-ით
-3. **არასდროს** ნუ შევურევთ ამ პატერნებს
-4. **არასდროს** ნუ შევქმნით პირდაპირ dependencies-ს მოდულებს შორის
-5. **System Manager** არასდროს ნუ იყენებს MQTT-ს
-6. ყოველთვის ავირჩიოთ სწორი ინსტრუმენტი კომუნიკაციის პატერნისთვის
+1. **Service Locator** = პირდაპირი API გამოძახებები იზოლაციით.
+2. **Event Bus** = broadcast ივენთები სრული დეკაპლინგით.
+3. **Command Router** = ტექსტური ბრძანებების ცენტრალიზებული მართვა.
+4. **არასდროს** შექმნათ პირდაპირი დამოკიდებულებები მოდულებს შორის.
+5. ყოველთვის აირჩიეთ სწორი ინსტრუმენტი კონკრეტული ამოცანისთვის.

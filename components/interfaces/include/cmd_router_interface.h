@@ -101,6 +101,15 @@ typedef struct
      */
     esp_err_t (*unregister_command)(const char *command_name);
 
+    /**
+     * @brief Checks if a command with the given name is already registered.
+     * @param[in] command_name The name of the command to check.
+     * @return
+     *      - true: If the command is already registered.
+     *      - false: If the command is not registered.
+     */
+    bool (*is_command_registered)(const char *command_name);
+
 } cmd_router_api_t;
 
 

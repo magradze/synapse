@@ -187,3 +187,12 @@
                 SPI რესურსების მაქსიმალური რაოდენობა.
 
     endmenu
+
+    menu "Command Router Configuration"
+        config FMW_COMMAND_ROUTER_MAX_CMD_LEN
+            int "Command Router-ის მაქს. ბრძანების სიგრძე"
+            default 256
+            help
+                Command Router-ის მიერ დამუშავებული ბრძანებების მაქსიმალური სიგრძე.
+                ეს განსაზღვრავს, რამდენი მონაცემის გადაცემას შეუძლია Command Router-ს ერთდროულად.
+    endmenu

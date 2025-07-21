@@ -93,6 +93,7 @@ class TemplateGenerator:
         """აგენერირებს ფაილების კონტენტს."""
         return {
             "module.json": self._generate_module_json(),
+            "config.json": self._generate_config_json(), # <--- ახალი ხაზი
             "CMakeLists.txt": self._generate_cmake(),
             "Kconfig": self._generate_kconfig(),
             "README.md": self._generate_readme(),
@@ -242,6 +243,24 @@ DEFINE_COMPONENT_TAG("{self.params['module_name'].upper()}");
 
 // ... Basic implementation ...
 """
+
+    def _generate_config_json(self) -> str:
+        """Generates a default config.json template."""
+        config_data = [
+            {
+                "type": self.params['module_name'],
+                "enabled": True,
+                "config": {
+                    "instance_name": f"main_{self.params['module_name']}"
+                    # TODO: Add module-specific default configuration parameters here.
+                    # Example:
+                    # "gpio_pin": 23,
+                    # "update_interval_sec": 30
+                }
+            }
+        ]
+        return json.dumps(config_data, indent=4, ensure_ascii=False)
+
 
 class ArchetypeGenerator(TemplateGenerator):
     """კლასი, რომელიც აგენერირებს კოდს არქეტიპების მიხედვით."""
@@ -560,8 +579,13 @@ def create_module_files(params: Dict):
     generator = ArchetypeGenerator(params)
     files_content = generator.generate()
 
-    for file_path, content in files_content.items():
-        full_path = module_path / file_path
+    for file_name, content in files_content.items():
+        # Correctly handle nested paths for include/ and src/
+        if file_name.startswith("include/") or file_name.startswith("src/"):
+            full_path = module_path / file_name
+        else:
+            full_path = module_path / file_name
+        
         with open(full_path, "w", encoding="utf-8") as f:
             f.write(content)
     
@@ -572,9 +596,10 @@ def create_module_files(params: Dict):
     print(f"   - მდებარეობა: {module_path}")
     print("="*50)
     print("\n📋 შემდეგი ნაბიჯები:")
-    print("   1. `idf.py menuconfig`  # ჩართეთ ახალი მოდული (Component config -> ...)")
-    print("   2. `idf.py build`       # ააგეთ პროექტი")
-    print("   3. შეავსეთ `TODO` კომენტარები გენერირებულ კოდში.")
+    print("   1. გახსენით და შეავსეთ ახლად შექმნილი `config.json` ფაილი.")
+    print("   2. `idf.py menuconfig`  # დარწმუნდით, რომ მოდული ჩართულია.")
+    print("   3. `idf.py build`       # ააგეთ პროექტი.")
+    print("   4. შეავსეთ `TODO` კომენტარები გენერირებულ კოდში.")
 
 
 def main():

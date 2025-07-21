@@ -2,211 +2,200 @@
 
 ## მიზანი
 
-ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი მოდული Synapse ESP Framework-ში naming, structure და communication კონვენციების დაცვით.
+ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ `create_module.py` სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით.
 
 ## 1. საჭიროების განსაზღვრა
 
-- განსაზღვრეთ, რა ფუნქციონალი გჭირდებათ (მაგ: ახალი სენსორი, აქტუატორი, კომუნიკაცია)
-- აირჩიეთ შესაბამისი კატეგორია (მაგ: sensors, actuators, communications)
+- **ამოცანა:** შევქმნათ მარტივი "მისალმების" მოდული, სახელად `greeter_module`.
+- **ფუნქციონალი:**
+    1. `start` ფაზაში, `System Timer` სერვისის გამოყენებით, დაგეგმოს პერიოდული ივენთი `GREETING_TIMER_TICK`.
+    2. როდესაც მიიღებს ამ ივენთს, `Event Bus`-ზე გამოაქვეყნოს ახალი, საკუთარი ივენთი `GREETING_MESSAGE_READY` `payload`-ით, რომელიც შეიცავს მისალმების ტექსტს.
+- **კატეგორია:** `utilities`
 
-## 2. საქაღალდის და ფაილების შექმნა
+## 2. მოდულის ჩონჩხის გენერაცია
 
-- შექმენით ახალი საქაღალდე: `components/modules/{category}/{new_module}/`
-- დაამატეთ შემდეგი ფაილები:
-  - `CMakeLists.txt`
-  - `module.json`
-  - `README.md`
-  - `include/{new_module}.h`
-  - `src/{new_module}.c`
+**(სრულად განახლებულია)**
 
-## 3. Header და Source ფაილების შაბლონები
+ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ `create_module.py` სკრიპტს.
 
-**Header (`include/{new_module}.h`):**
+1. გახსენით ტერმინალი პროექტის root დირექტორიაში.
+2. გაუშვით სკრიპტი ინტერაქტიულ რეჟიმში:
+
+    ```bash
+    python3 scripts/create_module.py
+    ```
+
+3. უპასუხეთ კითხვებს შემდეგნაირად:
+    - **შეიყვანეთ მოდულის სრული სახელი:** `Greeter Module`
+    - **აირჩიეთ კატეგორია:** `utilities`
+    - **აირჩიეთ მოდულის არქეტიპი:** `Event Producer` (რადგან ჩვენი მოდული ივენთებს გამოაქვეყნებს).
+    - დანარჩენ კითხვებს შეგიძლიათ დაეთანხმოთ (Enter).
+
+სკრიპტი შექმნის ყველა საჭირო ფაილს, მათ შორის `config.json`-ს, `components/modules/utilities/greeter_module/` დირექტორიაში.
+
+## 3. კონფიგურაცია
+
+1. **Runtime კონფიგურაცია:** გახსენით ახლად შექმნილი `greeter_module/config.json` და შეავსეთ ის:
+
+    ```json
+    [
+      {
+        "type": "greeter_module",
+        "enabled": true,
+        "config": {
+          "instance_name": "main_greeter",
+          "greeting_text": "Hello from Synapse!"
+        }
+      }
+    ]
+    ```
+
+2. **Build-დროის კონფიგურაცია:** გაუშვით `idf.py menuconfig`, გადადით `Component config` -> `Synapse Framework` -> `Modules` -> `Greeter Module` და დარწმუნდით, რომ მოდული ჩართულია (`[*] Enable Greeter Module`).
+
+## 4. კოდის იმპლემენტაცია
+
+ახლა შევავსოთ `greeter_module.c` ფაილი. სკრიპტმა უკვე დააგენერირა ჩონჩხი, ჩვენ მხოლოდ ლოგიკა უნდა დავამატოთ.
+
+**`src/greeter_module.c` (საბოლოო ვერსია):**
 
 ```c
-#ifndef {MODULE_NAME}_H
-#define {MODULE_NAME}_H
-
-#include "base_module.h"
-#include "cJSON.h"
-#include "esp_err.h"
-
-typedef struct {
-    esp_err_t (*enable)(void);
-    esp_err_t (*disable)(void);
-    // საჭიროების მიხედვით სხვა API ფუნქციები
-}} {module_name}_api_t;
-
-module_t *{module_name}_create(const cJSON *config);
-esp_err_t {module_name}_api_enable(void);
-esp_err_t {module_name}_api_disable(void);
-
-#endif // {MODULE_NAME}_H
-```
-
-**Source (`src/{new_module}.c`):**
-
-```c
-#include "{module_name}.h"
-#include "service_locator.h"
-#include "event_bus.h"
-#include "config_manager.h"
+/**
+ * @file greeter_module.c
+ * @brief A simple module that periodically sends greetings.
+ * @author (Your Name)
+ */
+#include "greeter_module.h"
 #include "logging.h"
-#include "esp_log.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/semphr.h" // For mutex
-#include <string.h> // strcmp-ისთვის
+#include "event_bus.h"
+#include "event_data_wrapper.h"
+#include "service_locator.h"
+#include "timer_interface.h" // <--- დაგვჭირდება ტაიმერის ინტერფეისი
+#include <string.h>
+#include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("{MODULE_NAME}");
+DEFINE_COMPONENT_TAG("GREETER_MODULE");
 
-// ივენთის სახელი, რომელსაც ჩვენი მოდული დაამუშავებს
-#define MY_TARGET_EVENT "SomeInterestingEvent"
+// ჩვენი მოდულის მიერ გამოყენებული ივენთების სახელები
+#define GREETING_TIMER_TICK "GREETING_TIMER_TICK"
+#define GREETING_MESSAGE_READY "GREETING_MESSAGE_READY"
 
-static module_t *global_{module_name}_instance = NULL;
-static {module_name}_api_t {module_name}_service_api = {
-    .enable = {module_name}_api_enable,
-    .disable = {module_name}_api_disable,
-    // საჭიროების მიხედვით სხვა ფუნქციები
-};
-
+// Private Data Structure
 typedef struct {
-    char module_instance_name[32];
-    // კონფიგურაციის პარამეტრები
-    // runtime ცვლადები
-    // hardware handles
-}} {module_name}_private_data_t;
+    char instance_name[32];
+    char greeting_text[64];
+    fmw_timer_handle_t greeting_timer;
+} greeter_private_data_t;
 
-// ფუნქციის დეკლარაციები
-static void {module_name}_deinit(module_t *self);
-// ... სხვა დეკლარაციები
+// Forward Declarations
+static esp_err_t greeter_module_init(module_t *self);
+static esp_err_t greeter_module_start(module_t *self);
+static void greeter_module_deinit(module_t *self);
+static void greeter_module_handle_event(module_t *self, const char *event_name, void *event_data);
 
-// ★★★ განახლებული create და deinit ფუნქციის შაბლონები ★★★
+// Create Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)
+module_t *greeter_module_create(const cJSON *config) {
+    module_t *module = (module_t *)calloc(1, sizeof(module_t));
+    greeter_private_data_t *private_data = (greeter_private_data_t *)calloc(1, sizeof(greeter_private_data_t));
+    if (!module || !private_data) { /* ... error handling ... */ return NULL; }
 
-module_t* {module_name}_create(const cJSON *config) {
-    // 1. გამოყავით მეხსიერება მთავარი მოდულის სტრუქტურისთვის
-    module_t *module = calloc(1, sizeof(module_t));
-    if (!module) {
-        ESP_LOGE(TAG, "Failed to allocate memory for module_t.");
-        return NULL;
-    }
-
-    // 2. გამოყავით მეხსიერება მოდულის პირადი მონაცემების სტრუქტურისთვის
-    {module_name}_private_data_t *private_data = calloc(1, sizeof({module_name}_private_data_t));
-    if (!private_data) {
-        ESP_LOGE(TAG, "Failed to allocate memory for private_data.");
-        free(module);
-        return NULL;
-    }
-    
-    // 3. ★★★ შექმენით state_mutex ★★★
-    module->state_mutex = xSemaphoreCreateMutex();
-    if (!module->state_mutex) {
-        ESP_LOGE(TAG, "Failed to create state mutex.");
-        free(private_data);
-        free(module);
-        return NULL;
-    }
-
-    // 4. დააკავშირეთ პირადი მონაცემები და დააყენეთ საწყისი სტატუსი
     module->private_data = private_data;
-    module->status = MODULE_STATUS_UNINITIALIZED;
+    module->current_config = (cJSON*)config; // ვიღებთ მფლობელობას
 
-    // ... (დააყენეთ ბაზის ფუნქციები, მაგ: module->base.init = {module_name}_init;) ...
-    module->base.deinit = {module_name}_deinit; // მნიშვნელოვანია: დააყენეთ deinit ფუნქცია
-    
-    // ... (წაიკითხეთ კონფიგურაცია `config`-დან და შეავსეთ პირადი მონაცემები) ...
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+    const cJSON *text_node = cJSON_GetObjectItem(config_node, "greeting_text");
+
+    snprintf(module->name, sizeof(module->name), "%s", cJSON_GetStringValue(name_node));
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetStringValue(name_node));
+    snprintf(private_data->greeting_text, sizeof(private_data->greeting_text), "%s", cJSON_GetStringValue(text_node));
+
+    module->base.init = greeter_module_init;
+    module->base.start = greeter_module_start;
+    module->base.deinit = greeter_module_deinit;
+    module->base.handle_event = greeter_module_handle_event;
     
     return module;
 }
 
-static void {module_name}_deinit(module_t *self) {
+// Init Function
+static esp_err_t greeter_module_init(module_t *self) {
+    ESP_LOGI(TAG, "'%s' initializing...", self->name);
+    // გამოვიწეროთ ჩვენივე ტაიმერის ივენთი
+    fmw_event_bus_subscribe(GREETING_TIMER_TICK, self);
+    self->status = MODULE_STATUS_INITIALIZED;
+    return ESP_OK;
+}
+
+// Start Function
+static esp_err_t greeter_module_start(module_t *self) {
+    ESP_LOGI(TAG, "'%s' starting...", self->name);
+    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
+
+    service_handle_t timer_service = fmw_service_get("main_timer_service");
+    if (timer_service) {
+        timer_api_t *timer_api = (timer_api_t *)timer_service;
+        // დავგეგმოთ პერიოდული ივენთი ყოველ 5 წამში
+        p_data->greeting_timer = timer_api->schedule_event(GREETING_TIMER_TICK, 5000, true);
+    } else {
+        ESP_LOGE(TAG, "System Timer service not found!");
+        return ESP_FAIL;
+    }
+    
+    self->status = MODULE_STATUS_RUNNING;
+    return ESP_OK;
+}
+
+// Event Handler
+static void greeter_module_handle_event(module_t *self, const char *event_name, void *event_data) {
+    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
+
+    if (strcmp(event_name, GREETING_TIMER_TICK) == 0) {
+        ESP_LOGI(TAG, "Timer tick received. Posting greeting message.");
+        
+        // მოვამზადოთ payload
+        char* message_payload = strdup(p_data->greeting_text);
+        event_data_wrapper_t *wrapper;
+
+        if (fmw_event_data_wrap(message_payload, free, &wrapper) == ESP_OK) {
+            fmw_event_bus_post(GREETING_MESSAGE_READY, wrapper);
+            fmw_event_data_release(wrapper); // გავათავისუფლოთ ჩვენი reference
+        }
+    }
+
+    if (event_data) {
+        fmw_event_data_release((event_data_wrapper_t *)event_data);
+    }
+}
+
+// Deinit Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)
+static void greeter_module_deinit(module_t *self) {
     if (!self) return;
+    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
 
-    ESP_LOGI(TAG, "Deinitializing {module_name} module: %s", self->name);
-
-    // ★★★ მნიშვნელოვანი ნაბიჯი: გააუქმეთ ყველა გამოწერა! ★★★
-    // მაგალითად: fmw_event_bus_unsubscribe(SOME_EVENT_ID, self);
-    // **მნიშვნელოვანია:** ყოველთვის გააუქმეთ ივენთის გამოწერა,
-    // რათა თავიდან ავიცილოთ dangling pointer-ები.
-    fmw_event_bus_unsubscribe(MY_TARGET_EVENT, self);
-    
-    // ★★★ გაანადგურეთ state_mutex ★★★
-    if (self->state_mutex) {
-        vSemaphoreDelete(self->state_mutex);
-        self->state_mutex = NULL;
+    // გავაუქმოთ ტაიმერი
+    service_handle_t timer_service = fmw_service_get("main_timer_service");
+    if (timer_service && p_data->greeting_timer) {
+        ((timer_api_t *)timer_service)->cancel_event(p_data->greeting_timer);
     }
 
-    // გაათავისუფლეთ პირადი მონაცემები
-    if (self->private_data) {
-        free(self->private_data);
-        self->private_data = NULL;
-    }
-    
-    // გაათავისუფლეთ თავად მოდულის ობიექტი
+    fmw_event_bus_unsubscribe(GREETING_TIMER_TICK, self);
+
+    if (self->current_config) cJSON_Delete(self->current_config);
+    if (self->private_data) free(self->private_data);
     free(self);
 }
-
-// მოდულის ინიციალიზაცია
-static esp_err_t my_module_init(module_t* module) {
-    ESP_LOGI(TAG, "My Module initialized!");
-    // გამოიწერეთ ივენთი, რომლის მიღებაც გსურთ
-    fmw_event_bus_subscribe(MY_TARGET_EVENT, module);
-    return ESP_OK;
-}
-
-// ივენთების დამმუშავებელი
-static esp_err_t my_module_handle_event(module_t* module, const char *event_name, event_data_wrapper_t* data) {
-    // შევამოწმოთ ივენთის სახელი strcmp-ის გამოყენებით
-    if (strcmp(event_name, MY_TARGET_EVENT) == 0) {
-        ESP_LOGI(TAG, "My target event received!");
-        // აქ დაამუშავეთ ივენთის მონაცემები...
-    }
-    return ESP_OK;
-}
-
-// მოდულის გაშვება
-static esp_err_t my_module_start(module_t* module) {
-    ESP_LOGI(TAG, "My Module started!");
-    return ESP_OK;
-}
-
-// ... (სხვა ფუნქციების იმპლემენტაცია) ...
 ```
 
-## 4. Naming და Structure კონვენციების გამოყენება
+## 5. ტესტირება
 
-- გამოიყენეთ [variable_naming.md](../convention/variable_naming.md) და [function_naming.md](../convention/function_naming.md)
-- დაიცავით [module_structure.md](../convention/module_structure.md)
-- ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიური და კონტექსტური
+1. **ააწყვეთ და ჩაწერეთ firmware:**
 
-## 5. მოდულის რეგისტრაცია და ჩართვა
+    ```bash
+    idf.py build flash monitor
+    ```
 
-- დაამატეთ მოდული `system_config.json`-ში:
-
-  ```json
-  {
-      "type": "{module_name}",
-      "enabled": true,
-      "config": {
-          "instance_name": "{instance_name}",
-          // სხვა საჭირო პარამეტრები
-      }
-  }
-  ```
-
-- ჩართეთ მოდული Kconfig-ში
-
-## 6. ტესტირება და ლოგირება
-
-- გამოიყენეთ ESP-IDF-ის build და flash ბრძანებები
-- დააკვირდით ლოგებს (ESP_LOGI, ESP_LOGE და სხვ.)
-- დარწმუნდით, რომ ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგში ჩანს
-
-## 7. დამატებითი რესურსები
-
-- [module_structure.md](../convention/module_structure.md)
-- [configuration_flow.md](../structure/configuration_flow.md)
-- [error_handling_and_logging.md](../structure/error_handling_and_logging.md)
+2. **დააკვირდით ლოგებს:** თქვენ უნდა დაინახოთ, რომ `greeter_module` იქმნება, იწყებს მუშაობას და ყოველ 5 წამში ერთხელ ბეჭდავს `Posting greeting message.` შეტყობინებას.
+3. **დამატებით:** შეგიძლიათ, `logger_module` გამოიყენოთ, რათა დაინახოთ, რომ `GREETING_MESSAGE_READY` ივენთი ნამდვილად ქვეყნდება `Event Bus`-ზე.
 
 ---
 

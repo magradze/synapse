@@ -9,36 +9,39 @@ set(SRCS
     "event_data_wrapper.c"
     "service_locator.c"
     "event_payloads.c"
+    "module_helpers.c"
 )
 
-# ჩასვით სკრიპტი, რომელიც ავტომატურად აღმოაჩენს მოდულებს და გენერირებს factory-ს.
-# ეს სკრიპტი მშობელ scope-ში განსაზღვრავს რამდენიმე ცვლადს, მათ შორის
-# COLLECTED_MODULE_DEPENDENCIES-ს და სხვა factory-ს გენერაციისთვის საჭირო ცვლადებს.
+# --- Synapse Build Automation ---
+
+# ჩასვით და გაუშვით სკრიპტი, რომელიც აგროვებს დეცენტრალიზებულ კონფიგურაციებს
+include(${CMAKE_CURRENT_LIST_DIR}/collect_configs.cmake)
+collect_and_prepare_module_configs() # ეს ფუნქცია განსაზღვრავს COLLECTED_EMBED_FILES ცვლადს
+
+# ჩასვით სკრიპტი, რომელიც აგროვებს მოდულებს და აგენერირებს factory-ს
 include(${CMAKE_CURRENT_LIST_DIR}/collect_modules.cmake)
 
-# ჩასვით სკრიპტი, რომელიც აგროვებს MQTT თემებს მოდულებიდან და ქმნის ცენტრალიზებულ header-ს
+# ჩასვით სკრიპტი, რომელიც აგროვებს MQTT თემებს
 include(${CMAKE_CURRENT_LIST_DIR}/collect_mqtt_topics.cmake)
-
-# გენერაცია MQTT თემების header ფაილის module.json-ებიდან
 collect_mqtt_topics()
 
-# collect_modules სკრიპტი აგენერირებს ამ C ფაილს, ამიტომ უნდა დავამატოთ ჩვენს წყაროებში.
+# დაამატეთ ავტომატურად გენერირებული factory წყაროების სიას
 list(APPEND SRCS "${CMAKE_CURRENT_BINARY_DIR}/generated_module_factory.c")
 
-# დაარეგისტრირეთ კომპონენტი მის წყარო ფაილებთან და დამოკიდებულებებთან ერთად.
-# შენიშვნა: არჩევითი მოდულების პირდაპირი დამოკიდებულებები ამოღებულია.
-# Build სისტემა ამ დამოკიდებულებებს გადმოიღებს ტრანზიტიულად გენერირებული factory ფაილის include-ებიდან.
+# --- კომპონენტის რეგისტრაცია ---
 idf_component_register(SRCS ${SRCS}
-                    INCLUDE_DIRS "include" "${CMAKE_CURRENT_BINARY_DIR}"
-                    EMBED_FILES "../../configs/system_config.json"
-                    REQUIRES esp_event
-                             nvs_flash
-                             json
-                             driver
-                             esp_wifi
-                             interfaces
-                             # esp_tls # ეს დამოკიდებულება მხოლოდ იმ მოდულს უნდა დაემატოს, რომელსაც ეს სჭირდება და არა core-ს.
-                             # ყველა აღმოჩენილი მოდული დაემატოს build-time დამოკიდებულებად,
-                             # რათა build სისტემამ იცოდეს მათი header-ების მდებარეობა.
-                             ${COLLECTED_MODULE_DEPENDENCIES}
+                    INCLUDE_DIRS
+                        "include"
+                        "${CMAKE_CURRENT_BINARY_DIR}" # დაამატეთ build დირექტორია გენერირებული ჰედერებისთვის
+                    EMBED_FILES
+                        "../../configs/system_config.json" # ბაზისური კონფიგურაცია
+                        ${COLLECTED_EMBED_FILES}           # შეგროვებული მოდულების კონფიგურაციები
+                    REQUIRES
+                        esp_event
+                        nvs_flash
+                        json
+                        driver
+                        esp_wifi
+                        interfaces
+                        ${COLLECTED_MODULE_DEPENDENCIES}
 )

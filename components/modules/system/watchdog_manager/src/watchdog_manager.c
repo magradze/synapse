@@ -91,7 +91,8 @@ static watchdog_api_t watchdog_service_api = {
 
 /**
  * @brief Creates a new instance of the Watchdog Manager module.
- * @param[in] config Module configuration from system_config.json.
+ * @param[in] config Module configuration from system_config.json. This function
+ *                   takes ownership of the config pointer.
  * @return A pointer to the created module, or NULL on failure.
  */
 module_t *watchdog_manager_create(const cJSON *config)
@@ -105,31 +106,50 @@ module_t *watchdog_manager_create(const cJSON *config)
         ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
         free(private_data);
+        // Since we are about to own `config`, we must free it on failure.
+        if (config)
+            cJSON_Delete((cJSON *)config);
         return NULL;
     }
+
+    module->private_data = private_data;
+    module->current_config = (cJSON *)config; // Take ownership of the config object
 
     private_data->client_list_mutex = xSemaphoreCreateMutex();
     if (!private_data->client_list_mutex)
     {
         ESP_LOGE(TAG, "Failed to create client list mutex");
-        free(private_data);
-        free(module);
+        watchdog_manager_deinit(module); // Use deinit for consistent cleanup
         return NULL;
     }
 
-    module->private_data = private_data;
-
-    if (parse_config(config, private_data) != ESP_OK)
+    // --- START OF CORRECTED CONFIGURATION & NAME PARSING ---
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    if (!config_node)
     {
-        ESP_LOGE(TAG, "Failed to parse configuration.");
-        vSemaphoreDelete(private_data->client_list_mutex);
-        free(private_data);
-        free(module);
+        ESP_LOGE(TAG, "Module config is missing the required 'config' object wrapper.");
+        watchdog_manager_deinit(module);
         return NULL;
     }
 
-    snprintf(module->name, sizeof(module->name), "%s", private_data->instance_name);
-    module->init_level = 36;
+    // 1. Parse instance_name FIRST
+    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+    const char *instance_name = cJSON_IsString(name_node) ? name_node->valuestring : CONFIG_WATCHDOG_MANAGER_DEFAULT_INSTANCE_NAME;
+
+    // 2. Copy the name to both the module's public name and private data
+    snprintf(module->name, sizeof(module->name), "%s", instance_name);
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", instance_name);
+
+    // 3. Parse the rest of the configuration
+    if (parse_config(config_node, private_data) != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to parse configuration for '%s'.", module->name);
+        watchdog_manager_deinit(module);
+        return NULL;
+    }
+    // --- END OF CORRECTED LOGIC ---
+
+    module->init_level = 36; // Should be after System Timer (35)
     module->status = MODULE_STATUS_UNINITIALIZED;
 
     module->base.init = watchdog_manager_init;
@@ -138,6 +158,8 @@ module_t *watchdog_manager_create(const cJSON *config)
     module->base.handle_event = NULL; // This module does not need to handle events
 
     watchdog_manager_self = module;
+
+    ESP_LOGI(TAG, "Watchdog Manager module '%s' created.", module->name);
     return module;
 }
 

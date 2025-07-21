@@ -36,6 +36,11 @@
 // --- Relay Actuator Events ---
 #define FMW_EVENT_RELAY_STATE_CHANGED "FMW_RELAY_STATE_CHANGED"
 
+// --- Watchdog Manager Events ---
+#define FMW_EVENT_WATCHDOG_CHECK_TICK "FMW_WATCHDOG_CHECK_TICK"
+#define FMW_EVENT_HEARTBEAT_MISSED "FMW_HEARTBEAT_MISSED"
+#define FMW_EVENT_WATCHDOG_ALL_OK "FMW_WATCHDOG_ALL_OK"
+
 /**
  * @brief Generic event published by any module that establishes a critical external connection.
  * @details The payload should be of type fmw_connectivity_payload_t.

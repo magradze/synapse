@@ -4,272 +4,164 @@
 
 ### სტანდარტული მოდულის layout
 
-```
+```plaintext
 components/modules/{category}/{module_name}/
 ├── CMakeLists.txt
+├── Kconfig
 ├── module.json
+├── config.json         # <--- ახალი
 ├── README.md
 ├── include/
 │   └── {module_name}.h
-└── {module_name}.c
+└── src/
+    └── {module_name}.c
 ```
 
 ### კატეგორიები
 
-```
+```plaintext
 components/modules/
-├── actuators/          # მოქმედი მოწყობილობები
-│   └── relay_module/
-├── communication/      # კომუნიკაციის მოდულები
-│   ├── mqtt_module/
-│   └── wifi_module/
-├── display/           # ეკრანები და ინდიკატორები
-│   ├── ssd1306_module/
-│   └── lcd1602_module/
-├── drivers/           # დრაივერები
-│   ├── i2c_bus_module/
-│   └── spi_bus_module/
-├── provisioning/      # კონფიგურაციის მოდულები
-│   └── ble_prov_module/
-├── sensors/           # სენსორები
-│   └── dht22_module/
-├── system/            # სისტემური მოდულები
-│   ├── ota_module/
-│   └── version_module/
-└── utility/           # დამხმარე მოდულები
-    └── logger_module/
+├── actuators/
+├── communications/
+├── displays/
+├── drivers/
+├── provisioning/
+├── security/
+├── sensors/
+├── storage/
+├── system/
+├── testing/
+└── utilities/
 ```
 
 ## ფაილის სტრუქტურა
 
-### 1. Header ფაილი (`include/{module_name}.h`)
+### 1. `config.json` (ახალი სექცია)
 
-```c
-#ifndef {MODULE_NAME}_H
-#define {MODULE_NAME}_H
+ეს ფაილი განსაზღვრავს მოდულის default runtime კონფიგურაციას. ის უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი აღწერს მოდულის ერთ ინსტანციას.
 
-#include "base_module.h"
-#include "cJSON.h"
-#include "esp_err.h"
-
-// === Service API Structure (თუ Service Locator-ს იყენებს) ===
-typedef struct {
-    esp_err_t (*enable)(void);
-    esp_err_t (*disable)(void);
-    // სხვა API ფუნქციები...
-} {module_name}_api_t;
-
-// === Public Functions ===
-module_t *{module_name}_create(const cJSON *config);
-
-// === Service API Functions (თუ Service Locator-ს იყენებს) ===
-esp_err_t {module_name}_api_enable(void);
-esp_err_t {module_name}_api_disable(void);
-
-#endif // {MODULE_NAME}_H
-```
-
-### 2. Source ფაილი (`{module_name}.c`)
-
-```c
-// === Includes ===
-#include "{module_name}.h"
-
-// Core framework headers
-#include "service_locator.h"  // თუ Service Locator-ს იყენებს
-#include "event_bus.h"        // თუ Event Bus-ს იყენებს
-#include "config_manager.h"
-#include "logging.h"
-
-// ESP-IDF headers
-#include "esp_log.h"
-#include "freertos/FreeRTOS.h"
-// სხვა საჭირო headers...
-
-// === Component Tag ===
-DEFINE_COMPONENT_TAG("{MODULE_NAME}");
-
-// === Global Variables (თუ Service Locator API აქვს) ===
-static module_t *global_{module_name}_instance = NULL;
-static {module_name}_api_t {module_name}_service_api = {
-    .enable = {module_name}_api_enable,
-    .disable = {module_name}_api_disable,
-    // სხვა ფუნქციები...
-};
-
-// === Private Data Structure ===
-typedef struct {
-    char module_instance_name[32];
-    // კონფიგურაციის პარამეტრები
-    // runtime ცვლადები
-    // hardware handles
-}} {module_name}_private_data_t;
-
-// === Function Declarations ===
-// Module lifecycle
-static esp_err_t {module_name}_init(module_t *module);
-static esp_err_t {module_name}_start(module_t *module);
-static esp_err_t {module_name}_deinit(module_t *module);
-
-// Runtime management (თუ runtime module-ია)
-static esp_err_t {module_name}_enable(module_t *module);
-static esp_err_t {module_name}_disable(module_t *module);
-static esp_err_t {module_name}_reconfigure(module_t *module, const cJSON *config);
-static module_status_t {module_name}_get_status(module_t *module);
-
-// Event handling (თუ events-ს იყენებს)
-static void {module_name}_handle_event(module_t *module, int32_t event_id, void *event_data);
-
-// Private helper functions
-static esp_err_t parse_{module_name}_config(const cJSON *config, {module_name}_private_data_t *module_private_data);
-// სხვა helper ფუნქციები...
-
-// === Implementation ===
-// [ყველა ფუნქციის იმპლემენტაცია]
-
-// === Public API Implementation ===
-module_t *{module_name}_create(const cJSON *config) {
-    // Module creation logic
-}
-
-// === Service API Implementation (თუ Service Locator-ს იყენებს) ===
-esp_err_t {module_name}_api_enable(void) {
-    if (!global_{module_name}_instance) {
-        ESP_LOGE(TAG, "Module not initialized for API access");
-        return ESP_ERR_INVALID_STATE;
+```json
+[
+  {
+    "type": "{module_name}",
+    "enabled": true,
+    "config": {
+      "instance_name": "main_{module_name}"
     }
-    return {module_name}_enable(global_{module_name}_instance);
-}
+  }
+]
 ```
 
-## მოდულის ტიპები
+### 2. `module.json`
 
-### 1. Event-Driven Module (მაგ., DHT22)
-
-- **იყენებს:** Event Bus-ს მონაცემების გასაგზავნად
-- **არ იყენებს:** Service Locator-ს
-- **მაგალითი:** sensor modules, health monitor
-
-```c
-// Event-driven module structure
-static void dht22_task(void *pvParameters);
-static esp_err_t publish_sensor_data(dht22_private_data_t *dht22_data, float temperature, float humidity);
-static void dht22_handle_event(module_t *module, int32_t event_id, void *event_data);
-```
-
-### 2. Service-Driven Module (მაგ., SSD1306)
-
-- **იყენებს:** Service Locator-ს API-ის გასაზიარებლად
-- **შეიძლება იყენებდეს:** Event Bus-ს notification-ებისთვის
-- **მაგალითი:** display modules, actuator modules
-
-```c
-// Service-driven module structure
-static ssd1306_api_t ssd1306_service_api = { /* API functions */ };
-esp_err_t ssd1306_api_enable(void);  // Service API
-static esp_err_t ssd1306_enable(module_t *module);  // Internal implementation
-```
-
-### 3. Driver Module (მაგ., I2C Bus)
-
-- **იყენებს:** Service Locator-ს driver API-ის გასაზიარებლად
-- **არ იყენებს:** Event Bus-ს (ძირითადად)
-- **მაგალითი:** i2c_bus_module, spi_bus_module
-
-```c
-// Driver module structure
-typedef struct {
-    esp_err_t (*read)(void *handle, uint8_t device_address, uint8_t *data, size_t data_length);
-    esp_err_t (*write)(void *handle, uint8_t device_address, const uint8_t *data, size_t data_length);
-    esp_err_t (*scan)(void *handle);
-}} i2c_bus_api_t;
-```
-
-## CMakeLists.txt სტრუქტურა
-
-```cmake
-# Standard structure
-idf_component_register(
-    SRCS "{module_name}.c"
-    INCLUDE_DIRS "include"
-    REQUIRES 
-        core 
-        interfaces 
-        # სხვა dependencies...
-)
-```
-
-### Dependencies მიხედვით
-
-```cmake
-# Event-driven module
-REQUIRES core interfaces
-
-# Service-driven module (uses other services)
-REQUIRES core interfaces i2c_bus_module
-
-# Driver module
-REQUIRES core interfaces driver
-
-# Communication module
-REQUIRES core interfaces esp_wifi mqtt
-```
-
-## module.json სტრუქტურა
+ეს ფაილი შეიცავს მოდულის მეტამონაცემებს build-სისტემისთვის.
 
 ```json
 {
     "name": "{module_name}",
-    "init_function": "{module_name}_create",
-    "description": "Module description",
     "version": "1.0.0",
-    "dependencies": [
-        "core",
-        "interfaces"
-    ]
+    "description": "Module description.",
+    "author": "Author Name",
+    "init_function": "{module_name}_create",
+    "init_level": 60,
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_{MODULE_NAME_UPPER}_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
 }
+```
+
+### 3. `src/{module_name}.c` (განახლებული შაბლონი)
+
+Source ფაილმა უნდა დაიცვას მეხსიერების მართვის ახალი წესები.
+
+```c
+// ... Includes ...
+
+DEFINE_COMPONENT_TAG("{MODULE_NAME_UPPER}");
+
+// ... Private Data, API Globals, etc. ...
+
+// --- Create & Deinit Functions ---
+
+module_t *{module_name}_create(const cJSON *config) {
+    // 1. Allocate memory for module and private data
+    module_t *module = (module_t *)calloc(1, sizeof(module_t));
+    // ... error handling ...
+    
+    // 2. Take ownership of the config object
+    module->current_config = (cJSON*)config;
+
+    // 3. Parse the configuration
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    if (!config_node) {
+        // ... error handling and cleanup ...
+        return NULL;
+    }
+    // ... parse instance_name and other parameters ...
+    
+    // 4. Set up base function pointers
+    module->base.init = {module_name}_init;
+    module->base.deinit = {module_name}_deinit;
+    // ... other base functions ...
+
+    return module;
+}
+
+static void {module_name}_deinit(module_t *self) {
+    if (!self) return;
+
+    // ... Unregister services, unsubscribe from events, delete tasks/queues ...
+
+    // Free all allocated memory
+    if (self->current_config) {
+        cJSON_Delete(self->current_config);
+    }
+    if (self->private_data) {
+        free(self->private_data);
+    }
+    free(self);
+}
+
+// ... Other module functions (init, start, handle_event, etc.) ...
+```
+
+## `CMakeLists.txt` სტრუქტურა
+
+რეკომენდებულია გამარტივებული `CMakeLists.txt`-ის გამოყენება. პირობითი კომპილაცია იმართება `core` კომპონენტის მიერ გენერირებული `module_factory`-ით.
+
+```cmake
+# Standard simplified structure
+idf_component_register(
+    SRCS "src/{module_name}.c"
+    INCLUDE_DIRS "include"
+    REQUIRES
+        core
+        interfaces
+        # Other direct dependencies (e.g., a specific driver)
+    PRIV_REQUIRES
+        json
+        # Other private dependencies (e.g., esp_timer)
+)
 ```
 
 ## აკრძალული პრაქტიკები
 
-❌ **არ გავაკეთოთ:**
+❌ **არასდროს:**
 
-- პირდაპირი #include სხვა მოდულების header-ების
-- Global variables without proper naming
-- Mixed communication patterns (Event Bus + Service Locator არასწორად)
-- Hardcoded configuration values
-- Non-standard directory structure
+- პირდაპირი `#include` სხვა მოდულის ჰედერების.
+- `module.json`-ში runtime პარამეტრების შენახვა.
+- `_create` ფუნქციაში გადაცემული `config` ობიექტის დუბლირება (`cJSON_Duplicate`).
 
-✅ **ყოველთვის გავაკეთოთ:**
+✅ **ყოველთვის:**
 
-- Service Locator for direct API calls
-- Event Bus for broadcast notifications
-- Config-based parameters
-- Standard module lifecycle
-- Proper error handling
-- Comprehensive logging
+- გამოიყენეთ `Service Locator` და `Event Bus` კომუნიკაციისთვის.
+- განსაზღვრეთ runtime პარამეტრები `config.json`-ში.
+- `_create` ფუნქციამ უნდა "მიითვისოს" (`take ownership`) გადაცემული `config` ობიექტი.
+- `_deinit` ფუნქციამ უნდა გაათავისუფლოს `module->current_config`.
 
-## მაგალითი სრული მოდული სტრუქტურა
+---
 
-```
-components/modules/display/ssd1306_module/
-├── CMakeLists.txt
-│   └── REQUIRES core interfaces i2c_bus_module
-├── module.json
-│   └── "init_function": "ssd1306_module_create"
-├── README.md
-├── include/
-│   └── ssd1306_module.h
-│       ├── ssd1306_api_t structure
-│       ├── ssd1306_module_create() declaration
-│       └── ssd1306_api_*() declarations
-└── ssd1306_module.c
-    ├── DEFINE_COMPONENT_TAG("SSD1306_MODULE")
-    ├── global_ssd1306_instance
-    ├── ssd1306_service_api
-    ├── ssd1306_private_data_t
-    ├── Lifecycle functions (init, start, deinit)
-    ├── Runtime functions (enable, disable, get_status)
-    ├── Service API functions
-    └── Private helper functions
-```
+ამ ფაილის განახლებით, ჩვენი დოკუმენტაციის რეფაქტორინგი დასრულებულია. ის ახლა სრულად შეესაბამება Synapse Framework v5.0.0-ის არქიტექტურას.

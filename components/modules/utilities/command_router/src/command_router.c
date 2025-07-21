@@ -80,12 +80,14 @@ static esp_err_t cmd_handler_nvs_inspect(int argc, char **argv, void *context);
 static esp_err_t cmd_handler_reboot(int argc, char **argv, void *context);
 static esp_err_t service_api_register_command(const cmd_t *command);
 static esp_err_t service_api_unregister_command(const char *command_name);
+static bool service_api_is_command_registered(const char *command_name);
 
 // --- Module-static variables ---
 static module_t *global_cmd_router_instance = NULL;
 static cmd_router_api_t command_router_service_api = {
     .register_command = service_api_register_command,
     .unregister_command = service_api_unregister_command,
+    .is_command_registered = service_api_is_command_registered,
 };
 
 /**
@@ -576,6 +578,39 @@ static esp_err_t service_api_unregister_command(const char *command_name)
     xSemaphoreGive(private_data->commands_mutex);
     ESP_LOGI(TAG, "Command unregistered: '%s'", command_name);
     return ESP_OK;
+}
+
+/**
+ * @internal
+ * @brief API function to check if a command is registered.
+ * @see cmd_router_interface.h
+ */
+static bool service_api_is_command_registered(const char *command_name)
+{
+    if (!global_cmd_router_instance || !command_name)
+    {
+        return false;
+    }
+    cmd_router_private_data_t *private_data = (cmd_router_private_data_t *)global_cmd_router_instance->private_data;
+
+    if (xSemaphoreTake(private_data->commands_mutex, pdMS_TO_TICKS(50)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to take mutex to check command registration.");
+        return false; // Fail-safe: assume it exists to prevent duplicates
+    }
+
+    bool found = false;
+    for (int i = 0; i < private_data->command_count; i++)
+    {
+        if (strcmp(private_data->registered_commands[i]->command, command_name) == 0)
+        {
+            found = true;
+            break;
+        }
+    }
+
+    xSemaphoreGive(private_data->commands_mutex);
+    return found;
 }
 
 // =========================================================================

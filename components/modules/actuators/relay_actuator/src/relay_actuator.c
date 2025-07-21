@@ -188,22 +188,55 @@ static void relay_module_deinit(module_t *self) {
     free(self);
 }
 
-static void relay_module_handle_event(module_t *self, const char *event_name, void *event_data) {
+/**
+ * @internal
+ * @brief Handles events from the Event Bus.
+ * @details This function's primary role is to register the generic 'relay'
+ *          command once the system has fully started. It uses the new
+ *          `is_command_registered` API to ensure that only the first
+ *          relay_actuator instance performs this registration, avoiding conflicts.
+ */
+static void relay_module_handle_event(module_t *self, const char *event_name, void *event_data)
+{
+    // We only care about the system start event.
     if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {
+
         service_handle_t cmd_router = fmw_service_get("main_cmd_router");
         if (cmd_router) {
-            static cmd_t relay_cmd = {
-                .command = "relay",
-                .help = "Controls a relay actuator.",
-                .usage = "relay <instance_name> <on|off|toggle>",
-                .min_args = 3,
-                .max_args = 3,
-                .handler = cmd_handler,
-                .context = NULL,
-            };
-            ((cmd_router_api_t *)cmd_router)->register_command(&relay_cmd);
+            cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router;
+
+            // --- START OF NEW, CONFLICT-FREE REGISTRATION LOGIC ---
+            if (!cmd_api->is_command_registered("relay"))
+            {
+                ESP_LOGI(TAG, "Module '%s' is registering the generic 'relay' command.", self->name);
+
+                // This static struct is shared by all relay instances, but that's okay
+                // because it's registered only once and the handler is generic.
+                static cmd_t relay_cmd = {
+                    .command = "relay",
+                    .help = "Controls a relay actuator.",
+                    .usage = "relay <instance_name> <on|off|toggle>",
+                    .min_args = 3,
+                    .max_args = 3,
+                    .handler = cmd_handler,
+                    .context = NULL, // The handler is generic and doesn't need instance context
+                };
+
+                esp_err_t err = cmd_api->register_command(&relay_cmd);
+                if (err != ESP_OK)
+                {
+                    ESP_LOGE(TAG, "Failed to register 'relay' command: %s", esp_err_to_name(err));
+                }
+            }
+            else
+            {
+                ESP_LOGD(TAG, "Module '%s' sees that 'relay' command is already registered. Skipping.", self->name);
+            }
+            // --- END OF NEW LOGIC ---
         }
     }
+
+    // Always release the data wrapper if it exists
     if (event_data) {
         fmw_event_data_release((event_data_wrapper_t *)event_data);
     }

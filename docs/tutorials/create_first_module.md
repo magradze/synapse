@@ -2,7 +2,7 @@
 
 ## მიზანი
 
-ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ `create_module.py` სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით.
+ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ `create_module.py` სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით, მათ შორის, როგორ დავამატოთ CLI ბრძანება უსაფრთხოდ, კონფლიქტების გარეშე.
 
 ## 1. საჭიროების განსაზღვრა
 
@@ -10,11 +10,10 @@
 - **ფუნქციონალი:**
     1. `start` ფაზაში, `System Timer` სერვისის გამოყენებით, დაგეგმოს პერიოდული ივენთი `GREETING_TIMER_TICK`.
     2. როდესაც მიიღებს ამ ივენთს, `Event Bus`-ზე გამოაქვეყნოს ახალი, საკუთარი ივენთი `GREETING_MESSAGE_READY` `payload`-ით, რომელიც შეიცავს მისალმების ტექსტს.
+    3. დაარეგისტრიროს `greet` CLI ბრძანება, რომელიც დაბეჭდავს კონკრეტული ინსტანციის მისალმების ტექსტს.
 - **კატეგორია:** `utilities`
 
 ## 2. მოდულის ჩონჩხის გენერაცია
-
-**(სრულად განახლებულია)**
 
 ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ `create_module.py` სკრიპტს.
 
@@ -28,7 +27,7 @@
 3. უპასუხეთ კითხვებს შემდეგნაირად:
     - **შეიყვანეთ მოდულის სრული სახელი:** `Greeter Module`
     - **აირჩიეთ კატეგორია:** `utilities`
-    - **აირჩიეთ მოდულის არქეტიპი:** `Event Producer` (რადგან ჩვენი მოდული ივენთებს გამოაქვეყნებს).
+    - **აირჩიეთ მოდულის არქეტიპი:** `Event & Command` (რადგან ჩვენი მოდული ივენთებსაც გამოაქვეყნებს და ბრძანებასაც დაამუშავებს).
     - დანარჩენ კითხვებს შეგიძლიათ დაეთანხმოთ (Enter).
 
 სკრიპტი შექმნის ყველა საჭირო ფაილს, მათ შორის `config.json`-ს, `components/modules/utilities/greeter_module/` დირექტორიაში.
@@ -54,14 +53,14 @@
 
 ## 4. კოდის იმპლემენტაცია
 
-ახლა შევავსოთ `greeter_module.c` ფაილი. სკრიპტმა უკვე დააგენერირა ჩონჩხი, ჩვენ მხოლოდ ლოგიკა უნდა დავამატოთ.
+ახლა სრულად ჩავანაცვლოთ `greeter_module.c` ფაილის შიგთავსი. სკრიპტმა დააგენერირა ჩონჩხი, მაგრამ ჩვენ მას სრულად შევავსებთ ჩვენი ლოგიკით.
 
 **`src/greeter_module.c` (საბოლოო ვერსია):**
 
 ```c
 /**
  * @file greeter_module.c
- * @brief A simple module that periodically sends greetings.
+ * @brief A simple module that periodically sends greetings and provides a CLI command.
  * @author (Your Name)
  */
 #include "greeter_module.h"
@@ -69,13 +68,15 @@
 #include "event_bus.h"
 #include "event_data_wrapper.h"
 #include "service_locator.h"
-#include "timer_interface.h" // <--- დაგვჭირდება ტაიმერის ინტერფეისი
+#include "timer_interface.h"
+#include "cmd_router_interface.h"
+#include "module_registry.h" // To find other instances
 #include <string.h>
 #include <stdlib.h>
 
 DEFINE_COMPONENT_TAG("GREETER_MODULE");
 
-// ჩვენი მოდულის მიერ გამოყენებული ივენთების სახელები
+// Event names used by this module
 #define GREETING_TIMER_TICK "GREETING_TIMER_TICK"
 #define GREETING_MESSAGE_READY "GREETING_MESSAGE_READY"
 
@@ -91,15 +92,22 @@ static esp_err_t greeter_module_init(module_t *self);
 static esp_err_t greeter_module_start(module_t *self);
 static void greeter_module_deinit(module_t *self);
 static void greeter_module_handle_event(module_t *self, const char *event_name, void *event_data);
+static esp_err_t greeter_cmd_handler(int argc, char **argv, void *context);
 
-// Create Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)
+// Create Function
 module_t *greeter_module_create(const cJSON *config) {
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
     greeter_private_data_t *private_data = (greeter_private_data_t *)calloc(1, sizeof(greeter_private_data_t));
-    if (!module || !private_data) { /* ... error handling ... */ return NULL; }
+    if (!module || !private_data) {
+        ESP_LOGE(TAG, "Failed to allocate memory");
+        free(module);
+        free(private_data);
+        if (config) cJSON_Delete((cJSON*)config);
+        return NULL;
+    }
 
     module->private_data = private_data;
-    module->current_config = (cJSON*)config; // ვიღებთ მფლობელობას
+    module->current_config = (cJSON*)config;
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
@@ -120,8 +128,8 @@ module_t *greeter_module_create(const cJSON *config) {
 // Init Function
 static esp_err_t greeter_module_init(module_t *self) {
     ESP_LOGI(TAG, "'%s' initializing...", self->name);
-    // გამოვიწეროთ ჩვენივე ტაიმერის ივენთი
     fmw_event_bus_subscribe(GREETING_TIMER_TICK, self);
+    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
@@ -134,7 +142,6 @@ static esp_err_t greeter_module_start(module_t *self) {
     service_handle_t timer_service = fmw_service_get("main_timer_service");
     if (timer_service) {
         timer_api_t *timer_api = (timer_api_t *)timer_service;
-        // დავგეგმოთ პერიოდული ივენთი ყოველ 5 წამში
         p_data->greeting_timer = timer_api->schedule_event(GREETING_TIMER_TICK, 5000, true);
     } else {
         ESP_LOGE(TAG, "System Timer service not found!");
@@ -151,14 +158,29 @@ static void greeter_module_handle_event(module_t *self, const char *event_name, 
 
     if (strcmp(event_name, GREETING_TIMER_TICK) == 0) {
         ESP_LOGI(TAG, "Timer tick received. Posting greeting message.");
-        
-        // მოვამზადოთ payload
         char* message_payload = strdup(p_data->greeting_text);
         event_data_wrapper_t *wrapper;
-
         if (fmw_event_data_wrap(message_payload, free, &wrapper) == ESP_OK) {
             fmw_event_bus_post(GREETING_MESSAGE_READY, wrapper);
-            fmw_event_data_release(wrapper); // გავათავისუფლოთ ჩვენი reference
+            fmw_event_data_release(wrapper);
+        }
+    } else if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {
+        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+        if (cmd_router) {
+            cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router;
+            if (!cmd_api->is_command_registered("greet")) {
+                ESP_LOGI(TAG, "Module '%s' is registering the generic 'greet' command.", self->name);
+                static cmd_t greet_cmd = {
+                    .command = "greet",
+                    .help = "Prints a greeting message from a specific instance.",
+                    .usage = "greet <instance_name>",
+                    .min_args = 2,
+                    .max_args = 2,
+                    .handler = greeter_cmd_handler,
+                    .context = NULL
+                };
+                cmd_api->register_command(&greet_cmd);
+            }
         }
     }
 
@@ -167,22 +189,47 @@ static void greeter_module_handle_event(module_t *self, const char *event_name, 
     }
 }
 
-// Deinit Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)
+// Deinit Function
 static void greeter_module_deinit(module_t *self) {
     if (!self) return;
     greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
 
-    // გავაუქმოთ ტაიმერი
     service_handle_t timer_service = fmw_service_get("main_timer_service");
     if (timer_service && p_data->greeting_timer) {
         ((timer_api_t *)timer_service)->cancel_event(p_data->greeting_timer);
     }
 
     fmw_event_bus_unsubscribe(GREETING_TIMER_TICK, self);
+    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+
+    // Unregister the command (optional, but good practice)
+    service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    if (cmd_router) {
+        ((cmd_router_api_t *)cmd_router)->unregister_command("greet");
+    }
 
     if (self->current_config) cJSON_Delete(self->current_config);
     if (self->private_data) free(self->private_data);
     free(self);
+}
+
+// Command Handler
+static esp_err_t greeter_cmd_handler(int argc, char **argv, void *context) {
+    const char* instance_name = argv[1];
+    
+    module_t* target_module = fmw_module_registry_find_by_name(instance_name);
+    
+    if (target_module) {
+        // Check if the found module is actually a greeter_module.
+        // This is an advanced check, not strictly necessary for this example.
+        // We can assume it is for now.
+        greeter_private_data_t* p_data = (greeter_private_data_t*)target_module->private_data;
+        printf("Message from '%s': %s\n", instance_name, p_data->greeting_text);
+        return ESP_OK;
+    } else {
+        printf("Error: Greeter module with name '%s' not found.\n", instance_name);
+        return ESP_ERR_NOT_FOUND;
+    }
 }
 ```
 
@@ -195,7 +242,7 @@ static void greeter_module_deinit(module_t *self) {
     ```
 
 2. **დააკვირდით ლოგებს:** თქვენ უნდა დაინახოთ, რომ `greeter_module` იქმნება, იწყებს მუშაობას და ყოველ 5 წამში ერთხელ ბეჭდავს `Posting greeting message.` შეტყობინებას.
-3. **დამატებით:** შეგიძლიათ, `logger_module` გამოიყენოთ, რათა დაინახოთ, რომ `GREETING_MESSAGE_READY` ივენთი ნამდვილად ქვეყნდება `Event Bus`-ზე.
+3. **გამოიყენეთ CLI:** ტერმინალში აკრიფეთ `greet main_greeter`. ეკრანზე უნდა დაიბეჭდოს: `Message from 'main_greeter': Hello from Synapse!`.
 
 ---
 

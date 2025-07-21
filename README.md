@@ -1,100 +1,101 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/espressif/esp-idf/master/docs/_static/espressif-logo.svg" width="120" alt="ESP-IDF Logo"/>
+  <a href="https://github.com/espressif/esp-idf">
+    <img src="https://raw.githubusercontent.com/espressif/esp-idf/master/docs/_static/espressif-logo.svg" width="120" alt="ESP-IDF Logo"/>
+  </a>
   
 # Synapse ESP Framework
   
   _მძლავრი, მოდულური და გაფართოებადი პლატფორმა ESP32 მოწყობილობებისთვის_
   
-  [![Getting Started](https://img.shields.io/badge/-Getting%20Started-blue?style=for-the-badge)](#getting-started)
-  [![API Reference](https://img.shields.io/badge/-API%20Reference-green?style=for-the-badge)](#api-reference)
-  [![Contributing](https://img.shields.io/badge/-Contributing-orange?style=for-the-badge)](#%E1%83%99%E1%83%9D%E1%83%9C%E1%83%A2%E1%83%A0%E1%83%98%E1%83%91%E1%83%A3%E1%83%AA%E1%83%98%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%AE%E1%83%94%E1%83%9A%E1%83%9B%E1%83%AC%E1%83%A6%E1%83%95%E1%83%90%E1%83%9C%E1%83%94%E1%83%9A%E1%83%9D-contributing-guide)
-  [![Security](https://img.shields.io/badge/-Security-red?style=for-the-badge)](#security)
-  [![Performance](https://img.shields.io/badge/-Performance-yellow?style=for-the-badge)](#performance)
+  [![Getting Started](https://img.shields.io/badge/-სწრაფი%20სტარტი-blue?style=for-the-badge&logo=read-the-docs)](docs/tutorials/getting_started.md)
+  [![API Reference](https://img.shields.io/badge/-API%20Reference-green?style=for-the-badge&logo=c)](docs/api_reference/api_index.md)
+  [![Contributing](https://img.shields.io/badge/-კონტრიბუცია-orange?style=for-the-badge&logo=github)](docs/contributing/contributing_guide.md)
+  [![Security](https://img.shields.io/badge/-უსაფრთხოება-red?style=for-the-badge&logo=lock)](docs/security/security_best_practices.md)
+  [![Performance](https://img.shields.io/badge/-წარმადობა-yellow?style=for-the-badge&logo=speedtest)](docs/performance/performance_best_practices.md)
 </div>
 
 ---
 
 ## 🔥 პროექტის მიმოხილვა
 
-Synapse ESP Framework არის ღია კოდის პლატფორმა, რომელიც ამარტივებს ESP32-ზე დაფუძნებული IoT სისტემების შექმნას. ის უზრუნველყოფს მოდულურ არქიტექტურას, მოქნილ API-ებს, უსაფრთხოების და წარმადობის საუკეთესო პრაქტიკებს.
+Synapse ESP Framework არის ღია კოდის პლატფორმა, რომელიც ამარტივებს ESP32-ზე დაფუძნებული IoT სისტემების შექმნას. ის უზრუნველყოფს მოდულურ არქიტექტურას, მოქნილ API-ებს, უსაფრთხოების და წარმადობის საუკეთესო პრაქტიკებს. ფრეიმვორქის მთავარი უპირატესობაა **მოდულების ავტომატური აღმოჩენა** და **დეცენტრალიზებული კონფიგურაცია**, რაც დეველოპმენტის პროცესს უკიდურესად მოქნილს და მასშტაბირებადს ხდის.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 სწრაფი სტარტი (Getting Started)
 
 1. **საჭიროებები:**
-   - [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html) v5.4.1+
-   - Python 3.x, git
+    * [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html) v5.4.1+
+    * Python 3.x, git
 
 2. **პროექტის კლონირება:**
 
-   ```sh
-   git clone https://github.com/IoTesseract/synapse-esp.git
-   cd synapse-esp
-   ```
+    ```sh
+    git clone https://github.com/IoTesseract/synapse-esp.git
+    cd synapse-esp
+    ```
 
 3. **სტრუქტურის გაცნობა:**
-   - იხილეთ [Directory Structure](docs/structure/directory_structure.md)
-   - ძირითადი საქაღალდეები: `main/`, `components/`, `docs/`
+    * იხილეთ [Directory Structure](docs/structure/directory_structure.md)
+    * ძირითადი საქაღალდეები: `main/`, `components/`, `configs/`, `docs/`
 
-4. **მოდულის დამატება:**
-   - კონფიგურაცია: `system_config.json`
-   - იხილეთ მაგალითი და დეტალები [getting_started.md](docs/tutorials/getting_started.md)
+4. **მოდულის დამატება და კონფიგურაცია:**
+    * **(ახალი!)** მოდულების კონფიგურაცია ხდება მათ საკუთარ `config.json` ფაილებში (`components/modules/{category}/{module_name}/config.json`).
+    * იხილეთ დეტალური ინსტრუქციები [სწრაფი სტარტის სახელმძღვანელოში](docs/tutorials/getting_started.md).
 
 5. **ბილდი და ფლეში:**
-   - გამოიყენეთ ESP-IDF სტანდარტული build და flash ბრძანებები:
+    * გამოიყენეთ ESP-IDF სტანდარტული build და flash ბრძანებები:
 
-     ```sh
-     idf.py build
-     idf.py -p <PORT> flash
-     ```
+      ```sh
+      idf.py build
+      idf.py -p <PORT> flash monitor
+      ```
 
 ---
 
 ## 📚 API Reference
 
-- იხილეთ [API Reference Index](docs/api_reference/api_index.md) სრული API დოკუმენტაციისთვის.
-- ძირითადი API-ები:
-  - Core, Event, Configuration, Module, Display, Sensor, Communication, Drivers, Utility, Actuators, Provisioning, System, OTA, Version, Health Monitor, Storage, Time Sync, Local Control, Custom Extensions
+* იხილეთ [API Reference Index](docs/api_reference/api_index.md) სრული API დოკუმენტაციისთვის.
+* **ძირითადი API-ები:** Core, Event, Configuration, Module, Display, Sensor, Communication, Drivers, Utility, Actuators, Provisioning, System, OTA, Version, Health Monitor, Storage, Time Sync, Local Control, Custom Extensions.
 
 ---
 
 ## 🤝 კონტრიბუციის სახელმძღვანელო (Contributing Guide)
 
-- იხილეთ [Contributing Guide](docs/contributing/contributing_guide.md) დეტალური ინსტრუქციებისთვის.
-- ძირითადი წესები:
-  - გამოიყენეთ branch-ები და Pull Request-ები
-  - დაიცავით naming/structure convetion-ები
-  - კოდი უნდა იყოს კარგად დოკუმენტირებული
-  - README და სხვა დოკუმენტაცია განახლებული
+* იხილეთ [Contributing Guide](docs/contributing/contributing_guide.md) დეტალური ინსტრუქციებისთვის.
+* **ძირითადი წესები:**
+  * გამოიყენეთ branch-ები და Pull Request-ები.
+  * დაიცავით naming/structure კონვენციები.
+  * კოდი უნდა იყოს კარგად დოკუმენტირებული.
+  * განაახლეთ შესაბამისი დოკუმენტაცია.
 
 ---
 
-## 🛡️ Security
+## 🛡️ უსაფრთხოება (Security)
 
-- იხილეთ [Security Best Practices](docs/security/security_best_practices.md)
-- ძირითადი რეკომენდაციები:
-  - გამოიყენეთ TLS/SSL კომუნიკაციისთვის
-  - credentials შეინახეთ უსაფრთხოდ (NVS/Storage)
-  - firmware განაახლეთ მხოლოდ უსაფრთხო არხით (OTA)
-  - input validation ყველა მოდულში
-
----
-
-## ⚡ Performance
-
-- იხილეთ [Performance Best Practices](docs/performance/performance_best_practices.md)
-- რეკომენდაციები:
-  - გამოიყენეთ static allocation სადაც შესაძლებელია
-  - bottleneck-ების იდენტიფიკაცია და ოპტიმიზაცია
-  - lazy initialization რესურსების დაზოგვისთვის
+* იხილეთ [Security Best Practices](docs/security/security_best_practices.md).
+* **ძირითადი რეკომენდაციები:**
+  * გამოიყენეთ TLS/SSL კომუნიკაციისთვის.
+  * credentials შეინახეთ უსაფრთხოდ (NVS).
+  * firmware განაახლეთ მხოლოდ უსაფრთხო არხით (Signed OTA).
+  * გამოიყენეთ input validation ყველა მოდულში.
 
 ---
 
-## 🛠️ Troubleshooting
+## ⚡ წარმადობა (Performance)
 
-- იხილეთ [Troubleshooting FAQ](docs/troubleshooting/faq.md)
-- ხშირად დასმული კითხვები და პრობლემების გადაჭრის გზები
+* იხილეთ [Performance Best Practices](docs/performance/performance_best_practices.md).
+* **რეკომენდაციები:**
+  * გამოიყენეთ static allocation სადაც შესაძლებელია.
+  * მოახდინეთ bottleneck-ების იდენტიფიკაცია და ოპტიმიზაცია.
+  * გამოიყენეთ lazy initialization რესურსების დაზოგვისთვის.
+
+---
+
+## 🛠️ პრობლემების მოგვარება (Troubleshooting)
+
+* იხილეთ [Troubleshooting FAQ](docs/troubleshooting/faq.md).
+* ხშირად დასმული კითხვები და პრობლემების გადაჭრის გზები.
 
 ---
 
@@ -105,5 +106,5 @@ MIT License
 ---
 
 <div align="center">
-  <sub>დამატებითი ინფორმაცია იხილეთ [დოკუმენტაციაში](docs/README.md)</sub>
+  <sub>დამატებითი ინფორმაცია იხილეთ <a href="docs/README.md">სრულ დოკუმენტაციაში</a></sub>
 </div>

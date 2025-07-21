@@ -127,7 +127,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="center"><img src="config__manager_8h__dep__incl.png" border="0" usemap="#acomponents_2core_2include_2config__manager_8hdep" alt=""/></div>
 <map name="acomponents_2core_2include_2config__manager_8hdep" id="acomponents_2core_2include_2config__manager_8hdep">
 <area shape="rect" title="კონფიგურაციის მენეჯერის API." alt="" coords="208,5,393,45"/>
-<area shape="rect" href="config__manager_8c.html" title="კონფიგურაციის მენეჯერის იმპლემენტაცია." alt="" coords="5,93,183,133"/>
+<area shape="rect" href="config__manager_8c.html" title="Implementation of the Configuration Manager." alt="" coords="5,93,183,133"/>
 <area shape="poly" title=" " alt="" coords="244,53,140,96,138,91,242,48"/>
 <area shape="rect" href="module__registry_8c.html" title="მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია." alt="" coords="207,93,394,133"/>
 <area shape="poly" title=" " alt="" coords="303,59,303,93,298,93,298,59"/>
@@ -405,10 +405,7 @@ Functions</h2></td></tr>
 
 <p>აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს. </p>
 <dl class="section note"><dt>Note</dt><dd>გამოიყენეთ სიფრთხილით. სასურველია გამოიყენოთ უფრო სპეციფიური get ფუნქციები. </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>const cJSON* მთლიანი კონფიგურაციის root ობიექტის მაჩვენებელი.</dd></dl>
-<p>აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.</p>
-<dl class="section warning"><dt>Warning</dt><dd>ეს ფუნქცია აბრუნებს მაჩვენებელს შიდა cJSON ობიექტზე. მიუხედავად იმისა, რომ მაჩვენებელი არის <code>const</code>, რაც კრძალავს პირდაპირ ცვლილებებს, მისი გამოყენება მაინც მოითხოვს სიფრთხილეს. თავი აარიდეთ მის გამოყენებას, თუ ეს აბსოლუტურად აუცილებელი არ არის. გამოიყენეთ <code>fmw_config_get_*</code> ფუნქციები კონკრეტული მნიშვნელობების უსაფრთხოდ მისაღებად. </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>const cJSON* მაჩვენებელი მთავარ კვანძზე, ან NULL თუ კონფიგურაცია არ არის ჩატვირთული. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const cJSON* მთლიანი კონფიგურაციის root ობიექტის მაჩვენებელი. </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -451,16 +448,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="config__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph.png" border="0" usemap="#aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph" alt=""/></div>
-<map name="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph" id="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_cgraph">
-<area shape="rect" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="5,5,196,31"/>
-<area shape="rect" href="config__manager_8c.html#adf782fcfae675652d67a24618947e547" title="ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში." alt="" coords="244,5,379,31"/>
-<area shape="poly" title=" " alt="" coords="196,15,230,15,230,21,196,21"/>
-</map>
-</div>
-<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="config__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph.png" border="0" usemap="#aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph" alt=""/></div>
@@ -491,18 +478,6 @@ Here is the caller graph for this function:</div>
 
 <p>ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში. </p>
 <p>ეს ფუნქცია უნდა გამოიძახოთ მას შემდეგ, რაც კონფიგურაციაში ცვლილებები შევა, რათა ისინი შენარჩუნდეს მოწყობილობის გადატვირთვის შემდეგაც. </p><dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="config__manager_8h_adf782fcfae675652d67a24618947e547_icgraph.png" border="0" usemap="#aconfig__manager_8h_adf782fcfae675652d67a24618947e547_icgraph" alt=""/></div>
-<map name="aconfig__manager_8h_adf782fcfae675652d67a24618947e547_icgraph" id="aconfig__manager_8h_adf782fcfae675652d67a24618947e547_icgraph">
-<area shape="rect" title="ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში." alt="" coords="427,5,561,31"/>
-<area shape="rect" href="config__manager_8c.html#adfc0f16e9882bf39fc2560b58aec6c60" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="188,5,379,31"/>
-<area shape="poly" title=" " alt="" coords="413,21,379,21,379,15,413,15"/>
-<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
-<area shape="poly" title=" " alt="" coords="174,21,141,21,141,15,174,15"/>
-</map>
-</div>
 
 </div>
 </div>

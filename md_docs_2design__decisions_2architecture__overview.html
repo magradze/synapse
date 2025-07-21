@@ -93,83 +93,86 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
   <div class="headertitle"><div class="title">Synapse ESP Framework — არქიტექტურის მიმოხილვა</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1124"></a> </p>
-<h1><a class="anchor" id="autotoc_md1125"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1093"></a> </p>
+<h1><a class="anchor" id="autotoc_md1094"></a>
 მიზანი</h1>
 <p>Synapse ESP Framework-ის არქიტექტურა შექმნილია იმისთვის, რომ უზრუნველყოს მოდულური, გაფართოებადი და სტანდარტიზებული ჩაშენებული სისტემების (embedded systems) განვითარება ESP-IDF ეკოსისტემაში. მთავარი პრინციპებია მოდულურობა, იზოლაცია, ავტომატიზაცია და მაღალი ხარისხის კოდის უზრუნველყოფა.</p>
-<h1><a class="anchor" id="autotoc_md1126"></a>
+<h1><a class="anchor" id="autotoc_md1095"></a>
 ძირითადი არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
-<li><b>იზოლაცია:</b> მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ Service Locator-ის ან Event Bus-ის მეშვეობით.</li>
+<li><b>იზოლაცია:</b> მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ <code>Service Locator</code>-ის ან <code>Event Bus</code>-ის მეშვეობით.</li>
 <li><b>სტანდარტიზაცია:</b> ყველა მოდული და ინფრასტრუქტურა მიჰყვება ერთიან naming, structure და communication სტანდარტებს.</li>
 <li><b>გაფართოებადობა:</b> ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით.</li>
-<li><b>ავტომატიზაცია:</b> მოდულების ჩართვა/გამორთვა და ბილდში მოხვედრა სრულად ავტომატიზირებულია Kconfig და CMake სისტემების გამოყენებით.</li>
+<li><b>ავტომატიზაცია:</b> მოდულების აღმოჩენა, build-სისტემაში ინტეგრაცია და <code>Module Factory</code>-ის გენერაცია სრულად ავტომატიზირებულია CMake სკრიპტების გამოყენებით.</li>
 <li><b>დოკუმენტირებულობა:</b> ყველა არქიტექტურული გადაწყვეტილება და სტანდარტი აღწერილია შესაბამის დოკუმენტებში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1127"></a>
+<h1><a class="anchor" id="autotoc_md1096"></a>
 არქიტექტურული ფენები და ძირითადი კომპონენტები</h1>
 <ol type="1">
 <li><b>Core (ბირთვი):</b><ul>
-<li>Service Locator — მოდულებს შორის API-ს მოძიება და გამოძახება იზოლაციის დაცვით</li>
-<li>Event Bus — broadcast/notification ტიპის კომუნიკაცია მოდულებს შორის</li>
-<li>Module Register — მოდულების რეგისტრაცია, ინიციალიზაცია და მართვა</li>
-<li>Module Factory — მოდულების დინამიური შექმნა კონფიგურაციიდან</li>
-<li>Configuration Manager — სისტემის და მოდულების კონფიგურაციის მართვა</li>
-<li>Logging — სტანდარტიზებული ლოგირება</li>
+<li><code>Service Locator</code> — მოდულებს შორის API-ს მოძიება და გამოძახება იზოლაციის დაცვით.</li>
+<li><code>Event Bus</code> — broadcast/notification ტიპის კომუნიკაცია მოდულებს შორის.</li>
+<li><code>Module Registry</code> — მოდულების რეგისტრაცია, ინიციალიზაცია და მართვა.</li>
+<li><code>Module Factory</code> — მოდულების დინამიური შექმნა კონფიგურაციიდან.</li>
+<li><code>Configuration Manager</code> — სისტემის და მოდულების კონფიგურაციის მართვა.</li>
+<li><code>Logging</code> — სტანდარტიზებული ლოგირება.</li>
 </ul>
 </li>
 <li><b>Interfaces:</b><ul>
-<li>გლობალური ინტერფეისები, რომლებიც უზრუნველყოფს მოდულებს შორის კონტრაქტებს</li>
+<li>გლობალური ინტერფეისები, რომლებიც უზრუნველყოფს მოდულებს შორის "კონტრაქტებს".</li>
 </ul>
 </li>
 <li><b>Modules:</b><ul>
-<li>კატეგორიებად დაყოფილი ფუნქციონალური გაფართოებები (სენსორები, აქტუატორები, კომუნიკაციები, ეკრანები, დრაივერები, სისტემური და დამხმარე მოდულები)</li>
+<li>კატეგორიებად დაყოფილი ფუნქციონალური გაფართოებები (სენსორები, აქტუატორები, კომუნიკაციები, ეკრანები, დრაივერები, სისტემური და დამხმარე მოდულები).</li>
 </ul>
 </li>
 <li><b>Configuration:</b><ul>
-<li>მოქნილი და სტანდარტიზებული კონფიგურაციის სისტემა (system_config.json, module.json, Kconfig)</li>
+<li>**(განახლებულია)** მოქნილი და <b>დეცენტრალიზებული</b> კონფიგურაციის სისტემა, რომელიც ეფუძნება <code>Kconfig</code>-ს, ბაზისურ <code>system_config.json</code>-ს და თითოეული მოდულის საკუთარ <code>config.json</code> ფაილს.</li>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1128"></a>
+<h1><a class="anchor" id="autotoc_md1097"></a>
 მოდულებს შორის კომუნიკაციის პატერნები</h1>
 <ul>
 <li><b>Service Locator Pattern:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის. უზრუნველყოფს მოდულებს შორის მინიმალურ დამოკიდებულებას.</li>
 <li><b>Event Bus Pattern:</b> გამოიყენება broadcast/notification სცენარებისთვის, როცა ერთზე მეტ მოდულს სჭირდება ერთი მოვლენის მიღება.</li>
-<li><b>აკრძალულია:</b> პირდაპირი დამოკიდებულება მოდულებს შორის და სხვა მოდულის header-ის პირდაპირი ჩასმა (#include).</li>
+<li><b>აკრძალულია:</b> პირდაპირი დამოკიდებულება მოდულებს შორის და სხვა მოდულის header-ის პირდაპირი ჩასმა (<code>#include</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1129"></a>
+<h1><a class="anchor" id="autotoc_md1098"></a>
 სიცოცხლის ციკლი</h1>
 <ul>
-<li><b>Create:</b> მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა</li>
-<li><b>Init:</b> hardware-ის ან სხვა რესურსების ინიციალიზაცია</li>
-<li><b>Enable/Disable:</b> მოდულის აქტივაცია ან დროებით გათიშვა</li>
-<li><b>Deinit:</b> ყველა გამოყოფილი რესურსის გათავისუფლება</li>
+<li><b>Create:</b> მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა.</li>
+<li><b>Init:</b> hardware-ის ან სხვა რესურსების ინიციალიზაცია.</li>
+<li><b>Start:</b> მოდულის აქტიური მუშაობის დაწყება (მაგ., ტასკის გაშვება).</li>
+<li><b>Deinit:</b> ყველა გამოყოფილი რესურსის გათავისუფლება.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1130"></a>
+<h1><a class="anchor" id="autotoc_md1099"></a>
 საქაღალდეებისა და ფაილების სტრუქტურა</h1>
 <ul>
-<li><b>main/</b> — მთავარი აპლიკაცია (app_main და ძირითადი ლოგიკა)</li>
-<li><b>components/core/</b> — ბირთვი: service locator, event bus, module register და სხვა</li>
-<li><b>components/interfaces/</b> — გლობალური ინტერფეისები</li>
-<li><b>components/modules/</b> — კატეგორიებად დაყოფილი მოდულები</li>
-<li><b>docs/</b> — დოკუმენტაცია და სტანდარტები</li>
+<li><b>main/</b> — მთავარი აპლიკაცია (<code>app_main</code> და ძირითადი ლოგიკა).</li>
+<li><b>components/core/</b> — ბირთვი: <code>Service Locator</code>, <code>Event Bus</code>, <code>Module Registry</code> და სხვა.</li>
+<li><b>components/interfaces/</b> — გლობალური ინტერფეისები.</li>
+<li><b>components/modules/</b> — კატეგორიებად დაყოფილი მოდულები.</li>
+<li><b>configs/</b> — ბაზისური <code>system_config.json</code> ფაილი.</li>
+<li><b>docs/</b> — დოკუმენტაცია და სტანდარტები.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1131"></a>
+<h1><a class="anchor" id="autotoc_md1100"></a>
 არქიტექტურული დიაგრამა (მოკლე)</h1>
 <div class="fragment"><div class="line">┌──────────────┐      Service Locator     ┌──────────────┐</div>
 <div class="line">│   Module A   │ ───────────────────────► │   Module B   │</div>
-<div class="line">└──────────────┘                          └──────────────┘</div>
+<div class="line">└──────────────┘      (Direct Call)       └──────────────┘</div>
 <div class="line">        │</div>
 <div class="line">        │ Event Bus</div>
+<div class="line">        │ (Broadcast)</div>
 <div class="line">        ▼</div>
 <div class="line">┌──────────────┐</div>
 <div class="line">│   Module C   │</div>
 <div class="line">└──────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1132"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1101"></a>
 სტანდარტები და დოკუმენტაცია</h1>
-<p>ყველა naming, structure, communication და სხვა წესები აღწერილია შესაბამის convention დოკუმენტებში:</p><ul>
+<p>ყველა naming, structure, communication და სხვა წესები აღწერილია შესაბამის convention დოკუმენტებში:</p>
+<ul>
 <li>variable_naming.md</li>
 <li>function_naming.md</li>
 <li>module_structure.md</li>
@@ -179,7 +182,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li>logging_standards.md</li>
 <li>coding_doxygen_standard.md</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1133"></a>
+<h1><a class="anchor" id="autotoc_md1102"></a>
 დასკვნა</h1>
 <p>Synapse ESP Framework-ის არქიტექტურა უზრუნველყოფს მოქნილ, სტანდარტიზებულ და გაფართოებად ჩაშენებულ სისტემებს, სადაც თითოეული მოდული დამოუკიდებელია, ადვილად ტესტირებადი და დოკუმენტირებულია. ყველა გადაწყვეტილება და სტანდარტი დეტალურადაა აღწერილი დოკუმენტაციაში, რაც ამარტივებს როგორც ახალ, ისე გამოცდილ დეველოპერებს ჩართვას და განვითარებას. </p>
 </div></div><!-- contents -->

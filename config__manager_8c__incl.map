@@ -1,29 +1,31 @@
 <map id="components/core/config_manager.c" name="components/core/config_manager.c">
-<area shape="rect" id="Node000001" title="კონფიგურაციის მენეჯერის იმპლემენტაცია." alt="" coords="477,5,655,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,167,156,192"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,44,377,66,270,96,185,129,115,163,113,158,183,124,268,91,375,61,476,39"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="180,167,317,192"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="478,33,433,40,385,52,339,70,297,95,273,123,259,154,254,152,269,120,294,91,336,65,384,47,431,35,477,28"/>
-<area shape="rect" id="Node000004" href="$config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="307,93,444,119"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="521,48,417,91,415,86,519,43"/>
-<area shape="rect" id="Node000008" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="469,93,551,119"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="555,47,528,84,524,80,550,44"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="576,93,671,119"/>
-<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="582,44,609,80,605,84,578,47"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="695,93,752,119"/>
-<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="605,43,689,85,687,89,603,48"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="776,93,847,119"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="626,43,764,87,762,92,624,48"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="871,93,941,119"/>
-<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="651,43,858,90,856,95,650,48"/>
-<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="329,121,142,166,141,161,327,116"/>
-<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="356,121,283,162,280,157,354,116"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="341,167,423,192"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="379,119,382,153,377,153,374,119"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="447,167,520,192"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="394,116,456,157,453,161,391,121"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="545,167,627,192"/>
-<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="410,116,540,160,538,165,408,121"/>
+<area shape="rect" id="Node000001" title="Implementation of the Configuration Manager." alt="" coords="633,5,811,45"/>
+<area shape="rect" id="Node000002" href="$config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="228,93,365,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="633,46,373,93,372,88,632,40"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="316,167,467,192"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="664,48,605,70,542,96,477,129,422,162,419,157,474,125,540,91,603,65,663,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="491,167,628,192"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="634,44,591,63,573,77,558,95,552,108,550,123,553,153,548,154,544,123,546,107,553,92,569,74,588,59,632,39"/>
+<area shape="rect" id="Node000008" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="567,93,650,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="696,48,638,87,635,83,693,43"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="675,93,769,119"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="725,46,725,79,719,79,719,46"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="793,93,851,119"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="748,43,798,82,795,87,745,48"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="875,93,945,119"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="768,43,871,85,869,90,766,48"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="969,93,1040,119"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="790,43,957,89,955,94,789,48"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1064,93,1220,119"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="812,41,1068,88,1067,93,811,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,87,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,121,101,165,99,160,256,116"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="111,167,184,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="274,121,185,163,183,158,272,116"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="313,117,366,156,363,160,310,121"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="340,116,504,160,503,166,338,121"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="209,167,291,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="291,120,267,157,263,154,287,118"/>
 <area shape="rect" id="Node000009" title=" " alt="" coords="652,167,736,192"/>
-<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="541,116,652,159,650,164,539,121"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="624,117,671,156,668,160,621,121"/>
 </map>

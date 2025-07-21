@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🔄_20სრული_20workflow_0',['🔄 სრული Workflow',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1099',1,'']]],
-  ['🔄_20სრული_20workflow_20განახლებული_1',['🔄 სრული Workflow (განახლებული)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1498',1,'']]]
+  ['📺_20დისპლეის_20დრაივერი_3a_0',['📺 დისპლეის დრაივერი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1060',1,'']]]
 ];

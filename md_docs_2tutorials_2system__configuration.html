@@ -93,114 +93,98 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
   <div class="headertitle"><div class="title">სისტემის კონფიგურაცია (System Configuration)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1781"></a> </p>
-<h1><a class="anchor" id="autotoc_md1782"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1730"></a> </p>
+<h1><a class="anchor" id="autotoc_md1731"></a>
 🎯 მიზანი</h1>
-<p>ეს სახელმძღვანელო დაგეხმარებათ სწორად და სტანდარტულად აღწეროთ და მართოთ სისტემის და მოდულების კონფიგურაცია Synapse Framework-ში <code>system_config.json</code> ფაილის მეშვეობით.</p>
+<p>ეს სახელმძღვანელო დაგეხმარებათ სწორად და სტანდარტულად აღწეროთ და მართოთ სისტემის და მოდულების runtime კონფიგურაცია Synapse Framework-ში. v5.0.0-დან ფრეიმვორქი იყენებს <b>დეცენტრალიზებულ</b> მოდელს, სადაც თითოეული მოდული პასუხისმგებელია თავის default კონფიგურაციაზე.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1784"></a>
-1. &lt;tt&gt;system_config.json&lt;/tt&gt;-ის როლი</h1>
+<h1><a class="anchor" id="autotoc_md1733"></a>
+1. კონფიგურაციის ფაილების როლები</h1>
 <ul>
-<li><b>ცენტრალური კონფიგურაცია:</b> ეს არის პროექტის მთავარი კონფიგურაციის ფაილი, სადაც აღწერილია ყველა მოდული, მათი პარამეტრები და გლობალური კონფიგურაციები.</li>
-<li><b>გამოიყენება:</b> როგორც build-ის, ასევე runtime-ის დროს, რაც უზრუნველყოფს ერთიან და სტაბილურ გარემოს.</li>
+<li>**<code>Kconfig</code>:** განსაზღვრავს, რომელი მოდულების კოდი მოხვდება firmware-ში. ეს არის <b>build-დროის</b> კონფიგურაცია.</li>
+<li>**<code>configs/system_config.json</code>:** ბაზისური კონფიგურაცია. შეიცავს მხოლოდ გლობალურ პარამეტრებს (<code>firmware</code>, <code>global_config</code>) და <b>ცარიელ <code>modules</code> მასივს</b>.</li>
+<li>**<code>{module_name}/config.json</code>:** თითოეული მოდულის <b>default runtime კონფიგურაცია</b>. ეს არის მთავარი ადგილი, სადაც უნდა აღწეროთ თქვენი მოდულის პარამეტრები.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1786"></a>
-2. სტრუქტურა და მაგალითი</h1>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;firmware&quot;: {</div>
-<div class="line">        &quot;version&quot;: &quot;1.0.0&quot;,</div>
-<div class="line">        &quot;description&quot;: &quot;My First Synapse Project&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;global_config&quot;: {</div>
-<div class="line">        &quot;device.id.prefix&quot;: &quot;SYNAPSE_DEVICE&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;modules&quot;: [</div>
-<div class="line">        {</div>
-<div class="line">            &quot;type&quot;: &quot;relay_module&quot;,</div>
-<div class="line">            &quot;enabled&quot;: true,</div>
-<div class="line">            &quot;config&quot;: {</div>
-<div class="line">                &quot;instance_name&quot;: &quot;relay1&quot;,</div>
-<div class="line">                &quot;pin&quot;: 23</div>
-<div class="line">            }</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            &quot;type&quot;: &quot;dht22_module&quot;,</div>
-<div class="line">            &quot;enabled&quot;: true,</div>
-<div class="line">            &quot;config&quot;: {</div>
-<div class="line">                &quot;instance_name&quot;: &quot;indoor_sensor&quot;,</div>
-<div class="line">                &quot;pin&quot;: 4,</div>
-<div class="line">                &quot;update_interval_sec&quot;: 30</div>
-<div class="line">            }</div>
-<div class="line">        }</div>
-<div class="line">    ]</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1788"></a>
-3. მოდულის დამატება და პარამეტრების აღწერა</h1>
-<ul>
-<li>თითოეული მოდული აღიწერება <code>modules</code> მასივში, როგორც JSON ობიექტი.</li>
-<li><b>აუცილებელი ველები:</b><ul>
-<li><code>type</code>: მოდულის ტიპი (მაგ., "mqtt_module").</li>
-<li><code>enabled</code>: <code>true</code> ან <code>false</code>, რთავს ან თიშავს მოდულს.</li>
-<li><code>config</code>: ობიექტი, რომელიც შეიცავს მოდულის სპეციფიკურ პარამეტრებს.</li>
-<li><code>instance_name</code>: <code>config</code> ობიექტის შიგნით არსებული <b>უნიკალური</b> სახელი, რომელიც ამ მოდულის კონკრეტულ მაგალითს (instance) აღნიშნავს.</li>
-</ul>
-</li>
-<li><b>მაგალითი:</b> <div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;type&quot;: &quot;mqtt_module&quot;,</div>
+<h1><a class="anchor" id="autotoc_md1735"></a>
+2. &lt;tt&gt;config.json&lt;/tt&gt;-ის სტრუქტურა და მაგალითები</h1>
+<p>თითოეული მოდულის <code>config.json</code> ფაილი უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი არის ობიექტი, რომელიც აღწერს მოდულის ერთ ინსტანციას.</p>
+<p>**<code>relay_actuator/config.json</code> (ორი ინსტანციის მაგალითი):**</p>
+<div class="fragment"><div class="line">[</div>
+<div class="line">  {</div>
+<div class="line">    &quot;type&quot;: &quot;relay_actuator&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;main_light&quot;,</div>
+<div class="line">        &quot;pin&quot;: 23</div>
+<div class="line">    }</div>
+<div class="line">  },</div>
+<div class="line">  {</div>
+<div class="line">    &quot;type&quot;: &quot;relay_actuator&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;water_pump&quot;,</div>
+<div class="line">        &quot;pin&quot;: 22</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">]</div>
+</div><!-- fragment --><p>**<code>mqtt_manager/config.json</code> (ერთი ინსტანციის მაგალითი):**</p>
+<div class="fragment"><div class="line">[</div>
+<div class="line">  {</div>
+<div class="line">    &quot;type&quot;: &quot;mqtt_manager&quot;,</div>
 <div class="line">    &quot;enabled&quot;: true,</div>
 <div class="line">    &quot;config&quot;: {</div>
 <div class="line">        &quot;instance_name&quot;: &quot;main_broker&quot;,</div>
-<div class="line">        &quot;broker_uri&quot;: &quot;mqtt://192.168.1.100:1883&quot;,</div>
-<div class="line">        &quot;base_topic&quot;: &quot;/synapse/device&quot;</div>
+<div class="line">        &quot;broker_uri&quot;: &quot;mqtt://192.168.1.100:1883&quot;</div>
 <div class="line">    }</div>
-<div class="line">}</div>
-</div><!-- fragment --></li>
+<div class="line">  }</div>
+<div class="line">]</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md1737"></a>
+3. მოდულის კონფიგურაციის ობიექტის აღწერა</h1>
+<ul>
+<li>**<code>type</code>:** მოდულის ტიპი. ეს სტრიქონი <b>ზუსტად უნდა ემთხვეოდეს</b> მოდულის <code>module.json</code> ფაილში არსებულ <code>name</code> ველს.</li>
+<li>**<code>enabled</code>:** <code>true</code> ან <code>false</code>. განსაზღვრავს, უნდა გაუშვას თუ არა <code>System Manager</code>-მა ამ მოდულის <code>init</code> და <code>start</code> ფუნქციები. ეს საშუალებას გაძლევთ, firmware-ში გქონდეთ მოდულის კოდი, მაგრამ runtime-ში გამორთოთ ის.</li>
+<li>**<code>config</code>:** ობიექტი, რომელიც შეიცავს მოდულის სპეციფიკურ პარამეტრებს.</li>
+<li>**<code>instance_name</code>:** <code>config</code> ობიექტის შიგნით არსებული <b>უნიკალური</b> სახელი, რომელიც ამ მოდულის კონკრეტულ მაგალითს (instance) აღნიშნავს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1790"></a>
+<h1><a class="anchor" id="autotoc_md1739"></a>
 4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)</h1>
-<p>კონფიგურაციის პარამეტრებზე წვდომა ხდება <code>fmw_config_get_*</code> API ფუნქციებით, რომლებიც იყენებენ <b>წერტილით გამოყოფილ გასაღებს (dot-notation)</b>.</p>
+<p>მიუხედავად დეცენტრალიზაციისა, <code>Config Manager</code> runtime-ში აწყობს ერთიან ლოგიკურ ხეს, ამიტომ პარამეტრებზე წვდომის API უცვლელი რჩება.</p>
 <ul>
 <li><b>გლობალური პარამეტრისთვის:</b> <code>"global_config.parameter_name"</code></li>
-<li><b>მოდულის პარამეტრისთვის:</b> <code>"module_instance_name.parameter_name"</code></li>
-<li><b>მაგალიტები:</b> <div class="fragment"><div class="line"><span class="comment">// გლობალური პარამეტრის წაკითხვა</span></div>
+<li><b>მოდულის პარამეტრისთვის:</b> <code>"instance_name.parameter_name"</code></li>
+</ul>
+<p><b>მაგალითი:</b></p>
+<div class="fragment"><div class="line"><span class="comment">// გლობალური პარამეტრის წაკითხვა</span></div>
 <div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
 <div class="line">esp_err_t ret = fmw_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
-<div class="line"><span class="keywordflow">if</span> (ret == ESP_OK) {</div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Device prefix: %s&quot;</span>, device_prefix);</div>
-<div class="line">} <span class="keywordflow">else</span> {</div>
-<div class="line">    ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to read device prefix, using default.&quot;</span>);</div>
-<div class="line">    <span class="comment">// შეცდომის დამუშავება, მაგალითად, default მნიშვნელობის მინიჭება</span></div>
+<div class="line"><span class="keywordflow">if</span> (ret != ESP_OK) {</div>
+<div class="line">    <span class="comment">// Handle error, use a default value</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// მოდულის პარამეტრის წაკითხვა</span></div>
-<div class="line"><span class="keywordtype">int</span> update_interval;</div>
-<div class="line">ret = fmw_config_get_int(<span class="stringliteral">&quot;indoor_sensor.update_interval_sec&quot;</span>, &amp;update_interval);</div>
-<div class="line"><span class="keywordflow">if</span> (ret == ESP_OK) {</div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Sensor update interval: %d seconds&quot;</span>, update_interval);</div>
-<div class="line">} <span class="keywordflow">else</span> {</div>
-<div class="line">    ESP_LOGW(TAG, <span class="stringliteral">&quot;Update interval not found for &#39;indoor_sensor&#39;, using default.&quot;</span>);</div>
-<div class="line">    <span class="comment">// შეცდომის დამუშავება, მაგალითად, default მნიშვნელობის მინიჭება</span></div>
+<div class="line"><span class="comment">// `main_broker` ინსტანციის `broker_uri` პარამეტრის წაკითხვა</span></div>
+<div class="line"><span class="keywordtype">char</span> broker_uri[128];</div>
+<div class="line">ret = fmw_config_get_string(<span class="stringliteral">&quot;main_broker.broker_uri&quot;</span>, broker_uri, <span class="keyword">sizeof</span>(broker_uri));</div>
+<div class="line"><span class="keywordflow">if</span> (ret != ESP_OK) {</div>
+<div class="line">    <span class="comment">// Handle error</span></div>
 <div class="line">}</div>
-</div><!-- fragment --></li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="autotoc_md1792"></a>
-5. კონფიგურაციის ვალიდაცია</h1>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md1741"></a>
+5. კონფიგურაციის ვალიდაცია და Default-ები</h1>
 <ul>
-<li><b>ავტომატური ვალიდაცია:</b> Framework-ი ავტომატურად ამოწმებს <code>system_config.json</code>-ის სტრუქტურას და მოდულების კონფიგურაციას გაშვებისას.</li>
-<li><b>Default მნიშვნელობები:</b> თუ რომელიმე პარამეტრი არასწორია ან არ არსებობს, მოდულმა უნდა გამოიყენოს წინასწარ განსაზღვრული (default) მნიშვნელობა.</li>
-<li><b>ლოგირება:</b> ყველა შეცდომა და გაფრთხილება ლოგირდება, რაც ამარტივებს პრობლემის აღმოჩენას.</li>
+<li>**<code>_create</code> ფუნქცია:** თითოეული მოდულის <code>_create</code> ფუნქცია პასუხისმგებელია, წაიკითხოს და დაავალიდიროს თავისი კონფიგურაცია.</li>
+<li><b>Default მნიშვნელობები:</b> თუ <code>config.json</code>-ში რომელიმე პარამეტრი არ არის, მოდულმა უნდა გამოიყენოს <code>Kconfig</code>-ში განსაზღვრული ან კოდში მითითებული უსაფრთხო default მნიშვნელობა.</li>
+<li><b>ლოგირება:</b> ყველა შეცდომა (მაგ., სავალდებულო პარამეტრის არარსებობა) და გაფრთხილება (მაგ., default მნიშვნელობის გამოყენება) უნდა დაილოგოს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1794"></a>
+<h1><a class="anchor" id="autotoc_md1743"></a>
 6. საუკეთესო პრაქტიკები (Best Practices)</h1>
 <ul>
 <li><b>აღწერითი სახელები:</b> გამოიყენეთ მხოლოდ დესკრიპტიული და კონტექსტური სახელები პარამეტრებისთვის.</li>
-<li><b>Hardcoded მნიშვნელობების თავიდან არიდება:</b> არასდროს გამოიყენოთ hardcoded მნიშვნელობები კოდში. ყველა პარამეტრი უნდა იყოს <code>system_config.json</code>-ში.</li>
-<li><b>დოკუმენტაცია:</b> ყველა ახალი პარამეტრი და ცვლილება დეტალურად აღწერეთ მოდულის დოკუმენტაციაში.</li>
+<li><b>Hardcoded მნიშვნელობების თავიდან არიდება:</b> არასდროს გამოიყენოთ hardcoded მნიშვნელობები კოდში. ყველა პარამეტრი უნდა იყოს <code>config.json</code>-ში ან <code>Kconfig</code>-ში.</li>
+<li><b>დოკუმენტაცია:</b> ყველა პარამეტრი დეტალურად აღწერეთ მოდულის <code>README.md</code> ფაილში.</li>
 <li><b>კონვენციების დაცვა:</b> დაიცავით პროექტში მიღებული <a class="el" href="md_docs_2convention_2configuration__management.html">კონფიგურაციის მართვის</a> და <a class="el" href="md_docs_2convention_2module__structure.html">მოდულის სტრუქტურის</a> წესები.</li>
 </ul>
 <hr  />

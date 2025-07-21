@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📖_20დამხმარე_20სტრუქტურა_20tt_20cmd_5ft_20tt_0',['📖 დამხმარე სტრუქტურა (&lt;tt&gt;cmd_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md239',1,'']]]
+  ['📋_20რა_20არის_20create_5fmodule_20py_0',['📋 რა არის create_module.py?',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1051',1,'']]],
+  ['📋_20რა_20არის_20tt_20create_5fmodule_20py_20tt_1',['1. 📋 რა არის &lt;tt&gt;create_module.py&lt;/tt&gt;?',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1450',1,'']]]
 ];

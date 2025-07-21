@@ -93,134 +93,109 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
   <div class="headertitle"><div class="title">მოდულების არქიტექტურა (Module Architecture)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1652"></a> </p>
-<h1><a class="anchor" id="autotoc_md1653"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1604"></a> </p>
+<h1><a class="anchor" id="autotoc_md1605"></a>
 ძირითადი პრინციპები</h1>
 <ul>
-<li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
-<li><b>იზოლაცია:</b> მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ Service Locator-ის ან Event Bus-ის მეშვეობით.</li>
+<li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს <code>Kconfig</code>-ის მეშვეობით.</li>
+<li><b>იზოლაცია:</b> მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ <code>Service Locator</code>-ის ან <code>Event Bus</code>-ის მეშვეობით.</li>
 <li><b>სტანდარტიზაცია:</b> ყველა მოდული მიჰყვება ერთიან naming, structure და communication სტანდარტებს.</li>
-<li><b>გაფართოებადობა:</b> ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით.</li>
+<li><b>გაფართოებადობა:</b> ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით, <code>create_module.py</code> სკრიპტის გამოყენებით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1654"></a>
+<h1><a class="anchor" id="autotoc_md1606"></a>
 მოდულის ტიპები</h1>
 <ol type="1">
-<li><b>Service-driven Module</b><ul>
-<li>უზრუნველყოფს API-ს Service Locator-ისთვის</li>
-<li>მაგ: display, actuator, driver მოდულები</li>
+<li><b>Service Provider Module:</b><ul>
+<li>აწვდის API-ს <code>Service Locator</code>-ის მეშვეობით.</li>
+<li>მაგ: <code>rgb_led_indicator</code>, <code>storage_manager</code>, <code>system_timer</code>.</li>
 </ul>
 </li>
-<li><b>Event-driven Module</b><ul>
-<li>ავრცელებს ან იღებს მოვლენებს Event Bus-ის მეშვეობით</li>
-<li>მაგ: სენსორები, ლოგერები</li>
+<li><b>Event-driven Module:</b><ul>
+<li>ავრცელებს ან იღებს მოვლენებს <code>Event Bus</code>-ის მეშვეობით.</li>
+<li>მაგ: <code>sensor_aggregator</code>, <code>alarms_manager</code>.</li>
 </ul>
 </li>
-<li><b>Driver Module</b><ul>
-<li>უზრუნველყოფს hardware abstraction-ს და API-ს სხვა მოდულებისთვის</li>
-<li>მაგ: i2c_bus_module, spi_bus_module</li>
-</ul>
-</li>
-<li><b>Utility Module</b><ul>
-<li>დამხმარე ფუნქციონალი, რომელიც შეიძლება იყოს როგორც service-driven, ასევე event-driven</li>
+<li><b>Hybrid Module:</b><ul>
+<li>იყენებს ორივე პატერნს. არის როგორც სერვისის მომწოდებელი, ისე ივენთებზე დამოკიდებული.</li>
+<li>მაგ: <code>wifi_manager</code> (იღებს ივენთებს, მაგრამ მომავალში შეიძლება API-ც ჰქონდეს), <code>rgb_led_indicator</code> (იღებს ივენთებს და აწვდის API-ს).</li>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1655"></a>
+<h1><a class="anchor" id="autotoc_md1607"></a>
 მოდულების ურთიერთქმედება</h1>
 <ul>
-<li><b>Service Locator:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის</li>
-<li><b>Event Bus:</b> გამოიყენება broadcast/notification სცენარებისთვის</li>
-<li><b>აკრძალულია:</b> პირდაპირი #include სხვა მოდულის header-ების</li>
+<li><b>Service Locator:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი, სინქრონული ფუნქციური გამოძახებისთვის.</li>
+<li><b>Event Bus:</b> გამოიყენება broadcast/notification სცენარებისთვის, ასინქრონული კომუნიკაციისთვის.</li>
+<li><b>აკრძალულია:</b> პირდაპირი <code>#include</code> სხვა მოდულის ჰედერების.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1656"></a>
+<h1><a class="anchor" id="autotoc_md1608"></a>
 მოდულის სიცოცხლის ციკლი (Lifecycle)</h1>
 <ol type="1">
-<li><b>Create:</b> მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)</li>
-<li><b>Init:</b> ინიციალიზაცია (მაგ: static esp_err_t ssd1306_init)</li>
-<li><b>Enable/Disable:</b> ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)</li>
-<li><b>Deinit:</b> რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)</li>
+<li><b>Create:</b> <code>Module Factory</code> იძახებს მოდულის <code>_create(config)</code> ფუნქციას. მოდული იღებს თავისი კონფიგურაციის ობიექტის <b>მფლობელობას</b>.</li>
+<li><b>Init:</b> <code>System Manager</code> იძახებს <code>init(self)</code> ფუნქციას. აქ ხდება რესურსების დაკავება, სერვისების რეგისტრაცია, ივენთებზე გამოწერა.</li>
+<li><b>Start:</b> <code>System Manager</code> იძახებს <code>start(self)</code> ფუნქციას. აქ იწყება მოდულის აქტიური მუშაობა (მაგ., ტასკის გაშვება).</li>
+<li><b>Deinit:</b> <code>System Manager</code> (მომავალში) ან სისტემის გამორთვისას გამოიძახება <code>deinit(self)</code> ფუნქცია. აქ ხდება ყველა გამოყოფილი რესურსის (მათ შორის კონფიგურაციის ობიექტის) გათავისუფლება.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1657"></a>
+<h1><a class="anchor" id="autotoc_md1609"></a>
 მოდულის სტრუქტურის მაგალითი</h1>
-<div class="fragment"><div class="line">components/modules/display/ssd1306_module/</div>
+<div class="fragment"><div class="line">components/modules/displays/rgb_led_indicator/</div>
 <div class="line">├── CMakeLists.txt</div>
+<div class="line">├── Kconfig</div>
 <div class="line">├── module.json</div>
+<div class="line">├── config.json         # &lt;--- Default runtime კონფიგურაცია</div>
 <div class="line">├── README.md</div>
 <div class="line">├── include/</div>
-<div class="line">│   └── ssd1306_module.h</div>
-<div class="line">├── src/</div>
-<div class="line">│   └── ssd1306_module.c</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1658"></a>
-Header (include/ssd1306_module.h)</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#ifndef SSD1306_MODULE_H</span></div>
-<div class="line"><span class="preprocessor">#define SSD1306_MODULE_H</span></div>
+<div class="line">│   └── rgb_led_indicator.h</div>
+<div class="line">└── src/</div>
+<div class="line">    └── rgb_led_indicator.c</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1610"></a>
+&lt;tt&gt;_create&lt;/tt&gt; ფუნქციის კონტრაქტი</h2>
+<p>ყველა მოდულის <code>_create</code> ფუნქციამ უნდა დაიცვას მეხსიერების მართვის ახალი წესი.</p>
+<div class="fragment"><div class="line"><span class="comment">// src/rgb_led_indicator.c-ში</span></div>
+<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="rgb__led__indicator_8h.html#af7ab099c2a16ab7a894d97a3a01f3d31">rgb_led_indicator_create</a>(<span class="keyword">const</span> cJSON *config) {</div>
+<div class="line">    <span class="comment">// 1. მეხსიერების გამოყოფა</span></div>
+<div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = (module_t *)calloc(1, sizeof(module_t));</div>
+<div class="line">    <span class="comment">// ...</span></div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;cJSON.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
+<div class="line">    <span class="comment">// 2. კონფიგურაციის ობიექტის მფლობელობის აღება</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Service API Structure</span></div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    esp_err_t (*enable)(void);</div>
-<div class="line">    esp_err_t (*disable)(void);</div>
-<div class="line">    esp_err_t (*clear)(void);</div>
-<div class="line">    esp_err_t (*write_text)(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line);</div>
-<div class="line">} ssd1306_api_t;</div>
+<div class="line">    <span class="comment">// 3. კონფიგურაციის პარსინგი</span></div>
+<div class="line">    <span class="keyword">const</span> cJSON *config_node = cJSON_GetObjectItem(config, <span class="stringliteral">&quot;config&quot;</span>);</div>
+<div class="line">    <span class="comment">// ...</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Public API</span></div>
-<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config);</div>
+<div class="line">    <span class="comment">// 4. base ფუნქციების დაყენება</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.init = rgb_led_indicator_init;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.deinit = rgb_led_indicator_deinit;</div>
+<div class="line">    <span class="comment">// ...</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Service API Functions</span></div>
-<div class="line">esp_err_t ssd1306_api_enable(<span class="keywordtype">void</span>);</div>
-<div class="line">esp_err_t ssd1306_api_disable(<span class="keywordtype">void</span>);</div>
-<div class="line">esp_err_t ssd1306_api_clear(<span class="keywordtype">void</span>);</div>
-<div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line);</div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#endif </span><span class="comment">// SSD1306_MODULE_H</span></div>
-<div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="argb__led__indicator_8h_html_af7ab099c2a16ab7a894d97a3a01f3d31"><div class="ttname"><a href="rgb__led__indicator_8h.html#af7ab099c2a16ab7a894d97a3a01f3d31">rgb_led_indicator_create</a></div><div class="ttdeci">module_t * rgb_led_indicator_create(const cJSON *config)</div><div class="ttdoc">ქმნის ახალ rgb_led_indicator მოდულის ინსტანციას</div><div class="ttdef"><b>Definition</b> rgb_led_indicator.c:123</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1659"></a>
-Source (src/ssd1306_module.c)</h2>
-<div class="fragment"><div class="line"><span class="comment">// ...existing code...</span></div>
-<div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *global_ssd1306_instance = NULL;</div>
-<div class="line"><span class="keyword">static</span> ssd1306_api_t ssd1306_service_api = {</div>
-<div class="line">    .<a class="code hl_variable" href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">enable</a> = ssd1306_api_enable,</div>
-<div class="line">    .disable = ssd1306_api_disable,</div>
-<div class="line">    .clear = ssd1306_api_clear,</div>
-<div class="line">    .write_text = ssd1306_api_write_text</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    <span class="keywordtype">char</span> module_instance_name[32];</div>
-<div class="line">    <span class="comment">// კონფიგურაციის პარამეტრები</span></div>
-<div class="line">    <span class="comment">// runtime ცვლადები</span></div>
-<div class="line">    <span class="comment">// hardware handles</span></div>
-<div class="line">} ssd1306_private_data_t;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ...function declarations, implementation...</span></div>
-<div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:150</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1660"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1611"></a>
 მოდულის გაფართოება/დამატება</h1>
 <ol type="1">
-<li>შექმენით ახალი საქაღალდე შესაბამის კატეგორიაში (მაგ: sensors/new_sensor_module)</li>
-<li>დაამატეთ CMakeLists.txt, module.json, include/, src/, README.md</li>
-<li>გამოიყენეთ naming და structure კონვენციები</li>
-<li>აღწერეთ API და საჭირო კონფიგურაცია</li>
-<li>ჩართეთ მოდული მთავარ კონფიგურაციაში (Kconfig)</li>
+<li>გამოიყენეთ <code>python3 scripts/create_module.py</code> სკრიპტი ახალი მოდულის ჩონჩხის დასაგენერირებლად.</li>
+<li>შეავსეთ <code>config.json</code> ფაილი default პარამეტრებით.</li>
+<li>შეავსეთ <code>_create</code>, <code>init</code>, <code>start</code>, <code>deinit</code> და <code>handle_event</code> ფუნქციები თქვენი ლოგიკით.</li>
+<li>ჩართეთ მოდული <code>idf.py menuconfig</code>-ში.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1661"></a>
+<h1><a class="anchor" id="autotoc_md1612"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>პირდაპირი #include სხვა მოდულის header-ების</li>
-<li>არასტანდარტული ცვლადებისა და ფუნქციების სახელები</li>
-<li>არასტანდარტული ფაილური სტრუქტურა</li>
-<li>კონფიგურაციის მნიშვნელობების hardcode</li>
+<p>❌ <b>არასდროს:</b></p>
+<ul>
+<li>პირდაპირი <code>#include</code> სხვა მოდულის ჰედერების.</li>
+<li>არასტანდარტული ფაილური სტრუქტურა.</li>
+<li>კონფიგურაციის მნიშვნელობების hardcode-ირება.</li>
+<li><code>_create</code> ფუნქციაში გადაცემული <code>config</code> ობიექტის დუბლირება.</li>
 </ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>დაიცავით naming და structure კონვენციები</li>
-<li>გამოიყენეთ Service Locator ან Event Bus სწორი სცენარისთვის</li>
-<li>აღწერეთ ყველა public API და კონფიგურაცია</li>
-<li>გამოიყენეთ დესკრიპტიული სახელები</li>
+<p>✅ <b>ყოველთვის:</b></p>
+<ul>
+<li>დაიცავით naming და structure კონვენციები.</li>
+<li>გამოიყენეთ <code>Service Locator</code> ან <code>Event Bus</code> სწორი სცენარისთვის.</li>
+<li>აღწერეთ ყველა public API და კონფიგურაცია <code>README.md</code>-ში.</li>
+<li><code>_deinit</code> ფუნქციაში გაათავისუფლეთ ყველა რესურსი, მათ შორის <code>module-&gt;current_config</code>.</li>
 </ul>
 <hr  />
 <p>შემდეგი ნაბიჯი: დეტალურად განვიხილოთ core კომპონენტები და მათი დანიშნულება. </p>

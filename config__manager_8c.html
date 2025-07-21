@@ -96,48 +96,51 @@ $(document).ready(function(){initNavTree('config__manager_8c.html',''); initResi
 </div><!--header-->
 <div class="contents">
 
-<p>კონფიგურაციის მენეჯერის იმპლემენტაცია.  
+<p>Implementation of the Configuration Manager.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
-<code>#include &quot;freertos/semphr.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="config__manager_8h_source.html">config_manager.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="config__manager_8h_source.html">config_manager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="logging_8h_source.html">logging.h</a>&quot;</code><br />
 <code>#include &quot;nvs_flash.h&quot;</code><br />
 <code>#include &quot;nvs.h&quot;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;freertos/semphr.h&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;embedded_configs.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for config_manager.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="config__manager_8c__incl.png" border="0" usemap="#acomponents_2core_2config__manager_8c" alt=""/></div>
 <map name="acomponents_2core_2config__manager_8c" id="acomponents_2core_2config__manager_8c">
-<area shape="rect" title="კონფიგურაციის მენეჯერის იმპლემენტაცია." alt="" coords="477,5,655,45"/>
-<area shape="rect" title=" " alt="" coords="5,167,156,192"/>
-<area shape="poly" title=" " alt="" coords="477,44,377,66,270,96,185,129,115,163,113,158,183,124,268,91,375,61,476,39"/>
-<area shape="rect" title=" " alt="" coords="180,167,317,192"/>
-<area shape="poly" title=" " alt="" coords="478,33,433,40,385,52,339,70,297,95,273,123,259,154,254,152,269,120,294,91,336,65,384,47,431,35,477,28"/>
-<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="307,93,444,119"/>
-<area shape="poly" title=" " alt="" coords="521,48,417,91,415,86,519,43"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="469,93,551,119"/>
-<area shape="poly" title=" " alt="" coords="555,47,528,84,524,80,550,44"/>
-<area shape="rect" title=" " alt="" coords="576,93,671,119"/>
-<area shape="poly" title=" " alt="" coords="582,44,609,80,605,84,578,47"/>
-<area shape="rect" title=" " alt="" coords="695,93,752,119"/>
-<area shape="poly" title=" " alt="" coords="605,43,689,85,687,89,603,48"/>
-<area shape="rect" title=" " alt="" coords="776,93,847,119"/>
-<area shape="poly" title=" " alt="" coords="626,43,764,87,762,92,624,48"/>
-<area shape="rect" title=" " alt="" coords="871,93,941,119"/>
-<area shape="poly" title=" " alt="" coords="651,43,858,90,856,95,650,48"/>
-<area shape="poly" title=" " alt="" coords="329,121,142,166,141,161,327,116"/>
-<area shape="poly" title=" " alt="" coords="356,121,283,162,280,157,354,116"/>
-<area shape="rect" title=" " alt="" coords="341,167,423,192"/>
-<area shape="poly" title=" " alt="" coords="379,119,382,153,377,153,374,119"/>
-<area shape="rect" title=" " alt="" coords="447,167,520,192"/>
-<area shape="poly" title=" " alt="" coords="394,116,456,157,453,161,391,121"/>
-<area shape="rect" title=" " alt="" coords="545,167,627,192"/>
-<area shape="poly" title=" " alt="" coords="410,116,540,160,538,165,408,121"/>
+<area shape="rect" title="Implementation of the Configuration Manager." alt="" coords="633,5,811,45"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="228,93,365,119"/>
+<area shape="poly" title=" " alt="" coords="633,46,373,93,372,88,632,40"/>
+<area shape="rect" title=" " alt="" coords="316,167,467,192"/>
+<area shape="poly" title=" " alt="" coords="664,48,605,70,542,96,477,129,422,162,419,157,474,125,540,91,603,65,663,43"/>
+<area shape="rect" title=" " alt="" coords="491,167,628,192"/>
+<area shape="poly" title=" " alt="" coords="634,44,591,63,573,77,558,95,552,108,550,123,553,153,548,154,544,123,546,107,553,92,569,74,588,59,632,39"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="567,93,650,119"/>
+<area shape="poly" title=" " alt="" coords="696,48,638,87,635,83,693,43"/>
+<area shape="rect" title=" " alt="" coords="675,93,769,119"/>
+<area shape="poly" title=" " alt="" coords="725,46,725,79,719,79,719,46"/>
+<area shape="rect" title=" " alt="" coords="793,93,851,119"/>
+<area shape="poly" title=" " alt="" coords="748,43,798,82,795,87,745,48"/>
+<area shape="rect" title=" " alt="" coords="875,93,945,119"/>
+<area shape="poly" title=" " alt="" coords="768,43,871,85,869,90,766,48"/>
+<area shape="rect" title=" " alt="" coords="969,93,1040,119"/>
+<area shape="poly" title=" " alt="" coords="790,43,957,89,955,94,789,48"/>
+<area shape="rect" title=" " alt="" coords="1064,93,1220,119"/>
+<area shape="poly" title=" " alt="" coords="812,41,1068,88,1067,93,811,46"/>
+<area shape="rect" title=" " alt="" coords="5,167,87,192"/>
+<area shape="poly" title=" " alt="" coords="257,121,101,165,99,160,256,116"/>
+<area shape="rect" title=" " alt="" coords="111,167,184,192"/>
+<area shape="poly" title=" " alt="" coords="274,121,185,163,183,158,272,116"/>
+<area shape="poly" title=" " alt="" coords="313,117,366,156,363,160,310,121"/>
+<area shape="poly" title=" " alt="" coords="340,116,504,160,503,166,338,121"/>
+<area shape="rect" title=" " alt="" coords="209,167,291,192"/>
+<area shape="poly" title=" " alt="" coords="291,120,267,157,263,154,287,118"/>
 <area shape="rect" title=" " alt="" coords="652,167,736,192"/>
-<area shape="poly" title=" " alt="" coords="541,116,652,159,650,164,539,121"/>
+<area shape="poly" title=" " alt="" coords="624,117,671,156,668,160,621,121"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -146,12 +149,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a98b9ee2100b74c1c1e46f69a18a76f72" id="r_a98b9ee2100b74c1c1e46f69a18a76f72"><td class="memItemLeft" align="right" valign="top"><a id="a98b9ee2100b74c1c1e46f69a18a76f72" name="a98b9ee2100b74c1c1e46f69a18a76f72"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;CONFIG_MANAGER&quot;)</td></tr>
 <tr class="separator:a98b9ee2100b74c1c1e46f69a18a76f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf782fcfae675652d67a24618947e547" id="r_adf782fcfae675652d67a24618947e547"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8c.html#adf782fcfae675652d67a24618947e547">fmw_config_save</a> (void)</td></tr>
-<tr class="memdesc:adf782fcfae675652d67a24618947e547"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.  <br /></td></tr>
-<tr class="separator:adf782fcfae675652d67a24618947e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfc0f16e9882bf39fc2560b58aec6c60" id="r_adfc0f16e9882bf39fc2560b58aec6c60"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8c.html#adfc0f16e9882bf39fc2560b58aec6c60">fmw_config_manager_init</a> (void)</td></tr>
 <tr class="memdesc:adfc0f16e9882bf39fc2560b58aec6c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას.  <br /></td></tr>
 <tr class="separator:adfc0f16e9882bf39fc2560b58aec6c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf782fcfae675652d67a24618947e547" id="r_adf782fcfae675652d67a24618947e547"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8c.html#adf782fcfae675652d67a24618947e547">fmw_config_save</a> (void)</td></tr>
+<tr class="memdesc:adf782fcfae675652d67a24618947e547"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.  <br /></td></tr>
+<tr class="separator:adf782fcfae675652d67a24618947e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fff68d0b0a44c6a4724eeb1837148e" id="r_ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8c.html#ab5fff68d0b0a44c6a4724eeb1837148e">fmw_config_get_root</a> (void)</td></tr>
+<tr class="memdesc:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad83c96bb47fc292873d5d630e44e2fd6" id="r_ad83c96bb47fc292873d5d630e44e2fd6"><td class="memItemLeft" align="right" valign="top"><a id="ad83c96bb47fc292873d5d630e44e2fd6" name="ad83c96bb47fc292873d5d630e44e2fd6"></a>
 esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_config_get_string</b> (const char *key, char *buffer, size_t buffer_size)</td></tr>
 <tr class="separator:ad83c96bb47fc292873d5d630e44e2fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,16 +170,13 @@ esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_config_get_b
 <tr class="memitem:a8e04f99cb76db95b008f854b5db0a06c" id="r_a8e04f99cb76db95b008f854b5db0a06c"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8c.html#a8e04f99cb76db95b008f854b5db0a06c">fmw_config_get_global_config</a> (void)</td></tr>
 <tr class="memdesc:a8e04f99cb76db95b008f854b5db0a06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს გლობალური კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
 <tr class="separator:a8e04f99cb76db95b008f854b5db0a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5fff68d0b0a44c6a4724eeb1837148e" id="r_ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8c.html#ab5fff68d0b0a44c6a4724eeb1837148e">fmw_config_get_root</a> (void)</td></tr>
-<tr class="memdesc:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="mdescLeft">&#160;</td><td class="mdescRight">იღებს კონფიგურაციის მთავარ (root) cJSON კვანძზე const მაჩვენებელს.  <br /></td></tr>
-<tr class="separator:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>კონფიგურაციის მენეჯერის იმპლემენტაცია. </p>
-<dl class="section version"><dt>Version</dt><dd>3.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-06-27 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Giorgi Magradze (Refactored by AI)</dd></dl>
-<p>ეს ფაილი შეიცავს კონფიგურაციის მენეჯერის იმპლემენტაციას, რომელიც მართავს <code>system_config.json</code>-ის ჩატვირთვას, შენახვასა და მასზე წვდომას მეხსიერებიდან (RAM) ოპტიმიზებული პერფორმანსისთვის. რეფაქტორინგის შედეგად გაუმჯობესდა ნაკად-უსაფრთხოება, დაემატა წერტილით გამოყოფილი გასაღებით წვდომის API და აღმოიფხვრა მეხსიერების გაჟონვის პოტენციური რისკები. </p>
+<div class="textblock"><p>Implementation of the Configuration Manager. </p>
+<dl class="section author"><dt>Author</dt><dd>Giorgi Magradze &amp; Synapse AI </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>7.0.0 - Final Correct Implementation </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-07-01</dd></dl>
+<p>This is the final, correct implementation that supports the decentralized config.json model. It assembles the full configuration from multiple embedded files on first boot and then uses a simple, single-key NVS strategy for subsequent boots. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a8e04f99cb76db95b008f854b5db0a06c" name="a8e04f99cb76db95b008f854b5db0a06c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e04f99cb76db95b008f854b5db0a06c">&#9670;&#160;</a></span>fmw_config_get_global_config()</h2>
@@ -212,16 +215,15 @@ esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_config_get_b
       </table>
 </div><div class="memdoc">
 
-<p>იღებს კონფიგურაციის მთავარ (root) cJSON კვანძზე const მაჩვენებელს. </p>
-<p>აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.</p>
-<dl class="section warning"><dt>Warning</dt><dd>ეს ფუნქცია აბრუნებს მაჩვენებელს შიდა cJSON ობიექტზე. მიუხედავად იმისა, რომ მაჩვენებელი არის <code>const</code>, რაც კრძალავს პირდაპირ ცვლილებებს, მისი გამოყენება მაინც მოითხოვს სიფრთხილეს. თავი აარიდეთ მის გამოყენებას, თუ ეს აბსოლუტურად აუცილებელი არ არის. გამოიყენეთ <code>fmw_config_get_*</code> ფუნქციები კონკრეტული მნიშვნელობების უსაფრთხოდ მისაღებად. </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>const cJSON* მაჩვენებელი მთავარ კვანძზე, ან NULL თუ კონფიგურაცია არ არის ჩატვირთული. </dd></dl>
+<p>აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს. </p>
+<dl class="section note"><dt>Note</dt><dd>გამოიყენეთ სიფრთხილით. სასურველია გამოიყენოთ უფრო სპეციფიური get ფუნქციები. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const cJSON* მთლიანი კონფიგურაციის root ობიექტის მაჩვენებელი. </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="config__manager_8c_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph.png" border="0" usemap="#aconfig__manager_8c_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph" alt=""/></div>
 <map name="aconfig__manager_8c_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph" id="aconfig__manager_8c_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph">
-<area shape="rect" title="იღებს კონფიგურაციის მთავარ (root) cJSON კვანძზე const მაჩვენებელს." alt="" coords="428,5,587,31"/>
+<area shape="rect" title="აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს." alt="" coords="428,5,587,31"/>
 <area shape="rect" href="module__registry_8c.html#a15ad8ee3953b528270916074c41f0c06" title="ინიციალიზებს მოდულების რეესტრს." alt="" coords="188,5,380,31"/>
 <area shape="poly" title=" " alt="" coords="414,21,380,21,380,15,414,15"/>
 <area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
@@ -258,16 +260,6 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="config__manager_8c_adfc0f16e9882bf39fc2560b58aec6c60_cgraph.png" border="0" usemap="#aconfig__manager_8c_adfc0f16e9882bf39fc2560b58aec6c60_cgraph" alt=""/></div>
-<map name="aconfig__manager_8c_adfc0f16e9882bf39fc2560b58aec6c60_cgraph" id="aconfig__manager_8c_adfc0f16e9882bf39fc2560b58aec6c60_cgraph">
-<area shape="rect" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="5,5,196,31"/>
-<area shape="rect" href="config__manager_8c.html#adf782fcfae675652d67a24618947e547" title="ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში." alt="" coords="244,5,379,31"/>
-<area shape="poly" title=" " alt="" coords="196,15,230,15,230,21,196,21"/>
-</map>
-</div>
-<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="config__manager_8c_adfc0f16e9882bf39fc2560b58aec6c60_icgraph.png" border="0" usemap="#aconfig__manager_8c_adfc0f16e9882bf39fc2560b58aec6c60_icgraph" alt=""/></div>
@@ -298,18 +290,6 @@ Here is the caller graph for this function:</div>
 
 <p>ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში. </p>
 <p>ეს ფუნქცია უნდა გამოიძახოთ მას შემდეგ, რაც კონფიგურაციაში ცვლილებები შევა, რათა ისინი შენარჩუნდეს მოწყობილობის გადატვირთვის შემდეგაც. </p><dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="config__manager_8c_adf782fcfae675652d67a24618947e547_icgraph.png" border="0" usemap="#aconfig__manager_8c_adf782fcfae675652d67a24618947e547_icgraph" alt=""/></div>
-<map name="aconfig__manager_8c_adf782fcfae675652d67a24618947e547_icgraph" id="aconfig__manager_8c_adf782fcfae675652d67a24618947e547_icgraph">
-<area shape="rect" title="ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში." alt="" coords="427,5,561,31"/>
-<area shape="rect" href="config__manager_8c.html#adfc0f16e9882bf39fc2560b58aec6c60" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="188,5,379,31"/>
-<area shape="poly" title=" " alt="" coords="413,21,379,21,379,15,413,15"/>
-<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
-<area shape="poly" title=" " alt="" coords="174,21,141,21,141,15,174,15"/>
-</map>
-</div>
 
 </div>
 </div>

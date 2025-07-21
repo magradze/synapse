@@ -93,19 +93,20 @@ $(document).ready(function(){initNavTree('md_docs_2glossary_2glossary__config.ht
   <div class="headertitle"><div class="title">კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1323"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1325"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1292"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1294"></a>
 მიზანი</h1>
-<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის კონფიგურაციისა და მონაცემთა შენახვის ტერმინებსა და მათ განმარტებებს naming/structure კონვენციების დაცვით.</p>
+<p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის კონფიგურაციისა და მონაცემთა შენახვის ტერმინებსა და მათ განმარტებებს.</p>
 <hr  />
 <ul>
-<li><b>system_config.json:</b> მთავარი კონფიგურაციის ფაილი, სადაც აღწერილია ყველა მოდული და გლობალური პარამეტრი.</li>
-<li><b>module.json:</b> თითოეული მოდულის აღწერითი და default კონფიგურაცია.</li>
-<li><b>Kconfig:</b> ბილდის დროის კონფიგურაციის პარამეტრების განსაზღვრის ფაილი.</li>
-<li><b>NVS (Non-Volatile Storage):</b> მუდმივი მეხსიერება, რომელიც გამოიყენება კონფიგურაციისა და მონაცემების შესანახად.</li>
+<li>**<code>configs/system_config.json</code>:** **(განახლებულია)** ბაზისური კონფიგურაციის ფაილი, სადაც აღწერილია მხოლოდ გლობალური პარამეტრები (<code>firmware</code>, <code>global_config</code>) და ცარიელი <code>modules</code> მასივი.</li>
+<li>**<code>{module_name}/config.json</code>:** **(ახალი)** თითოეული მოდულის default runtime კონფიგურაციის ფაილი.</li>
+<li>**<code>module.json</code>:** თითოეული მოდულის მეტამონაცემების ფაილი build-სისტემისთვის (<code>name</code>, <code>init_function</code> და ა.შ.).</li>
+<li>**<code>Kconfig</code>:** Build-დროის კონფიგურაციის ფაილი, რომელიც განსაზღვრავს, რომელი მოდულები მოხვდება firmware-ში.</li>
+<li><b>NVS (Non-Volatile Storage):</b> მუდმივი მეხსიერება, რომელიც გამოიყენება runtime-ში აწყობილი სრული კონფიგურაციისა და სხვა მონაცემების შესანახად.</li>
 <li><b>Flash:</b> მეხსიერების ტიპი, რომელიც გამოიყენება firmware-სა და დიდი მოცულობის მონაცემების შესანახად.</li>
-<li><b>Configuration Manager (Config Manager):</b> Core-ის კომპონენტი, რომელიც უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ წაკითხვას, ვალიდაციას, განახლებასა და API-ით წვდომას.</li>
-<li><b>Default Value:</b> პარამეტრის მნიშვნელობა, რომელიც გამოიყენება მაშინ, როცა კონფიგურაციაში არ არის მითითებული კონკრეტული მნიშვნელობა.</li>
+<li><b>Configuration Manager (Config Manager):</b> Core-ის კომპონენტი, რომელიც runtime-ში "აწყობს" ერთიან კონფიგურაციას სხვადასხვა წყაროდან (<code>system_config.json</code>, <code>config.json</code>, NVS) და უზრუნველყოფს მასზე წვდომას სტანდარტული API-ით.</li>
+<li><b>Default Value:</b> პარამეტრის მნიშვნელობა, რომელიც გამოიყენება მაშინ, როცა <code>config.json</code>-ში არ არის მითითებული კონკრეტული მნიშვნელობა. როგორც წესი, განისაზღვრება <code>Kconfig</code>-ში.</li>
 <li><b>Validation:</b> კონფიგურაციის ან მონაცემის სისწორის შემოწმების პროცესი.</li>
 <li><b>Migration Script:</b> ინსტრუმენტი, რომელიც უზრუნველყოფს ძველი კონფიგურაციის ახალ სქემაზე გადაყვანას.</li>
 <li><b>Schema Version:</b> კონფიგურაციის ან მონაცემთა სტრუქტურის ვერსიის იდენტიფიკატორი.</li>

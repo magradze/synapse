@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔳_20qr_20code_20provisioning_20api_0',['🔳 QR Code Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md502',1,'']]]
+  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1067',1,'']]]
 ];

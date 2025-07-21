@@ -78,7 +78,6 @@ var annotated_dup =
     [ "timer_test_module_config_t", "structtimer__test__module__config__t.html", "structtimer__test__module__config__t" ],
     [ "timer_test_module_private_data_t", "structtimer__test__module__private__data__t.html", "structtimer__test__module__private__data__t" ],
     [ "watchdog_api_t", "structwatchdog__api__t.html", "structwatchdog__api__t" ],
-    [ "watchdog_manager_config_t", "structwatchdog__manager__config__t.html", "structwatchdog__manager__config__t" ],
     [ "watchdog_manager_private_data_t", "structwatchdog__manager__private__data__t.html", null ],
     [ "wifi_manager_config_t", "structwifi__manager__config__t.html", "structwifi__manager__config__t" ],
     [ "wifi_manager_private_data_t", "structwifi__manager__private__data__t.html", null ]

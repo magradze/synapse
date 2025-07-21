@@ -93,225 +93,214 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1740"></a> </p>
-<h1><a class="anchor" id="autotoc_md1741"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1691"></a> </p>
+<h1><a class="anchor" id="autotoc_md1692"></a>
 მიზანი</h1>
-<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი მოდული Synapse ESP Framework-ში naming, structure და communication კონვენციების დაცვით.</p>
-<h1><a class="anchor" id="autotoc_md1742"></a>
+<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით.</p>
+<h1><a class="anchor" id="autotoc_md1693"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
-<li>განსაზღვრეთ, რა ფუნქციონალი გჭირდებათ (მაგ: ახალი სენსორი, აქტუატორი, კომუნიკაცია)</li>
-<li>აირჩიეთ შესაბამისი კატეგორია (მაგ: sensors, actuators, communications)</li>
+<li><b>ამოცანა:</b> შევქმნათ მარტივი "მისალმების" მოდული, სახელად <code>greeter_module</code>.</li>
+<li><b>ფუნქციონალი:</b><ol type="1">
+<li><code>start</code> ფაზაში, <code>System Timer</code> სერვისის გამოყენებით, დაგეგმოს პერიოდული ივენთი <code>GREETING_TIMER_TICK</code>.</li>
+<li>როდესაც მიიღებს ამ ივენთს, <code>Event Bus</code>-ზე გამოაქვეყნოს ახალი, საკუთარი ივენთი <code>GREETING_MESSAGE_READY</code> <code>payload</code>-ით, რომელიც შეიცავს მისალმების ტექსტს.</li>
+</ol>
+</li>
+<li><b>კატეგორია:</b> <code>utilities</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1743"></a>
-2. საქაღალდის და ფაილების შექმნა</h1>
-<ul>
-<li>შექმენით ახალი საქაღალდე: <code>components/modules/{category}/{new_module}/</code></li>
-<li>დაამატეთ შემდეგი ფაილები:<ul>
-<li><code>CMakeLists.txt</code></li>
-<li><code>module.json</code></li>
-<li><code>README.md</code></li>
-<li><code>include/{new_module}.h</code></li>
-<li><code>src/{new_module}.c</code></li>
+<h1><a class="anchor" id="autotoc_md1694"></a>
+2. მოდულის ჩონჩხის გენერაცია</h1>
+<p>**(სრულად განახლებულია)**</p>
+<p>ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს.</p>
+<ol type="1">
+<li>გახსენით ტერმინალი პროექტის root დირექტორიაში.</li>
+<li><p class="startli">გაუშვით სკრიპტი ინტერაქტიულ რეჟიმში:</p>
+<div class="fragment"><div class="line">python3 scripts/create_module.py</div>
+</div><!-- fragment --></li>
+<li>უპასუხეთ კითხვებს შემდეგნაირად:<ul>
+<li><b>შეიყვანეთ მოდულის სრული სახელი:</b> <code>Greeter Module</code></li>
+<li><b>აირჩიეთ კატეგორია:</b> <code>utilities</code></li>
+<li><b>აირჩიეთ მოდულის არქეტიპი:</b> <code>Event Producer</code> (რადგან ჩვენი მოდული ივენთებს გამოაქვეყნებს).</li>
+<li>დანარჩენ კითხვებს შეგიძლიათ დაეთანხმოთ (Enter).</li>
 </ul>
 </li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1744"></a>
-3. Header და Source ფაილების შაბლონები</h1>
-<p>**Header (<code>include/{new_module}.h</code>):**</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#ifndef {MODULE_NAME}_H</span></div>
-<div class="line"><span class="preprocessor">#define {MODULE_NAME}_H</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;cJSON.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    esp_err_t (*enable)(void);</div>
-<div class="line">    esp_err_t (*disable)(void);</div>
-<div class="line">    <span class="comment">// საჭიროების მიხედვით სხვა API ფუნქციები</span></div>
-<div class="line">}} {module_name}_api_t;</div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *{module_name}_create(<span class="keyword">const</span> cJSON *config);</div>
-<div class="line">esp_err_t {module_name}_api_enable(<span class="keywordtype">void</span>);</div>
-<div class="line">esp_err_t {module_name}_api_disable(<span class="keywordtype">void</span>);</div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#endif </span><span class="comment">// {MODULE_NAME}_H</span></div>
-<div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-</div><!-- fragment --><p>**Source (<code>src/{new_module}.c</code>):**</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;{module_name}.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="config__manager_8h.html">config_manager.h</a>&quot;</span></div>
+</ol>
+<p>სკრიპტი შექმნის ყველა საჭირო ფაილს, მათ შორის <code>config.json</code>-ს, <code>components/modules/utilities/greeter_module/</code> დირექტორიაში.</p>
+<h1><a class="anchor" id="autotoc_md1695"></a>
+3. კონფიგურაცია</h1>
+<ol type="1">
+<li><p class="startli"><b>Runtime კონფიგურაცია:</b> გახსენით ახლად შექმნილი <code>greeter_module/config.json</code> და შეავსეთ ის:</p>
+<div class="fragment"><div class="line">[</div>
+<div class="line">  {</div>
+<div class="line">    &quot;type&quot;: &quot;greeter_module&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">      &quot;instance_name&quot;: &quot;main_greeter&quot;,</div>
+<div class="line">      &quot;greeting_text&quot;: &quot;Hello from Synapse!&quot;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">]</div>
+</div><!-- fragment --></li>
+<li><b>Build-დროის კონფიგურაცია:</b> გაუშვით <code>idf.py menuconfig</code>, გადადით <code>Component config</code> -&gt; <code>Synapse Framework</code> -&gt; <code>Modules</code> -&gt; <code>Greeter Module</code> და დარწმუნდით, რომ მოდული ჩართულია (<code>[*] Enable Greeter Module</code>).</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md1696"></a>
+4. კოდის იმპლემენტაცია</h1>
+<p>ახლა შევავსოთ <code>greeter_module.c</code> ფაილი. სკრიპტმა უკვე დააგენერირა ჩონჩხი, ჩვენ მხოლოდ ლოგიკა უნდა დავამატოთ.</p>
+<p>**<code>src/greeter_module.c</code> (საბოლოო ვერსია):**</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;greeter_module.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="logging_8h.html">logging.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;freertos/semphr.h&quot;</span> <span class="comment">// For mutex</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span> <span class="comment">// strcmp-ისთვის</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__data__wrapper_8h.html">event_data_wrapper.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="timer__interface_8h.html">timer_interface.h</a>&quot;</span> <span class="comment">// &lt;--- დაგვჭირდება ტაიმერის ინტერფეისი</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;{MODULE_NAME}&quot;</span>);</div>
+<div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;GREETER_MODULE&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ივენთის სახელი, რომელსაც ჩვენი მოდული დაამუშავებს</span></div>
-<div class="line"><span class="preprocessor">#define MY_TARGET_EVENT &quot;SomeInterestingEvent&quot;</span></div>
+<div class="line"><span class="comment">// ჩვენი მოდულის მიერ გამოყენებული ივენთების სახელები</span></div>
+<div class="line"><span class="preprocessor">#define GREETING_TIMER_TICK &quot;GREETING_TIMER_TICK&quot;</span></div>
+<div class="line"><span class="preprocessor">#define GREETING_MESSAGE_READY &quot;GREETING_MESSAGE_READY&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *global_{module_name}_instance = NULL;</div>
-<div class="line"><span class="keyword">static</span> {module_name}_api_t {module_name}_service_api = {</div>
-<div class="line">    .<a class="code hl_variable" href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">enable</a> = {module_name}_api_enable,</div>
-<div class="line">    .disable = {module_name}_api_disable,</div>
-<div class="line">    <span class="comment">// საჭიროების მიხედვით სხვა ფუნქციები</span></div>
-<div class="line">};</div>
-<div class="line"> </div>
+<div class="line"><span class="comment">// Private Data Structure</span></div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    <span class="keywordtype">char</span> module_instance_name[32];</div>
-<div class="line">    <span class="comment">// კონფიგურაციის პარამეტრები</span></div>
-<div class="line">    <span class="comment">// runtime ცვლადები</span></div>
-<div class="line">    <span class="comment">// hardware handles</span></div>
-<div class="line">}} {module_name}_private_data_t;</div>
+<div class="line">    <span class="keywordtype">char</span> instance_name[32];</div>
+<div class="line">    <span class="keywordtype">char</span> greeting_text[64];</div>
+<div class="line">    <a class="code hl_typedef" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a> greeting_timer;</div>
+<div class="line">} greeter_private_data_t;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ფუნქციის დეკლარაციები</span></div>
-<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
-<div class="line"><span class="comment">// ... სხვა დეკლარაციები</span></div>
+<div class="line"><span class="comment">// Forward Declarations</span></div>
+<div class="line"><span class="keyword">static</span> esp_err_t greeter_module_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
+<div class="line"><span class="keyword">static</span> esp_err_t greeter_module_start(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keywordtype">void</span> *event_data);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ★★★ განახლებული create და deinit ფუნქციის შაბლონები ★★★</span></div>
+<div class="line"><span class="comment">// Create Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)</span></div>
+<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *greeter_module_create(<span class="keyword">const</span> cJSON *config) {</div>
+<div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = (module_t *)calloc(1, sizeof(module_t));</div>
+<div class="line">    greeter_private_data_t *private_data = (greeter_private_data_t *)calloc(1, <span class="keyword">sizeof</span>(greeter_private_data_t));</div>
+<div class="line">    <span class="keywordflow">if</span> (!module || !private_data) { <span class="comment">/* ... error handling ... */</span> <span class="keywordflow">return</span> NULL; }</div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a>* {module_name}_create(<span class="keyword">const</span> cJSON *config) {</div>
-<div class="line">    <span class="comment">// 1. გამოყავით მეხსიერება მთავარი მოდულის სტრუქტურისთვის</span></div>
-<div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = calloc(1, sizeof(module_t));</div>
-<div class="line">    <span class="keywordflow">if</span> (!module) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to allocate memory for module_t.&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> NULL;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// 2. გამოყავით მეხსიერება მოდულის პირადი მონაცემების სტრუქტურისთვის</span></div>
-<div class="line">    {module_name}_private_data_t *private_data = calloc(1, <span class="keyword">sizeof</span>({module_name}_private_data_t));</div>
-<div class="line">    <span class="keywordflow">if</span> (!private_data) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to allocate memory for private_data.&quot;</span>);</div>
-<div class="line">        free(module);</div>
-<div class="line">        <span class="keywordflow">return</span> NULL;</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="comment">// 3. ★★★ შექმენით state_mutex ★★★</span></div>
-<div class="line">    <span class="keyword">module</span>-&gt;state_mutex = xSemaphoreCreateMutex();</div>
-<div class="line">    <span class="keywordflow">if</span> (!module-&gt;state_mutex) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to create state mutex.&quot;</span>);</div>
-<div class="line">        free(private_data);</div>
-<div class="line">        free(module);</div>
-<div class="line">        <span class="keywordflow">return</span> NULL;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// 4. დააკავშირეთ პირადი მონაცემები და დააყენეთ საწყისი სტატუსი</span></div>
 <div class="line">    <span class="keyword">module</span>-&gt;private_data = private_data;</div>
-<div class="line">    <span class="keyword">module</span>-&gt;status = MODULE_STATUS_UNINITIALIZED;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config; <span class="comment">// ვიღებთ მფლობელობას</span></div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// ... (დააყენეთ ბაზის ფუნქციები, მაგ: module-&gt;base.init = {module_name}_init;) ...</span></div>
-<div class="line">    <span class="keyword">module</span>-&gt;base.deinit = {module_name}_deinit; <span class="comment">// მნიშვნელოვანია: დააყენეთ deinit ფუნქცია</span></div>
-<div class="line">    </div>
-<div class="line">    <span class="comment">// ... (წაიკითხეთ კონფიგურაცია `config`-დან და შეავსეთ პირადი მონაცემები) ...</span></div>
+<div class="line">    <span class="keyword">const</span> cJSON *config_node = cJSON_GetObjectItem(config, <span class="stringliteral">&quot;config&quot;</span>);</div>
+<div class="line">    <span class="keyword">const</span> cJSON *name_node = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;instance_name&quot;</span>);</div>
+<div class="line">    <span class="keyword">const</span> cJSON *text_node = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;greeting_text&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    snprintf(module-&gt;name, <span class="keyword">sizeof</span>(module-&gt;name), <span class="stringliteral">&quot;%s&quot;</span>, cJSON_GetStringValue(name_node));</div>
+<div class="line">    snprintf(private_data-&gt;instance_name, <span class="keyword">sizeof</span>(private_data-&gt;instance_name), <span class="stringliteral">&quot;%s&quot;</span>, cJSON_GetStringValue(name_node));</div>
+<div class="line">    snprintf(private_data-&gt;greeting_text, <span class="keyword">sizeof</span>(private_data-&gt;greeting_text), <span class="stringliteral">&quot;%s&quot;</span>, cJSON_GetStringValue(text_node));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.init = greeter_module_init;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.start = greeter_module_start;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.deinit = greeter_module_deinit;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;base.handle_event = greeter_module_handle_event;</div>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line"><span class="comment">// Init Function</span></div>
+<div class="line"><span class="keyword">static</span> esp_err_t greeter_module_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;&#39;%s&#39; initializing...&quot;</span>, self-&gt;<a class="code hl_variable" href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">name</a>);</div>
+<div class="line">    <span class="comment">// გამოვიწეროთ ჩვენივე ტაიმერის ივენთი</span></div>
+<div class="line">    <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(GREETING_TIMER_TICK, self);</div>
+<div class="line">    self-&gt;<a class="code hl_variable" href="structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2">status</a> = <a class="code hl_enumvalue" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87">MODULE_STATUS_INITIALIZED</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Start Function</span></div>
+<div class="line"><span class="keyword">static</span> esp_err_t greeter_module_start(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;&#39;%s&#39; starting...&quot;</span>, self-&gt;<a class="code hl_variable" href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">name</a>);</div>
+<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> timer_service = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_timer_service&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (timer_service) {</div>
+<div class="line">        <a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *timer_api = (<a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *)timer_service;</div>
+<div class="line">        <span class="comment">// დავგეგმოთ პერიოდული ივენთი ყოველ 5 წამში</span></div>
+<div class="line">        p_data-&gt;greeting_timer = timer_api-&gt;<a class="code hl_variable" href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">schedule_event</a>(GREETING_TIMER_TICK, 5000, <span class="keyword">true</span>);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;System Timer service not found!&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_FAIL;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    self-&gt;status = <a class="code hl_enumvalue" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c">MODULE_STATUS_RUNNING</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Event Handler</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keywordtype">void</span> *event_data) {</div>
+<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (strcmp(event_name, GREETING_TIMER_TICK) == 0) {</div>
+<div class="line">        ESP_LOGI(TAG, <span class="stringliteral">&quot;Timer tick received. Posting greeting message.&quot;</span>);</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// მოვამზადოთ payload</span></div>
+<div class="line">        <span class="keywordtype">char</span>* message_payload = strdup(p_data-&gt;greeting_text);</div>
+<div class="line">        <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *wrapper;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (<a class="code hl_function" href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a>(message_payload, free, &amp;wrapper) == ESP_OK) {</div>
+<div class="line">            <a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(GREETING_MESSAGE_READY, wrapper);</div>
+<div class="line">            <a class="code hl_function" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>(wrapper); <span class="comment">// გავათავისუფლოთ ჩვენი reference</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (event_data) {</div>
+<div class="line">        <a class="code hl_function" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>((<a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *)event_data);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Deinit Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!self) <span class="keywordflow">return</span>;</div>
+<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line"> </div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Deinitializing {module_name} module: %s&quot;</span>, self-&gt;<a class="code hl_variable" href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">name</a>);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// ★★★ მნიშვნელოვანი ნაბიჯი: გააუქმეთ ყველა გამოწერა! ★★★</span></div>
-<div class="line">    <span class="comment">// მაგალითად: fmw_event_bus_unsubscribe(SOME_EVENT_ID, self);</span></div>
-<div class="line">    <span class="comment">// **მნიშვნელოვანია:** ყოველთვის გააუქმეთ ივენთის გამოწერა,</span></div>
-<div class="line">    <span class="comment">// რათა თავიდან ავიცილოთ dangling pointer-ები.</span></div>
-<div class="line">    <a class="code hl_function" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a>(MY_TARGET_EVENT, self);</div>
-<div class="line">    </div>
-<div class="line">    <span class="comment">// ★★★ გაანადგურეთ state_mutex ★★★</span></div>
-<div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">state_mutex</a>) {</div>
-<div class="line">        vSemaphoreDelete(self-&gt;<a class="code hl_variable" href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">state_mutex</a>);</div>
-<div class="line">        self-&gt;<a class="code hl_variable" href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">state_mutex</a> = NULL;</div>
+<div class="line">    <span class="comment">// გავაუქმოთ ტაიმერი</span></div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> timer_service = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_timer_service&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (timer_service &amp;&amp; p_data-&gt;greeting_timer) {</div>
+<div class="line">        ((<a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *)timer_service)-&gt;cancel_event(p_data-&gt;greeting_timer);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// გაათავისუფლეთ პირადი მონაცემები</span></div>
-<div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>) {</div>
-<div class="line">        free(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>);</div>
-<div class="line">        self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a> = NULL;</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="comment">// გაათავისუფლეთ თავად მოდულის ობიექტი</span></div>
+<div class="line">    <a class="code hl_function" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a>(GREETING_TIMER_TICK, self);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>) cJSON_Delete(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>);</div>
+<div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>) free(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>);</div>
 <div class="line">    free(self);</div>
 <div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// მოდულის ინიციალიზაცია</span></div>
-<div class="line"><span class="keyword">static</span> esp_err_t my_module_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* module) {</div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;My Module initialized!&quot;</span>);</div>
-<div class="line">    <span class="comment">// გამოიწერეთ ივენთი, რომლის მიღებაც გსურთ</span></div>
-<div class="line">    <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(MY_TARGET_EVENT, module);</div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ივენთების დამმუშავებელი</span></div>
-<div class="line"><span class="keyword">static</span> esp_err_t my_module_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* module, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a>* data) {</div>
-<div class="line">    <span class="comment">// შევამოწმოთ ივენთის სახელი strcmp-ის გამოყენებით</span></div>
-<div class="line">    <span class="keywordflow">if</span> (strcmp(event_name, MY_TARGET_EVENT) == 0) {</div>
-<div class="line">        ESP_LOGI(TAG, <span class="stringliteral">&quot;My target event received!&quot;</span>);</div>
-<div class="line">        <span class="comment">// აქ დაამუშავეთ ივენთის მონაცემები...</span></div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// მოდულის გაშვება</span></div>
-<div class="line"><span class="keyword">static</span> esp_err_t my_module_start(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* module) {</div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;My Module started!&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ... (სხვა ფუნქციების იმპლემენტაცია) ...</span></div>
-<div class="ttc" id="aconfig__manager_8h_html"><div class="ttname"><a href="config__manager_8h.html">config_manager.h</a></div><div class="ttdoc">კონფიგურაციის მენეჯერის API.</div></div>
+<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87">MODULE_STATUS_INITIALIZED</a></div><div class="ttdeci">@ MODULE_STATUS_INITIALIZED</div><div class="ttdoc">მოდული ინიციალიზებულია, მაგრამ არ მუშაობს.</div><div class="ttdef"><b>Definition</b> base_module.h:36</div></div>
+<div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c">MODULE_STATUS_RUNNING</a></div><div class="ttdeci">@ MODULE_STATUS_RUNNING</div><div class="ttdoc">მოდული მუშაობს და მზადაა ოპერაციებისთვის.</div><div class="ttdef"><b>Definition</b> base_module.h:37</div></div>
 <div class="ttc" id="aevent__bus_8c_html_a1bb409daa4df05a7f65b3531e3231e7f"><div class="ttname"><a href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:365</div></div>
+<div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
 <div class="ttc" id="aevent__bus_8c_html_ae3df84e5063b0dff1e0f0dbdb69c5455"><div class="ttname"><a href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_unsubscribe(const char *event_name, module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:422</div></div>
 <div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის Public API.</div></div>
+<div class="ttc" id="aevent__data__wrapper_8c_html_a7df3595496d466d104e1629d5435e9f7"><div class="ttname"><a href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a></div><div class="ttdeci">esp_err_t fmw_event_data_wrap(const void *payload, void(*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)</div><div class="ttdoc">ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:21</div></div>
+<div class="ttc" id="aevent__data__wrapper_8c_html_a99c9f26cd90b553b84bf2a56db51a689"><div class="ttname"><a href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a></div><div class="ttdeci">esp_err_t fmw_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
+<div class="ttc" id="aevent__data__wrapper_8h_html"><div class="ttname"><a href="event__data__wrapper_8h.html">event_data_wrapper.h</a></div><div class="ttdoc">Event Bus-ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting-ის API.</div></div>
 <div class="ttc" id="alogging_8h_html"><div class="ttname"><a href="logging_8h.html">logging.h</a></div><div class="ttdoc">Synapse ESP Framework-ის ლოგირების დამხმარე ინტერფეისი.</div></div>
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
+<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 <div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
-<div class="ttc" id="astructmodule__t_html_aab517ed6d3ea95d081a3c5c93b59529d"><div class="ttname"><a href="structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d">module_t::state_mutex</a></div><div class="ttdeci">SemaphoreHandle_t state_mutex</div><div class="ttdoc">mutex მოდულის მდგომარეობის დაცვისთვის.</div><div class="ttdef"><b>Definition</b> base_module.h:138</div></div>
-<div class="ttc" id="astructmodule__t_html_ada2e3b860271c0f1d7a0e2291261acde"><div class="ttname"><a href="structmodule__t.html#ada2e3b860271c0f1d7a0e2291261acde">module_t::enable</a></div><div class="ttdeci">module_enable_fn enable</div><div class="ttdoc">მოდულის runtime ჩართვის ფუნქცია.</div><div class="ttdef"><b>Definition</b> base_module.h:150</div></div>
+<div class="ttc" id="astructmodule__t_html_a521c1f2803108c52ea071a5d44f3f8a2"><div class="ttname"><a href="structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2">module_t::status</a></div><div class="ttdeci">module_status_t status</div><div class="ttdoc">მოდულის მიმდინარე სტატუსი.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
+<div class="ttc" id="astructmodule__t_html_a5a1305713cce543522141d618ca463da"><div class="ttname"><a href="structmodule__t.html#a5a1305713cce543522141d618ca463da">module_t::current_config</a></div><div class="ttdeci">cJSON * current_config</div><div class="ttdoc">მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
 <div class="ttc" id="astructmodule__t_html_afb5f2d3d957c8717f54cd8668e4cab5e"><div class="ttname"><a href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">module_t::name</a></div><div class="ttdeci">char name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</div><div class="ttdoc">მოდულის უნიკალური სახელი (instance_name).</div><div class="ttdef"><b>Definition</b> base_module.h:134</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1745"></a>
-4. Naming და Structure კონვენციების გამოყენება</h1>
-<ul>
-<li>გამოიყენეთ <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a></li>
-<li>დაიცავით <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
-<li>ყველა ცვლადი და ფუნქცია უნდა იყოს დესკრიპტიური და კონტექსტური</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1746"></a>
-5. მოდულის რეგისტრაცია და ჩართვა</h1>
-<ul>
-<li><p class="startli">დაამატეთ მოდული <code>system_config.json</code>-ში:</p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;type&quot;: &quot;{module_name}&quot;,</div>
-<div class="line">    &quot;enabled&quot;: true,</div>
-<div class="line">    &quot;config&quot;: {</div>
-<div class="line">        &quot;instance_name&quot;: &quot;{instance_name}&quot;,</div>
-<div class="line">        // სხვა საჭირო პარამეტრები</div>
-<div class="line">    }</div>
-<div class="line">}</div>
+<div class="ttc" id="astructtimer__api__t_html"><div class="ttname"><a href="structtimer__api__t.html">timer_api_t</a></div><div class="ttdoc">The public Service API structure for the System Timer Service.</div><div class="ttdef"><b>Definition</b> timer_interface.h:31</div></div>
+<div class="ttc" id="astructtimer__api__t_html_a362c2f5fb2285918b2579c0ae273b24e"><div class="ttname"><a href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">timer_api_t::schedule_event</a></div><div class="ttdeci">fmw_timer_handle_t(* schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules an event to be posted on the Event Bus after a specified interval.</div><div class="ttdef"><b>Definition</b> timer_interface.h:41</div></div>
+<div class="ttc" id="atimer__interface_8h_html"><div class="ttname"><a href="timer__interface_8h.html">timer_interface.h</a></div><div class="ttdoc">Public Service API contract for the System Timer Service module.</div></div>
+<div class="ttc" id="atimer__interface_8h_html_ade6f29151e54d5c129f8b052f6ec3e8a"><div class="ttname"><a href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a></div><div class="ttdeci">void * fmw_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1697"></a>
+5. ტესტირება</h1>
+<ol type="1">
+<li><p class="startli"><b>ააწყვეთ და ჩაწერეთ firmware:</b></p>
+<div class="fragment"><div class="line">idf.py build flash monitor</div>
 </div><!-- fragment --></li>
-<li>ჩართეთ მოდული Kconfig-ში</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1747"></a>
-6. ტესტირება და ლოგირება</h1>
-<ul>
-<li>გამოიყენეთ ESP-IDF-ის build და flash ბრძანებები</li>
-<li>დააკვირდით ლოგებს (ESP_LOGI, ESP_LOGE და სხვ.)</li>
-<li>დარწმუნდით, რომ ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგში ჩანს</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1748"></a>
-7. დამატებითი რესურსები</h1>
-<ul>
-<li><a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a></li>
-<li><a class="el" href="md_docs_2structure_2configuration__flow.html">configuration_flow.md</a></li>
-<li><a class="el" href="md_docs_2structure_2error__handling__and__logging.html">error_handling_and_logging.md</a></li>
-</ul>
+<li><b>დააკვირდით ლოგებს:</b> თქვენ უნდა დაინახოთ, რომ <code>greeter_module</code> იქმნება, იწყებს მუშაობას და ყოველ 5 წამში ერთხელ ბეჭდავს <code>Posting greeting message.</code> შეტყობინებას.</li>
+<li><b>დამატებით:</b> შეგიძლიათ, <code>logger_module</code> გამოიყენოთ, რათა დაინახოთ, რომ <code>GREETING_MESSAGE_READY</code> ივენთი ნამდვილად ქვეყნდება <code>Event Bus</code>-ზე.</li>
+</ol>
 <hr  />
 <p>თუ შეგექმნათ პრობლემა, იხილეთ <a href="../troubleshooting/">troubleshooting</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>
 </div></div><!-- contents -->

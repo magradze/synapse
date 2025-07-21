@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მოდული: Watchdog Manager</title>
+<title>Synapse ESP Framework: 🐕 მოდული: &lt;tt&gt;watchdog_manager&lt;/tt&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,35 +90,22 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მოდული: Watchdog Manager</div></div>
+  <div class="headertitle"><div class="title">🐕 მოდული: &lt;tt&gt;watchdog_manager&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md127"></a> </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md127"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
+ <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
+ <b>🔖 ვერსია:</b> 1.2.0</p>
 <h1><a class="anchor" id="autotoc_md128"></a>
-1. მიმოხილვა</h1>
-<p><b>მოდულის სახელი:</b> <code>watchdog_manager</code> <br  />
- <b>კატეგორია:</b> <code>system</code> <br  />
- <b>ვერსია:</b> 1.0.0 <br  />
- <b>ავტორი:</b> Synapse Framework Team</p>
-<p><code>Watchdog Manager</code> მოდული არის Synapse Framework-ის თვითაღდგენის და საიმედოობის კრიტიკული კომპონენტი. მისი მთავარი ამოცანაა, დაიცვას სისტემა პროგრამული უზრუნველყოფის გაჭედვისგან (software freeze/hang).</p>
-<p>ტრადიციული watchdog-ებისგან განსხვავებით, რომლებიც უბრალოდ პერიოდულად "იკვებებიან", ეს მოდული ახდენს **"ჭკვიანი" ანუ აპლიკაციაზე მორგებული (application-aware)** watchdog-ის იმპლემენტაციას. ის გადატვირთავს ESP-IDF-ის Task Watchdog Timer-ს (TWDT) მხოლოდ იმ შემთხვევაში, თუ სისტემის <b>ყველა</b> კრიტიკულად მნიშვნელოვანი კომპონენტი გამართულად და დროულად ფუნქციონირებს.</p>
+1. 📜 მიმოხილვა</h1>
+<p><code>Watchdog Manager</code> მოდული არის Synapse Framework-ის <b>თვითაღდგენის და საიმედოობის კრიტიკული კომპონენტი</b>. მისი მთავარი ამოცანაა, დაიცვას სისტემა პროგრამული უზრუნველყოფის გაჭედვისგან (software freeze/hang).</p>
+<p>ტრადიციული watchdog-ებისგან განსხვავებით, რომლებიც უბრალოდ პერიოდულად "იკვებებიან", ეს მოდული ახდენს **"ჭკვიანი" ანუ აპლიკაციაზე მორგებული (application-aware)** watchdog-ის იმპლემენტაციას. ის იყენებს ESP-IDF-ის Task Watchdog Timer-ს (TWDT), მაგრამ "აკვებებს" მას მხოლოდ იმ შემთხვევაში, თუ სისტემის <b>ყველა</b> კრიტიკულად მნიშვნელოვანი, რეგისტრირებული კომპონენტი გამართულად და დროულად ფუნქციონირებს.</p>
 <h1><a class="anchor" id="autotoc_md129"></a>
-2. წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
-<p>ამ მოდულის გამართული მუშაობისთვის აუცილებელია ESP-IDF-ის კონფიგურაციაში (<code>menuconfig</code>) შემდეგი ოფციების ჩართვა:</p>
-<ol type="1">
-<li><b>Task Watchdog Timer (TWDT):</b><ul>
-<li>გზა: <code>Component config</code> → <code>ESP System Settings</code></li>
-<li>ოფცია: <code>[*] Initialize Task Watchdog Timer on startup</code> (<code>CONFIG_ESP_TASK_WDT_INIT</code>)</li>
-<li>ოფცია: <code>Task Watchdog timeout period (seconds)</code> (<code>CONFIG_ESP_TASK_WDT_TIMEOUT_S</code>) - ეს მნიშვნელობა უნდა იყოს უფრო დიდი, ვიდრე ჩვენი მოდულის <code>check_interval_sec</code>.</li>
-</ul>
-</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md130"></a>
-3. არქიტექტურული პრინციპები</h1>
+2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>განაწილებული "გულისცემა" (Distributed Heartbeat):</b> მოდული არ ეყრდნობა ერთ ცენტრალურ ტასკს. ამის ნაცვლად, ის ელოდება "გულისცემის" სიგნალებს სხვადასხვა კრიტიკული მოდულისგან. Watchdog-ი "იკვებება" მხოლოდ მაშინ, როცა ყველა რეგისტრირებული მოდულისგან მიღებულია სიგნალი.</li>
 <li><b>Service-driven:</b> მოდული აწვდის <code><a class="el" href="structwatchdog__api__t.html" title="Watchdog Manager Service API structure.">watchdog_api_t</a></code> სერვისს, რომელიც სხვა მოდულებს საშუალებას აძლევს, დაარეგისტრირონ საკუთარი თავი, როგორც "კრიტიკული" კომპონენტი და პერიოდულად გააგზავნონ "გულისცემა".</li>
-<li><b>Event-driven:</b> მოდული გამოიწერს <code>SYSTEM_HEALTH_ALERT</code> ივენთს. თუ <code>Health Monitor</code>-ისგან მიიღებს გამოუსწორებელი შეცდომის სიგნალს, მას შეუძლია მიზანმიმართულად შეწყვიტოს Watchdog-ის "კვება", რათა გამოიწვიოს სისტემის უსაფრთხო გადატვირთვა.</li>
+<li><b>ეფექტური პერიოდული შემოწმება:</b> ცალკე FreeRTOS ტასკის შექმნის ნაცვლად, მოდული იყენებს <code>System Timer Service</code>-ს, რათა პერიოდულად გამოიძახოს შემოწმების ლოგიკა. ეს ამცირებს სისტემის დატვირთვას და ზოგავს რესურსებს.</li>
 <li><b>ფენებად დაყოფილი პასუხისმგებლობა:</b><ol type="1">
 <li><b>ESP-IDF TWDT:</b> დაბალი დონის ტაიმერი, რომელიც იწვევს აპარატურულ გადატვირთვას.</li>
 <li>**<code>watchdog_manager</code>:** მაღალი დონის ლოგიკა, რომელიც წყვეტს, "ვაჭამოთ" თუ არა TWDT-ს.</li>
@@ -126,10 +113,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 </ol>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md131"></a>
-4. კონფიგურაცია</h1>
-<p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
-<p><b>კონფიგურაციის მაგალითი:</b></p>
+<h1><a class="anchor" id="autotoc_md130"></a>
+3. ⚙️ კონფიგურაცია</h1>
+<p>მოდულის კონფიგურაცია ხდება როგორც <code>Kconfig</code>-ის, ისე <code>system_config.json</code> ფაილის საშუალებით.</p>
+<p>**<code>system_config.json</code> მაგალითი:**</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;type&quot;: &quot;watchdog_manager&quot;,</div>
 <div class="line">    &quot;enabled&quot;: true,</div>
@@ -142,72 +129,64 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2watchd
 </div><!-- fragment --><p><b>კონფიგურაციის პარამეტრები:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadCenter">სავალდებულო   </th><th class="markdownTableHeadLeft">Default    </th></tr>
+<th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadLeft">Default (<code>Kconfig</code>)    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მოდულის ინსტანციის უნიკალური სახელი.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>main_watchdog</code>    </td></tr>
+<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მოდულის ინსტანციის უნიკალური სახელი.   </td><td class="markdownTableBodyLeft"><code>main_watchdog</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>check_interval_ms</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ინტერვალი (მილიწამებში), რა სიხშირითაც მოდული ამოწმებს მიღებულ "გულისცემებს".   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>2000</code>    </td></tr>
+<td class="markdownTableBodyLeft"><code>check_interval_ms</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ინტერვალი (მილიწამებში), რა სიხშირითაც მოდული ამოწმებს მიღებულ "გულისცემებს".   </td><td class="markdownTableBodyLeft"><code>2000</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>heartbeat_timeout_ms</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">მაქსიმალური დრო (მილიწამებში), რომლის განმავლობაშიც მოდული ელოდება "გულისცემას" რეგისტრირებული კომპონენტისგან.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>5000</code>   </td></tr>
+<td class="markdownTableBodyLeft"><code>heartbeat_timeout_ms</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">მაქსიმალური დრო (მილიწამებში), რომლის განმავლობაშიც მოდული ელოდება "გულისცემას" რეგისტრირებული კომპონენტისგან.   </td><td class="markdownTableBodyLeft"><code>5000</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md132"></a>
-5. Service API (&lt;tt&gt;watchdog_api_t&lt;/tt&gt;)</h1>
+<h1><a class="anchor" id="autotoc_md131"></a>
+4. 🔌 Service API (&lt;tt&gt;watchdog_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა Watchdog მენეჯერის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>FMW_SERVICE_TYPE_WATCHDOG_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>esp_err_t register_heartbeat(const char *module_name);</code>** <br  />
- არეგისტრირებს მოდულს, როგორც კრიტიკულ კომპონენტს. ამის შემდეგ, <code>watchdog_manager</code> დაიწყებს ამ მოდულისგან "გულისცემის" ლოდინს. ეს ფუნქცია უნდა გამოიძახოს კრიტიკულმა მოდულმა თავის <code>init</code> ან <code>start</code> ფუნქციაში.</li>
+ ❤️ არეგისტრირებს მოდულს, როგორც კრიტიკულ კომპონენტს. ამის შემდეგ, <code>watchdog_manager</code> დაიწყებს ამ მოდულისგან "გულისცემის" ლოდინს.</li>
 <li>**<code>esp_err_t send_heartbeat(const char *module_name);</code>** <br  />
- რეგისტრირებული მოდული პერიოდულად იძახებს ამ ფუნქციას, რათა ამცნოს <code>watchdog_manager</code>-ს, რომ ის "ცოცხალია" და გამართულად მუშაობს.</li>
+ 💓 რეგისტრირებული მოდული პერიოდულად იძახებს ამ ფუნქციას, რათა ამცნოს <code>watchdog_manager</code>-ს, რომ ის "ცოცხალია".</li>
 <li>**<code>esp_err_t unregister_heartbeat(const char *module_name);</code>** <br  />
- შლის მოდულს მონიტორინგის სიიდან. უნდა გამოიძახოს მოდულის <code>deinit</code> ფუნქციამ.</li>
+ 💔 შლის მოდულს მონიტორინგის სიიდან (ამჟამად არ არის იმპლემენტირებული).</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md132"></a>
+5. 📢 გამოქვეყნებული ივენთები</h1>
+<ul>
+<li>**<code>FMW_EVENT_HEARTBEAT_MISSED</code>**<ul>
+<li><b>როდის ქვეყნდება:</b> როდესაც რომელიმე რეგისტრირებული მოდული ვერ აგზავნის "გულისცემას" <code>heartbeat_timeout_ms</code>-ის განმავლობაში.</li>
+<li>**Payload (<code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code>):** <code>module_name</code> ველი შეიცავს იმ მოდულის სახელს, რომელიც "გაიჭედა".</li>
+</ul>
+</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md133"></a>
-6. გამოქვეყნებული ივენთები</h1>
-<ul>
-<li>**<code>WATCHDOG_HEARTBEAT_MISSED</code>**<ul>
-<li><b>როდის ქვეყნდება:</b> როდესაც რომელიმე რეგისტრირებული მოდული ვერ აგზავნის "გულისცემას" <code>heartbeat_timeout_ms</code>-ის განმავლობაში.</li>
-<li><b>Payload (cJSON სტრიქონი):</b> <code>{"module_name":"main_mqtt_client"}</code></li>
-</ul>
-</li>
-<li>**<code>WATCHDOG_TRIGGERED_REBOOT</code>**<ul>
-<li><b>როდის ქვეყნდება:</b> როდესაც მოდული წყვეტს "კვებას" და ემზადება სისტემის გადასატვირთად.</li>
-<li><b>Payload (cJSON სტრიქონი):</b> <code>{"reason":"Heartbeat missed from main_mqtt_client"}</code></li>
-</ul>
-</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md134"></a>
-7. 💡 გამოყენების მაგალითი</h1>
-<p>წარმოვიდგინოთ, <code>mqtt_client</code> მოდული არის კრიტიკული კომპონენტი.</p>
-<p>**1. რეგისტრაცია (<code>mqtt_client.c</code>-ში):**</p>
-<div class="fragment"><div class="line"><span class="comment">// mqtt_client_init ფუნქციაში</span></div>
-<div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_watchdog&quot;</span>);</div>
+6. 💡 გამოყენების მაგალითი</h1>
+<p>წარმოვიდგინოთ, <code>mqtt_manager</code> არის კრიტიკული კომპონენტი.</p>
+<p>**1. რეგისტრაცია (<code><a class="el" href="mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing.">mqtt_manager.c</a></code>-ში, <code>init</code> ფუნქციაში):**</p>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#a15eb7d324559bd97c87796cac394cc8d">fmw_service_lookup_by_type</a>(FMW_SERVICE_TYPE_WATCHDOG_API);</div>
 <div class="line"><span class="keywordflow">if</span> (handle) {</div>
 <div class="line">    <a class="code hl_struct" href="structwatchdog__api__t.html">watchdog_api_t</a> *wd_api = (<a class="code hl_struct" href="structwatchdog__api__t.html">watchdog_api_t</a> *)handle;</div>
-<div class="line">    wd_api-&gt;<a class="code hl_variable" href="structwatchdog__api__t.html#ac16b85ae36dedce6596731ba9d56f28c">register_heartbeat</a>(<span class="stringliteral">&quot;main_mqtt_client&quot;</span>);</div>
+<div class="line">    wd_api-&gt;<a class="code hl_variable" href="structwatchdog__api__t.html#ac16b85ae36dedce6596731ba9d56f28c">register_heartbeat</a>(<span class="stringliteral">&quot;main_mqtt_broker&quot;</span>);</div>
 <div class="line">}</div>
+<div class="ttc" id="aservice__locator_8h_html_a15eb7d324559bd97c87796cac394cc8d"><div class="ttname"><a href="service__locator_8h.html#a15eb7d324559bd97c87796cac394cc8d">fmw_service_lookup_by_type</a></div><div class="ttdeci">service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type)</div><div class="ttdoc">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს</div><div class="ttdef"><b>Definition</b> service_locator.c:242</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 <div class="ttc" id="astructwatchdog__api__t_html"><div class="ttname"><a href="structwatchdog__api__t.html">watchdog_api_t</a></div><div class="ttdoc">Watchdog Manager Service API structure.</div><div class="ttdef"><b>Definition</b> watchdog_interface.h:24</div></div>
 <div class="ttc" id="astructwatchdog__api__t_html_ac16b85ae36dedce6596731ba9d56f28c"><div class="ttname"><a href="structwatchdog__api__t.html#ac16b85ae36dedce6596731ba9d56f28c">watchdog_api_t::register_heartbeat</a></div><div class="ttdeci">esp_err_t(* register_heartbeat)(const char *module_name)</div><div class="ttdoc">Registers a module for heartbeat monitoring.</div><div class="ttdef"><b>Definition</b> watchdog_interface.h:32</div></div>
-</div><!-- fragment --><p>**2. "გულისცემის" გაგზავნა (<code>mqtt_client.c</code>-ში):**</p>
-<div class="fragment"><div class="line"><span class="comment">// MQTT ტასკის მთავარ ციკლში, ყოველი წარმატებული ოპერაციის შემდეგ</span></div>
-<div class="line"><span class="keywordtype">void</span> mqtt_task() {</div>
-<div class="line">    <span class="keywordflow">while</span>(1) {</div>
-<div class="line">        <span class="comment">// ... აკეთებს თავის საქმეს ...</span></div>
-<div class="line">        </div>
-<div class="line">        <span class="comment">// ვაგზავნით &quot;გულისცემას&quot;</span></div>
-<div class="line">        <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_watchdog&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">if</span> (handle) {</div>
-<div class="line">            <a class="code hl_struct" href="structwatchdog__api__t.html">watchdog_api_t</a> *wd_api = (<a class="code hl_struct" href="structwatchdog__api__t.html">watchdog_api_t</a> *)handle;</div>
-<div class="line">            wd_api-&gt;<a class="code hl_variable" href="structwatchdog__api__t.html#a2e0bd819a4be6e90ad4149b7d921b2d5">send_heartbeat</a>(<span class="stringliteral">&quot;main_mqtt_client&quot;</span>);</div>
-<div class="line">        }</div>
-<div class="line">        </div>
-<div class="line">        vTaskDelay(pdMS_TO_TICKS(1000));</div>
-<div class="line">    }</div>
+</div><!-- fragment --><p>**2. "გულისცემის" გაგზავნა (<code><a class="el" href="mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing.">mqtt_manager.c</a></code>-ში, პერიოდულად):**</p>
+<div class="fragment"><div class="line"><span class="comment">// მაგალითად, MQTT_EVENT_CONNECTED-ისას ან პერიოდულად</span></div>
+<div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#a15eb7d324559bd97c87796cac394cc8d">fmw_service_lookup_by_type</a>(FMW_SERVICE_TYPE_WATCHDOG_API);</div>
+<div class="line"><span class="keywordflow">if</span> (handle) {</div>
+<div class="line">    <a class="code hl_struct" href="structwatchdog__api__t.html">watchdog_api_t</a> *wd_api = (<a class="code hl_struct" href="structwatchdog__api__t.html">watchdog_api_t</a> *)handle;</div>
+<div class="line">    wd_api-&gt;<a class="code hl_variable" href="structwatchdog__api__t.html#a2e0bd819a4be6e90ad4149b7d921b2d5">send_heartbeat</a>(<span class="stringliteral">&quot;main_mqtt_broker&quot;</span>);</div>
 <div class="line">}</div>
 <div class="ttc" id="astructwatchdog__api__t_html_a2e0bd819a4be6e90ad4149b7d921b2d5"><div class="ttname"><a href="structwatchdog__api__t.html#a2e0bd819a4be6e90ad4149b7d921b2d5">watchdog_api_t::send_heartbeat</a></div><div class="ttdeci">esp_err_t(* send_heartbeat)(const char *module_name)</div><div class="ttdoc">A monitored module calls this function to signal it is alive.</div><div class="ttdef"><b>Definition</b> watchdog_interface.h:47</div></div>
-</div><!-- fragment --><p>თუ <code>mqtt_task</code> გაიჭედება, <code>send_heartbeat</code> აღარ გამოიძახება, <code>watchdog_manager</code> ამას დააფიქსირებს და გადატვირთავს სისტემას. </p>
+</div><!-- fragment --><p>თუ <code>mqtt_manager</code> გაიჭედება, <code>send_heartbeat</code> აღარ გამოიძახება, <code>watchdog_manager</code> ამას დააფიქსირებს, გამოაქვეყნებს <code>FMW_EVENT_HEARTBEAT_MISSED</code> ივენთს და შეწყვეტს TWDT-ს "კვებას", რაც გამოიწვევს სისტემის უსაფრთხო გადატვირთვას.</p>
+<h1><a class="anchor" id="autotoc_md134"></a>
+7. ❗ წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
+<p>ამ მოდულის გამართული მუშაობისთვის აუცილებელია ESP-IDF-ის კონფიგურაციაში (<code>menuconfig</code>) შემდეგი ოფციის ჩართვა:</p>
+<ul>
+<li><b>გზა:</b> <code>Component config</code> → <code>ESP System Settings</code></li>
+<li><b>ოფცია:</b> <code>[*] Initialize Task Watchdog Timer on startup</code> (<code>CONFIG_ESP_TASK_WDT_INIT</code>) </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

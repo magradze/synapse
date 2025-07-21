@@ -1,14 +1,20 @@
 var searchData=
 [
-  ['error_20handling_20ის_20წესები_0',['Error Handling-ის წესები',['../md_docs_2convention_2error__handling.html',1,'']]],
-  ['error_20handling_20decisions_1',['შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)',['../md_docs_2design__decisions_2error__handling__decisions.html',1,'']]],
-  ['error_20handling_20logging_2',['შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)',['../md_docs_2structure_2error__handling__and__logging.html',1,'']]],
-  ['esp_20framework_20—_20არქიტექტურის_20მიმოხილვა_3',['Synapse ESP Framework — არქიტექტურის მიმოხილვა',['../md_docs_2design__decisions_2architecture__overview.html',1,'']]],
-  ['event_20bus_20api_20reference_4',['Synapse Event Bus API Reference',['../md_docs_2api__reference_2event__api.html',1,'']]],
-  ['event_20payloads_20event_5fpayloads_20h_5',['API რეფერენსი: Event Payloads (event_payloads.h)',['../md_docs_2api__reference_2event__payloads__api.html',1,'']]],
-  ['event_5fpayloads_20h_6',['API რეფერენსი: Event Payloads (event_payloads.h)',['../md_docs_2api__reference_2event__payloads__api.html',1,'']]],
-  ['example_7',['ინტეგრაციის მაგალითი (Integration Example)',['../md_docs_2tutorials_2integration__example.html',1,'']]],
-  ['extending_20the_20framework_8',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
-  ['extensibility_20modularity_9',['გაფართოებადობისა და მოდულარობის არქიტექტურული გადაწყვეტილებები (Extensibility &amp; Modularity)',['../md_docs_2design__decisions_2extensibility__and__modularity.html',1,'']]],
-  ['extension_20feature_20addition_10',['მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension &amp; Feature Addition)',['../md_docs_2tutorials_2module__extension.html',1,'']]]
+  ['debugging_20guide_20დიბაგინგის_20სახელმძღვანელო_0',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
+  ['decision_20record_20template_1',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
+  ['decisions_2',['decisions',['../md_docs_2design__decisions_2error__handling__decisions.html',1,'შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)'],['../md_docs_2design__decisions_2design__decisions__index.html',1,'Synapse Design Decisions']]],
+  ['deprecated_20list_3',['Deprecated List',['../deprecated.html',1,'']]],
+  ['design_20checklist_4',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
+  ['design_20decisions_5',['Synapse Design Decisions',['../md_docs_2design__decisions_2design__decisions__index.html',1,'']]],
+  ['device_20identity_20service_20api_20reference_6',['Synapse Device Identity Service API Reference',['../md_docs_2api__reference_2device__identity__api.html',1,'']]],
+  ['device_5fidentity_5fservice_20tt_7',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
+  ['diagnostics_20გაფართოებული_20დიაგნოსტიკა_8',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
+  ['directory_20structure_9',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
+  ['disclosure_20policy_20უსაფრთხოების_20ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_10',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
+  ['display_20module_20api_20reference_11',['Synapse Display Module API Reference',['../md_docs_2api__reference_2display__api.html',1,'']]],
+  ['display_20modules_12',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
+  ['documentation_20module_20design_20checklist_13',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
+  ['doxygen_20კომენტარების_20სტანდარტი_20v1_200_14',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]],
+  ['doxygen_5fmain_5fpages_15',['doxygen_main_pages',['../md_docs_2doxygen__main__pages.html',1,'']]],
+  ['drivers_20module_20api_20reference_16',['Synapse Drivers Module API Reference',['../md_docs_2api__reference_2drivers__api.html',1,'']]]
 ];

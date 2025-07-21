@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🔌_20მოდული_3a_20tt_20relay_5factuator_20tt_0',['🔌 მოდული: &lt;tt&gt;relay_actuator&lt;/tt&gt;',['../md_components_2modules_2actuators_2relay__actuator_2README.html',1,'']]],
-  ['🔌_20relay_20actuator_20api_20reference_1',['🔌 Relay Actuator API Reference',['../md_docs_2api__reference_2relay__api.html',1,'']]]
+  ['📲_20მოდული_20tt_20ble_5fprovisioning_20tt_0',['📲 მოდული &lt;tt&gt;ble_provisioning&lt;/tt&gt;',['../md_components_2modules_2provisioning_2ble__provisioning_2README.html',1,'']]],
+  ['📲_20synapse_20provisioning_20module_20api_20reference_1',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]]
 ];

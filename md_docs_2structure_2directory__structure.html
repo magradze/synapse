@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2directory__structu
   <div class="headertitle"><div class="title">საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1605"></a> </p>
-<h1><a class="anchor" id="autotoc_md1606"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1557"></a> </p>
+<h1><a class="anchor" id="autotoc_md1558"></a>
 ძირითადი სტრუქტურა</h1>
 <div class="fragment"><div class="line">project_root/</div>
 <div class="line">├── main/                  # მთავარი აპლიკაცია (app_main და ძირითადი ლოგიკა)</div>
@@ -105,79 +105,75 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2directory__structu
 <div class="line">│   └── modules/           # კატეგორიებად დაყოფილი მოდულები</div>
 <div class="line">│       ├── sensors/</div>
 <div class="line">│       ├── actuators/</div>
-<div class="line">│       ├── communications/</div>
-<div class="line">│       ├── display/</div>
-<div class="line">│       ├── drivers/</div>
-<div class="line">│       ├── provisioning/</div>
-<div class="line">│       ├── system/</div>
-<div class="line">│       └── utility/</div>
+<div class="line">│       └── ...</div>
+<div class="line">├── configs/               # ბაზისური კონფიგურაციის ფაილები</div>
+<div class="line">│   └── system_config.json # მხოლოდ გლობალური პარამეტრები</div>
 <div class="line">├── docs/                  # დოკუმენტაცია და სტანდარტები</div>
 <div class="line">│   ├── convention/</div>
 <div class="line">│   └── structure/</div>
 <div class="line">├── CMakeLists.txt         # მთავარი ბილდის სკრიპტი</div>
 <div class="line">├── Kconfig                # მთავარი კონფიგურაცია</div>
 <div class="line">└── ...                    # სხვა ფაილები და საქაღალდეები</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1607"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1559"></a>
 ძირითადი საქაღალდეების აღწერა</h1>
 <ul>
-<li><b>main/</b> — მთავარი აპლიკაციის საწყისი წერტილი (app_main), სადაც ხდება სისტემის ინიციალიზაცია და მოდულების ჩართვა.</li>
-<li><b>components/core/</b> — ბირთვი: service locator, event bus, module register, module_fabrique და სხვა ინფრასტრუქტურული კომპონენტები.</li>
-<li><b>components/interfaces/</b> — გლობალური ინტერფეისები, რომლებიც უზრუნველყოფს მოდულებს შორის კონტრაქტებს.</li>
-<li><b>components/modules/</b> — კატეგორიებად დაყოფილი მოდულები (სენსორები, აქტუატორები, კომუნიკაციები, ეკრანები, დრაივერები და ა.შ.).</li>
+<li><b>main/</b> — მთავარი აპლიკაციის საწყისი წერტილი (<code>app_main</code>), სადაც ხდება სისტემის ინიციალიზაცია და გაშვება.</li>
+<li><b>components/core/</b> — ფრეიმვორქის ბირთვი: <code>Service Locator</code>, <code>Event Bus</code>, <code>Module Registry</code>, <code>Config Manager</code> და სხვა ინფრასტრუქტურული კომპონენტები.</li>
+<li><b>components/interfaces/</b> — გლობალური ინტერფეისები, რომლებიც უზრუნველყოფს მოდულებს შორის "კონტრაქტებს".</li>
+<li><b>components/modules/</b> — კატეგორიებად დაყოფილი, დამოუკიდებელი ფუნქციონალური მოდულები.</li>
+<li><b>configs/</b> — **(განახლებულია)** შეიცავს ბაზისურ <code>system_config.json</code> ფაილს, რომელიც განსაზღვრავს მხოლოდ გლობალურ პარამეტრებს (<code>firmware</code>, <code>global_config</code>) და ცარიელ <code>modules</code> მასივს.</li>
 <li><b>docs/</b> — დოკუმენტაცია, სტანდარტები და არქიტექტურული აღწერები.</li>
-<li><b>CMakeLists.txt</b> — მთავარი ბილდის სკრიპტი, რომელიც განსაზღვრავს პროექტის ბილდს.</li>
-<li><b>Kconfig</b> — მთავარი კონფიგურაციის ფაილი, სადაც ხდება მოდულების ჩართვა/გამორთვა.</li>
+<li><b>CMakeLists.txt</b> — მთავარი build-სკრიპტი, რომელიც აღმოაჩენს და აერთიანებს ყველა კომპონენტს.</li>
+<li><b>Kconfig</b> — მთავარი კონფიგურაციის ფაილი, სადაც ხდება მოდულების ჩართვა/გამორთვა build-დროში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1608"></a>
-modules საქაღალდის სტრუქტურა</h1>
+<h1><a class="anchor" id="autotoc_md1560"></a>
+&lt;tt&gt;modules&lt;/tt&gt; საქაღალდის სტრუქტურა</h1>
 <div class="fragment"><div class="line">components/modules/</div>
 <div class="line">├── sensors/</div>
 <div class="line">│   └── dht22_module/</div>
 <div class="line">├── actuators/</div>
-<div class="line">│   └── relay_module/</div>
+<div class="line">│   └── relay_actuator/</div>
 <div class="line">├── communications/</div>
-<div class="line">│   ├── wifi_module/</div>
-<div class="line">│   └── mqtt_module/</div>
-<div class="line">├── display/</div>
-<div class="line">│   └── ssd1306_module/</div>
-<div class="line">├── drivers/</div>
-<div class="line">│   └── i2c_bus_module/</div>
-<div class="line">├── provisioning/</div>
-<div class="line">│   └── ble_prov_module/</div>
-<div class="line">├── system/</div>
-<div class="line">│   └── ota_module/</div>
-<div class="line">└── utility/</div>
-<div class="line">    └── logger_module/</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1609"></a>
+<div class="line">│   ├── wifi_manager/</div>
+<div class="line">│   └── mqtt_manager/</div>
+<div class="line">└── ... (სხვა კატეგორიები)</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1561"></a>
 თითოეული მოდულის სტრუქტურა</h1>
+<p>**(განახლებულია <code>config.json</code>-ის დასამატებლად)**</p>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
 <div class="line">├── CMakeLists.txt</div>
+<div class="line">├── Kconfig</div>
 <div class="line">├── module.json</div>
+<div class="line">├── config.json         # &lt;--- ახალი ფაილი</div>
 <div class="line">├── README.md</div>
 <div class="line">├── include/</div>
 <div class="line">│   └── {module_name}.h</div>
-<div class="line">├── src/</div>
-<div class="line">│   └── {module_name}.c</div>
-<div class="line">└── ... (სხვა საჭირო ფაილები)</div>
+<div class="line">└── src/</div>
+<div class="line">    └── {module_name}.c</div>
 </div><!-- fragment --><ul>
-<li><b>CMakeLists.txt</b> — მოდულის ბილდის სკრიპტი</li>
-<li><b>module.json</b> — მოდულის აღწერითი და კონფიგურაციული ფაილი</li>
-<li><b>README.md</b> — მოკლე აღწერა და გამოყენების მაგალითები</li>
-<li><b>include/</b> — ჰედერ ფაილები (public API)</li>
-<li><b>src/</b> — წყარო კოდი (implementation)</li>
+<li><b>CMakeLists.txt</b> — მოდულის build-სკრიპტი.</li>
+<li><b>Kconfig</b> — მოდულის build-დროის კონფიგურაციის პარამეტრები (<code>menuconfig</code>-ისთვის).</li>
+<li><b>module.json</b> — მოდულის მეტამონაცემები (<code>name</code>, <code>init_function</code>, <code>init_level</code> და ა.შ.).</li>
+<li><b>config.json</b> — **(ახალი)** მოდულის default runtime კონფიგურაცია. ეს ფაილი შეიცავს JSON ობიექტს ან ობიექტების მასივს, რომელიც აღწერს მოდულის ერთ ან მეტ ინსტანციას.</li>
+<li><b>README.md</b> — მოკლე აღწერა და გამოყენების მაგალითები.</li>
+<li><b>include/</b> — ჰედერ ფაილები (public API).</li>
+<li><b>src/</b> — წყარო კოდი (implementation).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1610"></a>
+<h1><a class="anchor" id="autotoc_md1562"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p><ul>
-<li>პირდაპირი #include სხვა მოდულის header-ების</li>
-<li>არასტანდარტული ან არათანმიმდევრული საქაღალდეების შექმნა</li>
-<li>მოდულის ფაილების არასწორი განლაგება</li>
+<p>❌ <b>არასდროს:</b></p>
+<ul>
+<li>პირდაპირი <code>#include</code> სხვა მოდულის ჰედერების.</li>
+<li>არასტანდარტული ან არათანმიმდევრული საქაღალდეების შექმნა.</li>
+<li>მოდულის ფაილების არასწორი განლაგება.</li>
+<li>Runtime პარამეტრების hardcode-ირება კოდში.</li>
 </ul>
-<p>✅ <b>ყოველთვის:</b></p><ul>
-<li>დაიცავით სტანდარტული სტრუქტურა</li>
-<li>გამოიყენეთ მკაფიო და დესკრიპტიული სახელები</li>
-<li>ყველა მოდულს ჰქონდეს თავისი include/ და src/ ქვეკატეგორიები</li>
-<li>გამოიყენეთ README.md თითოეულ მოდულში</li>
+<p>✅ <b>ყოველთვის:</b></p>
+<ul>
+<li>დაიცავით სტანდარტული სტრუქტურა.</li>
+<li>გამოიყენეთ მკაფიო და დესკრიპტიული სახელები.</li>
+<li>ყველა მოდულს ჰქონდეს თავისი <code>include/</code> და <code>src/</code> ქვედირექტორიები.</li>
+<li>ყველა მოდულს ჰქონდეს <code>README.md</code>, <code>module.json</code> და <code>config.json</code>.</li>
 </ul>
 <hr  />
 <p>შემდეგი ნაბიჯი: დეტალურად განვიხილოთ მოდულების არქიტექტურა და მათი ურთიერთქმედება. </p>

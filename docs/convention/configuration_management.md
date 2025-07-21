@@ -2,467 +2,151 @@
 
 ## ძირითადი პრინციპი
 
-**ყველა კონფიგურაციული პარამეტრი უნდა იყოს `system_config.json`-ში, არ უნდა იყოს hardcoded კოდში.**
+**(განახლებულია)**
+**ყველა runtime კონფიგურაციული პარამეტრი უნდა იყოს მოდულის საკუთარ `config.json` ფაილში. კოდში hardcoded მნიშვნელობები დაუშვებელია.**
 
-## system_config.json სტრუქტურა
+## კონფიგურაციის სტრუქტურა და წყაროები
 
-### სტანდარტული ფორმატი
+**(სრულად განახლებულია)**
 
-```json
-{
-    "firmware": {
-        "version": "2.3.0",
-        "description": "Firmware description"
-    },
-    "global_config": {
-        "device.id.prefix": "MINDLAB"
-    },
-    "modules": [
+Synapse Framework v5.0.0-დან იყენებს **დეცენტრალიზებულ** კონფიგურაციის მოდელს:
+
+1. **`configs/system_config.json` (ბაზისური):**
+    * **როლი:** განსაზღვრავს მხოლოდ გლობალურ პარამეტრებს.
+    * **სტრუქტურა:**
+
+        ```json
         {
-            "type": "module_type_name",
+            "firmware": {
+                "version": "5.0.0",
+                "description": "Decentralized configuration model."
+            },
+            "global_config": {
+                "device.id.prefix": "SYNAPSE"
+            },
+            "modules": [] // ეს მასივი ყოველთვის ცარიელია ამ ფაილში
+        }
+        ```
+
+2. **`{module_name}/config.json` (მოდულის):**
+    * **როლი:** ეს არის თითოეული მოდულის **default runtime კონფიგურაცია**.
+    * **სტრუქტურა:** შეიცავს JSON ობიექტს ან ობიექტების მასივს, რომელიც სრულად აღწერს მოდულის ინსტანცი(ებ)ს.
+
+    **მაგალითი (`relay_actuator/config.json`):**
+
+    ```json
+    [
+      {
+        "type": "relay_actuator",
+        "enabled": true,
+        "config": {
+            "instance_name": "main_light",
+            "pin": 23,
+            "active_level": 0
+        }
+      },
+      {
+        "type": "relay_actuator",
+        "enabled": true,
+        "config": {
+            "instance_name": "water_pump",
+            "pin": 22,
+            "active_level": 0
+        }
+      }
+    ]
+    ```
+
+    **მაგალითი (`wifi_manager/config.json`):**
+
+    ```json
+    [
+        {
+            "type": "wifi_manager",
             "enabled": true,
             "config": {
-                "instance_name": "instance_name",
-                // module-specific configuration
+                "instance_name": "main_wifi"
             }
         }
     ]
-}
-```
+    ```
 
-### მაგალითი სრული კონფიგურაცია
+## კონფიგურაციის წვდომის პატერნები
 
-```json
-{
-    "firmware": {
-        "version": "2.3.0",
-        "description": "Implemented Service Locator pattern for I2C bus decoupling."
-    },
-    "global_config": {
-        "device.id.prefix": "MINDLAB"
-    },
-    "modules": [
-        {
-            "type": "ssd1306_module",
-            "enabled": true,
-            "config": {
-                "instance_name": "main_display",
-                "i2c_bus_instance": "i2c_bus_0",
-                "i2c_addr": "0x3C",
-                "width": 128,
-                "height": 64,
-                "default_enabled": true,
-                "init_text": "MINDLAB"
-            }
-        },
-        {
-            "type": "lcd1602_module",
-            "enabled": true,
-            "config": {
-                "instance_name": "main_lcd",
-                "i2c_bus_instance": "i2c_bus_0",
-                "i2c_addr": "0x27",
-                "rows": 2,
-                "cols": 16,
-                "backlight": true,
-                "default_enabled": true,
-                "init_text_line1": "MINDLAB ESP32",
-                "init_text_line2": "Ready..."
-            }
-        },
-        {
-            "type": "relay_module",
-            "enabled": true,
-            "config": {
-                "instance_name": "main_light",
-                "pin": 23,
-                "active_low": true
-            }
-        },
-        {
-            "type": "dht22_module",
-            "enabled": true,
-            "config": {
-                "instance_name": "indoor_sensor",
-                "pin": 4,
-                "type": "DHT11",
-                "update_interval_sec": 30
-            }
-        },
-        {
-            "type": "mqtt_module",
-            "enabled": true,
-            "config": {
-                "instance_name": "main_broker",
-                "broker_uri": "mqtt://192.168.1.160:1883",
-                "username": "",
-                "password": "",
-                "base_topic": "/mindlab/device"
-            }
-        }
-    ]
-}
-```
+**(განახლებულია)**
+მიუხედავად იმისა, რომ კონფიგურაცია ფიზიკურად დაყოფილია, `Config Manager` runtime-ში აწყობს ერთიან, ლოგიკურ სტრუქტურას. ამიტომ, პარამეტრებზე წვდომის API უცვლელი რჩება.
 
-## კონფიგურაციის ტიპები
+### `fmw_config_get_*` ფუნქციების გამოყენება
 
-### 1. Hardware Configuration (Sensor Module)
+წვდომა ხდება **წერტილით გამოყოფილი გასაღებით (dot-notation)**:
 
-```json
-{
-    "type": "dht22_module",
-    "enabled": true,
-    "config": {
-        "instance_name": "indoor_sensor",
-        "pin": 4,
-        "type": "DHT11",
-        "update_interval_sec": 30
-    }
-}
-```
+1. **გლობალური პარამეტრისთვის:** `"global_config.parameter_name"`
+2. **მოდულის პარამეტრისთვის:** `"instance_name.parameter_name"`
 
-### 2. Display Configuration (SSD1306)
-
-```json
-{
-    "type": "ssd1306_module",
-    "enabled": true,
-    "config": {
-        "instance_name": "main_display",
-        "i2c_bus_instance": "i2c_bus_0",
-        "i2c_addr": "0x3C",
-        "width": 128,
-        "height": 64,
-        "default_enabled": true,
-        "init_text": "MINDLAB"
-    }
-}
-```
-
-### 3. LCD Display Configuration
-
-```json
-{
-    "type": "lcd1602_module",
-    "enabled": true,
-    "config": {
-        "instance_name": "main_lcd",
-        "i2c_bus_instance": "i2c_bus_0",
-        "i2c_addr": "0x27",
-        "rows": 2,
-        "cols": 16,
-        "backlight": true,
-        "default_enabled": true,
-        "init_text_line1": "MINDLAB ESP32",
-        "init_text_line2": "Ready..."
-    }
-}
-```
-
-### 4. Communication Configuration (MQTT)
-
-```json
-{
-    "type": "mqtt_module",
-    "enabled": true,
-    "config": {
-        "instance_name": "main_broker",
-        "broker_uri": "mqtt://192.168.1.160:1883",
-        "username": "",
-        "password": "",
-        "base_topic": "/mindlab/device"
-    }
-}
-```
-
-### 5. I2C Bus Configuration
-
-```json
-{
-    "type": "i2c_bus_module",
-    "enabled": true,
-    "config": {
-        "instance_name": "i2c_bus_0",
-        "port": 0,
-        "sda_pin": 21,
-        "scl_pin": 22,
-        "clk_speed_hz": 100000
-    }
-}
-```
-
-### 6. Relay Configuration
-
-```json
-{
-    "type": "relay_module",
-    "enabled": true,
-    "config": {
-        "instance_name": "main_light",
-        "pin": 23,
-        "active_low": true
-    }
-}
-```
-
-## კონფიგურაციის Parsing
-
-### Private Data Structure
+**მაგალითი:**
 
 ```c
-typedef struct {
-    char instance_name[32];
-    
-    // Configuration parameters from JSON
-    int gpio_pin;
-    bool default_enabled;
-    char init_text[64];
-    uint32_t read_interval_ms;
-    float temperature_offset;
-    
-    // Runtime variables
-    TaskHandle_t task_handle;
-    bool task_suspended;
-    // hardware handles...
-} module_private_data_t;
-```
-
-### Configuration Parsing Function
-
-```c
-static esp_err_t parse_module_config(const cJSON *config, module_private_data_t *module_private_data) {
-    if (!config || !module_private_data) {
-        return ESP_ERR_INVALID_ARG;
-    }
-    
-    // Parse integer values
-    cJSON *gpio_pin = cJSON_GetObjectItem(config, "gpio_pin");
-    if (cJSON_IsNumber(gpio_pin)) {
-        module_private_data->gpio_pin = gpio_pin->valueint;
-    } else {
-        ESP_LOGW(TAG, "gpio_pin not found, using default: %d", DEFAULT_GPIO_PIN);
-        module_private_data->gpio_pin = DEFAULT_GPIO_PIN;
-    }
-    
-    // Parse boolean values
-    cJSON *default_enabled = cJSON_GetObjectItem(config, "default_enabled");
-    if (cJSON_IsBool(default_enabled)) {
-        module_private_data->default_enabled = cJSON_IsTrue(default_enabled);
-    } else {
-        ESP_LOGW(TAG, "default_enabled not found, using default: false");
-        module_private_data->default_enabled = false;
-    }
-    
-    // Parse string values
-    cJSON *init_text = cJSON_GetObjectItem(config, "init_text");
-    if (cJSON_IsString(init_text)) {
-        strncpy(module_private_data->init_text, init_text->valuestring, sizeof(module_private_data->init_text) - 1);
-        module_private_data->init_text[sizeof(module_private_data->init_text) - 1] = '\0';
-    } else {
-        ESP_LOGW(TAG, "init_text not found, using default");
-        strncpy(module_private_data->init_text, "Default Text", sizeof(module_private_data->init_text) - 1);
-    }
-    
-    // Parse float values
-    cJSON *temperature_offset = cJSON_GetObjectItem(config, "temperature_offset");
-    if (cJSON_IsNumber(temperature_offset)) {
-        module_private_data->temperature_offset = (float)temperature_offset->valuedouble;
-    } else {
-        ESP_LOGW(TAG, "temperature_offset not found, using default: 0.0");
-        module_private_data->temperature_offset = 0.0;
-    }
-    
-    return ESP_OK;
-}
-```
-
-## Default Values
-
-### Constants Definition
-
-```c
-// Default configuration values
-#define DEFAULT_GPIO_PIN           4
-#define DEFAULT_READ_INTERVAL_MS   5000
-#define DEFAULT_TASK_PRIORITY      5
-#define DEFAULT_STACK_SIZE         4096
-#define DEFAULT_INIT_TEXT          "MindLab ESP32"
-#define DEFAULT_TEMPERATURE_OFFSET 0.0
-#define DEFAULT_HUMIDITY_OFFSET    0.0
-```
-
-### Fallback Logic
-
-```c
-static esp_err_t apply_default_config(module_private_data_t *module_private_data) {
-    // Apply defaults if config parsing failed
-    module_private_data->gpio_pin = DEFAULT_GPIO_PIN;
-    module_private_data->read_interval_ms = DEFAULT_READ_INTERVAL_MS;
-    module_private_data->default_enabled = false;
-    module_private_data->temperature_offset = DEFAULT_TEMPERATURE_OFFSET;
-    strncpy(module_private_data->init_text, DEFAULT_INIT_TEXT, sizeof(module_private_data->init_text) - 1);
-    
-    ESP_LOGW(TAG, "Applied default configuration");
-    return ESP_OK;
-}
-```
-
-## Runtime Configuration Changes
-
-### Reconfiguration Support
-
-```c
-static esp_err_t module_reconfigure(module_t *module, const cJSON *new_config) {
-    if (!module || !new_config) {
-        return ESP_ERR_INVALID_ARG;
-    }
-    
-    module_private_data_t *module_private_data = (module_private_data_t *)module->private_data;
-    
-    // Parse new configuration
-    esp_err_t ret = parse_module_config(new_config, module_private_data);
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to parse new configuration");
-        return ret;
-    }
-    
-    // Apply new configuration
-    ret = apply_new_configuration(module_private_data);
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to apply new configuration");
-        return ret;
-    }
-    
-    ESP_LOGI(TAG, "Module reconfigured successfully");
-    return ESP_OK;
-}
-```
-
-## Configuration Validation
-
-### Input Validation
-
-```c
-static esp_err_t validate_module_config(const module_private_data_t *module_private_data) {
-    // Validate GPIO pin
-    if (module_private_data->gpio_pin < 0 || module_private_data->gpio_pin > 39) {
-        ESP_LOGE(TAG, "Invalid GPIO pin: %d", module_private_data->gpio_pin);
-        return ESP_ERR_INVALID_ARG;
-    }
-    
-    // Validate intervals
-    if (module_private_data->read_interval_ms < 100 || module_private_data->read_interval_ms > 60000) {
-        ESP_LOGE(TAG, "Invalid read interval: %lu ms", module_private_data->read_interval_ms);
-        return ESP_ERR_INVALID_ARG;
-    }
-    
-    // Validate string lengths
-    if (strlen(module_private_data->init_text) == 0) {
-        ESP_LOGW(TAG, "Empty init_text, using default");
-        strncpy((char *)module_private_data->init_text, DEFAULT_INIT_TEXT, sizeof(module_private_data->init_text) - 1);
-    }
-    
-    return ESP_OK;
-}
-```
-
-## Configuration Access Patterns
-
-### Using Config Manager
-
-```c
-// მოდულის კონფიგურაცია იღება modules მასივიდან type-ის მიხედვით
-// Config Manager ავტომატურად პოულობს შესაბამის მოდულს
-
-// Get configuration value from module config
-char broker_url[128];
-esp_err_t ret = fmw_config_get_string("mqtt_module.config.broker_uri", 
-                                      broker_url, sizeof(broker_url));
-if (ret != ESP_OK) {
-    strncpy(broker_url, DEFAULT_BROKER_URL, sizeof(broker_url) - 1);
-}
-
-// Get integer value from module config
-int update_interval;
-ret = fmw_config_get_int("dht22_module.config.update_interval_sec", &update_interval);
-if (ret != ESP_OK) {
-    update_interval = DEFAULT_UPDATE_INTERVAL;
-}
-
-// Get global configuration
+// გლობალური პარამეტრის წაკითხვა
 char device_prefix[32];
-ret = fmw_config_get_string("global_config.device.id.prefix", 
-                           device_prefix, sizeof(device_prefix));
-if (ret != ESP_OK) {
-    strncpy(device_prefix, "MINDLAB", sizeof(device_prefix) - 1);
+fmw_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
+
+// `main_light` ინსტანციის `pin` პარამეტრის წაკითხვა
+int relay_pin;
+fmw_config_get_int("main_light.pin", &relay_pin);
+```
+
+## კონფიგურაციის პარსინგი მოდულის შიგნით
+
+თითოეული მოდულის `_create` ფუნქცია იღებს თავისი კონფიგურაციის სრულ JSON ობიექტს (`{"type": ..., "enabled": ..., "config": ...}`).
+
+### `parse_config` ფუნქცია
+
+რეკომენდებულია, თითოეულ მოდულს ჰქონდეს `static esp_err_t parse_config(const cJSON *config_node, private_data_t *p_data)` ფუნქცია.
+
+```c
+// relay_actuator.c-ში
+static esp_err_t parse_config(const cJSON *config_node, relay_private_data_t *p_data) {
+    if (!config_node) return ESP_ERR_INVALID_ARG;
+
+    // Kconfig-იდან ვიღებთ default მნიშვნელობას
+    p_data->gpio_pin = CONFIG_RELAY_ACTUATOR_DEFAULT_PIN;
+    
+    const cJSON *pin_node = cJSON_GetObjectItem(config_node, "pin");
+    if (cJSON_IsNumber(pin_node)) {
+        p_data->gpio_pin = pin_node->valueint;
+    } else {
+        ESP_LOGE(TAG, "'pin' is a required parameter!");
+        return ESP_ERR_INVALID_ARG; // pin სავალდებულოა
+    }
+    
+    // ... ვპარსავთ სხვა პარამეტრებს ...
+    
+    return ESP_OK;
 }
 ```
+
+## Default მნიშვნელობები და ვალიდაცია
+
+* **"სიმართლის წყარო" default-ებისთვის არის `Kconfig`**. მოდულმა `parse_config` ფუნქციაში ჯერ უნდა მიანიჭოს `Kconfig`-იდან წამოღებული მნიშვნელობა და შემდეგ სცადოს მისი გადაფარვა `config.json`-იდან.
+* **ვალიდაცია:** `_create` ფუნქცია პასუხისმგებელია, შეამოწმოს ყველა სავალდებულო პარამეტრის არსებობა და დააბრუნოს შეცდომა, თუ რომელიმე აკლია.
 
 ## აკრძალული პრაქტიკები
 
-❌ **არ გავაკეთოთ:**
+❌ **არასდროს:**
 
-```c
-// Hardcoded values in code
-#define DISPLAY_WIDTH  128    // Should be in config!
-#define SENSOR_PIN     4      // Should be in config!
-#define MQTT_BROKER    "mqtt://broker.example.com"  // Should be in config!
+* კოდში hardcoded მნიშვნელობების გამოყენება.
+* `system_config.json`-ში `modules` მასივის ხელით შევსება.
+* `module.json`-ში runtime პარამეტრების განსაზღვრა.
 
-// Magic numbers in code
-ssd1306_init(display_width, display_height);  // Width and height should come from config
-gpio_set_level(gpio_pin, active_level);   // GPIO pin should come from config
-```
+✅ **ყოველთვის:**
 
-✅ **ყოველთვის გავაკეთოთ:**
-
-```c
-// All parameters from configuration
-ssd1306_init(module_private_data->display_width, module_private_data->display_height);
-gpio_set_level(module_private_data->gpio_pin, module_private_data->active_level);
-mqtt_connect(module_private_data->broker_url, module_private_data->client_id);
-```
-
-## Configuration Categories
-
-### 1. Hardware Parameters
-
-- GPIO pins
-- I2C addresses
-- SPI frequencies
-- UART baud rates
-
-### 2. Timing Parameters
-
-- Task intervals
-- Timeouts
-- Retry delays
-- Watchdog periods
-
-### 3. Display Parameters
-
-- Screen dimensions
-- Font sizes
-- Default text
-- Brightness levels
-
-### 4. Network Parameters
-
-- MQTT broker URLs
-- WiFi credentials
-- Connection timeouts
-- QoS levels
-
-### 5. Sensor Parameters
-
-- Calibration offsets
-- Filtering settings
-- Sampling rates
-- Threshold values
+* გამოიყენეთ `fmw_config_get_*` API-ები სხვა მოდულების პარამეტრებზე წვდომისთვის.
+* განსაზღვრეთ მოდულის default კონფიგურაცია მის საკუთარ `config.json` ფაილში.
+* გამოიყენეთ `Kconfig` build-დროის default-ებისთვის.
 
 ## შეჯამება
 
-1. **ყველაფერი** `system_config.json`-ში
-2. **არაფერი** hardcoded კოდში
-3. **ყოველთვის** validation და default values
-4. **მხარდაჭერა** runtime reconfiguration-ის
-5. **ნათელი** error handling და logging
+1. **კონფიგურაცია დეცენტრალიზებულია:** თითოეული მოდული პასუხისმგებელია თავის default კონფიგურაციაზე.
+2. **`Config Manager` აერთიანებს მათ:** runtime-ში იქმნება ერთიანი, ლოგიკური კონფიგურაციის ხე.
+3. **წვდომის API უცვლელია:** `fmw_config_get_*` ფუნქციები მუშაობს ისე, როგორც ადრე.
+4. **`Kconfig` არის default-ების წყარო:** `config.json`-მა შეიძლება გადააფაროს `Kconfig`-ის მნიშვნელობები.

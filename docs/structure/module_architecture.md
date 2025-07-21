@@ -2,126 +2,101 @@
 
 ## ძირითადი პრინციპები
 
-- **მოდულურობა:** ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.
-- **იზოლაცია:** მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ Service Locator-ის ან Event Bus-ის მეშვეობით.
+- **მოდულურობა:** ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს `Kconfig`-ის მეშვეობით.
+- **იზოლაცია:** მოდულებს შორის პირდაპირი დამოკიდებულებები აკრძალულია. კომუნიკაცია ხდება მხოლოდ `Service Locator`-ის ან `Event Bus`-ის მეშვეობით.
 - **სტანდარტიზაცია:** ყველა მოდული მიჰყვება ერთიან naming, structure და communication სტანდარტებს.
-- **გაფართოებადობა:** ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით.
+- **გაფართოებადობა:** ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით, `create_module.py` სკრიპტის გამოყენებით.
 
 ## მოდულის ტიპები
 
-1. **Service-driven Module**
-   - უზრუნველყოფს API-ს Service Locator-ისთვის
-   - მაგ: display, actuator, driver მოდულები
-2. **Event-driven Module**
-   - ავრცელებს ან იღებს მოვლენებს Event Bus-ის მეშვეობით
-   - მაგ: სენსორები, ლოგერები
-3. **Driver Module**
-   - უზრუნველყოფს hardware abstraction-ს და API-ს სხვა მოდულებისთვის
-   - მაგ: i2c_bus_module, spi_bus_module
-4. **Utility Module**
-   - დამხმარე ფუნქციონალი, რომელიც შეიძლება იყოს როგორც service-driven, ასევე event-driven
+1. **Service Provider Module:**
+    - აწვდის API-ს `Service Locator`-ის მეშვეობით.
+    - მაგ: `rgb_led_indicator`, `storage_manager`, `system_timer`.
+2. **Event-driven Module:**
+    - ავრცელებს ან იღებს მოვლენებს `Event Bus`-ის მეშვეობით.
+    - მაგ: `sensor_aggregator`, `alarms_manager`.
+3. **Hybrid Module:**
+    - იყენებს ორივე პატერნს. არის როგორც სერვისის მომწოდებელი, ისე ივენთებზე დამოკიდებული.
+    - მაგ: `wifi_manager` (იღებს ივენთებს, მაგრამ მომავალში შეიძლება API-ც ჰქონდეს), `rgb_led_indicator` (იღებს ივენთებს და აწვდის API-ს).
 
 ## მოდულების ურთიერთქმედება
 
-- **Service Locator:** გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის
-- **Event Bus:** გამოიყენება broadcast/notification სცენარებისთვის
-- **აკრძალულია:** პირდაპირი #include სხვა მოდულის header-ების
+- **Service Locator:** გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი, სინქრონული ფუნქციური გამოძახებისთვის.
+- **Event Bus:** გამოიყენება broadcast/notification სცენარებისთვის, ასინქრონული კომუნიკაციისთვის.
+- **აკრძალულია:** პირდაპირი `#include` სხვა მოდულის ჰედერების.
 
 ## მოდულის სიცოცხლის ციკლი (Lifecycle)
 
-1. **Create:** მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)
-2. **Init:** ინიციალიზაცია (მაგ: static esp_err_t ssd1306_init)
-3. **Enable/Disable:** ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)
-4. **Deinit:** რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)
+1. **Create:** `Module Factory` იძახებს მოდულის `_create(config)` ფუნქციას. მოდული იღებს თავისი კონფიგურაციის ობიექტის **მფლობელობას**.
+2. **Init:** `System Manager` იძახებს `init(self)` ფუნქციას. აქ ხდება რესურსების დაკავება, სერვისების რეგისტრაცია, ივენთებზე გამოწერა.
+3. **Start:** `System Manager` იძახებს `start(self)` ფუნქციას. აქ იწყება მოდულის აქტიური მუშაობა (მაგ., ტასკის გაშვება).
+4. **Deinit:** `System Manager` (მომავალში) ან სისტემის გამორთვისას გამოიძახება `deinit(self)` ფუნქცია. აქ ხდება ყველა გამოყოფილი რესურსის (მათ შორის კონფიგურაციის ობიექტის) გათავისუფლება.
 
 ## მოდულის სტრუქტურის მაგალითი
 
-```
-components/modules/display/ssd1306_module/
+```plaintext
+components/modules/displays/rgb_led_indicator/
 ├── CMakeLists.txt
+├── Kconfig
 ├── module.json
+├── config.json         # <--- Default runtime კონფიგურაცია
 ├── README.md
 ├── include/
-│   └── ssd1306_module.h
-├── src/
-│   └── ssd1306_module.c
+│   └── rgb_led_indicator.h
+└── src/
+    └── rgb_led_indicator.c
 ```
 
-### Header (include/ssd1306_module.h)
+### `_create` ფუნქციის კონტრაქტი
+
+ყველა მოდულის `_create` ფუნქციამ უნდა დაიცვას მეხსიერების მართვის ახალი წესი.
 
 ```c
-#ifndef SSD1306_MODULE_H
-#define SSD1306_MODULE_H
+// src/rgb_led_indicator.c-ში
+module_t *rgb_led_indicator_create(const cJSON *config) {
+    // 1. მეხსიერების გამოყოფა
+    module_t *module = (module_t *)calloc(1, sizeof(module_t));
+    // ...
 
-#include "base_module.h"
-#include "cJSON.h"
-#include "esp_err.h"
+    // 2. კონფიგურაციის ობიექტის მფლობელობის აღება
+    module->current_config = (cJSON*)config;
 
-// Service API Structure
-typedef struct {
-    esp_err_t (*enable)(void);
-    esp_err_t (*disable)(void);
-    esp_err_t (*clear)(void);
-    esp_err_t (*write_text)(const char *text, uint8_t line);
-} ssd1306_api_t;
+    // 3. კონფიგურაციის პარსინგი
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    // ...
 
-// Public API
-module_t *ssd1306_module_create(const cJSON *config);
+    // 4. base ფუნქციების დაყენება
+    module->base.init = rgb_led_indicator_init;
+    module->base.deinit = rgb_led_indicator_deinit;
+    // ...
 
-// Service API Functions
-esp_err_t ssd1306_api_enable(void);
-esp_err_t ssd1306_api_disable(void);
-esp_err_t ssd1306_api_clear(void);
-esp_err_t ssd1306_api_write_text(const char *text, uint8_t line);
-
-#endif // SSD1306_MODULE_H
-```
-
-### Source (src/ssd1306_module.c)
-
-```c
-// ...existing code...
-static module_t *global_ssd1306_instance = NULL;
-static ssd1306_api_t ssd1306_service_api = {
-    .enable = ssd1306_api_enable,
-    .disable = ssd1306_api_disable,
-    .clear = ssd1306_api_clear,
-    .write_text = ssd1306_api_write_text
-};
-
-typedef struct {
-    char module_instance_name[32];
-    // კონფიგურაციის პარამეტრები
-    // runtime ცვლადები
-    // hardware handles
-} ssd1306_private_data_t;
-
-// ...function declarations, implementation...
+    return module;
+}
 ```
 
 ## მოდულის გაფართოება/დამატება
 
-1. შექმენით ახალი საქაღალდე შესაბამის კატეგორიაში (მაგ: sensors/new_sensor_module)
-2. დაამატეთ CMakeLists.txt, module.json, include/, src/, README.md
-3. გამოიყენეთ naming და structure კონვენციები
-4. აღწერეთ API და საჭირო კონფიგურაცია
-5. ჩართეთ მოდული მთავარ კონფიგურაციაში (Kconfig)
+1. გამოიყენეთ `python3 scripts/create_module.py` სკრიპტი ახალი მოდულის ჩონჩხის დასაგენერირებლად.
+2. შეავსეთ `config.json` ფაილი default პარამეტრებით.
+3. შეავსეთ `_create`, `init`, `start`, `deinit` და `handle_event` ფუნქციები თქვენი ლოგიკით.
+4. ჩართეთ მოდული `idf.py menuconfig`-ში.
 
 ## აკრძალული და რეკომენდებული პრაქტიკები
 
 ❌ **არასდროს:**
-- პირდაპირი #include სხვა მოდულის header-ების
-- არასტანდარტული ცვლადებისა და ფუნქციების სახელები
-- არასტანდარტული ფაილური სტრუქტურა
-- კონფიგურაციის მნიშვნელობების hardcode
+
+- პირდაპირი `#include` სხვა მოდულის ჰედერების.
+- არასტანდარტული ფაილური სტრუქტურა.
+- კონფიგურაციის მნიშვნელობების hardcode-ირება.
+- `_create` ფუნქციაში გადაცემული `config` ობიექტის დუბლირება.
 
 ✅ **ყოველთვის:**
-- დაიცავით naming და structure კონვენციები
-- გამოიყენეთ Service Locator ან Event Bus სწორი სცენარისთვის
-- აღწერეთ ყველა public API და კონფიგურაცია
-- გამოიყენეთ დესკრიპტიული სახელები
+
+- დაიცავით naming და structure კონვენციები.
+- გამოიყენეთ `Service Locator` ან `Event Bus` სწორი სცენარისთვის.
+- აღწერეთ ყველა public API და კონფიგურაცია `README.md`-ში.
+- `_deinit` ფუნქციაში გაათავისუფლეთ ყველა რესურსი, მათ შორის `module->current_config`.
 
 ---
 
 შემდეგი ნაბიჯი: დეტალურად განვიხილოთ core კომპონენტები და მათი დანიშნულება.
-

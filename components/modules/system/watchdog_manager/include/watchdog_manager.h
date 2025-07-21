@@ -1,10 +1,9 @@
 /**
  * @file watchdog_manager.h
- * @brief Intelligent watchdog timer management with heartbeat monitoring
+ * @brief Application-aware watchdog with heartbeat monitoring.
  * @author Synapse Framework Team
- * @version 1.0.0
- * @details Watchdog Manager მოდული რომელიც აღზევს Intelligent watchdog timer management with heartbeat monitoring ფუნქციონალურობას.
- *          მოდული მუშაობს Synapse Framework-ის base_module interface-ის საფუძველზე.
+ * @version 1.1.0
+ * @date 2025-07-19
  */
 
 #ifndef WATCHDOG_MANAGER_H
@@ -18,26 +17,13 @@
 extern "C" {
 #endif
 
-/**
- * @brief Watchdog Manager მოდულის კონფიგურაციის სტრუქტურა
- * @details შეიცავს მოდულის ყველა კონფიგურაციის პარამეტრს
- */
-typedef struct {
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];  /**< მოდულის ინსტანციის სახელი */
-    bool auto_start;                                        /**< ავტომატური გაშვება */
-    // TODO: დაამატეთ მოდულის სპეციფიკური კონფიგურაციის ფილდები
-} watchdog_manager_config_t;
-
-/**
- * @brief ქმნის ახალ watchdog_manager მოდულის ინსტანციას
- * 
- * @param[in] config მოდულის კონფიგურაცია (JSON ობიექტი) ან NULL default-ებისთვის
- * @return მაჩვენებელი შექმნილ მოდულზე ან NULL შეცდომისას
- * 
- * @note შექმნილი მოდული უნდა დარეგისტრირდეს system_manager-ში
- * @warning მეხსიერება უნდა გათავისუფლდეს module->base.destroy() ფუნქციით
- */
-module_t *watchdog_manager_create(const cJSON *config);
+    /**
+     * @brief Creates a new instance of the Watchdog Manager module.
+     *
+     * @param[in] config Module configuration from system_config.json.
+     * @return A pointer to the created module, or NULL on failure.
+     */
+    module_t *watchdog_manager_create(const cJSON *config);
 
 #ifdef __cplusplus
 }

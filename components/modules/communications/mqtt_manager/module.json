@@ -6,7 +6,7 @@
     "init_function": "mqtt_manager_create",
     "init_level": 45,
     "dependencies": [],
-    "type": "communications",
+    "type": "mqtt_manager",
     "build_enabled": true,
     "conditional_config": "CONFIG_MODULE_MQTT_MANAGER_ENABLED",
     "runtime_commands": {

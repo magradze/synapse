@@ -1,7 +1,7 @@
 /**
  * @file wifi_icons.h
  * @brief Bitmap data for WiFi signal strength icons (8x8 pixels).
- * @author Synapse AI Expert
+ * @author Giorgi Magradze
  * @date 2025-07-27
  */
 #ifndef WIFI_ICONS_H

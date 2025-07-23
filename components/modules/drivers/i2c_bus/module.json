@@ -1,0 +1,15 @@
+{
+    "name": "i2c_bus",
+    "version": "1.0.0",
+    "description": "Manages a hardware I2C bus, providing a shared resource for other modules.",
+    "author": "Giorgi Magradze",
+    "init_function": "i2c_bus_create",
+    "init_level": 10,
+    "type": "drivers",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_I2C_BUS_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
+}

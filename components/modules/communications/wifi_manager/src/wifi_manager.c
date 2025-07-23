@@ -15,8 +15,9 @@
 #include "service_locator.h"
 #include "cmd_router_interface.h"
 #include "storage_interface.h"
-#include "service_locator.h" // თუ უკვე არ არის დამატებული
+#include "service_locator.h"
 #include "framework_events.h"
+#include "event_payloads.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -721,11 +722,12 @@ static esp_err_t load_credentials(wifi_manager_private_data_t *private_data)
  * @details
  * This function serves as the central handler for all 'wifi' related commands.
  * It parses subcommands and arguments to manage and query the WiFi state.
- * For the 'status' subcommand, in addition to printing to the console,
- * it now also gathers the status information into a JSON object and
- * publishes it to the Event Bus via a `FMW_EVENT_WIFI_STATUS_READY` event.
- * This allows other modules, like the mqtt_manager, to receive and forward
+ * For the 'status' subcommand, it gathers the status information into a JSON
+ * object and publishes it to the Event Bus via a `FMW_EVENT_WIFI_STATUS_READY`
+ * event. This allows other modules, like mqtt_manager, to receive and forward
  * the status to external systems.
+ * A `--silent` flag can be used with the `status` subcommand to suppress
+ * console output, which is useful for periodic checks initiated by other modules.
  *
  * @param[in] argc Argument count.
  * @param[in] argv Argument vector.
@@ -755,16 +757,13 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
     // --- ℹ️ Status and Info Commands ---
     if (strcmp(sub_command, "status") == 0)
     {
-        // --- ★★★ ახალი ლოგიკა ივენთის გამოსაქვეყნებლად ★★★ ---
+        // Check for the --silent flag
+        bool silent_mode = (argc > 2 && strcmp(argv[2], "--silent") == 0);
+
+        // --- Event Publishing Logic ---
         cJSON *status_json = cJSON_CreateObject();
-        if (status_json == NULL)
+        if (status_json)
         {
-            ESP_LOGE(TAG, "Failed to create cJSON object for status.");
-            // We don't return here, we can still print to console.
-        }
-        else
-        {
-            // Populate the JSON object with the same info we are about to print
             cJSON_AddStringToObject(status_json, "module_state", private_data->enabled ? "Enabled" : "Disabled");
             cJSON_AddStringToObject(status_json, "connection_status", private_data->is_connected ? "Connected" : "Disconnected");
 
@@ -788,59 +787,73 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
                 }
             }
 
-            // Convert JSON object to string
             char *json_string = cJSON_PrintUnformatted(status_json);
             if (json_string)
             {
-                // Publish the event to the Event Bus
-                ESP_LOGI(TAG, "Publishing WIFI_STATUS_READY event with payload: %s", json_string);
-                event_data_wrapper_t *wrapper;
-                if (fmw_event_data_wrap(strdup(json_string), free, &wrapper) == ESP_OK)
+                fmw_telemetry_payload_t *payload = calloc(1, sizeof(fmw_telemetry_payload_t));
+                if (payload)
                 {
-                    fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
-                    fmw_event_data_release(wrapper);
-                }
-                free(json_string);
-            }
+                    snprintf(payload->module_name, sizeof(payload->module_name), "%s", self->name);
+                    payload->json_data = json_string;
 
+                    ESP_LOGI(TAG, "Publishing WIFI_STATUS_READY event (silent: %d)", silent_mode);
+                    event_data_wrapper_t *wrapper;
+                    if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+                    {
+                        fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
+                        fmw_event_data_release(wrapper);
+                    }
+                    else
+                    {
+                        free(payload->json_data);
+                        free(payload);
+                    }
+                }
+                else
+                {
+                    free(json_string);
+                }
+            }
             cJSON_Delete(status_json);
         }
-        // --- ★★★ ახალი ლოგიკის დასასრული ★★★ ---
 
-        // The original console output logic remains for direct CLI feedback
-        printf("---------------- WiFi Status ----------------\n");
-        printf("  Module State:      %s\n", private_data->enabled ? "Enabled" : "Disabled");
-        printf("  Connection Status: %s\n", private_data->is_connected ? "Connected" : "Disconnected");
-
-        if (private_data->is_connected)
+        // --- Console Output Logic ---
+        if (!silent_mode)
         {
-            wifi_ap_record_t ap_info;
-            if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
+            printf("---------------- WiFi Status ----------------\n");
+            printf("  Module State:      %s\n", private_data->enabled ? "Enabled" : "Disabled");
+            printf("  Connection Status: %s\n", private_data->is_connected ? "Connected" : "Disconnected");
+
+            if (private_data->is_connected)
             {
-                printf("  SSID:              %s\n", ap_info.ssid);
-                printf("  Channel:           %d\n", ap_info.primary);
-                printf("  RSSI:              %d dBm\n", ap_info.rssi);
+                wifi_ap_record_t ap_info;
+                if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
+                {
+                    printf("  SSID:              %s\n", ap_info.ssid);
+                    printf("  Channel:           %d\n", ap_info.primary);
+                    printf("  RSSI:              %d dBm\n", ap_info.rssi);
+                }
+
+                esp_netif_ip_info_t ip_info;
+                esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+                if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
+                {
+                    printf("  IP Address:        " IPSTR "\n", IP2STR(&ip_info.ip));
+                    printf("  Gateway:           " IPSTR "\n", IP2STR(&ip_info.gw));
+                }
             }
 
-            esp_netif_ip_info_t ip_info;
-            esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-            if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
-            {
-                printf("  IP Address:        " IPSTR "\n", IP2STR(&ip_info.ip));
-                printf("  Gateway:           " IPSTR "\n", IP2STR(&ip_info.gw));
-            }
+            uint8_t mac[6];
+            esp_wifi_get_mac(WIFI_IF_STA, mac);
+            printf("  MAC Address:       %02X:%02X:%02X:%02X:%02X:%02X\n",
+                   mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+            const char *hostname;
+            esp_netif_get_hostname(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &hostname);
+            printf("  Hostname:          %s\n", hostname ? hostname : "N/A");
+
+            printf("-------------------------------------------\n");
         }
-
-        uint8_t mac[6];
-        esp_wifi_get_mac(WIFI_IF_STA, mac);
-        printf("  MAC Address:       %02X:%02X:%02X:%02X:%02X:%02X\n",
-               mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-
-        const char *hostname;
-        esp_netif_get_hostname(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &hostname);
-        printf("  Hostname:          %s\n", hostname ? hostname : "N/A");
-
-        printf("-------------------------------------------\n");
         return ESP_OK;
     }
     else if (strcmp(sub_command, "scan") == 0)
@@ -958,8 +971,6 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
     else if (strcmp(sub_command, "erase_creds") == 0)
     {
         printf("Erasing saved WiFi credentials...\n");
-        // This part should ideally use the Storage Manager service
-        // For now, we keep the direct NVS call as it was
         nvs_handle_t nvs_handle;
         if (nvs_open("wifi_creds", NVS_READWRITE, &nvs_handle) == ESP_OK)
         {

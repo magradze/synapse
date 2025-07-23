@@ -38,7 +38,7 @@ DEFINE_COMPONENT_TAG("HEALTH_MONITOR");
 // --- Private Data Structures ---
 typedef struct
 {
-    char name[32];
+    char name[CONFIG_HEALTH_MONITOR_INSTANCE_NAME_MAX_LEN];
     health_check_fn_t check_fn;
     void *context;
 } custom_check_t;
@@ -47,7 +47,7 @@ typedef struct
 {
     uint32_t check_interval_sec;
     uint32_t min_free_heap_kb;
-    uint32_t min_task_stack_hwm_bytes; // ★★★ შეიცვალა პროცენტიდან ბაიტებზე ★★★
+    uint32_t min_task_stack_hwm_bytes;
 } health_thresholds_t;
 
 typedef struct
@@ -57,12 +57,14 @@ typedef struct
     health_thresholds_t thresholds;
     custom_check_t custom_checks[MAX_CUSTOM_CHECKS];
     uint8_t custom_check_count;
+    bool is_provisioning_active; // Flag to indicate if provisioning is in progress
 } health_monitor_private_data_t;
 
 // --- Forward declarations ---
 static esp_err_t health_monitor_init(module_t *self);
 static esp_err_t health_monitor_start(module_t *self);
 static void health_monitor_deinit(module_t *self);
+static void health_monitor_handle_event(module_t *self, const char *event_name, void *event_data);
 static module_status_t health_monitor_get_status(module_t *self);
 static void health_monitor_task(void *pvParameters);
 static esp_err_t parse_config(const cJSON *config, health_monitor_private_data_t *p_data);
@@ -84,7 +86,6 @@ static health_api_t health_service_api = {
 // =============================================================================
 module_t *health_monitor_create(const cJSON *config)
 {
-    // ... (ეს ფუნქცია უცვლელია, რადგან სწორად მუშაობდა) ...
     ESP_LOGI(TAG, "Creating health_monitor module instance");
 
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
@@ -149,7 +150,7 @@ module_t *health_monitor_create(const cJSON *config)
     module->base.enable = NULL;
     module->base.disable = NULL;
     module->base.reconfigure = NULL;
-    module->base.handle_event = NULL;
+    module->base.handle_event = health_monitor_handle_event;
 
     global_health_monitor_instance = module;
 
@@ -157,13 +158,11 @@ module_t *health_monitor_create(const cJSON *config)
     return module;
 }
 
-
 // =============================================================================
 // Base Module & Lifecycle Functions
 // =============================================================================
 static esp_err_t health_monitor_init(module_t *self)
 {
-    // ... (ეს ფუნქცია უცვლელია) ...
     if (!self)
     {
         return ESP_ERR_INVALID_ARG;
@@ -177,6 +176,10 @@ static esp_err_t health_monitor_init(module_t *self)
         return ret;
     }
 
+    // Subscribe to provisioning events to manage state
+    fmw_event_bus_subscribe("PROV_STARTED", self);
+    fmw_event_bus_subscribe("PROV_ENDED", self);
+
     self->status = MODULE_STATUS_INITIALIZED;
     ESP_LOGI(TAG, "Health_Monitor module initialized successfully");
     return ESP_OK;
@@ -184,7 +187,6 @@ static esp_err_t health_monitor_init(module_t *self)
 
 static esp_err_t health_monitor_start(module_t *self)
 {
-    // ... (ეს ფუნქცია უცვლელია) ...
     if (!self)
     {
         return ESP_ERR_INVALID_ARG;
@@ -220,7 +222,6 @@ static esp_err_t health_monitor_start(module_t *self)
 
 static module_status_t health_monitor_get_status(module_t *self)
 {
-    // ... (ეს ფუნქცია უცვლელია) ...
     if (!self)
     {
         return MODULE_STATUS_ERROR;
@@ -230,7 +231,6 @@ static module_status_t health_monitor_get_status(module_t *self)
 
 static void health_monitor_deinit(module_t *self)
 {
-    // ... (ეს ფუნქცია უცვლელია) ...
     if (!self)
     {
         return;
@@ -263,6 +263,34 @@ static void health_monitor_deinit(module_t *self)
     ESP_LOGI(TAG, "Module deinitialized successfully");
 }
 
+/**
+ * @internal
+ * @brief Handles events from the Event Bus to manage the monitor's state.
+ * @details Subscribes to provisioning events to temporarily disable heap checks
+ *          during the memory-intensive provisioning process.
+ */
+static void health_monitor_handle_event(module_t *self, const char *event_name, void *event_data)
+{
+    health_monitor_private_data_t *private_data = (health_monitor_private_data_t *)self->private_data;
+
+    if (strcmp(event_name, "PROV_STARTED") == 0)
+    {
+        ESP_LOGW(TAG, "Provisioning started. Temporarily disabling heap memory checks.");
+        private_data->is_provisioning_active = true;
+    }
+    else if (strcmp(event_name, "PROV_ENDED") == 0)
+    {
+        ESP_LOGI(TAG, "Provisioning ended. Re-enabling heap memory checks.");
+        private_data->is_provisioning_active = false;
+    }
+
+    // We must release the wrapper for any event we handle
+    if (event_data)
+    {
+        fmw_event_data_release((event_data_wrapper_t *)event_data);
+    }
+}
+
 // =============================================================================
 // Service API Implementations
 // =============================================================================
@@ -283,7 +311,6 @@ static esp_err_t api_get_system_health_report(cJSON **report)
     cJSON_AddNumberToObject(root, "min_free_heap_bytes", esp_get_minimum_free_heap_size());
     cJSON_AddNumberToObject(root, "uptime_sec", esp_timer_get_time() / 1000000);
 
-    // ★★★ ტასკების ინფორმაციის წაკითხვის გასწორებული ლოგიკა (Grok-ის მიხედვით) ★★★
     UBaseType_t num_of_tasks = uxTaskGetNumberOfTasks();
     TaskStatus_t *task_status_array = pvPortMalloc(num_of_tasks * sizeof(TaskStatus_t));
     if (task_status_array == NULL) {
@@ -314,7 +341,6 @@ static esp_err_t api_get_system_health_report(cJSON **report)
 
 static esp_err_t api_register_custom_check(const char *check_name, health_check_fn_t check_fn, void *context)
 {
-    // ... (ეს ფუნქცია უცვლელია) ...
     if (!global_health_monitor_instance || !check_name || !check_fn)
     {
         return ESP_ERR_INVALID_ARG;
@@ -359,27 +385,40 @@ static void health_monitor_task(void *pvParameters)
 
         ESP_LOGD(TAG, "Performing health check...");
 
-        // 1. შევამოწმოთ მეხსიერება
-        size_t free_heap = esp_get_free_heap_size() / 1024;
-        if (free_heap < p_data->thresholds.min_free_heap_kb)
+        // 1. Check heap memory, but only if provisioning is NOT active
+        if (!p_data->is_provisioning_active)
         {
-            ESP_LOGE(TAG, "HEALTH ALERT: Low heap memory! Free: %u KB, Threshold: %" PRIu32 " KB",
-                     (unsigned int)free_heap, p_data->thresholds.min_free_heap_kb);
-            
-            cJSON *payload_json = cJSON_CreateObject();
-            cJSON_AddStringToObject(payload_json, "alert_type", "LOW_HEAP_MEMORY");
-            cJSON_AddNumberToObject(payload_json, "value_kb", free_heap);
-            char *json_str = cJSON_PrintUnformatted(payload_json);
-            
-            if (json_str) {
-                event_data_wrapper_t *wrapper = NULL;
-                if (fmw_event_data_wrap(json_str, free, &wrapper) == ESP_OK) {
-                    fmw_event_bus_post(EVT_HEALTH_ALERT, wrapper);
-                } else {
-                    free(json_str);
+            size_t free_heap = esp_get_free_heap_size() / 1024;
+            if (free_heap < p_data->thresholds.min_free_heap_kb)
+            {
+                ESP_LOGE(TAG, "HEALTH ALERT: Low heap memory! Free: %u KB, Threshold: %" PRIu32 " KB",
+                         (unsigned int)free_heap, p_data->thresholds.min_free_heap_kb);
+
+                cJSON *payload_json = cJSON_CreateObject();
+                cJSON_AddStringToObject(payload_json, "alert_type", "LOW_HEAP_MEMORY");
+                cJSON_AddNumberToObject(payload_json, "value_kb", free_heap);
+                char *json_str = cJSON_PrintUnformatted(payload_json);
+
+                if (json_str)
+                {
+                    event_data_wrapper_t *wrapper = NULL;
+                    // Use fmw_payload_common_free for simple malloc/free
+                    if (fmw_event_data_wrap(json_str, fmw_payload_common_free, &wrapper) == ESP_OK)
+                    {
+                        fmw_event_bus_post(EVT_HEALTH_ALERT, wrapper);
+                        fmw_event_data_release(wrapper); // Release the initial reference
+                    }
+                    else
+                    {
+                        free(json_str);
+                    }
                 }
+                cJSON_Delete(payload_json);
             }
-            cJSON_Delete(payload_json);
+        }
+        else
+        {
+            ESP_LOGI(TAG, "Heap check skipped during active provisioning.");
         }
 
         // 2. შევამოწმოთ Custom Checks

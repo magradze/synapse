@@ -4,7 +4,7 @@
     "description": "Universal RGB LED indicator for system status",
     "author": "Giorgi Magradze & Synapse AI",
     "init_function": "rgb_led_indicator_create",
-    "init_level": 1,
+    "init_level": 60,
     "dependencies": [
         "core",
         "driver"

@@ -1,7 +1,7 @@
 /**
  * @file ssd1306_fonts.h
  * @brief Extern declarations for font data.
- * @author Neven Boyanov, Tinusaur Team (and others)
+ * @author Giorgi Magradze
  */
 #ifndef SSD1306_FONTS_H
 #define SSD1306_FONTS_H

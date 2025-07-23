@@ -1,7 +1,7 @@
 /**
  * @file ssd1306_oled_display.h
  * @brief A module to control SSD1306 OLED displays via I2C.
- * @author Giorgi Magradze & Synapse AI Expert
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-26
  */

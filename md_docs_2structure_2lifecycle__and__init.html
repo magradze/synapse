@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
   <div class="headertitle"><div class="title">მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1592"></a> </p>
-<h1><a class="anchor" id="autotoc_md1593"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1610"></a> </p>
+<h1><a class="anchor" id="autotoc_md1611"></a>
 მიზანი</h1>
 <p>მოდულის სიცოცხლის ციკლის მართვის მიზანია უზრუნველყოს თითოეული მოდულის სწორი ინიციალიზაცია, რესურსების გამოყოფა, ჩართვა/გამორთვა და უსაფრთხო გათავისუფლება სისტემის მუშაობის განმავლობაში.</p>
-<h1><a class="anchor" id="autotoc_md1594"></a>
+<h1><a class="anchor" id="autotoc_md1612"></a>
 სიცოცხლის ციკლის ეტაპები</h1>
 <ol type="1">
 <li><b>Create</b> — მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)</li>
@@ -105,9 +105,9 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <li><b>Enable/Disable</b> — ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)</li>
 <li><b>Deinit</b> — რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1595"></a>
+<h1><a class="anchor" id="autotoc_md1613"></a>
 დეტალური აღწერა</h1>
-<h2><a class="anchor" id="autotoc_md1596"></a>
+<h2><a class="anchor" id="autotoc_md1614"></a>
 1. Create</h2>
 <ul>
 <li>ხდება მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა</li>
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1597"></a>
+<h2><a class="anchor" id="autotoc_md1615"></a>
 2. Init</h2>
 <ul>
 <li>ხდება hardware-ის ან სხვა რესურსების ინიციალიზაცია</li>
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1598"></a>
+<h2><a class="anchor" id="autotoc_md1616"></a>
 3. Enable/Disable</h2>
 <ul>
 <li>უზრუნველყოფს მოდულის აქტივაციას ან დროებით გათიშვას</li>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="line"><span class="keyword">static</span> esp_err_t ssd1306_disable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1599"></a>
+<h2><a class="anchor" id="autotoc_md1617"></a>
 4. Deinit</h2>
 <ul>
 <li>ხდება ყველა გამოყოფილი რესურსის გათავისუფლება</li>
@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1600"></a>
+<h1><a class="anchor" id="autotoc_md1618"></a>
 სიცოცხლის ციკლის დიაგრამა</h1>
 <div class="fragment"><div class="line">graph TD</div>
 <div class="line">    subgraph &quot;System Startup / Module Factory&quot;</div>
@@ -188,11 +188,11 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="line">    style G fill:#ff6347,stroke:#333,stroke-width:2px</div>
 <div class="line">    style O fill:#ff6347,stroke:#333,stroke-width:2px</div>
 <div class="line">    style I fill:#90ee90,stroke:#333,stroke-width:2px</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1601"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1619"></a>
 მაგალითი მოდულის სიცოცხლის ციკლის მართვის</h1>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config) {</div>
 <div class="line">    <span class="comment">// ... კონფიგურაციის დამუშავება ...</span></div>
-<div class="line">    ssd1306_private_data_t *ssd1306_data = malloc(<span class="keyword">sizeof</span>(ssd1306_private_data_t));</div>
+<div class="line">    <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a>));</div>
 <div class="line">    <span class="comment">// ... პარამეტრების ინიციალიზაცია ...</span></div>
 <div class="line">    ssd1306_init(module);</div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
@@ -217,7 +217,8 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="line">    <span class="comment">// ... free resources ...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1602"></a>
+<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_oled_display.c:67</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1620"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

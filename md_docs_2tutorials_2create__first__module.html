@@ -93,24 +93,24 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1691"></a> </p>
-<h1><a class="anchor" id="autotoc_md1692"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1709"></a> </p>
+<h1><a class="anchor" id="autotoc_md1710"></a>
 მიზანი</h1>
-<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით.</p>
-<h1><a class="anchor" id="autotoc_md1693"></a>
+<p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით, მათ შორის, როგორ დავამატოთ CLI ბრძანება უსაფრთხოდ, კონფლიქტების გარეშე.</p>
+<h1><a class="anchor" id="autotoc_md1711"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li><b>ამოცანა:</b> შევქმნათ მარტივი "მისალმების" მოდული, სახელად <code>greeter_module</code>.</li>
 <li><b>ფუნქციონალი:</b><ol type="1">
 <li><code>start</code> ფაზაში, <code>System Timer</code> სერვისის გამოყენებით, დაგეგმოს პერიოდული ივენთი <code>GREETING_TIMER_TICK</code>.</li>
 <li>როდესაც მიიღებს ამ ივენთს, <code>Event Bus</code>-ზე გამოაქვეყნოს ახალი, საკუთარი ივენთი <code>GREETING_MESSAGE_READY</code> <code>payload</code>-ით, რომელიც შეიცავს მისალმების ტექსტს.</li>
+<li>დაარეგისტრიროს <code>greet</code> CLI ბრძანება, რომელიც დაბეჭდავს კონკრეტული ინსტანციის მისალმების ტექსტს.</li>
 </ol>
 </li>
 <li><b>კატეგორია:</b> <code>utilities</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1694"></a>
+<h1><a class="anchor" id="autotoc_md1712"></a>
 2. მოდულის ჩონჩხის გენერაცია</h1>
-<p>**(სრულად განახლებულია)**</p>
 <p>ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს.</p>
 <ol type="1">
 <li>გახსენით ტერმინალი პროექტის root დირექტორიაში.</li>
@@ -120,13 +120,13 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <li>უპასუხეთ კითხვებს შემდეგნაირად:<ul>
 <li><b>შეიყვანეთ მოდულის სრული სახელი:</b> <code>Greeter Module</code></li>
 <li><b>აირჩიეთ კატეგორია:</b> <code>utilities</code></li>
-<li><b>აირჩიეთ მოდულის არქეტიპი:</b> <code>Event Producer</code> (რადგან ჩვენი მოდული ივენთებს გამოაქვეყნებს).</li>
+<li><b>აირჩიეთ მოდულის არქეტიპი:</b> <code>Event &amp; Command</code> (რადგან ჩვენი მოდული ივენთებსაც გამოაქვეყნებს და ბრძანებასაც დაამუშავებს).</li>
 <li>დანარჩენ კითხვებს შეგიძლიათ დაეთანხმოთ (Enter).</li>
 </ul>
 </li>
 </ol>
 <p>სკრიპტი შექმნის ყველა საჭირო ფაილს, მათ შორის <code>config.json</code>-ს, <code>components/modules/utilities/greeter_module/</code> დირექტორიაში.</p>
-<h1><a class="anchor" id="autotoc_md1695"></a>
+<h1><a class="anchor" id="autotoc_md1713"></a>
 3. კონფიგურაცია</h1>
 <ol type="1">
 <li><p class="startli"><b>Runtime კონფიგურაცია:</b> გახსენით ახლად შექმნილი <code>greeter_module/config.json</code> და შეავსეთ ის:</p>
@@ -143,9 +143,9 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div><!-- fragment --></li>
 <li><b>Build-დროის კონფიგურაცია:</b> გაუშვით <code>idf.py menuconfig</code>, გადადით <code>Component config</code> -&gt; <code>Synapse Framework</code> -&gt; <code>Modules</code> -&gt; <code>Greeter Module</code> და დარწმუნდით, რომ მოდული ჩართულია (<code>[*] Enable Greeter Module</code>).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1696"></a>
+<h1><a class="anchor" id="autotoc_md1714"></a>
 4. კოდის იმპლემენტაცია</h1>
-<p>ახლა შევავსოთ <code>greeter_module.c</code> ფაილი. სკრიპტმა უკვე დააგენერირა ჩონჩხი, ჩვენ მხოლოდ ლოგიკა უნდა დავამატოთ.</p>
+<p>ახლა სრულად ჩავანაცვლოთ <code>greeter_module.c</code> ფაილის შიგთავსი. სკრიპტმა დააგენერირა ჩონჩხი, მაგრამ ჩვენ მას სრულად შევავსებთ ჩვენი ლოგიკით.</p>
 <p>**<code>src/greeter_module.c</code> (საბოლოო ვერსია):**</p>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &quot;greeter_module.h&quot;</span></div>
@@ -153,13 +153,15 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="event__data__wrapper_8h.html">event_data_wrapper.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="timer__interface_8h.html">timer_interface.h</a>&quot;</span> <span class="comment">// &lt;--- დაგვჭირდება ტაიმერის ინტერფეისი</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="timer__interface_8h.html">timer_interface.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cmd__router__interface_8h.html">cmd_router_interface.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="module__registry_8h.html">module_registry.h</a>&quot;</span> <span class="comment">// To find other instances</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;GREETER_MODULE&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ჩვენი მოდულის მიერ გამოყენებული ივენთების სახელები</span></div>
+<div class="line"><span class="comment">// Event names used by this module</span></div>
 <div class="line"><span class="preprocessor">#define GREETING_TIMER_TICK &quot;GREETING_TIMER_TICK&quot;</span></div>
 <div class="line"><span class="preprocessor">#define GREETING_MESSAGE_READY &quot;GREETING_MESSAGE_READY&quot;</span></div>
 <div class="line"> </div>
@@ -175,15 +177,22 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="keyword">static</span> esp_err_t greeter_module_start(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self);</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keywordtype">void</span> *event_data);</div>
+<div class="line"><span class="keyword">static</span> esp_err_t greeter_cmd_handler(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv, <span class="keywordtype">void</span> *context);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Create Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)</span></div>
+<div class="line"><span class="comment">// Create Function</span></div>
 <div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *greeter_module_create(<span class="keyword">const</span> cJSON *config) {</div>
 <div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = (module_t *)calloc(1, sizeof(module_t));</div>
 <div class="line">    greeter_private_data_t *private_data = (greeter_private_data_t *)calloc(1, <span class="keyword">sizeof</span>(greeter_private_data_t));</div>
-<div class="line">    <span class="keywordflow">if</span> (!module || !private_data) { <span class="comment">/* ... error handling ... */</span> <span class="keywordflow">return</span> NULL; }</div>
+<div class="line">    <span class="keywordflow">if</span> (!module || !private_data) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to allocate memory&quot;</span>);</div>
+<div class="line">        free(module);</div>
+<div class="line">        free(private_data);</div>
+<div class="line">        <span class="keywordflow">if</span> (config) cJSON_Delete((cJSON*)config);</div>
+<div class="line">        <span class="keywordflow">return</span> NULL;</div>
+<div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">module</span>-&gt;private_data = private_data;</div>
-<div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config; <span class="comment">// ვიღებთ მფლობელობას</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> cJSON *config_node = cJSON_GetObjectItem(config, <span class="stringliteral">&quot;config&quot;</span>);</div>
 <div class="line">    <span class="keyword">const</span> cJSON *name_node = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;instance_name&quot;</span>);</div>
@@ -204,8 +213,8 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="comment">// Init Function</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t greeter_module_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;&#39;%s&#39; initializing...&quot;</span>, self-&gt;<a class="code hl_variable" href="structmodule__t.html#afb5f2d3d957c8717f54cd8668e4cab5e">name</a>);</div>
-<div class="line">    <span class="comment">// გამოვიწეროთ ჩვენივე ტაიმერის ივენთი</span></div>
 <div class="line">    <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(GREETING_TIMER_TICK, self);</div>
+<div class="line">    <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(FMW_EVENT_SYSTEM_START_COMPLETE, self);</div>
 <div class="line">    self-&gt;<a class="code hl_variable" href="structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2">status</a> = <a class="code hl_enumvalue" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87">MODULE_STATUS_INITIALIZED</a>;</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
@@ -218,7 +227,6 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> timer_service = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_timer_service&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (timer_service) {</div>
 <div class="line">        <a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *timer_api = (<a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *)timer_service;</div>
-<div class="line">        <span class="comment">// დავგეგმოთ პერიოდული ივენთი ყოველ 5 წამში</span></div>
 <div class="line">        p_data-&gt;greeting_timer = timer_api-&gt;<a class="code hl_variable" href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">schedule_event</a>(GREETING_TIMER_TICK, 5000, <span class="keyword">true</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> {</div>
 <div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;System Timer service not found!&quot;</span>);</div>
@@ -235,14 +243,29 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (strcmp(event_name, GREETING_TIMER_TICK) == 0) {</div>
 <div class="line">        ESP_LOGI(TAG, <span class="stringliteral">&quot;Timer tick received. Posting greeting message.&quot;</span>);</div>
-<div class="line">        </div>
-<div class="line">        <span class="comment">// მოვამზადოთ payload</span></div>
 <div class="line">        <span class="keywordtype">char</span>* message_payload = strdup(p_data-&gt;greeting_text);</div>
 <div class="line">        <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *wrapper;</div>
-<div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (<a class="code hl_function" href="event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7">fmw_event_data_wrap</a>(message_payload, free, &amp;wrapper) == ESP_OK) {</div>
 <div class="line">            <a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(GREETING_MESSAGE_READY, wrapper);</div>
-<div class="line">            <a class="code hl_function" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>(wrapper); <span class="comment">// გავათავისუფლოთ ჩვენი reference</span></div>
+<div class="line">            <a class="code hl_function" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>(wrapper);</div>
+<div class="line">        }</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {</div>
+<div class="line">        <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> cmd_router = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_cmd_router&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">if</span> (cmd_router) {</div>
+<div class="line">            <a class="code hl_struct" href="structcmd__router__api__t.html">cmd_router_api_t</a> *cmd_api = (<a class="code hl_struct" href="structcmd__router__api__t.html">cmd_router_api_t</a> *)cmd_router;</div>
+<div class="line">            <span class="keywordflow">if</span> (!cmd_api-&gt;<a class="code hl_variable" href="structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec">is_command_registered</a>(<span class="stringliteral">&quot;greet&quot;</span>)) {</div>
+<div class="line">                ESP_LOGI(TAG, <span class="stringliteral">&quot;Module &#39;%s&#39; is registering the generic &#39;greet&#39; command.&quot;</span>, self-&gt;name);</div>
+<div class="line">                <span class="keyword">static</span> <a class="code hl_struct" href="structcmd__t.html">cmd_t</a> greet_cmd = {</div>
+<div class="line">                    .<a class="code hl_variable" href="structcmd__t.html#a0120d5191bad85cf51f4fc04037847d7">command</a> = <span class="stringliteral">&quot;greet&quot;</span>,</div>
+<div class="line">                    .help = <span class="stringliteral">&quot;Prints a greeting message from a specific instance.&quot;</span>,</div>
+<div class="line">                    .usage = <span class="stringliteral">&quot;greet &lt;instance_name&gt;&quot;</span>,</div>
+<div class="line">                    .min_args = 2,</div>
+<div class="line">                    .max_args = 2,</div>
+<div class="line">                    .handler = greeter_cmd_handler,</div>
+<div class="line">                    .context = NULL</div>
+<div class="line">                };</div>
+<div class="line">                cmd_api-&gt;<a class="code hl_variable" href="structcmd__router__api__t.html#a577628a1e19c957eaac870d60b9ebdc7">register_command</a>(&amp;greet_cmd);</div>
+<div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -251,25 +274,51 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Deinit Function (განახლებულია მეხსიერების მართვის წესების მიხედვით)</span></div>
+<div class="line"><span class="comment">// Deinit Function</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!self) <span class="keywordflow">return</span>;</div>
 <div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// გავაუქმოთ ტაიმერი</span></div>
 <div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> timer_service = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_timer_service&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (timer_service &amp;&amp; p_data-&gt;greeting_timer) {</div>
 <div class="line">        ((<a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *)timer_service)-&gt;cancel_event(p_data-&gt;greeting_timer);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <a class="code hl_function" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a>(GREETING_TIMER_TICK, self);</div>
+<div class="line">    <a class="code hl_function" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a>(FMW_EVENT_SYSTEM_START_COMPLETE, self);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Unregister the command (optional, but good practice)</span></div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> cmd_router = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_cmd_router&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (cmd_router) {</div>
+<div class="line">        ((<a class="code hl_struct" href="structcmd__router__api__t.html">cmd_router_api_t</a> *)cmd_router)-&gt;unregister_command(<span class="stringliteral">&quot;greet&quot;</span>);</div>
+<div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>) cJSON_Delete(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>);</div>
 <div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>) free(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>);</div>
 <div class="line">    free(self);</div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Command Handler</span></div>
+<div class="line"><span class="keyword">static</span> esp_err_t greeter_cmd_handler(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv, <span class="keywordtype">void</span> *context) {</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span>* instance_name = argv[1];</div>
+<div class="line">    </div>
+<div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a>* target_module = <a class="code hl_function" href="module__registry_8h.html#ad35f0c01a8c06081202d8d4b18cbf43e">fmw_module_registry_find_by_name</a>(instance_name);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (target_module) {</div>
+<div class="line">        <span class="comment">// Check if the found module is actually a greeter_module.</span></div>
+<div class="line">        <span class="comment">// This is an advanced check, not strictly necessary for this example.</span></div>
+<div class="line">        <span class="comment">// We can assume it is for now.</span></div>
+<div class="line">        greeter_private_data_t* p_data = (greeter_private_data_t*)target_module-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">        printf(<span class="stringliteral">&quot;Message from &#39;%s&#39;: %s\n&quot;</span>, instance_name, p_data-&gt;greeting_text);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">        printf(<span class="stringliteral">&quot;Error: Greeter module with name &#39;%s&#39; not found.\n&quot;</span>, instance_name);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_NOT_FOUND;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
 <div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65fa479aebdf242458d0bb49d35842edad87">MODULE_STATUS_INITIALIZED</a></div><div class="ttdeci">@ MODULE_STATUS_INITIALIZED</div><div class="ttdoc">მოდული ინიციალიზებულია, მაგრამ არ მუშაობს.</div><div class="ttdef"><b>Definition</b> base_module.h:36</div></div>
 <div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c">MODULE_STATUS_RUNNING</a></div><div class="ttdeci">@ MODULE_STATUS_RUNNING</div><div class="ttdoc">მოდული მუშაობს და მზადაა ოპერაციებისთვის.</div><div class="ttdef"><b>Definition</b> base_module.h:37</div></div>
+<div class="ttc" id="acmd__router__interface_8h_html"><div class="ttname"><a href="cmd__router__interface_8h.html">cmd_router_interface.h</a></div><div class="ttdoc">Public Service API contract for the Command Router module.</div></div>
 <div class="ttc" id="aevent__bus_8c_html_a1bb409daa4df05a7f65b3531e3231e7f"><div class="ttname"><a href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:365</div></div>
 <div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
 <div class="ttc" id="aevent__bus_8c_html_ae3df84e5063b0dff1e0f0dbdb69c5455"><div class="ttname"><a href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_unsubscribe(const char *event_name, module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:422</div></div>
@@ -279,9 +328,16 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="aevent__data__wrapper_8h_html"><div class="ttname"><a href="event__data__wrapper_8h.html">event_data_wrapper.h</a></div><div class="ttdoc">Event Bus-ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting-ის API.</div></div>
 <div class="ttc" id="alogging_8h_html"><div class="ttname"><a href="logging_8h.html">logging.h</a></div><div class="ttdoc">Synapse ESP Framework-ის ლოგირების დამხმარე ინტერფეისი.</div></div>
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
+<div class="ttc" id="amodule__registry_8h_html"><div class="ttname"><a href="module__registry_8h.html">module_registry.h</a></div><div class="ttdoc">მოდულების რეგისტრაციისა და მოძიების API.</div></div>
+<div class="ttc" id="amodule__registry_8h_html_ad35f0c01a8c06081202d8d4b18cbf43e"><div class="ttname"><a href="module__registry_8h.html#ad35f0c01a8c06081202d8d4b18cbf43e">fmw_module_registry_find_by_name</a></div><div class="ttdeci">module_t * fmw_module_registry_find_by_name(const char *name)</div><div class="ttdoc">პოულობს დარეგისტრირებულ მოდულს უნიკალური instance სახელით.</div><div class="ttdef"><b>Definition</b> module_registry.c:142</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="astructcmd__router__api__t_html"><div class="ttname"><a href="structcmd__router__api__t.html">cmd_router_api_t</a></div><div class="ttdoc">The public Service API structure for the Command Router.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:79</div></div>
+<div class="ttc" id="astructcmd__router__api__t_html_a577628a1e19c957eaac870d60b9ebdc7"><div class="ttname"><a href="structcmd__router__api__t.html#a577628a1e19c957eaac870d60b9ebdc7">cmd_router_api_t::register_command</a></div><div class="ttdeci">esp_err_t(* register_command)(const cmd_t *command)</div><div class="ttdoc">Registers a new command with the router.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:91</div></div>
+<div class="ttc" id="astructcmd__router__api__t_html_afc9179a2e07c021b813573e7148879ec"><div class="ttname"><a href="structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec">cmd_router_api_t::is_command_registered</a></div><div class="ttdeci">bool(* is_command_registered)(const char *command_name)</div><div class="ttdoc">Checks if a command with the given name is already registered.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:111</div></div>
+<div class="ttc" id="astructcmd__t_html"><div class="ttname"><a href="structcmd__t.html">cmd_t</a></div><div class="ttdoc">Defines the structure for a single command to be registered.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:29</div></div>
+<div class="ttc" id="astructcmd__t_html_a0120d5191bad85cf51f4fc04037847d7"><div class="ttname"><a href="structcmd__t.html#a0120d5191bad85cf51f4fc04037847d7">cmd_t::command</a></div><div class="ttdeci">const char * command</div><div class="ttdoc">The command name (e.g., &quot;relay&quot;, &quot;wifi&quot;). This is what the user types.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:33</div></div>
 <div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
@@ -292,14 +348,14 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="astructtimer__api__t_html_a362c2f5fb2285918b2579c0ae273b24e"><div class="ttname"><a href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">timer_api_t::schedule_event</a></div><div class="ttdeci">fmw_timer_handle_t(* schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules an event to be posted on the Event Bus after a specified interval.</div><div class="ttdef"><b>Definition</b> timer_interface.h:41</div></div>
 <div class="ttc" id="atimer__interface_8h_html"><div class="ttname"><a href="timer__interface_8h.html">timer_interface.h</a></div><div class="ttdoc">Public Service API contract for the System Timer Service module.</div></div>
 <div class="ttc" id="atimer__interface_8h_html_ade6f29151e54d5c129f8b052f6ec3e8a"><div class="ttname"><a href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a></div><div class="ttdeci">void * fmw_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1697"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1715"></a>
 5. ტესტირება</h1>
 <ol type="1">
 <li><p class="startli"><b>ააწყვეთ და ჩაწერეთ firmware:</b></p>
 <div class="fragment"><div class="line">idf.py build flash monitor</div>
 </div><!-- fragment --></li>
 <li><b>დააკვირდით ლოგებს:</b> თქვენ უნდა დაინახოთ, რომ <code>greeter_module</code> იქმნება, იწყებს მუშაობას და ყოველ 5 წამში ერთხელ ბეჭდავს <code>Posting greeting message.</code> შეტყობინებას.</li>
-<li><b>დამატებით:</b> შეგიძლიათ, <code>logger_module</code> გამოიყენოთ, რათა დაინახოთ, რომ <code>GREETING_MESSAGE_READY</code> ივენთი ნამდვილად ქვეყნდება <code>Event Bus</code>-ზე.</li>
+<li><b>გამოიყენეთ CLI:</b> ტერმინალში აკრიფეთ <code>greet main_greeter</code>. ეკრანზე უნდა დაიბეჭდოს: &lsquo;Message from 'main_greeter&rsquo;: Hello from Synapse!`.</li>
 </ol>
 <hr  />
 <p>თუ შეგექმნათ პრობლემა, იხილეთ <a href="../troubleshooting/">troubleshooting</a> ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს. </p>

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['kconfig_20configuration_0',['Kconfig Configuration',['../md_components_2modules_2utilities_2logger__module_2README.html#autotoc_md159',1,'']]],
-  ['key_20bool_20out_5fvalue_20tt_1',['&lt;tt&gt;esp_err_t fmw_config_get_bool(const char *key, bool *out_value)&lt;/tt&gt;',['../md_docs_2api__reference_2configuration__api.html#autotoc_md266',1,'']]],
-  ['key_20char_20buffer_20size_5ft_20buffer_5fsize_20tt_2',['&lt;tt&gt;esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_size)&lt;/tt&gt;',['../md_docs_2api__reference_2configuration__api.html#autotoc_md264',1,'']]],
-  ['key_20int_20out_5fvalue_20tt_3',['&lt;tt&gt;esp_err_t fmw_config_get_int(const char *key, int *out_value)&lt;/tt&gt;',['../md_docs_2api__reference_2configuration__api.html#autotoc_md265',1,'']]],
-  ['key_20value_20ოპერაციები_4',['key value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md590',1,'🔑 Key-Value ოპერაციები'],['../md_components_2modules_2storage_2storage__manager_2README.html#autotoc_md70',1,'Key-Value ოპერაციები']]]
+  ['kconfig_20configuration_0',['Kconfig Configuration',['../md_components_2modules_2utilities_2logger__module_2README.html#autotoc_md174',1,'']]],
+  ['key_20bool_20out_5fvalue_20tt_1',['&lt;tt&gt;esp_err_t fmw_config_get_bool(const char *key, bool *out_value)&lt;/tt&gt;',['../md_docs_2api__reference_2configuration__api.html#autotoc_md283',1,'']]],
+  ['key_20char_20buffer_20size_5ft_20buffer_5fsize_20tt_2',['&lt;tt&gt;esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_size)&lt;/tt&gt;',['../md_docs_2api__reference_2configuration__api.html#autotoc_md281',1,'']]],
+  ['key_20int_20out_5fvalue_20tt_3',['&lt;tt&gt;esp_err_t fmw_config_get_int(const char *key, int *out_value)&lt;/tt&gt;',['../md_docs_2api__reference_2configuration__api.html#autotoc_md282',1,'']]],
+  ['key_20value_20ოპერაციები_4',['key value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md607',1,'🔑 Key-Value ოპერაციები'],['../md_components_2modules_2storage_2storage__manager_2README.html#autotoc_md85',1,'Key-Value ოპერაციები']]]
 ];

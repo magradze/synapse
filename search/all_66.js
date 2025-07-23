@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1067',1,'']]]
+  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1085',1,'']]]
 ];

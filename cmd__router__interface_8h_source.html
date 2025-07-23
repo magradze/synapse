@@ -135,15 +135,17 @@ $(document).ready(function(){initNavTree('cmd__router__interface_8h_source.html'
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structcmd__router__api__t.html#ae1dda5d57f2108d77a1fc6f314a2058f">  102</a></span>    esp_err_t (*unregister_command)(<span class="keyword">const</span> <span class="keywordtype">char</span> *command_name);</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>} <a class="code hl_struct" href="structcmd__router__api__t.html">cmd_router_api_t</a>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec">  111</a></span>    bool (*is_command_registered)(<span class="keyword">const</span> <span class="keywordtype">char</span> *command_name);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>} <a class="code hl_struct" href="structcmd__router__api__t.html">cmd_router_api_t</a>;</div>
 </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="preprocessor">#endif </span><span class="comment">// FMW_CMD_ROUTER_INTERFACE_H</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif </span><span class="comment">// FMW_CMD_ROUTER_INTERFACE_H</span></div>
 <div class="ttc" id="astructcmd__router__api__t_html"><div class="ttname"><a href="structcmd__router__api__t.html">cmd_router_api_t</a></div><div class="ttdoc">The public Service API structure for the Command Router.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:79</div></div>
 <div class="ttc" id="astructcmd__t_html"><div class="ttname"><a href="structcmd__t.html">cmd_t</a></div><div class="ttdoc">Defines the structure for a single command to be registered.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:29</div></div>
 <div class="ttc" id="astructcmd__t_html_a0120d5191bad85cf51f4fc04037847d7"><div class="ttname"><a href="structcmd__t.html#a0120d5191bad85cf51f4fc04037847d7">cmd_t::command</a></div><div class="ttdeci">const char * command</div><div class="ttdoc">The command name (e.g., &quot;relay&quot;, &quot;wifi&quot;). This is what the user types.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:33</div></div>

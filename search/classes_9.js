@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['oled_5fdisplay_5fconfig_5ft_0',['oled_display_config_t',['../structoled__display__config__t.html',1,'']]],
-  ['oled_5fdisplay_5fprivate_5fdata_5ft_1',['oled_display_private_data_t',['../structoled__display__private__data__t.html',1,'']]],
-  ['ota_5fapi_5ft_2',['ota_api_t',['../structota__api__t.html',1,'']]],
-  ['ota_5fupdate_5fmanager_5fconfig_5ft_3',['ota_update_manager_config_t',['../structota__update__manager__config__t.html',1,'']]],
-  ['ota_5fupdate_5fmanager_5fprivate_5fdata_5ft_4',['ota_update_manager_private_data_t',['../structota__update__manager__private__data__t.html',1,'']]]
+  ['module_5ffactory_5fmap_5ft_0',['module_factory_map_t',['../structmodule__factory__map__t.html',1,'']]],
+  ['module_5ft_1',['module_t',['../structmodule__t.html',1,'']]],
+  ['mqtt_5fmanager_5fconfig_5ft_2',['mqtt_manager_config_t',['../structmqtt__manager__config__t.html',1,'']]],
+  ['mqtt_5fmanager_5fprivate_5fdata_5ft_3',['mqtt_manager_private_data_t',['../structmqtt__manager__private__data__t.html',1,'']]]
 ];

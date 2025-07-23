@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__ben
   <div class="headertitle"><div class="title">ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1366"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1368"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1384"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1386"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის ბენჩმარკების ჩატარების წესებს, შედეგების აღწერას და მაგალითებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1370"></a>
+<h1><a class="anchor" id="autotoc_md1388"></a>
 ბენჩმარკის ჩატარების ძირითადი ნაბიჯები</h1>
 <ol type="1">
 <li><b>ბენჩმარკის მიზნის განსაზღვრა</b><ul>
@@ -132,22 +132,22 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__ben
 </li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1372"></a>
+<h1><a class="anchor" id="autotoc_md1390"></a>
 მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1373"></a>
+<h2><a class="anchor" id="autotoc_md1391"></a>
 სენსორის კითხვა</h2>
 <div class="fragment"><div class="line">int64_t start = esp_timer_get_time();</div>
 <div class="line">read_sensor();</div>
 <div class="line">int64_t end = esp_timer_get_time();</div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Sensor read: %lld us&quot;</span>, (end - start));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1374"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1392"></a>
 MQTT publish latency</h2>
 <div class="fragment"><div class="line">int64_t start = esp_timer_get_time();</div>
 <div class="line">mqtt_module_publish(topic, payload);</div>
 <div class="line">int64_t end = esp_timer_get_time();</div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT publish: %lld us&quot;</span>, (end - start));</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1376"></a>
+<h1><a class="anchor" id="autotoc_md1394"></a>
 Best Practices</h1>
 <ul>
 <li>გამოიყენეთ განმეორებადი გარემო და პარამეტრები</li>
@@ -155,7 +155,7 @@ Best Practices</h1>
 <li>Bottleneck-ის აღმოჩენისას განახორციელეთ ოპტიმიზაცია და ხელახლა ჩაატარეთ ბენჩმარკი</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1378"></a>
+<h1><a class="anchor" id="autotoc_md1396"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>

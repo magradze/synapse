@@ -110,11 +110,41 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae1dda5d57f2108d77a1fc6f314a2058f" id="r_ae1dda5d57f2108d77a1fc6f314a2058f"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcmd__router__api__t.html#ae1dda5d57f2108d77a1fc6f314a2058f">unregister_command</a> )(const char *command_name)</td></tr>
 <tr class="memdesc:ae1dda5d57f2108d77a1fc6f314a2058f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregisters a previously registered command.  <br /></td></tr>
 <tr class="separator:ae1dda5d57f2108d77a1fc6f314a2058f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc9179a2e07c021b813573e7148879ec" id="r_afc9179a2e07c021b813573e7148879ec"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec">is_command_registered</a> )(const char *command_name)</td></tr>
+<tr class="memdesc:afc9179a2e07c021b813573e7148879ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a command with the given name is already registered.  <br /></td></tr>
+<tr class="separator:afc9179a2e07c021b813573e7148879ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The public Service API structure for the Command Router. </p>
 <p>This is the "contract" that the command_router module implements and other modules consume via the Service Locator. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="afc9179a2e07c021b813573e7148879ec" name="afc9179a2e07c021b813573e7148879ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc9179a2e07c021b813573e7148879ec">&#9670;&#160;</a></span>is_command_registered</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool(* cmd_router_api_t::is_command_registered) (const char *command_name)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if a command with the given name is already registered. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">command_name</td><td>The name of the command to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li>true: If the command is already registered.</li>
+<li>false: If the command is not registered. </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
 <a id="a577628a1e19c957eaac870d60b9ebdc7" name="a577628a1e19c957eaac870d60b9ebdc7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a577628a1e19c957eaac870d60b9ebdc7">&#9670;&#160;</a></span>register_command</h2>
 

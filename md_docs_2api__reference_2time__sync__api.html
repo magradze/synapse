@@ -93,55 +93,55 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2time__sync__a
   <div class="headertitle"><div class="title">Synapse Time Sync Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md622"></a> </p>
-<h1><a class="anchor" id="autotoc_md623"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md639"></a> </p>
+<h1><a class="anchor" id="autotoc_md640"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის დროის სინქრონიზაციის (Time Sync, NTP/SNTP) მოდულის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md625"></a>
+<h1><a class="anchor" id="autotoc_md642"></a>
 Time Sync Module API</h1>
-<h2><a class="anchor" id="autotoc_md626"></a>
+<h2><a class="anchor" id="autotoc_md643"></a>
 module_t *time_sync_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი Time Sync მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md627"></a>
+<h2><a class="anchor" id="autotoc_md644"></a>
 esp_err_t time_sync_module_start(module_t *module);</h2>
 <ul>
 <li>იწყებს დროის სინქრონიზაციის პროცესს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md628"></a>
+<h2><a class="anchor" id="autotoc_md645"></a>
 esp_err_t time_sync_module_stop(module_t *module);</h2>
 <ul>
 <li>აჩერებს დროის სინქრონიზაციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md629"></a>
+<h2><a class="anchor" id="autotoc_md646"></a>
 esp_err_t time_sync_module_set_server(module_t *module, const char *server_url);</h2>
 <ul>
 <li>აყენებს NTP/SNTP სერვერის მისამართს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md630"></a>
+<h2><a class="anchor" id="autotoc_md647"></a>
 esp_err_t time_sync_module_get_time(time_t *current_time);</h2>
 <ul>
 <li>აბრუნებს სინქრონიზებულ დროს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md632"></a>
+<h1><a class="anchor" id="autotoc_md649"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md633"></a>
+<h2><a class="anchor" id="autotoc_md650"></a>
 static void time_sync_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს Time Sync მოდულის მიერ მიღებულ მოვლენებს (მაგ: sync complete, error)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md635"></a>
+<h1><a class="anchor" id="autotoc_md652"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md637"></a>
+<h1><a class="anchor" id="autotoc_md654"></a>
 მაგალითები</h1>
 <p><b>დროის სინქრონიზაციის დაწყება:</b> </p><div class="fragment"><div class="line">time_sync_module_start(module);</div>
 </div><!-- fragment --><p><b>NTP სერვერის დაყენება:</b> </p><div class="fragment"><div class="line">time_sync_module_set_server(module, <span class="stringliteral">&quot;pool.ntp.org&quot;</span>);</div>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['led_5fblinker_5fcreate_0',['led_blinker_create',['../led__blinker_8h.html#a58464148167e157567a7abd4cddeccea',1,'led_blinker_create(const cJSON *config):&#160;led_blinker.c'],['../led__blinker_8c.html#a58464148167e157567a7abd4cddeccea',1,'led_blinker_create(const cJSON *config):&#160;led_blinker.c']]],
-  ['logger_5fmodule_5fcreate_1',['logger_module_create',['../logger__module_8h.html#a43e3a3a59f4f51311e997fcd358871da',1,'logger_module_create(const cJSON *config):&#160;logger_module.c'],['../logger__module_8c.html#a43e3a3a59f4f51311e997fcd358871da',1,'logger_module_create(const cJSON *config):&#160;logger_module.c']]]
+  ['i2c_5fbus_5fcreate_0',['i2c_bus_create',['../i2c__bus_8h.html#aaf4e532bca146a2a6707a509e03b5aba',1,'i2c_bus_create(const cJSON *config):&#160;i2c_bus.c'],['../i2c__bus_8c.html#aaf4e532bca146a2a6707a509e03b5aba',1,'i2c_bus_create(const cJSON *config):&#160;i2c_bus.c']]]
 ];

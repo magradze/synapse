@@ -1,11 +1,22 @@
 var searchData=
 [
-  ['test_5fmodule_5fconfig_5ft_0',['test_module_config_t',['../structtest__module__config__t.html',1,'']]],
-  ['test_5fmodule_5fmodule_5ft_1',['test_module_module_t',['../structtest__module__module__t.html',1,'']]],
-  ['test_5freport_5fline_5ft_2',['test_report_line_t',['../structtest__report__line__t.html',1,'']]],
-  ['test_5ftask_5fparams_5ft_3',['test_task_params_t',['../structtest__task__params__t.html',1,'']]],
-  ['timer_5fapi_5ft_4',['timer_api_t',['../structtimer__api__t.html',1,'']]],
-  ['timer_5fentry_5ft_5',['timer_entry_t',['../structtimer__entry__t.html',1,'']]],
-  ['timer_5ftest_5fmodule_5fconfig_5ft_6',['timer_test_module_config_t',['../structtimer__test__module__config__t.html',1,'']]],
-  ['timer_5ftest_5fmodule_5fprivate_5fdata_5ft_7',['timer_test_module_private_data_t',['../structtimer__test__module__private__data__t.html',1,'']]]
+  ['security_5fstatus_5fapi_5ft_0',['security_status_api_t',['../structsecurity__status__api__t.html',1,'']]],
+  ['security_5fstatus_5fprivate_5fdata_5ft_1',['security_status_private_data_t',['../structsecurity__status__private__data__t.html',1,'']]],
+  ['security_5fstatus_5freporter_5fconfig_5ft_2',['security_status_reporter_config_t',['../structsecurity__status__reporter__config__t.html',1,'']]],
+  ['self_5ftest_5fprivate_5fdata_5ft_3',['self_test_private_data_t',['../structself__test__private__data__t.html',1,'']]],
+  ['sensor_5faggregator_5fprivate_5fdata_5ft_4',['sensor_aggregator_private_data_t',['../structsensor__aggregator__private__data__t.html',1,'']]],
+  ['sensor_5fmapping_5ft_5',['sensor_mapping_t',['../structsensor__mapping__t.html',1,'']]],
+  ['sensor_5fruntime_5fdata_5ft_6',['sensor_runtime_data_t',['../structsensor__runtime__data__t.html',1,'']]],
+  ['sensor_5fsimulator_5fconfig_5ft_7',['sensor_simulator_config_t',['../structsensor__simulator__config__t.html',1,'']]],
+  ['sensor_5fsimulator_5fprivate_5fdata_5ft_8',['sensor_simulator_private_data_t',['../structsensor__simulator__private__data__t.html',1,'']]],
+  ['service_5fentry_5ft_9',['service_entry_t',['../structservice__entry__t.html',1,'']]],
+  ['ssd1306_5fapi_5ft_10',['ssd1306_api_t',['../structssd1306__api__t.html',1,'']]],
+  ['ssd1306_5fhandle_5ft_11',['ssd1306_handle_t',['../structssd1306__handle__t.html',1,'']]],
+  ['ssd1306_5fprivate_5fdata_5ft_12',['ssd1306_private_data_t',['../structssd1306__private__data__t.html',1,'']]],
+  ['storage_5fapi_5ft_13',['storage_api_t',['../structstorage__api__t.html',1,'']]],
+  ['storage_5fmanager_5fconfig_5ft_14',['storage_manager_config_t',['../structstorage__manager__config__t.html',1,'']]],
+  ['storage_5fmanager_5fprivate_5fdata_5ft_15',['storage_manager_private_data_t',['../structstorage__manager__private__data__t.html',1,'']]],
+  ['system_5fmanager_5fapi_5ft_16',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
+  ['system_5ftimer_5fconfig_5ft_17',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
+  ['system_5ftimer_5fprivate_5fdata_5ft_18',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
 ];

@@ -93,19 +93,19 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2event__api.ht
   <div class="headertitle"><div class="title">Synapse Event Bus API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md394"></a> </p>
-<h1><a class="anchor" id="autotoc_md395"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md395"></a> </p>
+<h1><a class="anchor" id="autotoc_md396"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის Event Bus-ისა და custom event-ების დეტალურ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md397"></a>
+<h1><a class="anchor" id="autotoc_md398"></a>
 Event Bus API</h1>
-<h2><a class="anchor" id="autotoc_md398"></a>
+<h2><a class="anchor" id="autotoc_md399"></a>
 &lt;tt&gt;esp_err_t fmw_event_bus_init(void)&lt;/tt&gt;</h2>
 <ul>
 <li>ინიციალიზაციას უკეთებს Event Bus-ს. ქმნის ივენთების რიგს (queue) და იწყებს დამმუშავებელ ტასკს. უნდა გამოიძახოს მხოლოდ სისტემის ბირთვმა ერთხელ.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md399"></a>
+<h2><a class="anchor" id="autotoc_md400"></a>
 &lt;tt&gt;esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)&lt;/tt&gt;</h2>
 <ul>
 <li>ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.</li>
@@ -115,7 +115,7 @@ Event Bus API</h1>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md400"></a>
+<h2><a class="anchor" id="autotoc_md401"></a>
 &lt;tt&gt;esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
 <ul>
 <li>**(განახლებული)** აძლევს მოდულს შესაძლებლობას, მიიღოს კონკრეტული მოვლენა. Event Bus-ი ავტომატურად გამოიძახებს ამ მოდულის <code>handle_event</code> ფუნქციას.</li>
@@ -125,7 +125,7 @@ Event Bus API</h1>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md401"></a>
+<h2><a class="anchor" id="autotoc_md402"></a>
 &lt;tt&gt;esp_err_t fmw_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
 <ul>
 <li>**(ახალი)** აუქმებს მოდულის გამოწერას კონკრეტულ მოვლენაზე.</li>
@@ -137,7 +137,7 @@ Event Bus API</h1>
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md403"></a>
+<h1><a class="anchor" id="autotoc_md404"></a>
 ივენთის მონაცემების მართვა (Reference Counting)</h1>
 <p><b>მნიშვნელოვანია:</b> როდესაც ივენთს გადასცემთ მონაცემებს (<code>data_wrapper</code>), Synapse Framework იყენებს <b>reference counting</b> მექანიზმს მეხსიერების უსაფრთხოდ სამართავად.</p>
 <ul>
@@ -155,7 +155,7 @@ Event Bus API</h1>
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md405"></a>
+<h1><a class="anchor" id="autotoc_md406"></a>
 Event Handler-ის მაგალითი</h1>
 <div class="fragment"><div class="line"><span class="comment">// ეს არის მოდულის შიდა ფუნქცია, რომელსაც Event Bus-ი იძახებს.</span></div>
 <div class="line"><span class="comment">// მესამე პარამეტრი არის მაჩვენებელი მონაცემთა wrapper-ზე.</span></div>
@@ -182,13 +182,13 @@ Event Handler-ის მაგალითი</h1>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="asystem__event__ids_8h_html_a14be883083731f631af5eb44a5f3a046"><div class="ttname"><a href="system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046">core_framework_event_id_t</a></div><div class="ttdeci">core_framework_event_id_t</div><div class="ttdoc">ბირთვის ივენთების იდენტიფიკატორები, რომლებიც სისტემურია და არ არის მიბმული კონკრეტულ მოდულზე.</div><div class="ttdef"><b>Definition</b> system_event_ids.h:32</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md407"></a>
+<h1><a class="anchor" id="autotoc_md408"></a>
 Custom Event-ების აღწერა</h1>
 <ul>
 <li>ყველა custom event-ს უნდა ჰქონდეს უნიკალური იდენტიფიკატორი (მაგ: #define MY_EVENT_ID 0x1001)</li>
 <li>რეკომენდებულია event-ისთვის შესაბამისი მონაცემების სტრუქტურის აღწერა</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md408"></a>
+<h2><a class="anchor" id="autotoc_md409"></a>
 მაგალითი Custom Event-ის აღწერისა</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define TELEMETRY_EVENT_SENSOR_DATA  0x2001</span></div>
 <div class="line"> </div>
@@ -199,14 +199,14 @@ Custom Event-ების აღწერა</h1>
 <div class="line">    int64_t timestamp;</div>
 <div class="line">} telemetry_data_t;</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md410"></a>
+<h1><a class="anchor" id="autotoc_md411"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md412"></a>
+<h1><a class="anchor" id="autotoc_md413"></a>
 მაგალითები</h1>
 <p><b>Event-ის გამოქვეყნება:</b></p>
 <div class="fragment"><div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>

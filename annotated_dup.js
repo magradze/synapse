@@ -18,7 +18,6 @@ var annotated_dup =
     [ "custom_check_t", "structcustom__check__t.html", null ],
     [ "device_identity_api_t", "structdevice__identity__api__t.html", "structdevice__identity__api__t" ],
     [ "device_identity_private_data_t", "structdevice__identity__private__data__t.html", "structdevice__identity__private__data__t" ],
-    [ "display_command_t", "structdisplay__command__t.html", null ],
     [ "event_data_wrapper_t", "structevent__data__wrapper__t.html", "structevent__data__wrapper__t" ],
     [ "event_message_t", "structevent__message__t.html", "structevent__message__t" ],
     [ "event_subscriber_t", "structevent__subscriber__t.html", null ],

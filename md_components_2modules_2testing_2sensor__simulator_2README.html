@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2senso
   <div class="headertitle"><div class="title">🧪 მოდული: &lt;tt&gt;sensor_simulator&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md150"></a> <b>🗂️ კატეგორია:</b> <code>testing</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md151"></a> <b>🗂️ კატეგორია:</b> <code>testing</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 1.0.0</p>
-<h1><a class="anchor" id="autotoc_md151"></a>
+<h1><a class="anchor" id="autotoc_md152"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>sensor_simulator</code> არის <b>სატესტო და დეველოპმენტის დამხმარე მოდული</b>. მისი ერთადერთი დანიშნულებაა, მოახდინოს სხვადასხვა ტიპის სენსორების ქცევის იმიტაცია ფიზიკური აპარატურის გარეშე.</p>
 <p>ის იყენებს <code>System Timer Service</code>-ს, რათა პერიოდულად გამოაქვეყნოს წინასწარ განსაზღვრული სენსორული ივენთები შემთხვევითი, მაგრამ რეალისტური მნიშვნელობებით. ეს მოდული ფასდაუდებელია ისეთი კომპონენტების შესამოწმებლად, როგორიცაა <code>sensor_aggregator</code>, <code>alarms_manager</code> ან <code>mqtt_manager</code>, რადგან ის უზრუნველყოფს კონტროლირებად და განმეორებად მონაცემთა ნაკადს.</p>
-<h1><a class="anchor" id="autotoc_md152"></a>
+<h1><a class="anchor" id="autotoc_md153"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Event-driven:</b> მოდული არის სუფთა "ივენთების მწარმოებელი". ის იყენებს ტაიმერს, რათა პერიოდულად გამოაქვეყნოს ივენთები.</li>
 <li><b>მარტივი და მსუბუქი:</b> არ გააჩნია რთული ლოგიკა ან დამოკიდებულებები, გარდა <code>System Timer Service</code>-ისა.</li>
 <li><b>არაკონფიგურირებადი:</b> ამ ეტაპზე, მოდულის ქცევა (გამოსაქვეყნებელი ივენთების სია, ინტერვალი) <code>hardcoded</code>-ია კოდში, რადგან მისი მთავარი მიზანი ტესტირებაა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md153"></a>
+<h1><a class="anchor" id="autotoc_md154"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის ჩასართავად, დაამატეთ შემდეგი ობიექტი <code>system_config.json</code>-ში:</p>
 <div class="fragment"><div class="line">{</div>
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2senso
 <div class="line">        &quot;instance_name&quot;: &quot;main_sensor_sim&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md154"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md155"></a>
 4. 📢 გამოქვეყნებული ივენთები</h1>
 <p>ამჟამინდელი იმპლემენტაცია ყოველ 15 წამში აქვეყნებს შემდეგ სამ ივენთს:</p>
 <table class="markdownTable">
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2senso
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>SENSOR_DATA_LIGHT</code>   </td><td class="markdownTableBodyLeft"><code>{"value":350}</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md155"></a>
+<h1><a class="anchor" id="autotoc_md156"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p><code>sensor_simulator</code>-ის მთავარი გამოყენების სცენარი არის <code>sensor_aggregator</code>-ის ტესტირება.</p>
 <ol type="1">

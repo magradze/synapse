@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2performanc
   <div class="headertitle"><div class="title">წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1237"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1239"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1238"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1240"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში წარმადობისა და რესურსების არქიტექტურულ კომპრომისებს, არჩეულ სტრატეგიებს, მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1241"></a>
+<h1><a class="anchor" id="autotoc_md1242"></a>
 კონტექსტი</h1>
 <p>ფრეიმვორქი უნდა იყოს ოპტიმიზირებული როგორც მცირე რესურსების მქონე, ისე მაღალი წარმადობის მოთხოვნების მქონე სისტემებისთვის. საჭიროა ბალანსი მოდულურობასა და მინიმალურ footprint-ს შორის, ასევე latency-სა და გაფართოებადობას შორის.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1243"></a>
+<h1><a class="anchor" id="autotoc_md1244"></a>
 არჩეული სტრატეგიები</h1>
 <ul>
 <li><b>მოდულური არქიტექტურა:</b> მხოლოდ არჩეული მოდულები შედის საბოლოო firmware-ში</li>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2performanc
 <li><b>Async Event Bus:</b> ასინქრონული კომუნიკაცია ამცირებს latency-ს და ზრდის responsiveness-ს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1245"></a>
+<h1><a class="anchor" id="autotoc_md1246"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li>მოდულური არქიტექტურა ამცირებს firmware-ს ზომას და RAM-ის მოხმარებას</li>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2performanc
 <li>ალტერნატივა (მონოლითური არქიტექტურა, მხოლოდ dynamic allocation) უარყოფილია footprint-ის ზრდისა და სტაბილურობის გამო</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1247"></a>
+<h1><a class="anchor" id="autotoc_md1248"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>firmware-ს ზომა და RAM-ის მოხმარება მინიმუმამდეა დაყვანილი</li>
@@ -131,26 +131,26 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2performanc
 <li>Static allocation ამცირებს მოქნილობას ზოგიერთ სცენარში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1249"></a>
+<h1><a class="anchor" id="autotoc_md1250"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1250"></a>
+<h2><a class="anchor" id="autotoc_md1251"></a>
 მოდულის გამორთვა ბილდიდან</h2>
 <div class="fragment"><div class="line"><span class="comment">// Kconfig-ში მოდულის გამორთვა</span></div>
 <div class="line">CONFIG_RELAY_MODULE=n</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1251"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1252"></a>
 Static allocation</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define COMMAND_QUEUE_SIZE 8</span></div>
 <div class="line"><span class="keyword">static</span> QueueHandle_t command_queue;</div>
 <div class="line">command_queue = xQueueCreate(COMMAND_QUEUE_SIZE, <span class="keyword">sizeof</span>(command_t));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1252"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1253"></a>
 Lazy initialization</h2>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (!global_ssd1306_instance) {</div>
 <div class="line">    global_ssd1306_instance = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a>));</div>
 <div class="line">    <span class="comment">// ...init...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_oled_display.c:67</div></div>
+<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_oled_display.c:41</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1254"></a>
+<h1><a class="anchor" id="autotoc_md1255"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>ყველა მოდულის ჩართვა ერთ ბილდში საჭიროების გარეშე</li>
@@ -164,7 +164,7 @@ Lazy initialization</h2>
 <li>ჩაწერეთ ყველა ცვლილება და ოპტიმიზაციის გადაწყვეტილება დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1256"></a>
+<h1><a class="anchor" id="autotoc_md1257"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>

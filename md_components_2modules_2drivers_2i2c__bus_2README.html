@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
   <div class="headertitle"><div class="title">🚌 მოდული: &lt;tt&gt;i2c_bus&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md45"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md46"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
  <b>✒️ ავტორი:</b> Giorgi Magradze &amp; Synapse AI Expert <br  />
  <b>🔖 ვერსია:</b> 2.1.0</p>
-<h1><a class="anchor" id="autotoc_md46"></a>
+<h1><a class="anchor" id="autotoc_md47"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>i2c_bus</code> არის Synapse Framework-ის <b>ფუნდამენტური აპარატურული დრაივერის მოდული</b>. ის უზრუნველყოფს ცენტრალიზებულ, უსაფრთხო და ნაკად-დაცულ (thread-safe) ინტერფეისს ESP32-ის I2C (Inter-Integrated Circuit) პერიფერიასთან სამუშაოდ.</p>
 <p>მისი მთავარი მიზანია, მოახდინოს I2C ავტობუსის, როგორც <b>გაზიარებული რესურსის</b>, მართვის აბსტრაგირება. იმის ნაცვლად, რომ თითოეულმა სენსორმა თუ დისპლეიმ თავად მოახდინოს I2C დრაივერის ინიციალიზაცია, ისინი ითხოვენ წვდომას ამ ცენტრალიზებული სერვისისგან. ეს გამორიცხავს კონფლიქტებს, ამარტივებს კოდს და უზრუნველყოფს სისტემის სტაბილურობას.</p>
-<h1><a class="anchor" id="autotoc_md47"></a>
+<h1><a class="anchor" id="autotoc_md48"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>純粋なサービスプロバイダー (Pure Service Provider):</b> ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module.">i2c_bus_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <li><b>最新のドライバー (Modern Driver):</b> 🚀 მოდული იყენებს ESP-IDF v5.x-ის თანამედროვე, <code>i2c_master.h</code>-ზე დაფუძნებულ დრაივერს, რაც უზრუნველყოფს უკეთეს წარმადობას, მოქნილობას და მომავალთან თავსებადობას.</li>
 <li><b>早期初期化 (Early Initialization):</b> 📉 <code>init_level: 10</code> უზრუნველყოფს, რომ I2C ავტობუსი ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა ის ხელმისაწვდომი იყოს ყველა მასზე დამოკიდებული მოდულისთვის.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md48"></a>
+<h1><a class="anchor" id="autotoc_md49"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით. შესაძლებელია სისტემაში რამდენიმე, სხვადასხვა I2C ავტობუსის ერთდროულად კონფიგურირება.</p>
 <p><b>კონფიგურაციის მაგალითი (ერთი ავტობუსი):</b></p>
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>clk_speed_hz</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">I2C საათის სიხშირე ჰერცებში (მაგ., <code>100000</code> Standard Mode-სთვის, <code>400000</code> Fast Mode-სთვის).   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md49"></a>
+<h1><a class="anchor" id="autotoc_md50"></a>
 4. 🔌 Service API (&lt;tt&gt;i2c_bus_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_I2C_BUS_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <li>**<code>i2c_port_t get_port(context);</code>** <br  />
  ℹ️ აბრუნებს ამ ავტობუსის პორტის ნომერს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md50"></a>
+<h1><a class="anchor" id="autotoc_md51"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, <code>ssd1306_oled_display</code> მოდულს სურს, გამოიყენოს I2C ავტობუსი, რომლის <code>instance_name</code> არის <code>"main_i2c_bus"</code>.</p>
 <p>**<code><a class="el" href="ssd1306__oled__display_8c.html" title="Implementation for the SSD1306 OLED display module.">ssd1306_oled_display.c</a></code>-ში, <code>init</code> ფუნქციაში:**</p>
@@ -206,8 +206,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <div class="ttc" id="astructi2c__bus__handle__t_html_accdab12ae8b1ff24b97b432010ea5e20"><div class="ttname"><a href="structi2c__bus__handle__t.html#accdab12ae8b1ff24b97b432010ea5e20">i2c_bus_handle_t::api</a></div><div class="ttdeci">const i2c_bus_api_t * api</div><div class="ttdoc">Pointer to the table of I2C API functions.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:83</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
-<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_oled_display.c:67</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md51"></a>
+<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_oled_display.c:41</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md52"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> ნებისმიერმა მოდულმა, რომელიც იყენებს <code>i2c_bus</code>-ის სერვისს, თავის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა დაამატოს <code>interfaces</code> (და არა <code>i2c_bus</code>), რათა მიიღოს წვდომა <code><a class="el" href="i2c__bus__interface_8h.html" title="Public Service API contract for the I2C Bus module.">i2c_bus_interface.h</a></code>-ზე.</li>

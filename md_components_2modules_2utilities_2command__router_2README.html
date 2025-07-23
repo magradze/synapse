@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2com
   <div class="headertitle"><div class="title">⚙️ მოდული: Command Router &amp; System Shell</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md162"></a> <b>🗂️ კატეგორია:</b> <code>utilities</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md163"></a> <b>🗂️ კატეგორია:</b> <code>utilities</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 1.3.1</p>
-<h1><a class="anchor" id="autotoc_md163"></a>
+<h1><a class="anchor" id="autotoc_md164"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>Command Router</code> მოდული არის Synapse Framework-ის <b>მართვის ცენტრალური კვანძი</b>. ის უზრუნველყოფს ერთიან, გაფართოებად და უსაფრთხო მექანიზმს სისტემური და მოდულების ბრძანებების მისაღებად, გასაპარსად და შესასრულებლად.</p>
 <p>მისი მთავარი მიზანია, სრულად გამიჯნოს ბრძანების <b>წყარო</b> (მაგ., 💻 Serial Console, ☁️ MQTT, 🌐 HTTP, 🔵 BLE) ბრძანების <b>შემსრულებლისგან</b> (მაგ., <code>relay_module</code>, <code>ota_manager</code>). ეს ქმნის უკიდურესად მოქნილ არქიტექტურას, სადაც ნებისმიერი მოდული შეიძლება იმართოს ნებისმიერი საკომუნიკაციო არხიდან, კოდის დუბლირების გარეშე.</p>
-<h1><a class="anchor" id="autotoc_md164"></a>
+<h1><a class="anchor" id="autotoc_md165"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>🤝 ბრძანებების რეგისტრაციის პატერნი:</b> მოდულები არ ახდენენ ბრძანებების იმპლემენტაციას თავად. ამის ნაცვლად, ისინი არეგისტრირებენ თავიანთ ბრძანებებს და შესაბამის <code>callback</code> ფუნქციებს <code>Command Router</code>-ში მისი Service API-ს მეშვეობით.</li>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2com
 </li>
 <li><b>📖 ჩაშენებული დახმარების სისტემა:</b> <code>help</code> ბრძანება ავტომატურად აჩვენებს ყველა რეგისტრირებულ ბრძანებას, მათ აღწერას და გამოყენების ფორმატს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md165"></a>
+<h1><a class="anchor" id="autotoc_md166"></a>
 3. 🛠️ კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება <code>Kconfig</code> (<code>idf.py menuconfig</code>) და <code>system_config.json</code> ფაილების საშუალებით.</p>
 <ul>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2com
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>serial_shell_prompt</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">სერიული კონსოლის prompt-ის ტექსტი.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>"SYNAPSE&gt; "</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md166"></a>
+<h1><a class="anchor" id="autotoc_md167"></a>
 4. 🔌 Service API (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ დაარეგისტრირონ თავიანთი ბრძანებები <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_CMD_ROUTER_API</code>**. ინტერფეისი აღწერილია <code><a class="el" href="cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module.">components/interfaces/include/cmd_router_interface.h</a></code>-ში.</p>
 <ul>
@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2com
 <div class="ttc" id="astructcmd__t_html"><div class="ttname"><a href="structcmd__t.html">cmd_t</a></div><div class="ttdoc">Defines the structure for a single command to be registered.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:29</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md167"></a>
+<h1><a class="anchor" id="autotoc_md168"></a>
 5. 🚀 ჩაშენებული ბრძანებები</h1>
 <p>მოდულს მოყვება რამდენიმე ჩაშენებული, სისტემური ბრძანება:</p>
 <ul>
@@ -175,7 +175,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2com
 <li>**<code>modules</code>**: ბეჭდავს სისტემაში არსებული ყველა მოდულის სიას და მათ სტატუსს.</li>
 <li>**<code>reboot</code>**: ასრულებს მოწყობილობის პროგრამულ გადატვირთვას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md168"></a>
+<h1><a class="anchor" id="autotoc_md169"></a>
 6. 💡 გამოყენების მაგალითი</h1>
 <p>წარმოვიდგინოთ, <code>relay_module</code> არეგისტრირებს თავის ბრძანებას.</p>
 <ul>
@@ -245,7 +245,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2com
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md169"></a>
+<h1><a class="anchor" id="autotoc_md170"></a>
 7. 🩺 პრობლემების მოგვარება (Troubleshooting)</h1>
 <ul>
 <li><b>პრობლემა:</b> კონსოლში იბეჭდება "ნაგავი" ან <code>ESP_ERR_NO_MEM</code> შეცდომები.<ul>

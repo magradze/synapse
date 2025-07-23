@@ -105,17 +105,35 @@ $(document).ready(function(){initNavTree('structssd1306__api__t.html',''); initR
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a49c18ab20520fe0db6e0bf9bf5170d79" id="r_a49c18ab20520fe0db6e0bf9bf5170d79"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">enable</a> )(void *context)</td></tr>
-<tr class="memdesc:a49c18ab20520fe0db6e0bf9bf5170d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the display and its background task.  <br /></td></tr>
+<tr class="memdesc:a49c18ab20520fe0db6e0bf9bf5170d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the display.  <br /></td></tr>
 <tr class="separator:a49c18ab20520fe0db6e0bf9bf5170d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80708f9c9bb4d94d7feb9f518ad80053" id="r_a80708f9c9bb4d94d7feb9f518ad80053"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053">disable</a> )(void *context)</td></tr>
-<tr class="memdesc:a80708f9c9bb4d94d7feb9f518ad80053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the display, turns it off, and suspends its task.  <br /></td></tr>
+<tr class="memdesc:a80708f9c9bb4d94d7feb9f518ad80053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the display (turns off the screen).  <br /></td></tr>
 <tr class="separator:a80708f9c9bb4d94d7feb9f518ad80053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89a760ac07563034035c4169c3e16f6d" id="r_a89a760ac07563034035c4169c3e16f6d"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a89a760ac07563034035c4169c3e16f6d">clear</a> )(void *context)</td></tr>
-<tr class="memdesc:a89a760ac07563034035c4169c3e16f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the entire display screen.  <br /></td></tr>
+<tr class="memdesc:a89a760ac07563034035c4169c3e16f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the internal screen buffer. Call <a class="el" href="structssd1306__api__t.html#ae2e172d208efab883f3219aa5fe983fb" title="Pushes the content of the internal buffer to the physical display.">update_screen()</a> to see the change.  <br /></td></tr>
 <tr class="separator:a89a760ac07563034035c4169c3e16f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2603e3db1a8a5be5f6cb335968d8b7ee" id="r_a2603e3db1a8a5be5f6cb335968d8b7ee"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a2603e3db1a8a5be5f6cb335968d8b7ee">write_text</a> )(void *context, uint8_t line_num, const char *format,...)</td></tr>
-<tr class="memdesc:a2603e3db1a8a5be5f6cb335968d8b7ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a line of text to the display.  <br /></td></tr>
-<tr class="separator:a2603e3db1a8a5be5f6cb335968d8b7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81a613b9b5caaaf8fe9e2fc09a2d277c" id="r_a81a613b9b5caaaf8fe9e2fc09a2d277c"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a81a613b9b5caaaf8fe9e2fc09a2d277c">write_text</a> )(void *context, uint8_t x, uint8_t y, const char *format,...)</td></tr>
+<tr class="memdesc:a81a613b9b5caaaf8fe9e2fc09a2d277c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a formatted text string to the buffer using the small 6x8 font.  <br /></td></tr>
+<tr class="separator:a81a613b9b5caaaf8fe9e2fc09a2d277c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af89b9713df1eabb336865dbef81268b9" id="r_af89b9713df1eabb336865dbef81268b9"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#af89b9713df1eabb336865dbef81268b9">draw_pixel</a> )(void *context, uint8_t x, uint8_t y, bool color)</td></tr>
+<tr class="memdesc:af89b9713df1eabb336865dbef81268b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a single pixel in the internal buffer.  <br /></td></tr>
+<tr class="separator:af89b9713df1eabb336865dbef81268b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2194b894a903ae8650b7e74d67a4326" id="r_ad2194b894a903ae8650b7e74d67a4326"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#ad2194b894a903ae8650b7e74d67a4326">draw_hline</a> )(void *context, uint8_t x, uint8_t y, uint8_t width)</td></tr>
+<tr class="memdesc:ad2194b894a903ae8650b7e74d67a4326"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a horizontal line in the internal buffer.  <br /></td></tr>
+<tr class="separator:ad2194b894a903ae8650b7e74d67a4326"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80346e9cd1699cf9caadf1709d05dc35" id="r_a80346e9cd1699cf9caadf1709d05dc35"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a80346e9cd1699cf9caadf1709d05dc35">draw_vline</a> )(void *context, uint8_t x, uint8_t y, uint8_t height)</td></tr>
+<tr class="memdesc:a80346e9cd1699cf9caadf1709d05dc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a vertical line in the internal buffer.  <br /></td></tr>
+<tr class="separator:a80346e9cd1699cf9caadf1709d05dc35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a598059dfc2bc2b4f00f3354a3094b96b" id="r_a598059dfc2bc2b4f00f3354a3094b96b"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#a598059dfc2bc2b4f00f3354a3094b96b">draw_rect</a> )(void *context, uint8_t x, uint8_t y, uint8_t width, uint8_t height)</td></tr>
+<tr class="memdesc:a598059dfc2bc2b4f00f3354a3094b96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a rectangle outline in the internal buffer.  <br /></td></tr>
+<tr class="separator:a598059dfc2bc2b4f00f3354a3094b96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af994ef2aad28cde6d529c0ed3fc2ba6e" id="r_af994ef2aad28cde6d529c0ed3fc2ba6e"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#af994ef2aad28cde6d529c0ed3fc2ba6e">fill_rect</a> )(void *context, uint8_t x, uint8_t y, uint8_t width, uint8_t height)</td></tr>
+<tr class="memdesc:af994ef2aad28cde6d529c0ed3fc2ba6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a filled rectangle in the internal buffer.  <br /></td></tr>
+<tr class="separator:af994ef2aad28cde6d529c0ed3fc2ba6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2e172d208efab883f3219aa5fe983fb" id="r_ae2e172d208efab883f3219aa5fe983fb"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structssd1306__api__t.html#ae2e172d208efab883f3219aa5fe983fb">update_screen</a> )(void *context)</td></tr>
+<tr class="memdesc:ae2e172d208efab883f3219aa5fe983fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes the content of the internal buffer to the physical display.  <br /></td></tr>
+<tr class="separator:ae2e172d208efab883f3219aa5fe983fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The public Service API structure for an SSD1306 display module. </p>
@@ -132,7 +150,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Clears the entire display screen. </p>
+<p>Clears the internal screen buffer. Call <a class="el" href="structssd1306__api__t.html#ae2e172d208efab883f3219aa5fe983fb" title="Pushes the content of the internal buffer to the physical display.">update_screen()</a> to see the change. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
@@ -155,10 +173,115 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Disables the display, turns it off, and suspends its task. </p>
+<p>Disables the display (turns off the screen). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="ad2194b894a903ae8650b7e74d67a4326" name="ad2194b894a903ae8650b7e74d67a4326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2194b894a903ae8650b7e74d67a4326">&#9670;&#160;</a></span>draw_hline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* ssd1306_api_t::draw_hline) (void *context, uint8_t x, uint8_t y, uint8_t width)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a horizontal line in the internal buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The starting horizontal position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>The vertical position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>The width of the line in pixels. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="af89b9713df1eabb336865dbef81268b9" name="af89b9713df1eabb336865dbef81268b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af89b9713df1eabb336865dbef81268b9">&#9670;&#160;</a></span>draw_pixel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* ssd1306_api_t::draw_pixel) (void *context, uint8_t x, uint8_t y, bool color)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a single pixel in the internal buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The horizontal position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>The vertical position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">color</td><td><code>true</code> for white (pixel on), <code>false</code> for black (pixel off). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="a598059dfc2bc2b4f00f3354a3094b96b" name="a598059dfc2bc2b4f00f3354a3094b96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a598059dfc2bc2b4f00f3354a3094b96b">&#9670;&#160;</a></span>draw_rect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* ssd1306_api_t::draw_rect) (void *context, uint8_t x, uint8_t y, uint8_t width, uint8_t height)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a rectangle outline in the internal buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The top-left corner's horizontal position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>The top-left corner's vertical position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>The width of the rectangle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>The height of the rectangle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="a80346e9cd1699cf9caadf1709d05dc35" name="a80346e9cd1699cf9caadf1709d05dc35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80346e9cd1699cf9caadf1709d05dc35">&#9670;&#160;</a></span>draw_vline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* ssd1306_api_t::draw_vline) (void *context, uint8_t x, uint8_t y, uint8_t height)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a vertical line in the internal buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The horizontal position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>The starting vertical position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>The height of the line in pixels. </td></tr>
   </table>
   </dd>
 </dl>
@@ -178,7 +301,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enables the display and its background task. </p>
+<p>Enables the display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle for the specific display instance. </td></tr>
@@ -189,23 +312,74 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2603e3db1a8a5be5f6cb335968d8b7ee" name="a2603e3db1a8a5be5f6cb335968d8b7ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2603e3db1a8a5be5f6cb335968d8b7ee">&#9670;&#160;</a></span>write_text</h2>
+<a id="af994ef2aad28cde6d529c0ed3fc2ba6e" name="af994ef2aad28cde6d529c0ed3fc2ba6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af994ef2aad28cde6d529c0ed3fc2ba6e">&#9670;&#160;</a></span>fill_rect</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t(* ssd1306_api_t::write_text) (void *context, uint8_t line_num, const char *format,...)</td>
+          <td class="memname">esp_err_t(* ssd1306_api_t::fill_rect) (void *context, uint8_t x, uint8_t y, uint8_t width, uint8_t height)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Writes a line of text to the display. </p>
+<p>Draws a filled rectangle in the internal buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">line_num</td><td>The line number to write to (e.g., 0 for the first line). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The top-left corner's horizontal position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>The top-left corner's vertical position. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>The width of the rectangle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">height</td><td>The height of the rectangle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="ae2e172d208efab883f3219aa5fe983fb" name="ae2e172d208efab883f3219aa5fe983fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2e172d208efab883f3219aa5fe983fb">&#9670;&#160;</a></span>update_screen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* ssd1306_api_t::update_screen) (void *context)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pushes the content of the internal buffer to the physical display. </p>
+<p>All <code>draw_*</code> operations modify an internal memory buffer. This function must be called to make the changes visible on the screen. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
+
+</div>
+</div>
+<a id="a81a613b9b5caaaf8fe9e2fc09a2d277c" name="a81a613b9b5caaaf8fe9e2fc09a2d277c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81a613b9b5caaaf8fe9e2fc09a2d277c">&#9670;&#160;</a></span>write_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t(* ssd1306_api_t::write_text) (void *context, uint8_t x, uint8_t y, const char *format,...)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a formatted text string to the buffer using the small 6x8 font. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">context</td><td>The context handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The starting horizontal position (column). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>The starting vertical position (page/line, 0-7). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">format</td><td>A printf-style format string. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">...</td><td>Variable arguments for the format string. </td></tr>
   </table>

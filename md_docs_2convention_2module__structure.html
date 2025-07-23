@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
   <div class="headertitle"><div class="title">მოდულის სტრუქტურის წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1034"></a> </p>
-<h1><a class="anchor" id="autotoc_md1035"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1035"></a> </p>
+<h1><a class="anchor" id="autotoc_md1036"></a>
 საქაღალდის სტრუქტურა</h1>
-<h2><a class="anchor" id="autotoc_md1036"></a>
+<h2><a class="anchor" id="autotoc_md1037"></a>
 სტანდარტული მოდულის layout</h2>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
 <div class="line">├── CMakeLists.txt</div>
@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">│   └── {module_name}.h</div>
 <div class="line">└── src/</div>
 <div class="line">    └── {module_name}.c</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1037"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1038"></a>
 კატეგორიები</h2>
 <div class="fragment"><div class="line">components/modules/</div>
 <div class="line">├── actuators/</div>
@@ -122,9 +122,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">├── system/</div>
 <div class="line">├── testing/</div>
 <div class="line">└── utilities/</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1038"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1039"></a>
 ფაილის სტრუქტურა</h1>
-<h2><a class="anchor" id="autotoc_md1039"></a>
+<h2><a class="anchor" id="autotoc_md1040"></a>
 1. &lt;tt&gt;config.json&lt;/tt&gt; (ახალი სექცია)</h2>
 <p>ეს ფაილი განსაზღვრავს მოდულის default runtime კონფიგურაციას. ის უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი აღწერს მოდულის ერთ ინსტანციას.</p>
 <div class="fragment"><div class="line">[</div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">]</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1040"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1041"></a>
 2. &lt;tt&gt;module.json&lt;/tt&gt;</h2>
 <p>ეს ფაილი შეიცავს მოდულის მეტამონაცემებს build-სისტემისთვის.</p>
 <div class="fragment"><div class="line">{</div>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">        &quot;subscribes&quot;: {}</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1041"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1042"></a>
 3. &lt;tt&gt;src/{module_name}.c&lt;/tt&gt; (განახლებული შაბლონი)</h2>
 <p>Source ფაილმა უნდა დაიცვას მეხსიერების მართვის ახალი წესები.</p>
 <div class="fragment"><div class="line"><span class="comment">// ... Includes ...</span></div>
@@ -208,7 +208,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
 <div class="ttc" id="astructmodule__t_html_a5a1305713cce543522141d618ca463da"><div class="ttname"><a href="structmodule__t.html#a5a1305713cce543522141d618ca463da">module_t::current_config</a></div><div class="ttdeci">cJSON * current_config</div><div class="ttdoc">მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1042"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1043"></a>
 &lt;tt&gt;CMakeLists.txt&lt;/tt&gt; სტრუქტურა</h1>
 <p>რეკომენდებულია გამარტივებული <code>CMakeLists.txt</code>-ის გამოყენება. პირობითი კომპილაცია იმართება <code>core</code> კომპონენტის მიერ გენერირებული <code>module_factory</code>-ით.</p>
 <div class="fragment"><div class="line"># Standard simplified structure</div>
@@ -223,7 +223,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">        json</div>
 <div class="line">        # Other private dependencies (e.g., esp_timer)</div>
 <div class="line">)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1043"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1044"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

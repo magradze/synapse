@@ -7,5 +7,9 @@ var searchData=
   ['details_4',['details',['../structtest__report__line__t.html#a2b19e8c7c0bb250db357b84d32380d14',1,'test_report_line_t']]],
   ['device_5fid_5',['device_id',['../structdevice__identity__private__data__t.html#a694bded633d18d5d97cf36922b0d1cbc',1,'device_identity_private_data_t']]],
   ['device_5fname_6',['device_name',['../structble__provisioning__private__data__t.html#ad37d705cb2eb4ea70d0c43973c8e19cf',1,'ble_provisioning_private_data_t']]],
-  ['disable_7',['disable',['../structmodule__t.html#ae00c883b7a5e858edad93c7cdbd5239b',1,'module_t::disable'],['../structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053',1,'ssd1306_api_t::disable']]]
+  ['disable_7',['disable',['../structmodule__t.html#ae00c883b7a5e858edad93c7cdbd5239b',1,'module_t::disable'],['../structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053',1,'ssd1306_api_t::disable']]],
+  ['draw_5fhline_8',['draw_hline',['../structssd1306__api__t.html#ad2194b894a903ae8650b7e74d67a4326',1,'ssd1306_api_t']]],
+  ['draw_5fpixel_9',['draw_pixel',['../structssd1306__api__t.html#af89b9713df1eabb336865dbef81268b9',1,'ssd1306_api_t']]],
+  ['draw_5frect_10',['draw_rect',['../structssd1306__api__t.html#a598059dfc2bc2b4f00f3354a3094b96b',1,'ssd1306_api_t']]],
+  ['draw_5fvline_11',['draw_vline',['../structssd1306__api__t.html#a80346e9cd1699cf9caadf1709d05dc35',1,'ssd1306_api_t']]]
 ];

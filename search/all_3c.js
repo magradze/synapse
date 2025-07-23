@@ -1,18 +1,18 @@
 var searchData=
 [
   ['ჩანაწერის_20შაბლონი_20decision_20record_20template_0',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
-  ['ჩანს_1',['პრობლემა: ლოგები არ ჩანს',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1667',1,'']]],
-  ['ჩანს_20ლოგები_2',['2. რატომ არ ჩანს ლოგები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1690',1,'']]],
-  ['ჩართვა_3',['ჩართვა',['../md_docs_2tutorials_2getting__started.html#autotoc_md1721',1,'3. პირველი მოდულის ჩართვა'],['../md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md68',1,'6. 💡 გამოყენება და უსაფრთხოების ჩართვა']]],
-  ['ჩართვა_20გამორთვა_4',['2. მოდულის დინამიური ჩართვა/გამორთვა',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1702',1,'']]],
-  ['ჩართვა_20და_20გამოყენება_5',['1. ლოგირების ჩართვა და გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1679',1,'']]],
-  ['ჩართვა_20და_20კონფიგურაცია_6',['2. საჭირო მოდულების ჩართვა და კონფიგურაცია',['../md_docs_2tutorials_2integration__example.html#autotoc_md1729',1,'']]],
-  ['ჩართვა_20mqtt_20ში_7',['ჩართვა mqtt ში',['../md_docs_2security_2security__best__practices.html#autotoc_md1487',1,'TLS/SSL ჩართვა MQTT-ში'],['../md_docs_2design__decisions_2security__considerations.html#autotoc_md1271',1,'TLS/SSL ჩართვა MQTT-ში']]],
+  ['ჩანს_1',['პრობლემა: ლოგები არ ჩანს',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1668',1,'']]],
+  ['ჩანს_20ლოგები_2',['2. რატომ არ ჩანს ლოგები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1691',1,'']]],
+  ['ჩართვა_3',['ჩართვა',['../md_docs_2tutorials_2getting__started.html#autotoc_md1722',1,'3. პირველი მოდულის ჩართვა'],['../md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md69',1,'6. 💡 გამოყენება და უსაფრთხოების ჩართვა']]],
+  ['ჩართვა_20გამორთვა_4',['2. მოდულის დინამიური ჩართვა/გამორთვა',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1703',1,'']]],
+  ['ჩართვა_20და_20გამოყენება_5',['1. ლოგირების ჩართვა და გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1680',1,'']]],
+  ['ჩართვა_20და_20კონფიგურაცია_6',['2. საჭირო მოდულების ჩართვა და კონფიგურაცია',['../md_docs_2tutorials_2integration__example.html#autotoc_md1730',1,'']]],
+  ['ჩართვა_20mqtt_20ში_7',['ჩართვა mqtt ში',['../md_docs_2security_2security__best__practices.html#autotoc_md1488',1,'TLS/SSL ჩართვა MQTT-ში'],['../md_docs_2design__decisions_2security__considerations.html#autotoc_md1272',1,'TLS/SSL ჩართვა MQTT-ში']]],
   ['ჩატარების_20სახელმძღვანელო_20performance_20benchmarks_20guide_8',['ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)',['../md_docs_2performance_2performance__benchmarks.html',1,'']]],
-  ['ჩატარების_20ძირითადი_20ნაბიჯები_9',['ბენჩმარკის ჩატარების ძირითადი ნაბიჯები',['../md_docs_2performance_2performance__benchmarks.html#autotoc_md1388',1,'']]],
-  ['ჩაშენებული_20ბრძანებები_10',['5. 🚀 ჩაშენებული ბრძანებები',['../md_components_2modules_2utilities_2command__router_2README.html#autotoc_md167',1,'']]],
-  ['ჩემი_20მოდული_11',['1. რატომ არ იბილდება ჩემი მოდული?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1689',1,'']]],
-  ['ჩემს_20სერვისს_12',['3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1691',1,'']]],
-  ['ჩვეული_20შეცდომები_3a_13',['❌ ჩვეული შეცდომები:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1098',1,'']]],
-  ['ჩონჩხის_20გენერაცია_14',['2. მოდულის ჩონჩხის გენერაცია',['../md_docs_2tutorials_2create__first__module.html#autotoc_md1712',1,'']]]
+  ['ჩატარების_20ძირითადი_20ნაბიჯები_9',['ბენჩმარკის ჩატარების ძირითადი ნაბიჯები',['../md_docs_2performance_2performance__benchmarks.html#autotoc_md1389',1,'']]],
+  ['ჩაშენებული_20ბრძანებები_10',['5. 🚀 ჩაშენებული ბრძანებები',['../md_components_2modules_2utilities_2command__router_2README.html#autotoc_md168',1,'']]],
+  ['ჩემი_20მოდული_11',['1. რატომ არ იბილდება ჩემი მოდული?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1690',1,'']]],
+  ['ჩემს_20სერვისს_12',['3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1692',1,'']]],
+  ['ჩვეული_20შეცდომები_3a_13',['❌ ჩვეული შეცდომები:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1099',1,'']]],
+  ['ჩონჩხის_20გენერაცია_14',['2. მოდულის ჩონჩხის გენერაცია',['../md_docs_2tutorials_2create__first__module.html#autotoc_md1713',1,'']]]
 ];

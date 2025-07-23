@@ -104,40 +104,54 @@ $(document).ready(function(){initNavTree('ssd1306__interface_8h_source.html','')
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html">   21</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">   27</a></span>    esp_err_t (*enable)(<span class="keywordtype">void</span>* context);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053">   34</a></span>    esp_err_t (*disable)(<span class="keywordtype">void</span>* context);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a89a760ac07563034035c4169c3e16f6d">   41</a></span>    esp_err_t (*clear)(<span class="keywordtype">void</span>* context);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a2603e3db1a8a5be5f6cb335968d8b7ee">   51</a></span>    esp_err_t (*write_text)(<span class="keywordtype">void</span>* context, uint8_t line_num, <span class="keyword">const</span> <span class="keywordtype">char</span> *format, ...);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>} <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span> <span class="comment">// For bool type</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;stdarg.h&gt;</span>  <span class="comment">// For va_list</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html">   23</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">   29</a></span>    esp_err_t (*enable)(<span class="keywordtype">void</span>* context);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053">   36</a></span>    esp_err_t (*disable)(<span class="keywordtype">void</span>* context);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a89a760ac07563034035c4169c3e16f6d">   43</a></span>    esp_err_t (*clear)(<span class="keywordtype">void</span>* context);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a81a613b9b5caaaf8fe9e2fc09a2d277c">   54</a></span>    esp_err_t (*write_text)(<span class="keywordtype">void</span> *context, uint8_t x, uint8_t y, <span class="keyword">const</span> <span class="keywordtype">char</span> *format, ...);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#af89b9713df1eabb336865dbef81268b9">   64</a></span>    esp_err_t (*draw_pixel)(<span class="keywordtype">void</span> *context, uint8_t x, uint8_t y, <span class="keywordtype">bool</span> color);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#ad2194b894a903ae8650b7e74d67a4326">   74</a></span>    esp_err_t (*draw_hline)(<span class="keywordtype">void</span> *context, uint8_t x, uint8_t y, uint8_t width);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a80346e9cd1699cf9caadf1709d05dc35">   84</a></span>    esp_err_t (*draw_vline)(<span class="keywordtype">void</span> *context, uint8_t x, uint8_t y, uint8_t height);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#a598059dfc2bc2b4f00f3354a3094b96b">   95</a></span>    esp_err_t (*draw_rect)(<span class="keywordtype">void</span> *context, uint8_t x, uint8_t y, uint8_t width, uint8_t height);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#af994ef2aad28cde6d529c0ed3fc2ba6e">  106</a></span>    esp_err_t (*fill_rect)(<span class="keywordtype">void</span> *context, uint8_t x, uint8_t y, uint8_t width, uint8_t height);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structssd1306__api__t.html#ae2e172d208efab883f3219aa5fe983fb">  115</a></span>    esp_err_t (*update_screen)(<span class="keywordtype">void</span> *context);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>} <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a>;</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="foldopen" id="foldopen00058" data-start="{" data-end="};">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structssd1306__handle__t.html">   58</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structssd1306__handle__t.html#a9e1709d4f32f7edd788595fd2e9e2681">   59</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *<a class="code hl_variable" href="structssd1306__handle__t.html#a9e1709d4f32f7edd788595fd2e9e2681">api</a>; </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658">   60</a></span>    <span class="keywordtype">void</span>* <a class="code hl_variable" href="structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658">context</a>;            </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>} <a class="code hl_struct" href="structssd1306__handle__t.html">ssd1306_handle_t</a>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="};">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="structssd1306__handle__t.html">  122</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="structssd1306__handle__t.html#a9e1709d4f32f7edd788595fd2e9e2681">  123</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *<a class="code hl_variable" href="structssd1306__handle__t.html#a9e1709d4f32f7edd788595fd2e9e2681">api</a>; </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658">  124</a></span>    <span class="keywordtype">void</span>* <a class="code hl_variable" href="structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658">context</a>;            </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>} <a class="code hl_struct" href="structssd1306__handle__t.html">ssd1306_handle_t</a>;</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif </span><span class="comment">// SSD1306_INTERFACE_H</span></div>
-<div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:21</div></div>
-<div class="ttc" id="astructssd1306__handle__t_html"><div class="ttname"><a href="structssd1306__handle__t.html">ssd1306_handle_t</a></div><div class="ttdoc">The handle returned by the Service Locator for a display service.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:58</div></div>
-<div class="ttc" id="astructssd1306__handle__t_html_a88da8e9a145017a5bef918669a3e8658"><div class="ttname"><a href="structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658">ssd1306_handle_t::context</a></div><div class="ttdeci">void * context</div><div class="ttdoc">Opaque context pointer for the API functions.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:60</div></div>
-<div class="ttc" id="astructssd1306__handle__t_html_a9e1709d4f32f7edd788595fd2e9e2681"><div class="ttname"><a href="structssd1306__handle__t.html#a9e1709d4f32f7edd788595fd2e9e2681">ssd1306_handle_t::api</a></div><div class="ttdeci">const ssd1306_api_t * api</div><div class="ttdoc">Pointer to the table of display API functions.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:59</div></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">#endif </span><span class="comment">// SSD1306_INTERFACE_H</span></div>
+<div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:23</div></div>
+<div class="ttc" id="astructssd1306__handle__t_html"><div class="ttname"><a href="structssd1306__handle__t.html">ssd1306_handle_t</a></div><div class="ttdoc">The handle returned by the Service Locator for a display service.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:122</div></div>
+<div class="ttc" id="astructssd1306__handle__t_html_a88da8e9a145017a5bef918669a3e8658"><div class="ttname"><a href="structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658">ssd1306_handle_t::context</a></div><div class="ttdeci">void * context</div><div class="ttdoc">Opaque context pointer for the API functions.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:124</div></div>
+<div class="ttc" id="astructssd1306__handle__t_html_a9e1709d4f32f7edd788595fd2e9e2681"><div class="ttname"><a href="structssd1306__handle__t.html#a9e1709d4f32f7edd788595fd2e9e2681">ssd1306_handle_t::api</a></div><div class="ttdeci">const ssd1306_api_t * api</div><div class="ttdoc">Pointer to the table of display API functions.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:123</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

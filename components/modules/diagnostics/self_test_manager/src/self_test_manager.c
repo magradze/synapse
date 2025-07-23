@@ -26,6 +26,7 @@
 #include "system_manager_interface.h"
 #include "event_payloads.h" // For telemetry payloads
 #include "security_status_interface.h"
+#include "ssd1306_interface.h"
 
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"
@@ -137,6 +138,7 @@ static void run_system_health_check(self_test_private_data_t *private_data);
 static void run_storage_check(self_test_private_data_t *private_data);
 static void run_connectivity_check(self_test_private_data_t *private_data);
 static void run_security_check(self_test_private_data_t *private_data);
+static void run_display_check(self_test_private_data_t *private_data);
 
 // =========================================================================
 //                      Module Lifecycle & Core Logic
@@ -268,7 +270,7 @@ static void self_test_manager_handle_event(module_t *self, const char *event_nam
             static cmd_t selftest_cmd = {
                 .command = "selftest",
                 .help = "Run system self-diagnostics.",
-                .usage = "selftest [--run [all|core|health|storage|conn|security]] [--report]",
+                .usage = "selftest [--run [all|core|health|storage|conn|security|display]] [--report]",
                 .min_args = 2,
                 .max_args = 3,
                 .handler = cmd_handler,
@@ -535,6 +537,13 @@ static void run_tests_task(void *pvParameters)
         vTaskDelay(pdMS_TO_TICKS(50));
     }
 
+    if (run_all || strcmp(suite_to_run, "display") == 0)
+    {
+        printf("Running Display Check...\n");
+        run_display_check(private_data);
+        vTaskDelay(pdMS_TO_TICKS(50));
+    }
+
     printf("\nSelf-test sequence complete. Use 'selftest --report' to see results.\n");
 
 cleanup:
@@ -783,4 +792,53 @@ static void run_security_check(self_test_private_data_t *private_data)
     {
         add_report_line(private_data, "Overall Security", TEST_RESULT_WARN, "Device not in production secure state");
     }
+}
+
+/**
+ * @internal
+ * @brief Test suite for the SSD1306 Display module.
+ * @details Checks if the display service is available and performs a quick
+ *          visual test by drawing various graphical primitives.
+ */
+static void run_display_check(self_test_private_data_t *private_data)
+{
+    const char *test_name = "Display Check";
+
+    // 1. Find the display service
+    service_handle_t display_handle = fmw_service_get("main_display");
+    if (!display_handle)
+    {
+        add_report_line(private_data, test_name, TEST_RESULT_SKIPPED, "Display service not found");
+        return;
+    }
+    ssd1306_handle_t *display = (ssd1306_handle_t *)display_handle;
+
+    // 2. Perform drawing operations on the internal buffer
+    display->api->clear(display->context);
+    display->api->write_text(display->context, 0, 0, "Display Test:");
+
+    // Draw some graphics
+    display->api->draw_hline(display->context, 0, 10, 128);
+    display->api->draw_rect(display->context, 5, 15, 30, 20);
+    display->api->fill_rect(display->context, 40, 15, 30, 20);
+    display->api->draw_vline(display->context, 75, 12, 25);
+
+    display->api->write_text(display->context, 0, 5, "GFX OK!");
+
+    // 3. Push the buffer to the screen to make it visible
+    if (display->api->update_screen(display->context) == ESP_OK)
+    {
+        add_report_line(private_data, test_name, TEST_RESULT_PASS, "GFX primitives drawn");
+    }
+    else
+    {
+        add_report_line(private_data, test_name, TEST_RESULT_FAIL, "Failed to update screen");
+    }
+
+    vTaskDelay(pdMS_TO_TICKS(3000));
+
+    // Clean up by clearing the screen and pushing the changes
+    ESP_LOGI(TAG, "Clearing display after test...");
+    display->api->clear(display->context);
+    display->api->update_screen(display->context);
 }

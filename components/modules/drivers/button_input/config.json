@@ -1,0 +1,26 @@
+[
+  {
+    "type": "button_input",
+    "enabled": true,
+    "config": {
+      "instance_name": "main_buttons",
+      "buttons": [
+        {
+          "name": "UP",
+          "gpio_pin": 26,
+          "active_level": 0
+        },
+        {
+          "name": "DOWN",
+          "gpio_pin": 27,
+          "active_level": 0
+        },
+        {
+          "name": "OK",
+          "gpio_pin": 32,
+          "active_level": 0
+        }
+      ]
+    }
+  }
+]

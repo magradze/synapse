@@ -16,6 +16,7 @@
 #include "service_types.h"
 #include "i2c_bus_interface.h"
 #include "timer_interface.h"
+#include "system_manager_interface.h"
 #include "event_bus.h"
 #include "event_data_wrapper.h"
 #include "event_payloads.h"
@@ -24,6 +25,7 @@
 #include "wifi_icons.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_timer.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -35,6 +37,17 @@ DEFINE_COMPONENT_TAG("SSD1306_DISPLAY");
 #define LINE_BUFFER_SIZE 32
 #define HEADER_PAGE_NUM 0
 #define CONTENT_START_PAGE 1
+
+// --- UI State Machine Definitions ---
+typedef enum
+{
+    UI_STATE_HOME,
+    UI_STATE_MENU,
+    UI_STATE_MODULE_CONTROL,
+    // Add more states like UI_STATE_SETTINGS later
+} ui_state_t;
+
+#define MENU_ITEM_COUNT 2 // For now, we will have 2 static menu items
 
 /** @internal @brief Private data for the SSD1306 module instance. */
 typedef struct
@@ -55,6 +68,20 @@ typedef struct
     bool is_enabled;
     bool wifi_connected;
     int32_t wifi_rssi;
+
+    // --- UI State ---
+    ui_state_t current_ui_state;
+    int8_t selected_menu_item;
+    const char *menu_items[MENU_ITEM_COUNT];
+
+    // --- Event Handling ---
+    int64_t last_button_press_time_us;
+
+    // --- Dynamic Menu Data ---
+    system_manager_api_t *system_api; // Handle to the System Manager service
+    const module_t **menu_modules;    // A cached list of modules to display in the menu
+    uint8_t menu_item_count;          // The actual number of modules in the menu
+    const module_t *selected_module;  // The currently selected module in the menu
 } ssd1306_private_data_t;
 
 // --- Forward Declarations ---
@@ -79,12 +106,15 @@ static void draw_pixel_internal(ssd1306_private_data_t *private_data, uint8_t x,
 static void screen_draw_large_text_internal(ssd1306_private_data_t *private_data, uint8_t line, const char *text);
 static void draw_header(ssd1306_private_data_t *private_data);
 
+static void render_home_view(ssd1306_private_data_t *private_data);
+static void render_menu_view(ssd1306_private_data_t *private_data);
+static void render_module_control_view(ssd1306_private_data_t *private_data);
+
 /**
- * @brief Creates a new instance of the SSD1306 OLED Display module.
- * @details This is the factory function for the module, called by the Module Factory.
- *          It allocates memory for the module and its private data, takes ownership
- *          of the provided config object, parses it, and sets up the module's
- *          base function pointers and service API.
+ * @brief Creates a new instance of the Button Input module.
+ * @details This factory function allocates memory for the module and its private
+ *          data, takes ownership of the provided config object, parses it to
+ *          configure the buttons, and sets up the module's base function pointers.
  * @param[in] config A pointer to the cJSON configuration object for this instance.
  *                   The function takes ownership of this object.
  * @return A pointer to the newly created module_t structure, or NULL on failure.
@@ -401,6 +431,108 @@ static void draw_header(ssd1306_private_data_t *private_data)
 }
 
 /**
+ * @internal @brief Renders the Home View on the internal buffer.
+ */
+static void render_home_view(ssd1306_private_data_t *private_data)
+{
+    api_clear(private_data);
+    draw_header(private_data);
+    // For now, just show a message. Later it will show sensor data.
+    api_write_text(private_data, 0, 3, "   Home Screen");
+    api_write_text(private_data, 0, 5, " Press OK for Menu");
+}
+
+/**
+ * @internal @brief Renders the dynamic, scrollable Menu View, including a "Back" option.
+ */
+static void render_menu_view(ssd1306_private_data_t *private_data)
+{
+    api_clear(private_data);
+    draw_header(private_data);
+    api_write_text(private_data, 0, 2, "--- Main Menu ---");
+
+    if (!private_data->system_api)
+    {
+        api_write_text(private_data, 0, 4, " Service N/A");
+        return;
+    }
+
+    // Get the fresh list of all modules from the system manager
+    const module_t **all_modules = NULL;
+    uint8_t total_module_count = 0;
+    private_data->system_api->get_all_modules(&all_modules, &total_module_count);
+
+    if (all_modules == NULL || total_module_count == 0)
+    {
+        api_write_text(private_data, 0, 4, " No modules found");
+        return;
+    }
+
+    // ★★★ NEW: Add "Back" option to the total item count ★★★
+    private_data->menu_item_count = total_module_count + 1;
+
+    // --- Scrolling Logic ---
+    const int8_t lines_on_screen = 4;
+    int8_t scroll_offset = 0;
+    if (private_data->selected_menu_item >= lines_on_screen)
+    {
+        scroll_offset = private_data->selected_menu_item - lines_on_screen + 1;
+    }
+
+    // --- Rendering Logic ---
+    for (int i = 0; i < lines_on_screen; i++)
+    {
+        int8_t item_index = scroll_offset + i;
+
+        if (item_index >= private_data->menu_item_count)
+            break;
+
+        char line_buffer[40];
+        const char *item_name;
+
+        // Check if it's a module or the "Back" option
+        if (item_index < total_module_count)
+        {
+            item_name = all_modules[item_index]->name;
+        }
+        else
+        {
+            item_name = "Back";
+        }
+
+        int max_name_len = sizeof(line_buffer) - 3;
+
+        snprintf(line_buffer, sizeof(line_buffer), "%s %.*s",
+                 (item_index == private_data->selected_menu_item) ? ">" : " ",
+                 max_name_len,
+                 item_name);
+
+        api_write_text(private_data, 5, 4 + i, line_buffer);
+    }
+}
+
+/**
+ * @internal @brief Renders the control view for a selected module.
+ */
+static void render_module_control_view(ssd1306_private_data_t *private_data)
+{
+    api_clear(private_data);
+    draw_header(private_data);
+
+    if (!private_data->selected_module || strlen(private_data->selected_module->name) == 0)
+    {
+        render_home_view(private_data); // Fallback to home if no module is selected
+        return;
+    }
+
+    // Display the name of the selected module as a title
+    api_write_text(private_data, 0, 2, private_data->selected_module->name);
+
+    // For now, we only show generic options
+    api_write_text(private_data, 5, 4, "> Back to Menu");
+}
+
+/**
  * @internal
  * @brief Initializes the SSD1306 module instance.
  * @details This function gets the required I2C bus service, allocates the screen
@@ -413,6 +545,21 @@ static esp_err_t ssd1306_init(module_t *self)
 {
     ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing SSD1306 '%s'", self->name);
+
+    // Initialize UI state
+    private_data->current_ui_state = UI_STATE_HOME;
+    private_data->selected_menu_item = 0;
+    private_data->last_button_press_time_us = 0;
+    private_data->menu_modules = NULL;
+    private_data->menu_item_count = 0;
+    private_data->selected_module = NULL;
+
+    // Get and store the System Manager service handle
+    private_data->system_api = fmw_service_get("system_manager");
+    if (!private_data->system_api)
+    {
+        ESP_LOGW(TAG, "System Manager service not found. Dynamic menu will be disabled.");
+    }
 
     private_data->is_enabled = false;
     private_data->wifi_connected = false;
@@ -442,6 +589,8 @@ static esp_err_t ssd1306_init(module_t *self)
 
     fmw_event_bus_subscribe(FMW_EVENT_WIFI_STATUS_READY, self);
     fmw_event_bus_subscribe(EVT_INTERNAL_UPDATE_WIFI, self);
+    fmw_event_bus_subscribe(FMW_EVENT_BUTTON_PRESSED, self);
+
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
@@ -473,20 +622,20 @@ static esp_err_t ssd1306_start(module_t *self)
     screen_hardware_init(private_data);
     private_data->is_enabled = true;
 
+    // Show splash screen
     if (strlen(private_data->init_text) > 0)
     {
         api_clear(private_data);
         screen_draw_large_text_internal(private_data, 1, private_data->init_text);
         api_update_screen(private_data);
+        vTaskDelay(pdMS_TO_TICKS(3000));
     }
-    ESP_LOGI(TAG, "Display for '%s' started, showing splash screen.", self->name);
 
-    vTaskDelay(pdMS_TO_TICKS(3000));
-
-    api_clear(private_data);
-    draw_header(private_data);
+    // Switch to main UI
+    private_data->current_ui_state = UI_STATE_HOME;
+    render_home_view(private_data);
     api_update_screen(private_data);
-    ESP_LOGI(TAG, "Switching to main display mode.");
+    ESP_LOGI(TAG, "Switched to Home View.");
 
     self->status = MODULE_STATUS_RUNNING;
     return ESP_OK;
@@ -511,6 +660,7 @@ static void ssd1306_deinit(module_t *self)
         fmw_service_unregister(self->name);
         fmw_event_bus_unsubscribe(FMW_EVENT_WIFI_STATUS_READY, self);
         fmw_event_bus_unsubscribe(EVT_INTERNAL_UPDATE_WIFI, self);
+        fmw_event_bus_unsubscribe(FMW_EVENT_BUTTON_PRESSED, self);
         if (private_data->screen_buffer)
         {
             free(private_data->screen_buffer);
@@ -525,16 +675,22 @@ static void ssd1306_deinit(module_t *self)
 /**
  * @internal
  * @brief Handles events received from the Event Bus.
- * @details This function processes events to update the display content. It
- *          triggers periodic WiFi status requests and updates the header icon
- *          when a status report is received.
- * @param self Pointer to the module instance.
- * @param event_name The name of the received event.
- * @param event_data A pointer to the event data wrapper.
+ * @details This function is the core of the UI logic. It processes button presses
+ *          to navigate the UI state machine and also listens for system events
+ *          like WiFi status or sensor data to update the display content dynamically.
  */
 static void ssd1306_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
+
+    if (event_name == NULL)
+    {
+        ESP_LOGE(TAG, "Received an event with a NULL name!");
+        if (event_data)
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
+        return;
+    }
+
     if (!private_data->is_enabled)
     {
         if (event_data)
@@ -542,7 +698,110 @@ static void ssd1306_handle_event(module_t *self, const char *event_name, void *e
         return;
     }
 
-    if (strcmp(event_name, EVT_INTERNAL_UPDATE_WIFI) == 0)
+    bool screen_needs_update = false;
+
+    if (strcmp(event_name, FMW_EVENT_BUTTON_PRESSED) == 0)
+    {
+        event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
+        if (!wrapper || !wrapper->payload)
+        {
+            ESP_LOGE(TAG, "Received BUTTON_PRESSED event with NULL payload!");
+            if (event_data)
+                fmw_event_data_release(wrapper);
+            return;
+        }
+        fmw_button_payload_t *payload = (fmw_button_payload_t *)wrapper->payload;
+
+        int64_t now = esp_timer_get_time();
+        if ((now - private_data->last_button_press_time_us) < 200 * 1000)
+        {
+            if (event_data)
+                fmw_event_data_release(wrapper);
+            return;
+        }
+        private_data->last_button_press_time_us = now;
+
+        switch (private_data->current_ui_state)
+        {
+        case UI_STATE_HOME:
+            if (strcmp(payload->button_name, "OK") == 0)
+            {
+                private_data->current_ui_state = UI_STATE_MENU;
+                private_data->selected_menu_item = 0;
+                render_menu_view(private_data);
+                screen_needs_update = true;
+            }
+            break;
+
+        case UI_STATE_MENU:
+            if (strcmp(payload->button_name, "UP") == 0)
+            {
+                private_data->selected_menu_item--;
+                if (private_data->selected_menu_item < 0)
+                {
+                    private_data->selected_menu_item = private_data->menu_item_count - 1;
+                }
+                render_menu_view(private_data);
+                screen_needs_update = true;
+            }
+            else if (strcmp(payload->button_name, "DOWN") == 0)
+            {
+                private_data->selected_menu_item++;
+                if (private_data->selected_menu_item >= private_data->menu_item_count)
+                {
+                    private_data->selected_menu_item = 0;
+                }
+                render_menu_view(private_data);
+                screen_needs_update = true;
+            }
+            else if (strcmp(payload->button_name, "OK") == 0)
+            {
+                // ★★★ ADDED SAFETY CHECK ★★★
+                // Ensure the module list is populated before trying to access it.
+                if (private_data->system_api && private_data->menu_modules == NULL)
+                {
+                    private_data->system_api->get_all_modules(&private_data->menu_modules, &private_data->menu_item_count);
+                    // Recalculate total item count to include the "Back" option
+                    if (private_data->menu_modules)
+                    {
+                        private_data->menu_item_count++;
+                    }
+                }
+
+                // Proceed only if the module list is valid
+                if (private_data->menu_modules)
+                {
+                    uint8_t total_module_count = private_data->menu_item_count - 1;
+                    if (private_data->selected_menu_item < total_module_count)
+                    {
+                        // A module was selected
+                        private_data->selected_module = private_data->menu_modules[private_data->selected_menu_item];
+                        private_data->current_ui_state = UI_STATE_MODULE_CONTROL;
+                        render_module_control_view(private_data);
+                        screen_needs_update = true;
+                    }
+                    else
+                    {
+                        // The "Back" option was selected
+                        private_data->current_ui_state = UI_STATE_HOME;
+                        render_home_view(private_data);
+                        screen_needs_update = true;
+                    }
+                }
+            }
+            break;
+
+        case UI_STATE_MODULE_CONTROL:
+            private_data->current_ui_state = UI_STATE_MENU;
+            render_menu_view(private_data);
+            screen_needs_update = true;
+            break;
+
+        default:
+            break;
+        }
+    }
+    else if (strcmp(event_name, EVT_INTERNAL_UPDATE_WIFI) == 0)
     {
         ESP_LOGD(TAG, "Internal timer triggered. Requesting WiFi status update.");
         fmw_command_payload_t *payload = calloc(1, sizeof(fmw_command_payload_t));
@@ -586,7 +845,7 @@ static void ssd1306_handle_event(module_t *self, const char *event_name, void *e
                         private_data->wifi_connected = new_status;
                         private_data->wifi_rssi = new_rssi;
                         draw_header(private_data);
-                        api_update_screen(private_data);
+                        screen_needs_update = true;
                     }
                     cJSON_Delete(root);
                 }
@@ -594,8 +853,15 @@ static void ssd1306_handle_event(module_t *self, const char *event_name, void *e
         }
     }
 
+    if (screen_needs_update)
+    {
+        api_update_screen(private_data);
+    }
+
     if (event_data)
+    {
         fmw_event_data_release((event_data_wrapper_t *)event_data);
+    }
 }
 
 /**

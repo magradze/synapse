@@ -41,6 +41,10 @@
 #define FMW_EVENT_HEARTBEAT_MISSED "FMW_HEARTBEAT_MISSED"
 #define FMW_EVENT_WATCHDOG_ALL_OK "FMW_WATCHDOG_ALL_OK"
 
+// --- User Input Events ---
+#define FMW_EVENT_BUTTON_PRESSED "BUTTON_PRESSED"
+// #define FMW_EVENT_BUTTON_LONG_PRESSED "BUTTON_LONG_PRESSED"
+
 /**
  * @brief Generic event published by any module that establishes a critical external connection.
  * @details The payload should be of type fmw_connectivity_payload_t.

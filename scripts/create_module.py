@@ -7,7 +7,7 @@ Synapse Framework Module Generator v2.1
 ავტომატურად ქმნის ახალ მოდულს Synapse Framework-ისთვის, სრული,
 არქეტიპებზე დაფუძნებული კოდის გენერაციით და ინტერაქტიული ინტერფეისით.
 
-ავტორი: Giorgi Magradze & Synapse AI Assistant
+ავტორი: Synapse Framework Team
 ვერსია: 2.1.0
 """
 

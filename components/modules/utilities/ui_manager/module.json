@@ -1,0 +1,15 @@
+{
+    "name": "ui_manager",
+    "version": "1.0.0",
+    "description": "Manages the user interface, including menus and status screens.",
+    "author": "Giorgi Magradze",
+    "init_function": "ui_manager_create",
+    "init_level": 80,
+    "type": "utilities",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_UI_MANAGER_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
+}

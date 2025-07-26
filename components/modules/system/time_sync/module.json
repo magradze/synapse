@@ -1,0 +1,15 @@
+{
+    "name": "time_sync",
+    "version": "1.0.0",
+    "description": "Synchronizes system time using NTP/SNTP.",
+    "author": "Giorgi Magradze",
+    "init_function": "time_sync_create",
+    "init_level": 40,
+    "type": "system",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_TIME_SYNC_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
+}

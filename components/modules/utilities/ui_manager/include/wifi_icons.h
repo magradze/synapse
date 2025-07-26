@@ -13,6 +13,9 @@
 extern "C" {
 #endif
 
+#define WIFI_ICON_WIDTH 8
+#define WIFI_ICON_HEIGHT 8
+
 // A simple "X" icon for disconnected state
 const uint8_t wifi_icon_disconnected[] = {
     0x81, 0x42, 0x24, 0x18, 0x18, 0x24, 0x42, 0x81

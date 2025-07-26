@@ -66,6 +66,7 @@ extern "C"
     FMW_SERVICE_TYPE_OTA_API,
     FMW_SERVICE_TYPE_VERSION_API,
     FMW_SERVICE_TYPE_HEALTH_API,
+    FMW_SERVICE_TYPE_TIME_SYNC_API,
 
     // --- Security Services ---
     FMW_SERVICE_TYPE_CRYPTO_API,
@@ -179,6 +180,8 @@ extern "C"
       return "version_api";
     case FMW_SERVICE_TYPE_HEALTH_API:
       return "health_api";
+    case FMW_SERVICE_TYPE_TIME_SYNC_API:
+      return "time_sync_api";
 
     // Security Services
     case FMW_SERVICE_TYPE_CRYPTO_API:

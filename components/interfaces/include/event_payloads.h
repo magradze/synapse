@@ -92,6 +92,19 @@ typedef struct
     char check_name[32];
 } fmw_connectivity_payload_t;
 
+/**
+ * @struct fmw_button_payload_t
+ * @brief Defines the data structure for the FMW_EVENT_BUTTON_PRESSED event.
+ */
+typedef struct
+{
+    /**
+     * @brief The name of the button that was pressed (e.g., "UP", "OK").
+     *        Matches the name defined in the button_input module's config.
+     */
+    char button_name[16];
+} fmw_button_payload_t;
+
 // =========================================================================
 //                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები
 // =========================================================================

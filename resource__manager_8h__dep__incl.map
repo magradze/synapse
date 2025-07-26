@@ -1,13 +1,15 @@
 <map id="components/core/include/resource_manager.h" name="components/core/include/resource_manager.h">
-<area shape="rect" id="Node000001" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="435,5,621,45"/>
+<area shape="rect" id="Node000001" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="534,5,719,45"/>
 <area shape="rect" id="Node000002" href="$resource__manager_8c.html" title="რესურსების მენეჯერის ზოგადი იმპლემენტაცია." alt="" coords="5,101,200,141"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="424,51,213,96,181,103,180,98,211,91,422,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="520,44,374,67,213,96,179,103,178,98,211,91,373,62,520,39"/>
 <area shape="rect" id="Node000003" href="$system__manager_8c.html" title="System Manager კომპონენტის იმპლემენტაცია." alt="" coords="224,101,411,141"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="474,53,361,103,359,98,472,48"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="552,52,381,103,379,98,550,47"/>
 <area shape="rect" id="Node000004" href="$relay__actuator_8c.html" title="Implementation of the Relay Actuator module." alt="" coords="435,93,621,148"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="531,59,531,93,525,93,525,59"/>
-<area shape="rect" id="Node000005" href="$i2c__bus_8c.html" title="Implementation of the I2C Bus module using the new ESP&#45;IDF v5.x driver." alt="" coords="645,93,808,148"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="582,49,672,91,670,96,579,54"/>
-<area shape="rect" id="Node000006" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="833,93,1023,148"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="625,46,821,91,833,94,832,99,819,96,624,51"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="599,57,558,95,554,91,595,53"/>
+<area shape="rect" id="Node000005" href="$button__input_8c.html" title="A module to handle hardware button presses and publish events." alt="" coords="645,93,808,148"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="659,53,700,91,697,95,655,57"/>
+<area shape="rect" id="Node000006" href="$i2c__bus_8c.html" title="Implementation of the I2C Bus module using the new ESP&#45;IDF v5.x driver." alt="" coords="832,93,995,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="698,47,833,91,832,96,697,52"/>
+<area shape="rect" id="Node000007" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა" alt="" coords="1019,93,1210,148"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="733,41,1007,91,1019,93,1018,99,1006,96,732,46"/>
 </map>

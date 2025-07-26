@@ -1,12 +1,10 @@
 <map id="ssd1306_private_data_t" name="ssd1306_private_data_t">
-<area shape="rect" id="Node000001" title=" " alt="" coords="112,181,289,207"/>
-<area shape="rect" id="Node000002" href="$structi2c__bus__handle__t.html" title="The handle returned by the Service Locator for an I2C bus service." alt="" coords="5,93,140,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,132,71,145,76,156,92,171,113,181,110,186,89,175,72,159,66,146,65,133"/>
-<area shape="rect" id="Node000003" href="$structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module." alt="" coords="17,5,128,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,45,75,93,70,93,70,45"/>
-<area shape="rect" id="Node000004" href="$structssd1306__handle__t.html" title="The handle returned by the Service Locator for a display service." alt="" coords="303,93,442,119"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="339,127,225,183,223,179,336,122"/>
-<area shape="rect" id="Node000005" href="$structssd1306__api__t.html" title="The public Service API structure for an SSD1306 display module." alt="" coords="202,5,317,31"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="244,43,228,67,215,94,205,142,203,181,198,181,200,141,210,92,223,65,239,41"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="287,37,359,91,356,95,284,41"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="81,273,258,299"/>
+<area shape="rect" id="Node000002" href="$structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,139,88,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,173,134,247,158,271,155,275,130,251,63,177"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="80,133,103,136,112,142,115,152,110,164,98,170,83,171,66,167,68,162,83,166,97,165,106,160,109,152,107,145,101,141,80,139"/>
+<area shape="rect" id="Node000003" href="$structi2c__bus__handle__t.html" title="The handle returned by the Service Locator for an I2C bus service." alt="" coords="226,139,361,165"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="286,178,266,215,236,251,200,275,197,271,233,247,261,212,281,176"/>
+<area shape="rect" id="Node000004" href="$structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module." alt="" coords="238,5,349,31"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="296,45,296,139,291,139,291,45"/>
 </map>

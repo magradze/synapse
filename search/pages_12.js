@@ -16,7 +16,7 @@ var searchData=
   ['setup_20guide_13',['Synapse Local Setup Guide',['../md_docs_2contributing_2local__setup.html',1,'']]],
   ['shell_14',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
   ['solutions_15',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
-  ['ssd1306_5foled_5fdisplay_20tt_16',['📺 მოდული: &lt;tt&gt;ssd1306_oled_display&lt;/tt&gt;',['../md_components_2modules_2displays_2ssd1306__oled__display_2README.html',1,'']]],
+  ['ssd1306_5fdriver_20tt_16',['📺 მოდული: &lt;tt&gt;ssd1306_driver&lt;/tt&gt;',['../md_components_2modules_2displays_2ssd1306__driver_2README.html',1,'']]],
   ['started_17',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
   ['status_20api_20reference_18',['🛡️ Security Status API Reference',['../md_docs_2api__reference_2security__api.html',1,'']]],
   ['storage_19',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],

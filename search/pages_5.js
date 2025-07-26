@@ -5,5 +5,6 @@ var searchData=
   ['best_20practices_20extending_20the_20framework_2',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
   ['ble_5fprovisioning_20tt_3',['📲 მოდული &lt;tt&gt;ble_provisioning&lt;/tt&gt;',['../md_components_2modules_2provisioning_2ble__provisioning_2README.html',1,'']]],
   ['branching_20strategy_4',['Synapse Branching Strategy',['../md_docs_2contributing_2branching__strategy.html',1,'']]],
-  ['bus_20api_20reference_5',['Synapse Event Bus API Reference',['../md_docs_2api__reference_2event__api.html',1,'']]]
+  ['bus_20api_20reference_5',['Synapse Event Bus API Reference',['../md_docs_2api__reference_2event__api.html',1,'']]],
+  ['button_5finput_20tt_6',['🔘 მოდული: &lt;tt&gt;button_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2button__input_2README.html',1,'']]]
 ];

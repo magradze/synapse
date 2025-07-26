@@ -31,6 +31,7 @@ var service__types_8h =
       [ "FMW_SERVICE_TYPE_OTA_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca29e3e127854b29bb04739346b1902153", null ],
       [ "FMW_SERVICE_TYPE_VERSION_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca154af5d6498da9cf102656819c8a5ca2", null ],
       [ "FMW_SERVICE_TYPE_HEALTH_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219caf1adbe629e2373afb3bd4c06e82647e2", null ],
+      [ "FMW_SERVICE_TYPE_TIME_SYNC_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219cad30033f0f82f1dd588aa6070953e1d85", null ],
       [ "FMW_SERVICE_TYPE_CRYPTO_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219cae649cba37d8952da5be81fa79bc6e447", null ],
       [ "FMW_SERVICE_TYPE_AUTH_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca53204d45787130027f18cf4e1a532812", null ],
       [ "FMW_SERVICE_TYPE_TLS_API", "service__types_8h.html#a2147d7b6aec6913e52ceb12330fc219ca7ac44feced257e923d2d354d0445a1cb", null ],

@@ -101,63 +101,46 @@ Collaboration diagram for ssd1306_private_data_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structssd1306__private__data__t__coll__graph.png" border="0" usemap="#assd1306__private__data__t_coll__map" alt="Collaboration graph"/></div>
 <map name="assd1306__private__data__t_coll__map" id="assd1306__private__data__t_coll__map">
-<area shape="rect" title=" " alt="" coords="112,181,289,207"/>
-<area shape="rect" href="structi2c__bus__handle__t.html" title="The handle returned by the Service Locator for an I2C bus service." alt="" coords="5,93,140,119"/>
-<area shape="poly" title=" " alt="" coords="70,132,71,145,76,156,92,171,113,181,110,186,89,175,72,159,66,146,65,133"/>
-<area shape="rect" href="structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module." alt="" coords="17,5,128,31"/>
-<area shape="poly" title=" " alt="" coords="75,45,75,93,70,93,70,45"/>
-<area shape="rect" href="structssd1306__handle__t.html" title="The handle returned by the Service Locator for a display service." alt="" coords="303,93,442,119"/>
-<area shape="poly" title=" " alt="" coords="339,127,225,183,223,179,336,122"/>
-<area shape="rect" href="structssd1306__api__t.html" title="The public Service API structure for an SSD1306 display module." alt="" coords="202,5,317,31"/>
-<area shape="poly" title=" " alt="" coords="244,43,228,67,215,94,205,142,203,181,198,181,200,141,210,92,223,65,239,41"/>
-<area shape="poly" title=" " alt="" coords="287,37,359,91,356,95,284,41"/>
+<area shape="rect" title=" " alt="" coords="81,273,258,299"/>
+<area shape="rect" href="structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,139,88,165"/>
+<area shape="poly" title=" " alt="" coords="67,173,134,247,158,271,155,275,130,251,63,177"/>
+<area shape="poly" title=" " alt="" coords="80,133,103,136,112,142,115,152,110,164,98,170,83,171,66,167,68,162,83,166,97,165,106,160,109,152,107,145,101,141,80,139"/>
+<area shape="rect" href="structi2c__bus__handle__t.html" title="The handle returned by the Service Locator for an I2C bus service." alt="" coords="226,139,361,165"/>
+<area shape="poly" title=" " alt="" coords="286,178,266,215,236,251,200,275,197,271,233,247,261,212,281,176"/>
+<area shape="rect" href="structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module." alt="" coords="238,5,349,31"/>
+<area shape="poly" title=" " alt="" coords="296,45,296,139,291,139,291,45"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a11a3a53970a720b3aa6590c165ea16af" id="r_a11a3a53970a720b3aa6590c165ea16af"><td class="memItemLeft" align="right" valign="top"><a id="a11a3a53970a720b3aa6590c165ea16af" name="a11a3a53970a720b3aa6590c165ea16af"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>instance_name</b> [CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</td></tr>
-<tr class="separator:a11a3a53970a720b3aa6590c165ea16af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad75589c5d94c6441d7608c5354266a4d" id="r_ad75589c5d94c6441d7608c5354266a4d"><td class="memItemLeft" align="right" valign="top"><a id="ad75589c5d94c6441d7608c5354266a4d" name="ad75589c5d94c6441d7608c5354266a4d"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_bus_instance</b> [CONFIG_FMW_SERVICE_NAME_MAX_LENGTH]</td></tr>
-<tr class="separator:ad75589c5d94c6441d7608c5354266a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fea955ae7497bc8311ac0def5487d41" id="r_a2fea955ae7497bc8311ac0def5487d41"><td class="memItemLeft" align="right" valign="top"><a id="a2fea955ae7497bc8311ac0def5487d41" name="a2fea955ae7497bc8311ac0def5487d41"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_address</b></td></tr>
-<tr class="separator:a2fea955ae7497bc8311ac0def5487d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa59b677489f213c691fa7592b307f27e" id="r_aa59b677489f213c691fa7592b307f27e"><td class="memItemLeft" align="right" valign="top"><a id="aa59b677489f213c691fa7592b307f27e" name="aa59b677489f213c691fa7592b307f27e"></a>
+<a class="el" href="structmodule__t.html">module_t</a> *<a class="el" href="structdisplay__driver__handle__t.html">display_driver_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>service_handle</b></td></tr>
+<tr class="separator:aa59b677489f213c691fa7592b307f27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae6d0c2304cf832940ac98742049c9d8" id="r_aae6d0c2304cf832940ac98742049c9d8"><td class="memItemLeft" align="right" valign="top"><a id="aae6d0c2304cf832940ac98742049c9d8" name="aae6d0c2304cf832940ac98742049c9d8"></a>
+<a class="el" href="structi2c__bus__handle__t.html">i2c_bus_handle_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_bus</b></td></tr>
+<tr class="separator:aae6d0c2304cf832940ac98742049c9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bb6b2051fc3b0ad0570fda41030b37c" id="r_a9bb6b2051fc3b0ad0570fda41030b37c"><td class="memItemLeft" align="right" valign="top"><a id="a9bb6b2051fc3b0ad0570fda41030b37c" name="a9bb6b2051fc3b0ad0570fda41030b37c"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_addr</b></td></tr>
+<tr class="separator:a9bb6b2051fc3b0ad0570fda41030b37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa711754376e63ba9cf325c2392aa94b7" id="r_aa711754376e63ba9cf325c2392aa94b7"><td class="memItemLeft" align="right" valign="top"><a id="aa711754376e63ba9cf325c2392aa94b7" name="aa711754376e63ba9cf325c2392aa94b7"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>width</b></td></tr>
 <tr class="separator:aa711754376e63ba9cf325c2392aa94b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad8c8aec8a14bcc693552f1d65d04ac" id="r_a3ad8c8aec8a14bcc693552f1d65d04ac"><td class="memItemLeft" align="right" valign="top"><a id="a3ad8c8aec8a14bcc693552f1d65d04ac" name="a3ad8c8aec8a14bcc693552f1d65d04ac"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>height</b></td></tr>
 <tr class="separator:a3ad8c8aec8a14bcc693552f1d65d04ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cdde665c44942e7273fa85c8ea45a35" id="r_a2cdde665c44942e7273fa85c8ea45a35"><td class="memItemLeft" align="right" valign="top"><a id="a2cdde665c44942e7273fa85c8ea45a35" name="a2cdde665c44942e7273fa85c8ea45a35"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>init_text</b> [LINE_BUFFER_SIZE]</td></tr>
-<tr class="separator:a2cdde665c44942e7273fa85c8ea45a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafc7604c53b8491b4e818c51695c737f" id="r_aafc7604c53b8491b4e818c51695c737f"><td class="memItemLeft" align="right" valign="top"><a id="aafc7604c53b8491b4e818c51695c737f" name="aafc7604c53b8491b4e818c51695c737f"></a>
-<a class="el" href="structi2c__bus__handle__t.html">i2c_bus_handle_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_bus_service</b></td></tr>
-<tr class="separator:aafc7604c53b8491b4e818c51695c737f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab89d6ad6ec5b242afc64dd7ed3ae0672" id="r_ab89d6ad6ec5b242afc64dd7ed3ae0672"><td class="memItemLeft" align="right" valign="top"><a id="ab89d6ad6ec5b242afc64dd7ed3ae0672" name="ab89d6ad6ec5b242afc64dd7ed3ae0672"></a>
+int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pin</b></td></tr>
+<tr class="separator:ab89d6ad6ec5b242afc64dd7ed3ae0672"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7375ffb1f1d0c5d129255c5441f5a72" id="r_af7375ffb1f1d0c5d129255c5441f5a72"><td class="memItemLeft" align="right" valign="top"><a id="af7375ffb1f1d0c5d129255c5441f5a72" name="af7375ffb1f1d0c5d129255c5441f5a72"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>screen_buffer</b></td></tr>
 <tr class="separator:af7375ffb1f1d0c5d129255c5441f5a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b059a66d94b47884f4cc9ac4c1b4391" id="r_a0b059a66d94b47884f4cc9ac4c1b4391"><td class="memItemLeft" align="right" valign="top"><a id="a0b059a66d94b47884f4cc9ac4c1b4391" name="a0b059a66d94b47884f4cc9ac4c1b4391"></a>
-<a class="el" href="structssd1306__handle__t.html">ssd1306_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>service_handle</b></td></tr>
-<tr class="separator:a0b059a66d94b47884f4cc9ac4c1b4391"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a337683b9745bb26cef6e61df2701950e" id="r_a337683b9745bb26cef6e61df2701950e"><td class="memItemLeft" align="right" valign="top"><a id="a337683b9745bb26cef6e61df2701950e" name="a337683b9745bb26cef6e61df2701950e"></a>
-<a class="el" href="structssd1306__api__t.html">ssd1306_api_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>service_api</b></td></tr>
-<tr class="separator:a337683b9745bb26cef6e61df2701950e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c42721aff89f46374ea4158515f8a9b" id="r_a7c42721aff89f46374ea4158515f8a9b"><td class="memItemLeft" align="right" valign="top"><a id="a7c42721aff89f46374ea4158515f8a9b" name="a7c42721aff89f46374ea4158515f8a9b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_enabled</b></td></tr>
-<tr class="separator:a7c42721aff89f46374ea4158515f8a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6da434dd85290bba294388d84396a8a2" id="r_a6da434dd85290bba294388d84396a8a2"><td class="memItemLeft" align="right" valign="top"><a id="a6da434dd85290bba294388d84396a8a2" name="a6da434dd85290bba294388d84396a8a2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_connected</b></td></tr>
-<tr class="separator:a6da434dd85290bba294388d84396a8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9813a82b7948a73dc14b76e2d5450077" id="r_a9813a82b7948a73dc14b76e2d5450077"><td class="memItemLeft" align="right" valign="top"><a id="a9813a82b7948a73dc14b76e2d5450077" name="a9813a82b7948a73dc14b76e2d5450077"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_rssi</b></td></tr>
-<tr class="separator:a9813a82b7948a73dc14b76e2d5450077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac06f41be742a6170dc40812e70118a38" id="r_ac06f41be742a6170dc40812e70118a38"><td class="memItemLeft" align="right" valign="top"><a id="ac06f41be742a6170dc40812e70118a38" name="ac06f41be742a6170dc40812e70118a38"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></tr>
+<tr class="separator:ac06f41be742a6170dc40812e70118a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>components/modules/displays/ssd1306_oled_display/src/<a class="el" href="ssd1306__oled__display_8c.html">ssd1306_oled_display.c</a></li>
+<li>components/modules/displays/ssd1306_driver/src/<a class="el" href="ssd1306__driver_8c.html">ssd1306_driver.c</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

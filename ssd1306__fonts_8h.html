@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: components/modules/displays/ssd1306_oled_display/include/ssd1306_fonts.h File Reference</title>
+<title>Synapse ESP Framework: components/modules/displays/ssd1306_driver/include/ssd1306_fonts.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -97,29 +97,31 @@ $(document).ready(function(){initNavTree('ssd1306__fonts_8h.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
-<p>Extern declarations for font data.  
+<p>Public declarations for bitmap fonts used by the SSD1306 driver.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ssd1306_fonts.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="ssd1306__fonts_8h__incl.png" border="0" usemap="#acomponents_2modules_2displays_2ssd1306__oled__display_2include_2ssd1306__fonts_8h" alt=""/></div>
-<map name="acomponents_2modules_2displays_2ssd1306__oled__display_2include_2ssd1306__fonts_8h" id="acomponents_2modules_2displays_2ssd1306__oled__display_2include_2ssd1306__fonts_8h">
-<area shape="rect" title="Extern declarations for font data." alt="" coords="5,5,191,75"/>
-<area shape="rect" title=" " alt="" coords="63,123,133,148"/>
-<area shape="poly" title=" " alt="" coords="101,75,101,109,95,109,95,75"/>
+<div class="center"><img src="ssd1306__fonts_8h__incl.png" border="0" usemap="#acomponents_2modules_2displays_2ssd1306__driver_2include_2ssd1306__fonts_8h" alt=""/></div>
+<map name="acomponents_2modules_2displays_2ssd1306__driver_2include_2ssd1306__fonts_8h" id="acomponents_2modules_2displays_2ssd1306__driver_2include_2ssd1306__fonts_8h">
+<area shape="rect" title="Public declarations for bitmap fonts used by the SSD1306 driver." alt="" coords="5,5,188,60"/>
+<area shape="rect" title=" " alt="" coords="61,108,132,133"/>
+<area shape="poly" title=" " alt="" coords="99,60,99,94,94,94,94,60"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="ssd1306__fonts_8h__dep__incl.png" border="0" usemap="#acomponents_2modules_2displays_2ssd1306__oled__display_2include_2ssd1306__fonts_8hdep" alt=""/></div>
-<map name="acomponents_2modules_2displays_2ssd1306__oled__display_2include_2ssd1306__fonts_8hdep" id="acomponents_2modules_2displays_2ssd1306__oled__display_2include_2ssd1306__fonts_8hdep">
-<area shape="rect" title="Extern declarations for font data." alt="" coords="129,5,314,75"/>
-<area shape="rect" href="ssd1306__fonts_8c.html" title="Font definitions for SSD1306 display module." alt="" coords="5,130,213,185"/>
-<area shape="poly" title=" " alt="" coords="181,87,137,132,133,128,177,83"/>
-<area shape="rect" href="ssd1306__oled__display_8c.html" title="Implementation for the SSD1306 OLED display module." alt="" coords="237,123,429,192"/>
-<area shape="poly" title=" " alt="" coords="266,83,302,121,299,124,262,87"/>
+<div class="center"><img src="ssd1306__fonts_8h__dep__incl.png" border="0" usemap="#acomponents_2modules_2displays_2ssd1306__driver_2include_2ssd1306__fonts_8hdep" alt=""/></div>
+<map name="acomponents_2modules_2displays_2ssd1306__driver_2include_2ssd1306__fonts_8hdep" id="acomponents_2modules_2displays_2ssd1306__driver_2include_2ssd1306__fonts_8hdep">
+<area shape="rect" title="Public declarations for bitmap fonts used by the SSD1306 driver." alt="" coords="212,5,395,60"/>
+<area shape="rect" href="ssd1306__driver_8c.html" title="Low&#45;level driver implementation for SSD1306 OLED displays." alt="" coords="5,108,188,163"/>
+<area shape="poly" title=" " alt="" coords="239,68,152,110,149,106,236,63"/>
+<area shape="rect" href="ssd1306__fonts_8c.html" title="Font definitions for SSD1306 display module." alt="" coords="212,108,395,163"/>
+<area shape="poly" title=" " alt="" coords="306,74,306,108,301,108,301,74"/>
+<area shape="rect" href="ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="419,108,582,163"/>
+<area shape="poly" title=" " alt="" coords="368,64,450,106,448,110,365,68"/>
 </map>
 </div>
 </div>
@@ -127,40 +129,114 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ab555da078bc3650f7e551b87defa0fe6" id="r_ab555da078bc3650f7e551b87defa0fe6"><td class="memItemLeft" align="right" valign="top"><a id="ab555da078bc3650f7e551b87defa0fe6" name="ab555da078bc3650f7e551b87defa0fe6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSD1306_LARGE_FONT_WIDTH</b>&#160;&#160;&#160;8</td></tr>
+<tr class="memdesc:ab555da078bc3650f7e551b87defa0fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The width of a character in the large font, in pixels. <br /></td></tr>
+<tr class="separator:ab555da078bc3650f7e551b87defa0fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d5ff1d6f7bc5cbd79d55d373dce5b7b" id="r_a1d5ff1d6f7bc5cbd79d55d373dce5b7b"><td class="memItemLeft" align="right" valign="top"><a id="a1d5ff1d6f7bc5cbd79d55d373dce5b7b" name="a1d5ff1d6f7bc5cbd79d55d373dce5b7b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSD1306_LARGE_FONT_HEIGHT</b>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:a1d5ff1d6f7bc5cbd79d55d373dce5b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of a character in the large font, in pixels. <br /></td></tr>
+<tr class="separator:a1d5ff1d6f7bc5cbd79d55d373dce5b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bd55f381f7d6e5287a125683dac1bc3" id="r_a7bd55f381f7d6e5287a125683dac1bc3"><td class="memItemLeft" align="right" valign="top"><a id="a7bd55f381f7d6e5287a125683dac1bc3" name="a7bd55f381f7d6e5287a125683dac1bc3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FONT_HEADER_SIZE_8X16</b>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:a7bd55f381f7d6e5287a125683dac1bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of the header in the font data array (in bytes). <br /></td></tr>
 <tr class="separator:a7bd55f381f7d6e5287a125683dac1bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f078ec6a5014b0a9092e68779848879" id="r_a0f078ec6a5014b0a9092e68779848879"><td class="memItemLeft" align="right" valign="top"><a id="a0f078ec6a5014b0a9092e68779848879" name="a0f078ec6a5014b0a9092e68779848879"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FONT_FIRST_CHAR_8X16</b>&#160;&#160;&#160;0x20</td></tr>
+<tr class="memdesc:a0f078ec6a5014b0a9092e68779848879"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ASCII code of the first character defined in the large font. <br /></td></tr>
 <tr class="separator:a0f078ec6a5014b0a9092e68779848879"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32e3da4b5e8433f56f6593d69ed6e824" id="r_a32e3da4b5e8433f56f6593d69ed6e824"><td class="memItemLeft" align="right" valign="top"><a id="a32e3da4b5e8433f56f6593d69ed6e824" name="a32e3da4b5e8433f56f6593d69ed6e824"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSD1306_SMALL_FONT_WIDTH</b>&#160;&#160;&#160;6</td></tr>
+<tr class="memdesc:a32e3da4b5e8433f56f6593d69ed6e824"><td class="mdescLeft">&#160;</td><td class="mdescRight">The width of a character in the small font, in pixels. <br /></td></tr>
+<tr class="separator:a32e3da4b5e8433f56f6593d69ed6e824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af699587acf645b37e682d2203beb00ec" id="r_af699587acf645b37e682d2203beb00ec"><td class="memItemLeft" align="right" valign="top"><a id="af699587acf645b37e682d2203beb00ec" name="af699587acf645b37e682d2203beb00ec"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSD1306_SMALL_FONT_HEIGHT</b>&#160;&#160;&#160;8</td></tr>
+<tr class="memdesc:af699587acf645b37e682d2203beb00ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of a character in the small font, in pixels. <br /></td></tr>
+<tr class="separator:af699587acf645b37e682d2203beb00ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24962f041dd729e2c8d79b4e08806fce" id="r_a24962f041dd729e2c8d79b4e08806fce"><td class="memItemLeft" align="right" valign="top"><a id="a24962f041dd729e2c8d79b4e08806fce" name="a24962f041dd729e2c8d79b4e08806fce"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FONT_HEADER_SIZE_6X8</b>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:a24962f041dd729e2c8d79b4e08806fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of the header in the font data array (in bytes). <br /></td></tr>
 <tr class="separator:a24962f041dd729e2c8d79b4e08806fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62434264d25b573306a91788e3334815" id="r_a62434264d25b573306a91788e3334815"><td class="memItemLeft" align="right" valign="top"><a id="a62434264d25b573306a91788e3334815" name="a62434264d25b573306a91788e3334815"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FONT_FIRST_CHAR_6X8</b>&#160;&#160;&#160;0x20</td></tr>
+<tr class="memdesc:a62434264d25b573306a91788e3334815"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ASCII code of the first character defined in the small font. <br /></td></tr>
 <tr class="separator:a62434264d25b573306a91788e3334815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ead4a7beda03bdc718acb2aa015f570" id="r_a7ead4a7beda03bdc718acb2aa015f570"><td class="memItemLeft" align="right" valign="top"><a id="a7ead4a7beda03bdc718acb2aa015f570" name="a7ead4a7beda03bdc718acb2aa015f570"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>FONT_CHAR_COUNT_6X8</b>&#160;&#160;&#160;96</td></tr>
+<tr class="memdesc:a7ead4a7beda03bdc718acb2aa015f570"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total number of characters defined in the small font. <br /></td></tr>
 <tr class="separator:a7ead4a7beda03bdc718acb2aa015f570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a2bca0fdef805eb4ae011697b457b772d" id="r_a2bca0fdef805eb4ae011697b457b772d"><td class="memItemLeft" align="right" valign="top"><a id="a2bca0fdef805eb4ae011697b457b772d" name="a2bca0fdef805eb4ae011697b457b772d"></a>
-const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ssd1306xled_font8x16</b> []</td></tr>
+<tr class="memitem:a2bca0fdef805eb4ae011697b457b772d" id="r_a2bca0fdef805eb4ae011697b457b772d"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306__fonts_8h.html#a2bca0fdef805eb4ae011697b457b772d">ssd1306xled_font8x16</a> []</td></tr>
+<tr class="memdesc:a2bca0fdef805eb4ae011697b457b772d"><td class="mdescLeft">&#160;</td><td class="mdescRight">External declaration for the 8x16 pixel font data array.  <br /></td></tr>
 <tr class="separator:a2bca0fdef805eb4ae011697b457b772d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b4bf5655301a01d1d4032bb9b60190" id="r_a20b4bf5655301a01d1d4032bb9b60190"><td class="memItemLeft" align="right" valign="top"><a id="a20b4bf5655301a01d1d4032bb9b60190" name="a20b4bf5655301a01d1d4032bb9b60190"></a>
-const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ssd1306xled_font6x8</b> []</td></tr>
+<tr class="memitem:a20b4bf5655301a01d1d4032bb9b60190" id="r_a20b4bf5655301a01d1d4032bb9b60190"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssd1306__fonts_8h.html#a20b4bf5655301a01d1d4032bb9b60190">ssd1306xled_font6x8</a> []</td></tr>
+<tr class="memdesc:a20b4bf5655301a01d1d4032bb9b60190"><td class="mdescLeft">&#160;</td><td class="mdescRight">External declaration for the 6x8 pixel font data array.  <br /></td></tr>
 <tr class="separator:a20b4bf5655301a01d1d4032bb9b60190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Extern declarations for font data. </p>
-<dl class="section author"><dt>Author</dt><dd>Giorgi Magradze </dd></dl>
-</div></div><!-- contents -->
+<div class="textblock"><p>Public declarations for bitmap fonts used by the SSD1306 driver. </p>
+<p>This file provides external declarations for the font data arrays and defines useful macros for their dimensions and character ranges. By centralizing these definitions, other modules or utilities can easily access font metrics without needing to know the internal implementation details of the font data. </p><dl class="section author"><dt>Author</dt><dd>Giorgi Magradze </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-08-14 </dd></dl>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a20b4bf5655301a01d1d4032bb9b60190" name="a20b4bf5655301a01d1d4032bb9b60190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b4bf5655301a01d1d4032bb9b60190">&#9670;&#160;</a></span>ssd1306xled_font6x8</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ssd1306xled_font6x8[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>External declaration for the 6x8 pixel font data array. </p>
+<p>The actual definition of this array is in <code><a class="el" href="ssd1306__fonts_8c.html" title="Font definitions for SSD1306 display module.">ssd1306_fonts.c</a></code>. </p>
+
+</div>
+</div>
+<a id="a2bca0fdef805eb4ae011697b457b772d" name="a2bca0fdef805eb4ae011697b457b772d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bca0fdef805eb4ae011697b457b772d">&#9670;&#160;</a></span>ssd1306xled_font8x16</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t ssd1306xled_font8x16[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>External declaration for the 8x16 pixel font data array. </p>
+<p>The actual definition of this array is in <code><a class="el" href="ssd1306__fonts_8c.html" title="Font definitions for SSD1306 display module.">ssd1306_fonts.c</a></code>. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_6a88773b00803615fafb700ddfe362d0.html">modules</a></li><li class="navelem"><a class="el" href="dir_d94aee959dd344eb9bfcbc67761ff2e9.html">displays</a></li><li class="navelem"><a class="el" href="dir_18bdf5b74250ed8e1e3bb220f5e17228.html">ssd1306_oled_display</a></li><li class="navelem"><a class="el" href="dir_97872a4bef8dfc98a6e1876e8f3d9edd.html">include</a></li><li class="navelem"><a class="el" href="ssd1306__fonts_8h.html">ssd1306_fonts.h</a></li>
+    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_6a88773b00803615fafb700ddfe362d0.html">modules</a></li><li class="navelem"><a class="el" href="dir_d94aee959dd344eb9bfcbc67761ff2e9.html">displays</a></li><li class="navelem"><a class="el" href="dir_681a0b3b10979084b105a50e3fdbef48.html">ssd1306_driver</a></li><li class="navelem"><a class="el" href="dir_59b4a0519436ce9d9975afeb8ab1af42.html">include</a></li><li class="navelem"><a class="el" href="ssd1306__fonts_8h.html">ssd1306_fonts.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

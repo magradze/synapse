@@ -5,6 +5,7 @@ var dir_8b2a2187e6ebda03a762b8631ac4d34a =
     [ "ble_prov_interface.h", "ble__prov__interface_8h.html", "ble__prov__interface_8h" ],
     [ "cmd_router_interface.h", "cmd__router__interface_8h.html", "cmd__router__interface_8h" ],
     [ "device_identity_interface.h", "device__identity__interface_8h.html", "device__identity__interface_8h" ],
+    [ "display_driver_interface.h", "display__driver__interface_8h.html", "display__driver__interface_8h" ],
     [ "event_data_wrapper.h", "event__data__wrapper_8h.html", "event__data__wrapper_8h" ],
     [ "event_payloads.h", "event__payloads_8h.html", "event__payloads_8h" ],
     [ "framework_events.h", "framework__events_8h.html", "framework__events_8h" ],
@@ -20,6 +21,7 @@ var dir_8b2a2187e6ebda03a762b8631ac4d34a =
     [ "ssd1306_interface.h", "ssd1306__interface_8h.html", "ssd1306__interface_8h" ],
     [ "storage_interface.h", "storage__interface_8h.html", "storage__interface_8h" ],
     [ "system_manager_interface.h", "system__manager__interface_8h.html", "system__manager__interface_8h" ],
+    [ "time_sync_interface.h", "time__sync__interface_8h.html", "time__sync__interface_8h" ],
     [ "timer_interface.h", "timer__interface_8h.html", "timer__interface_8h" ],
     [ "watchdog_interface.h", "watchdog__interface_8h.html", "watchdog__interface_8h" ]
 ];

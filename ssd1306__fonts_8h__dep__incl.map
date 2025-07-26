@@ -1,7 +1,9 @@
-<map id="components/modules/displays/ssd1306_oled_display/include/ssd1306_fonts.h" name="components/modules/displays/ssd1306_oled_display/include/ssd1306_fonts.h">
-<area shape="rect" id="Node000001" title="Extern declarations for font data." alt="" coords="129,5,314,75"/>
-<area shape="rect" id="Node000002" href="$ssd1306__fonts_8c.html" title="Font definitions for SSD1306 display module." alt="" coords="5,130,213,185"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,87,137,132,133,128,177,83"/>
-<area shape="rect" id="Node000003" href="$ssd1306__oled__display_8c.html" title="Implementation for the SSD1306 OLED display module." alt="" coords="237,123,429,192"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="266,83,302,121,299,124,262,87"/>
+<map id="components/modules/displays/ssd1306_driver/include/ssd1306_fonts.h" name="components/modules/displays/ssd1306_driver/include/ssd1306_fonts.h">
+<area shape="rect" id="Node000001" title="Public declarations for bitmap fonts used by the SSD1306 driver." alt="" coords="212,5,395,60"/>
+<area shape="rect" id="Node000002" href="$ssd1306__driver_8c.html" title="Low&#45;level driver implementation for SSD1306 OLED displays." alt="" coords="5,108,188,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,68,152,110,149,106,236,63"/>
+<area shape="rect" id="Node000003" href="$ssd1306__fonts_8c.html" title="Font definitions for SSD1306 display module." alt="" coords="212,108,395,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="306,74,306,108,301,108,301,74"/>
+<area shape="rect" id="Node000004" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="419,108,582,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="368,64,450,106,448,110,365,68"/>
 </map>

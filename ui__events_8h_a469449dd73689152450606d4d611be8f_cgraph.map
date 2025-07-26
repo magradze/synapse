@@ -1,0 +1,30 @@
+<map id="ui_events_handle" name="ui_events_handle">
+<area shape="rect" id="Node000001" title="The main event handler function for the UI Manager module." alt="" coords="5,156,141,181"/>
+<area shape="rect" id="Node000002" href="$event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="212,5,372,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,154,123,103,154,73,188,48,219,33,222,37,191,52,157,77,127,107,86,158"/>
+<area shape="rect" id="Node000004" href="$event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="443,56,629,81"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="87,154,130,121,158,105,188,91,249,75,312,66,429,60,429,66,312,71,250,81,190,97,161,109,133,126,91,158"/>
+<area shape="rect" id="Node000005" href="$event__data__wrapper_8c.html#a7df3595496d466d104e1629d5435e9f7" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="207,107,377,132"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="130,153,221,132,222,138,131,159"/>
+<area shape="rect" id="Node000006" href="$ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function." alt="" coords="213,156,371,181"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="142,166,199,166,199,171,142,171"/>
+<area shape="rect" id="Node000012" href="$ui__manager_8c.html#af34942bb9de4ca5702cca0195deb934a" title="Resets the screen&#39;s auto&#45;off timer." alt="" coords="207,205,377,231"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="131,179,222,200,221,205,130,184"/>
+<area shape="rect" id="Node000013" href="$ui__menu_8c.html#af9e0671c853f47ec58169dcd2c77e89a" title="Processes button presses when the UI is in a menu state." alt="" coords="189,255,395,280"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="92,179,135,209,190,240,214,248,212,253,188,244,133,214,89,184"/>
+<area shape="rect" id="Node000014" href="$ui__menu_8c.html#af51f507525224bfd88368c2704ad9fdc" title="Populates the dynamic menu with the list of currently running modules." alt="" coords="199,304,385,329"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="85,180,126,234,156,265,191,290,203,297,201,301,188,295,152,269,122,238,81,183"/>
+<area shape="rect" id="Node000003" href="$event__data__wrapper_8c.html#a1e82d26f36a72f0b9e1d1fb2d507a79f" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="443,5,629,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="372,15,429,15,429,21,372,21"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="355,28,461,51,460,56,354,33"/>
+<area shape="rect" id="Node000007" href="$ui__screens_8c.html#a376f0da5f8fa958e09b7a5adfc084950" title="Renders the status header at the top of the screen." alt="" coords="478,107,594,132"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="355,153,464,131,465,136,356,159"/>
+<area shape="rect" id="Node000008" href="$ui__screens_8c.html#aa073835a483ffe68580ffdec8bc36910" title="Renders the main home screen." alt="" coords="457,156,615,181"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="371,166,443,166,443,171,371,171"/>
+<area shape="rect" id="Node000010" href="$ui__screens_8c.html#a1d1f8173dcde1f8ca44070f3353a3457" title="Renders the initial splash screen." alt="" coords="455,205,617,231"/>
+<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="356,179,459,200,458,205,355,184"/>
+<area shape="rect" id="Node000011" href="$ui__menu_8c.html#aee91a4cf96bb6ccb531596a5c846115b" title="Renders the currently active menu screen." alt="" coords="473,255,599,280"/>
+<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="370,179,396,190,412,203,421,216,430,228,444,240,461,248,458,253,441,244,426,232,417,219,408,206,393,195,368,184"/>
+<area shape="rect" id="Node000009" href="$ui__screens_8c.html#a96f4ec2d25f38fd55d514150af179086" title="Renders a generic button in the footer area (bottom&#45;right)." alt="" coords="677,156,836,181"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="615,166,664,166,664,171,615,171"/>
+</map>

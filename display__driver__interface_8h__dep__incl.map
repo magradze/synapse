@@ -1,0 +1,27 @@
+<map id="components/interfaces/include/display_driver_interface.h" name="components/interfaces/include/display_driver_interface.h">
+<area shape="rect" id="Node000001" title="Universal Service API contract for display drivers." alt="" coords="141,5,311,60"/>
+<area shape="rect" id="Node000002" href="$ssd1306__driver_8c.html" title="Low&#45;level driver implementation for SSD1306 OLED displays." alt="" coords="5,108,188,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,70,132,110,129,106,180,66"/>
+<area shape="rect" id="Node000003" href="$ui__manager_8h.html" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="381,108,546,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="301,63,403,105,400,110,299,68"/>
+<area shape="rect" id="Node000008" href="$ui__menu_8c.html" title="Implements menu logic for the UI Manager." alt="" coords="277,313,439,368"/>
+<area shape="poly" id="edge15_Node000001_Node000008" title=" " alt="" coords="224,74,222,116,224,165,234,216,254,264,276,290,304,311,300,315,272,294,249,267,228,218,219,166,216,116,218,73"/>
+<area shape="rect" id="Node000004" href="$ui__events_8h.html" title="Handles all incoming events for the UI Manager." alt="" coords="687,211,850,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="557,164,690,208,688,213,555,169"/>
+<area shape="rect" id="Node000006" href="$ui__manager_8c.html" title="Main orchestrator for the UI system." alt="" coords="489,313,651,368"/>
+<area shape="poly" id="edge14_Node000003_Node000006" title=" " alt="" coords="467,176,474,220,491,264,510,290,534,311,530,315,506,293,486,267,469,221,462,177"/>
+<area shape="rect" id="Node000007" href="$ui__menu_8h.html" title="Manages menu state, navigation, and rendering for the UI Manager." alt="" coords="501,211,663,265"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="506,169,553,209,549,213,503,174"/>
+<area shape="rect" id="Node000009" href="$ui__screens_8h.html" title="Declares the rendering functions for all UI screens and common components." alt="" coords="263,211,426,265"/>
+<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="424,174,377,213,374,209,420,169"/>
+<area shape="rect" id="Node000005" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="687,313,850,368"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="771,279,771,313,766,313,766,279"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="706,274,623,316,621,311,704,269"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="644,269,721,311,718,315,641,274"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="580,279,576,314,570,313,575,279"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="512,273,417,316,415,311,510,268"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="417,268,512,311,510,316,415,273"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="353,279,357,313,352,314,347,279"/>
+<area shape="rect" id="Node000010" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="90,313,253,368"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="289,274,218,315,215,311,287,270"/>
+</map>

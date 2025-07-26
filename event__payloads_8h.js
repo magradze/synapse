@@ -6,5 +6,6 @@ var event__payloads_8h =
     [ "fmw_module_control_payload_t", "structfmw__module__control__payload__t.html", "structfmw__module__control__payload__t" ],
     [ "fmw_command_payload_t", "structfmw__command__payload__t.html", "structfmw__command__payload__t" ],
     [ "fmw_connectivity_payload_t", "structfmw__connectivity__payload__t.html", "structfmw__connectivity__payload__t" ],
+    [ "fmw_button_payload_t", "structfmw__button__payload__t.html", "structfmw__button__payload__t" ],
     [ "fmw_telemetry_payload_free", "event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd", null ]
 ];

@@ -13,10 +13,11 @@ var searchData=
   ['ssd1306_5fapi_5ft_10',['ssd1306_api_t',['../structssd1306__api__t.html',1,'']]],
   ['ssd1306_5fhandle_5ft_11',['ssd1306_handle_t',['../structssd1306__handle__t.html',1,'']]],
   ['ssd1306_5fprivate_5fdata_5ft_12',['ssd1306_private_data_t',['../structssd1306__private__data__t.html',1,'']]],
-  ['storage_5fapi_5ft_13',['storage_api_t',['../structstorage__api__t.html',1,'']]],
-  ['storage_5fmanager_5fconfig_5ft_14',['storage_manager_config_t',['../structstorage__manager__config__t.html',1,'']]],
-  ['storage_5fmanager_5fprivate_5fdata_5ft_15',['storage_manager_private_data_t',['../structstorage__manager__private__data__t.html',1,'']]],
-  ['system_5fmanager_5fapi_5ft_16',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
-  ['system_5ftimer_5fconfig_5ft_17',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
-  ['system_5ftimer_5fprivate_5fdata_5ft_18',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
+  ['static_5fmenu_5ft_13',['static_menu_t',['../structstatic__menu__t.html',1,'']]],
+  ['storage_5fapi_5ft_14',['storage_api_t',['../structstorage__api__t.html',1,'']]],
+  ['storage_5fmanager_5fconfig_5ft_15',['storage_manager_config_t',['../structstorage__manager__config__t.html',1,'']]],
+  ['storage_5fmanager_5fprivate_5fdata_5ft_16',['storage_manager_private_data_t',['../structstorage__manager__private__data__t.html',1,'']]],
+  ['system_5fmanager_5fapi_5ft_17',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
+  ['system_5ftimer_5fconfig_5ft_18',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
+  ['system_5ftimer_5fprivate_5fdata_5ft_19',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
 ];

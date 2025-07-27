@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"resource__manager_8c.html#abb1c1f1c6aadfa6f7311de08d27fae8b":[142,0,0,0,8,4],
+"resource__manager_8h.html":[142,0,0,0,0,7],
 "resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da":[142,0,0,0,0,7,3],
 "resource__manager_8h.html#a62e206db3497c414594319109267082b":[142,0,0,0,0,7,1],
 "resource__manager_8h.html#a68c8e1ee6abf08a2600a427d96653920":[142,0,0,0,0,7,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX7 =
 "structevent__subscriber__t.html":[141,0,25],
 "structevent__subscription__list__t.html":[141,0,26],
 "structevent__subscription__list__t.html#a03b15fc2eb8bbed587b42209aaab8fa5":[141,0,26,1],
-"structevent__subscription__list__t.html#a6eb88a33a31666f9d212fb46c0bfc732":[141,0,26,0],
-"structevent__subscription__node__t.html":[141,0,27],
-"structevent__subscription__node__t.html#a1dfec8c1116927fddd5d5c6d95a72973":[141,0,27,0]
+"structevent__subscription__list__t.html#a6eb88a33a31666f9d212fb46c0bfc732":[141,0,26,0]
 };

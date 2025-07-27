@@ -38,7 +38,7 @@ var searchData=
   ['მოდული_3a_20tt_20sensor_5faggregator_20tt_35',['🌡️ მოდული: &lt;tt&gt;sensor_aggregator&lt;/tt&gt;',['../md_components_2modules_2sensors_2sensor__aggregator_2README.html',1,'']]],
   ['მოდული_3a_20tt_20sensor_5fsimulator_20tt_36',['🧪 მოდული: &lt;tt&gt;sensor_simulator&lt;/tt&gt;',['../md_components_2modules_2testing_2sensor__simulator_2README.html',1,'']]],
   ['მოდული_3a_20tt_20ssd1306_5fdriver_20tt_37',['📺 მოდული: &lt;tt&gt;ssd1306_driver&lt;/tt&gt;',['../md_components_2modules_2displays_2ssd1306__driver_2README.html',1,'']]],
-  ['მოდული_3a_20tt_20time_5fsync_20tt_38',['🔌 მოდული: &lt;tt&gt;time_sync&lt;/tt&gt;',['../md_components_2modules_2system_2time__sync_2README.html',1,'']]],
+  ['მოდული_3a_20tt_20time_5fsync_20tt_38',['⏱️ მოდული: &lt;tt&gt;time_sync&lt;/tt&gt;',['../md_components_2modules_2system_2time__sync_2README.html',1,'']]],
   ['მოდული_3a_20tt_20ui_5fmanager_20tt_39',['🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;',['../md_components_2modules_2utilities_2ui__manager_2README.html',1,'']]],
   ['მოდული_3a_20tt_20watchdog_5fmanager_20tt_40',['🐕 მოდული: &lt;tt&gt;watchdog_manager&lt;/tt&gt;',['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'']]],
   ['მონაცემთა_20შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_41',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]]

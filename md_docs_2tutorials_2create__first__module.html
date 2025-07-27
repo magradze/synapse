@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1725"></a> </p>
-<h1><a class="anchor" id="autotoc_md1726"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1727"></a> </p>
+<h1><a class="anchor" id="autotoc_md1728"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით, მათ შორის, როგორ დავამატოთ CLI ბრძანება უსაფრთხოდ, კონფლიქტების გარეშე.</p>
-<h1><a class="anchor" id="autotoc_md1727"></a>
+<h1><a class="anchor" id="autotoc_md1729"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li><b>ამოცანა:</b> შევქმნათ მარტივი "მისალმების" მოდული, სახელად <code>greeter_module</code>.</li>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </li>
 <li><b>კატეგორია:</b> <code>utilities</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1728"></a>
+<h1><a class="anchor" id="autotoc_md1730"></a>
 2. მოდულის ჩონჩხის გენერაცია</h1>
 <p>ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს.</p>
 <ol type="1">
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </li>
 </ol>
 <p>სკრიპტი შექმნის ყველა საჭირო ფაილს, მათ შორის <code>config.json</code>-ს, <code>components/modules/utilities/greeter_module/</code> დირექტორიაში.</p>
-<h1><a class="anchor" id="autotoc_md1729"></a>
+<h1><a class="anchor" id="autotoc_md1731"></a>
 3. კონფიგურაცია</h1>
 <ol type="1">
 <li><p class="startli"><b>Runtime კონფიგურაცია:</b> გახსენით ახლად შექმნილი <code>greeter_module/config.json</code> და შეავსეთ ის:</p>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div><!-- fragment --></li>
 <li><b>Build-დროის კონფიგურაცია:</b> გაუშვით <code>idf.py menuconfig</code>, გადადით <code>Component config</code> -&gt; <code>Synapse Framework</code> -&gt; <code>Modules</code> -&gt; <code>Greeter Module</code> და დარწმუნდით, რომ მოდული ჩართულია (<code>[*] Enable Greeter Module</code>).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1730"></a>
+<h1><a class="anchor" id="autotoc_md1732"></a>
 4. კოდის იმპლემენტაცია</h1>
 <p>ახლა სრულად ჩავანაცვლოთ <code>greeter_module.c</code> ფაილის შიგთავსი. სკრიპტმა დააგენერირა ჩონჩხი, მაგრამ ჩვენ მას სრულად შევავსებთ ჩვენი ლოგიკით.</p>
 <p>**<code>src/greeter_module.c</code> (საბოლოო ვერსია):**</p>
@@ -348,7 +348,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="astructtimer__api__t_html_a362c2f5fb2285918b2579c0ae273b24e"><div class="ttname"><a href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">timer_api_t::schedule_event</a></div><div class="ttdeci">fmw_timer_handle_t(* schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules an event to be posted on the Event Bus after a specified interval.</div><div class="ttdef"><b>Definition</b> timer_interface.h:41</div></div>
 <div class="ttc" id="atimer__interface_8h_html"><div class="ttname"><a href="timer__interface_8h.html">timer_interface.h</a></div><div class="ttdoc">Public Service API contract for the System Timer Service module.</div></div>
 <div class="ttc" id="atimer__interface_8h_html_ade6f29151e54d5c129f8b052f6ec3e8a"><div class="ttname"><a href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a></div><div class="ttdeci">void * fmw_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1731"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1733"></a>
 5. ტესტირება</h1>
 <ol type="1">
 <li><p class="startli"><b>ააწყვეთ და ჩაწერეთ firmware:</b></p>

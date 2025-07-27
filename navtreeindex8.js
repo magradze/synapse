@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"structevent__subscription__node__t.html":[141,0,27],
+"structevent__subscription__node__t.html#a1dfec8c1116927fddd5d5c6d95a72973":[141,0,27,0],
 "structevent__subscription__node__t.html#a21fc6eec18e9253a574a7bc1bd30db99":[141,0,27,1],
 "structevent__subscription__node__t.html#ac0b52e87949a3a47c8ada97504f389a0":[141,0,27,2],
 "structevent__to__command__map__t.html":[141,0,28],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "structwifi__manager__config__t.html#aaf7fca00906f2052ddbe43cbc473d366":[141,0,95,0],
 "structwifi__manager__private__data__t.html":[141,0,96],
 "system__event__ids_8h.html":[142,0,0,0,0,9],
-"system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046":[142,0,0,0,0,9,1],
-"system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046a250d8cc23b0010dfe8fbb207f03160b3":[142,0,0,0,0,9,1,6],
-"system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046a40388ba3cacef0e4f640897afd1206a6":[142,0,0,0,0,9,1,5]
+"system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046":[142,0,0,0,0,9,1]
 };

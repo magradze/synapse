@@ -93,86 +93,86 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2system__api.h
   <div class="headertitle"><div class="title">Synapse System Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md629"></a> </p>
-<h1><a class="anchor" id="autotoc_md630"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md631"></a> </p>
+<h1><a class="anchor" id="autotoc_md632"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის სისტემური მოდულების (OTA, Version, Watchdog, Diagnostics) სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md632"></a>
+<h1><a class="anchor" id="autotoc_md634"></a>
 OTA Module API</h1>
-<h2><a class="anchor" id="autotoc_md633"></a>
+<h2><a class="anchor" id="autotoc_md635"></a>
 module_t *ota_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი OTA მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md634"></a>
+<h2><a class="anchor" id="autotoc_md636"></a>
 esp_err_t ota_module_start_update(const char *url);</h2>
 <ul>
 <li>იწყებს OTA განახლებას მითითებული URL-დან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md635"></a>
+<h2><a class="anchor" id="autotoc_md637"></a>
 esp_err_t ota_module_get_status(ota_status_t *status);</h2>
 <ul>
 <li>აბრუნებს მიმდინარე OTA პროცესის სტატუსს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md637"></a>
+<h1><a class="anchor" id="autotoc_md639"></a>
 Version Module API</h1>
-<h2><a class="anchor" id="autotoc_md638"></a>
+<h2><a class="anchor" id="autotoc_md640"></a>
 module_t *version_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი Version მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md639"></a>
+<h2><a class="anchor" id="autotoc_md641"></a>
 esp_err_t version_module_get_firmware_version(char *version_str, size_t size);</h2>
 <ul>
 <li>აბრუნებს მიმდინარე firmware-ის ვერსიას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md641"></a>
+<h1><a class="anchor" id="autotoc_md643"></a>
 Watchdog Module API</h1>
-<h2><a class="anchor" id="autotoc_md642"></a>
+<h2><a class="anchor" id="autotoc_md644"></a>
 module_t *watchdog_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი Watchdog მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md643"></a>
+<h2><a class="anchor" id="autotoc_md645"></a>
 esp_err_t watchdog_module_feed(void);</h2>
 <ul>
 <li>აძლევს Watchdog-ს სიგნალს (feed).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md644"></a>
+<h2><a class="anchor" id="autotoc_md646"></a>
 esp_err_t watchdog_module_set_timeout(uint32_t timeout_ms);</h2>
 <ul>
 <li>აყენებს Watchdog-ის timeout-ს მილიწამებში.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md646"></a>
+<h1><a class="anchor" id="autotoc_md648"></a>
 Diagnostics Module API</h1>
-<h2><a class="anchor" id="autotoc_md647"></a>
+<h2><a class="anchor" id="autotoc_md649"></a>
 module_t *diagnostics_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი Diagnostics მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md648"></a>
+<h2><a class="anchor" id="autotoc_md650"></a>
 esp_err_t diagnostics_module_run_tests(void);</h2>
 <ul>
 <li>ასრულებს სისტემურ დიაგნოსტიკურ ტესტებს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md649"></a>
+<h2><a class="anchor" id="autotoc_md651"></a>
 esp_err_t diagnostics_module_get_report(char *report_buffer, size_t buffer_size);</h2>
 <ul>
 <li>აბრუნებს ტესტების შედეგების რეპორტს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md651"></a>
+<h1><a class="anchor" id="autotoc_md653"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md653"></a>
+<h1><a class="anchor" id="autotoc_md655"></a>
 მაგალითები</h1>
 <p><b>OTA განახლების დაწყება:</b> </p><div class="fragment"><div class="line">ota_module_start_update(<span class="stringliteral">&quot;https://update.synapse.local/firmware.bin&quot;</span>);</div>
 </div><!-- fragment --><p><b>Firmware ვერსიის მიღება:</b> </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> version[32];</div>

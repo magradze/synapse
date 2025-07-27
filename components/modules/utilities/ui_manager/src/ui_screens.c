@@ -6,6 +6,7 @@
  * @date 2025-08-13
  */
 
+#include "ui_manager.h"
 #include "ui_screens.h"
 #include "roboto_bold_24.h"
 #include "roboto_bold_24_digits.h"
@@ -13,13 +14,20 @@
 #include "ssd1306_fonts.h"
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
+
+#include "relay_interface.h"
+#include "service_types.h"
+#include "service_locator.h"
+#include "system_manager.h"
 
 #define SYSTEM_NAME "SYNAPSE"
 
 // --- Helper Functions (now static as they are used only in this file) ---
 static void draw_bitmap(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint32_t color);
-static void draw_large_ascii_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char* str, uint32_t color);
-static void draw_large_digits_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char* str, uint32_t color);
+static void draw_large_ascii_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char *str, uint32_t color);
+static void draw_large_digits_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char *str, uint32_t color);
+void format_module_name(const char *original, char *formatted, size_t size);
 
 /**
  * @brief Renders the status header at the top of the screen.
@@ -28,22 +36,31 @@ static void draw_large_digits_string(ui_manager_private_data_t *private_data, in
  *          status and calls the `draw_bitmap` helper to render it.
  * @param[in] private_data A pointer to the main UI Manager's private data structure.
  */
-void render_header(ui_manager_private_data_t *private_data) {
+void render_header(ui_manager_private_data_t *private_data)
+{
     const uint8_t *icon = NULL;
-    
+
     bool connected = private_data->wifi_connected;
     int rssi = private_data->wifi_rssi;
 
-    if (connected) {
-        if (rssi >= -67) icon = wifi_icon_signal_4;
-        else if (rssi >= -70) icon = wifi_icon_signal_3;
-        else if (rssi >= -80) icon = wifi_icon_signal_2;
-        else icon = wifi_icon_signal_1;
-    } else {
+    if (connected)
+    {
+        if (rssi >= -67)
+            icon = wifi_icon_signal_4;
+        else if (rssi >= -70)
+            icon = wifi_icon_signal_3;
+        else if (rssi >= -80)
+            icon = wifi_icon_signal_2;
+        else
+            icon = wifi_icon_signal_1;
+    }
+    else
+    {
         icon = wifi_icon_disconnected;
     }
 
-    if (icon) {
+    if (icon)
+    {
         draw_bitmap(private_data, 2, 1, icon, WIFI_ICON_WIDTH, WIFI_ICON_HEIGHT, 1);
     }
 
@@ -58,11 +75,14 @@ void render_header(ui_manager_private_data_t *private_data) {
  *          for a short duration on startup.
  * @param[in] private_data A pointer to the main UI Manager's private data structure.
  */
-void render_splash_screen(ui_manager_private_data_t *private_data) {
+void render_splash_screen(ui_manager_private_data_t *private_data)
+{
     const char *text = SYSTEM_NAME;
     int total_width = 0;
-    for (const char *s = text; *s; s++) {
-        if (*s >= FONT_ASCII_START_CHAR && *s <= FONT_ASCII_END_CHAR) {
+    for (const char *s = text; *s; s++)
+    {
+        if (*s >= FONT_ASCII_START_CHAR && *s <= FONT_ASCII_END_CHAR)
+        {
             int char_index = *s - FONT_ASCII_START_CHAR;
             total_width += char_width[char_index] + 2;
         }
@@ -82,29 +102,38 @@ void render_splash_screen(ui_manager_private_data_t *private_data) {
  *          (using the small font), and the "MENU" footer button.
  * @param[in] private_data A pointer to the main UI Manager's private data structure.
  */
-void render_home_screen(ui_manager_private_data_t *private_data) {
+void render_home_screen(ui_manager_private_data_t *private_data)
+{
     const display_driver_api_t *display = private_data->display->api;
     void *context = private_data->display->context;
 
     char time_str[9];
 
-    if (private_data->time_sync) {
+    if (private_data->time_sync)
+    {
         time_t now;
         struct tm timeinfo;
-        if (private_data->time_sync->get_time(&now) == ESP_OK) {
+        if (private_data->time_sync->get_time(&now) == ESP_OK)
+        {
             localtime_r(&now, &timeinfo);
             strftime(time_str, sizeof(time_str), "%H:%M", &timeinfo);
-        } else {
+        }
+        else
+        {
             strcpy(time_str, "--:--");
         }
-    } else {
+    }
+    else
+    {
         static int seconds = 0;
-        if (seconds >= 60) seconds = 0;
+        if (seconds >= 60)
+            seconds = 0;
         snprintf(time_str, sizeof(time_str), "14:%02d", seconds++);
     }
 
     int total_width = 0;
-    for (const char *s = time_str; *s; s++) {
+    for (const char *s = time_str; *s; s++)
+    {
         int char_index = (*s >= '0' && *s <= '9') ? (*s - '0') : 10;
         total_width += char_width_digits[char_index] + 2;
     }
@@ -129,7 +158,8 @@ void render_home_screen(ui_manager_private_data_t *private_data) {
  * @param[in] text The text to display inside the button.
  * @param[in] is_selected If true, the button is rendered with inverted colors.
  */
-void render_footer_button(ui_manager_private_data_t *private_data, const char *text, bool is_selected) {
+void render_footer_button(ui_manager_private_data_t *private_data, const char *text, bool is_selected)
+{
     const display_driver_api_t *display = private_data->display->api;
     void *context = private_data->display->context;
 
@@ -147,7 +177,8 @@ void render_footer_button(ui_manager_private_data_t *private_data, const char *t
     uint32_t bg_color = is_selected ? 1 : 0;
     uint32_t text_color = is_selected ? 0 : 1;
 
-    if (private_data->current_state == UI_STATE_HOME) {
+    if (private_data->current_state == UI_STATE_HOME)
+    {
         bg_color = 1;
         text_color = 0;
     }
@@ -169,12 +200,16 @@ void render_footer_button(ui_manager_private_data_t *private_data, const char *t
  * @param[in] h The height of the bitmap in pixels.
  * @param[in] color The color to use for drawing the set pixels.
  */
-static void draw_bitmap(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint32_t color) {
+static void draw_bitmap(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint32_t color)
+{
     const display_driver_api_t *display = private_data->display->api;
-    void* context = private_data->display->context;
-    for (int16_t j = 0; j < h; j++, y++) {
-        for (int16_t i = 0; i < w; i++) {
-            if ((bitmap[j] >> i) & 0x1) {
+    void *context = private_data->display->context;
+    for (int16_t j = 0; j < h; j++, y++)
+    {
+        for (int16_t i = 0; i < w; i++)
+        {
+            if ((bitmap[j] >> i) & 0x1)
+            {
                 display->draw_pixel(context, x + i, y, color);
             }
         }
@@ -193,23 +228,30 @@ static void draw_bitmap(ui_manager_private_data_t *private_data, int16_t x, int1
  * @param[in] str The null-terminated string to draw.
  * @param[in] color The color of the text.
  */
-static void draw_large_ascii_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char* str, uint32_t color) {
+static void draw_large_ascii_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char *str, uint32_t color)
+{
     int16_t current_x = x;
-    for (const char *s = str; *s; s++) {
+    for (const char *s = str; *s; s++)
+    {
         char c = *s;
-        if (c < FONT_ASCII_START_CHAR || c > FONT_ASCII_END_CHAR) c = '?';
-        
+        if (c < FONT_ASCII_START_CHAR || c > FONT_ASCII_END_CHAR)
+            c = '?';
+
         int char_index = c - FONT_ASCII_START_CHAR;
 
         const uint8_t *bitmap = char_addr[char_index];
         int width = char_width[char_index];
-        
+
         int byte_index = 0;
-        for (int page = 0; page < (ROBOTO_BOLD_24_HEIGHT / 8); page++) {
-            for (int col = 0; col < width; col++) {
+        for (int page = 0; page < (ROBOTO_BOLD_24_HEIGHT / 8); page++)
+        {
+            for (int col = 0; col < width; col++)
+            {
                 uint8_t byte_data = bitmap[byte_index++];
-                for (int bit = 0; bit < 8; bit++) {
-                    if ((byte_data >> bit) & 0x01) {
+                for (int bit = 0; bit < 8; bit++)
+                {
+                    if ((byte_data >> bit) & 0x01)
+                    {
                         private_data->display->api->draw_pixel(private_data->display->context, current_x + col, y + (page * 8) + bit, color);
                     }
                 }
@@ -231,25 +273,34 @@ static void draw_large_ascii_string(ui_manager_private_data_t *private_data, int
  * @param[in] str The null-terminated string to draw (e.g., "14:05").
  * @param[in] color The color of the text.
  */
-static void draw_large_digits_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char* str, uint32_t color) {
+static void draw_large_digits_string(ui_manager_private_data_t *private_data, int16_t x, int16_t y, const char *str, uint32_t color)
+{
     int16_t current_x = x;
-    for (const char *s = str; *s; s++) {
+    for (const char *s = str; *s; s++)
+    {
         char c = *s;
         int char_index = -1;
 
-        if (c >= '0' && c <= '9') char_index = c - '0';
-        else if (c == ':') char_index = 10;
+        if (c >= '0' && c <= '9')
+            char_index = c - '0';
+        else if (c == ':')
+            char_index = 10;
 
-        if (char_index != -1) {
+        if (char_index != -1)
+        {
             const uint8_t *bitmap = char_addr_digits[char_index];
             int width = char_width_digits[char_index];
-            
+
             int byte_index = 0;
-            for (int page = 0; page < (ROBOTO_BOLD_24_HEIGHT / 8); page++) {
-                for (int col = 0; col < width; col++) {
+            for (int page = 0; page < (ROBOTO_BOLD_24_HEIGHT / 8); page++)
+            {
+                for (int col = 0; col < width; col++)
+                {
                     uint8_t byte_data = bitmap[byte_index++];
-                    for (int bit = 0; bit < 8; bit++) {
-                        if ((byte_data >> bit) & 0x01) {
+                    for (int bit = 0; bit < 8; bit++)
+                    {
+                        if ((byte_data >> bit) & 0x01)
+                        {
                             private_data->display->api->draw_pixel(private_data->display->context, current_x + col, y + (page * 8) + bit, color);
                         }
                     }
@@ -258,4 +309,100 @@ static void draw_large_digits_string(ui_manager_private_data_t *private_data, in
             current_x += width + 2;
         }
     }
+}
+
+/**
+ * @brief Renders the control screen for a selected module.
+ * @details This function displays the module's name, status, and provides an action button
+ *          if the module is a relay. It uses the display driver to render text and buttons.
+ * @param[in] private_data A pointer to the main UI Manager's private data structure.
+ * @note If no module is selected, it displays an error message.
+ */
+void render_module_control_screen(ui_manager_private_data_t *private_data)
+{
+    const display_driver_api_t *display = private_data->display->api;
+    void *context = private_data->display->context;
+    const module_t *module = private_data->selected_control_module;
+
+    int start_y = 16;
+    int line_height = 12;
+
+    if (!module)
+    {
+        display->draw_formatted_text(context, 2, start_y, 1, "Error: No module selected.");
+        render_footer_button(private_data, "BACK", true);
+        return;
+    }
+
+    char formatted_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    format_module_name(module->name, formatted_name, sizeof(formatted_name));
+    display->draw_formatted_text(context, 2, start_y, 1, "Module: %s", formatted_name);
+
+    module_status_t status;
+    fmw_module_get_status(module->name, &status);
+    const char *status_str = (status == MODULE_STATUS_RUNNING) ? "Running" : "Disabled";
+    display->draw_formatted_text(context, 2, start_y + line_height, 1, "Status: %s", status_str);
+
+    bool is_action_selected = (private_data->selected_item_index == 0);
+    bool is_back_selected = (private_data->selected_item_index == 1);
+
+    fmw_service_type_t type;
+    if (fmw_service_get_type(module->name, &type) == ESP_OK && type == FMW_SERVICE_TYPE_RELAY_API)
+    {
+        relay_api_t *relay_api = fmw_service_get(module->name);
+        if (relay_api)
+        {
+            bool state = relay_api->get_state((void *)module);
+            const char *action_text = state ? "Turn Off" : "Turn On";
+
+            if (is_action_selected)
+            {
+                display->draw_formatted_text(context, 2, start_y + (line_height * 2), 1, "> %s", action_text);
+            }
+            else
+            {
+                display->draw_formatted_text(context, 10, start_y + (line_height * 2), 1, "%s", action_text);
+            }
+        }
+    }
+    else
+    {
+        display->draw_formatted_text(context, 2, start_y + (line_height * 2), 1, "No actions available.");
+    }
+
+    render_footer_button(private_data, "BACK", is_back_selected);
+}
+
+/**
+ * @brief Formats a module name for display.
+ * @param[in] original The original module name string.
+ * @param[out] formatted The buffer to store the formatted name.
+ * @param[in] size The size of the formatted buffer.
+ */
+void format_module_name(const char *original, char *formatted, size_t size)
+{
+    int i = 0;
+    bool capitalize = true;
+    while (*original && i < size - 1)
+    {
+        if (*original == '_')
+        {
+            formatted[i++] = ' ';
+            capitalize = true;
+        }
+        else
+        {
+            if (capitalize)
+            {
+                formatted[i++] = toupper((unsigned char)*original);
+                capitalize = false;
+            }
+            else
+            {
+                formatted[i++] = *original;
+            }
+        }
+        original++;
+    }
+    formatted[i] = '\0';
 }

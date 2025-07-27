@@ -25,24 +25,22 @@ static const menu_item_t main_menu_items[] = {
 };
 // 2. Then define the menu struct that uses it
 const static_menu_t main_menu = {
-    .title = "Menu", 
-    .items = main_menu_items, 
-    .item_count = sizeof(main_menu_items) / sizeof(menu_item_t)
-};
+    .title = "Menu",
+    .items = main_menu_items,
+    .item_count = sizeof(main_menu_items) / sizeof(menu_item_t)};
 
 // 1. Define the items array first
 static const menu_item_t settings_menu_items[] = {
     {"Languages", UI_STATE_HOME},
     {"Themes", UI_STATE_HOME},
     {"Time", UI_STATE_HOME},
+    {"About", UI_STATE_HOME},
 };
 // 2. Then define the menu struct that uses it
 const static_menu_t settings_menu = {
-    .title = "Settings", 
-    .items = settings_menu_items, 
-    .item_count = sizeof(settings_menu_items) / sizeof(menu_item_t)
-};
-
+    .title = "Settings",
+    .items = settings_menu_items,
+    .item_count = sizeof(settings_menu_items) / sizeof(menu_item_t)};
 
 // --- Forward Declarations for local rendering functions ---
 static void render_static_menu(ui_manager_private_data_t *private_data, const static_menu_t *menu);
@@ -108,7 +106,10 @@ void ui_menu_handle_navigation(ui_manager_private_data_t *private_data, const ch
     {
       if (private_data->selected_item_index < private_data->dynamic_menu_item_count)
       {
-        // Future: Go to module control state
+        private_data->previous_menu_selection = private_data->selected_item_index;
+        private_data->selected_control_module = private_data->dynamic_menu_modules[private_data->selected_item_index];
+        private_data->current_state = UI_STATE_MODULE_CONTROL;
+        private_data->selected_item_index = 0;
       }
       else
       {
@@ -136,6 +137,32 @@ void ui_menu_handle_navigation(ui_manager_private_data_t *private_data, const ch
       {
         private_data->current_state = UI_STATE_MAIN_MENU;
         private_data->selected_item_index = 0;
+      }
+    }
+    break;
+  }
+  case UI_STATE_MODULE_CONTROL:
+  {
+    int total_items = 2;
+
+    if (strcmp(button_name, "DOWN") == 0)
+    {
+      private_data->selected_item_index = (private_data->selected_item_index + 1) % total_items;
+    }
+    else if (strcmp(button_name, "UP") == 0)
+    {
+      private_data->selected_item_index = (private_data->selected_item_index - 1 + total_items) % total_items;
+    }
+    else if (strcmp(button_name, "OK") == 0)
+    {
+      if (private_data->selected_item_index == 0)
+      {
+        // Action is handled in ui_events.c
+      }
+      else
+      { // BACK selected
+        private_data->current_state = UI_STATE_MODULES_MENU;
+        private_data->selected_item_index = private_data->previous_menu_selection;
       }
     }
     break;
@@ -261,15 +288,18 @@ static void render_modules_menu(ui_manager_private_data_t *private_data)
         break;
 
       int y_pos = start_y + i * line_height;
-      const char *item_name = private_data->dynamic_menu_modules[item_index]->name;
+      const char *original_name = private_data->dynamic_menu_modules[item_index]->name;
+
+      char formatted_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+      format_module_name(original_name, formatted_name, sizeof(formatted_name));
 
       if (item_index == private_data->selected_item_index)
       {
-        display->draw_formatted_text(context, 2, y_pos, 1, "> %s", item_name);
+        display->draw_formatted_text(context, 2, y_pos, 1, "> %s", formatted_name);
       }
       else
       {
-        display->draw_formatted_text(context, 10, y_pos, 1, "%s", item_name);
+        display->draw_formatted_text(context, 10, y_pos, 1, "%s", formatted_name);
       }
     }
   }

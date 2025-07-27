@@ -104,22 +104,36 @@ static void IRAM_ATTR gpio_isr_handler(void *arg) {
     extern QueueHandle_t g_button_gpio_evt_queue;
     xQueueSendFromISR(g_button_gpio_evt_queue, &gpio_num, NULL);
 }
+
+/**
+ * @internal
+ * @brief Task that processes button events from the queue.
+ * @details This task waits for GPIO events, applies debouncing, and publishes
+ *          button press events. It runs indefinitely until the module is deinitialized.
+ * @param pvParameters Pointer to the module instance.
+ */
 static void button_task(void *pvParameters) {
     module_t *self = (module_t *)pvParameters;
     button_input_private_data_t *private_data = (button_input_private_data_t *)self->private_data;
     uint32_t io_num;
-    TickType_t last_interrupt_time = 0;
 
     while (1) {
         if (xQueueReceive(private_data->gpio_evt_queue, &io_num, portMAX_DELAY)) {
-            TickType_t current_time = xTaskGetTickCount();
-            if ((current_time - last_interrupt_time) * portTICK_PERIOD_MS > DEBOUNCE_TIME_MS) {
-                last_interrupt_time = current_time;
-                
-                // Find which button was pressed
-                for (int i = 0; i < private_data->button_count; i++) {
-                    if (private_data->buttons[i].gpio_pin == io_num) {
-                        ESP_LOGI(TAG, "Button '%s' pressed on GPIO %" PRIu32, private_data->buttons[i].name, io_num);
+            // Debounce delay: wait for the signal to stabilize
+            vTaskDelay(pdMS_TO_TICKS(DEBOUNCE_TIME_MS));
+
+            // After the delay, read the final state of the pin
+            int level = gpio_get_level(io_num);
+
+            // Find which button it was
+            for (int i = 0; i < private_data->button_count; i++)
+            {
+                if (private_data->buttons[i].gpio_pin == io_num)
+                {
+                    // Check if the final state is the "active" state
+                    if (level == private_data->buttons[i].active_level)
+                    {
+                        ESP_LOGI(TAG, "Button '%s' press confirmed on GPIO %" PRIu32, private_data->buttons[i].name, io_num);
 
                         fmw_button_payload_t *payload = calloc(1, sizeof(fmw_button_payload_t));
                         if (payload) {
@@ -133,8 +147,8 @@ static void button_task(void *pvParameters) {
                                 free(payload);
                             }
                         }
-                        break; // Found the button, exit loop
                     }
+                    break; // Found the button
                 }
             }
         }
@@ -179,9 +193,9 @@ static esp_err_t button_input_init(module_t *self) {
             .mode = GPIO_MODE_INPUT,
             .pull_up_en = (btn->active_level == 0),
             .pull_down_en = (btn->active_level == 1),
-            .intr_type = (btn->active_level == 0) ? GPIO_INTR_POSEDGE : GPIO_INTR_NEGEDGE,
+            .intr_type = GPIO_INTR_ANYEDGE,
         };
-        
+
         gpio_config(&io_conf);
         // ★★★ CORRECTED: Pass the GPIO pin number as the argument to the ISR ★★★
         gpio_isr_handler_add(btn->gpio_pin, gpio_isr_handler, (void *) (intptr_t) btn->gpio_pin);

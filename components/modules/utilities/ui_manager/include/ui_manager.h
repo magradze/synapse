@@ -98,7 +98,7 @@ typedef struct {
 
     bool wifi_connected;                /**< @brief Cached WiFi connection status. */
     int32_t wifi_rssi;                  /**< @brief Cached WiFi signal strength (RSSI). */
-    
+
     int64_t last_button_press_time;     /**< @brief Timestamp of the last button press for debouncing/cooldown. */
 } ui_manager_private_data_t;
 

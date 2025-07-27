@@ -33,17 +33,20 @@
 #define SCREEN_OFF_TIMER_EVENT "UI_SCREEN_OFF_TIMER"
 #define SPLASH_SCREEN_TIMER_EVENT "UI_SPLASH_END"
 #define WIFI_STATUS_TIMER_EVENT "UI_WIFI_STATUS_TIMER"
+#define MODULE_CONTROL_ACTION_TIMER_EVENT "UI_MODULE_ACTION_TIMER"
 
 /**
  * @enum ui_state_t
  * @brief Defines the possible states (screens) of the user interface.
  */
-typedef enum {
-    UI_STATE_SPLASH,        /**< @brief The initial splash screen shown on startup. */
-    UI_STATE_HOME,          /**< @brief The main home screen, showing time and status. */
-    UI_STATE_MAIN_MENU,     /**< @brief The top-level menu. */
-    UI_STATE_MODULES_MENU,  /**< @brief The sub-menu listing all available modules. */
-    UI_STATE_SETTINGS_MENU, /**< @brief The sub-menu for system settings. */
+typedef enum
+{
+    UI_STATE_SPLASH,         /**< @brief The initial splash screen shown on startup. */
+    UI_STATE_HOME,           /**< @brief The main home screen, showing time and status. */
+    UI_STATE_MAIN_MENU,      /**< @brief The top-level menu. */
+    UI_STATE_MODULES_MENU,   /**< @brief The sub-menu listing all available modules. */
+    UI_STATE_MODULE_CONTROL, /**< @brief The control screen for a selected module. */
+    UI_STATE_SETTINGS_MENU,  /**< @brief The sub-menu for system settings. */
 } ui_state_t;
 
 /**
@@ -88,9 +91,11 @@ typedef struct {
 
     int selected_item_index;            /**< @brief The index of the currently selected item in a menu. */
     int top_visible_item;               /**< @brief The index of the topmost visible item for scrolling menus. */
+    int previous_menu_selection;        /**< @brief The last selected item index before entering a sub-menu. */
     const module_t* dynamic_menu_modules[MAX_MENU_ITEMS]; /**< @brief Array of module pointers for the dynamic menu. */
     int dynamic_menu_item_count;        /**< @brief The number of modules in the dynamic menu. */
-    
+    const module_t *selected_control_module; /**< @brief The module currently selected for control actions. */
+
     bool wifi_connected;                /**< @brief Cached WiFi connection status. */
     int32_t wifi_rssi;                  /**< @brief Cached WiFi signal strength (RSSI). */
     

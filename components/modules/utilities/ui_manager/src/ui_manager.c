@@ -204,6 +204,10 @@ void render_current_state(ui_manager_private_data_t *private_data) {
             render_header(private_data);
             ui_menu_render(private_data);
             break;
+        case UI_STATE_MODULE_CONTROL:
+            render_header(private_data);
+            render_module_control_screen(private_data);
+            break;
         default:
             display->draw_formatted_text(context, 10, 30, 1, "Unknown State");
             break;

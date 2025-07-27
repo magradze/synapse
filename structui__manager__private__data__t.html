@@ -106,18 +106,18 @@ Collaboration diagram for ui_manager_private_data_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structui__manager__private__data__t__coll__graph.png" border="0" usemap="#aui__manager__private__data__t_coll__map" alt="Collaboration graph"/></div>
 <map name="aui__manager__private__data__t_coll__map" id="aui__manager__private__data__t_coll__map">
-<area shape="rect" title="The central private data structure holding the entire state of the UI Manager." alt="" coords="397,200,549,240"/>
+<area shape="rect" title="The central private data structure holding the entire state of the UI Manager." alt="" coords="397,215,549,255"/>
 <area shape="rect" href="structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,51,88,77"/>
-<area shape="poly" title=" " alt="" coords="65,86,106,132,133,155,162,174,205,187,265,197,397,211,397,216,264,203,203,192,160,178,129,159,102,136,61,90"/>
-<area shape="poly" title=" " alt="" coords="78,44,102,46,111,53,115,64,110,77,97,84,81,84,64,79,65,74,82,79,96,78,106,73,109,64,107,56,101,51,77,50"/>
+<area shape="poly" title=" " alt="" coords="62,87,100,140,127,167,157,188,200,203,262,213,397,227,397,232,261,219,199,208,155,193,123,171,96,143,58,90"/>
+<area shape="poly" title=" " alt="" coords="75,43,89,42,102,45,111,52,115,64,109,78,96,85,79,85,62,80,64,74,80,80,95,80,105,75,109,64,107,55,100,49,89,47,76,49"/>
 <area shape="rect" href="structsystem__manager__api__t.html" title="The public Service API structure for the System Manager." alt="" coords="226,51,401,77"/>
-<area shape="poly" title=" " alt="" coords="318,90,328,133,338,155,353,174,374,190,398,202,396,206,371,195,349,178,334,158,323,135,313,91"/>
+<area shape="poly" title=" " alt="" coords="317,90,326,140,337,166,353,189,373,205,398,217,396,221,371,210,349,193,332,169,321,141,312,91"/>
 <area shape="rect" href="structtimer__api__t.html" title="The public Service API structure for the System Timer Service." alt="" coords="425,51,521,77"/>
-<area shape="poly" title=" " alt="" coords="476,90,476,200,471,200,471,90"/>
+<area shape="poly" title=" " alt="" coords="476,90,476,214,471,214,471,90"/>
 <area shape="rect" href="structtime__sync__api__t.html" title="The public Service API structure for the Time Sync module." alt="" coords="545,51,673,77"/>
-<area shape="poly" title=" " alt="" coords="595,89,521,178,497,202,493,198,517,174,591,86"/>
+<area shape="poly" title=" " alt="" coords="597,90,564,138,521,192,497,216,493,213,517,189,559,135,593,87"/>
 <area shape="rect" href="structfont__metrics__t.html" title="Contains metrics for a font supported by the driver." alt="" coords="698,51,814,77"/>
-<area shape="poly" title=" " alt="" coords="733,87,687,125,655,154,620,178,586,193,550,205,549,200,584,188,617,174,652,150,684,121,730,83"/>
+<area shape="poly" title=" " alt="" coords="741,90,695,142,665,169,631,193,591,211,550,223,549,218,589,206,628,188,661,165,692,138,737,86"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -178,6 +178,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>selected_item_index</b
 int&#160;</td><td class="memItemRight" valign="bottom"><b>top_visible_item</b></td></tr>
 <tr class="memdesc:a6ebaaf2558a4fd03fc0e8d44918f04f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index of the topmost visible item for scrolling menus. <br /></td></tr>
 <tr class="separator:a6ebaaf2558a4fd03fc0e8d44918f04f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb411d2d2d4497db2b125a6d98959f51" id="r_acb411d2d2d4497db2b125a6d98959f51"><td class="memItemLeft" align="right" valign="top"><a id="acb411d2d2d4497db2b125a6d98959f51" name="acb411d2d2d4497db2b125a6d98959f51"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>previous_menu_selection</b></td></tr>
+<tr class="memdesc:acb411d2d2d4497db2b125a6d98959f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">The last selected item index before entering a sub-menu. <br /></td></tr>
+<tr class="separator:acb411d2d2d4497db2b125a6d98959f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fa71cfa5939697ecace1023fdec1657" id="r_a2fa71cfa5939697ecace1023fdec1657"><td class="memItemLeft" align="right" valign="top"><a id="a2fa71cfa5939697ecace1023fdec1657" name="a2fa71cfa5939697ecace1023fdec1657"></a>
 const <a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dynamic_menu_modules</b> [MAX_MENU_ITEMS]</td></tr>
 <tr class="memdesc:a2fa71cfa5939697ecace1023fdec1657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of module pointers for the dynamic menu. <br /></td></tr>
@@ -186,6 +190,10 @@ const <a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td cla
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dynamic_menu_item_count</b></td></tr>
 <tr class="memdesc:ac5e36ec2e4293d1b06e7f260f7932a59"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of modules in the dynamic menu. <br /></td></tr>
 <tr class="separator:ac5e36ec2e4293d1b06e7f260f7932a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bce9044338fa50a7f29a26abaa5d9b" id="r_a27bce9044338fa50a7f29a26abaa5d9b"><td class="memItemLeft" align="right" valign="top"><a id="a27bce9044338fa50a7f29a26abaa5d9b" name="a27bce9044338fa50a7f29a26abaa5d9b"></a>
+const <a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>selected_control_module</b></td></tr>
+<tr class="memdesc:a27bce9044338fa50a7f29a26abaa5d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The module currently selected for control actions. <br /></td></tr>
+<tr class="separator:a27bce9044338fa50a7f29a26abaa5d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6da87b32cee6a414523d18c2b5c8748" id="r_ad6da87b32cee6a414523d18c2b5c8748"><td class="memItemLeft" align="right" valign="top"><a id="ad6da87b32cee6a414523d18c2b5c8748" name="ad6da87b32cee6a414523d18c2b5c8748"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_connected</b></td></tr>
 <tr class="memdesc:ad6da87b32cee6a414523d18c2b5c8748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cached WiFi connection status. <br /></td></tr>

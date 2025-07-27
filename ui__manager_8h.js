@@ -8,6 +8,7 @@ var ui__manager_8h =
       [ "UI_STATE_HOME", "ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6ac4f583a523a38e0a38a1398af8c9b6f5", null ],
       [ "UI_STATE_MAIN_MENU", "ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a83428a07b2010df3ea8eea54b670c482", null ],
       [ "UI_STATE_MODULES_MENU", "ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a670bbf30f56274e12784d01c25164121", null ],
+      [ "UI_STATE_MODULE_CONTROL", "ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a7c1cd52de998182096856dd2882a5484", null ],
       [ "UI_STATE_SETTINGS_MENU", "ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a1a7dbbae8fc86d0809b4a271d759e2c3", null ]
     ] ],
     [ "render_current_state", "ui__manager_8h.html#a093af2fea1ff15543b2b9d7609a87e71", null ],

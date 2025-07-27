@@ -1,6 +1,6 @@
 var structrelay__api__t =
 [
-    [ "get_state", "structrelay__api__t.html#a693df987ab68f1df76a408855dafb274", null ],
-    [ "set_state", "structrelay__api__t.html#a9d3276b2d43c9e64bcedcf37434d0117", null ],
-    [ "toggle", "structrelay__api__t.html#a7a9c76b4d6b760200e54a9fa79e6927d", null ]
+    [ "get_state", "structrelay__api__t.html#acba1597e1ea7261e4f1080ef4d146bf9", null ],
+    [ "set_state", "structrelay__api__t.html#a8c4160f255b09d4454ce9a8b8d8f0a51", null ],
+    [ "toggle", "structrelay__api__t.html#acecbd05b7a9a69a2ec053b70549419f6", null ]
 ];

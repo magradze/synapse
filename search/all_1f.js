@@ -62,7 +62,7 @@ var searchData=
   ['title_59',['title',['../structstatic__menu__t.html#a280d0f7b4e44f8ee35a737f6abf72a8a',1,'static_menu_t']]],
   ['tls_20ssl_60',['TLS/SSL',['../md_docs_2security_2security__guidelines.html#autotoc_md1526',1,'']]],
   ['tls_20ssl_20ჩართვა_20mqtt_20ში_61',['tls ssl ჩართვა mqtt ში',['../md_docs_2security_2security__best__practices.html#autotoc_md1503',1,'TLS/SSL ჩართვა MQTT-ში'],['../md_docs_2design__decisions_2security__considerations.html#autotoc_md1287',1,'TLS/SSL ჩართვა MQTT-ში']]],
-  ['toggle_62',['toggle',['../structrelay__api__t.html#a7a9c76b4d6b760200e54a9fa79e6927d',1,'relay_api_t']]],
+  ['toggle_62',['toggle',['../structrelay__api__t.html#acecbd05b7a9a69a2ec053b70549419f6',1,'relay_api_t']]],
   ['top_5fvisible_5fitem_63',['top_visible_item',['../structui__manager__private__data__t.html#a6ebaaf2558a4fd03fc0e8d44918f04f5',1,'ui_manager_private_data_t']]],
   ['topic_20structure_64',['4. 📡 MQTT თემების სტრუქტურა (Topic Structure)',['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md13',1,'']]],
   ['trade_20offs_65',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],

@@ -13,7 +13,7 @@ var searchData=
   ['get_5finfo_10',['get_info',['../structdisplay__driver__api__t.html#aee7bd9a8ea85bfdd71128962b690497b',1,'display_driver_api_t']]],
   ['get_5fport_11',['get_port',['../structi2c__bus__api__t.html#a7b1b85e1e5e330750db6a130af4796f0',1,'i2c_bus_api_t']]],
   ['get_5fsmall_5ffont_5fmetrics_12',['get_small_font_metrics',['../structdisplay__driver__api__t.html#aafddf3e759194b9264d597665a439754',1,'display_driver_api_t']]],
-  ['get_5fstate_13',['get_state',['../structrelay__api__t.html#a693df987ab68f1df76a408855dafb274',1,'relay_api_t']]],
+  ['get_5fstate_13',['get_state',['../structrelay__api__t.html#acba1597e1ea7261e4f1080ef4d146bf9',1,'relay_api_t']]],
   ['get_5fstatus_14',['get_status',['../structmodule__t.html#ad91ac1dc0334cbe050b7d3babcf6c639',1,'module_t']]],
   ['get_5fstring_15',['get_string',['../structstorage__api__t.html#aa12449cfc6a8bd24760deedbe5419a7b',1,'storage_api_t']]],
   ['get_5fsystem_5fhealth_5freport_16',['get_system_health_report',['../structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b',1,'health_api_t']]],

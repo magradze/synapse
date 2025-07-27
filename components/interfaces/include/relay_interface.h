@@ -17,33 +17,38 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-/**
- * @brief The public Service API structure for a Relay module.
- */
-typedef struct {
     /**
-     * @brief Sets the state of the relay.
-     * @param[in] is_on `true` to turn the relay on, `false` to turn it off.
-     * @return ESP_OK on success, or an error code on failure.
+     * @brief The public Service API structure for a Relay module.
      */
-    esp_err_t (*set_state)(bool is_on);
+    typedef struct
+    {
+        /**
+         * @brief Sets the state of the relay.
+         * @param[in] context The context handle for the specific relay instance.
+         * @param[in] is_on `true` to turn the relay on, `false` to turn it off.
+         * @return ESP_OK on success, or an error code on failure.
+         */
+        esp_err_t (*set_state)(void *context, bool is_on);
 
-    /**
-     * @brief Toggles the current state of the relay.
-     * @return ESP_OK on success.
-     */
-    esp_err_t (*toggle)(void);
+        /**
+         * @brief Toggles the current state of the relay.
+         * @param[in] context The context handle for the specific relay instance.
+         * @return ESP_OK on success.
+         */
+        esp_err_t (*toggle)(void *context);
 
-    /**
-     * @brief Gets the current state of the relay.
-     * @return `true` if the relay is on, `false` if it is off.
-     */
-    bool (*get_state)(void);
+        /**
+         * @brief Gets the current state of the relay.
+         * @param[in] context The context handle for the specific relay instance.
+         * @return `true` if the relay is on, `false` if it is off.
+         */
+        bool (*get_state)(void *context);
 
-} relay_api_t;
+    } relay_api_t;
 
 #ifdef __cplusplus
 }

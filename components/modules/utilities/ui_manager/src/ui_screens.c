@@ -109,26 +109,18 @@ void render_home_screen(ui_manager_private_data_t *private_data)
 
     char time_str[9];
 
-    if (private_data->time_sync)
+    time_t now;
+    // Check if the service exists AND if the time is successfully retrieved (synced)
+    if (private_data->time_sync && private_data->time_sync->get_time(&now) == ESP_OK)
     {
-        time_t now;
         struct tm timeinfo;
-        if (private_data->time_sync->get_time(&now) == ESP_OK)
-        {
-            localtime_r(&now, &timeinfo);
-            strftime(time_str, sizeof(time_str), "%H:%M", &timeinfo);
-        }
-        else
-        {
-            strcpy(time_str, "--:--");
-        }
+        localtime_r(&now, &timeinfo);
+        strftime(time_str, sizeof(time_str), "%H:%M", &timeinfo);
     }
     else
     {
-        static int seconds = 0;
-        if (seconds >= 60)
-            seconds = 0;
-        snprintf(time_str, sizeof(time_str), "14:%02d", seconds++);
+        // Fallback if service is missing OR time is not yet synced
+        strcpy(time_str, "--:--");
     }
 
     int total_width = 0;
@@ -285,6 +277,8 @@ static void draw_large_digits_string(ui_manager_private_data_t *private_data, in
             char_index = c - '0';
         else if (c == ':')
             char_index = 10;
+        else if (c == '-')
+            char_index = 11;
 
         if (char_index != -1)
         {

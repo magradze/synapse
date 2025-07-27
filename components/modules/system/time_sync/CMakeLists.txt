@@ -22,8 +22,10 @@ if(NOT DEFINED CONFIG_MODULE_TIME_SYNC_ENABLED OR CONFIG_MODULE_TIME_SYNC_ENABLE
             REQUIRES 
                 core 
                 interfaces
+                esp_netif
         PRIV_REQUIRES
             json
+            lwip
     )
 else()
     # მოდული გამორთულია

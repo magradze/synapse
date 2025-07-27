@@ -29,10 +29,11 @@ const uint8_t bitmap_digit_55[] = {28,28,28,28,28,28,28,28,220,252,252,124,28,0,
 const uint8_t bitmap_digit_56[] = {0,240,248,248,60,28,28,28,60,248,248,240,0,192,227,247,255,62,28,28,28,62,255,247,227,192,1,7,15,15,30,28,28,28,30,15,15,7,3};
 const uint8_t bitmap_digit_57[] = {192,240,248,248,60,28,28,28,124,248,240,224,0,7,31,63,127,120,112,112,112,184,255,255,255,31,0,0,0,28,28,28,30,14,15,7,3,0,0};
 const uint8_t bitmap_digit_58[] = {128,128,128,0,7,7,7,3,30,30,30,12};
+const uint8_t bitmap_digit_45[] = {0, 0, 0, 0, 60, 60, 60, 60, 0, 0, 0, 0, 0, 0, 0, 0};
 
-const uint8_t char_width_digits[] = {13,8,13,13,13,13,13,13,13,13,4};
+const uint8_t char_width_digits[] = {13, 8, 13, 13, 13, 13, 13, 13, 13, 13, 4, 8};
 
-const uint8_t* const char_addr_digits[] = {bitmap_digit_48, bitmap_digit_49, bitmap_digit_50, bitmap_digit_51, bitmap_digit_52, bitmap_digit_53, bitmap_digit_54, bitmap_digit_55, bitmap_digit_56, bitmap_digit_57, bitmap_digit_58};
+const uint8_t *const char_addr_digits[] = {bitmap_digit_48, bitmap_digit_49, bitmap_digit_50, bitmap_digit_51, bitmap_digit_52, bitmap_digit_53, bitmap_digit_54, bitmap_digit_55, bitmap_digit_56, bitmap_digit_57, bitmap_digit_58, bitmap_digit_45};
 
 #ifdef __cplusplus
 }

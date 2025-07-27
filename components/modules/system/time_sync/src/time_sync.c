@@ -1,55 +1,41 @@
 /**
  * @file time_sync.c
- * @brief Mock implementation of the Time Sync module.
+ * @brief SNTP-based implementation of the Time Sync module.
  * @author Synapse Framework Team
- * @version 1.0.0
- * @date 2025-08-02
+ * @version 2.0.0
+ * @date 2025-08-15
  */
 #include "time_sync.h"
 #include "logging.h"
 #include "service_locator.h"
 #include "time_sync_interface.h"
+#include "event_bus.h"
+#include "event_data_wrapper.h"
+#include "framework_events.h"
+#include "module_registry.h"
+#include "esp_sntp.h"
+#include "esp_netif.h"
+#include <time.h>
 
 DEFINE_COMPONENT_TAG("TIME_SYNC");
+
+#define EVT_WIFI_IP_ASSIGNED "WIFI_EVENT_IP_ASSIGNED"
 
 typedef struct {
     module_t *module;
     time_sync_api_t service_api;
+    bool is_synced;
 } time_sync_private_data_t;
 
-// --- API Function (Mock) ---
-static esp_err_t mock_get_time(time_t *current_time) {
-    if (current_time) {
-        // Return a fixed time for demonstration
-        *current_time = 1767209640; // 2025-12-31 14:34:00 UTC
-    }
-    return ESP_OK;
-}
+// --- Forward Declarations ---
+static esp_err_t time_sync_init(module_t *self);
+static void time_sync_deinit(module_t *self);
+static void time_sync_handle_event(module_t *self, const char *event_name, void *event_data);
+static esp_err_t api_get_time(time_t *current_time);
+static void time_sync_notification_cb(struct timeval *tv);
+static void start_sntp_sync(void);
 
-// --- Lifecycle Functions ---
-static esp_err_t time_sync_init(module_t *self) {
-    time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;
-    
-    private_data->service_api.get_time = mock_get_time;
-
-    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_TIME_SYNC_API, &private_data->service_api);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register time_sync service!");
-        return err;
-    }
-    
-    ESP_LOGI(TAG, "Mock Time Sync service registered successfully.");
-    return ESP_OK;
-}
-
-static void time_sync_deinit(module_t *self) {
-    if (!self) return;
-    fmw_service_unregister(self->name);
-    if (self->private_data) free(self->private_data);
-    if (self->current_config) cJSON_Delete(self->current_config);
-    free(self);
-}
-
+// --- Module Create & Deinit ---
 module_t* time_sync_create(const cJSON *config) {
     module_t *module = calloc(1, sizeof(module_t));
     time_sync_private_data_t *private_data = calloc(1, sizeof(time_sync_private_data_t));
@@ -70,6 +56,113 @@ module_t* time_sync_create(const cJSON *config) {
 
     module->base.init = time_sync_init;
     module->base.deinit = time_sync_deinit;
+    module->base.handle_event = time_sync_handle_event;
+
+    private_data->is_synced = false;
+    private_data->service_api.get_time = api_get_time;
 
     return module;
+}
+
+static void time_sync_deinit(module_t *self)
+{
+    if (!self)
+        return;
+    ESP_LOGI(TAG, "Deinitializing Time Sync module.");
+    esp_sntp_stop();
+    fmw_service_unregister(self->name);
+    fmw_event_bus_unsubscribe(EVT_WIFI_IP_ASSIGNED, self);
+    if (self->private_data)
+        free(self->private_data);
+    if (self->current_config)
+        cJSON_Delete(self->current_config);
+    free(self);
+}
+
+// --- Module Lifecycle & Event Handling ---
+static esp_err_t time_sync_init(module_t *self)
+{
+    time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;
+
+    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_TIME_SYNC_API, &private_data->service_api);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register time_sync service!");
+        return err;
+    }
+
+    fmw_event_bus_subscribe(EVT_WIFI_IP_ASSIGNED, self);
+
+    // Set timezone from config
+    const cJSON *config_node = cJSON_GetObjectItem(self->current_config, "config");
+    const cJSON *tz_node = cJSON_GetObjectItem(config_node, "timezone");
+    if (cJSON_IsString(tz_node) && tz_node->valuestring != NULL)
+    {
+        setenv("TZ", tz_node->valuestring, 1);
+        tzset();
+        ESP_LOGI(TAG, "Timezone set to: %s", tz_node->valuestring);
+    }
+    else
+    {
+        ESP_LOGW(TAG, "Timezone not found in config. Using default UTC.");
+    }
+
+    ESP_LOGI(TAG, "Time Sync service registered. Waiting for IP address.");
+    self->status = MODULE_STATUS_INITIALIZED;
+    return ESP_OK;
+}
+
+static void time_sync_handle_event(module_t *self, const char *event_name, void *event_data)
+{
+    if (strcmp(event_name, EVT_WIFI_IP_ASSIGNED) == 0)
+    {
+        ESP_LOGI(TAG, "IP address obtained. Starting SNTP synchronization.");
+        start_sntp_sync();
+        self->status = MODULE_STATUS_RUNNING;
+    }
+
+    if (event_data)
+    {
+        fmw_event_data_release((event_data_wrapper_t *)event_data);
+    }
+}
+
+// --- Service API Implementation ---
+static esp_err_t api_get_time(time_t *current_time)
+{
+    // This function is called from other modules, so we need to find our own private_data.
+    module_t *self = fmw_module_registry_find_by_name("main_time_sync"); // Assuming this instance name
+    if (!self)
+        return ESP_ERR_NOT_FOUND;
+
+    time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;
+    if (!private_data->is_synced)
+    {
+        return ESP_ERR_INVALID_STATE; // Not synced yet
+    }
+
+    time(current_time);
+    return ESP_OK;
+}
+
+// --- SNTP Logic ---
+static void time_sync_notification_cb(struct timeval *tv)
+{
+    ESP_LOGI(TAG, "Time successfully synchronized with NTP server.");
+
+    module_t *self = fmw_module_registry_find_by_name("main_time_sync");
+    if (self)
+    {
+        time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;
+        private_data->is_synced = true;
+    }
+}
+
+static void start_sntp_sync(void)
+{
+    ESP_LOGI(TAG, "Initializing SNTP");
+    esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
+    esp_sntp_setservername(0, "pool.ntp.org");
+    sntp_set_time_sync_notification_cb(time_sync_notification_cb);
+    esp_sntp_init();
 }

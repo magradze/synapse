@@ -4,9 +4,9 @@
     "enabled": true,
     "config": {
         "instance_name": "status_led",
-        "red_pin": 18,
-        "green_pin": 19,
-        "blue_pin": 5,
+        "red_pin": 5,
+        "green_pin": 18,
+        "blue_pin": 19,
         "is_common_anode": true
     }
   }

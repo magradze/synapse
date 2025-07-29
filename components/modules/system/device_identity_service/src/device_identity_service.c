@@ -145,7 +145,7 @@ module_t *device_identity_service_create(const cJSON *config)
 
     snprintf(module->name, sizeof(module->name), "%s", instance_name_buffer);
     module->status = MODULE_STATUS_UNINITIALIZED;
-    module->init_level = 60;
+    module->init_level = 20;
 
     module->base.init = device_identity_init;
     module->base.start = device_identity_start;

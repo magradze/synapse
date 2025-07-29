@@ -25,7 +25,7 @@ menu "BLE Provisioning"
 
         config ESP_PROV_DEVICE_NAME
             string "BLE Device Name"
-            default "Synapse-Prov"
+            default "Synapse"
             help
                 Device name that will appear during BLE scanning
 

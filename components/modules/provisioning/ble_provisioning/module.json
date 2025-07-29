@@ -4,7 +4,7 @@
     "description": "ESP-IDF native BLE-based WiFi provisioning service",
     "author": "Synapse Framework Team",
     "init_function": "ble_provisioning_create",
-    "init_level": 2,
+    "init_level": 90,
     "dependencies": [],
     "type": "ble_provisioning",
     "build_enabled": true,

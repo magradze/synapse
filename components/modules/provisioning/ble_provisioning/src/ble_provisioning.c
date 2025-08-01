@@ -2,12 +2,12 @@
  * @file ble_provisioning.c
  * @brief ESP-IDF native BLE provisioning implementation with a Service API.
  * @author Synapse Framework Team
- * @version 2.3.1 (Final Build Fix & Full Documentation)
- * @date 2025-07-05
+ * @version 2.4.0
+ * @date 2025-07-30
  * @details This module implements BLE provisioning using the ESP-IDF `wifi_provisioning`
  *          manager. It provides a service to check the provisioning status and
- *          handles system events to start/stop the process automatically. It can be
- *          configured via Kconfig and overridden by `system_config.json`.
+ *          handles system events to start/stop the process automatically. It dynamically
+ *          constructs its BLE advertising name using the Device Identity Service.
  */
 
 // --- Synapse Framework Includes ---
@@ -18,6 +18,7 @@
 #include "event_data_wrapper.h"
 #include "service_locator.h"
 #include "service_types.h"
+#include "device_identity_interface.h"
 #include "framework_config.h"
 #include "logging.h"
 
@@ -43,7 +44,6 @@ DEFINE_COMPONENT_TAG("BLE_PROV");
 #define EVT_PROV_START_REQUESTED "PROV_START_REQUESTED"
 
 // --- Private Data Structure ---
-
 /**
  * @internal
  * @struct ble_provisioning_private_data_t
@@ -52,10 +52,10 @@ DEFINE_COMPONENT_TAG("BLE_PROV");
 typedef struct
 {
     char instance_name[CONFIG_BLE_PROVISIONING_INSTANCE_NAME_MAX_LEN];
-    bool is_active;       /**< True if the provisioning process is currently running. */
-    char device_name[32]; /**< BLE device name for advertising. */
-    char pop[9];          /**< Proof-of-Possession string for secure provisioning. */
-    int security_version; /**< Security version (0 or 1). */
+    bool is_active;       /**< @brief True if the provisioning process is currently running. */
+    char device_name[32]; /**< @brief BLE device name for advertising. */
+    char pop[9];          /**< @brief Proof-of-Possession string for secure provisioning. */
+    int security_version; /**< @brief Security version (0 or 1). */
 } ble_provisioning_private_data_t;
 
 // --- Forward Declarations ---
@@ -83,9 +83,11 @@ static ble_prov_api_t ble_prov_service_api = {
 /**
  * @brief Creates a new instance of the BLE Provisioning module.
  * @details This function allocates memory for the module and its private data,
- *          sets the instance name and other parameters based on Kconfig defaults,
- *          and then overrides them with any values provided in the JSON config.
- * @param[in] config A cJSON object containing the module's configuration.
+ *          parses configuration from Kconfig and JSON, and sets up the module's
+ *          base function pointers. The dynamic device name is constructed later,
+ *          in the `init` phase, to ensure service dependencies are met.
+ * @param[in] config A cJSON object containing the module's configuration. The module
+ *                   takes ownership of this object if it's duplicated.
  * @return A pointer to the created module (`module_t*`), or NULL on failure.
  */
 module_t *ble_provisioning_create(const cJSON *config)
@@ -119,7 +121,6 @@ module_t *ble_provisioning_create(const cJSON *config)
     module->private_data = private_data;
 
     // 1. Set default configuration from Kconfig
-    strncpy(private_data->device_name, CONFIG_ESP_PROV_DEVICE_NAME, sizeof(private_data->device_name) - 1);
     strncpy(private_data->pop, CONFIG_ESP_PROV_POP, sizeof(private_data->pop) - 1);
     private_data->security_version = CONFIG_ESP_PROV_SECURITY_VERSION;
     const char *instance_name = CONFIG_BLE_PROVISIONING_DEFAULT_INSTANCE_NAME;
@@ -136,12 +137,6 @@ module_t *ble_provisioning_create(const cJSON *config)
                 instance_name = name_node->valuestring;
             }
 
-            const cJSON *device_name_node = cJSON_GetObjectItem(config_node, "device_name");
-            if (cJSON_IsString(device_name_node) && device_name_node->valuestring)
-            {
-                strncpy(private_data->device_name, device_name_node->valuestring, sizeof(private_data->device_name) - 1);
-            }
-
             const cJSON *pop_node = cJSON_GetObjectItem(config_node, "pop");
             if (cJSON_IsString(pop_node) && pop_node->valuestring)
             {
@@ -154,6 +149,7 @@ module_t *ble_provisioning_create(const cJSON *config)
                 private_data->security_version = sec_ver_node->valueint;
             }
         }
+        // The module takes ownership of the config by duplicating it.
         module->current_config = cJSON_Duplicate(config, true);
     }
 
@@ -161,8 +157,7 @@ module_t *ble_provisioning_create(const cJSON *config)
     strncpy(private_data->instance_name, instance_name, sizeof(private_data->instance_name) - 1);
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
-
-    module->init_level = 2;
+    module->init_level = 90;
 
     module->base.init = ble_provisioning_init;
     module->base.start = ble_provisioning_start;
@@ -176,12 +171,50 @@ module_t *ble_provisioning_create(const cJSON *config)
 
 /**
  * @internal
- * @brief Initializes the module, registers its service and subscribes to events.
+ * @brief Initializes the module.
+ * @details This function constructs the dynamic BLE device name using the
+ *          Device Identity Service, registers its own service API with the
+ *          Service Locator, and subscribes to necessary system events.
+ * @param[in] self Pointer to the module instance.
+ * @return esp_err_t Operation status.
+ * @retval ESP_OK on success.
+ * @retval ESP_ERR_INVALID_ARG if `self` is NULL.
+ * @retval ESP_ERR_INVALID_STATE if private data is missing.
  */
 static esp_err_t ble_provisioning_init(module_t *self)
 {
     if (!self)
         return ESP_ERR_INVALID_ARG;
+
+    ble_provisioning_private_data_t *private_data = (ble_provisioning_private_data_t *)self->private_data;
+    if (!private_data)
+    {
+        ESP_LOGE(TAG, "Private data is NULL. Cannot initialize module.");
+        return ESP_ERR_INVALID_STATE;
+    }
+
+    // --- Dynamic Device Name Generation ---
+    // We use service lookup by type to avoid hardcoding the instance name.
+    service_handle_t id_service = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+    if (id_service)
+    {
+        device_identity_api_t *id_api = (device_identity_api_t *)id_service;
+        const char *device_id = id_api->get_device_id();
+        if (device_id)
+        {
+            // Construct the name in "Prefix-DeviceID" format from Kconfig
+            snprintf(private_data->device_name, sizeof(private_data->device_name),
+                     "%s-%s", CONFIG_ESP_PROV_DEVICE_NAME, device_id);
+            ESP_LOGI(TAG, "Generated dynamic BLE device name: %s", private_data->device_name);
+        }
+    }
+    else
+    {
+        // Fallback: If the service is not found, use only the Kconfig name
+        ESP_LOGW(TAG, "Device Identity Service not found. Using default BLE device name.");
+        strncpy(private_data->device_name, CONFIG_ESP_PROV_DEVICE_NAME, sizeof(private_data->device_name) - 1);
+    }
+
     ESP_LOGI(TAG, "Initializing ble_provisioning module: %s", self->name);
 
     esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_CUSTOM_API, &ble_prov_service_api);
@@ -204,6 +237,8 @@ static esp_err_t ble_provisioning_init(module_t *self)
  * @brief Starts the module's main logic.
  * @details Checks if the device is already provisioned. If not, it starts the
  *          BLE provisioning process automatically.
+ * @param[in] self Pointer to the module instance.
+ * @return esp_err_t Always returns ESP_OK.
  */
 static esp_err_t ble_provisioning_start(module_t *self)
 {
@@ -213,6 +248,7 @@ static esp_err_t ble_provisioning_start(module_t *self)
     ESP_LOGI(TAG, "Starting ble_provisioning module: %s", self->name);
 
     bool provisioned = false;
+    // This check is critical for the initial startup logic.
     ESP_ERROR_CHECK(wifi_prov_mgr_is_provisioned(&provisioned));
 
     if (provisioned)
@@ -231,7 +267,11 @@ static esp_err_t ble_provisioning_start(module_t *self)
 
 /**
  * @internal
- * @brief Deinitializes the module, unregistering services and freeing resources.
+ * @brief Deinitializes the module and frees all allocated resources.
+ * @details This function unregisters the service, unsubscribes from events,
+ *          deinitializes the provisioning manager if it's active, and frees
+ *          all memory associated with the module instance.
+ * @param[in] self Pointer to the module instance to be deinitialized.
  */
 static void ble_provisioning_deinit(module_t *self)
 {
@@ -261,17 +301,15 @@ static void ble_provisioning_deinit(module_t *self)
     ESP_LOGI(TAG, "BLE Provisioning module deinitialized.");
 }
 
-// =========================================================================
-//                      Event Handlers
-// =========================================================================
-
 /**
  * @internal
  * @brief Handles events from the Synapse Event Bus.
- * @details Reacts to system-wide events to control the provisioning lifecycle.
- * @param self Pointer to the module instance.
- * @param event_name The name of the received event.
- * @param event_data Pointer to the event data wrapper.
+ * @details Reacts to system-wide events to control the provisioning lifecycle,
+ *          such as starting provisioning on request or reacting to a successful
+ *          WiFi connection.
+ * @param[in] self Pointer to the module instance.
+ * @param[in] event_name The name of the received event.
+ * @param[in] event_data Pointer to the event data wrapper.
  */
 static void ble_provisioning_handle_event(module_t *self, const char *event_name, void *event_data)
 {
@@ -296,12 +334,10 @@ static void ble_provisioning_handle_event(module_t *self, const char *event_name
             // The provisioning manager will automatically send a success message
             // to the client and then generate a WIFI_PROV_END event.
             // We don't need to call stop or send_success manually.
-            // The manager handles this internally upon receiving IP_EVENT_STA_GOT_IP.
-            // Forcing a stop here can sometimes interfere.
-            // Let's rely on the internal mechanism.
         }
     }
 
+    // It's crucial to release the event data wrapper to prevent memory leaks.
     if (event_data)
     {
         fmw_event_data_release((event_data_wrapper_t *)event_data);
@@ -310,12 +346,13 @@ static void ble_provisioning_handle_event(module_t *self, const char *event_name
 
 /**
  * @internal
- * @brief Handles events from the ESP-IDF WiFi Provisioning Manager.
- * @details This is a callback function, not a standard event loop handler.
- *          It directly receives provisioning-specific events.
- * @param handler_arg User data, a pointer to our module_t instance.
- * @param event The specific provisioning event that occurred.
- * @param event_data Data associated with the event.
+ * @brief Callback for events from the ESP-IDF WiFi Provisioning Manager.
+ * @details This function processes low-level events specific to the provisioning
+ *          protocol, such as receiving credentials or the process ending. It then
+ *          translates these into higher-level Synapse Framework events.
+ * @param[in] handler_arg User data, which is a pointer to our module_t instance.
+ * @param[in] event The specific provisioning event that occurred.
+ * @param[in] event_data Data associated with the event.
  */
 static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, void *event_data)
 {
@@ -353,6 +390,7 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
             if (fmw_event_data_wrap(json_str, free, &wrapper) == ESP_OK)
             {
                 fmw_event_bus_post(EVT_PROV_CREDENTIALS_RECEIVED, wrapper);
+                fmw_event_data_release(wrapper); // Release our initial ownership
             }
             else
             {
@@ -371,7 +409,7 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
         wifi_prov_sta_fail_reason_t *reason = (wifi_prov_sta_fail_reason_t *)event_data;
         ESP_LOGE(TAG, "Provisioning failed! Reason: %s",
                  (*reason == WIFI_PROV_STA_AUTH_ERROR) ? "Authentication Error" : "AP Not Found");
-        private_data->is_active = false; // Stop trying on failure
+        private_data->is_active = false;
         break;
     }
 
@@ -379,10 +417,9 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
         ESP_LOGI(TAG, "Provisioning process ended.");
         private_data->is_active = false;
 
-        // De-initialize the provisioning manager
         wifi_prov_mgr_deinit();
 
-        // ★★★ THE FIX: Use the high-level public API to release all BT memory ★★★
+        // This is a critical step to free up significant RAM used by the Bluetooth stack.
         ESP_LOGI(TAG, "Releasing all Bluetooth memory for mode BLE...");
         esp_bt_mem_release(ESP_BT_MODE_BLE);
 
@@ -394,14 +431,12 @@ static void prov_event_handler(void *handler_arg, wifi_prov_cb_event_t event, vo
     }
 }
 
-// =========================================================================
-//                      Service API Implementation
-// =========================================================================
-
 /**
  * @internal
- * @brief Implements the is_provisioning_active API function.
- * @see ble_prov_interface.h
+ * @brief Implements the `is_provisioning_active` service API function.
+ * @details Provides a thread-safe way for other modules to check if the
+ *          provisioning process is currently running.
+ * @return `true` if provisioning is active, `false` otherwise.
  */
 static bool api_is_provisioning_active(void)
 {
@@ -415,11 +450,13 @@ static bool api_is_provisioning_active(void)
 
 /**
  * @internal
- * @brief Implements the start_provisioning API function.
+ * @brief Implements the `start_provisioning` service API function.
  * @details This is the central function for initiating the provisioning process.
  *          It de-initializes any previous provisioning instance to ensure a
  *          clean state, then configures and starts the provisioning manager.
- * @see ble_prov_interface.h
+ * @return esp_err_t Operation status.
+ * @retval ESP_OK on success.
+ * @retval ESP_ERR_INVALID_STATE if provisioning is already active or module is not initialized.
  */
 static esp_err_t api_start_provisioning(void)
 {
@@ -435,6 +472,7 @@ static esp_err_t api_start_provisioning(void)
         return ESP_ERR_INVALID_STATE;
     }
 
+    // Ensure a clean state before starting a new provisioning session.
     wifi_prov_mgr_deinit();
 
     wifi_prov_mgr_config_t config = {

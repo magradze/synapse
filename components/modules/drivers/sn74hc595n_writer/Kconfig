@@ -1,0 +1,24 @@
+menu "SN74HC595N Writer"
+
+    config MODULE_SN74HC595N_WRITER_ENABLED
+        bool "Enable SN74HC595N Writer Module"
+        default y
+        help
+            Enables the sn74hc595n_writer module for A driver module for the SN74HC595N shift register to expand output pins using SPI..
+
+    config SN74HC595N_WRITER_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_sn74hc595n_writer"
+        depends on MODULE_SN74HC595N_WRITER_ENABLED
+        help
+            Default instance name for the sn74hc595n_writer module.
+
+    config SN74HC595N_WRITER_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_SN74HC595N_WRITER_ENABLED
+        help
+            Maximum length for the sn74hc595n_writer module instance name string.
+
+endmenu

@@ -1,0 +1,15 @@
+{
+    "name": "sn74hc595n_writer",
+    "version": "1.0.0",
+    "description": "A driver module for the SN74HC595N shift register to expand output pins using SPI.",
+    "author": "Giorgi Magradze",
+    "init_function": "sn74hc595n_writer_create",
+    "init_level": 15,
+    "type": "drivers",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_SN74HC595N_WRITER_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "type": "time_of_flight_sensor",
+    "enabled": false,
+    "config": {
+        "instance_name": "main_tof_sensor",
+        "i2c_bus_name": "main_i2c_bus",
+        "update_interval_sec": 5
+    }
+  }
+]

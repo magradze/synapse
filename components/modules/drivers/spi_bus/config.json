@@ -1,0 +1,14 @@
+[
+  {
+    "type": "spi_bus",
+    "enabled": true,
+    "config": {
+      "instance_name": "main_spi_bus",
+      "spi_host": 2,
+      "miso_pin": 12,
+      "mosi_pin": 13,
+      "sclk_pin": 14,
+      "dma_chan": 1
+    }
+  }
+]

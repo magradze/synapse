@@ -11,7 +11,7 @@ menu "Device Identity Service"
 
     config DEVICE_IDENTITY_SERVICE_DEFAULT_INSTANCE_NAME
         string "Default Instance Name"
-        default "main_device_identity_service"
+        default "main_identity_service"
         depends on MODULE_DEVICE_IDENTITY_SERVICE_ENABLED
         help
             Default instance name for the device_identity_service module.

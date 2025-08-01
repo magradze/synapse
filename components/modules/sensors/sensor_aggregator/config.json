@@ -26,9 +26,9 @@
                 }
             },
             {
-                "event_name": "SENSOR_DATA_LIGHT",
-                "json_key": "light_lux",
-                "aggregation_mode": "max"
+                "event_name": "SENSOR_DATA_DISTANCE_MM",
+                "json_key": "distance_mm",
+                "aggregation_mode": "last"
             }
         ]
       }

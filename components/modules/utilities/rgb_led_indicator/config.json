@@ -4,10 +4,11 @@
     "enabled": true,
     "config": {
         "instance_name": "status_led",
-        "red_pin": 5,
-        "green_pin": 18,
-        "blue_pin": 19,
-        "is_common_anode": true
+        "sr_writer_service": "main_sr_writer",
+        "red_pin": 4,
+        "green_pin": 5,
+        "blue_pin": 6,
+        "is_common_anode": false 
     }
   }
 ]

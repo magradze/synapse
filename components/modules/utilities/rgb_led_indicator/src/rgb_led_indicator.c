@@ -1,13 +1,10 @@
 /**
  * @file rgb_led_indicator.c
- * @brief RGB LED ინდიკატორის მართვა
- * @author Giorgi Magradze & Synapse AI
- * @version 1.3.0
- * @details RGB LED ინდიკატორის იმპლემენტაცია, რომელიც რეაგირებს სისტემურ ივენთებზე და უზრუნველყოფს API-ს სხვა მოდულებისთვის.
- *          გამოიყენებს LEDC დრაივერს PWM კონტროლისთვის და GPIO-ს სრული გათიშვისთვის.
+ * @brief RGB LED ინდიკატორის მართვა (Shift Register ვერსია)
+ * @author Synapse Team
+ * @version 2.1.0
  */
 
-// --- Includes ---
 #include "rgb_led_indicator.h"
 #include "rgb_led_interface.h"
 #include "ble_prov_interface.h"
@@ -15,34 +12,20 @@
 #include "event_bus.h"
 #include "event_data_wrapper.h"
 #include "service_locator.h"
-#include "resource_manager.h"
 #include "logging.h"
-#include "driver/ledc.h"
-#include "driver/gpio.h"
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <inttypes.h>
 #include "cmd_router_interface.h"
+#include "sn74hc595n_writer_interface.h"
 
-// --- Component Tag ---
 DEFINE_COMPONENT_TAG("RGB_LED_INDICATOR");
 
-// --- Definitions ---
-#define LEDC_MODE LEDC_LOW_SPEED_MODE
-#define LEDC_RESOLUTION LEDC_TIMER_8_BIT
-#define LEDC_FREQUENCY (5000)
-
-#define LEDC_TIMER (CONFIG_RGB_LED_INDICATOR_LEDC_TIMER)
-#define LEDC_CHANNEL_R (CONFIG_RGB_LED_INDICATOR_LEDC_CHANNEL_R)
-#define LEDC_CHANNEL_G (CONFIG_RGB_LED_INDICATOR_LEDC_CHANNEL_G)
-#define LEDC_CHANNEL_B (CONFIG_RGB_LED_INDICATOR_LEDC_CHANNEL_B)
-
 #define COMMAND_QUEUE_LENGTH 10
-#define TASK_STACK_SIZE 2560 // ოდნავ გავზარდეთ, მათემატიკური ოპერაციების გამო
+#define TASK_STACK_SIZE 3072
 
-// --- Private Data Structures ---
 typedef enum
 {
     LED_MODE_STATIC,
@@ -61,135 +44,90 @@ typedef struct
 
 typedef struct
 {
-    int red_pin;
-    int green_pin;
-    int blue_pin;
+    const char *event_name;
+    led_command_t command;
+} event_to_command_map_t;
+
+typedef struct
+{
+    char sr_writer_service_name[32];
+    sn74hc595n_writer_handle_t *sr_handle;
+    uint16_t red_pin;
+    uint16_t green_pin;
+    uint16_t blue_pin;
     bool is_common_anode;
     bool is_manual_override;
-    bool is_ledc_active;
     TaskHandle_t led_task_handle;
     QueueHandle_t command_queue;
     led_command_t last_system_command;
 } rgb_led_private_data_t;
 
-// --- Forward Declarations ---
 static esp_err_t rgb_led_indicator_init(module_t *self);
 static esp_err_t rgb_led_indicator_start(module_t *self);
-static esp_err_t rgb_led_indicator_enable(module_t *self);
-static esp_err_t rgb_led_indicator_disable(module_t *self);
 static void rgb_led_indicator_deinit(module_t *self);
-static esp_err_t rgb_led_indicator_reconfigure(module_t *self, const cJSON *new_config);
-static module_status_t rgb_led_indicator_get_status(module_t *self);
 static void rgb_led_indicator_handle_event(module_t *self, const char *event_name, void *event_data);
-
 static esp_err_t parse_config(const cJSON *config, rgb_led_private_data_t *private_data);
 static void led_control_task(void *pvParameters);
 static esp_err_t send_command_to_task(module_t *self, led_command_t *cmd);
 static void set_led_color(rgb_led_private_data_t *private_data, uint8_t r, uint8_t g, uint8_t b);
-
 static esp_err_t api_set_color(uint8_t r, uint8_t g, uint8_t b);
 static esp_err_t api_turn_off();
 static esp_err_t api_start_blink(uint8_t r, uint8_t g, uint8_t b, uint32_t interval_ms);
 static esp_err_t api_start_pulse(uint8_t r, uint8_t g, uint8_t b, uint32_t period_ms);
 static esp_err_t api_release_control();
-
-// Command Router-ისთვის საჭირო ფუნქციები
-static esp_err_t led_cmd_handler(int argc, char **argv, void *context);
 static void register_cli_commands(module_t *self);
 static void unregister_cli_commands(module_t *self);
 
-// --- Event to Command Mapping ---
-typedef struct
-{
-    const char *event_name;
-    led_command_t command;
-} event_to_command_map_t;
-
 static const event_to_command_map_t event_map[] = {
-    {"WIFI_CREDENTIALS_NOT_FOUND", {LED_MODE_PULSE, 255, 162, 0, 3000, false}}, // ყვითელი (Provisioning)
-    {"WIFI_EVENT_CONNECTED", {LED_MODE_BLINK, 0, 255, 0, 300, false}},          // მწვანე ციმციმი
-    {"WIFI_EVENT_DISCONNECTED", {LED_MODE_STATIC, 255, 0, 0, 0, false}},        // წითელი
+    {"WIFI_CREDENTIALS_NOT_FOUND", {LED_MODE_PULSE, 255, 162, 0, 3000, false}},
+    {"WIFI_EVENT_CONNECTED", {LED_MODE_BLINK, 0, 255, 0, 300, false}},
+    {"WIFI_EVENT_DISCONNECTED", {LED_MODE_STATIC, 255, 0, 0, 0, false}},
     {"SYSTEM_HEALTH_ALERT", {LED_MODE_BLINK, 255, 0, 0, 150, false}},
-    // მომავალში აქ დაემატება სხვა ივენთები...
 };
 static const size_t event_map_size = sizeof(event_map) / sizeof(event_map[0]);
 
-// --- Global Variables for Service API ---
 static module_t *global_rgb_led_instance = NULL;
 static rgb_led_api_t rgb_led_service_api = {
     .set_color = api_set_color, .turn_off = api_turn_off, .start_blink = api_start_blink, .start_pulse = api_start_pulse, .release_control = api_release_control};
 
-// --- Module Lifecycle & Base Functions ---
 module_t *rgb_led_indicator_create(const cJSON *config)
 {
-    ESP_LOGI(TAG, "Creating rgb_led_indicator module instance");
-
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module)
-    {
-        ESP_LOGE(TAG, "Failed to allocate memory for module");
-        return NULL;
-    }
-
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)calloc(1, sizeof(rgb_led_private_data_t));
-    if (!private_data)
+    if (!module || !private_data)
     {
-        ESP_LOGE(TAG, "Failed to allocate memory for private data");
+        ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
-        return NULL;
-    }
-    private_data->is_manual_override = false;
-
-    module->state_mutex = xSemaphoreCreateMutex();
-    if (!module->state_mutex)
-    {
-        ESP_LOGE(TAG, "Failed to create state mutex");
         free(private_data);
-        free(module);
+        if (config)
+            cJSON_Delete((cJSON *)config);
         return NULL;
     }
 
     module->private_data = private_data;
+    module->current_config = (cJSON *)config;
 
-    const cJSON *config_node = config ? cJSON_GetObjectItem(config, "config") : NULL;
-    const char *instance_name = CONFIG_RGB_LED_INDICATOR_DEFAULT_INSTANCE_NAME;
-    if (config_node)
-    {
-        const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-        if (cJSON_IsString(name_node) && name_node->valuestring)
-        {
-            instance_name = name_node->valuestring;
-        }
-    }
-    snprintf(module->name, sizeof(module->name), "%s", instance_name);
-
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (parse_config(config_node, private_data) != ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to parse configuration for %s", module->name);
-        vSemaphoreDelete(module->state_mutex);
-        free(private_data);
-        free(module);
+        ESP_LOGE(TAG, "Failed to parse configuration");
+        rgb_led_indicator_deinit(module);
         return NULL;
     }
 
-    if (config)
-    {
-        module->current_config = cJSON_Duplicate(config, true);
-    }
-
+    snprintf(module->name, sizeof(module->name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
     module->init_level = 60;
-
     module->status = MODULE_STATUS_UNINITIALIZED;
     module->base.init = rgb_led_indicator_init;
     module->base.start = rgb_led_indicator_start;
     module->base.handle_event = rgb_led_indicator_handle_event;
     module->base.deinit = rgb_led_indicator_deinit;
-    module->base.enable = rgb_led_indicator_enable;
-    module->base.disable = rgb_led_indicator_disable;
-    module->base.reconfigure = rgb_led_indicator_reconfigure;
-    module->base.get_status = rgb_led_indicator_get_status;
-    global_rgb_led_instance = module;
+    module->base.enable = NULL;
+    module->base.disable = NULL;
+    module->base.reconfigure = NULL;
+    module->base.get_status = NULL;
 
+    global_rgb_led_instance = module;
     ESP_LOGI(TAG, "Rgb_Led_Indicator module created: '%s'", module->name);
     return module;
 }
@@ -199,37 +137,15 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     if (!self)
         return ESP_ERR_INVALID_ARG;
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
-    ESP_LOGI(TAG, "Initializing module: %s", self->name);
+    ESP_LOGI(TAG, "Initializing module: %s (Shift Register Mode)", self->name);
 
-    // რესურსების დალოქვა (უცვლელია)
-    fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->red_pin, self->name);
-    fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->green_pin, self->name);
-    fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->blue_pin, self->name);
+    private_data->sr_handle = (sn74hc595n_writer_handle_t *)fmw_service_get(private_data->sr_writer_service_name);
+    if (!private_data->sr_handle)
+    {
+        ESP_LOGE(TAG, "Shift register writer service '%s' not found!", private_data->sr_writer_service_name);
+        return ESP_ERR_NOT_FOUND;
+    }
 
-    // LEDC კონფიგურაცია
-    ledc_timer_config_t ledc_timer = {
-        .speed_mode = LEDC_MODE, .timer_num = LEDC_TIMER, .duty_resolution = LEDC_RESOLUTION, .freq_hz = LEDC_FREQUENCY, .clk_cfg = LEDC_USE_APB_CLK};
-    ESP_ERROR_CHECK(ledc_timer_config(&ledc_timer));
-
-    ledc_channel_config_t ledc_channel_conf = {
-        .speed_mode = LEDC_MODE, .timer_sel = LEDC_TIMER, .duty = 0, .hpoint = 0, .intr_type = LEDC_INTR_DISABLE};
-
-    ledc_channel_conf.channel = LEDC_CHANNEL_R;
-    ledc_channel_conf.gpio_num = private_data->red_pin;
-    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_conf));
-
-    ledc_channel_conf.channel = LEDC_CHANNEL_G;
-    ledc_channel_conf.gpio_num = private_data->green_pin;
-    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_conf));
-
-    ledc_channel_conf.channel = LEDC_CHANNEL_B;
-    ledc_channel_conf.gpio_num = private_data->blue_pin;
-    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel_conf));
-
-    ESP_ERROR_CHECK(ledc_fade_func_install(0));
-    private_data->is_ledc_active = true; // LEDC ახლა ყოველთვის აქტიურია
-
-    // Queue-ს შექმნა (უცვლელია)
     private_data->command_queue = xQueueCreate(COMMAND_QUEUE_LENGTH, sizeof(led_command_t));
     if (!private_data->command_queue)
     {
@@ -237,19 +153,13 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
         return ESP_ERR_NO_MEM;
     }
 
-    // ★★★ გამოწერების გამარტივება ★★★
-    fmw_event_bus_subscribe("WIFI_CREDENTIALS_NOT_FOUND", self); // ამას wifi_manager აქვეყნებს
-    fmw_event_bus_subscribe("WIFI_EVENT_DISCONNECTED", self);    // ამას wifi_manager აქვეყნებს
-    fmw_event_bus_subscribe("WIFI_EVENT_CONNECTED", self);       // ამას wifi_manager აქვეყნებს
-    fmw_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);        // ამას health_monitor აქვეყნებს
+    fmw_event_bus_subscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
+    fmw_event_bus_subscribe("WIFI_EVENT_DISCONNECTED", self);
+    fmw_event_bus_subscribe("WIFI_EVENT_CONNECTED", self);
+    fmw_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);
 
-    // სერვისის რეგისტრაცია (უცვლელია)
     fmw_service_register(self->name, FMW_SERVICE_TYPE_RGB_LED_API, &rgb_led_service_api);
-
-    // დავარეგისტრიროთ ჩვენი ბრძანებები Command Router-ში
     register_cli_commands(self);
-
-    // LED-ის საწყისი გამორთვა
     set_led_color(private_data, 0, 0, 0);
 
     self->status = MODULE_STATUS_INITIALIZED;
@@ -259,23 +169,17 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
 
 static esp_err_t rgb_led_indicator_start(module_t *self)
 {
-    if (!self)
-        return ESP_ERR_INVALID_ARG;
-    if (self->status != MODULE_STATUS_INITIALIZED)
+    if (!self || self->status != MODULE_STATUS_INITIALIZED)
         return ESP_ERR_INVALID_STATE;
-
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Starting module: %s", self->name);
 
-    BaseType_t task_created = xTaskCreate(
-        led_control_task, "led_task", TASK_STACK_SIZE, self, 5, &private_data->led_task_handle);
-    if (task_created != pdPASS)
+    if (xTaskCreate(led_control_task, "led_task", TASK_STACK_SIZE, self, 5, &private_data->led_task_handle) != pdPASS)
     {
         ESP_LOGE(TAG, "Failed to create LED control task");
         return ESP_FAIL;
     }
 
-    // ★★★ ახალი ლოგიკა: შევამოწმოთ provisioning-ის სტატუსი ★★★
     service_handle_t prov_handle = fmw_service_get("main_ble_provisioning");
     if (prov_handle)
     {
@@ -283,7 +187,6 @@ static esp_err_t rgb_led_indicator_start(module_t *self)
         if (prov_api->is_provisioning_active())
         {
             ESP_LOGI(TAG, "Provisioning is already active. Starting pulse effect.");
-            // პირდაპირ გავუშვათ პულსაციის ბრძანება
             led_command_t cmd = {LED_MODE_PULSE, 255, 162, 0, 3000, false};
             send_command_to_task(self, &cmd);
         }
@@ -298,55 +201,8 @@ static esp_err_t rgb_led_indicator_start(module_t *self)
     return ESP_OK;
 }
 
-static esp_err_t rgb_led_indicator_enable(module_t *self)
-{
-    if (!self)
-        return ESP_ERR_INVALID_ARG;
-    rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
-    if (self->status != MODULE_STATUS_DISABLED)
-        return ESP_OK;
-
-    ESP_LOGI(TAG, "Enabling module %s", self->name);
-    if (private_data->led_task_handle)
-        vTaskResume(private_data->led_task_handle);
-    self->status = MODULE_STATUS_RUNNING;
-    return ESP_OK;
-}
-
-static esp_err_t rgb_led_indicator_disable(module_t *self)
-{
-    if (!self)
-        return ESP_ERR_INVALID_ARG;
-    rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
-    if (self->status != MODULE_STATUS_RUNNING)
-        return ESP_OK;
-
-    ESP_LOGI(TAG, "Disabling module %s", self->name);
-    api_turn_off();
-    if (private_data->led_task_handle)
-        vTaskSuspend(private_data->led_task_handle);
-    self->status = MODULE_STATUS_DISABLED;
-    return ESP_OK;
-}
-
-static esp_err_t rgb_led_indicator_reconfigure(module_t *self, const cJSON *new_config)
-{
-    if (!self || !new_config)
-        return ESP_ERR_INVALID_ARG;
-    ESP_LOGW(TAG, "Reconfiguration for %s is not yet implemented.", self->name);
-    return ESP_ERR_NOT_SUPPORTED;
-}
-
-static module_status_t rgb_led_indicator_get_status(module_t *self)
-{
-    if (!self)
-        return MODULE_STATUS_ERROR;
-    return self->status;
-}
-
 static void rgb_led_indicator_handle_event(module_t *self, const char *event_name, void *event_data)
 {
-    // --- საწყისი შემოწმებები (უცვლელია) ---
     if (!self || !self->private_data || !event_name)
     {
         if (event_data)
@@ -364,8 +220,6 @@ static void rgb_led_indicator_handle_event(module_t *self, const char *event_nam
         return;
     }
 
-    // --- ლოგიკა იწყება აქ ---
-
     ESP_LOGI(TAG, "EVENT HANDLER: Received '%s'", event_name);
 
     for (size_t i = 0; i < event_map_size; ++i)
@@ -374,16 +228,12 @@ static void rgb_led_indicator_handle_event(module_t *self, const char *event_nam
         {
             ESP_LOGI(TAG, "Found matching command for event '%s'", event_name);
 
-            // ვიღებთ ბრძანებას ცხრილიდან
             led_command_t cmd = event_map[i].command;
 
-            // ★★★ ვინახავთ მას, როგორც ბოლო სისტემურ ბრძანებას ★★★
             private_data->last_system_command = cmd;
 
-            // ვაგზავნით ბრძანებას ტასკში
             send_command_to_task(self, &cmd);
 
-            // ვწყვეტთ ძებნას
             goto cleanup;
         }
     }
@@ -401,17 +251,17 @@ static void rgb_led_indicator_deinit(module_t *self)
 {
     if (!self)
         return;
-    ESP_LOGI(TAG, "Deinitializing %s module", self->name);
-    rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
+    ESP_LOGI(TAG, "Deinitializing module '%s'...", self->name);
 
-    if (private_data->led_task_handle)
-        vTaskDelete(private_data->led_task_handle);
-    if (private_data->command_queue)
-        vQueueDelete(private_data->command_queue);
-
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->red_pin, self->name);
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->green_pin, self->name);
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->blue_pin, self->name);
+    if (self->private_data)
+    {
+        rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
+        if (private_data->led_task_handle)
+            vTaskDelete(private_data->led_task_handle);
+        if (private_data->command_queue)
+            vQueueDelete(private_data->command_queue);
+        free(self->private_data);
+    }
 
     fmw_event_bus_unsubscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
     fmw_event_bus_unsubscribe("WIFI_EVENT_DISCONNECTED", self);
@@ -419,188 +269,200 @@ static void rgb_led_indicator_deinit(module_t *self)
     fmw_event_bus_unsubscribe("SYSTEM_HEALTH_ALERT", self);
 
     fmw_service_unregister(self->name);
-
-    // გავაუქმოთ ჩვენი ბრძანებების რეგისტრაცია
     unregister_cli_commands(self);
 
-    global_rgb_led_instance = NULL;
-
-    if (self->private_data)
-        free(self->private_data);
+    if (global_rgb_led_instance == self)
+        global_rgb_led_instance = NULL;
     if (self->current_config)
         cJSON_Delete(self->current_config);
-    if (self->state_mutex)
-        vSemaphoreDelete(self->state_mutex);
     free(self);
 
-    ESP_LOGI(TAG, "Module deinitialized successfully");
+    ESP_LOGI(TAG, "Module deinitialized successfully.");
 }
 
 static esp_err_t parse_config(const cJSON *config, rgb_led_private_data_t *private_data)
 {
     if (!config)
-    {
-        ESP_LOGE(TAG, "Config JSON is NULL. Cannot parse pins.");
         return ESP_ERR_INVALID_ARG;
-    }
-
+    const cJSON *sr_service = cJSON_GetObjectItem(config, "sr_writer_service");
     const cJSON *red_pin = cJSON_GetObjectItem(config, "red_pin");
     const cJSON *green_pin = cJSON_GetObjectItem(config, "green_pin");
     const cJSON *blue_pin = cJSON_GetObjectItem(config, "blue_pin");
 
-    if (!cJSON_IsNumber(red_pin) || !cJSON_IsNumber(green_pin) || !cJSON_IsNumber(blue_pin))
+    if (!cJSON_IsString(sr_service) || !cJSON_IsNumber(red_pin) || !cJSON_IsNumber(green_pin) || !cJSON_IsNumber(blue_pin))
     {
-        ESP_LOGE(TAG, "red_pin, green_pin, and blue_pin must be specified as numbers in config");
+        ESP_LOGE(TAG, "sr_writer_service, red_pin, green_pin, and blue_pin must be specified in config");
         return ESP_ERR_INVALID_ARG;
     }
 
+    snprintf(private_data->sr_writer_service_name, sizeof(private_data->sr_writer_service_name), "%s", sr_service->valuestring);
     private_data->red_pin = red_pin->valueint;
     private_data->green_pin = green_pin->valueint;
     private_data->blue_pin = blue_pin->valueint;
     private_data->is_common_anode = cJSON_IsTrue(cJSON_GetObjectItem(config, "is_common_anode"));
 
-    ESP_LOGI(TAG, "Config parsed: R=%d, G=%d, B=%d, CommonAnode=%s",
-             private_data->red_pin, private_data->green_pin, private_data->blue_pin,
+    ESP_LOGI(TAG, "Config parsed: SR_Service='%s', R=%d, G=%d, B=%d, CommonAnode=%s",
+             private_data->sr_writer_service_name, private_data->red_pin, private_data->green_pin, private_data->blue_pin,
              private_data->is_common_anode ? "true" : "false");
     return ESP_OK;
 }
 
 static void set_led_color(rgb_led_private_data_t *private_data, uint8_t r, uint8_t g, uint8_t b)
 {
-    if (!private_data)
+    if (!private_data || !private_data->sr_handle || !private_data->sr_handle->api)
     {
-        ESP_LOGE(TAG, "set_led_color: private_data is NULL!");
+        ESP_LOGE(TAG, "set_led_color: Shift register handle or API is not available!");
         return;
     }
 
-    ESP_LOGD(TAG, "set_led_color: Request to set RGB(%u, %u, %u)", r, g, b);
+    ESP_LOGD(TAG, "Setting color to R:%d, G:%d, B:%d. Common Anode: %s", r, g, b, private_data->is_common_anode ? "Yes" : "No");
 
-    // გამოვთვალოთ duty cycle-ები is_common_anode-ის გათვალისწინებით
-    uint32_t duty_r = private_data->is_common_anode ? (255 - r) : r;
-    uint32_t duty_g = private_data->is_common_anode ? (255 - g) : g;
-    uint32_t duty_b = private_data->is_common_anode ? (255 - b) : b;
+    // 1. განვსაზღვროთ, რომელი ლოგიკური დონე (true/false) შეესაბამება "ანთებულ" მდგომარეობას.
+    //    - Common Cathode: ON = HIGH = true
+    //    - Common Anode:   ON = LOW  = false
+    bool state_when_on = !private_data->is_common_anode;
 
-    ESP_LOGD(TAG, "set_led_color: Calculated duties - R:%" PRIu32 ", G:%" PRIu32 ", B:%" PRIu32, duty_r, duty_g, duty_b);
+    // 2. განვსაზღვროთ თითოეული პინის საბოლოო მდგომარეობა
+    bool r_state = (r > 127) ? state_when_on : !state_when_on;
+    bool g_state = (g > 127) ? state_when_on : !state_when_on;
+    bool b_state = (b > 127) ? state_when_on : !state_when_on;
 
-    // დავაყენოთ duty და განვაახლოთ LEDC არხები
-    ledc_set_duty(LEDC_MODE, LEDC_CHANNEL_R, duty_r);
-    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_R);
+    ESP_LOGD(TAG, "Pin states to send: R_PIN(%d)=%d, G_PIN(%d)=%d, B_PIN(%d)=%d",
+             private_data->red_pin, r_state,
+             private_data->green_pin, g_state,
+             private_data->blue_pin, b_state);
 
-    ledc_set_duty(LEDC_MODE, LEDC_CHANNEL_G, duty_g);
-    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_G);
+    // 3. ავაწყოთ 8-ბიტიანი მნიშვნელობა (ბაიტი)
+    uint8_t new_chip_state = 0;
+    if (r_state)
+        new_chip_state |= (1 << (private_data->red_pin % 8));
+    if (g_state)
+        new_chip_state |= (1 << (private_data->green_pin % 8));
+    if (b_state)
+        new_chip_state |= (1 << (private_data->blue_pin % 8));
 
-    ledc_set_duty(LEDC_MODE, LEDC_CHANNEL_B, duty_b);
-    ledc_update_duty(LEDC_MODE, LEDC_CHANNEL_B);
+    ESP_LOGD(TAG, "Calculated byte to send to chip 0: 0x%02X", new_chip_state);
 
-    ESP_LOGD(TAG, "set_led_color: Duties updated.");
+    // 4. გავაგზავნოთ ბაიტი shift register-ში ერთი გამოძახებით
+    esp_err_t err = private_data->sr_handle->api->set_chip_pins(private_data->sr_handle->context, 0, new_chip_state);
+
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to set chip pins via service: %s", esp_err_to_name(err));
+    }
+    else
+    {
+        ESP_LOGD(TAG, "Successfully sent new state to shift register.");
+    }
 }
-/**
- * @brief LED-ის მმართველი ტასკი.
- * @details ეს არის მოდულის "გული", რომელიც მუშაობს ფონურ რეჟიმში. ის იღებს
- *          ბრძანებებს Queue-ს საშუალებით და მართავს LED-ის მდგომარეობასა და ეფექტებს
- *          (სტატიკური ფერი, ციმციმი, პულსაცია) არაბლოკირებად რეჟიმში.
- * @param pvParameters მაჩვენებელი მოდულის ინსტანციაზე (`module_t*`).
- */
+
 static void led_control_task(void *pvParameters)
 {
     module_t *self = (module_t *)pvParameters;
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
 
-    // ეს სტრუქტურა ინახავს მიმდინარე აქტიურ ბრძანებას.
     led_command_t active_cmd;
     memset(&active_cmd, 0, sizeof(led_command_t));
     active_cmd.mode = LED_MODE_OFF;
 
-    // ეფექტების მართვის ცვლადები
-    uint32_t last_update_time = 0;
     bool blink_state_on = false;
     uint8_t blink_cycle_count = 0;
+
+    // ცვლადები პროგრამული PWM-ისთვის
+    const int pwm_resolution = 10; // 10 საფეხური სიკაშკაშისთვის
+    int pwm_counter = 0;
 
     ESP_LOGI(TAG, "TASK: LED control task started.");
 
     while (1)
     {
-        // ველოდებით ახალ ბრძანებას. თუ ეფექტი აქტიურია (blink/pulse),
-        // ველოდებით 50ms, რათა ციკლმა შეძლოს ეფექტის განახლება.
-        // თუ სტატიკურია, ველოდებით უსასრულოდ.
-        TickType_t wait_ticks = (active_cmd.mode == LED_MODE_BLINK || active_cmd.mode == LED_MODE_PULSE) ? pdMS_TO_TICKS(50) : portMAX_DELAY;
-
-        // ვცდილობთ ახალი ბრძანების მიღებას.
-        if (xQueueReceive(private_data->command_queue, &active_cmd, wait_ticks) == pdPASS)
+        // 1. ვამოწმებთ ახალ ბრძანებას, მაგრამ არ ვბლოკავთ ტასკს
+        if (xQueueReceive(private_data->command_queue, &active_cmd, 0) == pdPASS)
         {
             ESP_LOGI(TAG, "TASK: New command received: Mode=%d", active_cmd.mode);
             private_data->is_manual_override = active_cmd.is_manual;
-
-            // ახალი ბრძანების მიღებისას ვანულებთ ეფექტის მდგომარეობას
-            last_update_time = xTaskGetTickCount();
             blink_state_on = true;
             blink_cycle_count = 0;
-
-            // თუ ბრძანება არის STATIC ან OFF, ვასრულებთ დაუყოვნებლივ და ვწყვეტთ ეფექტს.
-            if (active_cmd.mode == LED_MODE_STATIC)
-            {
-                set_led_color(private_data, active_cmd.r, active_cmd.g, active_cmd.b);
-                active_cmd.mode = LED_MODE_OFF; // ვაჩერებთ ეფექტს, ვტოვებთ ფერს
-            }
-            else if (active_cmd.mode == LED_MODE_OFF)
-            {
-                set_led_color(private_data, 0, 0, 0);
-            }
         }
 
-        // --- მიმდინარე ეფექტის დამუშავება ---
-
+        // 2. ვამუშავებთ მიმდინარე ბრძანებას
         switch (active_cmd.mode)
         {
-        case LED_MODE_BLINK:
-        {
-            uint32_t now = xTaskGetTickCount();
-            if ((now - last_update_time) * portTICK_PERIOD_MS < active_cmd.param1)
-            {
-                break; // ჯერ არ გასულა ინტერვალი
-            }
-            last_update_time = now;
+        case LED_MODE_STATIC:
+            set_led_color(private_data, active_cmd.r, active_cmd.g, active_cmd.b);
+            active_cmd.mode = LED_MODE_OFF; // ვასრულებთ და ვჩერდებით
+            break;
 
-            // WIFI connected ივენთის სპეციალური, ერთჯერადი დამუშავება
+        case LED_MODE_OFF:
+            set_led_color(private_data, 0, 0, 0);
+            // ველოდებით ახალ ბრძანებას, რომ CPU არ დავტვირთოთ
+            xQueueReceive(private_data->command_queue, &active_cmd, portMAX_DELAY);
+            private_data->is_manual_override = active_cmd.is_manual;
+            blink_state_on = true;
+            blink_cycle_count = 0;
+            continue; // ვიწყებთ ციკლს თავიდან
+
+        case LED_MODE_BLINK:
+            // ... (Blink ლოგიკა უცვლელია) ...
+            if (active_cmd.param1 == 0)
+            {
+                active_cmd.mode = LED_MODE_OFF;
+                break;
+            }
             if (!active_cmd.is_manual && active_cmd.g == 255)
             {
-                if (blink_cycle_count < 6) // 3 ციმციმი = 6 ცვლილება (on/off)
+                if (blink_cycle_count < 6)
                 {
                     blink_state_on = !blink_state_on;
                     set_led_color(private_data, 0, blink_state_on ? 255 : 0, 0);
                     blink_cycle_count++;
+                    vTaskDelay(pdMS_TO_TICKS(active_cmd.param1));
                 }
                 else
                 {
-                    active_cmd.mode = LED_MODE_OFF; // დავასრულეთ, ვთიშავთ
+                    active_cmd.mode = LED_MODE_OFF;
                     set_led_color(private_data, 0, 0, 0);
                 }
             }
-            else // ზოგადი, უწყვეტი ციმციმი
+            else
             {
                 blink_state_on = !blink_state_on;
                 set_led_color(private_data,
                               blink_state_on ? active_cmd.r : 0,
                               blink_state_on ? active_cmd.g : 0,
                               blink_state_on ? active_cmd.b : 0);
+                vTaskDelay(pdMS_TO_TICKS(active_cmd.param1 / 2));
             }
             break;
-        }
+
         case LED_MODE_PULSE:
         {
             if (active_cmd.param1 == 0)
+            {
+                active_cmd.mode = LED_MODE_OFF;
                 break;
-            uint32_t now = xTaskGetTickCount();
-            float sine_wave = sinf((float)now * 2.0f * M_PI / (active_cmd.param1 / portTICK_PERIOD_MS));
-            float brightness = (sine_wave + 1.0f) / 2.0f;
-            set_led_color(private_data,
-                          (uint8_t)(active_cmd.r * brightness),
-                          (uint8_t)(active_cmd.g * brightness),
-                          (uint8_t)(active_cmd.b * brightness));
+            }
+
+            // ვიყენებთ sinf ფუნქციას სიკაშკაშის დონის გამოსათვლელად (0-დან pwm_resolution-მდე)
+            uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
+            float sine_wave = sinf((float)now * 2.0f * M_PI / active_cmd.param1);
+            float brightness_factor = (sine_wave + 1.0f) / 2.0f; // Normalizes to 0.0 - 1.0
+            int brightness_level = (int)(brightness_factor * pwm_resolution);
+
+            // პროგრამული PWM ციკლი
+            pwm_counter = (pwm_counter + 1) % pwm_resolution;
+
+            uint8_t r = (pwm_counter < brightness_level) ? active_cmd.r : 0;
+            uint8_t g = (pwm_counter < brightness_level) ? active_cmd.g : 0;
+            uint8_t b = (pwm_counter < brightness_level) ? active_cmd.b : 0;
+
+            set_led_color(private_data, r, g, b);
+            vTaskDelay(pdMS_TO_TICKS(2)); // 2ms * 10 = 20ms per cycle => 50Hz PWM frequency
             break;
         }
+
         default:
-            // STATIC და OFF რეჟიმებში არაფერს ვაკეთებთ, უბრალოდ ველოდებით ახალ ბრძანებას
+            vTaskDelay(pdMS_TO_TICKS(100));
             break;
         }
     }
@@ -648,13 +510,6 @@ static esp_err_t api_start_pulse(uint8_t r, uint8_t g, uint8_t b, uint32_t perio
     return send_command_to_task(global_rgb_led_instance, &cmd);
 }
 
-/**
- * @brief ათავისუფლებს მექანიკურ კონტროლს და აბრუნებს LED-ს ავტომატურ რეჟიმში.
- * @details ეს ფუნქცია აუქმებს is_manual_override ფლაგს და ხელახლა აგზავნის
- *          ბოლო შენახულ სისტემურ ბრძანებას LED-ის ტასკში, რითაც აღადგენს
- *          ინდიკატორის იმ მდგომარეობას, რომელიც შეესაბამება სისტემის
- *          მიმდინარე სტატუსს.
- */
 static esp_err_t api_release_control()
 {
     if (!global_rgb_led_instance)
@@ -677,11 +532,6 @@ static esp_err_t api_release_control()
 //                      Command Router Integration
 // =========================================================================
 
-/**
- * @internal
- * @brief ბრძანების დამმუშავებელი (handler) ფუნქცია, რომელიც რეგისტრირდება Command Router-ში.
- * @details ეს ფუნქცია პარსავს არგუმენტებს და იძახებს შესაბამის Service API ფუნქციას.
- */
 static esp_err_t led_cmd_handler(int argc, char **argv, void *context)
 {
     if (argc < 2)
@@ -752,10 +602,6 @@ static esp_err_t led_cmd_handler(int argc, char **argv, void *context)
     return ESP_OK;
 }
 
-/**
- * @internal
- * @brief დამხმარე ფუნქცია, რომელიც არეგისტრირებს 'led' ბრძანებას.
- */
 static void register_cli_commands(module_t *self)
 {
     // 1. მოვამზადოთ ბრძანების აღწერის სტრუქტურა.
@@ -792,10 +638,6 @@ static void register_cli_commands(module_t *self)
     }
 }
 
-/**
- * @internal
- * @brief დამხმარე ფუნქცია, რომელიც აუქმებს 'led' ბრძანების რეგისტრაციას.
- */
 static void unregister_cli_commands(module_t *self)
 {
     service_handle_t handle = fmw_service_get("main_cmd_router");

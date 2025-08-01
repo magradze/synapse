@@ -18,6 +18,8 @@ var dir_8b2a2187e6ebda03a762b8631ac4d34a =
     [ "rgb_led_interface.h", "rgb__led__interface_8h.html", "rgb__led__interface_8h" ],
     [ "security_status_interface.h", "security__status__interface_8h.html", "security__status__interface_8h" ],
     [ "service_types.h", "service__types_8h.html", "service__types_8h" ],
+    [ "sn74hc595n_writer_interface.h", "sn74hc595n__writer__interface_8h.html", "sn74hc595n__writer__interface_8h" ],
+    [ "spi_bus_interface.h", "spi__bus__interface_8h.html", "spi__bus__interface_8h" ],
     [ "ssd1306_interface.h", "ssd1306__interface_8h.html", "ssd1306__interface_8h" ],
     [ "storage_interface.h", "storage__interface_8h.html", "storage__interface_8h" ],
     [ "system_manager_interface.h", "system__manager__interface_8h.html", "system__manager__interface_8h" ],

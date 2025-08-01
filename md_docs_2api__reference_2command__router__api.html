@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
   <div class="headertitle"><div class="title">Synapse Command Router API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md262"></a> </p>
-<h1><a class="anchor" id="autotoc_md263"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md282"></a> </p>
+<h1><a class="anchor" id="autotoc_md283"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code>Command Router</code> მოდულის საჯარო Service API-ს, რომელიც ხელმისაწვდომია სხვა მოდულებისთვის <code>Service Locator</code>-ის მეშვეობით. ეს API საშუალებას აძლევს ნებისმიერ მოდულს, დაარეგისტრიროს და მართოს საკუთარი ბრძანებები ცენტრალიზებულად და <b>კონფლიქტების გარეშე</b>.</p>
 <p><b>სერვისის სახელი:</b> <code>main_cmd_router</code> (ან როგორც მითითებულია <code>config.json</code>-ში) <b>სერვისის ტიპი:</b> <code>FMW_SERVICE_TYPE_CMD_ROUTER_API</code> <b>ინტერფეისის ჰედერი:</b> <code><a class="el" href="cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module.">cmd_router_interface.h</a></code></p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md265"></a>
+<h1><a class="anchor" id="autotoc_md285"></a>
 ⚙️ API სტრუქტურა (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)</h1>
 <p>ეს არის სტრუქტურა, რომელიც შეიცავს ფუნქციის მაჩვენებლებს <code>Command Router</code>-ის სამართავად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
@@ -111,9 +111,9 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 <div class="ttc" id="astructcmd__router__api__t_html"><div class="ttname"><a href="structcmd__router__api__t.html">cmd_router_api_t</a></div><div class="ttdoc">The public Service API structure for the Command Router.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:79</div></div>
 <div class="ttc" id="astructcmd__t_html"><div class="ttname"><a href="structcmd__t.html">cmd_t</a></div><div class="ttdoc">Defines the structure for a single command to be registered.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:29</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md267"></a>
+<h1><a class="anchor" id="autotoc_md287"></a>
 📚 API ფუნქციები</h1>
-<h2><a class="anchor" id="autotoc_md268"></a>
+<h2><a class="anchor" id="autotoc_md288"></a>
 &lt;tt&gt;esp_err_t register_command(const cmd_t *command)&lt;/tt&gt;</h2>
 <p>არეგისტრირებს ახალ ბრძანებას სისტემის <code>Command Router</code>-ში. რეგისტრაციის შემდეგ, ბრძანება ხელმისაწვდომი ხდება ყველა წყაროდან (Serial, Event Bus და ა.შ.).</p>
 <ul>
@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 </b></b></li>
 </ul>
 <p><b><b></b></b></p>
-<h2><a class="anchor" id="autotoc_md270"></a>
+<h2><a class="anchor" id="autotoc_md290"></a>
 &lt;tt&gt;esp_err_t unregister_command(const char *command_name)&lt;/tt&gt;</h2>
 <p><b><b></b></b></p>
 <p><b><b>შლის (აუქმებს რეგისტრაციას) ადრე დარეგისტრირებულ ბრძანებას.</b></b></p>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 </ul>
 <p></b></b></p>
 <p><b><b><b><b><b></b></b></b></b></b></p>
-<h2><a class="anchor" id="autotoc_md272"></a>
+<h2><a class="anchor" id="autotoc_md292"></a>
 &lt;tt&gt;bool is_command_registered(const char *command_name)&lt;/tt&gt;</h2>
 <p><b><b><b><b><b></b></b></b></b></b></p>
 <p><b><b><b><b><b>ამოწმებს, არის თუ არა მითითებული სახელის მქონე ბრძანება უკვე რეგისტრირებული. ეს ფუნქცია კრიტიკულად მნიშვნელოვანია იმ მოდულებისთვის, რომელთა მრავალი ინსტანციაც შეიძლება არსებობდეს სისტემაში, რათა თავიდან აიცილონ ერთი და იმავე ბრძანების განმეორებითი რეგისტრაცია.</b></b></b></b></b></p>
@@ -180,7 +180,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 </ul>
 <p></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b></b></b></b></b></b></b></b></p>
-<h1><a class="anchor" id="autotoc_md274"></a>
+<h1><a class="anchor" id="autotoc_md294"></a>
 📖 დამხმარე სტრუქტურა (&lt;tt&gt;cmd_t&lt;/tt&gt;)</h1>
 <p><b><b><b><b><b><b><b></b></b></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b>ეს სტრუქტურა გამოიყენება <code>register_command</code> ფუნქციისთვის ბრძანების სრულად აღსაწერად.</b></b></b></b></b></b></b></p>
@@ -201,7 +201,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 <p><b><b><b><b><b><b><b></p><hr  />
 <p></b></b></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b></b></b></b></b></b></b></b></p>
-<h1><a class="anchor" id="autotoc_md276"></a>
+<h1><a class="anchor" id="autotoc_md296"></a>
 💡 გამოყენების პატერნი: კონფლიქტისგან დაცული რეგისტრაცია</h1>
 <p><b><b><b><b><b><b><b></b></b></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b>იმისათვის, რომ თავიდან ავიცილოთ კონფლიქტი, როდესაც სისტემაში ერთი და იმავე ტიპის მრავალი მოდული არსებობს (მაგ., რამდენიმე რელე), გამოიყენეთ **"პირობითი, ერთჯერადი რეგისტრაციის"** პატერნი.</b></b></b></b></b></b></b></p>

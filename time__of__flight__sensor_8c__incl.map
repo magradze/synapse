@@ -1,0 +1,66 @@
+<map id="components/modules/sensors/time_of_flight_sensor/src/time_of_flight_sensor.c" name="components/modules/sensors/time_of_flight_sensor/src/time_of_flight_sensor.c">
+<area shape="rect" id="Node000001" title="Driver for I2C&#45;based Time&#45;of&#45;Flight (TOF) distance sensor VL6180X." alt="" coords="567,5,757,75"/>
+<area shape="rect" id="Node000002" href="$time__of__flight__sensor_8h.html" title="Public header for the Time&#45;of&#45;Flight (TOF) sensor module." alt="" coords="18,123,191,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="567,60,187,123,186,118,566,55"/>
+<area shape="rect" id="Node000003" href="$base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="267,196,388,221"/>
+<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="570,77,462,125,404,158,356,190,353,186,401,154,459,120,568,72"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="103,269,253,295"/>
+<area shape="poly" id="edge37_Node000001_Node000010" title=" " alt="" coords="568,64,495,85,414,113,332,151,256,198,222,228,196,260,192,256,219,225,252,194,329,146,412,109,494,80,566,59"/>
+<area shape="rect" id="Node000012" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="491,123,574,148"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="617,77,562,116,559,112,614,73"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="412,196,496,221"/>
+<area shape="poly" id="edge36_Node000001_Node000013" title=" " alt="" coords="568,68,521,91,500,107,481,124,466,152,459,182,453,181,461,150,477,121,497,102,519,87,566,64"/>
+<area shape="rect" id="Node000014" href="$event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1069,196,1170,221"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="738,72,903,146,982,171,1057,190,1055,195,981,176,901,150,736,77"/>
+<area shape="rect" id="Node000016" href="$event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="520,196,687,221"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="653,76,614,184,609,182,648,74"/>
+<area shape="rect" id="Node000017" href="$service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="700,123,832,148"/>
+<area shape="poly" id="edge24_Node000001_Node000017" title=" " alt="" coords="701,73,744,111,741,115,698,77"/>
+<area shape="rect" id="Node000019" href="$i2c__bus__interface_8h.html" title="Public Service API contract for the I2C Bus module." alt="" coords="1195,196,1343,221"/>
+<area shape="poly" id="edge27_Node000001_Node000019" title=" " alt="" coords="758,70,894,120,920,134,947,145,1050,169,1181,191,1180,196,1049,174,945,151,918,138,892,125,756,75"/>
+<area shape="rect" id="Node000021" href="$timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="711,196,845,221"/>
+<area shape="poly" id="edge32_Node000001_Node000021" title=" " alt="" coords="667,74,674,111,691,146,714,170,741,188,738,192,710,174,686,150,669,113,661,75"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="958,123,1075,148"/>
+<area shape="poly" id="edge38_Node000001_Node000022" title=" " alt="" coords="758,64,960,117,959,122,756,69"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="1099,123,1169,148"/>
+<area shape="poly" id="edge39_Node000001_Node000023" title=" " alt="" coords="757,55,1086,120,1085,125,756,61"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="1193,123,1264,148"/>
+<area shape="poly" id="edge40_Node000001_Node000024" title=" " alt="" coords="757,51,949,79,1180,120,1179,125,948,84,756,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,145,279,189,278,194,140,151"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,269,79,295"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="102,150,55,258,50,255,97,147"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="278,269,374,295"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="330,222,329,256,324,256,324,222"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="737,269,819,295"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="389,217,400,219,560,241,723,266,722,272,559,246,399,224,388,222"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="844,269,915,295"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="389,217,400,219,519,232,613,240,709,249,831,267,830,272,708,254,613,245,518,238,399,224,388,222"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="957,269,1039,295"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="389,217,400,219,548,234,664,243,779,251,928,267,944,269,943,274,927,272,779,256,663,248,547,240,399,224,388,223"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="282,224,93,271,92,266,281,219"/>
+<area shape="rect" id="Node000009" href="$system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="398,269,550,295"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="352,219,439,261,437,266,350,224"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="304,224,216,266,214,261,302,219"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="575,269,712,295"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="379,219,579,264,578,269,378,224"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="522,150,479,189,475,185,518,146"/>
+<area shape="poly" id="edge17_Node000014_Node000007" title=" " alt="" coords="1101,224,1031,265,1028,260,1098,219"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="1082,269,1157,295"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="1122,222,1122,256,1117,256,1117,222"/>
+<area shape="poly" id="edge20_Node000016_Node000006" title=" " alt="" coords="648,219,831,266,830,271,647,224"/>
+<area shape="poly" id="edge19_Node000016_Node000007" title=" " alt="" coords="667,219,944,268,943,274,666,224"/>
+<area shape="poly" id="edge22_Node000016_Node000010" title=" " alt="" coords="535,224,260,270,260,264,535,219"/>
+<area shape="poly" id="edge23_Node000016_Node000011" title=" " alt="" coords="612,220,632,256,628,259,608,223"/>
+<area shape="poly" id="edge21_Node000016_Node000015" title=" " alt="" coords="687,218,1052,267,1069,269,1068,275,1051,272,686,223"/>
+<area shape="poly" id="edge25_Node000017_Node000007" title=" " alt="" coords="829,145,939,169,984,182,1008,194,1015,209,1017,226,1011,257,1006,256,1012,225,1010,211,1004,198,982,187,938,174,828,151"/>
+<area shape="rect" id="Node000018" href="$service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="869,196,993,221"/>
+<area shape="poly" id="edge26_Node000017_Node000018" title=" " alt="" coords="794,146,893,188,891,193,792,150"/>
+<area shape="poly" id="edge31_Node000019_Node000006" title=" " alt="" coords="1207,224,929,274,928,269,1206,219"/>
+<area shape="poly" id="edge28_Node000019_Node000007" title=" " alt="" coords="1226,224,1052,269,1051,264,1225,219"/>
+<area shape="poly" id="edge30_Node000019_Node000015" title=" " alt="" coords="1246,224,1157,266,1155,261,1244,219"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1221,269,1316,295"/>
+<area shape="poly" id="edge29_Node000019_Node000020" title=" " alt="" coords="1271,222,1271,256,1266,256,1266,222"/>
+<area shape="poly" id="edge35_Node000021_Node000005" title=" " alt="" coords="781,222,781,256,775,256,775,222"/>
+<area shape="poly" id="edge34_Node000021_Node000006" title=" " alt="" coords="796,219,853,259,850,263,793,224"/>
+<area shape="poly" id="edge33_Node000021_Node000007" title=" " alt="" coords="814,219,950,263,949,268,813,224"/>
+</map>

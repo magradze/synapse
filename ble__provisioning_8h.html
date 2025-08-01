@@ -188,9 +188,9 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>შექმნილი მოდული უნდა დარეგისტრირდეს system_manager-ში </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>მეხსიერება უნდა გათავისუფლდეს module-&gt;base.destroy() ფუნქციით</dd></dl>
 <p>ქმნის ახალ ble_provisioning მოდულის ინსტანციას</p>
-<p>This function allocates memory for the module and its private data, sets the instance name and other parameters based on Kconfig defaults, and then overrides them with any values provided in the JSON config. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This function allocates memory for the module and its private data, parses configuration from Kconfig and JSON, and sets up the module's base function pointers. The dynamic device name is constructed later, in the <code>init</code> phase, to ensure service dependencies are met. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the module's configuration. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the module's configuration. The module takes ownership of this object if it's duplicated. </td></tr>
   </table>
   </dd>
 </dl>

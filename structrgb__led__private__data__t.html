@@ -101,32 +101,39 @@ Collaboration diagram for rgb_led_private_data_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structrgb__led__private__data__t__coll__graph.png" border="0" usemap="#argb__led__private__data__t_coll__map" alt="Collaboration graph"/></div>
 <map name="argb__led__private__data__t_coll__map" id="argb__led__private__data__t_coll__map">
-<area shape="rect" title=" " alt="" coords="5,93,176,119"/>
-<area shape="rect" href="structled__command__t.html" title=" " alt="" coords="27,5,154,31"/>
-<area shape="poly" title=" " alt="" coords="93,45,93,93,88,93,88,45"/>
+<area shape="rect" title=" " alt="" coords="120,181,291,207"/>
+<area shape="rect" href="structsn74hc595n__writer__handle__t.html" title="The handle type for the SN74HC595N writer service." alt="" coords="5,93,213,119"/>
+<area shape="poly" title=" " alt="" coords="134,126,194,179,190,183,131,130"/>
+<area shape="rect" href="structsn74hc595n__writer__api__t.html" title="The public Service API structure for the SN74HC595N writer module." alt="" coords="17,5,201,31"/>
+<area shape="poly" title=" " alt="" coords="112,45,112,93,107,93,107,45"/>
+<area shape="rect" href="structled__command__t.html" title=" " alt="" coords="238,93,365,119"/>
+<area shape="poly" title=" " alt="" coords="280,130,220,183,217,179,277,126"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aaa48790b089a027c26942f31a399092e" id="r_aaa48790b089a027c26942f31a399092e"><td class="memItemLeft" align="right" valign="top"><a id="aaa48790b089a027c26942f31a399092e" name="aaa48790b089a027c26942f31a399092e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>red_pin</b></td></tr>
-<tr class="separator:aaa48790b089a027c26942f31a399092e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c65ee2c10c03847fdf4a431cdd81171" id="r_a7c65ee2c10c03847fdf4a431cdd81171"><td class="memItemLeft" align="right" valign="top"><a id="a7c65ee2c10c03847fdf4a431cdd81171" name="a7c65ee2c10c03847fdf4a431cdd81171"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>green_pin</b></td></tr>
-<tr class="separator:a7c65ee2c10c03847fdf4a431cdd81171"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6c40266cbcec56e941dc0e5f520bdd7" id="r_aa6c40266cbcec56e941dc0e5f520bdd7"><td class="memItemLeft" align="right" valign="top"><a id="aa6c40266cbcec56e941dc0e5f520bdd7" name="aa6c40266cbcec56e941dc0e5f520bdd7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>blue_pin</b></td></tr>
-<tr class="separator:aa6c40266cbcec56e941dc0e5f520bdd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b9ea4b7fa3fcf3f9d002ea20b89a77" id="r_aa1b9ea4b7fa3fcf3f9d002ea20b89a77"><td class="memItemLeft" align="right" valign="top"><a id="aa1b9ea4b7fa3fcf3f9d002ea20b89a77" name="aa1b9ea4b7fa3fcf3f9d002ea20b89a77"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>sr_writer_service_name</b> [32]</td></tr>
+<tr class="separator:aa1b9ea4b7fa3fcf3f9d002ea20b89a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a271b72f0ca79c10c7ae7384cf0538888" id="r_a271b72f0ca79c10c7ae7384cf0538888"><td class="memItemLeft" align="right" valign="top"><a id="a271b72f0ca79c10c7ae7384cf0538888" name="a271b72f0ca79c10c7ae7384cf0538888"></a>
+<a class="el" href="structsn74hc595n__writer__handle__t.html">sn74hc595n_writer_handle_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sr_handle</b></td></tr>
+<tr class="separator:a271b72f0ca79c10c7ae7384cf0538888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a635df821f7903fedfbd8b33e01ac49a3" id="r_a635df821f7903fedfbd8b33e01ac49a3"><td class="memItemLeft" align="right" valign="top"><a id="a635df821f7903fedfbd8b33e01ac49a3" name="a635df821f7903fedfbd8b33e01ac49a3"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>red_pin</b></td></tr>
+<tr class="separator:a635df821f7903fedfbd8b33e01ac49a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab481aef2c0d6533694085e4f8e91abd6" id="r_ab481aef2c0d6533694085e4f8e91abd6"><td class="memItemLeft" align="right" valign="top"><a id="ab481aef2c0d6533694085e4f8e91abd6" name="ab481aef2c0d6533694085e4f8e91abd6"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>green_pin</b></td></tr>
+<tr class="separator:ab481aef2c0d6533694085e4f8e91abd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2ff3fc4d61ef04d08a2c8509ee82a5" id="r_a3f2ff3fc4d61ef04d08a2c8509ee82a5"><td class="memItemLeft" align="right" valign="top"><a id="a3f2ff3fc4d61ef04d08a2c8509ee82a5" name="a3f2ff3fc4d61ef04d08a2c8509ee82a5"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>blue_pin</b></td></tr>
+<tr class="separator:a3f2ff3fc4d61ef04d08a2c8509ee82a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f195df856fd10d00bdf7a9d2e0fbe30" id="r_a4f195df856fd10d00bdf7a9d2e0fbe30"><td class="memItemLeft" align="right" valign="top"><a id="a4f195df856fd10d00bdf7a9d2e0fbe30" name="a4f195df856fd10d00bdf7a9d2e0fbe30"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_common_anode</b></td></tr>
 <tr class="separator:a4f195df856fd10d00bdf7a9d2e0fbe30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24fc35c23cc49da0c6aff162a6c195f4" id="r_a24fc35c23cc49da0c6aff162a6c195f4"><td class="memItemLeft" align="right" valign="top"><a id="a24fc35c23cc49da0c6aff162a6c195f4" name="a24fc35c23cc49da0c6aff162a6c195f4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_manual_override</b></td></tr>
 <tr class="separator:a24fc35c23cc49da0c6aff162a6c195f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8d0fa8724cedd6f0a84ee4261cf1bdd" id="r_aa8d0fa8724cedd6f0a84ee4261cf1bdd"><td class="memItemLeft" align="right" valign="top"><a id="aa8d0fa8724cedd6f0a84ee4261cf1bdd" name="aa8d0fa8724cedd6f0a84ee4261cf1bdd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_ledc_active</b></td></tr>
-<tr class="separator:aa8d0fa8724cedd6f0a84ee4261cf1bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe16ad1c730be5f68c033c8ada24fea5" id="r_afe16ad1c730be5f68c033c8ada24fea5"><td class="memItemLeft" align="right" valign="top"><a id="afe16ad1c730be5f68c033c8ada24fea5" name="afe16ad1c730be5f68c033c8ada24fea5"></a>
 TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>led_task_handle</b></td></tr>
 <tr class="separator:afe16ad1c730be5f68c033c8ada24fea5"><td class="memSeparator" colspan="2">&#160;</td></tr>

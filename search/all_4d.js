@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🎓_20best_20practices_0',['🎓 Best Practices',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1123',1,'']]]
+  ['🆔_20მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_0',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]]
 ];

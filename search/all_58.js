@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📖_20დამხმარე_20სტრუქტურა_20tt_20cmd_5ft_20tt_0',['📖 დამხმარე სტრუქტურა (&lt;tt&gt;cmd_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md274',1,'']]]
+  ['💥_20breaking_20changes_0',['💥 Breaking Changes',['../md_docs_2changelog_2v5.html#autotoc_md818',1,'']]]
 ];

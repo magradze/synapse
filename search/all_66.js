@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1103',1,'']]]
+  ['📶_20მოდული_20tt_20wifi_5fmanager_20tt_0',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]],
+  ['📶_20wifi_20manager_20service_20api_1',['📶 WiFi Manager Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md300',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🔑_20გასაღების_20ფორმატი_20dot_20notation_0',['🔑 გასაღების ფორმატი (Dot-Notation)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md296',1,'']]],
-  ['🔑_20key_20value_20ოპერაციები_1',['🔑 Key-Value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md625',1,'']]]
+  ['📲_20მოდული_20tt_20ble_5fprovisioning_20tt_0',['📲 მოდული &lt;tt&gt;ble_provisioning&lt;/tt&gt;',['../md_components_2modules_2provisioning_2ble__provisioning_2README.html',1,'']]],
+  ['📲_20synapse_20provisioning_20module_20api_20reference_1',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]]
 ];

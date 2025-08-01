@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['changelog_0',['Changelog',['../md_docs_2changelog_2CHANGELOG__2025-06-28.html',1,'']]],
+  ['changelog_0',['changelog',['../md_docs_2changelog_2v5.html',1,'ცვლილებების ისტორია (Changelog)'],['../md_docs_2changelog_2CHANGELOG__2025-06-28.html',1,'Changelog']]],
   ['changelog_202025_2006_2026_1',['CHANGELOG - 2025-06-26',['../md_docs_2changelog_2CHANGELOG__2025-06-26.html',1,'']]],
   ['changelog_3a_20led_5fblinker_20ინიციალიზაციის_20პრობლემის_20დიაგნოსტიკა_20და_20გამოსწორება_2',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
   ['check_5fconventions_20py_20tt_3',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],

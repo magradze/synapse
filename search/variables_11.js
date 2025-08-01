@@ -8,6 +8,7 @@ var searchData=
   ['title_5',['title',['../structstatic__menu__t.html#a280d0f7b4e44f8ee35a737f6abf72a8a',1,'static_menu_t']]],
   ['toggle_6',['toggle',['../structrelay__api__t.html#acecbd05b7a9a69a2ec053b70549419f6',1,'relay_api_t']]],
   ['top_5fvisible_5fitem_7',['top_visible_item',['../structui__manager__private__data__t.html#a6ebaaf2558a4fd03fc0e8d44918f04f5',1,'ui_manager_private_data_t']]],
-  ['turn_5foff_8',['turn_off',['../structrgb__led__api__t.html#a1e7bd763888a4afbe12354d27250ecd3',1,'rgb_led_api_t']]],
-  ['type_9',['type',['../structservice__entry__t.html#a2ffb19a8df6aa8318e4fca7de82b22a3',1,'service_entry_t']]]
+  ['transmit_8',['transmit',['../structspi__bus__api__t.html#a14569536f7044a7dc918581db66cf059',1,'spi_bus_api_t']]],
+  ['turn_5foff_9',['turn_off',['../structrgb__led__api__t.html#a1e7bd763888a4afbe12354d27250ecd3',1,'rgb_led_api_t']]],
+  ['type_10',['type',['../structservice__entry__t.html#a2ffb19a8df6aa8318e4fca7de82b22a3',1,'service_entry_t']]]
 ];

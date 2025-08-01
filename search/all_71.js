@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🛰️_20მოდული_3a_20connectivity_20watchdog_0',['🛰️ მოდული: Connectivity Watchdog',['../md_components_2modules_2system_2connectivity__watchdog_2README.html',1,'']]]
+  ['🖥️_20მოდული_3a_20tt_20ui_5fmanager_20tt_0',['🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;',['../md_components_2modules_2utilities_2ui__manager_2README.html',1,'']]]
 ];

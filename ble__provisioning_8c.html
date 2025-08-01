@@ -107,6 +107,7 @@ $(document).ready(function(){initNavTree('ble__provisioning_8c.html',''); initRe
 <code>#include &quot;<a class="el" href="event__data__wrapper_8h_source.html">event_data_wrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="service__locator_8h_source.html">service_locator.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="service__types_8h_source.html">service_types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="device__identity__interface_8h_source.html">device_identity_interface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="framework__config_8h_source.html">framework_config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="logging_8h_source.html">logging.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -123,75 +124,78 @@ Include dependency graph for ble_provisioning.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="ble__provisioning_8c__incl.png" border="0" usemap="#acomponents_2modules_2provisioning_2ble__provisioning_2src_2ble__provisioning_8c" alt=""/></div>
 <map name="acomponents_2modules_2provisioning_2ble__provisioning_2src_2ble__provisioning_8c" id="acomponents_2modules_2provisioning_2ble__provisioning_2src_2ble__provisioning_8c">
-<area shape="rect" title="ESP&#45;IDF native BLE provisioning implementation with a Service API." alt="" coords="1219,5,1436,60"/>
-<area shape="rect" href="ble__provisioning_8h.html" title="BLE&#45;based WiFi provisioning service." alt="" coords="262,115,403,141"/>
-<area shape="poly" title=" " alt="" coords="1219,41,864,63,643,83,422,111,395,115,394,110,422,105,643,78,863,58,1218,36"/>
-<area shape="rect" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="332,196,453,221"/>
-<area shape="poly" title=" " alt="" coords="1219,36,1035,38,818,48,712,57,615,70,534,88,474,110,452,125,434,145,407,185,402,182,430,141,449,121,471,106,532,83,614,65,711,52,818,42,1035,32,1219,30"/>
-<area shape="rect" title=" " alt="" coords="668,269,819,295"/>
-<area shape="poly" title=" " alt="" coords="1219,41,1035,54,929,66,823,81,722,102,633,128,563,160,537,178,519,197,514,209,519,220,539,234,572,247,655,266,654,271,570,252,536,239,515,223,509,209,514,195,534,174,560,155,631,123,720,97,822,76,929,60,1035,49,1218,36"/>
-<area shape="rect" href="ble__prov__interface_8h.html" title="Public Service API contract for the BLE Provisioning module." alt="" coords="529,196,683,221"/>
-<area shape="poly" title=" " alt="" coords="1219,52,1075,77,919,111,771,153,651,194,649,189,769,148,917,105,1074,72,1218,47"/>
-<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1326,196,1427,221"/>
-<area shape="poly" title=" " alt="" coords="1320,61,1311,103,1311,125,1316,147,1330,168,1349,186,1345,190,1326,172,1312,149,1306,126,1305,102,1314,60"/>
-<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="708,196,875,221"/>
-<area shape="poly" title=" " alt="" coords="1219,59,1126,82,1030,111,919,153,829,193,827,188,917,148,1028,105,1125,77,1218,54"/>
-<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1068,115,1200,141"/>
-<area shape="poly" title=" " alt="" coords="1274,62,1171,112,1169,107,1272,58"/>
-<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1177,196,1301,221"/>
-<area shape="poly" title=" " alt="" coords="1316,62,1254,185,1249,183,1312,59"/>
-<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="951,196,1101,221"/>
-<area shape="poly" title=" " alt="" coords="1219,42,1176,50,1133,63,1093,83,1057,110,1045,126,1037,145,1029,183,1024,181,1032,143,1041,123,1053,106,1090,78,1131,58,1175,45,1218,36"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="1326,115,1409,141"/>
-<area shape="poly" title=" " alt="" coords="1341,59,1359,101,1354,103,1336,61"/>
-<area shape="rect" title=" " alt="" coords="1452,196,1536,221"/>
-<area shape="poly" title=" " alt="" coords="1366,58,1423,106,1456,145,1481,182,1477,185,1451,149,1419,110,1363,62"/>
-<area shape="rect" title=" " alt="" coords="1484,115,1555,141"/>
-<area shape="poly" title=" " alt="" coords="1382,58,1485,107,1482,112,1380,62"/>
-<area shape="rect" title=" " alt="" coords="1579,115,1649,141"/>
-<area shape="poly" title=" " alt="" coords="1419,57,1568,105,1575,108,1573,113,1566,111,1417,63"/>
-<area shape="rect" title=" " alt="" coords="1674,115,1791,141"/>
-<area shape="poly" title=" " alt="" coords="1437,54,1663,105,1678,109,1677,115,1661,111,1436,59"/>
-<area shape="rect" title=" " alt="" coords="1816,115,1903,141"/>
-<area shape="poly" title=" " alt="" coords="1436,43,1610,67,1708,85,1804,105,1816,109,1815,114,1803,111,1707,90,1609,73,1436,48"/>
-<area shape="rect" title=" " alt="" coords="1927,115,2133,141"/>
-<area shape="poly" title=" " alt="" coords="1437,44,1916,105,1950,111,1949,116,1915,111,1436,49"/>
-<area shape="rect" title=" " alt="" coords="2157,108,2343,148"/>
-<area shape="poly" title=" " alt="" coords="1436,38,1750,63,1944,82,2143,105,2143,111,1944,87,1749,68,1436,44"/>
-<area shape="rect" title=" " alt="" coords="2367,115,2445,141"/>
-<area shape="poly" title=" " alt="" coords="1436,35,1917,60,2171,80,2276,92,2356,105,2367,108,2366,113,2355,111,2275,97,2171,85,1916,65,1436,41"/>
-<area shape="poly" title=" " alt="" coords="344,139,377,183,373,186,339,142"/>
-<area shape="rect" title=" " alt="" coords="937,269,1019,295"/>
-<area shape="poly" title=" " alt="" coords="404,130,522,137,662,150,794,168,847,180,887,194,910,207,930,223,963,256,959,260,927,227,907,211,885,198,846,185,793,173,662,155,522,142,404,135"/>
-<area shape="rect" title=" " alt="" coords="5,269,79,295"/>
-<area shape="poly" title=" " alt="" coords="312,143,77,265,75,261,310,138"/>
-<area shape="rect" title=" " alt="" coords="279,269,375,295"/>
-<area shape="poly" title=" " alt="" coords="384,223,349,261,345,257,380,220"/>
-<area shape="rect" title=" " alt="" coords="399,269,482,295"/>
-<area shape="poly" title=" " alt="" coords="403,220,428,257,423,260,398,223"/>
-<area shape="rect" title=" " alt="" coords="843,269,913,295"/>
-<area shape="poly" title=" " alt="" coords="454,214,619,234,830,267,829,272,618,239,453,219"/>
-<area shape="poly" title=" " alt="" coords="454,213,691,238,924,267,924,272,690,243,453,219"/>
-<area shape="poly" title=" " alt="" coords="332,224,93,272,92,267,331,219"/>
-<area shape="rect" href="system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="103,269,255,295"/>
-<area shape="poly" title=" " alt="" coords="359,224,228,267,226,262,358,219"/>
-<area shape="poly" title=" " alt="" coords="450,219,674,264,673,269,448,224"/>
-<area shape="rect" title=" " alt="" coords="507,269,644,295"/>
-<area shape="poly" title=" " alt="" coords="423,219,534,262,532,267,421,224"/>
-<area shape="poly" title=" " alt="" coords="580,224,481,266,479,261,578,219"/>
-<area shape="poly" title=" " alt="" coords="670,219,924,267,923,272,669,224"/>
-<area shape="poly" title=" " alt="" coords="1326,222,1033,274,1032,268,1325,216"/>
-<area shape="rect" title=" " alt="" coords="1167,269,1242,295"/>
-<area shape="poly" title=" " alt="" coords="1350,224,1246,266,1244,262,1348,219"/>
-<area shape="poly" title=" " alt="" coords="807,219,855,258,852,263,804,223"/>
-<area shape="poly" title=" " alt="" coords="822,219,936,262,934,267,820,224"/>
-<area shape="poly" title=" " alt="" coords="786,223,761,260,756,257,781,220"/>
-<area shape="poly" title=" " alt="" coords="757,224,624,267,622,262,756,219"/>
-<area shape="poly" title=" " alt="" coords="858,219,1154,269,1153,275,857,224"/>
-<area shape="poly" title=" " alt="" coords="1137,141,1134,180,1127,203,1115,223,1097,240,1076,254,1033,272,1031,267,1074,249,1094,236,1111,220,1122,200,1128,179,1132,141"/>
-<area shape="poly" title=" " alt="" coords="1151,139,1214,186,1211,190,1148,143"/>
-<area shape="poly" title=" " alt="" coords="1003,224,916,266,913,261,1001,219"/>
-<area shape="poly" title=" " alt="" coords="1387,139,1465,186,1462,191,1385,143"/>
+<area shape="rect" title="ESP&#45;IDF native BLE provisioning implementation with a Service API." alt="" coords="1055,5,1273,60"/>
+<area shape="rect" href="ble__provisioning_8h.html" title="BLE&#45;based WiFi provisioning service." alt="" coords="208,115,349,141"/>
+<area shape="poly" title=" " alt="" coords="1055,48,364,120,363,115,1055,43"/>
+<area shape="rect" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="286,196,407,221"/>
+<area shape="poly" title=" " alt="" coords="1056,44,846,66,726,85,607,111,545,129,483,151,384,193,382,188,482,146,543,124,606,105,725,80,845,61,1055,38"/>
+<area shape="rect" title=" " alt="" coords="1106,269,1257,295"/>
+<area shape="poly" title=" " alt="" coords="1166,60,1171,104,1179,127,1191,146,1208,160,1226,166,1264,168,1301,170,1319,178,1336,194,1342,208,1342,220,1336,232,1326,241,1296,257,1260,269,1259,263,1294,252,1323,237,1332,228,1337,219,1337,209,1331,198,1316,182,1300,175,1263,173,1225,172,1206,165,1187,150,1174,129,1166,105,1160,61"/>
+<area shape="rect" href="ble__prov__interface_8h.html" title="Public Service API contract for the BLE Provisioning module." alt="" coords="5,196,160,221"/>
+<area shape="poly" title=" " alt="" coords="1055,36,850,39,600,50,477,59,364,72,268,89,197,110,169,126,143,146,102,187,98,183,139,142,166,121,195,106,267,84,363,67,477,54,600,45,849,34,1055,31"/>
+<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="853,196,955,221"/>
+<area shape="poly" title=" " alt="" coords="1126,63,934,191,931,186,1123,58"/>
+<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="979,196,1146,221"/>
+<area shape="poly" title=" " alt="" coords="1151,62,1078,186,1074,183,1146,59"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="701,115,833,141"/>
+<area shape="poly" title=" " alt="" coords="1056,62,829,115,828,110,1054,57"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="705,196,829,221"/>
+<area shape="poly" title=" " alt="" coords="1103,63,992,110,805,193,803,188,990,106,1101,58"/>
+<area shape="rect" href="device__identity__interface_8h.html" title="Public Service API contract for the Device Identity Service." alt="" coords="431,196,630,221"/>
+<area shape="poly" title=" " alt="" coords="1055,41,973,48,880,61,783,82,689,110,651,128,615,149,556,190,553,185,612,144,649,123,687,106,782,76,879,56,973,43,1055,36"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="1170,196,1321,221"/>
+<area shape="poly" title=" " alt="" coords="1153,61,1141,103,1141,126,1148,147,1169,171,1197,188,1195,193,1166,175,1143,149,1136,127,1136,103,1148,59"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="1201,115,1284,141"/>
+<area shape="poly" title=" " alt="" coords="1188,59,1226,103,1222,106,1184,62"/>
+<area shape="rect" title=" " alt="" coords="1397,196,1481,221"/>
+<area shape="poly" title=" " alt="" coords="1216,58,1297,106,1350,146,1410,186,1407,191,1346,150,1295,110,1213,62"/>
+<area shape="rect" title=" " alt="" coords="1359,115,1430,141"/>
+<area shape="poly" title=" " alt="" coords="1230,58,1355,108,1353,113,1228,63"/>
+<area shape="rect" title=" " alt="" coords="1454,115,1525,141"/>
+<area shape="poly" title=" " alt="" coords="1273,57,1443,105,1450,108,1449,113,1442,111,1272,62"/>
+<area shape="rect" title=" " alt="" coords="1549,115,1667,141"/>
+<area shape="poly" title=" " alt="" coords="1274,51,1538,105,1554,109,1553,114,1537,111,1272,56"/>
+<area shape="rect" title=" " alt="" coords="1691,115,1778,141"/>
+<area shape="poly" title=" " alt="" coords="1273,41,1464,65,1572,83,1679,105,1691,109,1690,114,1678,111,1571,88,1463,70,1273,47"/>
+<area shape="rect" title=" " alt="" coords="1803,115,2008,141"/>
+<area shape="poly" title=" " alt="" coords="1273,43,1511,70,1791,105,1826,111,1825,116,1790,111,1510,75,1273,48"/>
+<area shape="rect" title=" " alt="" coords="2032,108,2219,148"/>
+<area shape="poly" title=" " alt="" coords="1273,38,1602,62,1808,81,2019,105,2018,111,1808,86,1602,67,1273,43"/>
+<area shape="rect" title=" " alt="" coords="2243,115,2320,141"/>
+<area shape="poly" title=" " alt="" coords="1273,35,1496,44,1772,59,2038,79,2148,92,2231,105,2242,108,2241,113,2230,111,2147,97,2037,85,1771,64,1495,49,1273,40"/>
+<area shape="poly" title=" " alt="" coords="291,139,330,184,326,187,287,143"/>
+<area shape="rect" title=" " alt="" coords="555,269,637,295"/>
+<area shape="poly" title=" " alt="" coords="276,142,266,180,267,201,275,220,294,233,321,243,393,255,542,267,542,272,392,261,319,248,291,238,271,223,262,203,261,180,271,140"/>
+<area shape="rect" title=" " alt="" coords="161,269,234,295"/>
+<area shape="poly" title=" " alt="" coords="271,143,251,167,232,197,207,257,202,255,227,195,247,164,266,139"/>
+<area shape="rect" title=" " alt="" coords="435,269,531,295"/>
+<area shape="poly" title=" " alt="" coords="370,219,450,261,447,265,367,224"/>
+<area shape="rect" title=" " alt="" coords="48,269,131,295"/>
+<area shape="poly" title=" " alt="" coords="306,224,145,268,143,263,305,219"/>
+<area shape="rect" title=" " alt="" coords="1011,269,1082,295"/>
+<area shape="poly" title=" " alt="" coords="408,217,419,219,573,235,693,243,814,251,968,267,998,271,997,276,968,272,813,257,693,249,573,240,418,224,407,223"/>
+<area shape="poly" title=" " alt="" coords="387,219,543,263,542,268,386,224"/>
+<area shape="poly" title=" " alt="" coords="324,224,235,266,233,261,322,219"/>
+<area shape="rect" href="system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="259,269,411,295"/>
+<area shape="poly" title=" " alt="" coords="347,222,342,256,336,255,342,221"/>
+<area shape="poly" title=" " alt="" coords="408,217,419,219,606,236,753,244,902,251,1093,267,1092,272,902,257,753,250,606,242,418,224,407,223"/>
+<area shape="rect" title=" " alt="" coords="698,269,835,295"/>
+<area shape="poly" title=" " alt="" coords="408,218,687,264,686,270,407,223"/>
+<area shape="poly" title=" " alt="" coords="86,221,90,256,84,256,81,222"/>
+<area shape="poly" title=" " alt="" coords="161,215,331,236,542,267,542,272,331,241,160,221"/>
+<area shape="poly" title=" " alt="" coords="855,224,651,271,650,266,854,219"/>
+<area shape="rect" title=" " alt="" coords="881,269,956,295"/>
+<area shape="poly" title=" " alt="" coords="909,221,916,255,911,256,904,222"/>
+<area shape="poly" title=" " alt="" coords="1063,222,1055,257,1050,256,1057,221"/>
+<area shape="poly" title=" " alt="" coords="988,224,651,275,650,270,987,219"/>
+<area shape="poly" title=" " alt="" coords="1083,219,1151,260,1149,264,1080,224"/>
+<area shape="poly" title=" " alt="" coords="1016,224,828,269,827,263,1014,219"/>
+<area shape="poly" title=" " alt="" coords="1041,224,956,265,953,261,1038,219"/>
+<area shape="poly" title=" " alt="" coords="756,143,621,262,617,258,752,139"/>
+<area shape="poly" title=" " alt="" coords="769,141,769,182,764,182,764,141"/>
+<area shape="poly" title=" " alt="" coords="543,220,578,257,574,261,539,223"/>
+<area shape="poly" title=" " alt="" coords="1214,224,1093,267,1091,262,1213,219"/>
+<area shape="poly" title=" " alt="" coords="1272,138,1399,188,1397,193,1270,143"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -230,9 +234,9 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESP-IDF native BLE provisioning implementation with a Service API. </p>
 <dl class="section author"><dt>Author</dt><dd>Synapse Framework Team </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>2.3.1 (Final Build Fix &amp; Full Documentation) </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-07-05</dd></dl>
-<p>This module implements BLE provisioning using the ESP-IDF <code>wifi_provisioning</code> manager. It provides a service to check the provisioning status and handles system events to start/stop the process automatically. It can be configured via Kconfig and overridden by <code>system_config.json</code>. </p>
+<dl class="section version"><dt>Version</dt><dd>2.4.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-07-30</dd></dl>
+<p>This module implements BLE provisioning using the ESP-IDF <code>wifi_provisioning</code> manager. It provides a service to check the provisioning status and handles system events to start/stop the process automatically. It dynamically constructs its BLE advertising name using the Device Identity Service. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a8e072fac4f72bee5b1899e3c56e9519a" name="a8e072fac4f72bee5b1899e3c56e9519a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e072fac4f72bee5b1899e3c56e9519a">&#9670;&#160;</a></span>ble_provisioning_create()</h2>
@@ -252,9 +256,9 @@ Functions</h2></td></tr>
 
 <p>Creates a new instance of the BLE Provisioning module. </p>
 <p>ქმნის ახალ ble_provisioning მოდულის ინსტანციას</p>
-<p>This function allocates memory for the module and its private data, sets the instance name and other parameters based on Kconfig defaults, and then overrides them with any values provided in the JSON config. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This function allocates memory for the module and its private data, parses configuration from Kconfig and JSON, and sets up the module's base function pointers. The dynamic device name is constructed later, in the <code>init</code> phase, to ensure service dependencies are met. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the module's configuration. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the module's configuration. The module takes ownership of this object if it's duplicated. </td></tr>
   </table>
   </dd>
 </dl>

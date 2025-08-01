@@ -102,76 +102,23 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac0dd21931d46a5ff3587d32fec113423" id="r_ac0dd21931d46a5ff3587d32fec113423"><td class="memItemLeft" align="right" valign="top"><a id="ac0dd21931d46a5ff3587d32fec113423" name="ac0dd21931d46a5ff3587d32fec113423"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>instance_name</b> [CONFIG_BLE_PROVISIONING_INSTANCE_NAME_MAX_LEN]</td></tr>
 <tr class="separator:ac0dd21931d46a5ff3587d32fec113423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3b454eb1269da408b7488ac82e30e2e" id="r_ae3b454eb1269da408b7488ac82e30e2e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structble__provisioning__private__data__t.html#ae3b454eb1269da408b7488ac82e30e2e">is_active</a></td></tr>
+<tr class="memitem:ae3b454eb1269da408b7488ac82e30e2e" id="r_ae3b454eb1269da408b7488ac82e30e2e"><td class="memItemLeft" align="right" valign="top"><a id="ae3b454eb1269da408b7488ac82e30e2e" name="ae3b454eb1269da408b7488ac82e30e2e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b></td></tr>
+<tr class="memdesc:ae3b454eb1269da408b7488ac82e30e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the provisioning process is currently running. <br /></td></tr>
 <tr class="separator:ae3b454eb1269da408b7488ac82e30e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad37d705cb2eb4ea70d0c43973c8e19cf" id="r_ad37d705cb2eb4ea70d0c43973c8e19cf"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structble__provisioning__private__data__t.html#ad37d705cb2eb4ea70d0c43973c8e19cf">device_name</a> [32]</td></tr>
+<tr class="memitem:ad37d705cb2eb4ea70d0c43973c8e19cf" id="r_ad37d705cb2eb4ea70d0c43973c8e19cf"><td class="memItemLeft" align="right" valign="top"><a id="ad37d705cb2eb4ea70d0c43973c8e19cf" name="ad37d705cb2eb4ea70d0c43973c8e19cf"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>device_name</b> [32]</td></tr>
+<tr class="memdesc:ad37d705cb2eb4ea70d0c43973c8e19cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">BLE device name for advertising. <br /></td></tr>
 <tr class="separator:ad37d705cb2eb4ea70d0c43973c8e19cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69e3e98d0bc1065a35056ef9008e2e79" id="r_a69e3e98d0bc1065a35056ef9008e2e79"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structble__provisioning__private__data__t.html#a69e3e98d0bc1065a35056ef9008e2e79">pop</a> [9]</td></tr>
+<tr class="memitem:a69e3e98d0bc1065a35056ef9008e2e79" id="r_a69e3e98d0bc1065a35056ef9008e2e79"><td class="memItemLeft" align="right" valign="top"><a id="a69e3e98d0bc1065a35056ef9008e2e79" name="a69e3e98d0bc1065a35056ef9008e2e79"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>pop</b> [9]</td></tr>
+<tr class="memdesc:a69e3e98d0bc1065a35056ef9008e2e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proof-of-Possession string for secure provisioning. <br /></td></tr>
 <tr class="separator:a69e3e98d0bc1065a35056ef9008e2e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81d2ea011cee5090af0e53c1d4ef258d" id="r_a81d2ea011cee5090af0e53c1d4ef258d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structble__provisioning__private__data__t.html#a81d2ea011cee5090af0e53c1d4ef258d">security_version</a></td></tr>
+<tr class="memitem:a81d2ea011cee5090af0e53c1d4ef258d" id="r_a81d2ea011cee5090af0e53c1d4ef258d"><td class="memItemLeft" align="right" valign="top"><a id="a81d2ea011cee5090af0e53c1d4ef258d" name="a81d2ea011cee5090af0e53c1d4ef258d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>security_version</b></td></tr>
+<tr class="memdesc:a81d2ea011cee5090af0e53c1d4ef258d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Security version (0 or 1). <br /></td></tr>
 <tr class="separator:a81d2ea011cee5090af0e53c1d4ef258d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad37d705cb2eb4ea70d0c43973c8e19cf" name="ad37d705cb2eb4ea70d0c43973c8e19cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad37d705cb2eb4ea70d0c43973c8e19cf">&#9670;&#160;</a></span>device_name</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char ble_provisioning_private_data_t::device_name[32]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>BLE device name for advertising. </p>
-
-</div>
-</div>
-<a id="ae3b454eb1269da408b7488ac82e30e2e" name="ae3b454eb1269da408b7488ac82e30e2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3b454eb1269da408b7488ac82e30e2e">&#9670;&#160;</a></span>is_active</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ble_provisioning_private_data_t::is_active</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>True if the provisioning process is currently running. </p>
-
-</div>
-</div>
-<a id="a69e3e98d0bc1065a35056ef9008e2e79" name="a69e3e98d0bc1065a35056ef9008e2e79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69e3e98d0bc1065a35056ef9008e2e79">&#9670;&#160;</a></span>pop</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char ble_provisioning_private_data_t::pop[9]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Proof-of-Possession string for secure provisioning. </p>
-
-</div>
-</div>
-<a id="a81d2ea011cee5090af0e53c1d4ef258d" name="a81d2ea011cee5090af0e53c1d4ef258d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81d2ea011cee5090af0e53c1d4ef258d">&#9670;&#160;</a></span>security_version</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ble_provisioning_private_data_t::security_version</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Security version (0 or 1). </p>
-
-</div>
-</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>components/modules/provisioning/ble_provisioning/src/<a class="el" href="ble__provisioning_8c.html">ble_provisioning.c</a></li>
 </ul>

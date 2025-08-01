@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🚨_20მნიშვნელოვანი_20შენიშვნები_0',['🚨 მნიშვნელოვანი შენიშვნები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1114',1,'🚨 მნიშვნელოვანი შენიშვნები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1495',1,'6. 🚨 მნიშვნელოვანი შენიშვნები']]],
-  ['🚨_20მოდული_3a_20system_20alarms_20manager_1',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]]
+  ['🔬_20მოდული_3a_20tt_20time_5fof_5fflight_5fsensor_20tt_0',['🔬 მოდული: &lt;tt&gt;time_of_flight_sensor&lt;/tt&gt;',['../md_components_2modules_2sensors_2time__of__flight__sensor_2README.html',1,'']]]
 ];

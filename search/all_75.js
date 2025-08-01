@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['🧪_20მოდული_20tt_20timer_5ftest_20tt_0',['🧪 მოდული &lt;tt&gt;timer_test&lt;/tt&gt;',['../md_components_2modules_2testing_2timer__test__module_2README.html',1,'']]],
-  ['🧪_20მოდული_3a_20tt_20sensor_5fsimulator_20tt_1',['🧪 მოდული: &lt;tt&gt;sensor_simulator&lt;/tt&gt;',['../md_components_2modules_2testing_2sensor__simulator_2README.html',1,'']]],
-  ['🧪_20ტესტირების_20მეთოდები_2',['🧪 ტესტირების მეთოდები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1117',1,'']]]
+  ['🚨_20მნიშვნელოვანი_20შენიშვნები_0',['🚨 მნიშვნელოვანი შენიშვნები',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1273',1,'🚨 მნიშვნელოვანი შენიშვნები'],['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1654',1,'6. 🚨 მნიშვნელოვანი შენიშვნები']]],
+  ['🚨_20მოდული_3a_20system_20alarms_20manager_1',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]]
 ];

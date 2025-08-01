@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['🆔_20მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_0',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]]
+  ['❌_20არასწორი_0',['❌ არასწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md1242',1,'']]],
+  ['❌_20პატერნების_20არასწორი_20შერევა_1',['❌ პატერნების არასწორი შერევა',['../md_docs_2convention_2communication__patterns.html#autotoc_md1090',1,'']]],
+  ['❌_20პირდაპირი_20დამოკიდებულებები_2',['❌ პირდაპირი დამოკიდებულებები',['../md_docs_2convention_2communication__patterns.html#autotoc_md1089',1,'']]],
+  ['❌_20ჩვეული_20შეცდომები_3a_3',['❌ ჩვეული შეცდომები:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1275',1,'']]],
+  ['❌_20system_20manager_20mqtt_20handling_4',['❌ System Manager MQTT Handling',['../md_docs_2convention_2communication__patterns.html#autotoc_md1091',1,'']]]
 ];

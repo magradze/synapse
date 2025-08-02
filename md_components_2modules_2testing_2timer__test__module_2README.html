@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2timer
   <div class="headertitle"><div class="title">🧪 მოდული &lt;tt&gt;timer_test&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md189"></a> </p>
-<h1><a class="anchor" id="autotoc_md190"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md202"></a> </p>
+<h1><a class="anchor" id="autotoc_md203"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>timer_test</code> <br  />
  <b>კატეგორია:</b> <code>testing</code> <br  />
@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2timer
 <p><code>timer_test</code> არის სატესტო და სადემონსტრაციო მოდული, რომელიც შექმნილია Synapse Framework-ის ორი ძირითადი სერვისის — **<code>System Timer Service</code>**-ისა და **<code>RGB LED Indicator</code>**-ის — ურთიერთქმედების შესამოწმებლად.</p>
 <p>მოდულის მთავარი დანიშნულებაა, აჩვენოს, თუ როგორ შეუძლია ერთ მოდულს, გამოიყენოს ტაიმერის სერვისი პერიოდული მოქმედებების დასაგეგმად და შემდეგ, სხვა სერვისის (ამ შემთხვევაში, LED ინდიკატორის) API გამოიძახოს ამ მოქმედების შესასრულებლად.</p>
 <p><b>ეს მოდული არ არის განკუთვნილი საბოლოო პროდუქტში გამოსაყენებლად.</b> ის წარმოადგენს შესანიშნავ მაგალითს და "სავარჯიშოს" ახალი დეველოპერებისთვის, რათა გაეცნონ ფრეიმვორქის ძირითად პრინციპებს.</p>
-<h1><a class="anchor" id="autotoc_md191"></a>
+<h1><a class="anchor" id="autotoc_md204"></a>
 2. 🏗️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისის მომხმარებელი (Service Consumer):</b> ეს მოდული არის კლასიკური სერვისის მომხმარებელი. ის არ აწვდის საკუთარ სერვისს, არამედ იყენებს ორ სხვა სერვისს:<ol type="1">
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2timer
 <li><b>ივენთებზე-დაფუძნებული ლოგიკა:</b> მოდული იყენებს <code>Event Bus</code>-ს, რათა მიიღოს თავის მიერვე დაგეგმილი ივენთი (<code>EVT_TOGGLE_LED_COLOR</code>). ეს აჩვენებს, თუ როგორ შეიძლება ტაიმერის ლოგიკის გამოყოფა რეალური მოქმედებისგან.</li>
 <li>**მაღალი ინიციალიზაციის დონე (<code>init_level: 80</code>):** რადგან ის დამოკიდებულია სხვა სერვისებზე, მისი <code>init_level</code> მაღალია, რათა დარწმუნებული ვიყოთ, რომ <code>system_timer</code> და <code>rgb_led_indicator</code> მოდულები უკვე ინიციალიზებული და გაშვებულია, როდესაც <code>timer_test</code> იწყებს მუშაობას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md192"></a>
+<h1><a class="anchor" id="autotoc_md205"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდული იმართება <code>Kconfig</code>-იდან და არ საჭიროებს <code>system_config.json</code>-ში კომპლექსურ პარამეტრებს.</p>
 <p>**<code>Kconfig</code> პარამეტრები:**</p>
@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2timer
 <div class="line">        &quot;instance_name&quot;: &quot;main_timer_test&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md193"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md206"></a>
 4. 🚀 მუშაობის ლოგიკა</h1>
 <ol type="1">
 <li>**<code>start</code> ფაზა:**<ul>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2testing_2timer
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md194"></a>
+<h1><a class="anchor" id="autotoc_md207"></a>
 5. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულებები <code>CMakeLists.txt</code>-ში:</b> ამ მოდულის <code>CMakeLists.txt</code> ფაილი <code>REQUIRES</code> სექციაში შეიცავს <code>system_timer</code>-ს და <code>rgb_led_indicator</code>-ს, რათა build-სისტემამ შეძლოს შესაბამისი ინტერფეისების პოვნა.</li>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🧩_20strong_20დონე_205_3a_20მაღალი_20დონის_20კომპოზიტური_20მოდულები_2080_20100_20strong_0',['🧩 &lt;strong&gt;დონე 5: მაღალი დონის კომპოზიტური მოდულები (80-100)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md1180',1,'']]]
+  ['🧠_20იმპლემენტაციის_20ლოგიკა_0',['5. 🧠 იმპლემენტაციის ლოგიკა',['../md_components_2modules_2communications_2mqtt__manager_2README.html#autotoc_md14',1,'']]],
+  ['🧠_20კონდიციური_20კომპილაცია_20smart_20system_20_3a_1',['1. 🧠 კონდიციური კომპილაცია (SMART SYSTEM):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1273',1,'']]]
 ];

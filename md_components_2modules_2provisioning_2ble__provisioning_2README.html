@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
   <div class="headertitle"><div class="title">📲 მოდული &lt;tt&gt;ble_provisioning&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md71"></a> </p>
-<h1><a class="anchor" id="autotoc_md72"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md84"></a> </p>
+<h1><a class="anchor" id="autotoc_md85"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>ble_provisioning</code> <br  />
  <b>კატეგორია:</b> <code>provisioning</code> <br  />
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
  <b>ავტორი:</b> Synapse Framework Team</p>
 <p><code>ble_provisioning</code> მოდული უზრუნველყოფს მოწყობილობის პირველადი კონფიგურაციის (provisioning) პროცესს <b>Bluetooth Low Energy (BLE)</b>-ის საშუალებით. ის იყენებს ESP-IDF-ის სტანდარტულ <code>wifi_provisioning</code> მენეჯერს, რათა მოწყობილობამ შეძლოს უსაფრთხოდ მიიღოს WiFi ქსელის მონაცემები (SSID და პაროლი) მობილური აპლიკაციიდან (მაგ., Espressif-ის <b>ESP BLE Prov</b>).</p>
 <p>მთავარი ცვლილებაა BLE სარეკლამო სახელის <b>დინამიური გენერაცია</b>, რომელიც იყენებს მოწყობილობის უნიკალურ ID-ს <code>device_identity_service</code>-იდან, რაც უზრუნველყოფს თითოეული მოწყობილობის უნიკალურ სახელს ქსელში.</p>
-<h1><a class="anchor" id="autotoc_md73"></a>
+<h1><a class="anchor" id="autotoc_md86"></a>
 2. 🏗️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისზე-ორიენტირებული (Service-driven):</b> მოდული არეგისტრირებს <code><a class="el" href="structble__prov__api__t.html" title="The public Service API structure for the BLE Provisioning module.">ble_prov_api_t</a></code> სერვისს <code>Service Locator</code>-ში. ეს საშუალებას აძლევს სხვა მოდულებს, შეამოწმონ, მიმდინარეობს თუ არა provisioning-ის პროცესი, ან დაიწყონ ის იძულებით.</li>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
 <li>**მაღალი ინიციალიზაციის დონე (<code>init_level: 90</code>):** როგორც სერვისის <b>მომხმარებელი (Consumer)</b>, რომელიც დამოკიდებულია <code>device_identity_service</code>-ზე (<code>init_level: 20</code>), <code>ble_provisioning</code> მოდულის ინიციალიზაცია ხდება სისტემის გაშვების გვიან ეტაპზე. ეს უზრუნველყოფს, რომ ყველა საჭირო სერვისი გარანტირებულად ხელმისაწვდომია მისი მუშაობის დაწყებამდე.</li>
 <li><b>დამოკიდებულება სერვისზე (Service Dependency):</b> მოდული პირდაპირ დამოკიდებულია <code>device_identity_service</code>-ზე, რათა მიიღოს მოწყობილობის უნიკალური ID. ეს არის ფრეიმვორქის "მომწოდებელი-მომხმარებლის" პატერნის კლასიკური მაგალითი.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md74"></a>
+<h1><a class="anchor" id="autotoc_md87"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის ძირითადი პარამეტრები იმართება <code>Kconfig</code>-ის (<code>idf.py menuconfig</code>) საშუალებით.</p>
 <p>**<code>Kconfig</code> პარამეტრები:**</p>
@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">]</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md75"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md88"></a>
 4. 🛠️ Service API (&lt;tt&gt;ble_prov_api_t&lt;/tt&gt;)</h1>
 <p>მოდული არეგისტრირებს სერვისს, რომლის მიღებაც შესაძლებელია <code>fmw_service_get</code>-ის გამოძახებით, <code>config.json</code>-ში მითითებული <code>instance_name</code>-ის გამოყენებით (მაგ., <code>"main_ble_provisioning"</code>).</p>
 <p><b>API ფუნქციები:</b></p>
@@ -147,10 +147,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
 <li>**<code>esp_err_t start_provisioning(void);</code>** <br  />
  🚀 იწყებს provisioning-ის პროცესს პროგრამულად.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md76"></a>
+<h1><a class="anchor" id="autotoc_md89"></a>
 5. 📢 ივენთები (Events)</h1>
 <p>(ეს სექცია უცვლელია)</p>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md90"></a>
 გამოქვეყნებული ივენთები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>PROV_ENDED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">Provisioning-ის პროცესი დასრულდა.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md91"></a>
 გამოწერილი ივენთები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -172,7 +172,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>PROV_START_REQUESTED</code>   </td><td class="markdownTableBodyLeft">იწყებს provisioning-ის პროცესს.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md79"></a>
+<h1><a class="anchor" id="autotoc_md92"></a>
 6. 💡 გამოყენების მაგალითი</h1>
 <p>(ეს სექცია უცვლელია)</p>
 <p><code>rgb_led_indicator</code> მოდული ამოწმებს, არის თუ არა provisioning აქტიური, რათa შესაბამისი ინდიკაცია აანთოს.</p>
@@ -199,7 +199,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2provisioning_2
 <div class="ttc" id="astructble__prov__api__t_html"><div class="ttname"><a href="structble__prov__api__t.html">ble_prov_api_t</a></div><div class="ttdoc">The public Service API structure for the BLE Provisioning module.</div><div class="ttdef"><b>Definition</b> ble_prov_interface.h:23</div></div>
 <div class="ttc" id="astructble__prov__api__t_html_aaf6157ba3bf6c8d06b905075bc8b039e"><div class="ttname"><a href="structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e">ble_prov_api_t::is_provisioning_active</a></div><div class="ttdeci">bool(* is_provisioning_active)(void)</div><div class="ttdoc">Checks if the BLE provisioning process is currently active.</div><div class="ttdef"><b>Definition</b> ble_prov_interface.h:35</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md80"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md93"></a>
 7. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება:</b> ამ მოდულის გამართული მუშაობისთვის, სისტემაში აუცილებლად უნდა იყოს ჩართული და კონფიგურირებული <code>device_identity_service</code> მოდული.</li>

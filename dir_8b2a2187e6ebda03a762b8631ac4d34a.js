@@ -12,6 +12,7 @@ var dir_8b2a2187e6ebda03a762b8631ac4d34a =
     [ "health_interface.h", "health__interface_8h.html", "health__interface_8h" ],
     [ "i2c_bus_interface.h", "i2c__bus__interface_8h.html", "i2c__bus__interface_8h" ],
     [ "logging.h", "logging_8h.html", "logging_8h" ],
+    [ "mcp23017_interface.h", "mcp23017__interface_8h.html", "mcp23017__interface_8h" ],
     [ "mqtt_topics_generated.h", "mqtt__topics__generated_8h.html", "mqtt__topics__generated_8h" ],
     [ "ota_interface.h", "ota__interface_8h.html", "ota__interface_8h" ],
     [ "relay_interface.h", "relay__interface_8h.html", "relay__interface_8h" ],

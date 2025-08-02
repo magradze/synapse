@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📺_20დისპლეის_20დრაივერი_3a_0',['📺 დისპლეის დრაივერი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1255',1,'']]],
-  ['📺_20მოდული_3a_20tt_20ssd1306_5fdriver_20tt_1',['📺 მოდული: &lt;tt&gt;ssd1306_driver&lt;/tt&gt;',['../md_components_2modules_2displays_2ssd1306__driver_2README.html',1,'']]]
+  ['📶_20მოდული_20tt_20wifi_5fmanager_20tt_0',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]],
+  ['📶_20wifi_20manager_20service_20api_1',['📶 WiFi Manager Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md313',1,'']]]
 ];

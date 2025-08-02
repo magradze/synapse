@@ -94,100 +94,123 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2butto
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md44"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
- <b>✒️ ავტორი:</b> Giorgi Magradze &amp; Synapse AI Expert <br  />
- <b>🔖 ვერსია:</b> 1.0.0</p>
+ <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
+ <b>🔖 ვერსია:</b> 2.0.0</p>
 <h1><a class="anchor" id="autotoc_md45"></a>
 1. 📜 მიმოხილვა</h1>
-<p><code>button_input</code> არის Synapse Framework-ის <b>მომხმარებლის შეტანის (User Input) ფუნდამენტური მოდული</b>. ის უზრუნველყოფს მარტივ, საიმედო და მოქნილ მექანიზმს აპარატურული, ტაქტილური ღილაკების დასამუშავებლად.</p>
-<p>მოდულის მთავარი ამოცანაა, დააფიქსიროს ღილაკზე დაჭერა GPIO შეფერხებების (Interrupts) გამოყენებით, მოახდინოს სიგნალის "გაწმენდა" (Debouncing) და შემდეგ, <code>Event Bus</code>-ზე გამოაქვეყნოს სტანდარტული <code>FMW_EVENT_BUTTON_PRESSED</code> ივენთი. ეს საშუალებას აძლევს სისტემის ნებისმიერ სხვა ნაწილს (მაგ., <code>ssd1 ઉ6_oled_display</code>), რეაგირება მოახდინოს მომხმარებლის ფიზიკურ ინტერაქციაზე ისე, რომ არ იყოს პირდაპირ დამოკიდებული აპარატურულ დეტალებზე.</p>
+<p><code>button_input</code> არის Synapse Framework-ის <b>უნივერსალური, მომხმარებლის შეტანის (User Input) მოდული</b>. ის უზრუნველყოფს ერთიან, საიმედო და მოქნილ მექანიზმს აპარატურული, ტაქტილური ღილაკების დასამუშავებლად, მიუხედავად იმისა, ისინი პირდაპირ ESP32-ის GPIO პინებზეა მიერთებული, თუ I/O გამფართოებელ ჩიპზე, როგორიცაა <code>MCP23017</code>.</p>
+<p>მოდულის მთავარი ამოცანაა, დააფიქსიროს ღილაკზე დაჭერა, მოახდინოს სიგნალის "გაწმენდა" (Debouncing) და შემდეგ, <code>Event Bus</code>-ზე გამოაქვეყნოს სტანდარტული <code>FMW_EVENT_BUTTON_PRESSED</code> ივენთი. ეს სრულად აბსტრაგირებს აპარატურულ დეტალებს და საშუალებას აძლევს სისტემის ნებისმიერ სხვა ნაწილს (მაგ., <code>ui_manager</code>), რეაგირება მოახდინოს მომხმარებლის ფიზიკურ ინტერაქციაზე.</p>
 <h1><a class="anchor" id="autotoc_md46"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
+<li><b>ორმაგი რეჟიმი (Dual Mode):</b> ⚙️ მოდულს შეუძლია იმუშაოს ორ, კონფიგურაციით მართვად რეჟიმში:<ol type="1">
+<li>**<code>GPIO</code> რეჟიმი:** ღილაკები მიერთებულია პირდაპირ ESP32-ის GPIO პინებზე. ამ რეჟიმში, მოდული იყენებს <b>GPIO შეფერხებებს (Interrupts)</b> მაქსიმალური ეფექტურობისთვის.</li>
+<li>**<code>Expander</code> რეჟიმი:** ღილაკები მიერთებულია <code>MCP23017</code> I/O გამფართოებელზე. ამ რეჟიმში, მოდული იყენებს <b>პერიოდულ წაკითხვას (Polling)</b> და <code>mcp23017_io_expander</code> სერვისს.</li>
+</ol>
+</li>
 <li><b>Event Producer:</b> 📢 მოდული არის სუფთა "ივენთების მწარმოებელი". მისი ერთადერთი გამომავალი პროდუქტი არის <code>FMW_EVENT_BUTTON_PRESSED</code> ივენთი.</li>
-<li><b>შეფერხებებზე დაფუძნებული:</b> ⚡️ მაქსიმალური ეფექტურობისთვის, მოდული იყენებს GPIO ISR-ებს (Interrupt Service Routines) ღილაკის დაჭერის მომენტის დასაფიქსირებლად.</li>
-<li><b>ასინქრონული დამუშავება:</b> 🔄 ISR-ი არის უკიდურესად სწრაფი — ის მხოლოდ აგზავნის შეტყობინებას FreeRTOS რიგში. ყველა "მძიმე" სამუშაო, მათ შორის Debouncing და ივენთის გამოქვეყნება, სრულდება გამოყოფილ, დაბალი პრიორიტეტის ტასკში.</li>
-<li><b>Debouncing:</b> 🛡️ ჩაშენებული აქვს მარტივი, დროზე დაფუძნებული Debouncing მექანიზმი, რათა თავიდან ავიცილოთ ღილაკის ერთი დაჭერის მრავალჯერად სიგნალად აღქმა.</li>
-<li><b>მოქნილი კონფიგურაცია:</b> ⚙️ მოდული სრულად კონფიგურირებადია <code>config.json</code>-ის საშუალებით, რაც იძლევა ნებისმიერი რაოდენობის ღილაკის, ნებისმიერ GPIO პინზე მიერთების საშუალებას.</li>
+<li><b>ასინქრონული დამუშავება:</b> 🔄 ორივე რეჟიმში, ღილაკების წაკითხვა და დამუშავება ხდება გამოყოფილ, დაბალი პრიორიტეტის FreeRTOS ტასკში, რათა არ დაიბლოკოს სისტემის სხვა კომპონენტები.</li>
+<li><b>Debouncing:</b> 🛡️ ჩაშენებული აქვს საიმედო, დროზე დაფუძნებული Debouncing მექანიზმი, რათა თავიდან ავიცილოთ ღილაკის ერთი დაჭერის მრავალჯერად სიგნალად აღქმა.</li>
+<li><b>რესურსების მართვა:</b> <code>GPIO</code> რეჟიმში, მოდული იყენებს <code>Resource Manager</code>-ს შესაბამისი პინების ექსკლუზიურად დასაკავებლად.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md47"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
-<p>მოდულის კონფიგურაცია ხდება <code>buttons</code> მასივის საშუალებით, სადაც თითოეული ობიექტი აღწერს ერთ ღილაკს.</p>
-<p><b>კონფიგურაციის მაგალითი:</b></p>
+<p>მოდულის ქცევა და რეჟიმი სრულად იმართება <code>config.json</code> ფაილიდან.</p>
+<h2><a class="anchor" id="autotoc_md48"></a>
+3.1. კონფიგურაცია &lt;tt&gt;GPIO&lt;/tt&gt; რეჟიმისთვის</h2>
 <div class="fragment"><div class="line">[</div>
 <div class="line">  {</div>
 <div class="line">    &quot;type&quot;: &quot;button_input&quot;,</div>
 <div class="line">    &quot;enabled&quot;: true,</div>
 <div class="line">    &quot;config&quot;: {</div>
 <div class="line">      &quot;instance_name&quot;: &quot;main_buttons&quot;,</div>
+<div class="line">      &quot;control_type&quot;: &quot;gpio&quot;,</div>
 <div class="line">      &quot;buttons&quot;: [</div>
 <div class="line">        {</div>
 <div class="line">          &quot;name&quot;: &quot;UP&quot;,</div>
-<div class="line">          &quot;gpio_pin&quot;: 34,</div>
+<div class="line">          &quot;gpio_pin&quot;: 26,</div>
 <div class="line">          &quot;active_level&quot;: 0</div>
 <div class="line">        },</div>
 <div class="line">        {</div>
 <div class="line">          &quot;name&quot;: &quot;DOWN&quot;,</div>
-<div class="line">          &quot;gpio_pin&quot;: 35,</div>
-<div class="line">          &quot;active_level&quot;: 0</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">          &quot;name&quot;: &quot;OK&quot;,</div>
-<div class="line">          &quot;gpio_pin&quot;: 32,</div>
+<div class="line">          &quot;gpio_pin&quot;: 27,</div>
 <div class="line">          &quot;active_level&quot;: 0</div>
 <div class="line">        }</div>
 <div class="line">      ]</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">]</div>
-</div><!-- fragment --><p>**<code>buttons</code> ობიექტის პარამეტრები:**</p>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md49"></a>
+3.2. კონფიგურაცია &lt;tt&gt;Expander&lt;/tt&gt; რეჟიმისთვის</h2>
+<div class="fragment"><div class="line">[</div>
+<div class="line">  {</div>
+<div class="line">    &quot;type&quot;: &quot;button_input&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">      &quot;instance_name&quot;: &quot;main_buttons&quot;,</div>
+<div class="line">      &quot;control_type&quot;: &quot;expander&quot;,</div>
+<div class="line">      &quot;expander_service&quot;: &quot;main_io_expander&quot;,</div>
+<div class="line">      &quot;buttons&quot;: [</div>
+<div class="line">        {</div>
+<div class="line">          &quot;name&quot;: &quot;UP&quot;,</div>
+<div class="line">          &quot;expander_pin&quot;: 13,</div>
+<div class="line">          &quot;active_level&quot;: 0</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">          &quot;name&quot;: &quot;DOWN&quot;,</div>
+<div class="line">          &quot;expander_pin&quot;: 14,</div>
+<div class="line">          &quot;active_level&quot;: 0</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">          &quot;name&quot;: &quot;OK&quot;,</div>
+<div class="line">          &quot;expander_pin&quot;: 15,</div>
+<div class="line">          &quot;active_level&quot;: 0</div>
+<div class="line">        }</div>
+<div class="line">      ]</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">]</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md50"></a>
+3.3. კონფიგურაციის პარამეტრები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadCenter">სავალდებულო    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">ღილაკის უნიკალური სახელი (მაგ., "UP", "OK"). ეს სახელი გაიგზავნება ივენთის <code>payload</code>-ში.   </td><td class="markdownTableBodyCenter">✅    </td></tr>
+<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მოდულის უნიკალური სახელი.   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>gpio_pin</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">GPIO პინის ნომერი, რომელზეც ღილაკია მიერთებული.   </td><td class="markdownTableBodyCenter">✅    </td></tr>
+<td class="markdownTableBodyLeft"><code>control_type</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მუშაობის რეჟიმი. შესაძლო მნიშვნელობები: <code>"gpio"</code> ან <code>"expander"</code>.   </td><td class="markdownTableBodyCenter">❌ (Default: <code>"gpio"</code>)    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>active_level</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ლოგიკური დონე, რომელიც დაჭერილ მდგომარეობად ითვლება. <code>0</code> = Active-Low (pull-up), <code>1</code> = Active-High (pull-down).   </td><td class="markdownTableBodyCenter">❌ (Default: <code>0</code>)   </td></tr>
+<td class="markdownTableBodyLeft"><code>expander_service</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">იმ <code>mcp23017_io_expander</code> სერვისის სახელი, რომელიც უნდა გამოიყენოს.   </td><td class="markdownTableBodyCenter"><code>expander</code> რეჟიმისთვის    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><code>buttons</code>   </td><td class="markdownTableBodyLeft">მასივი   </td><td class="markdownTableBodyLeft">ღილაკების კონფიგურაციის მასივი.   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md48"></a>
+<p>**<code>buttons</code> ობიექტის პარამეტრები:**</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadCenter">სავალდებულო    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><code>name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">ღილაკის უნიკალური სახელი (მაგ., "UP", "OK").   </td><td class="markdownTableBodyCenter">✅    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><code>gpio_pin</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">GPIO პინის ნომერი.   </td><td class="markdownTableBodyCenter"><code>gpio</code> რეჟიმისთვის    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><code>expander_pin</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ლოგიკური პინის ნომერი <code>MCP23017</code>-ზე (0-15).   </td><td class="markdownTableBodyCenter"><code>expander</code> რეჟიმისთვის    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><code>active_level</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ლოგიკური დონე, რომელიც დაჭერილ მდგომარეობად ითვლება (<code>0</code>=LOW, <code>1</code>=HIGH).   </td><td class="markdownTableBodyCenter">❌ (Default: <code>0</code>)   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md51"></a>
 4. 📢 გამოქვეყნებული ივენთი</h1>
 <ul>
 <li><b>ივენთის სახელი:</b> <code>FMW_EVENT_BUTTON_PRESSED</code></li>
 <li><b>Payload-ის ტიპი:</b> <code><a class="el" href="structfmw__button__payload__t.html" title="Defines the data structure for the FMW_EVENT_BUTTON_PRESSED event.">fmw_button_payload_t</a></code></li>
 <li><p class="startli"><b>Payload-ის შიგთავსი (მაგალითი):</b></p>
 <div class="fragment"><div class="line"><span class="comment">// fmw_button_payload_t payload;</span></div>
-<div class="line"><span class="comment">// payload.button_name = &quot;UP&quot;;</span></div>
+<div class="line"><span class="comment">// snprintf(payload.button_name, sizeof(payload.button_name), &quot;UP&quot;);</span></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md49"></a>
+<h1><a class="anchor" id="autotoc_md52"></a>
 5. 🔌 მიერთების სქემა</h1>
-<p>მოდული შექმნილია <b>შიდა Pull-up რეზისტორების</b> გამოყენებით (<code>active_level: 0</code> რეჟიმში). ღილაკი უნდა შეერთდეს შემდეგნაირად:</p>
-<ul>
-<li><b>ერთი ფეხი:</b> ESP32-ის <b>GND</b> პინზე.</li>
-<li><b>მეორე ფეხი:</b> ESP32-ის შესაბამის <b>GPIO</b> პინზე.</li>
-</ul>
-<p><b>ყურადღება:</b> ESP32-ის ზოგიერთ პინს (მაგ., GPIO 34, 35) არ გააჩნია შიდა pull-up/pull-down რეზისტორები. ამ პინების გამოყენებისას, აუცილებელია <b>გარე 10kΩ Pull-up რეზისტორის</b> დამატება GPIO პინსა და 3.3V-ს შორის.</p>
-<div class="fragment"><div class="line">graph TD</div>
-<div class="line">    subgraph ESP32</div>
-<div class="line">        P1(3.3V)</div>
-<div class="line">        P2(GPIO 34)</div>
-<div class="line">        P3(GND)</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    subgraph Button Circuit</div>
-<div class="line">        R1(&quot;10kΩ Pull-up&quot;)</div>
-<div class="line">        B1(&quot;Button&quot;)</div>
-<div class="line">    end</div>
-<div class="line"> </div>
-<div class="line">    P1 -- to --&gt; R1</div>
-<div class="line">    R1 -- to --&gt; P2</div>
-<div class="line">    P2 -- to --&gt; B1_Pin1</div>
-<div class="line">    B1_Pin2 -- to --&gt; P3</div>
-<div class="line"> </div>
-<div class="line">    style P1 fill:#D2042D,stroke:#fff,color:#fff</div>
-<div class="line">    style P3 fill:#333,stroke:#fff,color:#fff</div>
-</div><!-- fragment --><p>დიაგრამა ასახავს გარე Pull-up რეზისტორის გამოყენებას GPIO 34-ისთვის. </p>
+<p>ორივე რეჟიმში, <code>active_level: 0</code> კონფიგურაციისთვის, ღილაკი უნდა შეერთდეს <b>პინსა</b> და <b>GND</b>-ს შორის. მოდული ავტომატურად რთავს შიდა pull-up რეზისტორებს (როგორც GPIO-სთვის, ისე MCP23017-სთვის).</p>
+<p><b>ყურადღება:</b> ESP32-ის ზოგიერთ პინს (მაგ., GPIO 34, 35) არ გააჩნია შიდა pull-up რეზისტორები. ამ პინების გამოყენებისას, აუცილებელია <b>გარე 10kΩ Pull-up რეზისტორის</b> დამატება. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

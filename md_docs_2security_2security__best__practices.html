@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2security_2security__best__pra
   <div class="headertitle"><div class="title">უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1657"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1659"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1670"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1672"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის უსაფრთხოების საუკეთესო პრაქტიკებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1661"></a>
+<h1><a class="anchor" id="autotoc_md1674"></a>
 ძირითადი რეკომენდაციები</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ დაშიფრული კომუნიკაცია (TLS/SSL) გარე სერვისებთან (MQTT, REST, Cloud)</li>
@@ -110,9 +110,9 @@ $(document).ready(function(){initNavTree('md_docs_2security_2security__best__pra
 <li>რეგულარულად განაახლეთ dependencies და firmware</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1663"></a>
+<h1><a class="anchor" id="autotoc_md1676"></a>
 მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1664"></a>
+<h2><a class="anchor" id="autotoc_md1677"></a>
 TLS/SSL ჩართვა MQTT-ში</h2>
 <div class="fragment"><div class="line">mqtt_module_config_t mqtt_cfg = {</div>
 <div class="line">    .broker_uri = <span class="stringliteral">&quot;mqtts://broker.synapse.local:8883&quot;</span>,</div>
@@ -120,14 +120,14 @@ TLS/SSL ჩართვა MQTT-ში</h2>
 <div class="line">    .password = <span class="stringliteral">&quot;pass&quot;</span>,</div>
 <div class="line">    .use_tls = <span class="keyword">true</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1665"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1678"></a>
 OTA განახლების სიგნირება</h2>
 <div class="fragment"><div class="line"><span class="comment">// გამოიყენეთ esp_ota_set_boot_partition და სიგნირებული firmware</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1666"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1679"></a>
 ლოგირების კონტროლი</h2>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT connected to broker: %s&quot;</span>, broker_url); <span class="comment">// არ ჩაწეროთ პაროლი ლოგში</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1668"></a>
+<h1><a class="anchor" id="autotoc_md1681"></a>
 Best Practices</h1>
 <ul>
 <li>დაიცავით ყველა უსაფრთხოების სახელმძღვანელო და პოლიტიკა</li>
@@ -135,7 +135,7 @@ Best Practices</h1>
 <li>აღწერეთ ყველა უსაფრთხოების ნაბიჯი დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1670"></a>
+<h1><a class="anchor" id="autotoc_md1683"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2security_2security__index.html">security_index.md</a></li>

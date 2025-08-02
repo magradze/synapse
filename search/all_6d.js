@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔘_20მოდული_3a_20tt_20button_5finput_20tt_0',['🔘 მოდული: &lt;tt&gt;button_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2button__input_2README.html',1,'']]]
+  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1275',1,'']]]
 ];

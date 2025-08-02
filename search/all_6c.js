@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1262',1,'']]]
+  ['🔑_20გასაღების_20ფორმატი_20dot_20notation_0',['🔑 გასაღების ფორმატი (Dot-Notation)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md329',1,'']]],
+  ['🔑_20key_20value_20ოპერაციები_1',['🔑 Key-Value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md658',1,'']]]
 ];

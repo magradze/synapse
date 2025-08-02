@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
   <div class="headertitle"><div class="title">🛰️ მოდული: Connectivity Watchdog</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md126"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md139"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 2.1.0</p>
-<h1><a class="anchor" id="autotoc_md127"></a>
+<h1><a class="anchor" id="autotoc_md140"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>Connectivity Watchdog</code> არის Synapse Framework-ის <b>სისტემის მდგრადობისა და თვითაღდგენის მცველი</b>. მისი ფუნდამენტური ამოცანაა, უზრუნველყოს, რომ მოწყობილობა არასდროს დარჩეს "ცოცხალი, მაგრამ იზოლირებული" მდგომარეობაში. ის მუდმივად აკვირდება კრიტიკულ საკომუნიკაციო არხებს და პრობლემის აღმოჩენისას, ავტომატურად იწყებს მრავალსაფეხურიან, კონფიგურირებად აღდგენის პროცესს.</p>
 <p>ეს მოდული სცილდება უბრალო "პინგს". ის არის <b>უნივერსალური, მრავალშრიანი მონიტორინგის სისტემა</b>, რომელიც:</p>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <li><b>რეაგირებს</b> პრობლემებზე ეტაპობრივად — მარტივი გაფრთხილებიდან დაწყებული, სისტემის სრული გადატვირთვით დამთავრებული.</li>
 <li><b>არის უნივერსალური</b> და მზად არის ნებისმიერ საკომუნიკაციო პროტოკოლთან (WebSocket, CoAP, HTTP) ინტეგრაციისთვის.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md128"></a>
+<h1><a class="anchor" id="autotoc_md141"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>🌐 უნივერსალური "Heartbeat" პატერნი:</b> მოდული არ არის მიბმული კონკრეტულ პროტოკოლზე. ის უსმენს ზოგად, აბსტრაქტულ <code>FMW_EVENT_CONNECTIVITY_ESTABLISHED</code> ივენთს. ნებისმიერ საკომუნიკაციო მოდულს შეუძლია ამ ივენთის გამოქვეყნება, რითაც Watchdog-ს ამცნობს, რომ "კავშირი ცოცხალია".</li>
@@ -118,10 +118,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <li><b>⚖️ მდგომარეობის მართვა და ესკალაცია:</b> მოდული ითვლის წარუმატებელ მცდელობებს და პრობლემის გამწვავებასთან ერთად, გადადის უფრო აგრესიულ აღდგენის სტრატეგიებზე, რაც იცავს სისტემას არასაჭირო გადატვირთვის ციკლებისგან.</li>
 <li><b>🤝 სერვისების ინტეგრაცია:</b> ის არის სხვა სისტემური სერვისების აქტიური მომხმარებელი (<code>Service Consumer</code>), როგორიცაა <code>System Timer</code> (პერიოდული შემოწმებებისთვის) და <code>System Manager</code> (გადატვირთვისთვის).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md129"></a>
+<h1><a class="anchor" id="autotoc_md142"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;system_config.json&lt;/tt&gt;)</h1>
 <p>მოდულის სრული ქცევა იმართება <code>layers</code> მასივის საშუალებით. თითოეული ობიექტი ამ მასივში წარმოადგენს ერთ დამოუკიდებელ შემოწმებას.</p>
-<h2><a class="anchor" id="autotoc_md130"></a>
+<h2><a class="anchor" id="autotoc_md143"></a>
 3.1. კონფიგურაციის სრული მაგალითი</h2>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;type&quot;: &quot;connectivity_watchdog&quot;,</div>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <div class="line">    ]</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md131"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md144"></a>
 3.2. &lt;tt&gt;layers&lt;/tt&gt; ობიექტის პარამეტრები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>actions</code>   </td><td class="markdownTableBodyLeft">მასივი   </td><td class="markdownTableBodyLeft">მოქმედებების სია, რომლებიც უნდა შესრულდეს შეცდომისას.   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md132"></a>
+<h2><a class="anchor" id="autotoc_md145"></a>
 3.3. &lt;tt&gt;actions&lt;/tt&gt; ობიექტის პარამეტრები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>delay_ms</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">(მხოლოდ <code>reboot_system</code>-თვის) დაყოვნება გადატვირთვამდე მილიწამებში.   </td><td class="markdownTableBodyCenter">❌   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md133"></a>
+<h2><a class="anchor" id="autotoc_md146"></a>
 3.4. მხარდაჭერილი &lt;tt&gt;type&lt;/tt&gt;-ები და &lt;tt&gt;do&lt;/tt&gt; მოქმედებები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -213,10 +213,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>reboot_system</code>   </td><td class="markdownTableBodyLeft">გადატვირთავს მოწყობილობას.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md134"></a>
+<h1><a class="anchor" id="autotoc_md147"></a>
 4. 🔌 Service API</h1>
 <p>ეს მოდული არის სუფთა <b>Service Consumer</b> და არ აწვდის საკუთარ Service API-ს სხვა მოდულებს. მისი მართვა ხდება მხოლოდ კონფიგურაციით და ივენთებით.</p>
-<h1><a class="anchor" id="autotoc_md135"></a>
+<h1><a class="anchor" id="autotoc_md148"></a>
 5. 📢 ივენთების უნივერსალური მოდელი</h1>
 <p><code>Connectivity Watchdog</code>-ის უნივერსალურობის გასაღები არის <code>FMW_EVENT_CONNECTIVITY_ESTABLISHED</code> ივენთი.</p>
 <ul>
@@ -225,7 +225,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <li><b>Payload-ის შიგთავსი:</b> <code>char check_name[32];</code></li>
 </ul>
 <p>ნებისმიერმა მოდულმა, რომელსაც სურს Watchdog-ს "უთხრას", რომ ის "ცოცხალია", უნდა გამოაქვეყნოს ეს ივენთი და <code>payload</code>-ში მიუთითოს იმ შემოწმების სახელი, რომელიც კონფიგურაციაშია განსაზღვრული.</p>
-<h2><a class="anchor" id="autotoc_md136"></a>
+<h2><a class="anchor" id="autotoc_md149"></a>
 5.1. MQTT მოდულის ინტეგრაცია</h2>
 <p><code><a class="el" href="mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing.">mqtt_manager.c</a></code>-ში, <code>MQTT_EVENT_CONNECTED</code> ქეისში:</p>
 <div class="fragment"><div class="line"><span class="comment">// ...</span></div>
@@ -237,7 +237,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <div class="line"><span class="comment">// ...</span></div>
 <div class="ttc" id="astructfmw__connectivity__payload__t_html"><div class="ttname"><a href="structfmw__connectivity__payload__t.html">fmw_connectivity_payload_t</a></div><div class="ttdoc">Defines the data structure for connectivity-related events.</div><div class="ttdef"><b>Definition</b> event_payloads.h:87</div></div>
 <div class="ttc" id="astructfmw__connectivity__payload__t_html_a4f560bb85d36f2d3660d7ec5bdf50f85"><div class="ttname"><a href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">fmw_connectivity_payload_t::check_name</a></div><div class="ttdeci">char check_name[32]</div><div class="ttdoc">The name of the check that changed state (e.g., &quot;MQTT_Heartbeat&quot;, &quot;PING_8.8.8.8&quot;)....</div><div class="ttdef"><b>Definition</b> event_payloads.h:92</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md137"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md150"></a>
 5.2. WebSocket მოდულის (ჰიპოთეტური) ინტეგრაცია</h2>
 <p>წარმოვიდგინოთ, გვაქვს <code>websocket_manager</code>. როდესაც ის დაამყარებს კავშირს, ისიც იგივეს გააკეთებს:</p>
 <div class="fragment"><div class="line"><span class="comment">// In websocket_manager.c, on successful connection:</span></div>
@@ -246,7 +246,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <div class="line">    snprintf(payload-&gt;<a class="code hl_variable" href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">check_name</a>, <span class="keyword">sizeof</span>(payload-&gt;<a class="code hl_variable" href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">check_name</a>), <span class="stringliteral">&quot;WEBSOCKET_Heartbeat&quot;</span>);</div>
 <div class="line">    <span class="comment">// ... შეფუთვა და გამოქვეყნება ...</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md138"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md151"></a>
 5.3. PING შემოწმების ინტეგრაცია</h2>
 <p><code><a class="el" href="connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module.">connectivity_watchdog.c</a></code>-ის შიგნით, <code>ping_check_cb</code> ფუნქცია წარმატების შემთხვევაში აკეთებს იგივეს:</p>
 <div class="fragment"><div class="line"><span class="comment">// In connectivity_watchdog.c, inside ping_check_cb:</span></div>
@@ -255,7 +255,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2connec
 <div class="line">    snprintf(payload-&gt;<a class="code hl_variable" href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">check_name</a>, <span class="keyword">sizeof</span>(payload-&gt;<a class="code hl_variable" href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">check_name</a>), <span class="stringliteral">&quot;PING_%s&quot;</span>, check_cfg-&gt;target);</div>
 <div class="line">    <span class="comment">// ... შეფუთვა და გამოქვეყნება ...</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md139"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md152"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li>**<code>init_level</code>:** მოდულის <code>init_level</code> (<code>40</code>) კრიტიკულია. ის უნდა გაეშვას <code>System Timer</code>-ის (<code>35</code>) შემდეგ, მაგრამ იმ მოდულებამდე, რომელთა ივენთებსაც ის უსმენს.</li>

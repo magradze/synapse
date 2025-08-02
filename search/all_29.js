@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['ვალიდაცია_0',['ვალიდაცია',['../md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1366',1,'პარამეტრების ვალიდაცია'],['../md_docs_2contributing_2pull__request__template.html#autotoc_md1046',1,'ტესტირება და ვალიდაცია'],['../md_docs_2convention_2configuration__management.html#autotoc_md1113',1,'Default მნიშვნელობები და ვალიდაცია']]],
-  ['ვალიდაცია_20და_20default_20ები_1',['5. კონფიგურაციის ვალიდაცია და Default-ები',['../md_docs_2tutorials_2system__configuration.html#autotoc_md1936',1,'']]],
-  ['ვალიდაცია_20და_20default_20მნიშვნელობები_2',['ვალიდაცია და Default მნიშვნელობები',['../md_docs_2structure_2configuration__flow.html#autotoc_md1736',1,'']]],
-  ['ვალიდაცია_20და_20rollback_3',['8. განახლების ვალიდაცია და Rollback',['../md_components_2modules_2system_2ota__update__manager_2README.html#autotoc_md168',1,'']]],
-  ['ვერსიონირება_4',['სქემის ვერსიონირება',['../md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1406',1,'']]],
-  ['ვერ_20პოულობს_20service_20locator_20ი_20ჩემს_20სერვისს_5',['3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1868',1,'']]],
-  ['ვიპოვო_20დოკუმენტაციის_20სტრუქტურის_20და_20სტანდარტების_20შესახებ_20ინფორმაცია_6',['7. სად ვიპოვო დოკუმენტაციის სტრუქტურის და სტანდარტების შესახებ ინფორმაცია?',['../md_docs_2contributing_2faq.html#autotoc_md993',1,'']]],
-  ['ვის_20მივმართო_20დამატებითი_20კითხვების_20ან_20პრობლემების_20შემთხვევაში_7',['10. ვის მივმართო დამატებითი კითხვების ან პრობლემების შემთხვევაში?',['../md_docs_2contributing_2faq.html#autotoc_md996',1,'']]],
-  ['ვრცელდება_8',['პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1840',1,'']]],
-  ['ვრცელდება_20event_20bus_20ზე_20მოვლენები_9',['4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1869',1,'']]]
+  ['ვალიდაცია_0',['ვალიდაცია',['../md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1379',1,'პარამეტრების ვალიდაცია'],['../md_docs_2contributing_2pull__request__template.html#autotoc_md1059',1,'ტესტირება და ვალიდაცია'],['../md_docs_2convention_2configuration__management.html#autotoc_md1126',1,'Default მნიშვნელობები და ვალიდაცია']]],
+  ['ვალიდაცია_20და_20default_20ები_1',['5. კონფიგურაციის ვალიდაცია და Default-ები',['../md_docs_2tutorials_2system__configuration.html#autotoc_md1949',1,'']]],
+  ['ვალიდაცია_20და_20default_20მნიშვნელობები_2',['ვალიდაცია და Default მნიშვნელობები',['../md_docs_2structure_2configuration__flow.html#autotoc_md1749',1,'']]],
+  ['ვალიდაცია_20და_20rollback_3',['8. განახლების ვალიდაცია და Rollback',['../md_components_2modules_2system_2ota__update__manager_2README.html#autotoc_md181',1,'']]],
+  ['ვერსიონირება_4',['სქემის ვერსიონირება',['../md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1419',1,'']]],
+  ['ვერ_20პოულობს_20service_20locator_20ი_20ჩემს_20სერვისს_5',['3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1881',1,'']]],
+  ['ვიპოვო_20დოკუმენტაციის_20სტრუქტურის_20და_20სტანდარტების_20შესახებ_20ინფორმაცია_6',['7. სად ვიპოვო დოკუმენტაციის სტრუქტურის და სტანდარტების შესახებ ინფორმაცია?',['../md_docs_2contributing_2faq.html#autotoc_md1006',1,'']]],
+  ['ვის_20მივმართო_20დამატებითი_20კითხვების_20ან_20პრობლემების_20შემთხვევაში_7',['10. ვის მივმართო დამატებითი კითხვების ან პრობლემების შემთხვევაში?',['../md_docs_2contributing_2faq.html#autotoc_md1009',1,'']]],
+  ['ვრცელდება_8',['პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1853',1,'']]],
+  ['ვრცელდება_20event_20bus_20ზე_20მოვლენები_9',['4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1882',1,'']]]
 ];

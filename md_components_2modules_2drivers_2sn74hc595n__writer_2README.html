@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
   <div class="headertitle"><div class="title">💾 მოდული: &lt;tt&gt;sn74hc595n_writer&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md57"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md70"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 1.2.0</p>
-<h1><a class="anchor" id="autotoc_md58"></a>
+<h1><a class="anchor" id="autotoc_md71"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>sn74hc595n_writer</code> არის Synapse Framework-ის დაბალი დონის დრაივერის მოდული, რომელიც უზრუნველყოფს <b>გამომავალი (Output) პინების გაფართოებას</b> პოპულარული <code>SN74HC595N</code> 8-bit Serial-In, Parallel-Out Shift Register ჩიპის გამოყენებით.</p>
 <p>მისი მთავარი ამოცანაა, მინიმალური რაოდენობის ESP32 პინების (MOSI, SCLK, Latch) გამოყენებით, მართოს 8, 16, 24 ან მეტი დამატებითი ციფრული გამომავალი პინი. ეს მოდული იდეალურია ისეთი ამოცანებისთვის, როგორიცაა მრავალი LED-ის, 7-სეგმენტიანი ინდიკატორის ან რელეს მართვა. ის მოქმედებს როგორც "ხიდი" მაღალი დონის მოდულებსა (როგორიცაა <code>rgb_led_indicator</code>) და ფიზიკურ SPI ავტობუსს შორის.</p>
-<h1><a class="anchor" id="autotoc_md59"></a>
+<h1><a class="anchor" id="autotoc_md72"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისის მომწოდებელი (Pure Service Provider):</b> ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structsn74hc595n__writer__api__t.html" title="The public Service API structure for the SN74HC595N writer module.">sn74hc595n_writer_api_t</a></code> სერვისს <code>Service Locator</code>-ში, რაც სხვა მოდულებს აძლევს აბსტრაქტულ და მარტივ API-ს გაფართოებული პინების სამართავად.</li>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 <li><b>შიდა ბუფერიზაცია:</b> 📝 მოდული ინახავს ყველა გამომავალი პინის ლოგიკურ მდგომარეობას შიდა ბუფერში (<code>pin_states_buffer</code>). API ფუნქციები ცვლიან ამ ბუფერს და შემდეგ, <code>update_shift_registers</code> ფუნქცია აგზავნის ბუფერის სრულ შიგთავსს ჩიპ(ებ)ში ერთი SPI ტრანზაქციით.</li>
 <li><b>მასშტაბირებადობა (Daisy-Chaining):</b> ⛓️ არქიტექტურა მხარს უჭერს რამდენიმე <code>SN74HC595N</code> ჩიპის ერთმანეთზე მიმდევრობით გადაბმას (daisy-chaining), რაც იძლევა პინების რაოდენობის მარტივად გაზრდის საშუალებას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md60"></a>
+<h1><a class="anchor" id="autotoc_md73"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი (ორი გადაბმული ჩიპი, 16 პინი):</b></p>
@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>num_chips</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ერთმანეთზე გადაბმული (daisy-chained) ჩიპების რაოდენობა.   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md61"></a>
+<h1><a class="anchor" id="autotoc_md74"></a>
 4. 🔌 Service API (&lt;tt&gt;sn74hc595n_writer_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_SN74HC595N_WRITER_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 <li>**<code>esp_err_t get_pin_state(context, pin, out_state);</code>** <br  />
  ❓ კითხულობს პინის ბოლო ცნობილ (დამახსოვრებულ) მდგომარეობას შიდა ბუფერიდან.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md62"></a>
+<h1><a class="anchor" id="autotoc_md75"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p><code>rgb_led_indicator</code> მოდული იყენებს ამ სერვისს, რათა მართოს RGB LED, რომელიც მიერთებულია გაფართოებულ პინებზე.</p>
 <p>**<code><a class="el" href="rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა (Shift Register ვერსია)">rgb_led_indicator.c</a></code>-ში, <code>init</code> და <code>set_led_color</code> ფუნქციებში:**</p>
@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 <div class="ttc" id="astructsn74hc595n__writer__handle__t_html"><div class="ttname"><a href="structsn74hc595n__writer__handle__t.html">sn74hc595n_writer_handle_t</a></div><div class="ttdoc">The handle type for the SN74HC595N writer service.</div><div class="ttdef"><b>Definition</b> sn74hc595n_writer_interface.h:59</div></div>
 <div class="ttc" id="astructsn74hc595n__writer__handle__t_html_a25ec2112ddcaefd6fe7a6bbb4b6cc260"><div class="ttname"><a href="structsn74hc595n__writer__handle__t.html#a25ec2112ddcaefd6fe7a6bbb4b6cc260">sn74hc595n_writer_handle_t::api</a></div><div class="ttdeci">sn74hc595n_writer_api_t * api</div><div class="ttdoc">Pointer to the service API.</div><div class="ttdef"><b>Definition</b> sn74hc595n_writer_interface.h:60</div></div>
 <div class="ttc" id="astructsn74hc595n__writer__handle__t_html_a5220cbd141fafbd8a9e1fb749399e02f"><div class="ttname"><a href="structsn74hc595n__writer__handle__t.html#a5220cbd141fafbd8a9e1fb749399e02f">sn74hc595n_writer_handle_t::context</a></div><div class="ttdeci">void * context</div><div class="ttdoc">Context for the specific instance (e.g., private data)</div><div class="ttdef"><b>Definition</b> sn74hc595n_writer_interface.h:61</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md63"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md76"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> ნებისმიერმა მოდულმა, რომელიც იყენებს ამ სერვისს, თავის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა დაამატოს <code>interfaces</code>.</li>

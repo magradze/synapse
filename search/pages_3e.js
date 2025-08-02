@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🔌_20მოდული_3a_20tt_20relay_5factuator_20tt_0',['🔌 მოდული: &lt;tt&gt;relay_actuator&lt;/tt&gt;',['../md_components_2modules_2actuators_2relay__actuator_2README.html',1,'']]],
-  ['🔌_20relay_20actuator_20api_20reference_1',['🔌 Relay Actuator API Reference',['../md_docs_2api__reference_2relay__api.html',1,'']]]
+  ['🔄_20მოდული_3a_20tt_20mcp23017_5fio_5fexpander_20tt_0',['🔄 მოდული: &lt;tt&gt;mcp23017_io_expander&lt;/tt&gt;',['../md_components_2modules_2drivers_2mcp23017__io__expander_2README.html',1,'']]]
 ];

@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['✅_20ავტომატური_20ინტეგრაცია_0',['✅ ავტომატური ინტეგრაცია',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1648',1,'']]],
-  ['✅_20ავტომატური_20ინტეგრაცია_3a_1',['✅ ავტომატური ინტეგრაცია:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1249',1,'']]],
-  ['✅_20გენერირებული_20ფაილები_207_20ფაილი_2',['✅ გენერირებული ფაილები (7 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1647',1,'']]],
-  ['✅_20რაც_20უნდა_20გახსოვდეთ_3a_3',['✅ რაც უნდა გახსოვდეთ:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1274',1,'']]],
-  ['✅_20სწორი_4',['✅ სწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md1243',1,'']]],
-  ['✅_20შექმნილი_20ფაილები_205_20ფაილი_20_3a_5',['✅ შექმნილი ფაილები (5 ფაილი):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1248',1,'']]],
-  ['✅_20strong_20დოკუმენტაციის_20ხარისხი_3a_20strong_6',['✅ &lt;strong&gt;დოკუმენტაციის ხარისხი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md979',1,'']]],
-  ['✅_20strong_20ლოგირების_20სტანდარტი_3a_20strong_7',['✅ &lt;strong&gt;ლოგირების სტანდარტი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md978',1,'']]],
-  ['✅_20strong_20მოდულების_20იზოლაცია_20ყველაზე_20მნიშვნელოვანი_20შემოწმება_20_3a_20strong_8',['✅ &lt;strong&gt;მოდულების იზოლაცია (ყველაზე მნიშვნელოვანი შემოწმება):&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md980',1,'']]],
-  ['✅_20strong_20სტრუქტურული_20მთლიანობა_3a_20strong_9',['✅ &lt;strong&gt;სტრუქტურული მთლიანობა:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md977',1,'']]],
+  ['✅_20ავტომატური_20ინტეგრაცია_0',['✅ ავტომატური ინტეგრაცია',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1661',1,'']]],
+  ['✅_20ავტომატური_20ინტეგრაცია_3a_1',['✅ ავტომატური ინტეგრაცია:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1262',1,'']]],
+  ['✅_20გენერირებული_20ფაილები_207_20ფაილი_2',['✅ გენერირებული ფაილები (7 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1660',1,'']]],
+  ['✅_20რაც_20უნდა_20გახსოვდეთ_3a_3',['✅ რაც უნდა გახსოვდეთ:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1287',1,'']]],
+  ['✅_20სწორი_4',['✅ სწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md1256',1,'']]],
+  ['✅_20შექმნილი_20ფაილები_205_20ფაილი_20_3a_5',['✅ შექმნილი ფაილები (5 ფაილი):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1261',1,'']]],
+  ['✅_20strong_20დოკუმენტაციის_20ხარისხი_3a_20strong_6',['✅ &lt;strong&gt;დოკუმენტაციის ხარისხი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md992',1,'']]],
+  ['✅_20strong_20ლოგირების_20სტანდარტი_3a_20strong_7',['✅ &lt;strong&gt;ლოგირების სტანდარტი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md991',1,'']]],
+  ['✅_20strong_20მოდულების_20იზოლაცია_20ყველაზე_20მნიშვნელოვანი_20შემოწმება_20_3a_20strong_8',['✅ &lt;strong&gt;მოდულების იზოლაცია (ყველაზე მნიშვნელოვანი შემოწმება):&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md993',1,'']]],
+  ['✅_20strong_20სტრუქტურული_20მთლიანობა_3a_20strong_9',['✅ &lt;strong&gt;სტრუქტურული მთლიანობა:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md990',1,'']]],
   ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_10',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
 ];

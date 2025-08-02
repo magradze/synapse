@@ -1,0 +1,15 @@
+{
+    "name": "mcp23017_io_expander",
+    "version": "1.0.0",
+    "description": "A driver for the MCP23017 I2C 16-bit I/O expander.",
+    "author": "Giorgi Magradze",
+    "init_function": "mcp23017_io_expander_create",
+    "init_level": 15,
+    "type": "drivers",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_MCP23017_IO_EXPANDER_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
+}

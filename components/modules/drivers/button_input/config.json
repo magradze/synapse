@@ -4,20 +4,22 @@
     "enabled": true,
     "config": {
       "instance_name": "main_buttons",
+      "control_type": "expander",
+      "expander_service": "main_io_expander",
       "buttons": [
         {
           "name": "UP",
-          "gpio_pin": 26,
+          "expander_pin": 13,
           "active_level": 0
         },
         {
           "name": "DOWN",
-          "gpio_pin": 27,
+          "expander_pin": 14,
           "active_level": 0
         },
         {
           "name": "OK",
-          "gpio_pin": 32,
+          "expander_pin": 15,
           "active_level": 0
         }
       ]

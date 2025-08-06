@@ -1,0 +1,64 @@
+menu "Rotary Encoder Input"
+
+    config MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        bool "Enable Rotary Encoder Input Module"
+        default y
+        help
+            Enables the rotary_encoder_input module for A universal module to handle rotary encoder input and publish standard navigation events..
+
+    config ROTARY_ENCODER_INPUT_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_rotary_encoder_input"
+        depends on MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        help
+            Default instance name for the rotary_encoder_input module.
+
+    config ROTARY_ENCODER_INPUT_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        help
+            Maximum length for the rotary_encoder_input module instance name string.
+    
+    config ROTARY_ENCODER_MAX_INSTANCES
+        int "Maximum number of encoder instances"
+        default 4
+        range 1 16
+        depends on MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        help
+            Sets the maximum number of rotary encoder instances that can be
+            configured and run simultaneously. This affects the memory allocated
+            for managing them.
+
+    config ROTARY_ENCODER_TASK_STACK_SIZE
+        int "Shared Task Stack Size"
+        default 3072
+        depends on MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        help
+            Stack size for the single, shared task that processes all rotary encoders.
+
+    config ROTARY_ENCODER_TASK_PRIORITY
+        int "Shared Task Priority"
+        default 10
+        help
+            Priority for the shared rotary encoder processing task.
+
+    config ROTARY_ENCODER_POLLING_MS
+        int "Polling Interval (ms)"
+        default 20
+        range 5 100
+        depends on MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        help
+            Polling interval in milliseconds for reading the encoder state.
+            A lower value provides faster response but increases CPU usage.
+
+    config ROTARY_ENCODER_DEBOUNCE_MS
+        int "Switch Debounce Time (ms)"
+        default 50
+        depends on MODULE_ROTARY_ENCODER_INPUT_ENABLED
+        help
+            Debounce time in milliseconds for the encoder's push button to prevent
+            multiple triggers from a single press.
+
+endmenu

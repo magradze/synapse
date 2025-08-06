@@ -99,6 +99,7 @@ extern "C"
 
     // --- I/O Expander Services ---
     FMW_SERVICE_TYPE_SN74HC595N_WRITER_API,
+    FMW_SERVICE_TYPE_MCP23017_EXPANDER_API,
 
     // ეს ელემენტი ყოველთვის უნდა იყოს ბოლო, ვალიდაციისთვის
     FMW_SERVICE_TYPE_MAX
@@ -227,6 +228,8 @@ extern "C"
     // I/O Expander Services
     case FMW_SERVICE_TYPE_SN74HC595N_WRITER_API:
       return "sn74hc595n_writer_api";
+    case FMW_SERVICE_TYPE_MCP23017_EXPANDER_API:
+      return "mcp23017_expander_api";
 
     // Generic Services
     case FMW_SERVICE_TYPE_GENERIC_API:

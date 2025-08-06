@@ -367,106 +367,77 @@ static void led_control_task(void *pvParameters)
 
     bool blink_state_on = false;
     uint8_t blink_cycle_count = 0;
-
-    // ცვლადები პროგრამული PWM-ისთვის
-    const int pwm_resolution = 10; // 10 საფეხური სიკაშკაშისთვის
-    int pwm_counter = 0;
+    TickType_t last_effect_update = 0;
 
     ESP_LOGI(TAG, "TASK: LED control task started.");
 
     while (1)
     {
-        // 1. ვამოწმებთ ახალ ბრძანებას, მაგრამ არ ვბლოკავთ ტასკს
-        if (xQueueReceive(private_data->command_queue, &active_cmd, 0) == pdPASS)
+        // 1. ვამოწმებთ ახალ ბრძანებას, მაგრამ არ ვბლოკავთ ტასკს დიდხანს
+        if (xQueueReceive(private_data->command_queue, &active_cmd, pdMS_TO_TICKS(10)) == pdPASS)
         {
             ESP_LOGI(TAG, "TASK: New command received: Mode=%d", active_cmd.mode);
             private_data->is_manual_override = active_cmd.is_manual;
             blink_state_on = true;
             blink_cycle_count = 0;
+            last_effect_update = xTaskGetTickCount();
+
+            // თუ ბრძანება სტატიკურია ან გამორთვა, ვასრულებთ დაუყოვნებლივ
+            if (active_cmd.mode == LED_MODE_STATIC)
+            {
+                set_led_color(private_data, active_cmd.r, active_cmd.g, active_cmd.b);
+            }
+            else if (active_cmd.mode == LED_MODE_OFF)
+            {
+                set_led_color(private_data, 0, 0, 0);
+            }
         }
 
-        // 2. ვამუშავებთ მიმდინარე ბრძანებას
-        switch (active_cmd.mode)
+        // 2. ვამუშავებთ მხოლოდ აქტიურ ეფექტებს
+        if (active_cmd.mode != LED_MODE_BLINK && active_cmd.mode != LED_MODE_PULSE)
         {
-        case LED_MODE_STATIC:
-            set_led_color(private_data, active_cmd.r, active_cmd.g, active_cmd.b);
-            active_cmd.mode = LED_MODE_OFF; // ვასრულებთ და ვჩერდებით
-            break;
+            continue; // თუ ეფექტი არ არის, გადავდივართ შემდეგ იტერაციაზე
+        }
 
-        case LED_MODE_OFF:
-            set_led_color(private_data, 0, 0, 0);
-            // ველოდებით ახალ ბრძანებას, რომ CPU არ დავტვირთოთ
-            xQueueReceive(private_data->command_queue, &active_cmd, portMAX_DELAY);
-            private_data->is_manual_override = active_cmd.is_manual;
-            blink_state_on = true;
-            blink_cycle_count = 0;
-            continue; // ვიწყებთ ციკლს თავიდან
+        if (active_cmd.param1 == 0)
+        {
+            active_cmd.mode = LED_MODE_OFF;
+            continue;
+        }
 
-        case LED_MODE_BLINK:
-            // ... (Blink ლოგიკა უცვლელია) ...
-            if (active_cmd.param1 == 0)
+        // 3. ვამოწმებთ, გავიდა თუ არა ეფექტის განახლების დრო
+        if ((xTaskGetTickCount() - last_effect_update) * portTICK_PERIOD_MS < (active_cmd.param1 / 2))
+        {
+            continue;
+        }
+        last_effect_update = xTaskGetTickCount();
+
+        // 4. ვანახლებთ ეფექტს
+        blink_state_on = !blink_state_on;
+
+        if (!active_cmd.is_manual && active_cmd.g == 255)
+        { // WiFi connected
+            if (blink_cycle_count < 6)
             {
-                active_cmd.mode = LED_MODE_OFF;
-                break;
-            }
-            if (!active_cmd.is_manual && active_cmd.g == 255)
-            {
-                if (blink_cycle_count < 6)
-                {
-                    blink_state_on = !blink_state_on;
-                    set_led_color(private_data, 0, blink_state_on ? 255 : 0, 0);
-                    blink_cycle_count++;
-                    vTaskDelay(pdMS_TO_TICKS(active_cmd.param1));
-                }
-                else
-                {
-                    active_cmd.mode = LED_MODE_OFF;
-                    set_led_color(private_data, 0, 0, 0);
-                }
+                set_led_color(private_data, 0, blink_state_on ? 255 : 0, 0);
+                blink_cycle_count++;
             }
             else
             {
-                blink_state_on = !blink_state_on;
-                set_led_color(private_data,
-                              blink_state_on ? active_cmd.r : 0,
-                              blink_state_on ? active_cmd.g : 0,
-                              blink_state_on ? active_cmd.b : 0);
-                vTaskDelay(pdMS_TO_TICKS(active_cmd.param1 / 2));
-            }
-            break;
-
-        case LED_MODE_PULSE:
-        {
-            if (active_cmd.param1 == 0)
-            {
                 active_cmd.mode = LED_MODE_OFF;
-                break;
+                set_led_color(private_data, 0, 0, 0);
             }
-
-            // ვიყენებთ sinf ფუნქციას სიკაშკაშის დონის გამოსათვლელად (0-დან pwm_resolution-მდე)
-            uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
-            float sine_wave = sinf((float)now * 2.0f * M_PI / active_cmd.param1);
-            float brightness_factor = (sine_wave + 1.0f) / 2.0f; // Normalizes to 0.0 - 1.0
-            int brightness_level = (int)(brightness_factor * pwm_resolution);
-
-            // პროგრამული PWM ციკლი
-            pwm_counter = (pwm_counter + 1) % pwm_resolution;
-
-            uint8_t r = (pwm_counter < brightness_level) ? active_cmd.r : 0;
-            uint8_t g = (pwm_counter < brightness_level) ? active_cmd.g : 0;
-            uint8_t b = (pwm_counter < brightness_level) ? active_cmd.b : 0;
-
-            set_led_color(private_data, r, g, b);
-            vTaskDelay(pdMS_TO_TICKS(2)); // 2ms * 10 = 20ms per cycle => 50Hz PWM frequency
-            break;
         }
-
-        default:
-            vTaskDelay(pdMS_TO_TICKS(100));
-            break;
+        else
+        { // ზოგადი ციმციმი (BLINK და PULSE)
+            set_led_color(private_data,
+                          blink_state_on ? active_cmd.r : 0,
+                          blink_state_on ? active_cmd.g : 0,
+                          blink_state_on ? active_cmd.b : 0);
         }
     }
 }
+
 static esp_err_t send_command_to_task(module_t *self, led_command_t *cmd)
 {
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;

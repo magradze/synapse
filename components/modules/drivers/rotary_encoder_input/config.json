@@ -1,0 +1,16 @@
+[
+  {
+    "type": "rotary_encoder_input",
+    "enabled": true,
+    "config": {
+      "instance_name": "main_rotary_encoder",
+      "control_type": "expander",
+      "expander_service": "main_io_expander",
+      "pin_a": 10,
+      "pin_b": 11,
+      "pin_sw": 12,
+      "button_name": "OK",
+      "active_level": 0
+    }
+  }
+]

@@ -37,6 +37,7 @@ typedef struct
     uint8_t pin; // Can be GPIO or Expander pin
     uint8_t active_level;
     bool last_state;
+    uint32_t last_state_change_time;
 } button_config_t;
 
 typedef struct
@@ -129,6 +130,84 @@ static void button_task(void *pvParameters)
 {
     module_t *self = (module_t *)pvParameters;
     button_input_private_data_t *private_data = (button_input_private_data_t *)self->private_data;
+
+    if (private_data->control_type == CONTROL_TYPE_EXPANDER)
+    {
+        // --- I/O Expander Polling Mode (შესწორებული ლოგიკა) ---
+        while (1)
+        {
+            uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
+
+            // გავიაროთ მხოლოდ ამ მოდულისთვის კონფიგურირებული ღილაკები
+            for (int i = 0; i < private_data->button_count; i++)
+            {
+                button_config_t *btn = &private_data->buttons[i];
+                bool current_pin_level;
+
+                // წავიკითხოთ მხოლოდ ერთი, კონკრეტული პინის მდგომარეობა
+                esp_err_t ret = private_data->expander_handle->api->get_pin_level(
+                    private_data->expander_handle->context,
+                    btn->pin,
+                    &current_pin_level);
+
+                if (ret != ESP_OK)
+                {
+                    continue; // გადავიდეთ შემდეგ ღილაკზე თუ წაკითხვა ვერ მოხერხდა
+                }
+
+                bool is_pressed = (current_pin_level == (bool)btn->active_level);
+
+                // შევამოწმოთ დაჭერის მომენტი (falling edge)
+                if (is_pressed && !btn->last_state)
+                {
+                    // გამოვიყენოთ debouncing ლოგიკა
+                    if ((now - btn->last_state_change_time) > DEBOUNCE_TIME_MS)
+                    {
+                        ESP_LOGD(TAG, "Button '%s' PRESSED on Expander Pin %d", btn->name, btn->pin);
+                        publish_button_event(btn->name);
+                    }
+                }
+
+                // დავიმახსოვროთ პინის ბოლო მდგომარეობა და ცვლილების დრო
+                if (is_pressed != btn->last_state)
+                {
+                    btn->last_state = is_pressed;
+                    btn->last_state_change_time = now;
+                }
+            }
+            vTaskDelay(pdMS_TO_TICKS(20)); // Polling ინტერვალი
+        }
+    }
+    else
+    {
+        uint32_t last_event_time[MAX_BUTTONS] = {0};
+
+        while (1)
+        {
+            uint16_t all_pins_value;
+            if (private_data->expander_handle->api->read_all_pins(private_data->expander_handle->context, &all_pins_value) == ESP_OK)
+            {
+                uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
+
+                for (int i = 0; i < private_data->button_count; i++)
+                {
+                    button_config_t *btn = &private_data->buttons[i];
+
+                    bool is_pressed = (((all_pins_value >> btn->pin) & 1) == (bool)btn->active_level);
+
+                    if (is_pressed && !btn->last_state)
+                    {
+                        // ღილაკი ახლახანს დააჭირეს
+                        if ((now - last_event_time[i]) > DEBOUNCE_TIME_MS)
+                        {
+                            ESP_LOGI(TAG, "Button '%s' press confirmed on Expander Pin %d", btn->name, btn->pin);
+                            publish_button_event(btn->name);
+                            last_event_time[i] = now; // დავიმახსოვროთ დრო, რომ თავიდან ავიცილოთ სპამი
+                        }
+                    }
+                    btn->last_state = is_pressed;
+                }
+            }
 
     if (private_data->control_type == CONTROL_TYPE_EXPANDER)
     {
@@ -300,6 +379,8 @@ static esp_err_t parse_config(const cJSON *config_node, button_input_private_dat
 {
     if (!config_node)
         return ESP_ERR_INVALID_ARG;
+
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
 
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
 

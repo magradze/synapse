@@ -330,20 +330,18 @@ module_t *{self.params['module_name']}_create(const cJSON *config);
         
         includes = [
             f'#include "{module_name}.h"',
-            '#include "logging.h"',
-            '#include "event_bus.h"',
-            '#include "event_data_wrapper.h"',
+            '#include "synapse.h"',
         ]
         if self.is_service_provider:
-            includes.append('#include "service_locator.h"')
-            includes.append('#include "service_types.h"')
+            # Service Provider-ს, როგორც წესი, არ სჭირდება სხვა მოდულის ინტერფეისი,
+            # მაგრამ დავტოვოთ კომენტარი მაგალითისთვის.
+            # includes.append('#include "some_other_module_interface.h"')
+            pass
         if self.is_command_handler:
             includes.append('#include "cmd_router_interface.h"')
-            includes.append('#include "service_locator.h"') # Command Router-ის მისაღებად
         if self.is_event_producer:
             includes.append('#include "freertos/task.h"')
             includes.append('#include "system_timer_interface.h"') # ტაიმერის სერვისისთვის
-            includes.append('#include "service_locator.h"') # ტაიმერის სერვისის მისაღებად
 
         source = f"""/**
  * @file {module_name}.c
@@ -436,26 +434,45 @@ static void {module_name}_handle_event(module_t *self, const char *event_name, v
 // --- Create Function ---
 module_t *{module_name}_create(const cJSON *config) {{
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module) {{ return NULL; }}
-
     {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)calloc(1, sizeof({module_name}_private_data_t));
-    if (!private_data) {{ free(module); return NULL; }}
-    
-    module->state_mutex = xSemaphoreCreateMutex();
-    if (!module->state_mutex) {{ free(private_data); free(module); return NULL; }}
+    if (!module || !private_data) {{
+        ESP_LOGE(TAG, "Failed to allocate memory for {module_name} module");
+        free(module);
+        free(private_data);
+        if (config) cJSON_Delete((cJSON*)config); // გათავისუფლდეს config-იც
+        return NULL;
+    }}
 
     module->private_data = private_data;
+    module->current_config = (cJSON*)config; // ვიღებთ ownership-ს
     module->init_level = {init_level};
-    
-    // TODO: წაიკითხეთ კონფიგურაცია და შეავსეთ private_data
-    // ...
 
+    // --- Parse Configuration ---
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    if (!config_node) {{
+        ESP_LOGE(TAG, "Config node missing for {module_name}");
+        {module_name}_deinit(module); // სრული გასუფთავება
+        return NULL;
+    }}
+    
+    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+    if (!cJSON_IsString(name_node)) {{
+        ESP_LOGE(TAG, "instance_name is required for {module_name}");
+        {module_name}_deinit(module);
+        return NULL;
+    }}
+    snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
+
+    // TODO: დაამატეთ სხვა კონფიგურაციის პარამეტრების პარსინგი აქ.
+
+    // --- Setup Base Functions ---
     module->base.init = {module_name}_init;
     module->base.start = {module_name}_start;
     module->base.deinit = {module_name}_deinit;
     module->base.handle_event = {module_name}_handle_event;
     
-    ESP_LOGI(TAG, "{module_title} module created.");
+    ESP_LOGI(TAG, "{module_title} module ('%s') created.", module->name);
     return module;
 }}
 
@@ -502,14 +519,14 @@ static esp_err_t {module_name}_start(module_t *self) {{
 
 static void {module_name}_deinit(module_t *self) {{
     if (!self) return;
-    ESP_LOGI(TAG, "Deinitializing {module_name} module.");
+    ESP_LOGI(TAG, "Deinitializing {module_name} module ('%s').", self->name);
     {module_name}_private_data_t *p_data = ({module_name}_private_data_t *)self->private_data;
 """
         if self.is_event_producer:
             source += """
-    if (p_data->task_handle) {
+    if (p_data->task_handle) {{
         vTaskDelete(p_data->task_handle);
-    }
+    }}
 """
         if self.is_service_provider:
             source += """
@@ -518,16 +535,26 @@ static void {module_name}_deinit(module_t *self) {{
         if self.is_command_handler:
             source += """
     fmw_event_bus_unsubscribe("FMW_SYSTEM_START_COMPLETE", self);
-    service_handle_t cmd_router = fmw_service_get("main_cmd_router");
-    if (cmd_router) {
-        ((cmd_router_api_t *)cmd_router)->unregister_command("{module_name}");
-    }
+    // Command unregistration is optional but good practice if the command
+    // should only exist while this specific instance exists.
+    // service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    // if (cmd_router) {
+    //     ((cmd_router_api_t *)cmd_router)->unregister_command("{module_name}");
+    // }
 """
         source += """
-    if (self->private_data) free(self->private_data);
-    if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
+    // --- Free all allocated resources ---
+    if (self->current_config) {{
+        cJSON_Delete(self->current_config);
+    }}
+    if (self->private_data) {{
+        free(self->private_data);
+    }}
+    if (self->state_mutex) {{
+        vSemaphoreDelete(self->state_mutex);
+    }}
     free(self);
-}
+}}
 
 static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data) {{
     ESP_LOGD(TAG, "Event received: '%s'", event_name);

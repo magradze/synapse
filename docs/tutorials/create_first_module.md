@@ -63,14 +63,10 @@
  * @brief A simple module that periodically sends greetings and provides a CLI command.
  * @author (Your Name)
  */
+#include "synapse.h" // ერთიანი ჰედერი ფრეიმვორქისთვის
 #include "greeter_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "service_locator.h"
 #include "timer_interface.h"
 #include "cmd_router_interface.h"
-#include "module_registry.h" // To find other instances
 #include <string.h>
 #include <stdlib.h>
 

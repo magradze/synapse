@@ -37,6 +37,7 @@ typedef struct
     uint8_t pin; // Can be GPIO or Expander pin
     uint8_t active_level;
     bool last_state;
+    uint32_t last_state_change_time;
 } button_config_t;
 
 typedef struct
@@ -132,39 +133,49 @@ static void button_task(void *pvParameters)
 
     if (private_data->control_type == CONTROL_TYPE_EXPANDER)
     {
-        // --- I/O Expander Polling Mode (ულტრა-გამარტივებული) ---
-        uint16_t last_pins_value = 0xFFFF; // ვივარაუდოთ, რომ თავიდან ყველა აშვებულია (HIGH)
-
+        // --- I/O Expander Polling Mode (შესწორებული ლოგიკა) ---
         while (1)
         {
-            uint16_t current_pins_value;
-            esp_err_t ret = private_data->expander_handle->api->read_all_pins(private_data->expander_handle->context, &current_pins_value);
+            uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
 
-            if (ret == ESP_OK)
+            // გავიაროთ მხოლოდ ამ მოდულისთვის კონფიგურირებული ღილაკები
+            for (int i = 0; i < private_data->button_count; i++)
             {
-                // შევამოწმოთ, შეიცვალა თუ არა რომელიმე პინის მდგომარეობა
-                if (current_pins_value != last_pins_value)
+                button_config_t *btn = &private_data->buttons[i];
+                bool current_pin_level;
+
+                // წავიკითხოთ მხოლოდ ერთი, კონკრეტული პინის მდგომარეობა
+                esp_err_t ret = private_data->expander_handle->api->get_pin_level(
+                    private_data->expander_handle->context,
+                    btn->pin,
+                    &current_pin_level);
+
+                if (ret != ESP_OK)
                 {
-                    ESP_LOGW(TAG, "Pin state change detected! Old: 0x%04X, New: 0x%04X", last_pins_value, current_pins_value);
+                    continue; // გადავიდეთ შემდეგ ღილაკზე თუ წაკითხვა ვერ მოხერხდა
+                }
 
-                    // გავიაროთ ყველა ღილაკი და ვნახოთ, რომელი დააჭირეს
-                    for (int i = 0; i < private_data->button_count; i++)
+                bool is_pressed = (current_pin_level == (bool)btn->active_level);
+
+                // შევამოწმოთ დაჭერის მომენტი (falling edge)
+                if (is_pressed && !btn->last_state)
+                {
+                    // გამოვიყენოთ debouncing ლოგიკა
+                    if ((now - btn->last_state_change_time) > DEBOUNCE_TIME_MS)
                     {
-                        button_config_t *btn = &private_data->buttons[i];
-
-                        bool was_pressed = !((last_pins_value >> btn->pin) & 1); // ვივარაუდოთ active_level=0
-                        bool is_pressed = !((current_pins_value >> btn->pin) & 1);
-
-                        if (is_pressed && !was_pressed)
-                        {
-                            ESP_LOGI(TAG, "Button '%s' PRESSED on Expander Pin %d", btn->name, btn->pin);
-                            publish_button_event(btn->name);
-                        }
+                        ESP_LOGD(TAG, "Button '%s' PRESSED on Expander Pin %d", btn->name, btn->pin);
+                        publish_button_event(btn->name);
                     }
-                    last_pins_value = current_pins_value;
+                }
+
+                // დავიმახსოვროთ პინის ბოლო მდგომარეობა და ცვლილების დრო
+                if (is_pressed != btn->last_state)
+                {
+                    btn->last_state = is_pressed;
+                    btn->last_state_change_time = now;
                 }
             }
-            vTaskDelay(pdMS_TO_TICKS(50)); // Polling ინტერვალი
+            vTaskDelay(pdMS_TO_TICKS(20)); // Polling ინტერვალი
         }
     }
     else

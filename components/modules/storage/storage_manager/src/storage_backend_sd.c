@@ -10,9 +10,8 @@
  */
 
 // --- Includes ---
-#include "logging.h"
+#include "synapse.h"
 #include "storage_backend_sd.h"
-#include "framework_config.h" // For Kconfig values
 #include "esp_vfs_fat.h"
 #include "sdmmc_cmd.h"
 #include "driver/sdspi_host.h"

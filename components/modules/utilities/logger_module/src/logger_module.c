@@ -5,19 +5,13 @@
  * @version 2.2.0
  * @date 2025-08-09
  */
-
+#include "synapse.h"
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "esp_log.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "logging.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "framework_events.h"
 
 DEFINE_COMPONENT_TAG("LOGGER_MODULE");
 

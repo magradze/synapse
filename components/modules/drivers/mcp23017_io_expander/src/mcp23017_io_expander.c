@@ -5,9 +5,10 @@
  * @version 1.0.0
  * @date 2025-08-21
  */
+
+#include "synapse.h"
 #include "mcp23017_io_expander.h"
-#include "logging.h"
-#include "service_locator.h"
+
 #include "i2c_bus_interface.h"
 #include "mcp23017_interface.h"
 #include <string.h>

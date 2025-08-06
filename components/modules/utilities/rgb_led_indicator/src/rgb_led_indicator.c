@@ -5,14 +5,11 @@
  * @version 2.1.0
  */
 
+#include "synapse.h"
 #include "rgb_led_indicator.h"
 #include "rgb_led_interface.h"
 #include "ble_prov_interface.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "service_locator.h"
-#include "logging.h"
+
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>

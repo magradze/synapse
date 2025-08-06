@@ -10,10 +10,10 @@
  */
 
 // --- Includes ---
+#include "synapse.h"
 #include "storage_backend_nvs.h"
 #include "nvs_flash.h"
 #include "nvs.h"
-#include "logging.h" // ★★★ შესწორება: დაემატა logging.h ★★★
 #include <string.h>
 
 // --- Component Tag ---

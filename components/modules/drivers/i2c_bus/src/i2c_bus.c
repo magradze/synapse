@@ -10,12 +10,10 @@
  *          service with the ServiceLocator. It adheres to the Synapse v5.0.0+
  *          memory and lifecycle management contracts.
  */
+
+#include "synapse.h"
 #include "i2c_bus.h"
-#include "logging.h"
-#include "service_locator.h"
-#include "service_types.h"
-#include "resource_manager.h"
-#include "framework_config.h"
+
 #include "driver/i2c_master.h" // Using the new master driver
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"

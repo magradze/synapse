@@ -5,14 +5,10 @@
  * @version 2.0.0
  * @date 2025-08-15
  */
+
+#include "synapse.h"
 #include "time_sync.h"
-#include "logging.h"
-#include "service_locator.h"
 #include "time_sync_interface.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "framework_events.h"
-#include "module_registry.h"
 #include "esp_sntp.h"
 #include "esp_netif.h"
 #include <time.h>

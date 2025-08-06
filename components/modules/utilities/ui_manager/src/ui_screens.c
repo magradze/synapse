@@ -6,6 +6,7 @@
  * @date 2025-08-13
  */
 
+#include "synapse.h"
 #include "ui_manager.h"
 #include "ui_screens.h"
 #include "roboto_bold_24.h"
@@ -17,9 +18,6 @@
 #include <ctype.h>
 
 #include "relay_interface.h"
-#include "service_types.h"
-#include "service_locator.h"
-#include "system_manager.h"
 
 #define SYSTEM_NAME "SYNAPSE"
 

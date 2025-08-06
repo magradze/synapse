@@ -14,13 +14,9 @@
  */
 
 // --- Core Synapse Includes ---
+#include "synapse.h"
 #include "storage_manager.h"
 #include "storage_interface.h"
-#include "base_module.h"
-#include "service_locator.h"
-#include "service_types.h"
-#include "logging.h"
-#include "framework_config.h"
 
 // --- Standard Library Includes ---
 #include <string.h>

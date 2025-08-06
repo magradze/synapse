@@ -10,14 +10,10 @@
  *          MCP23017 I/O expander. All instances are managed by a single, shared FreeRTOS task
  *          for resource efficiency.
  */
+
+#include "synapse.h"
 #include "rotary_encoder_input.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "framework_events.h"
-#include "resource_manager.h"
-#include "service_locator.h"
+
 #include "mcp23017_interface.h"
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"

@@ -13,15 +13,9 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "mqtt_manager.h"
 
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "framework_events.h"
-#include "service_locator.h"
 #include "device_identity_interface.h"
 #include "mqtt_topics_generated.h" // ★★★ Auto-generated MQTT topics ★★★
 #include "timer_interface.h"

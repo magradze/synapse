@@ -5,17 +5,12 @@
  * @version 1.0.0
  * @date 2025-08-12
  */
+
+#include "synapse.h"
 #include "ui_events.h"
 #include "ui_menu.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "framework_events.h"
 #include "esp_timer.h"
 #include "relay_interface.h"
-#include "service_types.h"
-#include "service_locator.h"
 
 DEFINE_COMPONENT_TAG("UI_EVENTS");
 

@@ -11,17 +11,10 @@
  */
 
 // --- Includes ---
+#include "synapse.h"
 #include "command_router.h"
 #include "cmd_router_interface.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "framework_events.h"
-#include "service_locator.h"
-#include "service_types.h"
-#include "logging.h"
-#include "framework_config.h"
+
 #include "system_manager_interface.h"
 #include "sdkconfig.h"
 

@@ -13,16 +13,9 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "watchdog_manager.h"
 #include "watchdog_interface.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "service_locator.h"
-#include "service_types.h"
-#include "logging.h"
-#include "framework_events.h"
 
 // --- ESP-IDF & Standard Lib Includes ---
 #include "sdkconfig.h"

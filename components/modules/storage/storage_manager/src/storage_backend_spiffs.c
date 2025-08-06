@@ -7,10 +7,9 @@
  */
 
 // --- Includes ---
+#include "synapse.h"
 #include "storage_backend_spiffs.h"
-#include "framework_config.h"
 #include "esp_spiffs.h"
-#include "logging.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

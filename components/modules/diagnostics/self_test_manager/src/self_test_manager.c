@@ -13,18 +13,13 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "self_test_manager.h"
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "framework_events.h"
-#include "service_locator.h"
+
 #include "cmd_router_interface.h"
 #include "health_interface.h"
 #include "storage_interface.h"
 #include "system_manager_interface.h"
-#include "event_payloads.h" // For telemetry payloads
 #include "security_status_interface.h"
 #include "ssd1306_interface.h"
 

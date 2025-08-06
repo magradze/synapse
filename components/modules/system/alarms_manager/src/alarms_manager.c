@@ -14,14 +14,8 @@
  */
 
 // --- Synapse Framework Includes ---
+#include "synapse.h"
 #include "alarms_manager.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "logging.h"
-#include "framework_config.h"
-#include "service_locator.h"
-#include "service_types.h"
 #include "system_manager_interface.h"
 #include "rgb_led_interface.h"
 

@@ -6,9 +6,9 @@
  * @date 2025-08-01
  */
 
+#include "synapse.h"
 #include "ssd1306_driver.h"
-#include "logging.h"
-#include "service_locator.h"
+
 #include "display_driver_interface.h"
 #include "i2c_bus_interface.h"
 #include "ssd1306_fonts.h"

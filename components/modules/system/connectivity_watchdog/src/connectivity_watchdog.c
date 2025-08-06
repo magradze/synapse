@@ -11,18 +11,12 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "connectivity_watchdog.h"
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "service_locator.h"
+
 #include "timer_interface.h"
 #include "system_manager_interface.h"
 #include "alarms_manager_interface.h" // For triggering alarms
-#include "framework_config.h"
-#include "framework_events.h"
 
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"

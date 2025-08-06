@@ -12,18 +12,12 @@
  */
 
 // --- Framework & System Includes ---
+
+#include "synapse.h"
 #include "security_status_reporter.h"
 #include "security_status_interface.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "framework_config.h"
-#include "framework_events.h"
-#include "logging.h"
-#include "service_locator.h"
-#include "service_types.h"
+
 #include "cmd_router_interface.h"
-#include "event_payloads.h"
 
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"

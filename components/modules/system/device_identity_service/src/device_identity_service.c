@@ -18,17 +18,10 @@
  */
 
 // --- Synapse Framework Includes ---
+#include "synapse.h"
 #include "device_identity_service.h"
 #include "device_identity_interface.h"
 #include "cmd_router_interface.h"
-#include "base_module.h"
-#include "service_locator.h"
-#include "service_types.h"
-#include "logging.h"
-#include "framework_config.h"
-#include "framework_events.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
 
 // --- Standard & ESP-IDF Includes ---
 #include "esp_log.h"

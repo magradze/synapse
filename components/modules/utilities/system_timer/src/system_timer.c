@@ -11,14 +11,9 @@
  */
 
 // --- Synapse Framework Includes ---
+#include "synapse.h"
 #include "system_timer.h"
 #include "timer_interface.h"
-#include "base_module.h"
-#include "service_locator.h"
-#include "service_types.h"
-#include "event_bus.h"
-#include "logging.h"
-#include "framework_config.h"
 
 // --- Standard & ESP-IDF Includes ---
 #include "esp_timer.h"

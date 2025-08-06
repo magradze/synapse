@@ -5,15 +5,12 @@
  * @version 4.2.0
  * @date 2025-08-13
  */
+
+#include "synapse.h"
 #include "ui_manager.h"
 #include "ui_events.h"
 #include "ui_menu.h"
 #include "ui_screens.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "framework_events.h"
-#include "service_locator.h"
-#include "service_types.h"
 
 DEFINE_COMPONENT_TAG("UI_MANAGER");
 

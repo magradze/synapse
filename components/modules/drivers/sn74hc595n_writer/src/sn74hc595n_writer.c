@@ -4,10 +4,10 @@
  * @author Synapse Team
  * @version 1.2.0
  */
+
+#include "synapse.h"
 #include "sn74hc595n_writer.h"
-#include "logging.h"
-#include "service_locator.h"
-#include "resource_manager.h"
+
 #include "spi_bus_interface.h"
 #include "sn74hc595n_writer_interface.h"
 #include "driver/gpio.h"

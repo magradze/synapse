@@ -10,14 +10,9 @@
  *          დიაგნოსტიკისთვის.
  */
 
+#include "synapse.h"
 #include "health_monitor.h"
-#include "health_interface.h" 
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "service_locator.h"
-#include "logging.h"
+#include "health_interface.h"
 
 #include "esp_log.h"
 #include "esp_system.h"

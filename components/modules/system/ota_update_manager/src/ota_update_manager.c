@@ -10,14 +10,11 @@
  *          visual feedback to the user.
  */
 
+#include "synapse.h"
 #include "ota_update_manager.h"
 #include "ota_interface.h"
 #include "health_interface.h"
 #include "rgb_led_interface.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "service_locator.h"
-#include "logging.h"
 
 #include "esp_log.h"
 #include "esp_https_ota.h"

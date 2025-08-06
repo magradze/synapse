@@ -4,10 +4,10 @@
  * @author Synapse Team
  * @version 1.1.0
  */
+
+#include "synapse.h"
 #include "spi_bus.h"
-#include "logging.h"
-#include "service_locator.h"
-#include "resource_manager.h"
+
 #include "spi_bus_interface.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"

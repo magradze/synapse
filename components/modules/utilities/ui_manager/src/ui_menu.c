@@ -5,9 +5,10 @@
  * @version 1.3.0
  * @date 2025-08-13
  */
+
+#include "synapse.h"
 #include "ui_menu.h"
 #include "ui_screens.h"
-#include "logging.h"
 #include "display_driver_interface.h"
 #include <string.h>
 

@@ -10,16 +10,12 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "sensor_aggregator.h"
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "service_locator.h"
+
 #include "timer_interface.h"
-#include "framework_events.h"
 #include "storage_interface.h"
+
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"
 #include "esp_timer.h"

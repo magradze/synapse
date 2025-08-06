@@ -9,12 +9,9 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "time_of_flight_sensor.h"
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "service_locator.h"
+
 #include "i2c_bus_interface.h"
 #include "timer_interface.h"
 

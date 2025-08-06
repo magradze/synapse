@@ -14,19 +14,11 @@
  */
 
 // --- Framework & System Includes ---
+#include "synapse.h"
 #include "relay_actuator.h"
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "event_payloads.h"
-#include "framework_events.h"
 #include "cmd_router_interface.h"
-#include "resource_manager.h"
 #include "storage_interface.h"
-#include "service_locator.h"
 #include "relay_interface.h"
-#include "service_types.h"
 
 // --- ESP-IDF & Standard Lib Includes ---
 #include "esp_log.h"

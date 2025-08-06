@@ -6,18 +6,10 @@
  * @date 2025-06-28
  */
 
+#include "synapse.h"
 #include "wifi_manager.h"
-#include "base_module.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "framework_config.h"
-#include "logging.h"
-#include "service_locator.h"
 #include "cmd_router_interface.h"
 #include "storage_interface.h"
-#include "service_locator.h"
-#include "framework_events.h"
-#include "event_payloads.h"
 
 #include <string.h>
 #include <stdlib.h>

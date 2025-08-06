@@ -7,12 +7,8 @@
  *          აღზევს ყველა საჭირო base_module interface ფუნქციას.
  */
 
+#include "synapse.h"
 #include "sensor_simulator.h"
-#include "base_module.h"
-#include "logging.h"
-#include "event_bus.h"
-#include "event_data_wrapper.h"
-#include "service_locator.h"
 #include "timer_interface.h"
 #include <stdio.h>
 #include <stdlib.h>

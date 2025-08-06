@@ -32,10 +32,11 @@ var searchData=
   ['storage_5finterface_2eh_29',['storage_interface.h',['../storage__interface_8h.html',1,'']]],
   ['storage_5fmanager_2ec_30',['storage_manager.c',['../storage__manager_8c.html',1,'']]],
   ['storage_5fmanager_2eh_31',['storage_manager.h',['../storage__manager_8h.html',1,'']]],
-  ['system_5fevent_5fids_2eh_32',['system_event_ids.h',['../system__event__ids_8h.html',1,'']]],
-  ['system_5fmanager_2ec_33',['system_manager.c',['../system__manager_8c.html',1,'']]],
-  ['system_5fmanager_2eh_34',['system_manager.h',['../system__manager_8h.html',1,'']]],
-  ['system_5fmanager_5finterface_2eh_35',['system_manager_interface.h',['../system__manager__interface_8h.html',1,'']]],
-  ['system_5ftimer_2ec_36',['system_timer.c',['../system__timer_8c.html',1,'']]],
-  ['system_5ftimer_2eh_37',['system_timer.h',['../system__timer_8h.html',1,'']]]
+  ['synapse_2eh_32',['synapse.h',['../synapse_8h.html',1,'']]],
+  ['system_5fevent_5fids_2eh_33',['system_event_ids.h',['../system__event__ids_8h.html',1,'']]],
+  ['system_5fmanager_2ec_34',['system_manager.c',['../system__manager_8c.html',1,'']]],
+  ['system_5fmanager_2eh_35',['system_manager.h',['../system__manager_8h.html',1,'']]],
+  ['system_5fmanager_5finterface_2eh_36',['system_manager_interface.h',['../system__manager__interface_8h.html',1,'']]],
+  ['system_5ftimer_2ec_37',['system_timer.c',['../system__timer_8c.html',1,'']]],
+  ['system_5ftimer_2eh_38',['system_timer.h',['../system__timer_8h.html',1,'']]]
 ];

@@ -1,98 +1,131 @@
 <map id="components/modules/diagnostics/self_test_manager/src/self_test_manager.c" name="components/modules/diagnostics/self_test_manager/src/self_test_manager.c">
-<area shape="rect" id="Node000001" title="Implementation of the Self Test Manager module." alt="" coords="1460,5,1631,75"/>
-<area shape="rect" id="Node000002" href="$self__test__manager_8h.html" title="Public header for the Self Test Manager module." alt="" coords="5,123,160,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1460,47,920,74,553,96,179,125,174,126,173,120,178,120,552,91,920,68,1460,42"/>
-<area shape="rect" id="Node000003" href="$base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="686,196,807,221"/>
-<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="1460,46,1255,52,1004,65,886,76,784,89,708,105,683,115,669,125,664,132,663,140,671,157,689,173,712,187,709,192,686,177,667,160,658,141,659,131,665,121,681,110,707,100,783,84,885,71,1004,60,1254,46,1460,40"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="395,269,491,295"/>
-<area shape="poly" id="edge57_Node000001_Node000004" title=" " alt="" coords="1460,45,1213,50,888,63,722,73,568,87,437,104,338,125,295,137,262,147,234,165,209,197,205,209,209,220,230,230,274,243,382,267,381,272,273,248,228,235,205,223,199,209,204,195,231,161,260,142,294,131,337,120,436,99,568,81,722,68,888,57,1213,45,1460,40"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="691,269,842,295"/>
-<area shape="poly" id="edge58_Node000001_Node000010" title=" " alt="" coords="1460,46,1308,52,1108,65,882,89,768,105,656,125,584,133,524,137,497,142,473,153,449,171,425,197,420,209,424,219,453,228,516,240,678,266,677,271,516,246,451,233,421,223,415,209,420,195,445,167,470,148,496,137,523,132,583,128,656,120,767,100,882,84,1107,60,1308,47,1460,40"/>
-<area shape="rect" id="Node000012" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="2057,123,2140,148"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="1631,52,2039,120,2044,121,2043,126,2038,125,1631,57"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="2170,196,2254,221"/>
-<area shape="poly" id="edge55_Node000001_Node000013" title=" " alt="" coords="1631,48,1798,75,1894,95,1989,120,2018,132,2046,146,2165,189,2164,194,2044,150,2016,137,1987,125,1893,100,1797,80,1630,54"/>
-<area shape="rect" id="Node000014" href="$event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1592,196,1693,221"/>
-<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="1567,74,1631,183,1627,185,1563,76"/>
-<area shape="rect" id="Node000016" href="$event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="934,196,1101,221"/>
-<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="1460,50,1358,60,1244,76,1142,97,1101,110,1072,125,1058,137,1046,152,1028,184,1024,182,1041,150,1054,134,1069,120,1099,105,1140,92,1243,71,1357,55,1459,45"/>
-<area shape="rect" id="Node000017" href="$framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="2165,123,2321,148"/>
-<area shape="poly" id="edge24_Node000001_Node000017" title=" " alt="" coords="1631,50,2151,119,2151,124,1630,55"/>
-<area shape="rect" id="Node000018" href="$service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="679,123,811,148"/>
-<area shape="poly" id="edge25_Node000001_Node000018" title=" " alt="" coords="1460,53,1182,83,825,125,825,120,1182,77,1459,47"/>
-<area shape="rect" id="Node000020" href="$cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module." alt="" coords="836,123,1009,148"/>
-<area shape="poly" id="edge28_Node000001_Node000020" title=" " alt="" coords="1460,57,1013,123,1012,118,1459,51"/>
-<area shape="rect" id="Node000021" href="$health__interface_8h.html" title="Health Monitor მოდულის საჯარო სერვისის API&#45;ს &quot;კონტრაქტი&quot;." alt="" coords="219,196,359,221"/>
-<area shape="poly" id="edge30_Node000001_Node000021" title=" " alt="" coords="1460,47,1198,56,862,73,554,96,443,110,380,125,358,137,339,153,308,186,304,183,335,149,355,133,378,120,442,105,553,91,861,68,1198,51,1460,41"/>
-<area shape="rect" id="Node000022" href="$storage__interface_8h.html" title="Public Service API contract for the Storage Manager module." alt="" coords="1718,196,1866,221"/>
-<area shape="poly" id="edge33_Node000001_Node000022" title=" " alt="" coords="1585,73,1630,109,1680,146,1756,188,1753,192,1677,150,1627,114,1582,77"/>
-<area shape="rect" id="Node000023" href="$system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="1083,123,1295,148"/>
-<area shape="poly" id="edge37_Node000001_Node000023" title=" " alt="" coords="1460,66,1247,122,1246,117,1459,61"/>
-<area shape="rect" id="Node000024" href="$event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="1319,123,1457,148"/>
-<area shape="poly" id="edge41_Node000001_Node000024" title=" " alt="" coords="1490,77,1421,118,1418,113,1487,72"/>
-<area shape="rect" id="Node000026" title=" " alt="" coords="1402,196,1473,221"/>
-<area shape="poly" id="edge61_Node000001_Node000026" title=" " alt="" coords="1526,76,1455,186,1450,183,1521,73"/>
-<area shape="rect" id="Node000027" title=" " alt="" coords="1497,196,1567,221"/>
-<area shape="poly" id="edge60_Node000001_Node000027" title=" " alt="" coords="1545,75,1537,183,1531,182,1540,75"/>
-<area shape="rect" id="Node000028" href="$security__status__interface_8h.html" title="Public Service API contract for the Security Status Reporter module." alt="" coords="1734,123,1933,148"/>
-<area shape="poly" id="edge48_Node000001_Node000028" title=" " alt="" coords="1632,66,1786,116,1784,121,1630,71"/>
-<area shape="rect" id="Node000029" href="$ssd1306__interface_8h.html" title="Public Service API contract for SSD1306&#45;compatible OLED displays." alt="" coords="1890,196,2043,221"/>
-<area shape="poly" id="edge50_Node000001_Node000029" title=" " alt="" coords="1601,73,1722,146,1803,172,1882,191,1881,196,1802,178,1720,150,1599,77"/>
-<area shape="rect" id="Node000030" title=" " alt="" coords="2012,269,2087,295"/>
-<area shape="poly" id="edge63_Node000001_Node000030" title=" " alt="" coords="1631,48,1780,73,1863,94,1945,120,1968,132,1989,146,2017,157,2040,163,2062,173,2081,195,2086,211,2084,228,2070,259,2065,257,2079,227,2081,212,2076,197,2059,177,2039,168,2015,162,1987,150,1965,137,1943,125,1862,99,1779,79,1630,53"/>
-<area shape="rect" id="Node000031" title=" " alt="" coords="2345,123,2444,148"/>
-<area shape="poly" id="edge56_Node000001_Node000031" title=" " alt="" coords="1631,45,1936,73,2132,94,2332,120,2332,125,2131,99,1936,78,1630,51"/>
-<area shape="rect" id="Node000032" title=" " alt="" coords="2468,123,2585,148"/>
-<area shape="poly" id="edge59_Node000001_Node000032" title=" " alt="" coords="1631,44,1986,72,2217,93,2455,120,2454,125,2217,99,1986,77,1631,50"/>
-<area shape="rect" id="Node000033" title=" " alt="" coords="2609,123,2676,148"/>
-<area shape="poly" id="edge62_Node000001_Node000033" title=" " alt="" coords="1631,40,1805,47,2043,60,2316,84,2457,100,2596,120,2595,125,2456,105,2316,89,2043,65,1805,52,1631,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="160,142,673,197,672,202,160,148"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="285,269,358,295"/>
-<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="93,146,122,182,164,219,218,247,272,266,271,271,216,252,161,224,118,186,89,150"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="698,224,505,269,503,264,697,219"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="1828,269,1911,295"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="808,211,922,219,1692,267,1815,274,1814,280,1692,272,921,224,808,217"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="1154,269,1225,295"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="808,217,1120,267,1141,270,1140,275,1120,272,807,222"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="1027,269,1109,295"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="799,219,1014,266,1013,271,798,224"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="686,222,383,272,372,274,371,269,382,267,685,217"/>
-<area shape="rect" id="Node000009" href="$system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="515,269,667,295"/>
-<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="723,224,630,266,628,261,721,219"/>
-<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="753,221,762,255,757,257,747,222"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="866,269,1003,295"/>
-<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="778,219,892,262,890,267,776,224"/>
-<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="2118,146,2184,186,2181,191,2115,150"/>
-<area shape="poly" id="edge17_Node000014_Node000007" title=" " alt="" coords="1592,222,1579,224,1456,240,1360,249,1142,272,1122,275,1122,269,1141,267,1360,243,1456,234,1578,219,1591,217"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="1605,269,1680,295"/>
-<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="1645,222,1645,256,1640,256,1640,222"/>
-<area shape="poly" id="edge20_Node000016_Node000006" title=" " alt="" coords="1046,219,1150,262,1148,266,1044,224"/>
-<area shape="poly" id="edge19_Node000016_Node000007" title=" " alt="" coords="1028,220,1054,257,1050,260,1024,223"/>
-<area shape="poly" id="edge22_Node000016_Node000010" title=" " alt="" coords="978,224,821,268,820,263,976,219"/>
-<area shape="poly" id="edge23_Node000016_Node000011" title=" " alt="" coords="1006,223,960,262,957,258,1002,219"/>
-<area shape="poly" id="edge21_Node000016_Node000015" title=" " alt="" coords="1101,217,1592,272,1591,278,1101,222"/>
-<area shape="poly" id="edge26_Node000018_Node000007" title=" " alt="" coords="767,146,830,180,909,219,1022,262,1020,267,907,224,827,185,764,151"/>
-<area shape="rect" id="Node000019" href="$service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="435,196,559,221"/>
-<area shape="poly" id="edge27_Node000018_Node000019" title=" " alt="" coords="706,151,551,195,550,190,705,145"/>
-<area shape="poly" id="edge29_Node000020_Node000007" title=" " alt="" coords="921,149,915,183,916,202,924,220,937,231,959,243,1015,263,1013,268,957,248,934,236,919,223,911,204,910,183,916,148"/>
-<area shape="poly" id="edge31_Node000021_Node000007" title=" " alt="" coords="360,213,423,219,587,230,717,237,847,246,1014,267,1014,272,847,252,717,242,587,235,422,224,359,219"/>
-<area shape="poly" id="edge32_Node000021_Node000008" title=" " alt="" coords="297,221,313,256,308,258,292,223"/>
-<area shape="poly" id="edge36_Node000022_Node000005" title=" " alt="" coords="1806,219,1848,258,1845,262,1803,223"/>
-<area shape="poly" id="edge34_Node000022_Node000007" title=" " alt="" coords="1718,223,1706,224,1547,239,1423,247,1300,256,1142,272,1123,274,1122,269,1141,267,1299,250,1423,242,1547,233,1705,219,1718,217"/>
-<area shape="poly" id="edge35_Node000022_Node000015" title=" " alt="" coords="1769,224,1681,266,1678,261,1767,219"/>
-<area shape="poly" id="edge38_Node000023_Node000003" title=" " alt="" coords="1119,151,821,198,821,193,1118,145"/>
-<area shape="poly" id="edge40_Node000023_Node000006" title=" " alt="" coords="1192,148,1192,256,1187,256,1187,148"/>
-<area shape="poly" id="edge39_Node000023_Node000007" title=" " alt="" coords="1181,150,1089,260,1085,257,1177,147"/>
-<area shape="poly" id="edge44_Node000024_Node000004" title=" " alt="" coords="1320,149,1307,151,1210,159,1128,161,987,160,920,161,849,166,768,178,674,199,645,210,617,224,492,268,491,263,615,219,643,205,673,193,767,173,848,161,920,156,987,155,1128,156,1210,153,1306,145,1319,144"/>
-<area shape="poly" id="edge47_Node000024_Node000008" title=" " alt="" coords="1320,149,1307,151,1201,158,1111,159,957,154,884,153,806,159,718,173,617,198,594,210,572,224,482,249,372,273,371,268,480,244,570,219,592,206,615,194,717,167,805,153,883,148,957,148,1111,154,1201,153,1306,145,1319,144"/>
-<area shape="rect" id="Node000025" href="$framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="1227,196,1378,221"/>
-<area shape="poly" id="edge42_Node000024_Node000025" title=" " alt="" coords="1376,150,1329,189,1325,185,1373,146"/>
-<area shape="poly" id="edge45_Node000024_Node000026" title=" " alt="" coords="1398,147,1424,183,1419,186,1394,150"/>
-<area shape="poly" id="edge46_Node000024_Node000027" title=" " alt="" coords="1412,146,1497,187,1495,192,1410,150"/>
-<area shape="poly" id="edge43_Node000025_Node000006" title=" " alt="" coords="1286,224,1221,264,1218,260,1283,219"/>
-<area shape="poly" id="edge49_Node000028_Node000005" title=" " alt="" coords="1916,145,2000,165,2035,178,2057,194,2065,213,2062,229,2049,243,2030,253,1979,269,1925,278,1924,273,1978,264,2028,248,2046,238,2057,227,2060,214,2053,198,2032,183,1999,170,1915,151"/>
-<area shape="poly" id="edge53_Node000029_Node000005" title=" " alt="" coords="1953,224,1898,263,1895,259,1949,219"/>
-<area shape="poly" id="edge52_Node000029_Node000006" title=" " alt="" coords="1890,223,1878,224,1511,258,1239,280,1238,274,1510,253,1877,219,1889,217"/>
-<area shape="poly" id="edge51_Node000029_Node000007" title=" " alt="" coords="1890,223,1878,224,1671,240,1509,246,1348,254,1142,272,1123,274,1122,269,1141,267,1348,248,1509,241,1670,234,1877,219,1889,217"/>
-<area shape="poly" id="edge54_Node000029_Node000030" title=" " alt="" coords="1982,219,2027,258,2024,262,1978,223"/>
+<area shape="rect" id="Node000001" title="Implementation of the Self Test Manager module." alt="" coords="1915,5,2085,75"/>
+<area shape="rect" id="Node000002" href="$synapse_8h.html" title="Synapse ESP Framework &#45; მთავარი საჯარო ჰედერი." alt="" coords="1236,123,1324,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1915,55,1338,129,1337,124,1914,50"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="476,343,572,368"/>
+<area shape="poly" id="edge83_Node000001_Node000004" title=" " alt="" coords="1914,46,1524,55,983,71,474,95,288,109,179,125,133,136,96,146,66,163,38,197,28,221,28,237,36,250,52,260,100,275,158,292,239,316,306,325,375,330,462,340,462,345,374,335,305,330,238,321,157,297,98,280,49,264,32,254,22,239,22,220,34,195,62,159,94,141,132,131,178,120,287,104,473,90,983,66,1524,49,1914,40"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="597,343,747,368"/>
+<area shape="poly" id="edge84_Node000001_Node000010" title=" " alt="" coords="1914,45,1541,55,1293,65,1033,79,783,99,566,125,476,141,403,158,349,177,318,198,314,208,318,220,335,238,362,256,438,289,526,316,606,337,605,342,524,321,436,294,360,260,332,242,314,223,308,208,314,194,347,172,402,153,475,136,565,120,783,94,1033,74,1293,60,1541,50,1914,40"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1599,269,1670,295"/>
+<area shape="poly" id="edge87_Node000001_Node000016" title=" " alt="" coords="1915,59,1835,84,1795,102,1758,125,1734,148,1705,184,1652,260,1647,257,1700,181,1730,145,1754,121,1792,98,1833,79,1914,54"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1694,269,1765,295"/>
+<area shape="poly" id="edge86_Node000001_Node000017" title=" " alt="" coords="1915,56,1879,66,1843,80,1809,100,1779,124,1758,155,1744,191,1736,226,1733,256,1728,255,1731,225,1739,189,1753,153,1775,121,1806,95,1841,76,1877,61,1913,51"/>
+<area shape="rect" id="Node000025" title=" " alt="" coords="2246,269,2330,295"/>
+<area shape="poly" id="edge81_Node000001_Node000025" title=" " alt="" coords="2087,66,2135,88,2185,116,2233,151,2273,195,2286,225,2291,255,2285,256,2281,226,2268,197,2229,155,2183,120,2133,92,2085,71"/>
+<area shape="rect" id="Node000030" href="$self__test__manager_8h.html" title="Public header for the Self Test Manager module." alt="" coords="48,196,203,221"/>
+<area shape="poly" id="edge58_Node000001_Node000030" title=" " alt="" coords="1914,45,1531,49,1002,62,738,72,506,86,326,104,263,114,222,125,199,137,178,153,145,187,141,183,175,149,196,133,220,120,262,109,325,98,505,81,738,67,1002,57,1531,44,1914,39"/>
+<area shape="rect" id="Node000031" href="$cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module." alt="" coords="1789,123,1963,148"/>
+<area shape="poly" id="edge61_Node000001_Node000031" title=" " alt="" coords="1957,77,1904,116,1901,112,1954,73"/>
+<area shape="rect" id="Node000032" href="$health__interface_8h.html" title="Health Monitor მოდულის საჯარო სერვისის API&#45;ს &quot;კონტრაქტი&quot;." alt="" coords="170,269,310,295"/>
+<area shape="poly" id="edge63_Node000001_Node000032" title=" " alt="" coords="1914,45,1523,52,989,67,730,78,507,91,347,107,298,115,273,125,261,138,252,153,241,189,238,225,239,256,234,256,233,225,236,188,247,151,257,135,270,120,296,110,346,101,507,85,729,72,989,61,1523,47,1914,40"/>
+<area shape="rect" id="Node000033" href="$storage__interface_8h.html" title="Public Service API contract for the Storage Manager module." alt="" coords="2354,269,2502,295"/>
+<area shape="poly" id="edge66_Node000001_Node000033" title=" " alt="" coords="2086,63,2156,88,2227,120,2280,154,2331,192,2408,258,2404,262,2328,196,2277,158,2224,125,2154,93,2085,68"/>
+<area shape="rect" id="Node000034" href="$system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="1839,196,2051,221"/>
+<area shape="poly" id="edge70_Node000001_Node000034" title=" " alt="" coords="1997,76,1977,149,1961,185,1956,183,1972,147,1991,74"/>
+<area shape="rect" id="Node000035" href="$security__status__interface_8h.html" title="Public Service API contract for the Security Status Reporter module." alt="" coords="2514,123,2713,148"/>
+<area shape="poly" id="edge74_Node000001_Node000035" title=" " alt="" coords="2086,52,2525,118,2524,123,2085,57"/>
+<area shape="rect" id="Node000036" href="$ssd1306__interface_8h.html" title="Public Service API contract for SSD1306&#45;compatible OLED displays." alt="" coords="2526,269,2679,295"/>
+<area shape="poly" id="edge76_Node000001_Node000036" title=" " alt="" coords="2086,62,2173,88,2265,120,2438,195,2570,261,2568,265,2436,200,2263,125,2171,93,2085,67"/>
+<area shape="rect" id="Node000037" title=" " alt="" coords="2648,343,2723,368"/>
+<area shape="poly" id="edge89_Node000001_Node000037" title=" " alt="" coords="2086,42,2256,51,2458,66,2552,77,2633,89,2693,104,2713,112,2726,121,2742,146,2749,173,2749,203,2744,232,2725,288,2702,332,2698,330,2720,286,2739,231,2744,202,2744,174,2737,148,2722,125,2711,116,2691,109,2632,94,2551,82,2457,72,2256,56,2085,47"/>
+<area shape="rect" id="Node000038" title=" " alt="" coords="2799,123,2897,148"/>
+<area shape="poly" id="edge82_Node000001_Node000038" title=" " alt="" coords="2086,46,2393,75,2780,120,2785,121,2785,126,2780,125,2392,80,2085,51"/>
+<area shape="rect" id="Node000039" title=" " alt="" coords="2921,123,3039,148"/>
+<area shape="poly" id="edge85_Node000001_Node000039" title=" " alt="" coords="2086,44,2440,72,2671,93,2908,120,2907,125,2670,99,2439,77,2085,50"/>
+<area shape="rect" id="Node000040" title=" " alt="" coords="3063,123,3129,148"/>
+<area shape="poly" id="edge88_Node000001_Node000040" title=" " alt="" coords="2085,40,2260,47,2497,60,2770,84,2911,100,3049,120,3049,125,2910,105,2769,89,2497,66,2259,52,2085,46"/>
+<area shape="rect" id="Node000003" href="$base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="471,269,593,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1236,147,1146,167,1042,198,1017,212,991,224,917,240,814,255,606,277,606,271,813,249,916,235,990,219,1015,207,1040,194,1144,162,1235,142"/>
+<area shape="rect" id="Node000012" href="$service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1034,269,1158,295"/>
+<area shape="poly" id="edge11_Node000002_Node000012" title=" " alt="" coords="1281,149,1272,185,1263,205,1250,223,1212,250,1170,268,1168,263,1210,246,1246,219,1259,202,1267,183,1276,147"/>
+<area shape="rect" id="Node000013" href="$framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="651,196,807,221"/>
+<area shape="poly" id="edge12_Node000002_Node000013" title=" " alt="" coords="1236,145,821,198,821,193,1235,140"/>
+<area shape="rect" id="Node000014" href="$event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="1526,196,1663,221"/>
+<area shape="poly" id="edge13_Node000002_Node000014" title=" " alt="" coords="1325,144,1532,190,1530,196,1323,149"/>
+<area shape="rect" id="Node000018" href="$service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1318,196,1450,221"/>
+<area shape="poly" id="edge20_Node000002_Node000018" title=" " alt="" coords="1298,146,1357,186,1354,190,1295,150"/>
+<area shape="rect" id="Node000019" href="$event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1941,269,2043,295"/>
+<area shape="poly" id="edge23_Node000002_Node000019" title=" " alt="" coords="1324,134,1499,136,1734,143,1849,151,1949,161,2024,175,2049,184,2064,194,2070,203,2072,213,2064,232,2047,249,2027,264,2024,260,2044,245,2059,229,2066,213,2065,205,2061,198,2047,189,2022,180,1948,166,1848,156,1734,149,1499,141,1324,139"/>
+<area shape="rect" id="Node000021" href="$config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="770,269,907,295"/>
+<area shape="poly" id="edge26_Node000002_Node000021" title=" " alt="" coords="1275,150,1248,187,1228,207,1205,224,1153,242,1080,256,922,276,921,271,1079,251,1152,237,1203,219,1225,203,1244,183,1271,147"/>
+<area shape="rect" id="Node000022" href="$resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="2067,269,2221,295"/>
+<area shape="poly" id="edge32_Node000002_Node000022" title=" " alt="" coords="1324,135,1501,141,1740,152,1961,169,2041,180,2086,194,2103,206,2117,222,2137,255,2132,258,2113,225,2100,210,2084,198,2039,185,1960,174,1739,157,1501,146,1324,140"/>
+<area shape="rect" id="Node000023" href="$system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="832,196,979,221"/>
+<area shape="poly" id="edge36_Node000002_Node000023" title=" " alt="" coords="1236,148,980,196,979,191,1235,142"/>
+<area shape="rect" id="Node000024" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="2176,196,2259,221"/>
+<area shape="poly" id="edge40_Node000002_Node000024" title=" " alt="" coords="1324,135,1670,150,1912,168,2158,193,2162,194,2161,199,2157,199,1911,173,1670,156,1324,140"/>
+<area shape="rect" id="Node000026" href="$event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1234,269,1401,295"/>
+<area shape="poly" id="edge42_Node000002_Node000026" title=" " alt="" coords="1325,135,1360,139,1398,149,1434,167,1463,194,1470,208,1470,220,1464,231,1454,241,1425,256,1390,268,1389,263,1423,252,1451,236,1460,228,1464,219,1465,209,1459,198,1431,171,1396,154,1359,144,1324,140"/>
+<area shape="rect" id="Node000027" href="$module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="488,196,627,221"/>
+<area shape="poly" id="edge48_Node000002_Node000027" title=" " alt="" coords="1236,143,987,164,641,199,640,193,987,158,1236,137"/>
+<area shape="rect" id="Node000028" href="$module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="329,196,463,221"/>
+<area shape="poly" id="edge50_Node000002_Node000028" title=" " alt="" coords="1236,142,924,161,705,177,477,199,477,193,704,172,923,155,1236,136"/>
+<area shape="rect" id="Node000029" href="$module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="1053,196,1192,221"/>
+<area shape="poly" id="edge53_Node000002_Node000029" title=" " alt="" coords="1256,150,1162,193,1159,188,1254,146"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="533,295,529,329,524,329,528,295"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="2244,343,2327,368"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="593,284,757,292,1399,316,2041,340,2230,349,2230,354,2041,345,1399,322,757,297,593,289"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="1662,343,1733,368"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="593,284,1648,348,1648,354,593,290"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="1277,343,1358,368"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="593,286,1263,346,1263,352,593,291"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="202,343,275,368"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="485,297,289,345,288,339,484,292"/>
+<area shape="rect" id="Node000009" href="$system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="300,343,452,368"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="508,297,415,339,413,334,506,292"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="556,292,638,334,636,339,553,297"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="771,343,909,368"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="582,292,778,337,776,342,581,297"/>
+<area shape="poly" id="edge16_Node000014_Node000004" title=" " alt="" coords="1526,219,1461,224,1263,232,1107,233,1033,235,953,241,863,252,758,272,703,286,650,304,561,340,559,335,648,299,702,281,757,267,862,247,952,235,1032,229,1107,227,1262,227,1461,219,1526,213"/>
+<area shape="poly" id="edge19_Node000014_Node000008" title=" " alt="" coords="1526,219,1461,224,1241,231,958,236,676,247,556,257,459,272,408,286,357,303,274,339,272,334,355,298,406,281,458,267,555,252,676,242,958,231,1241,226,1461,219,1526,214"/>
+<area shape="rect" id="Node000015" href="$framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="1425,269,1575,295"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="1581,223,1528,263,1525,259,1578,219"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="1604,220,1624,256,1619,259,1599,223"/>
+<area shape="poly" id="edge18_Node000014_Node000017" title=" " alt="" coords="1617,219,1696,260,1694,265,1615,224"/>
+<area shape="poly" id="edge15_Node000015_Node000006" title=" " alt="" coords="1533,292,1653,335,1651,340,1531,297"/>
+<area shape="poly" id="edge21_Node000018_Node000007" title=" " alt="" coords="1335,224,1268,245,1240,258,1223,271,1219,280,1219,289,1229,306,1249,322,1274,335,1272,339,1246,326,1225,309,1214,290,1214,279,1219,268,1237,253,1266,240,1334,219"/>
+<area shape="poly" id="edge22_Node000018_Node000012" title=" " alt="" coords="1338,224,1156,269,1155,263,1337,219"/>
+<area shape="poly" id="edge25_Node000019_Node000007" title=" " alt="" coords="1941,291,1372,351,1371,346,1941,286"/>
+<area shape="rect" id="Node000020" title=" " alt="" coords="1955,343,2029,368"/>
+<area shape="poly" id="edge24_Node000019_Node000020" title=" " alt="" coords="1995,295,1995,329,1989,329,1989,295"/>
+<area shape="poly" id="edge31_Node000021_Node000005" title=" " alt="" coords="908,285,1021,292,2230,349,2230,354,1021,297,907,291"/>
+<area shape="poly" id="edge27_Node000021_Node000007" title=" " alt="" coords="908,291,1264,343,1263,349,907,296"/>
+<area shape="poly" id="edge28_Node000021_Node000008" title=" " alt="" coords="770,291,559,310,427,325,290,345,289,340,426,320,559,304,769,285"/>
+<area shape="poly" id="edge29_Node000021_Node000010" title=" " alt="" coords="813,297,713,340,711,335,811,292"/>
+<area shape="poly" id="edge30_Node000021_Node000011" title=" " alt="" coords="841,295,842,329,837,329,836,295"/>
+<area shape="poly" id="edge35_Node000022_Node000005" title=" " alt="" coords="2168,292,2251,334,2249,339,2165,297"/>
+<area shape="poly" id="edge34_Node000022_Node000006" title=" " alt="" coords="2073,297,1747,349,1746,344,2072,292"/>
+<area shape="poly" id="edge33_Node000022_Node000007" title=" " alt="" coords="2067,296,2055,297,1664,332,1372,353,1372,348,1663,327,2054,292,2066,291"/>
+<area shape="poly" id="edge38_Node000023_Node000003" title=" " alt="" coords="846,224,606,269,605,264,845,219"/>
+<area shape="poly" id="edge37_Node000023_Node000007" title=" " alt="" coords="918,219,957,256,983,276,1012,292,1077,316,1144,333,1208,343,1263,349,1262,354,1208,348,1143,338,1075,322,1009,297,980,280,953,260,914,223"/>
+<area shape="poly" id="edge39_Node000023_Node000008" title=" " alt="" coords="832,223,819,224,691,227,479,231,369,235,272,243,198,255,173,262,159,271,154,279,153,287,162,304,180,320,203,334,200,339,177,324,158,307,148,288,149,277,155,267,171,258,196,249,271,237,369,230,479,225,691,222,818,219,831,217"/>
+<area shape="poly" id="edge41_Node000024_Node000025" title=" " alt="" coords="2231,220,2269,258,2265,262,2227,224"/>
+<area shape="poly" id="edge44_Node000026_Node000006" title=" " alt="" coords="1379,292,1649,342,1648,347,1378,297"/>
+<area shape="poly" id="edge43_Node000026_Node000007" title=" " alt="" coords="1320,295,1320,329,1315,329,1315,295"/>
+<area shape="poly" id="edge46_Node000026_Node000010" title=" " alt="" coords="1234,294,762,345,761,340,1234,289"/>
+<area shape="poly" id="edge47_Node000026_Node000011" title=" " alt="" coords="1241,297,922,344,922,339,1240,292"/>
+<area shape="poly" id="edge45_Node000026_Node000020" title=" " alt="" coords="1401,291,1412,292,1942,346,1941,352,1412,297,1401,296"/>
+<area shape="poly" id="edge49_Node000027_Node000003" title=" " alt="" coords="556,223,543,257,538,256,551,221"/>
+<area shape="poly" id="edge51_Node000028_Node000003" title=" " alt="" coords="419,219,499,261,497,265,417,224"/>
+<area shape="poly" id="edge52_Node000028_Node000008" title=" " alt="" coords="329,215,255,220,176,230,107,247,81,258,65,271,57,286,59,299,70,310,88,320,137,336,189,345,188,351,135,341,86,325,67,314,54,301,52,285,61,268,79,253,105,242,175,225,254,215,328,209"/>
+<area shape="poly" id="edge55_Node000029_Node000003" title=" " alt="" coords="1053,222,1035,224,612,272,606,273,606,267,612,267,1034,219,1053,216"/>
+<area shape="poly" id="edge54_Node000029_Node000007" title=" " alt="" coords="1090,224,1060,237,1033,254,1018,273,1018,283,1023,293,1038,305,1062,316,1125,332,1197,342,1263,348,1263,354,1196,348,1124,337,1060,321,1036,310,1019,296,1013,284,1013,272,1030,250,1057,233,1088,219"/>
+<area shape="poly" id="edge56_Node000029_Node000010" title=" " alt="" coords="1054,222,866,250,748,272,730,284,713,300,688,332,684,329,709,296,726,280,746,267,865,245,1053,217"/>
+<area shape="poly" id="edge57_Node000029_Node000011" title=" " alt="" coords="1054,222,870,248,794,261,759,271,755,279,754,287,762,304,781,320,803,334,800,338,777,324,758,307,749,288,749,278,756,267,792,256,870,242,1053,216"/>
+<area shape="poly" id="edge59_Node000030_Node000003" title=" " alt="" coords="191,219,458,265,457,270,190,224"/>
+<area shape="poly" id="edge60_Node000030_Node000008" title=" " alt="" coords="87,224,54,237,25,253,15,263,9,272,9,282,14,293,25,302,41,311,86,326,189,345,188,351,85,331,39,316,22,307,10,296,3,283,4,271,11,259,22,249,52,232,85,219"/>
+<area shape="poly" id="edge62_Node000031_Node000007" title=" " alt="" coords="1867,150,1829,197,1815,226,1809,251,1799,275,1777,297,1745,313,1701,325,1590,342,1471,352,1372,356,1372,351,1471,347,1590,337,1700,320,1744,308,1774,293,1795,272,1804,249,1810,224,1824,195,1863,147"/>
+<area shape="poly" id="edge64_Node000032_Node000007" title=" " alt="" coords="310,285,1263,348,1263,353,310,291"/>
+<area shape="poly" id="edge65_Node000032_Node000008" title=" " alt="" coords="242,295,242,329,236,329,237,295"/>
+<area shape="poly" id="edge69_Node000033_Node000005" title=" " alt="" coords="2406,297,2322,339,2320,334,2404,292"/>
+<area shape="poly" id="edge67_Node000033_Node000007" title=" " alt="" coords="2354,296,2341,297,2056,320,1775,337,1372,355,1372,350,1775,332,2055,315,2341,292,2353,291"/>
+<area shape="poly" id="edge68_Node000033_Node000020" title=" " alt="" coords="2358,297,2043,348,2042,343,2357,292"/>
+<area shape="poly" id="edge71_Node000034_Node000003" title=" " alt="" coords="1839,218,757,272,607,280,606,274,757,267,1839,213"/>
+<area shape="poly" id="edge73_Node000034_Node000006" title=" " alt="" coords="1940,223,1914,259,1895,279,1873,297,1843,315,1809,329,1747,347,1745,342,1808,324,1840,310,1870,292,1891,275,1910,256,1936,220"/>
+<area shape="poly" id="edge72_Node000034_Node000007" title=" " alt="" coords="1935,223,1888,261,1856,281,1822,297,1784,308,1733,318,1608,334,1372,354,1371,348,1608,329,1732,313,1783,303,1820,292,1854,276,1885,257,1931,219"/>
+<area shape="poly" id="edge75_Node000035_Node000005" title=" " alt="" coords="2629,146,2658,174,2688,213,2699,234,2705,256,2703,277,2693,296,2668,314,2632,328,2587,339,2537,346,2431,355,2340,357,2340,352,2431,349,2536,341,2586,334,2630,323,2666,310,2689,293,2698,275,2700,256,2694,236,2684,216,2654,178,2625,150"/>
+<area shape="poly" id="edge79_Node000036_Node000005" title=" " alt="" coords="2552,297,2341,344,2340,339,2551,292"/>
+<area shape="poly" id="edge78_Node000036_Node000006" title=" " alt="" coords="2526,296,2514,297,2069,334,1747,354,1746,349,2068,329,2513,292,2525,291"/>
+<area shape="poly" id="edge77_Node000036_Node000007" title=" " alt="" coords="2526,296,2513,297,2268,314,1934,330,1372,355,1372,349,1934,325,2268,308,2513,292,2525,291"/>
+<area shape="poly" id="edge80_Node000036_Node000037" title=" " alt="" coords="2618,293,2663,331,2660,336,2614,297"/>
 </map>

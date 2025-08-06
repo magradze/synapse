@@ -42,10 +42,10 @@ var searchData=
   ['updated_5fkey_39',['updated_key',['../structfmw__config__updated__payload__t.html#a81fedf3181c56afb2a889f0ff2e8b2d5',1,'fmw_config_updated_payload_t']]],
   ['uri_20http_5fmethod_5ft_20method_20local_5fctrl_5fhandler_5ft_20handler_40',['esp_err_t local_ctrl_module_register_endpoint(const char *uri, http_method_t method, local_ctrl_handler_t handler);',['../md_docs_2api__reference_2local__ctrl__api.html#autotoc_md497',1,'']]],
   ['url_41',['url',['../md_docs_2api__reference_2ota__api.html#autotoc_md542',1,'esp_err_t ota_module_start_update(const char *url);'],['../md_docs_2api__reference_2system__api.html#autotoc_md669',1,'esp_err_t ota_module_start_update(const char *url);']]],
-  ['usage_42',['usage',['../md_docs_2convention_2logging__standards.html#autotoc_md1218',1,'2. Memory Usage'],['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1873',1,'5. Heap და Memory Usage'],['../structcmd__t.html#a09afbf9c03dbe87233dbfb0d4154349e',1,'cmd_t::usage']]],
+  ['usage_42',['usage',['../md_docs_2convention_2logging__standards.html#autotoc_md1229',1,'2. Memory Usage'],['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1891',1,'5. Heap და Memory Usage'],['../structcmd__t.html#a09afbf9c03dbe87233dbfb0d4154349e',1,'cmd_t::usage']]],
   ['usage_20გაფართოებული_20გამოყენება_43',['Advanced Usage (გაფართოებული გამოყენება)',['../md_docs_2tutorials_2advanced__usage.html',1,'']]],
-  ['usage_20მონიტორინგი_44',['4. Task და Stack Usage მონიტორინგი',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1872',1,'']]],
+  ['usage_20მონიტორინგი_44',['4. Task და Stack Usage მონიტორინგი',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1890',1,'']]],
   ['usage_20guide_45',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
-  ['usage_20mqtt_20module_46',['2. Service Usage (MQTT Module)',['../md_docs_2convention_2communication__patterns.html#autotoc_md1108',1,'']]],
+  ['usage_20mqtt_20module_46',['2. Service Usage (MQTT Module)',['../md_docs_2convention_2communication__patterns.html#autotoc_md1119',1,'']]],
   ['utility_20module_20api_20reference_47',['Synapse Utility Module API Reference',['../md_docs_2api__reference_2utility__api.html',1,'']]]
 ];

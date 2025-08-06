@@ -110,7 +110,7 @@ Changed</h2>
 <ul>
 <li><b>components/core/CMakeLists.txt</b>: core კომპონენტში COLLECTED_MODULE_DEPENDENCIES ემატება REQUIRES-ში, რათა მოდულის header-ები იყოს ხელმისაწვდომი</li>
 <li><b>components/modules/utilities/logger_module/CMakeLists.txt</b>: დაემატა "სმარტი" conditional registration (configure ეტაპზე placeholder, ჩართვისას სრული, გამორთვისას placeholder)</li>
-<li><b><a class="el" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.">components/interfaces/include/base_module.h</a></b>: განახლდა მოდულის ინტერფეისის სტრუქტურა (function pointer-ები, სტატუსები, კონტრაქტი)</li>
+<li><b>components/interfaces/include/base_module.h</b>: განახლდა მოდულის ინტერფეისის სტრუქტურა (function pointer-ები, სტატუსები, კონტრაქტი)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md776"></a>
 Fixed</h2>
@@ -127,7 +127,7 @@ Detailed File Changes</h2>
 <li><b>components/core/collect_modules.cmake</b>: დაემატა მოდულების ავტომატური პოვნა, თითოეული module.json და Kconfig-ის ინკლუზია, აგენერირდება factory-სა და Kconfig.projbuild-ის ფაილები მხოლოდ ჩართული მოდულებისთვის.</li>
 <li><b>components/core/generated_module_factory.[ch].in</b>: დაემატა template-ები, რომლითაც collect_modules.cmake აგენერირებს მოდულების factory-ს კონდიციური include-ებით.</li>
 <li><b>components/modules/utilities/logger_module/CMakeLists.txt</b>: დაემატა "სმარტი" conditional registration, რათა build-ში მოხვდეს მხოლოდ ჩართული მოდულის კოდი, გამორთვისას კი placeholder.</li>
-<li><b><a class="el" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.">components/interfaces/include/base_module.h</a></b>: განახლდა მოდულის ინტერფეისის სტრუქტურა (function pointer-ები, სტატუსები, კონტრაქტი), რათა ყველა მოდული იყოს ერთიანი კონტრაქტის ქვეშ.</li>
+<li><b>components/interfaces/include/base_module.h</b>: განახლდა მოდულის ინტერფეისის სტრუქტურა (function pointer-ები, სტატუსები, კონტრაქტი), რათა ყველა მოდული იყოს ერთიანი კონტრაქტის ქვეშ.</li>
 <li><b>components/modules/testing/test_module/</b>: შეიქმნა ტესტური მოდული ავტომატური გენერაციით, ახალი სისტემის ტესტირებისთვის.</li>
 <li><b>docs/CREATE_MODULE_DOCUMENTATION.md</b>: დაემატა დეტალური დოკუმენტაცია მოდულების ავტომატური სისტემისთვის, გამოყენების მაგალითებითა და best practices-ით.</li>
 <li><b>create_module.py</b>: დაემატა ახალი მოდულის ავტომატური გენერაცია (header, source, CMake, Kconfig, module.json), კოდი სრულად შეესაბამება <a class="el" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.">base_module.h</a>-ს და conditional compilation-ს.</li>

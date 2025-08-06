@@ -93,51 +93,51 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2advanced__di
   <div class="headertitle"><div class="title">Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1830"></a> </p>
-<h1><a class="anchor" id="autotoc_md1831"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1848"></a> </p>
+<h1><a class="anchor" id="autotoc_md1849"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის სისტემის და მოდულების გაღრმავებული დიაგნოსტიკის მეთოდებს, ინსტრუმენტებსა და best practices-ს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1833"></a>
+<h1><a class="anchor" id="autotoc_md1851"></a>
 1. Stack Overflow და Task Watchdog</h1>
 <ul>
 <li>გამოიყენეთ FreeRTOS stack overflow checking (<code>configCHECK_FOR_STACK_OVERFLOW</code>)</li>
 <li>ჩართეთ Task Watchdog და მონიტორინგი</li>
 <li>გამოიყენეთ <code>uxTaskGetStackHighWaterMark()</code> stack usage-ის გასაკონტროლებლად</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1834"></a>
+<h1><a class="anchor" id="autotoc_md1852"></a>
 2. Heap Corruption და Memory Leak</h1>
 <ul>
 <li>ჩართეთ heap corruption detection ESP-IDF-ში (<code>CONFIG_HEAP_POISONING</code>)</li>
 <li>გამოიყენეთ <code>heap_caps_check_integrity_all()</code> და <code>heap_caps_print_heap_info()</code></li>
 <li>გამოიყენეთ <code>esp_err_t heap_trace_start()</code> memory leak-ის დიაგნოსტიკისთვის</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1835"></a>
+<h1><a class="anchor" id="autotoc_md1853"></a>
 3. Core Dumps და Crash Reporting</h1>
 <ul>
 <li>ჩართეთ core dump ფუნქციონალი ESP-IDF-ში</li>
 <li>გამოიყენეთ <code>espcoredump.py</code> crash-ის დეტალური ანალიზისთვის</li>
 <li>შეინახეთ crash log-ები და გააგზავნეთ საჭიროების შემთხვევაში</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1836"></a>
+<h1><a class="anchor" id="autotoc_md1854"></a>
 4. Custom Health Checks</h1>
 <ul>
 <li>დაამატეთ custom health check ფუნქციები Health Monitor მოდულში</li>
 <li>გამოიყენეთ რეგულარული სტატუსის შემოწმება და ლოგირება</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1837"></a>
+<h1><a class="anchor" id="autotoc_md1855"></a>
 5. Peripheral Diagnostics</h1>
 <ul>
 <li>გამოიყენეთ შესაბამისი peripheral-ის (I2C, SPI, UART) დიაგნოსტიკური ფუნქციები</li>
 <li>ჩართეთ hardware-level ლოგირება საჭიროების შემთხვევაში</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1838"></a>
+<h1><a class="anchor" id="autotoc_md1856"></a>
 6. Network Diagnostics</h1>
 <ul>
 <li>გამოიყენეთ WiFi და MQTT მოდულების სტატუსის API-ები</li>
 <li>ჩართეთ დეტალური ლოგირება კავშირის პრობლემების დროს</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1839"></a>
+<h1><a class="anchor" id="autotoc_md1857"></a>
 7. Performance Metrics</h1>
 <ul>
 <li>გამოიყენეთ <code>esp_timer_get_time()</code> ოპერაციების დროის გასაზომად</li>

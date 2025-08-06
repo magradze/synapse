@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2directory__structu
   <div class="headertitle"><div class="title">საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1765"></a> </p>
-<h1><a class="anchor" id="autotoc_md1766"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1783"></a> </p>
+<h1><a class="anchor" id="autotoc_md1784"></a>
 ძირითადი სტრუქტურა</h1>
 <div class="fragment"><div class="line">project_root/</div>
 <div class="line">├── main/                  # მთავარი აპლიკაცია (app_main და ძირითადი ლოგიკა)</div>
 <div class="line">│   └── main.c</div>
 <div class="line">├── components/            # ყველა კომპონენტი და მოდული</div>
-<div class="line">│   ├── core/              # ბირთვი: service locator, event bus, module register და სხვა</div>
-<div class="line">│   ├── interfaces/        # გლობალური ინტერფეისები</div>
+<div class="line">│   ├── core/              # ფრეიმვორქის ბირთვი და ფუნდამენტური ინტერფეისები</div>
+<div class="line">│   ├── interfaces/        # მოდულების სერვისების API კონტრაქტები</div>
 <div class="line">│   └── modules/           # კატეგორიებად დაყოფილი მოდულები</div>
 <div class="line">│       ├── sensors/</div>
 <div class="line">│       ├── actuators/</div>
@@ -112,21 +112,21 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2directory__structu
 <div class="line">│   ├── convention/</div>
 <div class="line">│   └── structure/</div>
 <div class="line">├── CMakeLists.txt         # მთავარი ბილდის სკრიპტი</div>
-<div class="line">├── Kconfig                # მთავარი კონფიგურაცია</div>
+<div class="line">├── Kconfig.projbuild      # პროექტის მთავარი Kconfig</div>
 <div class="line">└── ...                    # სხვა ფაილები და საქაღალდეები</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1767"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1785"></a>
 ძირითადი საქაღალდეების აღწერა</h1>
 <ul>
 <li><b>main/</b> — მთავარი აპლიკაციის საწყისი წერტილი (<code>app_main</code>), სადაც ხდება სისტემის ინიციალიზაცია და გაშვება.</li>
-<li><b>components/core/</b> — ფრეიმვორქის ბირთვი: <code>Service Locator</code>, <code>Event Bus</code>, <code>Module Registry</code>, <code>Config Manager</code> და სხვა ინფრასტრუქტურული კომპონენტები.</li>
-<li><b>components/interfaces/</b> — გლობალური ინტერფეისები, რომლებიც უზრუნველყოფს მოდულებს შორის "კონტრაქტებს".</li>
+<li><b>components/core/</b> — ფრეიმვორქის ბირთვი: <code>Service Locator</code>, <code>Event Bus</code>, <code>Module Registry</code>, <code>Config Manager</code> და სხვა ინფრასტრუქტურული კომპონენტები, ასევე ფრეიმვორქის ფუნდამენტური ინტერფეისები (<code><a class="el" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.">base_module.h</a></code>, <code><a class="el" href="service__types_8h.html" title="Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები.">service_types.h</a></code> და ა.შ.).</li>
+<li><b>components/interfaces/</b> — შეიცავს მხოლოდ მოდულების მიერ შექმნილი სერვისების API კონტრაქტებს, რომლებიც უზრუნველყოფს მოდულებს შორის "კონტრაქტებს".</li>
 <li><b>components/modules/</b> — კატეგორიებად დაყოფილი, დამოუკიდებელი ფუნქციონალური მოდულები.</li>
 <li><b>configs/</b> — **(განახლებულია)** შეიცავს ბაზისურ <code>system_config.json</code> ფაილს, რომელიც განსაზღვრავს მხოლოდ გლობალურ პარამეტრებს (<code>firmware</code>, <code>global_config</code>) და ცარიელ <code>modules</code> მასივს.</li>
 <li><b>docs/</b> — დოკუმენტაცია, სტანდარტები და არქიტექტურული აღწერები.</li>
 <li><b>CMakeLists.txt</b> — მთავარი build-სკრიპტი, რომელიც აღმოაჩენს და აერთიანებს ყველა კომპონენტს.</li>
-<li><b>Kconfig</b> — მთავარი კონფიგურაციის ფაილი, სადაც ხდება მოდულების ჩართვა/გამორთვა build-დროში.</li>
+<li><b>Kconfig.projbuild</b> — პროექტის მთავარი კონფიგურაციის ფაილი, სადაც ხდება მოდულების ჩართვა/გამორთვა build-დროში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1768"></a>
+<h1><a class="anchor" id="autotoc_md1786"></a>
 &lt;tt&gt;modules&lt;/tt&gt; საქაღალდის სტრუქტურა</h1>
 <div class="fragment"><div class="line">components/modules/</div>
 <div class="line">├── sensors/</div>
@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2directory__structu
 <div class="line">│   ├── wifi_manager/</div>
 <div class="line">│   └── mqtt_manager/</div>
 <div class="line">└── ... (სხვა კატეგორიები)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1769"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1787"></a>
 თითოეული მოდულის სტრუქტურა</h1>
 <p>**(განახლებულია <code>config.json</code>-ის დასამატებლად)**</p>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2directory__structu
 <li><b>include/</b> — ჰედერ ფაილები (public API).</li>
 <li><b>src/</b> — წყარო კოდი (implementation).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1770"></a>
+<h1><a class="anchor" id="autotoc_md1788"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

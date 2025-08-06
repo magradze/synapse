@@ -208,6 +208,74 @@ static void button_task(void *pvParameters)
                     btn->last_state = is_pressed;
                 }
             }
+
+    if (private_data->control_type == CONTROL_TYPE_EXPANDER)
+    {
+        // --- I/O Expander Polling Mode (ულტრა-გამარტივებული) ---
+        uint16_t last_pins_value = 0xFFFF; // ვივარაუდოთ, რომ თავიდან ყველა აშვებულია (HIGH)
+
+        while (1)
+        {
+            uint16_t current_pins_value;
+            esp_err_t ret = private_data->expander_handle->api->read_all_pins(private_data->expander_handle->context, &current_pins_value);
+
+            if (ret == ESP_OK)
+            {
+                // შევამოწმოთ, შეიცვალა თუ არა რომელიმე პინის მდგომარეობა
+                if (current_pins_value != last_pins_value)
+                {
+                    ESP_LOGW(TAG, "Pin state change detected! Old: 0x%04X, New: 0x%04X", last_pins_value, current_pins_value);
+
+                    // გავიაროთ ყველა ღილაკი და ვნახოთ, რომელი დააჭირეს
+                    for (int i = 0; i < private_data->button_count; i++)
+                    {
+                        button_config_t *btn = &private_data->buttons[i];
+
+                        bool was_pressed = !((last_pins_value >> btn->pin) & 1); // ვივარაუდოთ active_level=0
+                        bool is_pressed = !((current_pins_value >> btn->pin) & 1);
+
+                        if (is_pressed && !was_pressed)
+                        {
+                            ESP_LOGI(TAG, "Button '%s' PRESSED on Expander Pin %d", btn->name, btn->pin);
+                            publish_button_event(btn->name);
+                        }
+                    }
+                    last_pins_value = current_pins_value;
+                }
+            }
+            vTaskDelay(pdMS_TO_TICKS(50)); // Polling ინტერვალი
+        }
+    }
+    else
+    {
+        uint32_t last_event_time[MAX_BUTTONS] = {0};
+
+        while (1)
+        {
+            uint16_t all_pins_value;
+            if (private_data->expander_handle->api->read_all_pins(private_data->expander_handle->context, &all_pins_value) == ESP_OK)
+            {
+                uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
+
+                for (int i = 0; i < private_data->button_count; i++)
+                {
+                    button_config_t *btn = &private_data->buttons[i];
+
+                    bool is_pressed = (((all_pins_value >> btn->pin) & 1) == (bool)btn->active_level);
+
+                    if (is_pressed && !btn->last_state)
+                    {
+                        // ღილაკი ახლახანს დააჭირეს
+                        if ((now - last_event_time[i]) > DEBOUNCE_TIME_MS)
+                        {
+                            ESP_LOGI(TAG, "Button '%s' press confirmed on Expander Pin %d", btn->name, btn->pin);
+                            publish_button_event(btn->name);
+                            last_event_time[i] = now; // დავიმახსოვროთ დრო, რომ თავიდან ავიცილოთ სპამი
+                        }
+                    }
+                    btn->last_state = is_pressed;
+                }
+            }
             vTaskDelay(pdMS_TO_TICKS(20));
         }
     }
@@ -311,6 +379,8 @@ static esp_err_t parse_config(const cJSON *config_node, button_input_private_dat
 {
     if (!config_node)
         return ESP_ERR_INVALID_ARG;
+
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
 
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
 

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['თავსებადობის_20არქიტექტურული_20გადაწყვეტილებები_20migration_20compatibility_0',['მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)',['../md_docs_2design__decisions_2migration__and__compatibility.html',1,'']]],
-  ['თან_1',['7. 🤝 ინტეგრაცია &lt;tt&gt;self_test_manager&lt;/tt&gt;-თან',['../md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md101',1,'']]],
+  ['თან_1',['თან',['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md79',1,'6. 💡 გამოყენების მაგალითი (&lt;tt&gt;ui_manager&lt;/tt&gt;-თან)'],['../md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md101',1,'7. 🤝 ინტეგრაცია &lt;tt&gt;self_test_manager&lt;/tt&gt;-თან']]],
   ['თან_20ავტომატური_20შემოწმება_2',['4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md996',1,'']]],
   ['თან_20ინტეგრაცია_3',['5. 💡 გამოყენების მაგალითი (&lt;tt&gt;sensor_aggregator&lt;/tt&gt;-თან ინტეგრაცია)',['../md_components_2modules_2sensors_2time__of__flight__sensor_2README.html#autotoc_md118',1,'']]],
   ['თარიღი_4',['თარიღი',['../md_docs_2design__decisions_2decision__record__template.html#autotoc_md1353',1,'']]],

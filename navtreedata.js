@@ -108,33 +108,33 @@ var NAVTREE =
       ] ],
       [ "6. 💡 გამოყენების მაგალითი", "md_components_2modules_2drivers_2mcp23017__io__expander_2README.html#autotoc_md69", null ]
     ] ],
+    [ "🔘 მოდული: <tt>rotary_encoder_input</tt>", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html", [
+      [ "1. 📜 მიმოხილვა", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md71", null ],
+      [ "2. 🏛️ არქიტექტურული პრინციპები", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md72", null ],
+      [ "3. ⚙️ კონფიგურაცია (<tt>config.json</tt>)", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md73", [
+        [ "3.1. კონფიგურაცია <tt>GPIO</tt> რეჟიმისთვის", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md74", null ],
+        [ "3.2. კონფიგურაცია <tt>Expander</tt> რეჟიმისთვის", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md75", null ],
+        [ "3.3. კონფიგურაციის პარამეტრები", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md76", null ]
+      ] ],
+      [ "4. 📢 გამოქვეყნებული ივენთები", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md77", null ],
+      [ "5. 🔌 მიერთების სქემა", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md78", null ],
+      [ "6. 💡 გამოყენების მაგალითი (<tt>ui_manager</tt>-თან)", "md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md79", null ]
+    ] ],
     [ "💾 მოდული: <tt>sn74hc595n_writer</tt>", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html", [
-      [ "1. 📜 მიმოხილვა", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md71", null ],
-      [ "2. 🏛️ არქიტექტურული პრინციპები", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md72", null ],
-      [ "3. ⚙️ კონფიგურაცია (<tt>config.json</tt>)", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md73", null ],
-      [ "4. 🔌 Service API (<tt>sn74hc595n_writer_api_t</tt>)", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md74", null ],
-      [ "5. 💡 გამოყენების მაგალითი", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md75", null ],
-      [ "6. ❗ მნიშვნელოვანი შენიშვნები", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md76", null ]
+      [ "1. 📜 მიმოხილვა", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md81", null ],
+      [ "2. 🏛️ არქიტექტურული პრინციპები", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md82", null ],
+      [ "3. ⚙️ კონფიგურაცია (<tt>config.json</tt>)", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md83", null ],
+      [ "4. 🔌 Service API (<tt>sn74hc595n_writer_api_t</tt>)", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md84", null ],
+      [ "5. 💡 გამოყენების მაგალითი", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md85", null ],
+      [ "6. ❗ მნიშვნელოვანი შენიშვნები", "md_components_2modules_2drivers_2sn74hc595n__writer_2README.html#autotoc_md86", null ]
     ] ],
     [ "🚌 მოდული: <tt>spi_bus</tt>", "md_components_2modules_2drivers_2spi__bus_2README.html", [
-      [ "1. 📜 მიმოხილვა", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md78", null ],
-      [ "2. 🏛️ არქიტექტურული პრინციპები", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md79", null ],
-      [ "3. ⚙️ კონფიგურაცია (<tt>config.json</tt>)", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md80", null ],
-      [ "4. 🔌 Service API (<tt>spi_bus_api_t</tt>)", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md81", null ],
-      [ "5. 💡 გამოყენების მაგალითი", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md82", null ],
-      [ "6. ❗ მნიშვნელოვანი შენიშვნები", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md83", null ]
-    ] ],
-    [ "📲 მოდული <tt>ble_provisioning</tt>", "md_components_2modules_2provisioning_2ble__provisioning_2README.html", [
-      [ "1. 📜 მიმოხილვა", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md85", null ],
-      [ "2. 🏗️ არქიტექტურული პრინციპები", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md86", null ],
-      [ "3. ⚙️ კონფიგურაცია", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md87", null ],
-      [ "4. 🛠️ Service API (<tt>ble_prov_api_t</tt>)", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md88", null ],
-      [ "5. 📢 ივენთები (Events)", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md89", [
-        [ "გამოქვეყნებული ივენთები", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md90", null ],
-        [ "გამოწერილი ივენთები", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md91", null ]
-      ] ],
-      [ "6. 💡 გამოყენების მაგალითი", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md92", null ],
-      [ "7. ❗ მნიშვნელოვანი შენიშვნები", "md_components_2modules_2provisioning_2ble__provisioning_2README.html#autotoc_md93", null ]
+      [ "1. 📜 მიმოხილვა", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md88", null ],
+      [ "2. 🏛️ არქიტექტურული პრინციპები", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md89", null ],
+      [ "3. ⚙️ კონფიგურაცია (<tt>config.json</tt>)", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md90", null ],
+      [ "4. 🔌 Service API (<tt>spi_bus_api_t</tt>)", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md91", null ],
+      [ "5. 💡 გამოყენების მაგალითი", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md92", null ],
+      [ "6. ❗ მნიშვნელოვანი შენიშვნები", "md_components_2modules_2drivers_2spi__bus_2README.html#autotoc_md93", null ]
     ] ],
     [ "🛡️ მოდული: <tt>security_status_reporter</tt>", "md_components_2modules_2security_2security__status__reporter_2README.html", [
       [ "1. 📜 მიმოხილვა", "md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md95", null ],
@@ -1933,16 +1933,16 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "alarms__manager_8c.html",
-"functions_h.html",
-"md_components_2modules_2system_2alarms__manager_2README.html#autotoc_md133",
-"md_docs_2api__reference_2custom__api.html#autotoc_md370",
-"md_docs_2api__reference_2version__api.html#autotoc_md726",
-"md_docs_2contributing_2local__setup.html#autotoc_md1043",
-"md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1398",
-"md_docs_2structure_2faq.html#autotoc_md1793",
-"service__locator_8c.html#a40e29f1bbbc7d7de4a7ac6b6c5a28244",
-"structled__blinker__module__t.html#a3deaea46695c4833e7106d0a0acad127",
-"system__manager_8h.html#a92714f6b016d12e108ee8c70510a1cc2"
+"functions_vars.html",
+"md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md150",
+"md_docs_2api__reference_2device__identity__api.html#autotoc_md395",
+"md_docs_2changelog_2CHANGELOG__2025-06-24.html",
+"md_docs_2contributing_2review__guidelines.html#autotoc_md1077",
+"md_docs_2design__decisions_2performance__tradeoffs.html",
+"md_docs_2structure_2module__architecture.html",
+"service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1",
+"structmodule__t.html#ae00c883b7a5e858edad93c7cdbd5239b",
+"ui__events_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -8,5 +8,7 @@ var searchData=
   ['rgb_5fled_5findicator_2eh_5',['rgb_led_indicator.h',['../rgb__led__indicator_8h.html',1,'']]],
   ['rgb_5fled_5finterface_2eh_6',['rgb_led_interface.h',['../rgb__led__interface_8h.html',1,'']]],
   ['roboto_5fbold_5f24_2eh_7',['roboto_bold_24.h',['../roboto__bold__24_8h.html',1,'']]],
-  ['roboto_5fbold_5f24_5fdigits_2eh_8',['roboto_bold_24_digits.h',['../roboto__bold__24__digits_8h.html',1,'']]]
+  ['roboto_5fbold_5f24_5fdigits_2eh_8',['roboto_bold_24_digits.h',['../roboto__bold__24__digits_8h.html',1,'']]],
+  ['rotary_5fencoder_5finput_2ec_9',['rotary_encoder_input.c',['../rotary__encoder__input_8c.html',1,'']]],
+  ['rotary_5fencoder_5finput_2eh_10',['rotary_encoder_input.h',['../rotary__encoder__input_8h.html',1,'']]]
 ];

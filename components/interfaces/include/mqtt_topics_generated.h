@@ -17,9 +17,9 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-08-01 20:14:18 UTC
+ * @note გენერირების თარიღი: 2025-08-06 15:49:52 UTC
  * @note თემების რაოდენობა: 9
- * @note დამუშავებული მოდულები: button_input, connectivity_watchdog, device_identity_service, i2c_bus, mqtt_manager, relay_actuator, security_status_reporter, self_test_manager, sensor_aggregator, sn74hc595n_writer, spi_bus, ssd1306_driver, time_of_flight_sensor, time_sync, ui_manager, wifi_manager
+ * @note დამუშავებული მოდულები: button_input, connectivity_watchdog, device_identity_service, i2c_bus, mcp23017_io_expander, mqtt_manager, relay_actuator, rotary_encoder_input, security_status_reporter, self_test_manager, sensor_aggregator, sn74hc595n_writer, spi_bus, ssd1306_driver, time_of_flight_sensor, time_sync, ui_manager, wifi_manager
  * @version 1.0
  * @author MindLab Auto-Generation System
  */
@@ -85,9 +85,9 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-01 20:14:18 UTC"
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-06 15:49:52 UTC"
 #define MQTT_TOPICS_TOTAL_COUNT 9
-#define MQTT_TOPICS_GENERATED_FROM_MODULES "button_input, connectivity_watchdog, device_identity_service, i2c_bus, mqtt_manager, relay_actuator, security_status_reporter, self_test_manager, sensor_aggregator, sn74hc595n_writer, spi_bus, ssd1306_driver, time_of_flight_sensor, time_sync, ui_manager, wifi_manager"
+#define MQTT_TOPICS_GENERATED_FROM_MODULES "button_input, connectivity_watchdog, device_identity_service, i2c_bus, mcp23017_io_expander, mqtt_manager, relay_actuator, rotary_encoder_input, security_status_reporter, self_test_manager, sensor_aggregator, sn74hc595n_writer, spi_bus, ssd1306_driver, time_of_flight_sensor, time_sync, ui_manager, wifi_manager"
 
 #ifdef __cplusplus
 }

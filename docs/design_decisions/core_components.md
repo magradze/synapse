@@ -81,6 +81,20 @@
   ESP_LOGI(TAG, "MQTT connected to broker: %s", broker_url);
   ```
 
+### 7. Promise Manager
+
+- **როლი:** უზრუნველყოფს ასინქრონული "მოთხოვნა-პასუხის" ოპერაციების მართვას სუფთა და სტრუქტურირებული `Promise` პატერნის გამოყენებით.
+- **მთავარი ფუნქციები:**
+  - `Promise`-ის შექმნა (`fmw_promise_create`)
+  - წარმატების `callback`-ის რეგისტრაცია (`fmw_promise_then`)
+  - შეცდომის `callback`-ის რეგისტრაცია (`fmw_promise_catch`)
+  - `Promise`-ის შესრულება (`fmw_promise_resolve`, `fmw_promise_reject`)
+- **მაგალითი:**
+
+  ```c
+  promise_handle_t p = wifi_api->get_status_async();
+  fmw_promise_then(p, on_status_received_callback, NULL);
+
 ---
 
 ## ურთიერთქმედება მოდულებთან

@@ -4,6 +4,7 @@ set(SRCS
     "src/event_bus.c"
     "src/event_data_wrapper.c"
     "src/event_payloads.c"
+    "src/promise_manager.c"
     "src/module_factory.c"
     "src/module_helpers.c"
     "src/module_registry.c"

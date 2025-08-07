@@ -41,7 +41,7 @@
     fmw_event_bus_post("SENSOR_DATA_TEMPERATURE", wrapper);
     ```
 
-### 3. Command Router Pattern (ახალი სექცია)
+### 3. Command Router Pattern
 
 - **გამოიყენება:** მომხმარებლის მიერ ინიცირებული, ტექსტური ბრძანებების ცენტრალიზებული მართვისთვის.
 - **როდის ვიყენებთ:**
@@ -67,11 +67,38 @@
     }
     ```
 
+### 4. Promise Pattern (ახალი)
+
+- **გამოიყენება:** მიზანმიმართული, ასინქრონული "მოთხოვნა-პასუხის" (Request-Response) ოპერაციებისთვის.
+- **როდის ვიყენებთ:**
+  - როდესაც ერთ მოდულს (Consumer) სჭირდება მეორე მოდულისგან (Provider) მონაცემების ასინქრონულად მოთხოვნა და პასუხის მიღება, მაგრამ `Event Bus`-ის "Broadcast" მექანიზმი ზედმეტია.
+  - როდესაც გვინდა, რომ მოთხოვნის, წარმატების (`then`) და შეცდომის (`catch`) ლოგიკა ერთ კოდის ბლოკში იყოს თავმოყრილი.
+  - მაგალითად: `ui_manager`-ს სჭირდება `wifi_manager`-ისგან სტატუსის მიღება.
+- **პატერნის აღწერა:**
+    1. მომხმარებელი მოდული იძახებს სერვისის ასინქრონულ API ფუნქციას (მაგ., `wifi_api_get_status_async()`).
+    2. სერვისი მომენტალურად აბრუნებს `promise_handle_t` ობიექტს.
+    3. მომხმარებელი ამ `handle`-ზე არეგისტრირებს `then` და `catch` `callback` ფუნქციებს.
+    4. როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს `fmw_promise_resolve()` ან `fmw_promise_reject()`-ს, რაც ავტომატურად გამოიწვევს შესაბამისი `callback`-ის შესრულებას `Promise Manager`-ის ტასკის კონტექსტში.
+- **მაგალითი (`ui_manager.c`-დან):**
+
+    ```c
+    // Callback ფუნქციები
+    static void on_wifi_status_ready(void* result_data, void* context) { /* ... */ }
+    static void on_wifi_status_failed(void* error_data, void* context) { /* ... */ }
+
+    // ასინქრონული გამოძახება
+    promise_handle_t p = wifi_service->api->get_status_async(wifi_service->context);
+    if (p) {
+        fmw_promise_then(p, on_wifi_status_ready, NULL);
+        fmw_promise_catch(p, on_wifi_status_failed, NULL);
+    }
+    ```
+
 ## კომუნიკაციის ტიპები
 
 ### Direct API Communication (Service Locator)
 
-```
+```bash
 [MQTT Module] --API call--> [Display Module]
               --API call--> [Relay Module]
               --API call--> [System Module]
@@ -94,7 +121,7 @@ if (display_service_handle && fmw_service_get_type("main_display", &type) == ESP
 
 ### Broadcast Communication (Event Bus)
 
-```
+```bash
 [DHT22 Sensor] --event--> [Event Bus] --event--> [MQTT Module]
                                     --event--> [Display Module]
                                     --event--> [Logger Module]
@@ -320,8 +347,9 @@ sequenceDiagram
 
 ## შეჯამება
 
-1. **Service Locator** = პირდაპირი API გამოძახებები იზოლაციით.
-2. **Event Bus** = broadcast ივენთები სრული დეკაპლინგით.
+1. **Service Locator** = პირდაპირი, სინქრონული API გამოძახებები.
+2. **Event Bus** = ასინქრონული, "ერთი-მრავალთან" (Broadcast) შეტყობინებები.
 3. **Command Router** = ტექსტური ბრძანებების ცენტრალიზებული მართვა.
-4. **არასდროს** შექმნათ პირდაპირი დამოკიდებულებები მოდულებს შორის.
-5. ყოველთვის აირჩიეთ სწორი ინსტრუმენტი კონკრეტული ამოცანისთვის.
+4. **Promise Pattern** = მიზანმიმართული, ასინქრონული "ერთი-ერთთან" (Request-Response) ოპერაციები.
+5. **არასდროს** შექმნათ პირდაპირი დამოკიდებულებები მოდულებს შორის.
+6. ყოველთვის აირჩიეთ სწორი ინსტრუმენტი კონკრეტული ამოცანისთვის.

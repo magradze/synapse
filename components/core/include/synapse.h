@@ -1,18 +1,19 @@
 /**
  * @file synapse.h
- * @brief Synapse ESP Framework - მთავარი საჯარო ჰედერი.
+ * @brief Synapse ESP Framework - The Main Public Header.
  * @author Synapse Framework Team
- * @version 1.0.0
- * @date 2025-08-25
+ * @version 1.1.0
+ * @date 2025-08-29
  *
  * @details
- * ეს არის Synapse Framework-ის ბირთვის (core) ერთადერთი და მთავარი
- * საჯარო ჰედერ ფაილი. ნებისმიერმა მოდულმა, რომელსაც სჭირდება ფრეიმვორქის
- * საბაზისო სერვისებთან (როგორიცაა Event Bus, Service Locator, Config Manager და ა.შ.)
- * ურთიერთქმედება, უნდა დააინქლუდოს მხოლოდ ეს ერთი ფაილი.
+ * This is the primary and sole public header file for the Synapse Framework core.
+ * Any module that needs to interact with the framework's foundational services
+ * (such as the Event Bus, Service Locator, Config Manager, etc.) must include
+ * only this single file.
  *
- * ეს "ფასადის" (Facade) პატერნი ამარტივებს მოდულების იმპლემენტაციას და მალავს
- * core კომპონენტის შიდა სტრუქტურასა და დამოკიდებულებებს.
+ * This "Facade" design pattern simplifies module implementation by hiding the
+ * internal structure and dependencies of the core component, providing a clean
+ * and stable API surface.
  *
  * @copyright Copyright (c) 2025
  */
@@ -24,44 +25,51 @@
 extern "C" {
 #endif
 
-// =========================================================================
-//      1. ფუნდამენტური ტიპები და კონტრაქტები (Fundamental Types & Contracts)
-// =========================================================================
-// ეს ჰედერები განსაზღვრავს ძირითად სტრუქტურებსა და "ენას", რომლითაც
-// მოდულები და ფრეიმვორქი ერთმანეთს ესაუბრებიან.
+  // =================================================================================================
+  //      SECTION 1: FUNDAMENTAL TYPES & CONTRACTS
+  // =================================================================================================
+  // These headers define the core data structures and the "language" through which
+  // modules and the framework communicate. They establish the fundamental contracts
+  // for building any module within the Synapse ecosystem.
 
-#include "base_module.h"      // მოდულის საბაზისო სტრუქტურა (module_t) და სიცოცხლის ციკლი.
-#include "service_types.h"    // ყველა სერვისის ტიპის ცენტრალიზებული enum (fmw_service_type_t).
-#include "framework_events.h" // ფრეიმვორქის სტანდარტული ივენთების სახელები.
-#include "event_payloads.h"   // სტანდარტული ივენთების მონაცემთა სტრუქტურები (payloads).
+#include "base_module.h"      // Defines the basic module structure (module_t) and its lifecycle.
+#include "service_types.h"    // Provides the centralized enum for all service types (fmw_service_type_t).
+#include "framework_events.h" // Defines the names of standardized, framework-wide events.
+#include "event_payloads.h"   // Defines the data structures (payloads) for standard events.
 
-// =========================================================================
-//      2. ძირითადი სერვისების API (Core Service APIs)
-// =========================================================================
-// ეს ჰედერები აცხადებს ფრეიმვორქის მთავარი სერვისების საჯარო ფუნქციებს.
+  // =================================================================================================
+  //      SECTION 2: CORE SERVICE APIs
+  // =================================================================================================
+  // These headers declare the public functions for the framework's main services,
+  // forming the primary interaction points for all modules.
 
-#include "service_locator.h"  // სერვისების რეგისტრაცია და მოძიება (fmw_service_*).
-#include "event_bus.h"        // ივენთების გამოქვეყნება და გამოწერა (fmw_event_bus_*).
-#include "config_manager.h"   // კონფიგურაციის პარამეტრებზე წვდომა (fmw_config_get_*).
-#include "resource_manager.h" // აპარატურული რესურსების (GPIO, I2C) მართვა (fmw_resource_*).
-#include "system_manager.h"   // სისტემის მართვის ფუნქციები (fmw_module_*, fmw_system_*).
+#include "service_locator.h"  // For registering and discovering services (fmw_service_*).
+#include "event_bus.h"        // For publishing and subscribing to events (fmw_event_bus_*).
+#include "config_manager.h"   // For accessing configuration parameters (fmw_config_get_*).
+#include "resource_manager.h" // For managing exclusive access to hardware resources like GPIO, I2C (fmw_resource_*).
+#include "system_manager.h"   // For system-level control and module management (fmw_module_*, fmw_system_*).
+#include "promise_manager.h"  // For consuming asynchronous operations using a clean, promise-based pattern (fmw_promise_*).
 
-// =========================================================================
-//      3. დამხმარე და შიდა მექანიზმები (Helpers & Internal Mechanisms)
-// =========================================================================
-// ეს ჰედერები საჭიროა მოდულების გამართული მუშაობისთვის და ფრეიმვორქთან
-// სრული ინტეგრაციისთვის.
+  // =================================================================================================
+  //      SECTION 3: UTILITIES & INTERNAL MECHANISMS
+  // =================================================================================================
+  // These headers provide essential utilities and expose internal mechanisms required for
+  // the proper functioning and full integration of modules with the framework.
 
-#include "logging.h"                // ლოგირების TAG-ის განსაზღვრის მაკრო (DEFINE_COMPONENT_TAG).
-#include "event_data_wrapper.h"     // ივენთის მონაცემების უსაფრთხო მართვა (fmw_event_data_*).
-#include "module_helpers.h"         // სტანდარტული enable/disable/get_status იმპლემენტაციები.
-#include "module_factory.h"         // (შიდა გამოყენებისთვის) მოდულების დინამიური შექმნა.
-#include "module_registry.h"        // (შიდა გამოყენებისთვის) მოდულების რეესტრზე წვდომა.
+#include "logging.h"            // Provides the essential macro for logging (DEFINE_COMPONENT_TAG).
+#include "event_data_wrapper.h" // For safe, reference-counted management of event data (fmw_event_data_*).
+#include "module_helpers.h"     // Provides standard, reusable implementations for enable/disable/get_status.
+#include "module_factory.h"     // For dynamically creating modules at runtime (fmw_module_create).
+#include "module_registry.h"    // For accessing the module registry (fmw_module_registry_*).
 
-// შენიშვნა: generated_module_factory.h და framework_config.h არ არის აქ ჩართული,
-// რადგან ისინი, როგორც წესი, გამოიყენება მხოლოდ core-ის შიდა .c ფაილებში
-// და არ წარმოადგენს მოდულებისთვის განკუთვნილ საჯარო API-ს.
-// system_event_ids.h-ის შიგთავსი გადატანილია framework_events.h-ში.
+// --- For Service Providers Only ---
+// The following header is intended for modules that PROVIDE promise-based asynchronous services.
+// General consumer modules should not need to include this directly.
+#include "promise_manager_internal.h" // For creating and fulfilling promises (fmw_promise_create, fmw_promise_resolve).
+
+  // Note: Headers like `generated_module_factory.h`, `module_factory.h`, `module_registry.h`,
+  // and `framework_config.h` are intentionally excluded. They are used internally by the core
+  // system and are not part of the public API for modules.
 
 #ifdef __cplusplus
 }

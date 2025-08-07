@@ -196,3 +196,29 @@
                 Command Router-ის მიერ დამუშავებული ბრძანებების მაქსიმალური სიგრძე.
                 ეს განსაზღვრავს, რამდენი მონაცემის გადაცემას შეუძლია Command Router-ს ერთდროულად.
     endmenu
+
+    menu "Promise Manager Configuration"
+
+        config FMW_PROMISE_QUEUE_LENGTH
+            int "Promise execution queue length"
+            default 10
+            help
+                Specifies the size of the queue that holds pending promises waiting for
+                their callbacks to be executed by the promise manager task.
+
+        config FMW_PROMISE_TASK_STACK_SIZE
+            int "Promise manager task stack size"
+            default 3072
+            range 2048 8192
+            help
+                Stack size in bytes for the background task that executes promise callbacks.
+
+        config FMW_PROMISE_TASK_PRIORITY
+            int "Promise manager task priority"
+            default 11
+            range 1 24
+            help
+                Priority for the promise manager's background task. It should be high
+                enough to be responsive but generally lower than critical driver tasks.
+
+    endmenu

@@ -58,11 +58,11 @@ Promise პატერნი ამ პროცესს გარდაქმ
 1. **API-ს დეკლარირება (`wifi_interface.h`):**
 
     ```c
-    #include "promise_manager.h" // საჭიროა promise_handle_t-სთვის
+    #include "promise_manager.h" // საჭიროა callback ტიპებისთვის
 
     typedef struct {
         // ... სხვა ფუნქციები ...
-        promise_handle_t (*get_status_async)(void* context);
+        esp_err_t (*get_status_async)(void* context, promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);
     } wifi_api_t;
     ```
 
@@ -71,23 +71,17 @@ Promise პატერნი ამ პროცესს გარდაქმ
     ```c
     #include "promise_manager_internal.h" // საჭიროა fmw_promise_create-სთვის
 
-    static promise_handle_t wifi_api_get_status_async(void* context) {
-        // 1. შევქმნათ ახალი "დაპირება"
-        promise_handle_t promise = fmw_promise_create();
+    static esp_err_t wifi_api_get_status_async(void* context, promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context) {
+        // 1. შევქმნათ ახალი "დაპირება" უკვე მზა callback-ებით
+        promise_handle_t promise = fmw_promise_create(then_cb, catch_cb, user_context);
         if (!promise) {
-            return NULL;
+            return ESP_ERR_NO_MEM;
         }
 
-        // 2. გავაგზავნოთ ბრძანება ჩვენს შიდა ტასკში,
-        //    თან გადავცეთ promise-ის handle.
-        wifi_internal_cmd_t cmd = {
-            .type = CMD_GET_STATUS,
-            .promise_handle = promise
-        };
-        xQueueSend(private_data->command_queue, &cmd, 0);
+        // 2. გავაგზავნოთ ბრძანება ჩვენს შიდა ტასკში, promise-ის handle-თან ერთად
+        // ... (Queue send logic) ...
 
-        // 3. დავაბრუნოთ "დაპირება" მომხმარებელს
-        return promise;
+        return ESP_OK;
     }
     ```
 
@@ -95,11 +89,11 @@ Promise პატერნი ამ პროცესს გარდაქმ
 
     ```c
     // wifi_task-ში, როდესაც სტატუსი მზად იქნება...
-    wifi_status_t* status_data = malloc(sizeof(wifi_status_t));
-    // ... შევავსოთ status_data ...
+    static char status_buffer[512];
+    // ... შევავსოთ status_buffer ...
 
-    // შევასრულოთ "დაპირება"
-    fmw_promise_resolve(cmd.promise_handle, status_data, free);
+    // შევასრულოთ "დაპირება" სტატიკური ბუფერით
+    fmw_promise_resolve(cmd.promise_handle, status_buffer, NULL);
     ```
 
 ### 5.2. მომხმარებლის მხარე (Consumer - მაგ., `ui_manager`)
@@ -109,9 +103,9 @@ Promise პატერნი ამ პროცესს გარდაქმ
 
 // Callback ფუნქცია წარმატებისთვის
 static void on_wifi_status_ready(void* result_data, void* user_context) {
-    wifi_status_t* status = (wifi_status_t*)result_data;
-    ESP_LOGI(TAG, "Promise resolved! WiFi RSSI: %d", status->rssi);
-    // აქ მოხდება UI-ს განახლება
+    char* json_string = (char*)result_data;
+    ESP_LOGI(TAG, "Promise resolved! WiFi Status: %s", json_string);
+    // ... UI-ს განახლების ლოგიკა ...
 }
 
 // Callback ფუნქცია შეცდომისთვის
@@ -121,12 +115,12 @@ static void on_wifi_status_failed(void* error_data, void* user_context) {
 
 // მოთხოვნის გაგზავნა
 void request_wifi_update() {
-    promise_handle_t p = private_data->wifi_service->api->get_status_async(private_data->wifi_service->context);
-    
-    if (p) {
-        fmw_promise_then(p, on_wifi_status_ready, private_data);
-        fmw_promise_catch(p, on_wifi_status_failed, private_data);
-    }
+    private_data->wifi_service->get_status_async(
+        private_data->wifi_module_handle,
+        on_wifi_status_ready,
+        on_wifi_status_failed,
+        self
+    );
 }
 ```
 

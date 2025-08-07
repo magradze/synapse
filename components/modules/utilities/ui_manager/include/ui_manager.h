@@ -20,6 +20,7 @@
 #include "system_manager_interface.h"
 #include "timer_interface.h"
 #include "time_sync_interface.h"
+#include "wifi_interface.h"
 
 // Forward declaration for the event data wrapper to avoid including the full
 // header here, which would create circular dependencies.
@@ -103,6 +104,8 @@ typedef struct {
     system_manager_api_t *system_manager;/**< @brief Handle to the system manager service. */
     timer_api_t *timer;                 /**< @brief Handle to the system timer service. */
     time_sync_api_t *time_sync;         /**< @brief Handle to the time synchronization service. */
+    wifi_api_t *wifi_service;           /**< @brief Handle to the WiFi service. */
+    module_t *wifi_module_handle;       /**< @brief Handle to the WiFi module. */
 
     uint16_t display_width;             /**< @brief Cached width of the display in pixels. */
     uint16_t display_height;            /**< @brief Cached height of the display in pixels. */

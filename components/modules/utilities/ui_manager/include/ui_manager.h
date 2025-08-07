@@ -21,6 +21,10 @@
 #include "timer_interface.h"
 #include "time_sync_interface.h"
 
+// Forward declaration for the event data wrapper to avoid including the full
+// header here, which would create circular dependencies.
+struct event_data_wrapper_t;
+
 // --- Constants ---
 #define SCREEN_OFF_TIMEOUT_MS 30000
 #define HOME_SCREEN_UPDATE_INTERVAL_MS 1000
@@ -34,6 +38,27 @@
 #define SPLASH_SCREEN_TIMER_EVENT "UI_SPLASH_END"
 #define WIFI_STATUS_TIMER_EVENT "UI_WIFI_STATUS_TIMER"
 #define MODULE_CONTROL_ACTION_TIMER_EVENT "UI_MODULE_ACTION_TIMER"
+
+/**
+ * @enum ui_cmd_type_t
+ * @brief Defines the types of commands that can be sent to the UI task's queue.
+ */
+typedef enum
+{
+    UI_CMD_PROCESS_EVENT, /**< @brief A command to process an event from the Event Bus. */
+    // Future commands like UI_CMD_REDRAW can be added here.
+} ui_cmd_type_t;
+
+/**
+ * @struct ui_cmd_t
+ * @brief The structure for a command sent to the UI task's queue.
+ */
+typedef struct
+{
+    ui_cmd_type_t type;                      /**< @brief The type of the command. */
+    char event_name[32];                     /**< @brief Buffer to store the event name string. */
+    struct event_data_wrapper_t *event_data; /**< @brief Pointer to the event data wrapper. */
+} ui_cmd_t;
 
 /**
  * @enum ui_state_t
@@ -100,6 +125,8 @@ typedef struct {
     int32_t wifi_rssi;                  /**< @brief Cached WiFi signal strength (RSSI). */
 
     int64_t last_button_press_time;     /**< @brief Timestamp of the last button press for debouncing/cooldown. */
+    TaskHandle_t ui_task_handle;        /**< @brief Handle to the dedicated UI processing task. */
+    QueueHandle_t ui_cmd_queue;         /**< @brief Queue for sending commands from event handlers to the UI task. */
 } ui_manager_private_data_t;
 
 /**

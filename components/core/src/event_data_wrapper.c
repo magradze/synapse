@@ -114,16 +114,12 @@ esp_err_t fmw_event_data_release(event_data_wrapper_t* wrapper)
     {
         ESP_LOGI(TAG, "ref_count is zero. Freeing wrapper %p and its payload %p.", wrapper, wrapper->payload);
 
-        if (wrapper->payload)
+       if (wrapper->payload && wrapper->free_payload_fn)
         {
-            if (wrapper->free_payload_fn)
-            {
-                wrapper->free_payload_fn(wrapper->payload);
-            }
-            else
-            {
-                free(wrapper->payload);
-            }
+            // Call the provided free function only if it's not NULL.
+            // If free_fn is NULL, it implies the payload is static or managed
+            // elsewhere and should not be freed by the wrapper.
+            wrapper->free_payload_fn(wrapper->payload);
         }
 
         vSemaphoreDelete(wrapper->mutex);

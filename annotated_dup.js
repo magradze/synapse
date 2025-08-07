@@ -57,6 +57,8 @@ var annotated_dup =
     [ "ota_api_t", "structota__api__t.html", "structota__api__t" ],
     [ "ota_update_manager_config_t", "structota__update__manager__config__t.html", "structota__update__manager__config__t" ],
     [ "ota_update_manager_private_data_t", "structota__update__manager__private__data__t.html", null ],
+    [ "promise_message_t", "structpromise__message__t.html", null ],
+    [ "promise_t", "structpromise__t.html", null ],
     [ "relay_api_t", "structrelay__api__t.html", "structrelay__api__t" ],
     [ "relay_private_data_t", "structrelay__private__data__t.html", null ],
     [ "resource_pool_t", "structresource__pool__t.html", "structresource__pool__t" ],

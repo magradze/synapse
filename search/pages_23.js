@@ -1,13 +1,6 @@
 var searchData=
 [
-  ['პატერნების_20წესები_0',['კომუნიკაციის პატერნების წესები',['../md_docs_2convention_2communication__patterns.html',1,'']]],
-  ['პატერნები_20communication_20patterns_1',['კომუნიკაციის პატერნები (Communication Patterns)',['../md_docs_2structure_2communication__patterns.html',1,'']]],
-  ['პირველი_20საკუთარი_20მოდულის_20შექმნა_20create_20your_20first_20module_2',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
-  ['პრაქტიკები_20წარმადობისთვის_20performance_20best_20practices_3',['საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)',['../md_docs_2performance_2performance__best__practices.html',1,'']]],
-  ['პრაქტიკები_20security_20best_20practices_4',['უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)',['../md_docs_2security_2security__best__practices.html',1,'']]],
-  ['პრობლემები_20და_20გადაჭრის_20გზები_20common_20issues_20solutions_5',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
-  ['პრობლემის_20დიაგნოსტიკა_20და_20გამოსწორება_6',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
-  ['პროექტის_20მიმოხილვა_20project_20overview_7',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],
-  ['პროცედურა_8',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['პროცესი_20configuration_20flow_9',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]]
+  ['ოპერაციების_20მართვის_20პატერნი_20promise_20pattern_0',['asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)',['../md_docs_2convention_2promise__pattern.html',1,'']]],
+  ['ოპტიმიზაცია_20performance_20—_20display_20modules_1',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
+  ['ოპტიმიზაციის_20სახელმძღვანელოები_20performance_20optimization_20guide_2',['ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)',['../md_docs_2performance_2performance__optimization.html',1,'']]]
 ];

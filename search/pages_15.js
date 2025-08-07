@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['v1_200_0',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]],
-  ['v3_200_1',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.0)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'']]],
-  ['version_20module_20api_20reference_2',['Synapse Version Module API Reference',['../md_docs_2api__reference_2version__api.html',1,'']]],
-  ['vulnerability_20disclosure_20policy_20უსაფრთხოების_20ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_3',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]]
+  ['ui_5fmanager_20tt_0',['🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;',['../md_components_2modules_2utilities_2ui__manager_2README.html',1,'']]],
+  ['update_20manager_1',['მოდული: OTA Update Manager',['../md_components_2modules_2system_2ota__update__manager_2README.html',1,'']]],
+  ['usage_20გაფართოებული_20გამოყენება_2',['Advanced Usage (გაფართოებული გამოყენება)',['../md_docs_2tutorials_2advanced__usage.html',1,'']]],
+  ['usage_20guide_3',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
+  ['utility_20module_20api_20reference_4',['Synapse Utility Module API Reference',['../md_docs_2api__reference_2utility__api.html',1,'']]]
 ];

@@ -99,57 +99,64 @@ $(document).ready(function(){initNavTree('synapse_8h_source.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 <a href="synapse_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#ifndef SYNAPSE_H</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#define SYNAPSE_H</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//      1. ფუნდამენტური ტიპები და კონტრაქტები (Fundamental Types &amp; Contracts)</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// ეს ჰედერები განსაზღვრავს ძირითად სტრუქტურებსა და &quot;ენას&quot;, რომლითაც</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// მოდულები და ფრეიმვორქი ერთმანეთს ესაუბრებიან.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span>      <span class="comment">// მოდულის საბაზისო სტრუქტურა (module_t) და სიცოცხლის ციკლი.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="service__types_8h.html">service_types.h</a>&quot;</span>    <span class="comment">// ყველა სერვისის ტიპის ცენტრალიზებული enum (fmw_service_type_t).</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="framework__events_8h.html">framework_events.h</a>&quot;</span> <span class="comment">// ფრეიმვორქის სტანდარტული ივენთების სახელები.</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="event__payloads_8h.html">event_payloads.h</a>&quot;</span>   <span class="comment">// სტანდარტული ივენთების მონაცემთა სტრუქტურები (payloads).</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//      2. ძირითადი სერვისების API (Core Service APIs)</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// ეს ჰედერები აცხადებს ფრეიმვორქის მთავარი სერვისების საჯარო ფუნქციებს.</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span>  <span class="comment">// სერვისების რეგისტრაცია და მოძიება (fmw_service_*).</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span>        <span class="comment">// ივენთების გამოქვეყნება და გამოწერა (fmw_event_bus_*).</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;<a class="code" href="config__manager_8h.html">config_manager.h</a>&quot;</span>   <span class="comment">// კონფიგურაციის პარამეტრებზე წვდომა (fmw_config_get_*).</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &quot;<a class="code" href="resource__manager_8h.html">resource_manager.h</a>&quot;</span> <span class="comment">// აპარატურული რესურსების (GPIO, I2C) მართვა (fmw_resource_*).</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="system__manager_8h.html">system_manager.h</a>&quot;</span>   <span class="comment">// სისტემის მართვის ფუნქციები (fmw_module_*, fmw_system_*).</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">//      3. დამხმარე და შიდა მექანიზმები (Helpers &amp; Internal Mechanisms)</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">// =========================================================================</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">// ეს ჰედერები საჭიროა მოდულების გამართული მუშაობისთვის და ფრეიმვორქთან</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">// სრული ინტეგრაციისთვის.</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#include &quot;<a class="code" href="logging_8h.html">logging.h</a>&quot;</span>                <span class="comment">// ლოგირების TAG-ის განსაზღვრის მაკრო (DEFINE_COMPONENT_TAG).</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#include &quot;<a class="code" href="event__data__wrapper_8h.html">event_data_wrapper.h</a>&quot;</span>     <span class="comment">// ივენთის მონაცემების უსაფრთხო მართვა (fmw_event_data_*).</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#include &quot;<a class="code" href="module__helpers_8h.html">module_helpers.h</a>&quot;</span>         <span class="comment">// სტანდარტული enable/disable/get_status იმპლემენტაციები.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &quot;<a class="code" href="module__factory_8h.html">module_factory.h</a>&quot;</span>         <span class="comment">// (შიდა გამოყენებისთვის) მოდულების დინამიური შექმნა.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &quot;<a class="code" href="module__registry_8h.html">module_registry.h</a>&quot;</span>        <span class="comment">// (შიდა გამოყენებისთვის) მოდულების რეესტრზე წვდომა.</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">// შენიშვნა: generated_module_factory.h და framework_config.h არ არის აქ ჩართული,</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">// რადგან ისინი, როგორც წესი, გამოიყენება მხოლოდ core-ის შიდა .c ფაილებში</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">// და არ წარმოადგენს მოდულებისთვის განკუთვნილ საჯარო API-ს.</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">// system_event_ids.h-ის შიგთავსი გადატანილია framework_events.h-ში.</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#ifndef SYNAPSE_H</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define SYNAPSE_H</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="comment">// =================================================================================================</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="comment">//      SECTION 1: FUNDAMENTAL TYPES &amp; CONTRACTS</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">// =================================================================================================</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">// These headers define the core data structures and the &quot;language&quot; through which</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// modules and the framework communicate. They establish the fundamental contracts</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">// for building any module within the Synapse ecosystem.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span>      <span class="comment">// Defines the basic module structure (module_t) and its lifecycle.</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="service__types_8h.html">service_types.h</a>&quot;</span>    <span class="comment">// Provides the centralized enum for all service types (fmw_service_type_t).</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="framework__events_8h.html">framework_events.h</a>&quot;</span> <span class="comment">// Defines the names of standardized, framework-wide events.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="event__payloads_8h.html">event_payloads.h</a>&quot;</span>   <span class="comment">// Defines the data structures (payloads) for standard events.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">// =================================================================================================</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">//      SECTION 2: CORE SERVICE APIs</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">// =================================================================================================</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// These headers declare the public functions for the framework&#39;s main services,</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="comment">// forming the primary interaction points for all modules.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span>  <span class="comment">// For registering and discovering services (fmw_service_*).</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="event__bus_8h.html">event_bus.h</a>&quot;</span>        <span class="comment">// For publishing and subscribing to events (fmw_event_bus_*).</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="config__manager_8h.html">config_manager.h</a>&quot;</span>   <span class="comment">// For accessing configuration parameters (fmw_config_get_*).</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &quot;<a class="code" href="resource__manager_8h.html">resource_manager.h</a>&quot;</span> <span class="comment">// For managing exclusive access to hardware resources like GPIO, I2C (fmw_resource_*).</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="system__manager_8h.html">system_manager.h</a>&quot;</span>   <span class="comment">// For system-level control and module management (fmw_module_*, fmw_system_*).</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &quot;<a class="code" href="promise__manager_8h.html">promise_manager.h</a>&quot;</span>  <span class="comment">// For consuming asynchronous operations using a clean, promise-based pattern (fmw_promise_*).</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="comment">// =================================================================================================</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="comment">//      SECTION 3: UTILITIES &amp; INTERNAL MECHANISMS</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="comment">// =================================================================================================</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="comment">// These headers provide essential utilities and expose internal mechanisms required for</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="comment">// the proper functioning and full integration of modules with the framework.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &quot;<a class="code" href="logging_8h.html">logging.h</a>&quot;</span>            <span class="comment">// Provides the essential macro for logging (DEFINE_COMPONENT_TAG).</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#include &quot;<a class="code" href="event__data__wrapper_8h.html">event_data_wrapper.h</a>&quot;</span> <span class="comment">// For safe, reference-counted management of event data (fmw_event_data_*).</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#include &quot;<a class="code" href="module__helpers_8h.html">module_helpers.h</a>&quot;</span>     <span class="comment">// Provides standard, reusable implementations for enable/disable/get_status.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#include &quot;<a class="code" href="module__factory_8h.html">module_factory.h</a>&quot;</span>     <span class="comment">// For dynamically creating modules at runtime (fmw_module_create).</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#include &quot;<a class="code" href="module__registry_8h.html">module_registry.h</a>&quot;</span>    <span class="comment">// For accessing the module registry (fmw_module_registry_*).</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">// --- For Service Providers Only ---</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">// The following header is intended for modules that PROVIDE promise-based asynchronous services.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">// General consumer modules should not need to include this directly.</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#include &quot;<a class="code" href="promise__manager__internal_8h.html">promise_manager_internal.h</a>&quot;</span> <span class="comment">// For creating and fulfilling promises (fmw_promise_create, fmw_promise_resolve).</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_H</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="comment">// Note: Headers like `generated_module_factory.h`, `module_factory.h`, `module_registry.h`,</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="comment">// and `framework_config.h` are intentionally excluded. They are used internally by the core</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="comment">// system and are not part of the public API for modules.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_H</span></div>
 <div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">Defines the base module interface and status types.</div></div>
 <div class="ttc" id="aconfig__manager_8h_html"><div class="ttname"><a href="config__manager_8h.html">config_manager.h</a></div><div class="ttdoc">კონფიგურაციის მენეჯერის API.</div></div>
 <div class="ttc" id="aevent__bus_8h_html"><div class="ttname"><a href="event__bus_8h.html">event_bus.h</a></div><div class="ttdoc">Event Bus კომპონენტის Public API.</div></div>
@@ -160,6 +167,8 @@ $(document).ready(function(){initNavTree('synapse_8h_source.html',''); initResiz
 <div class="ttc" id="amodule__factory_8h_html"><div class="ttname"><a href="module__factory_8h.html">module_factory.h</a></div><div class="ttdoc">მოდულების შემქმნელი (Factory) კომპონენტის Public API.</div></div>
 <div class="ttc" id="amodule__helpers_8h_html"><div class="ttname"><a href="module__helpers_8h.html">module_helpers.h</a></div><div class="ttdoc">მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები.</div></div>
 <div class="ttc" id="amodule__registry_8h_html"><div class="ttname"><a href="module__registry_8h.html">module_registry.h</a></div><div class="ttdoc">მოდულების რეგისტრაციისა და მოძიების API.</div></div>
+<div class="ttc" id="apromise__manager_8h_html"><div class="ttname"><a href="promise__manager_8h.html">promise_manager.h</a></div><div class="ttdoc">Public API for consuming asynchronous operations using a Promise pattern.</div></div>
+<div class="ttc" id="apromise__manager__internal_8h_html"><div class="ttname"><a href="promise__manager__internal_8h.html">promise_manager_internal.h</a></div><div class="ttdoc">Internal Core API for creating and fulfilling promises.</div></div>
 <div class="ttc" id="aresource__manager_8h_html"><div class="ttname"><a href="resource__manager_8h.html">resource_manager.h</a></div><div class="ttdoc">რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
 <div class="ttc" id="aservice__types_8h_html"><div class="ttname"><a href="service__types_8h.html">service_types.h</a></div><div class="ttdoc">Synapse ESP Framework - ცენტრალიზებული სერვისის ტიპების განსაზღვრებები.</div></div>

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['ცვლადების_20დასახელების_20წესები_0',['ცვლადების დასახელების წესები',['../md_docs_2convention_2variable__naming.html',1,'']]],
-  ['ცვლილებების_20ისტორია_20changelog_1',['ცვლილებების ისტორია (Changelog)',['../md_docs_2changelog_2v5.html',1,'']]],
-  ['ცვლილებების_20ჟურნალი_20—_202025_2006_2024_2',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
-  ['ციკლი_20და_20ინიციალიზაცია_20lifecycle_20initialization_3',['მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)',['../md_docs_2structure_2lifecycle__and__init.html',1,'']]]
+  ['ჩანაწერის_20შაბლონი_20decision_20record_20template_0',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
+  ['ჩატარების_20სახელმძღვანელო_20performance_20benchmarks_20guide_1',['ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)',['../md_docs_2performance_2performance__benchmarks.html',1,'']]]
 ];

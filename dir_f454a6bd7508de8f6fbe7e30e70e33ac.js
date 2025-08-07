@@ -12,6 +12,8 @@ var dir_f454a6bd7508de8f6fbe7e30e70e33ac =
     [ "module_factory.h", "module__factory_8h.html", "module__factory_8h" ],
     [ "module_helpers.h", "module__helpers_8h.html", "module__helpers_8h" ],
     [ "module_registry.h", "module__registry_8h.html", "module__registry_8h" ],
+    [ "promise_manager.h", "promise__manager_8h.html", "promise__manager_8h" ],
+    [ "promise_manager_internal.h", "promise__manager__internal_8h.html", "promise__manager__internal_8h" ],
     [ "resource_manager.h", "resource__manager_8h.html", "resource__manager_8h" ],
     [ "service_locator.h", "service__locator_8h.html", "service__locator_8h" ],
     [ "service_types.h", "service__types_8h.html", "service__types_8h" ],

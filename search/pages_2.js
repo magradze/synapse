@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['9_20doxygen_20კომენტარების_20სტანდარტი_20v1_200_0',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]]
+  ['7_202_200_202025_2008_2028_0',['[7.2.0] - 2025-08-28',['../md_docs_2changelog_2v7.html',1,'']]]
 ];

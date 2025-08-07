@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['getting_20started_0',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
-  ['glossary_20ტერმინები_1',['Glossary (ტერმინები)',['../md_docs_2glossary_2glossary__index.html',1,'']]],
-  ['glossary_20—_20api_20code_2',['API-სა და კოდის ტერმინები (Glossary — API &amp; Code)',['../md_docs_2glossary_2glossary__api.html',1,'']]],
-  ['glossary_20—_20architecture_3',['არქიტექტურული ტერმინები (Glossary — Architecture)',['../md_docs_2glossary_2glossary__architecture.html',1,'']]],
-  ['glossary_20—_20configuration_20storage_4',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
-  ['glossary_20—_20security_20performance_5',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
-  ['guide_6',['guide',['../md_docs_2performance_2performance__benchmarks.html',1,'ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)'],['../md_docs_2contributing_2contributing__guide.html',1,'კონტრიბუციის სახელმძღვანელო (Contributing Guide)'],['../md_docs_2performance_2performance__optimization.html',1,'ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)'],['../md_docs_2performance_2performance__resource__usage.html',1,'რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)'],['../md_docs_2contributing_2local__setup.html',1,'Synapse Local Setup Guide']]],
-  ['guide_20დიბაგინგის_20სახელმძღვანელო_7',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
-  ['guidelines_8',['guidelines',['../md_docs_2security_2security__guidelines.html',1,'უსაფრთხოების სახელმძღვანელოები (Security Guidelines)'],['../md_docs_2contributing_2commit__message__guidelines.html',1,'Synapse Commit Message Guidelines'],['../md_docs_2contributing_2review__guidelines.html',1,'Synapse Review Guidelines']]]
+  ['faq_0',['faq',['../md_docs_2contributing_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)'],['../md_docs_2structure_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)'],['../md_docs_2troubleshooting_2faq.html',1,'ხშირად დასმული კითხვები (Troubleshooting FAQ)']]],
+  ['feature_20addition_1',['მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension &amp; Feature Addition)',['../md_docs_2tutorials_2module__extension.html',1,'']]],
+  ['first_20module_2',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
+  ['flow_3',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]],
+  ['framework_4',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
+  ['framework_20—_20არქიტექტურის_20მიმოხილვა_5',['Synapse ESP Framework — არქიტექტურის მიმოხილვა',['../md_docs_2design__decisions_2architecture__overview.html',1,'']]],
+  ['framework_20—_20documentation_20module_20design_20checklist_6',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
 ];

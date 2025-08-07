@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2logging__standard
   <div class="headertitle"><div class="title">Logging-ის სტანდარტები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1207"></a> </p>
-<h1><a class="anchor" id="autotoc_md1208"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1242"></a> </p>
+<h1><a class="anchor" id="autotoc_md1243"></a>
 Component Tag Definition</h1>
-<h2><a class="anchor" id="autotoc_md1209"></a>
+<h2><a class="anchor" id="autotoc_md1244"></a>
 სტანდარტული ფორმატი</h2>
 <div class="fragment"><div class="line"><span class="comment">// ყოველ მოდულში</span></div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;MODULE_NAME&quot;</span>);</div>
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1210"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1245"></a>
 მაგალითები</h2>
 <div class="fragment"><div class="line"><span class="comment">// Display modules</span></div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;SSD1306_MODULE&quot;</span>);</div>
@@ -118,23 +118,23 @@ Component Tag Definition</h1>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;SERVICE_LOCATOR&quot;</span>);</div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;EVENT_BUS&quot;</span>);</div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;CONFIG_MANAGER&quot;</span>);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1211"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1246"></a>
 Log Levels</h1>
-<h2><a class="anchor" id="autotoc_md1212"></a>
+<h2><a class="anchor" id="autotoc_md1247"></a>
 1. ESP_LOGE - Error Level</h2>
 <p><b>გამოიყენება:</b> კრიტიკული შეცდომებისთვის რომლებიც აფერხებენ ნორმალურ მუშაობას</p>
 <div class="fragment"><div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to initialize hardware: %s&quot;</span>, esp_err_to_name(operation_result));</div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Module creation failed for &#39;%s&#39;: %s&quot;</span>, module_instance_name, esp_err_to_name(operation_result));</div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Critical resource allocation failed: %s&quot;</span>, esp_err_to_name(operation_result));</div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;I2C communication error - addr: 0x%02X, error: %s&quot;</span>, device_address, esp_err_to_name(operation_result));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1213"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1248"></a>
 2. ESP_LOGW - Warning Level</h2>
 <p><b>გამოიყენება:</b> გაფრთხილებებისთვის, default values-ისთვის, non-critical issues-ისთვის</p>
 <div class="fragment"><div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Configuration key &#39;%s&#39; not found, using default: %d&quot;</span>, config_key, default_value);</div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Service &#39;%s&#39; not available, operation skipped&quot;</span>, service_name);</div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Retry attempt %d/%d failed: %s&quot;</span>, attempt_number, max_attempts, esp_err_to_name(operation_result));</div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Display already disabled, ignoring disable command&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1214"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1249"></a>
 3. ESP_LOGI - Info Level</h2>
 <p><b>გამოიყენება:</b> მნიშვნელოვანი events-ისთვის, lifecycle changes-ისთვის, status updates-ისთვის</p>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Module &#39;%s&#39; created successfully&quot;</span>, module_instance_name);</div>
@@ -142,22 +142,22 @@ Log Levels</h1>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Display enabled - resolution: %dx%d&quot;</span>, display_width, display_height);</div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT connected to broker: %s&quot;</span>, broker_url);</div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Sensor reading: temp=%.1f°C, hum=%.1f%%&quot;</span>, temperature_celsius, humidity_percent);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1215"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1250"></a>
 4. ESP_LOGD - Debug Level</h2>
 <p><b>გამოიყენება:</b> debugging information-ისთვის, detailed operation tracking-ისთვის</p>
 <div class="fragment"><div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Processing command: action=&#39;%s&#39;, target=&#39;%s&#39;&quot;</span>, command_action, command_target);</div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Event received: id=%ld, data_size=%d&quot;</span>, event_id, event_data_size);</div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Task state changed: %s -&gt; %s&quot;</span>, task_previous_state, task_current_state);</div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Queue status: used=%d, free=%d&quot;</span>, used_queue_slots, free_queue_slots);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1216"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1251"></a>
 5. ESP_LOGV - Verbose Level</h2>
 <p><b>გამოიყენება:</b> ძალიან დეტალური debugging-ისთვის, internal state tracking-ისთვის</p>
 <div class="fragment"><div class="line">ESP_LOGV(TAG, <span class="stringliteral">&quot;Internal buffer updated: size=%d, checksum=0x%08X&quot;</span>, buffer_size, buffer_checksum);</div>
 <div class="line">ESP_LOGV(TAG, <span class="stringliteral">&quot;Memory allocation: ptr=%p, size=%d&quot;</span>, memory_pointer, memory_size);</div>
 <div class="line">ESP_LOGV(TAG, <span class="stringliteral">&quot;Timer callback executed: interval=%lu ms&quot;</span>, timer_interval_ms);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1217"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1252"></a>
 Logging Patterns</h1>
-<h2><a class="anchor" id="autotoc_md1218"></a>
+<h2><a class="anchor" id="autotoc_md1253"></a>
 1. Module Lifecycle Logging</h2>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config) {</div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Creating SSD1306 module...&quot;</span>);</div>
@@ -182,7 +182,7 @@ Logging Patterns</h1>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1219"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1254"></a>
 2. Service Registration Logging</h2>
 <div class="fragment"><div class="line"><span class="comment">// Service registration</span></div>
 <div class="line">esp_err_t operation_result = <a class="code hl_function" href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a>(module_instance_name, <span class="stringliteral">&quot;display_api&quot;</span>, &amp;ssd1306_service_api);</div>
@@ -202,7 +202,7 @@ Logging Patterns</h1>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
 <div class="ttc" id="aservice__locator_8h_html_ac224eef59c2b5a418e8d19f89d895ba1"><div class="ttname"><a href="service__locator_8h.html#ac224eef59c2b5a418e8d19f89d895ba1">fmw_service_register</a></div><div class="ttdeci">esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle)</div><div class="ttdoc">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.</div><div class="ttdef"><b>Definition</b> service_locator.c:85</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1220"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1255"></a>
 3. Configuration Parsing Logging</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t parse_ssd1306_config(<span class="keyword">const</span> cJSON *config, <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data) {</div>
 <div class="line">    ESP_LOGD(TAG, <span class="stringliteral">&quot;Parsing SSD1306 configuration...&quot;</span>);</div>
@@ -220,7 +220,7 @@ Logging Patterns</h1>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1221"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1256"></a>
 4. Hardware Operation Logging</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_clear_display(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data) {</div>
 <div class="line">    ESP_LOGD(TAG, <span class="stringliteral">&quot;Clearing display buffer...&quot;</span>);</div>
@@ -236,7 +236,7 @@ Logging Patterns</h1>
 <div class="line">    ESP_LOGD(TAG, <span class="stringliteral">&quot;Display cleared successfully&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1222"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1257"></a>
 5. Event Handling Logging</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> mqtt_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, int32_t event_id, <span class="keywordtype">void</span> *event_data) {</div>
 <div class="line">    ESP_LOGD(TAG, <span class="stringliteral">&quot;Received event: id=%ld&quot;</span>, event_id);</div>
@@ -252,7 +252,7 @@ Logging Patterns</h1>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1223"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1258"></a>
 6. Error Context Logging</h2>
 <div class="fragment"><div class="line"><span class="comment">// Hardware errors with context</span></div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;I2C write failed - device: 0x%02X, register: 0x%02X, length: %d, error: %s&quot;</span>, </div>
@@ -265,9 +265,9 @@ Logging Patterns</h1>
 <div class="line"><span class="comment">// Service errors with context</span></div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Service operation failed - service: &#39;%s&#39;, operation: &#39;%s&#39;, error: %s&quot;</span>, </div>
 <div class="line">         service_name, operation_name, esp_err_to_name(operation_result));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1224"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1259"></a>
 Runtime State Logging</h1>
-<h2><a class="anchor" id="autotoc_md1225"></a>
+<h2><a class="anchor" id="autotoc_md1260"></a>
 1. Module Enable/Disable</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_enable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data = (<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *)module-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
@@ -301,7 +301,7 @@ Runtime State Logging</h1>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1226"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1261"></a>
 2. Task State Changes</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> ssd1306_task(<span class="keywordtype">void</span> *pvParameters) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data = (<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *)pvParameters;</div>
@@ -317,9 +317,9 @@ Runtime State Logging</h1>
 <div class="line">        <span class="comment">// ... task logic ...</span></div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1227"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1262"></a>
 Performance Logging</h1>
-<h2><a class="anchor" id="autotoc_md1228"></a>
+<h2><a class="anchor" id="autotoc_md1263"></a>
 1. Operation Timing</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t perform_heavy_operation(<span class="keywordtype">void</span>) {</div>
 <div class="line">    int64_t operation_start_time_us = esp_timer_get_time();</div>
@@ -338,7 +338,7 @@ Performance Logging</h1>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1229"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1264"></a>
 2. Memory Usage</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> log_memory_usage(<span class="keyword">const</span> <span class="keywordtype">char</span> *operation_name) {</div>
 <div class="line">    <span class="keywordtype">size_t</span> free_heap_bytes = esp_get_free_heap_size();</div>
@@ -352,20 +352,20 @@ Performance Logging</h1>
 <div class="line">                 free_heap_bytes, MEMORY_WARNING_THRESHOLD);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1230"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1265"></a>
 Log Message Format Standards</h1>
-<h2><a class="anchor" id="autotoc_md1231"></a>
+<h2><a class="anchor" id="autotoc_md1266"></a>
 1. Consistent Formatting</h2>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Module created: name=&#39;%s&#39;, type=&#39;%s&#39;&quot;</span>, module_instance_name, module_type);</div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Operation failed: %s (code: 0x%X)&quot;</span>, esp_err_to_name(operation_result), operation_result);</div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Processing data: size=%d, checksum=0x%08X&quot;</span>, data_size, data_checksum);</div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Configuration missing: key=&#39;%s&#39;, using_default=%d&quot;</span>, config_key, using_default_value);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1232"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1267"></a>
 2. Parameter Naming</h2>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Display initialized: width=%d, height=%d, address=0x%02X&quot;</span>, display_width, display_height, device_address);</div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Sensor read failed: pin=%d, attempts=%d, last_error=%s&quot;</span>, sensor_pin, read_attempts, last_error_message);</div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Queue operation: action=&#39;%s&#39;, items_count=%d, max_size=%d&quot;</span>, queue_action, queue_items_count, queue_max_size);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1233"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1268"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არ გავაკეთოთ:</b></p>
 <div class="fragment"><div class="line"><span class="comment">// Don&#39;t use static const char *TAG</span></div>
@@ -389,7 +389,7 @@ Log Message Format Standards</h1>
 <div class="line"><span class="comment">// Provide relevant context</span></div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;I2C write failed for display at address 0x%02X: %s&quot;</span>, device_address, esp_err_to_name(operation_result));</div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Display width not configured, using default: %d pixels&quot;</span>, DEFAULT_WIDTH);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1234"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1269"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>ყოველთვის</b> გამოვიყენოთ <code>DEFINE_COMPONENT_TAG("MODULE_NAME")</code></li>

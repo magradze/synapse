@@ -7,6 +7,7 @@ var dir_0e719ecdb5ebd3794c683401181575e9 =
     [ "module_factory.c", "module__factory_8c.html", "module__factory_8c" ],
     [ "module_helpers.c", "module__helpers_8c.html", "module__helpers_8c" ],
     [ "module_registry.c", "module__registry_8c.html", "module__registry_8c" ],
+    [ "promise_manager.c", "promise__manager_8c.html", "promise__manager_8c" ],
     [ "resource_manager.c", "resource__manager_8c.html", "resource__manager_8c" ],
     [ "service_locator.c", "service__locator_8c.html", "service__locator_8c" ],
     [ "system_manager.c", "system__manager_8c.html", "system__manager_8c" ]

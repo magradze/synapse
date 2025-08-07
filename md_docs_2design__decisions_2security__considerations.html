@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2security__
   <div class="headertitle"><div class="title">უსაფრთხოების არქიტექტურული გადაწყვეტილებები (Security Considerations)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1468"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1470"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1513"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1515"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში უსაფრთხოების არქიტექტურულ გადაწყვეტილებებს, არჩეულ best practices, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1472"></a>
+<h1><a class="anchor" id="autotoc_md1517"></a>
 კონტექსტი</h1>
 <p>ფრეიმვორქს სჭირდება უსაფრთხოების ისეთი მექანიზმები, რომლებიც დაიცავს როგორც სისტემურ, ისე მოდულების დონეზე მონაცემებს, კომუნიკაციას და firmware-ს. აუცილებელია როგორც მინიმალური თავდაცვა (default), ისე გაფართოებადი უსაფრთხოების პოლიტიკა.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1474"></a>
+<h1><a class="anchor" id="autotoc_md1519"></a>
 არჩეული გადაწყვეტილებები</h1>
 <ul>
 <li><b>კომუნიკაციის დაშიფვრა:</b> გამოიყენება TLS/SSL ყველა გარე სერვისთან (მაგ: MQTT, REST API)</li>
@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2security__
 <li><b>Logging-ის კონტროლი:</b> ლოგებში არ იწერება სენსიტიური ინფორმაცია (პაროლები, ტოკენები)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1476"></a>
+<h1><a class="anchor" id="autotoc_md1521"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li>დაშიფრული კომუნიკაცია იცავს მონაცემებს გადაცემისას</li>
@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2security__
 <li>ალტერნატივა (plain communication, unsecured OTA) უარყოფილია უსაფრთხოების სერიოზული რისკების გამო</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1478"></a>
+<h1><a class="anchor" id="autotoc_md1523"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>მონაცემები და firmware დაცულია როგორც გადაცემისას, ისე შენახვისას</li>
@@ -132,9 +132,9 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2security__
 <li>უსაფრთხოების დამატებითი მექანიზმები ზრდის სისტემის კომპლექსურობას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1480"></a>
+<h1><a class="anchor" id="autotoc_md1525"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1481"></a>
+<h2><a class="anchor" id="autotoc_md1526"></a>
 TLS/SSL ჩართვა MQTT-ში</h2>
 <div class="fragment"><div class="line">mqtt_module_config_t mqtt_cfg = {</div>
 <div class="line">    .broker_uri = <span class="stringliteral">&quot;mqtts://broker.synapse.local:8883&quot;</span>,</div>
@@ -142,14 +142,14 @@ TLS/SSL ჩართვა MQTT-ში</h2>
 <div class="line">    .password = <span class="stringliteral">&quot;pass&quot;</span>,</div>
 <div class="line">    .use_tls = <span class="keyword">true</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1482"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1527"></a>
 OTA განახლების სიგნირება</h2>
 <div class="fragment"><div class="line"><span class="comment">// გამოიყენეთ esp_ota_set_boot_partition და სიგნირებული firmware</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1483"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1528"></a>
 ლოგირების კონტროლი</h2>
 <div class="fragment"><div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT connected to broker: %s&quot;</span>, broker_url); <span class="comment">// არ ჩაწეროთ პაროლი ლოგში</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1485"></a>
+<h1><a class="anchor" id="autotoc_md1530"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>credentials-ის, პაროლების ან ტოკენების ლოგირება</li>
@@ -164,7 +164,7 @@ OTA განახლების სიგნირება</h2>
 <li>ჩაწერეთ ყველა უსაფრთხოების გადაწყვეტილება დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1487"></a>
+<h1><a class="anchor" id="autotoc_md1532"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>

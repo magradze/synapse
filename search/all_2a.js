@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ზე_0',['პრობლემა: მოდული არ რეაგირებს enable/disable-ზე',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1887',1,'']]],
-  ['ზე_20მოვლენები_1',['4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1911',1,'']]],
-  ['ზე_20მოვლენები_20არ_20ვრცელდება_2',['პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1879',1,'']]]
+  ['ზე_0',['პრობლემა: მოდული არ რეაგირებს enable/disable-ზე',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1932',1,'']]],
+  ['ზე_20მოვლენები_1',['4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1956',1,'']]],
+  ['ზე_20მოვლენები_20არ_20ვრცელდება_2',['პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1924',1,'']]]
 ];

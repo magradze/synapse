@@ -1,15 +1,15 @@
 # ძირითადი კომპონენტის წყარო ფაილების სია
 set(SRCS
-    "event_bus.c"
-    "config_manager.c"
-    "system_manager.c"
-    "module_registry.c"
-    "module_factory.c"
-    "resource_manager.c"
-    "event_data_wrapper.c"
-    "service_locator.c"
-    "event_payloads.c"
-    "module_helpers.c"
+    "src/config_manager.c"
+    "src/event_bus.c"
+    "src/event_data_wrapper.c"
+    "src/event_payloads.c"
+    "src/module_factory.c"
+    "src/module_helpers.c"
+    "src/module_registry.c"
+    "src/resource_manager.c"
+    "src/service_locator.c"
+    "src/system_manager.c"
 )
 
 # --- Synapse Build Automation ---

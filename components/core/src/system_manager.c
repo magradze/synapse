@@ -194,11 +194,13 @@ esp_err_t fmw_system_start(void)
  * @param[in] module The module instance to process.
  * @return ESP_OK on success, or ESP_FAIL if a dependency cannot be resolved.
  */
+// ფაილი: system_manager.c
+
 static esp_err_t resolve_dependencies_for_module(module_t *module)
 {
-    if (!module || !module->dependency_map || !module->current_config || !module->private_data)
+    if (!module || !module->dependency_map || !module->private_data)
     {
-        return ESP_OK; // This module has no dependencies to inject.
+        return ESP_OK; // No dependencies to inject.
     }
 
     ESP_LOGD(TAG, "Checking dependencies for module '%s'...", module->name);
@@ -206,44 +208,58 @@ static esp_err_t resolve_dependencies_for_module(module_t *module)
     const cJSON *config_node = cJSON_GetObjectItem(module->current_config, "config");
     if (!cJSON_IsObject(config_node))
     {
-        // If a dependency map exists, a config node should also exist.
-        ESP_LOGE(TAG, "Module '%s' has a dependency map but no 'config' object in its configuration.", module->name);
+        ESP_LOGE(TAG, "Module '%s' has a dependency map but no 'config' object.", module->name);
         return ESP_FAIL;
     }
 
-    // Iterate through the dependency map provided by the module
     for (int i = 0; module->dependency_map[i].config_key != NULL; i++)
     {
         const module_dependency_t *dep = &module->dependency_map[i];
+        const cJSON *name_node = cJSON_GetObjectItem(config_node, dep->config_key);
 
-        // Find the service name in the module's config using the key from the map
-        const cJSON *service_name_node = cJSON_GetObjectItem(config_node, dep->config_key);
-        if (!cJSON_IsString(service_name_node))
+        if (!cJSON_IsString(name_node))
         {
-            ESP_LOGW(TAG, "Dependency key '%s' not found or not a string in config for module '%s'. Skipping.", dep->config_key, module->name);
-            continue; // This dependency is optional
+            ESP_LOGW(TAG, "Dependency key '%s' not found in config for module '%s'. Skipping.", dep->config_key, module->name);
+            continue;
         }
 
-        const char *service_name = service_name_node->valuestring;
-        ESP_LOGD(TAG, "Module '%s' depends on service '%s'. Resolving...", module->name, service_name);
+        const char *name_to_find = name_node->valuestring;
+        void *handle_to_inject = NULL;
 
-        // Find the service handle in the Service Locator
-        service_handle_t service_handle = fmw_service_get(service_name);
-        if (!service_handle)
+        // --- ახალი ლოგიკა: ვარჩევთ, სერვისია თუ მოდულის handle ---
+        if (strstr(dep->config_key, "_service") != NULL)
         {
-            ESP_LOGE(TAG, "FATAL: Dependency not met for module '%s'. Service '%s' not found!", module->name, service_name);
-            return ESP_FAIL;
+            // This is a service dependency
+            ESP_LOGD(TAG, "Module '%s' depends on SERVICE '%s'. Resolving...", module->name, name_to_find);
+            handle_to_inject = fmw_service_get(name_to_find);
+            if (!handle_to_inject)
+            {
+                ESP_LOGE(TAG, "FATAL: Service '%s' not found for module '%s'!", name_to_find, module->name);
+                return ESP_FAIL;
+            }
+        }
+        else if (strstr(dep->config_key, "_handle") != NULL)
+        {
+            // This is a module handle dependency
+            ESP_LOGD(TAG, "Module '%s' depends on MODULE HANDLE '%s'. Resolving...", module->name, name_to_find);
+            handle_to_inject = fmw_module_registry_find_by_name(name_to_find);
+            if (!handle_to_inject)
+            {
+                ESP_LOGE(TAG, "FATAL: Module handle '%s' not found for module '%s'!", name_to_find, module->name);
+                return ESP_FAIL;
+            }
+        }
+        else
+        {
+            ESP_LOGW(TAG, "Skipping unknown dependency type for key '%s' in module '%s'.", dep->config_key, module->name);
+            continue;
         }
 
         // --- Safe Injection Logic ---
-        // Calculate the absolute memory address of the target pointer field
-        // inside the module's private_data struct.
         void **target_handle_ptr = (void **)((uint8_t *)module->private_data + dep->offset);
+        *target_handle_ptr = handle_to_inject;
 
-        // Write the found service handle to that address.
-        *target_handle_ptr = service_handle;
-
-        ESP_LOGI(TAG, "Successfully injected service '%s' into module '%s'.", service_name, module->name);
+        ESP_LOGI(TAG, "Successfully injected dependency '%s' into module '%s'.", name_to_find, module->name);
     }
 
     return ESP_OK;

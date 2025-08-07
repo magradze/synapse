@@ -1,14 +1,16 @@
 <map id="ui_manager_private_data_t" name="ui_manager_private_data_t">
-<area shape="rect" id="Node000001" title="The central private data structure holding the entire state of the UI Manager." alt="" coords="397,215,549,255"/>
-<area shape="rect" id="Node000002" href="$structmodule__t.html" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,51,88,77"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,87,100,140,127,167,157,188,200,203,262,213,397,227,397,232,261,219,199,208,155,193,123,171,96,143,58,90"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="75,43,89,42,102,45,111,52,115,64,109,78,96,85,79,85,62,80,64,74,80,80,95,80,105,75,109,64,107,55,100,49,89,47,76,49"/>
-<area shape="rect" id="Node000003" href="$structsystem__manager__api__t.html" title="The public Service API structure for the System Manager." alt="" coords="226,51,401,77"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="317,90,326,140,337,166,353,189,373,205,398,217,396,221,371,210,349,193,332,169,321,141,312,91"/>
-<area shape="rect" id="Node000004" href="$structtimer__api__t.html" title="The public Service API structure for the System Timer Service." alt="" coords="425,51,521,77"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="476,90,476,214,471,214,471,90"/>
-<area shape="rect" id="Node000005" href="$structtime__sync__api__t.html" title="The public Service API structure for the Time Sync module." alt="" coords="545,51,673,77"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="597,90,564,138,521,192,497,216,493,213,517,189,559,135,593,87"/>
-<area shape="rect" id="Node000006" href="$structfont__metrics__t.html" title="Contains metrics for a font supported by the driver." alt="" coords="698,51,814,77"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="741,90,695,142,665,169,631,193,591,211,550,223,549,218,589,206,628,188,661,165,692,138,737,86"/>
+<area shape="rect" id="Node000001" title="The central private data structure holding the entire state of the UI Manager." alt="" coords="441,303,593,343"/>
+<area shape="rect" id="Node000002" href="$structmodule__t.html" title="The primary structure defining a framework module." alt="" coords="49,139,131,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,175,143,228,170,255,201,276,243,291,305,301,441,315,440,320,305,307,242,296,198,281,166,259,139,231,101,178"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="124,133,147,136,155,142,158,152,153,164,142,170,126,171,110,167,111,162,127,166,140,165,149,160,153,152,151,145,145,141,123,139"/>
+<area shape="rect" id="Node000003" href="$structmodule__dependency__t.html" title="Describes a single service dependency for a module." alt="" coords="5,5,175,31"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="93,45,93,139,87,139,87,45"/>
+<area shape="rect" id="Node000004" href="$structsystem__manager__api__t.html" title="The public Service API structure for the System Manager." alt="" coords="269,139,444,165"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="360,178,369,228,380,254,396,277,417,293,441,305,439,309,414,298,392,281,375,257,364,229,355,179"/>
+<area shape="rect" id="Node000005" href="$structtimer__api__t.html" title="The public Service API structure for the System Timer Service." alt="" coords="469,139,565,165"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="519,178,519,302,514,302,514,178"/>
+<area shape="rect" id="Node000006" href="$structtime__sync__api__t.html" title="The public Service API structure for the Time Sync module." alt="" coords="589,139,717,165"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="640,178,607,226,564,280,540,304,536,301,560,277,603,223,636,175"/>
+<area shape="rect" id="Node000007" href="$structfont__metrics__t.html" title="Contains metrics for a font supported by the driver." alt="" coords="741,139,857,165"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="785,178,739,230,708,257,674,281,634,299,594,311,592,306,633,294,671,276,705,253,735,226,781,174"/>
 </map>

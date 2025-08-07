@@ -49,6 +49,7 @@ var annotated_dup =
     [ "mcp23017_handle_t", "structmcp23017__handle__t.html", null ],
     [ "mcp23017_private_data_t", "structmcp23017__private__data__t.html", null ],
     [ "menu_item_t", "structmenu__item__t.html", "structmenu__item__t" ],
+    [ "module_dependency_t", "structmodule__dependency__t.html", "structmodule__dependency__t" ],
     [ "module_factory_map_t", "structmodule__factory__map__t.html", null ],
     [ "module_t", "structmodule__t.html", "structmodule__t" ],
     [ "mqtt_manager_config_t", "structmqtt__manager__config__t.html", null ],
@@ -97,9 +98,9 @@ var annotated_dup =
     [ "timer_test_module_config_t", "structtimer__test__module__config__t.html", "structtimer__test__module__config__t" ],
     [ "timer_test_module_private_data_t", "structtimer__test__module__private__data__t.html", "structtimer__test__module__private__data__t" ],
     [ "tof_private_data_t", "structtof__private__data__t.html", null ],
+    [ "ui_cmd_t", "structui__cmd__t.html", "structui__cmd__t" ],
     [ "ui_manager_private_data_t", "structui__manager__private__data__t.html", "structui__manager__private__data__t" ],
     [ "watchdog_api_t", "structwatchdog__api__t.html", "structwatchdog__api__t" ],
     [ "watchdog_manager_private_data_t", "structwatchdog__manager__private__data__t.html", null ],
-    [ "wifi_manager_config_t", "structwifi__manager__config__t.html", "structwifi__manager__config__t" ],
     [ "wifi_manager_private_data_t", "structwifi__manager__private__data__t.html", null ]
 ];

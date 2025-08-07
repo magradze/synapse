@@ -101,18 +101,21 @@ Collaboration diagram for button_input_private_data_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structbutton__input__private__data__t__coll__graph.png" border="0" usemap="#abutton__input__private__data__t_coll__map" alt="Collaboration graph"/></div>
 <map name="abutton__input__private__data__t_coll__map" id="abutton__input__private__data__t_coll__map">
-<area shape="rect" title=" " alt="" coords="29,181,187,221"/>
-<area shape="rect" href="structbutton__config__t.html" title=" " alt="" coords="5,93,128,119"/>
-<area shape="poly" title=" " alt="" coords="80,130,102,180,97,182,75,132"/>
-<area shape="rect" href="structmcp23017__handle__t.html" title="The handle returned by the Service Locator for an MCP23017 service." alt="" coords="153,93,306,119"/>
-<area shape="poly" title=" " alt="" coords="205,129,134,183,131,179,202,125"/>
-<area shape="rect" href="structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module." alt="" coords="165,5,294,31"/>
-<area shape="poly" title=" " alt="" coords="232,45,232,93,227,93,227,45"/>
+<area shape="rect" title=" " alt="" coords="85,181,242,221"/>
+<area shape="rect" href="structmcp23017__handle__t.html" title="The handle returned by the Service Locator for an MCP23017 service." alt="" coords="5,93,159,119"/>
+<area shape="poly" title=" " alt="" coords="89,131,100,156,127,179,123,183,96,159,84,133"/>
+<area shape="rect" href="structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module." alt="" coords="17,5,147,31"/>
+<area shape="poly" title=" " alt="" coords="85,45,85,93,79,93,79,45"/>
+<area shape="rect" href="structbutton__config__t.html" title=" " alt="" coords="183,93,306,119"/>
+<area shape="poly" title=" " alt="" coords="235,132,217,159,192,183,188,179,213,156,231,129"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a2fc38c557a837bb47d2f777a61b85f4d" id="r_a2fc38c557a837bb47d2f777a61b85f4d"><td class="memItemLeft" align="right" valign="top"><a id="a2fc38c557a837bb47d2f777a61b85f4d" name="a2fc38c557a837bb47d2f777a61b85f4d"></a>
+<a class="el" href="structmcp23017__handle__t.html">mcp23017_handle_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>expander_handle</b></td></tr>
+<tr class="separator:a2fc38c557a837bb47d2f777a61b85f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95c0eba39847a66c70d59c074f01a896" id="r_a95c0eba39847a66c70d59c074f01a896"><td class="memItemLeft" align="right" valign="top"><a id="a95c0eba39847a66c70d59c074f01a896" name="a95c0eba39847a66c70d59c074f01a896"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>instance_name</b> [CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</td></tr>
 <tr class="separator:a95c0eba39847a66c70d59c074f01a896"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,21 +125,15 @@ TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>task_handle</
 <tr class="memitem:a0bf4a49057f14f561ada2ea98f9e110d" id="r_a0bf4a49057f14f561ada2ea98f9e110d"><td class="memItemLeft" align="right" valign="top"><a id="a0bf4a49057f14f561ada2ea98f9e110d" name="a0bf4a49057f14f561ada2ea98f9e110d"></a>
 QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_evt_queue</b></td></tr>
 <tr class="separator:a0bf4a49057f14f561ada2ea98f9e110d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fca465e2a740cef07701829f42bc3ac" id="r_a2fca465e2a740cef07701829f42bc3ac"><td class="memItemLeft" align="right" valign="top"><a id="a2fca465e2a740cef07701829f42bc3ac" name="a2fca465e2a740cef07701829f42bc3ac"></a>
-<a class="el" href="structbutton__config__t.html">button_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buttons</b> [MAX_BUTTONS]</td></tr>
-<tr class="separator:a2fca465e2a740cef07701829f42bc3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acffdd8637182ce67f94e58f91324be96" id="r_acffdd8637182ce67f94e58f91324be96"><td class="memItemLeft" align="right" valign="top"><a id="acffdd8637182ce67f94e58f91324be96" name="acffdd8637182ce67f94e58f91324be96"></a>
+<a class="el" href="structbutton__config__t.html">button_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buttons</b> [MAX_BUTTONS_PER_INSTANCE]</td></tr>
+<tr class="separator:acffdd8637182ce67f94e58f91324be96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ddb0ea75997ad8125a7f07ac0122c6f" id="r_a5ddb0ea75997ad8125a7f07ac0122c6f"><td class="memItemLeft" align="right" valign="top"><a id="a5ddb0ea75997ad8125a7f07ac0122c6f" name="a5ddb0ea75997ad8125a7f07ac0122c6f"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>button_count</b></td></tr>
 <tr class="separator:a5ddb0ea75997ad8125a7f07ac0122c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c491e104322689a4aaedb8022d7dee3" id="r_a4c491e104322689a4aaedb8022d7dee3"><td class="memItemLeft" align="right" valign="top"><a id="a4c491e104322689a4aaedb8022d7dee3" name="a4c491e104322689a4aaedb8022d7dee3"></a>
 control_type_t&#160;</td><td class="memItemRight" valign="bottom"><b>control_type</b></td></tr>
 <tr class="separator:a4c491e104322689a4aaedb8022d7dee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe140b74212b651732be5b8e17344a4d" id="r_abe140b74212b651732be5b8e17344a4d"><td class="memItemLeft" align="right" valign="top"><a id="abe140b74212b651732be5b8e17344a4d" name="abe140b74212b651732be5b8e17344a4d"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>expander_service_name</b> [32]</td></tr>
-<tr class="separator:abe140b74212b651732be5b8e17344a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fc38c557a837bb47d2f777a61b85f4d" id="r_a2fc38c557a837bb47d2f777a61b85f4d"><td class="memItemLeft" align="right" valign="top"><a id="a2fc38c557a837bb47d2f777a61b85f4d" name="a2fc38c557a837bb47d2f777a61b85f4d"></a>
-<a class="el" href="structmcp23017__handle__t.html">mcp23017_handle_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>expander_handle</b></td></tr>
-<tr class="separator:a2fc38c557a837bb47d2f777a61b85f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>components/modules/drivers/button_input/src/<a class="el" href="button__input_8c.html">button_input.c</a></li>

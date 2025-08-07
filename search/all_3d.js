@@ -9,11 +9,11 @@ var searchData=
   ['ცვლილებების_20ჟურნალი_20—_202025_2006_2024_6',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
   ['ცვლილებები_7',['ძირითადი ცვლილებები',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md770',1,'']]],
   ['ცვლილებები_20კოდში_8',['ცვლილებები კოდში',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md748',1,'']]],
-  ['ციკლის_20დიაგრამა_9',['სიცოცხლის ციკლის დიაგრამა',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1826',1,'']]],
-  ['ციკლის_20ეტაპები_10',['სიცოცხლის ციკლის ეტაპები',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1820',1,'']]],
-  ['ციკლის_20მართვის_11',['მაგალითი მოდულის სიცოცხლის ციკლის მართვის',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1827',1,'']]],
+  ['ციკლის_20დიაგრამა_9',['სიცოცხლის ციკლის დიაგრამა',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1834',1,'']]],
+  ['ციკლის_20ეტაპები_10',['სიცოცხლის ციკლის ეტაპები',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1828',1,'']]],
+  ['ციკლის_20მართვის_11',['მაგალითი მოდულის სიცოცხლის ციკლის მართვის',['../md_docs_2structure_2lifecycle__and__init.html#autotoc_md1835',1,'']]],
   ['ციკლი_12',['ციკლი',['../structure_docs.html#struct_lifecycle_sec',1,'მოდულის სიცოცხლის ციკლი'],['../md_docs_2api__reference_2sensor__api.html#autotoc_md633',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2api__reference_2module__api.html#autotoc_md507',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2api__reference_2display__api.html#autotoc_md400',1,'მოდულის შექმნა და სიცოცხლის ციკლი'],['../md_docs_2design__decisions_2architecture__overview.html#autotoc_md1317',1,'სიცოცხლის ციკლი']]],
   ['ციკლი_20და_20ინიციალიზაცია_20lifecycle_20initialization_13',['მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)',['../md_docs_2structure_2lifecycle__and__init.html',1,'']]],
-  ['ციკლი_20lifecycle_14',['მოდულის სიცოცხლის ციკლი (Lifecycle)',['../md_docs_2structure_2module__architecture.html#autotoc_md1834',1,'']]],
+  ['ციკლი_20lifecycle_14',['მოდულის სიცოცხლის ციკლი (Lifecycle)',['../md_docs_2structure_2module__architecture.html#autotoc_md1842',1,'']]],
   ['ცნობილი_20პრობლემები_15',['ცნობილი პრობლემები',['../md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md784',1,'']]]
 ];

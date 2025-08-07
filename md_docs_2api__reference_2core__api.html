@@ -144,8 +144,8 @@ fmw_service_lookup_by_type</h2>
 Event Bus API</h1>
 <h2><a class="anchor" id="autotoc_md349"></a>
 &lt;tt&gt;fmw_event_bus_post&lt;/tt&gt;</h2>
-<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *data_wrapper);</div>
-<div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
+<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *data_wrapper);</div>
+<div class="ttc" id="aevent__bus_8h_html_abe0f3af3ae92846abaa9d421289b853e"><div class="ttname"><a href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
 <div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
 </div><!-- fragment --><ul>
 <li><b>აღწერა:</b> ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.</li>
@@ -154,9 +154,9 @@ Event Bus API</h1>
 </ul>
 <h2><a class="anchor" id="autotoc_md350"></a>
 &lt;tt&gt;fmw_event_bus_subscribe&lt;/tt&gt;</h2>
-<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-<div class="ttc" id="aevent__bus_8c_html_a1bb409daa4df05a7f65b3531e3231e7f"><div class="ttname"><a href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:365</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
+<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8h.html#afb0a242b04a96dc9e72a72efee42fb86">fmw_event_bus_subscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
+<div class="ttc" id="aevent__bus_8h_html_afb0a242b04a96dc9e72a72efee42fb86"><div class="ttname"><a href="event__bus_8h.html#afb0a242b04a96dc9e72a72efee42fb86">fmw_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_subscribe(const char *event_name, struct module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:365</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 </div><!-- fragment --><ul>
 <li><b>აღწერა:</b> არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</li>
 <li>**<code>event_name</code>:** ივენთის სახელი, რომელზეც ხდება გამოწერა. <code>*</code> (wildcard) გამოიწერს ყველა ივენთს.</li>
@@ -164,8 +164,8 @@ Event Bus API</h1>
 </ul>
 <h2><a class="anchor" id="autotoc_md351"></a>
 &lt;tt&gt;fmw_event_bus_unsubscribe&lt;/tt&gt;</h2>
-<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-<div class="ttc" id="aevent__bus_8c_html_ae3df84e5063b0dff1e0f0dbdb69c5455"><div class="ttname"><a href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_unsubscribe(const char *event_name, module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:422</div></div>
+<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8h.html#a77bcf96befe815c620b163fcbe887dfb">fmw_event_bus_unsubscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
+<div class="ttc" id="aevent__bus_8h_html_a77bcf96befe815c620b163fcbe887dfb"><div class="ttname"><a href="event__bus_8h.html#a77bcf96befe815c620b163fcbe887dfb">fmw_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t fmw_event_bus_unsubscribe(const char *event_name, struct module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:422</div></div>
 </div><!-- fragment --><ul>
 <li><b>აღწერა:</b> აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. აუცილებლად უნდა გამოიძახოს მოდულის <code>deinit</code> ფუნქციამ.</li>
 <li>**<code>event_name</code>:** ივენთის სახელი, რომლიდანაც გამოწერა უნდა მოიხსნას.</li>

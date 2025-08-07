@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: components/core/module_helpers.c File Reference</title>
+<title>Synapse ESP Framework: components/core/src/module_helpers.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,36 +106,34 @@ $(document).ready(function(){initNavTree('module__helpers_8c.html',''); initResi
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for module_helpers.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="module__helpers_8c__incl.png" border="0" usemap="#acomponents_2core_2module__helpers_8c" alt=""/></div>
-<map name="acomponents_2core_2module__helpers_8c" id="acomponents_2core_2module__helpers_8c">
-<area shape="rect" title="მოდულების დამხმარე (Helper) ფუნქციების იმპლემენტაცია." alt="" coords="679,5,865,45"/>
-<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="487,93,625,119"/>
-<area shape="poly" title=" " alt="" coords="721,48,601,91,600,86,719,43"/>
-<area shape="rect" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="418,167,539,192"/>
-<area shape="poly" title=" " alt="" coords="750,48,700,84,639,121,584,146,531,165,529,160,582,141,636,116,697,79,747,43"/>
-<area shape="rect" title=" " alt="" coords="707,240,858,265"/>
-<area shape="poly" title=" " alt="" coords="776,45,784,226,779,226,770,46"/>
-<area shape="rect" title=" " alt="" coords="882,240,1019,265"/>
-<area shape="poly" title=" " alt="" coords="782,45,814,124,834,164,851,190,879,214,910,232,907,236,876,218,847,194,829,166,810,126,777,47"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="861,93,944,119"/>
-<area shape="poly" title=" " alt="" coords="805,43,873,84,870,88,802,48"/>
-<area shape="poly" title=" " alt="" coords="545,121,503,159,500,155,542,117"/>
-<area shape="rect" title=" " alt="" coords="5,240,101,265"/>
-<area shape="poly" title=" " alt="" coords="418,193,115,242,115,237,417,187"/>
-<area shape="rect" title=" " alt="" coords="125,240,208,265"/>
-<area shape="poly" title=" " alt="" coords="429,195,222,242,221,236,428,189"/>
-<area shape="rect" title=" " alt="" coords="233,240,303,265"/>
-<area shape="poly" title=" " alt="" coords="446,195,316,238,314,233,444,189"/>
-<area shape="rect" title=" " alt="" coords="327,240,409,265"/>
-<area shape="poly" title=" " alt="" coords="462,194,399,235,396,230,459,190"/>
-<area shape="rect" title=" " alt="" coords="433,240,506,265"/>
-<area shape="poly" title=" " alt="" coords="480,193,475,227,470,226,474,192"/>
-<area shape="rect" href="system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="531,240,683,265"/>
-<area shape="poly" title=" " alt="" coords="501,190,575,231,572,235,498,194"/>
-<area shape="poly" title=" " alt="" coords="528,189,721,234,720,239,527,195"/>
-<area shape="poly" title=" " alt="" coords="540,187,869,236,868,242,539,192"/>
-<area shape="rect" title=" " alt="" coords="861,167,945,192"/>
-<area shape="poly" title=" " alt="" coords="905,119,905,153,900,153,900,119"/>
+<div class="center"><img src="module__helpers_8c__incl.png" border="0" usemap="#acomponents_2core_2src_2module__helpers_8c" alt=""/></div>
+<map name="acomponents_2core_2src_2module__helpers_8c" id="acomponents_2core_2src_2module__helpers_8c">
+<area shape="rect" title="მოდულების დამხმარე (Helper) ფუნქციების იმპლემენტაცია." alt="" coords="528,5,685,45"/>
+<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="380,93,519,119"/>
+<area shape="poly" title=" " alt="" coords="570,48,486,89,484,85,568,43"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="389,167,510,192"/>
+<area shape="poly" title=" " alt="" coords="595,47,568,82,532,121,481,161,478,157,529,117,564,79,591,44"/>
+<area shape="rect" title=" " alt="" coords="531,240,682,265"/>
+<area shape="poly" title=" " alt="" coords="609,45,609,226,604,226,604,45"/>
+<area shape="rect" title=" " alt="" coords="706,240,843,265"/>
+<area shape="poly" title=" " alt="" coords="614,45,639,113,660,153,686,190,711,213,740,231,737,236,708,218,682,194,655,156,634,115,609,46"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="696,93,779,119"/>
+<area shape="poly" title=" " alt="" coords="640,43,708,84,705,88,637,48"/>
+<area shape="poly" title=" " alt="" coords="452,119,452,153,447,153,447,119"/>
+<area shape="rect" title=" " alt="" coords="411,240,507,265"/>
+<area shape="poly" title=" " alt="" coords="454,192,458,226,453,227,448,193"/>
+<area shape="rect" title=" " alt="" coords="5,240,88,265"/>
+<area shape="poly" title=" " alt="" coords="389,193,102,242,101,237,388,188"/>
+<area shape="rect" title=" " alt="" coords="113,240,183,265"/>
+<area shape="poly" title=" " alt="" coords="401,195,197,242,196,237,399,189"/>
+<area shape="rect" title=" " alt="" coords="207,240,289,265"/>
+<area shape="poly" title=" " alt="" coords="418,195,294,238,293,233,416,190"/>
+<area shape="rect" title=" " alt="" coords="313,240,386,265"/>
+<area shape="poly" title=" " alt="" coords="435,194,378,234,375,230,432,190"/>
+<area shape="poly" title=" " alt="" coords="476,190,570,232,568,237,474,194"/>
+<area shape="poly" title=" " alt="" coords="502,189,709,234,708,240,501,195"/>
+<area shape="rect" title=" " alt="" coords="695,167,779,192"/>
+<area shape="poly" title=" " alt="" coords="740,119,740,153,735,153,735,119"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -263,7 +261,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_b639423b1b477c33570e11c69c063fee.html">core</a></li><li class="navelem"><a class="el" href="module__helpers_8c.html">module_helpers.c</a></li>
+    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_b639423b1b477c33570e11c69c063fee.html">core</a></li><li class="navelem"><a class="el" href="dir_0e719ecdb5ebd3794c683401181575e9.html">src</a></li><li class="navelem"><a class="el" href="module__helpers_8c.html">module_helpers.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

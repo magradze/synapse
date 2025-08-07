@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: components/core/module_registry.c File Reference</title>
+<title>Synapse ESP Framework: components/core/src/module_registry.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -111,57 +111,55 @@ $(document).ready(function(){initNavTree('module__registry_8c.html',''); initRes
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for module_registry.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="module__registry_8c__incl.png" border="0" usemap="#acomponents_2core_2module__registry_8c" alt=""/></div>
-<map name="acomponents_2core_2module__registry_8c" id="acomponents_2core_2module__registry_8c">
-<area shape="rect" title="მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია." alt="" coords="651,5,838,45"/>
-<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="543,93,682,119"/>
-<area shape="poly" title=" " alt="" coords="714,48,646,88,643,84,712,43"/>
-<area shape="rect" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="445,167,567,192"/>
-<area shape="poly" title=" " alt="" coords="652,39,588,58,559,74,533,95,524,108,517,123,510,154,505,152,512,121,519,105,529,91,556,70,586,54,650,34"/>
-<area shape="rect" title=" " alt="" coords="612,240,763,265"/>
-<area shape="poly" title=" " alt="" coords="742,46,696,227,691,226,737,45"/>
-<area shape="rect" title=" " alt="" coords="787,240,924,265"/>
-<area shape="poly" title=" " alt="" coords="750,45,766,112,780,152,799,191,814,211,832,229,828,233,810,215,794,193,775,154,761,114,745,46"/>
-<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="283,93,417,119"/>
-<area shape="poly" title=" " alt="" coords="652,48,421,93,420,88,651,43"/>
-<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="216,167,353,192"/>
-<area shape="poly" title=" " alt="" coords="674,48,511,96,327,164,325,159,509,91,672,43"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="858,93,941,119"/>
-<area shape="poly" title=" " alt="" coords="783,43,866,85,863,89,781,48"/>
-<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="808,167,959,192"/>
-<area shape="poly" title=" " alt="" coords="764,44,865,154,861,158,760,48"/>
-<area shape="rect" title=" " alt="" coords="965,93,1036,119"/>
-<area shape="poly" title=" " alt="" coords="807,43,953,87,952,92,805,48"/>
-<area shape="rect" title=" " alt="" coords="1060,93,1131,119"/>
-<area shape="poly" title=" " alt="" coords="833,43,1047,90,1046,95,832,48"/>
-<area shape="rect" title=" " alt="" coords="103,240,184,265"/>
-<area shape="poly" title=" " alt="" coords="543,114,455,120,356,131,266,147,231,157,205,169,189,181,176,197,156,229,151,226,171,193,185,177,202,164,229,152,265,142,356,126,455,115,543,108"/>
-<area shape="poly" title=" " alt="" coords="597,121,536,161,533,157,594,116"/>
-<area shape="poly" title=" " alt="" coords="619,118,651,191,674,227,669,230,646,193,614,120"/>
-<area shape="poly" title=" " alt="" coords="632,116,753,190,824,231,822,236,750,194,630,121"/>
-<area shape="poly" title=" " alt="" coords="445,195,198,243,197,237,444,189"/>
-<area shape="rect" title=" " alt="" coords="491,240,587,265"/>
-<area shape="poly" title=" " alt="" coords="514,191,531,227,526,229,509,193"/>
-<area shape="rect" title=" " alt="" coords="209,240,291,265"/>
-<area shape="poly" title=" " alt="" coords="466,195,305,239,304,234,464,189"/>
-<area shape="rect" title=" " alt="" coords="948,240,1019,265"/>
-<area shape="poly" title=" " alt="" coords="567,184,730,204,935,237,934,242,729,210,567,190"/>
-<area shape="rect" title=" " alt="" coords="5,240,79,265"/>
-<area shape="poly" title=" " alt="" coords="445,190,289,211,93,242,92,237,289,205,445,185"/>
-<area shape="rect" href="system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="315,240,467,265"/>
-<area shape="poly" title=" " alt="" coords="489,194,423,235,420,230,486,190"/>
-<area shape="poly" title=" " alt="" coords="536,190,646,232,644,237,534,195"/>
-<area shape="poly" title=" " alt="" coords="563,189,786,235,785,240,562,195"/>
-<area shape="poly" title=" " alt="" coords="376,116,469,158,467,163,374,121"/>
-<area shape="poly" title=" " alt="" coords="283,118,205,136,164,150,126,169,89,198,60,230,56,227,85,194,123,164,162,145,203,131,282,113"/>
-<area shape="poly" title=" " alt="" coords="263,194,180,236,177,231,261,190"/>
-<area shape="poly" title=" " alt="" coords="281,194,264,229,259,226,277,191"/>
-<area shape="poly" title=" " alt="" coords="246,195,92,239,91,234,245,189"/>
-<area shape="poly" title=" " alt="" coords="350,189,610,235,609,240,349,195"/>
-<area shape="poly" title=" " alt="" coords="354,186,773,237,773,242,353,191"/>
-<area shape="rect" title=" " alt="" coords="983,167,1067,192"/>
-<area shape="poly" title=" " alt="" coords="921,116,994,157,991,162,918,121"/>
-<area shape="poly" title=" " alt="" coords="901,190,957,230,954,234,898,194"/>
+<div class="center"><img src="module__registry_8c__incl.png" border="0" usemap="#acomponents_2core_2src_2module__registry_8c" alt=""/></div>
+<map name="acomponents_2core_2src_2module__registry_8c" id="acomponents_2core_2src_2module__registry_8c">
+<area shape="rect" title="მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია." alt="" coords="406,5,563,45"/>
+<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="206,93,345,119"/>
+<area shape="poly" title=" " alt="" coords="435,48,320,91,318,86,434,43"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="475,167,596,192"/>
+<area shape="poly" title=" " alt="" coords="474,46,460,81,457,100,462,118,479,140,501,157,497,162,475,144,457,120,452,100,454,80,470,44"/>
+<area shape="rect" title=" " alt="" coords="5,240,156,265"/>
+<area shape="poly" title=" " alt="" coords="406,30,352,35,293,47,234,66,180,95,148,125,123,161,104,197,91,228,86,226,99,195,118,158,144,122,176,91,231,61,291,41,351,30,405,24"/>
+<area shape="rect" title=" " alt="" coords="180,240,317,265"/>
+<area shape="poly" title=" " alt="" coords="406,36,344,45,281,57,228,74,209,84,196,95,187,111,185,128,186,145,192,164,210,199,231,228,227,231,206,202,187,166,181,146,179,127,182,109,192,92,206,80,226,69,280,52,343,40,405,31"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="471,93,605,119"/>
+<area shape="poly" title=" " alt="" coords="500,44,524,80,520,83,495,47"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="313,167,451,192"/>
+<area shape="poly" title=" " alt="" coords="474,47,400,157,395,154,469,44"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="630,93,713,119"/>
+<area shape="poly" title=" " alt="" coords="530,43,632,85,630,90,528,48"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="780,167,931,192"/>
+<area shape="poly" title=" " alt="" coords="564,40,643,61,726,91,784,123,832,156,829,160,781,128,724,96,642,66,563,45"/>
+<area shape="rect" title=" " alt="" coords="788,93,859,119"/>
+<area shape="poly" title=" " alt="" coords="564,42,775,91,774,96,563,47"/>
+<area shape="rect" title=" " alt="" coords="883,93,953,119"/>
+<area shape="poly" title=" " alt="" coords="564,36,703,59,870,90,869,96,702,64,563,41"/>
+<area shape="rect" title=" " alt="" coords="341,240,423,265"/>
+<area shape="poly" title=" " alt="" coords="279,118,286,153,293,172,303,190,324,213,348,231,345,235,320,217,299,194,288,174,281,154,274,119"/>
+<area shape="poly" title=" " alt="" coords="318,116,481,160,479,166,316,121"/>
+<area shape="poly" title=" " alt="" coords="261,121,109,234,106,229,258,117"/>
+<area shape="poly" title=" " alt="" coords="273,120,259,167,252,226,247,226,254,166,268,118"/>
+<area shape="poly" title=" " alt="" coords="512,194,420,237,418,232,510,190"/>
+<area shape="rect" title=" " alt="" coords="653,240,749,265"/>
+<area shape="poly" title=" " alt="" coords="563,190,662,232,660,237,561,194"/>
+<area shape="rect" title=" " alt="" coords="447,240,530,265"/>
+<area shape="poly" title=" " alt="" coords="530,194,506,230,502,227,525,191"/>
+<area shape="rect" title=" " alt="" coords="796,240,867,265"/>
+<area shape="poly" title=" " alt="" coords="584,189,783,237,782,242,582,195"/>
+<area shape="rect" title=" " alt="" coords="555,240,628,265"/>
+<area shape="poly" title=" " alt="" coords="547,191,576,228,572,231,542,194"/>
+<area shape="poly" title=" " alt="" coords="475,193,464,195,168,240,168,235,463,189,474,188"/>
+<area shape="poly" title=" " alt="" coords="490,195,309,239,308,234,489,189"/>
+<area shape="poly" title=" " alt="" coords="540,119,539,153,534,153,535,119"/>
+<area shape="poly" title=" " alt="" coords="562,117,589,137,611,165,615,182,615,198,606,228,601,227,610,197,610,182,606,168,585,140,559,121"/>
+<area shape="poly" title=" " alt="" coords="385,192,385,226,379,226,379,192"/>
+<area shape="poly" title=" " alt="" coords="401,190,461,230,458,235,398,194"/>
+<area shape="poly" title=" " alt="" coords="416,189,545,233,543,238,415,195"/>
+<area shape="poly" title=" " alt="" coords="334,195,143,239,142,234,333,189"/>
+<area shape="poly" title=" " alt="" coords="362,194,284,236,281,231,359,190"/>
+<area shape="rect" title=" " alt="" coords="672,167,756,192"/>
+<area shape="poly" title=" " alt="" coords="681,118,702,154,698,156,676,120"/>
+<area shape="poly" title=" " alt="" coords="854,193,842,228,837,226,849,191"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -328,7 +326,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_b639423b1b477c33570e11c69c063fee.html">core</a></li><li class="navelem"><a class="el" href="module__registry_8c.html">module_registry.c</a></li>
+    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_b639423b1b477c33570e11c69c063fee.html">core</a></li><li class="navelem"><a class="el" href="dir_0e719ecdb5ebd3794c683401181575e9.html">src</a></li><li class="navelem"><a class="el" href="module__registry_8c.html">module_registry.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

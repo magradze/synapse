@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['✅_20ავტომატური_20ინტეგრაცია_0',['✅ ავტომატური ინტეგრაცია',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1673',1,'']]],
+  ['✅_20ავტომატური_20ინტეგრაცია_0',['✅ ავტომატური ინტეგრაცია',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1681',1,'']]],
   ['✅_20ავტომატური_20ინტეგრაცია_3a_1',['✅ ავტომატური ინტეგრაცია:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1273',1,'']]],
-  ['✅_20გენერირებული_20ფაილები_207_20ფაილი_2',['✅ გენერირებული ფაილები (7 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1672',1,'']]],
+  ['✅_20გენერირებული_20ფაილები_207_20ფაილი_2',['✅ გენერირებული ფაილები (7 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1680',1,'']]],
   ['✅_20რაც_20უნდა_20გახსოვდეთ_3a_3',['✅ რაც უნდა გახსოვდეთ:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1298',1,'']]],
   ['✅_20სწორი_4',['✅ სწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md1267',1,'']]],
   ['✅_20შექმნილი_20ფაილები_205_20ფაილი_20_3a_5',['✅ შექმნილი ფაილები (5 ფაილი):',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1272',1,'']]],

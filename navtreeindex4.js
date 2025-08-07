@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md749":[58,5],
 "md_docs_2changelog_2CHANGELOG__2025-06-24.html":[59],
 "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md752":[59,0],
 "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md753":[59,0,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "md_docs_2contributing_2pull__request__template.html":[73],
 "md_docs_2contributing_2pull__request__template.html#autotoc_md1064":[73,0],
 "md_docs_2contributing_2pull__request__template.html#autotoc_md1066":[73,1],
-"md_docs_2contributing_2pull__request__template.html#autotoc_md1068":[73,2],
-"md_docs_2contributing_2pull__request__template.html#autotoc_md1070":[73,3]
+"md_docs_2contributing_2pull__request__template.html#autotoc_md1068":[73,2]
 };

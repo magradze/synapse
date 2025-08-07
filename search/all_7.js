@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['7_20დოკუმენტაციის_20განახლება_0',['7. დოკუმენტაციის განახლება',['../md_docs_2tutorials_2module__extension.html#autotoc_md1952',1,'']]],
-  ['7_20როგორ_20გამოვასწორო_20რესურსების_20გაჟონვა_20memory_20leak_1',['7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1903',1,'']]],
-  ['7_20როგორ_20ხდება_20შეცდომების_20დამუშავება_20და_20ლოგირება_2',['7. როგორ ხდება შეცდომების დამუშავება და ლოგირება?',['../md_docs_2structure_2faq.html#autotoc_md1813',1,'']]],
+  ['7_20დოკუმენტაციის_20განახლება_0',['7. დოკუმენტაციის განახლება',['../md_docs_2tutorials_2module__extension.html#autotoc_md1963',1,'']]],
+  ['7_20როგორ_20გამოვასწორო_20რესურსების_20გაჟონვა_20memory_20leak_1',['7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1914',1,'']]],
+  ['7_20როგორ_20ხდება_20შეცდომების_20დამუშავება_20და_20ლოგირება_2',['7. როგორ ხდება შეცდომების დამუშავება და ლოგირება?',['../md_docs_2structure_2faq.html#autotoc_md1821',1,'']]],
   ['7_20სად_20ვიპოვო_20დოკუმენტაციის_20სტრუქტურის_20და_20სტანდარტების_20შესახებ_20ინფორმაცია_3',['7. სად ვიპოვო დოკუმენტაციის სტრუქტურის და სტანდარტების შესახებ ინფორმაცია?',['../md_docs_2contributing_2faq.html#autotoc_md1017',1,'']]],
-  ['7_20ფაილი_4',['✅ გენერირებული ფაილები (7 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1672',1,'']]],
+  ['7_20ფაილი_4',['✅ გენერირებული ფაილები (7 ფაილი)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1680',1,'']]],
   ['7_20⌨️_20cli_20ბრძანებები_20command_20line_20interface_5',['7. ⌨️ CLI ბრძანებები (Command Line Interface)',['../md_components_2modules_2system_2device__identity__service_2README.html#autotoc_md162',1,'']]],
   ['7_20❗_20მნიშვნელოვანი_20შენიშვნები_6',['7 ❗ მნიშვნელოვანი შენიშვნები',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html#autotoc_md37',1,'7. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2system_2alarms__manager_2README.html#autotoc_md138',1,'7. ❗ მნიშვნელოვანი შენიშვნები'],['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html#autotoc_md250',1,'7. ❗ მნიშვნელოვანი შენიშვნები']]],
   ['7_20❗_20წინაპირობები_20და_20tt_20menuconfig_20tt_7',['7. ❗ წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;',['../md_components_2modules_2system_2watchdog__manager_2README.html#autotoc_md195',1,'']]],
@@ -16,10 +16,10 @@ var searchData=
   ['7_200_202025_2007_2005_13',['[2.7.0] - 2025-07-05',['../md_docs_2changelog_2v5.html#autotoc_md896',1,'']]],
   ['7_200_202025_2007_2018_14',['[v3.7.0] - 2025-07-18',['../md_docs_2changelog_2v5.html#autotoc_md853',1,'']]],
   ['7_200_202025_2007_2030_15',['[5.7.0] - 2025-07-30',['../md_docs_2changelog_2v5.html#autotoc_md790',1,'']]],
-  ['7_20assertion_20ები_20და_20error_20checking_16',['7. Assertion-ები და Error Checking',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1893',1,'']]],
-  ['7_20best_20practices_17',['7. Best Practices',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1915',1,'']]],
-  ['7_20performance_20metrics_18',['7. Performance Metrics',['../md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1857',1,'']]],
-  ['7_20testability_19',['7. Testability',['../md_docs_2internal_2synapse__checklist.html#autotoc_md1585',1,'']]],
-  ['7_20troubleshooting_20',['7. Troubleshooting',['../md_docs_2tutorials_2integration__example.html#autotoc_md1942',1,'']]],
+  ['7_20assertion_20ები_20და_20error_20checking_16',['7. Assertion-ები და Error Checking',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1904',1,'']]],
+  ['7_20best_20practices_17',['7. Best Practices',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1926',1,'']]],
+  ['7_20performance_20metrics_18',['7. Performance Metrics',['../md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1865',1,'']]],
+  ['7_20testability_19',['7. Testability',['../md_docs_2internal_2synapse__checklist.html#autotoc_md1593',1,'']]],
+  ['7_20troubleshooting_20',['7. Troubleshooting',['../md_docs_2tutorials_2integration__example.html#autotoc_md1953',1,'']]],
   ['79_20strong_21',['💡 &lt;strong&gt;დონე 4: აპლიკაციის ლოგიკა და პერიფერია (60-79)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md1202',1,'']]]
 ];

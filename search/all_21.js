@@ -21,7 +21,7 @@ var searchData=
   ['v3_209_200_202025_2007_2018_18',['[v3.9.0] - 2025-07-18',['../md_docs_2changelog_2v5.html#autotoc_md844',1,'']]],
   ['v4_200_200_202025_2007_2019_19',['[v4.0.0] - 2025-07-19',['../md_docs_2changelog_2v5.html#autotoc_md840',1,'']]],
   ['v4_201_200_202025_2007_2019_20',['[v4.1.0] - 2025-07-19',['../md_docs_2changelog_2v5.html#autotoc_md835',1,'']]],
-  ['validation_21',['validation',['../md_docs_2convention_2error__handling.html#autotoc_md1154',1,'1. Parameter Validation'],['../md_docs_2security_2security__guidelines.html#autotoc_md1714',1,'Input Validation']]],
+  ['validation_21',['validation',['../md_docs_2convention_2error__handling.html#autotoc_md1154',1,'1. Parameter Validation'],['../md_docs_2security_2security__guidelines.html#autotoc_md1722',1,'Input Validation']]],
   ['value_20ოპერაციები_22',['value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md658',1,'🔑 Key-Value ოპერაციები'],['../md_components_2modules_2storage_2storage__manager_2README.html#autotoc_md125',1,'Key-Value ოპერაციები']]],
   ['verbose_20level_23',['5. ESP_LOGV - Verbose Level',['../md_docs_2convention_2logging__standards.html#autotoc_md1216',1,'']]],
   ['version_20module_20api_24',['version module api',['../md_docs_2api__reference_2system__api.html#autotoc_md672',1,'Version Module API'],['../md_docs_2api__reference_2version__api.html#autotoc_md723',1,'Version Module API']]],

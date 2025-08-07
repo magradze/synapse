@@ -18,6 +18,8 @@ var structui__manager__private__data__t =
     [ "time_sync", "structui__manager__private__data__t.html#a399f3bdff6c7a3bf7ffe8587e52b494b", null ],
     [ "timer", "structui__manager__private__data__t.html#a54cfcac066a4adbb227aa346c8b7aeca", null ],
     [ "top_visible_item", "structui__manager__private__data__t.html#a6ebaaf2558a4fd03fc0e8d44918f04f5", null ],
+    [ "ui_cmd_queue", "structui__manager__private__data__t.html#aadf23fd6c0f3bb919147cc46d599f7d6", null ],
+    [ "ui_task_handle", "structui__manager__private__data__t.html#acd29a294f3161e61f1a114a8280445c0", null ],
     [ "wifi_connected", "structui__manager__private__data__t.html#ad6da87b32cee6a414523d18c2b5c8748", null ],
     [ "wifi_rssi", "structui__manager__private__data__t.html#ab361dc7522622b4c8b95169316369f2b", null ],
     [ "wifi_status_timer", "structui__manager__private__data__t.html#a5eea26ba4fd8ccbeb1a59285fe5bd25b", null ]

@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('structmodule__t.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.  
+<p>The primary structure defining a framework module.  
  <a href="structmodule__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="base__module_8h_source.html">base_module.h</a>&gt;</code></p>
@@ -106,8 +106,10 @@ Collaboration diagram for module_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structmodule__t__coll__graph.png" border="0" usemap="#amodule__t_coll__map" alt="Collaboration graph"/></div>
 <map name="amodule__t_coll__map" id="amodule__t_coll__map">
-<area shape="rect" title="მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს." alt="" coords="5,51,88,77"/>
-<area shape="poly" title=" " alt="" coords="102,58,115,64,106,70,88,71,88,66,104,65,109,64,101,63"/>
+<area shape="rect" title="The primary structure defining a framework module." alt="" coords="49,139,131,165"/>
+<area shape="poly" title=" " alt="" coords="124,133,147,136,155,142,158,152,153,164,142,170,126,171,110,167,111,162,127,166,140,165,149,160,153,152,151,145,145,141,123,139"/>
+<area shape="rect" href="structmodule__dependency__t.html" title="Describes a single service dependency for a module." alt="" coords="5,5,175,31"/>
+<area shape="poly" title=" " alt="" coords="93,45,93,139,87,139,87,45"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -115,69 +117,65 @@ Collaboration diagram for module_t:</div>
 Public Attributes</h2></td></tr>
 <tr class="memitem:afb5f2d3d957c8717f54cd8668e4cab5e" id="r_afb5f2d3d957c8717f54cd8668e4cab5e"><td class="memItemLeft" align="right" valign="top"><a id="afb5f2d3d957c8717f54cd8668e4cab5e" name="afb5f2d3d957c8717f54cd8668e4cab5e"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> [CONFIG_FMW_MODULE_NAME_MAX_LENGTH]</td></tr>
-<tr class="memdesc:afb5f2d3d957c8717f54cd8668e4cab5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის უნიკალური სახელი (instance_name). <br /></td></tr>
+<tr class="memdesc:afb5f2d3d957c8717f54cd8668e4cab5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique instance name of the module. <br /></td></tr>
 <tr class="separator:afb5f2d3d957c8717f54cd8668e4cab5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae50465ce0627de2f517d79199fd276c7" id="r_ae50465ce0627de2f517d79199fd276c7"><td class="memItemLeft" align="right" valign="top"><a id="ae50465ce0627de2f517d79199fd276c7" name="ae50465ce0627de2f517d79199fd276c7"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>init_level</b></td></tr>
-<tr class="memdesc:ae50465ce0627de2f517d79199fd276c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ლეველი <br /></td></tr>
+<tr class="memdesc:ae50465ce0627de2f517d79199fd276c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The initialization priority level (lower value = earlier init). <br /></td></tr>
 <tr class="separator:ae50465ce0627de2f517d79199fd276c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a521c1f2803108c52ea071a5d44f3f8a2" id="r_a521c1f2803108c52ea071a5d44f3f8a2"><td class="memItemLeft" align="right" valign="top"><a id="a521c1f2803108c52ea071a5d44f3f8a2" name="a521c1f2803108c52ea071a5d44f3f8a2"></a>
 <a class="el" href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>status</b></td></tr>
-<tr class="memdesc:a521c1f2803108c52ea071a5d44f3f8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის მიმდინარე სტატუსი. <br /></td></tr>
+<tr class="memdesc:a521c1f2803108c52ea071a5d44f3f8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current operational status of the module. <br /></td></tr>
 <tr class="separator:a521c1f2803108c52ea071a5d44f3f8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a1305713cce543522141d618ca463da" id="r_a5a1305713cce543522141d618ca463da"><td class="memItemLeft" align="right" valign="top"><a id="a5a1305713cce543522141d618ca463da" name="a5a1305713cce543522141d618ca463da"></a>
 cJSON *&#160;</td><td class="memItemRight" valign="bottom"><b>current_config</b></td></tr>
-<tr class="memdesc:a5a1305713cce543522141d618ca463da"><td class="mdescLeft">&#160;</td><td class="mdescRight">მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე. <br /></td></tr>
+<tr class="memdesc:a5a1305713cce543522141d618ca463da"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the module's current configuration object. The module owns this memory. <br /></td></tr>
 <tr class="separator:a5a1305713cce543522141d618ca463da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab517ed6d3ea95d081a3c5c93b59529d" id="r_aab517ed6d3ea95d081a3c5c93b59529d"><td class="memItemLeft" align="right" valign="top"><a id="aab517ed6d3ea95d081a3c5c93b59529d" name="aab517ed6d3ea95d081a3c5c93b59529d"></a>
 SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>state_mutex</b></td></tr>
-<tr class="memdesc:aab517ed6d3ea95d081a3c5c93b59529d"><td class="mdescLeft">&#160;</td><td class="mdescRight">mutex მოდულის მდგომარეობის დაცვისთვის. <br /></td></tr>
+<tr class="memdesc:aab517ed6d3ea95d081a3c5c93b59529d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A mutex to protect the module's internal state from concurrent access. <br /></td></tr>
 <tr class="separator:aab517ed6d3ea95d081a3c5c93b59529d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebce5933d1dc8eaa718b0a90a7e1aaed" id="r_aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="memItemLeft" >struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb745788683c435bea2c6a7294e327bb" id="r_abb745788683c435bea2c6a7294e327bb"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#ac4996e0e6156f1eb798d4217e838161e">module_init_fn</a>&#160;&#160;&#160;<b>init</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:abb745788683c435bea2c6a7294e327bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ინიციალიზაციის ფუნქცია. <br /></td></tr>
 <tr class="separator:abb745788683c435bea2c6a7294e327bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e27d5450caeb277f513e88b811ef481" id="r_a9e27d5450caeb277f513e88b811ef481"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#ab41617ef693a6a11dcbafc02f10f4b97">module_start_fn</a>&#160;&#160;&#160;<b>start</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a9e27d5450caeb277f513e88b811ef481"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის გაშვების ფუნქცია. <br /></td></tr>
 <tr class="separator:a9e27d5450caeb277f513e88b811ef481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d91b51c47e2a4345aeb2eb97ec891e1" id="r_a8d91b51c47e2a4345aeb2eb97ec891e1"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#ade01ba3e5ab4ba310fe2d371818962fe">module_deinit_fn</a>&#160;&#160;&#160;<b>deinit</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a8d91b51c47e2a4345aeb2eb97ec891e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის გასუფთავების (დეინიციალიზაციის) ფუნქცია. <br /></td></tr>
 <tr class="separator:a8d91b51c47e2a4345aeb2eb97ec891e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f49e81fa92b00df4dbd8b8e5f70bd5c" id="r_a0f49e81fa92b00df4dbd8b8e5f70bd5c"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#a12c489a290559f17c955283acf60c938">module_enable_fn</a>&#160;&#160;&#160;<b>enable</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a0f49e81fa92b00df4dbd8b8e5f70bd5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის runtime ჩართვის ფუნქცია. <br /></td></tr>
 <tr class="separator:a0f49e81fa92b00df4dbd8b8e5f70bd5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af05d24d2943871250f1e3f9f31edfe04" id="r_af05d24d2943871250f1e3f9f31edfe04"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#a096edb8fbe11bd3de3d5dcf42e978d2e">module_disable_fn</a>&#160;&#160;&#160;<b>disable</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:af05d24d2943871250f1e3f9f31edfe04"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის runtime გამორთვის ფუნქცია. <br /></td></tr>
 <tr class="separator:af05d24d2943871250f1e3f9f31edfe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a943e79f36eb36b19e4437f9f42cf7ed7" id="r_a943e79f36eb36b19e4437f9f42cf7ed7"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#aad12c040a4a0655eb32efd12cb11d312">module_reconfigure_fn</a>&#160;&#160;&#160;<b>reconfigure</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a943e79f36eb36b19e4437f9f42cf7ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის კონფიგურაციის შეცვლის ფუნქცია. <br /></td></tr>
 <tr class="separator:a943e79f36eb36b19e4437f9f42cf7ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac52bc38e3e46b1541361cac7d00267df" id="r_ac52bc38e3e46b1541361cac7d00267df"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#acc9f2e92ea221066e91f1f5a7a805699">module_get_status_fn</a>&#160;&#160;&#160;<b>get_status</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:ac52bc38e3e46b1541361cac7d00267df"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის სტატუსის მიღების ფუნქცია. <br /></td></tr>
 <tr class="separator:ac52bc38e3e46b1541361cac7d00267df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af170aa0908ad5d69a8fe3fc571c621dd" id="r_af170aa0908ad5d69a8fe3fc571c621dd"><td class="memItemLeft" >
 &#160;&#160;&#160;<a class="el" href="base__module_8h.html#a174e03215ffd614b2f100df675179307">module_event_handler_fn</a>&#160;&#160;&#160;<b>handle_event</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:af170aa0908ad5d69a8fe3fc571c621dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ივენთების დამუშავების ფუნქცია. <br /></td></tr>
 <tr class="separator:af170aa0908ad5d69a8fe3fc571c621dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebce5933d1dc8eaa718b0a90a7e1aaed" id="r_aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodule__t.html#aebce5933d1dc8eaa718b0a90a7e1aaed">base</a>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="mdescLeft">&#160;</td><td class="mdescRight">მოდულის ძირითადი API ფუნქციების კოლექცია.  <br /></td></tr>
+<tr class="memdesc:aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of base API function pointers for the module's lifecycle.  <br /></td></tr>
 <tr class="separator:aebce5933d1dc8eaa718b0a90a7e1aaed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e4e556e94d9d5402250b0524a7c0196" id="r_a2e4e556e94d9d5402250b0524a7c0196"><td class="memItemLeft" align="right" valign="top"><a id="a2e4e556e94d9d5402250b0524a7c0196" name="a2e4e556e94d9d5402250b0524a7c0196"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>private_data</b></td></tr>
-<tr class="memdesc:a2e4e556e94d9d5402250b0524a7c0196"><td class="mdescLeft">&#160;</td><td class="mdescRight">მაჩვენებელი მოდულის შიდა მონაცემებზე. <br /></td></tr>
+<tr class="memdesc:a2e4e556e94d9d5402250b0524a7c0196"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the module's internal, private data structure. <br /></td></tr>
 <tr class="separator:a2e4e556e94d9d5402250b0524a7c0196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6209faec074954640ba0eafd259670d" id="r_ae6209faec074954640ba0eafd259670d"><td class="memItemLeft" align="right" valign="top"><a id="ae6209faec074954640ba0eafd259670d" name="ae6209faec074954640ba0eafd259670d"></a>
+const <a class="el" href="structmodule__dependency__t.html">module_dependency_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dependency_map</b></td></tr>
+<tr class="memdesc:ae6209faec074954640ba0eafd259670d"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Optional) A NULL-terminated array describing the module's service dependencies for injection. <br /></td></tr>
+<tr class="separator:ae6209faec074954640ba0eafd259670d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს. </p>
-<p>ეს სტრუქტურა შეიცავს მოდულის ყველა აუცილებელ ინფორმაციას და ფუნქციონალურს: სახელს, სტატუსს, კონფიგურაციას, API ფუნქციებს და შიდა მონაცემებს. ყველა მოდული უნდა აღებულ იქნას ამ სტრუქტურის საფუძველზე. </p>
+<div class="textblock"><p>The primary structure defining a framework module. </p>
+<p>This structure encapsulates all essential information and functionality for a module, including its name, status, configuration, base API functions, and a pointer to its private data. All modules must be based on this structure. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="aebce5933d1dc8eaa718b0a90a7e1aaed" name="aebce5933d1dc8eaa718b0a90a7e1aaed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebce5933d1dc8eaa718b0a90a7e1aaed">&#9670;&#160;</a></span>[struct]</h2>
@@ -191,8 +189,8 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>private_data</b></t
       </table>
 </div><div class="memdoc">
 
-<p>მოდულის ძირითადი API ფუნქციების კოლექცია. </p>
-<p>ყველა მოდული უნდა იმპლემენტირებდეს ამ ფუნქციებს ფრეიმვორქის სტანდარტული lifecycle-ის უზრუნველსაყოფად. </p>
+<p>A collection of base API function pointers for the module's lifecycle. </p>
+<p>All modules must implement these functions to ensure standard framework lifecycle management. </p>
 
 </div>
 </div>

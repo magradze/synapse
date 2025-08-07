@@ -133,10 +133,10 @@ Naming &amp; Structure</h1>
 <div class="line">cJSON* status = cJSON_CreateObject();</div>
 <div class="line"><span class="comment">// ... შეავსეთ status ...</span></div>
 <div class="line"><span class="keywordtype">char</span>* json_str = cJSON_PrintUnformatted(status);</div>
-<div class="line"><a class="code hl_function" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a>(FMW_EVENT_WIFI_STATUS_READY, wrapper);</div>
+<div class="line"><a class="code hl_function" href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a>(FMW_EVENT_WIFI_STATUS_READY, wrapper);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 2. mqtt_manager ავტომატურად იჭერს ამ ივენთს და აქვეყნებს MQTT-ში.</span></div>
-<div class="ttc" id="aevent__bus_8c_html_a6b067cccdb6a903e0612e49869456a81"><div class="ttname"><a href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
+<div class="ttc" id="aevent__bus_8h_html_abe0f3af3ae92846abaa9d421289b853e"><div class="ttname"><a href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
 </div><!-- fragment --><hr  />
 <p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და structure.md დოკუმენტები. </p>
 </div></div><!-- contents -->

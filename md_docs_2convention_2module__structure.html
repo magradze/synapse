@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მოდულის სტრუქტურის წესები</title>
+<title>Synapse ESP Framework: მოდულის სტრუქტურის კონვენცია</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,19 +90,19 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მოდულის სტრუქტურის წესები</div></div>
+  <div class="headertitle"><div class="title">მოდულის სტრუქტურის კონვენცია</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md1235"></a> </p>
 <h1><a class="anchor" id="autotoc_md1236"></a>
 საქაღალდის სტრუქტურა</h1>
 <h2><a class="anchor" id="autotoc_md1237"></a>
-სტანდარტული მოდულის layout</h2>
+სტანდარტული მოდულის სტრუქტურა</h2>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
 <div class="line">├── CMakeLists.txt</div>
 <div class="line">├── Kconfig</div>
 <div class="line">├── module.json</div>
-<div class="line">├── config.json         # &lt;--- ახალი</div>
+<div class="line">├── config.json</div>
 <div class="line">├── README.md</div>
 <div class="line">├── include/</div>
 <div class="line">│   └── {module_name}.h</div>
@@ -125,8 +125,8 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md1239"></a>
 ფაილის სტრუქტურა</h1>
 <h2><a class="anchor" id="autotoc_md1240"></a>
-1. &lt;tt&gt;config.json&lt;/tt&gt; (ახალი სექცია)</h2>
-<p>ეს ფაილი განსაზღვრავს მოდულის default runtime კონფიგურაციას. ის უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი აღწერს მოდულის ერთ ინსტანციას.</p>
+1. &lt;tt&gt;config.json&lt;/tt&gt;</h2>
+<p>ეს ფაილი განსაზღვრავს მოდულის <b>default runtime კონფიგურაციას</b>. ის უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი არის ობიექტი, რომელიც აღწერს მოდულის ერთ ინსტანციას.</p>
 <div class="fragment"><div class="line">[</div>
 <div class="line">  {</div>
 <div class="line">    &quot;type&quot;: &quot;{module_name}&quot;,</div>
@@ -142,8 +142,8 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;name&quot;: &quot;{module_name}&quot;,</div>
 <div class="line">    &quot;version&quot;: &quot;1.0.0&quot;,</div>
-<div class="line">    &quot;description&quot;: &quot;Module description.&quot;,</div>
-<div class="line">    &quot;author&quot;: &quot;Author Name&quot;,</div>
+<div class="line">    &quot;description&quot;: &quot;მოდულის აღწერა.&quot;,</div>
+<div class="line">    &quot;author&quot;: &quot;ავტორის სახელი&quot;,</div>
 <div class="line">    &quot;init_function&quot;: &quot;{module_name}_create&quot;,</div>
 <div class="line">    &quot;init_level&quot;: 60,</div>
 <div class="line">    &quot;build_enabled&quot;: true,</div>
@@ -154,36 +154,55 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md1242"></a>
-3. &lt;tt&gt;src/{module_name}.c&lt;/tt&gt; (განახლებული შაბლონი)</h2>
-<p>Source ფაილმა უნდა დაიცვას მეხსიერების მართვის ახალი წესები.</p>
-<div class="fragment"><div class="line"><span class="comment">// ... Includes ...</span></div>
+3. &lt;tt&gt;src/{module_name}.c&lt;/tt&gt; (განახლებული შაბლონი Dependency Injection-ის მხარდაჭერით)</h2>
+<p>Source ფაილმა უნდა დაიცვას მეხსიერების მართვისა და დამოკიდებულებების ინექციის ახალი წესები.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;{module_name}.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="synapse_8h.html">synapse.h</a>&quot;</span> <span class="comment">// ვიყენებთ ფრეიმვორქის ერთიან ჰედერს</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// --- Dependency Injection-ის კონვენცია ---</span></div>
+<div class="line"><span class="comment">// თუ ეს მოდული დამოკიდებულია რომელიმე სერვისზე, მისი handle-ის მაჩვენებელი</span></div>
+<div class="line"><span class="comment">// აუცილებლად უნდა იყოს private_data სტრუქტურის პირველი წევრი.</span></div>
+<div class="line"><span class="comment">// მაგალითი:</span></div>
+<div class="line"><span class="comment">// typedef struct {</span></div>
+<div class="line"><span class="comment">//     mcp23017_handle_t *expander_handle; // აუცილებლად პირველი წევრი!</span></div>
+<div class="line"><span class="comment">//     // ... სხვა private მონაცემების ველები</span></div>
+<div class="line"><span class="comment">// } my_module_private_data_t;</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;{MODULE_NAME_UPPER}&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ... Private Data, API Globals, etc. ...</span></div>
+<div class="line"><span class="comment">// ... Private მონაცემები, API გლობალები და ა.შ. ...</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// --- Create &amp; Deinit Functions ---</span></div>
+<div class="line"><span class="comment">// --- Create და Deinit ფუნქციები ---</span></div>
 <div class="line"> </div>
 <div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *{module_name}_create(<span class="keyword">const</span> cJSON *config) {</div>
-<div class="line">    <span class="comment">// 1. Allocate memory for module and private data</span></div>
+<div class="line">    <span class="comment">// --- Dependency Map ---</span></div>
+<div class="line">    <span class="comment">// ეს რუკა ეუბნება System Manager-ს, თუ როგორ მოახდინოს დამოკიდებულებების ინექცია.</span></div>
+<div class="line">    <span class="comment">// ის აკავშირებს config.json-ის გასაღებს private_data სტრუქტურის ველთან.</span></div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structmodule__dependency__t.html">module_dependency_t</a> s_dependencies[] = {</div>
+<div class="line">        <span class="comment">// { &quot;config_key_ending_with_service&quot;, offsetof(my_module_private_data_t, handle_pointer_field) },</span></div>
+<div class="line">        { NULL, 0 } <span class="comment">// მასივის დამასრულებელი (terminator)</span></div>
+<div class="line">    };</div>
+<div class="line">    <span class="comment">// 1. გამოვყოთ მეხსიერება მოდულისა და private მონაცემებისთვის</span></div>
 <div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = (module_t *)calloc(1, sizeof(module_t));</div>
-<div class="line">    <span class="comment">// ... error handling ...</span></div>
+<div class="line">    <span class="comment">// ... შეცდომის დამუშავება ...</span></div>
 <div class="line">    </div>
-<div class="line">    <span class="comment">// 2. Take ownership of the config object</span></div>
+<div class="line">    <span class="comment">// 2. ავიღოთ მფლობელობა (ownership) config ობიექტზე</span></div>
 <div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// 3. Parse the configuration</span></div>
+<div class="line">    <span class="keyword">module</span>-&gt;dependency_map = s_dependencies; <span class="comment">// მივანიჭოთ დამოკიდებულებების რუკა</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 3. დავამუშაოთ კონფიგურაცია</span></div>
 <div class="line">    <span class="keyword">const</span> cJSON *config_node = cJSON_GetObjectItem(config, <span class="stringliteral">&quot;config&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (!config_node) {</div>
-<div class="line">        <span class="comment">// ... error handling and cleanup ...</span></div>
+<div class="line">        <span class="comment">// ... შეცდომის დამუშავება და სრული გასუფთავება ...</span></div>
 <div class="line">        <span class="keywordflow">return</span> NULL;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="comment">// ... parse instance_name and other parameters ...</span></div>
+<div class="line">    <span class="comment">// ... instance_name-ის და სხვა პარამეტრების დამუშავება ...</span></div>
 <div class="line">    </div>
-<div class="line">    <span class="comment">// 4. Set up base function pointers</span></div>
+<div class="line">    <span class="comment">// 4. დავაყენოთ საბაზისო ფუნქციების მაჩვენებლები</span></div>
 <div class="line">    <span class="keyword">module</span>-&gt;base.init = {module_name}_init;</div>
 <div class="line">    <span class="keyword">module</span>-&gt;base.deinit = {module_name}_deinit;</div>
-<div class="line">    <span class="comment">// ... other base functions ...</span></div>
+<div class="line">    <span class="comment">// ... სხვა საბაზისო ფუნქციები ...</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
 <div class="line">}</div>
@@ -191,9 +210,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> {module_name}_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!self) <span class="keywordflow">return</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// ... Unregister services, unsubscribe from events, delete tasks/queues ...</span></div>
+<div class="line">    <span class="comment">// ... სერვისების რეგისტრაციის გაუქმება, ივენთებიდან გამოწერის გაუქმება, ტასკების/რიგების წაშლა ...</span></div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Free all allocated memory</span></div>
+<div class="line">    <span class="comment">// გამოვათავისუფლოთ ყველა გამოყოფილი მეხსიერება</span></div>
 <div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>) {</div>
 <div class="line">        cJSON_Delete(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>);</div>
 <div class="line">    }</div>
@@ -203,43 +222,63 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">    free(self);</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ... Other module functions (init, start, handle_event, etc.) ...</span></div>
+<div class="line"><span class="comment">// --- მოდულის Init ფუნქცია (დამოკიდებულებების გათვალისწინებით) ---</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> esp_err_t {module_name}_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line">    my_module_private_data_t *private_data = (my_module_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// სერვისის handle-ი უკვე &quot;ინექცირებულია&quot; System Manager-ის მიერ init-ის გამოძახებამდე.</span></div>
+<div class="line">    <span class="comment">// fmw_service_get()-ის გამოძახების ნაცვლად, ჩვენ უბრალოდ ვამოწმებთ ინექცირებულ handle-ს.</span></div>
+<div class="line">    <span class="keywordflow">if</span> (!private_data-&gt;expander_handle) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Dependency injection failed: expander_handle is NULL!&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_STATE;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ... ვაგრძელებთ ინიციალიზაციას handle-ის გამოყენებით ...</span></div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ... სხვა მოდულის ფუნქციები (start, handle_event და ა.შ.) ...</span></div>
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">მაჩვენებელი მოდულის შიდა მონაცემებზე.</div><div class="ttdef"><b>Definition</b> base_module.h:157</div></div>
-<div class="ttc" id="astructmodule__t_html_a5a1305713cce543522141d618ca463da"><div class="ttname"><a href="structmodule__t.html#a5a1305713cce543522141d618ca463da">module_t::current_config</a></div><div class="ttdeci">cJSON * current_config</div><div class="ttdoc">მაჩვენებელი მოდულის მიმდინარე კონფიგურაციაზე.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
+<div class="ttc" id="astructmodule__dependency__t_html"><div class="ttname"><a href="structmodule__dependency__t.html">module_dependency_t</a></div><div class="ttdoc">Describes a single service dependency for a module.</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
+<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
+<div class="ttc" id="astructmodule__t_html_a5a1305713cce543522141d618ca463da"><div class="ttname"><a href="structmodule__t.html#a5a1305713cce543522141d618ca463da">module_t::current_config</a></div><div class="ttdeci">cJSON * current_config</div><div class="ttdoc">A pointer to the module's current configuration object. The module owns this memory.</div><div class="ttdef"><b>Definition</b> base_module.h:140</div></div>
+<div class="ttc" id="asynapse_8h_html"><div class="ttname"><a href="synapse_8h.html">synapse.h</a></div><div class="ttdoc">Synapse ESP Framework - მთავარი საჯარო ჰედერი.</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md1243"></a>
 &lt;tt&gt;CMakeLists.txt&lt;/tt&gt; სტრუქტურა</h1>
 <p>რეკომენდებულია გამარტივებული <code>CMakeLists.txt</code>-ის გამოყენება. პირობითი კომპილაცია იმართება <code>core</code> კომპონენტის მიერ გენერირებული <code>module_factory</code>-ით.</p>
-<div class="fragment"><div class="line"># Standard simplified structure</div>
+<div class="fragment"><div class="line"># სტანდარტული გამარტივებული სტრუქტურა</div>
 <div class="line">idf_component_register(</div>
 <div class="line">    SRCS &quot;src/{module_name}.c&quot;</div>
 <div class="line">    INCLUDE_DIRS &quot;include&quot;</div>
 <div class="line">    REQUIRES</div>
-<div class="line">        core</div>
-<div class="line">        interfaces</div>
-<div class="line">        # Other direct dependencies (e.g., a specific driver)</div>
+<div class="line">        synapse # ანაცვლებს &#39;core&#39;-ს და &#39;interfaces&#39;-ს ფრეიმვორქის API-სთვის</div>
+<div class="line">        # სხვა მოდულების ინტერფეისებზე დამოკიდებულებები (მაგ., mcp23017_interface)</div>
 <div class="line">    PRIV_REQUIRES</div>
 <div class="line">        json</div>
-<div class="line">        # Other private dependencies (e.g., esp_timer)</div>
+<div class="line">        # სხვა private დამოკიდებულებები (მაგ., esp_timer)</div>
 <div class="line">)</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md1244"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>
-<li>პირდაპირი <code>#include</code> სხვა მოდულის ჰედერების.</li>
-<li><code>module.json</code>-ში runtime პარამეტრების შენახვა.</li>
+<li>სხვა მოდულის ჰედერების პირდაპირი <code>#include</code>.</li>
+<li>runtime პარამეტრების შენახვა <code>module.json</code>-ში.</li>
 <li><code>_create</code> ფუნქციაში გადაცემული <code>config</code> ობიექტის დუბლირება (<code>cJSON_Duplicate</code>).</li>
+<li><code><a class="el" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc" title="აბრუნებს რეგისტრირებულ სერვისს სახელით">fmw_service_get()</a></code>-ის გამოძახება <code>_init</code> ფუნქციაში იმ დამოკიდებულებებისთვის, რომელთა ინექციაც შესაძლებელია.</li>
 </ul>
 <p>✅ <b>ყოველთვის:</b></p>
 <ul>
 <li>გამოიყენეთ <code>Service Locator</code> და <code>Event Bus</code> კომუნიკაციისთვის.</li>
+<li>აღწერეთ სერვისებზე დამოკიდებულებები <code>dependency_map</code>-ის საშუალებით.</li>
 <li>განსაზღვრეთ runtime პარამეტრები <code>config.json</code>-ში.</li>
 <li><code>_create</code> ფუნქციამ უნდა "მიითვისოს" (<code>take ownership</code>) გადაცემული <code>config</code> ობიექტი.</li>
 <li><code>_deinit</code> ფუნქციამ უნდა გაათავისუფლოს <code>module-&gt;current_config</code>.</li>
+<li><b>გამოაცხადეთ სერვისზე დამოკიდებულების handle-ი <code>private_data</code> სტრუქტურის პირველ წევრად, რათა იმუშაოს ავტომატურმა ინექციამ.</b></li>
 </ul>
 <hr  />
-<p>ამ ფაილის განახლებით, ჩვენი დოკუმენტაციის რეფაქტორინგი დასრულებულია. ის ახლა სრულად შეესაბამება Synapse Framework v5.0.0-ის არქიტექტურას. </p>
+<p>ეს განახლება ასრულებს დოკუმენტაციის რეფაქტორინგს. ის ახლა სრულად შეესაბამება Synapse Framework v7.0.0-ის არქიტექტურას, Dependency Injection-ის პატერნის ჩათვლით. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -26,6 +26,6 @@ var searchData=
   ['სტარტი_20getting_20started_23',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
   ['სტრუქტურა_24',['არქიტექტურა და სტრუქტურა',['../structure_docs.html',1,'']]],
   ['სტრუქტურა_20directory_20structure_25',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
-  ['სტრუქტურის_20წესები_26',['მოდულის სტრუქტურის წესები',['../md_docs_2convention_2module__structure.html',1,'']]],
+  ['სტრუქტურის_20კონვენცია_26',['მოდულის სტრუქტურის კონვენცია',['../md_docs_2convention_2module__structure.html',1,'']]],
   ['სწრაფი_20სტარტი_20getting_20started_27',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]]
 ];

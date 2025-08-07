@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2storage__s
   <div class="headertitle"><div class="title">მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1481"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1483"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1489"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1491"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში მონაცემთა შენახვის არქიტექტურულ არჩევანს, არჩეული ტექნოლოგიების მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1485"></a>
+<h1><a class="anchor" id="autotoc_md1493"></a>
 კონტექსტი</h1>
 <p>ფრეიმვორქს სჭირდება მოქნილი, საიმედო და სტანდარტიზებული მონაცემთა შენახვის მექანიზმი როგორც სისტემური კონფიგურაციისთვის, ისე მოდულების runtime მონაცემებისთვის. აუცილებელია მხარდაჭერა როგორც მუდმივი (persistent), ისე დროებითი (volatile) მონაცემებისთვის.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1487"></a>
+<h1><a class="anchor" id="autotoc_md1495"></a>
 არჩეული გადაწყვეტილება</h1>
 <ul>
 <li><b>NVS (Non-Volatile Storage):</b> გამოიყენება სისტემური და მოდულების კონფიგურაციის მუდმივი შენახვისთვის.</li>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2storage__s
 <li><b>RAM/Stack:</b> გამოიყენება დროებითი, ოპერაციული მონაცემებისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1489"></a>
+<h1><a class="anchor" id="autotoc_md1497"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li><b>NVS</b> უზრუნველყოფს key-value სტრუქტურას, საიმედოობას და მარტივ ინტეგრაციას ESP-IDF ეკოსისტემაში.</li>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2storage__s
 <li>ალტერნატივა (გარე SD-ბარათი, FATFS) უარყოფილია კომპლექსურობისა და რესურსების გამო.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1491"></a>
+<h1><a class="anchor" id="autotoc_md1499"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>სისტემური და მოდულების კონფიგურაცია ინახება უსაფრთხოდ და სტანდარტულად</li>
@@ -128,20 +128,20 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2storage__s
 <li>Flash-ის ცვეთა (wear) საჭიროებს ყურადღებას დიდი მოცულობის მონაცემების შემთხვევაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1493"></a>
+<h1><a class="anchor" id="autotoc_md1501"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1494"></a>
+<h2><a class="anchor" id="autotoc_md1502"></a>
 NVS-ში სტრიქონის შენახვა</h2>
 <div class="fragment"><div class="line">nvs_storage_module_set_string(<span class="stringliteral">&quot;device_name&quot;</span>, <span class="stringliteral">&quot;synapse_node_1&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1495"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1503"></a>
 NVS-დან სტრიქონის წაკითხვა</h2>
 <div class="fragment"><div class="line"><span class="keywordtype">char</span> device_name[32];</div>
 <div class="line">nvs_storage_module_get_string(<span class="stringliteral">&quot;device_name&quot;</span>, device_name, <span class="keyword">sizeof</span>(device_name));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1496"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1504"></a>
 Flash-ში მონაცემების შენახვა (OTA)</h2>
 <div class="fragment"><div class="line"><span class="comment">// OTA განახლების პროცესში გამოიყენება esp_ota APIs</span></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1498"></a>
+<h1><a class="anchor" id="autotoc_md1506"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>მონაცემების hardcoded შენახვა კოდში</li>
@@ -154,7 +154,7 @@ Flash-ში მონაცემების შენახვა (OTA)</h2>
 <li>ჩაწერეთ ყველა ცვლილება და შენახვის არქიტექტურული გადაწყვეტილება დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1500"></a>
+<h1><a class="anchor" id="autotoc_md1508"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>

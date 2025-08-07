@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: components/core/module_factory.c File Reference</title>
+<title>Synapse ESP Framework: components/core/src/module_factory.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,36 +104,34 @@ $(document).ready(function(){initNavTree('module__factory_8c.html',''); initResi
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for module_factory.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="module__factory_8c__incl.png" border="0" usemap="#acomponents_2core_2module__factory_8c" alt=""/></div>
-<map name="acomponents_2core_2module__factory_8c" id="acomponents_2core_2module__factory_8c">
-<area shape="rect" title="მოდულების შემქმნელი (Factory) კომპონენტის იმპლემენტაცია." alt="" coords="808,5,995,45"/>
-<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="701,93,835,119"/>
-<area shape="poly" title=" " alt="" coords="871,48,801,89,798,84,868,43"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="860,93,943,119"/>
-<area shape="poly" title=" " alt="" coords="904,46,904,79,899,79,899,46"/>
-<area shape="rect" title=" " alt="" coords="967,93,1041,119"/>
-<area shape="poly" title=" " alt="" coords="928,43,980,83,976,87,925,48"/>
-<area shape="rect" href="base__module_8h.html" title="საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა." alt="" coords="449,167,570,192"/>
-<area shape="poly" title=" " alt="" coords="727,121,565,166,564,160,726,116"/>
-<area shape="rect" title=" " alt="" coords="946,240,1019,265"/>
-<area shape="poly" title=" " alt="" coords="779,117,807,153,848,190,891,215,934,233,932,238,889,219,845,194,803,156,774,121"/>
+<div class="center"><img src="module__factory_8c__incl.png" border="0" usemap="#acomponents_2core_2src_2module__factory_8c" alt=""/></div>
+<map name="acomponents_2core_2src_2module__factory_8c" id="acomponents_2core_2src_2module__factory_8c">
+<area shape="rect" title="მოდულების შემქმნელი (Factory) კომპონენტის იმპლემენტაცია." alt="" coords="699,5,856,45"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="577,93,711,119"/>
+<area shape="poly" title=" " alt="" coords="747,48,677,89,674,84,744,43"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="736,93,819,119"/>
+<area shape="poly" title=" " alt="" coords="780,46,780,79,775,79,775,46"/>
+<area shape="rect" title=" " alt="" coords="843,93,917,119"/>
+<area shape="poly" title=" " alt="" coords="804,43,856,83,852,87,801,48"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="377,167,498,192"/>
+<area shape="poly" title=" " alt="" coords="612,121,485,165,483,160,610,116"/>
+<area shape="rect" title=" " alt="" coords="769,240,842,265"/>
+<area shape="poly" title=" " alt="" coords="656,117,685,151,724,190,777,230,774,234,721,194,681,155,652,121"/>
 <area shape="rect" title=" " alt="" coords="5,240,101,265"/>
-<area shape="poly" title=" " alt="" coords="449,192,116,242,115,237,448,186"/>
+<area shape="poly" title=" " alt="" coords="377,194,116,242,115,237,376,189"/>
 <area shape="rect" title=" " alt="" coords="125,240,208,265"/>
-<area shape="poly" title=" " alt="" coords="454,195,222,242,221,237,453,189"/>
+<area shape="poly" title=" " alt="" coords="395,195,222,240,221,234,393,189"/>
 <area shape="rect" title=" " alt="" coords="233,240,303,265"/>
-<area shape="poly" title=" " alt="" coords="471,195,318,240,316,234,470,189"/>
+<area shape="poly" title=" " alt="" coords="411,194,309,237,307,232,409,190"/>
 <area shape="rect" title=" " alt="" coords="327,240,409,265"/>
-<area shape="poly" title=" " alt="" coords="488,194,404,236,402,231,485,190"/>
-<area shape="poly" title=" " alt="" coords="571,185,731,205,933,237,932,242,730,210,570,190"/>
-<area shape="rect" href="system__event__ids_8h.html" title="სისტემური (ბირთვის) ივენთების იდენტიფიკატორები" alt="" coords="433,240,585,265"/>
-<area shape="poly" title=" " alt="" coords="512,192,512,226,507,226,507,192"/>
-<area shape="rect" title=" " alt="" coords="610,240,761,265"/>
-<area shape="poly" title=" " alt="" coords="539,190,645,232,643,237,537,194"/>
-<area shape="rect" title=" " alt="" coords="785,240,922,265"/>
-<area shape="poly" title=" " alt="" coords="565,189,785,235,784,240,564,195"/>
-<area shape="rect" title=" " alt="" coords="859,167,943,192"/>
-<area shape="poly" title=" " alt="" coords="904,119,904,153,899,153,899,119"/>
+<area shape="poly" title=" " alt="" coords="428,194,391,232,387,228,424,190"/>
+<area shape="poly" title=" " alt="" coords="499,188,755,237,754,242,498,194"/>
+<area shape="rect" title=" " alt="" coords="433,240,583,265"/>
+<area shape="poly" title=" " alt="" coords="451,190,489,228,485,232,447,194"/>
+<area shape="rect" title=" " alt="" coords="607,240,745,265"/>
+<area shape="poly" title=" " alt="" coords="476,189,625,233,623,239,475,195"/>
+<area shape="rect" title=" " alt="" coords="735,167,819,192"/>
+<area shape="poly" title=" " alt="" coords="780,119,780,153,775,153,775,119"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -215,7 +213,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_b639423b1b477c33570e11c69c063fee.html">core</a></li><li class="navelem"><a class="el" href="module__factory_8c.html">module_factory.c</a></li>
+    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_b639423b1b477c33570e11c69c063fee.html">core</a></li><li class="navelem"><a class="el" href="dir_0e719ecdb5ebd3794c683401181575e9.html">src</a></li><li class="navelem"><a class="el" href="module__factory_8c.html">module_factory.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

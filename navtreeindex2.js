@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md149":[17,4,0],
 "md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md150":[17,4,1],
 "md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md151":[17,4,2],
 "md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md152":[17,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "md_docs_2api__reference_2device__identity__api.html#autotoc_md387":[37,0],
 "md_docs_2api__reference_2device__identity__api.html#autotoc_md389":[37,1],
 "md_docs_2api__reference_2device__identity__api.html#autotoc_md390":[37,1,0],
-"md_docs_2api__reference_2device__identity__api.html#autotoc_md391":[37,1,1],
-"md_docs_2api__reference_2device__identity__api.html#autotoc_md393":[37,2]
+"md_docs_2api__reference_2device__identity__api.html#autotoc_md391":[37,1,1]
 };

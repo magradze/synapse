@@ -99,37 +99,25 @@ $(document).ready(function(){initNavTree('wifi__manager_8h_source.html',''); ini
 </div><!--header-->
 <div class="contents">
 <a href="wifi__manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef WIFI_MANAGER_H</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define WIFI_MANAGER_H</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="base__module_8h.html">base_module.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;cJSON.h&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structwifi__manager__config__t.html">   25</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structwifi__manager__config__t.html#aab9cc619afd4d8efda38266890d90678">   26</a></span>    <span class="keywordtype">char</span> instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];  </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structwifi__manager__config__t.html#aaf7fca00906f2052ddbe43cbc473d366">   27</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structwifi__manager__config__t.html#aaf7fca00906f2052ddbe43cbc473d366">auto_start</a>;                                        </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">// TODO: დაამატეთ მოდულის სპეციფიკური კონფიგურაციის ფილდები</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>} <a class="code hl_struct" href="structwifi__manager__config__t.html">wifi_manager_config_t</a>;</div>
-</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="wifi__manager_8h.html#a5100b2f029e2c1e6e8212bd03703667e">wifi_manager_create</a>(<span class="keyword">const</span> cJSON *config);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif </span><span class="comment">// WIFI_MANAGER_H</span></div>
-<div class="ttc" id="abase__module_8h_html"><div class="ttname"><a href="base__module_8h.html">base_module.h</a></div><div class="ttdoc">საბაზისო მოდულის ინტერფეისის და სტატუსის ტიპების აღწერა.</div></div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">მოდულის ძირითადი სტრუქტურა, რომელიც განსაზღვრავს ფრეიმვორქის მოდულის კონტრაქტს.</div><div class="ttdef"><b>Definition</b> base_module.h:133</div></div>
-<div class="ttc" id="astructwifi__manager__config__t_html"><div class="ttname"><a href="structwifi__manager__config__t.html">wifi_manager_config_t</a></div><div class="ttdoc">Wifi_Manager მოდულის კონფიგურაციის სტრუქტურა</div><div class="ttdef"><b>Definition</b> wifi_manager.h:25</div></div>
-<div class="ttc" id="astructwifi__manager__config__t_html_aaf7fca00906f2052ddbe43cbc473d366"><div class="ttname"><a href="structwifi__manager__config__t.html#aaf7fca00906f2052ddbe43cbc473d366">wifi_manager_config_t::auto_start</a></div><div class="ttdeci">bool auto_start</div><div class="ttdef"><b>Definition</b> wifi_manager.h:27</div></div>
-<div class="ttc" id="awifi__manager_8h_html_a5100b2f029e2c1e6e8212bd03703667e"><div class="ttname"><a href="wifi__manager_8h.html#a5100b2f029e2c1e6e8212bd03703667e">wifi_manager_create</a></div><div class="ttdeci">module_t * wifi_manager_create(const cJSON *config)</div><div class="ttdoc">ქმნის ახალ wifi_manager მოდულის ინსტანციას</div><div class="ttdef"><b>Definition</b> wifi_manager.c:82</div></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#ifndef WIFI_MANAGER_H</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define WIFI_MANAGER_H</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="synapse_8h.html">synapse.h</a>&quot;</span> <span class="comment">// Includes base_module.h and cJSON.h</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="wifi__manager_8h.html#a5100b2f029e2c1e6e8212bd03703667e">wifi_manager_create</a>(<span class="keyword">const</span> cJSON *config);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// WIFI_MANAGER_H</span></div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
+<div class="ttc" id="asynapse_8h_html"><div class="ttname"><a href="synapse_8h.html">synapse.h</a></div><div class="ttdoc">Synapse ESP Framework - მთავარი საჯარო ჰედერი.</div></div>
+<div class="ttc" id="awifi__manager_8h_html_a5100b2f029e2c1e6e8212bd03703667e"><div class="ttname"><a href="wifi__manager_8h.html#a5100b2f029e2c1e6e8212bd03703667e">wifi_manager_create</a></div><div class="ttdeci">module_t * wifi_manager_create(const cJSON *config)</div><div class="ttdoc">Creates a new instance of the wifi_manager module.</div><div class="ttdef"><b>Definition</b> wifi_manager.c:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

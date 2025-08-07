@@ -1,5 +1,6 @@
 var base__module_8h =
 [
+    [ "module_dependency_t", "structmodule__dependency__t.html", "structmodule__dependency__t" ],
     [ "module_t", "structmodule__t.html", "structmodule__t" ],
     [ "MODULE_IS_OPERATIONAL", "base__module_8h.html#a379e520ce4e4d0e2d8b097f9ae8cd892", null ],
     [ "MODULE_IS_RUNNING", "base__module_8h.html#ad290645119813f8481296153b77e7aae", null ],

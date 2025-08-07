@@ -2,24 +2,33 @@
  * @file button_input.c
  * @brief A module to handle hardware button presses from GPIO or I/O expanders.
  * @author Synapse Team
- * @version 2.1.0
+ * @version 3.0.0
+ * @date 2025-08-27
+ * @details This module provides a robust and flexible way to handle user button
+ *          inputs. It supports multiple instances, can operate on direct GPIOs
+ *          (using interrupts) or via an MCP23017 I/O expander (using polling),
+ *          and is fully compatible with the framework's dependency injection system.
+ *          It is designed to be multi-instance safe by avoiding global variables.
  */
 
-#include "synapse.h"
 #include "button_input.h"
-
+#include "synapse.h"
 #include "mcp23017_interface.h"
+
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-#include <inttypes.h>
+#include <stddef.h> // For offsetof
 
 DEFINE_COMPONENT_TAG("BUTTON_INPUT");
 
-#define MAX_BUTTONS 16
+#define MAX_BUTTONS_PER_INSTANCE 16
 #define DEBOUNCE_TIME_MS 50
 #define POLLING_INTERVAL_MS 20
+#define GPIO_INTR_QUEUE_LEN 10
+
+// --- Internal Data Structures ---
 
 typedef enum
 {
@@ -38,17 +47,17 @@ typedef struct
 
 typedef struct
 {
+    // --- Injected Dependencies (MUST BE FIRST) ---
+    mcp23017_handle_t *expander_handle;
+
+    // --- Module State & Configuration ---
     char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
     TaskHandle_t task_handle;
-    QueueHandle_t gpio_evt_queue;
-    button_config_t buttons[MAX_BUTTONS];
+    QueueHandle_t gpio_evt_queue; // Each instance has its own queue
+    button_config_t buttons[MAX_BUTTONS_PER_INSTANCE];
     uint8_t button_count;
     control_type_t control_type;
-    char expander_service_name[32];
-    mcp23017_handle_t *expander_handle;
 } button_input_private_data_t;
-
-static QueueHandle_t g_button_gpio_evt_queue = NULL;
 
 // --- Forward Declarations ---
 static esp_err_t button_input_init(module_t *self);
@@ -57,6 +66,12 @@ static void button_input_deinit(module_t *self);
 static esp_err_t parse_config(const cJSON *config_node, button_input_private_data_t *private_data);
 static void button_task(void *pvParameters);
 static void gpio_isr_handler(void *arg);
+
+// --- Dependency Map ---
+static const module_dependency_t s_dependencies[] = {
+    {"expander_service", offsetof(button_input_private_data_t, expander_handle)},
+    {NULL, 0} // Terminator
+};
 
 module_t *button_input_create(const cJSON *config)
 {
@@ -74,6 +89,7 @@ module_t *button_input_create(const cJSON *config)
 
     module->current_config = (cJSON *)config;
     module->private_data = private_data;
+    module->dependency_map = s_dependencies; // Assign the dependency map
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (parse_config(config_node, private_data) != ESP_OK)
@@ -115,11 +131,10 @@ static void publish_button_event(const char *button_name)
 
 static void IRAM_ATTR gpio_isr_handler(void *arg)
 {
-    uint32_t gpio_num = (uint32_t)(intptr_t)arg;
-    if (g_button_gpio_evt_queue)
-    {
-        xQueueSendFromISR(g_button_gpio_evt_queue, &gpio_num, NULL);
-    }
+    module_t *self = (module_t *)arg;
+    button_input_private_data_t *private_data = (button_input_private_data_t *)self->private_data;
+    // We send the module pointer itself to the queue
+    xQueueSendFromISR(private_data->gpio_evt_queue, &self, NULL);
 }
 
 static void button_task(void *pvParameters)
@@ -162,31 +177,32 @@ static void button_task(void *pvParameters)
     }
     else // CONTROL_TYPE_GPIO
     {
-        uint32_t io_num;
+        module_t *triggered_module;
         for (;;)
         {
-            if (xQueueReceive(private_data->gpio_evt_queue, &io_num, portMAX_DELAY))
+            if (xQueueReceive(private_data->gpio_evt_queue, &triggered_module, portMAX_DELAY))
             {
+                // This task is shared, but the ISR sends the specific module context
+                button_input_private_data_t *p_data = (button_input_private_data_t *)triggered_module->private_data;
+
+                // Simple debounce by delaying after any interrupt
                 vTaskDelay(pdMS_TO_TICKS(DEBOUNCE_TIME_MS));
 
-                for (int i = 0; i < private_data->button_count; i++)
+                for (int i = 0; i < p_data->button_count; i++)
                 {
-                    button_config_t *btn = &private_data->buttons[i];
-                    if (btn->pin == io_num)
+                    button_config_t *btn = &p_data->buttons[i];
+                    bool is_pressed = (gpio_get_level(btn->pin) == btn->active_level);
+                    if (is_pressed && !btn->last_state)
                     {
-                        bool is_pressed = (gpio_get_level(io_num) == btn->active_level);
-                        if (is_pressed)
-                        {
-                            ESP_LOGI(TAG, "Button '%s' PRESSED on GPIO %d", btn->name, btn->pin);
-                            publish_button_event(btn->name);
-                        }
-                        break;
+                        ESP_LOGI(TAG, "Button '%s' PRESSED on GPIO %d", btn->name, btn->pin);
+                        publish_button_event(btn->name);
                     }
+                    btn->last_state = is_pressed;
                 }
             }
         }
     }
-} // <--- ეს იყო მთავარი პრობლემა, დაკარგული ფრჩხილი და დუბლირებული კოდი
+}
 
 static esp_err_t button_input_init(module_t *self)
 {
@@ -195,8 +211,7 @@ static esp_err_t button_input_init(module_t *self)
 
     if (private_data->control_type == CONTROL_TYPE_GPIO)
     {
-        g_button_gpio_evt_queue = xQueueCreate(10, sizeof(uint32_t));
-        private_data->gpio_evt_queue = g_button_gpio_evt_queue;
+        private_data->gpio_evt_queue = xQueueCreate(GPIO_INTR_QUEUE_LEN, sizeof(module_t *));
         if (!private_data->gpio_evt_queue)
             return ESP_ERR_NO_MEM;
 
@@ -213,17 +228,18 @@ static esp_err_t button_input_init(module_t *self)
                 .intr_type = GPIO_INTR_ANYEDGE,
             };
             gpio_config(&io_conf);
-            gpio_isr_handler_add(btn->pin, gpio_isr_handler, (void *)(intptr_t)btn->pin);
+            // Pass the module instance pointer as the ISR argument
+            gpio_isr_handler_add(btn->pin, gpio_isr_handler, (void *)self);
             ESP_LOGI(TAG, "Button '%s' configured on GPIO %d", btn->name, btn->pin);
         }
     }
     else // Expander Mode
     {
-        private_data->expander_handle = (mcp23017_handle_t *)fmw_service_get(private_data->expander_service_name);
+        // Validate the injected handle
         if (!private_data->expander_handle)
         {
-            ESP_LOGE(TAG, "Expander service '%s' not found!", private_data->expander_service_name);
-            return ESP_ERR_NOT_FOUND;
+            ESP_LOGE(TAG, "Dependency injection failed: expander_handle is NULL for '%s'!", self->name);
+            return ESP_ERR_INVALID_STATE;
         }
 
         for (int i = 0; i < private_data->button_count; i++)
@@ -268,7 +284,6 @@ static void button_input_deinit(module_t *self)
             if (private_data->gpio_evt_queue)
             {
                 vQueueDelete(private_data->gpio_evt_queue);
-                g_button_gpio_evt_queue = NULL;
             }
             for (int i = 0; i < private_data->button_count; i++)
             {
@@ -288,19 +303,13 @@ static esp_err_t parse_config(const cJSON *config_node, button_input_private_dat
     if (!config_node)
         return ESP_ERR_INVALID_ARG;
 
-    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
+    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
 
     const cJSON *control_type_node = cJSON_GetObjectItem(config_node, "control_type");
     if (cJSON_IsString(control_type_node) && strcmp(control_type_node->valuestring, "expander") == 0)
     {
         private_data->control_type = CONTROL_TYPE_EXPANDER;
-        const cJSON *expander_service_node = cJSON_GetObjectItem(config_node, "expander_service");
-        if (!cJSON_IsString(expander_service_node))
-        {
-            ESP_LOGE(TAG, "'expander_service' must be specified for expander control type");
-            return ESP_ERR_INVALID_ARG;
-        }
-        snprintf(private_data->expander_service_name, sizeof(private_data->expander_service_name), "%s", expander_service_node->valuestring);
     }
     else
     {
@@ -315,7 +324,7 @@ static esp_err_t parse_config(const cJSON *config_node, button_input_private_dat
     const cJSON *button_node;
     cJSON_ArrayForEach(button_node, buttons_array)
     {
-        if (private_data->button_count >= MAX_BUTTONS)
+        if (private_data->button_count >= MAX_BUTTONS_PER_INSTANCE)
             break;
 
         const cJSON *btn_name = cJSON_GetObjectItem(button_node, "name");

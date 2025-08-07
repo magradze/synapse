@@ -19,6 +19,7 @@ static esp_err_t ui_manager_init(module_t *self);
 static esp_err_t ui_manager_start(module_t *self);
 static void ui_manager_deinit(module_t *self);
 static void ui_manager_handle_event(module_t *self, const char *event_name, void *event_data);
+static void ui_task(void *pvParameters);
 
 /**
  * @brief Creates a new instance of the UI Manager module.
@@ -30,27 +31,31 @@ static void ui_manager_handle_event(module_t *self, const char *event_name, void
  *                   The function takes ownership of this object.
  * @return A pointer to the newly created module_t structure, or NULL on failure.
  */
-module_t *ui_manager_create(const cJSON *config) {
+module_t *ui_manager_create(const cJSON *config)
+{
     module_t *module = calloc(1, sizeof(module_t));
     ui_manager_private_data_t *private_data = calloc(1, sizeof(ui_manager_private_data_t));
-    if (!module || !private_data) {
+    if (!module || !private_data)
+    {
         ESP_LOGE(TAG, "Failed to allocate memory");
-        free(module); free(private_data);
-        if (config) cJSON_Delete((cJSON*)config);
+        free(module);
+        free(private_data);
+        if (config)
+            cJSON_Delete((cJSON *)config);
         return NULL;
     }
     module->private_data = private_data;
-    module->current_config = (cJSON*)config;
+    module->current_config = (cJSON *)config;
     private_data->module = module;
     module->init_level = 80;
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     snprintf(module->name, sizeof(module->name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
-    
+
     module->base.init = ui_manager_init;
     module->base.start = ui_manager_start;
     module->base.deinit = ui_manager_deinit;
     module->base.handle_event = ui_manager_handle_event;
-    
+
     return module;
 }
 
@@ -62,13 +67,31 @@ module_t *ui_manager_create(const cJSON *config) {
  *          private data structure and the configuration object.
  * @param[in] self A pointer to the module instance to deinitialize.
  */
-static void ui_manager_deinit(module_t *self) {
-    if (!self) return;
+static void ui_manager_deinit(module_t *self)
+{
+    if (!self)
+        return;
     ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
-    if (private_data->timer) {
-        if (private_data->screen_off_timer) private_data->timer->cancel_event(private_data->screen_off_timer);
-        if (private_data->home_screen_timer) private_data->timer->cancel_event(private_data->home_screen_timer);
-        if (private_data->wifi_status_timer) private_data->timer->cancel_event(private_data->wifi_status_timer);
+
+    if (private_data->ui_task_handle)
+    {
+        vTaskDelete(private_data->ui_task_handle);
+        private_data->ui_task_handle = NULL;
+    }
+    if (private_data->ui_cmd_queue)
+    {
+        vQueueDelete(private_data->ui_cmd_queue);
+        private_data->ui_cmd_queue = NULL;
+    }
+
+    if (private_data->timer)
+    {
+        if (private_data->screen_off_timer)
+            private_data->timer->cancel_event(private_data->screen_off_timer);
+        if (private_data->home_screen_timer)
+            private_data->timer->cancel_event(private_data->home_screen_timer);
+        if (private_data->wifi_status_timer)
+            private_data->timer->cancel_event(private_data->wifi_status_timer);
     }
     fmw_event_bus_unsubscribe(FMW_EVENT_BUTTON_PRESSED, self);
     fmw_event_bus_unsubscribe(FMW_EVENT_WIFI_STATUS_READY, self);
@@ -76,7 +99,8 @@ static void ui_manager_deinit(module_t *self) {
     fmw_event_bus_unsubscribe("UI_HOME_UPDATE", self);
     fmw_event_bus_unsubscribe(WIFI_STATUS_TIMER_EVENT, self);
     fmw_event_bus_unsubscribe(SPLASH_SCREEN_TIMER_EVENT, self);
-    if (self->current_config) cJSON_Delete(self->current_config);
+    if (self->current_config)
+        cJSON_Delete(self->current_config);
     free(private_data);
     free(self);
     ESP_LOGI(TAG, "UI Manager deinitialized.");
@@ -91,21 +115,32 @@ static void ui_manager_deinit(module_t *self) {
  * @param[in] self A pointer to the module instance.
  * @return ESP_OK on success, or an error code if required services are not found.
  */
-static esp_err_t ui_manager_init(module_t *self) {
+static esp_err_t ui_manager_init(module_t *self)
+{
     ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
+
+    private_data->ui_cmd_queue = xQueueCreate(10, sizeof(ui_cmd_t));
+    if (!private_data->ui_cmd_queue)
+    {
+        ESP_LOGE(TAG, "Failed to create UI command queue");
+        return ESP_ERR_NO_MEM;
+    }
+
     const cJSON *config_node = cJSON_GetObjectItem(self->current_config, "config");
-    const char* driver_service_name = cJSON_GetObjectItem(config_node, "display_driver_service")->valuestring;
+    const char *driver_service_name = cJSON_GetObjectItem(config_node, "display_driver_service")->valuestring;
 
     private_data->display = fmw_service_get(driver_service_name);
     private_data->system_manager = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_SYSTEM_API);
     private_data->timer = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
     private_data->time_sync = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIME_SYNC_API);
 
-    if (!private_data->display || !private_data->system_manager || !private_data->timer) {
+    if (!private_data->display || !private_data->system_manager || !private_data->timer)
+    {
         ESP_LOGE(TAG, "Failed to acquire required services!");
         return ESP_ERR_NOT_FOUND;
     }
-    if (!private_data->time_sync) {
+    if (!private_data->time_sync)
+    {
         ESP_LOGW(TAG, "Time Sync service not found. Time will not be displayed.");
     }
 
@@ -135,26 +170,38 @@ static esp_err_t ui_manager_init(module_t *self) {
  * @param[in] self A pointer to the module instance.
  * @return ESP_OK on success.
  */
-static esp_err_t ui_manager_start(module_t *self) {
+static esp_err_t ui_manager_start(module_t *self)
+{
     ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
-    
+
+    BaseType_t ret = xTaskCreate(ui_task, "ui_task", 4096, self, 10, &private_data->ui_task_handle);
+    if (ret != pdPASS)
+    {
+        ESP_LOGE(TAG, "Failed to create UI task");
+        return ESP_FAIL;
+    }
+
     display_info_t display_info;
-    if (private_data->display->api->get_info(private_data->display->context, &display_info) == ESP_OK) {
+    if (private_data->display->api->get_info(private_data->display->context, &display_info) == ESP_OK)
+    {
         private_data->display_width = display_info.width;
         private_data->display_height = display_info.height;
-    } else {
+    }
+    else
+    {
         private_data->display_width = 128;
         private_data->display_height = 64;
     }
 
-    if (private_data->display->api->get_small_font_metrics(private_data->display->context, &private_data->small_font_metrics) != ESP_OK) {
+    if (private_data->display->api->get_small_font_metrics(private_data->display->context, &private_data->small_font_metrics) != ESP_OK)
+    {
         private_data->small_font_metrics.width = 6;
         private_data->small_font_metrics.height = 8;
     }
 
     private_data->timer->schedule_event(SPLASH_SCREEN_TIMER_EVENT, 3000, false);
     render_current_state(private_data);
-    
+
     ESP_LOGI(TAG, "UI Manager started, showing splash screen.");
     return ESP_OK;
 }
@@ -168,8 +215,29 @@ static esp_err_t ui_manager_start(module_t *self) {
  * @param[in] event_name The name of the event that was triggered.
  * @param[in] event_data A pointer to the event's data wrapper.
  */
-static void ui_manager_handle_event(module_t *self, const char *event_name, void *event_data) {
-    ui_events_handle(self, event_name, event_data);
+static void ui_manager_handle_event(module_t *self, const char *event_name, void *event_data)
+{
+    ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
+
+    ui_cmd_t cmd = {
+        .type = UI_CMD_PROCESS_EVENT,
+        .event_data = event_data,
+    };
+    // Safely copy the event name
+    strncpy(cmd.event_name, event_name, sizeof(cmd.event_name) - 1);
+    cmd.event_name[sizeof(cmd.event_name) - 1] = '\0';
+
+    // Send the command to the UI task's queue.
+    // Use a timeout of 0 to avoid blocking the caller (e.g., the Event Bus task).
+    if (xQueueSend(private_data->ui_cmd_queue, &cmd, (TickType_t)0) != pdPASS)
+    {
+        ESP_LOGE(TAG, "Failed to send event '%s' to UI queue. Queue is full. Releasing data.", event_name);
+        // If we can't queue the event, we are now responsible for releasing the data.
+        if (event_data)
+        {
+            fmw_event_data_release((event_data_wrapper_t *)event_data);
+        }
+    }
 }
 
 /**
@@ -181,33 +249,36 @@ static void ui_manager_handle_event(module_t *self, const char *event_name, void
  *          drawing and pushing the final buffer to the display.
  * @param[in] private_data A pointer to the module's private data structure.
  */
-void render_current_state(ui_manager_private_data_t *private_data) {
-    if (!private_data || !private_data->display || !private_data->is_screen_on) return;
+void render_current_state(ui_manager_private_data_t *private_data)
+{
+    if (!private_data || !private_data->display || !private_data->is_screen_on)
+        return;
     const display_driver_api_t *display = private_data->display->api;
     void *context = private_data->display->context;
     display->clear(context);
-    
-    switch (private_data->current_state) {
-        case UI_STATE_SPLASH:
-            render_splash_screen(private_data);
-            break;
-        case UI_STATE_HOME:
-            render_header(private_data);
-            render_home_screen(private_data);
-            break;
-        case UI_STATE_MAIN_MENU:
-        case UI_STATE_MODULES_MENU:
-        case UI_STATE_SETTINGS_MENU:
-            render_header(private_data);
-            ui_menu_render(private_data);
-            break;
-        case UI_STATE_MODULE_CONTROL:
-            render_header(private_data);
-            render_module_control_screen(private_data);
-            break;
-        default:
-            display->draw_formatted_text(context, 10, 30, 1, "Unknown State");
-            break;
+
+    switch (private_data->current_state)
+    {
+    case UI_STATE_SPLASH:
+        render_splash_screen(private_data);
+        break;
+    case UI_STATE_HOME:
+        render_header(private_data);
+        render_home_screen(private_data);
+        break;
+    case UI_STATE_MAIN_MENU:
+    case UI_STATE_MODULES_MENU:
+    case UI_STATE_SETTINGS_MENU:
+        render_header(private_data);
+        ui_menu_render(private_data);
+        break;
+    case UI_STATE_MODULE_CONTROL:
+        render_header(private_data);
+        render_module_control_screen(private_data);
+        break;
+    default:
+        display->draw_formatted_text(context, 10, 30, 1, "Unknown State");
+        break;
     }
     display->update_screen(context);
 }
@@ -219,11 +290,49 @@ void render_current_state(ui_manager_private_data_t *private_data) {
  *          press) to prevent the screen from turning off prematurely.
  * @param[in] private_data A pointer to the module's private data structure.
  */
-void reset_screen_off_timer(ui_manager_private_data_t *private_data) {
-    if (private_data->timer) {
-        if (private_data->screen_off_timer) {
+void reset_screen_off_timer(ui_manager_private_data_t *private_data)
+{
+    if (private_data->timer)
+    {
+        if (private_data->screen_off_timer)
+        {
             private_data->timer->cancel_event(private_data->screen_off_timer);
         }
         private_data->screen_off_timer = private_data->timer->schedule_event(SCREEN_OFF_TIMER_EVENT, 30000, false);
+    }
+}
+
+/**
+ * @internal
+ * @brief The dedicated FreeRTOS task for the UI Manager.
+ * @details This task waits for commands on its queue and processes them.
+ *          All heavy operations, such as menu population and screen rendering,
+ *          are executed in the context of this task, which has its own,
+ *          sufficiently large stack. This prevents stack overflows in other
+ *          system tasks like Tmr Svc.
+ * @param[in] pvParameters A pointer to the `ui_manager` module instance.
+ */
+static void ui_task(void *pvParameters)
+{
+    module_t *self = (module_t *)pvParameters;
+    ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
+
+    ESP_LOGI(TAG, "UI processing task started.");
+
+    while (1)
+    {
+        ui_cmd_t received_cmd;
+        // Wait indefinitely for a command to arrive.
+        if (xQueueReceive(private_data->ui_cmd_queue, &received_cmd, portMAX_DELAY) == pdPASS)
+        {
+
+            if (received_cmd.type == UI_CMD_PROCESS_EVENT)
+            {
+                // Call the original event handler, but now safely in our own task context.
+                // The event handler is responsible for releasing the event_data.
+                ui_events_handle(self, received_cmd.event_name, received_cmd.event_data);
+            }
+            // Other command types can be handled here in the future.
+        }
     }
 }

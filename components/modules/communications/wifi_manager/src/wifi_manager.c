@@ -1,472 +1,293 @@
 /**
  * @file wifi_manager.c
- * @brief WiFi კავშირის და კავშირის აღდგენის მართვის იმპლემენტაცია.
- * @author Giorgi Magradze
- * @version 2.0.0
- * @date 2025-06-28
+ * @brief Implementation of WiFi connection and reconnection management.
+ * @author Giorgi Magradze & Synapse AI Team
+ * @version 3.2.0
+ * @date 2025-08-28
+ * @details This module manages the device's WiFi connection. It uses a dedicated
+ *          FreeRTOS task to handle connection logic, preventing stack overflows
+ *          in system tasks. It uses the injected Storage Manager service to
+ *          persist credentials and handles automatic reconnection with an
+ *          exponential backoff strategy.
  */
 
-#include "synapse.h"
 #include "wifi_manager.h"
+#include "synapse.h"
 #include "cmd_router_interface.h"
-#include "storage_interface.h"
+#include "storage_interface.h" // <-- დაკარგული ჰედერი, რომელიც იწვევდა შეცდომებს
 
 #include <string.h>
 #include <stdlib.h>
 #include <inttypes.h>
 #include "freertos/FreeRTOS.h"
-#include "freertos/semphr.h"
+#include "freertos/task.h"
+#include "freertos/queue.h"
 #include "freertos/timers.h"
-#include "esp_log.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "nvs_flash.h"
 #include "nvs.h"
-#include <wifi_provisioning/manager.h>
 
 DEFINE_COMPONENT_TAG("WIFI_MANAGER");
 
-// --- Synapse ივენთების სახელები ---
-#define EVT_PROV_CREDENTIALS_RECEIVED "PROV_CREDENTIALS_RECEIVED"
-#define EVT_WIFI_CONNECTED "WIFI_EVENT_CONNECTED"
-#define EVT_WIFI_DISCONNECTED "WIFI_EVENT_DISCONNECTED"
-#define EVT_WIFI_IP_ASSIGNED "WIFI_EVENT_IP_ASSIGNED"
+// --- Internal Command Types for the WiFi Task ---
+typedef enum
+{
+    WIFI_CMD_CONNECT,
+    WIFI_CMD_DISCONNECT,
+    WIFI_CMD_RECONNECT_TIMER_FIRED,
+} wifi_cmd_type_t;
 
-// Default მნიშვნელობები (თუ Kconfig-ში არ არის)
-#ifndef CONFIG_WIFI_MANAGER_MAX_RECONNECT_DELAY_MS
-#define CONFIG_WIFI_MANAGER_MAX_RECONNECT_DELAY_MS 60000
-#endif
-
-// ==============================================================================
-//  პრივატული მონაცემების სტრუქტურა
-// ==============================================================================
+// --- Private Data Structure ---
 typedef struct
 {
-    bool enabled; // მოდულის ჩართვის ფლაგი
+    // --- Injected Dependencies (MUST BE FIRST) ---
+    storage_api_t *storage_handle;
+
+    // --- Module State & Configuration ---
     char instance_name[CONFIG_WIFI_MANAGER_INSTANCE_NAME_MAX_LEN];
-    bool is_connected;             // მოწყობილობა დაკავშირებულია WiFi-სთან
-    bool is_provisioning;          // თუ მოწყობილობა პროვიზირებულია
-    wifi_config_t wifi_config;     // WiFi კონფიგურაცია (SSID/პაროლი)
-    TimerHandle_t reconnect_timer; // ხელახალი დაკავშირების ტაიმერი
-    int retry_num;                 // დაკავშირების მცდელობების მრიცხველი
-    bool has_saved_credentials;    // WiFi მონაცემების არსებობის ფლაგი
+    bool is_connected;
+    wifi_config_t wifi_config;
+    int retry_num;
+    bool has_saved_credentials;
+
+    // --- RTOS Handles ---
+    TaskHandle_t task_handle;
+    QueueHandle_t cmd_queue;
+    TimerHandle_t reconnect_timer;
+
 } wifi_manager_private_data_t;
 
-// ==============================================================================
-//  პრივატული ფუნქციების დეკლარაციები
-// ==============================================================================
+// --- Dependency Map ---
+static const module_dependency_t s_dependencies[] = {
+    {"storage_service", offsetof(wifi_manager_private_data_t, storage_handle)},
+    {NULL, 0} // Terminator
+};
+
+// --- Forward Declarations ---
 static esp_err_t wifi_manager_init(module_t *self);
 static esp_err_t wifi_manager_start(module_t *self);
-static esp_err_t wifi_manager_enable(module_t *self);
-static esp_err_t wifi_manager_disable(module_t *self);
-static esp_err_t wifi_manager_reconfigure(module_t *self, const cJSON *new_config);
-static module_status_t wifi_manager_get_status(module_t *self);
 static void wifi_manager_deinit(module_t *self);
 static void wifi_manager_handle_event(module_t *self, const char *event_name, void *event_data);
-
-static esp_err_t load_credentials(wifi_manager_private_data_t *data);
-static esp_err_t save_credentials(const char *ssid, const char *password);
-static void start_wifi_connection(module_t *self);
+static void wifi_task(void *pvParameters);
 static void reconnect_timer_callback(TimerHandle_t xTimer);
-
 static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
 static void ip_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
-
 static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context);
 static void register_cli_commands(module_t *self);
-static void unregister_cli_commands(module_t *self);
+static esp_err_t save_credentials(module_t *self, const char *ssid, const char *password);
+static esp_err_t load_credentials(module_t *self);
+static void start_wifi_connection(module_t *self);
 
-// ==============================================================================
-//  Public API - მოდულის შემქმნელი ფუნქცია
-// ==============================================================================
+// --- Factory Function ---
 module_t *wifi_manager_create(const cJSON *config)
 {
-    ESP_LOGI(TAG, "Creating wifi_manager module instance");
-
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module)
-    {
-        ESP_LOGE(TAG, "Failed to allocate memory for module");
-        return NULL;
-    }
-
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)calloc(1, sizeof(wifi_manager_private_data_t));
-    if (!private_data)
+    if (!module || !private_data)
     {
-        ESP_LOGE(TAG, "Failed to allocate memory for private data");
+        ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
-        return NULL;
-    }
-
-    module->state_mutex = xSemaphoreCreateMutex();
-    if (!module->state_mutex)
-    {
-        ESP_LOGE(TAG, "Failed to create state mutex");
         free(private_data);
-        free(module);
+        if (config)
+            cJSON_Delete((cJSON *)config);
         return NULL;
     }
 
+    module->current_config = (cJSON *)config;
     module->private_data = private_data;
+    module->dependency_map = s_dependencies;
 
-    // დავაყენოთ default კონფიგურაცია
-    const char *instance_name = CONFIG_WIFI_MANAGER_DEFAULT_INSTANCE_NAME;
-    if (config)
-    {
-        const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-        if (cJSON_IsObject(config_node))
-        {
-            const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-            if (cJSON_IsString(name_node) && name_node->valuestring)
-            {
-                instance_name = name_node->valuestring;
-            }
-        }
-        module->current_config = cJSON_Duplicate(config, true);
-    }
-
-    // ინიციალიზაცია
-    private_data->enabled = true;
-    strncpy(private_data->instance_name, instance_name, CONFIG_WIFI_MANAGER_INSTANCE_NAME_MAX_LEN - 1);
-    snprintf(module->name, sizeof(module->name), "%s", instance_name);
-    module->status = MODULE_STATUS_UNINITIALIZED;
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+    snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
+    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
 
     module->init_level = 40;
-
-    // დავაყენოთ ფუნქციების pointers
     module->base.init = wifi_manager_init;
     module->base.start = wifi_manager_start;
     module->base.deinit = wifi_manager_deinit;
-    module->base.enable = wifi_manager_enable;
-    module->base.disable = wifi_manager_disable;
-    module->base.reconfigure = wifi_manager_reconfigure;
-    module->base.get_status = wifi_manager_get_status;
     module->base.handle_event = wifi_manager_handle_event;
+    module->base.enable = NULL;
+    module->base.disable = NULL;
 
-    ESP_LOGI(TAG, "WiFi Manager module created: '%s'", instance_name);
+    ESP_LOGI(TAG, "WiFi Manager module created: '%s'", module->name);
     return module;
 }
 
-// ==============================================================================
-//  მოდულის სასიცოცხლო ციკლის ფუნქციები
-// ==============================================================================
+// --- Lifecycle Functions ---
 static esp_err_t wifi_manager_init(module_t *self)
 {
-    if (!self || !self->private_data)
-        return ESP_ERR_INVALID_ARG;
-
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing wifi_manager module: %s", self->name);
 
-    // WiFi stack ინიციალიზაცია
+    // Dependency validation
+    if (!private_data->storage_handle)
+    {
+        ESP_LOGE(TAG, "Dependency injection failed: storage_handle is NULL!");
+        return ESP_ERR_INVALID_STATE;
+    }
+
+    private_data->cmd_queue = xQueueCreate(5, sizeof(wifi_cmd_type_t));
+    if (!private_data->cmd_queue)
+    {
+        ESP_LOGE(TAG, "Failed to create command queue");
+        return ESP_ERR_NO_MEM;
+    }
+
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     esp_netif_create_default_wifi_sta();
-
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
-    // Event handlers რეგისტრაცია
-    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, private_data));
-    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler, private_data));
-    // Reconnect timer შექმნა
-    private_data->reconnect_timer = xTimerCreate("wifi_reconnect",
-                                                 pdMS_TO_TICKS(CONFIG_WIFI_MANAGER_RECONNECT_DELAY_MS),
-                                                 pdFALSE, self, reconnect_timer_callback);
+    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, self));
+    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler, self));
 
-    // Event Bus-ზე გამოწერა
-    esp_err_t ret = fmw_event_bus_subscribe(EVT_PROV_CREDENTIALS_RECEIVED, self);
-    if (ret != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to subscribe to provisioning events: %s", esp_err_to_name(ret));
-    }
+    private_data->reconnect_timer = xTimerCreate("wifi_reconnect", pdMS_TO_TICKS(5000), pdFALSE, self, reconnect_timer_callback);
 
-    // ცდილობს წინა კავშირის მონაცემების ჩატვირთვას
-    if (load_credentials(private_data) != ESP_OK)
+    fmw_event_bus_subscribe("PROV_CREDENTIALS_RECEIVED", self);
+    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+
+    if (load_credentials(self) != ESP_OK)
     {
         ESP_LOGI(TAG, "No saved credentials found. Waiting for provisioning...");
     }
 
-    esp_log_level_set("nvs", ESP_LOG_DEBUG);
-
     self->status = MODULE_STATUS_INITIALIZED;
-
-    // გამოვიწეროთ სისტემის გაშვების დასრულების ივენთზე.
-    // ბრძანებებს დავარეგისტრირებთ მაშინ, როცა ამ ივენთს მივიღებთ.
-    esp_err_t err = fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to subscribe to system start event: %s", esp_err_to_name(err));
-        // ეს არ არის კრიტიკული შეცდომა, მოდულმა შეიძლება გააგრძელოს მუშაობა CLI-ს გარეშე.
-    }
-
     ESP_LOGI(TAG, "WiFi Manager module initialized successfully");
     return ESP_OK;
 }
 
 static esp_err_t wifi_manager_start(module_t *self)
 {
-    if (!self)
-        return ESP_ERR_INVALID_ARG;
-
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-
-    if (self->status != MODULE_STATUS_INITIALIZED)
-    {
-        ESP_LOGE(TAG, "Cannot start uninitialized module");
-        return ESP_ERR_INVALID_STATE;
-    }
-
-    if (self->status == MODULE_STATUS_RUNNING)
-    {
-        ESP_LOGW(TAG, "Module already running");
-        return ESP_OK;
-    }
-
     ESP_LOGI(TAG, "Starting wifi_manager module: %s", self->name);
 
-    // თუ NVS-დან ჩაიტვირთა მონაცემები, პირდაპირ ვიწყებთ კავშირს.
+    BaseType_t ret = xTaskCreate(wifi_task, self->name, 4096, self, 12, &private_data->task_handle);
+    if (ret != pdPASS)
+    {
+        ESP_LOGE(TAG, "Failed to create wifi task");
+        return ESP_FAIL;
+    }
+
     if (private_data->has_saved_credentials)
     {
-        ESP_LOGI(TAG, "Found saved credentials. Starting connection...");
-        start_wifi_connection(self); // ეს ფუნქცია შენ უკვე გაქვს
+        ESP_LOGI(TAG, "Found saved credentials. Requesting connection...");
+        start_wifi_connection(self);
     }
     else
     {
         ESP_LOGI(TAG, "No credentials. Waiting for provisioning.");
-        // აქ შეგვიძლია დაველოდოთ provisioning-ის ივენთს, როგორც ახლაა.
+        fmw_event_bus_post("WIFI_CREDENTIALS_NOT_FOUND", NULL);
     }
 
     self->status = MODULE_STATUS_RUNNING;
-    private_data->enabled = true;
-
     ESP_LOGI(TAG, "WiFi Manager module started successfully");
     return ESP_OK;
-}
-
-static esp_err_t wifi_manager_enable(module_t *self)
-{
-    if (!self)
-        return ESP_ERR_INVALID_ARG;
-
-    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-
-    ESP_LOGI(TAG, "Enabling wifi_manager module: %s", self->name);
-
-    if (private_data->enabled)
-    {
-        ESP_LOGW(TAG, "Module already enabled");
-        return ESP_OK;
-    }
-
-    private_data->enabled = true;
-    self->status = MODULE_STATUS_RUNNING;
-
-    // თუ გვაქვს credentials, ხელახლა დავუკავშირდეთ
-    if (strlen((const char *)private_data->wifi_config.sta.ssid) > 0)
-    {
-        start_wifi_connection(self);
-    }
-
-    ESP_LOGI(TAG, "WiFi Manager module enabled");
-    return ESP_OK;
-}
-
-static esp_err_t wifi_manager_disable(module_t *self)
-{
-    if (!self)
-        return ESP_ERR_INVALID_ARG;
-
-    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-
-    ESP_LOGI(TAG, "Disabling wifi_manager module: %s", self->name);
-
-    if (!private_data->enabled)
-    {
-        ESP_LOGW(TAG, "Module already disabled");
-        return ESP_OK;
-    }
-
-    // გავთიშოთ WiFi
-    esp_wifi_disconnect();
-    esp_wifi_stop();
-
-    // გავაჩეროთ reconnect timer
-    if (private_data->reconnect_timer)
-    {
-        xTimerStop(private_data->reconnect_timer, 0);
-    }
-
-    private_data->enabled = false;
-    self->status = MODULE_STATUS_DISABLED;
-
-    ESP_LOGI(TAG, "WiFi Manager module disabled");
-    return ESP_OK;
-}
-
-static esp_err_t wifi_manager_reconfigure(module_t *self, const cJSON *new_config)
-{
-    if (!self || !new_config)
-        return ESP_ERR_INVALID_ARG;
-
-    ESP_LOGI(TAG, "Reconfiguring wifi_manager module: %s", self->name);
-
-    // განაახლეთ კონფიგურაცია
-    if (self->current_config)
-    {
-        cJSON_Delete(self->current_config);
-    }
-    self->current_config = cJSON_Duplicate(new_config, true);
-
-    // TODO: Apply new configuration if needed
-
-    ESP_LOGI(TAG, "WiFi Manager module reconfigured");
-    return ESP_OK;
-}
-
-static module_status_t wifi_manager_get_status(module_t *self)
-{
-    if (!self)
-        return MODULE_STATUS_ERROR;
-    return self->status;
 }
 
 static void wifi_manager_deinit(module_t *self)
 {
     if (!self)
         return;
-
     ESP_LOGI(TAG, "Deinitializing %s module", self->name);
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
 
-    // Event Bus-დან გამოწერის გაუქმება
-    fmw_event_bus_unsubscribe(EVT_PROV_CREDENTIALS_RECEIVED, self);
-
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
-    unregister_cli_commands(self);
-
-    // ESP event handlers-ის გაუქმება
-    esp_event_handler_instance_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler);
-    esp_event_handler_instance_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler);
-
-    // Timer-ის წაშლა
-    if (private_data && private_data->reconnect_timer)
+    if (private_data)
     {
-        xTimerDelete(private_data->reconnect_timer, portMAX_DELAY);
+        if (private_data->task_handle)
+            vTaskDelete(private_data->task_handle);
+        if (private_data->cmd_queue)
+            vQueueDelete(private_data->cmd_queue);
+        if (private_data->reconnect_timer)
+            xTimerDelete(private_data->reconnect_timer, portMAX_DELAY);
+        free(private_data);
     }
 
-    // WiFi გათიშვა
+    fmw_event_bus_unsubscribe("PROV_CREDENTIALS_RECEIVED", self);
+    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+
+    esp_event_handler_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler);
+    esp_event_handler_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler);
+
     esp_wifi_stop();
     esp_wifi_deinit();
 
-    // მეხსიერების გათავისუფლება
-    if (self->private_data)
-    {
-        free(self->private_data);
-    }
-
     if (self->current_config)
-    {
         cJSON_Delete(self->current_config);
-    }
-
-    if (self->state_mutex)
-    {
-        vSemaphoreDelete(self->state_mutex);
-    }
-
     free(self);
-
     ESP_LOGI(TAG, "Module deinitialized successfully");
 }
 
-// ==============================================================================
-//  Synapse და ESP-IDF ივენთების დამუშავებლები
-// ==============================================================================
+// --- Task & Event Handlers ---
 
-/**
- * @brief ამუშავებს Synapse Event Bus-იდან მიღებულ ივენთებს.
- * @details ამჟამად, რეაგირებს მხოლოდ PROV_CREDENTIALS_RECEIVED ივენთზე,
- *          რომელიც მოდის provisioning მოდულიდან. იღებს WiFi-ს მონაცემებს,
- *          ინახავს მათ NVS-ში და იწყებს კავშირის დამყარების პროცესს.
- * @param self მაჩვენებელი მოდულის ინსტანციაზე.
- * @param event_name მიღებული ივენთის სახელი.
- * @param event_data მაჩვენებელი ივენთის მონაცემებზე.
- */
+static void wifi_task(void *pvParameters)
+{
+    module_t *self = (module_t *)pvParameters;
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+    wifi_cmd_type_t cmd;
+
+    while (1)
+    {
+        if (xQueueReceive(private_data->cmd_queue, &cmd, portMAX_DELAY) == pdPASS)
+        {
+            switch (cmd)
+            {
+            case WIFI_CMD_CONNECT:
+                ESP_LOGI(TAG, "TASK: Received CONNECT command.");
+                ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+                ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &private_data->wifi_config));
+                ESP_ERROR_CHECK(esp_wifi_start());
+                break;
+            case WIFI_CMD_DISCONNECT:
+                ESP_LOGI(TAG, "TASK: Received DISCONNECT command.");
+                esp_wifi_disconnect();
+                break;
+            case WIFI_CMD_RECONNECT_TIMER_FIRED:
+                ESP_LOGI(TAG, "TASK: Received RECONNECT command from timer.");
+                esp_wifi_connect();
+                break;
+            }
+        }
+    }
+}
+
 static void wifi_manager_handle_event(module_t *self, const char *event_name, void *event_data)
 {
-    if (!self || !self->private_data)
+    // This handler now only deals with events that don't require the task,
+    // or it forwards commands to the task.
+    // The private_data variable is removed as it's currently unused here.
+
+    if (strcmp(event_name, "PROV_CREDENTIALS_RECEIVED") == 0)
     {
-        if (event_data)
-        {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
-        }
-        return;
-    }
-
-    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-
-    if (!private_data->enabled)
-    {
-        if (event_data)
-        {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
-        }
-        return;
-    }
-
-    if (event_name && strcmp(event_name, EVT_PROV_CREDENTIALS_RECEIVED) == 0)
-    {
-        ESP_LOGI(TAG, "[%s] Received provisioning credentials", private_data->instance_name);
-        private_data->is_provisioning = true;
-
+        ESP_LOGI(TAG, "Received provisioning credentials");
         event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
         if (wrapper && wrapper->payload)
         {
-            char *json_string = (char *)wrapper->payload;
-            cJSON *creds_json = cJSON_Parse(json_string);
+            cJSON *creds_json = cJSON_Parse((char *)wrapper->payload);
             if (creds_json)
             {
                 const cJSON *ssid_json = cJSON_GetObjectItem(creds_json, "ssid");
                 const cJSON *password_json = cJSON_GetObjectItem(creds_json, "password");
-
-                if (cJSON_IsString(ssid_json) && cJSON_IsString(password_json) && ssid_json->valuestring && password_json->valuestring)
+                if (cJSON_IsString(ssid_json) && cJSON_IsString(password_json))
                 {
-                    // 1. ვასუფთავებთ ძველ კონფიგურაციას
-                    memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-
-                    // 2. უსაფრთხოდ ვაკოპირებთ ახალ მონაცემებს private_data-ში
-                    strncpy((char *)private_data->wifi_config.sta.ssid, ssid_json->valuestring, sizeof(private_data->wifi_config.sta.ssid) - 1);
-                    strncpy((char *)private_data->wifi_config.sta.password, password_json->valuestring, sizeof(private_data->wifi_config.sta.password) - 1);
-
-                    if (save_credentials(ssid_json->valuestring, password_json->valuestring) == ESP_OK)
+                    if (save_credentials(self, ssid_json->valuestring, password_json->valuestring) == ESP_OK)
                     {
-                        // ვაახლებთ private_data-ს მხოლოდ შენახვის შემდეგ
-                        memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-                        strncpy((char *)private_data->wifi_config.sta.ssid, ssid_json->valuestring, sizeof(private_data->wifi_config.sta.ssid) - 1);
-                        strncpy((char *)private_data->wifi_config.sta.password, password_json->valuestring, sizeof(private_data->wifi_config.sta.password) - 1);
-                        private_data->has_saved_credentials = true;
-
+                        load_credentials(self);
                         start_wifi_connection(self);
-                    }
-                    else
-                    {
-                        ESP_LOGE(TAG, "Failed to save new credentials using Storage Manager.");
                     }
                 }
                 cJSON_Delete(creds_json);
             }
         }
     }
-
-    // ★★★ ახალი ლოგიკა ★★★
-    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0)
+    else if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0)
     {
         ESP_LOGI(TAG, "System start complete. Registering CLI commands now.");
         register_cli_commands(self);
     }
 
-    // ყოველთვის გავათავისუფლოთ event data
     if (event_data)
     {
         fmw_event_data_release((event_data_wrapper_t *)event_data);
@@ -475,646 +296,258 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
 
 static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
+    module_t *self = (module_t *)arg;
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
 
-    ESP_LOGI(TAG, "wifi_event_handler: event_base=%p, event_id=%" PRId32, event_base, (int32_t)event_id);
-    if (!arg || !event_base)
+    if (event_id == WIFI_EVENT_STA_START)
     {
-        ESP_LOGE(TAG, "Invalid arguments in wifi_event_handler");
-        return;
+        ESP_LOGI(TAG, "WiFi STA started, attempting to connect...");
+        esp_wifi_connect();
     }
-
-    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)arg;
-
-    if (event_base == WIFI_EVENT)
+    else if (event_id == WIFI_EVENT_STA_CONNECTED)
     {
-        switch (event_id)
+        ESP_LOGI(TAG, "Connected to WiFi network");
+        private_data->retry_num = 0;
+        xTimerStop(private_data->reconnect_timer, 0);
+        fmw_event_bus_post("WIFI_EVENT_CONNECTED", NULL);
+    }
+    else if (event_id == WIFI_EVENT_STA_DISCONNECTED)
+    {
+        private_data->is_connected = false;
+        ESP_LOGW(TAG, "Disconnected from WiFi network");
+        fmw_event_bus_post("WIFI_EVENT_DISCONNECTED", NULL);
+
+        if (private_data->retry_num < CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS)
         {
-        case WIFI_EVENT_STA_START:
-            ESP_LOGI(TAG, "WiFi STA started");
-            // Only connect if we have saved credentials
-            if (private_data->has_saved_credentials)
+            uint32_t delay_ms = 5000 * (1 << private_data->retry_num);
+            if (delay_ms > 60000)
+                delay_ms = 60000;
+            ESP_LOGI(TAG, "Retry %d in %" PRIu32 " ms", private_data->retry_num + 1, delay_ms);
+            private_data->retry_num++;
+            xTimerChangePeriod(private_data->reconnect_timer, pdMS_TO_TICKS(delay_ms), 0);
+            xTimerStart(private_data->reconnect_timer, 0);
+        }
+        else
+        {
+            ESP_LOGE(TAG, "Failed to connect after %d attempts. Erasing creds and waiting for provisioning.", CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS);
+            if (private_data->storage_handle)
             {
-                ESP_LOGI(TAG, "Attempting to connect with saved credentials");
-                esp_wifi_connect();
+                private_data->storage_handle->erase_key("wifi_manager", "ssid");
+                private_data->storage_handle->erase_key("wifi_manager", "password");
             }
-            else
-            {
-                ESP_LOGI(TAG, "No saved credentials, waiting for provisioning");
-                fmw_event_bus_post("WIFI_CREDENTIALS_NOT_FOUND", NULL);
-            }
-            break;
-
-        case WIFI_EVENT_STA_CONNECTED:
-            ESP_LOGI(TAG, "Connected to WiFi network");
-            private_data->retry_num = 0;
-            xTimerStop(private_data->reconnect_timer, 0);
-            fmw_event_bus_post(EVT_WIFI_CONNECTED, NULL);
-            break;
-
-        case WIFI_EVENT_STA_DISCONNECTED:
-            private_data->is_connected = false;
-
-            ESP_LOGW(TAG, "Disconnected from WiFi network");
-
-            fmw_event_bus_post(EVT_WIFI_DISCONNECTED, NULL);
-
-            if (private_data->retry_num < CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS)
-            {
-                // ექსპონენციალური backoff ლოგიკა (უცვლელია)
-                uint32_t delay_ms = CONFIG_WIFI_MANAGER_RECONNECT_DELAY_MS * (1 << private_data->retry_num);
-                if (delay_ms > CONFIG_WIFI_MANAGER_MAX_RECONNECT_DELAY_MS)
-                {
-                    delay_ms = CONFIG_WIFI_MANAGER_MAX_RECONNECT_DELAY_MS;
-                }
-
-                ESP_LOGI(TAG, "Retry %d in %" PRIu32 " ms", private_data->retry_num + 1, delay_ms);
-                private_data->retry_num++;
-
-                xTimerChangePeriod(private_data->reconnect_timer, pdMS_TO_TICKS(delay_ms), 0);
-                xTimerStart(private_data->reconnect_timer, 0);
-            }
-            else
-            {
-                ESP_LOGE(TAG, "Failed to connect to WiFi after %d attempts. Starting provisioning.", CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS);
-                // გავასუფთავოთ ძველი, არასწორი credentials
-                nvs_flash_erase_partition(CONFIG_WIFI_MANAGER_NVS_NAMESPACE);
-                private_data->has_saved_credentials = false;
-                memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-
-                // გავუშვათ provisioning ივენთი
-                fmw_event_bus_post("PROV_START_REQUESTED", NULL); // ვივარაუდოთ, რომ provisioning მოდული ამ ივენთს უსმენს
-            }
-            break;
-
-        default:
-            break;
+            private_data->has_saved_credentials = false;
+            memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
+            fmw_event_bus_post("PROV_START_REQUESTED", NULL);
         }
     }
 }
 
 static void ip_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
-    ESP_LOGI(TAG, "ip_event_handler: event_base=%p, event_id=%" PRId32, event_base, (int32_t)event_id);
-    if (!arg || !event_base)
-    {
-        ESP_LOGE(TAG, "Invalid arguments in ip_event_handler");
-        return;
-    }
-
+    module_t *self = (module_t *)arg;
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
     if (event_id == IP_EVENT_STA_GOT_IP)
     {
-        wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)arg;
         private_data->is_connected = true;
-
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
         ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
-
-        // კოპირება და wrapper-ში შეფუთვა
-        esp_netif_ip_info_t *ip_info_copy = malloc(sizeof(esp_netif_ip_info_t));
-        if (ip_info_copy)
-        {
-            *ip_info_copy = event->ip_info;
-            event_data_wrapper_t *wrapper = NULL;
-            if (fmw_event_data_wrap(ip_info_copy, free, &wrapper) == ESP_OK)
-            {
-                fmw_event_bus_post(EVT_WIFI_IP_ASSIGNED, wrapper);
-            }
-            else
-            {
-                ESP_LOGE(TAG, "Failed to wrap IP info data");
-                free(ip_info_copy);
-            }
-        }
+        fmw_event_bus_post("WIFI_EVENT_IP_ASSIGNED", NULL);
     }
 }
-
-// ==============================================================================
-//  დამხმარე ფუნქციები
-// ==============================================================================
 
 static void reconnect_timer_callback(TimerHandle_t xTimer)
 {
-    ESP_LOGI(TAG, "Reconnect timer fired, attempting to reconnect...");
-    esp_wifi_connect();
+    module_t *self = (module_t *)pvTimerGetTimerID(xTimer);
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+    wifi_cmd_type_t cmd = WIFI_CMD_RECONNECT_TIMER_FIRED;
+    xQueueSend(private_data->cmd_queue, &cmd, 0);
 }
 
+// --- Helper Functions ---
 static void start_wifi_connection(module_t *self)
 {
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-
-    ESP_LOGI(TAG, "Starting WiFi connection to SSID: %s", private_data->wifi_config.sta.ssid);
-
-    private_data->retry_num = 0;
-    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
-    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &private_data->wifi_config));
-    ESP_ERROR_CHECK(esp_wifi_start());
+    wifi_cmd_type_t cmd = WIFI_CMD_CONNECT;
+    xQueueSend(private_data->cmd_queue, &cmd, 0);
 }
 
-/**
- * @brief Saves WiFi credentials using the central Storage Manager service.
- */
-static esp_err_t save_credentials(const char *ssid, const char *password)
+static esp_err_t save_credentials(module_t *self, const char *ssid, const char *password)
 {
-    if (!ssid || !password)
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+    if (!private_data->storage_handle)
     {
-        ESP_LOGE(TAG, "Invalid parameters: SSID or password is NULL");
-        return ESP_ERR_INVALID_ARG;
+        ESP_LOGE(TAG, "Storage service not available. Cannot save credentials.");
+        return ESP_ERR_INVALID_STATE;
     }
-
-    // ... (არგუმენტების სიგრძის ვალიდაცია უცვლელი რჩება) ...
-
-    // 1. ვიღებთ Storage Manager სერვისს
-    service_handle_t storage_handle = fmw_service_get("main_storage");
-    if (!storage_handle)
-    {
-        ESP_LOGE(TAG, "Storage Manager service not found. Cannot save credentials.");
-        return ESP_ERR_NOT_FOUND;
-    }
-
-    storage_api_t *storage = (storage_api_t *)storage_handle;
-    const char *owner = "wifi_manager"; // ვიყენებთ მოდულის სახელს, როგორც namespace/directory
-
     ESP_LOGI(TAG, "Saving credentials via Storage Manager...");
-
-    // 2. ვიძახებთ Storage Manager-ის API-ს SSID-ის შესანახად
-    esp_err_t err = storage->set_string(owner, "ssid", ssid);
-    if (err != ESP_OK)
+    esp_err_t err = private_data->storage_handle->set_string("wifi_manager", "ssid", ssid);
+    if (err == ESP_OK)
     {
-        ESP_LOGE(TAG, "Failed to save SSID via Storage Manager: %s", esp_err_to_name(err));
-        return err;
+        err = private_data->storage_handle->set_string("wifi_manager", "password", password);
     }
-
-    // 3. ვიძახებთ Storage Manager-ის API-ს პაროლის შესანახად
-    err = storage->set_string(owner, "password", password);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to save password via Storage Manager: %s", esp_err_to_name(err));
-        storage->erase_key(owner, "ssid"); // დავასუფთავოთ, რომ არასრული მონაცემი არ დარჩეს
-        return err;
-    }
-
-    ESP_LOGI(TAG, "Successfully saved WiFi credentials using Storage Manager.");
-    return ESP_OK;
+    return err;
 }
 
-/**
- * @brief Loads WiFi credentials using the central Storage Manager service.
- */
-static esp_err_t load_credentials(wifi_manager_private_data_t *private_data)
+static esp_err_t load_credentials(module_t *self)
 {
-    if (!private_data)
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+    if (!private_data->storage_handle)
     {
-        return ESP_ERR_INVALID_ARG;
+        ESP_LOGW(TAG, "Storage service not available. Cannot load credentials.");
+        return ESP_ERR_INVALID_STATE;
     }
-
-    // 1. ვიღებთ Storage Manager სერვისს
-    service_handle_t storage_handle = fmw_service_get("main_storage");
-    if (!storage_handle)
-    {
-        ESP_LOGE(TAG, "Storage Manager service not found. Cannot load credentials.");
-        return ESP_ERR_NOT_FOUND;
-    }
-
-    storage_api_t *storage = (storage_api_t *)storage_handle;
-    const char *owner = "wifi_manager";
-
     ESP_LOGI(TAG, "Loading credentials via Storage Manager...");
     memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-
-    // 2. ვკითხულობთ SSID-ს Storage Manager-ის API-თ
     size_t required_size = sizeof(private_data->wifi_config.sta.ssid);
-    esp_err_t err = storage->get_string(owner, "ssid", (char *)private_data->wifi_config.sta.ssid, &required_size);
-    if (err != ESP_OK)
+    esp_err_t err = private_data->storage_handle->get_string("wifi_manager", "ssid", (char *)private_data->wifi_config.sta.ssid, &required_size);
+    if (err == ESP_OK)
     {
-        ESP_LOGI(TAG, "Could not retrieve SSID. Assuming no credentials are saved.");
-        return err;
+        required_size = sizeof(private_data->wifi_config.sta.password);
+        err = private_data->storage_handle->get_string("wifi_manager", "password", (char *)private_data->wifi_config.sta.password, &required_size);
     }
-
-    // 3. ვკითხულობთ პაროლს Storage Manager-ის API-თ
-    required_size = sizeof(private_data->wifi_config.sta.password);
-    err = storage->get_string(owner, "password", (char *)private_data->wifi_config.sta.password, &required_size);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "SSID found, but failed to retrieve password: %s.", esp_err_to_name(err));
-        return err;
-    }
-
-    ESP_LOGI(TAG, "Successfully loaded credentials for SSID: %s", (char *)private_data->wifi_config.sta.ssid);
-    private_data->has_saved_credentials = true;
-    return ESP_OK;
+    private_data->has_saved_credentials = (err == ESP_OK);
+    return err;
 }
 
-// =========================================================================
-//                      Command Router Integration
-// =========================================================================
-
-/**
- * @internal
- * @brief Handles 'wifi' command from the CLI and remote sources.
- * @details
- * This function serves as the central handler for all 'wifi' related commands.
- * It parses subcommands and arguments to manage and query the WiFi state.
- * For the 'status' subcommand, it gathers the status information into a JSON
- * object and publishes it to the Event Bus via a `FMW_EVENT_WIFI_STATUS_READY`
- * event. This allows other modules, like mqtt_manager, to receive and forward
- * the status to external systems.
- * A `--silent` flag can be used with the `status` subcommand to suppress
- * console output, which is useful for periodic checks initiated by other modules.
- *
- * @param[in] argc Argument count.
- * @param[in] argv Argument vector.
- * @param[in] context Pointer to the module_t instance.
- * @return ESP_OK on success, or an error code on failure.
- */
+// --- CLI Handler ---
 static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
 {
     module_t *self = (module_t *)context;
-    if (!self || !self->private_data)
-    {
-        printf("Error: Module context is not valid.\n");
-        return ESP_ERR_INVALID_STATE;
-    }
-
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
 
     if (argc < 2)
     {
-        printf("Error: Missing subcommand for 'wifi'.\n");
-        printf("Usage: wifi <status|scan|connect|disconnect|enable|disable|erase_creds|set_hostname|set_power_save>\n");
+        printf("Usage: wifi <status|scan|connect|disconnect|erase_creds|...>\n");
         return ESP_ERR_INVALID_ARG;
     }
 
     const char *sub_command = argv[1];
 
-    // --- ℹ️ Status and Info Commands ---
     if (strcmp(sub_command, "status") == 0)
     {
-        // Check for the --silent flag
         bool silent_mode = (argc > 2 && strcmp(argv[2], "--silent") == 0);
 
-        // --- Event Publishing Logic ---
         cJSON *status_json = cJSON_CreateObject();
-        if (status_json)
+        if (!status_json)
         {
-            cJSON_AddStringToObject(status_json, "module_state", private_data->enabled ? "Enabled" : "Disabled");
-            cJSON_AddStringToObject(status_json, "connection_status", private_data->is_connected ? "Connected" : "Disconnected");
+            ESP_LOGE(TAG, "Failed to create cJSON object for status.");
+            return ESP_ERR_NO_MEM;
+        }
 
-            if (private_data->is_connected)
+        cJSON_AddStringToObject(status_json, "module_name", self->name);
+        cJSON_AddStringToObject(status_json, "connection_status", private_data->is_connected ? "Connected" : "Disconnected");
+
+        if (private_data->is_connected)
+        {
+            wifi_ap_record_t ap_info;
+            if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
             {
-                wifi_ap_record_t ap_info;
-                if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
-                {
-                    cJSON_AddStringToObject(status_json, "ssid", (const char *)ap_info.ssid);
-                    cJSON_AddNumberToObject(status_json, "channel", ap_info.primary);
-                    cJSON_AddNumberToObject(status_json, "rssi", ap_info.rssi);
-                }
-
-                esp_netif_ip_info_t ip_info;
-                esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-                if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
-                {
-                    char ip_str[16];
-                    sprintf(ip_str, IPSTR, IP2STR(&ip_info.ip));
-                    cJSON_AddStringToObject(status_json, "ip_address", ip_str);
-                }
+                cJSON_AddStringToObject(status_json, "ssid", (const char *)ap_info.ssid);
+                cJSON_AddNumberToObject(status_json, "channel", ap_info.primary);
+                cJSON_AddNumberToObject(status_json, "rssi", ap_info.rssi);
             }
 
-            char *json_string = cJSON_PrintUnformatted(status_json);
-            if (json_string)
+            esp_netif_ip_info_t ip_info;
+            esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+            if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
             {
-                fmw_telemetry_payload_t *payload = calloc(1, sizeof(fmw_telemetry_payload_t));
-                if (payload)
-                {
-                    snprintf(payload->module_name, sizeof(payload->module_name), "%s", self->name);
-                    payload->json_data = json_string;
-
-                    ESP_LOGI(TAG, "Publishing WIFI_STATUS_READY event (silent: %d)", silent_mode);
-                    event_data_wrapper_t *wrapper;
-                    if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
-                    {
-                        fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
-                        fmw_event_data_release(wrapper);
-                    }
-                    else
-                    {
-                        free(payload->json_data);
-                        free(payload);
-                    }
-                }
-                else
-                {
-                    free(json_string);
-                }
+                char ip_str[16];
+                sprintf(ip_str, IPSTR, IP2STR(&ip_info.ip));
+                cJSON_AddStringToObject(status_json, "ip_address", ip_str);
             }
+        }
+
+        // --- Event Publishing Logic (Refactored for Heap Efficiency) ---
+        static char json_buffer[256];
+        if (!cJSON_PrintPreallocated(status_json, json_buffer, sizeof(json_buffer), 0))
+        {
+            ESP_LOGE(TAG, "Failed to print cJSON to preallocated buffer. Buffer might be too small.");
             cJSON_Delete(status_json);
+            return ESP_FAIL;
+        }
+
+        static fmw_telemetry_payload_t payload;
+        snprintf(payload.module_name, sizeof(payload.module_name), "%s", self->name);
+        payload.json_data = json_buffer;
+
+        ESP_LOGI(TAG, "Publishing WIFI_STATUS_READY event (silent: %d)", silent_mode);
+        event_data_wrapper_t *wrapper;
+        if (fmw_event_data_wrap(&payload, NULL, &wrapper) == ESP_OK)
+        {
+            fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
+            fmw_event_data_release(wrapper);
         }
 
         // --- Console Output Logic ---
         if (!silent_mode)
         {
-            printf("---------------- WiFi Status ----------------\n");
-            printf("  Module State:      %s\n", private_data->enabled ? "Enabled" : "Disabled");
-            printf("  Connection Status: %s\n", private_data->is_connected ? "Connected" : "Disconnected");
-
-            if (private_data->is_connected)
+            char *console_output_string = cJSON_Print(status_json);
+            if (console_output_string)
             {
-                wifi_ap_record_t ap_info;
-                if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
-                {
-                    printf("  SSID:              %s\n", ap_info.ssid);
-                    printf("  Channel:           %d\n", ap_info.primary);
-                    printf("  RSSI:              %d dBm\n", ap_info.rssi);
-                }
-
-                esp_netif_ip_info_t ip_info;
-                esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-                if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
-                {
-                    printf("  IP Address:        " IPSTR "\n", IP2STR(&ip_info.ip));
-                    printf("  Gateway:           " IPSTR "\n", IP2STR(&ip_info.gw));
-                }
+                printf("---------------- WiFi Status ----------------\n%s\n-------------------------------------------\n", console_output_string);
+                free(console_output_string);
             }
-
-            uint8_t mac[6];
-            esp_wifi_get_mac(WIFI_IF_STA, mac);
-            printf("  MAC Address:       %02X:%02X:%02X:%02X:%02X:%02X\n",
-                   mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-
-            const char *hostname;
-            esp_netif_get_hostname(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &hostname);
-            printf("  Hostname:          %s\n", hostname ? hostname : "N/A");
-
-            printf("-------------------------------------------\n");
         }
+
+        cJSON_Delete(status_json);
         return ESP_OK;
-    }
-    else if (strcmp(sub_command, "scan") == 0)
-    {
-        printf("Scanning for WiFi networks...\n");
-        wifi_scan_config_t scan_config = {.show_hidden = true};
-
-        if (esp_wifi_scan_start(&scan_config, true) != ESP_OK)
-        {
-            printf("Error: Failed to start WiFi scan.\n");
-            return ESP_FAIL;
-        }
-
-        uint16_t ap_count = 0;
-        esp_wifi_scan_get_ap_num(&ap_count);
-        if (ap_count == 0)
-        {
-            printf("No networks found.\n");
-            return ESP_OK;
-        }
-
-        wifi_ap_record_t *ap_list = (wifi_ap_record_t *)malloc(ap_count * sizeof(wifi_ap_record_t));
-        if (!ap_list)
-        {
-            printf("Error: Failed to allocate memory for scan results.\n");
-            return ESP_ERR_NO_MEM;
-        }
-
-        if (esp_wifi_scan_get_ap_records(&ap_count, ap_list) == ESP_OK)
-        {
-            printf("------------------------------------------------------------------\n");
-            printf("  %-32s | %-4s | %-4s | %s\n", "SSID", "RSSI", "CHAN", "AUTH");
-            printf("------------------------------------------------------------------\n");
-            for (int i = 0; i < ap_count; i++)
-            {
-                const char *auth_mode;
-                switch (ap_list[i].authmode)
-                {
-                case WIFI_AUTH_OPEN:
-                    auth_mode = "OPEN";
-                    break;
-                case WIFI_AUTH_WEP:
-                    auth_mode = "WEP";
-                    break;
-                case WIFI_AUTH_WPA_PSK:
-                    auth_mode = "WPA_PSK";
-                    break;
-                case WIFI_AUTH_WPA2_PSK:
-                    auth_mode = "WPA2_PSK";
-                    break;
-                case WIFI_AUTH_WPA_WPA2_PSK:
-                    auth_mode = "WPA/WPA2";
-                    break;
-                case WIFI_AUTH_WPA2_ENTERPRISE:
-                    auth_mode = "WPA2_ENT";
-                    break;
-                case WIFI_AUTH_WPA3_PSK:
-                    auth_mode = "WPA3_PSK";
-                    break;
-                case WIFI_AUTH_WPA2_WPA3_PSK:
-                    auth_mode = "WPA2/WPA3";
-                    break;
-                default:
-                    auth_mode = "UNKNOWN";
-                    break;
-                }
-                printf("  %-32s | %-4d | %-4d | %s\n", (char *)ap_list[i].ssid, ap_list[i].rssi, ap_list[i].primary, auth_mode);
-            }
-            printf("------------------------------------------------------------------\n");
-        }
-        free(ap_list);
-        return ESP_OK;
-    }
-    else if (strcmp(sub_command, "enable") == 0)
-    {
-        printf("Enabling WiFi module...\n");
-        return wifi_manager_enable(self);
-    }
-    else if (strcmp(sub_command, "disable") == 0)
-    {
-        printf("Disabling WiFi module...\n");
-        return wifi_manager_disable(self);
-    }
-    else if (strcmp(sub_command, "disconnect") == 0)
-    {
-        printf("Disconnecting from WiFi network...\n");
-        return esp_wifi_disconnect();
     }
     else if (strcmp(sub_command, "connect") == 0)
     {
         if (argc != 4)
         {
-            printf("Error: Incorrect arguments for 'connect'.\nUsage: wifi connect <ssid> <password>\n");
+            printf("Usage: wifi connect <ssid> <password>\n");
             return ESP_ERR_INVALID_ARG;
         }
-        const char *ssid = argv[2];
-        const char *password = argv[3];
-        printf("Attempting to connect to '%s'...\n", ssid);
-
-        if (save_credentials(ssid, password) == ESP_OK)
+        if (save_credentials(self, argv[2], argv[3]) == ESP_OK)
         {
-            memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-            strncpy((char *)private_data->wifi_config.sta.ssid, ssid, sizeof(private_data->wifi_config.sta.ssid) - 1);
-            strncpy((char *)private_data->wifi_config.sta.password, password, sizeof(private_data->wifi_config.sta.password) - 1);
-            private_data->has_saved_credentials = true;
+            load_credentials(self);
             start_wifi_connection(self);
         }
-        else
-        {
-            printf("Error: Failed to save new credentials.\n");
-            return ESP_FAIL;
-        }
+        return ESP_OK;
+    }
+    else if (strcmp(sub_command, "disconnect") == 0)
+    {
+        wifi_cmd_type_t cmd = WIFI_CMD_DISCONNECT;
+        xQueueSend(private_data->cmd_queue, &cmd, 0);
         return ESP_OK;
     }
     else if (strcmp(sub_command, "erase_creds") == 0)
     {
-        printf("Erasing saved WiFi credentials...\n");
-        nvs_handle_t nvs_handle;
-        if (nvs_open("wifi_creds", NVS_READWRITE, &nvs_handle) == ESP_OK)
+        if (private_data->storage_handle)
         {
-            nvs_erase_all(nvs_handle);
-            nvs_commit(nvs_handle);
-            nvs_close(nvs_handle);
+            private_data->storage_handle->erase_key("wifi_manager", "ssid");
+            private_data->storage_handle->erase_key("wifi_manager", "password");
             printf("Credentials erased. Please reboot or provision the device.\n");
             memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
             private_data->has_saved_credentials = false;
         }
         else
         {
-            printf("Error: Could not open NVS to erase credentials.\n");
-            return ESP_FAIL;
+            printf("Error: Storage service not available.\n");
         }
         return ESP_OK;
     }
-    else if (strcmp(sub_command, "set_hostname") == 0)
-    {
-        if (argc < 3)
-        {
-            printf("Error: Missing hostname.\nUsage: wifi set_hostname <new_hostname> [--reconnect]\n");
-            return ESP_ERR_INVALID_ARG;
-        }
-        const char *hostname = argv[2];
-        esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-        if (esp_netif_set_hostname(netif, hostname) == ESP_OK)
-        {
-            printf("Hostname set to '%s'.\n", hostname);
-            bool reconnect = (argc == 4 && strcmp(argv[3], "--reconnect") == 0);
-            if (reconnect)
-            {
-                printf("Reconnecting to apply new hostname...\n");
-                esp_wifi_disconnect();
-                vTaskDelay(pdMS_TO_TICKS(500));
-                esp_wifi_connect();
-            }
-            else
-            {
-                printf("The new hostname will be effective on the next connection.\n");
-            }
-        }
-        else
-        {
-            printf("Error: Failed to set hostname.\n");
-            return ESP_FAIL;
-        }
-        return ESP_OK;
-    }
-    else if (strcmp(sub_command, "set_power_save") == 0)
-    {
-        if (argc != 3)
-        {
-            printf("Error: Missing power save mode.\nUsage: wifi set_power_save <off|min|max>\n");
-            return ESP_ERR_INVALID_ARG;
-        }
-        const char *mode_str = argv[2];
-        wifi_ps_type_t ps_mode;
-        if (strcmp(mode_str, "off") == 0)
-            ps_mode = WIFI_PS_NONE;
-        else if (strcmp(mode_str, "min") == 0)
-            ps_mode = WIFI_PS_MIN_MODEM;
-        else if (strcmp(mode_str, "max") == 0)
-            ps_mode = WIFI_PS_MAX_MODEM;
-        else
-        {
-            printf("Error: Invalid power save mode '%s'.\n", mode_str);
-            return ESP_ERR_INVALID_ARG;
-        }
+    // ... (აქ შეიძლება დაემატოს სხვა ბრძანებები, როგორიცაა scan, set_hostname და ა.შ.) ...
 
-        if (esp_wifi_set_ps(ps_mode) == ESP_OK)
-        {
-            printf("WiFi power save mode set to '%s'.\n", mode_str);
-        }
-        else
-        {
-            printf("Error: Failed to set power save mode.\n");
-            return ESP_FAIL;
-        }
-        return ESP_OK;
-    }
-    else
-    {
-        printf("Error: Unknown subcommand '%s'.\n", sub_command);
-        printf("Usage: wifi <status|scan|connect|disconnect|enable|disable|erase_creds|set_hostname|set_power_save>\n");
-        return ESP_ERR_INVALID_ARG;
-    }
+    printf("Error: Unknown or incomplete command.\n");
+    return ESP_ERR_INVALID_ARG;
 }
 
-/**
- * @internal
- * @brief Registers the 'wifi' command and its subcommands with the Command Router.
- * @details This function prepares the command structure and uses the Command Router
- *          service to make the 'wifi' command available in the system shell.
- * @param self Pointer to the module_t instance.
- */
 static void register_cli_commands(module_t *self)
 {
-    // cmd_t სტრუქტურა უნდა იყოს static, რათა მისი მეხსიერება ვალიდური დარჩეს
-    // რეგისტრაციის შემდეგაც.
     static cmd_t wifi_command;
-
-    // შევავსოთ სტრუქტურა განახლებული ინფორმაციით
     wifi_command = (cmd_t){
         .command = "wifi",
         .help = "Manage and query WiFi status and configuration.",
-        .usage = "wifi <status|scan|connect|disconnect|enable|disable|erase_creds|set_hostname|set_power_save>",
-        .min_args = 2, // მინიმალური ბრძანება, მაგ: `wifi status`
-        .max_args = 4, // მაქსიმალური ბრძანება, მაგ: `wifi connect <ssid> <password>`
+        .usage = "wifi <status|scan|connect|disconnect|erase_creds|...>",
+        .min_args = 2,
+        .max_args = 4,
         .handler = wifi_cmd_handler,
-        .context = self // გადავცეთ მოდულის ინსტანცია, როგორც კონტექსტი
-    };
-
-    // მოვძებნოთ Command Router სერვისი Service Locator-ის მეშვეობით
+        .context = self};
     service_handle_t handle = fmw_service_get("main_cmd_router");
     if (handle)
     {
-        // თუ სერვისი ნაპოვნია, ავიღოთ მისი API
-        cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
-
-        // დავარეგისტრიროთ ჩვენი ბრძანება
-        esp_err_t err = cmd_api->register_command(&wifi_command);
-        if (err != ESP_OK)
-        {
-            ESP_LOGE(TAG, "Failed to register 'wifi' command: %s", esp_err_to_name(err));
-        }
-        else
-        {
-            ESP_LOGI(TAG, "'wifi' command registered successfully.");
-        }
-    }
-    else
-    {
-        // თუ სერვისი ვერ მოიძებნა, დავწეროთ გაფრთხილება
-        ESP_LOGW(TAG, "Command Router service not found. CLI commands for WiFi will not be available.");
-    }
-}
-
-static void unregister_cli_commands(module_t *self)
-{
-    service_handle_t handle = fmw_service_get("main_cmd_router");
-    if (handle)
-    {
-        cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
-        esp_err_t err = cmd_api->unregister_command("wifi");
-        if (err != ESP_OK)
-        {
-            ESP_LOGE(TAG, "Failed to unregister 'wifi' command: %s", esp_err_to_name(err));
-        }
-        else
-        {
-            ESP_LOGI(TAG, "'wifi' command unregistered successfully.");
-        }
+        ((cmd_router_api_t *)handle)->register_command(&wifi_command);
     }
 }

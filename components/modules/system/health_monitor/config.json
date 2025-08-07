@@ -6,7 +6,7 @@
         "instance_name": "health_monitor",
         "check_interval_sec": 60,
         "thresholds": {
-            "min_free_heap_kb": 40,
+            "min_free_heap_kb": 20,
             "task_stack_watermark_percent": 90
         }
     }

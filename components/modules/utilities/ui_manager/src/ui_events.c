@@ -129,21 +129,17 @@ void ui_events_handle(module_t *self, const char *event_name, void *event_data)
         }
         else if (strcmp(event_name, WIFI_STATUS_TIMER_EVENT) == 0)
         {
-            fmw_command_payload_t *payload = calloc(1, sizeof(fmw_command_payload_t));
-            if (payload)
+            // ვიყენებთ სტატიკურ payload-ს, რათა თავიდან ავიცილოთ heap fragmentation
+            static fmw_command_payload_t payload;
+            snprintf(payload.command_string, sizeof(payload.command_string), "wifi status --silent");
+            snprintf(payload.source, sizeof(payload.source), self->name);
+
+            // ვქმნით wrapper-ს, რომელიც არ გაათავისუფლებს payload-ს (რადგან ის სტატიკურია)
+            event_data_wrapper_t *wrapper;
+            if (fmw_event_data_wrap(&payload, NULL, &wrapper) == ESP_OK) // free_fn არის NULL
             {
-                snprintf(payload->command_string, sizeof(payload->command_string), "wifi status --silent");
-                snprintf(payload->source, sizeof(payload->source), self->name);
-                event_data_wrapper_t *wrapper;
-                if (fmw_event_data_wrap(payload, fmw_payload_common_free, &wrapper) == ESP_OK)
-                {
-                    fmw_event_bus_post(FMW_EVENT_EXECUTE_COMMAND_STRING, wrapper);
-                    fmw_event_data_release(wrapper);
-                }
-                else
-                {
-                    free(payload);
-                }
+                fmw_event_bus_post(FMW_EVENT_EXECUTE_COMMAND_STRING, wrapper);
+                fmw_event_data_release(wrapper);
             }
         }
         else if (strcmp(event_name, FMW_EVENT_WIFI_STATUS_READY) == 0)

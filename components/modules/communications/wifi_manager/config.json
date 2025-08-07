@@ -3,7 +3,8 @@
     "type": "wifi_manager",
     "enabled": true,
     "config": {
-      "instance_name": "main_wifi_manager"
+      "instance_name": "main_wifi_manager",
+      "storage_service": "main_storage"
     }
   }
 ]

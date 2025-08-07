@@ -24,29 +24,29 @@
 
 ### 1. ძირითადი სინტაქსი:
 ```bash
-python3 scripts/create_module.py <module_name> [options]
+python3 tools/create_module.py <module_name> [options]
 ```
 
 ### 2. მაგალითები:
 
 #### 📡 WiFi მოდული:
 ```bash
-python3 scripts/create_module.py wifi_manager --type networking --description "WiFi კავშირის მენეჯერი"
+python3 tools/create_module.py wifi_manager --type networking --description "WiFi კავშირის მენეჯერი"
 ```
 
 #### 🌡️ ტემპერატურის სენსორი:
 ```bash
-python3 scripts/create_module.py temperature_sensor --type sensors --description "ტემპერატურის სენსორის ინტერფეისი"
+python3 tools/create_module.py temperature_sensor --type sensors --description "ტემპერატურის სენსორის ინტერფეისი"
 ```
 
 #### 📺 დისპლეის დრაივერი:
 ```bash
-python3 scripts/create_module.py oled_display --type displays --description "OLED დისპლეის დრაივერი" --author "Your Name"
+python3 tools/create_module.py oled_display --type displays --description "OLED დისპლეის დრაივერი" --author "Your Name"
 ```
 
 #### 💾 მეხსიერების მენეჯერი:
 ```bash
-python3 scripts/create_module.py flash_storage --type storage --description "Flash მეხსიერების მენეჯერი"
+python3 tools/create_module.py flash_storage --type storage --description "Flash მეხსიერების მენეჯერი"
 ```
 
 ### 3. პარამეტრები:
@@ -122,7 +122,7 @@ static void {module_name}_handle_event(module_t *self, core_framework_event_id_t
 
 ### 1. მოდულის შექმნა:
 ```bash
-python3 scripts/create_module.py new_module --type sensors
+python3 tools/create_module.py new_module --type sensors
 ```
 
 ### 2. სისტემის reconfigure:
@@ -242,7 +242,7 @@ static void sensor_handle_event(module_t *self, core_framework_event_id_t event_
 ### 1. რომ დარწმუნდეთ მოდული სწორად იქმნება:
 ```bash
 # შექმნა
-python3 scripts/create_module.py test_module --type testing
+python3 tools/create_module.py test_module --type testing
 
 # შემოწმება
 ls -la components/modules/testing/test_module/

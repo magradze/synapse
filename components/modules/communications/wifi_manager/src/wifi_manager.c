@@ -14,7 +14,7 @@
 #include "wifi_manager.h"
 #include "synapse.h"
 #include "cmd_router_interface.h"
-#include "storage_interface.h" // <-- დაკარგული ჰედერი, რომელიც იწვევდა შეცდომებს
+#include "storage_interface.h"
 
 #include <string.h>
 #include <stdlib.h>

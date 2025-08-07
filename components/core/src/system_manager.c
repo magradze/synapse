@@ -81,6 +81,14 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Event Bus initialized.");
 
+    err = fmw_promise_manager_init();
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to initialize Promise Manager: %s", esp_err_to_name(err));
+        return err;
+    }
+    ESP_LOGI(TAG, "Promise Manager initialized.");
+
     err = fmw_service_register("system_manager", FMW_SERVICE_TYPE_SYSTEM_API, &system_manager_service_api);
     if (err != ESP_OK)
     {
@@ -188,7 +196,7 @@ esp_err_t fmw_system_start(void)
  */
 static esp_err_t resolve_dependencies_for_module(module_t *module)
 {
-        if (!module || !module->dependency_map || !module->current_config || !module->private_data)
+    if (!module || !module->dependency_map || !module->current_config || !module->private_data)
     {
         return ESP_OK; // This module has no dependencies to inject.
     }

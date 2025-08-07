@@ -15,6 +15,7 @@
 #include "synapse.h"
 #include "cmd_router_interface.h"
 #include "storage_interface.h"
+#include "wifi_interface.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -36,7 +37,14 @@ typedef enum
     WIFI_CMD_CONNECT,
     WIFI_CMD_DISCONNECT,
     WIFI_CMD_RECONNECT_TIMER_FIRED,
+    WIFI_CMD_GET_STATUS_ASYNC,
 } wifi_cmd_type_t;
+
+// --- Payload for the GET_STATUS_ASYNC command ---
+typedef struct
+{
+    promise_handle_t promise;
+} wifi_get_status_cmd_payload_t;
 
 // --- Private Data Structure ---
 typedef struct
@@ -55,6 +63,9 @@ typedef struct
     TaskHandle_t task_handle;
     QueueHandle_t cmd_queue;
     TimerHandle_t reconnect_timer;
+
+    // --- Service API ---
+    wifi_api_t service_api;
 
 } wifi_manager_private_data_t;
 
@@ -78,6 +89,11 @@ static void register_cli_commands(module_t *self);
 static esp_err_t save_credentials(module_t *self, const char *ssid, const char *password);
 static esp_err_t load_credentials(module_t *self);
 static void start_wifi_connection(module_t *self);
+static cJSON *build_status_json(module_t *self);
+
+// --- Service API Implementation ---
+static esp_err_t wifi_api_get_status_async(void *context, promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context);
+static bool wifi_api_is_connected(void *context);
 
 // --- Factory Function ---
 module_t *wifi_manager_create(const cJSON *config)
@@ -102,6 +118,11 @@ module_t *wifi_manager_create(const cJSON *config)
     const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
     snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
+
+    // --- Initialize and register the service API ---
+    private_data->service_api.get_status_async = wifi_api_get_status_async;
+    private_data->service_api.is_connected = wifi_api_is_connected;
+    fmw_service_register(module->name, FMW_SERVICE_TYPE_WIFI_API, &private_data->service_api);
 
     module->init_level = 40;
     module->base.init = wifi_manager_init;
@@ -128,7 +149,18 @@ static esp_err_t wifi_manager_init(module_t *self)
         return ESP_ERR_INVALID_STATE;
     }
 
-    private_data->cmd_queue = xQueueCreate(5, sizeof(wifi_cmd_type_t));
+    // --- შეცვლილია რიგის შეტყობინების სტრუქტურა ---
+    typedef struct
+    {
+        wifi_cmd_type_t type;
+        union
+        {
+            wifi_get_status_cmd_payload_t get_status;
+        } payload;
+    } wifi_queue_msg_t;
+
+    // --- შეცვლილია ზომა ---
+    private_data->cmd_queue = xQueueCreate(5, sizeof(wifi_queue_msg_t));
     if (!private_data->cmd_queue)
     {
         ESP_LOGE(TAG, "Failed to create command queue");
@@ -226,28 +258,71 @@ static void wifi_task(void *pvParameters)
 {
     module_t *self = (module_t *)pvParameters;
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-    wifi_cmd_type_t cmd;
+
+    typedef struct
+    {
+        wifi_cmd_type_t type;
+        union
+        {
+            wifi_get_status_cmd_payload_t get_status;
+        } payload;
+    } wifi_queue_msg_t;
+
+    wifi_queue_msg_t msg;
+
+    // --- ახალი: სტატიკური ბუფერი JSON სტრიქონისთვის ---
+    static char status_json_buffer[512]; // საკმარისად დიდი ბუფერი
 
     while (1)
     {
-        if (xQueueReceive(private_data->cmd_queue, &cmd, portMAX_DELAY) == pdPASS)
+        if (xQueueReceive(private_data->cmd_queue, &msg, portMAX_DELAY) == pdPASS)
         {
-            switch (cmd)
+            switch (msg.type)
             {
+            // ... (CONNECT, DISCONNECT, RECONNECT_TIMER_FIRED case-ები უცვლელია) ...
             case WIFI_CMD_CONNECT:
                 ESP_LOGI(TAG, "TASK: Received CONNECT command.");
                 ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
                 ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &private_data->wifi_config));
                 ESP_ERROR_CHECK(esp_wifi_start());
                 break;
+
             case WIFI_CMD_DISCONNECT:
                 ESP_LOGI(TAG, "TASK: Received DISCONNECT command.");
                 esp_wifi_disconnect();
                 break;
+
             case WIFI_CMD_RECONNECT_TIMER_FIRED:
                 ESP_LOGI(TAG, "TASK: Received RECONNECT command from timer.");
                 esp_wifi_connect();
                 break;
+
+            case WIFI_CMD_GET_STATUS_ASYNC:
+            {
+                ESP_LOGD(TAG, "TASK: Received GET_STATUS_ASYNC command.");
+                cJSON *status_json = build_status_json(self);
+                if (status_json)
+                {
+                    // --- ახალი ლოგიკა: ვიყენებთ სტატიკურ ბუფერს ---
+                    if (cJSON_PrintPreallocated(status_json, status_json_buffer, sizeof(status_json_buffer), 0))
+                    {
+                        // Promise-ს გადავცემთ მაჩვენებელს სტატიკურ ბუფერზე და NULL free_fn-ს
+                        fmw_promise_resolve(msg.payload.get_status.promise, status_json_buffer, NULL);
+                    }
+                    else
+                    {
+                        ESP_LOGE(TAG, "Failed to print status JSON to preallocated buffer.");
+                        fmw_promise_reject(msg.payload.get_status.promise, NULL, NULL);
+                    }
+                    cJSON_Delete(status_json);
+                }
+                else
+                {
+                    ESP_LOGE(TAG, "Failed to build status JSON.");
+                    fmw_promise_reject(msg.payload.get_status.promise, NULL, NULL);
+                }
+            }
+            break;
             }
         }
     }
@@ -359,16 +434,35 @@ static void reconnect_timer_callback(TimerHandle_t xTimer)
 {
     module_t *self = (module_t *)pvTimerGetTimerID(xTimer);
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-    wifi_cmd_type_t cmd = WIFI_CMD_RECONNECT_TIMER_FIRED;
-    xQueueSend(private_data->cmd_queue, &cmd, 0);
+
+    typedef struct
+    {
+        wifi_cmd_type_t type;
+        union
+        {
+            wifi_get_status_cmd_payload_t get_status;
+        } payload;
+    } wifi_queue_msg_t;
+
+    wifi_queue_msg_t msg = {.type = WIFI_CMD_RECONNECT_TIMER_FIRED};
+    xQueueSend(private_data->cmd_queue, &msg, 0);
 }
 
-// --- Helper Functions ---
 static void start_wifi_connection(module_t *self)
 {
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
-    wifi_cmd_type_t cmd = WIFI_CMD_CONNECT;
-    xQueueSend(private_data->cmd_queue, &cmd, 0);
+
+    typedef struct
+    {
+        wifi_cmd_type_t type;
+        union
+        {
+            wifi_get_status_cmd_payload_t get_status;
+        } payload;
+    } wifi_queue_msg_t;
+
+    wifi_queue_msg_t msg = {.type = WIFI_CMD_CONNECT};
+    xQueueSend(private_data->cmd_queue, &msg, 0);
 }
 
 static esp_err_t save_credentials(module_t *self, const char *ssid, const char *password)
@@ -410,6 +504,18 @@ static esp_err_t load_credentials(module_t *self)
 }
 
 // --- CLI Handler ---
+static void cli_status_then_cb(void *result_data, void *user_context)
+{
+    char *json_string = (char *)result_data;
+    printf("---------------- WiFi Status (CLI) ----------------\n%s\n---------------------------------------------------\n", json_string);
+    // Memory is not freed here because result_data points to a static buffer
+}
+
+static void cli_status_catch_cb(void *error_data, void *user_context)
+{
+    printf("Error: Failed to retrieve WiFi status via promise.\n");
+}
+
 static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
 {
     module_t *self = (module_t *)context;
@@ -417,7 +523,7 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
 
     if (argc < 2)
     {
-        printf("Usage: wifi <status|scan|connect|disconnect|erase_creds|...>\n");
+        printf("Usage: wifi <status|connect|disconnect|erase_creds>\n");
         return ESP_ERR_INVALID_ARG;
     }
 
@@ -425,72 +531,14 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
 
     if (strcmp(sub_command, "status") == 0)
     {
-        bool silent_mode = (argc > 2 && strcmp(argv[2], "--silent") == 0);
-
-        cJSON *status_json = cJSON_CreateObject();
-        if (!status_json)
+        printf("Requesting WiFi status asynchronously...\n");
+        // --- ახალი ლოგიკა: ვიძახებთ ახალ API-ს callback-ებით ---
+        esp_err_t err = wifi_api_get_status_async(self, cli_status_then_cb, cli_status_catch_cb, NULL);
+        if (err != ESP_OK)
         {
-            ESP_LOGE(TAG, "Failed to create cJSON object for status.");
-            return ESP_ERR_NO_MEM;
+            printf("Error: Could not start the status request operation.\n");
         }
-
-        cJSON_AddStringToObject(status_json, "module_name", self->name);
-        cJSON_AddStringToObject(status_json, "connection_status", private_data->is_connected ? "Connected" : "Disconnected");
-
-        if (private_data->is_connected)
-        {
-            wifi_ap_record_t ap_info;
-            if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
-            {
-                cJSON_AddStringToObject(status_json, "ssid", (const char *)ap_info.ssid);
-                cJSON_AddNumberToObject(status_json, "channel", ap_info.primary);
-                cJSON_AddNumberToObject(status_json, "rssi", ap_info.rssi);
-            }
-
-            esp_netif_ip_info_t ip_info;
-            esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
-            if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
-            {
-                char ip_str[16];
-                sprintf(ip_str, IPSTR, IP2STR(&ip_info.ip));
-                cJSON_AddStringToObject(status_json, "ip_address", ip_str);
-            }
-        }
-
-        // --- Event Publishing Logic (Refactored for Heap Efficiency) ---
-        static char json_buffer[256];
-        if (!cJSON_PrintPreallocated(status_json, json_buffer, sizeof(json_buffer), 0))
-        {
-            ESP_LOGE(TAG, "Failed to print cJSON to preallocated buffer. Buffer might be too small.");
-            cJSON_Delete(status_json);
-            return ESP_FAIL;
-        }
-
-        static fmw_telemetry_payload_t payload;
-        snprintf(payload.module_name, sizeof(payload.module_name), "%s", self->name);
-        payload.json_data = json_buffer;
-
-        ESP_LOGI(TAG, "Publishing WIFI_STATUS_READY event (silent: %d)", silent_mode);
-        event_data_wrapper_t *wrapper;
-        if (fmw_event_data_wrap(&payload, NULL, &wrapper) == ESP_OK)
-        {
-            fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
-            fmw_event_data_release(wrapper);
-        }
-
-        // --- Console Output Logic ---
-        if (!silent_mode)
-        {
-            char *console_output_string = cJSON_Print(status_json);
-            if (console_output_string)
-            {
-                printf("---------------- WiFi Status ----------------\n%s\n-------------------------------------------\n", console_output_string);
-                free(console_output_string);
-            }
-        }
-
-        cJSON_Delete(status_json);
-        return ESP_OK;
+        return err;
     }
     else if (strcmp(sub_command, "connect") == 0)
     {
@@ -508,8 +556,16 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
     }
     else if (strcmp(sub_command, "disconnect") == 0)
     {
-        wifi_cmd_type_t cmd = WIFI_CMD_DISCONNECT;
-        xQueueSend(private_data->cmd_queue, &cmd, 0);
+        typedef struct
+        {
+            wifi_cmd_type_t type;
+            union
+            {
+                wifi_get_status_cmd_payload_t get_status;
+            } payload;
+        } wifi_queue_msg_t;
+        wifi_queue_msg_t msg = {.type = WIFI_CMD_DISCONNECT};
+        xQueueSend(private_data->cmd_queue, &msg, 0);
         return ESP_OK;
     }
     else if (strcmp(sub_command, "erase_creds") == 0)
@@ -528,7 +584,6 @@ static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context)
         }
         return ESP_OK;
     }
-    // ... (აქ შეიძლება დაემატოს სხვა ბრძანებები, როგორიცაა scan, set_hostname და ა.შ.) ...
 
     printf("Error: Unknown or incomplete command.\n");
     return ESP_ERR_INVALID_ARG;
@@ -550,4 +605,87 @@ static void register_cli_commands(module_t *self)
     {
         ((cmd_router_api_t *)handle)->register_command(&wifi_command);
     }
+}
+
+// --- Service API Implementation ---
+static esp_err_t wifi_api_get_status_async(void *context, promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context)
+{
+    module_t *self = (module_t *)context;
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+
+    // 1. ვქმნით Promise-ს და პირდაპირ გადავცემთ callback-ებს
+    promise_handle_t promise = fmw_promise_create(then_cb, catch_cb, user_context);
+    if (!promise)
+    {
+        ESP_LOGE(TAG, "Failed to create a promise for status request.");
+        return ESP_ERR_NO_MEM;
+    }
+
+    // 2. ვამზადებთ შეტყობინებას ტასკისთვის
+    typedef struct
+    {
+        wifi_cmd_type_t type;
+        union
+        {
+            wifi_get_status_cmd_payload_t get_status;
+        } payload;
+    } wifi_queue_msg_t;
+
+    wifi_queue_msg_t msg = {
+        .type = WIFI_CMD_GET_STATUS_ASYNC,
+        .payload.get_status.promise = promise};
+
+    // 3. ვაგზავნით რიგში
+    if (xQueueSend(private_data->cmd_queue, &msg, 0) != pdPASS)
+    {
+        ESP_LOGE(TAG, "Failed to queue status request. Promise will not be fulfilled.");
+        // ამ შემთხვევაში Promise-ს თავად Promise Manager-ი გაასუფთავებს, თუ მას ვადა გაუვა (მომავლის ფუნქციონალი)
+        // ან შეგვიძლია დავამატოთ fmw_promise_destroy(promise);
+        return ESP_FAIL;
+    }
+
+    return ESP_OK;
+}
+
+static bool wifi_api_is_connected(void *context)
+{
+    module_t *self = (module_t *)context;
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+    return private_data->is_connected;
+}
+
+// --- Helper Function ---
+static cJSON *build_status_json(module_t *self)
+{
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+    cJSON *status_json = cJSON_CreateObject();
+    if (!status_json)
+    {
+        ESP_LOGE(TAG, "Failed to create cJSON object for status.");
+        return NULL;
+    }
+
+    cJSON_AddStringToObject(status_json, "module_name", self->name);
+    cJSON_AddStringToObject(status_json, "connection_status", private_data->is_connected ? "Connected" : "Disconnected");
+
+    if (private_data->is_connected)
+    {
+        wifi_ap_record_t ap_info;
+        if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK)
+        {
+            cJSON_AddStringToObject(status_json, "ssid", (const char *)ap_info.ssid);
+            cJSON_AddNumberToObject(status_json, "channel", ap_info.primary);
+            cJSON_AddNumberToObject(status_json, "rssi", ap_info.rssi);
+        }
+
+        esp_netif_ip_info_t ip_info;
+        esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+        if (netif && esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
+        {
+            char ip_str[16];
+            sprintf(ip_str, IPSTR, IP2STR(&ip_info.ip));
+            cJSON_AddStringToObject(status_json, "ip_address", ip_str);
+        }
+    }
+    return status_json;
 }

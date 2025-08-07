@@ -21,6 +21,14 @@ static void ui_manager_deinit(module_t *self);
 static void ui_manager_handle_event(module_t *self, const char *event_name, void *event_data);
 static void ui_task(void *pvParameters);
 
+// --- Dependency Map ---
+static const module_dependency_t s_dependencies[] = {
+    {"display_driver_service", offsetof(ui_manager_private_data_t, display)},
+    {"wifi_service", offsetof(ui_manager_private_data_t, wifi_service)},
+    {"wifi_module_handle", offsetof(ui_manager_private_data_t, wifi_module_handle)},
+    {NULL, 0} // Terminator
+};
+
 /**
  * @brief Creates a new instance of the UI Manager module.
  * @details This is the factory function for the module, called by the Module Factory.
@@ -46,6 +54,7 @@ module_t *ui_manager_create(const cJSON *config)
     }
     module->private_data = private_data;
     module->current_config = (cJSON *)config;
+    module->dependency_map = s_dependencies;
     private_data->module = module;
     module->init_level = 80;
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
@@ -134,10 +143,11 @@ static esp_err_t ui_manager_init(module_t *self)
     private_data->timer = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
     private_data->time_sync = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIME_SYNC_API);
 
-    if (!private_data->display || !private_data->system_manager || !private_data->timer)
+    // Dependency Injection-ის ვალიდაცია
+    if (!private_data->display || !private_data->system_manager || !private_data->timer || !private_data->wifi_service || !private_data->wifi_module_handle)
     {
-        ESP_LOGE(TAG, "Failed to acquire required services!");
-        return ESP_ERR_NOT_FOUND;
+        ESP_LOGE(TAG, "Dependency injection failed! Check config and module init levels.");
+        return ESP_ERR_INVALID_STATE;
     }
     if (!private_data->time_sync)
     {

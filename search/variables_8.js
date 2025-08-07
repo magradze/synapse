@@ -5,11 +5,12 @@ var searchData=
   ['is_5factive_2',['is_active',['../structtimer__entry__t.html#a148cad4ac19324e5daa3dcb1fd8b08ab',1,'timer_entry_t']]],
   ['is_5fcolor_3',['is_color',['../structdisplay__info__t.html#ab47f8096d9a1be6cdcd559206ab478c5',1,'display_info_t']]],
   ['is_5fcommand_5fregistered_4',['is_command_registered',['../structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec',1,'cmd_router_api_t']]],
-  ['is_5fflash_5fencryption_5fenabled_5',['is_flash_encryption_enabled',['../structsecurity__status__api__t.html#a935bfb3d13a5c2df3ad281af3851cca0',1,'security_status_api_t']]],
-  ['is_5fled_5fon_6',['is_led_on',['../structtimer__test__module__private__data__t.html#ad2051d9f1445c38ae3701feaed0868e9',1,'timer_test_module_private_data_t']]],
-  ['is_5fprovisioning_5factive_7',['is_provisioning_active',['../structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e',1,'ble_prov_api_t']]],
-  ['is_5fscreen_5fon_8',['is_screen_on',['../structui__manager__private__data__t.html#a4ee4ce7e83997733d0f1a0a0cab5a543',1,'ui_manager_private_data_t']]],
-  ['is_5fsecure_5fboot_5fenabled_9',['is_secure_boot_enabled',['../structsecurity__status__api__t.html#a88ddda9666c725c944a43f9ef662bd8a',1,'security_status_api_t']]],
-  ['item_5fcount_10',['item_count',['../structstatic__menu__t.html#ac5d90201decbf4b43a7a4bc7482f7be9',1,'static_menu_t']]],
-  ['items_11',['items',['../structstatic__menu__t.html#aa4c0992bcbc65ff7f9760605b06422f2',1,'static_menu_t']]]
+  ['is_5fconnected_5',['is_connected',['../structwifi__api__t.html#a43df8edbe4004fa64d66c072a1f971c9',1,'wifi_api_t']]],
+  ['is_5fflash_5fencryption_5fenabled_6',['is_flash_encryption_enabled',['../structsecurity__status__api__t.html#a935bfb3d13a5c2df3ad281af3851cca0',1,'security_status_api_t']]],
+  ['is_5fled_5fon_7',['is_led_on',['../structtimer__test__module__private__data__t.html#ad2051d9f1445c38ae3701feaed0868e9',1,'timer_test_module_private_data_t']]],
+  ['is_5fprovisioning_5factive_8',['is_provisioning_active',['../structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e',1,'ble_prov_api_t']]],
+  ['is_5fscreen_5fon_9',['is_screen_on',['../structui__manager__private__data__t.html#a4ee4ce7e83997733d0f1a0a0cab5a543',1,'ui_manager_private_data_t']]],
+  ['is_5fsecure_5fboot_5fenabled_10',['is_secure_boot_enabled',['../structsecurity__status__api__t.html#a88ddda9666c725c944a43f9ef662bd8a',1,'security_status_api_t']]],
+  ['item_5fcount_11',['item_count',['../structstatic__menu__t.html#ac5d90201decbf4b43a7a4bc7482f7be9',1,'static_menu_t']]],
+  ['items_12',['items',['../structstatic__menu__t.html#aa4c0992bcbc65ff7f9760605b06422f2',1,'static_menu_t']]]
 ];

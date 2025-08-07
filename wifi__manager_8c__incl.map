@@ -1,40 +1,42 @@
 <map id="components/modules/communications/wifi_manager/src/wifi_manager.c" name="components/modules/communications/wifi_manager/src/wifi_manager.c">
-<area shape="rect" id="Node000001" title="Implementation of WiFi connection and reconnection management." alt="" coords="1412,5,1624,60"/>
-<area shape="rect" id="Node000002" href="$wifi__manager_8h.html" title="WiFi connection management." alt="" coords="1148,108,1269,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1424,63,1264,107,1262,102,1423,57"/>
+<area shape="rect" id="Node000001" title="Implementation of WiFi connection and reconnection management." alt="" coords="1392,5,1604,60"/>
+<area shape="rect" id="Node000002" href="$wifi__manager_8h.html" title="WiFi connection management." alt="" coords="1197,108,1319,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1426,63,1304,106,1302,101,1424,58"/>
 <area shape="rect" id="Node000003" href="$synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1165,181,1253,207"/>
-<area shape="poly" id="edge62_Node000001_Node000003" title=" " alt="" coords="1412,42,1331,51,1249,64,1180,83,1154,96,1137,110,1133,118,1132,125,1140,142,1156,158,1176,172,1173,177,1152,162,1135,145,1127,126,1128,116,1133,106,1152,91,1178,78,1248,59,1331,45,1412,37"/>
+<area shape="poly" id="edge62_Node000001_Node000003" title=" " alt="" coords="1392,48,1330,58,1269,71,1219,89,1200,99,1188,110,1182,123,1183,138,1195,169,1190,171,1177,139,1177,122,1184,106,1197,94,1217,84,1268,66,1329,52,1391,43"/>
 <area shape="rect" id="Node000010" title=" " alt="" coords="699,401,849,427"/>
-<area shape="poly" id="edge72_Node000001_Node000010" title=" " alt="" coords="1412,37,1111,45,922,57,725,75,534,103,445,121,363,142,289,165,225,192,174,222,136,257,111,282,91,297,83,303,84,304,142,314,204,327,292,351,367,366,471,380,686,402,685,408,471,386,366,371,291,356,202,333,141,319,82,309,77,302,88,293,107,278,132,253,171,218,223,187,287,160,361,136,444,116,533,98,724,70,921,51,1111,40,1412,31"/>
+<area shape="poly" id="edge74_Node000001_Node000010" title=" " alt="" coords="1392,37,1095,46,908,58,714,76,526,104,439,122,358,142,286,166,224,193,173,223,136,257,111,282,92,297,84,303,86,305,144,315,205,328,292,351,367,366,471,380,686,402,685,408,471,386,366,371,291,356,204,333,143,320,84,309,79,303,89,293,107,278,132,253,170,219,221,188,284,161,357,137,438,117,525,99,713,71,908,52,1094,40,1392,32"/>
 <area shape="rect" id="Node000016" title=" " alt="" coords="5,328,76,353"/>
-<area shape="poly" id="edge70_Node000001_Node000016" title=" " alt="" coords="1412,39,1076,47,649,61,272,82,148,96,110,103,92,110,72,131,58,156,48,184,42,213,38,269,40,314,35,314,32,269,36,212,43,182,53,154,68,128,88,106,109,98,148,90,272,77,648,56,1076,41,1411,33"/>
+<area shape="poly" id="edge72_Node000001_Node000016" title=" " alt="" coords="1392,39,1061,47,640,61,270,83,147,96,110,103,92,110,72,131,58,156,48,184,42,213,38,269,40,314,35,314,32,269,36,212,43,183,53,154,68,128,88,106,108,98,147,90,269,77,640,56,1061,42,1392,33"/>
 <area shape="rect" id="Node000017" title=" " alt="" coords="479,328,549,353"/>
-<area shape="poly" id="edge69_Node000001_Node000017" title=" " alt="" coords="1479,62,1408,110,1346,161,1302,206,1255,246,1223,265,1184,283,1131,297,1062,308,901,319,739,324,613,331,563,336,563,331,612,325,738,319,901,314,1062,303,1129,292,1182,277,1221,260,1251,242,1298,202,1343,157,1404,106,1476,58"/>
+<area shape="poly" id="edge71_Node000001_Node000017" title=" " alt="" coords="1471,62,1328,184,1248,245,1213,268,1184,282,1131,297,1062,308,901,319,739,324,613,331,563,336,563,331,612,325,738,319,901,314,1062,303,1129,292,1182,278,1210,263,1245,241,1325,180,1467,58"/>
 <area shape="rect" id="Node000032" href="$cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module." alt="" coords="1622,181,1795,207"/>
-<area shape="poly" id="edge63_Node000001_Node000032" title=" " alt="" coords="1463,62,1440,78,1421,95,1414,114,1415,122,1420,132,1431,141,1448,150,1495,165,1551,176,1609,183,1608,188,1550,181,1494,170,1446,155,1429,146,1416,135,1410,124,1408,113,1417,92,1436,74,1461,58"/>
+<area shape="poly" id="edge63_Node000001_Node000032" title=" " alt="" coords="1467,62,1451,79,1439,97,1435,115,1441,132,1466,149,1507,163,1609,181,1608,186,1506,168,1464,154,1437,135,1430,115,1435,95,1447,76,1463,58"/>
 <area shape="rect" id="Node000033" href="$storage__interface_8h.html" title="Public Service API contract for the Storage Manager module." alt="" coords="2041,328,2189,353"/>
-<area shape="poly" id="edge65_Node000001_Node000033" title=" " alt="" coords="1488,62,1473,79,1461,97,1457,115,1464,132,1490,149,1527,160,1574,166,1626,169,1729,171,1773,173,1808,179,1900,209,1987,252,2043,286,2091,318,2088,322,2041,290,1985,257,1898,214,1807,184,1773,179,1729,176,1626,174,1574,172,1526,165,1487,154,1460,135,1452,116,1456,95,1468,76,1484,59"/>
-<area shape="rect" id="Node000034" title=" " alt="" coords="1475,108,1561,133"/>
-<area shape="poly" id="edge71_Node000001_Node000034" title=" " alt="" coords="1521,60,1521,94,1515,94,1515,60"/>
-<area shape="rect" id="Node000035" title=" " alt="" coords="1586,108,1703,133"/>
-<area shape="poly" id="edge73_Node000001_Node000035" title=" " alt="" coords="1558,58,1618,98,1615,102,1555,62"/>
-<area shape="rect" id="Node000036" title=" " alt="" coords="1727,108,1856,133"/>
-<area shape="poly" id="edge74_Node000001_Node000036" title=" " alt="" coords="1602,58,1743,101,1741,106,1601,63"/>
-<area shape="rect" id="Node000037" title=" " alt="" coords="1881,108,2011,133"/>
-<area shape="poly" id="edge75_Node000001_Node000037" title=" " alt="" coords="1625,53,1876,103,1875,108,1624,58"/>
-<area shape="rect" id="Node000038" title=" " alt="" coords="2036,108,2123,133"/>
-<area shape="poly" id="edge76_Node000001_Node000038" title=" " alt="" coords="1625,45,1806,71,2023,105,2022,111,1806,76,1624,50"/>
-<area shape="rect" id="Node000039" title=" " alt="" coords="2147,108,2249,133"/>
-<area shape="poly" id="edge77_Node000001_Node000039" title=" " alt="" coords="1625,42,1854,68,2134,105,2133,111,1853,74,1624,48"/>
-<area shape="rect" id="Node000040" title=" " alt="" coords="2273,108,2368,133"/>
-<area shape="poly" id="edge78_Node000001_Node000040" title=" " alt="" coords="1624,39,1907,64,2082,82,2260,105,2259,111,2081,88,1907,69,1624,44"/>
-<area shape="rect" id="Node000041" title=" " alt="" coords="2392,108,2449,133"/>
-<area shape="poly" id="edge79_Node000001_Node000041" title=" " alt="" coords="1624,34,1771,41,1958,54,2166,75,2379,106,2378,111,2166,80,1957,59,1771,46,1624,40"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1211,134,1211,168,1206,168,1206,134"/>
+<area shape="poly" id="edge65_Node000001_Node000033" title=" " alt="" coords="1487,61,1477,98,1479,116,1487,132,1510,148,1546,159,1589,165,1638,168,1734,171,1776,173,1808,179,1900,209,1986,252,2043,286,2090,318,2087,322,2040,290,1983,257,1897,214,1807,184,1775,179,1734,176,1637,173,1589,170,1545,164,1508,153,1483,135,1474,117,1472,97,1482,60"/>
+<area shape="rect" id="Node000034" href="$wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="999,108,1122,133"/>
+<area shape="poly" id="edge69_Node000001_Node000034" title=" " alt="" coords="1392,57,1133,108,1132,103,1391,52"/>
+<area shape="rect" id="Node000035" title=" " alt="" coords="1496,108,1583,133"/>
+<area shape="poly" id="edge73_Node000001_Node000035" title=" " alt="" coords="1513,59,1530,94,1525,97,1508,61"/>
+<area shape="rect" id="Node000036" title=" " alt="" coords="1607,108,1725,133"/>
+<area shape="poly" id="edge75_Node000001_Node000036" title=" " alt="" coords="1551,58,1632,99,1630,104,1548,62"/>
+<area shape="rect" id="Node000037" title=" " alt="" coords="1748,108,1877,133"/>
+<area shape="poly" id="edge76_Node000001_Node000037" title=" " alt="" coords="1595,57,1758,102,1757,107,1593,63"/>
+<area shape="rect" id="Node000038" title=" " alt="" coords="1902,108,2033,133"/>
+<area shape="poly" id="edge77_Node000001_Node000038" title=" " alt="" coords="1605,51,1892,103,1891,108,1604,56"/>
+<area shape="rect" id="Node000039" title=" " alt="" coords="2057,108,2144,133"/>
+<area shape="poly" id="edge78_Node000001_Node000039" title=" " alt="" coords="1604,44,1804,69,2044,105,2043,111,1803,75,1604,49"/>
+<area shape="rect" id="Node000040" title=" " alt="" coords="2169,108,2270,133"/>
+<area shape="poly" id="edge79_Node000001_Node000040" title=" " alt="" coords="1605,41,1852,67,2155,105,2155,111,1851,72,1604,46"/>
+<area shape="rect" id="Node000041" title=" " alt="" coords="2295,108,2389,133"/>
+<area shape="poly" id="edge80_Node000001_Node000041" title=" " alt="" coords="1604,38,1905,63,2091,82,2281,105,2281,111,2090,87,1904,68,1604,44"/>
+<area shape="rect" id="Node000042" title=" " alt="" coords="2413,108,2471,133"/>
+<area shape="poly" id="edge81_Node000001_Node000042" title=" " alt="" coords="1604,33,1758,39,1955,52,2176,73,2400,105,2399,111,2175,78,1955,57,1758,45,1604,39"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1252,135,1227,172,1222,169,1248,132"/>
 <area shape="rect" id="Node000004" href="$base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="625,328,747,353"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1164,198,1006,201,797,210,695,218,607,228,542,241,520,248,508,257,500,270,500,281,508,291,522,301,564,316,613,327,612,332,562,321,520,305,504,295,495,283,495,268,504,253,518,244,540,236,607,223,695,212,796,205,1005,196,1164,193"/>
 <area shape="rect" id="Node000012" href="$service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1615,328,1739,353"/>
-<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="1253,198,1364,217,1429,233,1494,252,1520,264,1545,278,1639,320,1637,325,1542,282,1517,269,1492,257,1428,238,1363,223,1252,204"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="1253,198,1364,218,1429,233,1494,252,1520,264,1546,278,1639,320,1637,325,1543,282,1518,269,1492,257,1428,238,1363,223,1252,204"/>
 <area shape="rect" id="Node000013" href="$framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="689,255,845,280"/>
 <area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="1165,205,852,255,851,250,1164,200"/>
 <area shape="rect" id="Node000014" href="$event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="147,255,284,280"/>
@@ -46,11 +48,11 @@
 <area shape="rect" id="Node000021" href="$config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="873,328,1011,353"/>
 <area shape="poly" id="edge26_Node000003_Node000021" title=" " alt="" coords="1211,207,1206,244,1198,264,1185,282,1162,293,1120,305,1015,328,1014,323,1119,299,1160,288,1182,278,1193,262,1201,242,1206,207"/>
 <area shape="rect" id="Node000022" href="$resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="1226,328,1381,353"/>
-<area shape="poly" id="edge32_Node000003_Node000022" title=" " alt="" coords="1219,206,1252,253,1291,315,1287,318,1248,256,1215,209"/>
+<area shape="poly" id="edge32_Node000003_Node000022" title=" " alt="" coords="1219,206,1251,253,1291,315,1286,318,1246,256,1214,209"/>
 <area shape="rect" id="Node000023" href="$system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="518,255,665,280"/>
 <area shape="poly" id="edge36_Node000003_Node000023" title=" " alt="" coords="1165,203,679,257,678,252,1164,197"/>
 <area shape="rect" id="Node000024" href="$promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="1815,328,1965,353"/>
-<area shape="poly" id="edge40_Node000003_Node000024" title=" " alt="" coords="1253,195,1642,217,1839,233,1904,243,1934,253,1942,269,1939,287,1929,304,1916,320,1912,316,1924,301,1934,285,1937,270,1931,257,1903,248,1838,239,1642,222,1253,200"/>
+<area shape="poly" id="edge40_Node000003_Node000024" title=" " alt="" coords="1253,195,1643,217,1840,233,1905,243,1936,253,1943,270,1940,288,1929,305,1916,320,1912,317,1925,302,1935,286,1938,270,1932,257,1904,248,1839,239,1642,222,1253,200"/>
 <area shape="rect" id="Node000025" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="1398,255,1481,280"/>
 <area shape="poly" id="edge42_Node000003_Node000025" title=" " alt="" coords="1247,204,1390,248,1388,253,1245,209"/>
 <area shape="rect" id="Node000027" href="$event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1035,328,1201,353"/>
@@ -83,13 +85,13 @@
 <area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="188,282,83,325,81,320,186,278"/>
 <area shape="poly" id="edge18_Node000014_Node000017" title=" " alt="" coords="264,277,466,325,465,330,263,283"/>
 <area shape="poly" id="edge15_Node000015_Node000007" title=" " alt="" coords="455,349,466,351,622,365,744,373,866,382,1022,399,1045,402,1045,407,1022,404,866,388,744,379,622,371,466,356,455,355"/>
-<area shape="poly" id="edge21_Node000018_Node000008" title=" " alt="" coords="1670,278,1707,290,1739,307,1751,317,1758,329,1759,341,1752,355,1737,368,1714,378,1654,394,1586,405,1524,412,1523,406,1585,400,1653,389,1712,373,1734,363,1748,352,1754,340,1753,330,1747,320,1736,311,1704,295,1668,283"/>
+<area shape="poly" id="edge21_Node000018_Node000008" title=" " alt="" coords="1670,277,1707,290,1740,307,1752,317,1760,328,1760,341,1753,355,1738,368,1715,378,1655,395,1586,405,1523,412,1523,407,1585,400,1654,389,1713,373,1735,363,1749,352,1755,340,1755,330,1748,320,1737,311,1705,295,1669,283"/>
 <area shape="poly" id="edge22_Node000018_Node000012" title=" " alt="" coords="1633,279,1662,316,1657,319,1629,282"/>
-<area shape="poly" id="edge25_Node000019_Node000008" title=" " alt="" coords="2214,354,2201,356,2006,378,1813,394,1523,413,1523,407,1813,389,2005,372,2200,351,2213,349"/>
+<area shape="poly" id="edge25_Node000019_Node000008" title=" " alt="" coords="2214,354,2202,356,2007,378,1814,394,1523,413,1523,407,1813,389,2006,373,2202,351,2213,349"/>
 <area shape="rect" id="Node000020" title=" " alt="" coords="2078,401,2153,427"/>
 <area shape="poly" id="edge24_Node000019_Node000020" title=" " alt="" coords="2242,356,2153,398,2151,393,2240,351"/>
 <area shape="poly" id="edge31_Node000021_Node000006" title=" " alt="" coords="994,351,1208,398,1206,403,993,356"/>
-<area shape="poly" id="edge27_Node000021_Node000008" title=" " alt="" coords="1011,349,1022,351,1414,403,1414,408,1022,356,1011,354"/>
+<area shape="poly" id="edge27_Node000021_Node000008" title=" " alt="" coords="1011,349,1024,351,1415,403,1414,408,1023,356,1010,354"/>
 <area shape="poly" id="edge28_Node000021_Node000009" title=" " alt="" coords="886,356,638,405,637,400,884,351"/>
 <area shape="poly" id="edge29_Node000021_Node000010" title=" " alt="" coords="916,356,815,398,813,393,914,351"/>
 <area shape="poly" id="edge30_Node000021_Node000011" title=" " alt="" coords="945,354,945,388,939,388,939,354"/>
@@ -115,8 +117,9 @@
 <area shape="poly" id="edge58_Node000030_Node000010" title=" " alt="" coords="1034,283,930,304,884,317,851,330,817,359,791,391,787,388,813,355,849,326,882,312,929,299,1033,277"/>
 <area shape="poly" id="edge59_Node000030_Node000011" title=" " alt="" coords="1039,283,929,306,885,319,863,330,858,338,858,346,866,363,884,379,906,393,903,397,881,383,862,366,853,347,853,337,859,326,883,314,928,301,1038,277"/>
 <area shape="poly" id="edge61_Node000031_Node000024" title=" " alt="" coords="1831,278,1870,316,1866,320,1827,282"/>
-<area shape="poly" id="edge64_Node000032_Node000008" title=" " alt="" coords="1795,204,1890,224,1930,237,1957,253,1979,277,1992,302,1993,329,1979,355,1955,368,1911,378,1786,395,1643,406,1523,413,1523,408,1642,401,1785,390,1910,373,1953,363,1975,351,1988,328,1987,304,1974,280,1954,257,1928,242,1889,229,1794,209"/>
+<area shape="poly" id="edge64_Node000032_Node000008" title=" " alt="" coords="1794,204,1890,224,1930,237,1957,253,1979,277,1993,302,1994,329,1980,355,1956,368,1912,378,1787,395,1643,406,1523,413,1523,408,1643,401,1786,390,1911,373,1954,363,1976,351,1989,327,1988,304,1975,280,1954,257,1928,242,1888,229,1793,209"/>
 <area shape="poly" id="edge68_Node000033_Node000006" title=" " alt="" coords="2041,351,1317,411,1317,405,2041,345"/>
 <area shape="poly" id="edge66_Node000033_Node000008" title=" " alt="" coords="2041,354,2022,356,1524,410,1523,404,2022,351,2041,348"/>
 <area shape="poly" id="edge67_Node000033_Node000020" title=" " alt="" coords="2118,354,2118,388,2113,388,2113,354"/>
+<area shape="poly" id="edge70_Node000034_Node000003" title=" " alt="" coords="1086,131,1173,173,1171,178,1083,136"/>
 </map>

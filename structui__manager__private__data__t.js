@@ -21,6 +21,8 @@ var structui__manager__private__data__t =
     [ "ui_cmd_queue", "structui__manager__private__data__t.html#aadf23fd6c0f3bb919147cc46d599f7d6", null ],
     [ "ui_task_handle", "structui__manager__private__data__t.html#acd29a294f3161e61f1a114a8280445c0", null ],
     [ "wifi_connected", "structui__manager__private__data__t.html#ad6da87b32cee6a414523d18c2b5c8748", null ],
+    [ "wifi_module_handle", "structui__manager__private__data__t.html#a7f945a4b383ef6341679d410d6eef179", null ],
     [ "wifi_rssi", "structui__manager__private__data__t.html#ab361dc7522622b4c8b95169316369f2b", null ],
+    [ "wifi_service", "structui__manager__private__data__t.html#a8ec1e727b7c0d3a5459f354747e0c821", null ],
     [ "wifi_status_timer", "structui__manager__private__data__t.html#a5eea26ba4fd8ccbeb1a59285fe5bd25b", null ]
 ];

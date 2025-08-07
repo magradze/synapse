@@ -1,16 +1,18 @@
 <map id="ui_manager_private_data_t" name="ui_manager_private_data_t">
-<area shape="rect" id="Node000001" title="The central private data structure holding the entire state of the UI Manager." alt="" coords="441,303,593,343"/>
+<area shape="rect" id="Node000001" title="The central private data structure holding the entire state of the UI Manager." alt="" coords="509,317,661,357"/>
 <area shape="rect" id="Node000002" href="$structmodule__t.html" title="The primary structure defining a framework module." alt="" coords="49,139,131,165"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,175,143,228,170,255,201,276,243,291,305,301,441,315,440,320,305,307,242,296,198,281,166,259,139,231,101,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,175,148,235,178,266,214,291,267,307,344,319,509,331,508,336,344,324,266,313,211,296,175,270,144,239,101,178"/>
 <area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="124,133,147,136,155,142,158,152,153,164,142,170,126,171,110,167,111,162,127,166,140,165,149,160,153,152,151,145,145,141,123,139"/>
 <area shape="rect" id="Node000003" href="$structmodule__dependency__t.html" title="Describes a single service dependency for a module." alt="" coords="5,5,175,31"/>
 <area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="93,45,93,139,87,139,87,45"/>
 <area shape="rect" id="Node000004" href="$structsystem__manager__api__t.html" title="The public Service API structure for the System Manager." alt="" coords="269,139,444,165"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="360,178,369,228,380,254,396,277,417,293,441,305,439,309,414,298,392,281,375,257,364,229,355,179"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="364,177,385,235,403,265,426,291,466,314,509,327,508,332,464,319,423,295,399,269,380,237,359,179"/>
 <area shape="rect" id="Node000005" href="$structtimer__api__t.html" title="The public Service API structure for the System Timer Service." alt="" coords="469,139,565,165"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="519,178,519,302,514,302,514,178"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="528,177,580,316,575,318,523,178"/>
 <area shape="rect" id="Node000006" href="$structtime__sync__api__t.html" title="The public Service API structure for the Time Sync module." alt="" coords="589,139,717,165"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="640,178,607,226,564,280,540,304,536,301,560,277,603,223,636,175"/>
-<area shape="rect" id="Node000007" href="$structfont__metrics__t.html" title="Contains metrics for a font supported by the driver." alt="" coords="741,139,857,165"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="785,178,739,230,708,257,674,281,634,299,594,311,592,306,633,294,671,276,705,253,735,226,781,174"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="650,179,637,233,615,294,601,319,596,316,610,292,632,231,645,178"/>
+<area shape="rect" id="Node000007" href="$structwifi__api__t.html" title=" " alt="" coords="741,139,825,165"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="779,179,756,237,736,268,712,295,688,311,662,323,660,318,686,307,708,291,732,265,751,234,774,177"/>
+<area shape="rect" id="Node000008" href="$structfont__metrics__t.html" title="Contains metrics for a font supported by the driver." alt="" coords="849,139,965,165"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="905,179,897,207,885,238,866,270,841,296,810,310,765,320,662,334,661,328,764,315,808,305,838,291,862,266,880,236,892,205,900,178"/>
 </map>

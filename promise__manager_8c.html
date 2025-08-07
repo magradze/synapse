@@ -181,43 +181,34 @@ Functions</h2></td></tr>
 <tr class="memitem:a6a7682b955f45780d941eee0838e89f6" id="r_a6a7682b955f45780d941eee0838e89f6"><td class="memItemLeft" align="right" valign="top"><a id="a6a7682b955f45780d941eee0838e89f6" name="a6a7682b955f45780d941eee0838e89f6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;PROMISE_MANAGER&quot;)</td></tr>
 <tr class="separator:a6a7682b955f45780d941eee0838e89f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05357e412819a13c978c2dbcb75c0f2a" id="r_a05357e412819a13c978c2dbcb75c0f2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a05357e412819a13c978c2dbcb75c0f2a">fmw_promise_create</a> (void)</td></tr>
-<tr class="memdesc:a05357e412819a13c978c2dbcb75c0f2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new promise and returns its handle.  <br /></td></tr>
-<tr class="separator:a05357e412819a13c978c2dbcb75c0f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad694e381aa156f3f322240bad9fa6e5b" id="r_ad694e381aa156f3f322240bad9fa6e5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#ad694e381aa156f3f322240bad9fa6e5b">fmw_promise_create</a> (<a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="el" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, void *user_context)</td></tr>
+<tr class="memdesc:ad694e381aa156f3f322240bad9fa6e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new promise with pre-registered callbacks.  <br /></td></tr>
+<tr class="separator:ad694e381aa156f3f322240bad9fa6e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14092530cab146f56e280ebdfb45d062" id="r_a14092530cab146f56e280ebdfb45d062"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, void *result_data, void(*free_fn)(void *))</td></tr>
 <tr class="memdesc:a14092530cab146f56e280ebdfb45d062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a promise with a successful result.  <br /></td></tr>
 <tr class="separator:a14092530cab146f56e280ebdfb45d062"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a308e412c7d9ca197dec3023eeac58d" id="r_a9a308e412c7d9ca197dec3023eeac58d"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a9a308e412c7d9ca197dec3023eeac58d">fmw_promise_reject</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, void *error_data, void(*free_fn)(void *))</td></tr>
 <tr class="memdesc:a9a308e412c7d9ca197dec3023eeac58d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rejects a promise with an error.  <br /></td></tr>
 <tr class="separator:a9a308e412c7d9ca197dec3023eeac58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18af9104ecd48fac9b6f85227b309a65" id="r_a18af9104ecd48fac9b6f85227b309a65"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a18af9104ecd48fac9b6f85227b309a65">fmw_promise_then</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, <a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, void *user_context)</td></tr>
-<tr class="memdesc:a18af9104ecd48fac9b6f85227b309a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a callback to be executed upon successful completion of the promise.  <br /></td></tr>
-<tr class="separator:a18af9104ecd48fac9b6f85227b309a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4b92c0b2bb3a5778c59e6066a110e5f" id="r_aa4b92c0b2bb3a5778c59e6066a110e5f"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#aa4b92c0b2bb3a5778c59e6066a110e5f">fmw_promise_catch</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, <a class="el" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, void *user_context)</td></tr>
-<tr class="memdesc:aa4b92c0b2bb3a5778c59e6066a110e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a callback to be executed upon failure of the promise.  <br /></td></tr>
-<tr class="separator:aa4b92c0b2bb3a5778c59e6066a110e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd153c290cafc9969a33e3e30e0418ef" id="r_afd153c290cafc9969a33e3e30e0418ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#afd153c290cafc9969a33e3e30e0418ef">fmw_promise_destroy</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle)</td></tr>
-<tr class="memdesc:afd153c290cafc9969a33e3e30e0418ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a promise handle and releases its associated resources.  <br /></td></tr>
-<tr class="separator:afd153c290cafc9969a33e3e30e0418ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the asynchronous Promise Manager. </p>
 <dl class="section author"><dt>Author</dt><dd>Synapse Framework Team </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-08-29</dd></dl>
-<p>This component manages the lifecycle of promises, providing a clean way to handle asynchronous request-response patterns. It uses a dedicated FreeRTOS task to execute callbacks, ensuring that they run in a safe, isolated context and do not block the callers. </p>
+<dl class="section version"><dt>Version</dt><dd>2.0.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-08-30</dd></dl>
+<p>This component manages the lifecycle of promises. It uses a dedicated FreeRTOS task to execute callbacks, ensuring they run in a safe, isolated context. The new architecture requires callbacks to be provided at promise creation time, eliminating race conditions. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa4b92c0b2bb3a5778c59e6066a110e5f" name="aa4b92c0b2bb3a5778c59e6066a110e5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4b92c0b2bb3a5778c59e6066a110e5f">&#9670;&#160;</a></span>fmw_promise_catch()</h2>
+<a id="ad694e381aa156f3f322240bad9fa6e5b" name="ad694e381aa156f3f322240bad9fa6e5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad694e381aa156f3f322240bad9fa6e5b">&#9670;&#160;</a></span>fmw_promise_create()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_promise_catch </td>
+          <td class="memname"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> fmw_promise_create </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td>
-          <td class="paramname"><em>handle</em>, </td>
+          <td class="paramtype"><a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a>&#160;</td>
+          <td class="paramname"><em>then_cb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -239,68 +230,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Registers a callback to be executed upon failure of the promise. </p>
-<p>If the promise has already been rejected, the callback may be executed immediately. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Creates a new promise with pre-registered callbacks. </p>
+<p>Called by a service provider at the start of an async operation. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>The promise handle. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">then_cb</td><td>The function to call when the promise is resolved. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">catch_cb</td><td>The function to call when the promise is rejected. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">user_context</td><td>A context pointer to be passed to the callback. Can be NULL. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_context</td><td>A context pointer to be passed to the callbacks. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li>ESP_OK: If the callback was successfully registered.</li>
-<li>ESP_ERR_INVALID_ARG: If the handle or callback is NULL.</li>
-<li>ESP_ERR_INVALID_STATE: If a 'catch' callback is already registered for this promise. </li>
-</ul>
-</dd></dl>
-
-</div>
-</div>
-<a id="a05357e412819a13c978c2dbcb75c0f2a" name="a05357e412819a13c978c2dbcb75c0f2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05357e412819a13c978c2dbcb75c0f2a">&#9670;&#160;</a></span>fmw_promise_create()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> fmw_promise_create </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a new promise and returns its handle. </p>
-<p>Called by a service provider (e.g., wifi_manager) at the start of an asynchronous operation. The returned handle should be given to the original caller. </p><dl class="section return"><dt>Returns</dt><dd>A new promise_handle_t, or NULL on failure (e.g., out of memory). </dd></dl>
-
-</div>
-</div>
-<a id="afd153c290cafc9969a33e3e30e0418ef" name="afd153c290cafc9969a33e3e30e0418ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd153c290cafc9969a33e3e30e0418ef">&#9670;&#160;</a></span>fmw_promise_destroy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void fmw_promise_destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td>
-          <td class="paramname"><em>handle</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Destroys a promise handle and releases its associated resources. </p>
-<p>This function should be called by the consumer if it is no longer interested in the result of the promise. It signals to the promise manager that the resources can be cleaned up. The manager will also automatically clean up promises after they are executed. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>The promise handle to destroy. Can be NULL. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new promise_handle_t, or NULL on failure. </dd></dl>
 
 </div>
 </div>
@@ -337,20 +276,15 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Rejects a promise with an error. </p>
-<p>This action will queue the promise for execution, eventually triggering the 'catch' callback on the consumer's side. The promise manager takes ownership of the error_data pointer. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>The handle of the promise to reject. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">error_data</td><td>A pointer to the error data. Can be NULL. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">free_fn</td><td>A function pointer to free the error_data. If NULL, standard <code>free()</code> is used. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">error_data</td><td>A pointer to the error data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">free_fn</td><td>A function to free the error_data. If NULL, data is assumed static. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li>ESP_OK: If the promise was successfully queued for rejection.</li>
-<li>ESP_ERR_INVALID_ARG: If the handle is invalid or not found.</li>
-<li>ESP_ERR_INVALID_STATE: If the promise is not in a PENDING state. </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
 
 </div>
 </div>
@@ -387,70 +321,15 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Resolves a promise with a successful result. </p>
-<p>This action will queue the promise for execution, eventually triggering the 'then' callback on the consumer's side. The promise manager takes ownership of the result_data pointer and will free it according to free_fn. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>The handle of the promise to resolve. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">result_data</td><td>A pointer to the result data. Can be NULL. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">free_fn</td><td>A function pointer to free the result_data. If NULL, standard <code>free()</code> is used. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">result_data</td><td>A pointer to the result data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">free_fn</td><td>A function to free the result_data. If NULL, data is assumed static. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li>ESP_OK: If the promise was successfully queued for resolution.</li>
-<li>ESP_ERR_INVALID_ARG: If the handle is invalid or not found.</li>
-<li>ESP_ERR_INVALID_STATE: If the promise is not in a PENDING state. </li>
-</ul>
-</dd></dl>
-
-</div>
-</div>
-<a id="a18af9104ecd48fac9b6f85227b309a65" name="a18af9104ecd48fac9b6f85227b309a65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18af9104ecd48fac9b6f85227b309a65">&#9670;&#160;</a></span>fmw_promise_then()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_err_t fmw_promise_then </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td>
-          <td class="paramname"><em>handle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a>&#160;</td>
-          <td class="paramname"><em>then_cb</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>user_context</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Registers a callback to be executed upon successful completion of the promise. </p>
-<p>If the promise has already been resolved, the callback may be executed immediately from the context of the promise manager's task. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">handle</td><td>The promise handle returned by an asynchronous API call. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">then_cb</td><td>The function to call when the promise is resolved. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">user_context</td><td>A context pointer to be passed to the callback. Can be NULL. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li>ESP_OK: If the callback was successfully registered.</li>
-<li>ESP_ERR_INVALID_ARG: If the handle or callback is NULL.</li>
-<li>ESP_ERR_INVALID_STATE: If a 'then' callback is already registered for this promise. </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK on success. </dd></dl>
 
 </div>
 </div>

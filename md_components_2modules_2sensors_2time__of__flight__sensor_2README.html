@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2sensors_2time_
   <div class="headertitle"><div class="title">🔬 მოდული: &lt;tt&gt;time_of_flight_sensor&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md112"></a> <b>🗂️ კატეგორია:</b> <code>sensors</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md110"></a> <b>🗂️ კატეგორია:</b> <code>sensors</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 1.1.0</p>
-<h1><a class="anchor" id="autotoc_md113"></a>
+<h1><a class="anchor" id="autotoc_md111"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>time_of_flight_sensor</code> არის Synapse Framework-ის დრაივერის მოდული, რომელიც შექმნილია <b>VL6180X</b> ტიპის I2C Time-of-Flight (TOF) მანძილის სენსორებთან სამუშაოდ. ეს სენსორები იყენებენ ინფრაწითელ სინათლეს, რათა მაღალი სიზუსტით გაზომონ მანძილი ობიექტამდე.</p>
 <p>მოდული არის სუფთა **"Event Producer"**. ის პერიოდულად კითხულობს სენსორის მონაცემებს და შედეგს (მანძილს მილიმეტრებში) აქვეყნებს <code>Event Bus</code>-ზე, რაც საშუალებას აძლევს სხვა მოდულებს (როგორიცაა <code>sensor_aggregator</code>) გამოიყენონ ეს ინფორმაცია.</p>
-<h1><a class="anchor" id="autotoc_md114"></a>
+<h1><a class="anchor" id="autotoc_md112"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისის მომხმარებელი (Service Consumer):</b> მოდული არის ორი ფუნდამენტური სერვისის აქტიური მომხმარებელი:<ol type="1">
@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2sensors_2time_
 <li><b>ივენთების მომწოდებელი (Event Producer):</b> მოდულის მთავარი ამოცანაა, <code>SENSOR_DATA_DISTANCE_MM</code> ივენთის გენერაცია. ეს უზრუნველყოფს სრულ იზოლაციას (decoupling) იმ მოდულებისგან, რომლებიც ამ მონაცემს მოიხმარენ.</li>
 <li>**სტანდარტული ინიციალიზაციის დონე (<code>init_level: 60</code>):** როგორც სენსორების უმეტესობა, ის ინიციალიზდება სისტემის გაშვების საშუალო ეტაპზე. ეს გარანტიას იძლევა, რომ მისთვის საჭირო <code>i2c_bus</code> (init_level: 10) და <code>system_timer</code> (init_level: 50-59) სერვისები უკვე ხელმისაწვდომია.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md115"></a>
+<h1><a class="anchor" id="autotoc_md113"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -137,9 +137,9 @@ $(document).ready(function(){initNavTree('md_components_2modules_2sensors_2time_
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>update_interval_sec</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">გაზომვებს შორის ინტერვალი წამებში.   </td><td class="markdownTableBodyCenter">✅   </td><td class="markdownTableBodyLeft"><code>10</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md116"></a>
+<h1><a class="anchor" id="autotoc_md114"></a>
 4. 📢 ივენთები (Events)</h1>
-<h2><a class="anchor" id="autotoc_md117"></a>
+<h2><a class="anchor" id="autotoc_md115"></a>
 გამოქვეყნებული ივენთები</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2sensors_2time_
 </table>
 <p><b>Payload-ის მაგალითი:</b></p>
 <div class="fragment"><div class="line">{&quot;value&quot;: 123}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md118"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md116"></a>
 5. 💡 გამოყენების მაგალითი (&lt;tt&gt;sensor_aggregator&lt;/tt&gt;-თან ინტეგრაცია)</h1>
 <p>ამ მოდულის მთავარი დანიშნულებაა, მიაწოდოს მონაცემები <code>sensor_aggregator</code>-ს. ამისათვის, <code>sensor_aggregator/config.json</code> ფაილში უნდა დაამატოთ შესაბამისი ჩანაწერი:</p>
 <div class="fragment"><div class="line">// In sensor_aggregator/config.json, inside &quot;sensors_to_aggregate&quot; array:</div>
@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2sensors_2time_
 <div class="line">    &quot;aggregation_mode&quot;: &quot;last&quot; // or &quot;avg&quot;, &quot;min&quot;, &quot;max&quot;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>ამ კონფიგურაციით, <code>sensor_aggregator</code> დაიწყებს <code>SENSOR_DATA_DISTANCE_MM</code> ივენთების მოსმენას და თავის პერიოდულ რეპორტში დაამატებს <code>distance_mm</code> ველს, რომელიც შეიცავს TOF სენსორის მიერ გაზომილ ბოლო მანძილს.</p>
-<h1><a class="anchor" id="autotoc_md119"></a>
+<h1><a class="anchor" id="autotoc_md117"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>ფიზიკური შეერთება:</b> სენსორის გამართული მუშაობისთვის, <code>SHUT</code> (Shutdown) პინი უნდა იყოს მიერთებული 3.3V-ზე. <code>INT</code> (Interrupt) პინი ამ იმპლემენტაციაში არ გამოიყენება და შეიძლება თავისუფალი დარჩეს.</li>

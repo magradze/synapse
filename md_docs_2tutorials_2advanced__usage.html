@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
   <div class="headertitle"><div class="title">Advanced Usage (გაფართოებული გამოყენება)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1963"></a> </p>
-<h1><a class="anchor" id="autotoc_md1964"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1964"></a> </p>
+<h1><a class="anchor" id="autotoc_md1965"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ გამოიყენოთ Synapse Framework-ის გაფართოებული შესაძლებლობები, როგორ დააკონფიგურიროთ რთული სცენარები და როგორ მოახდინოთ სისტემის ოპტიმიზაცია.</p>
-<h1><a class="anchor" id="autotoc_md1965"></a>
+<h1><a class="anchor" id="autotoc_md1966"></a>
 1. მრავალმოდულიანი კონფიგურაცია</h1>
 <ul>
 <li>ერთზე მეტი ერთი და იმავე ტიპის მოდულის დამატება (მაგ: რამდენიმე რელე, რამდენიმე სენსორი)</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1966"></a>
+<h1><a class="anchor" id="autotoc_md1967"></a>
 2. მოდულის დინამიური ჩართვა/გამორთვა</h1>
 <ul>
 <li>მოდულის enable/disable ფუნქციების გამოყენება runtime-ზე</li>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">ssd1306_api_disable();</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1967"></a>
+<h1><a class="anchor" id="autotoc_md1968"></a>
 3. Runtime Reconfiguration</h1>
 <ul>
 <li>მოდულის კონფიგურაციის შეცვლა მუშაობის დროს</li>
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="line">module_reconfigure(module, new_config);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1968"></a>
+<h1><a class="anchor" id="autotoc_md1969"></a>
 4. Custom Event-ების გამოყენება</h1>
 <p>სისტემური ივენთების გარდა, შეგიძლიათ შექმნათ და გამოიყენოთ საკუთარი, აპლიკაციისთვის სპეციფიური ივენთები.</p>
 <p><b>ნაბიჯი 1: ივენთის სახელის განსაზღვრა</b></p>
@@ -164,8 +164,59 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="ttc" id="aevent__bus_8h_html_abe0f3af3ae92846abaa9d421289b853e"><div class="ttname"><a href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
 </div><!-- fragment --><p><b>ნაბიჯი 3: ივენთის გამოწერა და დამუშავება</b></p>
 <p>სხვა მოდულს შეუძლია გამოიწეროს ეს ივენთი და დაამუშავოს ის <code>handle_event</code> ფუნქციაში, როგორც ეს "პირველი მოდულის შექმნის" გაკვეთილშია ნაჩვენები.</p>
-<h1><a class="anchor" id="autotoc_md1969"></a>
-5. მოდულის სტატუსის მონიტორინგი</h1>
+<h1><a class="anchor" id="autotoc_md1970"></a>
+5. ასინქრონული ოპერაციების მართვა (Promise Pattern)</h1>
+<p><code>Event Bus</code> იდეალურია "Broadcast" ტიპის შეტყობინებებისთვის, მაგრამ როდესაც ერთ მოდულს სჭირდება მეორისგან კონკრეტული პასუხის მიღება, <code>Promise</code> პატერნი ბევრად სუფთა და ლოგიკურ ალტერნატივას გვთავაზობს.</p>
+<p><b>სცენარი:</b> <code>ui_manager</code>-ს სურს, პერიოდულად განაახლოს WiFi-ს სტატუსის იკონკა. ამისთვის, მან <code>wifi_manager</code>-ს უნდა გაუგზავნოს მოთხოვნა და მიიღოს პასუხი.</p>
+<h2><a class="anchor" id="autotoc_md1971"></a>
+5.1. სერვისის მომწოდებლის API (&lt;tt&gt;wifi_manager&lt;/tt&gt;)</h2>
+<p><code>wifi_manager</code> თავის <code><a class="el" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module.">wifi_interface.h</a></code>-ში აცხადებს ასინქრონულ ფუნქციას:</p>
+<div class="fragment"><div class="line"><span class="comment">// wifi_interface.h</span></div>
+<div class="line">esp_err_t (*get_status_async)(<span class="keywordtype">void</span>* context, <a class="code hl_typedef" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, <span class="keywordtype">void</span>* user_context);</div>
+<div class="ttc" id="apromise__manager_8h_html_a8b4021307655879de50bf9fb83140e45"><div class="ttname"><a href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a></div><div class="ttdeci">void(* promise_then_cb)(void *result_data, void *user_context)</div><div class="ttdoc">Callback function type for a successfully resolved promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:31</div></div>
+<div class="ttc" id="apromise__manager_8h_html_ae9229038eb3572aba3c551df7197de39"><div class="ttname"><a href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a></div><div class="ttdeci">void(* promise_catch_cb)(void *error_data, void *user_context)</div><div class="ttdoc">Callback function type for a rejected (failed) promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:38</div></div>
+</div><!-- fragment --><p>ეს ფუნქცია არ აბრუნებს შედეგს პირდაპირ. ამის ნაცვლად, ის იღებს <code>callback</code> ფუნქციებს, რომლებსაც გამოიძახებს ოპერაციის დასრულების შემდეგ.</p>
+<h2><a class="anchor" id="autotoc_md1972"></a>
+5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)</h2>
+<p><code>ui_manager</code> ახორციელებს შემდეგ ნაბიჯებს:</p>
+<p><b>ნაბიჯი 1: <code>callback</code> ფუნქციების შექმნა</b></p>
+<p><code>ui_manager</code> ქმნის ორ ფუნქციას: ერთს წარმატების შემთხვევისთვის, მეორეს — შეცდომისთვის.</p>
+<div class="fragment"><div class="line"><span class="comment">// ui_events.c</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_wifi_status_received(<span class="keywordtype">void</span>* result_data, <span class="keywordtype">void</span>* user_context) {</div>
+<div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a>* self = (<a class="code hl_struct" href="structmodule__t.html">module_t</a>*)user_context;</div>
+<div class="line">    <a class="code hl_struct" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a>* private_data = (<a class="code hl_struct" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a>*)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">    <span class="keywordtype">char</span>* json_string = (<span class="keywordtype">char</span>*)result_data;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ... აქ ხდება JSON-ის პარსინგი და private_data-ს ველების განახლება ...</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// ვაგზავნით შიდა ივენთს UI-ს გადასახატად</span></div>
+<div class="line">    <a class="code hl_function" href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a>(<span class="stringliteral">&quot;UI_HOME_UPDATE&quot;</span>, NULL);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_wifi_status_failed(<span class="keywordtype">void</span>* error_data, <span class="keywordtype">void</span>* user_context) {</div>
+<div class="line">    ESP_LOGE(TAG, <span class="stringliteral">&quot;Promise rejected: Failed to get WiFi status.&quot;</span>);</div>
+<div class="line">}</div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
+<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
+<div class="ttc" id="astructui__manager__private__data__t_html"><div class="ttname"><a href="structui__manager__private__data__t.html">ui_manager_private_data_t</a></div><div class="ttdoc">The central private data structure holding the entire state of the UI Manager.</div><div class="ttdef"><b>Definition</b> ui_manager.h:101</div></div>
+</div><!-- fragment --><p><b>ნაბიჯი 2: ასინქრონული API-ს გამოძახება</b></p>
+<p>პერიოდული ტაიმერის ივენთის მიღებისას, <code>ui_manager</code> იძახებს <code>wifi_manager</code>-ის API-ს და გადასცემს თავის <code>callback</code>-ებს.</p>
+<div class="fragment"><div class="line"><span class="comment">// ui_events.c -&gt; ui_events_handle()</span></div>
+<div class="line"><span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(event_name, WIFI_STATUS_TIMER_EVENT) == 0)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span> (private_data-&gt;wifi_service &amp;&amp; private_data-&gt;wifi_module_handle)</div>
+<div class="line">    {</div>
+<div class="line">        private_data-&gt;wifi_service-&gt;get_status_async(</div>
+<div class="line">            private_data-&gt;wifi_module_handle, <span class="comment">// კონტექსტი</span></div>
+<div class="line">            on_wifi_status_received,          <span class="comment">// then_cb</span></div>
+<div class="line">            on_wifi_status_failed,            <span class="comment">// catch_cb</span></div>
+<div class="line">            self                              <span class="comment">// user_context</span></div>
+<div class="line">        );</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>შედეგი:</b> ამ მიდგომით, <code>ui_manager</code>-ის კოდი, რომელიც WiFi სტატუსს ეხება, ლოგიკურად ერთ ადგილასაა თავმოყრილი. მოთხოვნა და პასუხის დამუშავება ერთმანეთთან პირდაპირ არის დაკავშირებული, რაც კოდს ბევრად უფრო წაკითხვადს და ადვილად სამართავს ხდის.</p>
+<h1><a class="anchor" id="autotoc_md1973"></a>
+6. მოდულის სტატუსის მონიტორინგი</h1>
 <ul>
 <li>გამოიყენეთ get_status API მოდულის მდგომარეობის მისაღებად</li>
 <li><p class="startli">მაგალითი:</p>
@@ -176,14 +227,14 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2advanced__usage.ht
 <div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65f"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65f">module_status_t</a></div><div class="ttdeci">module_status_t</div><div class="ttdoc">Enumeration of possible module statuses.</div><div class="ttdef"><b>Definition</b> base_module.h:36</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1970"></a>
-6. ოპტიმიზაცია და რესურსების მართვა</h1>
+<h1><a class="anchor" id="autotoc_md1974"></a>
+7. ოპტიმიზაცია და რესურსების მართვა</h1>
 <ul>
 <li>გამოიყენეთ ლოგირება და performance monitoring</li>
 <li>ყურადღება მიაქციეთ მეხსიერების გამოყენებას და task-ების რაოდენობას</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1971"></a>
-7. Best Practices</h1>
+<h1><a class="anchor" id="autotoc_md1975"></a>
+8. Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ public API-ები</li>
 <li>დაიცავით naming და structure კონვენციები</li>

@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_components_2modules_2displays_2ssd1
   <div class="headertitle"><div class="title">📺 მოდული: &lt;tt&gt;ssd1306_driver&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md38"></a> <b>🗂️ კატეგორია:</b> <code>displays</code> <b>✒️ ავტორი:</b> Synapse Framework Team <b>🔖 ვერსია:</b> 1.2.0</p>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md36"></a> <b>🗂️ კატეგორია:</b> <code>displays</code> <b>✒️ ავტორი:</b> Synapse Framework Team <b>🔖 ვერსია:</b> 1.2.0</p>
+<h1><a class="anchor" id="autotoc_md37"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>ssd1306_driver</code> არის Synapse Framework-ის დაბალი დონის დრაივერის მოდული, რომელიც უზრუნველყოფს SSD1306-ზე დაფუძნებული მონოქრომული OLED ეკრანების მართვას I2C ინტერფეისით.</p>
 <p>მისი მთავარი ამოცანაა, მოახდინოს აპარატურასთან პირდაპირი კომუნიკაციის აბსტრაგირება და მიაწოდოს უნივერსალური, <code><a class="el" href="structdisplay__driver__api__t.html" title="The public Service API structure for a display driver.">display_driver_api_t</a></code> ინტერფეისი მაღალი დონის მოდულებს (როგორიცაა <code>ui_manager</code>). ამ მოდულმა არაფერი "იცის" მენიუების, სტატუს ბარების ან სხვა UI ელემენტების შესახებ; ის მხოლოდ ასრულებს გრაფიკულ პრიმიტივებთან დაკავშირებულ ბრძანებებს.</p>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md38"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Service Provider:</b> მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structdisplay__driver__api__t.html" title="The public Service API structure for a display driver.">display_driver_api_t</a></code> სერვისს <code>Service Locator</code>-ში, <code>FMW_SERVICE_TYPE_DISPLAY_API</code> ტიპით.</li>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2displays_2ssd1
 <li><b>დამოკიდებულება I2C სერვისზე:</b> მოდული სრულად ეყრდნობა <code>i2c_bus</code> სერვისს I2C კომუნიკაციისთვის, რაც უზრუნველყოფს რესურსების უსაფრთხო და კონტროლირებად გამოყენებას.</li>
 <li>**ადრეული ინიციალიზაცია (<code>init_level: 15</code>):** როგორც ფუნდამენტური დრაივერი, ის ინიციალიზდება სისტემის გაშვების ადრეულ ეტაპზე, <code>i2c_bus</code> მოდულის (<code>init_level: 10</code>) შემდეგ, რათა მზად იყოს მაღალი დონის UI მოდულების მომსახურებისთვის.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md41"></a>
+<h1><a class="anchor" id="autotoc_md39"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდული კონფიგურირდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
 <table class="markdownTable">
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2displays_2ssd1
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>reset_pin</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">RESET პინის GPIO ნომერი. თუ არ გამოიყენება, მიუთითეთ <code>-1</code>.   </td><td class="markdownTableBodyCenter">❌ (Default: -1)   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md40"></a>
 4. 🔌 Service API</h1>
 <p>მოდული ახდენს <code><a class="el" href="structdisplay__driver__api__t.html" title="The public Service API structure for a display driver.">display_driver_api_t</a></code> ინტერფეისის იმპლემენტაციას. დეტალური აღწერისთვის იხილეთ <code><a class="el" href="display__driver__interface_8h.html" title="Universal Service API contract for display drivers.">components/interfaces/include/display_driver_interface.h</a></code>.</p>
 <p><b>მხარდაჭერილი ფუნქციები:</b></p>
@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2displays_2ssd1
 <ul>
 <li><code>set_rotation</code> (აბრუნებს <code>ESP_ERR_NOT_SUPPORTED</code>)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md41"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p><code>ui_manager</code> მოდული იღებს ამ დრაივერის სერვისს და იყენებს მას UI-ს დასახატად.</p>
 <div class="fragment"><div class="line"><span class="comment">// In ui_manager.c</span></div>

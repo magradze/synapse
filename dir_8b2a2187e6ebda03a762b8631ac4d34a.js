@@ -20,5 +20,6 @@ var dir_8b2a2187e6ebda03a762b8631ac4d34a =
     [ "system_manager_interface.h", "system__manager__interface_8h.html", "system__manager__interface_8h" ],
     [ "time_sync_interface.h", "time__sync__interface_8h.html", "time__sync__interface_8h" ],
     [ "timer_interface.h", "timer__interface_8h.html", "timer__interface_8h" ],
-    [ "watchdog_interface.h", "watchdog__interface_8h.html", "watchdog__interface_8h" ]
+    [ "watchdog_interface.h", "watchdog__interface_8h.html", "watchdog__interface_8h" ],
+    [ "wifi_interface.h", "wifi__interface_8h.html", "wifi__interface_8h" ]
 ];

@@ -104,5 +104,7 @@ var annotated_dup =
     [ "ui_manager_private_data_t", "structui__manager__private__data__t.html", "structui__manager__private__data__t" ],
     [ "watchdog_api_t", "structwatchdog__api__t.html", "structwatchdog__api__t" ],
     [ "watchdog_manager_private_data_t", "structwatchdog__manager__private__data__t.html", null ],
+    [ "wifi_api_t", "structwifi__api__t.html", "structwifi__api__t" ],
+    [ "wifi_get_status_cmd_payload_t", "structwifi__get__status__cmd__payload__t.html", null ],
     [ "wifi_manager_private_data_t", "structwifi__manager__private__data__t.html", null ]
 ];

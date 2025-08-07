@@ -13,10 +13,11 @@ var searchData=
   ['კონვენცია_10',['მოდულის სტრუქტურის კონვენცია',['../md_docs_2convention_2module__structure.html',1,'']]],
   ['კონვენციების_20ავტომატური_20შემმოწმებელი_20tt_20check_5fconventions_20py_20tt_11',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
   ['კონვენციები_20და_20სტანდარტები_12',['კონვენციები და სტანდარტები',['../conventions_docs.html',1,'']]],
-  ['კონტრიბუციის_20გზამკვლევი_13',['კონტრიბუციის გზამკვლევი',['../contributing_docs.html',1,'']]],
-  ['კონტრიბუციის_20სახელმძღვანელო_20contributing_20guide_14',['კონტრიბუციის სახელმძღვანელო (Contributing Guide)',['../md_docs_2contributing_2contributing__guide.html',1,'']]],
-  ['კონფიგურაცია_20system_20configuration_15',['სისტემის კონფიგურაცია (System Configuration)',['../md_docs_2tutorials_2system__configuration.html',1,'']]],
-  ['კონფიგურაციისა_20და_20შენახვის_20ტერმინები_20glossary_20—_20configuration_20storage_16',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
-  ['კონფიგურაციის_20მართვის_20პროცესი_20configuration_20flow_17',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]],
-  ['კონფიგურაციის_20მართვის_20წესები_18',['კონფიგურაციის მართვის წესები',['../md_docs_2convention_2configuration__management.html',1,'']]]
+  ['კონტექსტი_20სერვისის_20api_20ს_20გამოძახებისას_13',['პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?',['../md_docs_2troubleshooting_2dependency__injection__and__context.html',1,'']]],
+  ['კონტრიბუციის_20გზამკვლევი_14',['კონტრიბუციის გზამკვლევი',['../contributing_docs.html',1,'']]],
+  ['კონტრიბუციის_20სახელმძღვანელო_20contributing_20guide_15',['კონტრიბუციის სახელმძღვანელო (Contributing Guide)',['../md_docs_2contributing_2contributing__guide.html',1,'']]],
+  ['კონფიგურაცია_20system_20configuration_16',['სისტემის კონფიგურაცია (System Configuration)',['../md_docs_2tutorials_2system__configuration.html',1,'']]],
+  ['კონფიგურაციისა_20და_20შენახვის_20ტერმინები_20glossary_20—_20configuration_20storage_17',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
+  ['კონფიგურაციის_20მართვის_20პროცესი_20configuration_20flow_18',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]],
+  ['კონფიგურაციის_20მართვის_20წესები_19',['კონფიგურაციის მართვის წესები',['../md_docs_2convention_2configuration__management.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🎓_20best_20practices_0',['🎓 Best Practices',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1350',1,'']]]
+  ['🌡️_20მოდული_3a_20tt_20sensor_5faggregator_20tt_0',['🌡️ მოდული: &lt;tt&gt;sensor_aggregator&lt;/tt&gt;',['../md_components_2modules_2sensors_2sensor__aggregator_2README.html',1,'']]],
+  ['🌡️_20ტემპერატურის_20სენსორი_3a_1',['🌡️ ტემპერატურის სენსორი:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1314',1,'']]]
 ];

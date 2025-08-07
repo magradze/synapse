@@ -107,51 +107,128 @@ $(document).ready(function(){initNavTree('ui__manager_8h.html',''); initResizabl
 <code>#include &quot;<a class="el" href="system__manager__interface_8h_source.html">system_manager_interface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="timer__interface_8h_source.html">timer_interface.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="time__sync__interface_8h_source.html">time_sync_interface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wifi__interface_8h_source.html">wifi_interface.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui_manager.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui__manager_8h__incl.png" border="0" usemap="#acomponents_2modules_2utilities_2ui__manager_2include_2ui__manager_8h" alt=""/></div>
 <map name="acomponents_2modules_2utilities_2ui__manager_2include_2ui__manager_8h" id="acomponents_2modules_2utilities_2ui__manager_2include_2ui__manager_8h">
-<area shape="rect" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="581,5,746,60"/>
-<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="381,181,503,207"/>
-<area shape="poly" title=" " alt="" coords="628,62,471,175,468,171,625,58"/>
-<area shape="rect" title=" " alt="" coords="5,255,79,280"/>
-<area shape="poly" title=" " alt="" coords="594,63,86,252,84,247,592,58"/>
-<area shape="rect" href="display__driver__interface_8h.html" title="Universal Service API contract for display drivers." alt="" coords="527,181,717,207"/>
-<area shape="poly" title=" " alt="" coords="645,61,631,84,621,109,617,139,619,167,614,168,612,139,615,107,626,81,640,59"/>
-<area shape="rect" href="system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="629,108,841,133"/>
-<area shape="poly" title=" " alt="" coords="687,58,719,96,715,99,683,62"/>
-<area shape="rect" href="timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="793,181,928,207"/>
-<area shape="poly" title=" " alt="" coords="747,43,777,52,806,65,834,83,856,106,864,121,868,137,868,167,863,167,862,137,859,123,852,110,830,87,804,70,775,57,745,48"/>
-<area shape="rect" href="time__sync__interface_8h.html" title="Public Service API contract for the Time Sync module." alt="" coords="933,108,1100,133"/>
-<area shape="poly" title=" " alt="" coords="747,51,957,102,956,107,746,57"/>
-<area shape="rect" title=" " alt="" coords="103,255,199,280"/>
-<area shape="poly" title=" " alt="" coords="396,209,212,254,211,249,395,204"/>
-<area shape="rect" title=" " alt="" coords="659,255,742,280"/>
-<area shape="poly" title=" " alt="" coords="484,204,647,249,645,254,483,209"/>
-<area shape="rect" title=" " alt="" coords="767,255,837,280"/>
-<area shape="poly" title=" " alt="" coords="504,204,754,252,753,257,503,209"/>
-<area shape="rect" title=" " alt="" coords="861,255,943,280"/>
-<area shape="poly" title=" " alt="" coords="503,202,516,204,681,226,848,252,848,257,680,231,515,209,502,207"/>
-<area shape="poly" title=" " alt="" coords="381,207,93,257,92,252,381,202"/>
-<area shape="rect" title=" " alt="" coords="224,255,375,280"/>
-<area shape="poly" title=" " alt="" coords="420,209,336,251,334,246,418,204"/>
-<area shape="rect" title=" " alt="" coords="399,255,536,280"/>
-<area shape="poly" title=" " alt="" coords="449,206,461,241,456,243,444,208"/>
-<area shape="poly" title=" " alt="" coords="636,205,680,244,676,247,633,209"/>
-<area shape="poly" title=" " alt="" coords="652,204,761,247,759,252,650,209"/>
-<area shape="poly" title=" " alt="" coords="668,204,849,250,847,255,666,209"/>
-<area shape="rect" title=" " alt="" coords="561,255,635,280"/>
-<area shape="poly" title=" " alt="" coords="621,208,609,242,604,241,616,206"/>
-<area shape="poly" title=" " alt="" coords="689,136,503,181,502,175,688,131"/>
-<area shape="poly" title=" " alt="" coords="743,133,793,241,789,243,738,135"/>
-<area shape="poly" title=" " alt="" coords="808,131,888,150,922,164,943,180,949,196,946,214,926,246,922,243,941,212,944,197,939,183,919,168,887,155,806,136"/>
-<area shape="poly" title=" " alt="" coords="836,209,740,251,738,247,834,204"/>
-<area shape="poly" title=" " alt="" coords="853,209,822,246,818,243,849,205"/>
-<area shape="poly" title=" " alt="" coords="870,206,891,241,886,244,865,208"/>
-<area shape="poly" title=" " alt="" coords="1017,134,1007,169,987,208,964,232,938,250,935,245,960,227,983,205,1002,167,1012,133"/>
-<area shape="rect" title=" " alt="" coords="1054,181,1118,207"/>
-<area shape="poly" title=" " alt="" coords="1030,132,1067,170,1063,173,1026,136"/>
+<area shape="rect" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="449,5,614,60"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="1137,328,1259,353"/>
+<area shape="poly" title=" " alt="" coords="615,44,728,69,866,109,938,137,1010,170,1080,208,1144,253,1171,282,1190,314,1185,317,1167,286,1140,257,1077,213,1008,174,936,142,864,114,727,74,614,49"/>
+<area shape="rect" title=" " alt="" coords="2075,401,2148,427"/>
+<area shape="poly" title=" " alt="" coords="615,33,1089,47,1755,77,2077,98,2348,124,2455,139,2536,155,2588,172,2602,182,2607,192,2607,269,2604,298,2594,320,2576,338,2551,356,2520,370,2477,381,2370,399,2256,409,2162,414,2161,408,2256,403,2369,393,2476,376,2518,365,2549,351,2573,334,2589,317,2599,297,2602,269,2602,193,2598,185,2585,177,2534,160,2454,144,2348,129,2077,104,1754,82,1089,53,614,39"/>
+<area shape="rect" href="display__driver__interface_8h.html" title="Universal Service API contract for display drivers." alt="" coords="5,328,196,353"/>
+<area shape="poly" title=" " alt="" coords="449,50,371,73,332,89,296,110,236,160,185,217,144,273,116,317,112,314,140,270,180,214,232,156,292,106,330,85,370,68,448,45"/>
+<area shape="rect" href="system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="425,255,637,280"/>
+<area shape="poly" title=" " alt="" coords="534,60,534,241,529,241,529,60"/>
+<area shape="rect" href="timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="220,328,355,353"/>
+<area shape="poly" title=" " alt="" coords="449,44,413,52,377,65,344,84,316,110,301,133,290,160,280,216,280,271,285,314,280,314,274,271,274,216,285,158,296,131,312,106,341,80,375,60,411,47,448,38"/>
+<area shape="rect" href="time__sync__interface_8h.html" title="Public Service API contract for the Time Sync module." alt="" coords="325,108,492,133"/>
+<area shape="poly" title=" " alt="" coords="495,62,438,102,435,98,492,58"/>
+<area shape="rect" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="1385,108,1507,133"/>
+<area shape="poly" title=" " alt="" coords="614,39,1371,110,1371,115,614,44"/>
+<area shape="rect" title=" " alt="" coords="1831,401,1927,427"/>
+<area shape="poly" title=" " alt="" coords="1259,349,1272,351,1417,367,1530,376,1789,399,1817,402,1817,407,1788,404,1530,381,1416,372,1271,356,1258,354"/>
+<area shape="rect" title=" " alt="" coords="415,401,498,427"/>
+<area shape="poly" title=" " alt="" coords="1137,350,1074,356,799,377,679,387,525,404,512,406,511,401,524,399,678,381,799,371,1074,351,1137,345"/>
+<area shape="rect" title=" " alt="" coords="536,401,607,427"/>
+<area shape="poly" title=" " alt="" coords="1137,352,621,410,620,404,1136,346"/>
+<area shape="rect" title=" " alt="" coords="945,401,1027,427"/>
+<area shape="poly" title=" " alt="" coords="1165,356,1034,399,1032,394,1163,351"/>
+<area shape="poly" title=" " alt="" coords="1259,349,1272,351,1491,368,1663,372,1835,378,1936,385,2054,399,2061,400,2061,405,2054,404,1935,391,1834,383,1663,377,1491,373,1271,356,1258,354"/>
+<area shape="rect" title=" " alt="" coords="1451,401,1601,427"/>
+<area shape="poly" title=" " alt="" coords="1251,351,1460,396,1459,401,1250,356"/>
+<area shape="rect" title=" " alt="" coords="1639,401,1776,427"/>
+<area shape="poly" title=" " alt="" coords="1259,349,1272,351,1625,399,1625,405,1271,356,1258,354"/>
+<area shape="poly" title=" " alt="" coords="158,351,402,399,401,404,157,356"/>
+<area shape="poly" title=" " alt="" coords="186,351,510,399,523,401,522,406,510,404,185,356"/>
+<area shape="poly" title=" " alt="" coords="196,350,208,351,624,385,932,406,931,412,624,390,207,356,196,355"/>
+<area shape="rect" title=" " alt="" coords="63,401,138,427"/>
+<area shape="poly" title=" " alt="" coords="103,354,103,388,98,388,98,354"/>
+<area shape="poly" title=" " alt="" coords="638,277,1124,329,1123,334,637,283"/>
+<area shape="poly" title=" " alt="" coords="537,280,567,387,562,389,532,281"/>
+<area shape="poly" title=" " alt="" coords="554,278,630,318,700,351,761,369,824,384,932,403,931,408,823,389,760,374,698,356,628,323,551,283"/>
+<area shape="poly" title=" " alt="" coords="316,351,417,393,415,398,314,356"/>
+<area shape="poly" title=" " alt="" coords="334,351,523,398,522,403,332,356"/>
+<area shape="poly" title=" " alt="" coords="355,349,368,351,687,384,932,406,931,411,687,389,367,356,355,354"/>
+<area shape="poly" title=" " alt="" coords="399,135,381,156,367,182,363,212,371,236,389,257,415,278,456,295,526,318,641,351,799,383,932,403,931,408,798,388,640,356,525,323,454,300,413,282,386,261,367,238,358,212,362,181,377,153,395,132"/>
+<area shape="rect" title=" " alt="" coords="377,181,441,207"/>
+<area shape="poly" title=" " alt="" coords="411,134,411,168,406,168,406,134"/>
+<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1582,181,1670,207"/>
+<area shape="poly" title=" " alt="" coords="1476,131,1585,174,1583,179,1474,136"/>
+<area shape="poly" title=" " alt="" coords="1653,205,1678,219,1702,238,1716,259,1716,270,1709,282,1695,294,1677,304,1630,318,1573,326,1510,329,1381,329,1272,331,1272,326,1381,324,1510,324,1573,321,1629,313,1674,299,1692,290,1705,278,1711,269,1711,260,1698,241,1675,224,1650,209"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="711,328,835,353"/>
+<area shape="poly" title=" " alt="" coords="1582,199,1085,218,826,235,740,246,714,251,702,257,698,264,697,271,704,288,720,304,741,319,738,323,717,308,700,291,691,272,693,262,699,253,713,246,739,240,826,230,1085,213,1582,194"/>
+<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="1376,255,1532,280"/>
+<area shape="poly" title=" " alt="" coords="1599,209,1496,252,1494,247,1597,204"/>
+<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="2352,255,2489,280"/>
+<area shape="poly" title=" " alt="" coords="1671,196,1948,216,2339,252,2338,257,1947,221,1670,201"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="712,255,844,280"/>
+<area shape="poly" title=" " alt="" coords="1582,201,1281,221,864,257,858,258,857,253,863,252,1280,216,1581,195"/>
+<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1963,328,2065,353"/>
+<area shape="poly" title=" " alt="" coords="1670,195,1788,201,1934,213,2063,229,2109,240,2133,253,2140,265,2141,276,2127,296,2100,313,2068,326,2066,321,2097,308,2123,292,2136,275,2135,266,2130,257,2107,245,2062,235,1933,218,1787,206,1670,200"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="1560,328,1697,353"/>
+<area shape="poly" title=" " alt="" coords="1670,195,1906,215,2021,231,2061,241,2082,253,2105,276,2101,284,2080,288,1965,300,1711,331,1711,325,1964,295,2079,283,2098,279,2100,277,2079,257,2059,246,2020,236,1906,220,1670,200"/>
+<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="379,328,534,353"/>
+<area shape="poly" title=" " alt="" coords="1582,198,1315,203,933,213,584,230,468,243,432,249,416,257,410,270,413,285,422,302,435,317,431,320,418,305,408,287,404,269,412,253,431,244,467,237,584,225,933,207,1315,197,1582,193"/>
+<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="1205,255,1351,280"/>
+<area shape="poly" title=" " alt="" coords="1582,207,1348,254,1347,249,1581,202"/>
+<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="911,328,1061,353"/>
+<area shape="poly" title=" " alt="" coords="1582,198,1420,201,1207,210,1103,217,1013,227,945,241,923,248,911,257,906,264,905,272,913,289,930,305,952,319,949,323,927,309,909,292,900,273,901,263,907,253,921,243,944,235,1012,222,1102,212,1206,204,1420,196,1582,193"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="2245,255,2327,280"/>
+<area shape="poly" title=" " alt="" coords="1670,196,1908,215,2066,232,2226,252,2231,253,2230,258,2226,257,2066,237,1908,221,1670,201"/>
+<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1721,328,1888,353"/>
+<area shape="poly" title=" " alt="" coords="1670,195,1783,202,1922,213,2046,230,2088,241,2112,253,2118,267,2112,282,2085,295,2033,308,1902,329,1901,324,2032,302,2083,290,2108,278,2113,267,2108,256,2087,246,2045,235,1922,219,1783,207,1670,200"/>
+<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="1557,255,1695,280"/>
+<area shape="poly" title=" " alt="" coords="1629,207,1629,241,1623,241,1623,207"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="1933,255,2068,280"/>
+<area shape="poly" title=" " alt="" coords="1671,201,1927,249,1926,255,1670,206"/>
+<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="1770,255,1909,280"/>
+<area shape="poly" title=" " alt="" coords="1661,204,1793,248,1791,253,1659,209"/>
+<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="920,255,1129,280"/>
+<area shape="poly" title=" " alt="" coords="1582,203,1135,256,1135,250,1581,198"/>
+<area shape="poly" title=" " alt="" coords="2409,282,2358,319,2324,339,2288,356,2198,382,2124,391,2050,395,1956,404,1941,406,1941,401,1955,399,2050,389,2124,386,2197,377,2286,351,2322,335,2355,315,2405,278"/>
+<area shape="poly" title=" " alt="" coords="2458,278,2490,291,2520,308,2531,319,2537,330,2538,343,2531,355,2505,374,2466,388,2419,399,2365,406,2255,414,2162,416,2162,411,2255,409,2365,401,2418,394,2465,383,2502,369,2527,352,2532,341,2532,332,2526,322,2516,313,2488,296,2456,283"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="1283,328,1433,353"/>
+<area shape="poly" title=" " alt="" coords="2352,281,2340,283,1447,337,1447,331,2339,277,2352,276"/>
+<area shape="rect" title=" " alt="" coords="2351,328,2421,353"/>
+<area shape="poly" title=" " alt="" coords="2417,282,2400,317,2395,314,2413,279"/>
+<area shape="rect" title=" " alt="" coords="2445,328,2516,353"/>
+<area shape="poly" title=" " alt="" coords="2433,279,2464,316,2460,319,2429,282"/>
+<area shape="poly" title=" " alt="" coords="1283,355,1272,356,897,391,620,412,620,407,897,386,1271,351,1282,349"/>
+<area shape="poly" title=" " alt="" coords="796,278,901,351,959,391,956,395,898,356,793,282"/>
+<area shape="poly" title=" " alt="" coords="780,281,777,315,772,314,774,280"/>
+<area shape="poly" title=" " alt="" coords="1964,350,1901,356,1402,391,1041,412,1041,407,1402,386,1900,351,1963,345"/>
+<area shape="rect" title=" " alt="" coords="1967,401,2042,427"/>
+<area shape="poly" title=" " alt="" coords="2015,354,2011,388,2005,387,2010,353"/>
+<area shape="poly" title=" " alt="" coords="1560,349,1446,356,1187,367,985,372,783,381,525,404,512,406,511,400,524,399,783,376,985,367,1187,362,1446,351,1560,344"/>
+<area shape="poly" title=" " alt="" coords="1560,352,1040,409,1040,404,1560,347"/>
+<area shape="poly" title=" " alt="" coords="1698,349,2054,399,2061,400,2060,405,2054,404,1697,354"/>
+<area shape="poly" title=" " alt="" coords="1614,356,1556,395,1553,391,1611,351"/>
+<area shape="poly" title=" " alt="" coords="1643,351,1686,390,1683,394,1640,355"/>
+<area shape="poly" title=" " alt="" coords="459,354,459,388,454,388,454,354"/>
+<area shape="poly" title=" " alt="" coords="476,351,542,392,540,396,474,356"/>
+<area shape="poly" title=" " alt="" coords="535,350,932,403,931,408,534,355"/>
+<area shape="poly" title=" " alt="" coords="1267,282,1223,321,1219,317,1263,278"/>
+<area shape="poly" title=" " alt="" coords="1245,283,1189,303,1127,330,1067,364,1015,396,1012,392,1064,359,1125,326,1187,298,1243,278"/>
+<area shape="poly" title=" " alt="" coords="1352,276,1365,277,1500,282,1726,287,1950,299,2031,310,2060,317,2078,326,2091,339,2101,355,2111,387,2106,388,2096,357,2087,342,2075,330,2058,322,2030,316,1949,305,1726,292,1500,287,1364,283,1351,281"/>
+<area shape="poly" title=" " alt="" coords="989,354,989,388,983,388,983,354"/>
+<area shape="rect" title=" " alt="" coords="2191,328,2275,353"/>
+<area shape="poly" title=" " alt="" coords="2279,282,2252,319,2247,316,2275,279"/>
+<area shape="poly" title=" " alt="" coords="1721,355,1710,356,1385,380,1067,397,621,414,620,409,1067,391,1384,374,1710,351,1721,350"/>
+<area shape="poly" title=" " alt="" coords="1721,355,1710,356,1327,390,1041,412,1040,406,1326,385,1710,351,1721,350"/>
+<area shape="poly" title=" " alt="" coords="1761,356,1585,400,1584,395,1759,351"/>
+<area shape="poly" title=" " alt="" coords="1791,356,1736,395,1733,391,1787,351"/>
+<area shape="poly" title=" " alt="" coords="1838,351,1960,394,1958,399,1836,356"/>
+<area shape="poly" title=" " alt="" coords="1558,283,1273,330,1272,324,1557,277"/>
+<area shape="poly" title=" " alt="" coords="1933,281,1921,283,1741,298,1599,306,1456,314,1272,331,1272,325,1455,309,1598,301,1740,293,1920,277,1933,276"/>
+<area shape="poly" title=" " alt="" coords="2052,278,2091,296,2109,310,2123,327,2129,342,2130,358,2124,389,2119,388,2125,358,2124,343,2118,329,2105,313,2088,300,2050,283"/>
+<area shape="poly" title=" " alt="" coords="1770,280,1752,283,1514,306,1273,331,1272,325,1514,300,1751,277,1769,275"/>
+<area shape="poly" title=" " alt="" coords="1770,282,1656,303,1528,331,1488,344,1447,356,1334,377,1222,393,1041,411,1040,406,1221,388,1333,372,1445,351,1486,339,1527,325,1655,297,1769,277"/>
+<area shape="poly" title=" " alt="" coords="1770,282,1635,305,1579,318,1550,330,1541,342,1534,357,1529,388,1523,387,1529,355,1536,340,1547,326,1578,313,1634,300,1769,276"/>
+<area shape="poly" title=" " alt="" coords="1860,278,1880,293,1898,312,1908,333,1908,344,1903,355,1885,369,1856,382,1786,401,1785,396,1855,377,1882,365,1899,352,1903,343,1903,334,1894,315,1876,297,1857,282"/>
+<area shape="poly" title=" " alt="" coords="1021,282,1001,317,996,315,1016,279"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">

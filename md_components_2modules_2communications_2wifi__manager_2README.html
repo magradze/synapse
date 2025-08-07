@@ -97,149 +97,120 @@ $(document).ready(function(){initNavTree('md_components_2modules_2communications
 <h1><a class="anchor" id="autotoc_md20"></a>
 1. 📜 მიმოხილვა</h1>
 <p><b>მოდულის სახელი:</b> <code>wifi_manager</code> <br  />
- <b>კატეგორია:</b> <code>communication</code> <br  />
- <b>ვერსია:</b> 2.2.0 <br  />
+ <b>კატეგორია:</b> <code>communications</code> <br  />
+ <b>ვერსია:</b> 3.0.0 <br  />
  <b>ავტორი:</b> გიორგი მაგრაძე &amp; Synapse AI Assistant</p>
 <p><code>wifi_manager</code> არის Synapse Framework-ის ფუნდამენტური საკომუნიკაციო მოდული, რომელიც უზრუნველყოფს WiFi კავშირის სრულფასოვან, ავტომატიზებულ და მდგრად მართვას. მისი მთავარი ამოცანებია:</p>
 <ul>
 <li><b>🔗 კავშირის ავტომატური მართვა:</b> შენახული მონაცემებით (credentials) ქსელთან ავტომატური დაკავშირება მოწყობილობის ჩართვისას.</li>
 <li><b>🔄 კავშირის აღდგენა:</b> კავშირის გაწყვეტის შემთხვევაში, მისი ავტომატურად აღდგენის მცდელობა ექსპონენციალური backoff სტრატეგიით.</li>
 <li><b>📲 Provisioning-თან ინტეგრაცია:</b> ახალი ქსელის მონაცემების მიღება <code>provisioning</code> მოდულებიდან და მათი უსაფრთხოდ შენახვა.</li>
-<li><b>📢 სისტემური ივენთების გენერაცია:</b> სხვა მოდულების ინფორმირება WiFi კავშირის სტატუსის ცვლილების შესახებ (<code>WIFI_EVENT_CONNECTED</code>, <code>WIFI_EVENT_DISCONNECTED</code>, <code>WIFI_EVENT_IP_ASSIGNED</code>).</li>
-<li><b>📡 დისტანციური პასუხები:</b> <code>wifi status</code> ბრძანების შესრულებისას, აქვეყნებს დეტალურ სტატუსს JSON ფორმატში <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთის სახით, რაც <code>mqtt_manager</code>-ს საშუალებას აძლევს, ეს ინფორმაცია გარე სისტემებს მიაწოდოს.</li>
+<li><b>📢 სისტემური ივენთების გენერაცია:</b> სხვა მოდულების ინფორმირება WiFi კავშირის სტატუსის ცვლილების შესახებ (<code>WIFI_EVENT_CONNECTED</code>, <code>WIFI_EVENT_DISCONNECTED</code>).</li>
+<li><b>asynchronous API:</b> აწვდის <code>Promise</code>-ზე დაფუძნებულ API-ს სტატუსის უსაფრთხო და ასინქრონული მოთხოვნისთვის.</li>
 <li><b>⌨️ CLI ინტეგრაცია:</b> სრული, ინტერაქტიული მართვა და დიაგნოსტიკა სერიული კონსოლიდან.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md21"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
-<li><b>Event-driven არქიტექტურა:</b> მოდული აქტიურად იყენებს <code>Event Bus</code>-ს. ის როგორც <b>აქვეყნებს</b> ივენთებს საკუთარი სტატუსის შესახებ, ისე <b>გამოიწერს</b> სხვა მოდულების (მაგ., <code>provisioning</code>, <code>system_manager</code>) ივენთებს.</li>
-<li><b>აბსტრაგირებული მდგრადობა (Abstracted Persistence):</b> ქსელის მონაცემები (SSID და პაროლი) ინახება ცენტრალიზებული **<code>Storage Manager</code>** სერვისის მეშვეობით. ეს ნიშნავს, რომ <code>wifi_manager</code>-მა არ "იცის", მონაცემები ფიზიკურად NVS-ში ინახება თუ SPIFFS ფაილში.</li>
-<li><b>ფონური ოპერაციები:</b> მოდული ეყრდნობა ESP-IDF-ის <code>event loop</code> სისტემას და FreeRTOS ტაიმერებს, რათა კავშირის მართვის ყველა ოპერაცია ასინქრონულად, ფონურ რეჟიმში შესრულდეს.</li>
-<li><b>დაგვიანებული ინიციალიზაცია (Lazy Initialization of Dependencies):</b> მოდული არ არის პირდაპირ დამოკიდებული <code>command_router</code>-ზე. ის იყენებს <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთს, რათა ბრძანებების რეგისტრაცია მოახდინოს მხოლოდ მას შემდეგ, რაც დარწმუნდება, რომ <code>command_router</code>-ის სერვისი უკვე ხელმისაწვდომია.</li>
+<li><b>გამოყოფილი ტასკი (Dedicated Task):</b> კავშირის დამყარების, აღდგენის და API მოთხოვნების დამუშავების ყველა ოპერაცია სრულდება მოდულის საკუთარ, გამოყოფილ FreeRTOS ტასკში. ეს უზრუნველყოფს, რომ ბლოკირებადი ქსელური ოპერაციები არ აფერხებენ სისტემის სხვა კომპონენტების მუშაობას და გამორიცხავს სისტემური ტასკების (მაგ., <code>Tmr Svc</code>) სტეკის გადავსების რისკს.</li>
+<li><b>Service Provider &amp; Consumer:</b> მოდული არის როგორც სერვისის <b>მომწოდებელი</b> (<code><a class="el" href="structwifi__api__t.html">wifi_api_t</a></code>), ისე <b>მომხმარებელი</b> (<code><a class="el" href="structstorage__api__t.html" title="The public Service API structure for the Storage Manager.">storage_api_t</a></code>, <code><a class="el" href="structcmd__router__api__t.html" title="The public Service API structure for the Command Router.">cmd_router_api_t</a></code>).</li>
+<li><b>Event-driven:</b> მოდული აქტიურად იყენებს <code>Event Bus</code>-ს. ის როგორც <b>აქვეყნებს</b> ივენთებს საკუთარი სტატუსის შესახებ, ისე <b>გამოიწერს</b> სხვა მოდულების ივენთებს.</li>
+<li><b>აბსტრაგირებული მდგრადობა (Abstracted Persistence):</b> ქსელის მონაცემები ინახება ცენტრალიზებული **<code>Storage Manager</code>** სერვისის მეშვეობით, რაც უზრუნველყოფს <code>backend</code>-ისგან (NVS, SPIFFS) დამოუკიდებლობას.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md22"></a>
 3. ⚙️ კონფიგურაცია</h1>
-<p>მოდულის საბაზისო კონფიგურაცია ხდება <code>system_config.json</code> ფაილში, თუმცა მისი ქცევის პარამეტრების უმეტესობა იმართება <code>Kconfig</code>-ის (<code>idf.py menuconfig</code>) საშუალებით.</p>
-<p>**<code>system_config.json</code> მაგალითი:**</p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;type&quot;: &quot;wifi_manager&quot;,</div>
-<div class="line">    &quot;enabled&quot;: true,</div>
-<div class="line">    &quot;config&quot;: {</div>
-<div class="line">        &quot;instance_name&quot;: &quot;main_wifi&quot;</div>
+<p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadCenter">სავალდებულო    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft"><code>wifi_manager</code>-ის ამ ინსტანციის უნიკალური სახელი.   </td><td class="markdownTableBodyCenter">✅    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><code>storage_service</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">იმ <code>storage_manager</code> სერვისის სახელი, რომელიც უნდა გამოიყენოს მონაცემების შესანახად.   </td><td class="markdownTableBodyCenter">✅   </td></tr>
+</table>
+<p>**<code>config.json</code> მაგალითი:**</p>
+<div class="fragment"><div class="line">[</div>
+<div class="line">    {</div>
+<div class="line">        &quot;type&quot;: &quot;wifi_manager&quot;,</div>
+<div class="line">        &quot;enabled&quot;: true,</div>
+<div class="line">        &quot;config&quot;: {</div>
+<div class="line">            &quot;instance_name&quot;: &quot;main_wifi_manager&quot;,</div>
+<div class="line">            &quot;storage_service&quot;: &quot;main_storage&quot;</div>
+<div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>**<code>Kconfig</code> პარამეტრები (<code>idf.py menuconfig</code>):**</p>
-<p><code>Component config</code> -&gt; <code>Synapse Framework</code> -&gt; <code>Modules</code> -&gt; <code>WiFi Manager</code> მენიუში შეგიძლიათ დააკონფიგურიროთ:</p>
-<ul>
-<li><b>Reconnect Attempts:</b> ხელახალი დაკავშირების მცდელობების მაქსიმალური რაოდენობა.</li>
-<li><b>Reconnect Delay:</b> საწყისი დაყოვნება ხელახალი დაკავშირებისას.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md23"></a>
-4. 📢 ივენთები (Events)</h1>
+<div class="line">]</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md23"></a>
+4. 🔌 Service API (&lt;tt&gt;wifi_api_t&lt;/tt&gt;)</h1>
+<p><code>wifi_manager</code> აწვდის საჯარო Service API-ს, რომელიც სხვა მოდულებს საშუალებას აძლევს, პროგრამულად მართონ და მოითხოვონ ინფორმაცია WiFi კავშირის შესახებ.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">ფუნქცია   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><code>get_status_async(...)</code>   </td><td class="markdownTableBodyLeft"><b>ასინქრონულად</b> ითხოვს WiFi-ს სრულ სტატუსს და შედეგს აბრუნებს <code>Promise</code> მექანიზმით.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><code>is_connected(...)</code>   </td><td class="markdownTableBodyLeft"><b>სინქრონულად</b> და მომენტალურად აბრუნებს კავშირის ბოლო ცნობილ მდგომარეობას (<code>true</code> ან <code>false</code>).   </td></tr>
+</table>
 <h2><a class="anchor" id="autotoc_md24"></a>
+&lt;tt&gt;Promise&lt;/tt&gt;-ზე დაფუძნებული სტატუსის მოთხოვნა</h2>
+<p>ეს არის სტატუსის მიღების <b>რეკომენდებული</b> გზა.</p>
+<div class="fragment"><div class="line"><span class="comment">// მომხმარებელი მოდულის კოდი (მაგ., ui_manager.c)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 1. Callback ფუნქციები</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_wifi_status_ready(<span class="keywordtype">void</span>* result_data, <span class="keywordtype">void</span>* user_context) {</div>
+<div class="line">    <span class="keywordtype">char</span>* json_string = (<span class="keywordtype">char</span>*)result_data;</div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;WiFi Status Received: %s&quot;</span>, json_string);</div>
+<div class="line">    <span class="comment">// ... UI-ს განახლების ლოგიკა ...</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_wifi_status_failed(<span class="keywordtype">void</span>* error_data, <span class="keywordtype">void</span>* user_context) {</div>
+<div class="line">    ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to get WiFi status.&quot;</span>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 2. API-ს გამოძახება</span></div>
+<div class="line"><span class="keywordtype">void</span> request_update() {</div>
+<div class="line">    <span class="comment">// private_data-&gt;wifi_service არის ინექცირებული wifi_api_t*</span></div>
+<div class="line">    <span class="comment">// private_data-&gt;wifi_module_handle არის ინექცირებული module_t*</span></div>
+<div class="line">    private_data-&gt;wifi_service-&gt;get_status_async(</div>
+<div class="line">        private_data-&gt;wifi_module_handle,</div>
+<div class="line">        on_wifi_status_ready,</div>
+<div class="line">        on_wifi_status_failed,</div>
+<div class="line">        self <span class="comment">// user_context</span></div>
+<div class="line">    );</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md25"></a>
+5. 📢 ივენთები (Events)</h1>
+<h2><a class="anchor" id="autotoc_md26"></a>
 გამოქვეყნებული ივენთები</h2>
-<p><code>wifi_manager</code> აქვეყნებს შემდეგ ივენთებს, რომლებზეც სხვა მოდულებს შეუძლიათ გამოწერა:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">მონაცემები (Payload)   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>WIFI_EVENT_CONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">✅ მოწყობილობა წარმატებით დაუკავშირდა WiFi ქსელს (L2 კავშირი).    </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_EVENT_CONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">✅ მოწყობილობა წარმატებით დაუკავშირდა WiFi ქსელს.    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>WIFI_EVENT_DISCONNECTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">❌ მოწყობილობამ დაკარგა კავშირი WiFi ქსელთან.    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>WIFI_EVENT_IP_ASSIGNED</code>   </td><td class="markdownTableBodyLeft"><code>esp_netif_ip_info_t*</code>   </td><td class="markdownTableBodyLeft">🌐 მოწყობილობამ მიიღო IP მისამართი DHCP სერვერისგან.    </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_EVENT_IP_ASSIGNED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">🌐 მოწყობილობამ მიიღო IP მისამართი.    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>WIFI_CREDENTIALS_NOT_FOUND</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">❓ საცავში ვერ მოიძებნა შენახული მონაცემები, საჭიროა provisioning.    </td></tr>
+<td class="markdownTableBodyLeft"><code>WIFI_CREDENTIALS_NOT_FOUND</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">❓ საცავში ვერ მოიძებნა შენახული მონაცემები.    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>FMW_EVENT_WIFI_STATUS_READY</code>   </td><td class="markdownTableBodyLeft"><code>char*</code> (JSON)   </td><td class="markdownTableBodyLeft">📊 <code>wifi status</code> ბრძანების პასუხი JSON ფორმატში.   </td></tr>
+<td class="markdownTableBodyLeft"><code>PROV_START_REQUESTED</code>   </td><td class="markdownTableBodyLeft"><code>NULL</code>   </td><td class="markdownTableBodyLeft">📲 ითხოვს <code>provisioning</code> პროცესის დაწყებას, როდესაც დაკავშირება ვერ ხერხდება.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md25"></a>
-გამოწერილი ივენთები</h2>
-<p><code>wifi_manager</code> გამოიწერს შემდეგ ივენთებს:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">რეაქცია    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>PROV_CREDENTIALS_RECEIVED</code>   </td><td class="markdownTableBodyLeft">იღებს ახალ WiFi მონაცემებს და ინახავს მათ <code>Storage Manager</code>-ის მეშვეობით.    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
-</table>
-<h1><a class="anchor" id="autotoc_md26"></a>
-5. 📡 MQTT ინტერფეისი</h1>
-<p>ეს მოდული პირდაპირ არ უკავშირდება MQTT-ს, მაგრამ ის აწვდის ინფორმაციას <code>mqtt_manager</code>-ს <code>Event Bus</code>-ის საშუალებით.</p>
-<ul>
-<li><b>გამოსაქვეყნებელი თემა:</b> <code>synapse/devices/{id}/state/wifi/status</code></li>
-<li><b>როდის ქვეყნდება:</b> როდესაც <code>mqtt_manager</code> მიიღებს <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთს.</li>
-<li><p class="startli"><b>Payload (მაგალითი):</b></p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">  &quot;module_state&quot;: &quot;Enabled&quot;,</div>
-<div class="line">  &quot;connection_status&quot;: &quot;Connected&quot;,</div>
-<div class="line">  &quot;ssid&quot;: &quot;MyHomeWiFi&quot;,</div>
-<div class="line">  &quot;channel&quot;: 11,</div>
-<div class="line">  &quot;rssi&quot;: -55,</div>
-<div class="line">  &quot;ip_address&quot;: &quot;192.168.1.123&quot;</div>
-<div class="line">}</div>
-</div><!-- fragment --></li>
-</ul>
+<p><b>შენიშვნა:</b> <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთი <b>მოძველებულია (deprecated)</b> და აღარ გამოიყენება. მის ნაცვლად გამოიყენეთ <code>Promise</code>-ზე დაფუძნებული API.</p>
 <h1><a class="anchor" id="autotoc_md27"></a>
 6. ⌨️ CLI ბრძანებები (Command Line Interface)</h1>
-<p>მოდული არეგისტრირებს <code>wifi</code> ბრძანებას, რომელიც იძლევა WiFi-ს სრული მართვისა და დიაგნოსტიკის საშუალებას.</p>
+<p>მოდული არეგისტრირებს <code>wifi</code> ბრძანებას სრული მართვისა და დიაგნოსტიკისთვის.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ბრძანება   </th><th class="markdownTableHeadLeft">არგუმენტები   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>wifi status</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">ℹ️ გამოაქვს დეტალური ინფორმაცია კონსოლში <b>და</b> აქვეყნებს <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთს.    </td></tr>
+<td class="markdownTableBodyLeft"><code>wifi status</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">ℹ️ ითხოვს სტატუსს ასინქრონულად და ბეჭდავს შედეგს კონსოლში.    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>wifi scan</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">📡 ასკანერებს და გამოაქვს ხელმისაწვდომი WiFi ქსელების სია.    </td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>wifi connect</code>   </td><td class="markdownTableBodyLeft"><code>&lt;ssid&gt; &lt;password&gt;</code>   </td><td class="markdownTableBodyLeft">🔗 ცდილობს მითითებულ ქსელთან დაკავშირებას და ინახავს მონაცემებს.    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>wifi disconnect</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🔌 წყვეტს მიმდინარე WiFi კავშირს.    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>wifi enable</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">✅ რთავს <code>wifi_manager</code> მოდულს.    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>wifi disable</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">❌ თიშავს <code>wifi_manager</code> მოდულს და წყვეტს კავშირს.    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>wifi erase_creds</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🗑️ შლის შენახულ ყველა WiFi მონაცემს.    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>wifi set_hostname</code>   </td><td class="markdownTableBodyLeft"><code>&lt;name&gt; [--reconnect]</code>   </td><td class="markdownTableBodyLeft">📝 ცვლის მოწყობილობის Hostname-ს.    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>wifi set_power_save</code>   </td><td class="markdownTableBodyLeft"><code>&lt;off\|min\|max&gt;</code>   </td><td class="markdownTableBodyLeft">🔋 აყენებს WiFi-ს ენერგიის დაზოგვის რეჟიმს.   </td></tr>
+<td class="markdownTableBodyLeft"><code>wifi erase_creds</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">🗑️ შლის შენახულ ყველა WiFi მონაცემს.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md28"></a>
-7. 💡 გამოყენების მაგალითი (მოთხოვნა-პასუხი)</h1>
-<ol type="1">
-<li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
-<li><b>გამოიწერს:</b> <code>synapse/devices/+/state/#</code></li>
-<li><b>აქვეყნებს:</b><ul>
-<li><b>Topic:</b> <code>synapse/devices/{id}/cmd/in</code></li>
-<li><b>Payload:</b> <code>"wifi status"</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><b>⚙️ მოწყობილობა (Synapse Framework):</b><ul>
-<li><code>mqtt_manager</code> იღებს ბრძანებას და აგზავნის ივენთს <code>Command Router</code>-ში.</li>
-<li><code>command_router</code> იძახებს <code>wifi_manager</code>-ის <code>cmd_handler</code>-ს.</li>
-<li><code>wifi_manager</code> აგროვებს სტატუსს, ქმნის JSON-ს და აგზავნის <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთს.</li>
-<li><code>mqtt_manager</code> იღებს <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთს და აქვეყნებს MQTT-ში.</li>
-</ul>
-</li>
-<li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
-<li><b>იღებს შეტყობინებას:</b><ul>
-<li><b>Topic:</b> <code>synapse/devices/{id}/state/wifi/status</code></li>
-<li><b>Payload:</b> <code>{"connection_status":"Connected", ...}</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md29"></a>
-8. ❗ მნიშვნელოვანი შენიშვნები</h1>
-<ul>
-<li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>wifi_manager</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>storage_manager</code>, რადგან ის იყენებს ამ სერვისს.</li>
-<li>**<code>init_level</code>:** ამ მოდულის <code>init_level</code> (<code>40</code>) უნდა იყოს უფრო მაღალი, ვიდრე <code>storage_manager</code>-ის (<code>20</code>), მაგრამ უფრო დაბალი, ვიდრე <code>command_router</code>-ის (<code>50</code>), რათა დაცული იყოს დამოკიდებულებების იერარქია. </li>
-</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

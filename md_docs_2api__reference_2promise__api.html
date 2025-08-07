@@ -93,113 +93,72 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
   <div class="headertitle"><div class="title">Synapse Promise Manager API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md553"></a> </p>
-<h1><a class="anchor" id="autotoc_md554"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md550"></a> </p>
+<h1><a class="anchor" id="autotoc_md551"></a>
 🎯 მიზანი</h1>
-<p>ეს დოკუმენტი აღწერს <code>Promise Manager</code>-ის საჯარო API-ს, რომელიც ხელმისაწვდომია <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code> ჰედერის მეშვეობით. ეს API იყოფა ორ ნაწილად:</p>
+<p>ეს დოკუმენტი აღწერს <code>Promise Manager</code>-ის API-ს, რომელიც ხელმისაწვდომია <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code> ჰედერის მეშვეობით. ეს API იყოფა ორ ნაწილად:</p>
 <ol type="1">
-<li><b>Consumer API:</b> განკუთვნილია იმ მოდულებისთვის, რომლებიც ითხოვენ ასინქრონულ ოპერაციას და ამუშავებენ მის შედეგს (<code>then</code>, <code>catch</code>).</li>
-<li><b>Provider API:</b> განკუთვნილია იმ სერვისის მომწოდებელი მოდულებისთვის, რომლებიც ახდენენ ასინქრონული ოპერაციის იმპლემენტაციას და ქმნიან <code>Promise</code>-ებს (<code>create</code>, <code>resolve</code>, <code>reject</code>).</li>
+<li><b>Consumer Types:</b> <code>callback</code> ფუნქციების ტიპები, რომლებსაც მომხმარებელი მოდულები (<code>consumers</code>) ქმნიან და გადასცემენ ასინქრონულ API ფუნქციებს.</li>
+<li><b>Provider API:</b> ფუნქციები, რომლებსაც სერვისის მომწოდებელი მოდულები (<code>providers</code>) იყენებენ <code>Promise</code>-ების შესაქმნელად და შესასრულებლად.</li>
 </ol>
+<p><b>არქიტექტურული ცვლილება (v2.0.0):</b> <code>Promise</code> პატერნი გამარტივდა. <code>then()</code> და <code>catch()</code> ფუნქციები ამოღებულია. ამის ნაცვლად, <code>callback</code> ფუნქციები პირდაპირ გადაეცემა ასინქრონული ოპერაციის გამშვებ ფუნქციას, რაც სრულად აღმოფხვრის <code>race condition</code>-ისა და <code>deadlock</code>-ის რისკებს.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md556"></a>
-1. Consumer API (მომხმარებლისთვის)</h1>
-<p>ეს ფუნქციები განკუთვნილია ნებისმიერი მოდულისთვის, რომელსაც სურს გამოიძახოს ასინქრონული ფუნქცია და დაამუშაოს მისი შედეგი.</p>
-<h2><a class="anchor" id="autotoc_md557"></a>
-&lt;tt&gt;promise_handle_t&lt;/tt&gt;</h2>
-<p>ეს არის "გაუმჭვირვალე" (opaque) <code>handle</code>-ი, რომელიც წარმოადგენს <code>Promise</code> ობიექტს. თქვენ იღებთ მას ასინქრონული ფუნქციის გამოძახებისას და იყენებთ სხვა API ფუნქციებში.</p>
-<h2><a class="anchor" id="autotoc_md558"></a>
+<h1><a class="anchor" id="autotoc_md553"></a>
+1. Consumer Types (მომხმარებლისთვის)</h1>
+<p>ეს არის <code>callback</code> ფუნქციების ტიპები, რომლებიც უნდა შექმნათ თქვენს მოდულში და გადასცეთ ისეთ ასინქრონულ API ფუნქციებს, როგორიცაა <code>wifi_api_get_status_async</code>.</p>
+<h2><a class="anchor" id="autotoc_md554"></a>
 &lt;tt&gt;promise_then_cb&lt;/tt&gt;</h2>
 <p>ფუნქციის ტიპი, რომელიც გამოიყენება წარმატებული შედეგის დასამუშავებლად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a>)(<span class="keywordtype">void</span>* result_data, <span class="keywordtype">void</span>* user_context);</div>
-<div class="ttc" id="apromise__manager_8h_html_a8b4021307655879de50bf9fb83140e45"><div class="ttname"><a href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a></div><div class="ttdeci">void(* promise_then_cb)(void *result_data, void *user_context)</div><div class="ttdoc">Callback function type for a successfully resolved promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:35</div></div>
+<div class="ttc" id="apromise__manager_8h_html_a8b4021307655879de50bf9fb83140e45"><div class="ttname"><a href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a></div><div class="ttdeci">void(* promise_then_cb)(void *result_data, void *user_context)</div><div class="ttdoc">Callback function type for a successfully resolved promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:31</div></div>
 </div><!-- fragment --><ul>
-<li>**<code>result_data</code>**: მაჩვენებელი შედეგის მონაცემებზე. <code>callback</code> ფუნქცია პასუხისმგებელია მის სწორ ტიპზე მიყვანაზე (casting).</li>
-<li>**<code>user_context</code>**: მომხმარებლის მიერ განსაზღვრული კონტექსტი, რომელიც <code>fmw_promise_then</code>-ის გამოძახებისას გადაეცა.</li>
+<li>**<code>result_data</code>**: მაჩვენებელი შედეგის მონაცემებზე. <code>callback</code> ფუნქცია პასუხისმგებელია მის სწორ ტიპზე მიყვანაზე (casting). <b>მნიშვნელოვანია:</b> <code>callback</code>-მა უნდა იცოდეს, <code>result_data</code>-ს მეხსიერება დინამიურია თუ სტატიკური.</li>
+<li>**<code>user_context</code>**: მომხმარებლის მიერ განსაზღვრული კონტექსტი, რომელიც ასინქრონული ფუნქციის გამოძახებისას გადაეცა.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md559"></a>
+<h2><a class="anchor" id="autotoc_md555"></a>
 &lt;tt&gt;promise_catch_cb&lt;/tt&gt;</h2>
 <p>ფუნქციის ტიპი, რომელიც გამოიყენება შეცდომის დასამუშავებლად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a>)(<span class="keywordtype">void</span>* error_data, <span class="keywordtype">void</span>* user_context);</div>
-<div class="ttc" id="apromise__manager_8h_html_ae9229038eb3572aba3c551df7197de39"><div class="ttname"><a href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a></div><div class="ttdeci">void(* promise_catch_cb)(void *error_data, void *user_context)</div><div class="ttdoc">Callback function type for a rejected (failed) promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:42</div></div>
+<div class="ttc" id="apromise__manager_8h_html_ae9229038eb3572aba3c551df7197de39"><div class="ttname"><a href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a></div><div class="ttdeci">void(* promise_catch_cb)(void *error_data, void *user_context)</div><div class="ttdoc">Callback function type for a rejected (failed) promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:38</div></div>
 </div><!-- fragment --><ul>
 <li>**<code>error_data</code>**: მაჩვენებელი შეცდომის აღმწერ მონაცემებზე.</li>
 <li>**<code>user_context</code>**: მომხმარებლის კონტექსტი.</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md561"></a>
-&lt;tt&gt;esp_err_t fmw_promise_then(promise_handle_t handle, promise_then_cb then_cb, void* user_context);&lt;/tt&gt;</h2>
-<p>არეგისტრირებს <code>callback</code> ფუნქციას, რომელიც შესრულდება <code>Promise</code>-ის წარმატებით დასრულებისას.</p>
-<ul>
-<li>**<code>handle</code>**: <code>Promise</code>-ის <code>handle</code>, რომელიც მიიღეთ ასინქრონული ფუნქციიდან.</li>
-<li>**<code>then_cb</code>**: ფუნქცია, რომელიც უნდა გამოიძახოს წარმატების შემთხვევაში.</li>
-<li>**<code>user_context</code>**: (არასავალდებულო) მაჩვენებელი ნებისმიერ მონაცემზე, რომელიც გსურთ, რომ გადაეცეს თქვენს <code>callback</code> ფუნქციას.</li>
-<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, <code>ESP_ERR_INVALID_ARG</code> თუ <code>handle</code> ან <code>then_cb</code> არის <code>NULL</code>, <code>ESP_ERR_INVALID_STATE</code> თუ <code>then</code> <code>callback</code>-ი უკვე დარეგისტრირებულია.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md562"></a>
-&lt;tt&gt;esp_err_t fmw_promise_catch(promise_handle_t handle, promise_catch_cb catch_cb, void* user_context);&lt;/tt&gt;</h2>
-<p>არეგისტრირებს <code>callback</code> ფუნქციას, რომელიც შესრულდება <code>Promise</code>-ის შეცდომით დასრულებისას.</p>
-<ul>
-<li>**<code>handle</code>**: <code>Promise</code>-ის <code>handle</code>.</li>
-<li>**<code>catch_cb</code>**: ფუნქცია, რომელიც უნდა გამოიძახოს შეცდომის შემთხვევაში.</li>
-<li>**<code>user_context</code>**: (არასავალდებულო) მომხმარებლის კონტექსტი.</li>
-<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, <code>ESP_ERR_INVALID_ARG</code> თუ <code>handle</code> ან <code>catch_cb</code> არის <code>NULL</code>, <code>ESP_ERR_INVALID_STATE</code> თუ <code>catch</code> <code>callback</code>-ი უკვე დარეგისტრირებულია.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md563"></a>
-&lt;tt&gt;void fmw_promise_destroy(promise_handle_t handle);&lt;/tt&gt;</h2>
-<p>ანადგურებს <code>Promise</code>-ს და ათავისუფლებს მასთან დაკავშირებულ რესურსებს.</p>
-<ul>
-<li>**<code>handle</code>**: გასანადგურებელი <code>Promise</code>-ის <code>handle</code>.</li>
-<li><b><dl class="section note"><dt>Note</dt><dd>: ამ ფუნქციის გამოძახება საჭიროა მხოლოდ იმ შემთხვევაში, თუ თქვენ <code>Promise</code>-ის შედეგი აღარ გაინტერესებთ მის დასრულებამდე. <code>Promise Manager</code>-ი ავტომატურად ასუფთავებს <code>Promise</code>-ებს მათი შესრულების (resolve/reject) შემდეგ.</dd></dl>
-<hr  />
-</b></li>
-</ul>
-<p><b></b></p>
-<h1><a class="anchor" id="autotoc_md565"></a>
+<h1><a class="anchor" id="autotoc_md557"></a>
 2. Provider API (სერვისის მომწოდებლისთვის)</h1>
-<p><b></b></p>
-<p><b>ეს ფუნქციები განკუთვნილია მხოლოდ იმ მოდულებისთვის, რომლებიც თავად ქმნიან ასინქრონულ, <code>Promise</code>-ზე დაფუძნებულ API-ს. მათზე წვდომისთვის საჭიროა <code>#include "promise_manager_internal.h"</code>.</b></p>
-<p><b></b></p>
-<h2><a class="anchor" id="autotoc_md566"></a>
-&lt;tt&gt;promise_handle_t fmw_promise_create(void);&lt;/tt&gt;</h2>
-<p><b></b></p>
-<p><b>ქმნის ახალ <code>Promise</code> ობიექტს <code>PENDING</code> (მომლოდინე) მდგომარეობაში.</b></p>
-<p><b></p><ul>
+<p>ეს ფუნქციები განკუთვნილია მხოლოდ იმ მოდულებისთვის, რომლებიც თავად ქმნიან ასინქრონულ, <code>Promise</code>-ზე დაფუძნებულ API-ს. მათზე წვდომისთვის საჭიროა <code>#include "promise_manager_internal.h"</code>.</p>
+<h2><a class="anchor" id="autotoc_md558"></a>
+&lt;tt&gt;promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);&lt;/tt&gt;</h2>
+<p>ქმნის ახალ <code>Promise</code> ობიექტს <code>PENDING</code> (მომლოდინე) მდგომარეობაში, უკვე წინასწარ დარეგისტრირებული <code>callback</code> ფუნქციებით.</p>
+<ul>
+<li>**<code>then_cb</code>**: (არასავალდებულო) ფუნქცია, რომელიც უნდა გამოიძახოს წარმატების შემთხვევაში.</li>
+<li>**<code>catch_cb</code>**: (არასავალდებულო) ფუნქცია, რომელიც უნდა გამოიძახოს შეცდომის შემთხვევაში.</li>
+<li>**<code>user_context</code>**: (არასავალდებულო) მაჩვენებელი, რომელიც გადაეცემა <code>callback</code> ფუნქციებს.</li>
 <li><b>აბრუნებს:</b> ახალი <code>Promise</code>-ის <code>handle</code>-ს, ან <code>NULL</code> მეხსიერების გამოყოფის შეცდომის შემთხვევაში.</li>
-<li><b><dl class="section note"><dt>Note</dt><dd>: დაბრუნებული <code>handle</code> უნდა გადაეცეს ასინქრონული ფუნქციის გამომძახებელს.</dd></dl>
-</b></li>
 </ul>
-<p></b></p>
-<h2><a class="anchor" id="autotoc_md567"></a>
+<h2><a class="anchor" id="autotoc_md559"></a>
 &lt;tt&gt;esp_err_t fmw_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
-<p><b><b></b></b></p>
-<p><b><b>ასრულებს <code>Promise</code>-ს წარმატებით და გადასცემს შედეგს. ეს გამოიწვევს მომხმარებლის <code>then</code> <code>callback</code>-ის გამოძახებას.</b></b></p>
-<p><b><b></p><ul>
+<p>ასრულებს <code>Promise</code>-ს წარმატებით და გადასცემს შედეგს. ეს გამოიწვევს <code>Promise Manager</code>-ის მიერ <code>then_cb</code> <code>callback</code>-ის გამოძახებას.</p>
+<ul>
 <li>**<code>handle</code>**: შესასრულებელი <code>Promise</code>-ის <code>handle</code>.</li>
 <li>**<code>result_data</code>**: (არასავალდებულო) მაჩვენებელი შედეგის მონაცემებზე. <code>Promise Manager</code>-ი ხდება ამ მონაცემების "მფლობელი".</li>
-<li>**<code>free_fn</code>**: (არასავალდებულო) ფუნქცია, რომელიც გამოიყენება <code>result_data</code>-ს გასათავისუფლებლად. თუ <code>NULL</code>-ია, გამოიყენება სტანდარტული <code>free()</code>.</li>
+<li>**<code>free_fn</code>**: (არასავალდებულო) ფუნქცია, რომელიც გამოიყენება <code>result_data</code>-ს გასათავისუფლებლად. <b>თუ <code>NULL</code>-ია, <code>Promise Manager</code>-ი ჩათვლის, რომ მეხსიერება სტატიკურია და არ შეეცდება მის გათავისუფლებას.</b></li>
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> თუ <code>Promise</code> წარმატებით დაემატა შესრულების რიგში.</li>
 </ul>
-<p></b></b></p>
-<p><b><b></b></b></p>
-<h2><a class="anchor" id="autotoc_md568"></a>
+<h2><a class="anchor" id="autotoc_md560"></a>
 &lt;tt&gt;esp_err_t fmw_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
-<p><b><b></b></b></p>
-<p><b><b>ასრულებს <code>Promise</code>-ს შეცდომით. ეს გამოიწვევს მომხმარებლის <code>catch</code> <code>callback</code>-ის გამოძახებას.</b></b></p>
-<p><b><b></p><ul>
+<p>ასრულებს <code>Promise</code>-ს შეცდომით. ეს გამოიწვევს <code>catch_cb</code> <code>callback</code>-ის გამოძახებას.</p>
+<ul>
 <li>**<code>handle</code>**: შესასრულებელი <code>Promise</code>-ის <code>handle</code>.</li>
-<li>**<code>error_data</code>**: (არასავალდებულო) მაჩვენებელი შეცდომის მონაცემებზე. <code>Promise Manager</code>-ი ხდება ამ მონაცემების "მფლობელი".</li>
+<li>**<code>error_data</code>**: (არასავალდებულო) მაჩვენებელი შეცდომის მონაცემებზე.</li>
 <li>**<code>free_fn</code>**: (არასავალდებულო) ფუნქცია <code>error_data</code>-ს გასათავისუფლებლად.</li>
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> თუ <code>Promise</code> წარმატებით დაემატა შესრულების რიგში.</li>
 </ul>
-<p></b></b></p>
-<p><b><b></p><hr  />
-<p></b></b></p>
-<p><b><b></b></b></p>
-<h1><a class="anchor" id="autotoc_md570"></a>
+<hr  />
+<h1><a class="anchor" id="autotoc_md562"></a>
 💡 გამოყენების მაგალითი</h1>
-<p><b><b></b></b></p>
-<p><b><b>იხილეთ <a class="el" href="md_docs_2convention_2promise__pattern.html">promise_pattern.md</a> დეტალური გამოყენების მაგალითისთვის. </b></b></p>
+<p>იხილეთ <a class="el" href="md_docs_2convention_2promise__pattern.html">promise_pattern.md</a> დეტალური გამოყენების მაგალითისთვის. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

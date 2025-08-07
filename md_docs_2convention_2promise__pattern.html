@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
   <div class="headertitle"><div class="title">asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1281"></a> <b>სტატუსი:</b> რეკომენდებული (Recommended) <b>ავტორი:</b> Synapse Framework Team</p>
-<h1><a class="anchor" id="autotoc_md1282"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1273"></a> <b>სტატუსი:</b> რეკომენდებული (Recommended) <b>ავტორი:</b> Synapse Framework Team</p>
+<h1><a class="anchor" id="autotoc_md1274"></a>
 1. 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ში ასინქრონული "მოთხოვნა-პასუხის" (Request-Response) ოპერაციების მართვის სტანდარტულ პატერნს, რომელიც დაფუძნებულია <b>Promise</b> (დაპირების) კონცეფციაზე. ამ პატერნის მიზანია, ჩაანაცვლოს რთული, ივენთებზე დაფუძნებული ლოგიკა უფრო სუფთა, წაკითხვადი და ლოგიკურად გამართული კოდით.</p>
 <p>ეს პატერნი იდეალურია იმ სცენარებისთვის, როდესაც ერთი მოდული (მომხმარებელი, Consumer) აგზავნის მოთხოვნას მეორე მოდულთან (სერვისი, Provider) და ელოდება კონკრეტულ, ერთჯერად პასუხს.</p>
-<h1><a class="anchor" id="autotoc_md1283"></a>
+<h1><a class="anchor" id="autotoc_md1275"></a>
 2. 🤔 პრობლემა: რატომ გვჭირდება Promise-ები?</h1>
 <p>წარმოვიდგინოთ კლასიკური სცენარი: <code>ui_manager</code>-ს სჭირდება <code>wifi_manager</code>-ისგან მიმდინარე სტატუსის მიღება. <code>Event Bus</code>-ის გამოყენებით, პროცესი ასე გამოიყურება:</p>
 <ol type="1">
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <li><b>კონტექსტის დაკარგვა:</b> რთულია იმის მიკვლევა, თუ რომელი მოთხოვნა რომელ პასუხს შეესაბამება.</li>
 <li>**"ხმაური" <code>Event Bus</code>-ზე:** <code>FMW_EVENT_WIFI_STATUS_READY</code> იგზავნება ყველასთან, მაშინაც კი, თუ ის მხოლოდ <code>ui_manager</code>-ს სჭირდებოდა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1284"></a>
+<h1><a class="anchor" id="autotoc_md1276"></a>
 3. 💡 გადაწყვეტა: Promise პატერნი</h1>
 <p>Promise პატერნი ამ პროცესს გარდაქმნის. <code>Promise</code> არის ობიექტი, რომელიც წარმოადგენს <b>მომავალში დასრულებადი ოპერაციის შედეგს</b>.</p>
 <p><b>ახალი სამუშაო პროცესი:</b></p>
@@ -132,74 +132,70 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <li><b>წაკითხვადობა:</b> კოდი ხდება ბევრად უფრო ინტუიციური და ადვილად გასაგები.</li>
 <li><b>მიზანმიმართული კომუნიკაცია:</b> პასუხი მიეწოდება მხოლოდ იმას, ვინც ის მოითხოვა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1285"></a>
+<h1><a class="anchor" id="autotoc_md1277"></a>
 4. ⚙️ როგორ მუშაობს იმპლემენტაცია?</h1>
 <p>ფრეიმვორქის ბირთვში არსებობს **<code>Promise Manager</code>** კომპონენტი, რომელიც ამ პროცესს მართავს:</p>
 <ul>
-<li>**<code><a class="el" href="promise__manager__internal_8h.html#a05357e412819a13c978c2dbcb75c0f2a" title="Creates a new promise and returns its handle.">fmw_promise_create()</a></code>:** სერვისი (მაგ., <code>wifi_manager</code>) იძახებს ამ ფუნქციას, რათა შექმნას ახალი, <code>PENDING</code> (მომლოდინე) მდგომარეობაში მყოფი <code>Promise</code>.</li>
-<li>**<code><a class="el" href="promise__manager_8h.html#a18af9104ecd48fac9b6f85227b309a65" title="Registers a callback to be executed upon successful completion of the promise.">fmw_promise_then()</a></code> / <code><a class="el" href="promise__manager_8h.html#aa4b92c0b2bb3a5778c59e6066a110e5f" title="Registers a callback to be executed upon failure of the promise.">fmw_promise_catch()</a></code>:** მომხმარებელი (მაგ., <code>ui_manager</code>) ამ ფუნქციებით არეგისტრირებს თავის <code>callback</code>-ებს.</li>
+<li>**<code><a class="el" href="promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b" title="Creates a new promise with pre-registered callbacks.">fmw_promise_create()</a></code>:** სერვისი (მაგ., <code>wifi_manager</code>) იძახებს ამ ფუნქციას, რათა შექმნას ახალი, <code>PENDING</code> (მომლოდინე) მდგომარეობაში მყოფი <code>Promise</code>.</li>
+<li>**<code>fmw_promise_then()</code> / <code>fmw_promise_catch()</code>:** მომხმარებელი (მაგ., <code>ui_manager</code>) ამ ფუნქციებით არეგისტრირებს თავის <code>callback</code>-ებს.</li>
 <li>**<code><a class="el" href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062" title="Resolves a promise with a successful result.">fmw_promise_resolve()</a></code> / <code><a class="el" href="promise__manager__internal_8h.html#a9a308e412c7d9ca197dec3023eeac58d" title="Rejects a promise with an error.">fmw_promise_reject()</a></code>:** როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს ამ ფუნქციებიდან ერთ-ერთს.</li>
 <li>**<code>Promise Manager Task</code>:** <code>resolve</code> ან <code>reject</code> გამოძახებისას, <code>Promise Manager</code>-ი შესაბამის <code>Promise</code>-ს აგზავნის თავის შიდა რიგში. მისი გამოყოფილი FreeRTOS ტასკი იღებს ამ <code>Promise</code>-ს და უსაფრთხო, იზოლირებულ კონტექსტში იძახებს მომხმარებლის მიერ დარეგისტრირებულ <code>callback</code> ფუნქციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1286"></a>
+<h1><a class="anchor" id="autotoc_md1278"></a>
 5. 📝 გამოყენების პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md1287"></a>
+<h2><a class="anchor" id="autotoc_md1279"></a>
 5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., &lt;tt&gt;wifi_manager&lt;/tt&gt;)</h2>
 <ol type="1">
-<li><p class="startli">**API-ს დეკლარირება (<code>wifi_interface.h</code>):**</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="promise__manager_8h.html">promise_manager.h</a>&quot;</span> <span class="comment">// საჭიროა promise_handle_t-სთვის</span></div>
+<li><p class="startli">**API-ს დეკლარირება (<code><a class="el" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module.">wifi_interface.h</a></code>):**</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="promise__manager_8h.html">promise_manager.h</a>&quot;</span> <span class="comment">// საჭიროა callback ტიპებისთვის</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line">    <span class="comment">// ... სხვა ფუნქციები ...</span></div>
-<div class="line">    <a class="code hl_typedef" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> (*get_status_async)(<span class="keywordtype">void</span>* context);</div>
-<div class="line">} wifi_api_t;</div>
+<div class="line">    esp_err_t (*get_status_async)(<span class="keywordtype">void</span>* context, <a class="code hl_typedef" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, <span class="keywordtype">void</span>* user_context);</div>
+<div class="line">} <a class="code hl_struct" href="structwifi__api__t.html">wifi_api_t</a>;</div>
 <div class="ttc" id="apromise__manager_8h_html"><div class="ttname"><a href="promise__manager_8h.html">promise_manager.h</a></div><div class="ttdoc">Public API for consuming asynchronous operations using a Promise pattern.</div></div>
-<div class="ttc" id="apromise__manager_8h_html_a2f34bcbec5959abda16c34b29b075545"><div class="ttname"><a href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a></div><div class="ttdeci">struct promise_t * promise_handle_t</div><div class="ttdoc">Opaque handle to a promise object.</div><div class="ttdef"><b>Definition</b> promise_manager.h:26</div></div>
+<div class="ttc" id="apromise__manager_8h_html_a8b4021307655879de50bf9fb83140e45"><div class="ttname"><a href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a></div><div class="ttdeci">void(* promise_then_cb)(void *result_data, void *user_context)</div><div class="ttdoc">Callback function type for a successfully resolved promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:31</div></div>
+<div class="ttc" id="apromise__manager_8h_html_ae9229038eb3572aba3c551df7197de39"><div class="ttname"><a href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a></div><div class="ttdeci">void(* promise_catch_cb)(void *error_data, void *user_context)</div><div class="ttdoc">Callback function type for a rejected (failed) promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:38</div></div>
+<div class="ttc" id="astructwifi__api__t_html"><div class="ttname"><a href="structwifi__api__t.html">wifi_api_t</a></div><div class="ttdef"><b>Definition</b> wifi_interface.h:19</div></div>
 </div><!-- fragment --></li>
 <li><p class="startli">**API-ს იმპლემენტაცია (<code><a class="el" href="wifi__manager_8c.html" title="Implementation of WiFi connection and reconnection management.">wifi_manager.c</a></code>):**</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="promise__manager__internal_8h.html">promise_manager_internal.h</a>&quot;</span> <span class="comment">// საჭიროა fmw_promise_create-სთვის</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> wifi_api_get_status_async(<span class="keywordtype">void</span>* context) {</div>
-<div class="line">    <span class="comment">// 1. შევქმნათ ახალი &quot;დაპირება&quot;</span></div>
-<div class="line">    <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> promise = <a class="code hl_function" href="promise__manager__internal_8h.html#a05357e412819a13c978c2dbcb75c0f2a">fmw_promise_create</a>();</div>
+<div class="line"><span class="keyword">static</span> esp_err_t wifi_api_get_status_async(<span class="keywordtype">void</span>* context, <a class="code hl_typedef" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, <span class="keywordtype">void</span>* user_context) {</div>
+<div class="line">    <span class="comment">// 1. შევქმნათ ახალი &quot;დაპირება&quot; უკვე მზა callback-ებით</span></div>
+<div class="line">    <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> promise = <a class="code hl_function" href="promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b">fmw_promise_create</a>(then_cb, catch_cb, user_context);</div>
 <div class="line">    <span class="keywordflow">if</span> (!promise) {</div>
-<div class="line">        <span class="keywordflow">return</span> NULL;</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_NO_MEM;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// 2. გავაგზავნოთ ბრძანება ჩვენს შიდა ტასკში,</span></div>
-<div class="line">    <span class="comment">//    თან გადავცეთ promise-ის handle.</span></div>
-<div class="line">    wifi_internal_cmd_t cmd = {</div>
-<div class="line">        .type = CMD_GET_STATUS,</div>
-<div class="line">        .promise_handle = promise</div>
-<div class="line">    };</div>
-<div class="line">    xQueueSend(private_data-&gt;command_queue, &amp;cmd, 0);</div>
+<div class="line">    <span class="comment">// 2. გავაგზავნოთ ბრძანება ჩვენს შიდა ტასკში, promise-ის handle-თან ერთად</span></div>
+<div class="line">    <span class="comment">// ... (Queue send logic) ...</span></div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// 3. დავაბრუნოთ &quot;დაპირება&quot; მომხმარებელს</span></div>
-<div class="line">    <span class="keywordflow">return</span> promise;</div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="apromise__manager__internal_8h_html"><div class="ttname"><a href="promise__manager__internal_8h.html">promise_manager_internal.h</a></div><div class="ttdoc">Internal Core API for creating and fulfilling promises.</div></div>
-<div class="ttc" id="apromise__manager__internal_8h_html_a05357e412819a13c978c2dbcb75c0f2a"><div class="ttname"><a href="promise__manager__internal_8h.html#a05357e412819a13c978c2dbcb75c0f2a">fmw_promise_create</a></div><div class="ttdeci">promise_handle_t fmw_promise_create(void)</div><div class="ttdoc">Creates a new promise and returns its handle.</div><div class="ttdef"><b>Definition</b> promise_manager.c:112</div></div>
-<div class="ttc" id="astructpromise__t_html"><div class="ttname"><a href="structpromise__t.html">promise_t</a></div><div class="ttdef"><b>Definition</b> promise_manager.c:37</div></div>
+<div class="ttc" id="apromise__manager__internal_8h_html_ad694e381aa156f3f322240bad9fa6e5b"><div class="ttname"><a href="promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b">fmw_promise_create</a></div><div class="ttdeci">promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context)</div><div class="ttdoc">Creates a new promise with pre-registered callbacks.</div><div class="ttdef"><b>Definition</b> promise_manager.c:106</div></div>
+<div class="ttc" id="astructpromise__t_html"><div class="ttname"><a href="structpromise__t.html">promise_t</a></div><div class="ttdef"><b>Definition</b> promise_manager.c:39</div></div>
 </div><!-- fragment --></li>
 <li><p class="startli">**Promise-ის შესრულება (<code>wifi_task</code>-ში):**</p>
 <div class="fragment"><div class="line"><span class="comment">// wifi_task-ში, როდესაც სტატუსი მზად იქნება...</span></div>
-<div class="line">wifi_status_t* status_data = malloc(<span class="keyword">sizeof</span>(wifi_status_t));</div>
-<div class="line"><span class="comment">// ... შევავსოთ status_data ...</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">char</span> status_buffer[512];</div>
+<div class="line"><span class="comment">// ... შევავსოთ status_buffer ...</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// შევასრულოთ &quot;დაპირება&quot;</span></div>
-<div class="line"><a class="code hl_function" href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a>(cmd.promise_handle, status_data, free);</div>
-<div class="ttc" id="apromise__manager__internal_8h_html_a14092530cab146f56e280ebdfb45d062"><div class="ttname"><a href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a></div><div class="ttdeci">esp_err_t fmw_promise_resolve(promise_handle_t handle, void *result_data, void(*free_fn)(void *))</div><div class="ttdoc">Resolves a promise with a successful result.</div><div class="ttdef"><b>Definition</b> promise_manager.c:182</div></div>
+<div class="line"><span class="comment">// შევასრულოთ &quot;დაპირება&quot; სტატიკური ბუფერით</span></div>
+<div class="line"><a class="code hl_function" href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a>(cmd.promise_handle, status_buffer, NULL);</div>
+<div class="ttc" id="apromise__manager__internal_8h_html_a14092530cab146f56e280ebdfb45d062"><div class="ttname"><a href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a></div><div class="ttdeci">esp_err_t fmw_promise_resolve(promise_handle_t handle, void *result_data, void(*free_fn)(void *))</div><div class="ttdoc">Resolves a promise with a successful result.</div><div class="ttdef"><b>Definition</b> promise_manager.c:175</div></div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1288"></a>
+<h2><a class="anchor" id="autotoc_md1280"></a>
 5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"><span class="comment">// ui_manager.c</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Callback ფუნქცია წარმატებისთვის</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_wifi_status_ready(<span class="keywordtype">void</span>* result_data, <span class="keywordtype">void</span>* user_context) {</div>
-<div class="line">    wifi_status_t* status = (wifi_status_t*)result_data;</div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Promise resolved! WiFi RSSI: %d&quot;</span>, status-&gt;rssi);</div>
-<div class="line">    <span class="comment">// აქ მოხდება UI-ს განახლება</span></div>
+<div class="line">    <span class="keywordtype">char</span>* json_string = (<span class="keywordtype">char</span>*)result_data;</div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Promise resolved! WiFi Status: %s&quot;</span>, json_string);</div>
+<div class="line">    <span class="comment">// ... UI-ს განახლების ლოგიკა ...</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Callback ფუნქცია შეცდომისთვის</span></div>
@@ -209,16 +205,14 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="line"> </div>
 <div class="line"><span class="comment">// მოთხოვნის გაგზავნა</span></div>
 <div class="line"><span class="keywordtype">void</span> request_wifi_update() {</div>
-<div class="line">    <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> p = private_data-&gt;wifi_service-&gt;api-&gt;get_status_async(private_data-&gt;wifi_service-&gt;context);</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (p) {</div>
-<div class="line">        <a class="code hl_function" href="promise__manager_8h.html#a18af9104ecd48fac9b6f85227b309a65">fmw_promise_then</a>(p, on_wifi_status_ready, private_data);</div>
-<div class="line">        <a class="code hl_function" href="promise__manager_8h.html#aa4b92c0b2bb3a5778c59e6066a110e5f">fmw_promise_catch</a>(p, on_wifi_status_failed, private_data);</div>
-<div class="line">    }</div>
+<div class="line">    private_data-&gt;wifi_service-&gt;get_status_async(</div>
+<div class="line">        private_data-&gt;wifi_module_handle,</div>
+<div class="line">        on_wifi_status_ready,</div>
+<div class="line">        on_wifi_status_failed,</div>
+<div class="line">        self</div>
+<div class="line">    );</div>
 <div class="line">}</div>
-<div class="ttc" id="apromise__manager_8h_html_a18af9104ecd48fac9b6f85227b309a65"><div class="ttname"><a href="promise__manager_8h.html#a18af9104ecd48fac9b6f85227b309a65">fmw_promise_then</a></div><div class="ttdeci">esp_err_t fmw_promise_then(promise_handle_t handle, promise_then_cb then_cb, void *user_context)</div><div class="ttdoc">Registers a callback to be executed upon successful completion of the promise.</div><div class="ttdef"><b>Definition</b> promise_manager.c:194</div></div>
-<div class="ttc" id="apromise__manager_8h_html_aa4b92c0b2bb3a5778c59e6066a110e5f"><div class="ttname"><a href="promise__manager_8h.html#aa4b92c0b2bb3a5778c59e6066a110e5f">fmw_promise_catch</a></div><div class="ttdeci">esp_err_t fmw_promise_catch(promise_handle_t handle, promise_catch_cb catch_cb, void *user_context)</div><div class="ttdoc">Registers a callback to be executed upon failure of the promise.</div><div class="ttdef"><b>Definition</b> promise_manager.c:215</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1289"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1281"></a>
 6. ✅ როდის გამოვიყენოთ Promise და როდის Event Bus?</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

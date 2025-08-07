@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
   <div class="headertitle"><div class="title">🔄 მოდული: &lt;tt&gt;mcp23017_io_expander&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md60"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md58"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 1.0.0</p>
-<h1><a class="anchor" id="autotoc_md61"></a>
+<h1><a class="anchor" id="autotoc_md59"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>mcp23017_io_expander</code> არის Synapse Framework-ის მძლავრი დრაივერის მოდული, რომელიც უზრუნველყოფს <b>16-მდე დამატებითი, პროგრამირებადი GPIO პინის</b> მართვას პოპულარული <code>MCP23017</code> I2C I/O Expander ჩიპის გამოყენებით.</p>
 <p>მისი მთავარი ამოცანაა, ESP32-ის მხოლოდ ორი I2C პინის (SDA, SCL) გამოყენებით, სისტემას მისცეს საშუალება, მართოს დიდი რაოდენობით შემავალი (ღილაკები, სენსორები) და გამომავალი (LED-ები, რელეები) მოწყობილობები. მოდული სრულად აბსტრაგირებს I2C რეგისტრებთან მუშაობის სირთულეს და სხვა მოდულებს აწვდის მარტივ, <code>gpio.h</code>-ის მსგავს API-ს.</p>
-<h1><a class="anchor" id="autotoc_md62"></a>
+<h1><a class="anchor" id="autotoc_md60"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისის მომწოდებელი (Pure Service Provider):</b> ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module.">mcp23017_api_t</a></code> სერვისს <code>Service Locator</code>-ში, რაც სხვა მოდულებს აძლევს აბსტრაქტულ და მარტივ API-ს გაფართოებული პინების სამართავად.</li>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
 <li><b>რეგისტრების ქეშირება:</b> ⚡️ ეფექტურობის გასაზრდელად, მოდული ინახავს (აკეშირებს) პინების მიმართულების (<code>IODIR</code>) და გამომავალი დონის (<code>GPIO</code>) რეგისტრების ბოლო ცნობილ მდგომარეობას. ეს ამცირებს I2C ტრანზაქციების რაოდენობას, როდესაც საჭიროა მხოლოდ ერთი ბიტის შეცვლა.</li>
 <li><b>ადრეული ინიციალიზაცია (Early Initialization):</b> 📉 <code>init_level: 15</code> უზრუნველყოფს, რომ I/O გამფართოებელი ინიციალიზდება სისტემის გაშვების ადრეულ ეტაპზე, <code>i2c_bus</code> მოდულის (<code>init_level: 10</code>) შემდეგ, რათა ის ხელმისაწვდომი იყოს ყველა მასზე დამოკიდებული მოდულისთვის.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md63"></a>
+<h1><a class="anchor" id="autotoc_md61"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>i2c_addr</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">ჩიპის 7-ბიტიანი I2C მისამართი ჰექსადეციმალურ ფორმატში (მაგ., <code>"0x20"</code>).   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md64"></a>
+<h1><a class="anchor" id="autotoc_md62"></a>
 4. 🔌 Service API (&lt;tt&gt;mcp23017_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_MCP23017_EXPANDER_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -153,9 +153,9 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
 <li>**<code>esp_err_t read_all_pins(context, out_value);</code>** <br  />
  ⬅️ ერთდროულად კითხულობს 16-ბიტიან მნიშვნელობას ორივე პორტიდან.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md65"></a>
+<h1><a class="anchor" id="autotoc_md63"></a>
 5. 📌 პინების ნუმერაცია და შეერთების სქემა</h1>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md64"></a>
 5.1. ლოგიკური და ფიზიკური პინები</h2>
 <p>ჩვენი დრაივერი მუშაობს <b>ლოგიკური პინების</b> ნუმერაციით <code>0</code>-დან <code>15</code>-მდე. ეს ლოგიკური ნომრები შემდეგნაირად ნაწილდება ჩიპის ორ 8-ბიტიან პორტზე:</p>
 <ul>
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft">15   </td><td class="markdownTableBodyLeft">GPB7   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<h2><a class="anchor" id="autotoc_md65"></a>
 5.2. ASCII Pinout დიაგრამა (DIP-28 პაკეტი)</h2>
 <div class="fragment"><div class="line">     +----\/----+</div>
 <div class="line">GPB0 | 1      28 | GPA7</div>
@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
 <div class="line"> SDA | 13     16 | A1</div>
 <div class="line">  NC | 14     15 | A0</div>
 <div class="line">     +----------+</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md68"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md66"></a>
 5.3. შეერთების სქემა</h2>
 <p><code>i2c_bus</code> და <code>mcp23017_expander</code> მოდულების default კონფიგურაციისთვის (<code>sda_pin: 21</code>, <code>scl_pin: 22</code>, <code>i2c_addr: "0x20"</code>):</p>
 <ul>
@@ -207,7 +207,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2mcp23
 <li><b>ESP32 <code>GPIO 22</code> (SCL)</b> ➡️ <b>MCP23017 <code>SCL</code> (პინი 12)</b></li>
 </ul>
 <p><b>მნიშვნელოვანია:</b> სტაბილური მუშაობისთვის, რეკომენდებულია <b>4.7kΩ pull-up რეზისტორების</b> დამატება SDA და SCL ხაზებზე (თითოეული ხაზიდან 3.3V-ზე).</p>
-<h1><a class="anchor" id="autotoc_md69"></a>
+<h1><a class="anchor" id="autotoc_md67"></a>
 6. 💡 გამოყენების მაგალითი</h1>
 <p><code>button_input</code> მოდული იყენებს ამ სერვისს, რათა წაიკითხოს ღილაკები, რომლებიც მიერთებულია გაფართოებულ პინებზე.</p>
 <p>**<code><a class="el" href="button__input_8c.html" title="A module to handle hardware button presses from GPIO or I/O expanders.">button_input.c</a></code>-ში, <code>init</code> ფუნქციაში:**</p>

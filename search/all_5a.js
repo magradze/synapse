@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📁_20შექმნილი_20სტრუქტურა_3a_0',['2. 📁 შექმნილი სტრუქტურა:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1329',1,'']]]
+  ['💬_20დასკვნა_0',['4. 💬 დასკვნა',['../md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1952',1,'']]]
 ];

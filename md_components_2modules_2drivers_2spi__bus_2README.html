@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
   <div class="headertitle"><div class="title">🚌 მოდული: &lt;tt&gt;spi_bus&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md87"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md85"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
  <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
  <b>🔖 ვერსია:</b> 1.1.0</p>
-<h1><a class="anchor" id="autotoc_md88"></a>
+<h1><a class="anchor" id="autotoc_md86"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>spi_bus</code> არის Synapse Framework-ის <b>ფუნდამენტური აპარატურული დრაივერის მოდული</b>. ის უზრუნველყოფს ცენტრალიზებულ, უსაფრთხო და ნაკად-დაცულ (thread-safe) ინტერფეისს ESP32-ის SPI (Serial Peripheral Interface) პერიფერიასთან სამუშაოდ.</p>
 <p>მისი მთავარი მიზანია, მოახდინოს SPI ავტობუსის, როგორც <b>გაზიარებული რესურსის</b>, მართვის აბსტრაგირება. იმის ნაცვლად, რომ თითოეულმა SPI მოწყობილობამ (მაგ., ეკრანი, SD ბარათი, shift register) თავად მოახდინოს SPI დრაივერის ინიციალიზაცია, ისინი ითხოვენ წვდომას ამ ცენტრალიზებული სერვისისგან. ეს გამორიცხავს კონფლიქტებს, ამარტივებს კოდს და უზრუნველყოფს სისტემის სტაბილურობას.</p>
-<h1><a class="anchor" id="autotoc_md89"></a>
+<h1><a class="anchor" id="autotoc_md87"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>სერვისის მომწოდებელი (Pure Service Provider):</b> ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structspi__bus__api__t.html" title="The public Service API structure for the SPI Bus module.">spi_bus_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 <li><b>მოწყობილობების მართვა:</b> 🚌 მოდული მართავს ერთ SPI ავტობუსზე მიერთებულ მრავალ მოწყობილობას. თითოეული მოწყობილობა ემატება საკუთარი კონფიგურაციით (<code>spi_device_interface_config_t</code>) და იღებს უნიკალურ <code>handle</code>-ს, რომელიც გამოიყენება მასთან კომუნიკაციისთვის.</li>
 <li><b>ადრეული ინიციალიზაცია (Early Initialization):</b> 📉 <code>init_level: 10</code> უზრუნველყოფს, რომ SPI ავტობუსი ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა ის ხელმისაწვდომი იყოს ყველა მასზე დამოკიდებული მოდულისთვის.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md90"></a>
+<h1><a class="anchor" id="autotoc_md88"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით. შესაძლებელია სისტემაში რამდენიმე, სხვადასხვა SPI ავტობუსის ერთდროულად კონფიგურირება.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>dma_chan</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">გამოსაყენებელი DMA არხი. <code>0</code> ნიშნავს DMA-ს გარეშე.   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md91"></a>
+<h1><a class="anchor" id="autotoc_md89"></a>
 4. 🔌 Service API (&lt;tt&gt;spi_bus_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_SPI_BUS_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 <li>**<code>esp_err_t transmit(context, handle, transaction);</code>** <br  />
  🔄 ასრულებს სრულ SPI ტრანზაქციას მითითებულ მოწყობილობასთან.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md92"></a>
+<h1><a class="anchor" id="autotoc_md90"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p><code>sn74hc595n_writer</code> მოდული იყენებს <code>spi_bus</code> სერვისს.</p>
 <p>**<code><a class="el" href="sn74hc595n__writer_8c.html" title="Implementation of the SN74HC595N shift register driver module.">sn74hc595n_writer.c</a></code>-ში, <code>init</code> ფუნქციაში:**</p>
@@ -202,7 +202,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
 <div class="ttc" id="astructsn74hc595n__private__data__t_html"><div class="ttname"><a href="structsn74hc595n__private__data__t.html">sn74hc595n_private_data_t</a></div><div class="ttdef"><b>Definition</b> sn74hc595n_writer.c:20</div></div>
 <div class="ttc" id="astructspi__bus__handle__t_html"><div class="ttname"><a href="structspi__bus__handle__t.html">spi_bus_handle_t</a></div><div class="ttdoc">The handle returned by the Service Locator for an SPI bus service.</div><div class="ttdef"><b>Definition</b> spi_bus_interface.h:58</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md93"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md91"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> ნებისმიერმა მოდულმა, რომელიც იყენებს <code>spi_bus</code>-ის სერვისს, თავის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა დაამატოს <code>interfaces</code> (და არა <code>spi_bus</code>), რათა მიიღოს წვდომა <code><a class="el" href="spi__bus__interface_8h.html" title="Public Service API contract for the SPI Bus module.">spi_bus_interface.h</a></code>-ზე.</li>

@@ -93,78 +93,78 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2actuators__ap
   <div class="headertitle"><div class="title">Synapse Actuators Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md265"></a> </p>
-<h1><a class="anchor" id="autotoc_md266"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md262"></a> </p>
+<h1><a class="anchor" id="autotoc_md263"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის აქტუატორების (actuators) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md268"></a>
+<h1><a class="anchor" id="autotoc_md265"></a>
 Relay Module API</h1>
-<h2><a class="anchor" id="autotoc_md269"></a>
+<h2><a class="anchor" id="autotoc_md266"></a>
 module_t &lt;em&gt;relay_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი რელე მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 <li>არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)</li>
 <li>აბრუნებს: <a class="el" href="structmodule__t.html" title="The primary structure defining a framework module.">module_t</a> წარმატების შემთხვევაში, NULL შეცდომისას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md270"></a>
+<h2><a class="anchor" id="autotoc_md267"></a>
 esp_err_t relay_module_enable(module_t *module);</h2>
 <ul>
 <li>აქტივაციას უკეთებს რელეს (enable logic)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md271"></a>
+<h2><a class="anchor" id="autotoc_md268"></a>
 esp_err_t relay_module_disable(module_t *module);</h2>
 <ul>
 <li>დეაქტივაციას უკეთებს რელეს (disable logic)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md272"></a>
+<h2><a class="anchor" id="autotoc_md269"></a>
 esp_err_t relay_module_toggle(module_t *module);</h2>
 <ul>
 <li>ცვლის რელეს მდგომარეობას (on/off)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md273"></a>
+<h2><a class="anchor" id="autotoc_md270"></a>
 esp_err_t relay_module_set_state(module_t *module, bool state);</h2>
 <ul>
 <li>აყენებს რელეს მდგომარეობას (on/off)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md274"></a>
+<h2><a class="anchor" id="autotoc_md271"></a>
 bool relay_module_get_state(module_t *module);</h2>
 <ul>
 <li>აბრუნებს რელეს მიმდინარე მდგომარეობას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md276"></a>
+<h1><a class="anchor" id="autotoc_md273"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md277"></a>
+<h2><a class="anchor" id="autotoc_md274"></a>
 static void relay_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს მიღებულ მოვლენებს Event Bus-დან (მაგ: command, notify)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md279"></a>
+<h1><a class="anchor" id="autotoc_md276"></a>
 Configuration Parsing API</h1>
-<h2><a class="anchor" id="autotoc_md280"></a>
+<h2><a class="anchor" id="autotoc_md277"></a>
 static esp_err_t parse_relay_config(const cJSON *config, relay_private_data_t *relay_data);</h2>
 <ul>
 <li>კითხულობს და ამოწმებს რელეს კონფიგურაციას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md282"></a>
+<h1><a class="anchor" id="autotoc_md279"></a>
 Status &amp; Monitoring API</h1>
-<h2><a class="anchor" id="autotoc_md283"></a>
+<h2><a class="anchor" id="autotoc_md280"></a>
 static module_status_t relay_get_status(module_t *module);</h2>
 <ul>
 <li>აბრუნებს რელეს მიმდინარე სტატუსს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md285"></a>
+<h1><a class="anchor" id="autotoc_md282"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md287"></a>
+<h1><a class="anchor" id="autotoc_md284"></a>
 მაგალითები</h1>
 <p><b>რელეს ჩართვა:</b> </p><div class="fragment"><div class="line">relay_module_enable(module);</div>
 </div><!-- fragment --><p><b>რელეს გამორთვა:</b> </p><div class="fragment"><div class="line">relay_module_disable(module);</div>

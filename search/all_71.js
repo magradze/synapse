@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔵_20ble_20provisioning_20service_20api_20იმპლემენტირებულია_0',['🔵 BLE Provisioning Service API (იმპლემენტირებულია)',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md574',1,'']]]
+  ['🔬_20მოდული_3a_20tt_20time_5fof_5fflight_5fsensor_20tt_0',['🔬 მოდული: &lt;tt&gt;time_of_flight_sensor&lt;/tt&gt;',['../md_components_2modules_2sensors_2time__of__flight__sensor_2README.html',1,'']]]
 ];

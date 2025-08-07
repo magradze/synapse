@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2time__
   <div class="headertitle"><div class="title">⏱️ მოდული: &lt;tt&gt;time_sync&lt;/tt&gt;</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md182"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <b>✒️ ავტორი:</b> Synapse Framework Team <b>🔖 ვერსია:</b> 2.0.0</p>
-<h1><a class="anchor" id="autotoc_md183"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md180"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <b>✒️ ავტორი:</b> Synapse Framework Team <b>🔖 ვერსია:</b> 2.0.0</p>
+<h1><a class="anchor" id="autotoc_md181"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>time_sync</code> არის Synapse Framework-ის <b>სისტემური დროის სინქრონიზაციის</b> ფუნდამენტური მოდული. მისი მთავარი ამოცანაა, უზრუნველყოს მოწყობილობის სისტემური საათის ავტომატური გასწორება ინტერნეტში არსებულ დროის სერვერებთან <b>SNTP (Simple Network Time Protocol)</b> პროტოკოლის გამოყენებით.</p>
 <p>ეს მოდული გამორიცხავს გარე RTC (Real-Time Clock) აპარატურის საჭიროებას და იყენებს არსებულ WiFi კავშირს, რათა მოწყობილობის დრო ყოველთვის იყოს ზუსტი. ეს კრიტიკულად მნიშვნელოვანია ისეთი ფუნქციებისთვის, როგორიცაა ლოგების დროის ნიშნულები (timestamps), დაგეგმილი ამოცანები და, რა თქმა უნდა, დროის ჩვენება მომხმარებლის ინტერფეისზე.</p>
-<h1><a class="anchor" id="autotoc_md184"></a>
+<h1><a class="anchor" id="autotoc_md182"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>Service Provider:</b> 🕰️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structtime__sync__api__t.html" title="The public Service API structure for the Time Sync module.">time_sync_api_t</a></code> სერვისს <code>Service Locator</code>-ში, <code>FMW_SERVICE_TYPE_TIME_SYNC_API</code> ტიპით, რათა სხვა მოდულებმა (მაგ., <code>ui_manager</code>) შეძლონ ზუსტი დროის მიღება.</li>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2time__
 <li><b>ასინქრონული ოპერაცია:</b> 🔄 დროის სინქრონიზაცია ხდება ასინქრონულად, ESP-IDF-ის <code>esp_sntp</code> კომპონენტის მეშვეობით. პროცესის დასრულებისას, სპეციალური <code>callback</code> ფუნქცია აფიქსირებს წარმატებას და აყენებს შიდა <code>is_synced</code> ფლაგს.</li>
 <li><b>დროის ზონის მხარდაჭერა:</b> ⏰ მოდული კითხულობს <code>timezone</code> პარამეტრს თავისი <code>config.json</code> ფაილიდან და აყენებს სისტემურ <code>TZ</code> გარემოს ცვლადს. ეს უზრუნველყოფს, რომ C-ს სტანდარტული დროის ფუნქციები (<code>localtime_r</code>) ავტომატურად გარდაქმნის UTC დროს სწორ ლოკალურ დროში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md185"></a>
+<h1><a class="anchor" id="autotoc_md183"></a>
 3. ⚙️ კონფიგურაცია</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
 <table class="markdownTable">
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2time__
 <div class="line">  }</div>
 <div class="line">]</div>
 </div><!-- fragment --><p>**საქართველოსთვის (<code>UTC+4</code>) გამოიყენეთ:** <code>"timezone": "&lt;-04&gt;4"</code></p>
-<h1><a class="anchor" id="autotoc_md186"></a>
+<h1><a class="anchor" id="autotoc_md184"></a>
 4. 🔌 Service API (&lt;tt&gt;time_sync_api_t&lt;/tt&gt;)</h1>
 <p>მოდული აწვდის ერთ, მარტივ API ფუნქციას.</p>
 <ul>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2time__
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md187"></a>
+<h1><a class="anchor" id="autotoc_md185"></a>
 5. 💡 გამოყენების მაგალითი</h1>
 <p><code>ui_manager</code> მოდული იყენებს ამ სერვისს საათის გამოსატანად.</p>
 <div class="fragment"><div class="line"><span class="comment">// In ui_manager.c</span></div>
@@ -166,8 +166,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2time__
 <div class="line">    draw_large_digits_string(private_data, ..., time_str, 1);</div>
 <div class="line">}</div>
 <div class="ttc" id="astructtime__sync__api__t_html_a3f81908285e822b53367e9f5e25fa477"><div class="ttname"><a href="structtime__sync__api__t.html#a3f81908285e822b53367e9f5e25fa477">time_sync_api_t::get_time</a></div><div class="ttdeci">esp_err_t(* get_time)(time_t *current_time)</div><div class="ttdoc">Gets the current synchronized time.</div><div class="ttdef"><b>Definition</b> time_sync_interface.h:30</div></div>
-<div class="ttc" id="astructui__manager__private__data__t_html"><div class="ttname"><a href="structui__manager__private__data__t.html">ui_manager_private_data_t</a></div><div class="ttdoc">The central private data structure holding the entire state of the UI Manager.</div><div class="ttdef"><b>Definition</b> ui_manager.h:100</div></div>
-<div class="ttc" id="astructui__manager__private__data__t_html_a399f3bdff6c7a3bf7ffe8587e52b494b"><div class="ttname"><a href="structui__manager__private__data__t.html#a399f3bdff6c7a3bf7ffe8587e52b494b">ui_manager_private_data_t::time_sync</a></div><div class="ttdeci">time_sync_api_t * time_sync</div><div class="ttdoc">Handle to the time synchronization service.</div><div class="ttdef"><b>Definition</b> ui_manager.h:105</div></div>
+<div class="ttc" id="astructui__manager__private__data__t_html"><div class="ttname"><a href="structui__manager__private__data__t.html">ui_manager_private_data_t</a></div><div class="ttdoc">The central private data structure holding the entire state of the UI Manager.</div><div class="ttdef"><b>Definition</b> ui_manager.h:101</div></div>
+<div class="ttc" id="astructui__manager__private__data__t_html_a399f3bdff6c7a3bf7ffe8587e52b494b"><div class="ttname"><a href="structui__manager__private__data__t.html#a399f3bdff6c7a3bf7ffe8587e52b494b">ui_manager_private_data_t::time_sync</a></div><div class="ttdeci">time_sync_api_t * time_sync</div><div class="ttdoc">Handle to the time synchronization service.</div><div class="ttdef"><b>Definition</b> ui_manager.h:106</div></div>
 <div class="ttc" id="aui__screens_8h_html_aa073835a483ffe68580ffdec8bc36910"><div class="ttname"><a href="ui__screens_8h.html#aa073835a483ffe68580ffdec8bc36910">render_home_screen</a></div><div class="ttdeci">void render_home_screen(ui_manager_private_data_t *private_data)</div><div class="ttdoc">Renders the main home screen.</div><div class="ttdef"><b>Definition</b> ui_screens.c:103</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->

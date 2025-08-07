@@ -469,6 +469,14 @@ CONFIG_FMW_COMMAND_ROUTER_MAX_CMD_LEN=256
 # end of Command Router Configuration
 
 #
+# Promise Manager Configuration
+#
+CONFIG_FMW_PROMISE_QUEUE_LENGTH=10
+CONFIG_FMW_PROMISE_TASK_STACK_SIZE=3072
+CONFIG_FMW_PROMISE_TASK_PRIORITY=11
+# end of Promise Manager Configuration
+
+#
 # Modules
 #
 
@@ -2583,6 +2591,11 @@ CONFIG_WIFI_PROV_STA_ALL_CHANNEL_SCAN=y
 # Command Router Configuration
 #
 # end of Command Router Configuration
+
+#
+# Promise Manager Configuration
+#
+# end of Promise Manager Configuration
 
 #
 # Relay Actuator

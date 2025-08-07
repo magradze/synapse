@@ -87,7 +87,7 @@
 
 ### 5.2. ASCII Pinout დიაგრამა (DIP-28 პაკეტი)
 
-```
+```plaintext
               +----\/----+
          GPB0 | 1      28 | GPA7
          GPB1 | 2      27 | GPA6

@@ -30,13 +30,13 @@
 ### 3.1. ინტერაქტიული რეჟიმი (რეკომენდებული)
 
 ```bash
-python3 scripts/create_module.py
+python3 tools/create_module.py
 ```
 
 ### 3.2. ბრძანების ხაზის რეჟიმი (ავტომატიზაციისთვის)
 
 ```bash
-python3 scripts/create_module.py "OTA Updater" -c system -a service_provider -d "Handles Over-the-Air updates" --init_level 50 --deps "esp_http_client,esp_https_ota"
+python3 tools/create_module.py "OTA Updater" -c system -a service_provider -d "Handles Over-the-Air updates" --init_level 50 --deps "esp_http_client,esp_https_ota"
 ```
 
 ## 4. 🏛️ არქეტიპები (Archetypes)
@@ -58,7 +58,7 @@ python3 scripts/create_module.py "OTA Updater" -c system -a service_provider -d 
 1. **მოდულის გენერაცია:**
 
     ```bash
-    python3 scripts/create_module.py
+    python3 tools/create_module.py
     ```
 
 2. **კონფიგურაცია (`menuconfig`):**

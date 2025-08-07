@@ -21,7 +21,7 @@
 2. გაუშვით სკრიპტი ინტერაქტიულ რეჟიმში:
 
     ```bash
-    python3 scripts/create_module.py
+    python3 tools/create_module.py
     ```
 
 3. უპასუხეთ კითხვებს შემდეგნაირად:

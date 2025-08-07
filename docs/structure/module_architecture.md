@@ -76,7 +76,7 @@ module_t *rgb_led_indicator_create(const cJSON *config) {
 
 ## მოდულის გაფართოება/დამატება
 
-1. გამოიყენეთ `python3 scripts/create_module.py` სკრიპტი ახალი მოდულის ჩონჩხის დასაგენერირებლად.
+1. გამოიყენეთ `python3 tools/create_module.py` სკრიპტი ახალი მოდულის ჩონჩხის დასაგენერირებლად.
 2. შეავსეთ `config.json` ფაილი default პარამეტრებით.
 3. შეავსეთ `_create`, `init`, `start`, `deinit` და `handle_event` ფუნქციები თქვენი ლოგიკით.
 4. ჩართეთ მოდული `idf.py menuconfig`-ში.

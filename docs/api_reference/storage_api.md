@@ -4,7 +4,7 @@
 
 ეს დოკუმენტი აღწერს Synapse Framework-ის ცენტრალიზებული **Storage Manager** სერვისის საჯარო API-ს. ეს API უზრუნველყოფს ერთიან ინტერფეისს სხვადასხვა ფიზიკურ საცავთან (NVS, SPIFFS, SD Card) სამუშაოდ, რაც მოდულებს საშუალებას აძლევს, შეინახონ და წაიკითხონ მონაცემები შენახვის კონკრეტული ტექნოლოგიის ცოდნის გარეშე.
 
-სერვისის მისაღებად გამოიყენეთ `fmw_service_get("main_storage")`.
+სერვისის მისაღებად გამოიყენეთ `synapse_service_get("main_storage")`.
 
 ---
 
@@ -65,7 +65,7 @@
 
 void example_storage_usage() {
     // 1. სერვისის მიღება
-    storage_api_t *storage = (storage_api_t *)fmw_service_get("main_storage");
+    storage_api_t *storage = (storage_api_t *)synapse_service_get("main_storage");
     if (!storage) {
         ESP_LOGE(TAG, "Storage service is not available!");
         return;

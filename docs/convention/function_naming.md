@@ -32,12 +32,12 @@ static esp_err_t parse_sensor_config(const cJSON *config);
 
 #### Framework API ფუნქციები
 
-- `fmw_` პრეფიქსი
+- `synapse_` პრეფიქსი
 
 ```c
-esp_err_t fmw_service_register(const char *name, const char *type, void *api);
-esp_err_t fmw_config_get_string(const char *key, char *value, size_t size);
-module_t *fmw_module_registry_find_by_name(const char *name);
+esp_err_t synapse_service_register(const char *name, const char *type, void *api);
+esp_err_t synapse_config_get_string(const char *key, char *value, size_t size);
+module_t *synapse_module_registry_find_by_name(const char *name);
 ```
 
 ## მოდულის ტიპების მიხედვით
@@ -46,10 +46,10 @@ module_t *fmw_module_registry_find_by_name(const char *name);
 
 ```c
 // Public API
-esp_err_t fmw_service_locator_init(void);
-esp_err_t fmw_service_register(const char *name, const char *type, void *handle);
-service_handle_t fmw_service_get(const char *name);
-const char *fmw_service_get_type(const char *name);
+esp_err_t synapse_service_locator_init(void);
+esp_err_t synapse_service_register(const char *name, const char *type, void *handle);
+service_handle_t synapse_service_get(const char *name);
+const char *synapse_service_get_type(const char *name);
 
 // Private functions
 static service_entry_t *find_service_by_name(const char *name);
@@ -175,7 +175,7 @@ static void lcd_display_task(void *pvParameters);
 
 - Snake case: `ssd1306_api_enable()`
 - Descriptive names: `handle_mqtt_connection_event()`
-- Consistent prefixes: `fmw_` for framework APIs
+- Consistent prefixes: `synapse_` for framework APIs
 - Clear action verbs: `init`, `start`, `enable`, `configure`
 
 ## მაგალითი სრული მოდული

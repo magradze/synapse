@@ -27,7 +27,7 @@ DEFINE_COMPONENT_TAG("I2C_BUS");
  * @brief Private data structure for an I2C Bus module instance.
  */
 typedef struct {
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     i2c_port_t port;
     gpio_num_t sda_pin;
     gpio_num_t scl_pin;
@@ -112,13 +112,13 @@ static esp_err_t i2c_bus_init(module_t *self) {
              private_data->instance_name, private_data->port, private_data->sda_pin, private_data->scl_pin);
 
     // 1. Lock resources
-    err = fmw_resource_lock(FMW_RESOURCE_TYPE_I2C_PORT, private_data->port, private_data->instance_name);
+    err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_I2C_PORT, private_data->port, private_data->instance_name);
     if (err != ESP_OK) { return err; }
 
-    err = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->sda_pin, private_data->instance_name);
+    err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->sda_pin, private_data->instance_name);
     if (err != ESP_OK) { return err; }
 
-    err = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->scl_pin, private_data->instance_name);
+    err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->scl_pin, private_data->instance_name);
     if (err != ESP_OK) { return err; }
 
     // 2. Configure and install the new master bus driver
@@ -144,7 +144,7 @@ static esp_err_t i2c_bus_init(module_t *self) {
     }
 
     // 4. Register the service with the Service Locator
-    err = fmw_service_register(private_data->instance_name, FMW_SERVICE_TYPE_I2C_BUS_API, &private_data->service_handle);
+    err = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_I2C_BUS_API, &private_data->service_handle);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register I2C bus service '%s': %s", private_data->instance_name, esp_err_to_name(err));
         return err;
@@ -172,9 +172,9 @@ static void i2c_bus_deinit(module_t *self) {
 
     if (private_data) {
         ESP_LOGI(TAG, "De-initializing I2C bus '%s'", private_data->instance_name);
-        
-        fmw_service_unregister(private_data->instance_name);
-        
+
+        synapse_service_unregister(private_data->instance_name);
+
         if (private_data->bus_handle) {
             i2c_del_master_bus(private_data->bus_handle);
         }
@@ -182,11 +182,11 @@ static void i2c_bus_deinit(module_t *self) {
         if (private_data->bus_mutex) {
             vSemaphoreDelete(private_data->bus_mutex);
         }
-        
-        fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->scl_pin, private_data->instance_name);
-        fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->sda_pin, private_data->instance_name);
-        fmw_resource_release(FMW_RESOURCE_TYPE_I2C_PORT, private_data->port, private_data->instance_name);
-        
+
+        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->scl_pin, private_data->instance_name);
+        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->sda_pin, private_data->instance_name);
+        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_I2C_PORT, private_data->port, private_data->instance_name);
+
         free(private_data);
     }
 
@@ -240,7 +240,8 @@ static esp_err_t parse_config(const cJSON *config_node, i2c_bus_private_data_t *
  */
 static esp_err_t i2c_bus_api_write(void* context, uint8_t device_address, const uint8_t *write_data, size_t data_size) {
     i2c_bus_private_data_t *private_data = (i2c_bus_private_data_t *)context;
-    if (xSemaphoreTake(private_data->bus_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(private_data->bus_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Failed to lock bus '%s' for write", private_data->instance_name);
         return ESP_ERR_TIMEOUT;
     }
@@ -274,7 +275,8 @@ static esp_err_t i2c_bus_api_write(void* context, uint8_t device_address, const 
  */
 static esp_err_t i2c_bus_api_read(void* context, uint8_t device_address, uint8_t *read_data, size_t data_size) {
     i2c_bus_private_data_t *private_data = (i2c_bus_private_data_t *)context;
-    if (xSemaphoreTake(private_data->bus_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(private_data->bus_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Failed to lock bus '%s' for read", private_data->instance_name);
         return ESP_ERR_TIMEOUT;
     }
@@ -307,7 +309,8 @@ static esp_err_t i2c_bus_api_read(void* context, uint8_t device_address, uint8_t
  */
 static esp_err_t i2c_bus_api_write_read(void* context, uint8_t device_address, const uint8_t *write_data, size_t write_size, uint8_t *read_data, size_t read_size) {
     i2c_bus_private_data_t *private_data = (i2c_bus_private_data_t *)context;
-    if (xSemaphoreTake(private_data->bus_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(private_data->bus_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Failed to lock bus '%s' for write/read", private_data->instance_name);
         return ESP_ERR_TIMEOUT;
     }

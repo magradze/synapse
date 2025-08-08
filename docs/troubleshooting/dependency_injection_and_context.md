@@ -21,7 +21,7 @@ private_data->service_b_api->do_something(CONTEXT_IS_MISSING, ...);
 1. **`Hardcoded` სახელით მოძიება:**
 
     ```c
-    module_t* module_b_handle = fmw_module_registry_find_by_name("instance_name_of_b");
+    module_t* module_b_handle = synapse_module_registry_find_by_name("instance_name_of_b");
     private_data->service_b_api->do_something(module_b_handle, ...);
     ```
 

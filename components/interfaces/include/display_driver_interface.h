@@ -10,8 +10,8 @@
  * @date 2025-07-31
  */
 
-#ifndef FMW_DISPLAY_DRIVER_INTERFACE_H
-#define FMW_DISPLAY_DRIVER_INTERFACE_H
+#ifndef SYNAPSE_DISPLAY_DRIVER_INTERFACE_H
+#define SYNAPSE_DISPLAY_DRIVER_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdint.h>
@@ -178,4 +178,4 @@ typedef struct {
 }
 #endif
 
-#endif // FMW_DISPLAY_DRIVER_INTERFACE_H
+#endif // SYNAPSE_DISPLAY_DRIVER_INTERFACE_H

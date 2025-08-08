@@ -39,6 +39,6 @@ typedef struct
  * @param[in] module_type მოდულის ტიპის იდენტიფიკატორი (მაგ: "wifi_module").
  * @return მოდულის create ფუნქციის მაჩვენებელი ან NULL თუ ვერ მოიძებნა.
  */
-module_create_fn_t fmw_module_factory_get(const char *module_type);
+module_create_fn_t synapse_module_factory_get(const char *module_type);
 
 #endif // GENERATED_MODULE_FACTORY_H

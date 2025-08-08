@@ -138,15 +138,15 @@ static esp_err_t security_status_reporter_init(module_t *self)
     ESP_LOGI(TAG, "Security Status: Flash Encryption is %s", private_data->flash_encryption_enabled ? "ENABLED" : "DISABLED");
 
     // Register the service API
-    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_SECURITY_API, &security_service_api);
+    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_SECURITY_API, &security_service_api);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register Security Status service: %s", esp_err_to_name(err));
         return err;
     }
 
     // Subscribe to event to register CLI command later
-    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
-    
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
+
     self->status = MODULE_STATUS_RUNNING;
     ESP_LOGI(TAG, "Module initialized and service registered successfully.");
     return ESP_OK;
@@ -157,11 +157,11 @@ static void security_status_reporter_deinit(module_t *self)
     if (!self) return;
     
     ESP_LOGI(TAG, "Deinitializing %s module", self->name);
-    
-    fmw_service_unregister(self->name);
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
-    
-    service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+
+    synapse_service_unregister(self->name);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
+
+    service_handle_t cmd_router = synapse_service_get("main_cmd_router");
     if (cmd_router) {
         ((cmd_router_api_t *)cmd_router)->unregister_command("security");
     }
@@ -178,8 +178,9 @@ static void security_status_reporter_deinit(module_t *self)
 
 static void security_status_reporter_handle_event(module_t *self, const char *event_name, void *event_data)
 {
-    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {
-        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0)
+    {
+        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
         if (cmd_router) {
             // Initialize with compile-time constants first
             static cmd_t security_cmd = {
@@ -197,9 +198,9 @@ static void security_status_reporter_handle_event(module_t *self, const char *ev
             ((cmd_router_api_t *)cmd_router)->register_command(&security_cmd);
         }
     }
-    
+
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -277,16 +278,19 @@ static esp_err_t cmd_handler(int argc, char **argv, void *context) {
         
         char *json_string = cJSON_PrintUnformatted(report_json);
         if (json_string) {
-            fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+            synapse_telemetry_payload_t *payload = malloc(sizeof(synapse_telemetry_payload_t));
             if (payload) {
                 strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
                 payload->json_data = json_string;
 
                 event_data_wrapper_t *wrapper;
-                if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK) {
-                    fmw_event_bus_post(FMW_EVENT_SECURITY_STATUS_READY, wrapper);
-                    fmw_event_data_release(wrapper);
-                } else {
+                if (synapse_event_data_wrap(payload, synapse_telemetry_payload_free, &wrapper) == ESP_OK)
+                {
+                    synapse_event_bus_post(SYNAPSE_EVENT_SECURITY_STATUS_READY, wrapper);
+                    synapse_event_data_release(wrapper);
+                }
+                else
+                {
                     free(json_string);
                     free(payload);
                 }

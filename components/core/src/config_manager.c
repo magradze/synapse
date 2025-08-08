@@ -43,7 +43,7 @@ static const cJSON *get_node_by_key(const char *key);
 //                      Public API Implementation
 // =========================================================================
 
-esp_err_t fmw_config_manager_init(void)
+esp_err_t synapse_config_manager_init(void)
 {
     esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
@@ -80,10 +80,10 @@ esp_err_t fmw_config_manager_init(void)
     return ESP_OK;
 }
 
-esp_err_t fmw_config_save(void) { return save_config_to_nvs(); }
-const cJSON *fmw_config_get_root(void) { return config_root_node; }
+esp_err_t synapse_config_save(void) { return save_config_to_nvs(); }
+const cJSON *synapse_config_get_root(void) { return config_root_node; }
 
-esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_size)
+esp_err_t synapse_config_get_string(const char *key, char *buffer, size_t buffer_size)
 {
     if (!key || !buffer || buffer_size == 0)
     {
@@ -113,7 +113,7 @@ esp_err_t fmw_config_get_string(const char *key, char *buffer, size_t buffer_siz
     return ret;
 }
 
-esp_err_t fmw_config_get_int(const char *key, int *out_value)
+esp_err_t synapse_config_get_int(const char *key, int *out_value)
 {
     if (!key || !out_value)
     {
@@ -142,7 +142,7 @@ esp_err_t fmw_config_get_int(const char *key, int *out_value)
     return ret;
 }
 
-esp_err_t fmw_config_get_bool(const char *key, bool *out_value)
+esp_err_t synapse_config_get_bool(const char *key, bool *out_value)
 {
     if (!key || !out_value)
     {
@@ -171,13 +171,13 @@ esp_err_t fmw_config_get_bool(const char *key, bool *out_value)
     return ret;
 }
 
-const cJSON *fmw_config_get_global_config(void)
+const cJSON *synapse_config_get_global_config(void)
 {
     if (!config_root_node)
         return NULL;
     // ეს ფუნქცია არ იღებს mutex-ს, რადგან ის იძახებს get_node_by_key-ს,
     // რომელიც თავის მხრივ არ არის ნაკად-უსაფრთხო.
-    // გარე გამოყენებისთვის გამოიძახეთ fmw_config_get_* ფუნქციები.
+    // გარე გამოყენებისთვის გამოიძახეთ synapse_config_get_* ფუნქციები.
     return cJSON_GetObjectItem(config_root_node, "global_config");
 }
 

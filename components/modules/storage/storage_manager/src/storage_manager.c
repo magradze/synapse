@@ -172,7 +172,7 @@ static esp_err_t storage_manager_init(module_t *self)
     }
 
     // Register the now-active service API with the Service Locator.
-    err = fmw_service_register(self->name, FMW_SERVICE_TYPE_NVRAM_API, &private_data->active_storage_api);
+    err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_NVRAM_API, &private_data->active_storage_api);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register Storage Manager service: %s", esp_err_to_name(err));
         self->status = MODULE_STATUS_ERROR;
@@ -203,7 +203,7 @@ static void storage_manager_deinit(module_t *self)
     ESP_LOGI(TAG, "Deinitializing %s module", self->name);
     
     // Unregister the service to prevent other modules from using it.
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
 
     // --- Backend De-initializer Dispatcher ---
     #if CONFIG_STORAGE_BACKEND_SPIFFS

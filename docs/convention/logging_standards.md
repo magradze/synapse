@@ -119,7 +119,7 @@ static esp_err_t ssd1306_init(module_t *module) {
 
 ```c
 // Service registration
-esp_err_t operation_result = fmw_service_register(module_instance_name, "display_api", &ssd1306_service_api);
+esp_err_t operation_result = synapse_service_register(module_instance_name, "display_api", &ssd1306_service_api);
 if (operation_result != ESP_OK) {
     ESP_LOGE(TAG, "Failed to register service '%s': %s", module_instance_name, esp_err_to_name(operation_result));
     return operation_result;
@@ -127,7 +127,7 @@ if (operation_result != ESP_OK) {
 ESP_LOGI(TAG, "Service registered: %s (type: display_api)", module_instance_name);
 
 // Service usage
-service_handle_t service_handle = fmw_service_get(module_instance_name);
+service_handle_t service_handle = synapse_service_get(module_instance_name);
 if (!service_handle) {
     ESP_LOGW(TAG, "Service '%s' not found", module_instance_name);
     return ESP_ERR_NOT_FOUND;

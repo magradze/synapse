@@ -113,14 +113,14 @@ static esp_err_t sensor_simulator_init(module_t *self)
     }
     
     ESP_LOGI(TAG, "Initializing sensor_simulator module: %s", self->name);
-    
+
     // TODO: დაამატეთ ინიციალიზაციის ლოგიკა
     // მაგალითად, Event Bus-ზე გამოწერა:
-    // esp_err_t ret = fmw_event_bus_subscribe("some_event", self);
-    
+    // esp_err_t ret = synapse_event_bus_subscribe("some_event", self);
+
     self->status = MODULE_STATUS_INITIALIZED;
 
-    fmw_event_bus_subscribe(EVT_SIM_TICK, self);
+    synapse_event_bus_subscribe(EVT_SIM_TICK, self);
 
     ESP_LOGI(TAG, "Sensor Simulator module initialized successfully");
     return ESP_OK;
@@ -151,7 +151,7 @@ static esp_err_t sensor_simulator_start(module_t *self)
     self->status = MODULE_STATUS_RUNNING;
     private_data->enabled = true;
 
-    service_handle_t timer_service = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
+    service_handle_t timer_service = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIMER_API);
     if (timer_service) {
         ((timer_api_t *)timer_service)->schedule_event(EVT_SIM_TICK, 15000, true); // ყოველ 15 წამში
         ESP_LOGI(TAG, "Sensor simulation scheduled.");
@@ -242,7 +242,7 @@ static void sensor_simulator_handle_event(module_t *self, const char *event_name
 {
     if (!self || !self->private_data) {
         if (event_data) {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         }
         return;
     }
@@ -251,7 +251,7 @@ static void sensor_simulator_handle_event(module_t *self, const char *event_name
     
     if (!private_data->enabled) {
         if (event_data) {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         }
         return;
     }
@@ -263,31 +263,31 @@ static void sensor_simulator_handle_event(module_t *self, const char *event_name
         // --- Publish Temperature ---
         float temp = 20.0 + (rand() % 50) / 10.0; // 20.0 - 24.9
         snprintf(payload_str, sizeof(payload_str), "{\"value\":%.2f}", temp);
-        fmw_event_data_wrap(strdup(payload_str), free, &wrapper);
-        fmw_event_bus_post(SENSOR_DATA_TEMPERATURE, wrapper);
-        fmw_event_data_release(wrapper);
+        synapse_event_data_wrap(strdup(payload_str), free, &wrapper);
+        synapse_event_bus_post(SENSOR_DATA_TEMPERATURE, wrapper);
+        synapse_event_data_release(wrapper);
         ESP_LOGI(TAG, "Published Temp: %s", payload_str);
 
         // --- Publish Humidity ---
         float hum = 40.0 + (rand() % 200) / 10.0; // 40.0 - 59.9
         snprintf(payload_str, sizeof(payload_str), "{\"value\":%.2f}", hum);
-        fmw_event_data_wrap(strdup(payload_str), free, &wrapper);
-        fmw_event_bus_post(SENSOR_DATA_HUMIDITY, wrapper);
-        fmw_event_data_release(wrapper);
+        synapse_event_data_wrap(strdup(payload_str), free, &wrapper);
+        synapse_event_bus_post(SENSOR_DATA_HUMIDITY, wrapper);
+        synapse_event_data_release(wrapper);
         ESP_LOGI(TAG, "Published Hum: %s", payload_str);
 
         // --- Publish Light ---
         int light = 100 + (rand() % 500); // 100 - 599
         snprintf(payload_str, sizeof(payload_str), "{\"value\":%d}", light);
-        fmw_event_data_wrap(strdup(payload_str), free, &wrapper);
-        fmw_event_bus_post(SENSOR_DATA_LIGHT, wrapper);
-        fmw_event_data_release(wrapper);
+        synapse_event_data_wrap(strdup(payload_str), free, &wrapper);
+        synapse_event_bus_post(SENSOR_DATA_LIGHT, wrapper);
+        synapse_event_data_release(wrapper);
         ESP_LOGI(TAG, "Published Light: %s", payload_str);
     }
     
     // Always release event data
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -298,10 +298,10 @@ static void sensor_simulator_deinit(module_t *self)
     }
     
     ESP_LOGI(TAG, "Deinitializing %s module", self->name);
-    
+
     // TODO: Unsubscribe from events if needed
-    // fmw_event_bus_unsubscribe("some_event", self);
-    
+    // synapse_event_bus_unsubscribe("some_event", self);
+
     if (self->private_data) {
         free(self->private_data);
     }

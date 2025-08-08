@@ -291,7 +291,7 @@ static void render_modules_menu(ui_manager_private_data_t *private_data)
       int y_pos = start_y + i * line_height;
       const char *original_name = private_data->dynamic_menu_modules[item_index]->name;
 
-      char formatted_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+      char formatted_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
       format_module_name(original_name, formatted_name, sizeof(formatted_name));
 
       if (item_index == private_data->selected_item_index)

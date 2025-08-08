@@ -6,8 +6,8 @@
  * @date 2025-07-05
  */
 
-#ifndef FMW_STORAGE_INTERFACE_H
-#define FMW_STORAGE_INTERFACE_H
+#ifndef SYNAPSE_STORAGE_INTERFACE_H
+#define SYNAPSE_STORAGE_INTERFACE_H
 
 #include "esp_err.h"
 #include <stddef.h> // For size_t
@@ -125,4 +125,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_STORAGE_INTERFACE_H
+#endif // SYNAPSE_STORAGE_INTERFACE_H

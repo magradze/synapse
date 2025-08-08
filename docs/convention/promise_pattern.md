@@ -14,14 +14,14 @@
 წარმოვიდგინოთ კლასიკური სცენარი: `ui_manager`-ს სჭირდება `wifi_manager`-ისგან მიმდინარე სტატუსის მიღება. `Event Bus`-ის გამოყენებით, პროცესი ასე გამოიყურება:
 
 1. `ui_manager` აქვეყნებს `EXECUTE_COMMAND` ივენთს `payload`-ით `"wifi status --silent"`.
-2. `wifi_manager` იღებს ამ ბრძანებას, ამუშავებს მას და აქვეყნებს პასუხს **სხვა** ივენთით: `FMW_EVENT_WIFI_STATUS_READY`.
-3. `ui_manager`-ს აქვს ცალკე ლოგიკა `handle_event` ფუნქციაში, რომელიც უსმენს `FMW_EVENT_WIFI_STATUS_READY` ივენთს და ამუშავებს პასუხს.
+2. `wifi_manager` იღებს ამ ბრძანებას, ამუშავებს მას და აქვეყნებს პასუხს **სხვა** ივენთით: `SYNAPSE_EVENT_WIFI_STATUS_READY`.
+3. `ui_manager`-ს აქვს ცალკე ლოგიკა `handle_event` ფუნქციაში, რომელიც უსმენს `SYNAPSE_EVENT_WIFI_STATUS_READY` ივენთს და ამუშავებს პასუხს.
 
 **სისუსტეები:**
 
 - **გაფანტული ლოგიკა:** მოთხოვნის გაგზავნა და პასუხის მიღება ხდება კოდის სხვადასხვა, ერთმანეთთან ლოგიკურად დაუკავშირებელ ნაწილებში.
 - **კონტექსტის დაკარგვა:** რთულია იმის მიკვლევა, თუ რომელი მოთხოვნა რომელ პასუხს შეესაბამება.
-- **"ხმაური" `Event Bus`-ზე:** `FMW_EVENT_WIFI_STATUS_READY` იგზავნება ყველასთან, მაშინაც კი, თუ ის მხოლოდ `ui_manager`-ს სჭირდებოდა.
+- **"ხმაური" `Event Bus`-ზე:** `SYNAPSE_EVENT_WIFI_STATUS_READY` იგზავნება ყველასთან, მაშინაც კი, თუ ის მხოლოდ `ui_manager`-ს სჭირდებოდა.
 
 ## 3. 💡 გადაწყვეტა: Promise პატერნი
 
@@ -46,9 +46,9 @@ Promise პატერნი ამ პროცესს გარდაქმ
 
 ფრეიმვორქის ბირთვში არსებობს **`Promise Manager`** კომპონენტი, რომელიც ამ პროცესს მართავს:
 
-- **`fmw_promise_create()`:** სერვისი (მაგ., `wifi_manager`) იძახებს ამ ფუნქციას, რათა შექმნას ახალი, `PENDING` (მომლოდინე) მდგომარეობაში მყოფი `Promise`.
-- **`fmw_promise_then()` / `fmw_promise_catch()`:** მომხმარებელი (მაგ., `ui_manager`) ამ ფუნქციებით არეგისტრირებს თავის `callback`-ებს.
-- **`fmw_promise_resolve()` / `fmw_promise_reject()`:** როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს ამ ფუნქციებიდან ერთ-ერთს.
+- **`synapse_promise_create()`:** სერვისი (მაგ., `wifi_manager`) იძახებს ამ ფუნქციას, რათა შექმნას ახალი, `PENDING` (მომლოდინე) მდგომარეობაში მყოფი `Promise`.
+- **`synapse_promise_then()` / `synapse_promise_catch()`:** მომხმარებელი (მაგ., `ui_manager`) ამ ფუნქციებით არეგისტრირებს თავის `callback`-ებს.
+- **`synapse_promise_resolve()` / `synapse_promise_reject()`:** როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს ამ ფუნქციებიდან ერთ-ერთს.
 - **`Promise Manager Task`:** `resolve` ან `reject` გამოძახებისას, `Promise Manager`-ი შესაბამის `Promise`-ს აგზავნის თავის შიდა რიგში. მისი გამოყოფილი FreeRTOS ტასკი იღებს ამ `Promise`-ს და უსაფრთხო, იზოლირებულ კონტექსტში იძახებს მომხმარებლის მიერ დარეგისტრირებულ `callback` ფუნქციას.
 
 ## 5. 📝 გამოყენების პატერნი
@@ -69,11 +69,11 @@ Promise პატერნი ამ პროცესს გარდაქმ
 2. **API-ს იმპლემენტაცია (`wifi_manager.c`):**
 
     ```c
-    #include "promise_manager_internal.h" // საჭიროა fmw_promise_create-სთვის
+    #include "promise_manager_internal.h" // საჭიროა synapse_promise_create-სთვის
 
     static esp_err_t wifi_api_get_status_async(void* context, promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context) {
         // 1. შევქმნათ ახალი "დაპირება" უკვე მზა callback-ებით
-        promise_handle_t promise = fmw_promise_create(then_cb, catch_cb, user_context);
+        promise_handle_t promise = synapse_promise_create(then_cb, catch_cb, user_context);
         if (!promise) {
             return ESP_ERR_NO_MEM;
         }
@@ -93,7 +93,7 @@ Promise პატერნი ამ პროცესს გარდაქმ
     // ... შევავსოთ status_buffer ...
 
     // შევასრულოთ "დაპირება" სტატიკური ბუფერით
-    fmw_promise_resolve(cmd.promise_handle, status_buffer, NULL);
+    synapse_promise_resolve(cmd.promise_handle, status_buffer, NULL);
     ```
 
 ### 5.2. მომხმარებლის მხარე (Consumer - მაგ., `ui_manager`)

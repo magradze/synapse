@@ -50,12 +50,12 @@ typedef struct
  *          to the corresponding MQTT topic.
  */
 static const event_to_topic_map_t event_topic_map[] = {
-    {FMW_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS},
-    {FMW_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO},
-    {FMW_EVENT_SELF_TEST_REPORT_READY, MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT},
-    {FMW_EVENT_AGGREGATED_SENSOR_REPORT, MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT},
-    {FMW_EVENT_SECURITY_STATUS_READY, MQTT_TOPIC_PUB_SECURITY_STATUS_REPORTER_SECURITY_STATUS},
-    {FMW_EVENT_RELAY_STATE_CHANGED, MQTT_TOPIC_PUB_RELAY_ACTUATOR_STATE_CHANGED},
+    {SYNAPSE_EVENT_WIFI_STATUS_READY, MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS},
+    {SYNAPSE_EVENT_DEVICE_INFO_READY, MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO},
+    {SYNAPSE_EVENT_SELF_TEST_REPORT_READY, MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT},
+    {SYNAPSE_EVENT_AGGREGATED_SENSOR_REPORT, MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT},
+    {SYNAPSE_EVENT_SECURITY_STATUS_READY, MQTT_TOPIC_PUB_SECURITY_STATUS_REPORTER_SECURITY_STATUS},
+    {SYNAPSE_EVENT_RELAY_STATE_CHANGED, MQTT_TOPIC_PUB_RELAY_ACTUATOR_STATE_CHANGED},
 };
 static const int event_topic_map_size = sizeof(event_topic_map) / sizeof(event_topic_map[0]);
 
@@ -79,7 +79,7 @@ typedef struct
     mqtt_manager_config_t config;
     esp_mqtt_client_handle_t client_handle;
     bool is_connected;
-    fmw_timer_handle_t heartbeat_timer;
+    synapse_timer_handle_t heartbeat_timer;
 } mqtt_manager_private_data_t;
 
 // --- Forward Declarations ---
@@ -173,14 +173,14 @@ static esp_err_t mqtt_manager_init(module_t *self)
     ESP_LOGI(TAG, "Initializing MQTT Manager module: %s", self->name);
 
     // Subscribe to the event that signals WiFi is connected and has an IP
-    fmw_event_bus_subscribe("WIFI_EVENT_IP_ASSIGNED", self);
+    synapse_event_bus_subscribe("WIFI_EVENT_IP_ASSIGNED", self);
 
-    fmw_event_bus_subscribe("MQTT_HEARTBEAT_TICK", self);
+    synapse_event_bus_subscribe("MQTT_HEARTBEAT_TICK", self);
 
     // Automatically subscribe to all events in the map
     for (int i = 0; i < event_topic_map_size; i++)
     {
-        fmw_event_bus_subscribe(event_topic_map[i].event_name, self);
+        synapse_event_bus_subscribe(event_topic_map[i].event_name, self);
     }
 
     self->status = MODULE_STATUS_INITIALIZED;
@@ -202,10 +202,10 @@ static void mqtt_manager_deinit(module_t *self)
     }
 
     // Unsubscribe from all events
-    fmw_event_bus_unsubscribe("WIFI_EVENT_IP_ASSIGNED", self);
+    synapse_event_bus_unsubscribe("WIFI_EVENT_IP_ASSIGNED", self);
     for (int i = 0; i < event_topic_map_size; i++)
     {
-        fmw_event_bus_unsubscribe(event_topic_map[i].event_name, self);
+        synapse_event_bus_unsubscribe(event_topic_map[i].event_name, self);
     }
 
     if (self->private_data)
@@ -232,7 +232,7 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
     if (!self || !event_name)
     {
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
@@ -250,18 +250,18 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
     {
         ESP_LOGI(TAG, "HANDLE_EVENT: Received event 'MQTT_HEARTBEAT_TICK'. Sending heartbeat to Watchdog.");
         // შევქმნათ payload Connectivity Watchdog-ისთვის
-        fmw_connectivity_payload_t *payload = (fmw_connectivity_payload_t *)malloc(sizeof(fmw_connectivity_payload_t));
+        synapse_connectivity_payload_t *payload = (synapse_connectivity_payload_t *)malloc(sizeof(synapse_connectivity_payload_t));
         if (payload)
         {
             // ჩავწეროთ იმ შემოწმების სახელი, რომელსაც "ვაცოცხლებთ"
             snprintf(payload->check_name, sizeof(payload->check_name), "MQTT_Heartbeat");
 
             event_data_wrapper_t *wrapper;
-            if (fmw_event_data_wrap(payload, free, &wrapper) == ESP_OK)
+            if (synapse_event_data_wrap(payload, free, &wrapper) == ESP_OK)
             {
                 // გამოვაქვეყნოთ ზოგადი "კავშირი აღდგა" ივენთი
-                fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
-                fmw_event_data_release(wrapper);
+                synapse_event_bus_post(SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
+                synapse_event_data_release(wrapper);
             }
             else
             {
@@ -288,7 +288,7 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
                 goto cleanup;
             }
 
-            fmw_telemetry_payload_t *telemetry_payload = (fmw_telemetry_payload_t *)wrapper->payload;
+            synapse_telemetry_payload_t *telemetry_payload = (synapse_telemetry_payload_t *)wrapper->payload;
             char *json_to_publish = telemetry_payload->json_data;
 
             if (json_to_publish)
@@ -316,7 +316,7 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
                     strncpy(topic_template, base_template, sizeof(topic_template) - 1);
                 }
 
-                service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+                service_handle_t id_service_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API);
                 if (id_service_handle)
                 {
                     device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
@@ -343,7 +343,7 @@ static void mqtt_manager_handle_event(module_t *self, const char *event_name, vo
 cleanup:
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -355,7 +355,7 @@ static void start_mqtt_connection(module_t *self)
 {
     mqtt_manager_private_data_t *p_data = (mqtt_manager_private_data_t *)self->private_data;
 
-    service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+    service_handle_t id_service_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API);
     if (!id_service_handle)
     {
         ESP_LOGE(TAG, "Device Identity Service not found! Cannot start MQTT.");
@@ -419,15 +419,15 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
         p_data->is_connected = true;
 
         // Publish generic connectivity event
-        fmw_connectivity_payload_t *conn_payload = malloc(sizeof(fmw_connectivity_payload_t));
+        synapse_connectivity_payload_t *conn_payload = malloc(sizeof(synapse_connectivity_payload_t));
         if (conn_payload)
         {
             snprintf(conn_payload->check_name, sizeof(conn_payload->check_name), "MQTT_Heartbeat");
             event_data_wrapper_t *wrapper;
-            if (fmw_event_data_wrap(conn_payload, free, &wrapper) == ESP_OK)
+            if (synapse_event_data_wrap(conn_payload, free, &wrapper) == ESP_OK)
             {
-                fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
-                fmw_event_data_release(wrapper);
+                synapse_event_bus_post(SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
+                synapse_event_data_release(wrapper);
             }
             else
             {
@@ -436,7 +436,7 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
         }
 
         // Schedule periodic heartbeat
-        service_handle_t timer_service = fmw_service_get("main_timer_service");
+        service_handle_t timer_service = synapse_service_get("main_timer_service");
         if (timer_service)
         {
             timer_api_t *timer_api = (timer_api_t *)timer_service;
@@ -457,7 +457,7 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
 
         // Subscribe to command topic
         char cmd_topic[128];
-        service_handle_t id_service_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_DEVICE_IDENTITY_API);
+        service_handle_t id_service_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API);
         if (id_service_handle)
         {
             device_identity_api_t *id_api = (device_identity_api_t *)id_service_handle;
@@ -474,7 +474,7 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
         p_data->is_connected = false;
 
         // Cancel heartbeat timer
-        service_handle_t timer_service = fmw_service_get("main_timer_service");
+        service_handle_t timer_service = synapse_service_get("main_timer_service");
         if (timer_service && p_data->heartbeat_timer)
         {
             timer_api_t *timer_api = (timer_api_t *)timer_service;
@@ -484,15 +484,15 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
         }
 
         // Publish generic connectivity lost event
-        fmw_connectivity_payload_t *disconn_payload = malloc(sizeof(fmw_connectivity_payload_t));
+        synapse_connectivity_payload_t *disconn_payload = malloc(sizeof(synapse_connectivity_payload_t));
         if (disconn_payload)
         {
             snprintf(disconn_payload->check_name, sizeof(disconn_payload->check_name), "MQTT_Heartbeat");
             event_data_wrapper_t *wrapper;
-            if (fmw_event_data_wrap(disconn_payload, free, &wrapper) == ESP_OK)
+            if (synapse_event_data_wrap(disconn_payload, free, &wrapper) == ESP_OK)
             {
-                fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_LOST, wrapper);
-                fmw_event_data_release(wrapper);
+                synapse_event_bus_post(SYNAPSE_EVENT_CONNECTIVITY_LOST, wrapper);
+                synapse_event_data_release(wrapper);
             }
             else
             {
@@ -506,7 +506,7 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
     { // --- FIX: Start of local scope for this case ---
         ESP_LOGI(TAG, "MQTT_EVENT_DATA received on topic '%.*s'", event->topic_len, event->topic);
 
-        fmw_command_payload_t *payload = malloc(sizeof(fmw_command_payload_t));
+        synapse_command_payload_t *payload = malloc(sizeof(synapse_command_payload_t));
         if (payload)
         {
             int len = event->data_len < sizeof(payload->command_string) - 1 ? event->data_len : sizeof(payload->command_string) - 1;
@@ -515,11 +515,11 @@ static void mqtt_event_handler_cb(void *handler_args, esp_event_base_t base, int
             strncpy(payload->source, "mqtt", sizeof(payload->source) - 1);
 
             event_data_wrapper_t *wrapper;
-            if (fmw_event_data_wrap(payload, free, &wrapper) == ESP_OK)
+            if (synapse_event_data_wrap(payload, free, &wrapper) == ESP_OK)
             {
                 ESP_LOGI(TAG, "Forwarding command to Event Bus: '%s'", payload->command_string);
-                fmw_event_bus_post(FMW_EVENT_EXECUTE_COMMAND_STRING, wrapper);
-                fmw_event_data_release(wrapper);
+                synapse_event_bus_post(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, wrapper);
+                synapse_event_data_release(wrapper);
             }
             else
             {

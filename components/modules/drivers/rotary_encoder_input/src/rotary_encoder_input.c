@@ -5,7 +5,7 @@
  * @version 2.0.0
  * @date 2025-08-24
  * @details This module reads multiple rotary encoder's rotation and button presses, debounces the signals,
- *          and translates them into standard FMW_EVENT_BUTTON_PRESSED events with "UP", "DOWN",
+ *          and translates them into standard SYNAPSE_EVENT_BUTTON_PRESSED events with "UP", "DOWN",
  *          and "OK" payloads. It supports both direct GPIO connection and connection via an
  *          MCP23017 I/O expander. All instances are managed by a single, shared FreeRTOS task
  *          for resource efficiency.
@@ -39,8 +39,8 @@ typedef enum {
 } control_type_t;
 
 typedef struct {
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
-    
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
+
     // Pin configuration
     uint8_t pin_a;
     uint8_t pin_b;
@@ -121,9 +121,9 @@ static esp_err_t rotary_encoder_input_init(module_t *self)
     ESP_LOGI(TAG, "Initializing Rotary Encoder module '%s'", self->name);
 
     if (private_data->control_type == CONTROL_TYPE_GPIO) {
-        fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
-        fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
-        fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->pin_sw, self->name);
+        synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
+        synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
+        synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_sw, self->name);
 
         gpio_config_t io_conf = {
             .mode = GPIO_MODE_INPUT,
@@ -134,7 +134,7 @@ static esp_err_t rotary_encoder_input_init(module_t *self)
         io_conf.pin_bit_mask = (1ULL << private_data->pin_a) | (1ULL << private_data->pin_b) | (1ULL << private_data->pin_sw);
         gpio_config(&io_conf);
     } else { // Expander Mode
-        private_data->expander_handle = (mcp23017_handle_t *)fmw_service_get(private_data->expander_service_name);
+        private_data->expander_handle = (mcp23017_handle_t *)synapse_service_get(private_data->expander_service_name);
         if (!private_data->expander_handle) {
             ESP_LOGE(TAG, "Expander service '%s' not found!", private_data->expander_service_name);
             return ESP_ERR_NOT_FOUND;
@@ -217,9 +217,9 @@ static void rotary_encoder_input_deinit(module_t *self)
     rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
     if (private_data) {
         if (private_data->control_type == CONTROL_TYPE_GPIO) {
-            fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
-            fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
-            fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->pin_sw, self->name);
+            synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
+            synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
+            synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_sw, self->name);
         }
         free(private_data);
     }
@@ -278,7 +278,7 @@ static void rotary_task(void *pvParameters)
 
 static void publish_button_event(const char *button_name)
 {
-    fmw_button_payload_t *payload = calloc(1, sizeof(fmw_button_payload_t));
+    synapse_button_payload_t *payload = calloc(1, sizeof(synapse_button_payload_t));
     if (!payload) {
         ESP_LOGE(TAG, "Failed to allocate memory for button payload");
         return;
@@ -287,10 +287,13 @@ static void publish_button_event(const char *button_name)
     snprintf(payload->button_name, sizeof(payload->button_name), "%s", button_name);
 
     event_data_wrapper_t *wrapper;
-    if (fmw_event_data_wrap(payload, fmw_payload_common_free, &wrapper) == ESP_OK) {
-        fmw_event_bus_post(FMW_EVENT_BUTTON_PRESSED, wrapper);
-        fmw_event_data_release(wrapper);
-    } else {
+    if (synapse_event_data_wrap(payload, synapse_payload_common_free, &wrapper) == ESP_OK)
+    {
+        synapse_event_bus_post(SYNAPSE_EVENT_BUTTON_PRESSED, wrapper);
+        synapse_event_data_release(wrapper);
+    }
+    else
+    {
         free(payload);
     }
 }

@@ -42,18 +42,18 @@
 
 ## 4. 🛠️ Service API (`timer_api_t`)
 
-მოდული არეგისტრირებს სერვისს ტიპით `FMW_SERVICE_TYPE_TIMER_API`.
+მოდული არეგისტრირებს სერვისს ტიპით `SYNAPSE_SERVICE_TYPE_TIMER_API`.
 
 **API ფუნქციები:**
 
-- **`fmw_timer_handle_t schedule_event(const char* event_name, uint32_t interval_ms, bool is_periodic);`**  
+- **`synapse_timer_handle_t schedule_event(const char* event_name, uint32_t interval_ms, bool is_periodic);`**  
     🗓️ გეგმავს ივენთის გამოქვეყნებას.
   - `event_name`: ივენთის სახელი, რომელიც უნდა გამოქვეყნდეს. **ყურადღება:** ეს სტრიქონი უნდა იყოს პერმანენტული (მაგ., `#define` ან `static const char*`).
   - `interval_ms`: ინტერვალი მილიწამებში.
   - `is_periodic`: თუ `true`, ივენთი პერიოდულად გამოქვეყნდება. თუ `false`, ის ერთჯერადი იქნება.
   - **აბრუნებს:** უნიკალურ `handle`-ს, რომელიც შეიძლება გამოყენებულ იქნას ტაიმერის გასაუქმებლად, ან `NULL`-ს შეცდომის შემთხვევაში.
 
-- **`esp_err_t cancel_event(fmw_timer_handle_t handle);`**  
+- **`esp_err_t cancel_event(synapse_timer_handle_t handle);`**  
     ❌ აუქმებს ადრე დაგეგმილ ივენთს მისი `handle`-ის გამოყენებით.
 
 ## 5. 💡 გამოყენების მაგალითი
@@ -76,12 +76,12 @@ static esp_err_t dht22_start(module_t *self) {
     // ...
     
     // ვიღებთ ტაიმერის სერვისს
-    service_handle_t timer_service_handle = fmw_service_get("main_timer_service");
+    service_handle_t timer_service_handle = synapse_service_get("main_timer_service");
     if (timer_service_handle) {
         timer_api_t *timer_api = (timer_api_t *)timer_service_handle;
         
         // ვგეგმავთ პერიოდულ ივენთს ყოველ 60 წამში
-        fmw_timer_handle_t sensor_timer = timer_api->schedule_event(EVT_READ_SENSOR, 60000, true);
+        synapse_timer_handle_t sensor_timer = timer_api->schedule_event(EVT_READ_SENSOR, 60000, true);
         
         if (sensor_timer) {
             ESP_LOGI(TAG, "Sensor reading scheduled successfully.");
@@ -107,7 +107,7 @@ static void dht22_handle_event(module_t *self, const char *event_name, void *eve
     
     // არ დაგვავიწყდეს wrapper-ის გათავისუფლება (თუმცა ამ შემთხვევაში ის NULL-ია)
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 ```

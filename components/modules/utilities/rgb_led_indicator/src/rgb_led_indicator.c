@@ -136,7 +136,7 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing module: %s (Shift Register Mode)", self->name);
 
-    private_data->sr_handle = (sn74hc595n_writer_handle_t *)fmw_service_get(private_data->sr_writer_service_name);
+    private_data->sr_handle = (sn74hc595n_writer_handle_t *)synapse_service_get(private_data->sr_writer_service_name);
     if (!private_data->sr_handle)
     {
         ESP_LOGE(TAG, "Shift register writer service '%s' not found!", private_data->sr_writer_service_name);
@@ -150,12 +150,12 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
         return ESP_ERR_NO_MEM;
     }
 
-    fmw_event_bus_subscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
-    fmw_event_bus_subscribe("WIFI_EVENT_DISCONNECTED", self);
-    fmw_event_bus_subscribe("WIFI_EVENT_CONNECTED", self);
-    fmw_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);
+    synapse_event_bus_subscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
+    synapse_event_bus_subscribe("WIFI_EVENT_DISCONNECTED", self);
+    synapse_event_bus_subscribe("WIFI_EVENT_CONNECTED", self);
+    synapse_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);
 
-    fmw_service_register(self->name, FMW_SERVICE_TYPE_RGB_LED_API, &rgb_led_service_api);
+    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_RGB_LED_API, &rgb_led_service_api);
     register_cli_commands(self);
     set_led_color(private_data, 0, 0, 0);
 
@@ -177,7 +177,7 @@ static esp_err_t rgb_led_indicator_start(module_t *self)
         return ESP_FAIL;
     }
 
-    service_handle_t prov_handle = fmw_service_get("main_ble_provisioning");
+    service_handle_t prov_handle = synapse_service_get("main_ble_provisioning");
     if (prov_handle)
     {
         ble_prov_api_t *prov_api = (ble_prov_api_t *)prov_handle;
@@ -203,7 +203,7 @@ static void rgb_led_indicator_handle_event(module_t *self, const char *event_nam
     if (!self || !self->private_data || !event_name)
     {
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
@@ -213,7 +213,7 @@ static void rgb_led_indicator_handle_event(module_t *self, const char *event_nam
         if (private_data->is_manual_override)
             ESP_LOGD(TAG, "Ignoring event '%s', manual override is active.", event_name);
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
@@ -240,7 +240,7 @@ static void rgb_led_indicator_handle_event(module_t *self, const char *event_nam
 cleanup:
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -260,12 +260,12 @@ static void rgb_led_indicator_deinit(module_t *self)
         free(self->private_data);
     }
 
-    fmw_event_bus_unsubscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
-    fmw_event_bus_unsubscribe("WIFI_EVENT_DISCONNECTED", self);
-    fmw_event_bus_unsubscribe("WIFI_EVENT_CONNECTED", self);
-    fmw_event_bus_unsubscribe("SYSTEM_HEALTH_ALERT", self);
+    synapse_event_bus_unsubscribe("WIFI_CREDENTIALS_NOT_FOUND", self);
+    synapse_event_bus_unsubscribe("WIFI_EVENT_DISCONNECTED", self);
+    synapse_event_bus_unsubscribe("WIFI_EVENT_CONNECTED", self);
+    synapse_event_bus_unsubscribe("SYSTEM_HEALTH_ALERT", self);
 
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
     unregister_cli_commands(self);
 
     if (global_rgb_led_instance == self)
@@ -586,7 +586,7 @@ static void register_cli_commands(module_t *self)
     };
 
     // 2. მოვძებნოთ Command Router სერვისი.
-    service_handle_t handle = fmw_service_get("main_cmd_router");
+    service_handle_t handle = synapse_service_get("main_cmd_router");
     if (handle)
     {
         cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;
@@ -608,7 +608,7 @@ static void register_cli_commands(module_t *self)
 
 static void unregister_cli_commands(module_t *self)
 {
-    service_handle_t handle = fmw_service_get("main_cmd_router");
+    service_handle_t handle = synapse_service_get("main_cmd_router");
     if (handle)
     {
         cmd_router_api_t *cmd_api = (cmd_router_api_t *)handle;

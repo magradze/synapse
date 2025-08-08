@@ -164,7 +164,7 @@ static esp_err_t health_monitor_init(module_t *self)
     }
     ESP_LOGI(TAG, "Initializing health_monitor module: %s", self->name);
 
-    esp_err_t ret = fmw_service_register(self->name, FMW_SERVICE_TYPE_HEALTH_API, &health_service_api);
+    esp_err_t ret = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_HEALTH_API, &health_service_api);
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register health service: %s", esp_err_to_name(ret));
@@ -172,8 +172,8 @@ static esp_err_t health_monitor_init(module_t *self)
     }
 
     // Subscribe to provisioning events to manage state
-    fmw_event_bus_subscribe("PROV_STARTED", self);
-    fmw_event_bus_subscribe("PROV_ENDED", self);
+    synapse_event_bus_subscribe("PROV_STARTED", self);
+    synapse_event_bus_subscribe("PROV_ENDED", self);
 
     self->status = MODULE_STATUS_INITIALIZED;
     ESP_LOGI(TAG, "Health_Monitor module initialized successfully");
@@ -238,7 +238,7 @@ static void health_monitor_deinit(module_t *self)
         vTaskDelete(private_data->monitor_task_handle);
     }
 
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
     global_health_monitor_instance = NULL;
 
     if (self->private_data)
@@ -282,7 +282,7 @@ static void health_monitor_handle_event(module_t *self, const char *event_name, 
     // We must release the wrapper for any event we handle
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -397,11 +397,11 @@ static void health_monitor_task(void *pvParameters)
                 if (json_str)
                 {
                     event_data_wrapper_t *wrapper = NULL;
-                    // Use fmw_payload_common_free for simple malloc/free
-                    if (fmw_event_data_wrap(json_str, fmw_payload_common_free, &wrapper) == ESP_OK)
+                    // Use synapse_payload_common_free for simple malloc/free
+                    if (synapse_event_data_wrap(json_str, synapse_payload_common_free, &wrapper) == ESP_OK)
                     {
-                        fmw_event_bus_post(EVT_HEALTH_ALERT, wrapper);
-                        fmw_event_data_release(wrapper); // Release the initial reference
+                        synapse_event_bus_post(EVT_HEALTH_ALERT, wrapper);
+                        synapse_event_data_release(wrapper); // Release the initial reference
                     }
                     else
                     {
@@ -430,9 +430,12 @@ static void health_monitor_task(void *pvParameters)
                 
                 if (json_str) {
                     event_data_wrapper_t *wrapper = NULL;
-                    if (fmw_event_data_wrap(json_str, free, &wrapper) == ESP_OK) {
-                        fmw_event_bus_post(EVT_HEALTH_ALERT, wrapper);
-                    } else {
+                    if (synapse_event_data_wrap(json_str, free, &wrapper) == ESP_OK)
+                    {
+                        synapse_event_bus_post(EVT_HEALTH_ALERT, wrapper);
+                    }
+                    else
+                    {
                         free(json_str);
                     }
                 }
@@ -465,9 +468,12 @@ static void health_monitor_task(void *pvParameters)
                     
                     if (json_str) {
                         event_data_wrapper_t *wrapper = NULL;
-                        if (fmw_event_data_wrap(json_str, free, &wrapper) == ESP_OK) {
-                            fmw_event_bus_post(EVT_HEALTH_ALERT, wrapper);
-                        } else {
+                        if (synapse_event_data_wrap(json_str, free, &wrapper) == ESP_OK)
+                        {
+                            synapse_event_bus_post(EVT_HEALTH_ALERT, wrapper);
+                        }
+                        else
+                        {
                             free(json_str);
                         }
                     }

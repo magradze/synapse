@@ -12,7 +12,7 @@
  *
  * To ensure robust integration with other services that may initialize later,
  * it uses a delayed registration pattern for its CLI command. It subscribes to
- * the `FMW_EVENT_SYSTEM_START_COMPLETE` event and registers its 'device info'
+ * the `SYNAPSE_EVENT_SYSTEM_START_COMPLETE` event and registers its 'device info'
  * command only after the entire system is up and running, guaranteeing that
  * the Command Router service is available.
  */
@@ -121,7 +121,7 @@ module_t *device_identity_service_create(const cJSON *config)
         return NULL;
     }
 
-    char instance_name_buffer[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char instance_name_buffer[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     strncpy(instance_name_buffer, CONFIG_DEVICE_IDENTITY_SERVICE_DEFAULT_INSTANCE_NAME, sizeof(instance_name_buffer) - 1);
     instance_name_buffer[sizeof(instance_name_buffer) - 1] = '\0';
 
@@ -179,16 +179,16 @@ static esp_err_t device_identity_init(module_t *self)
     ESP_LOGI(TAG, "Device ID: %s", p_data->device_id);
     ESP_LOGI(TAG, "Firmware Version: %s", p_data->firmware_version);
 
-    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_DEVICE_IDENTITY_API, &identity_service_api);
+    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API, &identity_service_api);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register Device Identity service: %s", esp_err_to_name(err));
         return err;
     }
 
-    err = fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    err = synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to subscribe to system start event: %s", esp_err_to_name(err));
-        fmw_service_unregister(self->name);
+        synapse_service_unregister(self->name);
         return err;
     }
 
@@ -214,8 +214,8 @@ static void device_identity_deinit(module_t *self)
     ESP_LOGI(TAG, "Deinitializing Device Identity Service: %s", self->name);
 
     unregister_cli_commands();
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
-    fmw_service_unregister(self->name);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_service_unregister(self->name);
 
     if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
     if (self->private_data) free(self->private_data);
@@ -240,13 +240,14 @@ static void device_identity_handle_event(module_t *self, const char *event_name,
 {
 
     ESP_LOGI(TAG, "****************************************************");
-    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {
+    if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0)
+    {
         ESP_LOGI(TAG, "System start complete. Registering CLI commands now.");
         register_cli_commands(self);
     }
 
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -293,7 +294,7 @@ static const char* api_get_firmware_version(void)
  * 1. Prints the device identity information directly to the console for
  *    immediate feedback to the user.
  * 2. Creates a cJSON object with the same information, and publishes it
- *    to the Event Bus under the `FMW_EVENT_DEVICE_INFO_READY` event. This
+ *    to the Event Bus under the `SYNAPSE_EVENT_DEVICE_INFO_READY` event. This
  *    allows other modules, like the mqtt_manager, to react to the command
  *    and forward the response to external systems.
  *
@@ -339,10 +340,10 @@ static esp_err_t cmd_handler_device(int argc, char **argv, void *context)
 
             event_data_wrapper_t *wrapper;
             // Wrap the dynamically allocated string so it can be safely freed by the event bus
-            if (fmw_event_data_wrap(strdup(json_string), free, &wrapper) == ESP_OK)
+            if (synapse_event_data_wrap(strdup(json_string), free, &wrapper) == ESP_OK)
             {
-                fmw_event_bus_post(FMW_EVENT_DEVICE_INFO_READY, wrapper);
-                fmw_event_data_release(wrapper); // Release our ownership
+                synapse_event_bus_post(SYNAPSE_EVENT_DEVICE_INFO_READY, wrapper);
+                synapse_event_data_release(wrapper); // Release our ownership
             }
 
             free(json_string);
@@ -365,7 +366,7 @@ static esp_err_t cmd_handler_device(int argc, char **argv, void *context)
  */
 static void register_cli_commands(module_t *self)
 {
-    service_handle_t cmd_router_handle = fmw_service_get("main_cmd_router");
+    service_handle_t cmd_router_handle = synapse_service_get("main_cmd_router");
     if (!cmd_router_handle) {
         ESP_LOGW(TAG, "Command Router service not found. Cannot register 'device' command.");
         return;
@@ -399,7 +400,7 @@ static void register_cli_commands(module_t *self)
  */
 static void unregister_cli_commands(void)
 {
-    service_handle_t cmd_router_handle = fmw_service_get("main_cmd_router");
+    service_handle_t cmd_router_handle = synapse_service_get("main_cmd_router");
     if (cmd_router_handle) {
         cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router_handle;
         cmd_api->unregister_command("device");

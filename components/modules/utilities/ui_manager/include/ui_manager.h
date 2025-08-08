@@ -31,7 +31,7 @@ struct event_data_wrapper_t;
 #define HOME_SCREEN_UPDATE_INTERVAL_MS 1000
 #define WIFI_STATUS_UPDATE_INTERVAL_MS 5000
 #define BUTTON_COOLDOWN_MS 200
-#define MAX_MENU_ITEMS CONFIG_FMW_MAX_MODULES
+#define MAX_MENU_ITEMS CONFIG_SYNAPSE_MAX_MODULES
 #define MAX_VISIBLE_MENU_ITEMS 3
 
 // --- Event Names ---
@@ -112,9 +112,9 @@ typedef struct {
     font_metrics_t small_font_metrics;  /**< @brief Cached metrics of the driver's default small font. */
 
     ui_state_t current_state;           /**< @brief The current screen being displayed. */
-    fmw_timer_handle_t screen_off_timer;/**< @brief Handle for the screen auto-off timer. */
-    fmw_timer_handle_t home_screen_timer;/**< @brief Handle for the periodic home screen update timer. */
-    fmw_timer_handle_t wifi_status_timer;/**< @brief Handle for the periodic WiFi status request timer. */
+    synapse_timer_handle_t screen_off_timer;  /**< @brief Handle for the screen auto-off timer. */
+    synapse_timer_handle_t home_screen_timer; /**< @brief Handle for the periodic home screen update timer. */
+    synapse_timer_handle_t wifi_status_timer; /**< @brief Handle for the periodic WiFi status request timer. */
     bool is_screen_on;                  /**< @brief Tracks if the display panel is currently powered on. */
 
     int selected_item_index;            /**< @brief The index of the currently selected item in a menu. */

@@ -53,8 +53,8 @@ static esp_err_t system_timer_init(module_t *self);
 static void system_timer_deinit(module_t *self);
 static void timer_callback(void* arg);
 
-static fmw_timer_handle_t api_schedule_event(const char* event_name, uint32_t interval_ms, bool is_periodic);
-static esp_err_t api_cancel_event(fmw_timer_handle_t handle);
+static synapse_timer_handle_t api_schedule_event(const char *event_name, uint32_t interval_ms, bool is_periodic);
+static esp_err_t api_cancel_event(synapse_timer_handle_t handle);
 
 // --- Global Static Variables ---
 static module_t *global_timer_service_instance = NULL;
@@ -140,8 +140,8 @@ module_t *system_timer_create(const cJSON *config) {
  */
 static esp_err_t system_timer_init(module_t *self) {
     ESP_LOGI(TAG, "Initializing System Timer Service: %s", self->name);
-    
-    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_TIMER_API, &timer_service_api);
+
+    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_TIMER_API, &timer_service_api);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register System Timer service: %s", esp_err_to_name(err));
         return err;
@@ -162,7 +162,7 @@ static void system_timer_deinit(module_t *self) {
     system_timer_private_data_t *private_data = (system_timer_private_data_t *)self->private_data;
     
     ESP_LOGI(TAG, "Deinitializing System Timer Service: %s", self->name);
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
 
     // Cancel and delete all active timers to prevent callbacks after deinit
     for (int i = 0; i < CONFIG_SYSTEM_TIMER_MAX_TIMERS; i++) {
@@ -197,7 +197,7 @@ static void timer_callback(void* arg) {
     if (entry && entry->event_name) {
         ESP_LOGD(TAG, "Timer fired. Posting event: %s", entry->event_name);
         // Note: No data is passed with the event.
-        fmw_event_bus_post(entry->event_name, NULL);
+        synapse_event_bus_post(entry->event_name, NULL);
     }
 }
 
@@ -206,7 +206,8 @@ static void timer_callback(void* arg) {
  * @brief Implements the schedule_event API function.
  * @see timer_interface.h
  */
-static fmw_timer_handle_t api_schedule_event(const char* event_name, uint32_t interval_ms, bool is_periodic) {
+static synapse_timer_handle_t api_schedule_event(const char *event_name, uint32_t interval_ms, bool is_periodic)
+{
     if (!event_name || interval_ms == 0) {
         return NULL;
     }
@@ -272,7 +273,7 @@ static fmw_timer_handle_t api_schedule_event(const char* event_name, uint32_t in
     xSemaphoreGive(private_data->pool_mutex);
 
     ESP_LOGI(TAG, "Scheduled event '%s' with interval %" PRIu32 "ms. Periodic: %s", event_name, interval_ms, is_periodic ? "Yes" : "No");
-    return (fmw_timer_handle_t)new_entry;
+    return (synapse_timer_handle_t)new_entry;
 }
 
 /**
@@ -280,7 +281,8 @@ static fmw_timer_handle_t api_schedule_event(const char* event_name, uint32_t in
  * @brief Implements the cancel_event API function.
  * @see timer_interface.h
  */
-static esp_err_t api_cancel_event(fmw_timer_handle_t handle) {
+static esp_err_t api_cancel_event(synapse_timer_handle_t handle)
+{
     if (!handle) {
         return ESP_ERR_INVALID_ARG;
     }

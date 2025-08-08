@@ -132,7 +132,7 @@ module_t *ota_update_manager_create(const cJSON *config)
 static esp_err_t ota_update_manager_init(module_t *self)
 {
     ESP_LOGI(TAG, "Initializing OTA Update Manager.");
-    fmw_service_register(self->name, FMW_SERVICE_TYPE_OTA_API, &ota_service_api);
+    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_OTA_API, &ota_service_api);
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
@@ -159,7 +159,7 @@ static void ota_update_manager_deinit(module_t *self)
         free(p_data->update_url);
     }
 
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
     global_ota_instance = NULL;
 
     if (self->private_data) free(self->private_data);
@@ -192,7 +192,7 @@ static esp_err_t api_start_update(const char *firmware_url)
     }
 
     // 1. Health Check
-    service_handle_t health_handle = fmw_service_get("main_health_monitor");
+    service_handle_t health_handle = synapse_service_get("main_health_monitor");
     if (health_handle)
     {
         health_api_t *health_api = (health_api_t *)health_handle;
@@ -254,8 +254,8 @@ static void ota_task(void *pvParameters)
 
     // ვიზუალური ინდიკაცია და ივენთი
     ESP_LOGI(TAG, "Starting OTA update from: %s", p_data->update_url);
-    fmw_event_bus_post(EVT_OTA_STARTED, NULL);
-    service_handle_t led_handle = fmw_service_get("status_led");
+    synapse_event_bus_post(EVT_OTA_STARTED, NULL);
+    service_handle_t led_handle = synapse_service_get("status_led");
     rgb_led_api_t *led_api = led_handle ? (rgb_led_api_t *)led_handle : NULL;
     if (led_api) led_api->start_pulse(0, 0, 255, 2000); // ლურჯი პულსაცია
 
@@ -274,7 +274,7 @@ static void ota_task(void *pvParameters)
     if (ret == ESP_OK)
     {
         ESP_LOGI(TAG, "OTA Update successful! Rebooting...");
-        fmw_event_bus_post(EVT_OTA_SUCCESS, NULL);
+        synapse_event_bus_post(EVT_OTA_SUCCESS, NULL);
         if (led_api) led_api->set_color(0, 255, 0); // მწვანე
         vTaskDelay(pdMS_TO_TICKS(2000));
         esp_restart();
@@ -282,7 +282,7 @@ static void ota_task(void *pvParameters)
     else
     {
         ESP_LOGE(TAG, "OTA Update failed: %s", esp_err_to_name(ret));
-        fmw_event_bus_post(EVT_OTA_FAILED, NULL);
+        synapse_event_bus_post(EVT_OTA_FAILED, NULL);
         if (led_api) led_api->start_blink(255, 0, 0, 200); // სწრაფი წითელი ციმციმი
         // არ ვათავისუფლებთ კონტროლს, რათა შეცდომა ხილული დარჩეს
     }

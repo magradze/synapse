@@ -51,7 +51,7 @@
 
 ## 4. 🛠️ Service API (`storage_api_t`)
 
-მოდული არეგისტრირებს სერვისს ტიპით `FMW_SERVICE_TYPE_NVRAM_API`. სხვა მოდულებს შეუძლიათ ამ სერვისის მიღება `fmw_service_get("main_storage")` გამოძახებით.
+მოდული არეგისტრირებს სერვისს ტიპით `SYNAPSE_SERVICE_TYPE_NVRAM_API`. სხვა მოდულებს შეუძლიათ ამ სერვისის მიღება `synapse_service_get("main_storage")` გამოძახებით.
 
 ### Key-Value ოპერაციები
 
@@ -80,7 +80,7 @@
 #include "storage_interface.h"
 
 void save_homepage() {
-    storage_api_t *storage = (storage_api_t *)fmw_service_get("main_storage");
+    storage_api_t *storage = (storage_api_t *)synapse_service_get("main_storage");
     if (!storage) return;
 
     const char* html_content = "<h1>Welcome to Synapse!</h1>";
@@ -99,7 +99,7 @@ void save_homepage() {
 #include "storage_interface.h"
 
 void save_wifi_ssid(const char* ssid) {
-    storage_api_t *storage = (storage_api_t *)fmw_service_get("main_storage");
+    storage_api_t *storage = (storage_api_t *)synapse_service_get("main_storage");
     if (!storage) return;
 
     // Key-Value API-ს გამოყენება

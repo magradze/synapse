@@ -6,31 +6,31 @@
  * @author Giorgi Magradze
  * @details ეს ფაილი შეიცავს მეხსიერების გასუფთავების იმ ფუნქციებს,
  *          რომლებსაც სჭირდებათ სპეციალური ლოგიკა და არ კმაყოფილდებიან
- *          ზოგადი `fmw_payload_common_free` ფუნქციით.
+ *          ზოგადი `synapse_payload_common_free` ფუნქციით.
  */
 
 #include "event_payloads.h" // ამ ფაილის შესაბამისი ჰედერი
 #include <stdlib.h>         // free() ფუნქციისთვის
 
 /**
- * @brief ათავისუფლებს `fmw_telemetry_payload_t` სტრუქტურის მიერ დაკავებულ მეხსიერებას.
+ * @brief ათავისუფლებს `synapse_telemetry_payload_t` სტრუქტურის მიერ დაკავებულ მეხსიერებას.
  *
- * @details ეს ფუნქცია გადაეცემა `fmw_event_data_wrap`-ს ტელემეტრიული ივენთების
+ * @details ეს ფუნქცია გადაეცემა `synapse_event_data_wrap`-ს ტელემეტრიული ივენთების
  *          შექმნისას, რათა Event Bus-მა შეძლოს მეხსიერების უსაფრთხოდ გათავისუფლება.
  *          ფუნქცია ჯერ ათავისუფლებს შიდა, დინამიურად გამოყოფილ `json_data` სტრიქონს,
  *          შემდეგ კი თავად კონტეინერ სტრუქტურას.
  *
- * @param payload void მაჩვენებელი გასათავისუფლებელ `fmw_telemetry_payload_t` ობიექტზე.
+ * @param payload void მაჩვენებელი გასათავისუფლებელ `synapse_telemetry_payload_t` ობიექტზე.
  *                NULL მნიშვნელობა უსაფრთხოდ იგნორირებულია.
  */
-void fmw_telemetry_payload_free(void *payload)
+void synapse_telemetry_payload_free(void *payload)
 {
     if (!payload)
     {
         return;
     }
 
-    fmw_telemetry_payload_t *telemetry_payload = (fmw_telemetry_payload_t *)payload;
+    synapse_telemetry_payload_t *telemetry_payload = (synapse_telemetry_payload_t *)payload;
 
     // ჯერ ვათავისუფლებთ შიდა, დინამიურ ველს
     if (telemetry_payload->json_data)

@@ -66,8 +66,8 @@ static void time_sync_deinit(module_t *self)
         return;
     ESP_LOGI(TAG, "Deinitializing Time Sync module.");
     esp_sntp_stop();
-    fmw_service_unregister(self->name);
-    fmw_event_bus_unsubscribe(EVT_WIFI_IP_ASSIGNED, self);
+    synapse_service_unregister(self->name);
+    synapse_event_bus_unsubscribe(EVT_WIFI_IP_ASSIGNED, self);
     if (self->private_data)
         free(self->private_data);
     if (self->current_config)
@@ -80,14 +80,14 @@ static esp_err_t time_sync_init(module_t *self)
 {
     time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;
 
-    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_TIME_SYNC_API, &private_data->service_api);
+    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_TIME_SYNC_API, &private_data->service_api);
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register time_sync service!");
         return err;
     }
 
-    fmw_event_bus_subscribe(EVT_WIFI_IP_ASSIGNED, self);
+    synapse_event_bus_subscribe(EVT_WIFI_IP_ASSIGNED, self);
 
     // Set timezone from config
     const cJSON *config_node = cJSON_GetObjectItem(self->current_config, "config");
@@ -119,7 +119,7 @@ static void time_sync_handle_event(module_t *self, const char *event_name, void 
 
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -127,7 +127,7 @@ static void time_sync_handle_event(module_t *self, const char *event_name, void 
 static esp_err_t api_get_time(time_t *current_time)
 {
     // This function is called from other modules, so we need to find our own private_data.
-    module_t *self = fmw_module_registry_find_by_name("main_time_sync"); // Assuming this instance name
+    module_t *self = synapse_module_registry_find_by_name("main_time_sync"); // Assuming this instance name
     if (!self)
         return ESP_ERR_NOT_FOUND;
 
@@ -146,7 +146,7 @@ static void time_sync_notification_cb(struct timeval *tv)
 {
     ESP_LOGI(TAG, "Time successfully synchronized with NTP server.");
 
-    module_t *self = fmw_module_registry_find_by_name("main_time_sync");
+    module_t *self = synapse_module_registry_find_by_name("main_time_sync");
     if (self)
     {
         time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;

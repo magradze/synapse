@@ -9,8 +9,8 @@
  *          `system_config.json`-ის მიხედვით შექმნას და დაარეგისტრიროს
  *          ყველა ჩართული მოდული.
  */
-#ifndef FMW_MODULE_REGISTRY_H
-#define FMW_MODULE_REGISTRY_H
+#ifndef SYNAPSE_MODULE_REGISTRY_H
+#define SYNAPSE_MODULE_REGISTRY_H
 
 #include "esp_err.h"
 #include "base_module.h"
@@ -26,7 +26,7 @@
  * @retval ESP_OK თუ რეესტრი წარმატებით ინიციალიზდა.
  * @retval ESP_FAIL თუ რომელიმე მოდულის შექმნა ან რეგისტრაცია ვერ მოხერხდა.
  */
-esp_err_t fmw_module_registry_init(void);
+esp_err_t synapse_module_registry_init(void);
 
 /**
  * @brief აბრუნებს ყველა დარეგისტრირებულ მოდულს.
@@ -44,7 +44,7 @@ esp_err_t fmw_module_registry_init(void);
  * @retval ESP_OK წარმატების შემთხვევაში.
  * @retval ESP_ERR_INVALID_ARG თუ `modules` ან `count` არის NULL.
  */
-esp_err_t fmw_module_registry_get_all(const module_t ***modules, uint8_t *count);
+esp_err_t synapse_module_registry_get_all(const module_t ***modules, uint8_t *count);
 
 /**
  * @brief პოულობს დარეგისტრირებულ მოდულს უნიკალური instance სახელით.
@@ -56,6 +56,6 @@ esp_err_t fmw_module_registry_get_all(const module_t ***modules, uint8_t *count)
  * @return module_t* ნაპოვნი მოდულის მაჩვენებელი, ან NULL თუ ვერ მოიძებნა.
  * @warning დაბრუნებული მაჩვენებლის შეცვლის უფლება აქვს მხოლოდ System Manager-ს.
  */
-module_t *fmw_module_registry_find_by_name(const char *name);
+module_t *synapse_module_registry_find_by_name(const char *name);
 
-#endif // FMW_MODULE_REGISTRY_H
+#endif // SYNAPSE_MODULE_REGISTRY_H

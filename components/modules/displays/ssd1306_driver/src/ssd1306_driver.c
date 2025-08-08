@@ -163,9 +163,9 @@ module_t* ssd1306_driver_create(const cJSON *config) {
 static void ssd1306_driver_deinit(module_t *self) {
     if (!self) return;
     ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
-    
-    fmw_service_unregister(self->name);
-    
+
+    synapse_service_unregister(self->name);
+
     if (private_data->screen_buffer) {
         free(private_data->screen_buffer);
     }
@@ -192,7 +192,7 @@ static esp_err_t ssd1306_driver_init(module_t *self) {
     const cJSON *config_node = cJSON_GetObjectItem(self->current_config, "config");
     const char* i2c_bus_service_name = cJSON_GetObjectItem(config_node, "i2c_bus_service")->valuestring;
 
-    private_data->i2c_bus = fmw_service_get(i2c_bus_service_name);
+    private_data->i2c_bus = synapse_service_get(i2c_bus_service_name);
     if (!private_data->i2c_bus) {
         ESP_LOGE(TAG, "I2C bus service '%s' not found!", i2c_bus_service_name);
         return ESP_ERR_NOT_FOUND;
@@ -234,7 +234,7 @@ static esp_err_t ssd1306_driver_init(module_t *self) {
 
     private_data->service_handle.api = &ssd1306_api_table;
     private_data->service_handle.context = private_data;
-    fmw_service_register(self->name, FMW_SERVICE_TYPE_DISPLAY_API, &private_data->service_handle);
+    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_DISPLAY_API, &private_data->service_handle);
 
     ESP_LOGI(TAG, "SSD1306 driver '%s' initialized on I2C addr 0x%02X", self->name, private_data->i2c_addr);
     return ESP_OK;

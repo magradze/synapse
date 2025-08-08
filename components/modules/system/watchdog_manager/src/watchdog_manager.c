@@ -37,7 +37,7 @@ DEFINE_COMPONENT_TAG("WATCHDOG_MANAGER");
 /** @internal @brief Holds the state for a single monitored module (client). */
 typedef struct
 {
-    char module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char module_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     int64_t last_heartbeat_time_us;
     bool is_alive;
 } heartbeat_client_t;
@@ -173,7 +173,7 @@ static esp_err_t watchdog_manager_init(module_t *self)
     return ESP_FAIL;
 #endif
 
-    fmw_service_register(self->name, FMW_SERVICE_TYPE_WATCHDOG_API, &watchdog_service_api);
+    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_WATCHDOG_API, &watchdog_service_api);
     ESP_LOGI(TAG, "Task Watchdog Timer is configured to be initialized by the system.");
 
     self->status = MODULE_STATUS_INITIALIZED;
@@ -224,7 +224,7 @@ static void watchdog_manager_deinit(module_t *self)
         vTaskDelete(private_data->watchdog_task_handle);
     }
 
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
 
     if (private_data && private_data->client_list_mutex)
         vSemaphoreDelete(private_data->client_list_mutex);
@@ -389,17 +389,17 @@ static void watchdog_task(void *pvParameters)
             ESP_LOGE(TAG, "Heartbeat missed from '%s'! Not feeding watchdog. System will reboot soon.",
                      first_failed_module ? first_failed_module : "unknown module");
 
-            fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+            synapse_telemetry_payload_t *payload = malloc(sizeof(synapse_telemetry_payload_t));
             if (payload)
             {
                 snprintf(payload->module_name, sizeof(payload->module_name), "%s", first_failed_module ? first_failed_module : "unknown");
                 payload->json_data = NULL;
 
                 event_data_wrapper_t *wrapper;
-                if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+                if (synapse_event_data_wrap(payload, synapse_telemetry_payload_free, &wrapper) == ESP_OK)
                 {
-                    fmw_event_bus_post(FMW_EVENT_HEARTBEAT_MISSED, wrapper);
-                    fmw_event_data_release(wrapper);
+                    synapse_event_bus_post(SYNAPSE_EVENT_HEARTBEAT_MISSED, wrapper);
+                    synapse_event_data_release(wrapper);
                 }
                 else
                 {

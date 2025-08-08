@@ -107,7 +107,7 @@ static esp_err_t mcp23017_io_expander_init(module_t *self)
 {
     mcp23017_private_data_t *private_data = (mcp23017_private_data_t *)self->private_data;
 
-    private_data->i2c_handle = (i2c_bus_handle_t *)fmw_service_get(private_data->i2c_bus_service_name);
+    private_data->i2c_handle = (i2c_bus_handle_t *)synapse_service_get(private_data->i2c_bus_service_name);
     if (!private_data->i2c_handle)
     {
         ESP_LOGE(TAG, "I2C bus service '%s' not found!", private_data->i2c_bus_service_name);
@@ -138,7 +138,7 @@ static esp_err_t mcp23017_io_expander_init(module_t *self)
     private_data->iodir_cache[1] = 0xFF;
 
     // Register our service
-    ret = fmw_service_register(private_data->instance_name, FMW_SERVICE_TYPE_MCP23017_EXPANDER_API, &private_data->service_handle);
+    ret = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_MCP23017_EXPANDER_API, &private_data->service_handle);
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register MCP23017 service '%s'", private_data->instance_name);
@@ -155,7 +155,7 @@ static void mcp23017_io_expander_deinit(module_t *self)
         return;
     mcp23017_private_data_t *private_data = (mcp23017_private_data_t *)self->private_data;
 
-    fmw_service_unregister(private_data->instance_name);
+    synapse_service_unregister(private_data->instance_name);
 
     if (private_data->api_mutex)
         vSemaphoreDelete(private_data->api_mutex);

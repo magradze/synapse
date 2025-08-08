@@ -16,7 +16,7 @@
 
 ## 2. 🏛️ არქიტექტურული პრინციპები
 
-- **🌐 უნივერსალური "Heartbeat" პატერნი:** მოდული არ არის მიბმული კონკრეტულ პროტოკოლზე. ის უსმენს ზოგად, აბსტრაქტულ `FMW_EVENT_CONNECTIVITY_ESTABLISHED` ივენთს. ნებისმიერ საკომუნიკაციო მოდულს შეუძლია ამ ივენთის გამოქვეყნება, რითაც Watchdog-ს ამცნობს, რომ "კავშირი ცოცხალია".
+- **🌐 უნივერსალური "Heartbeat" პატერნი:** მოდული არ არის მიბმული კონკრეტულ პროტოკოლზე. ის უსმენს ზოგად, აბსტრაქტულ `SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED` ივენთს. ნებისმიერ საკომუნიკაციო მოდულს შეუძლია ამ ივენთის გამოქვეყნება, რითაც Watchdog-ს ამცნობს, რომ "კავშირი ცოცხალია".
 - **🧅 მრავალშრიანი მონიტორინგი (Multi-Layered Monitoring):**
   - **პასიური შრე (Heartbeat):** ეყრდნობა სხვა მოდულების მიერ გამოქვეყნებულ ივენთებს.
   - **აქტიური შრე (Active Probing):** თავად იწყებს შემოწმებებს (მაგ., PING), რათა დარწმუნდეს, რომ ქსელის სრული გზა გამართულად მუშაობს.
@@ -108,10 +108,10 @@
 
 ## 5. 📢 ივენთების უნივერსალური მოდელი
 
-`Connectivity Watchdog`-ის უნივერსალურობის გასაღები არის `FMW_EVENT_CONNECTIVITY_ESTABLISHED` ივენთი.
+`Connectivity Watchdog`-ის უნივერსალურობის გასაღები არის `SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED` ივენთი.
 
-- **ივენთის სახელი:** `FMW_EVENT_CONNECTIVITY_ESTABLISHED`
-- **Payload-ის ტიპი:** `fmw_connectivity_payload_t`
+- **ივენთის სახელი:** `SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED`
+- **Payload-ის ტიპი:** `synapse_connectivity_payload_t`
 - **Payload-ის შიგთავსი:** `char check_name[32];`
 
 ნებისმიერმა მოდულმა, რომელსაც სურს Watchdog-ს "უთხრას", რომ ის "ცოცხალია", უნდა გამოაქვეყნოს ეს ივენთი და `payload`-ში მიუთითოს იმ შემოწმების სახელი, რომელიც კონფიგურაციაშია განსაზღვრული.
@@ -122,7 +122,7 @@
 
 ```c
 // ...
-fmw_connectivity_payload_t *payload = malloc(sizeof(fmw_connectivity_payload_t));
+synapse_connectivity_payload_t *payload = malloc(sizeof(synapse_connectivity_payload_t));
 if (payload) {
     snprintf(payload->check_name, sizeof(payload->check_name), "MQTT_Heartbeat");
     // ... შეფუთვა და გამოქვეყნება ...
@@ -136,7 +136,7 @@ if (payload) {
 
 ```c
 // In websocket_manager.c, on successful connection:
-fmw_connectivity_payload_t *payload = malloc(sizeof(fmw_connectivity_payload_t));
+synapse_connectivity_payload_t *payload = malloc(sizeof(synapse_connectivity_payload_t));
 if (payload) {
     snprintf(payload->check_name, sizeof(payload->check_name), "WEBSOCKET_Heartbeat");
     // ... შეფუთვა და გამოქვეყნება ...
@@ -149,7 +149,7 @@ if (payload) {
 
 ```c
 // In connectivity_watchdog.c, inside ping_check_cb:
-fmw_connectivity_payload_t *payload = malloc(sizeof(fmw_connectivity_payload_t));
+synapse_connectivity_payload_t *payload = malloc(sizeof(synapse_connectivity_payload_t));
 if (payload) {
     snprintf(payload->check_name, sizeof(payload->check_name), "PING_%s", check_cfg->target);
     // ... შეფუთვა და გამოქვეყნება ...

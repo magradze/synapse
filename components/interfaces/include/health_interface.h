@@ -11,8 +11,8 @@
  *          დამოუკიდებლობას health_monitor-ის კონკრეტული იმპლემენტაციისგან.
  */
 
-#ifndef FMW_HEALTH_INTERFACE_H
-#define FMW_HEALTH_INTERFACE_H
+#ifndef SYNAPSE_HEALTH_INTERFACE_H
+#define SYNAPSE_HEALTH_INTERFACE_H
 
 #include "esp_err.h"
 #include "cJSON.h" // რადგან get_system_health_report იყენებს cJSON-ს
@@ -68,4 +68,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_HEALTH_INTERFACE_H
+#endif // SYNAPSE_HEALTH_INTERFACE_H

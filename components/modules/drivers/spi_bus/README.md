@@ -54,7 +54,7 @@
 
 ## 4. 🔌 Service API (`spi_bus_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`FMW_SERVICE_TYPE_SPI_BUS_API`**.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`SYNAPSE_SERVICE_TYPE_SPI_BUS_API`**.
 
 **API ფუნქციები:**
 
@@ -83,7 +83,7 @@ static esp_err_t sn74hc595n_writer_init(module_t *self) {
     sn74hc595n_private_data_t *private_data = (sn74hc595n_private_data_t *)self->private_data;
 
     // 1. 🤝 ვიღებთ SPI სერვისის handle-ს Service Locator-იდან
-    private_data->spi_bus_handle = (spi_bus_handle_t*)fmw_service_get(private_data->spi_bus_service_name);
+    private_data->spi_bus_handle = (spi_bus_handle_t*)synapse_service_get(private_data->spi_bus_service_name);
     if (!private_data->spi_bus_handle) {
         ESP_LOGE(TAG, "SPI bus service '%s' not found!", private_data->spi_bus_service_name);
         return ESP_ERR_NOT_FOUND;

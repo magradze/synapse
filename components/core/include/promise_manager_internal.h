@@ -8,8 +8,8 @@
  *          asynchronous, promise-based APIs.
  */
 
-#ifndef FMW_PROMISE_MANAGER_INTERNAL_H
-#define FMW_PROMISE_MANAGER_INTERNAL_H
+#ifndef SYNAPSE_PROMISE_MANAGER_INTERNAL_H
+#define SYNAPSE_PROMISE_MANAGER_INTERNAL_H
 
 #include "promise_manager.h"
 
@@ -20,7 +20,7 @@ extern "C" {
   /**
    * @brief Initializes the Promise Manager component.
    */
-  esp_err_t fmw_promise_manager_init(void);
+  esp_err_t synapse_promise_manager_init(void);
 
   /**
    * @brief Creates a new promise with pre-registered callbacks.
@@ -30,7 +30,7 @@ extern "C" {
    * @param[in] user_context A context pointer to be passed to the callbacks.
    * @return A new promise_handle_t, or NULL on failure.
    */
-  promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context);
+  promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context);
 
   /**
    * @brief Resolves a promise with a successful result.
@@ -39,7 +39,7 @@ extern "C" {
    * @param[in] free_fn A function to free the result_data. If NULL, data is assumed static.
    * @return ESP_OK on success.
    */
-  esp_err_t fmw_promise_resolve(promise_handle_t handle, void *result_data, void (*free_fn)(void *));
+  esp_err_t synapse_promise_resolve(promise_handle_t handle, void *result_data, void (*free_fn)(void *));
 
   /**
    * @brief Rejects a promise with an error.
@@ -48,10 +48,10 @@ extern "C" {
    * @param[in] free_fn A function to free the error_data. If NULL, data is assumed static.
    * @return ESP_OK on success.
    */
-  esp_err_t fmw_promise_reject(promise_handle_t handle, void *error_data, void (*free_fn)(void *));
+  esp_err_t synapse_promise_reject(promise_handle_t handle, void *error_data, void (*free_fn)(void *));
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // FMW_PROMISE_MANAGER_INTERNAL_H
+#endif // SYNAPSE_PROMISE_MANAGER_INTERNAL_H

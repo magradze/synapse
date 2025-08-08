@@ -36,7 +36,7 @@ typedef struct {
  * @brief აღწერს ერთი ივენთის ყველა გამომწერის სიას.
  */
 typedef struct {
-    event_subscriber_t subscribers[CONFIG_FMW_MAX_SUBSCRIBERS_PER_EVENT]; /**< @brief გამომწერების მასივი. */
+    event_subscriber_t subscribers[CONFIG_SYNAPSE_MAX_SUBSCRIBERS_PER_EVENT]; /**< @brief გამომწერების მასივი. */
     uint8_t count;                                                      /**< @brief გამომწერების მიმდინარე რაოდენობა. */
 } event_subscription_list_t;
 
@@ -101,7 +101,7 @@ static void event_bus_task(void *pvParameters)
             // გავათავისუფლოთ საწყისი reference, რომელიც `post` ფუნქციამ შექმნა
             if (msg.data_wrapper)
             {
-                fmw_event_data_release(msg.data_wrapper);
+                synapse_event_data_release(msg.data_wrapper);
             }
         }
     }
@@ -131,7 +131,7 @@ static void dispatch_event_to_subscribers(const event_message_t *msg)
     bool wildcard_found = false;
 
     // --- კრიტიკული სექციის დასაწყისი ---
-    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) == pdTRUE)
     {
         event_subscription_node_t *node = subscription_head;
         while (node != NULL)
@@ -172,7 +172,7 @@ static void dispatch_event_to_subscribers(const event_message_t *msg)
             {
                 if (msg->data_wrapper)
                 {
-                    fmw_event_data_acquire(msg->data_wrapper);
+                    synapse_event_data_acquire(msg->data_wrapper);
                 }
                 sub->module->base.handle_event(sub->module, msg->event_name, msg->data_wrapper);
             }
@@ -204,7 +204,7 @@ static void dispatch_event_to_subscribers(const event_message_t *msg)
             {
                 if (msg->data_wrapper)
                 {
-                    fmw_event_data_acquire(msg->data_wrapper);
+                    synapse_event_data_acquire(msg->data_wrapper);
                 }
                 sub->module->base.handle_event(sub->module, msg->event_name, msg->data_wrapper);
             }
@@ -290,7 +290,8 @@ static void remove_subscriber(event_subscription_list_t *sub_list, int index)
 
 // --- საჯარო API ფუნქციები ---
 
-esp_err_t fmw_event_bus_init(void) {
+esp_err_t synapse_event_bus_init(void)
+{
     ESP_LOGI(TAG, "Initializing Event Bus...");
     if (subscription_mutex != NULL)
     {
@@ -304,7 +305,7 @@ esp_err_t fmw_event_bus_init(void) {
         return ESP_ERR_NO_MEM;
     }
 
-    event_bus_queue = xQueueCreate(CONFIG_FMW_EVENT_QUEUE_LENGTH, sizeof(event_message_t));
+    event_bus_queue = xQueueCreate(CONFIG_SYNAPSE_EVENT_QUEUE_LENGTH, sizeof(event_message_t));
     if (!event_bus_queue) {
         ESP_LOGE(TAG, "Failed to create event queue.");
         vSemaphoreDelete(subscription_mutex);
@@ -315,7 +316,7 @@ esp_err_t fmw_event_bus_init(void) {
     // აღარ არის საჭირო `event_subscriptions` მასივის წინასწარი გამოყოფა
     subscription_head = NULL;
 
-    BaseType_t result = xTaskCreate(event_bus_task, "event_bus_task", CONFIG_FMW_EVENT_BUS_TASK_STACK_SIZE, NULL, CONFIG_FMW_EVENT_BUS_TASK_PRIORITY, NULL);
+    BaseType_t result = xTaskCreate(event_bus_task, "event_bus_task", CONFIG_SYNAPSE_EVENT_BUS_TASK_STACK_SIZE, NULL, CONFIG_SYNAPSE_EVENT_BUS_TASK_PRIORITY, NULL);
     if (result != pdPASS) {
         ESP_LOGE(TAG, "Failed to create event bus task.");
         // აქ საჭიროა გამოწერების სიის გასუფთავება, თუმცა ამ ეტაპზე ის ყოველთვის ცარიელია.
@@ -327,7 +328,7 @@ esp_err_t fmw_event_bus_init(void) {
     return ESP_OK;
 }
 
-esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)
+esp_err_t synapse_event_bus_post(const char *event_name, event_data_wrapper_t *data_wrapper)
 {
     if (!event_name || strlen(event_name) == 0)
     {
@@ -348,21 +349,22 @@ esp_err_t fmw_event_bus_post(const char *event_name, event_data_wrapper_t *data_
     };
 
     if (data_wrapper) {
-        fmw_event_data_acquire(data_wrapper);
+        synapse_event_data_acquire(data_wrapper);
     }
 
-    if (xQueueSend(event_bus_queue, &msg, pdMS_TO_TICKS(CONFIG_FMW_TASK_QUEUE_TIMEOUT_MS)) != pdPASS) {
+    if (xQueueSend(event_bus_queue, &msg, pdMS_TO_TICKS(CONFIG_SYNAPSE_TASK_QUEUE_TIMEOUT_MS)) != pdPASS)
+    {
         ESP_LOGE(TAG, "Failed to post event '%s'. Queue might be full.", event_name);
         free(event_name_copy); // გავათავისუფლოთ ასლი თუ რიგში ვერ ჩაიწერა
         if (data_wrapper) {
-            fmw_event_data_release(data_wrapper);
+            synapse_event_data_release(data_wrapper);
         }
         return ESP_FAIL;
     }
     return ESP_OK;
 }
 
-esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
+esp_err_t synapse_event_bus_subscribe(const char *event_name, module_t *module)
 {
     if (!event_name || strlen(event_name) == 0)
     {
@@ -377,7 +379,7 @@ esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
     }
 
     esp_err_t ret = ESP_OK;
-    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) == pdTRUE)
     {
         event_subscription_node_t *node = find_subscription_node(event_name, true);
 
@@ -400,15 +402,18 @@ esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
         }
 
         // ახალი გამომწერის დამატება
-        if (sub_list->count < CONFIG_FMW_MAX_SUBSCRIBERS_PER_EVENT) {
+        if (sub_list->count < CONFIG_SYNAPSE_MAX_SUBSCRIBERS_PER_EVENT)
+        {
             sub_list->subscribers[sub_list->count].module = module;
             sub_list->count++;
             ESP_LOGI(TAG, "Module '%s' subscribed successfully to event '%s'", module->name, event_name);
-        } else {
+        }
+        else
+        {
             ESP_LOGE(TAG, "Cannot subscribe module '%s' to event '%s'. Subscriber limit reached.", module->name, event_name);
             ret = ESP_ERR_NO_MEM;
         }
-        
+
         xSemaphoreGive(subscription_mutex);
     }
     else
@@ -419,14 +424,14 @@ esp_err_t fmw_event_bus_subscribe(const char *event_name, module_t *module)
     return ret;
 }
 
-esp_err_t fmw_event_bus_unsubscribe(const char *event_name, module_t *module)
+esp_err_t synapse_event_bus_unsubscribe(const char *event_name, module_t *module)
 {
     if (!event_name || strlen(event_name) == 0 || !module)
     {
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    if (xSemaphoreTake(subscription_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
     {
         ESP_LOGE(TAG, "Failed to acquire subscription mutex for unsubscribe (module '%s', event '%s')", module->name, event_name);
         return ESP_ERR_TIMEOUT;

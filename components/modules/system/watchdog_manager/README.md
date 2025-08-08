@@ -48,7 +48,7 @@
 
 ## 4. 🔌 Service API (`watchdog_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა Watchdog მენეჯერის API-ზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: `FMW_SERVICE_TYPE_WATCHDOG_API`.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა Watchdog მენეჯერის API-ზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: `SYNAPSE_SERVICE_TYPE_WATCHDOG_API`.
 
 **API ფუნქციები:**
 
@@ -61,9 +61,9 @@
 
 ## 5. 📢 გამოქვეყნებული ივენთები
 
-- **`FMW_EVENT_HEARTBEAT_MISSED`**
+- **`SYNAPSE_EVENT_HEARTBEAT_MISSED`**
   - **როდის ქვეყნდება:** როდესაც რომელიმე რეგისტრირებული მოდული ვერ აგზავნის "გულისცემას" `heartbeat_timeout_ms`-ის განმავლობაში.
-  - **Payload (`fmw_telemetry_payload_t`):** `module_name` ველი შეიცავს იმ მოდულის სახელს, რომელიც "გაიჭედა".
+  - **Payload (`synapse_telemetry_payload_t`):** `module_name` ველი შეიცავს იმ მოდულის სახელს, რომელიც "გაიჭედა".
 
 ## 6. 💡 გამოყენების მაგალითი
 
@@ -72,7 +72,7 @@
 **1. რეგისტრაცია (`mqtt_manager.c`-ში, `init` ფუნქციაში):**
 
 ```c
-service_handle_t handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_WATCHDOG_API);
+service_handle_t handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_WATCHDOG_API);
 if (handle) {
     watchdog_api_t *wd_api = (watchdog_api_t *)handle;
     wd_api->register_heartbeat("main_mqtt_broker");
@@ -83,14 +83,14 @@ if (handle) {
 
 ```c
 // მაგალითად, MQTT_EVENT_CONNECTED-ისას ან პერიოდულად
-service_handle_t handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_WATCHDOG_API);
+service_handle_t handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_WATCHDOG_API);
 if (handle) {
     watchdog_api_t *wd_api = (watchdog_api_t *)handle;
     wd_api->send_heartbeat("main_mqtt_broker");
 }
 ```
 
-თუ `mqtt_manager` გაიჭედება, `send_heartbeat` აღარ გამოიძახება, `watchdog_manager` ამას დააფიქსირებს, გამოაქვეყნებს `FMW_EVENT_HEARTBEAT_MISSED` ივენთს და შეწყვეტს TWDT-ს "კვებას", რაც გამოიწვევს სისტემის უსაფრთხო გადატვირთვას.
+თუ `mqtt_manager` გაიჭედება, `send_heartbeat` აღარ გამოიძახება, `watchdog_manager` ამას დააფიქსირებს, გამოაქვეყნებს `SYNAPSE_EVENT_HEARTBEAT_MISSED` ივენთს და შეწყვეტს TWDT-ს "კვებას", რაც გამოიწვევს სისტემის უსაფრთხო გადატვირთვას.
 
 ## 7. ❗ წინაპირობები და `menuconfig`
 

@@ -49,15 +49,15 @@ typedef struct
 /**
  * @internal
  * @brief ყველა ტიპის რესურსის ნაკრებების გლობალური მასივი.
- * @details მასივის ინდექსად გამოიყენება `fmw_resource_type_t` ენამი.
+ * @details მასივის ინდექსად გამოიყენება `synapse_resource_type_t` ენამი.
  */
-static resource_pool_t resource_pools[FMW_RESOURCE_TYPE_MAX];
+static resource_pool_t resource_pools[SYNAPSE_RESOURCE_TYPE_MAX];
 
-esp_err_t fmw_resource_manager_init(void)
+esp_err_t synapse_resource_manager_init(void)
 {
     ESP_LOGI(TAG, "რესურსების მენეჯერის ინიციალიზაცია...");
 
-    for (int i = 0; i < FMW_RESOURCE_TYPE_MAX; i++)
+    for (int i = 0; i < SYNAPSE_RESOURCE_TYPE_MAX; i++)
     {
         resource_pool_t *pool = &resource_pools[i];
 
@@ -66,7 +66,7 @@ esp_err_t fmw_resource_manager_init(void)
         {
             ESP_LOGE(TAG, "რესურსის ნაკრებისთვის (ტიპი: %d) Mutex-ის შექმნა ვერ მოხერხდა.", i);
             // უკვე შექმნილი Mutex-ების გასუფთავება
-            fmw_resource_manager_deinit();
+            synapse_resource_manager_deinit();
             return ESP_ERR_NO_MEM;
         }
 
@@ -79,10 +79,10 @@ esp_err_t fmw_resource_manager_init(void)
     return ESP_OK;
 }
 
-
-void fmw_resource_manager_deinit(void) {
+void synapse_resource_manager_deinit(void)
+{
     ESP_LOGI(TAG, "რესურსების მენეჯერის დეინიციალიზაცია...");
-    for (int i = 0; i < FMW_RESOURCE_TYPE_MAX; i++)
+    for (int i = 0; i < SYNAPSE_RESOURCE_TYPE_MAX; i++)
     {
         if (resource_pools[i].pool_mutex != NULL)
         {
@@ -93,9 +93,9 @@ void fmw_resource_manager_deinit(void) {
     ESP_LOGI(TAG, "რესურსების მენეჯერი წარმატებით დეინიციალიზდა.");
 }
 
-esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner)
+esp_err_t synapse_resource_lock(synapse_resource_type_t type, uint8_t resource_id, const char *owner)
 {
-    if (type >= FMW_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL || owner == NULL)
+    if (type >= SYNAPSE_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL || owner == NULL)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) დაკავება ვერ მოხერხდა: არავალიდური არგუმენტები.", type, resource_id);
         return ESP_ERR_INVALID_ARG;
@@ -103,7 +103,7 @@ esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const
 
     resource_pool_t *pool = &resource_pools[type];
 
-    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) დასაკავებლად Mutex-ის აღება ვერ მოხერხდა.", type, resource_id);
         return ESP_ERR_TIMEOUT;
@@ -128,9 +128,9 @@ esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const
     return ret;
 }
 
-esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner)
+esp_err_t synapse_resource_release(synapse_resource_type_t type, uint8_t resource_id, const char *owner)
 {
-    if (type >= FMW_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL || owner == NULL)
+    if (type >= SYNAPSE_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL || owner == NULL)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) გათავისუფლება ვერ მოხერხდა: არავალიდური არგუმენტები.", type, resource_id);
         return ESP_ERR_INVALID_ARG;
@@ -138,7 +138,7 @@ esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, co
 
     resource_pool_t *pool = &resource_pools[type];
 
-    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) გასათავისუფლებლად Mutex-ის აღება ვერ მოხერხდა.", type, resource_id);
         return ESP_ERR_TIMEOUT;
@@ -169,9 +169,9 @@ esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, co
     return ret;
 }
 
-bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id)
+bool synapse_resource_is_locked(synapse_resource_type_t type, uint8_t resource_id)
 {
-    if (type >= FMW_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL)
+    if (type >= SYNAPSE_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) სტატუსის შემოწმება ვერ მოხერხდა: არავალიდური არგუმენტები.", type, resource_id);
         return true; // Fail-safe: თუ არგუმენტი არასწორია, ჩავთვალოთ დაკავებულად.
@@ -179,7 +179,7 @@ bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id)
 
     resource_pool_t *pool = &resource_pools[type];
 
-    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) სტატუსის შესამოწმებლად Mutex-ის აღება ვერ მოხერხდა. ვიღებთ fail-safe გადაწყვეტილებას.", type, resource_id);
         return true; // Fail-safe: თუ მდგომარეობა უცნობია, ვთვლით რომ დაკავებულია კონფლიქტის თავიდან ასაცილებლად.
@@ -198,7 +198,7 @@ bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id)
  *          თუ რესურსი დაკავებული არ არის, `out_owner` იქნება NULL, მაგრამ ფუნქცია
  *          დააბრუნებს ESP_OK-ს.
  *
- * @param[in]  type        რესურსის ტიპი (`fmw_resource_type_t`).
+ * @param[in]  type        რესურსის ტიპი (`synapse_resource_type_t`).
  * @param[in]  resource_id რესურსის უნიკალური ID (0-63).
  * @param[out] out_owner   ორმაგი პოინტერი, სადაც ჩაიწერება მფლობელის სახელის პოინტერი.
  *                         შეცდომის ან თუ რესურსი თავისუფალია, იქნება NULL.
@@ -208,9 +208,9 @@ bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id)
  *      - ESP_ERR_INVALID_ARG: თუ `type`, `resource_id` ან `out_owner` არავალიდურია.
  *      - ESP_ERR_TIMEOUT: თუ Mutex-ის აღება ვერ მოხერხდა განსაზღვრულ დროში.
  */
-esp_err_t fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id, const char **out_owner)
+esp_err_t synapse_resource_get_owner(synapse_resource_type_t type, uint8_t resource_id, const char **out_owner)
 {
-    if (type >= FMW_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL || out_owner == NULL)
+    if (type >= SYNAPSE_RESOURCE_TYPE_MAX || resource_id >= MAX_RESOURCES_PER_POOL || out_owner == NULL)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) მფლობელის მიღება ვერ მოხერხდა: არავალიდური არგუმენტები.", type, resource_id);
         if (out_owner != NULL)
@@ -222,7 +222,7 @@ esp_err_t fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id, 
 
     resource_pool_t *pool = &resource_pools[type];
 
-    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    if (xSemaphoreTake(pool->pool_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
     {
         ESP_LOGE(TAG, "რესურსის (ტიპი: %d, ID: %d) მფლობელის წასაკითხად Mutex-ის აღება ვერ მოხერხდა.", type, resource_id);
         return ESP_ERR_TIMEOUT;

@@ -21,7 +21,7 @@ static const module_factory_map_t module_factories[] = {
 };
 
 // --- საჯარო API ---
-module_create_fn_t fmw_module_factory_get(const char* module_type)
+module_create_fn_t synapse_module_factory_get(const char* module_type)
 {
     if (module_type == NULL) {
         return NULL;

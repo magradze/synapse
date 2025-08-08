@@ -6,8 +6,8 @@
  * @date 2025-07-05
  */
 
-#ifndef FMW_BLE_PROV_INTERFACE_H
-#define FMW_BLE_PROV_INTERFACE_H
+#ifndef SYNAPSE_BLE_PROV_INTERFACE_H
+#define SYNAPSE_BLE_PROV_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdbool.h>
@@ -53,4 +53,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_BLE_PROV_INTERFACE_H
+#endif // SYNAPSE_BLE_PROV_INTERFACE_H

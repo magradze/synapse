@@ -23,7 +23,7 @@ extern "C" {
  * @details შეიცავს მოდულის ყველა კონფიგურაციის პარამეტრს
  */
 typedef struct {
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];  /**< მოდულის ინსტანციის სახელი */
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]; /**< მოდულის ინსტანციის სახელი */
     bool auto_start;                                        /**< ავტომატური გაშვება */
 } ota_update_manager_config_t;
 

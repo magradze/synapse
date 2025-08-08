@@ -92,7 +92,7 @@ static esp_err_t logger_module_init(module_t *self)
         return ESP_ERR_INVALID_ARG;
     ESP_LOGI(TAG, "'%s' მოდულის ინიციალიზაცია...", self->name);
 
-    esp_err_t ret = fmw_event_bus_subscribe("*", self);
+    esp_err_t ret = synapse_event_bus_subscribe("*", self);
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "ყველა ივენთზე გამოწერა ვერ მოხერხდა: %s", esp_err_to_name(ret));
@@ -118,14 +118,14 @@ static void logger_module_handle_event(module_t *self, const char *event_name, v
     if (event_name && (strcmp(event_name, "UI_HOME_UPDATE") == 0 || strcmp(event_name, "UI_WIFI_STATUS_TIMER") == 0))
     {
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
     if (!self || !self->private_data)
     {
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
@@ -133,7 +133,7 @@ static void logger_module_handle_event(module_t *self, const char *event_name, v
     if (!private_data->enabled)
     {
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
@@ -148,7 +148,7 @@ static void logger_module_handle_event(module_t *self, const char *event_name, v
 
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -189,7 +189,7 @@ static void logger_module_deinit(module_t *self)
         return;
     ESP_LOGI(TAG, "'%s' მოდულის რესურსების გათავისუფლება...", self->name);
 
-    fmw_event_bus_unsubscribe("*", self);
+    synapse_event_bus_unsubscribe("*", self);
 
     if (self->private_data)
     {

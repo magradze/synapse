@@ -52,7 +52,7 @@
 
 ## 4. 🔌 Service API (`i2c_bus_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`FMW_SERVICE_TYPE_I2C_BUS_API`**.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`SYNAPSE_SERVICE_TYPE_I2C_BUS_API`**.
 
 **API ფუნქციები:**
 
@@ -83,7 +83,7 @@ static esp_err_t ssd1306_init(module_t *self) {
     ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
 
     // 1. 🤝 ვიღებთ I2C სერვისის handle-ს Service Locator-იდან
-    private_data->i2c_bus_service = fmw_service_get("main_i2c_bus");
+    private_data->i2c_bus_service = synapse_service_get("main_i2c_bus");
     if (!private_data->i2c_bus_service) {
         ESP_LOGE(TAG, "I2C bus service 'main_i2c_bus' not found!");
         return ESP_ERR_NOT_FOUND;

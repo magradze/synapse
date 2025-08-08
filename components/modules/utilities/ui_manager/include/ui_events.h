@@ -23,7 +23,7 @@
  * @param[in] self A pointer to the `ui_manager` module instance.
  * @param[in] event_name The name of the event that was triggered.
  * @param[in] event_data A pointer to the event's data wrapper. The handler is
- *                       responsible for calling `fmw_event_data_release` on this
+ *                       responsible for calling `synapse_event_data_release` on this
  *                       pointer after processing the data.
  */
 void ui_events_handle(module_t *self, const char *event_name, void *event_data);

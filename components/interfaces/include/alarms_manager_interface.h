@@ -14,8 +14,8 @@
  *          or query alarms, the API functions would be defined here.
  */
 
-#ifndef FMW_ALARMS_MANAGER_INTERFACE_H
-#define FMW_ALARMS_MANAGER_INTERFACE_H
+#ifndef SYNAPSE_ALARMS_MANAGER_INTERFACE_H
+#define SYNAPSE_ALARMS_MANAGER_INTERFACE_H
 
 #include "esp_err.h"
 #include "cJSON.h"
@@ -50,4 +50,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_ALARMS_MANAGER_INTERFACE_H
+#endif // SYNAPSE_ALARMS_MANAGER_INTERFACE_H

@@ -99,8 +99,8 @@ $(document).ready(function(){initNavTree('promise__manager_8h_source.html',''); 
 </div><!--header-->
 <div class="contents">
 <a href="promise__manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef FMW_PROMISE_MANAGER_H</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define FMW_PROMISE_MANAGER_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef SYNAPSE_PROMISE_MANAGER_H</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define SYNAPSE_PROMISE_MANAGER_H</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
@@ -114,14 +114,14 @@ $(document).ready(function(){initNavTree('promise__manager_8h_source.html',''); 
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">   38</a></span>  <span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a>)(<span class="keywordtype">void</span> *error_data, <span class="keywordtype">void</span> *user_context);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">// NOTE: fmw_promise_then, fmw_promise_catch, and fmw_promise_destroy are now removed</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="comment">// NOTE: synapse_promise_then, synapse_promise_catch, and synapse_promise_destroy are now removed</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">// from the public API as they are no longer needed with the new architecture.</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif </span><span class="comment">// FMW_PROMISE_MANAGER_H</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_PROMISE_MANAGER_H</span></div>
 <div class="ttc" id="apromise__manager_8h_html_a2f34bcbec5959abda16c34b29b075545"><div class="ttname"><a href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a></div><div class="ttdeci">struct promise_t * promise_handle_t</div><div class="ttdoc">Opaque handle to a promise object.</div><div class="ttdef"><b>Definition</b> promise_manager.h:24</div></div>
 <div class="ttc" id="apromise__manager_8h_html_a8b4021307655879de50bf9fb83140e45"><div class="ttname"><a href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a></div><div class="ttdeci">void(* promise_then_cb)(void *result_data, void *user_context)</div><div class="ttdoc">Callback function type for a successfully resolved promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:31</div></div>
 <div class="ttc" id="apromise__manager_8h_html_ae9229038eb3572aba3c551df7197de39"><div class="ttname"><a href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a></div><div class="ttdeci">void(* promise_catch_cb)(void *error_data, void *user_context)</div><div class="ttdoc">Callback function type for a rejected (failed) promise.</div><div class="ttdef"><b>Definition</b> promise_manager.h:38</div></div>

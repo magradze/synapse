@@ -1,7 +1,7 @@
 var promise__manager__internal_8h =
 [
-    [ "fmw_promise_create", "promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b", null ],
-    [ "fmw_promise_manager_init", "promise__manager__internal_8h.html#a831676bb59822644463bf8b06fbc9abe", null ],
-    [ "fmw_promise_reject", "promise__manager__internal_8h.html#a9a308e412c7d9ca197dec3023eeac58d", null ],
-    [ "fmw_promise_resolve", "promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062", null ]
+    [ "synapse_promise_create", "promise__manager__internal_8h.html#af2afb27ca6f5baeef0e2c06f8d617dff", null ],
+    [ "synapse_promise_manager_init", "promise__manager__internal_8h.html#a2c153a0d0bddc01dd9908fbb3a1b6098", null ],
+    [ "synapse_promise_reject", "promise__manager__internal_8h.html#a01e4cc92988e54905f3c3880df7b3f82", null ],
+    [ "synapse_promise_resolve", "promise__manager__internal_8h.html#ada211a8f2e655e46818bf472f6bbe3a8", null ]
 ];

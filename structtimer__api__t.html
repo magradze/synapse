@@ -104,24 +104,24 @@ $(document).ready(function(){initNavTree('structtimer__api__t.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a362c2f5fb2285918b2579c0ae273b24e" id="r_a362c2f5fb2285918b2579c0ae273b24e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">schedule_event</a> )(const char *event_name, uint32_t interval_ms, bool is_periodic)</td></tr>
-<tr class="memdesc:a362c2f5fb2285918b2579c0ae273b24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules an event to be posted on the Event Bus after a specified interval.  <br /></td></tr>
-<tr class="separator:a362c2f5fb2285918b2579c0ae273b24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f80bb44781a75b81a987d1392760e0a" id="r_a1f80bb44781a75b81a987d1392760e0a"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer__api__t.html#a1f80bb44781a75b81a987d1392760e0a">cancel_event</a> )(<a class="el" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a> handle)</td></tr>
-<tr class="memdesc:a1f80bb44781a75b81a987d1392760e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels a previously scheduled event.  <br /></td></tr>
-<tr class="separator:a1f80bb44781a75b81a987d1392760e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491f4146bb79b02df56f0485e12eb96b" id="r_a491f4146bb79b02df56f0485e12eb96b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer__api__t.html#a491f4146bb79b02df56f0485e12eb96b">schedule_event</a> )(const char *event_name, uint32_t interval_ms, bool is_periodic)</td></tr>
+<tr class="memdesc:a491f4146bb79b02df56f0485e12eb96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules an event to be posted on the Event Bus after a specified interval.  <br /></td></tr>
+<tr class="separator:a491f4146bb79b02df56f0485e12eb96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9ed59cd22b446f8189145a48608ae7c" id="r_af9ed59cd22b446f8189145a48608ae7c"><td class="memItemLeft" align="right" valign="top">esp_err_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer__api__t.html#af9ed59cd22b446f8189145a48608ae7c">cancel_event</a> )(<a class="el" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a> handle)</td></tr>
+<tr class="memdesc:af9ed59cd22b446f8189145a48608ae7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels a previously scheduled event.  <br /></td></tr>
+<tr class="separator:af9ed59cd22b446f8189145a48608ae7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The public Service API structure for the System Timer Service. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1f80bb44781a75b81a987d1392760e0a" name="a1f80bb44781a75b81a987d1392760e0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f80bb44781a75b81a987d1392760e0a">&#9670;&#160;</a></span>cancel_event</h2>
+<a id="af9ed59cd22b446f8189145a48608ae7c" name="af9ed59cd22b446f8189145a48608ae7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9ed59cd22b446f8189145a48608ae7c">&#9670;&#160;</a></span>cancel_event</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t(* timer_api_t::cancel_event) (<a class="el" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a> handle)</td>
+          <td class="memname">esp_err_t(* timer_api_t::cancel_event) (<a class="el" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a> handle)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -142,14 +142,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a362c2f5fb2285918b2579c0ae273b24e" name="a362c2f5fb2285918b2579c0ae273b24e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a362c2f5fb2285918b2579c0ae273b24e">&#9670;&#160;</a></span>schedule_event</h2>
+<a id="a491f4146bb79b02df56f0485e12eb96b" name="a491f4146bb79b02df56f0485e12eb96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a491f4146bb79b02df56f0485e12eb96b">&#9670;&#160;</a></span>schedule_event</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a>(* timer_api_t::schedule_event) (const char *event_name, uint32_t interval_ms, bool is_periodic)</td>
+          <td class="memname"><a class="el" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a>(* timer_api_t::schedule_event) (const char *event_name, uint32_t interval_ms, bool is_periodic)</td>
         </tr>
       </table>
 </div><div class="memdoc">

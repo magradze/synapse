@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2communicat
   <div class="headertitle"><div class="title">კომუნიკაციის არქიტექტურული არჩევანი (Communication Choices)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1358"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1360"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1368"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1370"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ში მოდულებს შორის კომუნიკაციის არქიტექტურულ არჩევანს, არჩეული პატერნების მოტივაციას, ალტერნატივებს და საბოლოო გადაწყვეტილების შედეგებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1362"></a>
+<h1><a class="anchor" id="autotoc_md1372"></a>
 კონტექსტი</h1>
 <p>Synapse Framework-ის მიზანია მაქსიმალური მოდულურობა და იზოლაცია. მოდულებს შორის კომუნიკაცია უნდა იყოს სტანდარტიზებული, მარტივად გასაფართოებელი და მინიმალური დამოკიდებულებით. საჭიროა ისეთი არქიტექტურული გადაწყვეტა, რომელიც უზრუნველყოფს როგორც პირდაპირი API-კოლების, ისე ასინქრონული შეტყობინებების მხარდაჭერას.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1364"></a>
+<h1><a class="anchor" id="autotoc_md1374"></a>
 არჩეული გადაწყვეტილება</h1>
 <p>ფრეიმვორქში არჩეულია ორი ძირითადი კომუნიკაციის პატერნი:</p>
 <ol type="1">
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2communicat
 <li><b>Event Bus Pattern</b> — გამოიყენება broadcast/notification სცენარებისთვის, როცა ერთზე მეტ მოდულს სჭირდება ერთი მოვლენის მიღება.</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1366"></a>
+<h1><a class="anchor" id="autotoc_md1376"></a>
 არგუმენტები და მოტივაცია</h1>
 <ul>
 <li><b>Service Locator</b> უზრუნველყოფს მოდულებს შორის მინიმალურ დამოკიდებულებას და პირდაპირი API-კოლების სტანდარტიზაციას.</li>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2communicat
 <li>ალტერნატივა (პირდაპირი #include ან გლობალური ცვლადები) უარყოფილია იზოლაციისა და გაფართოებადობის დარღვევის გამო.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1368"></a>
+<h1><a class="anchor" id="autotoc_md1378"></a>
 შედეგები და გავლენა</h1>
 <ul>
 <li>მოდულებს შორის პირდაპირი დამოკიდებულება გამორიცხულია</li>
@@ -128,20 +128,20 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2communicat
 <li>Event Bus-ის debug შეიძლება იყოს შედარებით რთული</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1370"></a>
+<h1><a class="anchor" id="autotoc_md1380"></a>
 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1371"></a>
+<h2><a class="anchor" id="autotoc_md1381"></a>
 Service Locator</h2>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (display_service_handle) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *ssd1306_service_api = (<a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;<a class="code hl_variable" href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">enable</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:23</div></div>
 <div class="ttc" id="astructssd1306__api__t_html_a49c18ab20520fe0db6e0bf9bf5170d79"><div class="ttname"><a href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">ssd1306_api_t::enable</a></div><div class="ttdeci">esp_err_t(* enable)(void *context)</div><div class="ttdoc">Enables the display.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:29</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1372"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1382"></a>
 Event Bus</h2>
 <div class="fragment"><div class="line">telemetry_data_t sensor_telemetry_data = {</div>
 <div class="line">    .temperature = 23.5,</div>
@@ -150,7 +150,7 @@ Event Bus</h2>
 <div class="line">event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &amp;sensor_telemetry_data);</div>
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1374"></a>
+<h1><a class="anchor" id="autotoc_md1384"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>
@@ -165,7 +165,7 @@ Event Bus</h2>
 <li>ჩაწერეთ ყველა ცვლილება და კომუნიკაციის არქიტექტურული გადაწყვეტილება დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1376"></a>
+<h1><a class="anchor" id="autotoc_md1386"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2design__decisions_2core__components.html">core_components.md</a></li>
@@ -174,10 +174,10 @@ Event Bus</h2>
 <li><a class="el" href="md_docs_2structure_2faq.html">structure/faq.md</a></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1378"></a>
+<h1><a class="anchor" id="autotoc_md1388"></a>
 Event Bus Pattern</h1>
 <p>Event Bus არქიტექტურა არჩეულ იქნა მისი მოქნილობისა და მოდულებს შორის კავშირების შემცირების (loose coupling) უნარის გამო.</p>
-<h2><a class="anchor" id="autotoc_md1379"></a>
+<h2><a class="anchor" id="autotoc_md1389"></a>
 არქიტექტურული ცვლილება: Enum-დან სტრიქონებზე გადასვლა</h2>
 <p>პროექტის საწყის ეტაპზე ივენთების იდენტიფიკაციისთვის გამოიყენებოდა <code>enum</code> ტიპი. თუმცა, სისტემის ზრდასთან ერთად გამოიკვეთა ამ მიდგომის რამდენიმე სისუსტე, რის გამოც მივიღეთ გადაწყვეტილება გადავსულიყავით <code>const char*</code> (სტრიქონულ) იდენტიფიკატორებზე.</p>
 <p><b>გადაწყვეტილების მიზეზები:</b></p>
@@ -191,7 +191,7 @@ Event Bus Pattern</h1>
 <li><b>შესრულების სიჩქარე:</b> სტრიქონების შედარება (<code>strcmp</code>) უფრო ნელი ოპერაციაა, ვიდრე მთელი რიცხვების (<code>enum</code>) შედარება. თუმცა, ESP32-ის წარმადობის გათვალისწინებით, ეს სხვაობა უმნიშვნელოა ივენთების დამუშავების კონტექსტში.</li>
 <li><b>შეცდომის დაშვების რისკი:</b> სტრიქონების გამოყენებისას იზრდება ბეჭდვითი შეცდომის (typo) დაშვების რისკი. ამის შესამცირებლად, რეკომენდებულია ივენთების სახელების <code>#define</code>-ებით განსაზღვრა და ცენტრალიზებულად შენახვა.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1380"></a>
+<h2><a class="anchor" id="autotoc_md1390"></a>
 ფრეიმვორქის API-სთან წვდომა: Facade Pattern (&lt;tt&gt;synapse.h&lt;/tt&gt;)</h2>
 <p>არქიტექტურული გადაწყვეტილებით, ფრეიმვორქის ბირთვის ყველა საჯარო API (<code>Service Locator</code>, <code>Event Bus</code>, <code>Config Manager</code> და ა.შ.) გაერთიანდა ერთ, ცენტრალურ ჰედერ ფაილში — <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code>. ეს "ფასადის" პატერნი მნიშვნელოვნად ამარტივებს მოდულების წერას, რადგან დეველოპერს აღარ სჭირდება მრავალი ჰედერის დამახსოვრება და ჩართვა. ნებისმიერ მოდულს შეუძლია, მიიღოს წვდომა ფრეიმვორქის სრულ ფუნქციონალზე მხოლოდ ერთი <code>#include "synapse.h"</code> დირექტივით</p>
 <hr  />

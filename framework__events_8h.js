@@ -1,5 +1,5 @@
 var framework__events_8h =
 [
-    [ "FMW_EVENT_CONNECTIVITY_ESTABLISHED", "framework__events_8h.html#a316aab26053206b80037aa48ef1f00e1", null ],
-    [ "FMW_EVENT_CONNECTIVITY_LOST", "framework__events_8h.html#ab934f9e26cc046dfd8e231aeb0e3bdaa", null ]
+    [ "SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED", "framework__events_8h.html#a3ab2587249657a7da12bc5e70469d30e", null ],
+    [ "SYNAPSE_EVENT_CONNECTIVITY_LOST", "framework__events_8h.html#ad9ecf117f47172dfce6a3046488ae209", null ]
 ];

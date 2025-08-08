@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['led_5fblinker_20ინიციალიზაციის_20პრობლემის_20დიაგნოსტიკა_20და_20გამოსწორება_0',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
-  ['levels_1',['🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)',['../md_docs_2convention_2initialization__levels.html',1,'']]],
-  ['lifecycle_20initialization_2',['მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)',['../md_docs_2structure_2lifecycle__and__init.html',1,'']]],
-  ['list_3',['Deprecated List',['../deprecated.html',1,'']]],
-  ['local_20control_20module_20api_20reference_4',['Synapse Local Control Module API Reference',['../md_docs_2api__reference_2local__ctrl__api.html',1,'']]],
-  ['local_20setup_20guide_5',['Synapse Local Setup Guide',['../md_docs_2contributing_2local__setup.html',1,'']]],
-  ['logger_20module_6',['Logger Module',['../md_components_2modules_2utilities_2logger__module_2README.html',1,'']]],
-  ['logging_7',['შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)',['../md_docs_2structure_2error__handling__and__logging.html',1,'']]],
-  ['logging_20ის_20სტანდარტები_8',['Logging-ის სტანდარტები',['../md_docs_2convention_2logging__standards.html',1,'']]]
+  ['getting_20started_0',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
+  ['glossary_20ტერმინები_1',['Glossary (ტერმინები)',['../md_docs_2glossary_2glossary__index.html',1,'']]],
+  ['glossary_20—_20api_20code_2',['API-სა და კოდის ტერმინები (Glossary — API &amp; Code)',['../md_docs_2glossary_2glossary__api.html',1,'']]],
+  ['glossary_20—_20architecture_3',['არქიტექტურული ტერმინები (Glossary — Architecture)',['../md_docs_2glossary_2glossary__architecture.html',1,'']]],
+  ['glossary_20—_20configuration_20storage_4',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
+  ['glossary_20—_20security_20performance_5',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
+  ['guide_6',['guide',['../md_docs_2performance_2performance__benchmarks.html',1,'ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)'],['../md_docs_2contributing_2contributing__guide.html',1,'კონტრიბუციის სახელმძღვანელო (Contributing Guide)'],['../md_docs_2performance_2performance__optimization.html',1,'ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)'],['../md_docs_2performance_2performance__resource__usage.html',1,'რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)'],['../md_docs_2contributing_2local__setup.html',1,'Synapse Local Setup Guide']]],
+  ['guide_20დიბაგინგის_20სახელმძღვანელო_7',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
+  ['guidelines_8',['guidelines',['../md_docs_2security_2security__guidelines.html',1,'უსაფრთხოების სახელმძღვანელოები (Security Guidelines)'],['../md_docs_2contributing_2commit__message__guidelines.html',1,'Synapse Commit Message Guidelines'],['../md_docs_2contributing_2review__guidelines.html',1,'Synapse Review Guidelines']]]
 ];

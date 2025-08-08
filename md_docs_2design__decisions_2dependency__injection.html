@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
   <div class="headertitle"><div class="title">არქიტექტურული გადაწყვეტილება: დამოკიდებულებების ინექცია (Dependency Injection)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1411"></a> </p>
-<h1><a class="anchor" id="autotoc_md1412"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1421"></a> </p>
+<h1><a class="anchor" id="autotoc_md1422"></a>
 1. კონტექსტი</h1>
-<p>Synapse Framework-ის ერთ-ერთი მთავარი მიზანია მოდულებს შორის მაქსიმალური იზოლაციის მიღწევა. საწყის ვერსიებში, მოდული, რომელსაც სჭირდებოდა სხვა მოდულის სერვისი, იძახებდა <code>fmw_service_get("service_instance_name")</code> ფუნქციას თავის <code>_init</code> ფაზაში.</p>
+<p>Synapse Framework-ის ერთ-ერთი მთავარი მიზანია მოდულებს შორის მაქსიმალური იზოლაციის მიღწევა. საწყის ვერსიებში, მოდული, რომელსაც სჭირდებოდა სხვა მოდულის სერვისი, იძახებდა <code>synapse_service_get("service_instance_name")</code> ფუნქციას თავის <code>_init</code> ფაზაში.</p>
 <p><b>პრობლემა:</b> ეს მიდგომა, მიუხედავად იმისა, რომ მუშაობს, ქმნის რამდენიმე არქიტექტურულ გამოწვევას:</p>
 <ul>
 <li>**"რბილი" დამოკიდებულება:** მოდულის კოდში ჩაშენებულია (<code>hardcoded</code>) დამოკიდებული სერვისის კონკრეტული <code>instance_name</code>, რაც ართულებს კონფიგურაციის ცვლილებას.</li>
 <li><b>ტესტირების გართულება:</b> შეუძლებელია მოდულის იზოლირებულად ტესტირება "ყალბი" (mock) სერვისის მარტივად ჩანაცვლებით.</li>
 <li>**"ვინ ვის შემდეგ?" პრობლემა:** დეველოპერი თავად უნდა ზრუნავდეს <code>init_level</code>-ების სწორად დალაგებაზე, რათა სერვისის მომხმარებელი არ ცდილობდეს სერვისის გამოყენებას მის ინიციალიზაციამდე.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1413"></a>
+<h1><a class="anchor" id="autotoc_md1423"></a>
 2. გადაწყვეტილება</h1>
 <p>მიღებულ იქნა გადაწყვეტილება, დაინერგოს <b>კონფიგურაციაზე-დაფუძნებული დამოკიდებულებების ინექციის (Configuration-based Dependency Injection)</b> მექანიზმი.</p>
 <p>ამ მოდელის მიხედვით, <code>System Manager</code> სისტემის გაშვებისას, მოდულების <code>_init</code> ფუნქციების გამოძახებამდე, ასრულებს შემდეგ მოქმედებებს:</p>
@@ -114,17 +114,17 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 <li><b>ინექცია:</b> "შეჰყავს" (injects) ნაპოვნი <code>handle</code> პირდაპირ მომხმარებელი მოდულის <code>private_data</code> სტრუქტურაში.</li>
 </ol>
 <p>შედეგად, როდესაც მოდულის <code>_init</code> ფუნქცია გამოიძახება, მას უკვე გამზადებული და ვალიდური <code>handle</code> ხვდება თავის <code>private_data</code>-ში.</p>
-<h1><a class="anchor" id="autotoc_md1414"></a>
+<h1><a class="anchor" id="autotoc_md1424"></a>
 3. არგუმენტები და მოტივაცია</h1>
 <ul>
 <li><b>სრული იზოლაცია (Inversion of Control):</b> მოდული აღარ არის პასუხისმგებელი თავისი დამოკიდებულებების მოძიებაზე. ამ პასუხისმგებლობას თავის თავზე იღებს ფრეიმვორქი (<code>System Manager</code>). მოდული უბრალოდ აცხადებს, რა სჭირდება და იღებს მას.</li>
 <li><b>გაუმჯობესებული ტესტირება:</b> ტესტირებისას შესაძლებელია, მოდულს გადაეცეს "ყალბი" (mock) სერვისის <code>handle</code>, რაც იძლევა მისი ლოგიკის სრულად იზოლირებულად შემოწმების საშუალებას.</li>
 <li><b>კონფიგურაციის მოქნილობა:</b> დამოკიდებულებები იმართება ცენტრალიზებულად, <code>config.json</code> ფაილებით. სერვისის სახელის შეცვლა არ საჭიროებს კოდში ცვლილების შეტანას.</li>
-<li><b>გამარტივებული მოდულის კოდი:</b> მოდულების <code>_init</code> ფუნქციები თავისუფლდება <code>fmw_service_get</code> გამოძახებებისგან და ხდება უფრო სუფთა და ფოკუსირებული.</li>
+<li><b>გამარტივებული მოდულის კოდი:</b> მოდულების <code>_init</code> ფუნქციები თავისუფლდება <code>synapse_service_get</code> გამოძახებებისგან და ხდება უფრო სუფთა და ფოკუსირებული.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1415"></a>
+<h1><a class="anchor" id="autotoc_md1425"></a>
 4. შედეგები და გავლენა</h1>
-<h2><a class="anchor" id="autotoc_md1416"></a>
+<h2><a class="anchor" id="autotoc_md1426"></a>
 4.1. კონვენცია მოდულის დეველოპერებისთვის</h2>
 <p>ამ მექანიზმის გამართულად მუშაობისთვის, მოდულის დეველოპერმა უნდა დაიცვას <b>ორი მკაცრი კონვენცია</b>:</p>
 <ol type="1">
@@ -143,16 +143,16 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 </div><!-- fragment --><p class="startli"><em>ეს კონვენცია საშუალებას აძლევს <code>System Manager</code>-ს, უსაფრთხოდ და ზოგადად ჩაწეროს <code>handle</code>-ის მისამართი <code>private_data</code>-ს დასაწყისში, სტრუქტურის შიდა განლაგების ცოდნის გარეშე.</em></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1417"></a>
+<h2><a class="anchor" id="autotoc_md1427"></a>
 4.2. გამოყენების მაგალითი</h2>
 <p>**ძველი მიდგომა (<code>button_input_init</code>-ში):**</p>
 <div class="fragment"><div class="line"><span class="comment">// მოდული თავად ეძებს სერვისს</span></div>
-<div class="line">private_data-&gt;expander_handle = (<a class="code hl_struct" href="structmcp23017__handle__t.html">mcp23017_handle_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(private_data-&gt;expander_service_name);</div>
+<div class="line">private_data-&gt;expander_handle = (<a class="code hl_struct" href="structmcp23017__handle__t.html">mcp23017_handle_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(private_data-&gt;expander_service_name);</div>
 <div class="line"><span class="keywordflow">if</span> (!private_data-&gt;expander_handle) {</div>
 <div class="line">    ESP_LOGE(TAG, <span class="stringliteral">&quot;Expander service &#39;%s&#39; not found!&quot;</span>, ...);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_ERR_NOT_FOUND;</div>
 <div class="line">}</div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 </div><!-- fragment --><p>**ახალი მიდგომა (<code>button_input_init</code>-ში):**</p>
 <div class="fragment"><div class="line"><span class="comment">// მოდული უბრალოდ ამოწმებს, მოხდა თუ არა ინექცია</span></div>
 <div class="line"><span class="keywordflow">if</span> (!private_data-&gt;expander_handle) {</div>
@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 <div class="line">}</div>
 <div class="line"><span class="comment">// handle უკვე მზადაა გამოსაყენებლად</span></div>
 <div class="line">private_data-&gt;expander_handle-&gt;api-&gt;set_pin_direction(...);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1418"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1428"></a>
 5. დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a href="../../components/core/src/system_manager.c">system_manager.c</a></li>

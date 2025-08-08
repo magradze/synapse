@@ -6,11 +6,11 @@ var structui__manager__private__data__t =
     [ "display_width", "structui__manager__private__data__t.html#a2aa8d1df79108b5e7f640a2892fbb174", null ],
     [ "dynamic_menu_item_count", "structui__manager__private__data__t.html#ac5e36ec2e4293d1b06e7f260f7932a59", null ],
     [ "dynamic_menu_modules", "structui__manager__private__data__t.html#a2fa71cfa5939697ecace1023fdec1657", null ],
-    [ "home_screen_timer", "structui__manager__private__data__t.html#a9f87a5d732d7b806d48b690f166ac47f", null ],
+    [ "home_screen_timer", "structui__manager__private__data__t.html#a08cd65dae189f9e0f155c04623f2bb4a", null ],
     [ "is_screen_on", "structui__manager__private__data__t.html#a4ee4ce7e83997733d0f1a0a0cab5a543", null ],
     [ "last_button_press_time", "structui__manager__private__data__t.html#aa09a3406a2047fb041ed6ede8fa0ad4a", null ],
     [ "previous_menu_selection", "structui__manager__private__data__t.html#acb411d2d2d4497db2b125a6d98959f51", null ],
-    [ "screen_off_timer", "structui__manager__private__data__t.html#abc5d269e24877a9a9fe4b4f719bf1558", null ],
+    [ "screen_off_timer", "structui__manager__private__data__t.html#a51f763c6ffcc48cc42dc0839f836dbdc", null ],
     [ "selected_control_module", "structui__manager__private__data__t.html#a27bce9044338fa50a7f29a26abaa5d9b", null ],
     [ "selected_item_index", "structui__manager__private__data__t.html#afdb45006f9b8a7456aa1ed1e010c3d40", null ],
     [ "small_font_metrics", "structui__manager__private__data__t.html#a6041a88c678126145f9b23e686171f4d", null ],
@@ -24,5 +24,5 @@ var structui__manager__private__data__t =
     [ "wifi_module_handle", "structui__manager__private__data__t.html#a7f945a4b383ef6341679d410d6eef179", null ],
     [ "wifi_rssi", "structui__manager__private__data__t.html#ab361dc7522622b4c8b95169316369f2b", null ],
     [ "wifi_service", "structui__manager__private__data__t.html#a8ec1e727b7c0d3a5459f354747e0c821", null ],
-    [ "wifi_status_timer", "structui__manager__private__data__t.html#a5eea26ba4fd8ccbeb1a59285fe5bd25b", null ]
+    [ "wifi_status_timer", "structui__manager__private__data__t.html#ade34781106eba00144df323d02c1f7d4", null ]
 ];

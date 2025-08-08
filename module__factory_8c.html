@@ -137,31 +137,31 @@ Include dependency graph for module_factory.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a74dc53d12740baa1f954de78a93c1381" id="r_a74dc53d12740baa1f954de78a93c1381"><td class="memItemLeft" align="right" valign="top"><a id="a74dc53d12740baa1f954de78a93c1381" name="a74dc53d12740baa1f954de78a93c1381"></a>
-module_create_fn_t&#160;</td><td class="memItemRight" valign="bottom"><b>fmw_module_factory_get</b> (const char *module_type)</td></tr>
-<tr class="separator:a74dc53d12740baa1f954de78a93c1381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb5e5aa6eb4fe151e9cd6475d386cb2" id="r_a0cb5e5aa6eb4fe151e9cd6475d386cb2"><td class="memItemLeft" align="right" valign="top"><a id="a0cb5e5aa6eb4fe151e9cd6475d386cb2" name="a0cb5e5aa6eb4fe151e9cd6475d386cb2"></a>
+module_create_fn_t&#160;</td><td class="memItemRight" valign="bottom"><b>synapse_module_factory_get</b> (const char *module_type)</td></tr>
+<tr class="separator:a0cb5e5aa6eb4fe151e9cd6475d386cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b4b268afecd4d0978c9167a5e6e04e4" id="r_a7b4b268afecd4d0978c9167a5e6e04e4"><td class="memItemLeft" align="right" valign="top"><a id="a7b4b268afecd4d0978c9167a5e6e04e4" name="a7b4b268afecd4d0978c9167a5e6e04e4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;MODULE_FACTORY&quot;)</td></tr>
 <tr class="separator:a7b4b268afecd4d0978c9167a5e6e04e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b5e65c02a0bd3061e6c89e01e58142a" id="r_a0b5e65c02a0bd3061e6c89e01e58142a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__factory_8c.html#a0b5e65c02a0bd3061e6c89e01e58142a">fmw_module_factory_create</a> (const char *module_type, const cJSON *config)</td></tr>
-<tr class="memdesc:a0b5e65c02a0bd3061e6c89e01e58142a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ქმნის მოდულის ახალ ინსტანციას მითითებული ტიპისა და კონფიგურაციის მიხედვით.  <br /></td></tr>
-<tr class="separator:a0b5e65c02a0bd3061e6c89e01e58142a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6805f2afdd869574d6ae21de42a97e92" id="r_a6805f2afdd869574d6ae21de42a97e92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__factory_8c.html#a6805f2afdd869574d6ae21de42a97e92">synapse_module_factory_create</a> (const char *module_type, const cJSON *config)</td></tr>
+<tr class="memdesc:a6805f2afdd869574d6ae21de42a97e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">ქმნის მოდულის ახალ ინსტანციას მითითებული ტიპისა და კონფიგურაციის მიხედვით.  <br /></td></tr>
+<tr class="separator:a6805f2afdd869574d6ae21de42a97e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>მოდულების შემქმნელი (Factory) კომპონენტის იმპლემენტაცია. </p>
 <dl class="section version"><dt>Version</dt><dd>1.2 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-06-27 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
-<p>ეს ფაილი შეიცავს Module Factory-ის Public API-ს იმპლემენტაციას. იგი იყენებს ავტომატურად გენერირებულ <code>fmw_module_factory_get</code> ფუნქციას, რათა დააკავშიროს მოდულის ტიპის სტრიქონი მის შესაბამის შემქმნელ ფუნქციასთან. ეს მიდგომა უზრუნველყოფს, რომ Factory-ის კოდი არ საჭიროებს ცვლილებას ახალი მოდულების დამატებისას. </p>
+<p>ეს ფაილი შეიცავს Module Factory-ის Public API-ს იმპლემენტაციას. იგი იყენებს ავტომატურად გენერირებულ <code>synapse_module_factory_get</code> ფუნქციას, რათა დააკავშიროს მოდულის ტიპის სტრიქონი მის შესაბამის შემქმნელ ფუნქციასთან. ეს მიდგომა უზრუნველყოფს, რომ Factory-ის კოდი არ საჭიროებს ცვლილებას ახალი მოდულების დამატებისას. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a0b5e65c02a0bd3061e6c89e01e58142a" name="a0b5e65c02a0bd3061e6c89e01e58142a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b5e65c02a0bd3061e6c89e01e58142a">&#9670;&#160;</a></span>fmw_module_factory_create()</h2>
+<a id="a6805f2afdd869574d6ae21de42a97e92" name="a6805f2afdd869574d6ae21de42a97e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6805f2afdd869574d6ae21de42a97e92">&#9670;&#160;</a></span>synapse_module_factory_create()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structmodule__t.html">module_t</a> * fmw_module_factory_create </td>
+          <td class="memname"><a class="el" href="structmodule__t.html">module_t</a> * synapse_module_factory_create </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>module_type</em>, </td>
@@ -196,13 +196,13 @@ NULL თუ მოხდა შეცდომა (მაგ., ტიპი ა�
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="module__factory_8c_a0b5e65c02a0bd3061e6c89e01e58142a_icgraph.png" border="0" usemap="#amodule__factory_8c_a0b5e65c02a0bd3061e6c89e01e58142a_icgraph" alt=""/></div>
-<map name="amodule__factory_8c_a0b5e65c02a0bd3061e6c89e01e58142a_icgraph" id="amodule__factory_8c_a0b5e65c02a0bd3061e6c89e01e58142a_icgraph">
-<area shape="rect" title="ქმნის მოდულის ახალ ინსტანციას მითითებული ტიპისა და კონფიგურაციის მიხედვით." alt="" coords="428,5,588,45"/>
-<area shape="rect" href="module__registry_8c.html#a15ad8ee3953b528270916074c41f0c06" title="ინიციალიზებს მოდულების რეესტრს." alt="" coords="188,13,380,38"/>
-<area shape="poly" title=" " alt="" coords="414,28,380,28,380,23,414,23"/>
-<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,13,140,38"/>
-<area shape="poly" title=" " alt="" coords="174,28,140,28,140,23,174,23"/>
+<div class="center"><img src="module__factory_8c_a6805f2afdd869574d6ae21de42a97e92_icgraph.png" border="0" usemap="#amodule__factory_8c_a6805f2afdd869574d6ae21de42a97e92_icgraph" alt=""/></div>
+<map name="amodule__factory_8c_a6805f2afdd869574d6ae21de42a97e92_icgraph" id="amodule__factory_8c_a6805f2afdd869574d6ae21de42a97e92_icgraph">
+<area shape="rect" title="ქმნის მოდულის ახალ ინსტანციას მითითებული ტიპისა და კონფიგურაციის მიხედვით." alt="" coords="477,5,663,45"/>
+<area shape="rect" href="module__registry_8c.html#a43a25cf1a7108566a60ec7e35920336a" title="ინიციალიზებს მოდულების რეესტრს." alt="" coords="212,13,429,38"/>
+<area shape="poly" title=" " alt="" coords="464,28,430,28,430,23,464,23"/>
+<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,13,164,38"/>
+<area shape="poly" title=" " alt="" coords="198,28,164,28,164,23,198,23"/>
 </map>
 </div>
 

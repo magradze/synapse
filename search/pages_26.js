@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['რესურსების_20არქიტექტურული_20კომპრომისები_20performance_20trade_20offs_0',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],
-  ['რესურსების_20გამოყენების_20სახელმძღვანელო_20performance_20resource_20usage_20guide_1',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
-  ['რეფერენსი_3a_20event_20payloads_20event_5fpayloads_20h_2',['API რეფერენსი: Event Payloads (event_payloads.h)',['../md_docs_2api__reference_2event__payloads__api.html',1,'']]],
-  ['როგორ_20გადავცეთ_20კონტექსტი_20სერვისის_20api_20ს_20გამოძახებისას_3',['პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?',['../md_docs_2troubleshooting_2dependency__injection__and__context.html',1,'']]]
+  ['ოპერაციების_20მართვის_20პატერნი_20promise_20pattern_0',['asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)',['../md_docs_2convention_2promise__pattern.html',1,'']]],
+  ['ოპტიმიზაცია_20performance_20—_20display_20modules_1',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
+  ['ოპტიმიზაციის_20სახელმძღვანელოები_20performance_20optimization_20guide_2',['ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)',['../md_docs_2performance_2performance__optimization.html',1,'']]]
 ];

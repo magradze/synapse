@@ -1,8 +1,8 @@
 var searchData=
 [
   ['scan_0',['scan',['../structi2c__bus__api__t.html#a4c57d7686ca5efa19272b5c333cf7ede',1,'i2c_bus_api_t']]],
-  ['schedule_5fevent_1',['schedule_event',['../structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e',1,'timer_api_t']]],
-  ['screen_5foff_5ftimer_2',['screen_off_timer',['../structui__manager__private__data__t.html#abc5d269e24877a9a9fe4b4f719bf1558',1,'ui_manager_private_data_t']]],
+  ['schedule_5fevent_1',['schedule_event',['../structtimer__api__t.html#a491f4146bb79b02df56f0485e12eb96b',1,'timer_api_t']]],
+  ['screen_5foff_5ftimer_2',['screen_off_timer',['../structui__manager__private__data__t.html#a51f763c6ffcc48cc42dc0839f836dbdc',1,'ui_manager_private_data_t']]],
   ['selected_5fcontrol_5fmodule_3',['selected_control_module',['../structui__manager__private__data__t.html#a27bce9044338fa50a7f29a26abaa5d9b',1,'ui_manager_private_data_t']]],
   ['selected_5fitem_5findex_4',['selected_item_index',['../structui__manager__private__data__t.html#afdb45006f9b8a7456aa1ed1e010c3d40',1,'ui_manager_private_data_t']]],
   ['self_5',['self',['../structtest__task__params__t.html#a2e98868e485320079ce1b4f3fbbf1df6',1,'test_task_params_t']]],
@@ -22,7 +22,7 @@ var searchData=
   ['set_5fstate_19',['set_state',['../structrelay__api__t.html#a8c4160f255b09d4454ce9a8b8d8f0a51',1,'relay_api_t']]],
   ['set_5fstring_20',['set_string',['../structstorage__api__t.html#a291230ea486664e21554fde8fdc3ac84',1,'storage_api_t']]],
   ['small_5ffont_5fmetrics_21',['small_font_metrics',['../structui__manager__private__data__t.html#a6041a88c678126145f9b23e686171f4d',1,'ui_manager_private_data_t']]],
-  ['source_22',['source',['../structfmw__command__payload__t.html#a7a707a5775cf7c4edac1359be9b64481',1,'fmw_command_payload_t']]],
+  ['source_22',['source',['../structsynapse__command__payload__t.html#a8b6f1a8f221b0852ed8a1fe2f99896e6',1,'synapse_command_payload_t']]],
   ['ssd1306xled_5ffont6x8_23',['ssd1306xled_font6x8',['../ssd1306__fonts_8c.html#a20b4bf5655301a01d1d4032bb9b60190',1,'ssd1306xled_font6x8:&#160;ssd1306_fonts.c'],['../ssd1306__fonts_8h.html#a20b4bf5655301a01d1d4032bb9b60190',1,'ssd1306xled_font6x8:&#160;ssd1306_fonts.c']]],
   ['ssd1306xled_5ffont8x16_24',['ssd1306xled_font8x16',['../ssd1306__fonts_8c.html#a2bca0fdef805eb4ae011697b457b772d',1,'ssd1306xled_font8x16:&#160;ssd1306_fonts.c'],['../ssd1306__fonts_8h.html#a2bca0fdef805eb4ae011697b457b772d',1,'ssd1306xled_font8x16:&#160;ssd1306_fonts.c']]],
   ['start_5fblink_25',['start_blink',['../structrgb__led__api__t.html#a6e88408572b2a6d6bd8fe3d91fd70376',1,'rgb_led_api_t']]],
@@ -31,7 +31,7 @@ var searchData=
   ['start_5fupdate_28',['start_update',['../structota__api__t.html#a703e74e9a46ad90a96775f7ebd1e19dc',1,'ota_api_t']]],
   ['state_5fmutex_29',['state_mutex',['../structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d',1,'module_t']]],
   ['status_30',['status',['../structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2',1,'module_t']]],
-  ['subscribers_31',['subscribers',['../structevent__subscription__list__t.html#a03b15fc2eb8bbed587b42209aaab8fa5',1,'event_subscription_list_t']]],
+  ['subscribers_31',['subscribers',['../structevent__subscription__list__t.html#ad1b0e79a18f6a0b67d75098839c26423',1,'event_subscription_list_t']]],
   ['subscription_5flist_32',['subscription_list',['../structevent__subscription__node__t.html#ac0b52e87949a3a47c8ada97504f389a0',1,'event_subscription_node_t']]],
   ['suite_5fto_5frun_33',['suite_to_run',['../structtest__task__params__t.html#a16f723d9af9739b5bb63717e29d0d8c7',1,'test_task_params_t']]],
   ['sum_34',['sum',['../structsensor__runtime__data__t.html#a7aeebc735edc23a7cef60c53877af82e',1,'sensor_runtime_data_t']]],

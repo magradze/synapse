@@ -93,30 +93,30 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
   <div class="headertitle"><div class="title">კომუნიკაციის პატერნები (Communication Patterns)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1789"></a> </p>
-<h1><a class="anchor" id="autotoc_md1790"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1799"></a> </p>
+<h1><a class="anchor" id="autotoc_md1800"></a>
 მიზანი</h1>
 <p>მოდულებს შორის კომუნიკაციის მიზანია უზრუნველყოს მაქსიმალური იზოლაცია, მოქნილობა და გაფართოებადობა, რათა სისტემის ნებისმიერი ნაწილი იყოს დამოუკიდებელი და მარტივად შესაცვლელი.</p>
-<h1><a class="anchor" id="autotoc_md1791"></a>
+<h1><a class="anchor" id="autotoc_md1801"></a>
 ძირითადი პატერნები</h1>
-<h2><a class="anchor" id="autotoc_md1792"></a>
+<h2><a class="anchor" id="autotoc_md1802"></a>
 1. Service Locator Pattern</h2>
 <ul>
 <li>გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი ფუნქციური გამოძახებისთვის</li>
 <li>უზრუნველყოფს მოდულებს შორის მინიმალურ დამოკიდებულებას</li>
 <li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (display_service_handle) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *ssd1306_service_api = (<a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;<a class="code hl_variable" href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">enable</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:23</div></div>
 <div class="ttc" id="astructssd1306__api__t_html_a49c18ab20520fe0db6e0bf9bf5170d79"><div class="ttname"><a href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">ssd1306_api_t::enable</a></div><div class="ttdeci">esp_err_t(* enable)(void *context)</div><div class="ttdoc">Enables the display.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:29</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1793"></a>
+<h2><a class="anchor" id="autotoc_md1803"></a>
 2. Event Bus Pattern</h2>
 <ul>
 <li>გამოიყენება broadcast/notification სცენარებისთვის</li>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, display_handle_sensor_data);</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1794"></a>
+<h1><a class="anchor" id="autotoc_md1804"></a>
 სწორი გამოყენების წესები</h1>
 <ul>
 <li>Service Locator გამოიყენეთ მხოლოდ კონკრეტული API-ს გამოძახებისთვის</li>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <li>არასდროს გამოიყენოთ ორივე პატერნი ერთსა და იმავე მიზნისთვის</li>
 <li>აკრძალულია პირდაპირი #include სხვა მოდულის header-ების</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1795"></a>
+<h1><a class="anchor" id="autotoc_md1805"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <li>Event Bus და Service Locator-ის არასწორი მიქსი</li>
 <li>System Manager-ის მიერ MQTT-ის პირდაპირი მართვა</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1796"></a>
+<h1><a class="anchor" id="autotoc_md1806"></a>
 მაგალითები</h1>
 <div class="fragment"><div class="line">sequenceDiagram</div>
 <div class="line">    participant Cloud as MQTT Broker</div>
@@ -166,7 +166,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <div class="line"> </div>
 <div class="line">    Note over MqttMod, ServiceLocator: MQTT Module needs to call the Relay API</div>
 <div class="line"> </div>
-<div class="line">    MqttMod-&gt;&gt;ServiceLocator: 3. `fmw_service_get(&quot;relay1_api&quot;)`</div>
+<div class="line">    MqttMod-&gt;&gt;ServiceLocator: 3. `synapse_service_get(&quot;relay1_api&quot;)`</div>
 <div class="line">    ServiceLocator--&gt;&gt;MqttMod: 4. Returns Relay API handle</div>
 <div class="line"> </div>
 <div class="line">    MqttMod-&gt;&gt;RelayMod: 5. Calls `relay_api-&gt;set_state(true)`</div>
@@ -185,16 +185,16 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2communication__pat
 <div class="line"> </div>
 <div class="line">    EventBus-&gt;&gt;LoggerMod: 12. Forwards event</div>
 <div class="line">    LoggerMod-&gt;&gt;LoggerMod: 13. Logs: &quot;INFO: Relay &#39;relay1&#39; state changed to ON&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1797"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1807"></a>
 Service Locator</h2>
 <div class="fragment"><div class="line"><span class="comment">// Display module API-ის გამოძახება</span></div>
-<div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
+<div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (display_service_handle) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *ssd1306_service_api = (<a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;<a class="code hl_variable" href="structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053">disable</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="astructssd1306__api__t_html_a80708f9c9bb4d94d7feb9f518ad80053"><div class="ttname"><a href="structssd1306__api__t.html#a80708f9c9bb4d94d7feb9f518ad80053">ssd1306_api_t::disable</a></div><div class="ttdeci">esp_err_t(* disable)(void *context)</div><div class="ttdoc">Disables the display (turns off the screen).</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:36</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1798"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1808"></a>
 Event Bus</h2>
 <div class="fragment"><div class="line"><span class="comment">// სენსორის მონაცემების გავრცელება</span></div>
 <div class="line">telemetry_data_t sensor_telemetry_data = {</div>

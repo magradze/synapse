@@ -23,7 +23,14 @@ var searchData=
   ['storage_5fapi_5ft_20',['storage_api_t',['../structstorage__api__t.html',1,'']]],
   ['storage_5fmanager_5fconfig_5ft_21',['storage_manager_config_t',['../structstorage__manager__config__t.html',1,'']]],
   ['storage_5fmanager_5fprivate_5fdata_5ft_22',['storage_manager_private_data_t',['../structstorage__manager__private__data__t.html',1,'']]],
-  ['system_5fmanager_5fapi_5ft_23',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
-  ['system_5ftimer_5fconfig_5ft_24',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
-  ['system_5ftimer_5fprivate_5fdata_5ft_25',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
+  ['synapse_5fbutton_5fpayload_5ft_23',['synapse_button_payload_t',['../structsynapse__button__payload__t.html',1,'']]],
+  ['synapse_5fcommand_5fpayload_5ft_24',['synapse_command_payload_t',['../structsynapse__command__payload__t.html',1,'']]],
+  ['synapse_5fconfig_5fupdated_5fpayload_5ft_25',['synapse_config_updated_payload_t',['../structsynapse__config__updated__payload__t.html',1,'']]],
+  ['synapse_5fconnectivity_5fpayload_5ft_26',['synapse_connectivity_payload_t',['../structsynapse__connectivity__payload__t.html',1,'']]],
+  ['synapse_5fhealth_5fpong_5fpayload_5ft_27',['synapse_health_pong_payload_t',['../structsynapse__health__pong__payload__t.html',1,'']]],
+  ['synapse_5fmodule_5fcontrol_5fpayload_5ft_28',['synapse_module_control_payload_t',['../structsynapse__module__control__payload__t.html',1,'']]],
+  ['synapse_5ftelemetry_5fpayload_5ft_29',['synapse_telemetry_payload_t',['../structsynapse__telemetry__payload__t.html',1,'']]],
+  ['system_5fmanager_5fapi_5ft_30',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
+  ['system_5ftimer_5fconfig_5ft_31',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
+  ['system_5ftimer_5fprivate_5fdata_5ft_32',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
 ];

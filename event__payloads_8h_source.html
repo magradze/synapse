@@ -99,8 +99,8 @@ $(document).ready(function(){initNavTree('event__payloads_8h_source.html',''); i
 </div><!--header-->
 <div class="contents">
 <a href="event__payloads_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef FMW_EVENT_PAYLOADS_H</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define FMW_EVENT_PAYLOADS_H</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef SYNAPSE_EVENT_PAYLOADS_H</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define SYNAPSE_EVENT_PAYLOADS_H</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="framework__config_8h.html">framework_config.h</a>&quot;</span> <span class="comment">// Kconfig-ის პარამეტრებისთვის</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;sdkconfig.h&gt;</span></div>
@@ -112,62 +112,62 @@ $(document).ready(function(){initNavTree('event__payloads_8h_source.html',''); i
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// =========================================================================</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structfmw__telemetry__payload__t.html">   30</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structfmw__telemetry__payload__t.html#a0dc2b3ff532053a87a736f8fc9ba2110">   31</a></span>    <span class="keywordtype">char</span> module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structfmw__telemetry__payload__t.html#aeb33ae17a71357922d651f116a5eff92">   32</a></span>    <span class="keywordtype">char</span> *<a class="code hl_variable" href="structfmw__telemetry__payload__t.html#aeb33ae17a71357922d651f116a5eff92">json_data</a>;                                     </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>} <a class="code hl_struct" href="structfmw__telemetry__payload__t.html">fmw_telemetry_payload_t</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structsynapse__telemetry__payload__t.html">   30</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structsynapse__telemetry__payload__t.html#af36031da9846d080becfada6247cda31">   31</a></span>    <span class="keywordtype">char</span> module_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]; </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structsynapse__telemetry__payload__t.html#aa3a11b443b0813f021d34202f329d6a4">   32</a></span>    <span class="keywordtype">char</span> *<a class="code hl_variable" href="structsynapse__telemetry__payload__t.html#aa3a11b443b0813f021d34202f329d6a4">json_data</a>;                                     </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>} <a class="code hl_struct" href="structsynapse__telemetry__payload__t.html">synapse_telemetry_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structfmw__config__updated__payload__t.html">   39</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structsynapse__config__updated__payload__t.html">   39</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structfmw__config__updated__payload__t.html#a81fedf3181c56afb2a889f0ff2e8b2d5">   41</a></span>    <span class="keywordtype">char</span> updated_key[CONFIG_FMW_NVS_KEY_MAX_LENGTH]; </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>} <a class="code hl_struct" href="structfmw__config__updated__payload__t.html">fmw_config_updated_payload_t</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structsynapse__config__updated__payload__t.html#aebee8ec8cd701f32ea6964a09f4e235b">   41</a></span>    <span class="keywordtype">char</span> updated_key[CONFIG_SYNAPSE_NVS_KEY_MAX_LENGTH]; </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>} <a class="code hl_struct" href="structsynapse__config__updated__payload__t.html">synapse_config_updated_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structfmw__health__pong__payload__t.html">   48</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structsynapse__health__pong__payload__t.html">   48</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structfmw__health__pong__payload__t.html#a4fb51ffb30ea55f21d8f32d735f1db1a">   50</a></span>    <span class="keywordtype">char</span> module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <a class="code hl_struct" href="structfmw__health__pong__payload__t.html">fmw_health_pong_payload_t</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structsynapse__health__pong__payload__t.html#a1e9fd4ba570a485a7ef3a57d46381348">   50</a></span>    <span class="keywordtype">char</span> module_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]; </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <a class="code hl_struct" href="structsynapse__health__pong__payload__t.html">synapse_health_pong_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="foldopen" id="foldopen00057" data-start="{" data-end="};">
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structfmw__module__control__payload__t.html">   57</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structsynapse__module__control__payload__t.html">   57</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>{</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structfmw__module__control__payload__t.html#a8c9a02caf29fd3311985ded9f1767c4a">   59</a></span>    <span class="keywordtype">char</span> module_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>} <a class="code hl_struct" href="structfmw__module__control__payload__t.html">fmw_module_control_payload_t</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structsynapse__module__control__payload__t.html#a258abe73b95df3bc79cb7eeb45924d90">   59</a></span>    <span class="keywordtype">char</span> module_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]; </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>} <a class="code hl_struct" href="structsynapse__module__control__payload__t.html">synapse_module_control_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="foldopen" id="foldopen00067" data-start="{" data-end="};">
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structfmw__command__payload__t.html">   67</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structsynapse__command__payload__t.html">   67</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structfmw__command__payload__t.html#acff919b382838ab5d16c9348e68b7a06">   72</a></span>    <span class="keywordtype">char</span> command_string[CONFIG_FMW_COMMAND_ROUTER_MAX_CMD_LEN];</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structsynapse__command__payload__t.html#abed093840403cd30fa9033907f71a98a">   72</a></span>    <span class="keywordtype">char</span> command_string[CONFIG_SYNAPSE_COMMAND_ROUTER_MAX_CMD_LEN];</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="structfmw__command__payload__t.html#a7a707a5775cf7c4edac1359be9b64481">   77</a></span>    <span class="keywordtype">char</span> source[16];</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="structsynapse__command__payload__t.html#a8b6f1a8f221b0852ed8a1fe2f99896e6">   77</a></span>    <span class="keywordtype">char</span> source[16];</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>} <a class="code hl_struct" href="structfmw__command__payload__t.html">fmw_command_payload_t</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>} <a class="code hl_struct" href="structsynapse__command__payload__t.html">synapse_command_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
 <div class="foldopen" id="foldopen00086" data-start="{" data-end="};">
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structfmw__connectivity__payload__t.html">   86</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structsynapse__connectivity__payload__t.html">   86</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>{</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structfmw__connectivity__payload__t.html#a4f560bb85d36f2d3660d7ec5bdf50f85">   92</a></span>    <span class="keywordtype">char</span> check_name[32];</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>} <a class="code hl_struct" href="structfmw__connectivity__payload__t.html">fmw_connectivity_payload_t</a>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structsynapse__connectivity__payload__t.html#a7d3b6aac3698a4e1cddcb8d10b8f2f8c">   92</a></span>    <span class="keywordtype">char</span> check_name[32];</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>} <a class="code hl_struct" href="structsynapse__connectivity__payload__t.html">synapse_connectivity_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
 <div class="foldopen" id="foldopen00099" data-start="{" data-end="};">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="structfmw__button__payload__t.html">   99</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="structsynapse__button__payload__t.html">   99</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>{</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structfmw__button__payload__t.html#aa09f4dc32f2b9e7f0e78b28f3bb4b7d5">  105</a></span>    <span class="keywordtype">char</span> button_name[16];</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>} <a class="code hl_struct" href="structfmw__button__payload__t.html">fmw_button_payload_t</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="structsynapse__button__payload__t.html#a9ca24fc20c0ff84ee89da9b5b90cebe0">  105</a></span>    <span class="keywordtype">char</span> button_name[16];</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>} <a class="code hl_struct" href="structsynapse__button__payload__t.html">synapse_button_payload_t</a>;</div>
 </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">// =========================================================================</span></div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">//                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">// =========================================================================</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> fmw_payload_common_free(<span class="keywordtype">void</span> *data)</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> synapse_payload_common_free(<span class="keywordtype">void</span> *data)</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>{</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">if</span> (data)</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    {</div>
@@ -175,19 +175,19 @@ $(document).ready(function(){initNavTree('event__payloads_8h_source.html',''); i
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    }</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keywordtype">void</span> <a class="code hl_function" href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a>(<span class="keywordtype">void</span> *data);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keywordtype">void</span> <a class="code hl_function" href="event__payloads_8h.html#a6695b9c80528a4a8989f9d32e695f300">synapse_telemetry_payload_free</a>(<span class="keywordtype">void</span> *data);</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#endif </span><span class="comment">// FMW_EVENT_PAYLOADS_H</span></div>
-<div class="ttc" id="aevent__payloads_8h_html_abf1197131be8a1f26057673d01917cbd"><div class="ttname"><a href="event__payloads_8h.html#abf1197131be8a1f26057673d01917cbd">fmw_telemetry_payload_free</a></div><div class="ttdeci">void fmw_telemetry_payload_free(void *data)</div><div class="ttdoc">ათავისუფლებს ტელემეტრიის პეილოდს.</div><div class="ttdef"><b>Definition</b> event_payloads.c:26</div></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_EVENT_PAYLOADS_H</span></div>
+<div class="ttc" id="aevent__payloads_8h_html_a6695b9c80528a4a8989f9d32e695f300"><div class="ttname"><a href="event__payloads_8h.html#a6695b9c80528a4a8989f9d32e695f300">synapse_telemetry_payload_free</a></div><div class="ttdeci">void synapse_telemetry_payload_free(void *data)</div><div class="ttdoc">ათავისუფლებს ტელემეტრიის პეილოდს.</div><div class="ttdef"><b>Definition</b> event_payloads.c:26</div></div>
 <div class="ttc" id="aframework__config_8h_html"><div class="ttname"><a href="framework__config_8h.html">framework_config.h</a></div><div class="ttdoc">Framework-ის გლობალური კონფიგურაციის მაკროები</div></div>
-<div class="ttc" id="astructfmw__button__payload__t_html"><div class="ttname"><a href="structfmw__button__payload__t.html">fmw_button_payload_t</a></div><div class="ttdoc">Defines the data structure for the FMW_EVENT_BUTTON_PRESSED event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:100</div></div>
-<div class="ttc" id="astructfmw__command__payload__t_html"><div class="ttname"><a href="structfmw__command__payload__t.html">fmw_command_payload_t</a></div><div class="ttdoc">Defines the data structure for the FMW_EVENT_EXECUTE_COMMAND_STRING event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:68</div></div>
-<div class="ttc" id="astructfmw__config__updated__payload__t_html"><div class="ttname"><a href="structfmw__config__updated__payload__t.html">fmw_config_updated_payload_t</a></div><div class="ttdoc">განსაზღვრავს მონაცემთა სტრუქტურას FRAMEWORK_EVENT_CONFIG_UPDATED ივენთისთვის.</div><div class="ttdef"><b>Definition</b> event_payloads.h:40</div></div>
-<div class="ttc" id="astructfmw__connectivity__payload__t_html"><div class="ttname"><a href="structfmw__connectivity__payload__t.html">fmw_connectivity_payload_t</a></div><div class="ttdoc">Defines the data structure for connectivity-related events.</div><div class="ttdef"><b>Definition</b> event_payloads.h:87</div></div>
-<div class="ttc" id="astructfmw__health__pong__payload__t_html"><div class="ttname"><a href="structfmw__health__pong__payload__t.html">fmw_health_pong_payload_t</a></div><div class="ttdoc">განსაზღვრავს მონაცემთა სტრუქტურას FRAMEWORK_EVENT_HEALTH_PONG ივენთისთვის.</div><div class="ttdef"><b>Definition</b> event_payloads.h:49</div></div>
-<div class="ttc" id="astructfmw__module__control__payload__t_html"><div class="ttname"><a href="structfmw__module__control__payload__t.html">fmw_module_control_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა მოდულის მართვის ივენთებისთვის (enable/disable).</div><div class="ttdef"><b>Definition</b> event_payloads.h:58</div></div>
-<div class="ttc" id="astructfmw__telemetry__payload__t_html"><div class="ttname"><a href="structfmw__telemetry__payload__t.html">fmw_telemetry_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.</div><div class="ttdef"><b>Definition</b> event_payloads.h:30</div></div>
-<div class="ttc" id="astructfmw__telemetry__payload__t_html_aeb33ae17a71357922d651f116a5eff92"><div class="ttname"><a href="structfmw__telemetry__payload__t.html#aeb33ae17a71357922d651f116a5eff92">fmw_telemetry_payload_t::json_data</a></div><div class="ttdeci">char * json_data</div><div class="ttdoc">მონაცემები JSON სტრიქონის სახით (დინამიურად გამოყოფილი).</div><div class="ttdef"><b>Definition</b> event_payloads.h:32</div></div>
+<div class="ttc" id="astructsynapse__button__payload__t_html"><div class="ttname"><a href="structsynapse__button__payload__t.html">synapse_button_payload_t</a></div><div class="ttdoc">Defines the data structure for the SYNAPSE_EVENT_BUTTON_PRESSED event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:100</div></div>
+<div class="ttc" id="astructsynapse__command__payload__t_html"><div class="ttname"><a href="structsynapse__command__payload__t.html">synapse_command_payload_t</a></div><div class="ttdoc">Defines the data structure for the SYNAPSE_EVENT_EXECUTE_COMMAND_STRING event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:68</div></div>
+<div class="ttc" id="astructsynapse__config__updated__payload__t_html"><div class="ttname"><a href="structsynapse__config__updated__payload__t.html">synapse_config_updated_payload_t</a></div><div class="ttdoc">განსაზღვრავს მონაცემთა სტრუქტურას FRAMEWORK_EVENT_CONFIG_UPDATED ივენთისთვის.</div><div class="ttdef"><b>Definition</b> event_payloads.h:40</div></div>
+<div class="ttc" id="astructsynapse__connectivity__payload__t_html"><div class="ttname"><a href="structsynapse__connectivity__payload__t.html">synapse_connectivity_payload_t</a></div><div class="ttdoc">Defines the data structure for connectivity-related events.</div><div class="ttdef"><b>Definition</b> event_payloads.h:87</div></div>
+<div class="ttc" id="astructsynapse__health__pong__payload__t_html"><div class="ttname"><a href="structsynapse__health__pong__payload__t.html">synapse_health_pong_payload_t</a></div><div class="ttdoc">განსაზღვრავს მონაცემთა სტრუქტურას FRAMEWORK_EVENT_HEALTH_PONG ივენთისთვის.</div><div class="ttdef"><b>Definition</b> event_payloads.h:49</div></div>
+<div class="ttc" id="astructsynapse__module__control__payload__t_html"><div class="ttname"><a href="structsynapse__module__control__payload__t.html">synapse_module_control_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა მოდულის მართვის ივენთებისთვის (enable/disable).</div><div class="ttdef"><b>Definition</b> event_payloads.h:58</div></div>
+<div class="ttc" id="astructsynapse__telemetry__payload__t_html"><div class="ttname"><a href="structsynapse__telemetry__payload__t.html">synapse_telemetry_payload_t</a></div><div class="ttdoc">ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.</div><div class="ttdef"><b>Definition</b> event_payloads.h:30</div></div>
+<div class="ttc" id="astructsynapse__telemetry__payload__t_html_aa3a11b443b0813f021d34202f329d6a4"><div class="ttname"><a href="structsynapse__telemetry__payload__t.html#aa3a11b443b0813f021d34202f329d6a4">synapse_telemetry_payload_t::json_data</a></div><div class="ttdeci">char * json_data</div><div class="ttdoc">მონაცემები JSON სტრიქონის სახით (დინამიურად გამოყოფილი).</div><div class="ttdef"><b>Definition</b> event_payloads.h:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

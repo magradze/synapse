@@ -103,8 +103,8 @@ MQTT Manager API</h1>
 <p>ამჟამად, <code>mqtt_manager</code> მოდული არ აწვდის საჯარო Service API-ს სხვა მოდულებისთვის. მისი მთავარი როლია, იმოქმედოს როგორც "ხიდი" Synapse Framework-ის შიდა <code>Event Bus</code>-სა და გარე MQTT ბროკერს შორის.</p>
 <p>მოდულის სრული მართვა და მასთან ურთიერთქმედება ხდება შემდეგი მექანიზმებით:</p>
 <ol type="1">
-<li><b>შიდა ივენთების გამოწერა:</b> <code>mqtt_manager</code> ავტომატურად გამოიწერს სისტემურ ივენთებს (მაგ., <code>FMW_EVENT_WIFI_STATUS_READY</code>), რომელთა <code>payload</code>-საც შემდეგ აქვეყნებს შესაბამის MQTT თემებზე.</li>
-<li><b>ბრძანებების მიღება MQTT-ით:</b> ის გამოიწერს ერთ, ცენტრალიზებულ MQTT თემას (<code>.../cmd/in</code>) და მიღებულ ბრძანებებს გადაამისამართებს <code>Command Router</code>-ში <code>FMW_EVENT_EXECUTE_COMMAND_STRING</code> ივენთის საშუალებით.</li>
+<li><b>შიდა ივენთების გამოწერა:</b> <code>mqtt_manager</code> ავტომატურად გამოიწერს სისტემურ ივენთებს (მაგ., <code>SYNAPSE_EVENT_WIFI_STATUS_READY</code>), რომელთა <code>payload</code>-საც შემდეგ აქვეყნებს შესაბამის MQTT თემებზე.</li>
+<li><b>ბრძანებების მიღება MQTT-ით:</b> ის გამოიწერს ერთ, ცენტრალიზებულ MQTT თემას (<code>.../cmd/in</code>) და მიღებულ ბრძანებებს გადაამისამართებს <code>Command Router</code>-ში <code>SYNAPSE_EVENT_EXECUTE_COMMAND_STRING</code> ივენთის საშუალებით.</li>
 </ol>
 <p>ეს არქიტექტურა უზრუნველყოფს, რომ სხვა მოდულებს არ სჭირდებათ <code>mqtt_manager</code>-ის პირდაპირი გამოძახება.</p>
 <h2><a class="anchor" id="autotoc_md528"></a>
@@ -129,14 +129,14 @@ Naming &amp; Structure</h1>
 <p>ამჟამად API არ არსებობს. მოდულთან ურთიერთქმედება ხდება ივენთებით.</p>
 <p><b>სტატუსის გამოქვეყნება (არაპირდაპირი გზა):</b></p>
 <div class="fragment"><div class="line"><span class="comment">// 1. ნებისმიერი მოდული აქვეყნებს თავის სტატუსის ივენთს</span></div>
-<div class="line"><span class="comment">//    (მაგ., wifi_manager აქვეყნებს FMW_EVENT_WIFI_STATUS_READY)</span></div>
+<div class="line"><span class="comment">//    (მაგ., wifi_manager აქვეყნებს SYNAPSE_EVENT_WIFI_STATUS_READY)</span></div>
 <div class="line">cJSON* status = cJSON_CreateObject();</div>
 <div class="line"><span class="comment">// ... შეავსეთ status ...</span></div>
 <div class="line"><span class="keywordtype">char</span>* json_str = cJSON_PrintUnformatted(status);</div>
-<div class="line"><a class="code hl_function" href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a>(FMW_EVENT_WIFI_STATUS_READY, wrapper);</div>
+<div class="line"><a class="code hl_function" href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a>(SYNAPSE_EVENT_WIFI_STATUS_READY, wrapper);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 2. mqtt_manager ავტომატურად იჭერს ამ ივენთს და აქვეყნებს MQTT-ში.</span></div>
-<div class="ttc" id="aevent__bus_8h_html_abe0f3af3ae92846abaa9d421289b853e"><div class="ttname"><a href="event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e">fmw_event_bus_post</a></div><div class="ttdeci">esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:330</div></div>
+<div class="ttc" id="aevent__bus_8h_html_a4be3ec71e70f06b05b780b9883094387"><div class="ttname"><a href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a></div><div class="ttdeci">esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:331</div></div>
 </div><!-- fragment --><hr  />
 <p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და structure.md დოკუმენტები. </p>
 </div></div><!-- contents -->

@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
   <div class="headertitle"><div class="title">asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1273"></a> <b>სტატუსი:</b> რეკომენდებული (Recommended) <b>ავტორი:</b> Synapse Framework Team</p>
-<h1><a class="anchor" id="autotoc_md1274"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1283"></a> <b>სტატუსი:</b> რეკომენდებული (Recommended) <b>ავტორი:</b> Synapse Framework Team</p>
+<h1><a class="anchor" id="autotoc_md1284"></a>
 1. 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ში ასინქრონული "მოთხოვნა-პასუხის" (Request-Response) ოპერაციების მართვის სტანდარტულ პატერნს, რომელიც დაფუძნებულია <b>Promise</b> (დაპირების) კონცეფციაზე. ამ პატერნის მიზანია, ჩაანაცვლოს რთული, ივენთებზე დაფუძნებული ლოგიკა უფრო სუფთა, წაკითხვადი და ლოგიკურად გამართული კოდით.</p>
 <p>ეს პატერნი იდეალურია იმ სცენარებისთვის, როდესაც ერთი მოდული (მომხმარებელი, Consumer) აგზავნის მოთხოვნას მეორე მოდულთან (სერვისი, Provider) და ელოდება კონკრეტულ, ერთჯერად პასუხს.</p>
-<h1><a class="anchor" id="autotoc_md1275"></a>
+<h1><a class="anchor" id="autotoc_md1285"></a>
 2. 🤔 პრობლემა: რატომ გვჭირდება Promise-ები?</h1>
 <p>წარმოვიდგინოთ კლასიკური სცენარი: <code>ui_manager</code>-ს სჭირდება <code>wifi_manager</code>-ისგან მიმდინარე სტატუსის მიღება. <code>Event Bus</code>-ის გამოყენებით, პროცესი ასე გამოიყურება:</p>
 <ol type="1">
 <li><code>ui_manager</code> აქვეყნებს <code>EXECUTE_COMMAND</code> ივენთს <code>payload</code>-ით <code>"wifi status --silent"</code>.</li>
-<li><code>wifi_manager</code> იღებს ამ ბრძანებას, ამუშავებს მას და აქვეყნებს პასუხს <b>სხვა</b> ივენთით: <code>FMW_EVENT_WIFI_STATUS_READY</code>.</li>
-<li><code>ui_manager</code>-ს აქვს ცალკე ლოგიკა <code>handle_event</code> ფუნქციაში, რომელიც უსმენს <code>FMW_EVENT_WIFI_STATUS_READY</code> ივენთს და ამუშავებს პასუხს.</li>
+<li><code>wifi_manager</code> იღებს ამ ბრძანებას, ამუშავებს მას და აქვეყნებს პასუხს <b>სხვა</b> ივენთით: <code>SYNAPSE_EVENT_WIFI_STATUS_READY</code>.</li>
+<li><code>ui_manager</code>-ს აქვს ცალკე ლოგიკა <code>handle_event</code> ფუნქციაში, რომელიც უსმენს <code>SYNAPSE_EVENT_WIFI_STATUS_READY</code> ივენთს და ამუშავებს პასუხს.</li>
 </ol>
 <p><b>სისუსტეები:</b></p>
 <ul>
 <li><b>გაფანტული ლოგიკა:</b> მოთხოვნის გაგზავნა და პასუხის მიღება ხდება კოდის სხვადასხვა, ერთმანეთთან ლოგიკურად დაუკავშირებელ ნაწილებში.</li>
 <li><b>კონტექსტის დაკარგვა:</b> რთულია იმის მიკვლევა, თუ რომელი მოთხოვნა რომელ პასუხს შეესაბამება.</li>
-<li>**"ხმაური" <code>Event Bus</code>-ზე:** <code>FMW_EVENT_WIFI_STATUS_READY</code> იგზავნება ყველასთან, მაშინაც კი, თუ ის მხოლოდ <code>ui_manager</code>-ს სჭირდებოდა.</li>
+<li>**"ხმაური" <code>Event Bus</code>-ზე:** <code>SYNAPSE_EVENT_WIFI_STATUS_READY</code> იგზავნება ყველასთან, მაშინაც კი, თუ ის მხოლოდ <code>ui_manager</code>-ს სჭირდებოდა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1276"></a>
+<h1><a class="anchor" id="autotoc_md1286"></a>
 3. 💡 გადაწყვეტა: Promise პატერნი</h1>
 <p>Promise პატერნი ამ პროცესს გარდაქმნის. <code>Promise</code> არის ობიექტი, რომელიც წარმოადგენს <b>მომავალში დასრულებადი ოპერაციის შედეგს</b>.</p>
 <p><b>ახალი სამუშაო პროცესი:</b></p>
@@ -132,18 +132,18 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <li><b>წაკითხვადობა:</b> კოდი ხდება ბევრად უფრო ინტუიციური და ადვილად გასაგები.</li>
 <li><b>მიზანმიმართული კომუნიკაცია:</b> პასუხი მიეწოდება მხოლოდ იმას, ვინც ის მოითხოვა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1277"></a>
+<h1><a class="anchor" id="autotoc_md1287"></a>
 4. ⚙️ როგორ მუშაობს იმპლემენტაცია?</h1>
 <p>ფრეიმვორქის ბირთვში არსებობს **<code>Promise Manager</code>** კომპონენტი, რომელიც ამ პროცესს მართავს:</p>
 <ul>
-<li>**<code><a class="el" href="promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b" title="Creates a new promise with pre-registered callbacks.">fmw_promise_create()</a></code>:** სერვისი (მაგ., <code>wifi_manager</code>) იძახებს ამ ფუნქციას, რათა შექმნას ახალი, <code>PENDING</code> (მომლოდინე) მდგომარეობაში მყოფი <code>Promise</code>.</li>
-<li>**<code>fmw_promise_then()</code> / <code>fmw_promise_catch()</code>:** მომხმარებელი (მაგ., <code>ui_manager</code>) ამ ფუნქციებით არეგისტრირებს თავის <code>callback</code>-ებს.</li>
-<li>**<code><a class="el" href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062" title="Resolves a promise with a successful result.">fmw_promise_resolve()</a></code> / <code><a class="el" href="promise__manager__internal_8h.html#a9a308e412c7d9ca197dec3023eeac58d" title="Rejects a promise with an error.">fmw_promise_reject()</a></code>:** როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს ამ ფუნქციებიდან ერთ-ერთს.</li>
+<li>**<code><a class="el" href="promise__manager__internal_8h.html#af2afb27ca6f5baeef0e2c06f8d617dff" title="Creates a new promise with pre-registered callbacks.">synapse_promise_create()</a></code>:** სერვისი (მაგ., <code>wifi_manager</code>) იძახებს ამ ფუნქციას, რათა შექმნას ახალი, <code>PENDING</code> (მომლოდინე) მდგომარეობაში მყოფი <code>Promise</code>.</li>
+<li>**<code>synapse_promise_then()</code> / <code>synapse_promise_catch()</code>:** მომხმარებელი (მაგ., <code>ui_manager</code>) ამ ფუნქციებით არეგისტრირებს თავის <code>callback</code>-ებს.</li>
+<li>**<code><a class="el" href="promise__manager__internal_8h.html#ada211a8f2e655e46818bf472f6bbe3a8" title="Resolves a promise with a successful result.">synapse_promise_resolve()</a></code> / <code><a class="el" href="promise__manager__internal_8h.html#a01e4cc92988e54905f3c3880df7b3f82" title="Rejects a promise with an error.">synapse_promise_reject()</a></code>:** როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს ამ ფუნქციებიდან ერთ-ერთს.</li>
 <li>**<code>Promise Manager Task</code>:** <code>resolve</code> ან <code>reject</code> გამოძახებისას, <code>Promise Manager</code>-ი შესაბამის <code>Promise</code>-ს აგზავნის თავის შიდა რიგში. მისი გამოყოფილი FreeRTOS ტასკი იღებს ამ <code>Promise</code>-ს და უსაფრთხო, იზოლირებულ კონტექსტში იძახებს მომხმარებლის მიერ დარეგისტრირებულ <code>callback</code> ფუნქციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1278"></a>
+<h1><a class="anchor" id="autotoc_md1288"></a>
 5. 📝 გამოყენების პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md1279"></a>
+<h2><a class="anchor" id="autotoc_md1289"></a>
 5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., &lt;tt&gt;wifi_manager&lt;/tt&gt;)</h2>
 <ol type="1">
 <li><p class="startli">**API-ს დეკლარირება (<code><a class="el" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module.">wifi_interface.h</a></code>):**</p>
@@ -159,11 +159,11 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="ttc" id="astructwifi__api__t_html"><div class="ttname"><a href="structwifi__api__t.html">wifi_api_t</a></div><div class="ttdef"><b>Definition</b> wifi_interface.h:19</div></div>
 </div><!-- fragment --></li>
 <li><p class="startli">**API-ს იმპლემენტაცია (<code><a class="el" href="wifi__manager_8c.html" title="Implementation of WiFi connection and reconnection management.">wifi_manager.c</a></code>):**</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="promise__manager__internal_8h.html">promise_manager_internal.h</a>&quot;</span> <span class="comment">// საჭიროა fmw_promise_create-სთვის</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="promise__manager__internal_8h.html">promise_manager_internal.h</a>&quot;</span> <span class="comment">// საჭიროა synapse_promise_create-სთვის</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static</span> esp_err_t wifi_api_get_status_async(<span class="keywordtype">void</span>* context, <a class="code hl_typedef" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, <span class="keywordtype">void</span>* user_context) {</div>
 <div class="line">    <span class="comment">// 1. შევქმნათ ახალი &quot;დაპირება&quot; უკვე მზა callback-ებით</span></div>
-<div class="line">    <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> promise = <a class="code hl_function" href="promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b">fmw_promise_create</a>(then_cb, catch_cb, user_context);</div>
+<div class="line">    <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> promise = <a class="code hl_function" href="promise__manager__internal_8h.html#af2afb27ca6f5baeef0e2c06f8d617dff">synapse_promise_create</a>(then_cb, catch_cb, user_context);</div>
 <div class="line">    <span class="keywordflow">if</span> (!promise) {</div>
 <div class="line">        <span class="keywordflow">return</span> ESP_ERR_NO_MEM;</div>
 <div class="line">    }</div>
@@ -174,7 +174,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="apromise__manager__internal_8h_html"><div class="ttname"><a href="promise__manager__internal_8h.html">promise_manager_internal.h</a></div><div class="ttdoc">Internal Core API for creating and fulfilling promises.</div></div>
-<div class="ttc" id="apromise__manager__internal_8h_html_ad694e381aa156f3f322240bad9fa6e5b"><div class="ttname"><a href="promise__manager__internal_8h.html#ad694e381aa156f3f322240bad9fa6e5b">fmw_promise_create</a></div><div class="ttdeci">promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context)</div><div class="ttdoc">Creates a new promise with pre-registered callbacks.</div><div class="ttdef"><b>Definition</b> promise_manager.c:106</div></div>
+<div class="ttc" id="apromise__manager__internal_8h_html_af2afb27ca6f5baeef0e2c06f8d617dff"><div class="ttname"><a href="promise__manager__internal_8h.html#af2afb27ca6f5baeef0e2c06f8d617dff">synapse_promise_create</a></div><div class="ttdeci">promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context)</div><div class="ttdoc">Creates a new promise with pre-registered callbacks.</div><div class="ttdef"><b>Definition</b> promise_manager.c:106</div></div>
 <div class="ttc" id="astructpromise__t_html"><div class="ttname"><a href="structpromise__t.html">promise_t</a></div><div class="ttdef"><b>Definition</b> promise_manager.c:39</div></div>
 </div><!-- fragment --></li>
 <li><p class="startli">**Promise-ის შესრულება (<code>wifi_task</code>-ში):**</p>
@@ -183,11 +183,11 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="line"><span class="comment">// ... შევავსოთ status_buffer ...</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// შევასრულოთ &quot;დაპირება&quot; სტატიკური ბუფერით</span></div>
-<div class="line"><a class="code hl_function" href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a>(cmd.promise_handle, status_buffer, NULL);</div>
-<div class="ttc" id="apromise__manager__internal_8h_html_a14092530cab146f56e280ebdfb45d062"><div class="ttname"><a href="promise__manager__internal_8h.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a></div><div class="ttdeci">esp_err_t fmw_promise_resolve(promise_handle_t handle, void *result_data, void(*free_fn)(void *))</div><div class="ttdoc">Resolves a promise with a successful result.</div><div class="ttdef"><b>Definition</b> promise_manager.c:175</div></div>
+<div class="line"><a class="code hl_function" href="promise__manager__internal_8h.html#ada211a8f2e655e46818bf472f6bbe3a8">synapse_promise_resolve</a>(cmd.promise_handle, status_buffer, NULL);</div>
+<div class="ttc" id="apromise__manager__internal_8h_html_ada211a8f2e655e46818bf472f6bbe3a8"><div class="ttname"><a href="promise__manager__internal_8h.html#ada211a8f2e655e46818bf472f6bbe3a8">synapse_promise_resolve</a></div><div class="ttdeci">esp_err_t synapse_promise_resolve(promise_handle_t handle, void *result_data, void(*free_fn)(void *))</div><div class="ttdoc">Resolves a promise with a successful result.</div><div class="ttdef"><b>Definition</b> promise_manager.c:175</div></div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1280"></a>
+<h2><a class="anchor" id="autotoc_md1290"></a>
 5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"><span class="comment">// ui_manager.c</span></div>
 <div class="line"> </div>
@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="line">        self</div>
 <div class="line">    );</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1281"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1291"></a>
 6. ✅ როდის გამოვიყენოთ Promise და როდის Event Bus?</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

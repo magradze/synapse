@@ -122,6 +122,7 @@ var menudata={children:[
 {text:"d",url:"globals_eval.html#index_d"},
 {text:"f",url:"globals_eval.html#index_f"},
 {text:"m",url:"globals_eval.html#index_m"},
+{text:"s",url:"globals_eval.html#index_s"},
 {text:"t",url:"globals_eval.html#index_t"},
 {text:"u",url:"globals_eval.html#index_u"}]},
 {text:"Macros",url:"globals_defs.html"}]}]}]}

@@ -250,7 +250,7 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>1.2.3 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-07-09</dd></dl>
 <p>This module provides a centralized service to retrieve unique device identifiers (based on MAC address) and firmware version information. It is a fundamental system service designed to initialize early and provide consistent identity data to all other modules.</p>
-<p>To ensure robust integration with other services that may initialize later, it uses a delayed registration pattern for its CLI command. It subscribes to the <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> event and registers its 'device info' command only after the entire system is up and running, guaranteeing that the Command Router service is available. </p>
+<p>To ensure robust integration with other services that may initialize later, it uses a delayed registration pattern for its CLI command. It subscribes to the <code>SYNAPSE_EVENT_SYSTEM_START_COMPLETE</code> event and registers its 'device info' command only after the entire system is up and running, guaranteeing that the Command Router service is available. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a9687f2ed1bc8ee6d3697dd399376d97f" name="a9687f2ed1bc8ee6d3697dd399376d97f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9687f2ed1bc8ee6d3697dd399376d97f">&#9670;&#160;</a></span>device_identity_service_create()</h2>

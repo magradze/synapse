@@ -153,13 +153,13 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a347d1ee24c761698830a2a444df10c50" id="r_a347d1ee24c761698830a2a444df10c50"><td class="memItemLeft" align="right" valign="top"><a id="a347d1ee24c761698830a2a444df10c50" name="a347d1ee24c761698830a2a444df10c50"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMISE_QUEUE_LENGTH</b>&#160;&#160;&#160;CONFIG_FMW_PROMISE_QUEUE_LENGTH</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMISE_QUEUE_LENGTH</b>&#160;&#160;&#160;CONFIG_SYNAPSE_PROMISE_QUEUE_LENGTH</td></tr>
 <tr class="separator:a347d1ee24c761698830a2a444df10c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85025ac477f2c09dd5bb8f6d7a0f94f0" id="r_a85025ac477f2c09dd5bb8f6d7a0f94f0"><td class="memItemLeft" align="right" valign="top"><a id="a85025ac477f2c09dd5bb8f6d7a0f94f0" name="a85025ac477f2c09dd5bb8f6d7a0f94f0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMISE_TASK_STACK_SIZE</b>&#160;&#160;&#160;CONFIG_FMW_PROMISE_TASK_STACK_SIZE</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMISE_TASK_STACK_SIZE</b>&#160;&#160;&#160;CONFIG_SYNAPSE_PROMISE_TASK_STACK_SIZE</td></tr>
 <tr class="separator:a85025ac477f2c09dd5bb8f6d7a0f94f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85f783b71e8e25506e8a5e59d484f49c" id="r_a85f783b71e8e25506e8a5e59d484f49c"><td class="memItemLeft" align="right" valign="top"><a id="a85f783b71e8e25506e8a5e59d484f49c" name="a85f783b71e8e25506e8a5e59d484f49c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMISE_TASK_PRIORITY</b>&#160;&#160;&#160;CONFIG_FMW_PROMISE_TASK_PRIORITY</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PROMISE_TASK_PRIORITY</b>&#160;&#160;&#160;CONFIG_SYNAPSE_PROMISE_TASK_PRIORITY</td></tr>
 <tr class="separator:a85f783b71e8e25506e8a5e59d484f49c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -181,15 +181,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a6a7682b955f45780d941eee0838e89f6" id="r_a6a7682b955f45780d941eee0838e89f6"><td class="memItemLeft" align="right" valign="top"><a id="a6a7682b955f45780d941eee0838e89f6" name="a6a7682b955f45780d941eee0838e89f6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;PROMISE_MANAGER&quot;)</td></tr>
 <tr class="separator:a6a7682b955f45780d941eee0838e89f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad694e381aa156f3f322240bad9fa6e5b" id="r_ad694e381aa156f3f322240bad9fa6e5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#ad694e381aa156f3f322240bad9fa6e5b">fmw_promise_create</a> (<a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="el" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, void *user_context)</td></tr>
-<tr class="memdesc:ad694e381aa156f3f322240bad9fa6e5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new promise with pre-registered callbacks.  <br /></td></tr>
-<tr class="separator:ad694e381aa156f3f322240bad9fa6e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14092530cab146f56e280ebdfb45d062" id="r_a14092530cab146f56e280ebdfb45d062"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a14092530cab146f56e280ebdfb45d062">fmw_promise_resolve</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, void *result_data, void(*free_fn)(void *))</td></tr>
-<tr class="memdesc:a14092530cab146f56e280ebdfb45d062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a promise with a successful result.  <br /></td></tr>
-<tr class="separator:a14092530cab146f56e280ebdfb45d062"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a308e412c7d9ca197dec3023eeac58d" id="r_a9a308e412c7d9ca197dec3023eeac58d"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a9a308e412c7d9ca197dec3023eeac58d">fmw_promise_reject</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, void *error_data, void(*free_fn)(void *))</td></tr>
-<tr class="memdesc:a9a308e412c7d9ca197dec3023eeac58d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rejects a promise with an error.  <br /></td></tr>
-<tr class="separator:a9a308e412c7d9ca197dec3023eeac58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2afb27ca6f5baeef0e2c06f8d617dff" id="r_af2afb27ca6f5baeef0e2c06f8d617dff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#af2afb27ca6f5baeef0e2c06f8d617dff">synapse_promise_create</a> (<a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a> then_cb, <a class="el" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a> catch_cb, void *user_context)</td></tr>
+<tr class="memdesc:af2afb27ca6f5baeef0e2c06f8d617dff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new promise with pre-registered callbacks.  <br /></td></tr>
+<tr class="separator:af2afb27ca6f5baeef0e2c06f8d617dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada211a8f2e655e46818bf472f6bbe3a8" id="r_ada211a8f2e655e46818bf472f6bbe3a8"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#ada211a8f2e655e46818bf472f6bbe3a8">synapse_promise_resolve</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, void *result_data, void(*free_fn)(void *))</td></tr>
+<tr class="memdesc:ada211a8f2e655e46818bf472f6bbe3a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a promise with a successful result.  <br /></td></tr>
+<tr class="separator:ada211a8f2e655e46818bf472f6bbe3a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01e4cc92988e54905f3c3880df7b3f82" id="r_a01e4cc92988e54905f3c3880df7b3f82"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="promise__manager_8c.html#a01e4cc92988e54905f3c3880df7b3f82">synapse_promise_reject</a> (<a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> handle, void *error_data, void(*free_fn)(void *))</td></tr>
+<tr class="memdesc:a01e4cc92988e54905f3c3880df7b3f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rejects a promise with an error.  <br /></td></tr>
+<tr class="separator:a01e4cc92988e54905f3c3880df7b3f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the asynchronous Promise Manager. </p>
@@ -198,14 +198,14 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2025-08-30</dd></dl>
 <p>This component manages the lifecycle of promises. It uses a dedicated FreeRTOS task to execute callbacks, ensuring they run in a safe, isolated context. The new architecture requires callbacks to be provided at promise creation time, eliminating race conditions. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad694e381aa156f3f322240bad9fa6e5b" name="ad694e381aa156f3f322240bad9fa6e5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad694e381aa156f3f322240bad9fa6e5b">&#9670;&#160;</a></span>fmw_promise_create()</h2>
+<a id="af2afb27ca6f5baeef0e2c06f8d617dff" name="af2afb27ca6f5baeef0e2c06f8d617dff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2afb27ca6f5baeef0e2c06f8d617dff">&#9670;&#160;</a></span>synapse_promise_create()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> fmw_promise_create </td>
+          <td class="memname"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a> synapse_promise_create </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a>&#160;</td>
           <td class="paramname"><em>then_cb</em>, </td>
@@ -243,14 +243,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9a308e412c7d9ca197dec3023eeac58d" name="a9a308e412c7d9ca197dec3023eeac58d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a308e412c7d9ca197dec3023eeac58d">&#9670;&#160;</a></span>fmw_promise_reject()</h2>
+<a id="a01e4cc92988e54905f3c3880df7b3f82" name="a01e4cc92988e54905f3c3880df7b3f82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01e4cc92988e54905f3c3880df7b3f82">&#9670;&#160;</a></span>synapse_promise_reject()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_promise_reject </td>
+          <td class="memname">esp_err_t synapse_promise_reject </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
@@ -288,14 +288,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a14092530cab146f56e280ebdfb45d062" name="a14092530cab146f56e280ebdfb45d062"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14092530cab146f56e280ebdfb45d062">&#9670;&#160;</a></span>fmw_promise_resolve()</h2>
+<a id="ada211a8f2e655e46818bf472f6bbe3a8" name="ada211a8f2e655e46818bf472f6bbe3a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada211a8f2e655e46818bf472f6bbe3a8">&#9670;&#160;</a></span>synapse_promise_resolve()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_promise_resolve </td>
+          <td class="memname">esp_err_t synapse_promise_resolve </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="promise__manager_8h.html#a2f34bcbec5959abda16c34b29b075545">promise_handle_t</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>

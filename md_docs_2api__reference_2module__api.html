@@ -146,7 +146,7 @@ Event Handling API</h1>
 <li><code>event_data</code>: მაჩვენებელი <code><a class="el" href="structevent__data__wrapper__t.html" title="ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.">event_data_wrapper_t</a></code> სტრუქტურაზე.</li>
 </ul>
 </li>
-<li><b>მეხსიერების მართვა:</b> **(მნიშვნელოვანი!)** ამ ფუნქციის დასრულებისას, თუ <code>event_data</code> არ არის <code>NULL</code>, აუცილებელია <code>fmw_event_data_release((event_data_wrapper_t *)event_data);</code>-ის გამოძახება.</li>
+<li><b>მეხსიერების მართვა:</b> **(მნიშვნელოვანი!)** ამ ფუნქციის დასრულებისას, თუ <code>event_data</code> არ არის <code>NULL</code>, აუცილებელია <code>synapse_event_data_release((event_data_wrapper_t *)event_data);</code>-ის გამოძახება.</li>
 </ul>
 <hr  />
 <h1><a class="anchor" id="autotoc_md516"></a>

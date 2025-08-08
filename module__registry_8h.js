@@ -1,6 +1,6 @@
 var module__registry_8h =
 [
-    [ "fmw_module_registry_find_by_name", "module__registry_8h.html#ad35f0c01a8c06081202d8d4b18cbf43e", null ],
-    [ "fmw_module_registry_get_all", "module__registry_8h.html#a97d167b1b403324230fc7b95052f993f", null ],
-    [ "fmw_module_registry_init", "module__registry_8h.html#a15ad8ee3953b528270916074c41f0c06", null ]
+    [ "synapse_module_registry_find_by_name", "module__registry_8h.html#add9cd65d2672c1ff7570108b03e32da9", null ],
+    [ "synapse_module_registry_get_all", "module__registry_8h.html#a2ceebe718e59b2ac0f0eac674549c97e", null ],
+    [ "synapse_module_registry_init", "module__registry_8h.html#a43a25cf1a7108566a60ec7e35920336a", null ]
 ];

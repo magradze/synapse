@@ -1,8 +1,12 @@
 var searchData=
 [
-  ['წარმადობისა_20და_20რესურსების_20არქიტექტურული_20კომპრომისები_20performance_20trade_20offs_0',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],
-  ['წარმადობისთვის_20performance_20best_20practices_1',['საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)',['../md_docs_2performance_2performance__best__practices.html',1,'']]],
-  ['წარმადობის_20სახელმძღვანელო_2',['Performance (წარმადობის სახელმძღვანელო)',['../md_docs_2performance_2performance__index.html',1,'']]],
-  ['წარმადობის_20ტერმინები_20glossary_20—_20security_20performance_3',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
-  ['წესები_4',['წესები',['../md_docs_2convention_2communication__patterns.html',1,'კომუნიკაციის პატერნების წესები'],['../md_docs_2convention_2configuration__management.html',1,'კონფიგურაციის მართვის წესები'],['../md_docs_2convention_2function__naming.html',1,'ფუნქციების დასახელების წესები'],['../md_docs_2convention_2variable__naming.html',1,'ცვლადების დასახელების წესები'],['../md_docs_2convention_2error__handling.html',1,'Error Handling-ის წესები']]]
+  ['შაბლონი_20decision_20record_20template_0',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
+  ['შემმოწმებელი_20tt_20check_5fconventions_20py_20tt_1',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
+  ['შემოწმების_20სია_20security_20checklist_2',['უსაფრთხოების შემოწმების სია (Security Checklist)',['../md_docs_2security_2security__checklist.html',1,'']]],
+  ['შენახვის_20არქიტექტურული_20არჩევანი_20storage_20strategy_3',['მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)',['../md_docs_2design__decisions_2storage__strategy.html',1,'']]],
+  ['შენახვის_20ტერმინები_20glossary_20—_20configuration_20storage_4',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
+  ['შეტყობინების_20პროცედურა_5',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
+  ['შექმნა_20create_20your_20first_20module_6',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
+  ['შეცდომების_20დამუშავება_20და_20ლოგირების_20სტანდარტები_20error_20handling_20logging_7',['შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)',['../md_docs_2structure_2error__handling__and__logging.html',1,'']]],
+  ['შეცდომების_20დამუშავების_20არქიტექტურული_20გადაწყვეტილებები_20error_20handling_20decisions_8',['შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)',['../md_docs_2design__decisions_2error__handling__decisions.html',1,'']]]
 ];

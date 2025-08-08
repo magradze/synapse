@@ -101,12 +101,12 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2event__api.ht
 <h1><a class="anchor" id="autotoc_md445"></a>
 Event Bus API</h1>
 <h2><a class="anchor" id="autotoc_md446"></a>
-&lt;tt&gt;esp_err_t fmw_event_bus_init(void)&lt;/tt&gt;</h2>
+&lt;tt&gt;esp_err_t synapse_event_bus_init(void)&lt;/tt&gt;</h2>
 <ul>
 <li>ინიციალიზაციას უკეთებს Event Bus-ს. ქმნის ივენთების რიგს (queue) და იწყებს დამმუშავებელ ტასკს. უნდა გამოიძახოს მხოლოდ სისტემის ბირთვმა ერთხელ.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md447"></a>
-&lt;tt&gt;esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)&lt;/tt&gt;</h2>
+&lt;tt&gt;esp_err_t synapse_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)&lt;/tt&gt;</h2>
 <ul>
 <li>ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.</li>
 <li><b>არგუმენტები:</b><ul>
@@ -116,7 +116,7 @@ Event Bus API</h1>
 </li>
 </ul>
 <h2><a class="anchor" id="autotoc_md448"></a>
-&lt;tt&gt;esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
+&lt;tt&gt;esp_err_t synapse_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
 <ul>
 <li>**(განახლებული)** აძლევს მოდულს შესაძლებლობას, მიიღოს კონკრეტული მოვლენა. Event Bus-ი ავტომატურად გამოიძახებს ამ მოდულის <code>handle_event</code> ფუნქციას.</li>
 <li><b>არგუმენტები:</b><ul>
@@ -126,7 +126,7 @@ Event Bus API</h1>
 </li>
 </ul>
 <h2><a class="anchor" id="autotoc_md449"></a>
-&lt;tt&gt;esp_err_t fmw_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
+&lt;tt&gt;esp_err_t synapse_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)&lt;/tt&gt;</h2>
 <ul>
 <li>**(ახალი)** აუქმებს მოდულის გამოწერას კონკრეტულ მოვლენაზე.</li>
 <li><b>მნიშვნელოვანია:</b> ეს ფუნქცია აუცილებლად უნდა გამოიძახოს მოდულის <code>deinit</code> ფუნქციამ ყველა იმ ივენთისთვის, რომელზეც ის იყო გამოწერილი, რათა თავიდან ავიცილოთ Use-After-Free შეცდომები.</li>
@@ -141,15 +141,15 @@ Event Bus API</h1>
 ივენთის მონაცემების მართვა (Reference Counting)</h1>
 <p><b>მნიშვნელოვანია:</b> როდესაც ივენთს გადასცემთ მონაცემებს (<code>data_wrapper</code>), Synapse Framework იყენებს <b>reference counting</b> მექანიზმს მეხსიერების უსაფრთხოდ სამართავად.</p>
 <ul>
-<li><code><a class="el" href="structevent__data__wrapper__t.html" title="ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.">event_data_wrapper_t</a> *fmw_event_data_create(void *data, size_t size, event_data_free_fn_t free_fn);</code><ul>
+<li><code><a class="el" href="structevent__data__wrapper__t.html" title="ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.">event_data_wrapper_t</a> *synapse_event_data_create(void *data, size_t size, event_data_free_fn_t free_fn);</code><ul>
 <li>ქმნის მონაცემების "გარსს". <code>free_fn</code> არის callback, რომელიც გამოიძახება, როცა მონაცემები აღარავის სჭირდება.</li>
 </ul>
 </li>
-<li><code>void <a class="el" href="event__data__wrapper_8h.html#a1e82d26f36a72f0b9e1d1fb2d507a79f" title="ზრდის wrapper-ის მფლობელების (references) რაოდენობას ერთით.">fmw_event_data_acquire(event_data_wrapper_t *wrapper)</a>;</code><ul>
+<li><code>void <a class="el" href="event__data__wrapper_8h.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper-ის მფლობელების (references) რაოდენობას ერთით.">synapse_event_data_acquire(event_data_wrapper_t *wrapper)</a>;</code><ul>
 <li>ზრდის მითითებების მრიცხველს.</li>
 </ul>
 </li>
-<li><code>void <a class="el" href="event__data__wrapper_8h.html#a99c9f26cd90b553b84bf2a56db51a689" title="ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.">fmw_event_data_release(event_data_wrapper_t *wrapper)</a>;</code><ul>
+<li><code>void <a class="el" href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.">synapse_event_data_release(event_data_wrapper_t *wrapper)</a>;</code><ul>
 <li>ამცირებს მითითებების მრიცხველს. როცა მრიცხველი 0 გახდება, გამოიძახება <code>free_fn</code> და მეხსიერება თავისუფლდება.</li>
 </ul>
 </li>
@@ -171,13 +171,13 @@ Event Handler-ის მაგალითი</h1>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ★★★ მნიშვნელოვანია: Event Bus-ი გადასცემს wrapper-ის მფლობელობას (ownership) ★★★</span></div>
-<div class="line">    <span class="comment">// ★★★ ამ ფუნქციას. ამიტომ, დამუშავების შემდეგ აუცილებელია fmw_event_data_release-ის გამოძახება, ★★★</span></div>
+<div class="line">    <span class="comment">// ★★★ ამ ფუნქციას. ამიტომ, დამუშავების შემდეგ აუცილებელია synapse_event_data_release-ის გამოძახება, ★★★</span></div>
 <div class="line">    <span class="comment">// ★★★ რათა თავიდან ავიცილოთ მეხსიერების გაჟონვა. ★★★</span></div>
 <div class="line">    <span class="keywordflow">if</span> (wrapper) {</div>
-<div class="line">        <a class="code hl_function" href="event__data__wrapper_8h.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>(wrapper);</div>
+<div class="line">        <a class="code hl_function" href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a>(wrapper);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aevent__data__wrapper_8h_html_a99c9f26cd90b553b84bf2a56db51a689"><div class="ttname"><a href="event__data__wrapper_8h.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a></div><div class="ttdeci">esp_err_t fmw_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
+<div class="ttc" id="aevent__data__wrapper_8h_html_acbfc3de4d3a066b2adf4d8033f7cb994"><div class="ttname"><a href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a></div><div class="ttdeci">esp_err_t synapse_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
 <div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="asystem__event__ids_8h_html_a14be883083731f631af5eb44a5f3a046"><div class="ttname"><a href="system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046">core_framework_event_id_t</a></div><div class="ttdeci">core_framework_event_id_t</div><div class="ttdoc">ბირთვის ივენთების იდენტიფიკატორები, რომლებიც სისტემურია და არ არის მიბმული კონკრეტულ მოდულზე.</div><div class="ttdef"><b>Definition</b> system_event_ids.h:32</div></div>

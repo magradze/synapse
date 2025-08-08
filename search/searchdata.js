@@ -6,11 +6,11 @@ var indexSectionsWithContent =
   3: "abcdefhilmoprstuw",
   4: "abcdfghilmoprstuw",
   5: "abcdefghijlmnoprstuw",
-  6: "_efhmps",
-  7: "acdfmtu",
-  8: "adfmtu",
+  6: "_ehmps",
+  7: "acdmstu",
+  8: "adfmstu",
   9: "dfilms",
-  10: "0279:abcdefghilmoprstuvwyაბგდეთიკლმოპჟრსტუფქშჩცწხ—⏱☁⚙✅🆔🌡🐕💡💾📡📲📶📺🔄🔌🔘🔬🖥🚀🚌🚨🛡🛰🧪🩺"
+  10: "0123789:abcdefghilmoprstuvwyაბგდეთიკლმოპჟრსტუფქშჩცწხ—⏱☁⚙✅🆔🌡🐕💡💾📡📲📶📺🔄🔌🔘🔬🖥🚀🚌🚨🛡🛰🧪🩺"
 };
 
 var indexSectionNames =

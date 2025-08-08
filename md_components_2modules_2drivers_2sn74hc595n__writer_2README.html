@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 </table>
 <h1><a class="anchor" id="autotoc_md82"></a>
 4. 🔌 Service API (&lt;tt&gt;sn74hc595n_writer_api_t&lt;/tt&gt;)</h1>
-<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_SN74HC595N_WRITER_API</code>**.</p>
+<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>SYNAPSE_SERVICE_TYPE_SN74HC595N_WRITER_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>esp_err_t set_pin_state(context, pin, state);</code>** <br  />
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 <div class="line"><span class="comment">// init ფუნქციაში:</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t rgb_led_indicator_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    <span class="comment">// ...</span></div>
-<div class="line">    private_data-&gt;sr_handle = (<a class="code hl_struct" href="structsn74hc595n__writer__handle__t.html">sn74hc595n_writer_handle_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(private_data-&gt;sr_writer_service_name);</div>
+<div class="line">    private_data-&gt;sr_handle = (<a class="code hl_struct" href="structsn74hc595n__writer__handle__t.html">sn74hc595n_writer_handle_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(private_data-&gt;sr_writer_service_name);</div>
 <div class="line">    <span class="keywordflow">if</span> (!private_data-&gt;sr_handle) {</div>
 <div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Shift register writer service &#39;%s&#39; not found!&quot;</span>, private_data-&gt;sr_writer_service_name);</div>
 <div class="line">        <span class="keywordflow">return</span> ESP_ERR_NOT_FOUND;</div>
@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2sn74h
 <div class="line">    private_data-&gt;sr_handle-&gt;<a class="code hl_variable" href="structsn74hc595n__writer__handle__t.html#a25ec2112ddcaefd6fe7a6bbb4b6cc260">api</a>-&gt;<a class="code hl_variable" href="structsn74hc595n__writer__api__t.html#aa2314d0c01432e547fc27183baddf1b6">set_chip_pins</a>(private_data-&gt;sr_handle-&gt;<a class="code hl_variable" href="structsn74hc595n__writer__handle__t.html#a5220cbd141fafbd8a9e1fb749399e02f">context</a>, 0, new_chip_state);</div>
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="asn74hc595n__writer__interface_8h_html"><div class="ttname"><a href="sn74hc595n__writer__interface_8h.html">sn74hc595n_writer_interface.h</a></div><div class="ttdoc">Public Service API contract for the SN74HC595N shift register driver.</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructrgb__led__private__data__t_html"><div class="ttname"><a href="structrgb__led__private__data__t.html">rgb_led_private_data_t</a></div><div class="ttdef"><b>Definition</b> rgb_led_indicator.c:49</div></div>

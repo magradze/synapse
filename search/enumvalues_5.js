@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['ui_5fcmd_5fprocess_5fevent_0',['UI_CMD_PROCESS_EVENT',['../ui__manager_8h.html#affe816a12ce1b157a325adf74ceb1d08a080e05a29aa0fa56cac4d074d2589304',1,'ui_manager.h']]],
-  ['ui_5fstate_5fhome_1',['UI_STATE_HOME',['../ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6ac4f583a523a38e0a38a1398af8c9b6f5',1,'ui_manager.h']]],
-  ['ui_5fstate_5fmain_5fmenu_2',['UI_STATE_MAIN_MENU',['../ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a83428a07b2010df3ea8eea54b670c482',1,'ui_manager.h']]],
-  ['ui_5fstate_5fmodule_5fcontrol_3',['UI_STATE_MODULE_CONTROL',['../ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a7c1cd52de998182096856dd2882a5484',1,'ui_manager.h']]],
-  ['ui_5fstate_5fmodules_5fmenu_4',['UI_STATE_MODULES_MENU',['../ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a670bbf30f56274e12784d01c25164121',1,'ui_manager.h']]],
-  ['ui_5fstate_5fsettings_5fmenu_5',['UI_STATE_SETTINGS_MENU',['../ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a1a7dbbae8fc86d0809b4a271d759e2c3',1,'ui_manager.h']]],
-  ['ui_5fstate_5fsplash_6',['UI_STATE_SPLASH',['../ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a34b8e78b35ca15858cfe5eddb277cbf4',1,'ui_manager.h']]]
+  ['test_5fresult_5ffail_0',['TEST_RESULT_FAIL',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1ae705a406cd468034f29e2cfe794071bd',1,'self_test_manager.c']]],
+  ['test_5fresult_5fnot_5frun_1',['TEST_RESULT_NOT_RUN',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1a612fff5b65a9c17a74657dbb0fc13e7c',1,'self_test_manager.c']]],
+  ['test_5fresult_5fpass_2',['TEST_RESULT_PASS',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1a5915015357cf50b371e59de2436faa63',1,'self_test_manager.c']]],
+  ['test_5fresult_5fskipped_3',['TEST_RESULT_SKIPPED',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1ae5302228b05358d3f94a6f22cd11a1e8',1,'self_test_manager.c']]],
+  ['test_5fresult_5fwarn_4',['TEST_RESULT_WARN',['../self__test__manager_8c.html#a2682e047750c295771c3a6953c8393e1abba7234292b3e3c39c4a734b92235a1f',1,'self_test_manager.c']]]
 ];

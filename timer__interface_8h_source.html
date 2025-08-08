@@ -99,8 +99,8 @@ $(document).ready(function(){initNavTree('timer__interface_8h_source.html',''); 
 </div><!--header-->
 <div class="contents">
 <a href="timer__interface_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef FMW_TIMER_INTERFACE_H</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define FMW_TIMER_INTERFACE_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef SYNAPSE_TIMER_INTERFACE_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define SYNAPSE_TIMER_INTERFACE_H</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
@@ -110,14 +110,14 @@ $(document).ready(function(){initNavTree('timer__interface_8h_source.html',''); 
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">   25</a></span><span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code hl_typedef" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">   25</a></span><span class="keyword">typedef</span> <span class="keywordtype">void</span> *<a class="code hl_typedef" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a>;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structtimer__api__t.html">   30</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">   41</a></span>    <a class="code hl_typedef" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a> (*schedule_event)(<span class="keyword">const</span> <span class="keywordtype">char</span>* event_name, uint32_t interval_ms, <span class="keywordtype">bool</span> is_periodic);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structtimer__api__t.html#a491f4146bb79b02df56f0485e12eb96b">   41</a></span>    <a class="code hl_typedef" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a> (*schedule_event)(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, uint32_t interval_ms, <span class="keywordtype">bool</span> is_periodic);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structtimer__api__t.html#a1f80bb44781a75b81a987d1392760e0a">   52</a></span>    esp_err_t (*cancel_event)(<a class="code hl_typedef" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a> handle);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structtimer__api__t.html#af9ed59cd22b446f8189145a48608ae7c">   52</a></span>    esp_err_t (*cancel_event)(<a class="code hl_typedef" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a> handle);</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>} <a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a>;</div>
 </div>
@@ -127,9 +127,9 @@ $(document).ready(function(){initNavTree('timer__interface_8h_source.html',''); 
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif </span><span class="comment">// FMW_TIMER_INTERFACE_H</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_TIMER_INTERFACE_H</span></div>
 <div class="ttc" id="astructtimer__api__t_html"><div class="ttname"><a href="structtimer__api__t.html">timer_api_t</a></div><div class="ttdoc">The public Service API structure for the System Timer Service.</div><div class="ttdef"><b>Definition</b> timer_interface.h:31</div></div>
-<div class="ttc" id="atimer__interface_8h_html_ade6f29151e54d5c129f8b052f6ec3e8a"><div class="ttname"><a href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a></div><div class="ttdeci">void * fmw_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
+<div class="ttc" id="atimer__interface_8h_html_aa1aadaa5d00c8ff5bcb440686f924609"><div class="ttname"><a href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a></div><div class="ttdeci">void * synapse_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

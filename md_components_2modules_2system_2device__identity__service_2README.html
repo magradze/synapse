@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <li><b>სერვისზე-ორიენტირებული (Service-driven):</b> მოდული არის სუფთა სერვისის მომწოდებელი. ის არეგისტრირებს <code><a class="el" href="structdevice__identity__api__t.html" title="The public Service API structure for the Device Identity Service.">device_identity_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
 <li>**ადრეული ინიციალიზაცია (<code>init_level: 20</code>):** როგორც ფუნდამენტური სერვისი, ის ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა მისი სერვისი ხელმისაწვდომი იყოს თითქმის ყველა სხვა მოდულისთვის.</li>
 <li><b>მონაცემთა კეშირება:</b> მოდული კითხულობს აპარატურულ მონაცემებს მხოლოდ ერთხელ, <code>init</code> ფაზაში და ინახავს მათ თავის <code>private_data</code> სტრუქტურაში. შემდგომი API გამოძახებები მყისიერად აბრუნებენ ამ კეშირებულ მონაცემებს.</li>
-<li><b>CLI ინტეგრაცია და ივენთების გამოქვეყნება:</b> <code>device info</code> ბრძანების შესრულებისას, მოდული არა მხოლოდ ბეჭდავს ინფორმაციას კონსოლში, არამედ აქვეყნებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს, რაც საშუალებას აძლევს <code>mqtt_manager</code>-ს, ეს ინფორმაცია MQTT-ით გაავრცელოს.</li>
+<li><b>CLI ინტეგრაცია და ივენთების გამოქვეყნება:</b> <code>device info</code> ბრძანების შესრულებისას, მოდული არა მხოლოდ ბეჭდავს ინფორმაციას კონსოლში, არამედ აქვეყნებს <code>SYNAPSE_EVENT_DEVICE_INFO_READY</code> ივენთს, რაც საშუალებას აძლევს <code>mqtt_manager</code>-ს, ეს ინფორმაცია MQTT-ით გაავრცელოს.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md154"></a>
 3. ⚙️ კონფიგურაცია</h1>
@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md155"></a>
 4. 🔌 Service API (&lt;tt&gt;device_identity_api_t&lt;/tt&gt;)</h1>
-<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_DEVICE_IDENTITY_API</code>**.</p>
+<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>const char* get_device_id(void);</code>** <br  />
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">მონაცემები (Payload)   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>FMW_EVENT_DEVICE_INFO_READY</code>   </td><td class="markdownTableBodyLeft"><code>char*</code> (JSON)   </td><td class="markdownTableBodyLeft">📊 <code>device info</code> ბრძანების პასუხი JSON ფორმატში.   </td></tr>
+<td class="markdownTableBodyLeft"><code>SYNAPSE_EVENT_DEVICE_INFO_READY</code>   </td><td class="markdownTableBodyLeft"><code>char*</code> (JSON)   </td><td class="markdownTableBodyLeft">📊 <code>device info</code> ბრძანების პასუხი JSON ფორმატში.   </td></tr>
 </table>
 <h2><a class="anchor" id="autotoc_md158"></a>
 გამოწერილი ივენთები</h2>
@@ -147,13 +147,13 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ივენთის სახელი   </th><th class="markdownTableHeadLeft">რეაქცია    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>FMW_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
+<td class="markdownTableBodyLeft"><code>SYNAPSE_EVENT_SYSTEM_START_COMPLETE</code>   </td><td class="markdownTableBodyLeft">არეგისტრირებს თავის CLI ბრძანებებს, რადგან სისტემა სრულად გაეშვა.   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md159"></a>
 6. 📡 MQTT ინტერფეისი</h1>
 <ul>
 <li><b>გამოსაქვეყნებელი თემა:</b> <code>synapse/devices/{id}/state/device/info</code></li>
-<li><b>როდის ქვეყნდება:</b> როდესაც <code>mqtt_manager</code> მიიღებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს.</li>
+<li><b>როდის ქვეყნდება:</b> როდესაც <code>mqtt_manager</code> მიიღებს <code>SYNAPSE_EVENT_DEVICE_INFO_READY</code> ივენთს.</li>
 <li><p class="startli"><b>Payload (მაგალითი):</b></p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;device_id&quot;: &quot;5C013B7246E4&quot;,</div>
@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">ბრძანება   </th><th class="markdownTableHeadLeft">არგუმენტები   </th><th class="markdownTableHeadLeft">აღწერა    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>device info</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">ℹ️ გამოაქვს ინფორმაცია კონსოლში <b>და</b> აქვეყნებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს.   </td></tr>
+<td class="markdownTableBodyLeft"><code>device info</code>   </td><td class="markdownTableBodyLeft">-   </td><td class="markdownTableBodyLeft">ℹ️ გამოაქვს ინფორმაცია კონსოლში <b>და</b> აქვეყნებს <code>SYNAPSE_EVENT_DEVICE_INFO_READY</code> ივენთს.   </td></tr>
 </table>
 <p><b>ბრძანების მაგალითი და შედეგი:</b></p>
 <div class="fragment"><div class="line">SYNAPSE&gt; device info</div>
@@ -192,8 +192,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 <li><b>⚙️ მოწყობილობა (Synapse Framework):</b><ul>
 <li><code>mqtt_manager</code> იღებს ბრძანებას და აგზავნის ივენთს <code>Command Router</code>-ში.</li>
 <li><code>command_router</code> იძახებს <code>device_identity_service</code>-ის <code>cmd_handler</code>-ს.</li>
-<li><code>device_identity_service</code> აგროვებს ინფორმაციას, ქმნის JSON-ს და აგზავნის <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს.</li>
-<li><code>mqtt_manager</code> იღებს <code>FMW_EVENT_DEVICE_INFO_READY</code> ივენთს და აქვეყნებს MQTT-ში.</li>
+<li><code>device_identity_service</code> აგროვებს ინფორმაციას, ქმნის JSON-ს და აგზავნის <code>SYNAPSE_EVENT_DEVICE_INFO_READY</code> ივენთს.</li>
+<li><code>mqtt_manager</code> იღებს <code>SYNAPSE_EVENT_DEVICE_INFO_READY</code> ივენთს და აქვეყნებს MQTT-ში.</li>
 </ul>
 </li>
 <li><b>💻 მომხმარებელი (Postman/MQTT კლიენტი):</b><ul>
@@ -209,7 +209,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2device
 9. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
 <li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> <code>device_identity_service</code>-ის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა იყოს მითითებული <code>interfaces</code>, რათა მას ჰქონდეს წვდომა <code>Command Router</code>-ის API კონტრაქტზე.</li>
-<li><b>დაგვიანებული რეგისტრაცია:</b> CLI ბრძანების რეგისტრაცია ხდება <code>FMW_EVENT_SYSTEM_START_COMPLETE</code> ივენთის შემდეგ, რაც უზრუნველყოფს, რომ <code>Command Router</code> სერვისი ამ დროს უკვე გარანტირებულად ხელმისაწვდომია. </li>
+<li><b>დაგვიანებული რეგისტრაცია:</b> CLI ბრძანების რეგისტრაცია ხდება <code>SYNAPSE_EVENT_SYSTEM_START_COMPLETE</code> ივენთის შემდეგ, რაც უზრუნველყოფს, რომ <code>Command Router</code> სერვისი ამ დროს უკვე გარანტირებულად ხელმისაწვდომია. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

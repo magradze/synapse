@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gdb_20და_20breakpoint_20ების_20გამოყენება_0',['3. GDB და Breakpoint-ების გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1937',1,'']]],
+  ['gdb_20და_20breakpoint_20ების_20გამოყენება_0',['3. GDB და Breakpoint-ების გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1947',1,'']]],
   ['generate_5fmqtt_5ftopics_1',['generate_mqtt_topics',['../namespacegenerate__mqtt__topics.html',1,'']]],
   ['generate_5ftopic_5fdefines_2',['generate_topic_defines',['../namespacegenerate__mqtt__topics.html#a155412cdaa45b16a0a5c3cfaf05f27c0',1,'generate_mqtt_topics']]],
   ['get_5fall_5fmodules_3',['get_all_modules',['../structsystem__manager__api__t.html#ab8bea01e2fe57fa651cf7a4b4185ff4a',1,'system_manager_api_t']]],
@@ -21,16 +21,16 @@ var searchData=
   ['get_5fsystem_5fhealth_5freport_18',['get_system_health_report',['../structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b',1,'health_api_t']]],
   ['get_5ftime_19',['get_time',['../structtime__sync__api__t.html#a3f81908285e822b53367e9f5e25fa477',1,'time_sync_api_t']]],
   ['getting_20started_20',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
-  ['github_20actions_20თან_20ავტომატური_20შემოწმება_21',['4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md1033',1,'']]],
+  ['github_20actions_20თან_20ავტომატური_20შემოწმება_21',['4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md1043',1,'']]],
   ['gitignore_22',['[.gitignore]',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md778',1,'']]],
-  ['global_20ცვლადები_23',['Global ცვლადები',['../md_docs_2convention_2variable__naming.html#autotoc_md1292',1,'']]],
+  ['global_20ცვლადები_23',['Global ცვლადები',['../md_docs_2convention_2variable__naming.html#autotoc_md1302',1,'']]],
   ['glossary_20ტერმინები_24',['Glossary (ტერმინები)',['../md_docs_2glossary_2glossary__index.html',1,'']]],
   ['glossary_20—_20api_20code_25',['API-სა და კოდის ტერმინები (Glossary — API &amp; Code)',['../md_docs_2glossary_2glossary__api.html',1,'']]],
   ['glossary_20—_20architecture_26',['არქიტექტურული ტერმინები (Glossary — Architecture)',['../md_docs_2glossary_2glossary__architecture.html',1,'']]],
   ['glossary_20—_20configuration_20storage_27',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
   ['glossary_20—_20security_20performance_28',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
   ['gpio_20tt_20რეჟიმისთვის_29',['gpio tt რეჟიმისთვის',['../md_components_2modules_2drivers_2button__input_2README.html#autotoc_md46',1,'3.1. კონფიგურაცია &lt;tt&gt;GPIO&lt;/tt&gt; რეჟიმისთვის'],['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md72',1,'3.1. კონფიგურაცია &lt;tt&gt;GPIO&lt;/tt&gt; რეჟიმისთვის']]],
-  ['graceful_20degradation_30',['2. Graceful Degradation',['../md_docs_2convention_2error__handling.html#autotoc_md1194',1,'']]],
+  ['graceful_20degradation_30',['2. Graceful Degradation',['../md_docs_2convention_2error__handling.html#autotoc_md1204',1,'']]],
   ['guide_31',['guide',['../md_docs_2performance_2performance__benchmarks.html',1,'ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)'],['../md_docs_2contributing_2contributing__guide.html',1,'კონტრიბუციის სახელმძღვანელო (Contributing Guide)'],['../md_docs_2performance_2performance__optimization.html',1,'ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)'],['../md_docs_2performance_2performance__resource__usage.html',1,'რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)'],['../md_docs_2contributing_2local__setup.html',1,'Synapse Local Setup Guide']]],
   ['guide_20დიბაგინგის_20სახელმძღვანელო_32',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
   ['guidelines_33',['guidelines',['../md_docs_2security_2security__guidelines.html',1,'უსაფრთხოების სახელმძღვანელოები (Security Guidelines)'],['../md_docs_2contributing_2commit__message__guidelines.html',1,'Synapse Commit Message Guidelines'],['../md_docs_2contributing_2review__guidelines.html',1,'Synapse Review Guidelines']]]

@@ -187,18 +187,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ac67ca997ccba86a447d64136940d1cb2" id="r_ac67ca997ccba86a447d64136940d1cb2"><td class="memItemLeft" align="right" valign="top"><a id="ac67ca997ccba86a447d64136940d1cb2" name="ac67ca997ccba86a447d64136940d1cb2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;EVENT_BUS&quot;)</td></tr>
 <tr class="separator:ac67ca997ccba86a447d64136940d1cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c30f68a850ad88e75dcb5eca6294423" id="r_a3c30f68a850ad88e75dcb5eca6294423"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a3c30f68a850ad88e75dcb5eca6294423">fmw_event_bus_init</a> (void)</td></tr>
-<tr class="memdesc:a3c30f68a850ad88e75dcb5eca6294423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event Bus-ის ინიციალიზაცია და ფონური ტასკის გაშვება.  <br /></td></tr>
-<tr class="separator:a3c30f68a850ad88e75dcb5eca6294423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b067cccdb6a903e0612e49869456a81" id="r_a6b067cccdb6a903e0612e49869456a81"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a6b067cccdb6a903e0612e49869456a81">fmw_event_bus_post</a> (const char *event_name, <a class="el" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *data_wrapper)</td></tr>
-<tr class="memdesc:a6b067cccdb6a903e0612e49869456a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.  <br /></td></tr>
-<tr class="separator:a6b067cccdb6a903e0612e49869456a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bb409daa4df05a7f65b3531e3231e7f" id="r_a1bb409daa4df05a7f65b3531e3231e7f"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a1bb409daa4df05a7f65b3531e3231e7f">fmw_event_bus_subscribe</a> (const char *event_name, <a class="el" href="structmodule__t.html">module_t</a> *module)</td></tr>
-<tr class="memdesc:a1bb409daa4df05a7f65b3531e3231e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.  <br /></td></tr>
-<tr class="separator:a1bb409daa4df05a7f65b3531e3231e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3df84e5063b0dff1e0f0dbdb69c5455" id="r_ae3df84e5063b0dff1e0f0dbdb69c5455"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#ae3df84e5063b0dff1e0f0dbdb69c5455">fmw_event_bus_unsubscribe</a> (const char *event_name, <a class="el" href="structmodule__t.html">module_t</a> *module)</td></tr>
-<tr class="memdesc:ae3df84e5063b0dff1e0f0dbdb69c5455"><td class="mdescLeft">&#160;</td><td class="mdescRight">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★  <br /></td></tr>
-<tr class="separator:ae3df84e5063b0dff1e0f0dbdb69c5455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22832ab474112bb5e7fed4a3a40f892" id="r_ac22832ab474112bb5e7fed4a3a40f892"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#ac22832ab474112bb5e7fed4a3a40f892">synapse_event_bus_init</a> (void)</td></tr>
+<tr class="memdesc:ac22832ab474112bb5e7fed4a3a40f892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event Bus-ის ინიციალიზაცია და ფონური ტასკის გაშვება.  <br /></td></tr>
+<tr class="separator:ac22832ab474112bb5e7fed4a3a40f892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dfeeb1152a63bfed8ae50f64d93be4c" id="r_a8dfeeb1152a63bfed8ae50f64d93be4c"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c">synapse_event_bus_post</a> (const char *event_name, <a class="el" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *data_wrapper)</td></tr>
+<tr class="memdesc:a8dfeeb1152a63bfed8ae50f64d93be4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.  <br /></td></tr>
+<tr class="separator:a8dfeeb1152a63bfed8ae50f64d93be4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b15edb84f4619e9b03a0e632bfa8b5" id="r_a63b15edb84f4619e9b03a0e632bfa8b5"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#a63b15edb84f4619e9b03a0e632bfa8b5">synapse_event_bus_subscribe</a> (const char *event_name, <a class="el" href="structmodule__t.html">module_t</a> *module)</td></tr>
+<tr class="memdesc:a63b15edb84f4619e9b03a0e632bfa8b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.  <br /></td></tr>
+<tr class="separator:a63b15edb84f4619e9b03a0e632bfa8b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cb9ac4089d7a3b513bac101ed22d86" id="r_aa8cb9ac4089d7a3b513bac101ed22d86"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__bus_8c.html#aa8cb9ac4089d7a3b513bac101ed22d86">synapse_event_bus_unsubscribe</a> (const char *event_name, <a class="el" href="structmodule__t.html">module_t</a> *module)</td></tr>
+<tr class="memdesc:aa8cb9ac4089d7a3b513bac101ed22d86"><td class="mdescLeft">&#160;</td><td class="mdescRight">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★  <br /></td></tr>
+<tr class="separator:aa8cb9ac4089d7a3b513bac101ed22d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Event Bus კომპონენტის იმპლემენტაცია. </p>
@@ -207,14 +207,14 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
 <p>ეს ფაილი შეიცავს Event Bus-ის იმპლემენტაციას, რომელიც ამუშავებს ასინქრონულ ივენთებს FreeRTOS-ის რიგებისა და ტასკების გამოყენებით. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a3c30f68a850ad88e75dcb5eca6294423" name="a3c30f68a850ad88e75dcb5eca6294423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c30f68a850ad88e75dcb5eca6294423">&#9670;&#160;</a></span>fmw_event_bus_init()</h2>
+<a id="ac22832ab474112bb5e7fed4a3a40f892" name="ac22832ab474112bb5e7fed4a3a40f892"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22832ab474112bb5e7fed4a3a40f892">&#9670;&#160;</a></span>synapse_event_bus_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_event_bus_init </td>
+          <td class="memname">esp_err_t synapse_event_bus_init </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -236,24 +236,24 @@ Functions</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="event__bus_8c_a3c30f68a850ad88e75dcb5eca6294423_icgraph.png" border="0" usemap="#aevent__bus_8c_a3c30f68a850ad88e75dcb5eca6294423_icgraph" alt=""/></div>
-<map name="aevent__bus_8c_a3c30f68a850ad88e75dcb5eca6294423_icgraph" id="aevent__bus_8c_a3c30f68a850ad88e75dcb5eca6294423_icgraph">
-<area shape="rect" title="Event Bus&#45;ის ინიციალიზაცია და ფონური ტასკის გაშვება." alt="" coords="188,5,341,31"/>
-<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
-<area shape="poly" title=" " alt="" coords="175,21,141,21,141,15,175,15"/>
+<div class="center"><img src="event__bus_8c_ac22832ab474112bb5e7fed4a3a40f892_icgraph.png" border="0" usemap="#aevent__bus_8c_ac22832ab474112bb5e7fed4a3a40f892_icgraph" alt=""/></div>
+<map name="aevent__bus_8c_ac22832ab474112bb5e7fed4a3a40f892_icgraph" id="aevent__bus_8c_ac22832ab474112bb5e7fed4a3a40f892_icgraph">
+<area shape="rect" title="Event Bus&#45;ის ინიციალიზაცია და ფონური ტასკის გაშვება." alt="" coords="212,5,391,31"/>
+<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,164,31"/>
+<area shape="poly" title=" " alt="" coords="198,21,164,21,164,15,198,15"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a6b067cccdb6a903e0612e49869456a81" name="a6b067cccdb6a903e0612e49869456a81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b067cccdb6a903e0612e49869456a81">&#9670;&#160;</a></span>fmw_event_bus_post()</h2>
+<a id="a8dfeeb1152a63bfed8ae50f64d93be4c" name="a8dfeeb1152a63bfed8ae50f64d93be4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dfeeb1152a63bfed8ae50f64d93be4c">&#9670;&#160;</a></span>synapse_event_bus_post()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_event_bus_post </td>
+          <td class="memname">esp_err_t synapse_event_bus_post </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>event_name</em>, </td>
@@ -293,36 +293,36 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="event__bus_8c_a6b067cccdb6a903e0612e49869456a81_cgraph.png" border="0" usemap="#aevent__bus_8c_a6b067cccdb6a903e0612e49869456a81_cgraph" alt=""/></div>
-<map name="aevent__bus_8c_a6b067cccdb6a903e0612e49869456a81_cgraph" id="aevent__bus_8c_a6b067cccdb6a903e0612e49869456a81_cgraph">
-<area shape="rect" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="5,31,165,56"/>
-<area shape="rect" href="event__data__wrapper_8c.html#a1e82d26f36a72f0b9e1d1fb2d507a79f" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="213,5,400,31"/>
-<area shape="poly" title=" " alt="" coords="165,32,199,28,200,33,166,37"/>
-<area shape="rect" href="event__data__wrapper_8c.html#a99c9f26cd90b553b84bf2a56db51a689" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="213,55,400,80"/>
-<area shape="poly" title=" " alt="" coords="166,49,200,53,199,58,165,55"/>
+<div class="center"><img src="event__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_cgraph.png" border="0" usemap="#aevent__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_cgraph" alt=""/></div>
+<map name="aevent__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_cgraph" id="aevent__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_cgraph">
+<area shape="rect" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="5,45,191,70"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="239,5,395,45"/>
+<area shape="poly" title=" " alt="" coords="185,42,224,36,225,41,186,47"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="239,69,395,109"/>
+<area shape="poly" title=" " alt="" coords="186,67,225,73,224,79,185,73"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="event__bus_8c_a6b067cccdb6a903e0612e49869456a81_icgraph.png" border="0" usemap="#aevent__bus_8c_a6b067cccdb6a903e0612e49869456a81_icgraph" alt=""/></div>
-<map name="aevent__bus_8c_a6b067cccdb6a903e0612e49869456a81_icgraph" id="aevent__bus_8c_a6b067cccdb6a903e0612e49869456a81_icgraph">
-<area shape="rect" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="196,5,356,31"/>
-<area shape="rect" href="system__manager_8c.html#a5d90998d0fba9bd4ce66fbdbfa5f807f" title="სისტემის და ყველა დარეგისტრირებული მოდულის გაშვება." alt="" coords="5,5,148,31"/>
-<area shape="poly" title=" " alt="" coords="182,21,149,21,149,15,182,15"/>
+<div class="center"><img src="event__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_icgraph.png" border="0" usemap="#aevent__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_icgraph" alt=""/></div>
+<map name="aevent__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_icgraph" id="aevent__bus_8c_a8dfeeb1152a63bfed8ae50f64d93be4c_icgraph">
+<area shape="rect" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="221,5,407,31"/>
+<area shape="rect" href="system__manager_8c.html#a651e9c9cf8b0563b7f4f31be1ea506e3" title="სისტემის და ყველა დარეგისტრირებული მოდულის გაშვება." alt="" coords="5,5,173,31"/>
+<area shape="poly" title=" " alt="" coords="208,21,173,21,173,15,208,15"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a1bb409daa4df05a7f65b3531e3231e7f" name="a1bb409daa4df05a7f65b3531e3231e7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1bb409daa4df05a7f65b3531e3231e7f">&#9670;&#160;</a></span>fmw_event_bus_subscribe()</h2>
+<a id="a63b15edb84f4619e9b03a0e632bfa8b5" name="a63b15edb84f4619e9b03a0e632bfa8b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b15edb84f4619e9b03a0e632bfa8b5">&#9670;&#160;</a></span>synapse_event_bus_subscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_event_bus_subscribe </td>
+          <td class="memname">esp_err_t synapse_event_bus_subscribe </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>event_name</em>, </td>
@@ -362,14 +362,14 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ae3df84e5063b0dff1e0f0dbdb69c5455" name="ae3df84e5063b0dff1e0f0dbdb69c5455"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3df84e5063b0dff1e0f0dbdb69c5455">&#9670;&#160;</a></span>fmw_event_bus_unsubscribe()</h2>
+<a id="aa8cb9ac4089d7a3b513bac101ed22d86" name="aa8cb9ac4089d7a3b513bac101ed22d86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cb9ac4089d7a3b513bac101ed22d86">&#9670;&#160;</a></span>synapse_event_bus_unsubscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_event_bus_unsubscribe </td>
+          <td class="memname">esp_err_t synapse_event_bus_unsubscribe </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>event_name</em>, </td>

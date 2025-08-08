@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
 <ul>
 <li><b>feat(core):</b> 🚀 დაინერგა უსაფრთხო, <code>dependency_map</code>-ზე დაფუძნებული <b>Dependency Injection</b> მექანიზმი.<ul>
 <li><b>უსაფრთხო ინექცია:</b> <code>System Manager</code> ახლა იყენებს მოდულის მიერ მოწოდებულ <code>dependency_map</code>-ს, რათა <code>offsetof()</code>-ის მეშვეობით ზუსტად და უსაფრთხოდ ჩაწეროს სერვისის <code>handle</code>-ი <code>private_data</code> სტრუქტურის სწორ ველში. ეს სრულად აღმოფხვრის მეხსიერების კორუფციის რისკს.</li>
-<li><b>გაშვების ლოგიკის ოპტიმიზაცია:</b> <code>fmw_system_start</code> ფუნქციის ლოგიკა დაიხვეწა, რათა ინექცია და ინიციალიზაცია ხდებოდეს ერთ, თანმიმდევრულ ციკლში, <code>init_level</code>-ის პრიორიტეტის სრული დაცვით.</li>
+<li><b>გაშვების ლოგიკის ოპტიმიზაცია:</b> <code>synapse_system_start</code> ფუნქციის ლოგიკა დაიხვეწა, რათა ინექცია და ინიციალიზაცია ხდებოდეს ერთ, თანმიმდევრულ ციკლში, <code>init_level</code>-ის პრიორიტეტის სრული დაცვით.</li>
 </ul>
 </li>
 </ul>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
 <ul>
 <li><b>refactor(core):</b> 🚀 დაინერგა უსაფრთხო, <code>dependency_map</code>-ზე დაფუძნებული <b>Dependency Injection</b> მექანიზმი.<ul>
 <li><b>უსაფრთხო ინექცია:</b> <code>System Manager</code> ახლა იყენებს მოდულის მიერ მოწოდებულ <code>dependency_map</code>-ს, რათა <code>offsetof()</code>-ის მეშვეობით ზუსტად და უსაფრთხოდ ჩაწეროს სერვისის <code>handle</code>-ი <code>private_data</code> სტრუქტურის სწორ ველში. ეს სრულად აღმოფხვრის მეხსიერების კორუფციის რისკს, რომელიც წინა, კონვენციაზე დაფუძნებულმა მიდგომამ გამოიწვია.</li>
-<li><b>გაშვების ლოგიკის ოპტიმიზაცია:</b> <code>fmw_system_start</code> ფუნქციის ლოგიკა დაიხვეწა, რათა ინექცია და ინიციალიზაცია ხდებოდეს ერთ, თანმიმდევრულ ციკლში, <code>init_level</code>-ის პრიორიტეტის სრული დაცვით.</li>
+<li><b>გაშვების ლოგიკის ოპტიმიზაცია:</b> <code>synapse_system_start</code> ფუნქციის ლოგიკა დაიხვეწა, რათა ინექცია და ინიციალიზაცია ხდებოდეს ერთ, თანმიმდევრულ ციკლში, <code>init_level</code>-ის პრიორიტეტის სრული დაცვით.</li>
 </ul>
 </li>
 </ul>

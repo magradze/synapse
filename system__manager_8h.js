@@ -1,12 +1,12 @@
 var system__manager_8h =
 [
-    [ "fmw_module_disable", "system__manager_8h.html#ad8c9b2c31ded581d735bc399d6cf503e", null ],
-    [ "fmw_module_enable", "system__manager_8h.html#aa45ded18ca208f5e8d250c04bc3c54e2", null ],
-    [ "fmw_module_get_all", "system__manager_8h.html#a30043c10d2c99667e83018c8dc65d7c6", null ],
-    [ "fmw_module_get_config", "system__manager_8h.html#a86fff6c9cb4471e4c9fc89cb22f27f6b", null ],
-    [ "fmw_module_get_status", "system__manager_8h.html#a92714f6b016d12e108ee8c70510a1cc2", null ],
-    [ "fmw_module_reconfigure", "system__manager_8h.html#a7823200ab573eaa89f287ce81d03e83e", null ],
-    [ "fmw_system_init", "system__manager_8h.html#a0a04a8681142aec11736a9ca9bc931b5", null ],
-    [ "fmw_system_start", "system__manager_8h.html#a5d90998d0fba9bd4ce66fbdbfa5f807f", null ],
-    [ "system_get_system_info", "system__manager_8h.html#a620b4e69cf4f9e69692f3a5e8bb39f0d", null ]
+    [ "synapse_module_disable", "system__manager_8h.html#abf5ec590d6b95e8113ee37230cb83bbb", null ],
+    [ "synapse_module_enable", "system__manager_8h.html#a790b91c4a5d288fab9ea3dd04d9c17bf", null ],
+    [ "synapse_module_get_all", "system__manager_8h.html#a11fa45878fd178d237cc75f901069c66", null ],
+    [ "synapse_module_get_config", "system__manager_8h.html#a23a897c0cdde311d00157ee6530cb3b6", null ],
+    [ "synapse_module_get_status", "system__manager_8h.html#a430b1843223b31cd11b9b00e4a55f0f3", null ],
+    [ "synapse_module_reconfigure", "system__manager_8h.html#a482db07a0fe52e74c8873bba7c6f4c72", null ],
+    [ "synapse_system_init", "system__manager_8h.html#a21907f2ac4378ce9202eb71681467583", null ],
+    [ "synapse_system_start", "system__manager_8h.html#a651e9c9cf8b0563b7f4f31be1ea506e3", null ],
+    [ "system_get_system_info", "system__manager_8h.html#a79c74f4a53aa7962ff27a61d9d9f4f35", null ]
 ];

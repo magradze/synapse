@@ -1,19 +1,19 @@
 var resource__manager_8h =
 [
-    [ "fmw_resource_type_t", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15", [
-      [ "FMW_RESOURCE_TYPE_GPIO", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ab12cde75ac6a78ee9bbd80e2f7c16d6f", null ],
-      [ "FMW_RESOURCE_TYPE_I2C_PORT", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15ac2dbc52b4ad14f9d8ae0d0dd3f4c4de5", null ],
-      [ "FMW_RESOURCE_TYPE_SPI_HOST", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a464ad56ece3b89244a5f3f6a89c31ef9", null ],
-      [ "FMW_RESOURCE_TYPE_ADC_CHANNEL", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a16eade5c88f74a8bc15b056bf539580c", null ],
-      [ "FMW_RESOURCE_TYPE_TIMER_GROUP", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15afe7c7b3c6e16107d034bbf7dd9dcada1", null ],
-      [ "FMW_RESOURCE_TYPE_RMT_CHANNEL", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a00db7bc611979e9448314ccbe2b51e9f", null ],
-      [ "FMW_RESOURCE_TYPE_UART_PORT", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15a74e4aa1c63b82e39094f56711922ba72", null ],
-      [ "FMW_RESOURCE_TYPE_MAX", "resource__manager_8h.html#a7b7159efe4a9ab6e6f40a477c0466b15af0ba234a8d0d9a70105a2d4b94474838", null ]
+    [ "synapse_resource_type_t", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8", [
+      [ "SYNAPSE_RESOURCE_TYPE_GPIO", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8afdfecab5b764004b5954bcc230ca5fb4", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_I2C_PORT", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8a1a583049d35cf3425beb8bed50a218d4", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_SPI_HOST", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8ad26575d2c51cb6c6133f89e8888a5148", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_ADC_CHANNEL", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8aa368bade3c29ee66a2d4722f72c1ac6d", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_TIMER_GROUP", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8a07dc98ea66442929efb6b1a6e15f630a", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_RMT_CHANNEL", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8a381e39a6a287aa5f20fb10c0f6c4bf7a", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_UART_PORT", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8a895cc4c880dcaee8131cf754f53f709c", null ],
+      [ "SYNAPSE_RESOURCE_TYPE_MAX", "resource__manager_8h.html#a5b9c910caa40ea90ce93085c7f5637b8a41e35e9fadcb74d08c85d323fc7f17b6", null ]
     ] ],
-    [ "fmw_resource_get_owner", "resource__manager_8h.html#a62e206db3497c414594319109267082b", null ],
-    [ "fmw_resource_is_locked", "resource__manager_8h.html#a68c8e1ee6abf08a2600a427d96653920", null ],
-    [ "fmw_resource_lock", "resource__manager_8h.html#a2cf645372eb05ee6b182e39ed57e90da", null ],
-    [ "fmw_resource_manager_deinit", "resource__manager_8h.html#abb1c1f1c6aadfa6f7311de08d27fae8b", null ],
-    [ "fmw_resource_manager_init", "resource__manager_8h.html#a7644b52a0b11186f8a84b4b489c14f54", null ],
-    [ "fmw_resource_release", "resource__manager_8h.html#a92b4e49ff7f60e575bd0a97797266fb9", null ]
+    [ "synapse_resource_get_owner", "resource__manager_8h.html#a15e61c5a38852aef34097926122e771a", null ],
+    [ "synapse_resource_is_locked", "resource__manager_8h.html#a9c6b43be1a0a51065cff9dd22e99c3cd", null ],
+    [ "synapse_resource_lock", "resource__manager_8h.html#a335acbe081819f56692388bd8fc519d3", null ],
+    [ "synapse_resource_manager_deinit", "resource__manager_8h.html#a95103fac06eb7830e28494dca844ac3b", null ],
+    [ "synapse_resource_manager_init", "resource__manager_8h.html#aacceb1b239d569bcaccb13ae9bb59b72", null ],
+    [ "synapse_resource_release", "resource__manager_8h.html#a1a5ec350cde65f4adacefcd4717fe26f", null ]
 ];

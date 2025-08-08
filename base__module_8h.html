@@ -499,7 +499,7 @@ Enumerations</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">self</td><td>A pointer to the module instance. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">event_name</td><td>The name of the event that was triggered. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>A pointer to the event's data wrapper (<code>event_data_wrapper_t*</code>). IMPORTANT: After using the data, <code>fmw_event_data_release(data)</code> must be called to prevent memory leaks. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>A pointer to the event's data wrapper (<code>event_data_wrapper_t*</code>). IMPORTANT: After using the data, <code>synapse_event_data_release(data)</code> must be called to prevent memory leaks. </td></tr>
   </table>
   </dd>
 </dl>

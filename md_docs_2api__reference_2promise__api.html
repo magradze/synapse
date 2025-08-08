@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 2. Provider API (სერვისის მომწოდებლისთვის)</h1>
 <p>ეს ფუნქციები განკუთვნილია მხოლოდ იმ მოდულებისთვის, რომლებიც თავად ქმნიან ასინქრონულ, <code>Promise</code>-ზე დაფუძნებულ API-ს. მათზე წვდომისთვის საჭიროა <code>#include "promise_manager_internal.h"</code>.</p>
 <h2><a class="anchor" id="autotoc_md558"></a>
-&lt;tt&gt;promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);&lt;/tt&gt;</h2>
+&lt;tt&gt;promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);&lt;/tt&gt;</h2>
 <p>ქმნის ახალ <code>Promise</code> ობიექტს <code>PENDING</code> (მომლოდინე) მდგომარეობაში, უკვე წინასწარ დარეგისტრირებული <code>callback</code> ფუნქციებით.</p>
 <ul>
 <li>**<code>then_cb</code>**: (არასავალდებულო) ფუნქცია, რომელიც უნდა გამოიძახოს წარმატების შემთხვევაში.</li>
@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li><b>აბრუნებს:</b> ახალი <code>Promise</code>-ის <code>handle</code>-ს, ან <code>NULL</code> მეხსიერების გამოყოფის შეცდომის შემთხვევაში.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md559"></a>
-&lt;tt&gt;esp_err_t fmw_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
+&lt;tt&gt;esp_err_t synapse_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
 <p>ასრულებს <code>Promise</code>-ს წარმატებით და გადასცემს შედეგს. ეს გამოიწვევს <code>Promise Manager</code>-ის მიერ <code>then_cb</code> <code>callback</code>-ის გამოძახებას.</p>
 <ul>
 <li>**<code>handle</code>**: შესასრულებელი <code>Promise</code>-ის <code>handle</code>.</li>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> თუ <code>Promise</code> წარმატებით დაემატა შესრულების რიგში.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md560"></a>
-&lt;tt&gt;esp_err_t fmw_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
+&lt;tt&gt;esp_err_t synapse_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
 <p>ასრულებს <code>Promise</code>-ს შეცდომით. ეს გამოიწვევს <code>catch_cb</code> <code>callback</code>-ის გამოძახებას.</p>
 <ul>
 <li>**<code>handle</code>**: შესასრულებელი <code>Promise</code>-ის <code>handle</code>.</li>

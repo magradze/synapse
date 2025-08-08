@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ლოგირების_20სტანდარტები_20error_20handling_20logging_0',['შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)',['../md_docs_2structure_2error__handling__and__logging.html',1,'']]]
+  ['თავსებადობის_20არქიტექტურული_20გადაწყვეტილებები_20migration_20compatibility_0',['მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)',['../md_docs_2design__decisions_2migration__and__compatibility.html',1,'']]]
 ];

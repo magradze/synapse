@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 </table>
 <h1><a class="anchor" id="autotoc_md89"></a>
 4. 🔌 Service API (&lt;tt&gt;spi_bus_api_t&lt;/tt&gt;)</h1>
-<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>FMW_SERVICE_TYPE_SPI_BUS_API</code>**.</p>
+<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>SYNAPSE_SERVICE_TYPE_SPI_BUS_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>esp_err_t add_device(context, dev_config, out_handle);</code>** <br  />
@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 <div class="line">    <a class="code hl_struct" href="structsn74hc595n__private__data__t.html">sn74hc595n_private_data_t</a> *private_data = (<a class="code hl_struct" href="structsn74hc595n__private__data__t.html">sn74hc595n_private_data_t</a> *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// 1. 🤝 ვიღებთ SPI სერვისის handle-ს Service Locator-იდან</span></div>
-<div class="line">    private_data-&gt;spi_bus_handle = (<a class="code hl_struct" href="structspi__bus__handle__t.html">spi_bus_handle_t</a>*)<a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(private_data-&gt;spi_bus_service_name);</div>
+<div class="line">    private_data-&gt;spi_bus_handle = (<a class="code hl_struct" href="structspi__bus__handle__t.html">spi_bus_handle_t</a>*)<a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(private_data-&gt;spi_bus_service_name);</div>
 <div class="line">    <span class="keywordflow">if</span> (!private_data-&gt;spi_bus_handle) {</div>
 <div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;SPI bus service &#39;%s&#39; not found!&quot;</span>, private_data-&gt;spi_bus_service_name);</div>
 <div class="line">        <span class="keywordflow">return</span> ESP_ERR_NOT_FOUND;</div>
@@ -196,7 +196,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2spi__
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="aspi__bus__interface_8h_html"><div class="ttname"><a href="spi__bus__interface_8h.html">spi_bus_interface.h</a></div><div class="ttdoc">Public Service API contract for the SPI Bus module.</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>

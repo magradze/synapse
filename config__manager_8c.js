@@ -1,7 +1,7 @@
 var config__manager_8c =
 [
-    [ "fmw_config_get_global_config", "config__manager_8c.html#a8e04f99cb76db95b008f854b5db0a06c", null ],
-    [ "fmw_config_get_root", "config__manager_8c.html#ab5fff68d0b0a44c6a4724eeb1837148e", null ],
-    [ "fmw_config_manager_init", "config__manager_8c.html#adfc0f16e9882bf39fc2560b58aec6c60", null ],
-    [ "fmw_config_save", "config__manager_8c.html#adf782fcfae675652d67a24618947e547", null ]
+    [ "synapse_config_get_global_config", "config__manager_8c.html#a831a89505bcc027e027efb25297783df", null ],
+    [ "synapse_config_get_root", "config__manager_8c.html#a6157d9a88a8cb0ccf29ec4825755c067", null ],
+    [ "synapse_config_manager_init", "config__manager_8c.html#ad079e6e30687a2f3b5146b6d54dfe435", null ],
+    [ "synapse_config_save", "config__manager_8c.html#a07644a4ba1494af6570d8f1f33264587", null ]
 ];

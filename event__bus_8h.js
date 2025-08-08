@@ -1,7 +1,7 @@
 var event__bus_8h =
 [
-    [ "fmw_event_bus_init", "event__bus_8h.html#a3c30f68a850ad88e75dcb5eca6294423", null ],
-    [ "fmw_event_bus_post", "event__bus_8h.html#abe0f3af3ae92846abaa9d421289b853e", null ],
-    [ "fmw_event_bus_subscribe", "event__bus_8h.html#afb0a242b04a96dc9e72a72efee42fb86", null ],
-    [ "fmw_event_bus_unsubscribe", "event__bus_8h.html#a77bcf96befe815c620b163fcbe887dfb", null ]
+    [ "synapse_event_bus_init", "event__bus_8h.html#ac22832ab474112bb5e7fed4a3a40f892", null ],
+    [ "synapse_event_bus_post", "event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387", null ],
+    [ "synapse_event_bus_subscribe", "event__bus_8h.html#a4966efcc89039732d2764e0637da8bbd", null ],
+    [ "synapse_event_bus_unsubscribe", "event__bus_8h.html#aad4a2793a40d367c4463bd46dd5418c8", null ]
 ];

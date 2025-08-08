@@ -126,25 +126,25 @@ Include dependency graph for event_payloads.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a789ac008246090173805977877437cee" id="r_a789ac008246090173805977877437cee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__payloads_8c.html#a789ac008246090173805977877437cee">fmw_telemetry_payload_free</a> (void *payload)</td></tr>
-<tr class="memdesc:a789ac008246090173805977877437cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">ათავისუფლებს <code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code> სტრუქტურის მიერ დაკავებულ მეხსიერებას.  <br /></td></tr>
-<tr class="separator:a789ac008246090173805977877437cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5177cad686003ddbba65658c2604e23" id="r_aa5177cad686003ddbba65658c2604e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="event__payloads_8c.html#aa5177cad686003ddbba65658c2604e23">synapse_telemetry_payload_free</a> (void *payload)</td></tr>
+<tr class="memdesc:aa5177cad686003ddbba65658c2604e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">ათავისუფლებს <code><a class="el" href="structsynapse__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">synapse_telemetry_payload_t</a></code> სტრუქტურის მიერ დაკავებულ მეხსიერებას.  <br /></td></tr>
+<tr class="separator:aa5177cad686003ddbba65658c2604e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ივენთების მონაცემთა სტრუქტურების (payloads) დამხმარე ფუნქციების იმპლემენტაცია. </p>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-06-26 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
-<p>ეს ფაილი შეიცავს მეხსიერების გასუფთავების იმ ფუნქციებს, რომლებსაც სჭირდებათ სპეციალური ლოგიკა და არ კმაყოფილდებიან ზოგადი <code>fmw_payload_common_free</code> ფუნქციით. </p>
+<p>ეს ფაილი შეიცავს მეხსიერების გასუფთავების იმ ფუნქციებს, რომლებსაც სჭირდებათ სპეციალური ლოგიკა და არ კმაყოფილდებიან ზოგადი <code>synapse_payload_common_free</code> ფუნქციით. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a789ac008246090173805977877437cee" name="a789ac008246090173805977877437cee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a789ac008246090173805977877437cee">&#9670;&#160;</a></span>fmw_telemetry_payload_free()</h2>
+<a id="aa5177cad686003ddbba65658c2604e23" name="aa5177cad686003ddbba65658c2604e23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5177cad686003ddbba65658c2604e23">&#9670;&#160;</a></span>synapse_telemetry_payload_free()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void fmw_telemetry_payload_free </td>
+          <td class="memname">void synapse_telemetry_payload_free </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>payload</em></td><td>)</td>
@@ -153,12 +153,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>ათავისუფლებს <code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code> სტრუქტურის მიერ დაკავებულ მეხსიერებას. </p>
+<p>ათავისუფლებს <code><a class="el" href="structsynapse__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">synapse_telemetry_payload_t</a></code> სტრუქტურის მიერ დაკავებულ მეხსიერებას. </p>
 <p>ათავისუფლებს ტელემეტრიის პეილოდს.</p>
-<p>ეს ფუნქცია გადაეცემა <code>fmw_event_data_wrap</code>-ს ტელემეტრიული ივენთების შექმნისას, რათა Event Bus-მა შეძლოს მეხსიერების უსაფრთხოდ გათავისუფლება. ფუნქცია ჯერ ათავისუფლებს შიდა, დინამიურად გამოყოფილ <code>json_data</code> სტრიქონს, შემდეგ კი თავად კონტეინერ სტრუქტურას.</p>
+<p>ეს ფუნქცია გადაეცემა <code>synapse_event_data_wrap</code>-ს ტელემეტრიული ივენთების შექმნისას, რათა Event Bus-მა შეძლოს მეხსიერების უსაფრთხოდ გათავისუფლება. ფუნქცია ჯერ ათავისუფლებს შიდა, დინამიურად გამოყოფილ <code>json_data</code> სტრიქონს, შემდეგ კი თავად კონტეინერ სტრუქტურას.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">payload</td><td>void მაჩვენებელი გასათავისუფლებელ <code><a class="el" href="structfmw__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">fmw_telemetry_payload_t</a></code> ობიექტზე. NULL მნიშვნელობა უსაფრთხოდ იგნორირებულია. </td></tr>
+    <tr><td class="paramname">payload</td><td>void მაჩვენებელი გასათავისუფლებელ <code><a class="el" href="structsynapse__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">synapse_telemetry_payload_t</a></code> ობიექტზე. NULL მნიშვნელობა უსაფრთხოდ იგნორირებულია. </td></tr>
   </table>
   </dd>
 </dl>

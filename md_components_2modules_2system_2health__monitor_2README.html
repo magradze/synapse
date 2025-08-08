@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 </table>
 <h1><a class="anchor" id="autotoc_md168"></a>
 5. Service API (&lt;tt&gt;health_api_t&lt;/tt&gt;)</h1>
-<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა <code>Health Monitor</code>-ის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>FMW_SERVICE_TYPE_HEALTH_API</code>.</p>
+<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა <code>Health Monitor</code>-ის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>SYNAPSE_SERVICE_TYPE_HEALTH_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>esp_err_t get_system_health_report(cJSON **report);</code>** <br  />
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="health__interface_8h.html">health_interface.h</a>&quot;</span> <span class="comment">// პირობითი ინტერფეისის ფაილი</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> start_ota_if_healthy() {</div>
-<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_health_monitor&quot;</span>);</div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_health_monitor&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (!handle) {</div>
 <div class="line">        ESP_LOGW(TAG, <span class="stringliteral">&quot;Health Monitor service not found. Skipping health check.&quot;</span>);</div>
 <div class="line">        <span class="comment">// ... განაგრძე OTA ...</span></div>
@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <div class="ttc" id="ahealth__interface_8h_html"><div class="ttname"><a href="health__interface_8h.html">health_interface.h</a></div><div class="ttdoc">Health Monitor მოდულის საჯარო სერვისის API-ს &quot;კონტრაქტი&quot;.</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructhealth__api__t_html"><div class="ttname"><a href="structhealth__api__t.html">health_api_t</a></div><div class="ttdoc">Health Monitor-ის საჯარო Service API სტრუქტურა.</div><div class="ttdef"><b>Definition</b> health_interface.h:39</div></div>
 <div class="ttc" id="astructhealth__api__t_html_a50abcc64550890f281f6fcf4634fdf5b"><div class="ttname"><a href="structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b">health_api_t::get_system_health_report</a></div><div class="ttdeci">esp_err_t(* get_system_health_report)(cJSON **report)</div><div class="ttdoc">აბრუნებს სისტემის ჯანმრთელობის სრულ რეპორტს JSON ფორმატში.</div><div class="ttdef"><b>Definition</b> health_interface.h:46</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->

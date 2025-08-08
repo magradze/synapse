@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_3a_20synapse_20მოდულის_20გენერატორი_20v3_200_0',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.0)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'']]]
+  ['7_202_200_202025_2008_2028_0',['[7.2.0] - 2025-08-28',['../md_docs_2changelog_2v7.html',1,'']]]
 ];

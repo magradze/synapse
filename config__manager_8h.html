@@ -235,30 +235,30 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adfc0f16e9882bf39fc2560b58aec6c60" id="r_adfc0f16e9882bf39fc2560b58aec6c60"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#adfc0f16e9882bf39fc2560b58aec6c60">fmw_config_manager_init</a> (void)</td></tr>
-<tr class="memdesc:adfc0f16e9882bf39fc2560b58aec6c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას.  <br /></td></tr>
-<tr class="separator:adfc0f16e9882bf39fc2560b58aec6c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf782fcfae675652d67a24618947e547" id="r_adf782fcfae675652d67a24618947e547"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#adf782fcfae675652d67a24618947e547">fmw_config_save</a> (void)</td></tr>
-<tr class="memdesc:adf782fcfae675652d67a24618947e547"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.  <br /></td></tr>
-<tr class="separator:adf782fcfae675652d67a24618947e547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35834adfd4ee7bd208e842a91d0e79d4" id="r_a35834adfd4ee7bd208e842a91d0e79d4"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a35834adfd4ee7bd208e842a91d0e79d4">fmw_config_get_module_config</a> (const char *module_name)</td></tr>
-<tr class="memdesc:a35834adfd4ee7bd208e842a91d0e79d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
-<tr class="separator:a35834adfd4ee7bd208e842a91d0e79d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e04f99cb76db95b008f854b5db0a06c" id="r_a8e04f99cb76db95b008f854b5db0a06c"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a8e04f99cb76db95b008f854b5db0a06c">fmw_config_get_global_config</a> (void)</td></tr>
-<tr class="memdesc:a8e04f99cb76db95b008f854b5db0a06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს გლობალური კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
-<tr class="separator:a8e04f99cb76db95b008f854b5db0a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5fff68d0b0a44c6a4724eeb1837148e" id="r_ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#ab5fff68d0b0a44c6a4724eeb1837148e">fmw_config_get_root</a> (void)</td></tr>
-<tr class="memdesc:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
-<tr class="separator:ab5fff68d0b0a44c6a4724eeb1837148e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a607cfc06d3d3cf60580f7be5ee9c1a81" id="r_a607cfc06d3d3cf60580f7be5ee9c1a81"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a607cfc06d3d3cf60580f7be5ee9c1a81">fmw_config_get_module_string</a> (const char *module_name, const char *key, char *buffer, size_t buffer_size)</td></tr>
-<tr class="memdesc:a607cfc06d3d3cf60580f7be5ee9c1a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს სტრიქონის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
-<tr class="separator:a607cfc06d3d3cf60580f7be5ee9c1a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9eaf564a42e1badbad6648ed3d8688da" id="r_a9eaf564a42e1badbad6648ed3d8688da"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a9eaf564a42e1badbad6648ed3d8688da">fmw_config_get_module_int</a> (const char *module_name, const char *key, int *out_value)</td></tr>
-<tr class="memdesc:a9eaf564a42e1badbad6648ed3d8688da"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
-<tr class="separator:a9eaf564a42e1badbad6648ed3d8688da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d1215ed44ac7a65dda68e447f35c739" id="r_a1d1215ed44ac7a65dda68e447f35c739"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a1d1215ed44ac7a65dda68e447f35c739">fmw_config_get_module_bool</a> (const char *module_name, const char *key, bool *out_value)</td></tr>
-<tr class="memdesc:a1d1215ed44ac7a65dda68e447f35c739"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
-<tr class="separator:a1d1215ed44ac7a65dda68e447f35c739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad079e6e30687a2f3b5146b6d54dfe435" id="r_ad079e6e30687a2f3b5146b6d54dfe435"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#ad079e6e30687a2f3b5146b6d54dfe435">synapse_config_manager_init</a> (void)</td></tr>
+<tr class="memdesc:ad079e6e30687a2f3b5146b6d54dfe435"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას.  <br /></td></tr>
+<tr class="separator:ad079e6e30687a2f3b5146b6d54dfe435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07644a4ba1494af6570d8f1f33264587" id="r_a07644a4ba1494af6570d8f1f33264587"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a07644a4ba1494af6570d8f1f33264587">synapse_config_save</a> (void)</td></tr>
+<tr class="memdesc:a07644a4ba1494af6570d8f1f33264587"><td class="mdescLeft">&#160;</td><td class="mdescRight">ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.  <br /></td></tr>
+<tr class="separator:a07644a4ba1494af6570d8f1f33264587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea13d4ccca1a00b44aab8fd2050677e2" id="r_aea13d4ccca1a00b44aab8fd2050677e2"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#aea13d4ccca1a00b44aab8fd2050677e2">synapse_config_get_module_config</a> (const char *module_name)</td></tr>
+<tr class="memdesc:aea13d4ccca1a00b44aab8fd2050677e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:aea13d4ccca1a00b44aab8fd2050677e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a831a89505bcc027e027efb25297783df" id="r_a831a89505bcc027e027efb25297783df"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a831a89505bcc027e027efb25297783df">synapse_config_get_global_config</a> (void)</td></tr>
+<tr class="memdesc:a831a89505bcc027e027efb25297783df"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს გლობალური კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:a831a89505bcc027e027efb25297783df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6157d9a88a8cb0ccf29ec4825755c067" id="r_a6157d9a88a8cb0ccf29ec4825755c067"><td class="memItemLeft" align="right" valign="top">const cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a6157d9a88a8cb0ccf29ec4825755c067">synapse_config_get_root</a> (void)</td></tr>
+<tr class="memdesc:a6157d9a88a8cb0ccf29ec4825755c067"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.  <br /></td></tr>
+<tr class="separator:a6157d9a88a8cb0ccf29ec4825755c067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65ee18aeeddb1d4e9033fa7eb58592cd" id="r_a65ee18aeeddb1d4e9033fa7eb58592cd"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a65ee18aeeddb1d4e9033fa7eb58592cd">synapse_config_get_module_string</a> (const char *module_name, const char *key, char *buffer, size_t buffer_size)</td></tr>
+<tr class="memdesc:a65ee18aeeddb1d4e9033fa7eb58592cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს სტრიქონის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
+<tr class="separator:a65ee18aeeddb1d4e9033fa7eb58592cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7decb12a45853dfb441a3c4e08b40fd2" id="r_a7decb12a45853dfb441a3c4e08b40fd2"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a7decb12a45853dfb441a3c4e08b40fd2">synapse_config_get_module_int</a> (const char *module_name, const char *key, int *out_value)</td></tr>
+<tr class="memdesc:a7decb12a45853dfb441a3c4e08b40fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
+<tr class="separator:a7decb12a45853dfb441a3c4e08b40fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31632619f3c0ba8edadeff8b95ee661f" id="r_a31632619f3c0ba8edadeff8b95ee661f"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__manager_8h.html#a31632619f3c0ba8edadeff8b95ee661f">synapse_config_get_module_bool</a> (const char *module_name, const char *key, bool *out_value)</td></tr>
+<tr class="memdesc:a31632619f3c0ba8edadeff8b95ee661f"><td class="mdescLeft">&#160;</td><td class="mdescRight">კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან.  <br /></td></tr>
+<tr class="separator:a31632619f3c0ba8edadeff8b95ee661f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>კონფიგურაციის მენეჯერის API. </p>
@@ -267,14 +267,14 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Giorgi Magradze</dd></dl>
 <p>ეს კომპონენტი პასუხისმგებელია <code>system_config.json</code>-ის ჩატვირთვაზე, ვალიდაციასა და მასზე წვდომის უზრუნველყოფაზე. ის უზრუნველყოფს ერთიან "სიმართლის წყაროს" (Single Source of Truth) მთელი სისტემისთვის და მართავს კონფიგურაციის შენახვას NVS-ში. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a8e04f99cb76db95b008f854b5db0a06c" name="a8e04f99cb76db95b008f854b5db0a06c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e04f99cb76db95b008f854b5db0a06c">&#9670;&#160;</a></span>fmw_config_get_global_config()</h2>
+<a id="a831a89505bcc027e027efb25297783df" name="a831a89505bcc027e027efb25297783df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a831a89505bcc027e027efb25297783df">&#9670;&#160;</a></span>synapse_config_get_global_config()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const cJSON * fmw_config_get_global_config </td>
+          <td class="memname">const cJSON * synapse_config_get_global_config </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -288,14 +288,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1d1215ed44ac7a65dda68e447f35c739" name="a1d1215ed44ac7a65dda68e447f35c739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d1215ed44ac7a65dda68e447f35c739">&#9670;&#160;</a></span>fmw_config_get_module_bool()</h2>
+<a id="a31632619f3c0ba8edadeff8b95ee661f" name="a31632619f3c0ba8edadeff8b95ee661f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31632619f3c0ba8edadeff8b95ee661f">&#9670;&#160;</a></span>synapse_config_get_module_bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_get_module_bool </td>
+          <td class="memname">esp_err_t synapse_config_get_module_bool </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>module_name</em>, </td>
@@ -339,14 +339,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a35834adfd4ee7bd208e842a91d0e79d4" name="a35834adfd4ee7bd208e842a91d0e79d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35834adfd4ee7bd208e842a91d0e79d4">&#9670;&#160;</a></span>fmw_config_get_module_config()</h2>
+<a id="aea13d4ccca1a00b44aab8fd2050677e2" name="aea13d4ccca1a00b44aab8fd2050677e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea13d4ccca1a00b44aab8fd2050677e2">&#9670;&#160;</a></span>synapse_config_get_module_config()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const cJSON * fmw_config_get_module_config </td>
+          <td class="memname">const cJSON * synapse_config_get_module_config </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>module_name</em></td><td>)</td>
@@ -372,14 +372,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9eaf564a42e1badbad6648ed3d8688da" name="a9eaf564a42e1badbad6648ed3d8688da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eaf564a42e1badbad6648ed3d8688da">&#9670;&#160;</a></span>fmw_config_get_module_int()</h2>
+<a id="a7decb12a45853dfb441a3c4e08b40fd2" name="a7decb12a45853dfb441a3c4e08b40fd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7decb12a45853dfb441a3c4e08b40fd2">&#9670;&#160;</a></span>synapse_config_get_module_int()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_get_module_int </td>
+          <td class="memname">esp_err_t synapse_config_get_module_int </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>module_name</em>, </td>
@@ -423,14 +423,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a607cfc06d3d3cf60580f7be5ee9c1a81" name="a607cfc06d3d3cf60580f7be5ee9c1a81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a607cfc06d3d3cf60580f7be5ee9c1a81">&#9670;&#160;</a></span>fmw_config_get_module_string()</h2>
+<a id="a65ee18aeeddb1d4e9033fa7eb58592cd" name="a65ee18aeeddb1d4e9033fa7eb58592cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ee18aeeddb1d4e9033fa7eb58592cd">&#9670;&#160;</a></span>synapse_config_get_module_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_get_module_string </td>
+          <td class="memname">esp_err_t synapse_config_get_module_string </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>module_name</em>, </td>
@@ -482,14 +482,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab5fff68d0b0a44c6a4724eeb1837148e" name="ab5fff68d0b0a44c6a4724eeb1837148e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5fff68d0b0a44c6a4724eeb1837148e">&#9670;&#160;</a></span>fmw_config_get_root()</h2>
+<a id="a6157d9a88a8cb0ccf29ec4825755c067" name="a6157d9a88a8cb0ccf29ec4825755c067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6157d9a88a8cb0ccf29ec4825755c067">&#9670;&#160;</a></span>synapse_config_get_root()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const cJSON * fmw_config_get_root </td>
+          <td class="memname">const cJSON * synapse_config_get_root </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -504,26 +504,26 @@ Functions</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="config__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph.png" border="0" usemap="#aconfig__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph" alt=""/></div>
-<map name="aconfig__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph" id="aconfig__manager_8h_ab5fff68d0b0a44c6a4724eeb1837148e_icgraph">
-<area shape="rect" title="აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს." alt="" coords="428,5,587,31"/>
-<area shape="rect" href="module__registry_8c.html#a15ad8ee3953b528270916074c41f0c06" title="ინიციალიზებს მოდულების რეესტრს." alt="" coords="188,5,380,31"/>
-<area shape="poly" title=" " alt="" coords="414,21,380,21,380,15,414,15"/>
-<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
-<area shape="poly" title=" " alt="" coords="174,21,140,21,140,15,174,15"/>
+<div class="center"><img src="config__manager_8h_a6157d9a88a8cb0ccf29ec4825755c067_icgraph.png" border="0" usemap="#aconfig__manager_8h_a6157d9a88a8cb0ccf29ec4825755c067_icgraph" alt=""/></div>
+<map name="aconfig__manager_8h_a6157d9a88a8cb0ccf29ec4825755c067_icgraph" id="aconfig__manager_8h_a6157d9a88a8cb0ccf29ec4825755c067_icgraph">
+<area shape="rect" title="აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს." alt="" coords="477,5,660,31"/>
+<area shape="rect" href="module__registry_8c.html#a43a25cf1a7108566a60ec7e35920336a" title="ინიციალიზებს მოდულების რეესტრს." alt="" coords="212,5,429,31"/>
+<area shape="poly" title=" " alt="" coords="463,21,430,21,430,15,463,15"/>
+<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,164,31"/>
+<area shape="poly" title=" " alt="" coords="198,21,164,21,164,15,198,15"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="adfc0f16e9882bf39fc2560b58aec6c60" name="adfc0f16e9882bf39fc2560b58aec6c60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfc0f16e9882bf39fc2560b58aec6c60">&#9670;&#160;</a></span>fmw_config_manager_init()</h2>
+<a id="ad079e6e30687a2f3b5146b6d54dfe435" name="ad079e6e30687a2f3b5146b6d54dfe435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad079e6e30687a2f3b5146b6d54dfe435">&#9670;&#160;</a></span>synapse_config_manager_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_manager_init </td>
+          <td class="memname">esp_err_t synapse_config_manager_init </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -545,24 +545,24 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="config__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph.png" border="0" usemap="#aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph" alt=""/></div>
-<map name="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph" id="aconfig__manager_8h_adfc0f16e9882bf39fc2560b58aec6c60_icgraph">
-<area shape="rect" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="188,5,379,31"/>
-<area shape="rect" href="system__manager_8c.html#a0a04a8681142aec11736a9ca9bc931b5" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,140,31"/>
-<area shape="poly" title=" " alt="" coords="174,21,141,21,141,15,174,15"/>
+<div class="center"><img src="config__manager_8h_ad079e6e30687a2f3b5146b6d54dfe435_icgraph.png" border="0" usemap="#aconfig__manager_8h_ad079e6e30687a2f3b5146b6d54dfe435_icgraph" alt=""/></div>
+<map name="aconfig__manager_8h_ad079e6e30687a2f3b5146b6d54dfe435_icgraph" id="aconfig__manager_8h_ad079e6e30687a2f3b5146b6d54dfe435_icgraph">
+<area shape="rect" title="ახდენს კონფიგურაციის მენეჯერის ინიციალიზაციას." alt="" coords="212,5,427,31"/>
+<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,164,31"/>
+<area shape="poly" title=" " alt="" coords="198,21,164,21,164,15,198,15"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="adf782fcfae675652d67a24618947e547" name="adf782fcfae675652d67a24618947e547"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf782fcfae675652d67a24618947e547">&#9670;&#160;</a></span>fmw_config_save()</h2>
+<a id="a07644a4ba1494af6570d8f1f33264587" name="a07644a4ba1494af6570d8f1f33264587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07644a4ba1494af6570d8f1f33264587">&#9670;&#160;</a></span>synapse_config_save()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t fmw_config_save </td>
+          <td class="memname">esp_err_t synapse_config_save </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>

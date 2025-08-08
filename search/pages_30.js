@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_0',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['ხშირად_20დასმული_20კითხვები_20faq_1',['ხშირად დასმული კითხვები faq',['../md_docs_2contributing_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)'],['../md_docs_2structure_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)']]],
-  ['ხშირად_20დასმული_20კითხვები_20troubleshooting_20faq_2',['ხშირად დასმული კითხვები (Troubleshooting FAQ)',['../md_docs_2troubleshooting_2faq.html',1,'']]]
+  ['ჩანაწერის_20შაბლონი_20decision_20record_20template_0',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
+  ['ჩატარების_20სახელმძღვანელო_20performance_20benchmarks_20guide_1',['ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)',['../md_docs_2performance_2performance__benchmarks.html',1,'']]]
 ];

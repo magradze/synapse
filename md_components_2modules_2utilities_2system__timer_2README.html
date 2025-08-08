@@ -128,10 +128,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md253"></a>
 4. 🛠️ Service API (&lt;tt&gt;timer_api_t&lt;/tt&gt;)</h1>
-<p>მოდული არეგისტრირებს სერვისს ტიპით <code>FMW_SERVICE_TYPE_TIMER_API</code>.</p>
+<p>მოდული არეგისტრირებს სერვისს ტიპით <code>SYNAPSE_SERVICE_TYPE_TIMER_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
-<li>**<code>fmw_timer_handle_t schedule_event(const char* event_name, uint32_t interval_ms, bool is_periodic);</code>** <br  />
+<li>**<code>synapse_timer_handle_t schedule_event(const char* event_name, uint32_t interval_ms, bool is_periodic);</code>** <br  />
  🗓️ გეგმავს ივენთის გამოქვეყნებას.<ul>
 <li><code>event_name</code>: ივენთის სახელი, რომელიც უნდა გამოქვეყნდეს. <b>ყურადღება:</b> ეს სტრიქონი უნდა იყოს პერმანენტული (მაგ., <code>#define</code> ან <code>static const char*</code>).</li>
 <li><code>interval_ms</code>: ინტერვალი მილიწამებში.</li>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <li><b>აბრუნებს:</b> უნიკალურ <code>handle</code>-ს, რომელიც შეიძლება გამოყენებულ იქნას ტაიმერის გასაუქმებლად, ან <code>NULL</code>-ს შეცდომის შემთხვევაში.</li>
 </ul>
 </li>
-<li>**<code>esp_err_t cancel_event(fmw_timer_handle_t handle);</code>** <br  />
+<li>**<code>esp_err_t cancel_event(synapse_timer_handle_t handle);</code>** <br  />
  ❌ აუქმებს ადრე დაგეგმილ ივენთს მისი <code>handle</code>-ის გამოყენებით.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md254"></a>
@@ -159,12 +159,12 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">    </div>
 <div class="line">    <span class="comment">// ვიღებთ ტაიმერის სერვისს</span></div>
-<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> timer_service_handle = <a class="code hl_function" href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a>(<span class="stringliteral">&quot;main_timer_service&quot;</span>);</div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> timer_service_handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_timer_service&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (timer_service_handle) {</div>
 <div class="line">        <a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *timer_api = (<a class="code hl_struct" href="structtimer__api__t.html">timer_api_t</a> *)timer_service_handle;</div>
 <div class="line">        </div>
 <div class="line">        <span class="comment">// ვგეგმავთ პერიოდულ ივენთს ყოველ 60 წამში</span></div>
-<div class="line">        <a class="code hl_typedef" href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a> sensor_timer = timer_api-&gt;<a class="code hl_variable" href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">schedule_event</a>(EVT_READ_SENSOR, 60000, <span class="keyword">true</span>);</div>
+<div class="line">        <a class="code hl_typedef" href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a> sensor_timer = timer_api-&gt;<a class="code hl_variable" href="structtimer__api__t.html#a491f4146bb79b02df56f0485e12eb96b">schedule_event</a>(EVT_READ_SENSOR, 60000, <span class="keyword">true</span>);</div>
 <div class="line">        </div>
 <div class="line">        <span class="keywordflow">if</span> (sensor_timer) {</div>
 <div class="line">            ESP_LOGI(TAG, <span class="stringliteral">&quot;Sensor reading scheduled successfully.&quot;</span>);</div>
@@ -190,19 +190,19 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utilities_2sys
 <div class="line">    </div>
 <div class="line">    <span class="comment">// არ დაგვავიწყდეს wrapper-ის გათავისუფლება (თუმცა ამ შემთხვევაში ის NULL-ია)</span></div>
 <div class="line">    <span class="keywordflow">if</span> (event_data) {</div>
-<div class="line">        <a class="code hl_function" href="event__data__wrapper_8h.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a>((<a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *)event_data);</div>
+<div class="line">        <a class="code hl_function" href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a>((<a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *)event_data);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aevent__data__wrapper_8h_html_a99c9f26cd90b553b84bf2a56db51a689"><div class="ttname"><a href="event__data__wrapper_8h.html#a99c9f26cd90b553b84bf2a56db51a689">fmw_event_data_release</a></div><div class="ttdeci">esp_err_t fmw_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
+<div class="ttc" id="aevent__data__wrapper_8h_html_acbfc3de4d3a066b2adf4d8033f7cb994"><div class="ttname"><a href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a></div><div class="ttdeci">esp_err_t synapse_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa1b2b027ce8a0dfecde7324ecf6e63bc"><div class="ttname"><a href="service__locator_8h.html#aa1b2b027ce8a0dfecde7324ecf6e63bc">fmw_service_get</a></div><div class="ttdeci">service_handle_t fmw_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:179</div></div>
+<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructtimer__api__t_html"><div class="ttname"><a href="structtimer__api__t.html">timer_api_t</a></div><div class="ttdoc">The public Service API structure for the System Timer Service.</div><div class="ttdef"><b>Definition</b> timer_interface.h:31</div></div>
-<div class="ttc" id="astructtimer__api__t_html_a362c2f5fb2285918b2579c0ae273b24e"><div class="ttname"><a href="structtimer__api__t.html#a362c2f5fb2285918b2579c0ae273b24e">timer_api_t::schedule_event</a></div><div class="ttdeci">fmw_timer_handle_t(* schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules an event to be posted on the Event Bus after a specified interval.</div><div class="ttdef"><b>Definition</b> timer_interface.h:41</div></div>
+<div class="ttc" id="astructtimer__api__t_html_a491f4146bb79b02df56f0485e12eb96b"><div class="ttname"><a href="structtimer__api__t.html#a491f4146bb79b02df56f0485e12eb96b">timer_api_t::schedule_event</a></div><div class="ttdeci">synapse_timer_handle_t(* schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules an event to be posted on the Event Bus after a specified interval.</div><div class="ttdef"><b>Definition</b> timer_interface.h:41</div></div>
 <div class="ttc" id="atimer__interface_8h_html"><div class="ttname"><a href="timer__interface_8h.html">timer_interface.h</a></div><div class="ttdoc">Public Service API contract for the System Timer Service module.</div></div>
-<div class="ttc" id="atimer__interface_8h_html_ade6f29151e54d5c129f8b052f6ec3e8a"><div class="ttname"><a href="timer__interface_8h.html#ade6f29151e54d5c129f8b052f6ec3e8a">fmw_timer_handle_t</a></div><div class="ttdeci">void * fmw_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
+<div class="ttc" id="atimer__interface_8h_html_aa1aadaa5d00c8ff5bcb440686f924609"><div class="ttname"><a href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a></div><div class="ttdeci">void * synapse_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md255"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>

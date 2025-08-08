@@ -10,5 +10,5 @@ var searchData=
   ['top_5fvisible_5fitem_7',['top_visible_item',['../structui__manager__private__data__t.html#a6ebaaf2558a4fd03fc0e8d44918f04f5',1,'ui_manager_private_data_t']]],
   ['transmit_8',['transmit',['../structspi__bus__api__t.html#a14569536f7044a7dc918581db66cf059',1,'spi_bus_api_t']]],
   ['turn_5foff_9',['turn_off',['../structrgb__led__api__t.html#a1e7bd763888a4afbe12354d27250ecd3',1,'rgb_led_api_t']]],
-  ['type_10',['type',['../structservice__entry__t.html#a2ffb19a8df6aa8318e4fca7de82b22a3',1,'service_entry_t::type'],['../structui__cmd__t.html#a4efbf68beb8e304734e1803506cf20cb',1,'ui_cmd_t::type']]]
+  ['type_10',['type',['../structservice__entry__t.html#aee2c666bc5090ed0bfc567519c494f9c',1,'service_entry_t::type'],['../structui__cmd__t.html#a4efbf68beb8e304734e1803506cf20cb',1,'ui_cmd_t::type']]]
 ];

@@ -11,8 +11,8 @@
  *          როდესაც მასზე ბოლო მომხმარებელი დაასრულებს მუშაობას.
  */
 
-#ifndef FMW_EVENT_DATA_WRAPPER_H
-#define FMW_EVENT_DATA_WRAPPER_H
+#ifndef SYNAPSE_EVENT_DATA_WRAPPER_H
+#define SYNAPSE_EVENT_DATA_WRAPPER_H
 
 #include "esp_err.h"
 #include <stdint.h>
@@ -42,7 +42,7 @@ typedef struct event_data_wrapper_t
  *          wrapper-ში, ამატებს რა Reference Counting-ის მექანიზმს. შექმნისას
  *          `ref_count` ინიციალიზდება 1-ით, რაც ნიშნავს, რომ გამომძახებელს
  *          ეკუთვნის ეს ობიექტი და პასუხისმგებელია მის განთავისუფლებაზე
- *          `fmw_event_data_release`-ის გამოძახებით.
+ *          `synapse_event_data_release`-ის გამოძახებით.
  *
  * @param[in] payload მაჩვენებელი რეალურ მონაცემებზე, რომლებიც უნდა "შეიფუთოს".
  * @param[in] free_fn ფუნქცია, რომელმაც იცის, როგორ გაათავისუფლოს payload-ის მეხსიერება.
@@ -56,7 +56,7 @@ typedef struct event_data_wrapper_t
  * @retval ESP_ERR_INVALID_ARG თუ `payload` ან `wrapper_out` არის NULL.
  * @retval ESP_ERR_NO_MEM თუ მეხსიერების გამოყოფა ვერ მოხერხდა.
  */
-esp_err_t fmw_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out);
+esp_err_t synapse_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out);
 
 /**
  * @brief ზრდის wrapper-ის მფლობელების (references) რაოდენობას ერთით.
@@ -70,7 +70,7 @@ esp_err_t fmw_event_data_wrap(const void *payload, void (*free_fn)(void *payload
  * @retval ESP_OK თუ ოპერაცია წარმატებით შესრულდა.
  * @retval ESP_ERR_INVALID_ARG თუ `wrapper` არის NULL.
  */
-esp_err_t fmw_event_data_acquire(event_data_wrapper_t* wrapper);
+esp_err_t synapse_event_data_acquire(event_data_wrapper_t *wrapper);
 
 /**
  * @brief ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.
@@ -85,6 +85,6 @@ esp_err_t fmw_event_data_acquire(event_data_wrapper_t* wrapper);
  * @retval ESP_OK თუ ოპერაცია წარმატებით შესრულდა.
  * @retval ESP_ERR_INVALID_ARG თუ `wrapper` არის NULL.
  */
-esp_err_t fmw_event_data_release(event_data_wrapper_t* wrapper);
+esp_err_t synapse_event_data_release(event_data_wrapper_t *wrapper);
 
-#endif // FMW_EVENT_DATA_WRAPPER_H
+#endif // SYNAPSE_EVENT_DATA_WRAPPER_H

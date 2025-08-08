@@ -5,8 +5,8 @@
  * @version 1.0.0
  * @date 2025-08-21
  */
-#ifndef FMW_MCP23017_INTERFACE_H
-#define FMW_MCP23017_INTERFACE_H
+#ifndef SYNAPSE_MCP23017_INTERFACE_H
+#define SYNAPSE_MCP23017_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdbool.h>
@@ -94,4 +94,4 @@ typedef struct {
 }
 #endif
 
-#endif // FMW_MCP23017_INTERFACE_H
+#endif // SYNAPSE_MCP23017_INTERFACE_H

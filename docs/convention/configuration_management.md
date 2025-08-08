@@ -76,7 +76,7 @@ Synapse Framework v5.0.0-დან იყენებს **დეცენტრ
 **(განახლებულია)**
 მიუხედავად იმისა, რომ კონფიგურაცია ფიზიკურად დაყოფილია, `Config Manager` runtime-ში აწყობს ერთიან, ლოგიკურ სტრუქტურას. ამიტომ, პარამეტრებზე წვდომის API უცვლელი რჩება.
 
-### `fmw_config_get_*` ფუნქციების გამოყენება
+### `synapse_config_get_*` ფუნქციების გამოყენება
 
 წვდომა ხდება **წერტილით გამოყოფილი გასაღებით (dot-notation)**:
 
@@ -88,11 +88,11 @@ Synapse Framework v5.0.0-დან იყენებს **დეცენტრ
 ```c
 // გლობალური პარამეტრის წაკითხვა
 char device_prefix[32];
-fmw_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
+synapse_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
 
 // `main_light` ინსტანციის `pin` პარამეტრის წაკითხვა
 int relay_pin;
-fmw_config_get_int("main_light.pin", &relay_pin);
+synapse_config_get_int("main_light.pin", &relay_pin);
 ```
 
 ## კონფიგურაციის პარსინგი მოდულის შიგნით
@@ -140,7 +140,7 @@ static esp_err_t parse_config(const cJSON *config_node, relay_private_data_t *p_
 
 ✅ **ყოველთვის:**
 
-* გამოიყენეთ `fmw_config_get_*` API-ები სხვა მოდულების პარამეტრებზე წვდომისთვის.
+* გამოიყენეთ `synapse_config_get_*` API-ები სხვა მოდულების პარამეტრებზე წვდომისთვის.
 * განსაზღვრეთ მოდულის default კონფიგურაცია მის საკუთარ `config.json` ფაილში.
 * გამოიყენეთ `Kconfig` build-დროის default-ებისთვის.
 
@@ -148,5 +148,5 @@ static esp_err_t parse_config(const cJSON *config_node, relay_private_data_t *p_
 
 1. **კონფიგურაცია დეცენტრალიზებულია:** თითოეული მოდული პასუხისმგებელია თავის default კონფიგურაციაზე.
 2. **`Config Manager` აერთიანებს მათ:** runtime-ში იქმნება ერთიანი, ლოგიკური კონფიგურაციის ხე.
-3. **წვდომის API უცვლელია:** `fmw_config_get_*` ფუნქციები მუშაობს ისე, როგორც ადრე.
+3. **წვდომის API უცვლელია:** `synapse_config_get_*` ფუნქციები მუშაობს ისე, როგორც ადრე.
 4. **`Kconfig` არის default-ების წყარო:** `config.json`-მა შეიძლება გადააფაროს `Kconfig`-ის მნიშვნელობები.

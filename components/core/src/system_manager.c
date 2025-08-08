@@ -43,13 +43,13 @@ static system_manager_api_t system_manager_service_api = {
     .reboot_system = system_manager_reboot_api,
 };
 
-esp_err_t fmw_system_init(void)
+esp_err_t synapse_system_init(void)
 {
     esp_err_t err;
 
     ESP_LOGI(TAG, "--- System Core Initialization ---");
 
-    err = fmw_service_locator_init();
+    err = synapse_service_locator_init();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize Service Locator: %s", esp_err_to_name(err));
@@ -57,7 +57,7 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Service Locator initialized.");
 
-    err = fmw_resource_manager_init();
+    err = synapse_resource_manager_init();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize Resource Manager: %s", esp_err_to_name(err));
@@ -65,7 +65,7 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Resource Manager initialized.");
 
-    err = fmw_config_manager_init();
+    err = synapse_config_manager_init();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize Config Manager: %s", esp_err_to_name(err));
@@ -73,7 +73,7 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Config Manager initialized.");
 
-    err = fmw_event_bus_init();
+    err = synapse_event_bus_init();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize Event Bus: %s", esp_err_to_name(err));
@@ -81,7 +81,7 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Event Bus initialized.");
 
-    err = fmw_promise_manager_init();
+    err = synapse_promise_manager_init();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize Promise Manager: %s", esp_err_to_name(err));
@@ -89,7 +89,7 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Promise Manager initialized.");
 
-    err = fmw_service_register("system_manager", FMW_SERVICE_TYPE_SYSTEM_API, &system_manager_service_api);
+    err = synapse_service_register("system_manager", SYNAPSE_SERVICE_TYPE_SYSTEM_API, &system_manager_service_api);
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register System Manager service: %s", esp_err_to_name(err));
@@ -97,7 +97,7 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "System Manager service registered.");
 
-    err = fmw_module_registry_init();
+    err = synapse_module_registry_init();
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize Module Registry: %s", esp_err_to_name(err));
@@ -105,13 +105,13 @@ esp_err_t fmw_system_init(void)
     }
     ESP_LOGI(TAG, "Module Registry initialized.");
 
-    fmw_module_registry_get_all(&s_modules, &s_module_count);
+    synapse_module_registry_get_all(&s_modules, &s_module_count);
 
     ESP_LOGI(TAG, "--- System Core Initialization Finished: %d modules loaded ---", s_module_count);
     return ESP_OK;
 }
 
-esp_err_t fmw_system_start(void)
+esp_err_t synapse_system_start(void)
 {
     esp_err_t err;
     ESP_LOGI(TAG, "--- Starting all operational modules ---");
@@ -172,8 +172,8 @@ esp_err_t fmw_system_start(void)
     ESP_LOGI(TAG, "--- System is running. ---");
 
     // --- STAGE 3: Notify system that startup is complete ---
-    ESP_LOGI(TAG, "Publishing FMW_EVENT_SYSTEM_START_COMPLETE event.");
-    fmw_event_bus_post(FMW_EVENT_SYSTEM_START_COMPLETE, NULL);
+    ESP_LOGI(TAG, "Publishing SYNAPSE_EVENT_SYSTEM_START_COMPLETE event.");
+    synapse_event_bus_post(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, NULL);
 
     return ESP_OK;
 }
@@ -231,7 +231,7 @@ static esp_err_t resolve_dependencies_for_module(module_t *module)
         {
             // This is a service dependency
             ESP_LOGD(TAG, "Module '%s' depends on SERVICE '%s'. Resolving...", module->name, name_to_find);
-            handle_to_inject = fmw_service_get(name_to_find);
+            handle_to_inject = synapse_service_get(name_to_find);
             if (!handle_to_inject)
             {
                 ESP_LOGE(TAG, "FATAL: Service '%s' not found for module '%s'!", name_to_find, module->name);
@@ -242,7 +242,7 @@ static esp_err_t resolve_dependencies_for_module(module_t *module)
         {
             // This is a module handle dependency
             ESP_LOGD(TAG, "Module '%s' depends on MODULE HANDLE '%s'. Resolving...", module->name, name_to_find);
-            handle_to_inject = fmw_module_registry_find_by_name(name_to_find);
+            handle_to_inject = synapse_module_registry_find_by_name(name_to_find);
             if (!handle_to_inject)
             {
                 ESP_LOGE(TAG, "FATAL: Module handle '%s' not found for module '%s'!", name_to_find, module->name);
@@ -267,12 +267,12 @@ static esp_err_t resolve_dependencies_for_module(module_t *module)
 
 // --- Runtime Functions ---
 
-esp_err_t fmw_module_enable(const char *module_name)
+esp_err_t synapse_module_enable(const char *module_name)
 {
     if (!module_name)
         return ESP_ERR_INVALID_ARG;
 
-    module_t *module = fmw_module_registry_find_by_name(module_name);
+    module_t *module = synapse_module_registry_find_by_name(module_name);
     if (!module)
         return ESP_ERR_NOT_FOUND;
 
@@ -283,12 +283,12 @@ esp_err_t fmw_module_enable(const char *module_name)
     return ESP_ERR_NOT_SUPPORTED;
 }
 
-esp_err_t fmw_module_disable(const char *module_name)
+esp_err_t synapse_module_disable(const char *module_name)
 {
     if (!module_name)
         return ESP_ERR_INVALID_ARG;
 
-    module_t *module = fmw_module_registry_find_by_name(module_name);
+    module_t *module = synapse_module_registry_find_by_name(module_name);
     if (!module)
         return ESP_ERR_NOT_FOUND;
 
@@ -299,12 +299,12 @@ esp_err_t fmw_module_disable(const char *module_name)
     return ESP_ERR_NOT_SUPPORTED;
 }
 
-esp_err_t fmw_module_reconfigure(const char *module_name, const cJSON *new_config)
+esp_err_t synapse_module_reconfigure(const char *module_name, const cJSON *new_config)
 {
     if (!module_name || !new_config)
         return ESP_ERR_INVALID_ARG;
 
-    module_t *module = fmw_module_registry_find_by_name(module_name);
+    module_t *module = synapse_module_registry_find_by_name(module_name);
     if (!module)
         return ESP_ERR_NOT_FOUND;
 
@@ -315,12 +315,12 @@ esp_err_t fmw_module_reconfigure(const char *module_name, const cJSON *new_confi
     return ESP_ERR_NOT_SUPPORTED;
 }
 
-esp_err_t fmw_module_get_status(const char *module_name, module_status_t *status)
+esp_err_t synapse_module_get_status(const char *module_name, module_status_t *status)
 {
     if (!module_name || !status)
         return ESP_ERR_INVALID_ARG;
 
-    module_t *module = fmw_module_registry_find_by_name(module_name);
+    module_t *module = synapse_module_registry_find_by_name(module_name);
     if (!module)
         return ESP_ERR_NOT_FOUND;
 
@@ -335,12 +335,12 @@ esp_err_t fmw_module_get_status(const char *module_name, module_status_t *status
     return ESP_OK;
 }
 
-const cJSON *fmw_module_get_config(const char *module_name)
+const cJSON *synapse_module_get_config(const char *module_name)
 {
     if (!module_name)
         return NULL;
 
-    const module_t *module = fmw_module_registry_find_by_name(module_name);
+    const module_t *module = synapse_module_registry_find_by_name(module_name);
     if (!module)
         return NULL;
 
@@ -353,7 +353,7 @@ const cJSON *fmw_module_get_config(const char *module_name)
 
 static esp_err_t system_manager_get_all_modules_api(const module_t ***modules, uint8_t *count)
 {
-    return fmw_module_registry_get_all(modules, count);
+    return synapse_module_registry_get_all(modules, count);
 }
 
 static esp_err_t system_manager_reboot_api(void)

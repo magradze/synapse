@@ -2,46 +2,46 @@
 
 ## Service Locator API
 
-### fmw_service_register
+### synapse_service_register
 
 ```c
-esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_api_handle);
+esp_err_t synapse_service_register(const char *service_name, synapse_service_type_t service_type, service_handle_t service_api_handle);
 ```
 
 - რეგისტრირებს ახალ სერვისს Service Locator-ში.
 - არგუმენტები: უნიკალური სახელი, ტიპი, API-ის მაჩვენებელი.
 - აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_INVALID_ARG ან ESP_ERR_NO_MEM შეცდომისას.
 
-### fmw_service_unregister
+### synapse_service_unregister
 
 ```c
-esp_err_t fmw_service_unregister(const char *service_name);
+esp_err_t synapse_service_unregister(const char *service_name);
 ```
 
 - აუქმებს სერვისის რეგისტრაციას და ათავისუფლებს დაკავშირებულ რესურსებს.
 - არგუმენტები: რეგისტრაციიდან მოსახსნელი სერვისის უნიკალური სახელი.
 - აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_NOT_FOUND თუ სერვისი ვერ მოიძებნა.
 
-### fmw_service_get
+### synapse_service_get
 
 ```c
-service_handle_t fmw_service_get(const char *service_name);
+service_handle_t synapse_service_get(const char *service_name);
 ```
 
 - აბრუნებს სერვისის API-ს მაჩვენებელს სახელით.
 
-### fmw_service_get_type
+### synapse_service_get_type
 
 ```c
-esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type);
+esp_err_t synapse_service_get_type(const char *service_name, synapse_service_type_t *out_service_type);
 ```
 
 - აბრუნებს სერვისის ტიპს სახელით.
 
-### fmw_service_lookup_by_type
+### synapse_service_lookup_by_type
 
 ```c
-service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
+service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type);
 ```
 
 - ეძებს და აბრუნებს პირველ ნაპოვნ სერვისს მითითებული ტიპის მიხედვით.
@@ -52,30 +52,30 @@ service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
 
 ## Event Bus API
 
-### `fmw_event_bus_post`
+### `synapse_event_bus_post`
 
 ```c
-esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper);
+esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper);
 ```
 
 - **აღწერა:** ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.
 - **`event_name`:** ივენთის უნიკალური სახელი (სტრიქონი).
 - **`data_wrapper`:** მაჩვენებელი "შეფუთულ" მონაცემებზე. თუ მონაცემები არ არის საჭირო, გადაეცემა `NULL`.
 
-### `fmw_event_bus_subscribe`
+### `synapse_event_bus_subscribe`
 
 ```c
-esp_err_t fmw_event_bus_subscribe(const char *event_name, struct module_t *module);
+esp_err_t synapse_event_bus_subscribe(const char *event_name, struct module_t *module);
 ```
 
 - **აღწერა:** არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.
 - **`event_name`:** ივენთის სახელი, რომელზეც ხდება გამოწერა. `*` (wildcard) გამოიწერს ყველა ივენთს.
 - **`module`:** მაჩვენებელი გამომწერ მოდულზე.
 
-### `fmw_event_bus_unsubscribe`
+### `synapse_event_bus_unsubscribe`
 
 ```c
-esp_err_t fmw_event_bus_unsubscribe(const char *event_name, struct module_t *module);
+esp_err_t synapse_event_bus_unsubscribe(const char *event_name, struct module_t *module);
 ```
 
 - **აღწერა:** აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. აუცილებლად უნდა გამოიძახოს მოდულის `deinit` ფუნქციამ.
@@ -86,18 +86,18 @@ esp_err_t fmw_event_bus_unsubscribe(const char *event_name, struct module_t *mod
 
 ## Module Register API
 
-### fmw_module_register
+### synapse_module_register
 
 ```c
-esp_err_t fmw_module_register(const char *module_instance_name, module_t *module);
+esp_err_t synapse_module_register(const char *module_instance_name, module_t *module);
 ```
 
 - რეგისტრირებს ახალ მოდულს სისტემაში.
 
-### fmw_module_find_by_name
+### synapse_module_find_by_name
 
 ```c
-module_t *fmw_module_find_by_name(const char *module_instance_name);
+module_t *synapse_module_find_by_name(const char *module_instance_name);
 ```
 
 - პოულობს მოდულს instance_name-ით.
@@ -106,10 +106,10 @@ module_t *fmw_module_find_by_name(const char *module_instance_name);
 
 ## Module Factory API
 
-### fmw_module_factory_create
+### synapse_module_factory_create
 
 ```c
-module_t *fmw_module_factory_create(const char *type, const cJSON *config);
+module_t *synapse_module_factory_create(const char *type, const cJSON *config);
 ```
 
 - ქმნის მოდულის ახალ ინსტანციას ტიპისა და კონფიგურაციის მიხედვით.
@@ -118,26 +118,26 @@ module_t *fmw_module_factory_create(const char *type, const cJSON *config);
 
 ## Configuration Manager API
 
-### fmw_config_get_string
+### synapse_config_get_string
 
 ```c
-esp_err_t fmw_config_get_string(const char *key, char *value, size_t size);
+esp_err_t synapse_config_get_string(const char *key, char *value, size_t size);
 ```
 
 - კითხულობს სტრიქონის ტიპის პარამეტრს კონფიგურაციიდან.
 
-### fmw_config_get_int
+### synapse_config_get_int
 
 ```c
-esp_err_t fmw_config_get_int(const char *key, int *value);
+esp_err_t synapse_config_get_int(const char *key, int *value);
 ```
 
 - კითხულობს მთელი რიცხვის ტიპის პარამეტრს.
 
-### fmw_config_get_module_config
+### synapse_config_get_module_config
 
 ```c
-const cJSON *fmw_config_get_module_config(const char *module_instance_name);
+const cJSON *synapse_config_get_module_config(const char *module_instance_name);
 ```
 
 - აბრუნებს მოდულის სრულ კონფიგურაციას instance_name-ით.

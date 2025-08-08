@@ -5,8 +5,8 @@
  * @version 1.0.0
  * @date 2025-08-20
  */
-#ifndef FMW_SN74HC595N_WRITER_INTERFACE_H
-#define FMW_SN74HC595N_WRITER_INTERFACE_H
+#ifndef SYNAPSE_SN74HC595N_WRITER_INTERFACE_H
+#define SYNAPSE_SN74HC595N_WRITER_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdbool.h>
@@ -65,4 +65,4 @@ typedef struct {
 }
 #endif
 
-#endif // FMW_SN74HC595N_WRITER_INTERFACE_H
+#endif // SYNAPSE_SN74HC595N_WRITER_INTERFACE_H

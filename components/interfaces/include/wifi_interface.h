@@ -6,8 +6,8 @@
  * @date 2025-08-30
  */
 
-#ifndef FMW_WIFI_INTERFACE_H
-#define FMW_WIFI_INTERFACE_H
+#ifndef SYNAPSE_WIFI_INTERFACE_H
+#define SYNAPSE_WIFI_INTERFACE_H
 
 #include "synapse.h" // For promise callback types
 
@@ -46,4 +46,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_WIFI_INTERFACE_H
+#endif // SYNAPSE_WIFI_INTERFACE_H

@@ -356,7 +356,7 @@ DEFINE_COMPONENT_TAG("{module_name.upper()}");
 
 typedef struct {{
     // TODO: დაამატეთ თქვენი მოდულის მდგომარეობისთვის საჭირო ველები.
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
 """
         if self.is_event_producer:
             source += "    TaskHandle_t task_handle;\n"
@@ -417,7 +417,7 @@ static void {module_name}_task(void *pvParameters) {{
         // TODO: დაამატეთ თქვენი ლოგიკა (მაგ. სენსორის წაკითხვა)
         
         ESP_LOGI(TAG, "Posting event: %s", {module_name.upper()}_EVENT);
-        fmw_event_bus_post({module_name.upper()}_EVENT, NULL);
+        synapse_event_bus_post({module_name.upper()}_EVENT, NULL);
 
         vTaskDelay(pdMS_TO_TICKS(15000)); // მაგალითად, ყოველ 15 წამში
     }}
@@ -484,7 +484,7 @@ static esp_err_t {module_name}_init(module_t *self) {{
         if self.is_service_provider:
             source += f"""
     global_{module_name}_instance = self; // შევინახოთ გლობალური ინსტანცია
-    esp_err_t err = fmw_service_register(p_data->instance_name, FMW_SERVICE_TYPE_CUSTOM_API, &s_api);
+    esp_err_t err = synapse_service_register(p_data->instance_name, SYNAPSE_SERVICE_TYPE_CUSTOM_API, &s_api);
     if (err != ESP_OK) {{
         ESP_LOGE(TAG, "Failed to register service: %s", esp_err_to_name(err));
         return err;
@@ -492,9 +492,9 @@ static esp_err_t {module_name}_init(module_t *self) {{
 """
         if self.is_command_handler:
             source += """
-    // ბრძანების რეგისტრაცია მოხდება FMW_EVENT_SYSTEM_START_COMPLETE-ის შემდეგ,
+    // ბრძანების რეგისტრაცია მოხდება SYNAPSE_EVENT_SYSTEM_START_COMPLETE-ის შემდეგ,
     // რათა Command Router გარანტირებულად იყოს ხელმისაწვდომი.
-    fmw_event_bus_subscribe("FMW_SYSTEM_START_COMPLETE", self);
+    synapse_event_bus_subscribe("SYNAPSE_SYSTEM_START_COMPLETE", self);
 """
         source += """
     self->status = MODULE_STATUS_INITIALIZED;
@@ -530,14 +530,14 @@ static void {module_name}_deinit(module_t *self) {{
 """
         if self.is_service_provider:
             source += """
-    fmw_service_unregister(p_data->instance_name);
+    synapse_service_unregister(p_data->instance_name);
 """
         if self.is_command_handler:
             source += """
-    fmw_event_bus_unsubscribe("FMW_SYSTEM_START_COMPLETE", self);
+    synapse_event_bus_unsubscribe("SYNAPSE_SYSTEM_START_COMPLETE", self);
     // Command unregistration is optional but good practice if the command
     // should only exist while this specific instance exists.
-    // service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    // service_handle_t cmd_router = synapse_service_get("main_cmd_router");
     // if (cmd_router) {
     //     ((cmd_router_api_t *)cmd_router)->unregister_command("{module_name}");
     // }
@@ -561,8 +561,8 @@ static void {module_name}_handle_event(module_t *self, const char *event_name, v
 """
         if self.is_command_handler:
             source += f"""
-    if (strcmp(event_name, "FMW_SYSTEM_START_COMPLETE") == 0) {{
-        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    if (strcmp(event_name, "SYNAPSE_SYSTEM_START_COMPLETE") == 0) {{
+        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
         if (cmd_router) {{
             // შევავსოთ წინასწარ დეკლარირებული ბრძანების სტრუქტურა
             {module_name}_command_definition = (cmd_t){{
@@ -583,7 +583,7 @@ static void {module_name}_handle_event(module_t *self, const char *event_name, v
 """
         source += """
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 """

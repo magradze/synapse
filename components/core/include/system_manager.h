@@ -9,8 +9,8 @@
  * @version 1.0
  * @date 2025-06-24
  */
-#ifndef FMW_SYSTEM_MANAGER_H
-#define FMW_SYSTEM_MANAGER_H
+#ifndef SYNAPSE_SYSTEM_MANAGER_H
+#define SYNAPSE_SYSTEM_MANAGER_H
 
 #include "esp_err.h"
 #include "base_module.h"
@@ -25,17 +25,17 @@
  * @retval ESP_OK თუ ბირთვის ყველა კომპონენტი წარმატებით ინიციალიზდა.
  * @retval ESP_FAIL თუ რომელიმე კრიტიკული კომპონენტის ინიციალიზაცია ვერ მოხერხდა.
  */
-esp_err_t fmw_system_init(void);
+esp_err_t synapse_system_init(void);
 
 /**
  * @brief სისტემის და ყველა დარეგისტრირებული მოდულის გაშვება.
  * @details ეს ფუნქცია იღებს მოდულების მზა, დახარისხებულ სიას Module Registry-დან
  *          და შემდეგ თანმიმდევრულად უშვებს თითოეული მოდულის `init()` და `start()`
- *          ფუნქციებს. `fmw_system_init()` უნდა იყოს გამოძახებული ამ ფუნქციამდე.
+ *          ფუნქციებს. `synapse_system_init()` უნდა იყოს გამოძახებული ამ ფუნქციამდე.
  * @return ოპერაციის წარმატების კოდი.
  * @retval ESP_OK თუ ყველა მოდული წარმატებით გაეშვა.
  */
-esp_err_t fmw_system_start(void);
+esp_err_t synapse_system_start(void);
 
 /**
  * @brief ჩართავს მოდულს runtime-ზე.
@@ -47,7 +47,7 @@ esp_err_t fmw_system_start(void);
  * @retval ESP_ERR_INVALID_ARG თუ `module_name` არის NULL.
  * @retval ESP_ERR_NOT_FOUND თუ მითითებული სახელით მოდული ვერ მოიძებნა.
  */
-esp_err_t fmw_module_enable(const char *module_name);
+esp_err_t synapse_module_enable(const char *module_name);
 
 /**
  * @brief გამორთავს მოდულს runtime-ზე.
@@ -59,7 +59,7 @@ esp_err_t fmw_module_enable(const char *module_name);
  * @retval ESP_ERR_INVALID_ARG თუ `module_name` არის NULL.
  * @retval ESP_ERR_NOT_FOUND თუ მითითებული სახელით მოდული ვერ მოიძებნა.
  */
-esp_err_t fmw_module_disable(const char *module_name);
+esp_err_t synapse_module_disable(const char *module_name);
 
 /**
  * @brief ხელახლა აკონფიგურირებს მოდულს runtime-ზე.
@@ -71,7 +71,7 @@ esp_err_t fmw_module_disable(const char *module_name);
  * @retval ESP_ERR_INVALID_ARG თუ `module_name` ან `new_config` არის NULL.
  * @retval ESP_ERR_NOT_FOUND თუ მითითებული სახელით მოდული ვერ მოიძებნა.
  */
-esp_err_t fmw_module_reconfigure(const char *module_name, const cJSON *new_config);
+esp_err_t synapse_module_reconfigure(const char *module_name, const cJSON *new_config);
 
 /**
  * @brief აბრუნებს მოდულის სტატუსს.
@@ -82,7 +82,7 @@ esp_err_t fmw_module_reconfigure(const char *module_name, const cJSON *new_confi
  * @retval ESP_ERR_INVALID_ARG თუ `module_name` ან `status` არის NULL.
  * @retval ESP_ERR_NOT_FOUND თუ მითითებული სახელით მოდული ვერ მოიძებნა.
  */
-esp_err_t fmw_module_get_status(const char *module_name, module_status_t *status);
+esp_err_t synapse_module_get_status(const char *module_name, module_status_t *status);
 
 /**
  * @brief აბრუნებს ყველა runtime ჩართული მოდულის სიას.
@@ -92,7 +92,7 @@ esp_err_t fmw_module_get_status(const char *module_name, module_status_t *status
  * @return ოპერაციის წარმატების კოდი.
  * @retval ESP_OK წარმატების შემთხვევაში.
  */
-esp_err_t fmw_module_get_all(const module_t ***modules, uint8_t *count);
+esp_err_t synapse_module_get_all(const module_t ***modules, uint8_t *count);
 
 /**
  * @brief აბრუნებს მოდულის კონფიგურაციას.
@@ -100,14 +100,14 @@ esp_err_t fmw_module_get_all(const module_t ***modules, uint8_t *count);
  * @return `const cJSON` ობიექტის მაჩვენებელი, ან NULL თუ მოდული ვერ მოიძებნა.
  * @warning დაბრუნებული cJSON ობიექტი არის მხოლოდ წასაკითხად (read-only) და არ უნდა შეიცვალოს ან გათავისუფლდეს გამომძახებლის მიერ.
  */
-const cJSON *fmw_module_get_config(const char *module_name);
+const cJSON *synapse_module_get_config(const char *module_name);
 
 /**
  * @brief აბრუნებს სისტემის ზოგად ინფორმაციას JSON ფორმატში.
  * @deprecated ეს ფუნქცია მოძველებულია და გადატანილია `version_module`-ში.
- *             გამოიყენეთ `fmw_version_get_info()` ნაცვლად.
+ *             გამოიყენეთ `synapse_version_get_info()` ნაცვლად.
  * @return cJSON ობიექტის მაჩვენებელი, ან NULL შეცდომისას.
  */
-cJSON *system_get_system_info(void) __attribute__((deprecated("Use fmw_version_get_info() instead")));
+cJSON *system_get_system_info(void) __attribute__((deprecated("Use synapse_version_get_info() instead")));
 
-#endif // FMW_SYSTEM_MANAGER_H
+#endif // SYNAPSE_SYSTEM_MANAGER_H

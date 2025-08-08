@@ -67,7 +67,7 @@
 
 **ნაბიჯი 2: ივენთის გამოქვეყნება (Posting)**
 
-გამოიყენეთ `fmw_event_bus_post` ფუნქცია თქვენი ივენთის გასაგზავნად.
+გამოიყენეთ `synapse_event_bus_post` ფუნქცია თქვენი ივენთის გასაგზავნად.
 
 ```c
 #include "my_app_events.h"
@@ -77,7 +77,7 @@ void do_something_and_notify() {
     // ... რაიმე ლოგიკა ...
     ESP_LOGI(TAG, "Posting my cool event!");
     // მეორე პარამეტრი (payload) არის NULL, რადგან მონაცემებს არ ვაგზავნით.
-    fmw_event_bus_post(MY_COOL_EVENT, NULL);
+    synapse_event_bus_post(MY_COOL_EVENT, NULL);
 }
 ```
 
@@ -120,7 +120,7 @@ static void on_wifi_status_received(void* result_data, void* user_context) {
     // ... აქ ხდება JSON-ის პარსინგი და private_data-ს ველების განახლება ...
     
     // ვაგზავნით შიდა ივენთს UI-ს გადასახატად
-    fmw_event_bus_post("UI_HOME_UPDATE", NULL);
+    synapse_event_bus_post("UI_HOME_UPDATE", NULL);
 }
 
 static void on_wifi_status_failed(void* error_data, void* user_context) {

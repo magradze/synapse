@@ -8,8 +8,8 @@
  *          The actual promise creation and handling is done via service provider APIs.
  */
 
-#ifndef FMW_PROMISE_MANAGER_H
-#define FMW_PROMISE_MANAGER_H
+#ifndef SYNAPSE_PROMISE_MANAGER_H
+#define SYNAPSE_PROMISE_MANAGER_H
 
 #include "esp_err.h"
 
@@ -37,11 +37,11 @@ extern "C" {
    */
   typedef void (*promise_catch_cb)(void *error_data, void *user_context);
 
-  // NOTE: fmw_promise_then, fmw_promise_catch, and fmw_promise_destroy are now removed
+  // NOTE: synapse_promise_then, synapse_promise_catch, and synapse_promise_destroy are now removed
   // from the public API as they are no longer needed with the new architecture.
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // FMW_PROMISE_MANAGER_H
+#endif // SYNAPSE_PROMISE_MANAGER_H

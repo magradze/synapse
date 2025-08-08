@@ -27,7 +27,7 @@ DEFINE_COMPONENT_TAG("MODULE_REGISTRY");
  * @internal
  * @brief რეგისტრირებული მოდულების მასივი შიდა აღრიცხვისთვის.
  */
-static module_t* registered_modules[CONFIG_FMW_MAX_MODULES];
+static module_t *registered_modules[CONFIG_SYNAPSE_MAX_MODULES];
 static uint8_t registered_modules_count = 0;
 static SemaphoreHandle_t registry_mutex = NULL;
 
@@ -63,7 +63,8 @@ static int compare_modules_by_init_level(const void *a, const void *b)
 //                      Public API Implementation
 // =========================================================================
 
-esp_err_t fmw_module_registry_init(void) {
+esp_err_t synapse_module_registry_init(void)
+{
     ESP_LOGI(TAG, "--- Module Registry Initialization ---");
 
     registry_mutex = xSemaphoreCreateMutex();
@@ -77,7 +78,7 @@ esp_err_t fmw_module_registry_init(void) {
     registered_modules_count = 0;
 
     // Step 2: მივიღოთ კონფიგურაციის root ობიექტი
-    const cJSON *root = fmw_config_get_root();
+    const cJSON *root = synapse_config_get_root();
     if (!root) {
         ESP_LOGE(TAG, "Failed to get configuration root. Cannot initialize modules.");
         // Mutex-ის განადგურება რესურსის გაჟონვის თავიდან ასაცილებლად
@@ -113,7 +114,7 @@ esp_err_t fmw_module_registry_init(void) {
             continue;
         }
 
-        module_t *new_module = fmw_module_factory_create(type_json->valuestring, module_config_json);
+        module_t *new_module = synapse_module_factory_create(type_json->valuestring, module_config_json);
 
         if (new_module) {
             if (register_module(new_module) != ESP_OK)
@@ -139,7 +140,8 @@ esp_err_t fmw_module_registry_init(void) {
     return ESP_OK;
 }
 
-module_t* fmw_module_registry_find_by_name(const char *name) {
+module_t *synapse_module_registry_find_by_name(const char *name)
+{
     if (!name)
     {
         return NULL;
@@ -151,7 +153,8 @@ module_t* fmw_module_registry_find_by_name(const char *name) {
         return NULL;
     }
 
-    if (xSemaphoreTake(registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Failed to take mutex for find_by_name.");
         return NULL;
     }
@@ -170,7 +173,8 @@ module_t* fmw_module_registry_find_by_name(const char *name) {
     return found_module;
 }
 
-esp_err_t fmw_module_registry_get_all(const module_t ***modules, uint8_t *count) {
+esp_err_t synapse_module_registry_get_all(const module_t ***modules, uint8_t *count)
+{
     if (!modules || !count) {
         return ESP_ERR_INVALID_ARG;
     }
@@ -197,7 +201,8 @@ static esp_err_t register_module(module_t *module) {
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Failed to take mutex for module registration of '%s'.", module->name);
         // თუ რეგისტრაციისას mutex-ს ვერ ვიღებთ, მოდული უნდა განადგურდეს, რათა არ დაიკარგოს მეხსიერება
         if (module->base.deinit)
@@ -207,9 +212,10 @@ static esp_err_t register_module(module_t *module) {
         return ESP_ERR_TIMEOUT;
     }
 
-    if (registered_modules_count >= CONFIG_FMW_MAX_MODULES) {
+    if (registered_modules_count >= CONFIG_SYNAPSE_MAX_MODULES)
+    {
         ESP_LOGE(TAG, "Cannot register module '%s', max module count (%d) reached!",
-                 module->name, CONFIG_FMW_MAX_MODULES);
+                 module->name, CONFIG_SYNAPSE_MAX_MODULES);
         xSemaphoreGive(registry_mutex);
 
         // თუ რეგისტრაციისას ადგილი არ არის, მოდული უნდა განადგურდეს

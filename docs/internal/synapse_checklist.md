@@ -4,7 +4,7 @@
 
 | რუბრიკა | მოთხოვნა | ✓ |
 |--------|----------|----|
-| ✅ ფუნქციის სახელი | იყენებს ფორმატს: `prefix_module_action()` ან `fmw_*` core-თვის |   |
+| ✅ ფუნქციის სახელი | იყენებს ფორმატს: `prefix_module_action()` ან `synapse_*` core-თვის |   |
 | ✅ ლოგის TAG | განსაზღვრულია `DEFINE_COMPONENT_TAG(TAG_NAME)` |   |
 | ✅ ფაილის სახელები | lowercase + `_api.md` ან `_module.c` სტილით |   |
 | ✅ მოდულის სახელები | უნიკალურია სისტემაში (`module_instance_name`) |   |
@@ -14,12 +14,12 @@
 | რუბრიკა | მოთხოვნა | ✓ |
 |--------|----------|----|
 | ✅ არსებობს `*_create(config)` ფუნქცია | იღებს `cJSON*` და ასრულებს ინიციალიზაციას |   |
-| ✅ კონფიგურაციის წაკითხვა | `fmw_config_get_*` ფუნქციების მეშვეობით |   |
+| ✅ კონფიგურაციის წაკითხვა | `synapse_config_get_*` ფუნქციების მეშვეობით |   |
 | ✅ ლოგირება | ყველა მნიშვნელოვანი ქმედება ილოგება |   |
 | ✅ error handling | აბრუნებს `esp_err_t`, ლოგავს შეცდომებს |   |
 | ✅ ინდივიდუალური enable/disable | განსაზღვრულია მოდულის ჩართვა/გამორთვის მეთოდები |   |
 | ✅ event handler | საჭიროების შემთხვევაში რეგისტრირებულია `event_bus_subscribe()` |   |
-| ✅ სერვისის რეგისტრაცია | იყენებს `fmw_service_register()` საჭიროების შემთხვევაში |   |
+| ✅ სერვისის რეგისტრაცია | იყენებს `synapse_service_register()` საჭიროების შემთხვევაში |   |
 | ✅ **რესურსების გასუფთავება** | `deinit` ფუნქცია სრულად ათავისუფლებს ყველა დაკავებულ რესურსს (mutex, memory, event subscriptions). | ☐ |
 
 ## 3. Communication Integration (MQTT/WiFi/ESP-NOW)
@@ -36,10 +36,10 @@
 
 | რუბრიკა | მოთხოვნა | ✓ |
 |--------|----------|----|
-| ✅ Service Locator | სერვისები რეგისტრირდება `fmw_service_register()` |   |
+| ✅ Service Locator | სერვისები რეგისტრირდება `synapse_service_register()` |   |
 | ✅ Event Bus | მოიცავს `event_bus_post()` ან `event_bus_subscribe()` |   |
-| ✅ Module Register | ყველა მოდული რეგისტრირდება `fmw_module_register()` |   |
-| ✅ Module Factory | მართულია `fmw_module_factory_create()` |   |
+| ✅ Module Register | ყველა მოდული რეგისტრირდება `synapse_module_register()` |   |
+| ✅ Module Factory | მართულია `synapse_module_factory_create()` |   |
 
 ## 5. Documentation
 

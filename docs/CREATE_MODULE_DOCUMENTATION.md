@@ -177,7 +177,7 @@ endmenu
 ```c
 // კონფიგურაციის სტრუქტურაში:
 typedef struct {
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     bool auto_start;
     
     // TODO: დაამატეთ მოდულის სპეციფიური ფილდები:
@@ -206,13 +206,13 @@ typedef struct {
 ```c
 static void sensor_handle_event(module_t *self, core_framework_event_id_t event_id, void *event_data) {
     switch (event_id) {
-        case FMW_EVENT_SYSTEM_INIT:
+        case SYNAPSE_EVENT_SYSTEM_INIT:
             // სისტემის ინიციალიზაცია
             break;
-        case FMW_EVENT_SYSTEM_START:
+        case SYNAPSE_EVENT_SYSTEM_START:
             // სისტემის გაშვება
             break;
-        case FMW_EVENT_SENSOR_READ_REQUEST:
+        case SYNAPSE_EVENT_SENSOR_READ_REQUEST:
             // სენსორის წაკითხვის მოთხოვნა
             break;
         default:

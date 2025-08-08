@@ -11,8 +11,8 @@
  * @version 1.0
  */
 
-#ifndef FMW_SERVICE_LOCATOR_H
-#define FMW_SERVICE_LOCATOR_H
+#ifndef SYNAPSE_SERVICE_LOCATOR_H
+#define SYNAPSE_SERVICE_LOCATOR_H
 
 #include "esp_err.h"
 #include "service_types.h"
@@ -40,7 +40,7 @@ extern "C"
    * @retval ESP_ERR_NO_MEM მეხსიერების გამოყოფა ვერ მოხერხდა
    * @retval ESP_ERR_INVALID_STATE სერვის ლოკატორი უკვე ინიციალიზებულია
    */
-  esp_err_t fmw_service_locator_init(void);
+  esp_err_t synapse_service_locator_init(void);
 
   /**
    * @brief ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.
@@ -50,7 +50,7 @@ extern "C"
    *          ნაკად-უსაფრთხოა (thread-safe).
    *
    * @param[in] service_name სერვისის უნიკალური სახელი (მაგ: მოდულის `instance_name`).
-   * @param[in] service_type სერვისის ტიპი `fmw_service_type_t` enum-იდან (მაგ: `SERVICE_TYPE_DISPLAY_API`).
+   * @param[in] service_type სერვისის ტიპი `synapse_service_type_t` enum-იდან (მაგ: `SERVICE_TYPE_DISPLAY_API`).
    * @param[in] service_handle მაჩვენებელი სერვისის API სტრუქტურაზე.
    *
    * @return esp_err_t ოპერაციის წარმატების კოდი.
@@ -60,7 +60,7 @@ extern "C"
    * @retval ESP_ERR_INVALID_STATE თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია.
    * @retval ESP_ERR_TIMEOUT თუ mutex-ის დაკავება ვერ მოხერხდა.
    */
-  esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle);
+  esp_err_t synapse_service_register(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle);
 
   /**
    * @brief სერვისის რეგისტრაციის გაუქმება მისი სახელით.
@@ -77,7 +77,7 @@ extern "C"
    *      - ESP_ERR_INVALID_ARG: service_name არგუმენტი არის NULL ან არასწორია.
    *      - სხვა esp_err_t კოდები საჭიროებისამებრ.
    */
-  esp_err_t fmw_service_unregister(const char *service_name);
+  esp_err_t synapse_service_unregister(const char *service_name);
 
   /**
    * @brief აბრუნებს რეგისტრირებულ სერვისს სახელით
@@ -89,12 +89,12 @@ extern "C"
    * @retval NULL თუ ასეთი სახელით სერვისი არ არის რეგისტრირებული
    */
   service_handle_t
-  fmw_service_get(const char *service_name);
+  synapse_service_get(const char *service_name);
 
   /**
    * @brief აბრუნებს სერვისის ტიპს `enum` სახით.
    *
-   * @details ეძებს სერვისს მისი სახელით და აბრუნებს მის `fmw_service_type_t`
+   * @details ეძებს სერვისს მისი სახელით და აბრუნებს მის `synapse_service_type_t`
    *          ტიპს. ეს საშუალებას გაძლევთ, პროგრამულად შეამოწმოთ, თუ რა ტიპის
    *          სერვისთან გაქვთ საქმე.
    *
@@ -107,7 +107,7 @@ extern "C"
    * @retval ESP_ERR_NOT_FOUND თუ მითითებული სახელით სერვისი ვერ მოიძებნა.
    * @retval ESP_ERR_TIMEOUT თუ mutex-ის დაკავება ვერ მოხერხდა.
    */
-  esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type);
+  esp_err_t synapse_service_get_type(const char *service_name, synapse_service_type_t *out_service_type);
 
   /**
    * @brief აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს
@@ -120,10 +120,10 @@ extern "C"
    * @retval სერვისის API სტრუქტურაზე მაჩვენებელი თუ შესაბამისი ტიპის სერვისი მოიძებნა
    * @retval NULL თუ ასეთი ტიპის სერვისი არ არის რეგისტრირებული
    */
-  service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type);
+  service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* FMW_SERVICE_LOCATOR_H */
+#endif /* SYNAPSE_SERVICE_LOCATOR_H */

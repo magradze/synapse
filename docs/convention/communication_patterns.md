@@ -16,7 +16,7 @@
 
     ```c
     // MQTT module calls display API directly
-    service_handle_t display_service_handle = fmw_service_get("main_display");
+    service_handle_t display_service_handle = synapse_service_get("main_display");
     if (display_service_handle) {
         ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
         ssd1306_service_api->disable();
@@ -38,7 +38,7 @@
         .temperature = 23.5,
         .humidity = 65.2
     };
-    fmw_event_bus_post("SENSOR_DATA_TEMPERATURE", wrapper);
+    synapse_event_bus_post("SENSOR_DATA_TEMPERATURE", wrapper);
     ```
 
 ### 3. Command Router Pattern
@@ -55,8 +55,8 @@
 - **მაგალითი (`relay_actuator.c`-დან):**
 
     ```c
-    // FMW_SYSTEM_START_COMPLETE ივენთის მიღებისას
-    cmd_router_api_t *cmd_api = (cmd_router_api_t *)fmw_service_get("main_cmd_router");
+    // SYNAPSE_SYSTEM_START_COMPLETE ივენთის მიღებისას
+    cmd_router_api_t *cmd_api = (cmd_router_api_t *)synapse_service_get("main_cmd_router");
     if (cmd_api && !cmd_api->is_command_registered("relay")) {
         static cmd_t relay_cmd = {
             .command = "relay",
@@ -78,7 +78,7 @@
     1. მომხმარებელი მოდული იძახებს სერვისის ასინქრონულ API ფუნქციას (მაგ., `wifi_api_get_status_async()`).
     2. სერვისი მომენტალურად აბრუნებს `promise_handle_t` ობიექტს.
     3. მომხმარებელი ამ `handle`-ზე არეგისტრირებს `then` და `catch` `callback` ფუნქციებს.
-    4. როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს `fmw_promise_resolve()` ან `fmw_promise_reject()`-ს, რაც ავტომატურად გამოიწვევს შესაბამისი `callback`-ის შესრულებას `Promise Manager`-ის ტასკის კონტექსტში.
+    4. როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს `synapse_promise_resolve()` ან `synapse_promise_reject()`-ს, რაც ავტომატურად გამოიწვევს შესაბამისი `callback`-ის შესრულებას `Promise Manager`-ის ტასკის კონტექსტში.
 - **მაგალითი (`ui_manager.c`-დან):**
 
     ```c
@@ -89,8 +89,8 @@
     // ასინქრონული გამოძახება
     promise_handle_t p = wifi_service->api->get_status_async(wifi_service->context);
     if (p) {
-        fmw_promise_then(p, on_wifi_status_ready, NULL);
-        fmw_promise_catch(p, on_wifi_status_failed, NULL);
+        synapse_promise_then(p, on_wifi_status_ready, NULL);
+        synapse_promise_catch(p, on_wifi_status_failed, NULL);
     }
     ```
 
@@ -108,12 +108,12 @@
 
 ```c
 // Display module registers API
-fmw_service_register("main_display", FMW_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
+synapse_service_register("main_display", SYNAPSE_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
 
 // MQTT module uses API
-service_handle_t display_service_handle = fmw_service_get("main_display");
-fmw_service_type_t type;
-if (display_service_handle && fmw_service_get_type("main_display", &type) == ESP_OK && type == FMW_SERVICE_TYPE_DISPLAY_API) {
+service_handle_t display_service_handle = synapse_service_get("main_display");
+synapse_service_type_t type;
+if (display_service_handle && synapse_service_get_type("main_display", &type) == ESP_OK && type == SYNAPSE_SERVICE_TYPE_DISPLAY_API) {
     ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
     ssd1306_service_api->enable();
 }
@@ -133,13 +133,13 @@ if (display_service_handle && fmw_service_get_type("main_display", &type) == ESP
 // Sensor publishes data
 telemetry_data_t sensor_telemetry_data = { .temperature = 23.5 };
 event_data_wrapper_t* wrapper;
-fmw_event_data_wrap(&sensor_telemetry_data, NULL, &wrapper);
-fmw_event_bus_post("TELEMETRY_EVENT_SENSOR_DATA", wrapper);
-fmw_event_data_release(wrapper);
+synapse_event_data_wrap(&sensor_telemetry_data, NULL, &wrapper);
+synapse_event_bus_post("TELEMETRY_EVENT_SENSOR_DATA", wrapper);
+synapse_event_data_release(wrapper);
 
 // Multiple modules subscribe
-fmw_event_bus_subscribe("TELEMETRY_EVENT_SENSOR_DATA", mqtt_module_instance);
-fmw_event_bus_subscribe("TELEMETRY_EVENT_SENSOR_DATA", display_module_instance);
+synapse_event_bus_subscribe("TELEMETRY_EVENT_SENSOR_DATA", mqtt_module_instance);
+synapse_event_bus_subscribe("TELEMETRY_EVENT_SENSOR_DATA", display_module_instance);
 ```
 
 ## აკრძალული პატერნები
@@ -160,7 +160,7 @@ ssd1306_api_enable();  // Direct function call - BAD!
 ```c
 // DON'T MIX - choose one pattern per use case
 // Wrong: using both Event Bus AND Service Locator for the same purpose
-fmw_event_bus_post("DISPLAY_ENABLE_EVENT", NULL);  // Event Bus
+synapse_event_bus_post("DISPLAY_ENABLE_EVENT", NULL);  // Event Bus
 display_api->enable();                       // Service Locator
 ```
 
@@ -193,7 +193,7 @@ static ssd1306_api_t ssd1306_service_api = {
 module_t *ssd1306_module_create(const cJSON *config) {
     // ... module creation ...
     // Register API in Service Locator
-    esp_err_t operation_result = fmw_service_register(module->name, FMW_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
+    esp_err_t operation_result = synapse_service_register(module->name, SYNAPSE_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
     if (operation_result != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register service API");
         // ... cleanup ...
@@ -208,14 +208,14 @@ module_t *ssd1306_module_create(const cJSON *config) {
 ```c
 // mqtt_module.c - NO direct includes of other modules!
 static esp_err_t handle_display_command(const char *module_instance_name, const char *action) {
-    service_handle_t display_service_handle = fmw_service_get(module_instance_name);
+    service_handle_t display_service_handle = synapse_service_get(module_instance_name);
     if (!display_service_handle) {
         ESP_LOGW(TAG, "Service not found: %s", module_instance_name);
         return ESP_ERR_NOT_FOUND;
     }
     
-    fmw_service_type_t service_type;
-    if (fmw_service_get_type(module_instance_name, &service_type) != ESP_OK || service_type != FMW_SERVICE_TYPE_DISPLAY_API) {
+    synapse_service_type_t service_type;
+    if (synapse_service_get_type(module_instance_name, &service_type) != ESP_OK || service_type != SYNAPSE_SERVICE_TYPE_DISPLAY_API) {
         ESP_LOGW(TAG, "Invalid service type for %s", module_instance_name);
         return ESP_ERR_INVALID_ARG;
     }
@@ -239,9 +239,9 @@ static esp_err_t handle_display_command(const char *module_instance_name, const 
 static esp_err_t publish_sensor_reading(dht22_private_data_t *dht22_data, float temperature, float humidity) {
     // ... create payload ...
     event_data_wrapper_t *wrapper;
-    fmw_event_data_wrap(payload, free_payload_fn, &wrapper);
-    esp_err_t err = fmw_event_bus_post("TELEMETRY_EVENT_SENSOR_DATA", wrapper);
-    fmw_event_data_release(wrapper);
+    synapse_event_data_wrap(payload, free_payload_fn, &wrapper);
+    esp_err_t err = synapse_event_bus_post("TELEMETRY_EVENT_SENSOR_DATA", wrapper);
+    synapse_event_data_release(wrapper);
     return err;
 }
 ```
@@ -259,7 +259,7 @@ static void mqtt_handle_event(module_t *module, const char *event_name, void *ev
     }
     
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t*)event_data);
+        synapse_event_data_release((event_data_wrapper_t*)event_data);
     }
 }
 ```
@@ -278,7 +278,7 @@ static void mqtt_handle_event(module_t *module, const char *event_name, void *ev
     }
     ```
 
-2. **ივენთის Payload:** როდესაც ეს მოდული აქვეყნებს ივენთს (`FMW_EVENT_RELAY_STATE_CHANGED`), ის `fmw_telemetry_payload_t` სტრუქტურის `module_name` ველში სვამს თავის უნიკალურ `instance_name`-ს (მაგ., `"main_light"`).
+2. **ივენთის Payload:** როდესაც ეს მოდული აქვეყნებს ივენთს (`SYNAPSE_EVENT_RELAY_STATE_CHANGED`), ის `synapse_telemetry_payload_t` სტრუქტურის `module_name` ველში სვამს თავის უნიკალურ `instance_name`-ს (მაგ., `"main_light"`).
 3. **`mqtt_manager`-ის ლოგიკა:** `mqtt_manager` იღებს ამ ივენთს, ხედავს, რომ თემის შაბლონი შეიცავს `{module_name}`-ს, და ცვლის ამ placeholder-ს `payload`-იდან მოსული კონკრეტული სახელით.
 4. **საბოლოო თემა:** შედეგად, იქმნება უნიკალური თემა თითოეული ინსტანციისთვის, მაგ., `.../state/relay/main_light/status`.
 
@@ -314,11 +314,11 @@ sequenceDiagram
 
     User->>Broker: 1. Publish to '.../cmd/in'<br>Payload: "relay main_light on"
     Broker-->>MqttManager: 2. Forwards command
-    MqttManager->>EventBus: 3. Post FMW_EVENT_EXECUTE_COMMAND_STRING
+    MqttManager->>EventBus: 3. Post SYNAPSE_EVENT_EXECUTE_COMMAND_STRING
     EventBus-->>CmdRouter: 4. Delivers event
     CmdRouter->>RelayMod: 5. Executes cmd_handler for "relay"
     RelayMod->>RelayMod: 6. Sets GPIO ON
-    RelayMod->>EventBus: 7. Post FMW_EVENT_RELAY_STATE_CHANGED<br>Payload: {module_name:"main_light", json_data:"{\"state\":\"on\"}"}
+    RelayMod->>EventBus: 7. Post SYNAPSE_EVENT_RELAY_STATE_CHANGED<br>Payload: {module_name:"main_light", json_data:"{\"state\":\"on\"}"}
     EventBus-->>MqttManager: 8. Delivers event
     MqttManager->>MqttManager: 9. Builds dynamic topic:<br>'.../state/relay/main_light/status'
     MqttManager->>Broker: 10. Publish to dynamic topic<br>Payload: "{\"state\":\"on\"}"

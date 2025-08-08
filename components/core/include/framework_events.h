@@ -10,51 +10,51 @@
  */
 
 // --- Command & Control Events ---
-#define FMW_EVENT_EXECUTE_COMMAND_STRING "FMW_EXECUTE_COMMAND_STRING"
+#define SYNAPSE_EVENT_EXECUTE_COMMAND_STRING "SYNAPSE_EXECUTE_COMMAND_STRING"
 
 // --- System State Events ---
-#define FMW_EVENT_SYSTEM_START_COMPLETE "FMW_SYSTEM_START_COMPLETE"
-#define FMW_EVENT_CONFIG_UPDATED "FMW_CONFIG_UPDATED"
+#define SYNAPSE_EVENT_SYSTEM_START_COMPLETE "SYNAPSE_SYSTEM_START_COMPLETE"
+#define SYNAPSE_EVENT_CONFIG_UPDATED "SYNAPSE_CONFIG_UPDATED"
 
 // --- Module Lifecycle Events ---
-#define FMW_EVENT_MODULE_ENABLED "FMW_MODULE_ENABLED"
-#define FMW_EVENT_MODULE_DISABLED "FMW_MODULE_DISABLED"
+#define SYNAPSE_EVENT_MODULE_ENABLED "SYNAPSE_MODULE_ENABLED"
+#define SYNAPSE_EVENT_MODULE_DISABLED "SYNAPSE_MODULE_DISABLED"
 
 // --- Module-specific Status/Data Events ---
-#define FMW_EVENT_WIFI_STATUS_READY "WIFI_STATUS_READY" // WiFi module reports its status
-#define FMW_EVENT_DEVICE_INFO_READY "DEVICE_INFO_READY" // Device identity service reports its information
+#define SYNAPSE_EVENT_WIFI_STATUS_READY "WIFI_STATUS_READY" // WiFi module reports its status
+#define SYNAPSE_EVENT_DEVICE_INFO_READY "DEVICE_INFO_READY" // Device identity service reports its information
 
 // --- Self Test Events ---
-#define FMW_EVENT_SELF_TEST_REPORT_READY "FMW_SELF_TEST_REPORT_READY" // Self Test Manager publishes this when a report is ready
+#define SYNAPSE_EVENT_SELF_TEST_REPORT_READY "SYNAPSE_SELF_TEST_REPORT_READY" // Self Test Manager publishes this when a report is ready
 
 // --- Sensor Aggregator Events ---
-#define FMW_EVENT_AGGREGATED_SENSOR_REPORT "FMW_AGGREGATED_SENSOR_REPORT" // Sensor Aggregator publishes this when it has aggregated data
+#define SYNAPSE_EVENT_AGGREGATED_SENSOR_REPORT "SYNAPSE_AGGREGATED_SENSOR_REPORT" // Sensor Aggregator publishes this when it has aggregated data
 
 // --- Security Status Events ---
-#define FMW_EVENT_SECURITY_STATUS_READY "FMW_SECURITY_STATUS_READY"
+#define SYNAPSE_EVENT_SECURITY_STATUS_READY "SYNAPSE_SECURITY_STATUS_READY"
 
 // --- Relay Actuator Events ---
-#define FMW_EVENT_RELAY_STATE_CHANGED "FMW_RELAY_STATE_CHANGED"
+#define SYNAPSE_EVENT_RELAY_STATE_CHANGED "SYNAPSE_RELAY_STATE_CHANGED"
 
 // --- Watchdog Manager Events ---
-#define FMW_EVENT_WATCHDOG_CHECK_TICK "FMW_WATCHDOG_CHECK_TICK"
-#define FMW_EVENT_HEARTBEAT_MISSED "FMW_HEARTBEAT_MISSED"
-#define FMW_EVENT_WATCHDOG_ALL_OK "FMW_WATCHDOG_ALL_OK"
+#define SYNAPSE_EVENT_WATCHDOG_CHECK_TICK "SYNAPSE_WATCHDOG_CHECK_TICK"
+#define SYNAPSE_EVENT_HEARTBEAT_MISSED "SYNAPSE_HEARTBEAT_MISSED"
+#define SYNAPSE_EVENT_WATCHDOG_ALL_OK "SYNAPSE_WATCHDOG_ALL_OK"
 
 // --- User Input Events ---
-#define FMW_EVENT_BUTTON_PRESSED "BUTTON_PRESSED"
-// #define FMW_EVENT_BUTTON_LONG_PRESSED "BUTTON_LONG_PRESSED"
+#define SYNAPSE_EVENT_BUTTON_PRESSED "BUTTON_PRESSED"
+// #define SYNAPSE_EVENT_BUTTON_LONG_PRESSED "BUTTON_LONG_PRESSED"
 
 /**
  * @brief Generic event published by any module that establishes a critical external connection.
- * @details The payload should be of type fmw_connectivity_payload_t.
+ * @details The payload should be of type synapse_connectivity_payload_t.
  */
-#define FMW_EVENT_CONNECTIVITY_ESTABLISHED "FMW_CONNECTIVITY_ESTABLISHED"
+#define SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED "SYNAPSE_CONNECTIVITY_ESTABLISHED"
 
 /**
  * @brief Generic event published by any module that loses a critical external connection.
- * @details The payload should be of type fmw_connectivity_payload_t.
+ * @details The payload should be of type synapse_connectivity_payload_t.
  */
-#define FMW_EVENT_CONNECTIVITY_LOST "FMW_CONNECTIVITY_LOST"
+#define SYNAPSE_EVENT_CONNECTIVITY_LOST "SYNAPSE_CONNECTIVITY_LOST"
 
 #endif // FRAMEWORK_EVENTS_H

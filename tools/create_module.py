@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Synapse Framework Module Generator v2.1
+Synapse Framework Module Generator v3.1
 =======================================
 
-ავტომატურად ქმნის ახალ მოდულს Synapse Framework-ისთვის, სრული,
-არქეტიპებზე დაფუძნებული კოდის გენერაციით და ინტერაქტიული ინტერფეისით.
+An interactive, archetype-based tool that scaffolds a complete, standards-compliant
+module for the Synapse ESP Framework. This script automates the creation of all
+necessary files, including modular C sources, headers, build scripts, and
+configuration templates, ensuring perfect alignment with the framework's
+rigorous architectural conventions.
 
-ავტორი: Synapse Framework Team
-ვერსია: 2.1.0
+Author: Synapse Framework Team
+Version: 3.1.0
 """
 
 import os
@@ -19,39 +22,37 @@ import subprocess
 from pathlib import Path
 from typing import List, Dict, Optional
 
-# --- კონფიგურაცია ---
+# --- Configuration ---
 
-# ხელმისაწვდომი კატეგორიები და მათი აღწერები
 CATEGORIES = {
-    "actuators": "actuators",
-    "communications": "communications",
-    "diagnostics": "diagnostics",
-    "displays": "displays",
-    "drivers": "drivers",
-    "provisioning": "provisioning",
-    "security": "security",
-    "sensors": "sensors",
-    "storage": "storage",
-    "system": "system",
-    "testing": "testing",
-    "utilities": "utilities"
+    "actuators": "Actuators (e.g., relays, motors)",
+    "communications": "Communication protocols (e.g., MQTT, WiFi)",
+    "diagnostics": "System health and diagnostics",
+    "displays": "Display drivers and UI components",
+    "drivers": "Low-level hardware drivers (e.g., I2C, SPI, GPIO expanders)",
+    "provisioning": "Device provisioning methods",
+    "security": "Security-related modules",
+    "sensors": "Sensor reading and data processing",
+    "storage": "Storage and filesystem management",
+    "system": "Core system services (e.g., timers, watchdogs)",
+    "testing": "Modules for testing and simulation",
+    "utilities": "General-purpose utility modules"
 }
 
-# ხელმისაწვდომი არქეტიპები და მათი აღწერები
 ARCHETYPES = {
-    "basic": "Basic (მინიმალური შაბლონი)",
-    "event_producer": "Event Producer (აგზავნის ივენთებს, მაგ. სენსორი)",
-    "service_provider": "Service Provider (აწვდის API-ს, მაგ. დრაივერი)",
-    "command_handler": "Command Handler (ამუშავებს CLI ბრძანებებს)",
-    "event_service_provider": "Event Producer & Service Provider (ჰიბრიდული)",
-    "event_command_handler": "Event Producer & Command Handler (ჰიბრიდული)",
-    "service_command_handler": "Service Provider & Command Handler (ჰიბრიდული)"
+    "basic": "Basic (a minimal, empty module structure)",
+    "event_producer": "Event Producer (e.g., a sensor that periodically emits data)",
+    "service_provider": "Service Provider (e.g., a driver that offers a public API)",
+    "command_handler": "Command Handler (registers and processes CLI commands)",
+    "event_service_provider": "Event Producer & Service Provider (Hybrid)",
+    "event_command_handler": "Event Producer & Command Handler (Hybrid)",
+    "service_command_handler": "Service Provider & Command Handler (Hybrid)"
 }
 
-# --- დამხმარე ფუნქციები ინტერაქტიული რეჟიმისთვის ---
+# --- Helper Functions for Interactive Mode ---
 
 def get_git_user_name() -> str:
-    """იღებს მომხმარებლის სახელს Git-ის კონფიგურაციიდან."""
+    """Retrieves the user's name from the global Git configuration."""
     try:
         result = subprocess.run(['git', 'config', 'user.name'], capture_output=True, text=True, check=True)
         return result.stdout.strip()
@@ -59,14 +60,14 @@ def get_git_user_name() -> str:
         return "Synapse Framework Team"
 
 def prompt_for_input(prompt_text: str, default: Optional[str] = None) -> str:
-    """სთხოვს მომხმარებელს მონაცემის შეყვანას."""
+    """Prompts the user for text input with an optional default value."""
     prompt_suffix = f" (default: {default})" if default else ""
     full_prompt = f"? {prompt_text}{prompt_suffix}: "
     user_input = input(full_prompt).strip()
     return user_input if user_input else default
 
 def prompt_for_choice(prompt_text: str, choices: Dict[str, str]) -> str:
-    """სთხოვს მომხმარებელს არჩევანის გაკეთებას სიიდან."""
+    """Presents a list of choices to the user and returns the selected key."""
     print(f"? {prompt_text}:")
     choice_keys = list(choices.keys())
     for i, key in enumerate(choice_keys):
@@ -74,530 +75,442 @@ def prompt_for_choice(prompt_text: str, choices: Dict[str, str]) -> str:
     
     while True:
         try:
-            choice_index = int(input("> "))
+            choice_index_str = input("> ").strip()
+            if not choice_index_str:
+                continue
+            choice_index = int(choice_index_str)
             if 0 <= choice_index < len(choice_keys):
                 return choice_keys[choice_index]
             else:
-                print("! არასწორი არჩევანი. გთხოვთ, სცადოთ თავიდან.")
+                print("! Invalid choice. Please try again.")
         except ValueError:
-            print("! გთხოვთ, შეიყვანოთ რიცხვი.")
+            print("! Please enter a number.")
 
-# --- შაბლონების გენერატორი კლასები ---
+# --- Template Generator Classes ---
 
 class TemplateGenerator:
-    """საბაზისო კლასი შაბლონების გენერაციისთვის."""
+    """Base class for template generation, holding shared parameters."""
     def __init__(self, params: Dict):
         self.params = params
+        self.module_name = params['module_name']
+        self.module_upper = self.module_name.upper()
+        self.module_title = params['module_title']
+        self.author = params['author']
+        self.description = params['description']
 
     def generate(self) -> Dict[str, str]:
-        """აგენერირებს ფაილების კონტენტს."""
-        return {
-            "module.json": self._generate_module_json(),
-            "config.json": self._generate_config_json(), # <--- ახალი ხაზი
-            "CMakeLists.txt": self._generate_cmake(),
-            "Kconfig": self._generate_kconfig(),
-            "README.md": self._generate_readme(),
-            f"include/{self.params['module_name']}.h": self._generate_header(),
-            f"src/{self.params['module_name']}.c": self._generate_source(),
-        }
+        """Generates content for all required module files."""
+        # This method is intended to be overridden by the ArchetypeGenerator.
+        return {}
 
     def _generate_module_json(self) -> str:
         module_json = {
-            "name": self.params['module_name'],
+            "name": self.module_name,
             "version": "1.0.0",
-            "description": self.params['description'],
-            "author": self.params['author'],
-            "init_function": f"{self.params['module_name']}_create",
+            "description": self.description,
+            "author": self.author,
+            "init_function": f"{self.module_name}_create",
             "init_level": self.params['init_level'],
             "type": self.params['category'],
             "build_enabled": True,
-            "conditional_config": f"CONFIG_MODULE_{self.params['module_name'].upper()}_ENABLED",
-            "mqtt_interface": {
-                "publishes": {},
-                "subscribes": {}
-            },
+            "conditional_config": f"CONFIG_MODULE_{self.module_upper}_ENABLED",
+            "mqtt_interface": {"publishes": {}, "subscribes": {}},
         }
         return json.dumps(module_json, indent=4, ensure_ascii=False)
 
-    def _generate_cmake(self) -> str:
-        module_name = self.params['module_name']
-        module_title = self.params['module_title']
-        deps = self.params['deps']
-        
-        # დამოკიდებულებების ფორმირება
-        deps_str = "\n".join([f"                {dep}" for dep in deps]) if deps else ""
-        requires_section = f"""            REQUIRES 
-                core 
-                interfaces
-{deps_str}""" if deps_str else """            REQUIRES 
-                core 
-                interfaces"""
-
-        return f"""# {module_title} Module CMake Configuration
-# Component for {self.params['description']}
-# Author: {self.params['author']}
-# Version: 1.0.0
-
-# SMART CONDITIONAL COMPILATION SYSTEM:
-# 1. თუ CONFIG variable ჯერ არ არსებობს (configure ეტაპი), რეგისტრირდება სრული ფუნქციონალით.
-# 2. თუ CONFIG variable არსებობს და ჩართულია, რეგისტრირდება სრული ფუნქციონალით.
-# 3. თუ CONFIG variable არსებობს და გამორთულია, რეგისტრირდება ცარიელი placeholder-ით.
-
-if(NOT DEFINED CONFIG_MODULE_{module_name.upper()}_ENABLED OR CONFIG_MODULE_{module_name.upper()}_ENABLED)
-    # მოდული ჩართულია ან ჯერ არ არის კონფიგურირებული
-    if(NOT DEFINED CONFIG_MODULE_{module_name.upper()}_ENABLED)
-        message(STATUS "{module_title} Module: CONFIGURE STAGE - დროებითი რეგისტრაცია")
-    else()
-        message(STATUS "{module_title} Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
-    endif()
-    
-    idf_component_register(
-        SRCS "src/{module_name}.c"
-        INCLUDE_DIRS "include"
-{requires_section}
-        PRIV_REQUIRES
-            json
-    )
-else()
-    # მოდული გამორთულია
-    message(STATUS "{module_title} Module: DISABLED - კომპილირდება ცარიელი placeholder-ით")
-    
-    set(EMPTY_SOURCE_CONTENT "// {module_name} module disabled by Kconfig\\n// This is an empty placeholder to prevent CMake errors.\\n")
-    file(WRITE "${{CMAKE_CURRENT_BINARY_DIR}}/empty_{module_name}.c" "${{EMPTY_SOURCE_CONTENT}}")
-    
-    idf_component_register(
-        SRCS "${{CMAKE_CURRENT_BINARY_DIR}}/empty_{module_name}.c"
-        INCLUDE_DIRS "include"
-        REQUIRES core interfaces
-    )
-endif()
-"""
-
-    def _generate_kconfig(self) -> str:
-        module_name = self.params['module_name']
-        module_title = self.params['module_title']
-        description = self.params['description']
-
-        return f"""menu "{module_title}"
-
-    config MODULE_{module_name.upper()}_ENABLED
-        bool "Enable {module_title} Module"
-        default y
-        help
-            Enables the {module_name} module for {description}.
-
-    config {module_name.upper()}_DEFAULT_INSTANCE_NAME
-        string "Default Instance Name"
-        default "main_{module_name}"
-        depends on MODULE_{module_name.upper()}_ENABLED
-        help
-            Default instance name for the {module_name} module.
-
-    config {module_name.upper()}_INSTANCE_NAME_MAX_LEN
-        int "Maximum Instance Name Length"
-        default 32
-        range 8 64
-        depends on MODULE_{module_name.upper()}_ENABLED
-        help
-            Maximum length for the {module_name} module instance name string.
-
-endmenu
-"""
-    def _generate_readme(self) -> str:
-        # This will be overridden by archetypes
-        return f"""# 🔌 მოდული: `{self.params['module_name']}`
-
-## 1. 📜 მიმოხილვა
-{self.params['description']}
-"""
-
-    def _generate_header(self) -> str:
-        # This will be overridden by archetypes
-        return f"""/**
- * @file {self.params['module_name']}.h
- * @brief {self.params['description']}
- * @author {self.params['author']}
- */
-#ifndef {self.params['module_name'].upper()}_H
-#define {self.params['module_name'].upper()}_H
-
-#include "base_module.h"
-#include "cJSON.h"
-
-module_t *{self.params['module_name']}_create(const cJSON *config);
-
-#endif // {self.params['module_name'].upper()}_H
-"""
-
-    def _generate_source(self) -> str:
-        # This will be overridden by archetypes
-        return f"""/**
- * @file {self.params['module_name']}.c
- * @brief {self.params['description']}
- * @author {self.params['author']}
- */
-#include "{self.params['module_name']}.h"
-#include "logging.h"
-
-DEFINE_COMPONENT_TAG("{self.params['module_name'].upper()}");
-
-// ... Basic implementation ...
-"""
-
     def _generate_config_json(self) -> str:
-        """Generates a default config.json template."""
-        config_data = [
-            {
-                "type": self.params['module_name'],
-                "enabled": True,
-                "config": {
-                    "instance_name": f"main_{self.params['module_name']}"
-                    # TODO: Add module-specific default configuration parameters here.
-                    # Example:
-                    # "gpio_pin": 23,
-                    # "update_interval_sec": 30
-                }
+        config_data = [{
+            "type": self.module_name,
+            "enabled": True,
+            "config": {
+                "instance_name": f"main_{self.module_name}"
             }
-        ]
+        }]
         return json.dumps(config_data, indent=4, ensure_ascii=False)
 
+    def _generate_kconfig(self) -> str:
+        return f"""config CONFIG_MODULE_{self.module_upper}_ENABLED
+    bool "Enable {self.module_title} Module"
+    default y
+    help
+        Enables the {self.module_name} module, which provides functionality for:
+        {self.description}.
+
+if CONFIG_MODULE_{self.module_upper}_ENABLED
+
+# TODO: Add any module-specific Kconfig options here.
+# Example:
+# config {self.module_upper}_TASK_STACK_SIZE
+#     int "Task Stack Size"
+#     default 3072
+#     help
+#         Stack size for the {self.module_name} background task.
+
+endif # CONFIG_MODULE_{self.module_upper}_ENABLED
+"""
 
 class ArchetypeGenerator(TemplateGenerator):
-    """კლასი, რომელიც აგენერირებს კოდს არქეტიპების მიხედვით."""
+    """Generates code based on selected archetypes and the modular source structure."""
     
     def __init__(self, params: Dict):
         super().__init__(params)
-        self.is_event_producer = "event" in self.params['archetype']
-        self.is_service_provider = "service" in self.params['archetype']
-        self.is_command_handler = "command" in self.params['archetype']
+        archetype = self.params['archetype']
+        self.is_event_producer = "event" in archetype
+        self.is_service_provider = "service" in archetype
+        self.is_command_handler = "command" in archetype
+
+    def generate(self) -> Dict[str, str]:
+        """Generates a dictionary of filenames and their content based on the archetype."""
+        files = {
+            "module.json": self._generate_module_json(),
+            "config.json": self._generate_config_json(),
+            "Kconfig": self._generate_kconfig(),
+            "README.md": self._generate_readme(),
+            f"include/{self.module_name}.h": self._generate_public_header(),
+            f"src/{self.module_name}_internal.h": self._generate_internal_header(),
+            f"src/{self.module_name}.c": self._generate_main_source(),
+        }
+        
+        if self.is_service_provider:
+            files[f"src/{self.module_name}_api.c"] = self._generate_api_source()
+        if self.is_command_handler:
+            files[f"src/{self.module_name}_cmd.c"] = self._generate_cmd_source()
+        if self.is_event_producer or self.is_command_handler:
+            files[f"src/{self.module_name}_events.c"] = self._generate_events_source()
+            
+        files["CMakeLists.txt"] = self._generate_cmake(list(files.keys()))
+        return files
+
+    def _generate_cmake(self, generated_files: List[str]) -> str:
+        src_files = sorted([f for f in generated_files if f.startswith("src/") and f.endswith(".c")])
+        src_list = "\n".join([f'        "{f}"' for f in src_files])
+        
+        deps = self.params['deps']
+        requires_list = "\n".join([f"        {dep}" for dep in deps])
+        
+        return f"""# {self.module_title} Module CMake Configuration
+idf_component_register(
+    SRCS
+{src_list}
+    INCLUDE_DIRS "include"
+    REQUIRES
+        synapse
+        {requires_list}
+    PRIV_REQUIRES
+        json
+)
+"""
 
     def _generate_readme(self) -> str:
-        readme = f"""# 🔌 მოდული: `{self.params['module_name']}`
+        readme = f"""# 🔌 Module: `{self.module_name}`
 
-## 1. 📜 მიმოხილვა
-{self.params['description']}
+## 1. 📜 Overview
+{self.description}
 
-## 2. ⚙️ კონფიგურაცია
-| პარამეტრი | ტიპი | აღწერა |
-|:---|:---|:---|
-| `instance_name` | string | მოდულის უნიკალური სახელი. |
+This module is generated based on the **{self.params['archetype']}** archetype.
+
+## 2. ⚙️ Configuration (`config.json`)
+| Parameter | Type | Description | Required |
+|:---|:---|:---|:---:|
+| `instance_name` | string | The unique name for this module instance. | ✅ |
+| `...` | `...` | TODO: Add other configuration parameters here. | |
+
 """
         if self.is_service_provider:
-            readme += "\n## 3. 🔌 Service API\n- TODO: აღწერეთ თქვენი სერვისის API აქ.\n"
+            readme += "\n## 3. 🔌 Service API\n- TODO: Describe the Service API provided by this module. You will need to create a corresponding `_interface.h` file in `components/interfaces/include`.\n"
         if self.is_event_producer:
-            readme += "\n## 4. 📢 ივენთები\n- TODO: აღწერეთ თქვენს მიერ გამოქვეყნებული ივენთები.\n"
+            readme += "\n## 4. 📢 Published Events\n- TODO: Describe the events published by this module.\n"
         if self.is_command_handler:
-            readme += "\n## 5. ⌨️ CLI ბრძანებები\n- TODO: აღწერეთ თქვენი CLI ბრძანებები.\n"
+            readme += "\n## 5. ⌨️ CLI Commands\n- TODO: Describe the CLI commands registered by this module.\n"
         return readme
 
-    def _generate_header(self) -> str:
-        header = f"""/**
- * @file {self.params['module_name']}.h
- * @brief {self.params['description']}
- * @author {self.params['author']}
+    def _generate_public_header(self) -> str:
+        return f"""/**
+ * @file {self.module_name}.h
+ * @brief Public header for the {self.module_title}.
+ * @author {self.author}
+ * @version 1.0.0
  */
-#ifndef {self.params['module_name'].upper()}_H
-#define {self.params['module_name'].upper()}_H
+#ifndef {self.module_upper}_H
+#define {self.module_upper}_H
 
-#include "base_module.h"
-#include "cJSON.h"
+#include "synapse.h"
+
+#ifdef __cplusplus
+extern "C" {{
+#endif
+
+/**
+ * @brief Factory function to create a new instance of the {self.module_name} module.
+ * @param[in] config The cJSON configuration object for this instance.
+ * @return A pointer to the new module_t instance, or NULL on failure.
+ */
+module_t* {self.module_name}_create(const cJSON *config);
+
+#ifdef __cplusplus
+}}
+#endif
+
+#endif // {self.module_upper}_H
+"""
+
+    def _generate_internal_header(self) -> str:
+        internal_header = f"""/**
+ * @file {self.module_name}_internal.h
+ * @brief Internal declarations for the {self.module_title}.
+ * @author {self.author}
+ */
+#ifndef {self.module_upper}_INTERNAL_H
+#define {self.module_upper}_INTERNAL_H
+
+#include "{self.module_name}.h"
+#include "synapse.h"
 """
         if self.is_service_provider:
-            header += f"""
-/**
- * @brief {self.params['module_title']} მოდულის საჯარო Service API.
- */
-typedef struct {{
-    // TODO: დაამატეთ თქვენი API ფუნქციების მაჩვენებლები.
-    // მაგალითად: esp_err_t (*do_something)(int param);
-    void* reserved; // ცარიელი სტრუქტურების თავიდან ასაცილებლად
-}} {self.params['module_name']}_api_t;
-"""
-        header += f"""
-/**
- * @brief ქმნის ახალ {self.params['module_name']} მოდულის ინსტანციას.
- */
-module_t *{self.params['module_name']}_create(const cJSON *config);
-
-#endif // {self.params['module_name'].upper()}_H
-"""
-        return header
-
-    def _generate_source(self) -> str:
-        module_name = self.params['module_name']
-        module_title = self.params['module_title']
-        init_level = self.params['init_level']
+            internal_header += f'#include "{self.module_name}_interface.h" // IMPORTANT: Create this file in components/interfaces/include\n'
         
-        includes = [
-            f'#include "{module_name}.h"',
-            '#include "synapse.h"',
-        ]
-        if self.is_service_provider:
-            # Service Provider-ს, როგორც წესი, არ სჭირდება სხვა მოდულის ინტერფეისი,
-            # მაგრამ დავტოვოთ კომენტარი მაგალითისთვის.
-            # includes.append('#include "some_other_module_interface.h"')
-            pass
-        if self.is_command_handler:
-            includes.append('#include "cmd_router_interface.h"')
-        if self.is_event_producer:
-            includes.append('#include "freertos/task.h"')
-            includes.append('#include "system_timer_interface.h"') # ტაიმერის სერვისისთვის
-
-        source = f"""/**
- * @file {module_name}.c
- * @brief {self.params['description']}
- * @author {self.params['author']}
- */
-{os.linesep.join(sorted(list(set(includes))))}
-#include <string.h>
-#include <stdlib.h>
-
-DEFINE_COMPONENT_TAG("{module_name.upper()}");
-
+        internal_header += f"""
+// --- Private Data Structure ---
 typedef struct {{
-    // TODO: დაამატეთ თქვენი მოდულის მდგომარეობისთვის საჭირო ველები.
     char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
 """
         if self.is_event_producer:
-            source += "    TaskHandle_t task_handle;\n"
-        source += f"}} {module_name}_private_data_t;\n\n"
-
-        # --- Service Provider-ის ლოგიკა ---
+            internal_header += "    TaskHandle_t task_handle;\n"
         if self.is_service_provider:
-            source += f"""// --- Service Provider Globals & API Implementation ---
-/**
- * @internal
- * @brief გლობალური მაჩვენებელი მოდულის ინსტანციაზე.
- * @details აუცილებელია, რადგან Service API ფუნქციები არ იღებენ module_t* პარამეტრს.
- *          ეს მაჩვენებელი ინიციალიზდება init() ფუნქციაში.
- */
-static module_t *global_{module_name}_instance = NULL;
-...
-"""
-        # --- Command Handler-ის ლოგიკა ---
-        if self.is_command_handler:
-            source += f"""
-// --- Command Handler Implementation ---
+            internal_header += f"    {self.module_name}_api_t service_api;\n"
+        internal_header += f"""    // TODO: Add other private data fields here.
+}} {self.module_name}_private_data_t;
 
-/**
- * @internal
- * @brief {module_name} მოდულის ბრძანებების აღმწერი სტრუქტურა.
- */
-static cmd_t {module_name}_command_definition;
-
-/**
- * @internal
- * @brief {module_name} მოდულის ბრძანებების დამმუშავებელი (handler) ფუნქცია.
- */
-static esp_err_t {module_name}_cmd_handler(int argc, char **argv, void *context) {{
-    module_t *self = (module_t *)context;
-    ESP_LOGI(TAG, "Command handler for '{module_name}' called.");
-    
-    // TODO: დაამატეთ ბრძანების დამუშავების ლოგიკა.
-    if (argc == 2 && strcmp(argv[1], "status") == 0) {{
-        printf("Module {module_name} is currently: %d\\n", self->status);
-    }} else {{
-        printf("Usage: {module_name} status\\n");
-    }}
-    
-    return ESP_OK;
-}}
+// --- Forward Declarations for functions shared across .c files ---
 """
-        # --- Event Producer-ის ლოგიკა ---
         if self.is_event_producer:
-            source += f"""
-// --- Event Producer Task ---
-#define {module_name.upper()}_EVENT "EVT_{module_name.upper()}_DATA"
+            internal_header += f"void {self.module_name}_task(void *pvParameters);\n"
+        if self.is_command_handler:
+            internal_header += "void register_cli_commands(module_t *self);\n"
+        if self.is_event_producer or self.is_command_handler:
+            internal_header += f"void {self.module_name}_handle_event(module_t *self, const char *event_name, void *event_data);\n"
 
-static void {module_name}_task(void *pvParameters) {{
+        internal_header += f"\n#endif // {self.module_upper}_INTERNAL_H\n"
+        return internal_header
+
+    def _generate_main_source(self) -> str:
+        handle_event_assignment = ""
+        if self.is_event_producer or self.is_command_handler:
+            handle_event_assignment = f"    module->base.handle_event = {self.module_name}_handle_event;"
+
+        start_task_logic = ""
+        if self.is_event_producer:
+            start_task_logic = f"""
+    BaseType_t ret = xTaskCreate({self.module_name}_task, self->name, 4096, self, 5, &private_data->task_handle);
+    if (ret != pdPASS) {{
+        ESP_LOGE(TAG, "Failed to create task for {self.module_name}.");
+        return ESP_FAIL;
+    }}"""
+
+        deinit_task_logic = ""
+        if self.is_event_producer:
+            deinit_task_logic = "    if (private_data->task_handle) vTaskDelete(private_data->task_handle);"
+
+        task_implementation = ""
+        if self.is_event_producer:
+            task_implementation = f"""
+// --- Main Processing Task ---
+void {self.module_name}_task(void *pvParameters)
+{{
     module_t *self = (module_t *)pvParameters;
-    ESP_LOGI(TAG, "Task for {module_name} started.");
+    ESP_LOGI(TAG, "Task for %s started.", self->name);
 
     while (1) {{
-        // TODO: დაამატეთ თქვენი ლოგიკა (მაგ. სენსორის წაკითხვა)
-        
-        ESP_LOGI(TAG, "Posting event: %s", {module_name.upper()}_EVENT);
-        synapse_event_bus_post({module_name.upper()}_EVENT, NULL);
-
-        vTaskDelay(pdMS_TO_TICKS(15000)); // მაგალითად, ყოველ 15 წამში
+        // TODO: Implement your main task logic here (e.g., sensor reading).
+        // Example of posting an event:
+        // synapse_event_bus_post("MY_CUSTOM_EVENT", NULL);
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }}
-}}
-"""
-        # --- Forward declarations ---
-        source += f"""
-// --- Base Module Function Declarations ---
-static esp_err_t {module_name}_init(module_t *self);
-static esp_err_t {module_name}_start(module_t *self);
-static void {module_name}_deinit(module_t *self);
-static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data);
+}}"""
 
-// --- Create Function ---
-module_t *{module_name}_create(const cJSON *config) {{
+        return f"""/**
+ * @file {self.module_name}.c
+ * @brief Main lifecycle and task management for the {self.module_title}.
+ * @author {self.author}
+ */
+#include "{self.module_name}_internal.h"
+
+DEFINE_COMPONENT_TAG("{self.module_upper}");
+
+// --- Forward Declarations for static functions in this file ---
+static esp_err_t {self.module_name}_init(module_t *self);
+static esp_err_t {self.module_name}_start(module_t *self);
+static void {self.module_name}_deinit(module_t *self);
+
+// --- Factory Function ---
+module_t* {self.module_name}_create(const cJSON *config)
+{{
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    {module_name}_private_data_t *private_data = ({module_name}_private_data_t *)calloc(1, sizeof({module_name}_private_data_t));
+    {self.module_name}_private_data_t *private_data = ({self.module_name}_private_data_t *)calloc(1, sizeof({self.module_name}_private_data_t));
     if (!module || !private_data) {{
-        ESP_LOGE(TAG, "Failed to allocate memory for {module_name} module");
-        free(module);
-        free(private_data);
-        if (config) cJSON_Delete((cJSON*)config); // გათავისუფლდეს config-იც
+        ESP_LOGE(TAG, "Failed to allocate memory for {self.module_name} module");
+        free(module); free(private_data);
+        if (config) cJSON_Delete((cJSON*)config);
         return NULL;
     }}
 
     module->private_data = private_data;
-    module->current_config = (cJSON*)config; // ვიღებთ ownership-ს
-    module->init_level = {init_level};
+    module->current_config = (cJSON*)config;
+    module->init_level = {self.params['init_level']};
 
-    // --- Parse Configuration ---
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    if (!config_node) {{
-        ESP_LOGE(TAG, "Config node missing for {module_name}");
-        {module_name}_deinit(module); // სრული გასუფთავება
-        return NULL;
-    }}
-    
     const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    if (!cJSON_IsString(name_node)) {{
-        ESP_LOGE(TAG, "instance_name is required for {module_name}");
-        {module_name}_deinit(module);
-        return NULL;
-    }}
     snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
 
-    // TODO: დაამატეთ სხვა კონფიგურაციის პარამეტრების პარსინგი აქ.
+    module->base.init = {self.module_name}_init;
+    module->base.start = {self.module_name}_start;
+    module->base.deinit = {self.module_name}_deinit;
+{handle_event_assignment}
 
-    // --- Setup Base Functions ---
-    module->base.init = {module_name}_init;
-    module->base.start = {module_name}_start;
-    module->base.deinit = {module_name}_deinit;
-    module->base.handle_event = {module_name}_handle_event;
-    
-    ESP_LOGI(TAG, "{module_title} module ('%s') created.", module->name);
+    ESP_LOGI(TAG, "{self.module_title} ('%s') created.", module->name);
     return module;
 }}
 
-// --- Base Module Function Implementations ---
-static esp_err_t {module_name}_init(module_t *self) {{
-    ESP_LOGI(TAG, "Initializing {module_name} module.");
-    {module_name}_private_data_t *p_data = ({module_name}_private_data_t *)self->private_data;
-"""
-        if self.is_service_provider:
-            source += f"""
-    global_{module_name}_instance = self; // შევინახოთ გლობალური ინსტანცია
-    esp_err_t err = synapse_service_register(p_data->instance_name, SYNAPSE_SERVICE_TYPE_CUSTOM_API, &s_api);
-    if (err != ESP_OK) {{
-        ESP_LOGE(TAG, "Failed to register service: %s", esp_err_to_name(err));
-        return err;
-    }}
-"""
-        if self.is_command_handler:
-            source += """
-    // ბრძანების რეგისტრაცია მოხდება SYNAPSE_EVENT_SYSTEM_START_COMPLETE-ის შემდეგ,
-    // რათა Command Router გარანტირებულად იყოს ხელმისაწვდომი.
-    synapse_event_bus_subscribe("SYNAPSE_SYSTEM_START_COMPLETE", self);
-"""
-        source += """
+// --- Lifecycle Functions ---
+static esp_err_t {self.module_name}_init(module_t *self)
+{{
+    ESP_LOGI(TAG, "Initializing '%s'.", self->name);
+    // TODO: Add resource allocation (e.g., mutexes, queues) and
+    // event subscriptions (synapse_event_bus_subscribe) here.
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
-}
-
-static esp_err_t {module_name}_start(module_t *self) {{
-    ESP_LOGI(TAG, "Starting {module_name} module.");
-"""
-        if self.is_event_producer:
-            source += f"""
-    BaseType_t ret = xTaskCreate({module_name}_task, "{module_name}_task", 4096, self, 5, &(({module_name}_private_data_t *)self->private_data)->task_handle);
-    if (ret != pdPASS) {{
-        ESP_LOGE(TAG, "Failed to create task for {module_name}.");
-        return ESP_FAIL;
-    }}
-"""
-        source += """
-    self->status = MODULE_STATUS_RUNNING;
-    return ESP_OK;
-}
-
-static void {module_name}_deinit(module_t *self) {{
-    if (!self) return;
-    ESP_LOGI(TAG, "Deinitializing {module_name} module ('%s').", self->name);
-    {module_name}_private_data_t *p_data = ({module_name}_private_data_t *)self->private_data;
-"""
-        if self.is_event_producer:
-            source += """
-    if (p_data->task_handle) {{
-        vTaskDelete(p_data->task_handle);
-    }}
-"""
-        if self.is_service_provider:
-            source += """
-    synapse_service_unregister(p_data->instance_name);
-"""
-        if self.is_command_handler:
-            source += """
-    synapse_event_bus_unsubscribe("SYNAPSE_SYSTEM_START_COMPLETE", self);
-    // Command unregistration is optional but good practice if the command
-    // should only exist while this specific instance exists.
-    // service_handle_t cmd_router = synapse_service_get("main_cmd_router");
-    // if (cmd_router) {
-    //     ((cmd_router_api_t *)cmd_router)->unregister_command("{module_name}");
-    // }
-"""
-        source += """
-    // --- Free all allocated resources ---
-    if (self->current_config) {{
-        cJSON_Delete(self->current_config);
-    }}
-    if (self->private_data) {{
-        free(self->private_data);
-    }}
-    if (self->state_mutex) {{
-        vSemaphoreDelete(self->state_mutex);
-    }}
-    free(self);
 }}
 
-static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data) {{
-    ESP_LOGD(TAG, "Event received: '%s'", event_name);
-"""
-        if self.is_command_handler:
-            source += f"""
-    if (strcmp(event_name, "SYNAPSE_SYSTEM_START_COMPLETE") == 0) {{
-        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
-        if (cmd_router) {{
-            // შევავსოთ წინასწარ დეკლარირებული ბრძანების სტრუქტურა
-            {module_name}_command_definition = (cmd_t){{
-                .command = "{module_name}",
-                .help = "Command for {module_title}",
-                .usage = "{module_name} status", // საწყისი მაგალითი
-                .min_args = 1,
-                .max_args = 2,
-                .handler = {module_name}_cmd_handler,
-                .context = self
-            }};
-            ((cmd_router_api_t *)cmd_router)->register_command(&{module_name}_command_definition);
-            ESP_LOGI(TAG, "Command '{module_name}' registered successfully.");
-        }} else {{
-            ESP_LOGE(TAG, "Failed to get Command Router service to register command.");
-        }}
-    }}
-"""
-        source += """
-    if (event_data) {
-        synapse_event_data_release((event_data_wrapper_t *)event_data);
-    }
-}
-"""
-        return source
+static esp_err_t {self.module_name}_start(module_t *self)
+{{
+    ESP_LOGI(TAG, "Starting '%s'.", self->name);
+    {self.module_name}_private_data_t *private_data = ({self.module_name}_private_data_t *)self->private_data;
+{start_task_logic}
+    self->status = MODULE_STATUS_RUNNING;
+    return ESP_OK;
+}}
 
-# --- მთავარი ლოგიკა ---
+static void {self.module_name}_deinit(module_t *self)
+{{
+    if (!self) return;
+    ESP_LOGI(TAG, "Deinitializing '%s'.", self->name);
+    {self.module_name}_private_data_t *private_data = ({self.module_name}_private_data_t *)self->private_data;
+{deinit_task_logic}
+    
+    // TODO: Unsubscribe from events and unregister services here.
+
+    if (self->current_config) cJSON_Delete(self->current_config);
+    free(self->private_data);
+    free(self);
+}}
+{task_implementation}
+"""
+
+    def _generate_api_source(self) -> str:
+        return f"""/**
+ * @file {self.module_name}_api.c
+ * @brief Implements the public Service API for the {self.module_title}.
+ * @author {self.author}
+ */
+#include "{self.module_name}_internal.h"
+
+DEFINE_COMPONENT_TAG("{self.module_upper}_API");
+
+// TODO: Implement your service API functions here.
+// These functions will be assigned to the service_api struct in the main .c file.
+//
+// Example:
+// esp_err_t {self.module_name}_api_do_something(void* context, int param) {{
+//     module_t* self = (module_t*)context;
+//     {self.module_name}_private_data_t* private_data = ({self.module_name}_private_data_t*)self->private_data;
+//     // ... implementation ...
+//     return ESP_OK;
+// }}
+"""
+
+    def _generate_cmd_source(self) -> str:
+        return f"""/**
+ * @file {self.module_name}_cmd.c
+ * @brief Implements the CLI command handlers for the {self.module_title}.
+ * @author {self.author}
+ */
+#include "{self.module_name}_internal.h"
+#include "cmd_router_interface.h"
+
+DEFINE_COMPONENT_TAG("{self.module_upper}_CMD");
+
+static esp_err_t {self.module_name}_cmd_handler(int argc, char **argv, void *context)
+{{
+    module_t *self = (module_t *)context;
+    ESP_LOGI(TAG, "Command handler executed for module '%s'.", self->name);
+    // TODO: Implement your command logic here.
+    printf("Hello from {self.module_name} command!\\n");
+    return ESP_OK;
+}}
+
+void register_cli_commands(module_t *self)
+{{
+    static cmd_t cmd_def; // Use a static definition
+    cmd_def = (cmd_t){{
+        .command = "{self.module_name}",
+        .help = "Control the {self.module_title}",
+        .usage = "{self.module_name} <subcommand>",
+        .min_args = 1,
+        .max_args = 2,
+        .handler = {self.module_name}_cmd_handler,
+        .context = self
+    }};
+    
+    service_handle_t cmd_router = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API);
+    if (cmd_router) {{
+        cmd_router_api_t* cmd_api = (cmd_router_api_t*)cmd_router;
+        // Prevent re-registering the same command from multiple instances
+        if (!cmd_api->is_command_registered("{self.module_name}")) {{
+            cmd_api->register_command(&cmd_def);
+            ESP_LOGI(TAG, "Command '{self.module_name}' registered by instance '%s'.", self->name);
+        }}
+    }} else {{
+        ESP_LOGW(TAG, "Command Router service not found, cannot register CLI commands.");
+    }}
+}}
+"""
+
+    def _generate_events_source(self) -> str:
+        return f"""/**
+ * @file {self.module_name}_events.c
+ * @brief Implements the event handlers for the {self.module_title}.
+ * @author {self.author}
+ */
+#include "{self.module_name}_internal.h"
+
+DEFINE_COMPONENT_TAG("{self.module_upper}_EVENTS");
+
+void {self.module_name}_handle_event(module_t *self, const char *event_name, void *event_data)
+{{
+    ESP_LOGD(TAG, "Instance '%s' received event: '%s'", self->name, event_name);
+    
+    {'if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0) {{' if self.is_command_handler else ''}
+    {'    register_cli_commands(self);' if self.is_command_handler else ''}
+    {'}}' if self.is_command_handler else ''}
+
+    // TODO: Add your specific event handling logic here.
+
+    if (event_data) {{
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
+    }}
+}}
+"""
+
+# --- Main Execution Logic ---
 
 def create_module_files(params: Dict):
-    """ქმნის მოდულის ფაილებს და დირექტორიებს."""
-    base_path = Path(__file__).parent.parent
+    """Creates the module directory and file structure."""
+    base_path = Path(__file__).resolve().parent.parent
     module_path = base_path / "components" / "modules" / params['category'] / params['module_name']
     
     if module_path.exists():
-        print(f"! შეცდომა: დირექტორია '{module_path}' უკვე არსებობს.")
+        print(f"! Error: Directory '{module_path}' already exists.")
         sys.exit(1)
 
     (module_path / "src").mkdir(parents=True)
@@ -606,51 +519,44 @@ def create_module_files(params: Dict):
     generator = ArchetypeGenerator(params)
     files_content = generator.generate()
 
-    for file_name, content in files_content.items():
-        # Correctly handle nested paths for include/ and src/
-        if file_name.startswith("include/") or file_name.startswith("src/"):
-            full_path = module_path / file_name
-        else:
-            full_path = module_path / file_name
-        
+    for file_path_str, content in files_content.items():
+        full_path = module_path / file_path_str
         with open(full_path, "w", encoding="utf-8") as f:
             f.write(content)
     
     print("\n" + "="*50)
-    print(f"✅ მოდული '{params['module_title']}' ({params['module_name']}) წარმატებით შეიქმნა!")
-    print(f"   - კატეგორია: {params['category']}")
-    print(f"   - არქეტიპი: {ARCHETYPES[params['archetype']]}")
-    print(f"   - მდებარეობა: {module_path}")
+    print(f"✅ Module '{params['module_title']}' created successfully!")
+    print(f"   - Category: {params['category']}")
+    print(f"   - Archetype: {ARCHETYPES[params['archetype']]}")
+    print(f"   - Location: {module_path}")
     print("="*50)
-    print("\n📋 შემდეგი ნაბიჯები:")
-    print("   1. გახსენით და შეავსეთ ახლად შექმნილი `config.json` ფაილი.")
-    print("   2. `idf.py menuconfig`  # დარწმუნდით, რომ მოდული ჩართულია.")
-    print("   3. `idf.py build`       # ააგეთ პროექტი.")
-    print("   4. შეავსეთ `TODO` კომენტარები გენერირებულ კოდში.")
-
+    print("\n📋 Next Steps:")
+    print("   1. Review and customize the generated `config.json` file.")
+    print("   2. If you chose a Service Provider, create the `_interface.h` file in `components/interfaces/include`.")
+    print("   3. Run `idf.py menuconfig` to ensure the module is enabled.")
+    print("   4. Run `idf.py build` to compile your new module.")
+    print("   5. Fill in the `TODO` comments in the generated source code.")
 
 def main():
-    """სკრიპტის მთავარი შესრულების წერტილი."""
+    """Main entry point for the script."""
     parser = argparse.ArgumentParser(
-        description="Synapse Framework Module Generator v2.1",
+        description="Synapse Framework Module Generator v3.1",
         formatter_class=argparse.RawTextHelpFormatter
     )
-    parser.add_argument("module_title", nargs='?', default=None, help="მოდულის სრული სახელი (მაგ: 'OLED Display'). თუ არ მიუთითებთ, გაეშვება ინტერაქტიული რეჟიმი.")
-    parser.add_argument("-c", "--category", choices=CATEGORIES.keys(), help="მოდულის კატეგორია.")
-    parser.add_argument("-a", "--archetype", choices=ARCHETYPES.keys(), help="მოდულის არქეტიპი (შაბლონის ტიპი).")
-    parser.add_argument("-d", "--description", help="მოდულის მოკლე აღწერა.")
-    parser.add_argument("--author", help="მოდულის ავტორი.")
-    parser.add_argument("--init_level", type=int, help="საწყისი init_level.")
-    parser.add_argument("--deps", help="ESP-IDF კომპონენტებზე დამოკიდებულებები (მძიმით გამოყოფილი).")
+    parser.add_argument("module_title", nargs='?', default=None, help="The full, human-readable name of the module (e.g., 'OLED Display').\nIf omitted, interactive mode will be launched.")
+    parser.add_argument("-c", "--category", choices=CATEGORIES.keys(), help="The module's category.")
+    parser.add_argument("-a", "--archetype", choices=ARCHETYPES.keys(), help="The module's archetype (code template type).")
+    parser.add_argument("-d", "--description", help="A short description of the module.")
+    parser.add_argument("--author", help="The author of the module.")
+    parser.add_argument("--init_level", type=int, help="The initialization level (priority).")
+    parser.add_argument("--deps", help="Comma-separated list of public ESP-IDF/component dependencies (e.g., 'esp_http_client').")
     
     args = parser.parse_args()
-
     params = {}
 
     if args.module_title:
-        # ბრძანების ხაზის რეჟიმი
         if not all([args.category, args.archetype, args.description]):
-            print("! შეცდომა: ბრძანების ხაზის რეჟიმში აუცილებელია --category, --archetype და --description პარამეტრების მითითება.")
+            print("! Error: In command-line mode, --category, --archetype, and --description are required.")
             sys.exit(1)
         params['module_title'] = args.module_title
         params['category'] = args.category
@@ -660,17 +566,16 @@ def main():
         params['init_level'] = args.init_level or 60
         params['deps'] = [dep.strip() for dep in args.deps.split(',')] if args.deps else []
     else:
-        # ინტერაქტიული რეჟიმი
-        print("--- Synapse Module Generator (ინტერაქტიული რეჟიმი) ---")
-        while not (module_title := prompt_for_input("შეიყვანეთ მოდულის სრული სახელი (მაგ: 'OLED Display')")):
-            print("! მოდულის სახელი სავალდებულოა.")
+        print("--- Synapse Module Generator (Interactive Mode) ---")
+        while not (module_title := prompt_for_input("Enter the full module name (e.g., 'OLED Display')")):
+            print("! Module name is required.")
         params['module_title'] = module_title
-        params['category'] = prompt_for_choice("აირჩიეთ კატეგორია", CATEGORIES)
-        params['archetype'] = prompt_for_choice("აირჩიეთ მოდულის არქეტიპი", ARCHETYPES)
-        params['description'] = prompt_for_input("შეიყვანეთ მოკლე აღწერა", f"A module for {params['module_title']}")
-        params['author'] = prompt_for_input("შეიყვანეთ ავტორი", get_git_user_name())
-        params['init_level'] = int(prompt_for_input("შეიყვანეთ საწყისი init_level", "60"))
-        deps_input = prompt_for_input("შეიყვანეთ ESP-IDF დამოკიდებულებები (მძიმით გამოყოფილი, მაგ: esp_http_client)", "")
+        params['category'] = prompt_for_choice("Select a category", CATEGORIES)
+        params['archetype'] = prompt_for_choice("Select a module archetype", ARCHETYPES)
+        params['description'] = prompt_for_input("Enter a short description", f"A module for {params['module_title']}")
+        params['author'] = prompt_for_input("Enter the author", get_git_user_name())
+        params['init_level'] = int(prompt_for_input("Enter the initialization level", "60"))
+        deps_input = prompt_for_input("Enter public dependencies (comma-separated, e.g., esp_http_client)", "")
         params['deps'] = [dep.strip() for dep in deps_input.split(',')] if deps_input else []
 
     params['module_name'] = params['module_title'].lower().replace(' ', '_').replace('-', '_')

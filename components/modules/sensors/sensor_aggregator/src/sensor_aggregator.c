@@ -256,7 +256,6 @@ static void sensor_aggregator_deinit(module_t *self)
     if (private_data->current_snapshot)
         cJSON_Delete(private_data->current_snapshot);
     free(private_data);
-    free(self);
 }
 
 static void sensor_aggregator_handle_event(module_t *self, const char *event_name, void *event_data)

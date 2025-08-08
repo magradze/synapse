@@ -253,7 +253,6 @@ static void health_monitor_deinit(module_t *self)
     {
         vSemaphoreDelete(self->state_mutex);
     }
-    free(self);
 
     ESP_LOGI(TAG, "Module deinitialized successfully");
 }

@@ -21,6 +21,7 @@ if(DEFINED CONFIG_MODULE_COMMAND_ROUTER_ENABLED)
                 core 
                 interfaces
                 console
+                vfs
             PRIV_REQUIRES
                 json
         )

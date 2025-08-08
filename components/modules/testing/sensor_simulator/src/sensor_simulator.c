@@ -313,8 +313,6 @@ static void sensor_simulator_deinit(module_t *self)
     if (self->state_mutex) {
         vSemaphoreDelete(self->state_mutex);
     }
-    
-    free(self);
-    
+
     ESP_LOGI(TAG, "Module deinitialized successfully");
 }

@@ -20,15 +20,23 @@
 
 DEFINE_COMPONENT_TAG("SYSTEM_MANAGER");
 
+// --- Structure for passing data to the temporary deinit task ---
+typedef struct
+{
+    module_t *module_to_deinit;
+    SemaphoreHandle_t done_semaphore;
+} deinit_task_params_t;
+
 /**
  * @internal
  * @brief A static list of all registered and sorted module instances.
  */
-static const module_t **s_modules = NULL;
-static uint8_t s_module_count = 0;
+static const module_t **s_registered_modules = NULL;
+static uint8_t s_registered_module_count = 0;
 
 // --- Forward declarations for internal functions ---
 static esp_err_t resolve_dependencies_for_module(module_t *module);
+static void temporary_deinit_task(void *pvParameters);
 
 // --- Forward declarations for API implementation ---
 static esp_err_t system_manager_get_all_modules_api(const module_t ***modules, uint8_t *count);
@@ -105,9 +113,9 @@ esp_err_t synapse_system_init(void)
     }
     ESP_LOGI(TAG, "Module Registry initialized.");
 
-    synapse_module_registry_get_all(&s_modules, &s_module_count);
+    synapse_module_registry_get_all(&s_registered_modules, &s_registered_module_count);
 
-    ESP_LOGI(TAG, "--- System Core Initialization Finished: %d modules loaded ---", s_module_count);
+    ESP_LOGI(TAG, "--- System Core Initialization Finished: %d modules loaded ---", s_registered_module_count);
     return ESP_OK;
 }
 
@@ -117,9 +125,9 @@ esp_err_t synapse_system_start(void)
     ESP_LOGI(TAG, "--- Starting all operational modules ---");
 
     // --- STAGE 1: Initialize modules in sequence, injecting dependencies just-in-time ---
-    for (uint8_t i = 0; i < s_module_count; i++)
+    for (uint8_t i = 0; i < s_registered_module_count; i++)
     {
-        module_t *module = (module_t *)s_modules[i];
+        module_t *module = (module_t *)s_registered_modules[i];
 
         // Step 1.1: Resolve and inject dependencies for the current module.
         // Because modules are sorted by init_level, any required service from a
@@ -150,9 +158,9 @@ esp_err_t synapse_system_start(void)
     }
 
     // --- STAGE 2: Start all successfully initialized modules ---
-    for (uint8_t i = 0; i < s_module_count; i++)
+    for (uint8_t i = 0; i < s_registered_module_count; i++)
     {
-        module_t *module = (module_t *)s_modules[i];
+        module_t *module = (module_t *)s_registered_modules[i];
         if (module && module->base.start && module->status == MODULE_STATUS_INITIALIZED)
         {
             ESP_LOGI(TAG, "Starting module: '%s'", module->name);
@@ -356,10 +364,102 @@ static esp_err_t system_manager_get_all_modules_api(const module_t ***modules, u
     return synapse_module_registry_get_all(modules, count);
 }
 
-static esp_err_t system_manager_reboot_api(void)
+void synapse_system_shutdown(void)
 {
-    ESP_LOGW(TAG, "Reboot requested via API. Rebooting in 100ms...");
+    ESP_LOGW(TAG, "--- GRACEFUL SHUTDOWN INITIATED ---");
+
+    // Step 1: Notify all modules about the impending shutdown
+    synapse_event_bus_post(SYNAPSE_EVENT_SYSTEM_SHUTDOWN_REQUESTED, NULL);
+
+    // Step 2: Provide a short grace period for modules to finish critical tasks
+    vTaskDelay(pdMS_TO_TICKS(200));
+
+    ESP_LOGI(TAG, "Starting deinitialization of %d modules in reverse order...", s_registered_module_count);
+
+    // Step 3: Deinitialize modules in reverse init_level order
+    for (int i = s_registered_module_count - 1; i >= 0; i--)
+    {
+        module_t *module = (module_t *)s_registered_modules[i];
+        if (module && module->base.deinit)
+        {
+            ESP_LOGI(TAG, "Deinitializing module: '%s' (level %d)...", module->name, module->init_level);
+
+            deinit_task_params_t params = {
+                .module_to_deinit = module,
+                .done_semaphore = xSemaphoreCreateBinary()};
+
+            if (params.done_semaphore == NULL)
+            {
+                ESP_LOGE(TAG, "Failed to create semaphore for deinit task of '%s'. Skipping.", module->name);
+                continue;
+            }
+
+            TaskHandle_t deinit_task_handle;
+            BaseType_t task_created = xTaskCreate(
+                temporary_deinit_task,
+                "deinit_task",
+                CONFIG_SYNAPSE_RUNTIME_TASK_STACK_SIZE,
+                &params,
+                5,
+                &deinit_task_handle);
+
+            if (task_created != pdPASS)
+            {
+                ESP_LOGE(TAG, "Failed to create deinit task for '%s'. Skipping.", module->name);
+                vSemaphoreDelete(params.done_semaphore);
+                continue;
+            }
+
+            if (xSemaphoreTake(params.done_semaphore, pdMS_TO_TICKS(CONFIG_SYNAPSE_DEINIT_TIMEOUT_MS)) == pdTRUE)
+            {
+                // --- შეცვლილი ლოგიკა ---
+                // ლოგი იწერება აქ, სანამ module ობიექტი განადგურდება
+                ESP_LOGI(TAG, "Module '%s' deinitialized successfully.", module->name);
+                // ახლა კი, როდესაც ლოგირება დასრულდა, ვათავისუფლებთ module ობიექტს
+                free(module);
+                s_registered_modules[i] = NULL; // ვასუფთავებთ მასივს
+            }
+            else
+            {
+                ESP_LOGE(TAG, "Timeout waiting for deinit of module '%s'! Forcibly deleting task.", module->name);
+                vTaskDelete(deinit_task_handle);
+                // ამ შემთხვევაშიც, module ობიექტი რჩება მეხსიერებაში (leak), მაგრამ ეს უკეთესია, ვიდრე კრახი.
+            }
+
+            vSemaphoreDelete(params.done_semaphore);
+        }
+        else if (module) // თუ deinit არ აქვს, მაინც გავათავისუფლოთ
+        {
+            ESP_LOGI(TAG, "Module '%s' has no deinit function. Freeing structure.", module->name);
+            free(module);
+            s_registered_modules[i] = NULL;
+        }
+    }
+    ESP_LOGW(TAG, "--- GRACEFUL SHUTDOWN COMPLETE. REBOOTING NOW. ---");
     vTaskDelay(pdMS_TO_TICKS(100));
     esp_restart();
+}
+
+static esp_err_t system_manager_reboot_api(void)
+{
+    // The API call now triggers the graceful shutdown instead of an immediate restart
+    synapse_system_shutdown();
     return ESP_OK; // This line will not be reached
+}
+
+static void temporary_deinit_task(void *pvParameters)
+{
+    deinit_task_params_t *params = (deinit_task_params_t *)pvParameters;
+
+    // 1. Execute the module's internal cleanup
+    params->module_to_deinit->base.deinit(params->module_to_deinit);
+
+    // 2. Now, the System Manager frees the module structure itself
+    // free(params->module_to_deinit);
+
+    // 3. Signal that we are done
+    xSemaphoreGive(params->done_semaphore);
+
+    // The task has completed its purpose and can be deleted
+    vTaskDelete(NULL);
 }

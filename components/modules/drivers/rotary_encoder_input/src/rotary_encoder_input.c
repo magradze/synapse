@@ -30,6 +30,7 @@ static module_t* g_encoder_instances[CONFIG_ROTARY_ENCODER_MAX_INSTANCES] = { NU
 static uint8_t g_active_encoder_count = 0;
 static TaskHandle_t g_shared_task_handle = NULL;
 static SemaphoreHandle_t g_instance_mutex = NULL;
+static volatile bool g_is_task_running = false;
 
 // --- Internal Data Structures ---
 
@@ -92,7 +93,16 @@ module_t *rotary_encoder_input_create(const cJSON *config)
         return NULL;
     }
 
-    module->current_config = (cJSON *)config;
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        // Note: This assumes 'private_data' and 'module' are allocated.
+        // Manual check might be needed for each file's cleanup logic.
+        free(private_data);
+        free(module);
+        return NULL;
+    }
     module->private_data = private_data;
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
@@ -191,29 +201,41 @@ static void rotary_encoder_input_deinit(module_t *self)
 {
     if (!self) return;
 
-    if (xSemaphoreTake(g_instance_mutex, portMAX_DELAY) == pdTRUE) {
-        // Remove this instance from the global array
-        for (int i = 0; i < g_active_encoder_count; i++) {
-            if (g_encoder_instances[i] == self) {
-                // Shift remaining elements to the left
-                for (int j = i; j < g_active_encoder_count - 1; j++) {
+    // --- Step 1: Remove the instance from the active list ---
+    if (xSemaphoreTake(g_instance_mutex, pdMS_TO_TICKS(100)) == pdTRUE)
+    {
+        for (int i = 0; i < g_active_encoder_count; i++)
+        {
+            if (g_encoder_instances[i] == self)
+            {
+                for (int j = i; j < g_active_encoder_count - 1; j++)
+                {
                     g_encoder_instances[j] = g_encoder_instances[j + 1];
                 }
                 g_encoder_instances[g_active_encoder_count - 1] = NULL;
                 g_active_encoder_count--;
+                ESP_LOGI(TAG, "Instance '%s' removed from active list.", self->name);
                 break;
             }
         }
-
-        // If no instances are left, delete the shared task
-        if (g_active_encoder_count == 0 && g_shared_task_handle != NULL) {
-            vTaskDelete(g_shared_task_handle);
-            g_shared_task_handle = NULL;
-            ESP_LOGI(TAG, "Shared rotary task deleted.");
-        }
         xSemaphoreGive(g_instance_mutex);
     }
+    else
+    {
+        ESP_LOGE(TAG, "Failed to take mutex to remove instance '%s'.", self->name);
+    }
 
+    // --- Step 2: If it was the last instance, signal the task to stop ---
+    if (g_active_encoder_count == 0 && g_shared_task_handle != NULL)
+    {
+        ESP_LOGI(TAG, "Last encoder deinitialized. Signaling shared task to stop...");
+        g_is_task_running = false;
+        // Give the task a moment to exit its loop.
+        // The task will delete itself. We don't call vTaskDelete here.
+        vTaskDelay(pdMS_TO_TICKS(CONFIG_ROTARY_ENCODER_POLLING_MS * 2));
+    }
+
+    // --- Step 3: Free instance-specific resources ---
     rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
     if (private_data) {
         if (private_data->control_type == CONTROL_TYPE_GPIO) {
@@ -223,8 +245,11 @@ static void rotary_encoder_input_deinit(module_t *self)
         }
         free(private_data);
     }
-    if (self->current_config) cJSON_Delete(self->current_config);
-    free(self);
+    if (self->current_config)
+    {
+        cJSON_Delete(self->current_config);
+    }
+    // free(self) is handled by the System Manager
 }
 
 // --- Task and Helper Functions ---
@@ -233,7 +258,9 @@ static void rotary_task(void *pvParameters)
 {
     const int8_t rot_states[] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
 
-    while (1) {
+    g_is_task_running = true;
+    while (g_is_task_running)
+    { // <--- შეცვლილია პირობა
         if (xSemaphoreTake(g_instance_mutex, pdMS_TO_TICKS(100)) == pdTRUE) {
             
             for (int i = 0; i < g_active_encoder_count; i++) {
@@ -274,6 +301,11 @@ static void rotary_task(void *pvParameters)
         }
         vTaskDelay(pdMS_TO_TICKS(CONFIG_ROTARY_ENCODER_POLLING_MS));
     }
+
+    // Task is about to exit, clean up its own handle
+    g_shared_task_handle = NULL;
+    ESP_LOGI(TAG, "Shared rotary task has exited gracefully.");
+    vTaskDelete(NULL); // Delete self
 }
 
 static void publish_button_event(const char *button_name)

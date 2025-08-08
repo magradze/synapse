@@ -214,7 +214,6 @@ static void mqtt_manager_deinit(module_t *self)
         cJSON_Delete(self->current_config);
     if (self->state_mutex)
         vSemaphoreDelete(self->state_mutex);
-    free(self);
 
     ESP_LOGI(TAG, "Module deinitialized successfully");
 }

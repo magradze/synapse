@@ -62,7 +62,16 @@ module_t *i2c_bus_create(const cJSON *config) {
         return NULL;
     }
 
-    module->current_config = (cJSON*)config;
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        // Note: This assumes 'private_data' and 'module' are allocated.
+        // Manual check might be needed for each file's cleanup logic.
+        free(private_data);
+        free(module);
+        return NULL;
+    }
     module->private_data = private_data;
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
@@ -193,7 +202,6 @@ static void i2c_bus_deinit(module_t *self) {
     if (self->current_config) {
         cJSON_Delete(self->current_config);
     }
-    free(self);
 }
 
 // --- Internal Helper Functions ---

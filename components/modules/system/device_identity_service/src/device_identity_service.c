@@ -202,7 +202,6 @@ static esp_err_t device_identity_start(module_t *self) {
     return ESP_OK;
 }
 
-
 /**
  * @internal
  * @brief Deinitializes the module and frees all allocated resources.
@@ -217,10 +216,26 @@ static void device_identity_deinit(module_t *self)
     synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
     synapse_service_unregister(self->name);
 
-    if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
-    if (self->private_data) free(self->private_data);
-    if (self->current_config) cJSON_Delete(self->current_config);
-    free(self);
+    // current_config-ის გათავისუფლება უნდა მოხდეს private_data-ს გათავისუფლებამდე,
+    // რადგან private_data-მ შეიძლება გამოიყენოს config-ის მონაცემები.
+    // თუმცა, ამ მოდულში ეს ასე არ არის, მაგრამ ზოგადი წესია.
+    if (self->current_config)
+    {
+        cJSON_Delete(self->current_config);
+        self->current_config = NULL; // კარგი პრაქტიკაა, თავიდან ავიცილოთ dangling pointer
+    }
+
+    if (self->private_data)
+    {
+        free(self->private_data);
+        self->private_data = NULL;
+    }
+
+    if (self->state_mutex)
+    {
+        vSemaphoreDelete(self->state_mutex);
+        self->state_mutex = NULL;
+    }
 
     global_identity_service_instance = NULL;
 }
@@ -400,10 +415,15 @@ static void register_cli_commands(module_t *self)
  */
 static void unregister_cli_commands(void)
 {
-    service_handle_t cmd_router_handle = synapse_service_get("main_cmd_router");
+    service_handle_t cmd_router_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API);
     if (cmd_router_handle) {
         cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router_handle;
         cmd_api->unregister_command("device");
         ESP_LOGI(TAG, "'device' command unregistered.");
+    }
+    else
+    {
+        // ეს ლოგი ახლა გამოჩნდება deinit-ის დროს და დაადასტურებს, რომ ყველაფერი რიგზეა.
+        ESP_LOGD(TAG, "Command Router service not found during deinit, skipping command unregistration.");
     }
 }

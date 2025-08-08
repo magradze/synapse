@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
   <div class="headertitle"><div class="title">Core კომპონენტები (Core Components)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1350"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1352"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1371"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1373"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ის ბირთვის (core) ძირითად კომპონენტებს, მათ დანიშნულებას, მთავარ ფუნქციებსა და გამოყენების მაგალითებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1354"></a>
+<h1><a class="anchor" id="autotoc_md1375"></a>
 ძირითადი კომპონენტები</h1>
-<h2><a class="anchor" id="autotoc_md1355"></a>
+<h2><a class="anchor" id="autotoc_md1376"></a>
 1. Service Locator</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.</li>
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="ttc" id="astructssd1306__api__t_html_a49c18ab20520fe0db6e0bf9bf5170d79"><div class="ttname"><a href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">ssd1306_api_t::enable</a></div><div class="ttdeci">esp_err_t(* enable)(void *context)</div><div class="ttdoc">Enables the display.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:29</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1356"></a>
+<h2><a class="anchor" id="autotoc_md1377"></a>
 2. Event Bus</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს broadcast/notification ტიპის კომუნიკაციას მოდულებს შორის.</li>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1357"></a>
+<h2><a class="anchor" id="autotoc_md1378"></a>
 3. Module Register</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას და მართვას.</li>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1358"></a>
+<h2><a class="anchor" id="autotoc_md1379"></a>
 4. Module Factory</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების დინამიურ შექმნას და ინიციალიზაციას კონფიგურაციის მიხედვით.</li>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1359"></a>
+<h2><a class="anchor" id="autotoc_md1380"></a>
 5. Configuration Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.</li>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="line">synapse_config_get_string(<span class="stringliteral">&quot;mqtt_module.config.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1360"></a>
+<h2><a class="anchor" id="autotoc_md1381"></a>
 6. Logging</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სტანდარტიზებულ და კონტექსტურ ლოგირებას ყველა კომპონენტსა და მოდულში.</li>
@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1361"></a>
+<h2><a class="anchor" id="autotoc_md1382"></a>
 7. Promise Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს ასინქრონული "მოთხოვნა-პასუხის" ოპერაციების მართვას სუფთა და სტრუქტურირებული <code>Promise</code> პატერნის გამოყენებით.</li>
@@ -198,11 +198,26 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 <li><p class="startli"><b>მაგალითი:</b></p>
-<p class="startli">```c promise_handle_t p = wifi_api-&gt;get_status_async(); synapse_promise_then(p, on_status_received_callback, NULL);</p>
+<div class="fragment"><div class="line">  <a class="code hl_struct" href="structpromise__t.html">promise_handle_t</a> p = wifi_api-&gt;get_status_async();</div>
+<div class="line">  synapse_promise_then(p, on_status_received_callback, NULL);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">### 8. Task Pool Manager</span></div>
+<div class="line"> </div>
+<div class="line">- **როლი:** უზრუნველყოფს <span class="stringliteral">&quot;მუშა ტასკების&quot;</span> (Worker Tasks) ერთობლიობას, რათა მცირე, პერიოდულმა მოდულებმა შეასრულონ თავიანთი სამუშაო საკუთარი ტასკის შექმნის გარეშე.</div>
+<div class="line">- **მთავარი ფუნქციები:**</div>
+<div class="line">  - სამუშაოს დაგეგმვა (`<a class="code hl_function" href="task__pool__manager_8h.html#a431a85109a972dfe31d5c2a7167c8f0b">synapse_task_pool_schedule_job</a>`)</div>
+<div class="line">  - სამუშაოს გაუქმება (`<a class="code hl_function" href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323">synapse_task_pool_cancel_job</a>`)</div>
+<div class="line">- **სარგებელი:** რადიკალურად ამცირებს RAM-ის მოხმარებას და სისტემურ დატვირთვას მრავალი მოდულის არსებობის შემთხვევაში.</div>
+<div class="line">- **მაგალითი:**</div>
+<div class="ttc" id="astructpromise__t_html"><div class="ttname"><a href="structpromise__t.html">promise_t</a></div><div class="ttdef"><b>Definition</b> promise_manager.c:39</div></div>
+<div class="ttc" id="atask__pool__manager_8h_html_a431a85109a972dfe31d5c2a7167c8f0b"><div class="ttname"><a href="task__pool__manager_8h.html#a431a85109a972dfe31d5c2a7167c8f0b">synapse_task_pool_schedule_job</a></div><div class="ttdeci">synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void *user_context, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules a new job for execution by the task pool.</div><div class="ttdef"><b>Definition</b> task_pool_manager.c:88</div></div>
+<div class="ttc" id="atask__pool__manager_8h_html_a4f4a978a64cf383da083abae40a3f323"><div class="ttname"><a href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323">synapse_task_pool_cancel_job</a></div><div class="ttdeci">esp_err_t synapse_task_pool_cancel_job(synapse_job_handle_t handle)</div><div class="ttdoc">Cancels a previously scheduled job.</div><div class="ttdef"><b>Definition</b> task_pool_manager.c:117</div></div>
+</div><!-- fragment --><p> c // სენსორის პერიოდული წაკითხვის დაგეგმვა synapse_task_pool_schedule_job(sensor_poll_function, self, 30000, true);</p>
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1363"></a>
+<h1><a class="anchor" id="autotoc_md1384"></a>
 ურთიერთქმედება მოდულებთან</h1>
 <ul>
 <li>ყველა მოდული core-ის კომპონენტებს იყენებს მხოლოდ მათი public API-ების მეშვეობით.</li>
@@ -210,7 +225,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <li>core უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას, კონფიგურაციას და ლოგირებას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1365"></a>
+<h1><a class="anchor" id="autotoc_md1386"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

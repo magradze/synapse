@@ -101,22 +101,29 @@ Collaboration diagram for health_monitor_private_data_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structhealth__monitor__private__data__t__coll__graph.png" border="0" usemap="#ahealth__monitor__private__data__t_coll__map" alt="Collaboration graph"/></div>
 <map name="ahealth__monitor__private__data__t_coll__map" id="ahealth__monitor__private__data__t_coll__map">
-<area shape="rect" title=" " alt="" coords="75,93,249,133"/>
-<area shape="rect" href="structhealth__thresholds__t.html" title=" " alt="" coords="5,5,156,31"/>
-<area shape="poly" title=" " alt="" coords="102,39,147,91,143,95,98,43"/>
-<area shape="rect" href="structcustom__check__t.html" title=" " alt="" coords="180,5,307,31"/>
-<area shape="poly" title=" " alt="" coords="228,43,205,71,183,95,179,91,201,68,224,40"/>
+<area shape="rect" title=" " alt="" coords="339,273,513,313"/>
+<area shape="rect" href="structmodule__t.html" title="The primary structure defining a framework module." alt="" coords="49,139,131,165"/>
+<area shape="poly" title=" " alt="" coords="131,167,381,271,379,276,129,172"/>
+<area shape="poly" title=" " alt="" coords="124,133,147,136,155,142,158,152,153,164,142,170,126,171,110,167,111,162,127,166,140,165,149,160,153,152,151,145,145,141,123,139"/>
+<area shape="rect" href="structmodule__dependency__t.html" title="Describes a single service dependency for a module." alt="" coords="5,5,175,31"/>
+<area shape="poly" title=" " alt="" coords="93,45,93,139,87,139,87,45"/>
+<area shape="rect" href="structhealth__thresholds__t.html" title=" " alt="" coords="269,139,420,165"/>
+<area shape="poly" title=" " alt="" coords="361,175,417,272,413,274,356,178"/>
+<area shape="rect" href="structcustom__check__t.html" title=" " alt="" coords="444,139,571,165"/>
+<area shape="poly" title=" " alt="" coords="506,179,497,215,480,251,457,275,453,271,476,248,492,213,501,178"/>
+<area shape="rect" href="structsynapse__job__t.html" title=" " alt="" coords="595,139,710,165"/>
+<area shape="poly" title=" " alt="" coords="647,179,629,216,615,235,598,251,558,274,514,286,513,281,556,269,595,247,611,232,624,214,642,176"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ac760b8592283db865c3e0c717cb00ffb" id="r_ac760b8592283db865c3e0c717cb00ffb"><td class="memItemLeft" align="right" valign="top"><a id="ac760b8592283db865c3e0c717cb00ffb" name="ac760b8592283db865c3e0c717cb00ffb"></a>
+<a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>self</b></td></tr>
+<tr class="separator:ac760b8592283db865c3e0c717cb00ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441fdd58d09585a660d222e7d84ac1ad" id="r_a441fdd58d09585a660d222e7d84ac1ad"><td class="memItemLeft" align="right" valign="top"><a id="a441fdd58d09585a660d222e7d84ac1ad" name="a441fdd58d09585a660d222e7d84ac1ad"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>instance_name</b> [CONFIG_HEALTH_MONITOR_INSTANCE_NAME_MAX_LEN]</td></tr>
 <tr class="separator:a441fdd58d09585a660d222e7d84ac1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86b9c4574ccdb4ec7b2524613882ad78" id="r_a86b9c4574ccdb4ec7b2524613882ad78"><td class="memItemLeft" align="right" valign="top"><a id="a86b9c4574ccdb4ec7b2524613882ad78" name="a86b9c4574ccdb4ec7b2524613882ad78"></a>
-TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_task_handle</b></td></tr>
-<tr class="separator:a86b9c4574ccdb4ec7b2524613882ad78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46c17a0200dfe766e80e78b9595e1694" id="r_a46c17a0200dfe766e80e78b9595e1694"><td class="memItemLeft" align="right" valign="top"><a id="a46c17a0200dfe766e80e78b9595e1694" name="a46c17a0200dfe766e80e78b9595e1694"></a>
 <a class="el" href="structhealth__thresholds__t.html">health_thresholds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>thresholds</b></td></tr>
 <tr class="separator:a46c17a0200dfe766e80e78b9595e1694"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +136,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>custom_check_count
 <tr class="memitem:a0f07d2ceab01e405d75db0986b067bb4" id="r_a0f07d2ceab01e405d75db0986b067bb4"><td class="memItemLeft" align="right" valign="top"><a id="a0f07d2ceab01e405d75db0986b067bb4" name="a0f07d2ceab01e405d75db0986b067bb4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_provisioning_active</b></td></tr>
 <tr class="separator:a0f07d2ceab01e405d75db0986b067bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5abd3a786f8840c1cff31ac642d39c8c" id="r_a5abd3a786f8840c1cff31ac642d39c8c"><td class="memItemLeft" align="right" valign="top"><a id="a5abd3a786f8840c1cff31ac642d39c8c" name="a5abd3a786f8840c1cff31ac642d39c8c"></a>
+<a class="el" href="task__pool__manager_8h.html#aa66f647dc86661ec0359cd9cdf28d683">synapse_job_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>job_handle</b></td></tr>
+<tr class="separator:a5abd3a786f8840c1cff31ac642d39c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>components/modules/system/health_monitor/src/<a class="el" href="health__monitor_8c.html">health_monitor.c</a></li>

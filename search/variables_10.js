@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scan_0',['scan',['../structi2c__bus__api__t.html#a4c57d7686ca5efa19272b5c333cf7ede',1,'i2c_bus_api_t']]],
+  ['scan_0',['scan',['../structi2c__bus__api__t.html#ac341f0497419e5b33b54e1273e7b2237',1,'i2c_bus_api_t']]],
   ['schedule_5fevent_1',['schedule_event',['../structtimer__api__t.html#a491f4146bb79b02df56f0485e12eb96b',1,'timer_api_t']]],
   ['screen_5foff_5ftimer_2',['screen_off_timer',['../structui__manager__private__data__t.html#a51f763c6ffcc48cc42dc0839f836dbdc',1,'ui_manager_private_data_t']]],
   ['selected_5fcontrol_5fmodule_3',['selected_control_module',['../structui__manager__private__data__t.html#a27bce9044338fa50a7f29a26abaa5d9b',1,'ui_manager_private_data_t']]],

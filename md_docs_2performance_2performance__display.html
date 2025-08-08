@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__dis
   <div class="headertitle"><div class="title">ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1625"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1627"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1646"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1648"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის ეკრანის (Display) მოდულების ოპტიმიზაციის რჩევებსა და საუკეთესო პრაქტიკებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1629"></a>
+<h1><a class="anchor" id="autotoc_md1650"></a>
 ოპტიმიზაციის რეკომენდაციები</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ საჭირო refresh rate და update interval</li>
@@ -108,9 +108,9 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__dis
 <li>გამორთეთ ეკრანი ან შეამცირეთ update ინტერვალი ენერგიის დაზოგვისთვის</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1631"></a>
+<h1><a class="anchor" id="autotoc_md1652"></a>
 მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1632"></a>
+<h2><a class="anchor" id="autotoc_md1653"></a>
 Refresh interval-ის ოპტიმიზაცია</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define DISPLAY_UPDATE_INTERVAL_MS 500</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> display_task(<span class="keywordtype">void</span> *arg) {</div>
@@ -119,13 +119,13 @@ Refresh interval-ის ოპტიმიზაცია</h2>
 <div class="line">        vTaskDelay(pdMS_TO_TICKS(DISPLAY_UPDATE_INTERVAL_MS));</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1633"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1654"></a>
 Conditional redraw</h2>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (display_data_changed) {</div>
 <div class="line">    update_display();</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1635"></a>
+<h1><a class="anchor" id="autotoc_md1656"></a>
 Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ საჭირო refresh და redraw ოპერაციები</li>
@@ -133,7 +133,7 @@ Best Practices</h1>
 <li>გამოიყენეთ ლოგირება ეკრანის ოპერაციების მონიტორინგისთვის</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1637"></a>
+<h1><a class="anchor" id="autotoc_md1658"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>

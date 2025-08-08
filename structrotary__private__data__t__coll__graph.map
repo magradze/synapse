@@ -1,7 +1,14 @@
 <map id="rotary_private_data_t" name="rotary_private_data_t">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,181,168,207"/>
-<area shape="rect" id="Node000002" href="$structmcp23017__handle__t.html" title="The handle returned by the Service Locator for an MCP23017 service." alt="" coords="10,93,163,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,133,89,181,84,181,84,133"/>
-<area shape="rect" id="Node000003" href="$structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module." alt="" coords="22,5,151,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,45,89,93,84,93,84,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="265,273,427,299"/>
+<area shape="rect" id="Node000002" href="$structmodule__t.html" title="The primary structure defining a framework module." alt="" coords="49,139,131,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,169,325,271,322,276,123,173"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="124,133,147,136,155,142,158,152,153,164,142,170,126,171,110,167,111,162,127,166,140,165,149,160,153,152,151,145,145,141,123,139"/>
+<area shape="rect" id="Node000003" href="$structmodule__dependency__t.html" title="Describes a single service dependency for a module." alt="" coords="5,5,175,31"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="93,45,93,139,87,139,87,45"/>
+<area shape="rect" id="Node000004" href="$structmcp23017__handle__t.html" title="The handle returned by the Service Locator for an MCP23017 service." alt="" coords="269,139,423,165"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="349,179,349,273,343,273,343,179"/>
+<area shape="rect" id="Node000005" href="$structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module." alt="" coords="281,5,411,31"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="349,45,349,139,343,139,343,45"/>
+<area shape="rect" id="Node000006" href="$structsynapse__job__t.html" title=" " alt="" coords="447,139,562,165"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="504,179,494,216,484,235,470,251,450,266,427,276,425,271,447,261,467,247,479,232,489,214,499,178"/>
 </map>

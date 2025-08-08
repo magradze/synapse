@@ -1,9 +1,11 @@
 <map id="components/interfaces/include/i2c_bus_interface.h" name="components/interfaces/include/i2c_bus_interface.h">
-<area shape="rect" id="Node000001" title="Public Service API contract for the I2C Bus module." alt="" coords="203,5,406,45"/>
+<area shape="rect" id="Node000001" title="Public Service API contract for the I2C Bus module." alt="" coords="291,5,494,45"/>
 <area shape="rect" id="Node000002" href="$ssd1306__driver_8c.html" title="Low&#45;level driver implementation for SSD1306 OLED displays." alt="" coords="5,101,188,155"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,54,152,103,150,98,252,49"/>
-<area shape="rect" id="Node000003" href="$mcp23017__io__expander_8c.html" title="Implementation of the MCP23017 I/O Expander module." alt="" coords="212,93,397,163"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="307,59,307,93,302,93,302,59"/>
-<area shape="rect" id="Node000004" href="$time__of__flight__sensor_8c.html" title="Driver for I2C&#45;based Time&#45;of&#45;Flight (TOF) distance sensor VL6180X." alt="" coords="422,93,611,163"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="358,49,447,91,445,96,356,54"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,52,175,103,173,98,324,47"/>
+<area shape="rect" id="Node000003" href="$i2c__bus_8c.html" title="Implementation of the I2C Bus module using the new ESP&#45;IDF v5.x driver." alt="" coords="213,101,375,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="366,57,322,102,318,99,363,53"/>
+<area shape="rect" id="Node000004" href="$mcp23017__io__expander_8c.html" title="Implementation of the MCP23017 I/O Expander module." alt="" coords="400,93,585,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="423,53,461,91,457,95,419,57"/>
+<area shape="rect" id="Node000005" href="$time__of__flight__sensor_8c.html" title="Driver for I2C&#45;based Time&#45;of&#45;Flight (TOF) distance sensor VL6180X." alt="" coords="610,93,799,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="465,47,611,94,609,99,463,52"/>
 </map>

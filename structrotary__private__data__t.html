@@ -101,19 +101,38 @@ Collaboration diagram for rotary_private_data_t:</div>
 <div class="dyncontent">
 <div class="center"><img src="structrotary__private__data__t__coll__graph.png" border="0" usemap="#arotary__private__data__t_coll__map" alt="Collaboration graph"/></div>
 <map name="arotary__private__data__t_coll__map" id="arotary__private__data__t_coll__map">
-<area shape="rect" title=" " alt="" coords="5,181,168,207"/>
-<area shape="rect" href="structmcp23017__handle__t.html" title="The handle returned by the Service Locator for an MCP23017 service." alt="" coords="10,93,163,119"/>
-<area shape="poly" title=" " alt="" coords="89,133,89,181,84,181,84,133"/>
-<area shape="rect" href="structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module." alt="" coords="22,5,151,31"/>
-<area shape="poly" title=" " alt="" coords="89,45,89,93,84,93,84,45"/>
+<area shape="rect" title=" " alt="" coords="265,273,427,299"/>
+<area shape="rect" href="structmodule__t.html" title="The primary structure defining a framework module." alt="" coords="49,139,131,165"/>
+<area shape="poly" title=" " alt="" coords="126,169,325,271,322,276,123,173"/>
+<area shape="poly" title=" " alt="" coords="124,133,147,136,155,142,158,152,153,164,142,170,126,171,110,167,111,162,127,166,140,165,149,160,153,152,151,145,145,141,123,139"/>
+<area shape="rect" href="structmodule__dependency__t.html" title="Describes a single service dependency for a module." alt="" coords="5,5,175,31"/>
+<area shape="poly" title=" " alt="" coords="93,45,93,139,87,139,87,45"/>
+<area shape="rect" href="structmcp23017__handle__t.html" title="The handle returned by the Service Locator for an MCP23017 service." alt="" coords="269,139,423,165"/>
+<area shape="poly" title=" " alt="" coords="349,179,349,273,343,273,343,179"/>
+<area shape="rect" href="structmcp23017__api__t.html" title="The public Service API structure for the MCP23017 I/O Expander module." alt="" coords="281,5,411,31"/>
+<area shape="poly" title=" " alt="" coords="349,45,349,139,343,139,343,45"/>
+<area shape="rect" href="structsynapse__job__t.html" title=" " alt="" coords="447,139,562,165"/>
+<area shape="poly" title=" " alt="" coords="504,179,494,216,484,235,470,251,450,266,427,276,425,271,447,261,467,247,479,232,489,214,499,178"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a9e661d55b2b01a9f8825369c6bc28d8f" id="r_a9e661d55b2b01a9f8825369c6bc28d8f"><td class="memItemLeft" align="right" valign="top"><a id="a9e661d55b2b01a9f8825369c6bc28d8f" name="a9e661d55b2b01a9f8825369c6bc28d8f"></a>
+<a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>self</b></td></tr>
+<tr class="separator:a9e661d55b2b01a9f8825369c6bc28d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8c2ed181d7bd6433d7983f6cef2817b" id="r_ab8c2ed181d7bd6433d7983f6cef2817b"><td class="memItemLeft" align="right" valign="top"><a id="ab8c2ed181d7bd6433d7983f6cef2817b" name="ab8c2ed181d7bd6433d7983f6cef2817b"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>instance_name</b> [CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]</td></tr>
 <tr class="separator:ab8c2ed181d7bd6433d7983f6cef2817b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea00963a6e6548ceccd01ef337673cad" id="r_aea00963a6e6548ceccd01ef337673cad"><td class="memItemLeft" align="right" valign="top"><a id="aea00963a6e6548ceccd01ef337673cad" name="aea00963a6e6548ceccd01ef337673cad"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>button_name</b> [16]</td></tr>
+<tr class="separator:aea00963a6e6548ceccd01ef337673cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293f66b5c1c0afabb45fa46636f6d30e" id="r_a293f66b5c1c0afabb45fa46636f6d30e"><td class="memItemLeft" align="right" valign="top"><a id="a293f66b5c1c0afabb45fa46636f6d30e" name="a293f66b5c1c0afabb45fa46636f6d30e"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>active_level</b></td></tr>
+<tr class="separator:a293f66b5c1c0afabb45fa46636f6d30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37bcce51bf67c7eb5b8c82d4fff19dee" id="r_a37bcce51bf67c7eb5b8c82d4fff19dee"><td class="memItemLeft" align="right" valign="top"><a id="a37bcce51bf67c7eb5b8c82d4fff19dee" name="a37bcce51bf67c7eb5b8c82d4fff19dee"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>polling_interval_ms</b></td></tr>
+<tr class="separator:a37bcce51bf67c7eb5b8c82d4fff19dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64e4dfc72d98f59aa386b1431064ce5" id="r_ad64e4dfc72d98f59aa386b1431064ce5"><td class="memItemLeft" align="right" valign="top"><a id="ad64e4dfc72d98f59aa386b1431064ce5" name="ad64e4dfc72d98f59aa386b1431064ce5"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin_a</b></td></tr>
 <tr class="separator:ad64e4dfc72d98f59aa386b1431064ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,12 +142,6 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin_b</b></td></tr
 <tr class="memitem:afb1b778a125bad95186a44995a365335" id="r_afb1b778a125bad95186a44995a365335"><td class="memItemLeft" align="right" valign="top"><a id="afb1b778a125bad95186a44995a365335" name="afb1b778a125bad95186a44995a365335"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin_sw</b></td></tr>
 <tr class="separator:afb1b778a125bad95186a44995a365335"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a293f66b5c1c0afabb45fa46636f6d30e" id="r_a293f66b5c1c0afabb45fa46636f6d30e"><td class="memItemLeft" align="right" valign="top"><a id="a293f66b5c1c0afabb45fa46636f6d30e" name="a293f66b5c1c0afabb45fa46636f6d30e"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>active_level</b></td></tr>
-<tr class="separator:a293f66b5c1c0afabb45fa46636f6d30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea00963a6e6548ceccd01ef337673cad" id="r_aea00963a6e6548ceccd01ef337673cad"><td class="memItemLeft" align="right" valign="top"><a id="aea00963a6e6548ceccd01ef337673cad" name="aea00963a6e6548ceccd01ef337673cad"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>button_name</b> [16]</td></tr>
-<tr class="separator:aea00963a6e6548ceccd01ef337673cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f6226a90209478314e7aa9123c9833c" id="r_a0f6226a90209478314e7aa9123c9833c"><td class="memItemLeft" align="right" valign="top"><a id="a0f6226a90209478314e7aa9123c9833c" name="a0f6226a90209478314e7aa9123c9833c"></a>
 control_type_t&#160;</td><td class="memItemRight" valign="bottom"><b>control_type</b></td></tr>
 <tr class="separator:a0f6226a90209478314e7aa9123c9833c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +160,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>last_sw_state</b></td
 <tr class="memitem:a3346aaeaecac8faea53d189f9da8a581" id="r_a3346aaeaecac8faea53d189f9da8a581"><td class="memItemLeft" align="right" valign="top"><a id="a3346aaeaecac8faea53d189f9da8a581" name="a3346aaeaecac8faea53d189f9da8a581"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>last_sw_press_time</b></td></tr>
 <tr class="separator:a3346aaeaecac8faea53d189f9da8a581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902617514953600ff45828fca9acc161" id="r_a902617514953600ff45828fca9acc161"><td class="memItemLeft" align="right" valign="top"><a id="a902617514953600ff45828fca9acc161" name="a902617514953600ff45828fca9acc161"></a>
+<a class="el" href="task__pool__manager_8h.html#aa66f647dc86661ec0359cd9cdf28d683">synapse_job_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>job_handle</b></td></tr>
+<tr class="separator:a902617514953600ff45828fca9acc161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>components/modules/drivers/rotary_encoder_input/src/<a class="el" href="rotary__encoder__input_8c.html">rotary_encoder_input.c</a></li>

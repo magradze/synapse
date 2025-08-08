@@ -93,26 +93,26 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2error__handling.h
   <div class="headertitle"><div class="title">Error Handling-ის წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1183"></a> </p>
-<h1><a class="anchor" id="autotoc_md1184"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1195"></a> </p>
+<h1><a class="anchor" id="autotoc_md1196"></a>
 ძირითადი პრინციპები</h1>
-<h2><a class="anchor" id="autotoc_md1185"></a>
+<h2><a class="anchor" id="autotoc_md1197"></a>
 1. ESP Error Codes გამოყენება</h2>
 <ul>
 <li><b>ყოველთვის</b> გამოვიყენოთ <code>esp_err_t</code> return type</li>
 <li><b>ყოველთვის</b> დავაბრუნოთ <code>ESP_OK</code> წარმატების შემთხვევაში</li>
 <li><b>ყოველთვის</b> გამოვიყენოთ სტანდარტული ESP error codes</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1186"></a>
+<h2><a class="anchor" id="autotoc_md1198"></a>
 2. Comprehensive Error Checking</h2>
 <ul>
 <li><b>ყველა</b> function call-ი უნდა იყოს checked</li>
 <li><b>ყველა</b> pointer parameter უნდა იყოს validated</li>
 <li><b>ყველა</b> resource allocation უნდა იყოს checked</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1187"></a>
+<h1><a class="anchor" id="autotoc_md1199"></a>
 Standard Error Codes</h1>
-<h2><a class="anchor" id="autotoc_md1188"></a>
+<h2><a class="anchor" id="autotoc_md1200"></a>
 Framework-Specific Errors</h2>
 <div class="fragment"><div class="line"><span class="comment">// components/core/include/framework_errors.h</span></div>
 <div class="line"><span class="preprocessor">#define ESP_ERR_SYNAPSE_BASE                    0x8000</span></div>
@@ -121,7 +121,7 @@ Framework-Specific Errors</h2>
 <div class="line"><span class="preprocessor">#define ESP_ERR_SYNAPSE_INVALID_MODULE_STATE   (ESP_ERR_SYNAPSE_BASE + 3)</span></div>
 <div class="line"><span class="preprocessor">#define ESP_ERR_SYNAPSE_CONFIG_PARSE_FAILED    (ESP_ERR_SYNAPSE_BASE + 4)</span></div>
 <div class="line"><span class="preprocessor">#define ESP_ERR_SYNAPSE_RESOURCE_BUSY          (ESP_ERR_SYNAPSE_BASE + 5)</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1189"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1201"></a>
 Common ESP Error Codes</h2>
 <div class="fragment"><div class="line">ESP_OK                    <span class="comment">// Success</span></div>
 <div class="line">ESP_ERR_INVALID_ARG       <span class="comment">// Invalid argument</span></div>
@@ -130,9 +130,9 @@ Common ESP Error Codes</h2>
 <div class="line">ESP_ERR_NO_MEM           <span class="comment">// Out of memory</span></div>
 <div class="line">ESP_ERR_TIMEOUT          <span class="comment">// Operation timeout</span></div>
 <div class="line">ESP_ERR_NOT_SUPPORTED    <span class="comment">// Operation not supported</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1190"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1202"></a>
 Error Handling Patterns</h1>
-<h2><a class="anchor" id="autotoc_md1191"></a>
+<h2><a class="anchor" id="autotoc_md1203"></a>
 1. Parameter Validation</h2>
 <div class="fragment"><div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line) {</div>
 <div class="line">    <span class="comment">// Validate parameters first</span></div>
@@ -154,7 +154,7 @@ Error Handling Patterns</h1>
 <div class="line">    <span class="comment">// Continue with implementation...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1192"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1204"></a>
 2. Resource Allocation Checking</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t create_module_resources(module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module_private_data) {</div>
@@ -183,7 +183,7 @@ Error Handling Patterns</h1>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Module resources created successfully&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1193"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1205"></a>
 3. Service Locator Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t get_i2c_service(<a class="code hl_struct" href="structi2c__bus__api__t.html">i2c_bus_api_t</a> **api) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!api) {</div>
@@ -213,7 +213,7 @@ Error Handling Patterns</h1>
 <div class="ttc" id="aservice__locator_8h_html_a4441bcf4d7c9af56b3f7ed46b8ae37f0"><div class="ttname"><a href="service__locator_8h.html#a4441bcf4d7c9af56b3f7ed46b8ae37f0">synapse_service_get_type</a></div><div class="ttdeci">esp_err_t synapse_service_get_type(const char *service_name, synapse_service_type_t *out_service_type)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს enum სახით.</div><div class="ttdef"><b>Definition</b> service_locator.c:214</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructi2c__bus__api__t_html"><div class="ttname"><a href="structi2c__bus__api__t.html">i2c_bus_api_t</a></div><div class="ttdoc">The public Service API structure for the I2C Bus module.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:29</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1194"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1206"></a>
 4. Configuration Parsing Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t parse_display_config(<span class="keyword">const</span> cJSON *config, display_config_t *display_config) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!config || !display_config) {</div>
@@ -252,7 +252,7 @@ Error Handling Patterns</h1>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Display config parsed: %dx%d&quot;</span>, display_config-&gt;width, display_config-&gt;height);</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1195"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1207"></a>
 5. Hardware Operation Error Handling</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t write_display_data(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data, <span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!ssd1306_data || !data || len == 0) {</div>
@@ -267,7 +267,7 @@ Error Handling Patterns</h1>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordtype">int</span> retry_count = 0;</div>
 <div class="line">    <span class="keywordflow">while</span> (retry_count &lt; MAX_RETRIES) {</div>
-<div class="line">        ret = i2c_api-&gt;<a class="code hl_variable" href="structi2c__bus__api__t.html#ab5d528afb2ae26c7a5df7148f315d290">write</a>(ssd1306_data-&gt;i2c_handle, ssd1306_data-&gt;i2c_address, data, len);</div>
+<div class="line">        ret = i2c_api-&gt;<a class="code hl_variable" href="structi2c__bus__api__t.html#a3140f136900ac2717859b19eed32fffb">write</a>(ssd1306_data-&gt;i2c_handle, ssd1306_data-&gt;i2c_address, data, len);</div>
 <div class="line">        <span class="keywordflow">if</span> (ret == ESP_OK) {</div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
@@ -285,11 +285,11 @@ Error Handling Patterns</h1>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructi2c__bus__api__t_html_ab5d528afb2ae26c7a5df7148f315d290"><div class="ttname"><a href="structi2c__bus__api__t.html#ab5d528afb2ae26c7a5df7148f315d290">i2c_bus_api_t::write</a></div><div class="ttdeci">esp_err_t(* write)(void *context, uint8_t device_address, const uint8_t *write_data, size_t data_size)</div><div class="ttdoc">Writes data to a specific I2C device on the bus.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:38</div></div>
+<div class="ttc" id="astructi2c__bus__api__t_html_a3140f136900ac2717859b19eed32fffb"><div class="ttname"><a href="structi2c__bus__api__t.html#a3140f136900ac2717859b19eed32fffb">i2c_bus_api_t::write</a></div><div class="ttdeci">esp_err_t(* write)(void *context, uint8_t device_address, const uint8_t *write_data, size_t data_size)</div><div class="ttdoc">Writes data to a specific I2C device on the bus.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:38</div></div>
 <div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1196"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1208"></a>
 Cleanup and Resource Management</h1>
-<h2><a class="anchor" id="autotoc_md1197"></a>
+<h2><a class="anchor" id="autotoc_md1209"></a>
 1. Proper Cleanup on Errors</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t module_init_with_cleanup(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module) {</div>
@@ -323,7 +323,7 @@ Cleanup and Resource Management</h1>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1198"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1210"></a>
 2. Resource Cleanup Functions</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> cleanup_module_resources(module_private_data_t *module_private_data) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!module_private_data) {</div>
@@ -353,16 +353,16 @@ Cleanup and Resource Management</h1>
 <div class="line">        ESP_LOGI(TAG, <span class="stringliteral">&quot;I2C handle released&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1199"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1211"></a>
 Logging Standards</h1>
-<h2><a class="anchor" id="autotoc_md1200"></a>
+<h2><a class="anchor" id="autotoc_md1212"></a>
 1. Error Levels</h2>
 <div class="fragment"><div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Critical error occurred: %s&quot;</span>, esp_err_to_name(ret));  <span class="comment">// Errors</span></div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Warning: using default value&quot;</span>);                       <span class="comment">// Warnings  </span></div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;Module initialized successfully&quot;</span>);                    <span class="comment">// Info</span></div>
 <div class="line">ESP_LOGD(TAG, <span class="stringliteral">&quot;Debug: processing command %d&quot;</span>, cmd_id);              <span class="comment">// Debug</span></div>
 <div class="line">ESP_LOGV(TAG, <span class="stringliteral">&quot;Verbose: internal state changed&quot;</span>);                   <span class="comment">// Verbose</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1201"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1213"></a>
 2. Error Context Information</h2>
 <div class="fragment"><div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to create module &#39;%s&#39;: %s&quot;</span>, </div>
 <div class="line">         instance_name, esp_err_to_name(ret));</div>
@@ -372,9 +372,9 @@ Logging Standards</h1>
 <div class="line"> </div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Configuration parsing failed for key &#39;%s&#39;: %s&quot;</span>, </div>
 <div class="line">         config_key, esp_err_to_name(ret));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1202"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1214"></a>
 Error Recovery Strategies</h1>
-<h2><a class="anchor" id="autotoc_md1203"></a>
+<h2><a class="anchor" id="autotoc_md1215"></a>
 1. Retry Logic</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t operation_with_retry(operation_params_t *params) {</div>
 <div class="line">    esp_err_t ret;</div>
@@ -401,7 +401,7 @@ Error Recovery Strategies</h1>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> ret;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1204"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1216"></a>
 2. Graceful Degradation</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t initialize_display_with_fallback(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *ssd1306_data) {</div>
 <div class="line">    esp_err_t ret;</div>
@@ -422,7 +422,7 @@ Error Recovery Strategies</h1>
 <div class="line">    ssd1306_data-&gt;display_mode = DISPLAY_MODE_DISABLED;</div>
 <div class="line">    <span class="keywordflow">return</span> ret;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1205"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1217"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>ყოველთვის</b> გამოვიყენოთ <code>esp_err_t</code> return codes</li>

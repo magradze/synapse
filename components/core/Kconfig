@@ -231,3 +231,36 @@
                 enough to be responsive but generally lower than critical driver tasks.
 
     endmenu
+
+    menu "Task Pool Manager Configuration"
+
+        config SYNAPSE_TASK_POOL_SIZE
+            int "Number of worker tasks in the pool"
+            default 2
+            range 1 4
+            help
+                Defines how many worker tasks will be created to execute scheduled jobs.
+                Increasing this can help with parallelism but consumes more RAM.
+
+        config SYNAPSE_TASK_POOL_QUEUE_LENGTH
+            int "Job queue length for the task pool"
+            default 20
+            help
+                Specifies the size of the queue that holds pending jobs waiting
+                for a worker task to become available.
+
+        config SYNAPSE_TASK_POOL_TASK_STACK_SIZE
+            int "Worker task stack size"
+            default 3072
+            range 2048 8192
+            help
+                Stack size in bytes for each background worker task in the pool.
+
+        config SYNAPSE_TASK_POOL_TASK_PRIORITY
+            int "Worker task priority"
+            default 10
+            range 1 24
+            help
+                Priority for the background worker tasks.
+
+    endmenu

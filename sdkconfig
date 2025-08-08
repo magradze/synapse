@@ -478,6 +478,15 @@ CONFIG_SYNAPSE_PROMISE_TASK_PRIORITY=11
 # end of Promise Manager Configuration
 
 #
+# Task Pool Manager Configuration
+#
+CONFIG_SYNAPSE_TASK_POOL_SIZE=2
+CONFIG_SYNAPSE_TASK_POOL_QUEUE_LENGTH=20
+CONFIG_SYNAPSE_TASK_POOL_TASK_STACK_SIZE=3072
+CONFIG_SYNAPSE_TASK_POOL_TASK_PRIORITY=10
+# end of Task Pool Manager Configuration
+
+#
 # Modules
 #
 
@@ -2597,6 +2606,11 @@ CONFIG_WIFI_PROV_STA_ALL_CHANNEL_SCAN=y
 # Promise Manager Configuration
 #
 # end of Promise Manager Configuration
+
+#
+# Task Pool Manager Configuration
+#
+# end of Task Pool Manager Configuration
 
 #
 # Relay Actuator

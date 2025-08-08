@@ -11,6 +11,7 @@
 - [configuration_api.md](configuration_api.md) — კონფიგურაციის მენეჯერის API
 - [event_payloads_api.md](event_payloads_api.md) — სტანდარტული მონაცემთა სტრუქტურები ივენთებისთვის
 - [promise_api.md](promise_api.md) — ასინქრონული ოპერაციების მართვის (Promise) API
+- [task_pool_api.md](task_pool_api.md) — ტასკების გაზიარების მენეჯერის (Task Pool) API
 
 ## Module API
 

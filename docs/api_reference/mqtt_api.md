@@ -12,8 +12,8 @@
 
 მოდულის სრული მართვა და მასთან ურთიერთქმედება ხდება შემდეგი მექანიზმებით:
 
-1. **შიდა ივენთების გამოწერა:** `mqtt_manager` ავტომატურად გამოიწერს სისტემურ ივენთებს (მაგ., `FMW_EVENT_WIFI_STATUS_READY`), რომელთა `payload`-საც შემდეგ აქვეყნებს შესაბამის MQTT თემებზე.
-2. **ბრძანებების მიღება MQTT-ით:** ის გამოიწერს ერთ, ცენტრალიზებულ MQTT თემას (`.../cmd/in`) და მიღებულ ბრძანებებს გადაამისამართებს `Command Router`-ში `FMW_EVENT_EXECUTE_COMMAND_STRING` ივენთის საშუალებით.
+1. **შიდა ივენთების გამოწერა:** `mqtt_manager` ავტომატურად გამოიწერს სისტემურ ივენთებს (მაგ., `SYNAPSE_EVENT_WIFI_STATUS_READY`), რომელთა `payload`-საც შემდეგ აქვეყნებს შესაბამის MQTT თემებზე.
+2. **ბრძანებების მიღება MQTT-ით:** ის გამოიწერს ერთ, ცენტრალიზებულ MQTT თემას (`.../cmd/in`) და მიღებულ ბრძანებებს გადაამისამართებს `Command Router`-ში `SYNAPSE_EVENT_EXECUTE_COMMAND_STRING` ივენთის საშუალებით.
 
 ეს არქიტექტურა უზრუნველყოფს, რომ სხვა მოდულებს არ სჭირდებათ `mqtt_manager`-ის პირდაპირი გამოძახება.
 
@@ -55,11 +55,11 @@ typedef struct
 
 ```c
 // 1. ნებისმიერი მოდული აქვეყნებს თავის სტატუსის ივენთს
-//    (მაგ., wifi_manager აქვეყნებს FMW_EVENT_WIFI_STATUS_READY)
+//    (მაგ., wifi_manager აქვეყნებს SYNAPSE_EVENT_WIFI_STATUS_READY)
 cJSON* status = cJSON_CreateObject();
 // ... შეავსეთ status ...
 char* json_str = cJSON_PrintUnformatted(status);
-fmw_event_bus_post(FMW_EVENT_WIFI_STATUS_READY, wrapper);
+synapse_event_bus_post(SYNAPSE_EVENT_WIFI_STATUS_READY, wrapper);
 
 // 2. mqtt_manager ავტომატურად იჭერს ამ ივენთს და აქვეყნებს MQTT-ში.
 ```

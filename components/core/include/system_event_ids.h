@@ -17,8 +17,8 @@
  * - ota_events.h (OTA მოდულის ივენთები)
  * - health_events.h (ჯანმრთელობის მონიტორინგის ივენთები)
  */
-#ifndef FMW_SYSTEM_EVENT_IDS_H
-#define FMW_SYSTEM_EVENT_IDS_H
+#ifndef SYNAPSE_SYSTEM_EVENT_IDS_H
+#define SYNAPSE_SYSTEM_EVENT_IDS_H
 
 /**
  * @brief ბირთვის ივენთების იდენტიფიკატორები, რომლებიც სისტემურია და არ არის მიბმული კონკრეტულ მოდულზე.
@@ -78,7 +78,7 @@ typedef enum
     FRAMEWORK_EVENT_MODULE_ENABLE_REQUESTED,
 
     /**
-     * @enum FMW_EVENT_SYSTEM_INIT
+     * @enum SYNAPSE_EVENT_SYSTEM_INIT
      * @brief სისტემის ინიციალიზაციის ღონისძიება.
      *
      * აღნიშნული ღონისძიება გამოიყენება სისტემის ინიციალიზაციის პროცესის დასაწყისის აღსანიშნავად.
@@ -87,7 +87,7 @@ typedef enum
     FRAMEWORK_EVENT_SYSTEM_INIT,
 
     /**
-     * @enum FMW_EVENT_SYSTEM_START
+     * @enum SYNAPSE_EVENT_SYSTEM_START
      * @brief სისტემის გაშვების ღონისძიება.
      *
      * აღნიშნული ღონისძიება მიუთითებს სისტემის სრულად გაშვებასა და მზადყოფნაზე ოპერირებისათვის.
@@ -106,4 +106,4 @@ typedef enum
  */
 typedef core_framework_event_id_t system_event_id_t __attribute__((deprecated("Use core_framework_event_id_t instead")));
 
-#endif // FMW_SYSTEM_EVENT_IDS_H
+#endif // SYNAPSE_SYSTEM_EVENT_IDS_H

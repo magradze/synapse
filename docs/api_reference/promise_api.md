@@ -43,7 +43,7 @@ typedef void (*promise_catch_cb)(void* error_data, void* user_context);
 
 ეს ფუნქციები განკუთვნილია მხოლოდ იმ მოდულებისთვის, რომლებიც თავად ქმნიან ასინქრონულ, `Promise`-ზე დაფუძნებულ API-ს. მათზე წვდომისთვის საჭიროა `#include "promise_manager_internal.h"`.
 
-### `promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);`
+### `promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);`
 
 ქმნის ახალ `Promise` ობიექტს `PENDING` (მომლოდინე) მდგომარეობაში, უკვე წინასწარ დარეგისტრირებული `callback` ფუნქციებით.
 
@@ -52,7 +52,7 @@ typedef void (*promise_catch_cb)(void* error_data, void* user_context);
 - **`user_context`**: (არასავალდებულო) მაჩვენებელი, რომელიც გადაეცემა `callback` ფუნქციებს.
 - **აბრუნებს:** ახალი `Promise`-ის `handle`-ს, ან `NULL` მეხსიერების გამოყოფის შეცდომის შემთხვევაში.
 
-### `esp_err_t fmw_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));`
+### `esp_err_t synapse_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));`
 
 ასრულებს `Promise`-ს წარმატებით და გადასცემს შედეგს. ეს გამოიწვევს `Promise Manager`-ის მიერ `then_cb` `callback`-ის გამოძახებას.
 
@@ -61,7 +61,7 @@ typedef void (*promise_catch_cb)(void* error_data, void* user_context);
 - **`free_fn`**: (არასავალდებულო) ფუნქცია, რომელიც გამოიყენება `result_data`-ს გასათავისუფლებლად. **თუ `NULL`-ია, `Promise Manager`-ი ჩათვლის, რომ მეხსიერება სტატიკურია და არ შეეცდება მის გათავისუფლებას.**
 - **აბრუნებს:** `ESP_OK` თუ `Promise` წარმატებით დაემატა შესრულების რიგში.
 
-### `esp_err_t fmw_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));`
+### `esp_err_t synapse_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));`
 
 ასრულებს `Promise`-ს შეცდომით. ეს გამოიწვევს `catch_cb` `callback`-ის გამოძახებას.
 

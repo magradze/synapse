@@ -9,28 +9,28 @@
  *          აუცილებელია მოდულის გაჩერების ან გამორთვისას. ეს ხელს უწყობს სისტემის სტაბილურობას და მოდულებს შორის იზოლაციას.
  *          განახლებული ვერსია იყენებს გენერიკულ მიდგომას, რათა მართოს სხვადასხვა ტიპის რესურსი.
  */
-#ifndef FMW_RESOURCE_MANAGER_H
-#define FMW_RESOURCE_MANAGER_H
+#ifndef SYNAPSE_RESOURCE_MANAGER_H
+#define SYNAPSE_RESOURCE_MANAGER_H
 
 #include "esp_err.h"
 #include <stdint.h>
 #include <stdbool.h>
 
 /**
- * @enum fmw_resource_type_t
+ * @enum synapse_resource_type_t
  * @brief სისტემაში სამართავი რესურსების ტიპების ჩამონათვალი.
  */
 typedef enum
 {
-  FMW_RESOURCE_TYPE_GPIO,        /**< @brief GPIO პინი. `resource_id` არის `gpio_num_t`. */
-  FMW_RESOURCE_TYPE_I2C_PORT,    /**< @brief I2C პორტი. `resource_id` არის `i2c_port_t`. */
-  FMW_RESOURCE_TYPE_SPI_HOST,    /**< @brief SPI ჰოსტი. `resource_id` არის `spi_host_device_t`. */
-  FMW_RESOURCE_TYPE_ADC_CHANNEL, /**< @brief ADC არხი. `resource_id` არის `adc_channel_t`. */
-  FMW_RESOURCE_TYPE_TIMER_GROUP, /**< @brief ტაიმერების ჯგუფი. `resource_id` არის `timer_group_t`. */
-  FMW_RESOURCE_TYPE_RMT_CHANNEL, /**< @brief RMT არხი. `resource_id` არის `rmt_channel_t`. */
-  FMW_RESOURCE_TYPE_UART_PORT,   /**< @brief UART პორტი. `resource_id` არის `uart_port_t`. */
-  FMW_RESOURCE_TYPE_MAX,         /**< @brief ჩამონათვალის დასასრული, გამოიყენება შიდა ვალიდაციისთვის. */
-} fmw_resource_type_t;
+  SYNAPSE_RESOURCE_TYPE_GPIO,        /**< @brief GPIO პინი. `resource_id` არის `gpio_num_t`. */
+  SYNAPSE_RESOURCE_TYPE_I2C_PORT,    /**< @brief I2C პორტი. `resource_id` არის `i2c_port_t`. */
+  SYNAPSE_RESOURCE_TYPE_SPI_HOST,    /**< @brief SPI ჰოსტი. `resource_id` არის `spi_host_device_t`. */
+  SYNAPSE_RESOURCE_TYPE_ADC_CHANNEL, /**< @brief ADC არხი. `resource_id` არის `adc_channel_t`. */
+  SYNAPSE_RESOURCE_TYPE_TIMER_GROUP, /**< @brief ტაიმერების ჯგუფი. `resource_id` არის `timer_group_t`. */
+  SYNAPSE_RESOURCE_TYPE_RMT_CHANNEL, /**< @brief RMT არხი. `resource_id` არის `rmt_channel_t`. */
+  SYNAPSE_RESOURCE_TYPE_UART_PORT,   /**< @brief UART პორტი. `resource_id` არის `uart_port_t`. */
+  SYNAPSE_RESOURCE_TYPE_MAX,         /**< @brief ჩამონათვალის დასასრული, გამოიყენება შიდა ვალიდაციისთვის. */
+} synapse_resource_type_t;
 
 /**
  * @brief რესურს მენეჯერის ინიციალიზაცია.
@@ -41,14 +41,14 @@ typedef enum
  * @retval ESP_OK თუ რესურს მენეჯერი წარმატებით ინიციალიზდა.
  * @retval ESP_ERR_NO_MEM თუ მეხსიერების გამოყოფა ვერ მოხერხდა.
  */
-esp_err_t fmw_resource_manager_init(void);
+esp_err_t synapse_resource_manager_init(void);
 
 /**
  * @brief რესურსის დაკავება (დალოქვა) კონკრეტული მოდულისთვის.
  *
  * სანამ მოდული გამოიყენებს რესურსს, მან უნდა "დალოქოს" იგი, რათა სხვა მოდულმა ვერ გამოიყენოს.
  *
- * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] type რესურსის ტიპი `synapse_resource_type_t`-დან.
  * @param[in] resource_id რესურსის უნიკალური იდენტიფიკატორი (მაგ: პინის ნომერი, პორტის ნომერი).
  * @param[in] owner მოდულის სახელი, რომელიც იკავებს რესურსს (სასარგებლოა დიაგნოსტიკისთვის).
  *
@@ -58,14 +58,14 @@ esp_err_t fmw_resource_manager_init(void);
  * @retval ESP_ERR_INVALID_STATE თუ რესურსი უკვე დაკავებულია სხვა მოდულის მიერ.
  * @retval ESP_ERR_NO_MEM თუ მეხსიერების გამოყოფა ვერ მოხერხდა.
  */
-esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner);
+esp_err_t synapse_resource_lock(synapse_resource_type_t type, uint8_t resource_id, const char *owner);
 
 /**
  * @brief დაკავებული რესურსის გათავისუფლება.
  *
  * როდესაც მოდული ასრულებს მუშაობას რესურსზე (მაგ: `deinit` ფუნქციაში), მან უნდა გაათავისუფლოს იგი.
  *
- * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] type რესურსის ტიპი `synapse_resource_type_t`-დან.
  * @param[in] resource_id გასათავისუფლებელი რესურსის იდენტიფიკატორი.
  * @param[in] owner მოდულის სახელი, რომელიც ათავისუფლებს რესურსს.
  *
@@ -75,25 +75,25 @@ esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const
  * @retval ESP_ERR_NOT_FOUND თუ მითითებული რესურსი დაკავებული არ იყო.
  * @retval ESP_ERR_INVALID_STATE თუ გათავისუფლება სცადა არა მფლობელმა მოდულმა.
  */
-esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner);
+esp_err_t synapse_resource_release(synapse_resource_type_t type, uint8_t resource_id, const char *owner);
 
 /**
  * @brief ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი.
  *
- * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] type რესურსის ტიპი `synapse_resource_type_t`-დან.
  * @param[in] resource_id შესამოწმებელი რესურსის იდენტიფიკატორი.
  *
  * @return true თუ რესურსი დაკავებულია.
  * @return false თუ რესურსი თავისუფალია.
  */
-bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id);
+bool synapse_resource_is_locked(synapse_resource_type_t type, uint8_t resource_id);
 
 /**
  * @brief აბრუნებს რესურსის მფლობელის სახელს.
  *
  * სასარგებლოა დიაგნოსტიკისთვის, რათა გაირკვეს, რომელი მოდული იყენებს კონკრეტულ რესურსს.
  *
- * @param[in] type რესურსის ტიპი `fmw_resource_type_t`-დან.
+ * @param[in] type რესურსის ტიპი `synapse_resource_type_t`-დან.
  * @param[in] resource_id შესამოწმებელი რესურსის იდენტიფიკატორი.
  * @param[out] out_owner მაჩვენებელი სტრიქონზე, რომელიც მიუთითებს რესურსის მფლობელის სახელზე, თუ დაკავებულია.
  *
@@ -102,7 +102,7 @@ bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id);
  * @retval ESP_ERR_NOT_FOUND თუ რესურსი თავისუფალია ან ვერ მოიძებნა.
  * @retval ESP_ERR_INVALID_ARG თუ არგუმენტები არავალიდურია.
  */
-esp_err_t fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id, const char **out_owner);
+esp_err_t synapse_resource_get_owner(synapse_resource_type_t type, uint8_t resource_id, const char **out_owner);
 
 /**
  * @brief ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს.
@@ -114,6 +114,6 @@ esp_err_t fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id, 
  *
  * @note ფუნქცია არ იღებს პარამეტრებს და არ აბრუნებს მნიშვნელობას.
  */
-void fmw_resource_manager_deinit(void);
+void synapse_resource_manager_deinit(void);
 
-#endif /* FMW_RESOURCE_MANAGER_H */
+#endif /* SYNAPSE_RESOURCE_MANAGER_H */

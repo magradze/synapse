@@ -8,7 +8,7 @@
 
 ## 📶 WiFi Manager Service API
 
-**სერვისის ტიპი:** `FMW_SERVICE_TYPE_WIFI_API`  
+**სერვისის ტიპი:** `SYNAPSE_SERVICE_TYPE_WIFI_API`  
 **ინტერფეისის სტრუქტურა:** `wifi_api_t` (განსაზღვრულია `wifi_interface.h`-ში)
 
 ### ძირითადი ფუნქციები
@@ -32,7 +32,7 @@
 #include "wifi_interface.h" // უნდა შეიქმნას interfaces დირექტორიაში
 
 void check_wifi_status() {
-    service_handle_t wifi_handle = fmw_service_get("main_wifi");
+    service_handle_t wifi_handle = synapse_service_get("main_wifi");
     if (wifi_handle) {
         wifi_api_t *wifi_api = (wifi_api_t *)wifi_handle;
         
@@ -49,7 +49,7 @@ void check_wifi_status() {
 
 ## ☁️ MQTT Client Service API
 
-**სერვისის ტიპი:** `FMW_SERVICE_TYPE_MQTT_API`  
+**სერვისის ტიპი:** `SYNAPSE_SERVICE_TYPE_MQTT_API`  
 **ინტერფეისის სტრუქტურა:** `mqtt_api_t` (განსაზღვრულია `mqtt_interface.h`-ში)
 
 ### ძირითადი ფუნქციები
@@ -73,7 +73,7 @@ void check_wifi_status() {
 #include "mqtt_interface.h"
 
 void publish_sensor_data(float temperature) {
-    service_handle_t mqtt_handle = fmw_service_get("main_mqtt_broker");
+    service_handle_t mqtt_handle = synapse_service_get("main_mqtt_broker");
     if (mqtt_handle) {
         mqtt_api_t *mqtt_api = (mqtt_api_t *)mqtt_handle;
         
@@ -90,7 +90,7 @@ void publish_sensor_data(float temperature) {
 
 ## ⚡ ESP-NOW Service API
 
-**სერვისის ტიპი:** `FMW_SERVICE_TYPE_ESPNOW_API` (უნდა დაემატოს `service_types.h`-ში)  
+**სერვისის ტიპი:** `SYNAPSE_SERVICE_TYPE_ESPNOW_API` (უნდა დაემატოს `service_types.h`-ში)  
 **ინტერფეისის სტრუქტურა:** `espnow_api_t` (განსაზღვრულია `espnow_interface.h`-ში)
 
 ### ძირითადი ფუნქციები

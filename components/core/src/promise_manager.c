@@ -22,9 +22,9 @@
 DEFINE_COMPONENT_TAG("PROMISE_MANAGER");
 
 // --- Kconfig Definitions ---
-#define PROMISE_QUEUE_LENGTH CONFIG_FMW_PROMISE_QUEUE_LENGTH
-#define PROMISE_TASK_STACK_SIZE CONFIG_FMW_PROMISE_TASK_STACK_SIZE
-#define PROMISE_TASK_PRIORITY CONFIG_FMW_PROMISE_TASK_PRIORITY
+#define PROMISE_QUEUE_LENGTH CONFIG_SYNAPSE_PROMISE_QUEUE_LENGTH
+#define PROMISE_TASK_STACK_SIZE CONFIG_SYNAPSE_PROMISE_TASK_STACK_SIZE
+#define PROMISE_TASK_PRIORITY CONFIG_SYNAPSE_PROMISE_TASK_PRIORITY
 
 // --- Internal Structures ---
 
@@ -69,7 +69,7 @@ static void cleanup_promise(promise_t *promise);
 
 // --- Core Initialization ---
 
-esp_err_t fmw_promise_manager_init(void)
+esp_err_t synapse_promise_manager_init(void)
 {
     ESP_LOGI(TAG, "Initializing Promise Manager...");
     SLIST_INIT(&promise_registry_head);
@@ -103,7 +103,7 @@ esp_err_t fmw_promise_manager_init(void)
 
 // --- Internal API Implementation ---
 
-promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context)
+promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void *user_context)
 {
     promise_t *promise = (promise_t *)calloc(1, sizeof(promise_t));
     if (!promise)
@@ -131,7 +131,7 @@ promise_handle_t fmw_promise_create(promise_then_cb then_cb, promise_catch_cb ca
     return (promise_handle_t)promise;
 }
 
-static esp_err_t fmw_promise_fulfill(promise_handle_t handle, void *data, void (*free_fn)(void *), bool is_resolve)
+static esp_err_t synapse_promise_fulfill(promise_handle_t handle, void *data, void (*free_fn)(void *), bool is_resolve)
 {
     promise_t *promise = (promise_t *)handle;
     if (!promise)
@@ -172,14 +172,14 @@ static esp_err_t fmw_promise_fulfill(promise_handle_t handle, void *data, void (
     return ESP_OK;
 }
 
-esp_err_t fmw_promise_resolve(promise_handle_t handle, void *result_data, void (*free_fn)(void *))
+esp_err_t synapse_promise_resolve(promise_handle_t handle, void *result_data, void (*free_fn)(void *))
 {
-    return fmw_promise_fulfill(handle, result_data, free_fn, true);
+    return synapse_promise_fulfill(handle, result_data, free_fn, true);
 }
 
-esp_err_t fmw_promise_reject(promise_handle_t handle, void *error_data, void (*free_fn)(void *))
+esp_err_t synapse_promise_reject(promise_handle_t handle, void *error_data, void (*free_fn)(void *))
 {
-    return fmw_promise_fulfill(handle, error_data, free_fn, false);
+    return synapse_promise_fulfill(handle, error_data, free_fn, false);
 }
 
 // --- Internal Helper Functions ---

@@ -11,8 +11,8 @@
  *          implementation of the command router.
  */
 
-#ifndef FMW_CMD_ROUTER_INTERFACE_H
-#define FMW_CMD_ROUTER_INTERFACE_H
+#ifndef SYNAPSE_CMD_ROUTER_INTERFACE_H
+#define SYNAPSE_CMD_ROUTER_INTERFACE_H
 
 #include "esp_err.h"
 
@@ -117,4 +117,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_CMD_ROUTER_INTERFACE_H
+#endif // SYNAPSE_CMD_ROUTER_INTERFACE_H

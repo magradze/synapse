@@ -8,7 +8,7 @@
 
 ## 1. 🔌 Service API (`security_status_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით, `FMW_SERVICE_TYPE_SECURITY_API` ტიპის გამოყენებით.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით, `SYNAPSE_SERVICE_TYPE_SECURITY_API` ტიპის გამოყენებით.
 
 **ინტერფეისის ჰედერი:** `security_status_interface.h`
 
@@ -25,7 +25,7 @@
 **გამოყენების მაგალითი (`selftest_manager`-ში):**
 
 ```c
-service_handle_t sec_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_SECURITY_API);
+service_handle_t sec_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_SECURITY_API);
 if (sec_handle) {
     security_status_api_t *sec_api = (security_status_api_t *)sec_handle;
     bool sb_enabled = sec_api->is_secure_boot_enabled();
@@ -38,4 +38,4 @@ if (sec_handle) {
 ## 2. ⌨️ CLI (Command Line Interface)
 
 -   **ბრძანება:** `security status`
--   **აღწერა:** გამოაქვს მოწყობილობის უსაფრთხოების სტატუსი კონსოლში და აქვეყნებს `FMW_EVENT_SECURITY_STATUS_READY` ივენთს.
+- **აღწერა:** გამოაქვს მოწყობილობის უსაფრთხოების სტატუსი კონსოლში და აქვეყნებს `SYNAPSE_EVENT_SECURITY_STATUS_READY` ივენთს.

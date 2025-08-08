@@ -10,10 +10,10 @@
 
 ეს სექცია აღწერს `ble_provisioning` მოდულის მიერ მოწოდებულ, რეალურად არსებულ სერვისის API-ს.
 
-**სერვისის ტიპი:** `FMW_SERVICE_TYPE_CUSTOM_API`  
+**სერვისის ტიპი:** `SYNAPSE_SERVICE_TYPE_CUSTOM_API`  
 **ინტერფეისის სტრუქტურა:** `ble_prov_api_t` (განსაზღვრულია `ble_prov_interface.h`-ში)
 
-სერვისის მისაღებად გამოიყენეთ `fmw_service_get("main_ble_prov")` (ან თქვენს `system_config.json`-ში მითითებული `instance_name`).
+სერვისის მისაღებად გამოიყენეთ `synapse_service_get("main_ble_prov")` (ან თქვენს `system_config.json`-ში მითითებული `instance_name`).
 
 ### ძირითადი ფუნქციები
 
@@ -137,7 +137,7 @@
 #include "ble_prov_interface.h"
 
 void check_provisioning_status() {
-    service_handle_t prov_handle = fmw_service_get("main_ble_prov");
+    service_handle_t prov_handle = synapse_service_get("main_ble_prov");
     if (prov_handle) {
         ble_prov_api_t *prov_api = (ble_prov_api_t *)prov_handle;
         if (prov_api->is_provisioning_active()) {

@@ -9,8 +9,8 @@
  *          ერთიან "სიმართლის წყაროს" (Single Source of Truth) მთელი სისტემისთვის
  *          და მართავს კონფიგურაციის შენახვას NVS-ში.
  */
-#ifndef FMW_CONFIG_MANAGER_H
-#define FMW_CONFIG_MANAGER_H
+#ifndef SYNAPSE_CONFIG_MANAGER_H
+#define SYNAPSE_CONFIG_MANAGER_H
 
 #include "esp_err.h"
 #include "cJSON.h"
@@ -29,7 +29,7 @@
  * @retval ESP_OK თუ კონფიგურაცია წარმატებით ჩაიტვირთა.
  * @retval ESP_FAIL თუ ჩატვირთვა ვერ მოხერხდა.
  */
-esp_err_t fmw_config_manager_init(void);
+esp_err_t synapse_config_manager_init(void);
 
 /**
  * @brief ინახავს მიმდინარე კონფიგურაციას NVS მეხსიერებაში.
@@ -38,7 +38,7 @@ esp_err_t fmw_config_manager_init(void);
  *          რათა ისინი შენარჩუნდეს მოწყობილობის გადატვირთვის შემდეგაც.
  * @return esp_err_t ოპერაციის წარმატების კოდი.
  */
-esp_err_t fmw_config_save(void);
+esp_err_t synapse_config_save(void);
 
 /**
  * @brief აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.
@@ -47,20 +47,20 @@ esp_err_t fmw_config_save(void);
  * @return const cJSON* მოდულის კონფიგურაციის მაჩვენებელი (მხოლოდ წასაკითხად).
  * @retval NULL თუ მითითებული სახელით მოდული ვერ მოიძებნა.
  */
-const cJSON *fmw_config_get_module_config(const char *module_name);
+const cJSON *synapse_config_get_module_config(const char *module_name);
 
 /**
  * @brief აბრუნებს გლობალური კონფიგურაციის cJSON ობიექტს.
  * @return const cJSON* გლობალური კონფიგურაციის მაჩვენებელი (მხოლოდ წასაკითხად).
  */
-const cJSON *fmw_config_get_global_config(void);
+const cJSON *synapse_config_get_global_config(void);
 
 /**
  * @brief აბრუნებს მთლიანი კონფიგურაციის cJSON ობიექტს.
  * @note გამოიყენეთ სიფრთხილით. სასურველია გამოიყენოთ უფრო სპეციფიური get ფუნქციები.
  * @return const cJSON* მთლიანი კონფიგურაციის root ობიექტის მაჩვენებელი.
  */
-const cJSON *fmw_config_get_root(void);
+const cJSON *synapse_config_get_root(void);
 
 // --- დამხმარე (Helper) ფუნქციები კონკრეტული ტიპების წასაკითხად ---
 
@@ -75,7 +75,7 @@ const cJSON *fmw_config_get_root(void);
  * @retval ESP_OK თუ პარამეტრი წარმატებით იქნა წაკითხული.
  * @retval ESP_ERR_NOT_FOUND თუ მოდული ან გასაღები ვერ მოიძებნა.
  */
-esp_err_t fmw_config_get_module_string(const char *module_name, const char *key, char *buffer, size_t buffer_size);
+esp_err_t synapse_config_get_module_string(const char *module_name, const char *key, char *buffer, size_t buffer_size);
 
 /**
  * @brief კითხულობს მთელი რიცხვის ტიპის პარამეტრს მოდულის კონფიგურაციიდან.
@@ -86,7 +86,7 @@ esp_err_t fmw_config_get_module_string(const char *module_name, const char *key,
  * @return esp_err_t
  * @retval ESP_OK თუ პარამეტრი წარმატებით იქნა წაკითხული.
  */
-esp_err_t fmw_config_get_module_int(const char *module_name, const char *key, int *out_value);
+esp_err_t synapse_config_get_module_int(const char *module_name, const char *key, int *out_value);
 
 /**
  * @brief კითხულობს ლოგიკური ტიპის პარამეტრს მოდულის კონფიგურაციიდან.
@@ -97,6 +97,6 @@ esp_err_t fmw_config_get_module_int(const char *module_name, const char *key, in
  * @return esp_err_t
  * @retval ESP_OK თუ პარამეტრი წარმატებით იქნა წაკითხული.
  */
-esp_err_t fmw_config_get_module_bool(const char *module_name, const char *key, bool *out_value);
+esp_err_t synapse_config_get_module_bool(const char *module_name, const char *key, bool *out_value);
 
-#endif // FMW_CONFIG_MANAGER_H
+#endif // SYNAPSE_CONFIG_MANAGER_H

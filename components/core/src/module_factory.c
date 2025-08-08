@@ -5,7 +5,7 @@
  * @date 2025-06-27
  * @author Giorgi Magradze
  * @details ეს ფაილი შეიცავს Module Factory-ის Public API-ს იმპლემენტაციას.
- *          იგი იყენებს ავტომატურად გენერირებულ `fmw_module_factory_get` ფუნქციას,
+ *          იგი იყენებს ავტომატურად გენერირებულ `synapse_module_factory_get` ფუნქციას,
  *          რათა დააკავშიროს მოდულის ტიპის სტრიქონი მის შესაბამის შემქმნელ ფუნქციასთან.
  *          ეს მიდგომა უზრუნველყოფს, რომ Factory-ის კოდი არ საჭიროებს ცვლილებას
  *          ახალი მოდულების დამატებისას.
@@ -14,14 +14,14 @@
 #include "logging.h"
 #include <stddef.h> // NULL-ისთვის
 
-// ეს არის ავტომატურად გენერირებული ჰედერი, რომელიც შეიცავს fmw_module_factory_get-ის დეკლარაციას.
+// ეს არის ავტომატურად გენერირებული ჰედერი, რომელიც შეიცავს synapse_module_factory_get-ის დეკლარაციას.
 // იდეალურ შემთხვევაში, ბილდ-სისტემამ უნდა უზრუნველყოს ამ ჰედერის ხელმისაწვდომობა.
 // Forward declaration გამოიყენება როგორც ალტერნატივა, თუ include-ის დამატება რთულია.
-#if defined(FMW_USE_GENERATED_FACTORY_HEADER)
+#if defined(SYNAPSE_USE_GENERATED_FACTORY_HEADER)
 #include "generated_module_factory.h"
 #else
 // Forward-declare the function if the generated header is not used/available.
-module_create_fn_t fmw_module_factory_get(const char *module_type);
+module_create_fn_t synapse_module_factory_get(const char *module_type);
 #endif
 
 DEFINE_COMPONENT_TAG("MODULE_FACTORY");
@@ -41,7 +41,8 @@ DEFINE_COMPONENT_TAG("MODULE_FACTORY");
  * @return module_t* მაჩვენებელი ახლად შექმნილ მოდულზე წარმატების შემთხვევაში.
  * @return NULL თუ მოხდა შეცდომა (მაგ., ტიპი არ მოიძებნა, მეხსიერება ვერ გამოიყო).
  */
-module_t* fmw_module_factory_create(const char *module_type, const cJSON *config) {
+module_t *synapse_module_factory_create(const char *module_type, const cJSON *config)
+{
     if (!module_type) {
         // ⭐️ შესწორებულია: მოშორებულია ზედმეტი არგუმენტი
         ESP_LOGE(TAG, "Cannot create module: %s", "module_type is NULL");
@@ -52,8 +53,8 @@ module_t* fmw_module_factory_create(const char *module_type, const cJSON *config
     // თავად create_fn ფუნქციაა პასუხისმგებელი მის ვალიდაციაზე.
 
     // 1. მოვძებნოთ შესაბამისი create ფუნქცია ავტომატურად გენერირებულ რუქაში.
-    module_create_fn_t create_fn = fmw_module_factory_get(module_type);
-    
+    module_create_fn_t create_fn = synapse_module_factory_get(module_type);
+
     if (!create_fn) {
         ESP_LOGW(TAG, "No factory function found for module type: '%s'", module_type);
         return NULL;

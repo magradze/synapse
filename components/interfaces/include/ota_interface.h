@@ -4,8 +4,8 @@
  * @author Synapse Framework Team
  * @version 1.0.0
  */
-#ifndef FMW_OTA_INTERFACE_H
-#define FMW_OTA_INTERFACE_H
+#ifndef SYNAPSE_OTA_INTERFACE_H
+#define SYNAPSE_OTA_INTERFACE_H
 
 #include "esp_err.h"
 
@@ -37,4 +37,4 @@ typedef struct {
 }
 #endif
 
-#endif // FMW_OTA_INTERFACE_H
+#endif // SYNAPSE_OTA_INTERFACE_H

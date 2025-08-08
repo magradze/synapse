@@ -3,81 +3,81 @@
 
     menu "ბირთვის კონფიგურაცია"
 
-        config FMW_MAX_SUBSCRIBERS_PER_EVENT
+        config SYNAPSE_MAX_SUBSCRIBERS_PER_EVENT
             int "მაქს. გამომწერი ერთ ივენთზე"
             default 15
             help
                 განსაზღვრავს გამომწერების მაქსიმალურ რაოდენობას, რომელთა რეგისტრაციაც შესაძლებელია ერთ კონკრეტულ ივენთზე.
 
-        config FMW_EVENT_QUEUE_LENGTH
+        config SYNAPSE_EVENT_QUEUE_LENGTH
             int "Event Bus-ის რიგის სიგრძე"
             default 50
             help
                 Event Bus-ის რიგის ზომა. განსაზღვრავს, რამდენი მომლოდინე ივენთის შენახვა შეუძლია სისტემას.
 
-        config FMW_MAX_MODULES
+        config SYNAPSE_MAX_MODULES
             int "მოდულების მაქსიმალური რაოდენობა"
             default 20
             help
                 სისტემაში რეგისტრირებული მოდულების მაქსიმალური დასაშვები რაოდენობა.
 
-        config FMW_MAX_SERVICES
+        config SYNAPSE_MAX_SERVICES
             int "სერვისების მაქსიმალური რაოდენობა"
             default 32
             help
                 Service Locator-ში რეგისტრირებული სერვისების მაქსიმალური დასაშვები რაოდენობა.
 
-        config FMW_MUTEX_TIMEOUT_MS
+        config SYNAPSE_MUTEX_TIMEOUT_MS
             int "Mutex-ის ტაიმაუტი (მილიწამები)"
             default 1000
             help
                 ნაგულისხმევი ტაიმაუტი მილიწამებში Mutex-ის დაკავების მცდელობისას.
 
-        config FMW_QUEUE_TIMEOUT_MS
+        config SYNAPSE_QUEUE_TIMEOUT_MS
             int "რიგის ტაიმაუტი (მილიწამები)"
             default 100
             help
                 ნაგულისხმევი ტაიმაუტი მილიწამებში რიგში მონაცემის ჩაწერის მცდელობისას.
 
-        config FMW_SEMAPHORE_TIMEOUT_MS
+        config SYNAPSE_SEMAPHORE_TIMEOUT_MS
             int "სემაფორის ტაიმაუტი (მილიწამები)"
             default 500
             help
                 ნაგულისხმევი ტაიმაუტი მილიწამებში სემაფორის დაკავების მცდელობისას.
 
-        config FMW_TASK_QUEUE_TIMEOUT_MS
+        config SYNAPSE_TASK_QUEUE_TIMEOUT_MS
             int "ტასკის რიგის ტაიმაუტი (მილიწამები)"
             default 1000
             help
                 ნაგულისხმევი ტაიმაუტი მილიწამებში ტასკებს შორის კომუნიკაციის რიგებისთვის.
 
-        config FMW_EVENT_BUS_TASK_STACK_SIZE
+        config SYNAPSE_EVENT_BUS_TASK_STACK_SIZE
             int "Event Bus ტასკის Stack ზომა"
             default 4096
             range 2048 16384
             help
                 Stack-ის ზომა ბაიტებში Event Bus-ის ფონური ტასკისთვის.
 
-        config FMW_EVENT_BUS_TASK_PRIORITY
+        config SYNAPSE_EVENT_BUS_TASK_PRIORITY
             int "Event Bus ტასკის პრიორიტეტი"
             default 12
             range 1 24
             help
                 Event Bus-ის ფონური ტასკის პრიორიტეტი (უფრო მაღალი რიცხვი ნიშნავს მაღალ პრიორიტეტს).
 
-        config FMW_SERVICE_NAME_MAX_LENGTH
+        config SYNAPSE_SERVICE_NAME_MAX_LENGTH
             int "სერვისის სახელის მაქს. სიგრძე"
             default 32
             help
                 სერვისის სახელის მაქსიმალური დასაშვები სიგრძე (სიმბოლოებში).
 
-        config FMW_SERVICE_TYPE_MAX_LENGTH
+        config SYNAPSE_SERVICE_TYPE_MAX_LENGTH
             int "სერვისის ტიპის მაქს. სიგრძე"
             default 32
             help
                 სერვისის ტიპის მაქსიმალური დასაშვები სიგრძე (სიმბოლოებში).
 
-        config FMW_MODULE_NAME_MAX_LENGTH
+        config SYNAPSE_MODULE_NAME_MAX_LENGTH
             int "მოდულის სახელის მაქს. სიგრძე"
             default 32
             help
@@ -87,31 +87,31 @@
 
     menu "ოპტიმიზაცია და მეხსიერება"
 
-        config FMW_RUNTIME_TASK_STACK_SIZE
+        config SYNAPSE_RUNTIME_TASK_STACK_SIZE
             int "Runtime ტასკის Stack ზომა (ოპტიმიზებული)"
             default 2048
             help
                 ნაგულისხმევი Stack-ის ზომა მცირე, Runtime მოდულების ტასკებისთვის.
 
-        config FMW_RUNTIME_QUEUE_LENGTH
+        config SYNAPSE_RUNTIME_QUEUE_LENGTH
             int "Runtime რიგის სიგრძე (ოპტიმიზებული)"
             default 3
             help
                 ნაგულისხმევი რიგის სიგრძე მცირე, Runtime მოდულებისთვის.
 
-        config FMW_INSTANCE_NAME_MAX_LENGTH
+        config SYNAPSE_INSTANCE_NAME_MAX_LENGTH
             int "Instance სახელის მაქს. სიგრძე (ოპტიმიზებული)"
             default 16
             help
                 ოპტიმიზებული სიგრძე `instance_name`-ისთვის მეხსიერების დაზოგვის მიზნით.
 
-        config FMW_SHARED_TASK_STACK_SIZE
+        config SYNAPSE_SHARED_TASK_STACK_SIZE
             int "გაზიარებული ტასკის Stack ზომა"
             default 3072
             help
                 Stack-ის ზომა იმ ტასკისთვის, რომელიც შეიძლება რამდენიმე მცირე მოდულმა გაიზიაროს.
 
-        config FMW_NVS_KEY_MAX_LENGTH
+        config SYNAPSE_NVS_KEY_MAX_LENGTH
             int "NVS გასაღების მაქს. სიგრძე"
             default 16 # NVS-ის ლიმიტია 15 + null
             range 8 16
@@ -123,19 +123,19 @@
 
     menu "უსაფრთხოება"
 
-        config FMW_MQTT_COMMAND_MAX_LENGTH
+        config SYNAPSE_MQTT_COMMAND_MAX_LENGTH
             int "MQTT ბრძანების მაქს. სიგრძე"
             default 512
             help
                 ბუფერის მაქსიმალური ზომა შემომავალი MQTT ბრძანებებისთვის.
 
-        config FMW_AUTH_TOKEN_MAX_LENGTH
+        config SYNAPSE_AUTH_TOKEN_MAX_LENGTH
             int "ავთენტიფიკაციის ტოკენის მაქს. სიგრძე"
             default 64
             help
                 ბუფერის მაქსიმალური ზომა ავთენტიფიკაციის ტოკენებისთვის.
 
-        config FMW_ENABLE_MQTT_TLS
+        config SYNAPSE_ENABLE_MQTT_TLS
             bool "MQTT TLS მხარდაჭერა"
             default y
             help
@@ -146,19 +146,19 @@
 
     menu "წარმადობის მონიტორინგი"
 
-        config FMW_CPU_MONITORING_ENABLED
+        config SYNAPSE_CPU_MONITORING_ENABLED
             bool "CPU მონიტორინგის ჩართვა"
             default y
             help
                 ჩართავს CPU-ს დატვირთვის პერიოდულ ლოგირებას.
 
-        config FMW_MEMORY_MONITORING_ENABLED
+        config SYNAPSE_MEMORY_MONITORING_ENABLED
             bool "მეხსიერების მონიტორინგის ჩართვა"
             default y
             help
                 ჩართავს თავისუფალი heap მეხსიერების პერიოდულ ლოგირებას.
 
-        config FMW_PERFORMANCE_LOG_INTERVAL_MS
+        config SYNAPSE_PERFORMANCE_LOG_INTERVAL_MS
             int "მონიტორინგის ლოგის ინტერვალი (მილიწამები)"
             default 5000
             help
@@ -168,19 +168,19 @@
 
     menu "Resource Manager Configuration"
 
-        config FMW_MAX_GPIO_PINS
+        config SYNAPSE_MAX_GPIO_PINS
             int "მაქსიმალური GPIO პინების რაოდენობა"
             default 40
             help
                 GPIO რესურსების მაქსიმალური რაოდენობა, რომლის მართვაც შეუძლია Resource Manager-ს.
 
-        config FMW_MAX_I2C_BUSES
+        config SYNAPSE_MAX_I2C_BUSES
             int "მაქსიმალური I2C ავტობუსების რაოდენობა"
             default 2
             help
                 I2C რესურსების მაქსიმალური რაოდენობა.
 
-        config FMW_MAX_SPI_BUSES
+        config SYNAPSE_MAX_SPI_BUSES
             int "მაქსიმალური SPI ავტობუსების რაოდენობა"
             default 2
             help
@@ -189,7 +189,7 @@
     endmenu
 
     menu "Command Router Configuration"
-        config FMW_COMMAND_ROUTER_MAX_CMD_LEN
+        config SYNAPSE_COMMAND_ROUTER_MAX_CMD_LEN
             int "Command Router-ის მაქს. ბრძანების სიგრძე"
             default 256
             help
@@ -199,21 +199,21 @@
 
     menu "Promise Manager Configuration"
 
-        config FMW_PROMISE_QUEUE_LENGTH
+        config SYNAPSE_PROMISE_QUEUE_LENGTH
             int "Promise execution queue length"
             default 10
             help
                 Specifies the size of the queue that holds pending promises waiting for
                 their callbacks to be executed by the promise manager task.
 
-        config FMW_PROMISE_TASK_STACK_SIZE
+        config SYNAPSE_PROMISE_TASK_STACK_SIZE
             int "Promise manager task stack size"
             default 3072
             range 2048 8192
             help
                 Stack size in bytes for the background task that executes promise callbacks.
 
-        config FMW_PROMISE_TASK_PRIORITY
+        config SYNAPSE_PROMISE_TASK_PRIORITY
             int "Promise manager task priority"
             default 11
             range 1 24

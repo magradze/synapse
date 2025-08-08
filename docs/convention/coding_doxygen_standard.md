@@ -82,7 +82,7 @@
  * @retval ESP_ERR_INVALID_STATE თუ სერვისი ამ სახელით უკვე რეგისტრირებულია.
  * @warning service_api_handle უნდა დარჩეს ვალიდური სერვისის მთელი სიცოცხლის განმავლობაში.
  */
-esp_err_t fmw_service_register(const char *service_name, const char *service_type, service_handle_t service_api_handle);
+esp_err_t synapse_service_register(const char *service_name, const char *service_type, service_handle_t service_api_handle);
 ```
 
 ## 4. სტრუქტურების და ტიპების კომენტარები

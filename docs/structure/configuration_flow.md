@@ -54,7 +54,7 @@
     - `collect_configs.cmake` სკრიპტი პოულობს ყველა `config.json` ფაილს და ამატებს მათ firmware-ში უნიკალური სიმბოლოებით.
     - გენერირდება `embedded_configs.h` ფაილი, რომელიც შეიცავს ამ ჩაშენებული ფაილების "მანიფესტს".
 
-2. **Runtime-ის ინიციალიზაცია (`fmw_config_manager_init`):**
+2. **Runtime-ის ინიციალიზაცია (`synapse_config_manager_init`):**
     - **ნაბიჯი 1: NVS-ის შემოწმება.** `Config Manager` პირველ რიგში ცდილობს სრული კონფიგურაციის ჩატვირთვას NVS-დან.
     - **ნაბიჯი 2: Fallback (თუ NVS ცარიელია).** თუ NVS-ში კონფიგურაცია არ არის, იწყება "აწყობის" პროცესი:
         - იკითხება ბაზისური `configs/system_config.json`.
@@ -102,11 +102,11 @@ graph TD
 ```c
 // სტრიქონის წაკითხვა (instance_name.key ფორმატით)
 char broker_url[128];
-esp_err_t ret = fmw_config_get_string("main_broker.broker_uri", broker_url, sizeof(broker_url));
+esp_err_t ret = synapse_config_get_string("main_broker.broker_uri", broker_url, sizeof(broker_url));
 
 // გლობალური პარამეტრის წაკითხვა
 char device_prefix[32];
-ret = fmw_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
+ret = synapse_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
 ```
 
 ## ვალიდაცია და Default მნიშვნელობები
@@ -120,7 +120,7 @@ ret = fmw_config_get_string("global_config.device.id.prefix", device_prefix, siz
 **(უცვლელია)**
 
 - შესაძლებელია მოდულის კონფიგურაციის განახლება მუშაობის დროს.
-- გამოიყენება სპეციალური API: `fmw_module_reconfigure(const char *module_name, const cJSON *new_config)`.
+- გამოიყენება სპეციალური API: `synapse_module_reconfigure(const char *module_name, const cJSON *new_config)`.
 - ცვლილებები ინერგება მხოლოდ ვალიდაციის შემდეგ და ინახება NVS-ში.
 
 ## აკრძალული და რეკომენდებული პრაქტიკები
@@ -133,7 +133,7 @@ ret = fmw_config_get_string("global_config.device.id.prefix", device_prefix, siz
 
 ✅ **ყოველთვის:**
 
-- გამოიყენეთ `fmw_config_get_*` API-ები.
+- გამოიყენეთ `synapse_config_get_*` API-ები.
 - განსაზღვრეთ default მნიშვნელობები `Kconfig`-ში.
 - დაიცავით `config.json`-ის სტანდარტული სტრუქტურა.
 

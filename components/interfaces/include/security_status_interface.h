@@ -12,8 +12,8 @@
  *          of the reporter module.
  */
 
-#ifndef FMW_SECURITY_STATUS_INTERFACE_H
-#define FMW_SECURITY_STATUS_INTERFACE_H
+#ifndef SYNAPSE_SECURITY_STATUS_INTERFACE_H
+#define SYNAPSE_SECURITY_STATUS_INTERFACE_H
 
 #include <stdbool.h> // For bool type
 
@@ -57,4 +57,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_SECURITY_STATUS_INTERFACE_H
+#endif // SYNAPSE_SECURITY_STATUS_INTERFACE_H

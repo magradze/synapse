@@ -14,13 +14,13 @@
 
 - **როლი:** უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.
 - **მთავარი ფუნქციები:**
-  - სერვისის რეგისტრაცია (`fmw_service_register`)
-  - სერვისის მოძიება (`fmw_service_get`)
-  - სერვისის ტიპის დადგენა (`fmw_service_get_type`)
+  - სერვისის რეგისტრაცია (`synapse_service_register`)
+  - სერვისის მოძიება (`synapse_service_get`)
+  - სერვისის ტიპის დადგენა (`synapse_service_get_type`)
 - **მაგალითი:**
 
   ```c
-  service_handle_t display_service_handle = fmw_service_get("main_display");
+  service_handle_t display_service_handle = synapse_service_get("main_display");
   if (display_service_handle) {
       ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
       ssd1306_service_api->enable();
@@ -59,13 +59,13 @@
 
 - **როლი:** უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.
 - **მთავარი ფუნქციები:**
-  - კონფიგურაციის წაკითხვა (`fmw_config_get_*` ფუნქციები)
+  - კონფიგურაციის წაკითხვა (`synapse_config_get_*` ფუნქციები)
   - კონფიგურაციის ვალიდაცია და განახლება
 - **მაგალითი:**
 
   ```c
   char broker_url[128];
-  fmw_config_get_string("mqtt_module.config.broker_uri", broker_url, sizeof(broker_url));
+  synapse_config_get_string("mqtt_module.config.broker_uri", broker_url, sizeof(broker_url));
   ```
 
 ### 6. Logging
@@ -85,15 +85,15 @@
 
 - **როლი:** უზრუნველყოფს ასინქრონული "მოთხოვნა-პასუხის" ოპერაციების მართვას სუფთა და სტრუქტურირებული `Promise` პატერნის გამოყენებით.
 - **მთავარი ფუნქციები:**
-  - `Promise`-ის შექმნა (`fmw_promise_create`)
-  - წარმატების `callback`-ის რეგისტრაცია (`fmw_promise_then`)
-  - შეცდომის `callback`-ის რეგისტრაცია (`fmw_promise_catch`)
-  - `Promise`-ის შესრულება (`fmw_promise_resolve`, `fmw_promise_reject`)
+  - `Promise`-ის შექმნა (`synapse_promise_create`)
+  - წარმატების `callback`-ის რეგისტრაცია (`synapse_promise_then`)
+  - შეცდომის `callback`-ის რეგისტრაცია (`synapse_promise_catch`)
+  - `Promise`-ის შესრულება (`synapse_promise_resolve`, `synapse_promise_reject`)
 - **მაგალითი:**
 
   ```c
   promise_handle_t p = wifi_api->get_status_async();
-  fmw_promise_then(p, on_status_received_callback, NULL);
+  synapse_promise_then(p, on_status_received_callback, NULL);
 
 ---
 

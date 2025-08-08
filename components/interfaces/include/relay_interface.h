@@ -10,8 +10,8 @@
  *          handle to this API.
  */
 
-#ifndef FMW_RELAY_INTERFACE_H
-#define FMW_RELAY_INTERFACE_H
+#ifndef SYNAPSE_RELAY_INTERFACE_H
+#define SYNAPSE_RELAY_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdbool.h>
@@ -54,4 +54,4 @@ extern "C"
 }
 #endif
 
-#endif // FMW_RELAY_INTERFACE_H
+#endif // SYNAPSE_RELAY_INTERFACE_H

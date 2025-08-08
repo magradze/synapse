@@ -46,7 +46,7 @@ Synapse Framework-ის მიზანია მაქსიმალური
 ### Service Locator
 
 ```c
-service_handle_t display_service_handle = fmw_service_get("main_display");
+service_handle_t display_service_handle = synapse_service_get("main_display");
 if (display_service_handle) {
     ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
     ssd1306_service_api->enable();

@@ -80,7 +80,7 @@ DEFINE_COMPONENT_TAG("GREETER_MODULE");
 typedef struct {
     char instance_name[32];
     char greeting_text[64];
-    fmw_timer_handle_t greeting_timer;
+    synapse_timer_handle_t greeting_timer;
 } greeter_private_data_t;
 
 // Forward Declarations
@@ -124,8 +124,8 @@ module_t *greeter_module_create(const cJSON *config) {
 // Init Function
 static esp_err_t greeter_module_init(module_t *self) {
     ESP_LOGI(TAG, "'%s' initializing...", self->name);
-    fmw_event_bus_subscribe(GREETING_TIMER_TICK, self);
-    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_subscribe(GREETING_TIMER_TICK, self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
@@ -135,7 +135,7 @@ static esp_err_t greeter_module_start(module_t *self) {
     ESP_LOGI(TAG, "'%s' starting...", self->name);
     greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
 
-    service_handle_t timer_service = fmw_service_get("main_timer_service");
+    service_handle_t timer_service = synapse_service_get("main_timer_service");
     if (timer_service) {
         timer_api_t *timer_api = (timer_api_t *)timer_service;
         p_data->greeting_timer = timer_api->schedule_event(GREETING_TIMER_TICK, 5000, true);
@@ -156,12 +156,12 @@ static void greeter_module_handle_event(module_t *self, const char *event_name, 
         ESP_LOGI(TAG, "Timer tick received. Posting greeting message.");
         char* message_payload = strdup(p_data->greeting_text);
         event_data_wrapper_t *wrapper;
-        if (fmw_event_data_wrap(message_payload, free, &wrapper) == ESP_OK) {
-            fmw_event_bus_post(GREETING_MESSAGE_READY, wrapper);
-            fmw_event_data_release(wrapper);
+        if (synapse_event_data_wrap(message_payload, free, &wrapper) == ESP_OK) {
+            synapse_event_bus_post(GREETING_MESSAGE_READY, wrapper);
+            synapse_event_data_release(wrapper);
         }
-    } else if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {
-        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    } else if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0) {
+        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
         if (cmd_router) {
             cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router;
             if (!cmd_api->is_command_registered("greet")) {
@@ -181,7 +181,7 @@ static void greeter_module_handle_event(module_t *self, const char *event_name, 
     }
 
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -190,16 +190,16 @@ static void greeter_module_deinit(module_t *self) {
     if (!self) return;
     greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
 
-    service_handle_t timer_service = fmw_service_get("main_timer_service");
+    service_handle_t timer_service = synapse_service_get("main_timer_service");
     if (timer_service && p_data->greeting_timer) {
         ((timer_api_t *)timer_service)->cancel_event(p_data->greeting_timer);
     }
 
-    fmw_event_bus_unsubscribe(GREETING_TIMER_TICK, self);
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_unsubscribe(GREETING_TIMER_TICK, self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
     // Unregister the command (optional, but good practice)
-    service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    service_handle_t cmd_router = synapse_service_get("main_cmd_router");
     if (cmd_router) {
         ((cmd_router_api_t *)cmd_router)->unregister_command("greet");
     }
@@ -213,7 +213,7 @@ static void greeter_module_deinit(module_t *self) {
 static esp_err_t greeter_cmd_handler(int argc, char **argv, void *context) {
     const char* instance_name = argv[1];
     
-    module_t* target_module = fmw_module_registry_find_by_name(instance_name);
+    module_t* target_module = synapse_module_registry_find_by_name(instance_name);
     
     if (target_module) {
         // Check if the found module is actually a greeter_module.

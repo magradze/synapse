@@ -8,8 +8,8 @@
  *          ტიპის მიხედვით. ის იყენებს ავტომატურად გენერირებულ კოდს, რათა
  *          დააკავშიროს მოდულის ტიპი მის შემქმნელ ფუნქციასთან.
  */
-#ifndef FMW_MODULE_FACTORY_H
-#define FMW_MODULE_FACTORY_H
+#ifndef SYNAPSE_MODULE_FACTORY_H
+#define SYNAPSE_MODULE_FACTORY_H
 
 #include "base_module.h"
 #include "cJSON.h"
@@ -38,6 +38,6 @@ typedef module_t *(*module_create_fn_t)(const cJSON *config);
  * @return module_t* ახლად შექმნილი მოდულის მაჩვენებელი, ან NULL, თუ
  *                   ტიპი ვერ მოიძებნა ან შექმნა ვერ მოხერხდა.
  */
-module_t *fmw_module_factory_create(const char *module_type, const cJSON *config);
+module_t *synapse_module_factory_create(const char *module_type, const cJSON *config);
 
-#endif // FMW_MODULE_FACTORY_H
+#endif // SYNAPSE_MODULE_FACTORY_H

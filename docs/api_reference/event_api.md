@@ -8,25 +8,25 @@
 
 ## Event Bus API
 
-### `esp_err_t fmw_event_bus_init(void)`
+### `esp_err_t synapse_event_bus_init(void)`
 
 - ინიციალიზაციას უკეთებს Event Bus-ს. ქმნის ივენთების რიგს (queue) და იწყებს დამმუშავებელ ტასკს. უნდა გამოიძახოს მხოლოდ სისტემის ბირთვმა ერთხელ.
 
-### `esp_err_t fmw_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)`
+### `esp_err_t synapse_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)`
 
 - ასინქრონულად აქვეყნებს მოვლენას ყველა გამოწერილ მოდულზე.
 - **არგუმენტები:**
   - `event_id`: მოვლენის უნიკალური იდენტიფიკატორი (`enum`).
   - `data_wrapper`: მაჩვენებელი ივენთის მონაცემების "გარსზე" (`wrapper`). თუ მონაცემები არ არის საჭირო, გადაეცემა `NULL`.
 
-### `esp_err_t fmw_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)`
+### `esp_err_t synapse_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)`
 
 - **(განახლებული)** აძლევს მოდულს შესაძლებლობას, მიიღოს კონკრეტული მოვლენა. Event Bus-ი ავტომატურად გამოიძახებს ამ მოდულის `handle_event` ფუნქციას.
 - **არგუმენტები:**
   - `event_id`: მოვლენის ID, რომელზეც ხდება გამოწერა.
   - `module`: მაჩვენებელი გამომწერ მოდულზე (`self`).
 
-### `esp_err_t fmw_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)`
+### `esp_err_t synapse_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)`
 
 - **(ახალი)** აუქმებს მოდულის გამოწერას კონკრეტულ მოვლენაზე.
 - **მნიშვნელოვანია:** ეს ფუნქცია აუცილებლად უნდა გამოიძახოს მოდულის `deinit` ფუნქციამ ყველა იმ ივენთისთვის, რომელზეც ის იყო გამოწერილი, რათა თავიდან ავიცილოთ Use-After-Free შეცდომები.
@@ -40,11 +40,11 @@
 
 **მნიშვნელოვანია:** როდესაც ივენთს გადასცემთ მონაცემებს (`data_wrapper`), Synapse Framework იყენებს **reference counting** მექანიზმს მეხსიერების უსაფრთხოდ სამართავად.
 
-- `event_data_wrapper_t *fmw_event_data_create(void *data, size_t size, event_data_free_fn_t free_fn);`
+- `event_data_wrapper_t *synapse_event_data_create(void *data, size_t size, event_data_free_fn_t free_fn);`
   - ქმნის მონაცემების "გარსს". `free_fn` არის callback, რომელიც გამოიძახება, როცა მონაცემები აღარავის სჭირდება.
-- `void fmw_event_data_acquire(event_data_wrapper_t *wrapper);`
+- `void synapse_event_data_acquire(event_data_wrapper_t *wrapper);`
   - ზრდის მითითებების მრიცხველს.
-- `void fmw_event_data_release(event_data_wrapper_t *wrapper);`
+- `void synapse_event_data_release(event_data_wrapper_t *wrapper);`
   - ამცირებს მითითებების მრიცხველს. როცა მრიცხველი 0 გახდება, გამოიძახება `free_fn` და მეხსიერება თავისუფლდება.
 
 ---
@@ -66,10 +66,10 @@ static void my_module_handle_event(module_t *self, core_framework_event_id_t eve
     }
 
     // ★★★ მნიშვნელოვანია: Event Bus-ი გადასცემს wrapper-ის მფლობელობას (ownership) ★★★
-    // ★★★ ამ ფუნქციას. ამიტომ, დამუშავების შემდეგ აუცილებელია fmw_event_data_release-ის გამოძახება, ★★★
+    // ★★★ ამ ფუნქციას. ამიტომ, დამუშავების შემდეგ აუცილებელია synapse_event_data_release-ის გამოძახება, ★★★
     // ★★★ რათა თავიდან ავიცილოთ მეხსიერების გაჟონვა. ★★★
     if (wrapper) {
-        fmw_event_data_release(wrapper);
+        synapse_event_data_release(wrapper);
     }
 }
 ```

@@ -39,8 +39,8 @@ DEFINE_COMPONENT_TAG("SERVICE_LOCATOR");
  *          ეს ჩანაწერები ქმნიან ცალმხრივად დაკავშირებულ სიას სერვისების რეესტრისთვის.
  */
 typedef struct service_entry_t {
-    char name[CONFIG_FMW_SERVICE_NAME_MAX_LENGTH]; /**< @brief სერვისის უნიკალური სახელი. */
-    fmw_service_type_t type;                       /**< @brief სერვისის ტიპი (enum). */
+    char name[CONFIG_SYNAPSE_SERVICE_NAME_MAX_LENGTH]; /**< @brief სერვისის უნიკალური სახელი. */
+    synapse_service_type_t type;                       /**< @brief სერვისის ტიპი (enum). */
     void *service_handle;                          /**< @brief მაჩვენებელი სერვისის API სტრუქტურაზე. */
     SLIST_ENTRY(service_entry_t) entries;          /**< @brief მაჩვენებელი სიის შემდეგ ელემენტზე. */
 } service_entry_t;
@@ -63,8 +63,8 @@ static SLIST_HEAD(service_list_head, service_entry_t) service_registry_head;
  */
 static SemaphoreHandle_t service_registry_mutex = NULL;
 
-
-esp_err_t fmw_service_locator_init(void) {
+esp_err_t synapse_service_locator_init(void)
+{
     // შევამოწმოთ, ხომ არ არის უკვე ინიციალიზებული
     if (service_registry_mutex != NULL) {
         ESP_LOGW(TAG, "Service Locator უკვე ინიციალიზებულია.");
@@ -82,13 +82,15 @@ esp_err_t fmw_service_locator_init(void) {
     return ESP_OK;
 }
 
-esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t service_type, service_handle_t service_handle) {
+esp_err_t synapse_service_register(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle)
+{
     if (!service_name || !service_handle) {
         ESP_LOGE(TAG, "რეგისტრაცია ვერ მოხერხდა: არასწორი არგუმენტები (სახელი ან handle არის NULL).");
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "რეგისტრაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
         return ESP_ERR_TIMEOUT;
     }
@@ -120,11 +122,11 @@ esp_err_t fmw_service_register(const char *service_name, fmw_service_type_t serv
 
     xSemaphoreGive(service_registry_mutex);
 
-    ESP_LOGI(TAG, "სერვისი '%s' (ტიპი: '%s') წარმატებით დარეგისტრირდა.", service_name, fmw_service_type_to_string(service_type));
+    ESP_LOGI(TAG, "სერვისი '%s' (ტიპი: '%s') წარმატებით დარეგისტრირდა.", service_name, synapse_service_type_to_string(service_type));
     return ESP_OK;
 }
 
-esp_err_t fmw_service_unregister(const char *service_name)
+esp_err_t synapse_service_unregister(const char *service_name)
 {
     if (!service_name)
     {
@@ -132,7 +134,7 @@ esp_err_t fmw_service_unregister(const char *service_name)
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
     {
         ESP_LOGE(TAG, "Unregister ოპერაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
         return ESP_ERR_TIMEOUT;
@@ -176,13 +178,15 @@ esp_err_t fmw_service_unregister(const char *service_name)
     return ESP_ERR_NOT_FOUND;
 }
 
-service_handle_t fmw_service_get(const char *service_name) {
+service_handle_t synapse_service_get(const char *service_name)
+{
     if (!service_name) {
         ESP_LOGE(TAG, "სერვისის მოძიება ვერ მოხერხდა: service_name არის NULL.");
         return NULL;
     }
 
-    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Get ოპერაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
         return NULL;
     }
@@ -207,13 +211,15 @@ service_handle_t fmw_service_get(const char *service_name) {
     return found_handle;
 }
 
-esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out_service_type) {
+esp_err_t synapse_service_get_type(const char *service_name, synapse_service_type_t *out_service_type)
+{
     if (!service_name || !out_service_type) {
         ESP_LOGE(TAG, "სერვისის ტიპის მოძიება ვერ მოხერხდა: service_name ან out_service_type არის NULL.");
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Get_type ოპერაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
         return ESP_ERR_TIMEOUT;
     }
@@ -231,7 +237,7 @@ esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out
     xSemaphoreGive(service_registry_mutex);
 
     if (found) {
-        ESP_LOGD(TAG, "სერვისს '%s' აქვს ტიპი '%s'.", service_name, fmw_service_type_to_string(*out_service_type));
+        ESP_LOGD(TAG, "სერვისს '%s' აქვს ტიპი '%s'.", service_name, synapse_service_type_to_string(*out_service_type));
         return ESP_OK;
     } else {
         ESP_LOGW(TAG, "სერვისი '%s' ვერ მოიძებნა ტიპის მოთხოვნისას.", service_name);
@@ -239,12 +245,13 @@ esp_err_t fmw_service_get_type(const char *service_name, fmw_service_type_t *out
     }
 }
 
-service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type)
+service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type)
 {
     // აქ შეიძლება enum-ის დიაპაზონის შემოწმება, თუ საჭიროა, მაგრამ NULL-ზე შემოწმება არასწორია.
-    // მაგალითად: if (service_type >= FMW_SERVICE_TYPE_MAX) return NULL;
+    // მაგალითად: if (service_type >= SYNAPSE_SERVICE_TYPE_MAX) return NULL;
 
-    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_FMW_SEMAPHORE_TIMEOUT_MS)) != pdTRUE) {
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
+    {
         ESP_LOGE(TAG, "Lookup_by_type ოპერაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
         return NULL;
     }
@@ -264,9 +271,9 @@ service_handle_t fmw_service_lookup_by_type(fmw_service_type_t service_type)
 
     // ლოგირებისთვის ვიყენებთ დამხმარე ფუნქციას, რომ enum გადავიყვანოთ სტრიქონში
     if (found_handle) {
-        ESP_LOGD(TAG, "ნაპოვნია სერვისი ტიპით '%s'.", fmw_service_type_to_string(service_type));
+        ESP_LOGD(TAG, "ნაპოვნია სერვისი ტიპით '%s'.", synapse_service_type_to_string(service_type));
     } else {
-        ESP_LOGW(TAG, "სერვისი ტიპით '%s' ვერ მოიძებნა.", fmw_service_type_to_string(service_type));
+        ESP_LOGW(TAG, "სერვისი ტიპით '%s' ვერ მოიძებნა.", synapse_service_type_to_string(service_type));
     }
 
     return found_handle;

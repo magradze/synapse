@@ -14,8 +14,8 @@
  *       `DEFINE_COMPONENT_TAG` მაკრო საკუთარი, უნიკალური ტეგის შესაქმნელად.
  */
 
-#ifndef FMW_LOGGING_H
-#define FMW_LOGGING_H
+#ifndef SYNAPSE_LOGGING_H
+#define SYNAPSE_LOGGING_H
 
 #include "esp_log.h"
 
@@ -41,4 +41,4 @@
 #define DEFINE_COMPONENT_TAG(component_name) \
   static const char *TAG = component_name
 
-#endif // FMW_LOGGING_H
+#endif // SYNAPSE_LOGGING_H

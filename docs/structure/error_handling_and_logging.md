@@ -21,7 +21,7 @@
 - ESP_ERR_TIMEOUT — ოპერაციის ვადა ამოიწურა
 - ESP_ERR_NOT_FOUND — რესურსი ვერ მოიძებნა
 - ESP_ERR_NOT_SUPPORTED — ოპერაცია არ არის მხარდაჭერილი
-- ESP_ERR_FMW_* — Framework-ის სპეციფიკური შეცდომები
+- ESP_ERR_SYNAPSE_* — Framework-ის სპეციფიკური შეცდომები
 
 ## შეცდომების დამუშავების მაგალითები
 

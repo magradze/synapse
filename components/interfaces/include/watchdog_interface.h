@@ -8,8 +8,8 @@
  *          allowing other modules to register for heartbeat monitoring.
  */
 
-#ifndef FMW_WATCHDOG_INTERFACE_H
-#define FMW_WATCHDOG_INTERFACE_H
+#ifndef SYNAPSE_WATCHDOG_INTERFACE_H
+#define SYNAPSE_WATCHDOG_INTERFACE_H
 
 #include "esp_err.h"
 
@@ -53,4 +53,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_WATCHDOG_INTERFACE_H
+#endif // SYNAPSE_WATCHDOG_INTERFACE_H

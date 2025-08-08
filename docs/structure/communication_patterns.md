@@ -13,7 +13,7 @@
 - მაგალითი:
 
   ```c
-  service_handle_t display_service_handle = fmw_service_get("main_display");
+  service_handle_t display_service_handle = synapse_service_get("main_display");
   if (display_service_handle) {
       ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
       ssd1306_service_api->enable();
@@ -71,7 +71,7 @@ sequenceDiagram
 
     Note over MqttMod, ServiceLocator: MQTT Module needs to call the Relay API
 
-    MqttMod->>ServiceLocator: 3. `fmw_service_get("relay1_api")`
+    MqttMod->>ServiceLocator: 3. `synapse_service_get("relay1_api")`
     ServiceLocator-->>MqttMod: 4. Returns Relay API handle
 
     MqttMod->>RelayMod: 5. Calls `relay_api->set_state(true)`
@@ -96,7 +96,7 @@ sequenceDiagram
 
 ```c
 // Display module API-ის გამოძახება
-service_handle_t display_service_handle = fmw_service_get("main_display");
+service_handle_t display_service_handle = synapse_service_get("main_display");
 if (display_service_handle) {
     ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
     ssd1306_service_api->disable();

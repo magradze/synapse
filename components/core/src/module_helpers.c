@@ -17,7 +17,8 @@
 
 DEFINE_COMPONENT_TAG("MODULE_HELPERS");
 
-esp_err_t fmw_module_helper_simple_enable(struct module_t* module) {
+esp_err_t synapse_module_helper_simple_enable(struct module_t *module)
+{
     if (!module || !module->state_mutex)
     { // დაემატა mutex-ის შემოწმება
         return ESP_ERR_INVALID_ARG;
@@ -43,7 +44,8 @@ esp_err_t fmw_module_helper_simple_enable(struct module_t* module) {
     return ESP_OK;
 }
 
-esp_err_t fmw_module_helper_simple_disable(struct module_t* module) {
+esp_err_t synapse_module_helper_simple_disable(struct module_t *module)
+{
     if (!module || !module->state_mutex)
     {
         return ESP_ERR_INVALID_ARG;
@@ -69,7 +71,8 @@ esp_err_t fmw_module_helper_simple_disable(struct module_t* module) {
     return ESP_OK;
 }
 
-module_status_t fmw_module_helper_simple_get_status(struct module_t* module) {
+module_status_t synapse_module_helper_simple_get_status(struct module_t *module)
+{
     if (!module || !module->state_mutex)
     {
         return MODULE_STATUS_UNKNOWN;

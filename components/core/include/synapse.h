@@ -33,7 +33,7 @@ extern "C" {
   // for building any module within the Synapse ecosystem.
 
 #include "base_module.h"      // Defines the basic module structure (module_t) and its lifecycle.
-#include "service_types.h"    // Provides the centralized enum for all service types (fmw_service_type_t).
+#include "service_types.h"    // Provides the centralized enum for all service types (synapse_service_type_t).
 #include "framework_events.h" // Defines the names of standardized, framework-wide events.
 #include "event_payloads.h"   // Defines the data structures (payloads) for standard events.
 
@@ -43,12 +43,12 @@ extern "C" {
   // These headers declare the public functions for the framework's main services,
   // forming the primary interaction points for all modules.
 
-#include "service_locator.h"  // For registering and discovering services (fmw_service_*).
-#include "event_bus.h"        // For publishing and subscribing to events (fmw_event_bus_*).
-#include "config_manager.h"   // For accessing configuration parameters (fmw_config_get_*).
-#include "resource_manager.h" // For managing exclusive access to hardware resources like GPIO, I2C (fmw_resource_*).
-#include "system_manager.h"   // For system-level control and module management (fmw_module_*, fmw_system_*).
-#include "promise_manager.h"  // For consuming asynchronous operations using a clean, promise-based pattern (fmw_promise_*).
+#include "service_locator.h"  // For registering and discovering services (synapse_service_*).
+#include "event_bus.h"        // For publishing and subscribing to events (synapse_event_bus_*).
+#include "config_manager.h"   // For accessing configuration parameters (synapse_config_get_*).
+#include "resource_manager.h" // For managing exclusive access to hardware resources like GPIO, I2C (synapse_resource_*).
+#include "system_manager.h"   // For system-level control and module management (synapse_module_*, synapse_system_*).
+#include "promise_manager.h"  // For consuming asynchronous operations using a clean, promise-based pattern (synapse_promise_*).
 
   // =================================================================================================
   //      SECTION 3: UTILITIES & INTERNAL MECHANISMS
@@ -57,15 +57,15 @@ extern "C" {
   // the proper functioning and full integration of modules with the framework.
 
 #include "logging.h"            // Provides the essential macro for logging (DEFINE_COMPONENT_TAG).
-#include "event_data_wrapper.h" // For safe, reference-counted management of event data (fmw_event_data_*).
+#include "event_data_wrapper.h" // For safe, reference-counted management of event data (synapse_event_data_*).
 #include "module_helpers.h"     // Provides standard, reusable implementations for enable/disable/get_status.
-#include "module_factory.h"     // For dynamically creating modules at runtime (fmw_module_create).
-#include "module_registry.h"    // For accessing the module registry (fmw_module_registry_*).
+#include "module_factory.h"     // For dynamically creating modules at runtime (synapse_module_create).
+#include "module_registry.h"    // For accessing the module registry (synapse_module_registry_*).
 
 // --- For Service Providers Only ---
 // The following header is intended for modules that PROVIDE promise-based asynchronous services.
 // General consumer modules should not need to include this directly.
-#include "promise_manager_internal.h" // For creating and fulfilling promises (fmw_promise_create, fmw_promise_resolve).
+#include "promise_manager_internal.h" // For creating and fulfilling promises (synapse_promise_create, synapse_promise_resolve).
 
   // Note: Headers like `generated_module_factory.h`, `module_factory.h`, `module_registry.h`,
   // and `framework_config.h` are intentionally excluded. They are used internally by the core

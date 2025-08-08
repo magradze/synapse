@@ -62,7 +62,7 @@
 
 ## 5. Service API (`health_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა `Health Monitor`-ის API-ზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: `FMW_SERVICE_TYPE_HEALTH_API`.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა `Health Monitor`-ის API-ზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: `SYNAPSE_SERVICE_TYPE_HEALTH_API`.
 
 **API ფუნქციები:**
 
@@ -93,7 +93,7 @@
 #include "health_interface.h" // პირობითი ინტერფეისის ფაილი
 
 void start_ota_if_healthy() {
-    service_handle_t handle = fmw_service_get("main_health_monitor");
+    service_handle_t handle = synapse_service_get("main_health_monitor");
     if (!handle) {
         ESP_LOGW(TAG, "Health Monitor service not found. Skipping health check.");
         // ... განაგრძე OTA ...

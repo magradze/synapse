@@ -146,11 +146,11 @@ static esp_err_t relay_module_init(module_t *self)
     relay_private_data_t *private_data = (relay_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing module: %s", self->name);
 
-    esp_err_t err = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
+    esp_err_t err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
     if (err != ESP_OK)
     {
         const char *owner = NULL;
-        fmw_resource_get_owner(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin, &owner);
+        synapse_resource_get_owner(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, &owner);
         ESP_LOGE(TAG, "Failed to lock GPIO %d. It is already owned by '%s'.", private_data->gpio_pin, owner ? owner : "unknown");
         return err;
     }
@@ -159,16 +159,16 @@ static esp_err_t relay_module_init(module_t *self)
     gpio_config(&io_conf);
 
     // Register the service API for this specific instance
-    esp_err_t service_err = fmw_service_register(self->name, FMW_SERVICE_TYPE_RELAY_API, (void *)&relay_service_api);
+    esp_err_t service_err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_RELAY_API, (void *)&relay_service_api);
     if (service_err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register relay service for '%s'", self->name);
         // Cleanup locked resource before failing
-        fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
+        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
         return service_err;
     }
 
-    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
@@ -188,7 +188,7 @@ static esp_err_t relay_module_start(module_t *self)
     }
     else if (private_data->initial_state == INITIAL_STATE_LAST)
     {
-        service_handle_t storage = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+        service_handle_t storage = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_NVRAM_API);
         if (storage)
         {
             ((storage_api_t *)storage)->get_bool(self->name, "last_state", &initial_state_on);
@@ -207,12 +207,12 @@ static void relay_module_deinit(module_t *self)
     relay_private_data_t *private_data = (relay_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Deinitializing module: %s", self->name);
 
-    fmw_service_unregister(self->name);
+    synapse_service_unregister(self->name);
 
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
-    service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    service_handle_t cmd_router = synapse_service_get("main_cmd_router");
     if (cmd_router)
     {
         ((cmd_router_api_t *)cmd_router)->unregister_command("relay");
@@ -246,10 +246,10 @@ static void relay_module_deinit(module_t *self)
 static void relay_module_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     // We only care about the system start event.
-    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0)
+    if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0)
     {
 
-        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
         if (cmd_router)
         {
             cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router;
@@ -288,7 +288,7 @@ static void relay_module_handle_event(module_t *self, const char *event_name, vo
     // Always release the data wrapper if it exists
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -385,7 +385,7 @@ static esp_err_t set_relay_state(module_t *self, bool is_on)
 
 /**
  * @internal
- * @brief Publishes a FMW_EVENT_RELAY_STATE_CHANGED event to the Event Bus.
+ * @brief Publishes a SYNAPSE_EVENT_RELAY_STATE_CHANGED event to the Event Bus.
  * @param[in] self Pointer to the module instance whose state has changed.
  */
 static void publish_state_change(module_t *self)
@@ -398,16 +398,16 @@ static void publish_state_change(module_t *self)
 
     if (json_string)
     {
-        fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+        synapse_telemetry_payload_t *payload = malloc(sizeof(synapse_telemetry_payload_t));
         if (payload)
         {
             strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
             payload->json_data = json_string;
             event_data_wrapper_t *wrapper;
-            if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+            if (synapse_event_data_wrap(payload, synapse_telemetry_payload_free, &wrapper) == ESP_OK)
             {
-                fmw_event_bus_post(FMW_EVENT_RELAY_STATE_CHANGED, wrapper);
-                fmw_event_data_release(wrapper);
+                synapse_event_bus_post(SYNAPSE_EVENT_RELAY_STATE_CHANGED, wrapper);
+                synapse_event_data_release(wrapper);
             }
             else
             {
@@ -431,7 +431,7 @@ static void publish_state_change(module_t *self)
 static esp_err_t save_state_to_storage(module_t *self)
 {
     relay_private_data_t *private_data = (relay_private_data_t *)self->private_data;
-    service_handle_t storage = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+    service_handle_t storage = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_NVRAM_API);
     if (storage)
     {
         return ((storage_api_t *)storage)->set_bool(self->name, "last_state", private_data->current_state);

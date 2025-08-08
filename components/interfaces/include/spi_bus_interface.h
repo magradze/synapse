@@ -5,8 +5,8 @@
  * @version 1.0.0
  * @date 2025-08-20
  */
-#ifndef FMW_SPI_BUS_INTERFACE_H
-#define FMW_SPI_BUS_INTERFACE_H
+#ifndef SYNAPSE_SPI_BUS_INTERFACE_H
+#define SYNAPSE_SPI_BUS_INTERFACE_H
 
 #include "esp_err.h"
 #include "driver/spi_master.h"
@@ -64,4 +64,4 @@ typedef struct {
 }
 #endif
 
-#endif // FMW_SPI_BUS_INTERFACE_H
+#endif // SYNAPSE_SPI_BUS_INTERFACE_H

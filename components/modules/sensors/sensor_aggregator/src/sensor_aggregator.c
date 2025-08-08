@@ -88,7 +88,7 @@ typedef struct
 
     // Runtime State
     cJSON *current_snapshot;
-    fmw_timer_handle_t publish_timer;
+    synapse_timer_handle_t publish_timer;
     SemaphoreHandle_t snapshot_mutex;
 
     bool buffering_enabled;
@@ -178,20 +178,20 @@ static esp_err_t sensor_aggregator_init(module_t *self)
     for (int i = 0; i < private_data->num_sensors; i++)
     {
         ESP_LOGI(TAG, "Subscribing to sensor event: '%s'", private_data->sensors[i].event_name);
-        fmw_event_bus_subscribe(private_data->sensors[i].event_name, self);
+        synapse_event_bus_subscribe(private_data->sensors[i].event_name, self);
     }
 
     // Subscribe to our own timer tick if needed
     if (private_data->strategy == STRATEGY_TIME_WINDOW)
     {
-        fmw_event_bus_subscribe(AGGREGATOR_PUBLISH_TICK_EVENT, self);
+        synapse_event_bus_subscribe(AGGREGATOR_PUBLISH_TICK_EVENT, self);
     }
 
     // Subscribe to connectivity events if buffering is enabled
     if (private_data->buffering_enabled)
     {
-        fmw_event_bus_subscribe(FMW_EVENT_CONNECTIVITY_ESTABLISHED, self);
-        fmw_event_bus_subscribe(FMW_EVENT_CONNECTIVITY_LOST, self);
+        synapse_event_bus_subscribe(SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED, self);
+        synapse_event_bus_subscribe(SYNAPSE_EVENT_CONNECTIVITY_LOST, self);
     }
 
     self->status = MODULE_STATUS_INITIALIZED;
@@ -207,7 +207,7 @@ static esp_err_t sensor_aggregator_start(module_t *self)
 
     if (private_data->strategy == STRATEGY_TIME_WINDOW)
     {
-        service_handle_t timer_service = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
+        service_handle_t timer_service = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIMER_API);
         if (!timer_service)
         {
             ESP_LOGE(TAG, "System Timer service not found! Cannot start time_window strategy.");
@@ -239,12 +239,12 @@ static void sensor_aggregator_deinit(module_t *self)
     // Unsubscribe from all events
     for (int i = 0; i < private_data->num_sensors; i++)
     {
-        fmw_event_bus_unsubscribe(private_data->sensors[i].event_name, self);
+        synapse_event_bus_unsubscribe(private_data->sensors[i].event_name, self);
     }
     if (private_data->strategy == STRATEGY_TIME_WINDOW)
     {
-        fmw_event_bus_unsubscribe(AGGREGATOR_PUBLISH_TICK_EVENT, self);
-        service_handle_t timer_service = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
+        synapse_event_bus_unsubscribe(AGGREGATOR_PUBLISH_TICK_EVENT, self);
+        service_handle_t timer_service = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIMER_API);
         if (timer_service && private_data->publish_timer)
         {
             ((timer_api_t *)timer_service)->cancel_event(private_data->publish_timer);
@@ -264,7 +264,7 @@ static void sensor_aggregator_handle_event(module_t *self, const char *event_nam
     if (!self || !event_name)
     {
         if (event_data)
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
     sensor_aggregator_private_data_t *private_data = (sensor_aggregator_private_data_t *)self->private_data;
@@ -272,14 +272,14 @@ static void sensor_aggregator_handle_event(module_t *self, const char *event_nam
     // Handle connectivity events for buffering
     if (private_data->buffering_enabled)
     {
-        if (strcmp(event_name, FMW_EVENT_CONNECTIVITY_ESTABLISHED) == 0)
+        if (strcmp(event_name, SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED) == 0)
         {
             ESP_LOGI(TAG, "Connectivity established. Flushing buffered reports.");
             private_data->is_offline = false;
             publish_buffered_reports(self); // Publish any stored reports
             goto cleanup;
         }
-        else if (strcmp(event_name, FMW_EVENT_CONNECTIVITY_LOST) == 0)
+        else if (strcmp(event_name, SYNAPSE_EVENT_CONNECTIVITY_LOST) == 0)
         {
             ESP_LOGW(TAG, "Connectivity lost. Buffering will be enabled.");
             private_data->is_offline = true;
@@ -350,7 +350,7 @@ static void sensor_aggregator_handle_event(module_t *self, const char *event_nam
 cleanup:
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -456,7 +456,7 @@ static void publish_report(module_t *self)
     if (private_data->buffering_enabled && private_data->is_offline)
     {
         ESP_LOGI(TAG, "Device is offline. Buffering report to filesystem.");
-        service_handle_t storage_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+        service_handle_t storage_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_NVRAM_API);
         if (storage_handle)
         {
             storage_api_t *storage_api = (storage_api_t *)storage_handle;
@@ -501,18 +501,18 @@ static void publish_report(module_t *self)
     ESP_LOGI(TAG, "Generated aggregated JSON: %s", json_string);
 
     // Create and post the event with the generated JSON string
-    fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+    synapse_telemetry_payload_t *payload = malloc(sizeof(synapse_telemetry_payload_t));
     if (payload)
     {
         strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
         payload->json_data = json_string; // Ownership of json_string is transferred
 
         event_data_wrapper_t *wrapper;
-        if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+        if (synapse_event_data_wrap(payload, synapse_telemetry_payload_free, &wrapper) == ESP_OK)
         {
-            ESP_LOGI(TAG, "Publishing aggregated report event: %s", FMW_EVENT_AGGREGATED_SENSOR_REPORT);
-            fmw_event_bus_post(FMW_EVENT_AGGREGATED_SENSOR_REPORT, wrapper);
-            fmw_event_data_release(wrapper);
+            ESP_LOGI(TAG, "Publishing aggregated report event: %s", SYNAPSE_EVENT_AGGREGATED_SENSOR_REPORT);
+            synapse_event_bus_post(SYNAPSE_EVENT_AGGREGATED_SENSOR_REPORT, wrapper);
+            synapse_event_data_release(wrapper);
         }
         else
         {
@@ -675,7 +675,7 @@ static esp_err_t parse_aggregator_config(const cJSON *config, sensor_aggregator_
  */
 static void publish_buffered_reports(module_t *self)
 {
-    service_handle_t storage_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+    service_handle_t storage_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_NVRAM_API);
     if (!storage_handle)
     {
         ESP_LOGE(TAG, "Storage service not found. Cannot publish buffered reports.");
@@ -737,18 +737,18 @@ static void publish_buffered_reports(module_t *self)
                 }
 
                 // ... (The rest of the publishing logic remains the same) ...
-                fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+                synapse_telemetry_payload_t *payload = malloc(sizeof(synapse_telemetry_payload_t));
                 if (payload)
                 {
                     strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
                     payload->json_data = strdup(file_buffer);
 
                     event_data_wrapper_t *wrapper;
-                    if (payload->json_data && fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+                    if (payload->json_data && synapse_event_data_wrap(payload, synapse_telemetry_payload_free, &wrapper) == ESP_OK)
                     {
                         ESP_LOGI(TAG, "Publishing buffered report from %s", file_path);
-                        fmw_event_bus_post(FMW_EVENT_AGGREGATED_SENSOR_REPORT, wrapper);
-                        fmw_event_data_release(wrapper);
+                        synapse_event_bus_post(SYNAPSE_EVENT_AGGREGATED_SENSOR_REPORT, wrapper);
+                        synapse_event_data_release(wrapper);
                         storage_api->delete_file(file_path);
                     }
                     else

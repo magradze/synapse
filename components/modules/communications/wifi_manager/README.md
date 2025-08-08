@@ -99,7 +99,7 @@ void request_update() {
 | `WIFI_CREDENTIALS_NOT_FOUND` | `NULL` | ❓ საცავში ვერ მოიძებნა შენახული მონაცემები. |
 | `PROV_START_REQUESTED` | `NULL` | 📲 ითხოვს `provisioning` პროცესის დაწყებას, როდესაც დაკავშირება ვერ ხერხდება. |
 
-**შენიშვნა:** `FMW_EVENT_WIFI_STATUS_READY` ივენთი **მოძველებულია (deprecated)** და აღარ გამოიყენება. მის ნაცვლად გამოიყენეთ `Promise`-ზე დაფუძნებული API.
+**შენიშვნა:** `SYNAPSE_EVENT_WIFI_STATUS_READY` ივენთი **მოძველებულია (deprecated)** და აღარ გამოიყენება. მის ნაცვლად გამოიყენეთ `Promise`-ზე დაფუძნებული API.
 
 ## 6. ⌨️ CLI ბრძანებები (Command Line Interface)
 

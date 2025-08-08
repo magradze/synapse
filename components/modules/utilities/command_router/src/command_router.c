@@ -178,7 +178,7 @@ static esp_err_t command_router_init(module_t *self)
     if (!self) return ESP_ERR_INVALID_ARG;
     ESP_LOGI(TAG, "Initializing Command Router module: %s", self->name);
 
-    esp_err_t err = fmw_service_register(self->name, FMW_SERVICE_TYPE_CMD_ROUTER_API, &command_router_service_api);
+    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API, &command_router_service_api);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to register Command Router service: %s", esp_err_to_name(err));
         return err;
@@ -201,10 +201,10 @@ static esp_err_t command_router_init(module_t *self)
     service_api_register_command(&nvs_inspect_cmd);
     service_api_register_command(&reboot_cmd);
 
-    err = fmw_event_bus_subscribe(FMW_EVENT_EXECUTE_COMMAND_STRING, self);
+    err = synapse_event_bus_subscribe(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, self);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to subscribe to command events: %s", esp_err_to_name(err));
-        fmw_service_unregister(self->name);
+        synapse_service_unregister(self->name);
         return err;
     }
 
@@ -259,8 +259,8 @@ static void command_router_deinit(module_t *self)
         private_data->serial_shell_task_handle = NULL;
     }
 
-    fmw_event_bus_unsubscribe(FMW_EVENT_EXECUTE_COMMAND_STRING, self);
-    fmw_service_unregister(self->name);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, self);
+    synapse_service_unregister(self->name);
 
     if (private_data->commands_mutex) vSemaphoreDelete(private_data->commands_mutex);
     if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
@@ -286,14 +286,16 @@ static void command_router_deinit(module_t *self)
 static void command_router_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     if (!self || !event_name) {
-        if (event_data) fmw_event_data_release((event_data_wrapper_t *)event_data);
+        if (event_data)
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
-    if (strcmp(event_name, FMW_EVENT_EXECUTE_COMMAND_STRING) == 0) {
+    if (strcmp(event_name, SYNAPSE_EVENT_EXECUTE_COMMAND_STRING) == 0)
+    {
         event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
         if (wrapper && wrapper->payload) {
-            fmw_command_payload_t *payload = (fmw_command_payload_t *)wrapper->payload;
+            synapse_command_payload_t *payload = (synapse_command_payload_t *)wrapper->payload;
             ESP_LOGI(TAG, "Executing command from event source '%s': \"%s\"", payload->source, payload->command_string);
             
             char *argv[CONFIG_COMMAND_ROUTER_MAX_ARGS];
@@ -309,7 +311,7 @@ static void command_router_handle_event(module_t *self, const char *event_name, 
     }
 
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -632,14 +634,15 @@ static esp_err_t cmd_handler_help(int argc, char **argv, void *context)
 
 static esp_err_t cmd_handler_modules(int argc, char **argv, void *context)
 {
-    service_handle_t handle = fmw_service_get("system_manager");
+    service_handle_t handle = synapse_service_get("system_manager");
     if (!handle) {
         printf("Error: System Manager service not available.\n");
         return ESP_ERR_NOT_FOUND;
     }
 
-    fmw_service_type_t service_type;
-    if (fmw_service_get_type("system_manager", &service_type) != ESP_OK || service_type != FMW_SERVICE_TYPE_SYSTEM_API) {
+    synapse_service_type_t service_type;
+    if (synapse_service_get_type("system_manager", &service_type) != ESP_OK || service_type != SYNAPSE_SERVICE_TYPE_SYSTEM_API)
+    {
         printf("Error: Invalid service type for 'system_manager'.\n");
         return ESP_ERR_INVALID_STATE;
     }

@@ -212,7 +212,7 @@ static esp_err_t self_test_manager_init(module_t *self)
         return ESP_ERR_INVALID_ARG;
     ESP_LOGI(TAG, "Initializing module: %s", self->name);
 
-    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
     self->status = MODULE_STATUS_RUNNING;
     return ESP_OK;
@@ -232,13 +232,13 @@ static void self_test_manager_deinit(module_t *self)
     self_test_private_data_t *private_data = (self_test_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Deinitializing module: %s", self->name);
 
-    service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+    service_handle_t cmd_router = synapse_service_get("main_cmd_router");
     if (cmd_router)
     {
         ((cmd_router_api_t *)cmd_router)->unregister_command("selftest");
     }
 
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
     if (private_data->report_mutex)
         vSemaphoreDelete(private_data->report_mutex);
     free(private_data);
@@ -248,7 +248,7 @@ static void self_test_manager_deinit(module_t *self)
 /**
  * @internal
  * @brief Handles events from the Event Bus.
- * @details Specifically listens for FMW_EVENT_SYSTEM_START_COMPLETE to register
+ * @details Specifically listens for SYNAPSE_EVENT_SYSTEM_START_COMPLETE to register
  *          its command with the now-ready Command Router.
  * @param[in] self A pointer to the module instance.
  * @param[in] event_name The name of the received event.
@@ -256,10 +256,10 @@ static void self_test_manager_deinit(module_t *self)
  */
 static void self_test_manager_handle_event(module_t *self, const char *event_name, void *event_data)
 {
-    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0)
+    if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0)
     {
         ESP_LOGI(TAG, "System start complete, registering CLI command.");
-        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
         if (cmd_router)
         {
             static cmd_t selftest_cmd = {
@@ -280,7 +280,7 @@ static void self_test_manager_handle_event(module_t *self, const char *event_nam
     }
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -398,16 +398,16 @@ static esp_err_t cmd_handler(int argc, char **argv, void *context)
             {
                 // Wrap and post the event
                 event_data_wrapper_t *wrapper;
-                fmw_telemetry_payload_t *payload = malloc(sizeof(fmw_telemetry_payload_t));
+                synapse_telemetry_payload_t *payload = malloc(sizeof(synapse_telemetry_payload_t));
                 if (payload)
                 {
                     strncpy(payload->module_name, self->name, sizeof(payload->module_name) - 1);
                     payload->json_data = json_string; // The string will be freed by the payload's free function
 
-                    if (fmw_event_data_wrap(payload, fmw_telemetry_payload_free, &wrapper) == ESP_OK)
+                    if (synapse_event_data_wrap(payload, synapse_telemetry_payload_free, &wrapper) == ESP_OK)
                     {
-                        fmw_event_bus_post(FMW_EVENT_SELF_TEST_REPORT_READY, wrapper);
-                        fmw_event_data_release(wrapper);
+                        synapse_event_bus_post(SYNAPSE_EVENT_SELF_TEST_REPORT_READY, wrapper);
+                        synapse_event_data_release(wrapper);
                     }
                     else
                     {
@@ -561,7 +561,7 @@ static void run_core_services_check(self_test_private_data_t *private_data)
     bool all_pass = true;
     for (int i = 0; services_to_check[i] != NULL; i++)
     {
-        if (fmw_service_get(services_to_check[i]) == NULL)
+        if (synapse_service_get(services_to_check[i]) == NULL)
         {
             all_pass = false;
             ESP_LOGE(TAG, "Core service check failed for: %s", services_to_check[i]);
@@ -579,7 +579,7 @@ static void run_core_services_check(self_test_private_data_t *private_data)
  */
 static void run_system_health_check(self_test_private_data_t *private_data)
 {
-    service_handle_t health_handle = fmw_service_get("health_monitor");
+    service_handle_t health_handle = synapse_service_get("health_monitor");
     if (!health_handle)
     {
         add_report_line(private_data, "System Health Check", TEST_RESULT_SKIPPED, "Health Monitor service not found");
@@ -620,7 +620,7 @@ static void run_storage_check(self_test_private_data_t *private_data)
 {
     // Find the service by its type, not by a hardcoded name.
     // This is the architecturally correct way to get a dependency.
-    service_handle_t storage_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_NVRAM_API);
+    service_handle_t storage_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_NVRAM_API);
 
     if (!storage_handle)
     {
@@ -676,7 +676,7 @@ static void run_storage_check(self_test_private_data_t *private_data)
  */
 static void run_connectivity_check(self_test_private_data_t *private_data)
 {
-    service_handle_t sys_handle = fmw_service_get("system_manager");
+    service_handle_t sys_handle = synapse_service_get("system_manager");
     if (!sys_handle)
     {
         add_report_line(private_data, "Connectivity Check", TEST_RESULT_FAIL, "System Manager not found");
@@ -759,7 +759,7 @@ static cJSON* generate_report_json(self_test_private_data_t *private_data) {
  */
 static void run_security_check(self_test_private_data_t *private_data)
 {
-    service_handle_t sec_handle = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_SECURITY_API);
+    service_handle_t sec_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_SECURITY_API);
     if (!sec_handle)
     {
         add_report_line(private_data, "Security Check", TEST_RESULT_SKIPPED, "Service not found");
@@ -800,7 +800,7 @@ static void run_display_check(self_test_private_data_t *private_data)
     const char *test_name = "Display Check";
 
     // 1. Find the display service
-    service_handle_t display_handle = fmw_service_get("main_display");
+    service_handle_t display_handle = synapse_service_get("main_display");
     if (!display_handle)
     {
         add_report_line(private_data, test_name, TEST_RESULT_SKIPPED, "Display service not found");

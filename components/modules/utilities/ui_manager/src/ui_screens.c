@@ -326,22 +326,22 @@ void render_module_control_screen(ui_manager_private_data_t *private_data)
         return;
     }
 
-    char formatted_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char formatted_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     format_module_name(module->name, formatted_name, sizeof(formatted_name));
     display->draw_formatted_text(context, 2, start_y, 1, "Module: %s", formatted_name);
 
     module_status_t status;
-    fmw_module_get_status(module->name, &status);
+    synapse_module_get_status(module->name, &status);
     const char *status_str = (status == MODULE_STATUS_RUNNING) ? "Running" : "Disabled";
     display->draw_formatted_text(context, 2, start_y + line_height, 1, "Status: %s", status_str);
 
     bool is_action_selected = (private_data->selected_item_index == 0);
     bool is_back_selected = (private_data->selected_item_index == 1);
 
-    fmw_service_type_t type;
-    if (fmw_service_get_type(module->name, &type) == ESP_OK && type == FMW_SERVICE_TYPE_RELAY_API)
+    synapse_service_type_t type;
+    if (synapse_service_get_type(module->name, &type) == ESP_OK && type == SYNAPSE_SERVICE_TYPE_RELAY_API)
     {
-        relay_api_t *relay_api = fmw_service_get(module->name);
+        relay_api_t *relay_api = synapse_service_get(module->name);
         if (relay_api)
         {
             bool state = relay_api->get_state((void *)module);

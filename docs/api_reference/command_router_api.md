@@ -5,7 +5,7 @@
 ეს დოკუმენტი აღწერს `Command Router` მოდულის საჯარო Service API-ს, რომელიც ხელმისაწვდომია სხვა მოდულებისთვის `Service Locator`-ის მეშვეობით. ეს API საშუალებას აძლევს ნებისმიერ მოდულს, დაარეგისტრიროს და მართოს საკუთარი ბრძანებები ცენტრალიზებულად და **კონფლიქტების გარეშე**.
 
 **სერვისის სახელი:** `main_cmd_router` (ან როგორც მითითებულია `config.json`-ში)
-**სერვისის ტიპი:** `FMW_SERVICE_TYPE_CMD_ROUTER_API`
+**სერვისის ტიპი:** `SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API`
 **ინტერფეისის ჰედერი:** `cmd_router_interface.h`
 
 ---
@@ -92,7 +92,7 @@ typedef struct {
 
 **ლოგიკა:**
 
-1. მოდული გამოიწერს `FMW_EVENT_SYSTEM_START_COMPLETE` ივენთზე.
+1. მოდული გამოიწერს `SYNAPSE_EVENT_SYSTEM_START_COMPLETE` ივენთზე.
 2. როდესაც ივენთი მოვა, ის ამოწმებს, არის თუ არა მისი ზოგადი ბრძანება (მაგ., `"relay"`) უკვე რეგისტრირებული `is_command_registered` ფუნქციით.
 3. **მხოლოდ იმ შემთხვევაში, თუ ბრძანება არ არის რეგისტრირებული**, ის არეგისტრირებს მას ზოგადი `handler` ფუნქციით.
 4. შედეგად, ბრძანებას არეგისტრირებს მხოლოდ პირველი ინსტანცია, რომელიც ამ კოდს გაუშვებს.
@@ -108,7 +108,7 @@ static esp_err_t generic_relay_cmd_handler(int argc, char **argv, void *context)
     const char* action = argv[2];
     
     // იპოვე კონკრეტული რელეს სერვისი Service Locator-ით
-    service_handle_t handle = fmw_service_get(instance_name);
+    service_handle_t handle = synapse_service_get(instance_name);
     if (!handle) {
         printf("Error: Relay with name '%s' not found.\n", instance_name);
         return ESP_ERR_NOT_FOUND;
@@ -120,9 +120,9 @@ static esp_err_t generic_relay_cmd_handler(int argc, char **argv, void *context)
 
 // 2. ივენთის 핸들ერში რეგისტრაცია
 static void relay_module_handle_event(module_t *self, const char *event_name, void *event_data) {
-    if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0) {
+    if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0) {
         
-        service_handle_t cmd_router = fmw_service_get("main_cmd_router");
+        service_handle_t cmd_router = synapse_service_get("main_cmd_router");
         if (cmd_router) {
             cmd_router_api_t *cmd_api = (cmd_router_api_t *)cmd_router;
 

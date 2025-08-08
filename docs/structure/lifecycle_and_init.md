@@ -60,7 +60,7 @@
 graph TD
     subgraph "System Startup / Module Factory"
         A(Start) --> B{Config Parsing};
-        B -- OK --> C(fmw_module_create);
+        B -- OK --> C(synapse_module_create);
         B -- Fail --> D[Module Disabled];
     end
 

@@ -102,12 +102,12 @@ static void ui_manager_deinit(module_t *self)
         if (private_data->wifi_status_timer)
             private_data->timer->cancel_event(private_data->wifi_status_timer);
     }
-    fmw_event_bus_unsubscribe(FMW_EVENT_BUTTON_PRESSED, self);
-    fmw_event_bus_unsubscribe(FMW_EVENT_WIFI_STATUS_READY, self);
-    fmw_event_bus_unsubscribe(SCREEN_OFF_TIMER_EVENT, self);
-    fmw_event_bus_unsubscribe("UI_HOME_UPDATE", self);
-    fmw_event_bus_unsubscribe(WIFI_STATUS_TIMER_EVENT, self);
-    fmw_event_bus_unsubscribe(SPLASH_SCREEN_TIMER_EVENT, self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_BUTTON_PRESSED, self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_WIFI_STATUS_READY, self);
+    synapse_event_bus_unsubscribe(SCREEN_OFF_TIMER_EVENT, self);
+    synapse_event_bus_unsubscribe("UI_HOME_UPDATE", self);
+    synapse_event_bus_unsubscribe(WIFI_STATUS_TIMER_EVENT, self);
+    synapse_event_bus_unsubscribe(SPLASH_SCREEN_TIMER_EVENT, self);
     if (self->current_config)
         cJSON_Delete(self->current_config);
     free(private_data);
@@ -138,10 +138,10 @@ static esp_err_t ui_manager_init(module_t *self)
     const cJSON *config_node = cJSON_GetObjectItem(self->current_config, "config");
     const char *driver_service_name = cJSON_GetObjectItem(config_node, "display_driver_service")->valuestring;
 
-    private_data->display = fmw_service_get(driver_service_name);
-    private_data->system_manager = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_SYSTEM_API);
-    private_data->timer = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
-    private_data->time_sync = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIME_SYNC_API);
+    private_data->display = synapse_service_get(driver_service_name);
+    private_data->system_manager = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_SYSTEM_API);
+    private_data->timer = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIMER_API);
+    private_data->time_sync = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIME_SYNC_API);
 
     // Dependency Injection-ის ვალიდაცია
     if (!private_data->display || !private_data->system_manager || !private_data->timer || !private_data->wifi_service || !private_data->wifi_module_handle)
@@ -154,12 +154,12 @@ static esp_err_t ui_manager_init(module_t *self)
         ESP_LOGW(TAG, "Time Sync service not found. Time will not be displayed.");
     }
 
-    fmw_event_bus_subscribe(FMW_EVENT_BUTTON_PRESSED, self);
-    fmw_event_bus_subscribe(FMW_EVENT_WIFI_STATUS_READY, self);
-    fmw_event_bus_subscribe(SCREEN_OFF_TIMER_EVENT, self);
-    fmw_event_bus_subscribe("UI_HOME_UPDATE", self);
-    fmw_event_bus_subscribe(WIFI_STATUS_TIMER_EVENT, self);
-    fmw_event_bus_subscribe(SPLASH_SCREEN_TIMER_EVENT, self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_BUTTON_PRESSED, self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_WIFI_STATUS_READY, self);
+    synapse_event_bus_subscribe(SCREEN_OFF_TIMER_EVENT, self);
+    synapse_event_bus_subscribe("UI_HOME_UPDATE", self);
+    synapse_event_bus_subscribe(WIFI_STATUS_TIMER_EVENT, self);
+    synapse_event_bus_subscribe(SPLASH_SCREEN_TIMER_EVENT, self);
 
     private_data->current_state = UI_STATE_SPLASH;
     private_data->is_screen_on = true;
@@ -245,7 +245,7 @@ static void ui_manager_handle_event(module_t *self, const char *event_name, void
         // If we can't queue the event, we are now responsible for releasing the data.
         if (event_data)
         {
-            fmw_event_data_release((event_data_wrapper_t *)event_data);
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         }
     }
 }

@@ -11,8 +11,8 @@
  *          of the RGB LED driver.
  */
 
-#ifndef FMW_RGB_LED_INTERFACE_H
-#define FMW_RGB_LED_INTERFACE_H
+#ifndef SYNAPSE_RGB_LED_INTERFACE_H
+#define SYNAPSE_RGB_LED_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdint.h>
@@ -81,4 +81,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_RGB_LED_INTERFACE_H
+#endif // SYNAPSE_RGB_LED_INTERFACE_H

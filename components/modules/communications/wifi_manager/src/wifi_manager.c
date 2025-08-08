@@ -122,7 +122,7 @@ module_t *wifi_manager_create(const cJSON *config)
     // --- Initialize and register the service API ---
     private_data->service_api.get_status_async = wifi_api_get_status_async;
     private_data->service_api.is_connected = wifi_api_is_connected;
-    fmw_service_register(module->name, FMW_SERVICE_TYPE_WIFI_API, &private_data->service_api);
+    synapse_service_register(module->name, SYNAPSE_SERVICE_TYPE_WIFI_API, &private_data->service_api);
 
     module->init_level = 40;
     module->base.init = wifi_manager_init;
@@ -178,8 +178,8 @@ static esp_err_t wifi_manager_init(module_t *self)
 
     private_data->reconnect_timer = xTimerCreate("wifi_reconnect", pdMS_TO_TICKS(5000), pdFALSE, self, reconnect_timer_callback);
 
-    fmw_event_bus_subscribe("PROV_CREDENTIALS_RECEIVED", self);
-    fmw_event_bus_subscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_subscribe("PROV_CREDENTIALS_RECEIVED", self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
     if (load_credentials(self) != ESP_OK)
     {
@@ -211,7 +211,7 @@ static esp_err_t wifi_manager_start(module_t *self)
     else
     {
         ESP_LOGI(TAG, "No credentials. Waiting for provisioning.");
-        fmw_event_bus_post("WIFI_CREDENTIALS_NOT_FOUND", NULL);
+        synapse_event_bus_post("WIFI_CREDENTIALS_NOT_FOUND", NULL);
     }
 
     self->status = MODULE_STATUS_RUNNING;
@@ -237,8 +237,8 @@ static void wifi_manager_deinit(module_t *self)
         free(private_data);
     }
 
-    fmw_event_bus_unsubscribe("PROV_CREDENTIALS_RECEIVED", self);
-    fmw_event_bus_unsubscribe(FMW_EVENT_SYSTEM_START_COMPLETE, self);
+    synapse_event_bus_unsubscribe("PROV_CREDENTIALS_RECEIVED", self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
     esp_event_handler_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler);
     esp_event_handler_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler);
@@ -307,19 +307,19 @@ static void wifi_task(void *pvParameters)
                     if (cJSON_PrintPreallocated(status_json, status_json_buffer, sizeof(status_json_buffer), 0))
                     {
                         // Promise-ს გადავცემთ მაჩვენებელს სტატიკურ ბუფერზე და NULL free_fn-ს
-                        fmw_promise_resolve(msg.payload.get_status.promise, status_json_buffer, NULL);
+                        synapse_promise_resolve(msg.payload.get_status.promise, status_json_buffer, NULL);
                     }
                     else
                     {
                         ESP_LOGE(TAG, "Failed to print status JSON to preallocated buffer.");
-                        fmw_promise_reject(msg.payload.get_status.promise, NULL, NULL);
+                        synapse_promise_reject(msg.payload.get_status.promise, NULL, NULL);
                     }
                     cJSON_Delete(status_json);
                 }
                 else
                 {
                     ESP_LOGE(TAG, "Failed to build status JSON.");
-                    fmw_promise_reject(msg.payload.get_status.promise, NULL, NULL);
+                    synapse_promise_reject(msg.payload.get_status.promise, NULL, NULL);
                 }
             }
             break;
@@ -357,7 +357,7 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
             }
         }
     }
-    else if (strcmp(event_name, FMW_EVENT_SYSTEM_START_COMPLETE) == 0)
+    else if (strcmp(event_name, SYNAPSE_EVENT_SYSTEM_START_COMPLETE) == 0)
     {
         ESP_LOGI(TAG, "System start complete. Registering CLI commands now.");
         register_cli_commands(self);
@@ -365,7 +365,7 @@ static void wifi_manager_handle_event(module_t *self, const char *event_name, vo
 
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -384,13 +384,13 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t e
         ESP_LOGI(TAG, "Connected to WiFi network");
         private_data->retry_num = 0;
         xTimerStop(private_data->reconnect_timer, 0);
-        fmw_event_bus_post("WIFI_EVENT_CONNECTED", NULL);
+        synapse_event_bus_post("WIFI_EVENT_CONNECTED", NULL);
     }
     else if (event_id == WIFI_EVENT_STA_DISCONNECTED)
     {
         private_data->is_connected = false;
         ESP_LOGW(TAG, "Disconnected from WiFi network");
-        fmw_event_bus_post("WIFI_EVENT_DISCONNECTED", NULL);
+        synapse_event_bus_post("WIFI_EVENT_DISCONNECTED", NULL);
 
         if (private_data->retry_num < CONFIG_WIFI_MANAGER_MAX_RECONNECT_ATTEMPTS)
         {
@@ -412,7 +412,7 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t e
             }
             private_data->has_saved_credentials = false;
             memset(&private_data->wifi_config, 0, sizeof(wifi_config_t));
-            fmw_event_bus_post("PROV_START_REQUESTED", NULL);
+            synapse_event_bus_post("PROV_START_REQUESTED", NULL);
         }
     }
 }
@@ -426,7 +426,7 @@ static void ip_event_handler(void *arg, esp_event_base_t event_base, int32_t eve
         private_data->is_connected = true;
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
         ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
-        fmw_event_bus_post("WIFI_EVENT_IP_ASSIGNED", NULL);
+        synapse_event_bus_post("WIFI_EVENT_IP_ASSIGNED", NULL);
     }
 }
 
@@ -600,7 +600,7 @@ static void register_cli_commands(module_t *self)
         .max_args = 4,
         .handler = wifi_cmd_handler,
         .context = self};
-    service_handle_t handle = fmw_service_get("main_cmd_router");
+    service_handle_t handle = synapse_service_get("main_cmd_router");
     if (handle)
     {
         ((cmd_router_api_t *)handle)->register_command(&wifi_command);
@@ -614,7 +614,7 @@ static esp_err_t wifi_api_get_status_async(void *context, promise_then_cb then_c
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
 
     // 1. ვქმნით Promise-ს და პირდაპირ გადავცემთ callback-ებს
-    promise_handle_t promise = fmw_promise_create(then_cb, catch_cb, user_context);
+    promise_handle_t promise = synapse_promise_create(then_cb, catch_cb, user_context);
     if (!promise)
     {
         ESP_LOGE(TAG, "Failed to create a promise for status request.");
@@ -640,7 +640,7 @@ static esp_err_t wifi_api_get_status_async(void *context, promise_then_cb then_c
     {
         ESP_LOGE(TAG, "Failed to queue status request. Promise will not be fulfilled.");
         // ამ შემთხვევაში Promise-ს თავად Promise Manager-ი გაასუფთავებს, თუ მას ვადა გაუვა (მომავლის ფუნქციონალი)
-        // ან შეგვიძლია დავამატოთ fmw_promise_destroy(promise);
+        // ან შეგვიძლია დავამატოთ synapse_promise_destroy(promise);
         return ESP_FAIL;
     }
 

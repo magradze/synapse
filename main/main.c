@@ -15,7 +15,7 @@ void app_main(void)
     ESP_LOGI(TAG, "=== Synapse Framework Starting ===");
 
     // Initialize the framework core
-    esp_err_t ret = fmw_system_init();
+    esp_err_t ret = synapse_system_init();
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to initialize framework core: %s", esp_err_to_name(ret));
@@ -23,7 +23,7 @@ void app_main(void)
     }
 
     // Start all modules
-    ret = fmw_system_start();
+    ret = synapse_system_start();
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to start framework modules: %s", esp_err_to_name(ret));

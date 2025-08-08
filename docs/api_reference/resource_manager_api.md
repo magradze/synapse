@@ -15,23 +15,23 @@
 
 ## სამართავი რესურსების ტიპები
 
-`fmw_resource_type_t` არის ენუმერაცია, რომელიც განსაზღვრავს მართვად რესურსებს:
+`synapse_resource_type_t` არის ენუმერაცია, რომელიც განსაზღვრავს მართვად რესურსებს:
 
 | ტიპი | აღწერა | `resource_id` |
 |------|--------|----------------|
-| `FMW_RESOURCE_TYPE_GPIO` | GPIO პინი | `gpio_num_t` |
-| `FMW_RESOURCE_TYPE_I2C_PORT` | I2C პორტი | `i2c_port_t` |
-| `FMW_RESOURCE_TYPE_SPI_HOST` | SPI ჰოსტი | `spi_host_device_t` |
-| `FMW_RESOURCE_TYPE_ADC_CHANNEL` | ADC არხი | `adc_channel_t` |
-| `FMW_RESOURCE_TYPE_TIMER_GROUP` | ტაიმერების ჯგუფი | `timer_group_t` |
-| `FMW_RESOURCE_TYPE_RMT_CHANNEL` | RMT არხი | `rmt_channel_t` |
-| `FMW_RESOURCE_TYPE_UART_PORT` | UART პორტი | `uart_port_t` |
+| `SYNAPSE_RESOURCE_TYPE_GPIO` | GPIO პინი | `gpio_num_t` |
+| `SYNAPSE_RESOURCE_TYPE_I2C_PORT` | I2C პორტი | `i2c_port_t` |
+| `SYNAPSE_RESOURCE_TYPE_SPI_HOST` | SPI ჰოსტი | `spi_host_device_t` |
+| `SYNAPSE_RESOURCE_TYPE_ADC_CHANNEL` | ADC არხი | `adc_channel_t` |
+| `SYNAPSE_RESOURCE_TYPE_TIMER_GROUP` | ტაიმერების ჯგუფი | `timer_group_t` |
+| `SYNAPSE_RESOURCE_TYPE_RMT_CHANNEL` | RMT არხი | `rmt_channel_t` |
+| `SYNAPSE_RESOURCE_TYPE_UART_PORT` | UART პორტი | `uart_port_t` |
 
 ---
 
 ## API ფუნქციები
 
-### `esp_err_t fmw_resource_manager_init(void)`
+### `esp_err_t synapse_resource_manager_init(void)`
 
 ინიციალიზაციას უკეთებს რესურს მენეჯერს. უნდა გამოიძახოს System Manager-მა ერთხელ სისტემის გაშვებისას.
 
@@ -42,7 +42,7 @@
 
 ---
 
-### `esp_err_t fmw_resource_lock(fmw_resource_type_t type, uint8_t resource_id, const char *owner)`
+### `esp_err_t synapse_resource_lock(synapse_resource_type_t type, uint8_t resource_id, const char *owner)`
 
 დალოქავს კონკრეტულ რესურსს მითითებული მფლობელისთვის (მოდულისთვის).
 
@@ -61,7 +61,7 @@
 
 ---
 
-### `esp_err_t fmw_resource_release(fmw_resource_type_t type, uint8_t resource_id, const char *owner)`
+### `esp_err_t synapse_resource_release(synapse_resource_type_t type, uint8_t resource_id, const char *owner)`
 
 ათავისუფლებს დაკავებულ რესურსს.
 
@@ -80,7 +80,7 @@
 
 ---
 
-### `bool fmw_resource_is_locked(fmw_resource_type_t type, uint8_t resource_id)`
+### `bool synapse_resource_is_locked(synapse_resource_type_t type, uint8_t resource_id)`
 
 ამოწმებს, დაკავებულია თუ არა კონკრეტული რესურსი.
 
@@ -91,7 +91,7 @@
 
 ---
 
-### `const char *fmw_resource_get_owner(fmw_resource_type_t type, uint8_t resource_id)`
+### `const char *synapse_resource_get_owner(synapse_resource_type_t type, uint8_t resource_id)`
 
 აბრუნებს რესურსის მფლობელი მოდულის სახელს. სასარგებლოა დიაგნოსტიკისთვის.
 
@@ -109,9 +109,9 @@ static esp_err_t relay_module_init(module_t *module) {
     relay_private_data_t *private_data = (relay_private_data_t *)module->private_data;
 
     // 1. დალოქვა
-    esp_err_t ret = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin, private_data->instance_name);
+    esp_err_t ret = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, private_data->instance_name);
     if (ret != ESP_OK) {
-        const char *owner = fmw_resource_get_owner(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin);
+        const char *owner = synapse_resource_get_owner(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin);
         ESP_LOGE(TAG, "GPIO %d lock failed. Owner: %s", private_data->gpio_pin, owner ?: "unknown");
         return ret;
     }
@@ -124,7 +124,7 @@ static esp_err_t relay_module_init(module_t *module) {
 
 static esp_err_t relay_module_deinit(module_t *module) {
     relay_private_data_t *private_data = (relay_private_data_t *)module->private_data;
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->gpio_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, private_data->instance_name);
     ESP_LOGI(TAG, "GPIO %d released.", private_data->gpio_pin);
     return ESP_OK;
 }
@@ -136,7 +136,7 @@ static esp_err_t relay_module_deinit(module_t *module) {
 
 - ✅ **Lock Before Use** – დაილოქეთ რესურსები მათი გამოყენების წინ (`init()` ფუნქციაში).
 - ✅ **Release When Done** – გაათავისუფლეთ რესურსები მოდულის `deinit()` ფუნქციაში.
-- ✅ **Check Return Values** – ყოველთვის შეამოწმეთ `fmw_resource_lock` შედეგი.
+- ✅ **Check Return Values** – ყოველთვის შეამოწმეთ `synapse_resource_lock` შედეგი.
 - ✅ **Use Descriptive Owners** – გამოიყენეთ უნიკალური `instance_name` owner-ისთვის.
 
 ---

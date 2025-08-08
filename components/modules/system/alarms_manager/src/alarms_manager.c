@@ -59,7 +59,7 @@ typedef enum {
  */
 typedef struct {
     alarm_action_type_t type;
-    char service_name[CONFIG_FMW_SERVICE_NAME_MAX_LENGTH];
+    char service_name[CONFIG_SYNAPSE_SERVICE_NAME_MAX_LENGTH];
     union {
         char log_message[MAX_LOG_MESSAGE_LEN];
         struct {
@@ -104,7 +104,7 @@ typedef struct {
  * @brief Private data for the Alarms Manager module.
  */
 typedef struct {
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     alarm_rule_t rules[MAX_ALARM_RULES];
     uint8_t rule_count;
     alarm_state_t active_alarms[MAX_ALARM_RULES];
@@ -203,7 +203,7 @@ static esp_err_t alarms_manager_init(module_t *self)
         }
         if (!already_subscribed) {
             ESP_LOGI(TAG, "Subscribing to event: '%s'", p_data->rules[i].trigger_event);
-            esp_err_t err = fmw_event_bus_subscribe(p_data->rules[i].trigger_event, self);
+            esp_err_t err = synapse_event_bus_subscribe(p_data->rules[i].trigger_event, self);
             if (err != ESP_OK) {
                 ESP_LOGE(TAG, "Failed to subscribe to event '%s': %s", p_data->rules[i].trigger_event, esp_err_to_name(err));
                 // In a real scenario, we might want to handle this more gracefully.
@@ -232,7 +232,7 @@ static void alarms_manager_deinit(module_t *self)
             }
         }
         if (!already_unsubscribed) {
-            fmw_event_bus_unsubscribe(p_data->rules[i].trigger_event, self);
+            synapse_event_bus_unsubscribe(p_data->rules[i].trigger_event, self);
         }
     }
 
@@ -250,7 +250,8 @@ static void alarms_manager_deinit(module_t *self)
 static void alarms_manager_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     if (!self || !event_name) {
-        if (event_data) fmw_event_data_release((event_data_wrapper_t *)event_data);
+        if (event_data)
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
 
@@ -261,7 +262,8 @@ static void alarms_manager_handle_event(module_t *self, const char *event_name, 
 
     if (xSemaphoreTake(p_data->state_mutex, pdMS_TO_TICKS(50)) != pdTRUE) {
         ESP_LOGE(TAG, "Failed to take state mutex for event handling.");
-        if (wrapper) fmw_event_data_release(wrapper);
+        if (wrapper)
+            synapse_event_data_release(wrapper);
         return;
     }
 
@@ -340,7 +342,8 @@ static void alarms_manager_handle_event(module_t *self, const char *event_name, 
     }
 
     xSemaphoreGive(p_data->state_mutex);
-    if (wrapper) fmw_event_data_release(wrapper);
+    if (wrapper)
+        synapse_event_data_release(wrapper);
 }
 
 // =========================================================================
@@ -359,7 +362,7 @@ static void execute_actions(const alarm_rule_t *rule)
 
             case ALARM_ACTION_SET_LED:
                 {
-                    service_handle_t handle = fmw_service_get(action->service_name);
+                    service_handle_t handle = synapse_service_get(action->service_name);
                     if (handle) {
                         rgb_led_api_t *led_api = (rgb_led_api_t *)handle;
                         led_api->set_color(action->params.led_color.r, action->params.led_color.g, action->params.led_color.b);
@@ -371,7 +374,7 @@ static void execute_actions(const alarm_rule_t *rule)
 
             case ALARM_ACTION_REBOOT_SYSTEM:
                 {
-                    service_handle_t handle = fmw_service_get("system_manager");
+                    service_handle_t handle = synapse_service_get("system_manager");
                     if (handle) {
                         system_manager_api_t *sys_api = (system_manager_api_t *)handle;
                         ESP_LOGW(TAG, "Rebooting system in %" PRIu32 "ms due to alarm '%s'", action->params.reboot_params.delay_ms, rule->name);

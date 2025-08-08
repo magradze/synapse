@@ -79,14 +79,14 @@
 ```c
 // გლობალური პარამეტრის წაკითხვა
 char device_prefix[32];
-esp_err_t ret = fmw_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
+esp_err_t ret = synapse_config_get_string("global_config.device.id.prefix", device_prefix, sizeof(device_prefix));
 if (ret != ESP_OK) {
     // Handle error, use a default value
 }
 
 // `main_broker` ინსტანციის `broker_uri` პარამეტრის წაკითხვა
 char broker_uri[128];
-ret = fmw_config_get_string("main_broker.broker_uri", broker_uri, sizeof(broker_uri));
+ret = synapse_config_get_string("main_broker.broker_uri", broker_uri, sizeof(broker_uri));
 if (ret != ESP_OK) {
     // Handle error
 }

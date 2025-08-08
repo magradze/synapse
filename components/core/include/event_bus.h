@@ -11,8 +11,8 @@
  *          ეს ხელს უწყობს მოდულების მაქსიმალურ იზოლაციასა და დინამიურ გაფართოებას.
  */
 
-#ifndef FMW_EVENT_BUS_H
-#define FMW_EVENT_BUS_H
+#ifndef SYNAPSE_EVENT_BUS_H
+#define SYNAPSE_EVENT_BUS_H
 
 #include <stddef.h>
 #include "esp_err.h"
@@ -33,7 +33,7 @@ struct event_data_wrapper_t;
  * @retval ESP_OK თუ ინიციალიზაცია წარმატებით დასრულდა.
  * @retval ESP_FAIL თუ ტასკის ან რიგის შექმნა ვერ მოხერხდა.
  */
-esp_err_t fmw_event_bus_init(void);
+esp_err_t synapse_event_bus_init(void);
 
 /**
  * @brief აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.
@@ -51,7 +51,7 @@ esp_err_t fmw_event_bus_init(void);
  * @retval ESP_ERR_NO_MEM თუ მეხსიერება ვერ გამოიყო ივენთის სახელის კოპირებისთვის.
  * @retval ESP_FAIL თუ რიგი სავსეა.
  */
-esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper);
+esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper);
 
 /**
  * @brief არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.
@@ -67,7 +67,7 @@ esp_err_t fmw_event_bus_post(const char *event_name, struct event_data_wrapper_t
  * @retval ESP_ERR_NO_MEM თუ მეხსიერება არასაკმარისია ახალი გამომწერის დასამატებლად.
  * @retval ESP_ERR_INVALID_ARG თუ `module` ან `event_name` არასწორია.
  */
-esp_err_t fmw_event_bus_subscribe(const char *event_name, struct module_t *module);
+esp_err_t synapse_event_bus_subscribe(const char *event_name, struct module_t *module);
 
 /**
  * @brief აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★
@@ -84,6 +84,6 @@ esp_err_t fmw_event_bus_subscribe(const char *event_name, struct module_t *modul
  * @retval ESP_ERR_NOT_FOUND თუ მოდული არ იყო გამოწერილი ამ ივენთზე.
  * @retval ESP_ERR_INVALID_ARG თუ პარამეტრები არასწორია.
  */
-esp_err_t fmw_event_bus_unsubscribe(const char *event_name, struct module_t *module);
+esp_err_t synapse_event_bus_unsubscribe(const char *event_name, struct module_t *module);
 
-#endif // FMW_EVENT_BUS_H
+#endif // SYNAPSE_EVENT_BUS_H

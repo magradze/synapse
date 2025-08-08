@@ -46,7 +46,7 @@ typedef struct
 
     // Runtime handles
     i2c_bus_handle_t *i2c_handle;
-    fmw_timer_handle_t read_timer;
+    synapse_timer_handle_t read_timer;
 } tof_private_data_t;
 
 // --- Forward Declarations ---
@@ -103,7 +103,7 @@ static esp_err_t tof_init(module_t *self)
     tof_private_data_t *private_data = (tof_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing module: %s", self->name);
 
-    private_data->i2c_handle = (i2c_bus_handle_t *)fmw_service_get(private_data->i2c_bus_name);
+    private_data->i2c_handle = (i2c_bus_handle_t *)synapse_service_get(private_data->i2c_bus_name);
     if (!private_data->i2c_handle)
     {
         ESP_LOGE(TAG, "I2C bus service '%s' not found!", private_data->i2c_bus_name);
@@ -116,7 +116,7 @@ static esp_err_t tof_init(module_t *self)
         return ESP_FAIL;
     }
 
-    fmw_event_bus_subscribe(TOF_READ_TICK_EVENT, self);
+    synapse_event_bus_subscribe(TOF_READ_TICK_EVENT, self);
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
@@ -126,7 +126,7 @@ static esp_err_t tof_start(module_t *self)
     tof_private_data_t *private_data = (tof_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Starting module: %s", self->name);
 
-    service_handle_t timer_service = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
+    service_handle_t timer_service = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIMER_API);
     if (!timer_service)
     {
         ESP_LOGE(TAG, "System Timer service not found!");
@@ -143,13 +143,13 @@ static void tof_deinit(module_t *self)
 {
     if (!self) return;
     tof_private_data_t *private_data = (tof_private_data_t *)self->private_data;
-    
-    service_handle_t timer_service = fmw_service_lookup_by_type(FMW_SERVICE_TYPE_TIMER_API);
+
+    service_handle_t timer_service = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_TIMER_API);
     if (timer_service && private_data->read_timer)
     {
         ((timer_api_t *)timer_service)->cancel_event(private_data->read_timer);
     }
-    fmw_event_bus_unsubscribe(TOF_READ_TICK_EVENT, self);
+    synapse_event_bus_unsubscribe(TOF_READ_TICK_EVENT, self);
 
     free(private_data);
     free(self);
@@ -164,7 +164,7 @@ static void tof_handle_event(module_t *self, const char *event_name, void *event
 
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -226,11 +226,11 @@ static esp_err_t publish_sensor_value(const char *event_name, double value)
     if (!json_string) return ESP_ERR_NO_MEM;
 
     event_data_wrapper_t *wrapper;
-    esp_err_t err = fmw_event_data_wrap(json_string, free, &wrapper);
+    esp_err_t err = synapse_event_data_wrap(json_string, free, &wrapper);
     if (err == ESP_OK)
     {
-        fmw_event_bus_post(event_name, wrapper);
-        fmw_event_data_release(wrapper);
+        synapse_event_bus_post(event_name, wrapper);
+        synapse_event_data_release(wrapper);
     }
     else
     {

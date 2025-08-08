@@ -106,7 +106,7 @@ typedef module_status_t (*module_get_status_fn)(module_t *self);
  * @param[in] self A pointer to the module instance.
  * @param[in] event_name The name of the event that was triggered.
  * @param[in] data A pointer to the event's data wrapper (`event_data_wrapper_t*`).
- *                 IMPORTANT: After using the data, `fmw_event_data_release(data)`
+ *                 IMPORTANT: After using the data, `synapse_event_data_release(data)`
  *                 must be called to prevent memory leaks.
  */
 typedef void (*module_event_handler_fn)(module_t *self, const char *event_name, void *data);
@@ -134,7 +134,7 @@ typedef struct
  */
 struct module_t
 {
-    char name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH]; /**< @brief The unique instance name of the module. */
+    char name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]; /**< @brief The unique instance name of the module. */
     uint8_t init_level;                           /**< @brief The initialization priority level (lower value = earlier init). */
     module_status_t status;                       /**< @brief The current operational status of the module. */
     cJSON *current_config;                        /**< @brief A pointer to the module's current configuration object. The module owns this memory. */

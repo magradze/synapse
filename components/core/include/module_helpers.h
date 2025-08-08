@@ -9,8 +9,8 @@
  *          კოდის დუბლირება იმ მოდულებში, რომლებსაც აქვთ სტანდარტული
  *          `enable`, `disable` ან `get_status` ლოგიკა.
  */
-#ifndef FMW_MODULE_HELPERS_H
-#define FMW_MODULE_HELPERS_H
+#ifndef SYNAPSE_MODULE_HELPERS_H
+#define SYNAPSE_MODULE_HELPERS_H
 
 #include "base_module.h"
 
@@ -26,7 +26,7 @@
  * @retval ESP_ERR_INVALID_STATE თუ მოდული უკვე ჩართულია.
  * @retval ESP_ERR_INVALID_ARG თუ `module` არის NULL.
  */
-esp_err_t fmw_module_helper_simple_enable(struct module_t* module);
+esp_err_t synapse_module_helper_simple_enable(struct module_t *module);
 
 /**
  * @brief ზოგადი `disable` ფუნქციის იმპლემენტაცია.
@@ -39,7 +39,7 @@ esp_err_t fmw_module_helper_simple_enable(struct module_t* module);
  * @retval ESP_ERR_INVALID_STATE თუ მოდული უკვე გამორთულია.
  * @retval ESP_ERR_INVALID_ARG თუ `module` არის NULL.
  */
-esp_err_t fmw_module_helper_simple_disable(struct module_t* module);
+esp_err_t synapse_module_helper_simple_disable(struct module_t *module);
 
 /**
  * @brief ზოგადი `get_status` ფუნქციის იმპლემენტაცია.
@@ -49,6 +49,6 @@ esp_err_t fmw_module_helper_simple_disable(struct module_t* module);
  * @param[in] module სამიზნე მოდულის მაჩვენებელი.
  * @return module_status_t მოდულის მიმდინარე სტატუსი.
  */
-module_status_t fmw_module_helper_simple_get_status(struct module_t* module);
+module_status_t synapse_module_helper_simple_get_status(struct module_t *module);
 
-#endif // FMW_MODULE_HELPERS_H
+#endif // SYNAPSE_MODULE_HELPERS_H

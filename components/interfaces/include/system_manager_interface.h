@@ -12,8 +12,8 @@
  * decoupled from the specific implementation of the System Manager.
  */
 
-#ifndef FMW_SYSTEM_MANAGER_INTERFACE_H
-#define FMW_SYSTEM_MANAGER_INTERFACE_H
+#ifndef SYNAPSE_SYSTEM_MANAGER_INTERFACE_H
+#define SYNAPSE_SYSTEM_MANAGER_INTERFACE_H
 
 #include "base_module.h" // For module_t definition
 #include "esp_err.h"
@@ -69,4 +69,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_SYSTEM_MANAGER_INTERFACE_H
+#endif // SYNAPSE_SYSTEM_MANAGER_INTERFACE_H

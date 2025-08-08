@@ -93,7 +93,7 @@ static esp_err_t sn74hc595n_writer_init(module_t *self)
     sn74hc595n_private_data_t *private_data = (sn74hc595n_private_data_t *)self->private_data;
     esp_err_t ret;
 
-    private_data->spi_bus_handle = (spi_bus_handle_t *)fmw_service_get(private_data->spi_bus_service_name);
+    private_data->spi_bus_handle = (spi_bus_handle_t *)synapse_service_get(private_data->spi_bus_service_name);
     if (!private_data->spi_bus_handle)
     {
         ESP_LOGE(TAG, "SPI bus service '%s' not found!", private_data->spi_bus_service_name);
@@ -113,7 +113,7 @@ static esp_err_t sn74hc595n_writer_init(module_t *self)
         return ret;
     }
 
-    ret = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
+    ret = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to lock latch pin %d.", private_data->latch_pin);
@@ -127,10 +127,10 @@ static esp_err_t sn74hc595n_writer_init(module_t *self)
     gpio_config(&io_conf);
     gpio_set_level(private_data->latch_pin, 0);
 
-    ret = fmw_service_register(private_data->instance_name, FMW_SERVICE_TYPE_SN74HC595N_WRITER_API, &private_data->service_handle);
+    ret = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_SN74HC595N_WRITER_API, &private_data->service_handle);
     if (ret != ESP_OK)
     {
-        fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
+        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
         private_data->spi_bus_handle->api->remove_device(private_data->spi_bus_handle->context, private_data->spi_device_handle);
         return ret;
     }
@@ -145,12 +145,12 @@ static void sn74hc595n_writer_deinit(module_t *self)
         return;
     sn74hc595n_private_data_t *private_data = (sn74hc595n_private_data_t *)self->private_data;
 
-    fmw_service_unregister(private_data->instance_name);
+    synapse_service_unregister(private_data->instance_name);
     if (private_data->spi_bus_handle && private_data->spi_device_handle)
     {
         private_data->spi_bus_handle->api->remove_device(private_data->spi_bus_handle->context, private_data->spi_device_handle);
     }
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
 
     if (private_data->api_mutex)
         vSemaphoreDelete(private_data->api_mutex);

@@ -52,11 +52,11 @@ typedef struct
 
 ```c
 // 1. გააგზავნეთ "wifi status" ბრძანება Event Bus-ით
-fmw_command_payload_t* payload = ...;
+synapse_command_payload_t* payload = ...;
 // ... შეავსეთ payload ...
-fmw_event_bus_post(FMW_EVENT_EXECUTE_COMMAND_STRING, wrapper);
+synapse_event_bus_post(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, wrapper);
 
-// 2. დაელოდეთ FMW_EVENT_WIFI_STATUS_READY ივენთს თქვენი მოდულის handle_event-ში
+// 2. დაელოდეთ SYNAPSE_EVENT_WIFI_STATUS_READY ივენთს თქვენი მოდულის handle_event-ში
 ```
 
 ---

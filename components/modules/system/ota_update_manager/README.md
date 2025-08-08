@@ -70,7 +70,7 @@
 
 ## 5. Service API (`ota_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა OTA მენეჯერის API-ზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: `FMW_SERVICE_TYPE_OTA_API`.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა OTA მენეჯერის API-ზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: `SYNAPSE_SERVICE_TYPE_OTA_API`.
 
 **API ფუნქციები:**
 
@@ -110,7 +110,7 @@ esp_err_t ota_command_handler(int argc, char **argv, void *context) {
 
     const char *url = argv[1];
 
-    service_handle_t handle = fmw_service_get("main_ota_manager");
+    service_handle_t handle = synapse_service_get("main_ota_manager");
     if (!handle) {
         printf("OTA Manager service not available.\n");
         return ESP_FAIL;

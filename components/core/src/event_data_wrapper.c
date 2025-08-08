@@ -18,7 +18,7 @@
 
 DEFINE_COMPONENT_TAG("EVENT_WRAPPER");
 
-esp_err_t fmw_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)
+esp_err_t synapse_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)
 {
     if (!payload || !wrapper_out)
     {
@@ -52,7 +52,7 @@ esp_err_t fmw_event_data_wrap(const void *payload, void (*free_fn)(void *payload
     return ESP_OK;
 }
 
-esp_err_t fmw_event_data_acquire(event_data_wrapper_t* wrapper)
+esp_err_t synapse_event_data_acquire(event_data_wrapper_t *wrapper)
 {
     if (!wrapper || !wrapper->mutex)
     {
@@ -60,7 +60,7 @@ esp_err_t fmw_event_data_acquire(event_data_wrapper_t* wrapper)
         return ESP_ERR_INVALID_ARG;
     }
 
-    if (xSemaphoreTake(wrapper->mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    if (xSemaphoreTake(wrapper->mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) == pdTRUE)
     {
         wrapper->ref_count++;
         ESP_LOGD(TAG, "Acquired wrapper %p, ref_count is now %" PRId32, wrapper, wrapper->ref_count);
@@ -72,7 +72,7 @@ esp_err_t fmw_event_data_acquire(event_data_wrapper_t* wrapper)
     return ESP_ERR_TIMEOUT;
 }
 
-esp_err_t fmw_event_data_release(event_data_wrapper_t* wrapper)
+esp_err_t synapse_event_data_release(event_data_wrapper_t *wrapper)
 {
     if (!wrapper)
     {
@@ -88,7 +88,7 @@ esp_err_t fmw_event_data_release(event_data_wrapper_t* wrapper)
 
     bool should_free = false;
 
-    if (xSemaphoreTake(wrapper->mutex, pdMS_TO_TICKS(CONFIG_FMW_MUTEX_TIMEOUT_MS)) == pdTRUE)
+    if (xSemaphoreTake(wrapper->mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) == pdTRUE)
     {
         wrapper->ref_count--;
         ESP_LOGD(TAG, "Released wrapper %p, ref_count is now %" PRId32, wrapper, wrapper->ref_count);

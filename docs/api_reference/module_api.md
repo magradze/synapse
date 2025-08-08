@@ -47,7 +47,7 @@
   - `self`: მაჩვენებელი მოდულის ინსტანციაზე.
   - `event_name`: მიღებული ივენთის სახელი (სტრიქონი).
   - `event_data`: მაჩვენებელი `event_data_wrapper_t` სტრუქტურაზე.
-- **მეხსიერების მართვა:** **(მნიშვნელოვანი!)** ამ ფუნქციის დასრულებისას, თუ `event_data` არ არის `NULL`, აუცილებელია `fmw_event_data_release((event_data_wrapper_t *)event_data);`-ის გამოძახება.
+- **მეხსიერების მართვა:** **(მნიშვნელოვანი!)** ამ ფუნქციის დასრულებისას, თუ `event_data` არ არის `NULL`, აუცილებელია `synapse_event_data_release((event_data_wrapper_t *)event_data);`-ის გამოძახება.
 
 ---
 

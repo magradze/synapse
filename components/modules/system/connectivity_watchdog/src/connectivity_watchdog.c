@@ -6,7 +6,7 @@
  * @date 2025-07-13
  * @details This module implements a universal, multi-layered connectivity monitor.
  *          It supports both passive monitoring via generic heartbeat events
- *          (FMW_EVENT_CONNECTIVITY_ESTABLISHED) and active monitoring via PING checks.
+ *          (SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED) and active monitoring via PING checks.
  *          Recovery strategies are fully configurable through system_config.json.
  */
 
@@ -79,8 +79,8 @@ typedef struct {
     uint8_t num_checks;
     check_state_t states[CONFIG_CONNECTIVITY_WATCHDOG_MAX_CHECKS];
     bool is_in_grace_period;
-    fmw_timer_handle_t grace_period_timer;
-    fmw_timer_handle_t periodic_check_timer;
+    synapse_timer_handle_t grace_period_timer;
+    synapse_timer_handle_t periodic_check_timer;
 } connectivity_watchdog_private_data_t;
 
 // --- Forward Declarations ---
@@ -153,9 +153,9 @@ static esp_err_t connectivity_watchdog_init(module_t *self)
         private_data->states[i].failure_count = 0;
     }
 
-    fmw_event_bus_subscribe(FMW_EVENT_CONNECTIVITY_ESTABLISHED, self);
-    fmw_event_bus_subscribe(EVT_CONN_WD_GRACE_PERIOD_END, self);
-    fmw_event_bus_subscribe(EVT_CONN_WD_CHECK_NOW, self);
+    synapse_event_bus_subscribe(SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED, self);
+    synapse_event_bus_subscribe(EVT_CONN_WD_GRACE_PERIOD_END, self);
+    synapse_event_bus_subscribe(EVT_CONN_WD_CHECK_NOW, self);
 
     self->status = MODULE_STATUS_INITIALIZED;
     ESP_LOGI(TAG, "Module initialized successfully");
@@ -169,7 +169,7 @@ static esp_err_t connectivity_watchdog_start(module_t *self)
     connectivity_watchdog_private_data_t *private_data = (connectivity_watchdog_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Starting module: %s", self->name);
 
-    service_handle_t timer_service = fmw_service_get("main_timer_service");
+    service_handle_t timer_service = synapse_service_get("main_timer_service");
     if (!timer_service) {
         ESP_LOGE(TAG, "System Timer service not found! Cannot start watchdog.");
         self->status = MODULE_STATUS_ERROR;
@@ -199,16 +199,16 @@ static void connectivity_watchdog_deinit(module_t *self)
     ESP_LOGI(TAG, "Deinitializing %s module", self->name);
     connectivity_watchdog_private_data_t *private_data = (connectivity_watchdog_private_data_t *)self->private_data;
 
-    service_handle_t timer_service = fmw_service_get("main_timer_service");
+    service_handle_t timer_service = synapse_service_get("main_timer_service");
     if (timer_service) {
         timer_api_t *timer_api = (timer_api_t *)timer_service;
         if (private_data->grace_period_timer) timer_api->cancel_event(private_data->grace_period_timer);
         if (private_data->periodic_check_timer) timer_api->cancel_event(private_data->periodic_check_timer);
     }
 
-    fmw_event_bus_unsubscribe(FMW_EVENT_CONNECTIVITY_ESTABLISHED, self);
-    fmw_event_bus_unsubscribe(EVT_CONN_WD_GRACE_PERIOD_END, self);
-    fmw_event_bus_unsubscribe(EVT_CONN_WD_CHECK_NOW, self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED, self);
+    synapse_event_bus_unsubscribe(EVT_CONN_WD_GRACE_PERIOD_END, self);
+    synapse_event_bus_unsubscribe(EVT_CONN_WD_CHECK_NOW, self);
 
     if (self->private_data) free(self->private_data);
     if (self->current_config) cJSON_Delete(self->current_config);
@@ -220,16 +220,18 @@ static void connectivity_watchdog_deinit(module_t *self)
 static void connectivity_watchdog_handle_event(module_t *self, const char *event_name, void *event_data)
 {
     if (!self || !event_name) {
-        if (event_data) fmw_event_data_release((event_data_wrapper_t *)event_data);
+        if (event_data)
+            synapse_event_data_release((event_data_wrapper_t *)event_data);
         return;
     }
     connectivity_watchdog_private_data_t *private_data = (connectivity_watchdog_private_data_t *)self->private_data;
     ESP_LOGD(TAG, "Event received: '%s'", event_name);
 
-    if (strcmp(event_name, FMW_EVENT_CONNECTIVITY_ESTABLISHED) == 0) {
+    if (strcmp(event_name, SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED) == 0)
+    {
         if (event_data) {
             event_data_wrapper_t *wrapper = (event_data_wrapper_t *)event_data;
-            fmw_connectivity_payload_t *payload = (fmw_connectivity_payload_t *)wrapper->payload;
+            synapse_connectivity_payload_t *payload = (synapse_connectivity_payload_t *)wrapper->payload;
             for (int i = 0; i < private_data->num_checks; i++) {
                 if (strcmp(private_data->checks[i].name, payload->check_name) == 0) {
                     private_data->states[i].last_success_ts = esp_timer_get_time();
@@ -241,17 +243,21 @@ static void connectivity_watchdog_handle_event(module_t *self, const char *event
                 }
             }
         }
-    } else if (strcmp(event_name, EVT_CONN_WD_GRACE_PERIOD_END) == 0) {
+    }
+    else if (strcmp(event_name, EVT_CONN_WD_GRACE_PERIOD_END) == 0)
+    {
         private_data->is_in_grace_period = false;
         ESP_LOGI(TAG, "Grace period ended. Connectivity monitoring is now active.");
-    } else if (strcmp(event_name, EVT_CONN_WD_CHECK_NOW) == 0) {
+    }
+    else if (strcmp(event_name, EVT_CONN_WD_CHECK_NOW) == 0)
+    {
         if (!private_data->is_in_grace_period) {
             check_all_monitors(self);
         }
     }
 
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -304,7 +310,7 @@ static void execute_recovery_action(const action_config_t *action)
                 // This is a conceptual implementation. It posts a generic event
                 // that a specific module (like wifi_manager) could listen for.
                 ESP_LOGI(TAG, "Posting reconnect request for service: %s", action->param1);
-                // Example: fmw_event_bus_post("FMW_RECONNECT_REQUEST", ...payload with service name...);
+                // Example: synapse_event_bus_post("SYNAPSE_RECONNECT_REQUEST", ...payload with service name...);
             }
             break;
 
@@ -315,7 +321,7 @@ static void execute_recovery_action(const action_config_t *action)
                 // would require extending the Alarms Manager API.
                 ESP_LOGW(TAG, "Triggering alarm: %s", action->param1);
                 // Example:
-                // service_handle_t alarm_handle = fmw_service_get("main_alarms_manager");
+                // service_handle_t alarm_handle = synapse_service_get("main_alarms_manager");
                 // if (alarm_handle) {
                 //     alarms_manager_api_t *alarm_api = (alarms_manager_api_t *)alarm_handle;
                 //     alarm_api->trigger_manual_alarm(action->param1, NULL);
@@ -326,7 +332,7 @@ static void execute_recovery_action(const action_config_t *action)
         case ACTION_TYPE_REBOOT_SYSTEM:
             {
                 ESP_LOGE(TAG, "Recovery Action: Rebooting system in %lums...", action->param2);
-                service_handle_t sys_handle = fmw_service_get("system_manager");
+                service_handle_t sys_handle = synapse_service_get("system_manager");
                 if (sys_handle) {
                     system_manager_api_t *sys_api = (system_manager_api_t *)sys_handle;
                     // A small delay to ensure the log message is sent
@@ -374,15 +380,18 @@ static void ping_check_cb(esp_ping_handle_t hdl, void *args)
 
     if (received > 0) {
         ESP_LOGI(TAG, "PING check '%s' successful.", check_cfg->name);
-        fmw_connectivity_payload_t *payload = malloc(sizeof(fmw_connectivity_payload_t));
+        synapse_connectivity_payload_t *payload = malloc(sizeof(synapse_connectivity_payload_t));
         if(payload) {
             strncpy(payload->check_name, check_cfg->name, sizeof(payload->check_name) - 1);
             
             event_data_wrapper_t *wrapper;
-            if(fmw_event_data_wrap(payload, free, &wrapper) == ESP_OK) {
-                fmw_event_bus_post(FMW_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
-                fmw_event_data_release(wrapper);
-            } else {
+            if (synapse_event_data_wrap(payload, free, &wrapper) == ESP_OK)
+            {
+                synapse_event_bus_post(SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED, wrapper);
+                synapse_event_data_release(wrapper);
+            }
+            else
+            {
                 free(payload); // Cleanup if wrap fails
             }
         }

@@ -95,16 +95,16 @@ static esp_err_t spi_bus_init(module_t *self)
     esp_err_t ret = ESP_OK;
 
     ESP_LOGI(TAG, "Locking resources for SPI bus '%s'...", private_data->instance_name);
-    ret = fmw_resource_lock(FMW_RESOURCE_TYPE_SPI_HOST, private_data->host, private_data->instance_name);
+    ret = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_SPI_HOST, private_data->host, private_data->instance_name);
     if (ret != ESP_OK)
         goto fail;
-    ret = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->miso_pin, private_data->instance_name);
+    ret = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->miso_pin, private_data->instance_name);
     if (ret != ESP_OK)
         goto fail_host;
-    ret = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->mosi_pin, private_data->instance_name);
+    ret = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->mosi_pin, private_data->instance_name);
     if (ret != ESP_OK)
         goto fail_miso;
-    ret = fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, private_data->sclk_pin, private_data->instance_name);
+    ret = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->sclk_pin, private_data->instance_name);
     if (ret != ESP_OK)
         goto fail_mosi;
 
@@ -122,7 +122,7 @@ static esp_err_t spi_bus_init(module_t *self)
         goto fail_sclk;
     }
 
-    ret = fmw_service_register(private_data->instance_name, FMW_SERVICE_TYPE_SPI_BUS_API, &private_data->service_handle);
+    ret = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_SPI_BUS_API, &private_data->service_handle);
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register SPI bus service: %s", esp_err_to_name(ret));
@@ -134,13 +134,13 @@ static esp_err_t spi_bus_init(module_t *self)
     return ESP_OK;
 
 fail_sclk:
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->sclk_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->sclk_pin, private_data->instance_name);
 fail_mosi:
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->mosi_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->mosi_pin, private_data->instance_name);
 fail_miso:
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->miso_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->miso_pin, private_data->instance_name);
 fail_host:
-    fmw_resource_release(FMW_RESOURCE_TYPE_SPI_HOST, private_data->host, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_SPI_HOST, private_data->host, private_data->instance_name);
 fail:
     ESP_LOGE(TAG, "SPI bus initialization failed for '%s'.", private_data->instance_name);
     return ret;
@@ -152,12 +152,12 @@ static void spi_bus_deinit(module_t *self)
         return;
     spi_bus_private_data_t *private_data = (spi_bus_private_data_t *)self->private_data;
 
-    fmw_service_unregister(private_data->instance_name);
+    synapse_service_unregister(private_data->instance_name);
     spi_bus_free(private_data->host);
-    fmw_resource_release(FMW_RESOURCE_TYPE_SPI_HOST, private_data->host, private_data->instance_name);
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->sclk_pin, private_data->instance_name);
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->mosi_pin, private_data->instance_name);
-    fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->miso_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_SPI_HOST, private_data->host, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->sclk_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->mosi_pin, private_data->instance_name);
+    synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->miso_pin, private_data->instance_name);
 
     if (private_data->api_mutex)
         vSemaphoreDelete(private_data->api_mutex);

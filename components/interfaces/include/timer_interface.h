@@ -6,8 +6,8 @@
  * @date 2025-07-06
  */
 
-#ifndef FMW_TIMER_INTERFACE_H
-#define FMW_TIMER_INTERFACE_H
+#ifndef SYNAPSE_TIMER_INTERFACE_H
+#define SYNAPSE_TIMER_INTERFACE_H
 
 #include "esp_err.h"
 #include <stdint.h>
@@ -22,7 +22,7 @@ extern "C" {
  * @details This handle is returned by schedule_event and used by cancel_event
  *          to identify a specific timer.
  */
-typedef void* fmw_timer_handle_t;
+typedef void *synapse_timer_handle_t;
 
 /**
  * @brief The public Service API structure for the System Timer Service.
@@ -38,7 +38,7 @@ typedef struct
      *                        interval. If false, it will be a one-shot timer.
      * @return A handle to the scheduled timer, or NULL on failure (e.g., no more timer slots).
      */
-    fmw_timer_handle_t (*schedule_event)(const char* event_name, uint32_t interval_ms, bool is_periodic);
+    synapse_timer_handle_t (*schedule_event)(const char *event_name, uint32_t interval_ms, bool is_periodic);
 
     /**
      * @brief Cancels a previously scheduled event.
@@ -49,7 +49,7 @@ typedef struct
      *      - ESP_ERR_INVALID_ARG: If the handle is NULL or invalid.
      *      - ESP_ERR_NOT_FOUND: If no timer with the given handle was found.
      */
-    esp_err_t (*cancel_event)(fmw_timer_handle_t handle);
+    esp_err_t (*cancel_event)(synapse_timer_handle_t handle);
 
 } timer_api_t;
 
@@ -58,4 +58,4 @@ typedef struct
 }
 #endif
 
-#endif // FMW_TIMER_INTERFACE_H
+#endif // SYNAPSE_TIMER_INTERFACE_H

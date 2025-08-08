@@ -20,12 +20,12 @@
 
 ```c
 // components/core/include/framework_errors.h
-#define ESP_ERR_FMW_BASE                    0x8000
-#define ESP_ERR_FMW_MODULE_NOT_FOUND       (ESP_ERR_FMW_BASE + 1)
-#define ESP_ERR_FMW_SERVICE_NOT_REGISTERED (ESP_ERR_FMW_BASE + 2)
-#define ESP_ERR_FMW_INVALID_MODULE_STATE   (ESP_ERR_FMW_BASE + 3)
-#define ESP_ERR_FMW_CONFIG_PARSE_FAILED    (ESP_ERR_FMW_BASE + 4)
-#define ESP_ERR_FMW_RESOURCE_BUSY          (ESP_ERR_FMW_BASE + 5)
+#define ESP_ERR_SYNAPSE_BASE                    0x8000
+#define ESP_ERR_SYNAPSE_MODULE_NOT_FOUND       (ESP_ERR_SYNAPSE_BASE + 1)
+#define ESP_ERR_SYNAPSE_SERVICE_NOT_REGISTERED (ESP_ERR_SYNAPSE_BASE + 2)
+#define ESP_ERR_SYNAPSE_INVALID_MODULE_STATE   (ESP_ERR_SYNAPSE_BASE + 3)
+#define ESP_ERR_SYNAPSE_CONFIG_PARSE_FAILED    (ESP_ERR_SYNAPSE_BASE + 4)
+#define ESP_ERR_SYNAPSE_RESOURCE_BUSY          (ESP_ERR_SYNAPSE_BASE + 5)
 ```
 
 ### Common ESP Error Codes
@@ -109,18 +109,18 @@ static esp_err_t get_i2c_service(i2c_bus_api_t **api) {
     }
     
     // Get service from Service Locator
-    service_handle_t service = fmw_service_get("i2c_bus");
+    service_handle_t service = synapse_service_get("i2c_bus");
     if (!service) {
         ESP_LOGE(TAG, "I2C bus service not found");
-        return ESP_ERR_FMW_SERVICE_NOT_REGISTERED;
+        return ESP_ERR_SYNAPSE_SERVICE_NOT_REGISTERED;
     }
     
     // Verify service type
-    const char *service_type = fmw_service_get_type("i2c_bus");
+    const char *service_type = synapse_service_get_type("i2c_bus");
     if (!service_type || strcmp(service_type, "i2c_bus_api") != 0) {
         ESP_LOGE(TAG, "Invalid service type for I2C bus: %s", 
                  service_type ? service_type : "NULL");
-        return ESP_ERR_FMW_INVALID_MODULE_STATE;
+        return ESP_ERR_SYNAPSE_INVALID_MODULE_STATE;
     }
     
     *api = (i2c_bus_api_t *)service;

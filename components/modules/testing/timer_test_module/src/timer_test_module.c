@@ -35,7 +35,7 @@ DEFINE_COMPONENT_TAG("TIMER_TEST");
  */
 typedef struct {
     char instance_name[CONFIG_TIMER_TEST_MODULE_INSTANCE_NAME_MAX_LEN];
-    fmw_timer_handle_t led_timer_handle; /**< Handle for the scheduled timer. */
+    synapse_timer_handle_t led_timer_handle; /**< Handle for the scheduled timer. */
     rgb_led_api_t *led_api;              /**< Cached pointer to the RGB LED service API. */
     bool is_led_on;                      /**< Tracks the current state of the LED for toggling. */
 } timer_test_module_private_data_t;
@@ -102,9 +102,9 @@ module_t *timer_test_create(const cJSON *config) {
 // --- Module Lifecycle ---
 static esp_err_t timer_test_init(module_t *self) {
     ESP_LOGI(TAG, "Initializing Timer Test module: %s", self->name);
-    
-    fmw_event_bus_subscribe(EVT_TOGGLE_LED_COLOR, self);
-    
+
+    synapse_event_bus_subscribe(EVT_TOGGLE_LED_COLOR, self);
+
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
@@ -113,7 +113,7 @@ static esp_err_t timer_test_start(module_t *self) {
     ESP_LOGI(TAG, "Starting Timer Test module: %s", self->name);
     timer_test_module_private_data_t *private_data = (timer_test_module_private_data_t *)self->private_data;
 
-    service_handle_t led_handle = fmw_service_get("status_led");
+    service_handle_t led_handle = synapse_service_get("status_led");
     if (!led_handle) {
         ESP_LOGE(TAG, "RGB LED Indicator service not found! Test cannot run.");
         self->status = MODULE_STATUS_ERROR;
@@ -121,7 +121,7 @@ static esp_err_t timer_test_start(module_t *self) {
     }
     private_data->led_api = (rgb_led_api_t *)led_handle;
 
-    service_handle_t timer_handle = fmw_service_get("main_timer_service");
+    service_handle_t timer_handle = synapse_service_get("main_timer_service");
     if (!timer_handle) {
         ESP_LOGE(TAG, "System Timer service not found! Test cannot run.");
         self->status = MODULE_STATUS_ERROR;
@@ -149,7 +149,7 @@ static void timer_test_deinit(module_t *self) {
     timer_test_module_private_data_t *private_data = (timer_test_module_private_data_t *)self->private_data;
 
     if (private_data->led_timer_handle) {
-        service_handle_t timer_handle = fmw_service_get("main_timer_service");
+        service_handle_t timer_handle = synapse_service_get("main_timer_service");
         if (timer_handle) {
             timer_api_t *timer_api = (timer_api_t *)timer_handle;
             timer_api->cancel_event(private_data->led_timer_handle);
@@ -160,8 +160,8 @@ static void timer_test_deinit(module_t *self) {
         private_data->led_api->release_control();
     }
 
-    fmw_event_bus_unsubscribe(EVT_TOGGLE_LED_COLOR, self);
-    
+    synapse_event_bus_unsubscribe(EVT_TOGGLE_LED_COLOR, self);
+
     if (self->private_data) free(self->private_data);
     if (self->current_config) cJSON_Delete(self->current_config);
     if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
@@ -188,6 +188,6 @@ static void timer_test_handle_event(module_t *self, const char *event_name, void
     }
 
     if (event_data) {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }

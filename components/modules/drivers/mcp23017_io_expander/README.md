@@ -48,7 +48,7 @@
 
 ## 4. 🔌 Service API (`mcp23017_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`FMW_SERVICE_TYPE_MCP23017_EXPANDER_API`**.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`SYNAPSE_SERVICE_TYPE_MCP23017_EXPANDER_API`**.
 
 **API ფუნქციები:**
 
@@ -132,7 +132,7 @@
 static esp_err_t button_input_init(module_t *self) {
     // ...
     // ვიღებთ I/O Expander სერვისს
-    p_data->expander_handle = (mcp23017_handle_t*)fmw_service_get(p_data->expander_service_name);
+    p_data->expander_handle = (mcp23017_handle_t*)synapse_service_get(p_data->expander_service_name);
     if (!p_data->expander_handle) {
         ESP_LOGE(TAG, "Expander service '%s' not found!", p_data->expander_service_name);
         return ESP_ERR_NOT_FOUND;

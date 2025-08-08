@@ -11,10 +11,12 @@
 - გამოიყენეთ მხოლოდ Service Locator ან Event Bus პატერნები. პირდაპირი დამოკიდებულება აკრძალულია.
 
 ## 4. როგორ მივიღო ან შევცვალო მოდულის კონფიგურაცია?
-- გამოიყენეთ fmw_config_get_* API-ები წასაკითხად და module_reconfigure ფუნქცია ცვლილებისთვის.
+
+- გამოიყენეთ synapse_config_get_* API-ები წასაკითხად და module_reconfigure ფუნქცია ცვლილებისთვის.
 
 ## 5. როგორ დავამატო ახალი გლობალური პარამეტრი?
-- დაამატეთ global_config სექციაში system_config.json-ში და გამოიყენეთ fmw_config_get_* API.
+
+- დაამატეთ global_config სექციაში system_config.json-ში და გამოიყენეთ synapse_config_get_* API.
 
 ## 6. როგორ დავიცვა naming და structure სტანდარტები?
 - იხილეთ: [variable_naming.md](../convention/variable_naming.md), [function_naming.md](../convention/function_naming.md), [module_structure.md](../convention/module_structure.md)

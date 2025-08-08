@@ -51,7 +51,7 @@ typedef struct
     mcp23017_handle_t *expander_handle;
 
     // --- Module State & Configuration ---
-    char instance_name[CONFIG_FMW_MODULE_NAME_MAX_LENGTH];
+    char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
     TaskHandle_t task_handle;
     QueueHandle_t gpio_evt_queue; // Each instance has its own queue
     button_config_t buttons[MAX_BUTTONS_PER_INSTANCE];
@@ -112,15 +112,15 @@ module_t *button_input_create(const cJSON *config)
 
 static void publish_button_event(const char *button_name)
 {
-    fmw_button_payload_t *payload = calloc(1, sizeof(fmw_button_payload_t));
+    synapse_button_payload_t *payload = calloc(1, sizeof(synapse_button_payload_t));
     if (payload)
     {
         snprintf(payload->button_name, sizeof(payload->button_name), "%s", button_name);
         event_data_wrapper_t *wrapper;
-        if (fmw_event_data_wrap(payload, fmw_payload_common_free, &wrapper) == ESP_OK)
+        if (synapse_event_data_wrap(payload, synapse_payload_common_free, &wrapper) == ESP_OK)
         {
-            fmw_event_bus_post(FMW_EVENT_BUTTON_PRESSED, wrapper);
-            fmw_event_data_release(wrapper);
+            synapse_event_bus_post(SYNAPSE_EVENT_BUTTON_PRESSED, wrapper);
+            synapse_event_data_release(wrapper);
         }
         else
         {
@@ -219,7 +219,7 @@ static esp_err_t button_input_init(module_t *self)
         for (int i = 0; i < private_data->button_count; i++)
         {
             button_config_t *btn = &private_data->buttons[i];
-            fmw_resource_lock(FMW_RESOURCE_TYPE_GPIO, btn->pin, self->name);
+            synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, btn->pin, self->name);
             gpio_config_t io_conf = {
                 .pin_bit_mask = (1ULL << btn->pin),
                 .mode = GPIO_MODE_INPUT,
@@ -288,7 +288,7 @@ static void button_input_deinit(module_t *self)
             for (int i = 0; i < private_data->button_count; i++)
             {
                 gpio_isr_handler_remove(private_data->buttons[i].pin);
-                fmw_resource_release(FMW_RESOURCE_TYPE_GPIO, private_data->buttons[i].pin, self->name);
+                synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->buttons[i].pin, self->name);
             }
         }
         free(private_data);

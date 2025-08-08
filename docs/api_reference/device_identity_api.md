@@ -34,7 +34,7 @@
 **მოწყობილობის ID-ის მიღება:**
 
 ```c
-service_handle_t id_service = fmw_service_get("main_identity_service");
+service_handle_t id_service = synapse_service_get("main_identity_service");
 if (id_service) {
     device_identity_api_t *id_api = (device_identity_api_t *)id_service;
     const char* device_id = id_api->get_device_id();
@@ -45,7 +45,7 @@ if (id_service) {
 **Firmware ვერსიის მიღება:**
 
 ```c
-service_handle_t id_service = fmw_service_get("main_identity_service");
+service_handle_t id_service = synapse_service_get("main_identity_service");
 if (id_service) {
     device_identity_api_t *id_api = (device_identity_api_t *)id_service;
     const char* fw_version = id_api->get_firmware_version();

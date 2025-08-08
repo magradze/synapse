@@ -14,13 +14,13 @@
 
 - **როლი:** უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.
 - **მთავარი ფუნქციები:**
-  - სერვისის რეგისტრაცია (`fmw_service_register`)
-  - სერვისის მოძიება (`fmw_service_get`)
-  - სერვისის ტიპის დადგენა (`fmw_service_get_type`)
+  - სერვისის რეგისტრაცია (`synapse_service_register`)
+  - სერვისის მოძიება (`synapse_service_get`)
+  - სერვისის ტიპის დადგენა (`synapse_service_get_type`)
 - **მაგალითი:**
 
   ```c
-  service_handle_t display_service_handle = fmw_service_get("main_display");
+  service_handle_t display_service_handle = synapse_service_get("main_display");
   if (display_service_handle) {
       ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
       ssd1306_service_api->enable();
@@ -31,13 +31,13 @@
 
 - **როლი:** უზრუნველყოფს broadcast/notification ტიპის კომუნიკაციას მოდულებს შორის.
 - **მთავარი ფუნქციები:**
-  - მოვლენის გამოქვეყნება (`fmw_event_bus_post`)
-  - მოვლენის გამოწერა (`fmw_event_bus_subscribe`)
+  - მოვლენის გამოქვეყნება (`synapse_event_bus_post`)
+  - მოვლენის გამოწერა (`synapse_event_bus_subscribe`)
 - **მაგალი-თი:**
 
   ```c
-  fmw_event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &sensor_telemetry_data_wrapper);
-  fmw_event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_module_instance);
+  synapse_event_bus_post(TELEMETRY_EVENT_SENSOR_DATA, &sensor_telemetry_data_wrapper);
+  synapse_event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_module_instance);
   ```
 
 ### 3. Module Register
@@ -59,13 +59,13 @@
 
 - **როლი:** უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.
 - **მთავარი ფუნქციები:**
-  - კონფიგურაციის წაკითხვა (`fmw_config_get_*` ფუნქციები)
+  - კონფიგურაციის წაკითხვა (`synapse_config_get_*` ფუნქციები)
   - კონფიგურაციის ვალიდაცია და განახლება
 - **მაგალითი:**
 
   ```c
   char broker_url[128];
-  fmw_config_get_string("main_broker.broker_uri", broker_url, sizeof(broker_url));
+  synapse_config_get_string("main_broker.broker_uri", broker_url, sizeof(broker_url));
   ```
 
 ### 6. Logging

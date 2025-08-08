@@ -33,7 +33,7 @@ static void on_wifi_status_failed(void *error_data, void *user_context);
  *          - Triggering periodic requests for system status updates (e.g., WiFi).
  *          - Processing status update responses and flagging the UI for a re-render.
  *          - Handling the screen auto-off event.
- *          - Ensuring `fmw_event_data_release` is called on all event data wrappers.
+ *          - Ensuring `synapse_event_data_release` is called on all event data wrappers.
  *
  * @param[in] self A pointer to the `ui_manager` module instance.
  * @param[in] event_name The name of the event that was triggered.
@@ -45,7 +45,7 @@ void ui_events_handle(module_t *self, const char *event_name, void *event_data)
     bool needs_render = false;
 
     // --- ლოგიკა ეკრანის გაღვიძებისთვის ---
-    if (strcmp(event_name, FMW_EVENT_BUTTON_PRESSED) == 0)
+    if (strcmp(event_name, SYNAPSE_EVENT_BUTTON_PRESSED) == 0)
     {
         reset_screen_off_timer(private_data);
 
@@ -73,7 +73,7 @@ void ui_events_handle(module_t *self, const char *event_name, void *event_data)
             if ((now - private_data->last_button_press_time) < (BUTTON_COOLDOWN_MS * 1000))
             {
                 if (event_data)
-                    fmw_event_data_release((event_data_wrapper_t *)event_data);
+                    synapse_event_data_release((event_data_wrapper_t *)event_data);
                 return;
             }
             private_data->last_button_press_time = now;
@@ -81,10 +81,10 @@ void ui_events_handle(module_t *self, const char *event_name, void *event_data)
             if (!event_data || !((event_data_wrapper_t *)event_data)->payload)
             {
                 if (event_data)
-                    fmw_event_data_release((event_data_wrapper_t *)event_data);
+                    synapse_event_data_release((event_data_wrapper_t *)event_data);
                 return;
             }
-            const char *button_name = ((fmw_button_payload_t *)((event_data_wrapper_t *)event_data)->payload)->button_name;
+            const char *button_name = ((synapse_button_payload_t *)((event_data_wrapper_t *)event_data)->payload)->button_name;
 
             if (private_data->current_state == UI_STATE_HOME)
             {
@@ -104,10 +104,10 @@ void ui_events_handle(module_t *self, const char *event_name, void *event_data)
                 const module_t *module = private_data->selected_control_module;
                 if (module)
                 {
-                    fmw_service_type_t type;
-                    if (fmw_service_get_type(module->name, &type) == ESP_OK && type == FMW_SERVICE_TYPE_RELAY_API)
+                    synapse_service_type_t type;
+                    if (synapse_service_get_type(module->name, &type) == ESP_OK && type == SYNAPSE_SERVICE_TYPE_RELAY_API)
                     {
-                        relay_api_t *relay_api = fmw_service_get(module->name);
+                        relay_api_t *relay_api = synapse_service_get(module->name);
                         if (relay_api)
                         {
                             relay_api->toggle((void *)module);
@@ -188,7 +188,7 @@ void ui_events_handle(module_t *self, const char *event_name, void *event_data)
 
     if (event_data)
     {
-        fmw_event_data_release((event_data_wrapper_t *)event_data);
+        synapse_event_data_release((event_data_wrapper_t *)event_data);
     }
 }
 
@@ -217,7 +217,7 @@ static void on_wifi_status_received(void *result_data, void *user_context)
 
             // Since we are in the promise task context, we need to tell the UI to re-render.
             // A simple way is to post a self-event.
-            fmw_event_bus_post("UI_HOME_UPDATE", NULL);
+            synapse_event_bus_post("UI_HOME_UPDATE", NULL);
         }
         cJSON_Delete(root);
     }

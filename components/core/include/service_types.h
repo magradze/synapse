@@ -9,8 +9,8 @@
  *          Service Locator-ში რეგისტრაციისას, მოდულებმა უნდა გამოიყენონ მხოლოდ აქ განსაზღვრული ტიპები.
  *          ასევე, მოცემულია დამხმარე ფუნქცია `enum`-ის სტრიქონად გადასაყვანად (დიბაგინგისთვის).
  */
-#ifndef FMW_SERVICE_TYPES_H
-#define FMW_SERVICE_TYPES_H
+#ifndef SYNAPSE_SERVICE_TYPES_H
+#define SYNAPSE_SERVICE_TYPES_H
 
 #ifdef __cplusplus
 extern "C"
@@ -18,92 +18,92 @@ extern "C"
 #endif
 
   /**
-   * @enum fmw_service_type_t
+   * @enum synapse_service_type_t
    * @brief სერვისის ტიპების ცენტრალიზებული ჩამონათვალი.
    */
   typedef enum
   {
-    FMW_SERVICE_TYPE_UNKNOWN = 0,
+    SYNAPSE_SERVICE_TYPE_UNKNOWN = 0,
 
     // --- Display Services ---
-    FMW_SERVICE_TYPE_DISPLAY_API,
+    SYNAPSE_SERVICE_TYPE_DISPLAY_API,
 
     // --- Communication Bus Services ---
-    FMW_SERVICE_TYPE_I2C_BUS_API,
-    FMW_SERVICE_TYPE_SPI_BUS_API,
-    FMW_SERVICE_TYPE_UART_API,
+    SYNAPSE_SERVICE_TYPE_I2C_BUS_API,
+    SYNAPSE_SERVICE_TYPE_SPI_BUS_API,
+    SYNAPSE_SERVICE_TYPE_UART_API,
 
     // --- Network Services ---
-    FMW_SERVICE_TYPE_WIFI_API,
-    FMW_SERVICE_TYPE_MQTT_API,
-    FMW_SERVICE_TYPE_HTTP_API,
-    FMW_SERVICE_TYPE_BLE_API,
+    SYNAPSE_SERVICE_TYPE_WIFI_API,
+    SYNAPSE_SERVICE_TYPE_MQTT_API,
+    SYNAPSE_SERVICE_TYPE_HTTP_API,
+    SYNAPSE_SERVICE_TYPE_BLE_API,
 
     // --- Storage Services ---
-    FMW_SERVICE_TYPE_FLASH_API,
-    FMW_SERVICE_TYPE_NVRAM_API,
-    FMW_SERVICE_TYPE_SD_CARD_API,
+    SYNAPSE_SERVICE_TYPE_FLASH_API,
+    SYNAPSE_SERVICE_TYPE_NVRAM_API,
+    SYNAPSE_SERVICE_TYPE_SD_CARD_API,
 
     // --- Sensor Services ---
-    FMW_SERVICE_TYPE_TEMPERATURE_API,
-    FMW_SERVICE_TYPE_HUMIDITY_API,
-    FMW_SERVICE_TYPE_PRESSURE_API,
-    FMW_SERVICE_TYPE_MOTION_API,
-    FMW_SERVICE_TYPE_DHT22_API,
+    SYNAPSE_SERVICE_TYPE_TEMPERATURE_API,
+    SYNAPSE_SERVICE_TYPE_HUMIDITY_API,
+    SYNAPSE_SERVICE_TYPE_PRESSURE_API,
+    SYNAPSE_SERVICE_TYPE_MOTION_API,
+    SYNAPSE_SERVICE_TYPE_DHT22_API,
 
     // --- Actuator Services ---
-    FMW_SERVICE_TYPE_RELAY_API,
-    FMW_SERVICE_TYPE_PWM_API,
-    FMW_SERVICE_TYPE_SERVO_API,
-    FMW_SERVICE_TYPE_MOTOR_API,
+    SYNAPSE_SERVICE_TYPE_RELAY_API,
+    SYNAPSE_SERVICE_TYPE_PWM_API,
+    SYNAPSE_SERVICE_TYPE_SERVO_API,
+    SYNAPSE_SERVICE_TYPE_MOTOR_API,
 
     // --- System Services ---
-    FMW_SERVICE_TYPE_SYSTEM_API,
-    FMW_SERVICE_TYPE_LOGGER_API,
-    FMW_SERVICE_TYPE_CONFIG_API,
-    FMW_SERVICE_TYPE_TIMER_API,
-    FMW_SERVICE_TYPE_WATCHDOG_API,
-    FMW_SERVICE_TYPE_OTA_API,
-    FMW_SERVICE_TYPE_VERSION_API,
-    FMW_SERVICE_TYPE_HEALTH_API,
-    FMW_SERVICE_TYPE_TIME_SYNC_API,
+    SYNAPSE_SERVICE_TYPE_SYSTEM_API,
+    SYNAPSE_SERVICE_TYPE_LOGGER_API,
+    SYNAPSE_SERVICE_TYPE_CONFIG_API,
+    SYNAPSE_SERVICE_TYPE_TIMER_API,
+    SYNAPSE_SERVICE_TYPE_WATCHDOG_API,
+    SYNAPSE_SERVICE_TYPE_OTA_API,
+    SYNAPSE_SERVICE_TYPE_VERSION_API,
+    SYNAPSE_SERVICE_TYPE_HEALTH_API,
+    SYNAPSE_SERVICE_TYPE_TIME_SYNC_API,
 
     // --- Security Services ---
-    FMW_SERVICE_TYPE_CRYPTO_API,
-    FMW_SERVICE_TYPE_AUTH_API,
-    FMW_SERVICE_TYPE_TLS_API,
-    FMW_SERVICE_TYPE_SECURITY_API,
+    SYNAPSE_SERVICE_TYPE_CRYPTO_API,
+    SYNAPSE_SERVICE_TYPE_AUTH_API,
+    SYNAPSE_SERVICE_TYPE_TLS_API,
+    SYNAPSE_SERVICE_TYPE_SECURITY_API,
 
     // --- Audio Services ---
-    FMW_SERVICE_TYPE_AUDIO_API,
-    FMW_SERVICE_TYPE_SPEAKER_API,
-    FMW_SERVICE_TYPE_MICROPHONE_API,
+    SYNAPSE_SERVICE_TYPE_AUDIO_API,
+    SYNAPSE_SERVICE_TYPE_SPEAKER_API,
+    SYNAPSE_SERVICE_TYPE_MICROPHONE_API,
 
     // --- Power Management Services ---
-    FMW_SERVICE_TYPE_POWER_API,
-    FMW_SERVICE_TYPE_BATTERY_API,
-    FMW_SERVICE_TYPE_CHARGER_API,
+    SYNAPSE_SERVICE_TYPE_POWER_API,
+    SYNAPSE_SERVICE_TYPE_BATTERY_API,
+    SYNAPSE_SERVICE_TYPE_CHARGER_API,
 
     // --- Generic Services ---
-    FMW_SERVICE_TYPE_GENERIC_API,
-    FMW_SERVICE_TYPE_CUSTOM_API,
+    SYNAPSE_SERVICE_TYPE_GENERIC_API,
+    SYNAPSE_SERVICE_TYPE_CUSTOM_API,
 
     // ---RGB Led Indicator Services ---
-    FMW_SERVICE_TYPE_RGB_LED_API,
+    SYNAPSE_SERVICE_TYPE_RGB_LED_API,
 
     // --- Command Router API ---
-    FMW_SERVICE_TYPE_CMD_ROUTER_API,
+    SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API,
 
     // --- Device Identity API ---
-    FMW_SERVICE_TYPE_DEVICE_IDENTITY_API,
+    SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API,
 
     // --- I/O Expander Services ---
-    FMW_SERVICE_TYPE_SN74HC595N_WRITER_API,
-    FMW_SERVICE_TYPE_MCP23017_EXPANDER_API,
+    SYNAPSE_SERVICE_TYPE_SN74HC595N_WRITER_API,
+    SYNAPSE_SERVICE_TYPE_MCP23017_EXPANDER_API,
 
     // ეს ელემენტი ყოველთვის უნდა იყოს ბოლო, ვალიდაციისთვის
-    FMW_SERVICE_TYPE_MAX
-  } fmw_service_type_t;
+    SYNAPSE_SERVICE_TYPE_MAX
+  } synapse_service_type_t;
 
   /**
    * @brief გადაყავს სერვისის ტიპის enum-ი მის სტრიქონულ წარმოდგენაზე.
@@ -113,133 +113,133 @@ extern "C"
    * @param[in] type სერვისის ტიპის `enum` მნიშვნელობა.
    * @return const char* სერვისის ტიპის სტრიქონული სახელი, ან "UNKNOWN_SERVICE_TYPE" თუ ტიპი არასწორია.
    */
-  static inline const char *fmw_service_type_to_string(fmw_service_type_t type)
+  static inline const char *synapse_service_type_to_string(synapse_service_type_t type)
   {
     switch (type)
     {
     // Display Services
-    case FMW_SERVICE_TYPE_DISPLAY_API:
+    case SYNAPSE_SERVICE_TYPE_DISPLAY_API:
       return "display_api";
 
     // Communication Bus Services
-    case FMW_SERVICE_TYPE_I2C_BUS_API:
+    case SYNAPSE_SERVICE_TYPE_I2C_BUS_API:
       return "i2c_bus_api";
-    case FMW_SERVICE_TYPE_SPI_BUS_API:
+    case SYNAPSE_SERVICE_TYPE_SPI_BUS_API:
       return "spi_bus_api";
-    case FMW_SERVICE_TYPE_UART_API:
+    case SYNAPSE_SERVICE_TYPE_UART_API:
       return "uart_api";
 
     // Network Services
-    case FMW_SERVICE_TYPE_WIFI_API:
+    case SYNAPSE_SERVICE_TYPE_WIFI_API:
       return "wifi_api";
-    case FMW_SERVICE_TYPE_MQTT_API:
+    case SYNAPSE_SERVICE_TYPE_MQTT_API:
       return "mqtt_api";
-    case FMW_SERVICE_TYPE_HTTP_API:
+    case SYNAPSE_SERVICE_TYPE_HTTP_API:
       return "http_api";
-    case FMW_SERVICE_TYPE_BLE_API:
+    case SYNAPSE_SERVICE_TYPE_BLE_API:
       return "ble_api";
 
     // Storage Services
-    case FMW_SERVICE_TYPE_FLASH_API:
+    case SYNAPSE_SERVICE_TYPE_FLASH_API:
       return "flash_api";
-    case FMW_SERVICE_TYPE_NVRAM_API:
+    case SYNAPSE_SERVICE_TYPE_NVRAM_API:
       return "nvram_api";
-    case FMW_SERVICE_TYPE_SD_CARD_API:
+    case SYNAPSE_SERVICE_TYPE_SD_CARD_API:
       return "sd_card_api";
 
     // Sensor Services
-    case FMW_SERVICE_TYPE_TEMPERATURE_API:
+    case SYNAPSE_SERVICE_TYPE_TEMPERATURE_API:
       return "temperature_api";
-    case FMW_SERVICE_TYPE_HUMIDITY_API:
+    case SYNAPSE_SERVICE_TYPE_HUMIDITY_API:
       return "humidity_api";
-    case FMW_SERVICE_TYPE_PRESSURE_API:
+    case SYNAPSE_SERVICE_TYPE_PRESSURE_API:
       return "pressure_api";
-    case FMW_SERVICE_TYPE_MOTION_API:
+    case SYNAPSE_SERVICE_TYPE_MOTION_API:
       return "motion_api";
-    case FMW_SERVICE_TYPE_DHT22_API:
+    case SYNAPSE_SERVICE_TYPE_DHT22_API:
       return "dht22_api";
 
     // Actuator Services
-    case FMW_SERVICE_TYPE_RELAY_API:
+    case SYNAPSE_SERVICE_TYPE_RELAY_API:
       return "relay_api";
-    case FMW_SERVICE_TYPE_PWM_API:
+    case SYNAPSE_SERVICE_TYPE_PWM_API:
       return "pwm_api";
-    case FMW_SERVICE_TYPE_SERVO_API:
+    case SYNAPSE_SERVICE_TYPE_SERVO_API:
       return "servo_api";
-    case FMW_SERVICE_TYPE_MOTOR_API:
+    case SYNAPSE_SERVICE_TYPE_MOTOR_API:
       return "motor_api";
 
     // System Services
-    case FMW_SERVICE_TYPE_LOGGER_API:
+    case SYNAPSE_SERVICE_TYPE_LOGGER_API:
       return "logger_api";
-    case FMW_SERVICE_TYPE_CONFIG_API:
+    case SYNAPSE_SERVICE_TYPE_CONFIG_API:
       return "config_api";
-    case FMW_SERVICE_TYPE_TIMER_API:
+    case SYNAPSE_SERVICE_TYPE_TIMER_API:
       return "timer_api";
-    case FMW_SERVICE_TYPE_WATCHDOG_API:
+    case SYNAPSE_SERVICE_TYPE_WATCHDOG_API:
       return "watchdog_api";
-    case FMW_SERVICE_TYPE_OTA_API:
+    case SYNAPSE_SERVICE_TYPE_OTA_API:
       return "ota_api";
-    case FMW_SERVICE_TYPE_VERSION_API:
+    case SYNAPSE_SERVICE_TYPE_VERSION_API:
       return "version_api";
-    case FMW_SERVICE_TYPE_HEALTH_API:
+    case SYNAPSE_SERVICE_TYPE_HEALTH_API:
       return "health_api";
-    case FMW_SERVICE_TYPE_TIME_SYNC_API:
+    case SYNAPSE_SERVICE_TYPE_TIME_SYNC_API:
       return "time_sync_api";
 
     // Security Services
-    case FMW_SERVICE_TYPE_CRYPTO_API:
+    case SYNAPSE_SERVICE_TYPE_CRYPTO_API:
       return "crypto_api";
-    case FMW_SERVICE_TYPE_AUTH_API:
+    case SYNAPSE_SERVICE_TYPE_AUTH_API:
       return "auth_api";
-    case FMW_SERVICE_TYPE_TLS_API:
+    case SYNAPSE_SERVICE_TYPE_TLS_API:
       return "tls_api";
-    case FMW_SERVICE_TYPE_SECURITY_API:
+    case SYNAPSE_SERVICE_TYPE_SECURITY_API:
       return "security_api";
 
     // Audio Services
-    case FMW_SERVICE_TYPE_AUDIO_API:
+    case SYNAPSE_SERVICE_TYPE_AUDIO_API:
       return "audio_api";
-    case FMW_SERVICE_TYPE_SPEAKER_API:
+    case SYNAPSE_SERVICE_TYPE_SPEAKER_API:
       return "speaker_api";
-    case FMW_SERVICE_TYPE_MICROPHONE_API:
+    case SYNAPSE_SERVICE_TYPE_MICROPHONE_API:
       return "microphone_api";
 
     // Power Management Services
-    case FMW_SERVICE_TYPE_POWER_API:
+    case SYNAPSE_SERVICE_TYPE_POWER_API:
       return "power_api";
-    case FMW_SERVICE_TYPE_BATTERY_API:
+    case SYNAPSE_SERVICE_TYPE_BATTERY_API:
       return "battery_api";
-    case FMW_SERVICE_TYPE_CHARGER_API:
+    case SYNAPSE_SERVICE_TYPE_CHARGER_API:
       return "charger_api";
 
     // RGB Led Indicator Services
-    case FMW_SERVICE_TYPE_RGB_LED_API:
+    case SYNAPSE_SERVICE_TYPE_RGB_LED_API:
       return "rgb_led_api";
 
     // Command Router API
-    case FMW_SERVICE_TYPE_CMD_ROUTER_API:
+    case SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API:
       return "cmd_router_api";
 
     // Device Identity API
-    case FMW_SERVICE_TYPE_DEVICE_IDENTITY_API:
+    case SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API:
       return "device_identity_api";
 
     // I/O Expander Services
-    case FMW_SERVICE_TYPE_SN74HC595N_WRITER_API:
+    case SYNAPSE_SERVICE_TYPE_SN74HC595N_WRITER_API:
       return "sn74hc595n_writer_api";
-    case FMW_SERVICE_TYPE_MCP23017_EXPANDER_API:
+    case SYNAPSE_SERVICE_TYPE_MCP23017_EXPANDER_API:
       return "mcp23017_expander_api";
 
     // Generic Services
-    case FMW_SERVICE_TYPE_GENERIC_API:
+    case SYNAPSE_SERVICE_TYPE_GENERIC_API:
       return "generic_api";
-    case FMW_SERVICE_TYPE_CUSTOM_API:
+    case SYNAPSE_SERVICE_TYPE_CUSTOM_API:
       return "custom_api";
 
     // Default and Unknown cases
-    case FMW_SERVICE_TYPE_UNKNOWN:
-    case FMW_SERVICE_TYPE_MAX:
+    case SYNAPSE_SERVICE_TYPE_UNKNOWN:
+    case SYNAPSE_SERVICE_TYPE_MAX:
     default:
       return "UNKNOWN_SERVICE_TYPE";
     }
@@ -256,4 +256,4 @@ extern "C"
 }
 #endif
 
-#endif // FMW_SERVICE_TYPES_H
+#endif // SYNAPSE_SERVICE_TYPES_H

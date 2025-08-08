@@ -150,7 +150,7 @@ static esp_err_t {module_name}_init(module_t *self) {
     my_module_private_data_t *private_data = (my_module_private_data_t *)self->private_data;
 
     // სერვისის handle-ი უკვე "ინექცირებულია" System Manager-ის მიერ init-ის გამოძახებამდე.
-    // fmw_service_get()-ის გამოძახების ნაცვლად, ჩვენ უბრალოდ ვამოწმებთ ინექცირებულ handle-ს.
+    // synapse_service_get()-ის გამოძახების ნაცვლად, ჩვენ უბრალოდ ვამოწმებთ ინექცირებულ handle-ს.
     if (!private_data->expander_handle) {
         ESP_LOGE(TAG, "Dependency injection failed: expander_handle is NULL!");
         return ESP_ERR_INVALID_STATE;
@@ -188,7 +188,7 @@ idf_component_register(
 - სხვა მოდულის ჰედერების პირდაპირი `#include`.
 - runtime პარამეტრების შენახვა `module.json`-ში.
 - `_create` ფუნქციაში გადაცემული `config` ობიექტის დუბლირება (`cJSON_Duplicate`).
-- `fmw_service_get()`-ის გამოძახება `_init` ფუნქციაში იმ დამოკიდებულებებისთვის, რომელთა ინექციაც შესაძლებელია.
+- `synapse_service_get()`-ის გამოძახება `_init` ფუნქციაში იმ დამოკიდებულებებისთვის, რომელთა ინექციაც შესაძლებელია.
 
 ✅ **ყოველთვის:**
 

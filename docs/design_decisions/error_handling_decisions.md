@@ -17,7 +17,7 @@
 ## არჩეული გადაწყვეტილება
 
 - **esp_err_t ტიპის დაბრუნებადი მნიშვნელობები:** ყველა public და private ფუნქცია აბრუნებს esp_err_t-ს.
-- **სტანდარტული ESP-IDF და Framework-ის error code-ები:** გამოიყენება ESP_OK, ESP_ERR_INVALID_ARG, ESP_ERR_NO_MEM, ESP_ERR_FMW_* და სხვა.
+- **სტანდარტული ESP-IDF და Framework-ის error code-ები:** გამოიყენება ESP_OK, ESP_ERR_INVALID_ARG, ESP_ERR_NO_MEM, ESP_ERR_SYNAPSE_* და სხვა.
 - **პარამეტრების ვალიდაცია:** ყველა ფუნქციაში მოწმდება პარამეტრების ვალიდურობა.
 - **ლოგირება:** ყველა შეცდომა და მნიშვნელოვანი მოვლენა ლოგდება შესაბამისი log level-ით (ESP_LOGE, ESP_LOGW).
 

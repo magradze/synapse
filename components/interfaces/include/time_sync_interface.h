@@ -5,8 +5,8 @@
  * @version 1.0.0
  * @date 2025-08-02
  */
-#ifndef FMW_TIME_SYNC_INTERFACE_H
-#define FMW_TIME_SYNC_INTERFACE_H
+#ifndef SYNAPSE_TIME_SYNC_INTERFACE_H
+#define SYNAPSE_TIME_SYNC_INTERFACE_H
 
 #include "esp_err.h"
 #include <time.h> // For time_t
@@ -35,4 +35,4 @@ typedef struct {
 }
 #endif
 
-#endif // FMW_TIME_SYNC_INTERFACE_H
+#endif // SYNAPSE_TIME_SYNC_INTERFACE_H

@@ -2,7 +2,7 @@
 
 **🗂️ კატეგორია:** `drivers`  
 **✒️ ავტორი:** Giorgi Magradze & Synapse AI Expert  
-**🔖 ვერსია:** 2.1.0
+**🔖 ვერსია:** 2.2.0
 
 ## 1. 📜 მიმოხილვა
 
@@ -12,17 +12,17 @@
 
 ## 2. 🏛️ არქიტექტურული პრინციპები
 
-- **純粋なサービスプロバイダー (Pure Service Provider):** ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს `i2c_bus_api_t` სერვისს `Service Locator`-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.
-- **リソースの安全性 (Resource Safety):** 🛡️ `init` ფაზაში, მოდული იყენებს `Resource Manager`-ს, რათა ექსკლუზიურად დაიკავოს (დალოქოს) როგორც I2C პორტი, ისე კონფიგურაციაში მითითებული SDA და SCL GPIO პინები. ეს გარანტიას იძლევა, რომ სხვა მოდული შემთხვევით ვერ გამოიყენებს ამ რესურსებს.
-- **スレッドセーフティ (Thread-Safety):** 🔒 თითოეული I2C ოპერაცია (`write`, `read`, `scan`) დაცულია `Mutex`-ით. ეს უზრუნველყოფს, რომ მრავალტასკიან გარემოშიც კი, I2C ავტობუსზე ერთდროულად მხოლოდ ერთი ტრანზაქცია შესრულდება, რაც იცავს მონაცემთა მთლიანობას.
-- **最新のドライバー (Modern Driver):** 🚀 მოდული იყენებს ESP-IDF v5.x-ის თანამედროვე, `i2c_master.h`-ზე დაფუძნებულ დრაივერს, რაც უზრუნველყოფს უკეთეს წარმადობას, მოქნილობას და მომავალთან თავსებადობას.
-- **早期初期化 (Early Initialization):** 📉 `init_level: 10` უზრუნველყოფს, რომ I2C ავტობუსი ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა ის ხელმისაწვდომი იყოს ყველა მასზე დამოკიდებული მოდულისთვის.
+- **სუფთა სერვისის მომწოდებელი (Pure Service Provider):** ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს `i2c_bus_api_t` სერვისს `Service Locator`-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.
+- **რესურსების უსაფრთხოება (Resource Safety):** 🛡️ `init` ფაზაში, მოდული იყენებს `Resource Manager`-ს, რათა ექსკლუზიურად დაიკავოს (დალოქოს) როგორც I2C პორტი, ისე კონფიგურაციაში მითითებული SDA და SCL GPIO პინები.
+- **ნაკად-უსაფრთხოება (Thread-Safety):** 🔒 თითოეული I2C ოპერაცია (`write`, `read`, `scan`) დაცულია `Mutex`-ით, რაც უზრუნველყოფს I2C ავტობუსის უსაფრთხო გამოყენებას მრავალტასკიან გარემოში.
+- **თანამედროვე დრაივერი (Modern Driver):** 🚀 მოდული იყენებს ESP-IDF v5.x-ის თანამედროვე, `i2c_master.h`-ზე დაფუძნებულ დრაივერს.
+- **გამართული სიცოცხლის ციკლი (Proper Lifecycle):** 🔄 `init` ფაზაში ხდება მხოლოდ რესურსების მომზადება. აქტიური ოპერაციები, როგორიცაა ავტობუსის სკანირება, სრულდება `start` ფაზაში, რაც გამორიცხავს `race condition`-ებს სისტემის ჩატვირთვისას.
 
 ## 3. ⚙️ კონფიგურაცია (`config.json`)
 
 მოდულის კონფიგურაცია ხდება მისი `config.json` ფაილის საშუალებით. შესაძლებელია სისტემაში რამდენიმე, სხვადასხვა I2C ავტობუსის ერთდროულად კონფიგურირება.
 
-**კონფიგურაციის მაგალითი (ერთი ავტობუსი):**
+**კონფიგურაციის მაგალითი:**
 
 ```json
 [
@@ -34,7 +34,8 @@
       "port": 0,
       "sda_pin": 21,
       "scl_pin": 22,
-      "clk_speed_hz": 100000
+      "clk_speed_hz": 100000,
+      "scan_on_init": true
     }
   }
 ]
@@ -48,11 +49,12 @@
 | `port` | რიცხვი | გამოსაყენებელი I2C პორტის ნომერი (`0` ან `1`). | ✅ |
 | `sda_pin` | რიცხვი | SDA ხაზისთვის განკუთვნილი GPIO პინის ნომერი. | ✅ |
 | `scl_pin` | რიცხვი | SCL ხაზისთვის განკუთვნილი GPIO პინის ნომერი. | ✅ |
-| `clk_speed_hz` | რიცხვი | I2C საათის სიხშირე ჰერცებში (მაგ., `100000` Standard Mode-სთვის, `400000` Fast Mode-სთვის). | ✅ |
+| `clk_speed_hz` | რიცხვი | I2C საათის სიხშირე ჰერცებში (მაგ., `100000` Standard Mode-სთვის). | ✅ |
+| `scan_on_init` | ლოგიკური | თუ `true`, მოდული `start` ფაზაში ავტომატურად დაასკანერებს ავტობუსს. | ❌ |
 
 ## 4. 🔌 Service API (`i2c_bus_api_t`)
 
-სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`SYNAPSE_SERVICE_TYPE_I2C_BUS_API`**.
+სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე `Dependency Injection`-ის ან `Service Locator`-ის მეშვეობით. სერვისის ტიპი: **`SYNAPSE_SERVICE_TYPE_I2C_BUS_API`**.
 
 **API ფუნქციები:**
 
@@ -61,7 +63,7 @@
 - **`esp_err_t read(context, device_address, read_data, data_size);`**  
   ⬅️ კითხულობს მონაცემებს I2C მოწყობილობიდან.
 - **`esp_err_t write_read(context, device_address, write_data, write_size, read_data, read_size);`**  
-  🔄 ასრულებს კომბინირებულ write-read ტრანზაქციას (მაგ., რეგისტრის წასაკითხად).
+  🔄 ასრულებს კომბინირებულ write-read ტრანზაქციას.
 - **`void scan(context);`**  
   📡 ასკანერებს ავტობუსს და ლოგში ბეჭდავს ყველა აღმოჩენილი მოწყობილობის მისამართს.
 - **`i2c_port_t get_port(context);`**  
@@ -69,42 +71,64 @@
 
 ## 5. 💡 გამოყენების მაგალითი
 
-წარმოვიდგინოთ, `ssd1306_oled_display` მოდულს სურს, გამოიყენოს I2C ავტობუსი, რომლის `instance_name` არის `"main_i2c_bus"`.
+წარმოვიდგინოთ, `ssd1306_driver` მოდულს სურს, გამოიყენოს I2C ავტობუსი.
 
-**`ssd1306_oled_display.c`-ში, `init` ფუნქციაში:**
+**1. `ssd1306_driver/config.json`-ში დამოკიდებულების აღწერა:**
+
+```json
+{
+    "type": "ssd1306_driver",
+    "config": {
+        "instance_name": "main_ssd1306_driver",
+        "i2c_bus_service": "main_i2c_bus",
+        "i2c_address": 60
+    }
+}
+```
+
+**2. `ssd1306_driver.c`-ში `dependency_map`-ის შექმნა:**
 
 ```c
-#include "service_locator.h"
-#include "i2c_bus_interface.h" // ★★★ მნიშვნელოვანია ინტერფეისის ჩართვა ★★★
+// private_data სტრუქტურა
+typedef struct {
+    i2c_bus_handle_t *i2c_bus; // ინექცირებული handle-ის შესანახი ველი
+    // ...
+} ssd1306_private_data_t;
 
-// ...
+// დამოკიდებულების რუკა
+static const module_dependency_t s_dependencies[] = {
+    {"i2c_bus_service", offsetof(ssd1306_private_data_t, i2c_bus)},
+    {NULL, 0}
+};
 
+// _create ფუნქციაში
+module->dependency_map = s_dependencies;
+```
+
+**3. `ssd1306_driver.c`-ში სერვისის გამოყენება:**
+
+```c
 static esp_err_t ssd1306_init(module_t *self) {
     ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
 
-    // 1. 🤝 ვიღებთ I2C სერვისის handle-ს Service Locator-იდან
-    private_data->i2c_bus_service = synapse_service_get("main_i2c_bus");
-    if (!private_data->i2c_bus_service) {
-        ESP_LOGE(TAG, "I2C bus service 'main_i2c_bus' not found!");
-        return ESP_ERR_NOT_FOUND;
+    // 1. 🤝 ვამოწმებთ, რომ სერვისის handle-ი წარმატებით იქნა ინექცირებული
+    if (!private_data->i2c_bus) {
+        ESP_LOGE(TAG, "Dependency injection failed: i2c_bus service is NULL!");
+        return ESP_ERR_INVALID_STATE;
     }
 
-    // 2. 📡 ვასკანერებთ ავტობუსს, რომ დავრწმუნდეთ, რომ ეკრანი ჩანს
-    ESP_LOGI(TAG, "Performing diagnostic scan on the acquired I2C bus...");
-    private_data->i2c_bus_service->api->scan(private_data->i2c_bus_service->context);
-
-    // ... (დანარჩენი ინიციალიზაციის ლოგიკა) ...
+    // 2. 📡 ვასკანერებთ ავტობუსს (არასავალდებულო, დიაგნოსტიკისთვის)
+    private_data->i2c_bus->api->scan(private_data->i2c_bus->context);
+    
     return ESP_OK;
 }
 
-// ...
-
-// 3. ✍️ მონაცემების ჩაწერა (მაგალითი)
+// 3. ✍️ მონაცემების ჩაწერა
 static void send_display_command(ssd1306_private_data_t *private_data, uint8_t cmd) {
-    if (private_data->i2c_bus_service) {
+    if (private_data->i2c_bus) {
         uint8_t buffer[] = {0x00, cmd};
-        private_data->i2c_bus_service->api->write(
-            private_data->i2c_bus_service->context, // გადავცემთ კონტექსტს
+        private_data->i2c_bus->api->write(
+            private_data->i2c_bus->context, // გადავცემთ კონტექსტს
             private_data->i2c_address,
             buffer,
             sizeof(buffer)
@@ -115,5 +139,5 @@ static void send_display_command(ssd1306_private_data_t *private_data, uint8_t c
 
 ## 6. ❗ მნიშვნელოვანი შენიშვნები
 
-- **დამოკიდებულება `CMakeLists.txt`-ში:** ნებისმიერმა მოდულმა, რომელიც იყენებს `i2c_bus`-ის სერვისს, თავის `CMakeLists.txt` ფაილში, `REQUIRES` სექციაში უნდა დაამატოს `interfaces` (და არა `i2c_bus`), რათა მიიღოს წვდომა `i2c_bus_interface.h`-ზე.
-- **რესურსების გათავისუფლება:** `deinit` ფუნქცია ავტომატურად ათავისუფლებს დაკავებულ GPIO პინებსა და I2C პორტს, რაც უზრუნველყოფს სისტემის სისუფთავეს.
+- **დამოკიდებულება `CMakeLists.txt`-ში:** ნებისმიერმა მოდულმა, რომელიც იყენებს `i2c_bus`-ის სერვისს, თავის `CMakeLists.txt` ფაილში, `REQUIRES` სექციაში უნდა დაამატოს `i2c_bus_interface`, რათა მიიღოს წვდომა `i2c_bus_interface.h`-ზე.
+- **რესურსების გათავისუფლება:** `deinit` ფუნქცია ავტომატურად ათავისუფლებს დაკავებულ GPIO პინებსა და I2C პორტს.

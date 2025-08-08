@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔍_20ხელით_20მორგება_0',['🔍 ხელით მორგება',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1339',1,'']]]
+  ['🔬_20მოდული_3a_20tt_20time_5fof_5fflight_5fsensor_20tt_0',['🔬 მოდული: &lt;tt&gt;time_of_flight_sensor&lt;/tt&gt;',['../md_components_2modules_2sensors_2time__of__flight__sensor_2README.html',1,'']]]
 ];

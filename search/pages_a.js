@@ -32,7 +32,6 @@ var searchData=
   ['core_20კომპონენტები_20core_20components_29',['core კომპონენტები core components',['../md_docs_2design__decisions_2core__components.html',1,'Core კომპონენტები (Core Components)'],['../md_docs_2structure_2core__components.html',1,'Core კომპონენტები (Core Components)']]],
   ['core_20api_20reference_30',['Synapse Core API Reference',['../md_docs_2api__reference_2core__api.html',1,'']]],
   ['create_20your_20first_20module_31',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
-  ['create_5fmodule_20py_20ახალი_20მოდულის_20ავტომატური_20გენერატორი_32',['🚀 CREATE_MODULE.PY - ახალი მოდულის ავტომატური გენერატორი',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html',1,'']]],
-  ['create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_200_33',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.0)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'']]],
-  ['custom_20api_20reference_34',['Synapse Custom API Reference',['../md_docs_2api__reference_2custom__api.html',1,'']]]
+  ['create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_32',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]],
+  ['custom_20api_20reference_33',['Synapse Custom API Reference',['../md_docs_2api__reference_2custom__api.html',1,'']]]
 ];

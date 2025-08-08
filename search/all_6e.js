@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🔑_20გასაღების_20ფორმატი_20dot_20notation_0',['🔑 გასაღების ფორმატი (Dot-Notation)',['../md_docs_2api__reference_2configuration__api.html#autotoc_md326',1,'']]],
-  ['🔑_20key_20value_20ოპერაციები_1',['🔑 Key-Value ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md668',1,'']]]
+  ['🔳_20qr_20code_20provisioning_20api_0',['🔳 QR Code Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md576',1,'']]]
 ];

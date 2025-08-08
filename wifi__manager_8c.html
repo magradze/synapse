@@ -91,178 +91,134 @@ $(document).ready(function(){initNavTree('wifi__manager_8c.html',''); initResiza
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">wifi_manager.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of WiFi connection and reconnection management.  
+<p>Main lifecycle and task management for the WiFi Manager module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="wifi__manager_8h_source.html">wifi_manager.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="synapse_8h_source.html">synapse.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="cmd__router__interface_8h_source.html">cmd_router_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="storage__interface_8h_source.html">storage_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="wifi__interface_8h_source.html">wifi_interface.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;inttypes.h&gt;</code><br />
-<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
-<code>#include &quot;freertos/task.h&quot;</code><br />
-<code>#include &quot;freertos/queue.h&quot;</code><br />
-<code>#include &quot;freertos/timers.h&quot;</code><br />
-<code>#include &quot;esp_wifi.h&quot;</code><br />
-<code>#include &quot;esp_event.h&quot;</code><br />
-<code>#include &quot;nvs_flash.h&quot;</code><br />
-<code>#include &quot;nvs.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="wifi__manager__internal_8h_source.html">wifi_manager_internal.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for wifi_manager.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="wifi__manager_8c__incl.png" border="0" usemap="#acomponents_2modules_2communications_2wifi__manager_2src_2wifi__manager_8c" alt=""/></div>
 <map name="acomponents_2modules_2communications_2wifi__manager_2src_2wifi__manager_8c" id="acomponents_2modules_2communications_2wifi__manager_2src_2wifi__manager_8c">
-<area shape="rect" title="Implementation of WiFi connection and reconnection management." alt="" coords="1392,5,1604,60"/>
-<area shape="rect" href="wifi__manager_8h.html" title="WiFi connection management." alt="" coords="1197,108,1319,133"/>
-<area shape="poly" title=" " alt="" coords="1426,63,1304,106,1302,101,1424,58"/>
-<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1165,181,1253,207"/>
-<area shape="poly" title=" " alt="" coords="1392,48,1330,58,1269,71,1219,89,1200,99,1188,110,1182,123,1183,138,1195,169,1190,171,1177,139,1177,122,1184,106,1197,94,1217,84,1268,66,1329,52,1391,43"/>
-<area shape="rect" title=" " alt="" coords="699,401,849,427"/>
-<area shape="poly" title=" " alt="" coords="1392,37,1095,46,908,58,714,76,526,104,439,122,358,142,286,166,224,193,173,223,136,257,111,282,92,297,84,303,86,305,144,315,205,328,292,351,367,366,471,380,686,402,685,408,471,386,366,371,291,356,204,333,143,320,84,309,79,303,89,293,107,278,132,253,170,219,221,188,284,161,357,137,438,117,525,99,713,71,908,52,1094,40,1392,32"/>
-<area shape="rect" title=" " alt="" coords="5,328,76,353"/>
-<area shape="poly" title=" " alt="" coords="1392,39,1061,47,640,61,270,83,147,96,110,103,92,110,72,131,58,156,48,184,42,213,38,269,40,314,35,314,32,269,36,212,43,183,53,154,68,128,88,106,108,98,147,90,269,77,640,56,1061,42,1392,33"/>
-<area shape="rect" title=" " alt="" coords="479,328,549,353"/>
-<area shape="poly" title=" " alt="" coords="1471,62,1328,184,1248,245,1213,268,1184,282,1131,297,1062,308,901,319,739,324,613,331,563,336,563,331,612,325,738,319,901,314,1062,303,1129,292,1182,278,1210,263,1245,241,1325,180,1467,58"/>
-<area shape="rect" href="cmd__router__interface_8h.html" title="Public Service API contract for the Command Router module." alt="" coords="1622,181,1795,207"/>
-<area shape="poly" title=" " alt="" coords="1467,62,1451,79,1439,97,1435,115,1441,132,1466,149,1507,163,1609,181,1608,186,1506,168,1464,154,1437,135,1430,115,1435,95,1447,76,1463,58"/>
-<area shape="rect" href="storage__interface_8h.html" title="Public Service API contract for the Storage Manager module." alt="" coords="2041,328,2189,353"/>
-<area shape="poly" title=" " alt="" coords="1487,61,1477,98,1479,116,1487,132,1510,148,1546,159,1589,165,1638,168,1734,171,1776,173,1808,179,1900,209,1986,252,2043,286,2090,318,2087,322,2040,290,1983,257,1897,214,1807,184,1775,179,1734,176,1637,173,1589,170,1545,164,1508,153,1483,135,1474,117,1472,97,1482,60"/>
-<area shape="rect" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="999,108,1122,133"/>
-<area shape="poly" title=" " alt="" coords="1392,57,1133,108,1132,103,1391,52"/>
-<area shape="rect" title=" " alt="" coords="1496,108,1583,133"/>
-<area shape="poly" title=" " alt="" coords="1513,59,1530,94,1525,97,1508,61"/>
-<area shape="rect" title=" " alt="" coords="1607,108,1725,133"/>
-<area shape="poly" title=" " alt="" coords="1551,58,1632,99,1630,104,1548,62"/>
-<area shape="rect" title=" " alt="" coords="1748,108,1877,133"/>
-<area shape="poly" title=" " alt="" coords="1595,57,1758,102,1757,107,1593,63"/>
-<area shape="rect" title=" " alt="" coords="1902,108,2033,133"/>
-<area shape="poly" title=" " alt="" coords="1605,51,1892,103,1891,108,1604,56"/>
-<area shape="rect" title=" " alt="" coords="2057,108,2144,133"/>
-<area shape="poly" title=" " alt="" coords="1604,44,1804,69,2044,105,2043,111,1803,75,1604,49"/>
-<area shape="rect" title=" " alt="" coords="2169,108,2270,133"/>
-<area shape="poly" title=" " alt="" coords="1605,41,1852,67,2155,105,2155,111,1851,72,1604,46"/>
-<area shape="rect" title=" " alt="" coords="2295,108,2389,133"/>
-<area shape="poly" title=" " alt="" coords="1604,38,1905,63,2091,82,2281,105,2281,111,2090,87,1904,68,1604,44"/>
-<area shape="rect" title=" " alt="" coords="2413,108,2471,133"/>
-<area shape="poly" title=" " alt="" coords="1604,33,1758,39,1955,52,2176,73,2400,105,2399,111,2175,78,1955,57,1758,45,1604,39"/>
-<area shape="poly" title=" " alt="" coords="1252,135,1227,172,1222,169,1248,132"/>
-<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="625,328,747,353"/>
-<area shape="poly" title=" " alt="" coords="1164,198,1006,201,797,210,695,218,607,228,542,241,520,248,508,257,500,270,500,281,508,291,522,301,564,316,613,327,612,332,562,321,520,305,504,295,495,283,495,268,504,253,518,244,540,236,607,223,695,212,796,205,1005,196,1164,193"/>
-<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1615,328,1739,353"/>
-<area shape="poly" title=" " alt="" coords="1253,198,1364,218,1429,233,1494,252,1520,264,1546,278,1639,320,1637,325,1543,282,1518,269,1492,257,1428,238,1363,223,1252,204"/>
-<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="689,255,845,280"/>
-<area shape="poly" title=" " alt="" coords="1165,205,852,255,851,250,1164,200"/>
-<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="147,255,284,280"/>
-<area shape="poly" title=" " alt="" coords="1165,200,810,217,559,234,298,257,298,252,559,229,810,212,1164,194"/>
-<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1556,255,1688,280"/>
-<area shape="poly" title=" " alt="" coords="1253,200,1543,250,1542,255,1252,206"/>
-<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="2214,328,2315,353"/>
-<area shape="poly" title=" " alt="" coords="1253,193,1374,197,1549,206,1751,224,1956,252,2101,286,2219,321,2218,326,2099,291,1955,257,1750,229,1548,212,1374,202,1253,199"/>
-<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="873,328,1011,353"/>
-<area shape="poly" title=" " alt="" coords="1211,207,1206,244,1198,264,1185,282,1162,293,1120,305,1015,328,1014,323,1119,299,1160,288,1182,278,1193,262,1201,242,1206,207"/>
-<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="1226,328,1381,353"/>
-<area shape="poly" title=" " alt="" coords="1219,206,1251,253,1291,315,1286,318,1246,256,1214,209"/>
-<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="518,255,665,280"/>
-<area shape="poly" title=" " alt="" coords="1165,203,679,257,678,252,1164,197"/>
-<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="1815,328,1965,353"/>
-<area shape="poly" title=" " alt="" coords="1253,195,1643,217,1840,233,1905,243,1936,253,1943,270,1940,288,1929,305,1916,320,1912,317,1925,302,1935,286,1938,270,1932,257,1904,248,1839,239,1642,222,1253,200"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="1398,255,1481,280"/>
-<area shape="poly" title=" " alt="" coords="1247,204,1390,248,1388,253,1245,209"/>
-<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1035,328,1201,353"/>
-<area shape="poly" title=" " alt="" coords="1219,206,1233,241,1236,261,1230,281,1205,308,1175,325,1172,320,1202,303,1225,279,1230,261,1228,242,1214,208"/>
-<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="870,255,1009,280"/>
-<area shape="poly" title=" " alt="" coords="1166,209,997,254,995,249,1165,204"/>
-<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="308,255,443,280"/>
-<area shape="poly" title=" " alt="" coords="1165,201,870,221,462,257,457,258,456,253,462,252,869,216,1164,195"/>
-<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="1033,255,1171,280"/>
-<area shape="poly" title=" " alt="" coords="1193,209,1132,249,1129,245,1190,204"/>
-<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="1712,255,1921,280"/>
-<area shape="poly" title=" " alt="" coords="1253,198,1706,250,1705,256,1253,203"/>
-<area shape="rect" title=" " alt="" coords="249,401,345,427"/>
-<area shape="poly" title=" " alt="" coords="626,356,359,404,358,399,625,350"/>
-<area shape="rect" title=" " alt="" coords="1221,401,1303,427"/>
-<area shape="poly" title=" " alt="" coords="747,347,1207,403,1206,409,747,352"/>
-<area shape="rect" title=" " alt="" coords="1059,401,1129,427"/>
-<area shape="poly" title=" " alt="" coords="748,350,1045,402,1045,407,747,355"/>
-<area shape="rect" title=" " alt="" coords="1428,401,1509,427"/>
-<area shape="poly" title=" " alt="" coords="747,345,1415,405,1414,410,747,350"/>
-<area shape="rect" title=" " alt="" coords="551,401,624,427"/>
-<area shape="poly" title=" " alt="" coords="672,356,616,395,613,391,669,351"/>
-<area shape="poly" title=" " alt="" coords="702,351,751,390,747,395,698,355"/>
-<area shape="rect" title=" " alt="" coords="873,401,1011,427"/>
-<area shape="poly" title=" " alt="" coords="728,351,888,395,887,400,726,356"/>
-<area shape="poly" title=" " alt="" coords="210,281,196,315,194,334,199,352,221,376,249,394,246,398,217,380,194,355,189,335,191,314,205,279"/>
-<area shape="poly" title=" " alt="" coords="223,279,245,315,262,335,282,351,313,368,346,381,415,399,481,408,537,411,536,416,481,413,414,404,344,386,311,372,279,356,258,339,241,318,218,282"/>
-<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="304,328,455,353"/>
-<area shape="poly" title=" " alt="" coords="243,278,341,320,339,325,241,282"/>
-<area shape="poly" title=" " alt="" coords="188,282,83,325,81,320,186,278"/>
-<area shape="poly" title=" " alt="" coords="264,277,466,325,465,330,263,283"/>
-<area shape="poly" title=" " alt="" coords="455,349,466,351,622,365,744,373,866,382,1022,399,1045,402,1045,407,1022,404,866,388,744,379,622,371,466,356,455,355"/>
-<area shape="poly" title=" " alt="" coords="1670,277,1707,290,1740,307,1752,317,1760,328,1760,341,1753,355,1738,368,1715,378,1655,395,1586,405,1523,412,1523,407,1585,400,1654,389,1713,373,1735,363,1749,352,1755,340,1755,330,1748,320,1737,311,1705,295,1669,283"/>
-<area shape="poly" title=" " alt="" coords="1633,279,1662,316,1657,319,1629,282"/>
-<area shape="poly" title=" " alt="" coords="2214,354,2202,356,2007,378,1814,394,1523,413,1523,407,1813,389,2006,373,2202,351,2213,349"/>
-<area shape="rect" title=" " alt="" coords="2078,401,2153,427"/>
-<area shape="poly" title=" " alt="" coords="2242,356,2153,398,2151,393,2240,351"/>
-<area shape="poly" title=" " alt="" coords="994,351,1208,398,1206,403,993,356"/>
-<area shape="poly" title=" " alt="" coords="1011,349,1024,351,1415,403,1414,408,1023,356,1010,354"/>
-<area shape="poly" title=" " alt="" coords="886,356,638,405,637,400,884,351"/>
-<area shape="poly" title=" " alt="" coords="916,356,815,398,813,393,914,351"/>
-<area shape="poly" title=" " alt="" coords="945,354,945,388,939,388,939,354"/>
-<area shape="poly" title=" " alt="" coords="1299,355,1278,391,1273,388,1294,352"/>
-<area shape="poly" title=" " alt="" coords="1271,356,1142,399,1140,394,1269,351"/>
-<area shape="poly" title=" " alt="" coords="1331,351,1430,393,1428,398,1329,356"/>
-<area shape="poly" title=" " alt="" coords="608,278,661,317,658,322,605,282"/>
-<area shape="poly" title=" " alt="" coords="665,276,677,277,747,281,835,282,1040,281,1145,284,1243,291,1328,304,1364,314,1394,326,1414,338,1431,354,1457,387,1453,390,1427,358,1410,342,1391,330,1362,319,1327,309,1242,296,1145,289,1040,286,835,287,747,286,676,283,665,281"/>
-<area shape="poly" title=" " alt="" coords="594,281,591,388,585,388,588,280"/>
-<area shape="poly" title=" " alt="" coords="1823,356,1523,406,1523,401,1822,351"/>
-<area shape="rect" title=" " alt="" coords="1507,328,1591,353"/>
-<area shape="poly" title=" " alt="" coords="1458,278,1521,318,1518,323,1455,282"/>
-<area shape="poly" title=" " alt="" coords="1117,355,1105,389,1100,387,1112,353"/>
-<area shape="poly" title=" " alt="" coords="1175,351,1415,399,1414,404,1174,356"/>
-<area shape="poly" title=" " alt="" coords="1063,356,844,401,842,396,1062,351"/>
-<area shape="poly" title=" " alt="" coords="1091,356,985,398,983,394,1089,351"/>
-<area shape="poly" title=" " alt="" coords="1202,349,1214,351,1464,371,1709,388,2064,408,2064,413,1709,393,1464,376,1214,356,1201,355"/>
-<area shape="poly" title=" " alt="" coords="899,283,741,327,740,322,898,277"/>
-<area shape="poly" title=" " alt="" coords="426,277,623,322,622,328,425,283"/>
-<area shape="poly" title=" " alt="" coords="350,282,325,296,301,314,289,333,288,342,293,352,309,364,333,375,398,391,471,402,537,407,537,413,470,407,397,396,331,380,306,369,289,355,283,343,283,331,297,310,322,292,348,278"/>
-<area shape="poly" title=" " alt="" coords="1036,283,761,329,760,324,1035,277"/>
-<area shape="poly" title=" " alt="" coords="1172,270,1244,277,1322,288,1391,304,1419,314,1438,326,1450,339,1459,355,1468,387,1463,388,1454,357,1446,342,1435,330,1416,319,1390,309,1321,293,1243,282,1171,276"/>
-<area shape="poly" title=" " alt="" coords="1034,283,930,304,884,317,851,330,817,359,791,391,787,388,813,355,849,326,882,312,929,299,1033,277"/>
-<area shape="poly" title=" " alt="" coords="1039,283,929,306,885,319,863,330,858,338,858,346,866,363,884,379,906,393,903,397,881,383,862,366,853,347,853,337,859,326,883,314,928,301,1038,277"/>
-<area shape="poly" title=" " alt="" coords="1831,278,1870,316,1866,320,1827,282"/>
-<area shape="poly" title=" " alt="" coords="1794,204,1890,224,1930,237,1957,253,1979,277,1993,302,1994,329,1980,355,1956,368,1912,378,1787,395,1643,406,1523,413,1523,408,1643,401,1786,390,1911,373,1954,363,1976,351,1989,327,1988,304,1975,280,1954,257,1928,242,1888,229,1793,209"/>
-<area shape="poly" title=" " alt="" coords="2041,351,1317,411,1317,405,2041,345"/>
-<area shape="poly" title=" " alt="" coords="2041,354,2022,356,1524,410,1523,404,2022,351,2041,348"/>
-<area shape="poly" title=" " alt="" coords="2118,354,2118,388,2113,388,2113,354"/>
-<area shape="poly" title=" " alt="" coords="1086,131,1173,173,1171,178,1083,136"/>
+<area shape="rect" title="Main lifecycle and task management for the WiFi Manager module." alt="" coords="1906,5,2118,60"/>
+<area shape="rect" href="wifi__manager__internal_8h.html" title="Internal declarations for the WiFi Manager module." alt="" coords="1923,108,2101,133"/>
+<area shape="poly" title=" " alt="" coords="2015,60,2015,94,2009,94,2009,60"/>
+<area shape="rect" href="wifi__manager_8h.html" title="WiFi connection management." alt="" coords="1547,181,1669,207"/>
+<area shape="poly" title=" " alt="" coords="1948,136,1683,182,1682,177,1947,131"/>
+<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1241,255,1329,280"/>
+<area shape="poly" title=" " alt="" coords="1923,130,1743,149,1639,164,1537,184,1422,217,1327,252,1325,247,1420,212,1535,179,1638,159,1743,143,1922,125"/>
+<area shape="rect" title=" " alt="" coords="661,475,811,500"/>
+<area shape="poly" title=" " alt="" coords="1923,129,1550,150,1303,168,1045,191,797,218,582,251,494,269,422,288,369,308,338,330,333,340,338,351,474,398,689,468,687,473,473,403,334,355,328,340,334,326,366,304,420,283,493,263,581,245,797,213,1044,185,1302,163,1549,145,1923,123"/>
+<area shape="rect" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="1799,181,1921,207"/>
+<area shape="poly" title=" " alt="" coords="1989,136,1898,178,1896,173,1987,131"/>
+<area shape="rect" href="storage__interface_8h.html" title="Public Service API contract for the Storage Manager module." alt="" coords="1951,401,2099,427"/>
+<area shape="poly" title=" " alt="" coords="2015,133,2027,387,2022,388,2010,134"/>
+<area shape="rect" title=" " alt="" coords="2049,181,2167,207"/>
+<area shape="poly" title=" " alt="" coords="2029,131,2083,171,2080,175,2026,136"/>
+<area shape="rect" title=" " alt="" coords="2190,181,2319,207"/>
+<area shape="poly" title=" " alt="" coords="2052,131,2203,175,2202,180,2050,136"/>
+<area shape="rect" title=" " alt="" coords="2344,181,2475,207"/>
+<area shape="poly" title=" " alt="" coords="2076,131,2332,176,2331,181,2075,136"/>
+<area shape="rect" title=" " alt="" coords="2499,181,2586,207"/>
+<area shape="poly" title=" " alt="" coords="2102,129,2276,149,2486,179,2486,184,2275,154,2101,134"/>
+<area shape="poly" title=" " alt="" coords="1557,209,1344,256,1342,251,1556,204"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="587,401,709,427"/>
+<area shape="poly" title=" " alt="" coords="1241,273,1080,289,980,305,881,331,856,342,830,356,702,400,701,395,828,351,853,338,879,325,979,300,1080,283,1241,268"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1643,401,1767,427"/>
+<area shape="poly" title=" " alt="" coords="1330,268,1411,274,1509,284,1600,301,1637,312,1663,326,1677,339,1688,355,1702,387,1697,389,1683,357,1673,342,1660,330,1635,317,1599,306,1508,290,1411,279,1330,273"/>
+<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="1207,328,1363,353"/>
+<area shape="poly" title=" " alt="" coords="1288,280,1288,314,1283,314,1283,280"/>
+<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="83,328,221,353"/>
+<area shape="poly" title=" " alt="" coords="1241,274,235,337,234,332,1241,269"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1725,328,1857,353"/>
+<area shape="poly" title=" " alt="" coords="1330,272,1712,326,1711,331,1329,278"/>
+<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="2124,401,2225,427"/>
+<area shape="poly" title=" " alt="" coords="1329,265,1444,265,1605,272,1790,291,1885,306,1977,325,2023,340,2069,357,2143,393,2141,397,2067,362,2022,345,1975,331,1884,311,1790,296,1605,278,1444,271,1329,270"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="835,401,973,427"/>
+<area shape="poly" title=" " alt="" coords="1256,283,948,399,946,394,1254,278"/>
+<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="1188,401,1343,427"/>
+<area shape="poly" title=" " alt="" coords="1255,282,1223,301,1208,314,1197,329,1194,346,1201,363,1216,378,1233,392,1230,396,1212,382,1197,366,1189,347,1192,327,1204,310,1220,297,1252,278"/>
+<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="671,328,817,353"/>
+<area shape="poly" title=" " alt="" coords="1241,277,832,331,831,325,1241,272"/>
+<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="1469,401,1619,427"/>
+<area shape="poly" title=" " alt="" coords="1305,278,1429,351,1510,393,1508,398,1427,356,1302,282"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="1881,328,1964,353"/>
+<area shape="poly" title=" " alt="" coords="1330,269,1556,287,1709,304,1868,325,1867,331,1708,309,1556,293,1329,274"/>
+<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="997,401,1163,427"/>
+<area shape="poly" title=" " alt="" coords="1266,282,1188,330,1106,394,1102,390,1185,326,1263,278"/>
+<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="508,328,647,353"/>
+<area shape="poly" title=" " alt="" coords="1242,275,998,296,661,331,660,325,998,291,1241,270"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="349,328,483,353"/>
+<area shape="poly" title=" " alt="" coords="1241,274,935,293,720,309,497,331,497,325,720,304,934,287,1241,268"/>
+<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="892,328,1031,353"/>
+<area shape="poly" title=" " alt="" coords="1242,281,1027,328,1026,323,1241,276"/>
+<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="1439,328,1649,353"/>
+<area shape="poly" title=" " alt="" coords="1328,277,1490,322,1488,327,1326,283"/>
+<area shape="rect" title=" " alt="" coords="137,475,233,500"/>
+<area shape="poly" title=" " alt="" coords="588,427,247,479,247,474,587,422"/>
+<area shape="rect" title=" " alt="" coords="1183,475,1265,500"/>
+<area shape="poly" title=" " alt="" coords="709,420,1169,477,1168,482,709,425"/>
+<area shape="rect" title=" " alt="" coords="1021,475,1091,500"/>
+<area shape="poly" title=" " alt="" coords="710,423,1008,475,1007,480,709,429"/>
+<area shape="rect" title=" " alt="" coords="1365,475,1446,500"/>
+<area shape="poly" title=" " alt="" coords="709,418,1351,478,1351,484,709,424"/>
+<area shape="rect" title=" " alt="" coords="462,475,535,500"/>
+<area shape="poly" title=" " alt="" coords="625,429,537,471,534,466,623,424"/>
+<area shape="poly" title=" " alt="" coords="664,425,713,464,709,468,661,429"/>
+<area shape="rect" title=" " alt="" coords="835,475,973,500"/>
+<area shape="poly" title=" " alt="" coords="690,424,850,468,849,474,688,429"/>
+<area shape="poly" title=" " alt="" coords="96,356,59,368,27,383,16,392,10,402,9,413,14,425,36,447,64,463,94,474,124,480,123,485,93,479,62,468,33,452,10,428,3,414,5,401,12,389,24,379,57,363,95,351"/>
+<area shape="poly" title=" " alt="" coords="122,356,93,370,67,387,53,406,53,415,58,425,77,435,113,444,221,460,449,480,448,486,220,466,112,449,75,440,54,429,47,416,48,404,63,383,90,365,120,351"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="310,401,461,427"/>
+<area shape="poly" title=" " alt="" coords="190,351,335,395,334,400,189,356"/>
+<area shape="rect" title=" " alt="" coords="69,401,139,427"/>
+<area shape="poly" title=" " alt="" coords="146,355,122,392,117,389,142,352"/>
+<area shape="rect" title=" " alt="" coords="163,401,234,427"/>
+<area shape="poly" title=" " alt="" coords="162,352,186,388,181,391,158,355"/>
+<area shape="poly" title=" " alt="" coords="461,419,695,440,984,472,1007,475,1007,481,984,477,695,445,461,424"/>
+<area shape="poly" title=" " alt="" coords="1796,354,1798,390,1793,411,1782,429,1759,444,1726,457,1639,474,1543,484,1460,488,1460,482,1543,478,1638,469,1724,452,1756,440,1778,425,1788,409,1792,389,1791,354"/>
+<area shape="poly" title=" " alt="" coords="1779,355,1731,395,1728,390,1775,351"/>
+<area shape="poly" title=" " alt="" coords="2124,428,2112,429,1925,451,1740,467,1460,486,1460,481,1739,462,1924,445,2112,424,2123,422"/>
+<area shape="rect" title=" " alt="" coords="1988,475,2063,500"/>
+<area shape="poly" title=" " alt="" coords="2152,429,2063,471,2061,466,2150,424"/>
+<area shape="poly" title=" " alt="" coords="956,424,1170,471,1169,476,955,429"/>
+<area shape="poly" title=" " alt="" coords="973,422,984,424,1351,476,1351,481,984,429,973,428"/>
+<area shape="poly" title=" " alt="" coords="839,429,550,480,549,475,838,424"/>
+<area shape="poly" title=" " alt="" coords="878,429,777,472,775,467,876,424"/>
+<area shape="poly" title=" " alt="" coords="907,427,907,461,901,461,901,427"/>
+<area shape="poly" title=" " alt="" coords="1261,428,1240,464,1235,461,1256,426"/>
+<area shape="poly" title=" " alt="" coords="1233,429,1104,473,1102,468,1231,424"/>
+<area shape="poly" title=" " alt="" coords="1289,424,1372,466,1369,471,1287,429"/>
+<area shape="poly" title=" " alt="" coords="730,356,676,395,673,391,727,351"/>
+<area shape="poly" title=" " alt="" coords="818,346,1142,375,1289,389,1356,399,1371,412,1384,428,1400,460,1395,463,1379,431,1368,416,1354,404,1288,395,1142,380,818,351"/>
+<area shape="poly" title=" " alt="" coords="691,356,634,374,576,404,542,433,516,465,512,462,538,430,573,399,632,370,690,351"/>
+<area shape="poly" title=" " alt="" coords="1523,429,1441,471,1439,466,1521,424"/>
+<area shape="rect" title=" " alt="" coords="1843,401,1927,427"/>
+<area shape="poly" title=" " alt="" coords="1919,355,1900,391,1895,388,1914,352"/>
+<area shape="poly" title=" " alt="" coords="1079,428,1067,462,1062,461,1074,426"/>
+<area shape="poly" title=" " alt="" coords="1133,424,1352,472,1351,477,1132,429"/>
+<area shape="poly" title=" " alt="" coords="1025,429,806,474,805,469,1024,424"/>
+<area shape="poly" title=" " alt="" coords="1053,429,947,472,945,467,1051,424"/>
+<area shape="poly" title=" " alt="" coords="1164,423,1176,424,1639,460,1974,481,1974,486,1639,466,1176,429,1164,428"/>
+<area shape="poly" title=" " alt="" coords="591,352,629,390,625,394,587,356"/>
+<area shape="poly" title=" " alt="" coords="454,351,598,395,597,400,453,356"/>
+<area shape="poly" title=" " alt="" coords="374,356,341,368,311,385,301,394,295,404,294,414,300,425,314,440,330,453,369,471,410,480,449,484,448,490,409,486,367,476,328,458,310,444,295,428,289,415,290,402,297,391,308,380,339,364,373,351"/>
+<area shape="poly" title=" " alt="" coords="912,356,713,401,711,396,910,351"/>
+<area shape="poly" title=" " alt="" coords="1031,344,1250,365,1348,380,1382,389,1401,399,1410,413,1414,430,1414,461,1408,461,1409,430,1405,416,1397,403,1380,394,1347,386,1249,370,1031,349"/>
+<area shape="poly" title=" " alt="" coords="920,356,868,375,815,404,781,434,754,465,750,462,777,430,812,399,865,370,918,351"/>
+<area shape="poly" title=" " alt="" coords="897,356,857,373,839,386,825,403,821,412,821,420,830,437,847,453,868,466,865,471,843,457,825,440,816,421,816,410,820,400,836,383,854,369,895,351"/>
+<area shape="poly" title=" " alt="" coords="1547,354,1547,388,1541,388,1541,354"/>
+<area shape="poly" title=" " alt="" coords="1799,206,1344,262,1343,256,1798,200"/>
+<area shape="poly" title=" " alt="" coords="1951,428,1940,429,1647,456,1354,477,1279,484,1279,478,1353,472,1647,450,1940,424,1951,423"/>
+<area shape="poly" title=" " alt="" coords="1951,428,1940,429,1460,483,1460,478,1940,424,1951,423"/>
+<area shape="poly" title=" " alt="" coords="2028,427,2028,461,2023,461,2023,427"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwifi__get__status__cmd__payload__t.html">wifi_get_status_cmd_payload_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structwifi__manager__private__data__t.html">wifi_manager_private_data_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a0f09b1ae124b76c1cf2850529ccc0204" id="r_a0f09b1ae124b76c1cf2850529ccc0204"><td class="memItemLeft" align="right" valign="top"><a id="a0f09b1ae124b76c1cf2850529ccc0204" name="a0f09b1ae124b76c1cf2850529ccc0204"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>wifi_cmd_type_t</b> { <b>WIFI_CMD_CONNECT</b>
-, <b>WIFI_CMD_DISCONNECT</b>
-, <b>WIFI_CMD_RECONNECT_TIMER_FIRED</b>
-, <b>WIFI_CMD_GET_STATUS_ASYNC</b>
- }</td></tr>
-<tr class="separator:a0f09b1ae124b76c1cf2850529ccc0204"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:afcffc31664b263ffdd07bd5636efbd18" id="r_afcffc31664b263ffdd07bd5636efbd18"><td class="memItemLeft" align="right" valign="top"><a id="afcffc31664b263ffdd07bd5636efbd18" name="afcffc31664b263ffdd07bd5636efbd18"></a>
@@ -271,13 +227,27 @@ Functions</h2></td></tr>
 <tr class="memitem:a5100b2f029e2c1e6e8212bd03703667e" id="r_a5100b2f029e2c1e6e8212bd03703667e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wifi__manager_8c.html#a5100b2f029e2c1e6e8212bd03703667e">wifi_manager_create</a> (const cJSON *config)</td></tr>
 <tr class="memdesc:a5100b2f029e2c1e6e8212bd03703667e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the wifi_manager module.  <br /></td></tr>
 <tr class="separator:a5100b2f029e2c1e6e8212bd03703667e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae42aab429de6f33c632ca44a8a73f3cf" id="r_ae42aab429de6f33c632ca44a8a73f3cf"><td class="memItemLeft" align="right" valign="top"><a id="ae42aab429de6f33c632ca44a8a73f3cf" name="ae42aab429de6f33c632ca44a8a73f3cf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_task</b> (void *pvParameters)</td></tr>
+<tr class="separator:ae42aab429de6f33c632ca44a8a73f3cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87d4b54c8062d2285e21f9471233056b" id="r_a87d4b54c8062d2285e21f9471233056b"><td class="memItemLeft" align="right" valign="top"><a id="a87d4b54c8062d2285e21f9471233056b" name="a87d4b54c8062d2285e21f9471233056b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reconnect_timer_callback</b> (TimerHandle_t xTimer)</td></tr>
+<tr class="separator:a87d4b54c8062d2285e21f9471233056b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fdbcdaa3b36750e1ff0feaf7894ab7e" id="r_a9fdbcdaa3b36750e1ff0feaf7894ab7e"><td class="memItemLeft" align="right" valign="top"><a id="a9fdbcdaa3b36750e1ff0feaf7894ab7e" name="a9fdbcdaa3b36750e1ff0feaf7894ab7e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>start_wifi_connection</b> (<a class="el" href="structmodule__t.html">module_t</a> *self)</td></tr>
+<tr class="separator:a9fdbcdaa3b36750e1ff0feaf7894ab7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a342d5ae64e8f338d50fd5e1c56f32fa5" id="r_a342d5ae64e8f338d50fd5e1c56f32fa5"><td class="memItemLeft" align="right" valign="top"><a id="a342d5ae64e8f338d50fd5e1c56f32fa5" name="a342d5ae64e8f338d50fd5e1c56f32fa5"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>save_credentials</b> (<a class="el" href="structmodule__t.html">module_t</a> *self, const char *ssid, const char *password)</td></tr>
+<tr class="separator:a342d5ae64e8f338d50fd5e1c56f32fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7027a44d119f9eb78bba82f77b854579" id="r_a7027a44d119f9eb78bba82f77b854579"><td class="memItemLeft" align="right" valign="top"><a id="a7027a44d119f9eb78bba82f77b854579" name="a7027a44d119f9eb78bba82f77b854579"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>load_credentials</b> (<a class="el" href="structmodule__t.html">module_t</a> *self)</td></tr>
+<tr class="separator:a7027a44d119f9eb78bba82f77b854579"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of WiFi connection and reconnection management. </p>
-<dl class="section author"><dt>Author</dt><dd>Giorgi Magradze &amp; Synapse AI Team </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>3.2.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-08-28</dd></dl>
-<p>This module manages the device's WiFi connection. It uses a dedicated FreeRTOS task to handle connection logic, preventing stack overflows in system tasks. It uses the injected Storage Manager service to persist credentials and handles automatic reconnection with an exponential backoff strategy. </p>
+<div class="textblock"><p>Main lifecycle and task management for the WiFi Manager module. </p>
+<dl class="section author"><dt>Author</dt><dd>Synapse Framework Team </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>4.1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-09-02 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a5100b2f029e2c1e6e8212bd03703667e" name="a5100b2f029e2c1e6e8212bd03703667e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5100b2f029e2c1e6e8212bd03703667e">&#9670;&#160;</a></span>wifi_manager_create()</h2>

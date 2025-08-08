@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['0_0',['0',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.0)'],['../md_docs_2convention_2coding__doxygen__standard.html',1,'9. Doxygen კომენტარების სტანდარტი (v1.0)']]],
+  ['0_0',['9. Doxygen კომენტარების სტანდარტი (v1.0)',['../md_docs_2convention_2coding__doxygen__standard.html',1,'']]],
   ['0_200_202025_2006_2028_1',['[2.0.0] - 2025-06-28',['../md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md791',1,'']]],
   ['0_200_202025_2007_2001_2',['[5.0.0] - 2025-07-01',['../md_docs_2changelog_2v5.html#autotoc_md836',1,'']]],
   ['0_200_202025_2007_2005_3',['[v3.0.0] - 2025-07-05',['../md_docs_2changelog_2v5.html#autotoc_md897',1,'']]],

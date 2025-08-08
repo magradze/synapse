@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔗_20base_20module_20interface_3a_0',['3. 🔗 Base Module Interface:',['../md_docs_2CREATE__MODULE__DOCUMENTATION.html#autotoc_md1332',1,'']]]
+  ['🔵_20ble_20provisioning_20service_20api_20იმპლემენტირებულია_0',['🔵 BLE Provisioning Service API (იმპლემენტირებულია)',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md566',1,'']]]
 ];

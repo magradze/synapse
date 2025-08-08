@@ -11,7 +11,7 @@ var searchData=
   ['troubleshooting_20faq_8',['ხშირად დასმული კითხვები (Troubleshooting FAQ)',['../md_docs_2troubleshooting_2faq.html',1,'']]],
   ['tt_20button_5finput_20tt_9',['🔘 მოდული: &lt;tt&gt;button_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2button__input_2README.html',1,'']]],
   ['tt_20check_5fconventions_20py_20tt_10',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
-  ['tt_20create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_200_11',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.0)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'']]],
+  ['tt_20create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_11',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]],
   ['tt_20device_5fidentity_5fservice_20tt_12',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]],
   ['tt_20i2c_5fbus_20tt_13',['🚌 მოდული: &lt;tt&gt;i2c_bus&lt;/tt&gt;',['../md_components_2modules_2drivers_2i2c__bus_2README.html',1,'']]],
   ['tt_20mcp23017_5fio_5fexpander_20tt_14',['🔄 მოდული: &lt;tt&gt;mcp23017_io_expander&lt;/tt&gt;',['../md_components_2modules_2drivers_2mcp23017__io__expander_2README.html',1,'']]],

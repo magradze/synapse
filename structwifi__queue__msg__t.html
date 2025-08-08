@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: components/modules/testing/timer_test_module -&gt; interfaces Relation</title>
+<title>Synapse ESP Framework: wifi_queue_msg_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_7c3287064faa8b62fbf947dcd488f97b.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structwifi__queue__msg__t.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -89,13 +89,49 @@ $(document).ready(function(){initNavTree('dir_7c3287064faa8b62fbf947dcd488f97b.h
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structwifi__queue__msg__t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">wifi_queue_msg_t Struct Reference</div></div>
+</div><!--header-->
 <div class="contents">
-<h3>timer_test_module &rarr; interfaces Relation</h3><table class="dirtab"><tr class="dirtab"><th class="dirtab">File in components/modules/testing/timer_test_module</th><th class="dirtab">Includes file in components/interfaces</th></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_4903b3677fa8739d2b9f16315defab80.html">src</a>&#160;/&#160;<b>timer_test_module.c</b></td><td class="dirtab"><a class="el" href="dir_8b2a2187e6ebda03a762b8631ac4d34a.html">include</a>&#160;/&#160;<a class="el" href="rgb__led__interface_8h.html">rgb_led_interface.h</a></td></tr><tr class="dirtab"><td class="dirtab"><a class="el" href="dir_4903b3677fa8739d2b9f16315defab80.html">src</a>&#160;/&#160;<b>timer_test_module.c</b></td><td class="dirtab"><a class="el" href="dir_8b2a2187e6ebda03a762b8631ac4d34a.html">include</a>&#160;/&#160;<a class="el" href="timer__interface_8h.html">timer_interface.h</a></td></tr></table></div><!-- contents -->
+<div class="dynheader">
+Collaboration diagram for wifi_queue_msg_t:</div>
+<div class="dyncontent">
+<div class="center"><img src="structwifi__queue__msg__t__coll__graph.png" border="0" usemap="#awifi__queue__msg__t_coll__map" alt="Collaboration graph"/></div>
+<map name="awifi__queue__msg__t_coll__map" id="awifi__queue__msg__t_coll__map">
+<area shape="rect" title=" " alt="" coords="13,196,152,221"/>
+<area shape="rect" href="structwifi__get__status__cmd__payload__t.html" title=" " alt="" coords="5,93,160,133"/>
+<area shape="poly" title=" " alt="" coords="85,147,85,196,80,196,80,147"/>
+<area shape="rect" href="structpromise__t.html" title=" " alt="" coords="39,5,126,31"/>
+<area shape="poly" title=" " alt="" coords="85,44,85,93,80,93,80,44"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a4b5f24d91c708ad5ad2eaaecc6d46264" id="r_a4b5f24d91c708ad5ad2eaaecc6d46264"><td class="memItemLeft" align="right" valign="top"><a id="a4b5f24d91c708ad5ad2eaaecc6d46264" name="a4b5f24d91c708ad5ad2eaaecc6d46264"></a>
+wifi_cmd_type_t&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="separator:a4b5f24d91c708ad5ad2eaaecc6d46264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13575e45058b02bd9240be86297d40c" id="r_ab13575e45058b02bd9240be86297d40c"><td class="memItemLeft" ><a id="ab13575e45058b02bd9240be86297d40c" name="ab13575e45058b02bd9240be86297d40c"></a>
+union {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c5ed75fb45c4a0e0e9ac7eeda2f65c" id="r_ae7c5ed75fb45c4a0e0e9ac7eeda2f65c"><td class="memItemLeft" >
+&#160;&#160;&#160;<a class="el" href="structwifi__get__status__cmd__payload__t.html">wifi_get_status_cmd_payload_t</a>&#160;&#160;&#160;<b>get_status</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:ae7c5ed75fb45c4a0e0e9ac7eeda2f65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13575e45058b02bd9240be86297d40c" id="r_ab13575e45058b02bd9240be86297d40c"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>payload</b>&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:ab13575e45058b02bd9240be86297d40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>components/modules/communications/wifi_manager/src/<a class="el" href="wifi__manager__internal_8h_source.html">wifi_manager_internal.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_6a88773b00803615fafb700ddfe362d0.html">modules</a></li><li class="navelem"><a class="el" href="dir_fb41c28fb0cb4c0ee09bca89936d79a4.html">testing</a></li><li class="navelem"><a class="el" href="dir_7c3287064faa8b62fbf947dcd488f97b.html">timer_test_module</a></li>
+    <li class="navelem"><a class="el" href="structwifi__queue__msg__t.html">wifi_queue_msg_t</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

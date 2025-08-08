@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gdb_20და_20breakpoint_20ების_20გამოყენება_0',['3. GDB და Breakpoint-ების გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1947',1,'']]],
+  ['gdb_20და_20breakpoint_20ების_20გამოყენება_0',['3. GDB და Breakpoint-ების გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1905',1,'']]],
   ['generate_5fmqtt_5ftopics_1',['generate_mqtt_topics',['../namespacegenerate__mqtt__topics.html',1,'']]],
   ['generate_5ftopic_5fdefines_2',['generate_topic_defines',['../namespacegenerate__mqtt__topics.html#a155412cdaa45b16a0a5c3cfaf05f27c0',1,'generate_mqtt_topics']]],
   ['get_5fall_5fmodules_3',['get_all_modules',['../structsystem__manager__api__t.html#ab8bea01e2fe57fa651cf7a4b4185ff4a',1,'system_manager_api_t']]],
@@ -23,7 +23,7 @@ var searchData=
   ['getting_20started_20',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
   ['github_20actions_20თან_20ავტომატური_20შემოწმება_21',['4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md1043',1,'']]],
   ['gitignore_22',['[.gitignore]',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md778',1,'']]],
-  ['global_20ცვლადები_23',['Global ცვლადები',['../md_docs_2convention_2variable__naming.html#autotoc_md1302',1,'']]],
+  ['global_20ცვლადები_23',['Global ცვლადები',['../md_docs_2convention_2variable__naming.html#autotoc_md1303',1,'']]],
   ['glossary_20ტერმინები_24',['Glossary (ტერმინები)',['../md_docs_2glossary_2glossary__index.html',1,'']]],
   ['glossary_20—_20api_20code_25',['API-სა და კოდის ტერმინები (Glossary — API &amp; Code)',['../md_docs_2glossary_2glossary__api.html',1,'']]],
   ['glossary_20—_20architecture_26',['არქიტექტურული ტერმინები (Glossary — Architecture)',['../md_docs_2glossary_2glossary__architecture.html',1,'']]],

@@ -1,6 +1,6 @@
 var indexSectionsWithContent =
 {
-  0: "0123456789:_abcdefghijklmnopqrstuvwyაბგდევზთიკლმნოპჟრსტუფქყშჩცძწხჰ—⌨⏱☁♻⚙⚡✅✨❌❓❗🆔🌡🎓🎛🎯🏗🏛🐕🐛🐞💡💥💬💾📁📄📊📋📌📖📚📜📝📡📢📦📲📶📺🔄🔌🔍🔑🔗🔘🔬🔳🔵🖥🗂🚀🚌🚨🛠🛡🛰🤔🤝🧠🧩🧪🩺",
+  0: "0123456789:_abcdefghijklmnopqrstuvwyაბგდევზთიკლმნოპჟრსტუფქყშჩცძწხჰ—⌨⏱☁♻⚙⚡✅✨❌❓❗🆔🌡🎯🏗🏛🐕🐛🐞💡💥💬💾📂📄📊📋📌📖📚📜📝📡📢📦📲📶📺🔄🔌🔑🔘🔬🔳🔵🖥🗂🚀🚌🚨🛠🛡🛰🤔🤝🧠🧩🧪🩺",
   1: "abcdefhilmoprstuw",
   2: "g",
   3: "abcdefhilmoprstuw",

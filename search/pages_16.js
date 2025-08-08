@@ -27,7 +27,7 @@ var searchData=
   ['storage_5fmanager_20tt_24',['💾 მოდული &lt;tt&gt;storage_manager&lt;/tt&gt;',['../md_components_2modules_2storage_2storage__manager_2README.html',1,'']]],
   ['strategy_25',['strategy',['../md_docs_2design__decisions_2storage__strategy.html',1,'მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)'],['../md_docs_2contributing_2branching__strategy.html',1,'Synapse Branching Strategy']]],
   ['structure_26',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
-  ['synapse_20მოდულის_20გენერატორი_20v3_200_27',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.0)',['../md_docs_2scripts_2CREATE__MODULE__DOCUMENTATION.html',1,'']]],
+  ['synapse_20მოდულის_20გენერატორი_20v3_201_27',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]],
   ['synapse_20actuators_20module_20api_20reference_28',['Synapse Actuators Module API Reference',['../md_docs_2api__reference_2actuators__api.html',1,'']]],
   ['synapse_20api_20reference_20index_29',['Synapse API Reference Index',['../md_docs_2api__reference_2api__index.html',1,'']]],
   ['synapse_20branching_20strategy_30',['Synapse Branching Strategy',['../md_docs_2contributing_2branching__strategy.html',1,'']]],

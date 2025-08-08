@@ -5,7 +5,7 @@ var searchData=
   ['⚙️_20კონფიგურაცია_20tt_20system_5fconfig_20json_20tt_2',['⚙️ კონფიგურაცია tt system_config json tt',['../md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md140',1,'3. ⚙️ კონფიგურაცია (&lt;tt&gt;system_config.json&lt;/tt&gt;)'],['../md_components_2modules_2sensors_2sensor__aggregator_2README.html#autotoc_md103',1,'3. ⚙️ კონფიგურაცია (&lt;tt&gt;system_config.json&lt;/tt&gt;)']]],
   ['⚙️_20მოდული_3a_20command_20router_20system_20shell_3',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
   ['⚙️_20როგორ_20მუშაობს_4',['⚙️ როგორ მუშაობს?',['../md_docs_2convention_2initialization__levels.html#autotoc_md1228',1,'']]],
-  ['⚙️_20როგორ_20მუშაობს_20იმპლემენტაცია_5',['4. ⚙️ როგორ მუშაობს იმპლემენტაცია?',['../md_docs_2convention_2promise__pattern.html#autotoc_md1287',1,'']]],
+  ['⚙️_20როგორ_20მუშაობს_20იმპლემენტაცია_5',['4. ⚙️ როგორ მუშაობს იმპლემენტაცია?',['../md_docs_2convention_2promise__pattern.html#autotoc_md1288',1,'']]],
   ['⚙️_20ძირითადი_20api_20ფუნქციები_6',['⚙️ ძირითადი API ფუნქციები',['../md_docs_2api__reference_2configuration__api.html#autotoc_md328',1,'']]],
   ['⚙️_20api_20სტრუქტურა_20tt_20cmd_5frouter_5fapi_5ft_20tt_7',['⚙️ API სტრუქტურა (&lt;tt&gt;cmd_router_api_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md295',1,'']]],
   ['⚙️_20api_20ს_20სტრუქტურა_20tt_20storage_5fapi_5ft_20tt_8',['⚙️ API-ს სტრუქტურა (&lt;tt&gt;storage_api_t&lt;/tt&gt;)',['../md_docs_2api__reference_2storage__api.html#autotoc_md667',1,'']]]

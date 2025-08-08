@@ -176,7 +176,6 @@ static void system_timer_deinit(module_t *self) {
     if (self->private_data) free(self->private_data);
     if (self->current_config) cJSON_Delete(self->current_config);
     if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
-    free(self);
 
     global_timer_service_instance = NULL;
 }

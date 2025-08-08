@@ -355,7 +355,15 @@ module_t* {self.module_name}_create(const cJSON *config)
     }}
 
     module->private_data = private_data;
-    module->current_config = (cJSON*)config;
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config) {{
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        // Note: This assumes 'private_data' and 'module' are allocated.
+        // Manual check might be needed for each file's cleanup logic.
+        free(private_data);
+        free(module);
+        return NULL;
+    }}
     module->init_level = {self.params['init_level']};
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
@@ -402,7 +410,7 @@ static void {self.module_name}_deinit(module_t *self)
 
     if (self->current_config) cJSON_Delete(self->current_config);
     free(self->private_data);
-    free(self);
+    
 }}
 {task_implementation}
 """

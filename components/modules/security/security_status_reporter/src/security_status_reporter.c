@@ -171,8 +171,7 @@ static void security_status_reporter_deinit(module_t *self)
     }
     
     security_status_self = NULL;
-    free(self);
-    
+
     ESP_LOGI(TAG, "Module deinitialized successfully");
 }
 

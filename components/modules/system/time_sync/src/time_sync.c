@@ -43,7 +43,16 @@ module_t* time_sync_create(const cJSON *config) {
     }
 
     module->private_data = private_data;
-    module->current_config = (cJSON*)config;
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        // Note: This assumes 'private_data' and 'module' are allocated.
+        // Manual check might be needed for each file's cleanup logic.
+        free(private_data);
+        free(module);
+        return NULL;
+    }
     private_data->module = module;
     module->init_level = 40;
 
@@ -72,7 +81,6 @@ static void time_sync_deinit(module_t *self)
         free(self->private_data);
     if (self->current_config)
         cJSON_Delete(self->current_config);
-    free(self);
 }
 
 // --- Module Lifecycle & Event Handling ---

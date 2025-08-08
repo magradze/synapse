@@ -68,7 +68,16 @@ module_t *mcp23017_io_expander_create(const cJSON *config)
     }
 
     module->private_data = private_data;
-    module->current_config = (cJSON *)config;
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        // Note: This assumes 'private_data' and 'module' are allocated.
+        // Manual check might be needed for each file's cleanup logic.
+        free(private_data);
+        free(module);
+        return NULL;
+    }
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
@@ -162,7 +171,6 @@ static void mcp23017_io_expander_deinit(module_t *self)
     if (self->current_config)
         cJSON_Delete(self->current_config);
     free(private_data);
-    free(self);
     ESP_LOGI(TAG, "MCP23017 Expander module deinitialized.");
 }
 

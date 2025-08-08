@@ -224,8 +224,6 @@ static void storage_manager_deinit(module_t *self)
     if (self->state_mutex) {
         vSemaphoreDelete(self->state_mutex);
     }
-    
-    free(self);
-    
+
     ESP_LOGI(TAG, "Storage Manager module deinitialized successfully.");
 }

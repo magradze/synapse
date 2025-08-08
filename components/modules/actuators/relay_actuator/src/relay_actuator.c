@@ -232,7 +232,6 @@ static void relay_module_deinit(module_t *self)
     }
 
     free(private_data);
-    free(self);
 }
 
 /**

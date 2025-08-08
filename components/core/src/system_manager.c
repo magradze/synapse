@@ -97,6 +97,14 @@ esp_err_t synapse_system_init(void)
     }
     ESP_LOGI(TAG, "Promise Manager initialized.");
 
+    err = synapse_task_pool_init();
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to initialize Task Pool Manager: %s", esp_err_to_name(err));
+        return err;
+    }
+    ESP_LOGI(TAG, "Task Pool Manager initialized.");
+
     err = synapse_service_register("system_manager", SYNAPSE_SERVICE_TYPE_SYSTEM_API, &system_manager_service_api);
     if (err != ESP_OK)
     {

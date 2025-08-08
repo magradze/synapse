@@ -1984,8 +1984,8 @@ var NAVTREEINDEX =
 "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1421",
 "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1822",
 "rotary__encoder__input_8h_source.html",
-"structi2c__bus__handle__t.html",
-"system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046ac5a37a97387912e2f234d18d740a9e20"
+"structi2c__bus__api__t.html#ab5d528afb2ae26c7a5df7148f315d290",
+"system__event__ids_8h.html#a14be883083731f631af5eb44a5f3a046a8606a5e3a0db7b819555c1f0829b02cb"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -158,7 +158,15 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// 2. კონფიგურაციის ობიექტის მფლობელობის აღება</span></div>
-<div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;current_config = cJSON_Duplicate(config, true);</div>
+<div class="line"><span class="keywordflow">if</span> (!module-&gt;current_config) {</div>
+<div class="line">    ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to duplicate configuration object.&quot;</span>);</div>
+<div class="line">    <span class="comment">// Note: This assumes &#39;private_data&#39; and &#39;module&#39; are allocated.</span></div>
+<div class="line">    <span class="comment">// Manual check might be needed for each file&#39;s cleanup logic.</span></div>
+<div class="line">    free(private_data);</div>
+<div class="line">    free(module);</div>
+<div class="line">    <span class="keywordflow">return</span> NULL;</div>
+<div class="line">}</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// 3. კონფიგურაციის პარსინგი</span></div>
 <div class="line">    <span class="keyword">const</span> cJSON *config_node = cJSON_GetObjectItem(config, <span class="stringliteral">&quot;config&quot;</span>);</div>

@@ -272,6 +272,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a79c74f4a53aa7962ff27a61d9d9f4f35" id="r_a79c74f4a53aa7962ff27a61d9d9f4f35"><td class="memItemLeft" align="right" valign="top">cJSON *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="system__manager_8h.html#a79c74f4a53aa7962ff27a61d9d9f4f35">system_get_system_info</a> (void) <a class="el" href="system__event__ids_8h.html#a810ea8b6958132969b4acc24808c1f18">__attribute__</a>((deprecated(&quot;Use synapse_version_get_info() instead&quot;)))</td></tr>
 <tr class="memdesc:a79c74f4a53aa7962ff27a61d9d9f4f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს სისტემის ზოგად ინფორმაციას JSON ფორმატში.  <br /></td></tr>
 <tr class="separator:a79c74f4a53aa7962ff27a61d9d9f4f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e344fb76d747db9d27998e62d9e3dac" id="r_a6e344fb76d747db9d27998e62d9e3dac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="system__manager_8h.html#a6e344fb76d747db9d27998e62d9e3dac">synapse_system_shutdown</a> (void)</td></tr>
+<tr class="memdesc:a6e344fb76d747db9d27998e62d9e3dac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiates a graceful shutdown of the system.  <br /></td></tr>
+<tr class="separator:a6e344fb76d747db9d27998e62d9e3dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>სისტემის მენეჯერის Public API. </p>
@@ -581,6 +584,41 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="437,186,487,190,487,195,437,192"/>
 <area shape="rect" href="resource__manager_8c.html#a95103fac06eb7830e28494dca844ac3b" title="ათავისუფლებს რესურს მენეჯერს და ასრულებს საჭირო დასუფთავების ოპერაციებს." alt="" coords="492,261,696,301"/>
 <area shape="poly" title=" " alt="" coords="444,278,479,278,479,283,444,283"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6e344fb76d747db9d27998e62d9e3dac" name="a6e344fb76d747db9d27998e62d9e3dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e344fb76d747db9d27998e62d9e3dac">&#9670;&#160;</a></span>synapse_system_shutdown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void synapse_system_shutdown </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initiates a graceful shutdown of the system. </p>
+<p>This function deinitializes all modules in reverse order of their init_level and then reboots the device. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="system__manager_8h_a6e344fb76d747db9d27998e62d9e3dac_cgraph.png" border="0" usemap="#asystem__manager_8h_a6e344fb76d747db9d27998e62d9e3dac_cgraph" alt=""/></div>
+<map name="asystem__manager_8h_a6e344fb76d747db9d27998e62d9e3dac_cgraph" id="asystem__manager_8h_a6e344fb76d747db9d27998e62d9e3dac_cgraph">
+<area shape="rect" title="Initiates a graceful shutdown of the system." alt="" coords="5,45,207,70"/>
+<area shape="rect" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="255,45,440,70"/>
+<area shape="poly" title=" " alt="" coords="207,55,241,55,241,60,207,60"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="488,5,644,45"/>
+<area shape="poly" title=" " alt="" coords="434,42,474,36,475,41,435,47"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="488,69,644,109"/>
+<area shape="poly" title=" " alt="" coords="435,67,475,73,474,79,434,73"/>
 </map>
 </div>
 

@@ -16,6 +16,7 @@ var annotated_dup =
     [ "cmd_t", "structcmd__t.html", "structcmd__t" ],
     [ "connectivity_watchdog_private_data_t", "structconnectivity__watchdog__private__data__t.html", null ],
     [ "custom_check_t", "structcustom__check__t.html", null ],
+    [ "deinit_task_params_t", "structdeinit__task__params__t.html", null ],
     [ "device_identity_api_t", "structdevice__identity__api__t.html", "structdevice__identity__api__t" ],
     [ "device_identity_private_data_t", "structdevice__identity__private__data__t.html", "structdevice__identity__private__data__t" ],
     [ "display_driver_api_t", "structdisplay__driver__api__t.html", "structdisplay__driver__api__t" ],

@@ -188,7 +188,15 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">module</span>-&gt;private_data = private_data;</div>
-<div class="line">    <span class="keyword">module</span>-&gt;current_config = (cJSON*)config;</div>
+<div class="line">    <span class="keyword">module</span>-&gt;current_config = cJSON_Duplicate(config, true);</div>
+<div class="line"><span class="keywordflow">if</span> (!module-&gt;current_config) {</div>
+<div class="line">    ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to duplicate configuration object.&quot;</span>);</div>
+<div class="line">    <span class="comment">// Note: This assumes &#39;private_data&#39; and &#39;module&#39; are allocated.</span></div>
+<div class="line">    <span class="comment">// Manual check might be needed for each file&#39;s cleanup logic.</span></div>
+<div class="line">    free(private_data);</div>
+<div class="line">    free(module);</div>
+<div class="line">    <span class="keywordflow">return</span> NULL;</div>
+<div class="line">}</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> cJSON *config_node = cJSON_GetObjectItem(config, <span class="stringliteral">&quot;config&quot;</span>);</div>
 <div class="line">    <span class="keyword">const</span> cJSON *name_node = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;instance_name&quot;</span>);</div>
@@ -291,7 +299,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>) cJSON_Delete(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a5a1305713cce543522141d618ca463da">current_config</a>);</div>
 <div class="line">    <span class="keywordflow">if</span> (self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>) free(self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>);</div>
-<div class="line">    free(self);</div>
+<div class="line">    </div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Command Handler</span></div>

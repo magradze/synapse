@@ -16,6 +16,9 @@ if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
         message(STATUS "Wifi_Manager Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
         idf_component_register(
             SRCS "src/wifi_manager.c"
+                "src/wifi_manager_api.c"
+                "src/wifi_manager_cmd.c"
+                "src/wifi_manager_events.c"
             INCLUDE_DIRS "include"
             REQUIRES 
                 core 

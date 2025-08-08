@@ -242,7 +242,6 @@ static void self_test_manager_deinit(module_t *self)
     if (private_data->report_mutex)
         vSemaphoreDelete(private_data->report_mutex);
     free(private_data);
-    free(self);
 }
 
 /**

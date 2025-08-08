@@ -22,8 +22,10 @@
 #include "esp_log.h"
 #include "esp_console.h"
 #include "esp_system.h"
-#include "esp_vfs_dev.h"      // For VFS
+#include "esp_vfs.h"          // For VFS
 #include "driver/uart.h"      // For UART driver
+#include "driver/uart_vfs.h"
+#include "esp_vfs_dev.h" // <-- Add this include for esp_vfs_uart_use_driver
 #include "linenoise/linenoise.h"
 #include "argtable3/argtable3.h"
 #include "freertos/FreeRTOS.h"
@@ -55,6 +57,7 @@ typedef struct {
     uint8_t command_count;
     SemaphoreHandle_t commands_mutex;
     bool console_initialized;
+    volatile bool is_running;
 } cmd_router_private_data_t;
 
 
@@ -254,20 +257,35 @@ static void command_router_deinit(module_t *self)
     cmd_router_private_data_t *private_data = (cmd_router_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Deinitializing Command Router module: %s", self->name);
 
+    // --- Graceful shutdown for the serial shell task ---
     if (private_data->serial_shell_task_handle) {
-        vTaskDelete(private_data->serial_shell_task_handle);
+        // 1. Signal the task to stop its loop
+        private_data->is_running = false;
+
+        // 2. Unblock linenoise by writing a newline to UART
+        // This is a crucial step to make the task exit `linenoise()` call.
+        uart_write_bytes(CONFIG_ESP_CONSOLE_UART_NUM, "\n", 1);
+
+        // 3. Wait a moment for the task to process the signal and exit
+        vTaskDelay(pdMS_TO_TICKS(100));
+
+        // 4. The task will deinit the console and delete itself.
+        // We just nullify the handle.
         private_data->serial_shell_task_handle = NULL;
     }
 
+    // Unsubscribe from events and unregister the service
     synapse_event_bus_unsubscribe(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, self);
     synapse_service_unregister(self->name);
 
+    // Free resources
     if (private_data->commands_mutex) vSemaphoreDelete(private_data->commands_mutex);
     if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
     
     free(private_data);
-    free(self);
+
     global_cmd_router_instance = NULL;
+    // free(self) is now handled by the System Manager
 }
 
 // =========================================================================
@@ -336,8 +354,8 @@ static void initialize_console()
     // --- **გამოვიყენოთ ის API, რომელიც მუშაობს (გაფრთხილებებით)** ---
     // These functions in this IDF version apply to the default console UART
     // and do not take the port number as an argument.
-    esp_vfs_dev_uart_set_rx_line_endings(ESP_LINE_ENDINGS_CR);
-    esp_vfs_dev_uart_set_tx_line_endings(ESP_LINE_ENDINGS_CRLF);
+    uart_vfs_dev_port_set_rx_line_endings(CONFIG_ESP_CONSOLE_UART_NUM, ESP_LINE_ENDINGS_CR);
+    uart_vfs_dev_port_set_tx_line_endings(CONFIG_ESP_CONSOLE_UART_NUM, ESP_LINE_ENDINGS_CRLF);
 
     // Configure UART.
     const uart_config_t uart_config = {
@@ -352,7 +370,7 @@ static void initialize_console()
     ESP_ERROR_CHECK(uart_param_config(CONFIG_ESP_CONSOLE_UART_NUM, &uart_config));
 
     // Tell VFS to use UART driver for the console UART
-    esp_vfs_dev_uart_use_driver(CONFIG_ESP_CONSOLE_UART_NUM);
+    uart_vfs_dev_use_driver(CONFIG_ESP_CONSOLE_UART_NUM);
 
     // Initialize the console
     esp_console_config_t console_config = {
@@ -382,7 +400,8 @@ static void serial_shell_task(void *pvParameters)
     cmd_router_private_data_t *private_data = (cmd_router_private_data_t *)self->private_data;
 
     initialize_console();
-    
+    private_data->console_initialized = true; // Set flag after successful init
+
     ESP_ERROR_CHECK(register_all_commands_to_console());
 
     ESP_LOGI(TAG, "Serial console ready.");
@@ -392,63 +411,32 @@ static void serial_shell_task(void *pvParameters)
     printf("  Welcome to the Synapse System Shell! \n");
     printf("  Type 'help' to see available commands.\n");
     printf("==================================================\n");
-    
-    while (true) {
-        char* line = linenoise(prompt);
-        if (line == NULL) { // NULL on Ctrl-D or error
-            continue;
-        }
 
+    private_data->is_running = true;
+    while (private_data->is_running)
+    { // <--- შეცვლილია პირობა
+        char *line = linenoise(prompt);
         if (line == NULL)
-        { // NULL on Ctrl-D or error
-            // On Ctrl-D, linenoise returns NULL. We can break the loop or continue.
-            // Let's continue to allow recovery from errors.
-            vTaskDelay(pdMS_TO_TICKS(10)); // Small delay to prevent busy-looping on error
+        {
+            vTaskDelay(pdMS_TO_TICKS(10));
             continue;
         }
 
         if (strlen(line) > 0) {
             linenoiseHistoryAdd(line);
 
-            // --- ★★★ ძველი, პრობლემური კოდი ★★★ ---
-            // int ret_code;
-            // esp_err_t err = esp_console_run(line, &ret_code);
-            // if (err == ESP_ERR_NOT_FOUND) {
-            //     printf("Error: Command not found: %s\n", line);
-            // } ...
-
-            // --- ★★★ ახალი, შესწორებული ლოგიკა ★★★ ---
-            // ჩვენ თვითონ ვყოფთ არგუმენტებად და ვიძახებთ ჩვენს executor-ს.
-            // ეს გვაძლევს სრულ კონტროლს და გვერდს უვლის esp_console_run-ის პრობლემას.
             char *argv[CONFIG_COMMAND_ROUTER_MAX_ARGS];
             int argc = esp_console_split_argv(line, argv, CONFIG_COMMAND_ROUTER_MAX_ARGS);
 
             if (argc > 0)
             {
-                // ვამოწმებთ, არსებობს თუ არა ასეთი ბრძანება ჩვენს რეესტრში
-                cmd_router_private_data_t *private_data = (cmd_router_private_data_t *)self->private_data;
-                bool command_exists = false;
-                if (xSemaphoreTake(private_data->commands_mutex, portMAX_DELAY) == pdTRUE)
-                {
-                    for (int i = 0; i < private_data->command_count; i++)
-                    {
-                        if (strcmp(argv[0], private_data->registered_commands[i]->command) == 0)
-                        {
-                            command_exists = true;
-                            break;
-                        }
-                    }
-                    xSemaphoreGive(private_data->commands_mutex);
-                }
-
+                bool command_exists = service_api_is_command_registered(argv[0]);
                 if (command_exists)
                 {
-                    // თუ ბრძანება არსებობს, პირდაპირ ვიძახებთ ჩვენს executor-ს.
                     generic_command_executor(argc, argv);
                 }
                 else
                 {
-                    // თუ არ არსებობს, მაშინ ვბეჭდავთ შეცდომას.
                     printf("Error: Command not found: %s\n", argv[0]);
                 }
             }
@@ -456,8 +444,12 @@ static void serial_shell_task(void *pvParameters)
         linenoiseFree(line);
     }
 
-    ESP_LOGE(TAG, "Serial shell task has exited.");
-    esp_console_deinit();
+    ESP_LOGI(TAG, "Serial shell task is shutting down.");
+    if (private_data->console_initialized)
+    {
+        esp_console_deinit();
+        private_data->console_initialized = false;
+    }
     vTaskDelete(NULL);
 }
 
@@ -735,10 +727,10 @@ static esp_err_t cmd_handler_nvs_inspect(int argc, char **argv, void *context)
 
 static esp_err_t cmd_handler_reboot(int argc, char **argv, void *context)
 {
-    printf("Rebooting the system now...\n");
-    vTaskDelay(pdMS_TO_TICKS(100));
-    esp_restart();
-    return ESP_OK; // This line will not be reached
+    ESP_LOGW(TAG, "Reboot command received. Initiating graceful shutdown.");
+    synapse_system_shutdown();
+    // This part of the code will not be reached
+    return ESP_OK;
 }
 /**
  * @internal

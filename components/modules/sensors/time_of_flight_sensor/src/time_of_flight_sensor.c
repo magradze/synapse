@@ -152,7 +152,6 @@ static void tof_deinit(module_t *self)
     synapse_event_bus_unsubscribe(TOF_READ_TICK_EVENT, self);
 
     free(private_data);
-    free(self);
 }
 
 static void tof_handle_event(module_t *self, const char *event_name, void *event_data)

@@ -106,7 +106,16 @@ module_t *watchdog_manager_create(const cJSON *config)
     }
 
     module->private_data = private_data;
-    module->current_config = (cJSON *)config; // Take ownership of the config object
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        // Note: This assumes 'private_data' and 'module' are allocated.
+        // Manual check might be needed for each file's cleanup logic.
+        free(private_data);
+        free(module);
+        return NULL;
+    } // Take ownership of the config object
 
     private_data->client_list_mutex = xSemaphoreCreateMutex();
     if (!private_data->client_list_mutex)
@@ -230,7 +239,7 @@ static void watchdog_manager_deinit(module_t *self)
         vSemaphoreDelete(private_data->client_list_mutex);
     if (self->private_data)
         free(self->private_data);
-    free(self);
+
     watchdog_manager_self = NULL;
 }
 

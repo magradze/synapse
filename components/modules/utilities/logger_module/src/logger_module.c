@@ -196,5 +196,4 @@ static void logger_module_deinit(module_t *self)
         free(self->private_data);
     }
     // No need to free current_config as we didn't take ownership
-    free(self);
 }

@@ -110,4 +110,11 @@ const cJSON *synapse_module_get_config(const char *module_name);
  */
 cJSON *system_get_system_info(void) __attribute__((deprecated("Use synapse_version_get_info() instead")));
 
+/**
+ * @brief Initiates a graceful shutdown of the system.
+ * @details This function deinitializes all modules in reverse order of their
+ *          init_level and then reboots the device.
+ */
+void synapse_system_shutdown(void);
+
 #endif // SYNAPSE_SYSTEM_MANAGER_H

@@ -20,7 +20,8 @@
 - [configuration_management.md](configuration_management.md) — კონფიგურაციის მართვის წესები და საუკეთესო პრაქტიკები
 - [logging_standards.md](logging_standards.md) — ლოგირების სტანდარტები, დონეები და ფორმატირების წესები
 - [error_handling.md](error_handling.md) — შეცდომების დამუშავების სტანდარტები და რეკომენდაციები
-- [promise_pattern.md](promise_pattern.md) — ასინქრონული ოპერაციების მართვის პატერნი (Promise).
+- [promise_pattern.md](promise_pattern.md) — ასინქრონული ოპერაციების მართვის პატერნი (Promise)
+- [task_pool_pattern.md](task_pool_pattern.md) — რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)
 
 ---
 

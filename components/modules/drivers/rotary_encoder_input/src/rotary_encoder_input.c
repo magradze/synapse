@@ -1,36 +1,22 @@
 /**
  * @file rotary_encoder_input.c
- * @brief A universal module to handle multiple rotary encoder inputs and publish standard navigation events.
+ * @brief A universal module to handle rotary encoder inputs using the Task Pool Manager.
  * @author Synapse Framework Team
- * @version 2.0.0
- * @date 2025-08-24
- * @details This module reads multiple rotary encoder's rotation and button presses, debounces the signals,
- *          and translates them into standard SYNAPSE_EVENT_BUTTON_PRESSED events with "UP", "DOWN",
- *          and "OK" payloads. It supports both direct GPIO connection and connection via an
- *          MCP23017 I/O expander. All instances are managed by a single, shared FreeRTOS task
- *          for resource efficiency.
+ * @version 3.0.0
+ * @date 2025-09-07
+ * @details This module reads rotary encoders and translates their actions into standard
+ *          SYNAPSE_EVENT_BUTTON_PRESSED events ("UP", "DOWN", "OK"). It no longer
+ *          creates its own task; instead, it schedules a periodic job with the
+ *          Shared Task Pool Manager for maximum resource efficiency.
  */
 
 #include "synapse.h"
 #include "rotary_encoder_input.h"
-
 #include "mcp23017_interface.h"
 #include "driver/gpio.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "freertos/semphr.h"
 #include <string.h>
 
 DEFINE_COMPONENT_TAG("ROTARY_ENCODER");
-
-// --- Static Globals for Shared Task Management ---
-
-// Array to hold pointers to all active encoder instances
-static module_t* g_encoder_instances[CONFIG_ROTARY_ENCODER_MAX_INSTANCES] = { NULL };
-static uint8_t g_active_encoder_count = 0;
-static TaskHandle_t g_shared_task_handle = NULL;
-static SemaphoreHandle_t g_instance_mutex = NULL;
-static volatile bool g_is_task_running = false;
 
 // --- Internal Data Structures ---
 
@@ -40,24 +26,30 @@ typedef enum {
 } control_type_t;
 
 typedef struct {
+    // --- Module Identification & Configuration ---
+    module_t *self;
     char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
+    char button_name[16];
+    uint8_t active_level;
+    uint16_t polling_interval_ms;
 
-    // Pin configuration
+    // --- Pin configuration ---
     uint8_t pin_a;
     uint8_t pin_b;
     uint8_t pin_sw;
-    uint8_t active_level;
-    char button_name[16];
 
-    // Control type and dependencies
+    // --- Control type and dependencies ---
     control_type_t control_type;
     char expander_service_name[32];
     mcp23017_handle_t *expander_handle;
 
-    // State tracking for rotation and button press
+    // --- State tracking ---
     int8_t encoder_state;
     bool last_sw_state;
     uint32_t last_sw_press_time;
+
+    // --- Task Pool Handle ---
+    synapse_job_handle_t job_handle;
 
 } rotary_private_data_t;
 
@@ -67,22 +59,13 @@ static esp_err_t rotary_encoder_input_init(module_t *self);
 static esp_err_t rotary_encoder_input_start(module_t *self);
 static void rotary_encoder_input_deinit(module_t *self);
 static esp_err_t parse_config(const cJSON *config_node, rotary_private_data_t *private_data);
-static void rotary_task(void *pvParameters);
+static void rotary_poll_job(void *user_context); // This is now a job, not a task
 static void publish_button_event(const char *button_name);
 
 // --- Factory Function ---
 
 module_t *rotary_encoder_input_create(const cJSON *config)
 {
-    // Initialize the shared mutex once for the first instance
-    if (g_instance_mutex == NULL) {
-        g_instance_mutex = xSemaphoreCreateMutex();
-        if (g_instance_mutex == NULL) {
-            ESP_LOGE(TAG, "Failed to create instance mutex");
-            return NULL;
-        }
-    }
-
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
     rotary_private_data_t *private_data = (rotary_private_data_t *)calloc(1, sizeof(rotary_private_data_t));
     if (!module || !private_data) {
@@ -97,13 +80,13 @@ module_t *rotary_encoder_input_create(const cJSON *config)
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
     }
+
     module->private_data = private_data;
+    private_data->self = module; // Store back-pointer for the job context
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (parse_config(config_node, private_data) != ESP_OK) {
@@ -167,32 +150,22 @@ static esp_err_t rotary_encoder_input_init(module_t *self)
 
 static esp_err_t rotary_encoder_input_start(module_t *self)
 {
-    if (xSemaphoreTake(g_instance_mutex, portMAX_DELAY) != pdTRUE) {
-        return ESP_ERR_TIMEOUT;
+    rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
+    ESP_LOGI(TAG, "Starting '%s' by scheduling a job in the Task Pool.", self->name);
+
+    private_data->job_handle = synapse_task_pool_schedule_job(
+        rotary_poll_job,
+        private_data, // Pass private_data as context
+        private_data->polling_interval_ms,
+        true // It's a periodic job
+    );
+
+    if (private_data->job_handle == NULL)
+    {
+        ESP_LOGE(TAG, "Failed to schedule job for '%s'.", self->name);
+        return ESP_FAIL;
     }
 
-    // Add this instance to the global array
-    if (g_active_encoder_count < CONFIG_ROTARY_ENCODER_MAX_INSTANCES) {
-        g_encoder_instances[g_active_encoder_count++] = self;
-    } else {
-        ESP_LOGE(TAG, "Cannot start encoder '%s', max instance count reached!", self->name);
-        xSemaphoreGive(g_instance_mutex);
-        return ESP_ERR_NO_MEM;
-    }
-
-    // Start the shared task only if it's not already running
-    if (g_shared_task_handle == NULL) {
-        BaseType_t ret = xTaskCreate(rotary_task, "rotary_shared_task", CONFIG_ROTARY_ENCODER_TASK_STACK_SIZE, NULL, CONFIG_ROTARY_ENCODER_TASK_PRIORITY, &g_shared_task_handle);
-        if (ret != pdPASS) {
-            ESP_LOGE(TAG, "Failed to create shared rotary task");
-            g_active_encoder_count--; // Rollback
-            xSemaphoreGive(g_instance_mutex);
-            return ESP_FAIL;
-        }
-        ESP_LOGI(TAG, "Shared rotary task started.");
-    }
-
-    xSemaphoreGive(g_instance_mutex);
     self->status = MODULE_STATUS_RUNNING;
     return ESP_OK;
 }
@@ -200,44 +173,17 @@ static esp_err_t rotary_encoder_input_start(module_t *self)
 static void rotary_encoder_input_deinit(module_t *self)
 {
     if (!self) return;
-
-    // --- Step 1: Remove the instance from the active list ---
-    if (xSemaphoreTake(g_instance_mutex, pdMS_TO_TICKS(100)) == pdTRUE)
-    {
-        for (int i = 0; i < g_active_encoder_count; i++)
-        {
-            if (g_encoder_instances[i] == self)
-            {
-                for (int j = i; j < g_active_encoder_count - 1; j++)
-                {
-                    g_encoder_instances[j] = g_encoder_instances[j + 1];
-                }
-                g_encoder_instances[g_active_encoder_count - 1] = NULL;
-                g_active_encoder_count--;
-                ESP_LOGI(TAG, "Instance '%s' removed from active list.", self->name);
-                break;
-            }
-        }
-        xSemaphoreGive(g_instance_mutex);
-    }
-    else
-    {
-        ESP_LOGE(TAG, "Failed to take mutex to remove instance '%s'.", self->name);
-    }
-
-    // --- Step 2: If it was the last instance, signal the task to stop ---
-    if (g_active_encoder_count == 0 && g_shared_task_handle != NULL)
-    {
-        ESP_LOGI(TAG, "Last encoder deinitialized. Signaling shared task to stop...");
-        g_is_task_running = false;
-        // Give the task a moment to exit its loop.
-        // The task will delete itself. We don't call vTaskDelete here.
-        vTaskDelay(pdMS_TO_TICKS(CONFIG_ROTARY_ENCODER_POLLING_MS * 2));
-    }
-
-    // --- Step 3: Free instance-specific resources ---
     rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
-    if (private_data) {
+    ESP_LOGI(TAG, "Deinitializing '%s'.", self->name);
+
+    if (private_data)
+    {
+        if (private_data->job_handle)
+        {
+            synapse_task_pool_cancel_job(private_data->job_handle);
+            private_data->job_handle = NULL;
+        }
+
         if (private_data->control_type == CONTROL_TYPE_GPIO) {
             synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
             synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
@@ -249,63 +195,50 @@ static void rotary_encoder_input_deinit(module_t *self)
     {
         cJSON_Delete(self->current_config);
     }
-    // free(self) is handled by the System Manager
 }
 
-// --- Task and Helper Functions ---
+// --- Job Function and Helpers ---
 
-static void rotary_task(void *pvParameters)
+static void rotary_poll_job(void *user_context)
 {
+    rotary_private_data_t *private_data = (rotary_private_data_t *)user_context;
     const int8_t rot_states[] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
 
-    g_is_task_running = true;
-    while (g_is_task_running)
-    { // <--- შეცვლილია პირობა
-        if (xSemaphoreTake(g_instance_mutex, pdMS_TO_TICKS(100)) == pdTRUE) {
-            
-            for (int i = 0; i < g_active_encoder_count; i++) {
-                module_t *self = g_encoder_instances[i];
-                rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
+    bool pin_a_level, pin_b_level, pin_sw_level;
 
-                bool pin_a_level, pin_b_level, pin_sw_level;
-
-                if (private_data->control_type == CONTROL_TYPE_GPIO) {
-                    pin_a_level = gpio_get_level(private_data->pin_a);
-                    pin_b_level = gpio_get_level(private_data->pin_b);
-                    pin_sw_level = gpio_get_level(private_data->pin_sw);
-                } else {
-                    private_data->expander_handle->api->get_pin_level(private_data->expander_handle->context, private_data->pin_a, &pin_a_level);
-                    private_data->expander_handle->api->get_pin_level(private_data->expander_handle->context, private_data->pin_b, &pin_b_level);
-                    private_data->expander_handle->api->get_pin_level(private_data->expander_handle->context, private_data->pin_sw, &pin_sw_level);
-                }
-
-                uint8_t current_pins = (pin_a_level << 1) | pin_b_level;
-                private_data->encoder_state = (private_data->encoder_state << 2) | current_pins;
-
-                int8_t direction = rot_states[private_data->encoder_state & 0x0f];
-                if (direction != 0) {
-                    publish_button_event(direction == 1 ? "DOWN" : "UP");
-                }
-
-                bool is_sw_pressed = (pin_sw_level == (bool)private_data->active_level);
-                if (is_sw_pressed && !private_data->last_sw_state) {
-                    uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
-                    if ((now - private_data->last_sw_press_time) > CONFIG_ROTARY_ENCODER_DEBOUNCE_MS) {
-                        publish_button_event(private_data->button_name);
-                        private_data->last_sw_press_time = now;
-                    }
-                }
-                private_data->last_sw_state = is_sw_pressed;
-            }
-            xSemaphoreGive(g_instance_mutex);
-        }
-        vTaskDelay(pdMS_TO_TICKS(CONFIG_ROTARY_ENCODER_POLLING_MS));
+    if (private_data->control_type == CONTROL_TYPE_GPIO)
+    {
+        pin_a_level = gpio_get_level(private_data->pin_a);
+        pin_b_level = gpio_get_level(private_data->pin_b);
+        pin_sw_level = gpio_get_level(private_data->pin_sw);
+    }
+    else
+    {
+        private_data->expander_handle->api->get_pin_level(private_data->expander_handle->context, private_data->pin_a, &pin_a_level);
+        private_data->expander_handle->api->get_pin_level(private_data->expander_handle->context, private_data->pin_b, &pin_b_level);
+        private_data->expander_handle->api->get_pin_level(private_data->expander_handle->context, private_data->pin_sw, &pin_sw_level);
     }
 
-    // Task is about to exit, clean up its own handle
-    g_shared_task_handle = NULL;
-    ESP_LOGI(TAG, "Shared rotary task has exited gracefully.");
-    vTaskDelete(NULL); // Delete self
+    uint8_t current_pins = (pin_a_level << 1) | pin_b_level;
+    private_data->encoder_state = (private_data->encoder_state << 2) | current_pins;
+
+    int8_t direction = rot_states[private_data->encoder_state & 0x0f];
+    if (direction != 0)
+    {
+        publish_button_event(direction == 1 ? "DOWN" : "UP");
+    }
+
+    bool is_sw_pressed = (pin_sw_level == (bool)private_data->active_level);
+    if (is_sw_pressed && !private_data->last_sw_state)
+    {
+        uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
+        if ((now - private_data->last_sw_press_time) > CONFIG_ROTARY_ENCODER_DEBOUNCE_MS)
+        {
+            publish_button_event(private_data->button_name);
+            private_data->last_sw_press_time = now;
+        }
+    }
+    private_data->last_sw_state = is_sw_pressed;
 }
 
 static void publish_button_event(const char *button_name)
@@ -373,6 +306,17 @@ static esp_err_t parse_config(const cJSON *config_node, rotary_private_data_t *p
 
     const cJSON *level_node = cJSON_GetObjectItem(config_node, "active_level");
     private_data->active_level = cJSON_IsNumber(level_node) ? level_node->valueint : 0;
+
+    // --- ახალი: ვკითხულობთ polling interval-ს ---
+    const cJSON *interval_node = cJSON_GetObjectItem(config_node, "polling_interval_ms");
+    if (cJSON_IsNumber(interval_node))
+    {
+        private_data->polling_interval_ms = interval_node->valueint;
+    }
+    else
+    {
+        private_data->polling_interval_ms = CONFIG_ROTARY_ENCODER_POLLING_MS; // ვიღებთ Kconfig-იდან
+    }
 
     return ESP_OK;
 }

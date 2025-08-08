@@ -59,7 +59,15 @@ module_t *rgb_led_indicator_create(const cJSON *config) {
     // ...
 
     // 2. კონფიგურაციის ობიექტის მფლობელობის აღება
-    module->current_config = (cJSON*)config;
+    module->current_config = cJSON_Duplicate(config, true);
+if (!module->current_config) {
+    ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+    // Note: This assumes 'private_data' and 'module' are allocated.
+    // Manual check might be needed for each file's cleanup logic.
+    free(private_data);
+    free(module);
+    return NULL;
+}
 
     // 3. კონფიგურაციის პარსინგი
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");

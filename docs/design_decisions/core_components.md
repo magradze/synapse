@@ -95,6 +95,20 @@
   promise_handle_t p = wifi_api->get_status_async();
   synapse_promise_then(p, on_status_received_callback, NULL);
 
+
+### 8. Task Pool Manager
+
+- **როლი:** უზრუნველყოფს "მუშა ტასკების" (Worker Tasks) ერთობლიობას, რათა მცირე, პერიოდულმა მოდულებმა შეასრულონ თავიანთი სამუშაო საკუთარი ტასკის შექმნის გარეშე.
+- **მთავარი ფუნქციები:**
+  - სამუშაოს დაგეგმვა (`synapse_task_pool_schedule_job`)
+  - სამუშაოს გაუქმება (`synapse_task_pool_cancel_job`)
+- **სარგებელი:** რადიკალურად ამცირებს RAM-ის მოხმარებას და სისტემურ დატვირთვას მრავალი მოდულის არსებობის შემთხვევაში.
+- **მაგალითი:**
+
+  ```c
+  // სენსორის პერიოდული წაკითხვის დაგეგმვა
+  synapse_task_pool_schedule_job(sensor_poll_function, self, 30000, true);
+
 ---
 
 ## ურთიერთქმედება მოდულებთან

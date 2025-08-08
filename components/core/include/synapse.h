@@ -49,6 +49,7 @@ extern "C" {
 #include "resource_manager.h" // For managing exclusive access to hardware resources like GPIO, I2C (synapse_resource_*).
 #include "system_manager.h"   // For system-level control and module management (synapse_module_*, synapse_system_*).
 #include "promise_manager.h"  // For consuming asynchronous operations using a clean, promise-based pattern (synapse_promise_*).
+#include "task_pool_manager.h" // For scheduling jobs to be executed by a shared pool of worker tasks (synapse_task_pool_*).
 
   // =================================================================================================
   //      SECTION 3: UTILITIES & INTERNAL MECHANISMS
@@ -66,6 +67,7 @@ extern "C" {
 // The following header is intended for modules that PROVIDE promise-based asynchronous services.
 // General consumer modules should not need to include this directly.
 #include "promise_manager_internal.h" // For creating and fulfilling promises (synapse_promise_create, synapse_promise_resolve).
+#include "task_pool_manager_internal.h" // For internal task pool management functions (synapse_task_pool_init).
 
   // Note: Headers like `generated_module_factory.h`, `module_factory.h`, `module_registry.h`,
   // and `framework_config.h` are intentionally excluded. They are used internally by the core

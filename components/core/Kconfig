@@ -83,6 +83,15 @@
             help
                 მოდულის `instance_name`-ის მაქსიმალური დასაშვები სიგრძე (სიმბოლოებში).
 
+        config SYNAPSE_DEINIT_TIMEOUT_MS
+            int "Module deinit timeout (ms)"
+            default 500
+            range 100 5000
+            help
+                Timeout in milliseconds for a module's deinit function to complete
+                during a graceful shutdown. If a module's deinit takes longer
+                than this, it will be considered stuck, and the shutdown will proceed.
+
     endmenu
 
     menu "ოპტიმიზაცია და მეხსიერება"

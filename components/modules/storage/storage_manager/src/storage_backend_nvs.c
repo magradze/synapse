@@ -17,7 +17,7 @@
 #include <string.h>
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("BACKEND_NVS"); // ★★★ შესწორება: გამოიყენება კონვენცია ★★★
+DEFINE_COMPONENT_TAG("BACKEND_NVS", SYNAPSE_LOG_COLOR_YELLOW);
 
 // =========================================================================
 //                      API Function Implementations

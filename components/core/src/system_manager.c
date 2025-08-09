@@ -18,7 +18,7 @@
 #include "synapse.h"
 #include "system_manager_interface.h"
 
-DEFINE_COMPONENT_TAG("SYSTEM_MANAGER");
+DEFINE_COMPONENT_TAG("SYSTEM_MANAGER", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Structure for passing data to the temporary deinit task ---
 typedef struct

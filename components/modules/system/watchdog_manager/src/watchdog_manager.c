@@ -28,7 +28,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("WATCHDOG_MANAGER");
+DEFINE_COMPONENT_TAG("WATCHDOG_MANAGER", SYNAPSE_LOG_COLOR_BLUE);
 
 // =========================================================================
 //                      Private Data & Definitions

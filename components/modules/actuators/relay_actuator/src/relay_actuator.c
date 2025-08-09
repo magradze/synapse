@@ -27,7 +27,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("RELAY_MODULE");
+DEFINE_COMPONENT_TAG("RELAY_MODULE", SYNAPSE_LOG_COLOR_GREEN);
 
 // =========================================================================
 //                      Private Data & Definitions

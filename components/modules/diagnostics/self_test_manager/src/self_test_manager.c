@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <stdarg.h> // For va_list
 
-DEFINE_COMPONENT_TAG("SELF_TEST_MGR");
+DEFINE_COMPONENT_TAG("SELF_TEST_MGR", SYNAPSE_LOG_COLOR_YELLOW);
 
 // =========================================================================
 //                      Internal Definitions & Structures

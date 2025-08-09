@@ -26,7 +26,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("MQTT_MANAGER");
+DEFINE_COMPONENT_TAG("MQTT_MANAGER", SYNAPSE_LOG_COLOR_CYAN);
 
 // --- Event-to-Topic Mapping ---
 

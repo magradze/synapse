@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-DEFINE_COMPONENT_TAG("HEALTH_MONITOR");
+DEFINE_COMPONENT_TAG("HEALTH_MONITOR", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Definitions ---
 #define MAX_CUSTOM_CHECKS 5

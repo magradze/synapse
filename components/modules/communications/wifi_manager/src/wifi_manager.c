@@ -7,7 +7,7 @@
  */
 #include "wifi_manager_internal.h"
 
-DEFINE_COMPONENT_TAG("WIFI_MANAGER");
+DEFINE_COMPONENT_TAG("WIFI_MANAGER", SYNAPSE_LOG_COLOR_CYAN);
 
 // --- Forward Declarations for static functions in this file ---
 static esp_err_t wifi_manager_init(module_t *self);

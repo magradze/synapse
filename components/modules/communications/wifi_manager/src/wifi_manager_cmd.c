@@ -8,7 +8,7 @@
 #include "wifi_manager_internal.h"
 #include "cmd_router_interface.h" // For cmd_t
 
-DEFINE_COMPONENT_TAG("WIFI_MANAGER_CMD");
+DEFINE_COMPONENT_TAG("WIFI_MANAGER_CMD", SYNAPSE_LOG_COLOR_CYAN);
 
 // --- Static Forward Declarations ---
 static esp_err_t wifi_cmd_handler(int argc, char **argv, void *context);

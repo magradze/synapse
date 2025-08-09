@@ -12,7 +12,7 @@
 #include "ui_menu.h"
 #include "ui_screens.h"
 
-DEFINE_COMPONENT_TAG("UI_MANAGER");
+DEFINE_COMPONENT_TAG("UI_MANAGER", SYNAPSE_LOG_COLOR_YELLOW);
 
 // --- Forward Declarations for static lifecycle functions ---
 static esp_err_t ui_manager_init(module_t *self);

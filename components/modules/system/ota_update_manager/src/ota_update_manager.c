@@ -25,7 +25,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("OTA_MANAGER");
+DEFINE_COMPONENT_TAG("OTA_MANAGER", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Event Names ---
 #define EVT_OTA_STARTED "OTA_STARTED"

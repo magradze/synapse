@@ -22,7 +22,7 @@
 #include <inttypes.h> // For PRIu32 macro
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("SYSTEM_TIMER");
+DEFINE_COMPONENT_TAG("SYSTEM_TIMER", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Private Data Structures ---
 

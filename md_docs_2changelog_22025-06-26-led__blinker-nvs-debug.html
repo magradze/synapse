@@ -93,15 +93,15 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_22025-06-26-led__bl
   <div class="headertitle"><div class="title">CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md767"></a> <b>თარიღი:</b> 2025-06-26 <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md777"></a> <b>თარიღი:</b> 2025-06-26 <br  />
  <b>ავტორი:</b> Giorgi Magradze</p>
-<h1><a class="anchor" id="autotoc_md768"></a>
+<h1><a class="anchor" id="autotoc_md778"></a>
 პრობლემა</h1>
 <ul>
 <li>led_blinker მოდული არ ინიციალიზდებოდა, მიუხედავად იმისა, რომ ყველა კონფიგურაცია (Kconfig, linkage, system_config.json) სწორად იყო მითითებული.</li>
 <li>MODULE_REGISTRY-ში modules array-ს ზომა იყო 1 (მხოლოდ logger_module), led_blinker იკარგებოდა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md769"></a>
+<h1><a class="anchor" id="autotoc_md779"></a>
 დიაგნოსტიკა</h1>
 <ul>
 <li>შედარებულ იქნა led_blinker და logger_module-ის module.json, linkage, კოდი, generated_module_factory, Kconfig, CMakeLists.txt.</li>
@@ -112,13 +112,13 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_22025-06-26-led__bl
 <li>დადგინდა, რომ CONFIG_MANAGER NVS-დან კითხულობდა ძველ კონფიგურაციას, სადაც მხოლოდ logger_module იყო.</li>
 <li>NVS კონფიგის იძულებითი წაშლის შემდეგ, ჩაიტვირთა ახალი embedded system_config.json, სადაც ორივე მოდული იყო აღწერილი.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md770"></a>
+<h1><a class="anchor" id="autotoc_md780"></a>
 მიზეზი</h1>
 <ul>
 <li>NVS-ში იყო შენახული ძველი კონფიგურაცია, რომელიც არ ემთხვეოდა ახალ system_config.json-ს.</li>
 <li>CONFIG_MANAGER ყოველთვის NVS-დან კითხულობს კონფიგურაციას, თუ ის არსებობს, და მხოლოდ მის არარსებობის შემთხვევაში fallback-ად იყენებს embedded defaults-ს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md771"></a>
+<h1><a class="anchor" id="autotoc_md781"></a>
 გამოსავალი</h1>
 <ul>
 <li>იძულებით წაიშალა NVS-ში არსებული კონფიგი (debug კოდით ან idf.py erase-flash).</li>
@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_22025-06-26-led__bl
 <li>MODULE_FACTORY.c-ში დაემატა დეტალური ლოგირება მოდულის შექმნის პროცესზე.</li>
 <li>CONFIG_MANAGER.c-ში debug ლოგები და დროებითი NVS წაშლის კოდი წაიშალა საბოლოო ვერსიაში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md772"></a>
+<h1><a class="anchor" id="autotoc_md782"></a>
 ცვლილებები კოდში</h1>
 <ul>
 <li><b>components/core/config_manager.c</b>: დაემატა და შემდგომში წაიშალა debug ლოგები და დროებითი კოდი NVS კონფიგის წასაშლელად; დაემატა დეტალური ლოგირება JSON parsing-ზე და modules array iteration-ზე.</li>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_22025-06-26-led__bl
 <li><b>components/modules/testing/led_blinker/</b>: დაემატა ახალი led_blinker მოდული შესაბამისი კოდით, module.json-ით, linkage-ით და კონფიგურაციით.</li>
 <li><b>configs/system_config.json</b>: დაემატა led_blinker მოდული enabled:true-ით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md773"></a>
+<h1><a class="anchor" id="autotoc_md783"></a>
 რეკომენდაცია</h1>
 <ul>
 <li>თუ system_config.json იცვლება, აუცილებელია NVS კონფიგის წაშლა (factory reset ან erase-flash), რათა ცვლილებები აისახოს სისტემაში.</li>

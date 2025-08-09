@@ -2,9 +2,9 @@ var searchData=
 [
   ['მაგალითები_0',['სახელმძღვანელოები და მაგალითები',['../tutorials_docs.html',1,'']]],
   ['მაგალითი_20integration_20example_1',['ინტეგრაციის მაგალითი (Integration Example)',['../md_docs_2tutorials_2integration__example.html',1,'']]],
-  ['მართვის_20პატერნი_20promise_20pattern_2',['asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)',['../md_docs_2convention_2promise__pattern.html',1,'']]],
-  ['მართვის_20პროცესი_20configuration_20flow_3',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]],
-  ['მართვის_20წესები_4',['კონფიგურაციის მართვის წესები',['../md_docs_2convention_2configuration__management.html',1,'']]],
+  ['მართვის_20კონვენცია_2',['კონფიგურაციის მართვის კონვენცია',['../md_docs_2convention_2configuration__management.html',1,'']]],
+  ['მართვის_20პატერნი_20promise_20pattern_3',['asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)',['../md_docs_2convention_2promise__pattern.html',1,'']]],
+  ['მართვის_20პროცესი_20configuration_20flow_4',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]],
   ['მიგრაციისა_20და_20თავსებადობის_20არქიტექტურული_20გადაწყვეტილებები_20migration_20compatibility_5',['მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)',['../md_docs_2design__decisions_2migration__and__compatibility.html',1,'']]],
   ['მიმოხილვა_6',['Synapse ESP Framework — არქიტექტურის მიმოხილვა',['../md_docs_2design__decisions_2architecture__overview.html',1,'']]],
   ['მიმოხილვა_20project_20overview_7',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],

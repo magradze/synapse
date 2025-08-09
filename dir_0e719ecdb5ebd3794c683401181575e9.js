@@ -10,6 +10,7 @@ var dir_0e719ecdb5ebd3794c683401181575e9 =
     [ "promise_manager.c", "promise__manager_8c.html", "promise__manager_8c" ],
     [ "resource_manager.c", "resource__manager_8c.html", "resource__manager_8c" ],
     [ "service_locator.c", "service__locator_8c.html", "service__locator_8c" ],
+    [ "synapse_utils.c", "synapse__utils_8c.html", "synapse__utils_8c" ],
     [ "system_manager.c", "system__manager_8c.html", "system__manager_8c" ],
     [ "task_pool_manager.c", "task__pool__manager_8c.html", "task__pool__manager_8c" ]
 ];

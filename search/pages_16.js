@@ -65,12 +65,13 @@ var searchData=
   ['synapse_20task_20pool_20manager_20api_20reference_62',['Synapse Task Pool Manager API Reference',['../md_docs_2api__reference_2task__pool__api.html',1,'']]],
   ['synapse_20time_20sync_20module_20api_20reference_63',['Synapse Time Sync Module API Reference',['../md_docs_2api__reference_2time__sync__api.html',1,'']]],
   ['synapse_20utility_20module_20api_20reference_64',['Synapse Utility Module API Reference',['../md_docs_2api__reference_2utility__api.html',1,'']]],
-  ['synapse_20version_20module_20api_20reference_65',['Synapse Version Module API Reference',['../md_docs_2api__reference_2version__api.html',1,'']]],
-  ['synapse_20wifi_20manager_20service_20api_20reference_66',['Synapse WiFi Manager Service API Reference',['../md_docs_2api__reference_2wifi__api.html',1,'']]],
-  ['sync_20module_20api_20reference_67',['Synapse Time Sync Module API Reference',['../md_docs_2api__reference_2time__sync__api.html',1,'']]],
-  ['system_20alarms_20manager_68',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]],
-  ['system_20configuration_69',['სისტემის კონფიგურაცია (System Configuration)',['../md_docs_2tutorials_2system__configuration.html',1,'']]],
-  ['system_20module_20api_20reference_70',['Synapse System Module API Reference',['../md_docs_2api__reference_2system__api.html',1,'']]],
-  ['system_20shell_71',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utillities_2command__router_2README.html',1,'']]],
-  ['system_5ftimer_20tt_72',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utillities_2system__timer_2README.html',1,'']]]
+  ['synapse_20utils_20api_20reference_65',['Synapse Utils API Reference',['../md_docs_2api__reference_2utils__api.html',1,'']]],
+  ['synapse_20version_20module_20api_20reference_66',['Synapse Version Module API Reference',['../md_docs_2api__reference_2version__api.html',1,'']]],
+  ['synapse_20wifi_20manager_20service_20api_20reference_67',['Synapse WiFi Manager Service API Reference',['../md_docs_2api__reference_2wifi__api.html',1,'']]],
+  ['sync_20module_20api_20reference_68',['Synapse Time Sync Module API Reference',['../md_docs_2api__reference_2time__sync__api.html',1,'']]],
+  ['system_20alarms_20manager_69',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]],
+  ['system_20configuration_70',['სისტემის კონფიგურაცია (System Configuration)',['../md_docs_2tutorials_2system__configuration.html',1,'']]],
+  ['system_20module_20api_20reference_71',['Synapse System Module API Reference',['../md_docs_2api__reference_2system__api.html',1,'']]],
+  ['system_20shell_72',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utillities_2command__router_2README.html',1,'']]],
+  ['system_5ftimer_20tt_73',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utillities_2system__timer_2README.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: კონფიგურაციის მართვის წესები</title>
+<title>Synapse ESP Framework: კონფიგურაციის მართვის კონვენცია</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,116 +90,116 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">კონფიგურაციის მართვის წესები</div></div>
+  <div class="headertitle"><div class="title">კონფიგურაციის მართვის კონვენცია</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1181"></a> </p>
-<h1><a class="anchor" id="autotoc_md1182"></a>
-ძირითადი პრინციპი</h1>
-<p>**(განახლებულია)** <b>ყველა runtime კონფიგურაციული პარამეტრი უნდა იყოს მოდულის საკუთარ <code>config.json</code> ფაილში. კოდში hardcoded მნიშვნელობები დაუშვებელია.</b></p>
-<h1><a class="anchor" id="autotoc_md1183"></a>
-კონფიგურაციის სტრუქტურა და წყაროები</h1>
-<p>**(სრულად განახლებულია)**</p>
-<p>Synapse Framework v5.0.0-დან იყენებს <b>დეცენტრალიზებულ</b> კონფიგურაციის მოდელს:</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1191"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <b>ვერსია:</b> 2.0.0</p>
+<h1><a class="anchor" id="autotoc_md1192"></a>
+1. 📜 ძირითადი პრინციპი</h1>
+<p><b>ყველა runtime კონფიგურაციული პარამეტრი უნდა იყოს მოდულის საკუთარ <code>config.json</code> ფაილში. კოდში <code>hardcoded</code> მნიშვნელობები დაუშვებელია.</b></p>
+<h1><a class="anchor" id="autotoc_md1193"></a>
+2. 📂 კონფიგურაციის წყაროები და იერარქია</h1>
+<p>Synapse Framework-ი იყენებს მრავალშრიან, დეცენტრალიზებულ კონფიგურაციის მოდელს. პარამეტრების საბოლოო მნიშვნელობა განისაზღვრება შემდეგი პრიორიტეტის მიხედვით (მაღლიდან დაბლისკენ):</p>
 <ol type="1">
+<li><b>NVS (Non-Volatile Storage):</b><ul>
+<li><b>როლი:</b> მუდმივი მეხსიერება, სადაც ინახება საბოლოო, მომხმარებლის მიერ შეცვლილი ან <code>provisioning</code>-ით მიღებული კონფიგურაცია. NVS-ში შენახული კონფიგურაცია <b>ყველაზე მაღალი პრიორიტეტისაა</b> და გადააწერს ყველა დანარჩენს.</li>
+</ul>
+</li>
+<li>**<code>{module_name}/config.json</code> (Runtime Default-ები):**<ul>
+<li><b>როლი:</b> ეს არის თითოეული მოდულის <b>default runtime კონფიგურაცია</b>. აქ აღწერილმა მნიშვნელობებმა შეიძლება გადააწეროს <code>Kconfig</code>-ის <code>default</code>-ები.</li>
+</ul>
+</li>
+<li>**<code>Kconfig</code> (Build-დროის Default-ები):**<ul>
+<li><b>როლი:</b> ეს არის **"სიმართლის საბოლოო წყარო"** default მნიშვნელობებისთვის. ის განსაზღვრავს პარამეტრების საწყის მნიშვნელობებს, რომლებიც firmware-ში ჩაიშენება.</li>
+</ul>
+</li>
 <li>**<code>configs/system_config.json</code> (ბაზისური):**<ul>
-<li><b>როლი:</b> განსაზღვრავს მხოლოდ გლობალურ პარამეტრებს.</li>
-<li><p class="startli"><b>სტრუქტურა:</b></p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;firmware&quot;: {</div>
-<div class="line">        &quot;version&quot;: &quot;5.0.0&quot;,</div>
-<div class="line">        &quot;description&quot;: &quot;Decentralized configuration model.&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;global_config&quot;: {</div>
-<div class="line">        &quot;device.id.prefix&quot;: &quot;SYNAPSE&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;modules&quot;: [] // ეს მასივი ყოველთვის ცარიელია ამ ფაილში</div>
-<div class="line">}</div>
-</div><!-- fragment --></li>
+<li><b>როლი:</b> განსაზღვრავს მხოლოდ გლობალურ პარამეტრებს (<code>firmware</code>, <code>global_config</code>) და <code>modules</code> მასივის საწყის, ცარიელ სტრუქტურას.</li>
 </ul>
 </li>
-<li><p class="startli">**<code>{module_name}/config.json</code> (მოდულის):**</p><ul>
-<li><b>როლი:</b> ეს არის თითოეული მოდულის <b>default runtime კონფიგურაცია</b>.</li>
-<li><b>სტრუქტურა:</b> შეიცავს JSON ობიექტს ან ობიექტების მასივს, რომელიც სრულად აღწერს მოდულის ინსტანცი(ებ)ს.</li>
-</ul>
-<p class="startli">**მაგალითი (<code>relay_actuator/config.json</code>):**</p>
-<p class="startli"><code>json [ { "type": "relay_actuator", "enabled": true, "config": { "instance_name": "main_light", "pin": 23, "active_level": 0 } }, { "type": "relay_actuator", "enabled": true, "config": { "instance_name": "water_pump", "pin": 22, "active_level": 0 } } ] </code></p>
-<p class="startli">**მაგალითი (<code>wifi_manager/config.json</code>):**</p>
-<p class="startli"><code>json [ { "type": "wifi_manager", "enabled": true, "config": { "instance_name": "main_wifi" } } ] </code></p>
-</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1184"></a>
-კონფიგურაციის წვდომის პატერნები</h1>
-<p>**(განახლებულია)** მიუხედავად იმისა, რომ კონფიგურაცია ფიზიკურად დაყოფილია, <code>Config Manager</code> runtime-ში აწყობს ერთიან, ლოგიკურ სტრუქტურას. ამიტომ, პარამეტრებზე წვდომის API უცვლელი რჩება.</p>
-<h2><a class="anchor" id="autotoc_md1185"></a>
-&lt;tt&gt;synapse_config_get_*&lt;/tt&gt; ფუნქციების გამოყენება</h2>
-<p>წვდომა ხდება <b>წერტილით გამოყოფილი გასაღებით (dot-notation)</b>:</p>
-<ol type="1">
-<li><b>გლობალური პარამეტრისთვის:</b> <code>"global_config.parameter_name"</code></li>
-<li><b>მოდულის პარამეტრისთვის:</b> <code>"instance_name.parameter_name"</code></li>
-</ol>
-<p><b>მაგალითი:</b></p>
-<div class="fragment"><div class="line"><span class="comment">// გლობალური პარამეტრის წაკითხვა</span></div>
-<div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
-<div class="line">synapse_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// `main_light` ინსტანციის `pin` პარამეტრის წაკითხვა</span></div>
-<div class="line"><span class="keywordtype">int</span> relay_pin;</div>
-<div class="line">synapse_config_get_int(<span class="stringliteral">&quot;main_light.pin&quot;</span>, &amp;relay_pin);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1186"></a>
-კონფიგურაციის პარსინგი მოდულის შიგნით</h1>
-<p>თითოეული მოდულის <code>_create</code> ფუნქცია იღებს თავისი კონფიგურაციის სრულ JSON ობიექტს (<code>{"type": ..., "enabled": ..., "config": ...}</code>).</p>
-<h2><a class="anchor" id="autotoc_md1187"></a>
-&lt;tt&gt;parse_config&lt;/tt&gt; ფუნქცია</h2>
-<p>რეკომენდებულია, თითოეულ მოდულს ჰქონდეს <code>static esp_err_t parse_config(const cJSON *config_node, private_data_t *p_data)</code> ფუნქცია.</p>
-<div class="fragment"><div class="line"><span class="comment">// relay_actuator.c-ში</span></div>
-<div class="line"><span class="keyword">static</span> esp_err_t parse_config(<span class="keyword">const</span> cJSON *config_node, <a class="code hl_struct" href="structrelay__private__data__t.html">relay_private_data_t</a> *p_data) {</div>
-<div class="line">    <span class="keywordflow">if</span> (!config_node) <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG;</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Kconfig-იდან ვიღებთ default მნიშვნელობას</span></div>
-<div class="line">    p_data-&gt;gpio_pin = CONFIG_RELAY_ACTUATOR_DEFAULT_PIN;</div>
-<div class="line">    </div>
-<div class="line">    <span class="keyword">const</span> cJSON *pin_node = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;pin&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">if</span> (cJSON_IsNumber(pin_node)) {</div>
-<div class="line">        p_data-&gt;gpio_pin = pin_node-&gt;valueint;</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;&#39;pin&#39; is a required parameter!&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_ARG; <span class="comment">// pin სავალდებულოა</span></div>
+<h1><a class="anchor" id="autotoc_md1194"></a>
+3. 🏗️ კონფიგურაციის სტრუქტურა</h1>
+<p>მიუხედავად იმისა, რომ კონფიგურაცია ფიზიკურად დაყოფილია, <code>Config Manager</code> runtime-ში აწყობს ერთიან, ლოგიკურ სტრუქტურას.</p>
+<p>**მაგალითი (<code>relay_actuator/config.json</code>):**</p>
+<div class="fragment"><div class="line">[</div>
+<div class="line">  {</div>
+<div class="line">    &quot;type&quot;: &quot;relay_actuator&quot;,</div>
+<div class="line">    &quot;enabled&quot;: true,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;main_light&quot;,</div>
+<div class="line">        &quot;pin&quot;: 23,</div>
+<div class="line">        &quot;active_level&quot;: 0</div>
 <div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">]</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1195"></a>
+4. 📝 კონფიგურაციის პარსინგის პატერნი</h1>
+<p>თითოეული მოდულის <code>_create</code> ფუნქცია იღებს თავისი კონფიგურაციის სრულ JSON ობიექტს. ამ ობიექტის დასამუშავებლად, ყველა მოდულმა უნდა გამოიყენოს სტანდარტული, 3-ნაბიჯიანი პატერნი <code>parse_config</code> ფუნქციაში.</p>
+<h2><a class="anchor" id="autotoc_md1196"></a>
+&lt;tt&gt;parse_config&lt;/tt&gt; ფუნქციის 3-ნაბიჯიანი ლოგიკა</h2>
+<ol type="1">
+<li><b>ნაბიჯი 1: Default მნიშვნელობების დაყენება:</b> ფუნქციის დასაწყისში, <code>private_data</code> სტრუქტურის ველებს მიანიჭეთ <code>default</code> მნიშვნელობები, როგორც წესი, <code>Kconfig</code>-იდან.</li>
+<li><b>ნაბიჯი 2: JSON-იდან გადაწერა:</b> გამოიყენეთ <code><a class="el" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library.">synapse_utils.h</a></code>-ში განსაზღვრული დამხმარე ფუნქციები (<code>synapse_config_get_string_from_node</code>, <code>..._get_int_...</code> და ა.შ.), რათა სცადოთ <code>default</code> მნიშვნელობების გადაწერა <code>config.json</code>-იდან მოსული მნიშვნელობებით.</li>
+<li><b>ნაბიჯი 3: საბოლოო ვალიდაცია:</b> ფუნქციის ბოლოს, შეამოწმეთ, რომ ყველა <b>სავალდებულო</b> პარამეტრმა მიიღო ვალიდური მნიშვნელობა. თუ რომელიმე სავალდებულო პარამეტრი არ არის განსაზღვრული, დააბრუნეთ შეცდომა.</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md1197"></a>
+&lt;tt&gt;parse_config&lt;/tt&gt; ფუნქციის მაგალითი</h2>
+<div class="fragment"><div class="line"><span class="comment">// health_monitor.c-ში</span></div>
+<div class="line"><span class="keyword">static</span> esp_err_t parse_config(<span class="keyword">const</span> cJSON *config_node, <a class="code hl_struct" href="structhealth__monitor__private__data__t.html">health_monitor_private_data_t</a> *p_data) {</div>
+<div class="line">    <span class="comment">// ნაბიჯი 1: Default მნიშვნელობების დაყენება Kconfig-იდან</span></div>
+<div class="line">    p_data-&gt;check_interval_sec = CONFIG_HEALTH_MONITOR_DEFAULT_INTERVAL;</div>
+<div class="line">    p_data-&gt;min_free_heap_kb = CONFIG_HEALTH_MONITOR_DEFAULT_HEAP_KB;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ნაბიჯი 2: JSON-იდან გადაწერის მცდელობა synapse_utils-ის გამოყენებით</span></div>
+<div class="line">    <a class="code hl_function" href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a>(TAG, config_node, <span class="stringliteral">&quot;check_interval_sec&quot;</span>, (<span class="keywordtype">int</span>*)&amp;p_data-&gt;check_interval_sec);</div>
 <div class="line">    </div>
-<div class="line">    <span class="comment">// ... ვპარსავთ სხვა პარამეტრებს ...</span></div>
-<div class="line">    </div>
+<div class="line">    <span class="keyword">const</span> cJSON *thresholds = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;thresholds&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (thresholds) {</div>
+<div class="line">        <a class="code hl_function" href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a>(TAG, thresholds, <span class="stringliteral">&quot;min_free_heap_kb&quot;</span>, (<span class="keywordtype">int</span>*)&amp;p_data-&gt;min_free_heap_kb);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ნაბიჯი 3: ვალიდაცია (ამ შემთხვევაში, პარამეტრები არასავალდებულოა)</span></div>
+<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Health Monitor configured: Interval=%us, Min Heap=%ukB&quot;</span>, </div>
+<div class="line">             p_data-&gt;check_interval_sec, p_data-&gt;min_free_heap_kb);</div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructrelay__private__data__t_html"><div class="ttname"><a href="structrelay__private__data__t.html">relay_private_data_t</a></div><div class="ttdef"><b>Definition</b> relay_actuator.c:55</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1188"></a>
-Default მნიშვნელობები და ვალიდაცია</h1>
+<div class="ttc" id="astructhealth__monitor__private__data__t_html"><div class="ttname"><a href="structhealth__monitor__private__data__t.html">health_monitor_private_data_t</a></div><div class="ttdef"><b>Definition</b> health_monitor.c:46</div></div>
+<div class="ttc" id="asynapse__utils_8h_html_aa70b5e48e2691258a8f42faebdb83ff1"><div class="ttname"><a href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a></div><div class="ttdeci">bool synapse_config_get_int_from_node(const char *tag, const cJSON *json_node, const char *key, int *out_value)</div><div class="ttdoc">Safely retrieves an integer value from a cJSON object.</div><div class="ttdef"><b>Definition</b> synapse_utils.c:49</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1198"></a>
+5. 🌐 კონფიგურაციაზე წვდომა სხვა მოდულებიდან</h1>
+<p>სხვა მოდულის კონფიგურაციის პარამეტრზე წვდომა უნდა მოხდეს <b>მხოლოდ</b> <code>Config Manager</code>-ის API-ს საშუალებით, <b>წერტილით გამოყოფილი გასაღების (dot-notation)</b> გამოყენებით.</p>
 <ul>
-<li>**"სიმართლის წყარო" default-ებისთვის არის <code>Kconfig</code>**. მოდულმა <code>parse_config</code> ფუნქციაში ჯერ უნდა მიანიჭოს <code>Kconfig</code>-იდან წამოღებული მნიშვნელობა და შემდეგ სცადოს მისი გადაფარვა <code>config.json</code>-იდან.</li>
-<li><b>ვალიდაცია:</b> <code>_create</code> ფუნქცია პასუხისმგებელია, შეამოწმოს ყველა სავალდებულო პარამეტრის არსებობა და დააბრუნოს შეცდომა, თუ რომელიმე აკლია.</li>
+<li><b>გლობალური პარამეტრისთვის:</b> <code>"global_config.parameter_name"</code></li>
+<li><b>მოდულის პარამეტრისთვის:</b> <code>"instance_name.parameter_name"</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1189"></a>
-აკრძალული პრაქტიკები</h1>
-<p>❌ <b>არასდროს:</b></p>
+<div class="fragment"><div class="line"><span class="comment">// `main_light` ინსტანციის `pin` პარამეტრის წაკითხვა</span></div>
+<div class="line"><span class="keywordtype">int</span> relay_pin;</div>
+<div class="line">synapse_config_get_int(<span class="stringliteral">&quot;main_light.pin&quot;</span>, &amp;relay_pin);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1199"></a>
+6. ❌ აკრძალული პრაქტიკები</h1>
 <ul>
-<li>კოდში hardcoded მნიშვნელობების გამოყენება.</li>
-<li><code>system_config.json</code>-ში <code>modules</code> მასივის ხელით შევსება.</li>
+<li><b>არასდროს:</b><ul>
+<li>კოდში <code>hardcoded</code> მნიშვნელობების გამოყენება.</li>
+<li><code>parse_config</code> ფუნქციაში <code>cJSON_*</code> ფუნქციების პირდაპირი გამოყენება (გამოიყენეთ <code>synapse_utils</code>).</li>
 <li><code>module.json</code>-ში runtime პარამეტრების განსაზღვრა.</li>
+<li><code>system_config.json</code>-ში <code>modules</code> მასივის ხელით შევსება.</li>
 </ul>
-<p>✅ <b>ყოველთვის:</b></p>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1200"></a>
+7. ✅ საუკეთესო პრაქტიკები</h1>
 <ul>
+<li><b>ყოველთვის:</b><ul>
+<li>გამოიყენეთ <code><a class="el" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library.">synapse_utils.h</a></code>-ის დამხმარე ფუნქციები კონფიგურაციის პარსინგისთვის.</li>
+<li>განსაზღვრეთ <code>default</code> მნიშვნელობები <code>Kconfig</code>-ში.</li>
+<li>აღწერეთ ყველა კონფიგურაციის პარამეტრი მოდულის <code>README.md</code> ფაილში.</li>
 <li>გამოიყენეთ <code>synapse_config_get_*</code> API-ები სხვა მოდულების პარამეტრებზე წვდომისთვის.</li>
-<li>განსაზღვრეთ მოდულის default კონფიგურაცია მის საკუთარ <code>config.json</code> ფაილში.</li>
-<li>გამოიყენეთ <code>Kconfig</code> build-დროის default-ებისთვის.</li>
+<li>განსაზღვრეთ მოდულის default კონფიგურაცია მის საკუთარ <code>config.json</code> ფაილში. </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1190"></a>
-შეჯამება</h1>
-<ol type="1">
-<li><b>კონფიგურაცია დეცენტრალიზებულია:</b> თითოეული მოდული პასუხისმგებელია თავის default კონფიგურაციაზე.</li>
-<li>**<code>Config Manager</code> აერთიანებს მათ:** runtime-ში იქმნება ერთიანი, ლოგიკური კონფიგურაციის ხე.</li>
-<li><b>წვდომის API უცვლელია:</b> <code>synapse_config_get_*</code> ფუნქციები მუშაობს ისე, როგორც ადრე.</li>
-<li>**<code>Kconfig</code> არის default-ების წყარო:** <code>config.json</code>-მა შეიძლება გადააფაროს <code>Kconfig</code>-ის მნიშვნელობები. </li>
-</ol>
+</li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -18,6 +18,7 @@ var dir_f454a6bd7508de8f6fbe7e30e70e33ac =
     [ "service_locator.h", "service__locator_8h.html", "service__locator_8h" ],
     [ "service_types.h", "service__types_8h.html", "service__types_8h" ],
     [ "synapse.h", "synapse_8h.html", null ],
+    [ "synapse_utils.h", "synapse__utils_8h.html", "synapse__utils_8h" ],
     [ "system_event_ids.h", "system__event__ids_8h.html", "system__event__ids_8h" ],
     [ "system_manager.h", "system__manager_8h.html", "system__manager_8h" ],
     [ "task_pool_manager.h", "task__pool__manager_8h.html", "task__pool__manager_8h" ],

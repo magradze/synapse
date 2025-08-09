@@ -93,10 +93,10 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2CHANGELOG__2025-06
   <div class="headertitle"><div class="title">CHANGELOG - 2025-06-26</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md796"></a> </p>
-<h1><a class="anchor" id="autotoc_md797"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md806"></a> </p>
+<h1><a class="anchor" id="autotoc_md807"></a>
 [Major] Module System Automation &amp; Refactor</h1>
-<h2><a class="anchor" id="autotoc_md798"></a>
+<h2><a class="anchor" id="autotoc_md808"></a>
 Added</h2>
 <ul>
 <li><b>create_module.py</b>: ავტომატური სკრიპტი ახალი მოდულების გენერირებისთვის (header, source, CMake, Kconfig, module.json)</li>
@@ -105,14 +105,14 @@ Added</h2>
 <li><b>components/modules/testing/test_module/</b>: ტესტური მოდული ავტომატური გენერაციით</li>
 <li><b>docs/CREATE_MODULE_DOCUMENTATION.md</b>: დეტალური დოკუმენტაცია მოდულების ავტომატური სისტემისთვის</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md799"></a>
+<h2><a class="anchor" id="autotoc_md809"></a>
 Changed</h2>
 <ul>
 <li><b>components/core/CMakeLists.txt</b>: core კომპონენტში COLLECTED_MODULE_DEPENDENCIES ემატება REQUIRES-ში, რათა მოდულის header-ები იყოს ხელმისაწვდომი</li>
 <li><b>components/modules/utilities/logger_module/CMakeLists.txt</b>: დაემატა "სმარტი" conditional registration (configure ეტაპზე placeholder, ჩართვისას სრული, გამორთვისას placeholder)</li>
 <li><b>components/interfaces/include/base_module.h</b>: განახლდა მოდულის ინტერფეისის სტრუქტურა (function pointer-ები, სტატუსები, კონტრაქტი)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md800"></a>
+<h2><a class="anchor" id="autotoc_md810"></a>
 Fixed</h2>
 <ul>
 <li>Conditional compilation: build-ში მხოლოდ ჩართული მოდულების კოდი ხვდება, გამორთული მოდულები აგენერირებენ placeholder-ს</li>
@@ -120,7 +120,7 @@ Fixed</h2>
 <li>collect_modules.cmake-ში დაემატა კონდიციური include-ები და factory entries</li>
 <li>create_module.py-ს მიერ გენერირებული კოდი სრულად შეესაბამება <a class="el" href="base__module_8h.html" title="Defines the base module interface and status types.">base_module.h</a>-ს</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md801"></a>
+<h2><a class="anchor" id="autotoc_md811"></a>
 Detailed File Changes</h2>
 <ul>
 <li><b>CMakeLists.txt, components/core/CMakeLists.txt</b>: პროექტის build სისტემაში დაემატა COLLECTED_MODULE_DEPENDENCIES, რათა core-ს ჰქონდეს ყველა ჩართული მოდულის header-ებზე წვდომა და factory-ს სწორი მუშაობა.</li>
@@ -133,13 +133,13 @@ Detailed File Changes</h2>
 <li><b>create_module.py</b>: დაემატა ახალი მოდულის ავტომატური გენერაცია (header, source, CMake, Kconfig, module.json), კოდი სრულად შეესაბამება <a class="el" href="base__module_8h.html" title="Defines the base module interface and status types.">base_module.h</a>-ს და conditional compilation-ს.</li>
 </ul>
 <p><b>ყველა ეს ცვლილება მიზნად ისახავს მოდულების მართვის სრულ ავტომატიზაციას, შეცდომების მინიმიზაციას და დეველოპმენტის სიჩქარის ზრდას.</b></p>
-<h2><a class="anchor" id="autotoc_md802"></a>
+<h2><a class="anchor" id="autotoc_md812"></a>
 Why/How</h2>
 <ul>
 <li><b>რატომ:</b> მოდულების დამატება/ამოღება უნდა იყოს ავტომატური, build-ში მოხვდეს მხოლოდ ჩართული კოდი, და ინტერფეისი იყოს ერთიანი</li>
 <li><b>როგორ:</b> collect_modules.cmake პოულობს ყველა module.json/Kconfig-ს, აგენერირებს საჭირო ფაილებს, core-ს CMakeLists.txt ავტომატურად აერთიანებს დამოკიდებულებებს, ხოლო თითოეული მოდულის CMakeLists.txt conditional logic-ით მართავს build-ში მოხვედრას</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md803"></a>
+<h2><a class="anchor" id="autotoc_md813"></a>
 Testing</h2>
 <ul>
 <li>შექმნილია test_module ავტომატურად, build/reconfigure/menuconfig ციკლი წარმატებით გაიარა</li>

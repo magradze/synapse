@@ -9,7 +9,7 @@ var searchData=
   ['ui_5fevents_2ec_6',['ui_events.c',['../ui__events_8c.html',1,'']]],
   ['ui_5fevents_2eh_7',['ui_events.h',['../ui__events_8h.html',1,'']]],
   ['ui_5fevents_5fhandle_8',['ui_events_handle',['../ui__events_8c.html#a469449dd73689152450606d4d611be8f',1,'ui_events_handle(module_t *self, const char *event_name, void *event_data):&#160;ui_events.c'],['../ui__events_8h.html#a469449dd73689152450606d4d611be8f',1,'ui_events_handle(module_t *self, const char *event_name, void *event_data):&#160;ui_events.c']]],
-  ['ui_5fmanager_20tt_9',['ui_manager tt',['../md_components_2modules_2utillities_2ui__manager_2README.html',1,'🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;'],['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1969',1,'5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)'],['../md_docs_2convention_2promise__pattern.html#autotoc_md1311',1,'5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)']]],
+  ['ui_5fmanager_20tt_9',['ui_manager tt',['../md_components_2modules_2utillities_2ui__manager_2README.html',1,'🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;'],['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1979',1,'5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)'],['../md_docs_2convention_2promise__pattern.html#autotoc_md1321',1,'5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)']]],
   ['ui_5fmanager_20tt_20თან_10',['6. 💡 გამოყენების მაგალითი (&lt;tt&gt;ui_manager&lt;/tt&gt;-თან)',['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md77',1,'']]],
   ['ui_5fmanager_2ec_11',['ui_manager.c',['../ui__manager_8c.html',1,'']]],
   ['ui_5fmanager_2eh_12',['ui_manager.h',['../ui__manager_8h.html',1,'']]],
@@ -47,12 +47,13 @@ var searchData=
   ['updated_5fkey_44',['updated_key',['../structsynapse__config__updated__payload__t.html#aebee8ec8cd701f32ea6964a09f4e235b',1,'synapse_config_updated_payload_t']]],
   ['uri_20http_5fmethod_5ft_20method_20local_5fctrl_5fhandler_5ft_20handler_45',['esp_err_t local_ctrl_module_register_endpoint(const char *uri, http_method_t method, local_ctrl_handler_t handler);',['../md_docs_2api__reference_2local__ctrl__api.html#autotoc_md496',1,'']]],
   ['url_46',['url',['../md_docs_2api__reference_2ota__api.html#autotoc_md541',1,'esp_err_t ota_module_start_update(const char *url);'],['../md_docs_2api__reference_2system__api.html#autotoc_md681',1,'esp_err_t ota_module_start_update(const char *url);']]],
-  ['usage_47',['usage',['../md_docs_2convention_2logging__standards.html#autotoc_md1286',1,'2. Memory Usage'],['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1936',1,'5. Heap და Memory Usage'],['../structcmd__t.html#a09afbf9c03dbe87233dbfb0d4154349e',1,'cmd_t::usage']]],
+  ['usage_47',['usage',['../md_docs_2convention_2logging__standards.html#autotoc_md1296',1,'2. Memory Usage'],['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1946',1,'5. Heap და Memory Usage'],['../structcmd__t.html#a09afbf9c03dbe87233dbfb0d4154349e',1,'cmd_t::usage']]],
   ['usage_20გაფართოებული_20გამოყენება_48',['Advanced Usage (გაფართოებული გამოყენება)',['../md_docs_2tutorials_2advanced__usage.html',1,'']]],
-  ['usage_20მონიტორინგი_49',['4. Task და Stack Usage მონიტორინგი',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1935',1,'']]],
+  ['usage_20მონიტორინგი_49',['4. Task და Stack Usage მონიტორინგი',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1945',1,'']]],
   ['usage_20guide_50',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
-  ['usage_20mqtt_20module_51',['2. Service Usage (MQTT Module)',['../md_docs_2convention_2communication__patterns.html#autotoc_md1170',1,'']]],
+  ['usage_20mqtt_20module_51',['2. Service Usage (MQTT Module)',['../md_docs_2convention_2communication__patterns.html#autotoc_md1180',1,'']]],
   ['user_5fcontext_20tt_52',['&lt;tt&gt;promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);&lt;/tt&gt;',['../md_docs_2api__reference_2promise__api.html#autotoc_md560',1,'']]],
   ['user_5fcontext_20uint32_5ft_20interval_5fms_20bool_20is_5fperiodic_20tt_53',['&lt;tt&gt;synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void* user_context, uint32_t interval_ms, bool is_periodic);&lt;/tt&gt;',['../md_docs_2api__reference_2task__pool__api.html#autotoc_md710',1,'']]],
-  ['utility_20module_20api_20reference_54',['Synapse Utility Module API Reference',['../md_docs_2api__reference_2utility__api.html',1,'']]]
+  ['utility_20module_20api_20reference_54',['Synapse Utility Module API Reference',['../md_docs_2api__reference_2utility__api.html',1,'']]],
+  ['utils_20api_20reference_55',['Synapse Utils API Reference',['../md_docs_2api__reference_2utils__api.html',1,'']]]
 ];

@@ -15,7 +15,7 @@
 #include "freertos/timers.h"
 #include <sys/queue.h>
 
-DEFINE_COMPONENT_TAG("TASK_POOL_MANAGER");
+DEFINE_COMPONENT_TAG("TASK_POOL_MANAGER", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Internal Structures ---
 

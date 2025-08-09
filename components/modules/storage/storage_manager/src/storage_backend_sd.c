@@ -24,7 +24,7 @@
 #include <dirent.h>   // For opendir
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("BACKEND_SD");
+DEFINE_COMPONENT_TAG("BACKEND_SD", SYNAPSE_LOG_COLOR_YELLOW);
 
 // --- Helper Macros ---
 #define SD_PATH_MAX 256 // Maximum path length for SD card operations

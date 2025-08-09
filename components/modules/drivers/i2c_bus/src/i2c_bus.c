@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-DEFINE_COMPONENT_TAG("I2C_BUS");
+DEFINE_COMPONENT_TAG("I2C_BUS", SYNAPSE_LOG_COLOR_MAGENTA);
 
 /**
  * @internal

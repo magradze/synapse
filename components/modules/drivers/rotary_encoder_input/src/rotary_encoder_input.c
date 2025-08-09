@@ -16,7 +16,7 @@
 #include "driver/gpio.h"
 #include <string.h>
 
-DEFINE_COMPONENT_TAG("ROTARY_ENCODER");
+DEFINE_COMPONENT_TAG("ROTARY_ENCODER", SYNAPSE_LOG_COLOR_MAGENTA);
 
 // --- Internal Data Structures ---
 

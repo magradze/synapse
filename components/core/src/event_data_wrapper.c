@@ -16,7 +16,7 @@
 #include <string.h>
 #include <inttypes.h> // PRId32-სთვის
 
-DEFINE_COMPONENT_TAG("EVENT_WRAPPER");
+DEFINE_COMPONENT_TAG("EVENT_WRAPPER", SYNAPSE_LOG_COLOR_BLUE);
 
 esp_err_t synapse_event_data_wrap(const void *payload, void (*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)
 {

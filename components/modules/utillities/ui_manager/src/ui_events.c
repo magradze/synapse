@@ -13,7 +13,7 @@
 #include "relay_interface.h"
 #include "wifi_interface.h"
 
-DEFINE_COMPONENT_TAG("UI_EVENTS");
+DEFINE_COMPONENT_TAG("UI_EVENTS", SYNAPSE_LOG_COLOR_YELLOW);
 
 // --- Forward Declaration for the new promise callback ---
 static void on_wifi_status_received(void *result_data, void *user_context);

@@ -22,6 +22,7 @@
 - [error_handling.md](error_handling.md) — შეცდომების დამუშავების სტანდარტები და რეკომენდაციები
 - [promise_pattern.md](promise_pattern.md) — ასინქრონული ოპერაციების მართვის პატერნი (Promise)
 - [task_pool_pattern.md](task_pool_pattern.md) — რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)
+- [logging_colors.md](logging_colors.md) — ლოგირების ფერთა სქემის კონვენცია
 
 ---
 

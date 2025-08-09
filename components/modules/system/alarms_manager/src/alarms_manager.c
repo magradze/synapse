@@ -28,7 +28,7 @@
 #include <stdlib.h>
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("ALARMS_MANAGER");
+DEFINE_COMPONENT_TAG("ALARMS_MANAGER", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Private Definitions ---
 #define MAX_ALARM_RULES                 CONFIG_ALARMS_MANAGER_MAX_RULES

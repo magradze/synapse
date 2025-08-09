@@ -22,7 +22,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("TOF_SENSOR");
+DEFINE_COMPONENT_TAG("TOF_SENSOR", SYNAPSE_LOG_COLOR_GREEN);
 
 // --- VL6180X Register Definitions ---
 #define VL6180X_I2C_ADDR 0x29

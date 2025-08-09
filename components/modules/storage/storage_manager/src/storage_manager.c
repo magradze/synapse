@@ -35,7 +35,7 @@
 #endif
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("STORAGE_MANAGER");
+DEFINE_COMPONENT_TAG("STORAGE_MANAGER", SYNAPSE_LOG_COLOR_YELLOW);
 
 // --- Private Data Structure ---
 

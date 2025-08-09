@@ -18,7 +18,7 @@
 #include "cmd_router_interface.h"
 #include "sn74hc595n_writer_interface.h"
 
-DEFINE_COMPONENT_TAG("RGB_LED_INDICATOR");
+DEFINE_COMPONENT_TAG("RGB_LED_INDICATOR", SYNAPSE_LOG_COLOR_GREEN);
 
 #define COMMAND_QUEUE_LENGTH 10
 #define TASK_STACK_SIZE 3072

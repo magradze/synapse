@@ -21,7 +21,7 @@
 #include "esp_random.h"
 #include <inttypes.h>
 
-DEFINE_COMPONENT_TAG("TIMER_TEST");
+DEFINE_COMPONENT_TAG("TIMER_TEST", SYNAPSE_LOG_COLOR_RED);
 
 // --- Event Names ---
 #define EVT_TOGGLE_LED_COLOR "EVT_TOGGLE_LED_COLOR"

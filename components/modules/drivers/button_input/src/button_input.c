@@ -21,7 +21,7 @@
 #include "freertos/queue.h"
 #include <stddef.h> // For offsetof
 
-DEFINE_COMPONENT_TAG("BUTTON_INPUT");
+DEFINE_COMPONENT_TAG("BUTTON_INPUT", SYNAPSE_LOG_COLOR_MAGENTA);
 
 #define MAX_BUTTONS_PER_INSTANCE 16
 #define DEBOUNCE_TIME_MS 50

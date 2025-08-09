@@ -12,7 +12,7 @@
 #include "display_driver_interface.h"
 #include <string.h>
 
-DEFINE_COMPONENT_TAG("UI_MENU");
+DEFINE_COMPONENT_TAG("UI_MENU", SYNAPSE_LOG_COLOR_YELLOW);
 
 #define START_Y 16
 #define LINE_HEIGHT 12

@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-DEFINE_COMPONENT_TAG("SEC_STATUS");
+DEFINE_COMPONENT_TAG("SEC_STATUS", SYNAPSE_LOG_COLOR_BRIGHT_MAGENTA);
 
 // =========================================================================
 //                      Private Data & API Implementation

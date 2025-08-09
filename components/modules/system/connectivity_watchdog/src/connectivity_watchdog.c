@@ -26,7 +26,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("CONN_WATCHDOG");
+DEFINE_COMPONENT_TAG("CONN_WATCHDOG", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Internal Event Names ---
 #define EVT_CONN_WD_GRACE_PERIOD_END "CONN_WD_GRACE_PERIOD_END"

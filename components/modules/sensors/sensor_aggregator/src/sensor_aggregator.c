@@ -29,7 +29,7 @@
 #include <dirent.h>   // For opendir(), readdir(), closedir()
 #include "esp_vfs.h"
 
-DEFINE_COMPONENT_TAG("SENSOR_AGGR");
+DEFINE_COMPONENT_TAG("SENSOR_AGGR", SYNAPSE_LOG_COLOR_YELLOW);
 
 // --- Internal Definitions & Structures ---
 

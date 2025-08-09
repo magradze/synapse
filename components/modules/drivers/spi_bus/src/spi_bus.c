@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("SPI_BUS");
+DEFINE_COMPONENT_TAG("SPI_BUS", SYNAPSE_LOG_COLOR_MAGENTA);
 
 // Private Data Structure
 typedef struct

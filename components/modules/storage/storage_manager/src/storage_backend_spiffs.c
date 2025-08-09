@@ -17,7 +17,7 @@
 #include <dirent.h>
 #include <errno.h> // ★★★ შესწორება: დაემატა errno.h ★★★
 
-DEFINE_COMPONENT_TAG("BACKEND_SPIFFS");
+DEFINE_COMPONENT_TAG("BACKEND_SPIFFS", SYNAPSE_LOG_COLOR_YELLOW);
 
 #define SPIFFS_PATH_MAX 256
 #define INT_BUFFER_SIZE 12

@@ -24,7 +24,7 @@
 module_create_fn_t synapse_module_factory_get(const char *module_type);
 #endif
 
-DEFINE_COMPONENT_TAG("MODULE_FACTORY");
+DEFINE_COMPONENT_TAG("MODULE_FACTORY", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- Public API იმპლემენტაცია ---
 

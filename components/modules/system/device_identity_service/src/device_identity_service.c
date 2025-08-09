@@ -33,7 +33,7 @@
 #include <stdlib.h>
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("DEVICE_IDENTITY");
+DEFINE_COMPONENT_TAG("DEVICE_IDENTITY", SYNAPSE_LOG_COLOR_BLUE);
 
 /**
  * @internal
@@ -198,7 +198,7 @@ static esp_err_t device_identity_init(module_t *self)
 }
 
 static esp_err_t device_identity_start(module_t *self) {
-    ESP_LOGE(TAG, "🔥 START CALLED for Device Identity!");
+    ESP_LOGI(TAG, "Device Identity Service start routine invoked.");
     return ESP_OK;
 }
 

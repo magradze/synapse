@@ -38,7 +38,7 @@
 #include "nvs_flash.h"
 
 // --- Component Tag ---
-DEFINE_COMPONENT_TAG("CMD_ROUTER");
+DEFINE_COMPONENT_TAG("CMD_ROUTER", SYNAPSE_LOG_COLOR_YELLOW);
 
 // --- Type Definitions ---
 

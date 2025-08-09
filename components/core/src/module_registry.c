@@ -19,7 +19,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("MODULE_REGISTRY");
+DEFINE_COMPONENT_TAG("MODULE_REGISTRY", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- კომპონენტის შიდა ცვლადები ---
 

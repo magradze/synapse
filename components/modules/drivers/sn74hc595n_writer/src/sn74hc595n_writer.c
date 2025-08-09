@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("SN74HC595N_WRITER");
+DEFINE_COMPONENT_TAG("SN74HC595N_WRITER", SYNAPSE_LOG_COLOR_MAGENTA);
 
 typedef struct
 {

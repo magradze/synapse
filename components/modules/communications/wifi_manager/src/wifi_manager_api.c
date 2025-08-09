@@ -7,7 +7,7 @@
  */
 #include "wifi_manager_internal.h"
 
-DEFINE_COMPONENT_TAG("WIFI_MANAGER_API");
+DEFINE_COMPONENT_TAG("WIFI_MANAGER_API", SYNAPSE_LOG_COLOR_CYAN);
 
 // --- Service API Implementation ---
 

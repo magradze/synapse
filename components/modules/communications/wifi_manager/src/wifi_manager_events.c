@@ -7,7 +7,7 @@
  */
 #include "wifi_manager_internal.h"
 
-DEFINE_COMPONENT_TAG("WIFI_MANAGER_EVENTS");
+DEFINE_COMPONENT_TAG("WIFI_MANAGER_EVENTS", SYNAPSE_LOG_COLOR_CYAN);
 
 void wifi_manager_handle_event(module_t *self, const char *event_name, void *event_data)
 {

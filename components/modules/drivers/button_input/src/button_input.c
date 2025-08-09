@@ -308,47 +308,73 @@ static void button_input_deinit(module_t *self)
 
 static esp_err_t parse_config(const cJSON *config_node, button_input_private_data_t *private_data)
 {
-    if (!config_node)
+    if (!config_node || !private_data)
+    {
         return ESP_ERR_INVALID_ARG;
+    }
 
-    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
+    // --- Set default values ---
+    private_data->control_type = CONTROL_TYPE_GPIO; // Default control type
 
-    const cJSON *control_type_node = cJSON_GetObjectItem(config_node, "control_type");
-    if (cJSON_IsString(control_type_node) && strcmp(control_type_node->valuestring, "expander") == 0)
+    // --- Parse main config values ---
+    synapse_config_get_string_from_node(TAG, config_node, "instance_name",
+                                        private_data->instance_name, sizeof(private_data->instance_name));
+
+    char control_type_str[16] = "gpio";
+    synapse_config_get_string_from_node(TAG, config_node, "control_type",
+                                        control_type_str, sizeof(control_type_str));
+    if (strcmp(control_type_str, "expander") == 0)
     {
         private_data->control_type = CONTROL_TYPE_EXPANDER;
     }
-    else
-    {
-        private_data->control_type = CONTROL_TYPE_GPIO;
-    }
 
+    // --- Parse the "buttons" array ---
     const cJSON *buttons_array = cJSON_GetObjectItem(config_node, "buttons");
     if (!cJSON_IsArray(buttons_array))
+    {
+        ESP_LOGE(TAG, "Config error for '%s': 'buttons' array is missing or invalid.", private_data->instance_name);
         return ESP_ERR_INVALID_ARG;
+    }
 
     private_data->button_count = 0;
     const cJSON *button_node;
     cJSON_ArrayForEach(button_node, buttons_array)
     {
         if (private_data->button_count >= MAX_BUTTONS_PER_INSTANCE)
-            break;
-
-        const cJSON *btn_name = cJSON_GetObjectItem(button_node, "name");
-        const cJSON *btn_pin = (private_data->control_type == CONTROL_TYPE_GPIO)
-                                   ? cJSON_GetObjectItem(button_node, "gpio_pin")
-                                   : cJSON_GetObjectItem(button_node, "expander_pin");
-        const cJSON *btn_level = cJSON_GetObjectItem(button_node, "active_level");
-
-        if (cJSON_IsString(btn_name) && cJSON_IsNumber(btn_pin))
         {
-            button_config_t *btn = &private_data->buttons[private_data->button_count];
-            snprintf(btn->name, sizeof(btn->name), "%s", btn_name->valuestring);
-            btn->pin = btn_pin->valueint;
-            btn->active_level = cJSON_IsNumber(btn_level) ? btn_level->valueint : 0;
+            ESP_LOGW(TAG, "Reached maximum button limit (%d). Ignoring further buttons.", MAX_BUTTONS_PER_INSTANCE);
+            break;
+        }
+
+        button_config_t *btn = &private_data->buttons[private_data->button_count];
+
+        // Set defaults for each button
+        btn->active_level = 0;
+
+        // Use utils to parse each button's properties
+        bool name_ok = synapse_config_get_string_from_node(TAG, button_node, "name", btn->name, sizeof(btn->name));
+
+        const char *pin_key = (private_data->control_type == CONTROL_TYPE_GPIO) ? "gpio_pin" : "expander_pin";
+        bool pin_ok = synapse_config_get_int_from_node(TAG, button_node, pin_key, (int *)&btn->pin);
+
+        synapse_config_get_int_from_node(TAG, button_node, "active_level", (int *)&btn->active_level);
+
+        // Only add the button if the required fields were found
+        if (name_ok && pin_ok)
+        {
             private_data->button_count++;
         }
+        else
+        {
+            ESP_LOGE(TAG, "Skipping invalid button entry in config for '%s'. 'name' and '%s' are required.",
+                     private_data->instance_name, pin_key);
+        }
     }
+
+    if (private_data->button_count == 0)
+    {
+        ESP_LOGW(TAG, "No valid buttons configured for instance '%s'.", private_data->instance_name);
+    }
+
     return ESP_OK;
 }

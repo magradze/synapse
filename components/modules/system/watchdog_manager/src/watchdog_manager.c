@@ -419,38 +419,39 @@ static void watchdog_task(void *pvParameters)
     }
 }
 
-/**
- * @internal
- * @brief Parses the module's configuration from the provided cJSON object.
- */
 static esp_err_t parse_config(const cJSON *config, watchdog_manager_private_data_t *private_data)
 {
-    if (!private_data)
+    if (!private_data || !config)
+    {
         return ESP_ERR_INVALID_ARG;
+    }
 
+    // --- Step 1: Set default values from Kconfig ---
     private_data->check_interval_ms = CONFIG_WATCHDOG_MANAGER_CHECK_INTERVAL_MS;
     private_data->heartbeat_timeout_ms = CONFIG_WATCHDOG_MANAGER_HEARTBEAT_TIMEOUT_MS;
 
-    if (config)
+    // --- Step 2: Get the main "config" node ---
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    if (config_node)
     {
-        const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-        if (cJSON_IsObject(config_node))
-        {
-            const cJSON *check_interval = cJSON_GetObjectItem(config_node, "check_interval_ms");
-            if (cJSON_IsNumber(check_interval))
-                private_data->check_interval_ms = check_interval->valueint;
+        // --- Step 3: Use utility functions to override defaults if present ---
+        synapse_config_get_int_from_node(TAG, config_node, "check_interval_ms",
+                                         (int *)&private_data->check_interval_ms);
 
-            const cJSON *hb_timeout = cJSON_GetObjectItem(config_node, "heartbeat_timeout_ms");
-            if (cJSON_IsNumber(hb_timeout))
-                private_data->heartbeat_timeout_ms = hb_timeout->valueint;
-        }
+        synapse_config_get_int_from_node(TAG, config_node, "heartbeat_timeout_ms",
+                                         (int *)&private_data->heartbeat_timeout_ms);
     }
 
+    ESP_LOGI(TAG, "Config parsed: Check Interval=%" PRIu32 "ms, Heartbeat Timeout=%" PRIu32 "ms",
+             private_data->check_interval_ms, private_data->heartbeat_timeout_ms);
+
+    // --- Step 4: Validate the final configuration ---
     if (private_data->check_interval_ms >= (CONFIG_ESP_TASK_WDT_TIMEOUT_S * 1000))
     {
         ESP_LOGE(TAG, "Configuration error: check_interval_ms (%" PRIu32 ") must be less than TWDT timeout (%d s)!",
                  private_data->check_interval_ms, CONFIG_ESP_TASK_WDT_TIMEOUT_S);
         return ESP_ERR_INVALID_ARG;
     }
+
     return ESP_OK;
 }

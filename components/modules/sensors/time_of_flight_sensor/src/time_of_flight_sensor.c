@@ -240,24 +240,46 @@ static esp_err_t publish_sensor_value(const char *event_name, double value)
 
 static esp_err_t parse_config(const cJSON *config, tof_private_data_t *private_data)
 {
-    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    if (!cJSON_IsObject(config_node)) return ESP_ERR_INVALID_ARG;
+    if (!private_data || !config)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
 
-    // Set defaults from Kconfig
-    strncpy(private_data->instance_name, CONFIG_TOF_SENSOR_DEFAULT_INSTANCE_NAME, sizeof(private_data->instance_name) - 1);
-    strncpy(private_data->i2c_bus_name, CONFIG_TOF_SENSOR_DEFAULT_I2C_BUS, sizeof(private_data->i2c_bus_name) - 1);
+    // --- Step 1: Set default values from Kconfig ---
+    synapse_safe_strncpy(private_data->instance_name, CONFIG_TOF_SENSOR_DEFAULT_INSTANCE_NAME, sizeof(private_data->instance_name));
+    synapse_safe_strncpy(private_data->i2c_bus_name, CONFIG_TOF_SENSOR_DEFAULT_I2C_BUS, sizeof(private_data->i2c_bus_name));
     private_data->update_interval_ms = CONFIG_TOF_SENSOR_DEFAULT_UPDATE_INTERVAL * 1000;
-    private_data->i2c_address = VL6180X_I2C_ADDR;
+    private_data->i2c_address = VL6180X_I2C_ADDR; // This seems to be a fixed hardware address
 
-    // Override with JSON values
-    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    if (cJSON_IsString(name_node)) strncpy(private_data->instance_name, name_node->valuestring, sizeof(private_data->instance_name) - 1);
+    // --- Step 2: Get the main "config" node ---
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    if (!config_node)
+    {
+        ESP_LOGW(TAG, "No 'config' object in JSON. Using default values from Kconfig.");
+        // Log the final values for clarity
+        ESP_LOGI(TAG, "Config parsed for '%s': Interval=%lums, I2C Bus='%s'",
+                 private_data->instance_name, private_data->update_interval_ms, private_data->i2c_bus_name);
+        return ESP_OK;
+    }
 
-    const cJSON *bus_node = cJSON_GetObjectItem(config_node, "i2c_bus_name");
-    if (cJSON_IsString(bus_node)) strncpy(private_data->i2c_bus_name, bus_node->valuestring, sizeof(private_data->i2c_bus_name) - 1);
+    // --- Step 3: Use utility functions to override defaults ---
+    synapse_config_get_string_from_node(TAG, config_node, "instance_name",
+                                        private_data->instance_name, sizeof(private_data->instance_name));
 
-    const cJSON *interval_node = cJSON_GetObjectItem(config_node, "update_interval_sec");
-    if (cJSON_IsNumber(interval_node)) private_data->update_interval_ms = interval_node->valueint * 1000;
+    synapse_config_get_string_from_node(TAG, config_node, "i2c_bus_name",
+                                        private_data->i2c_bus_name, sizeof(private_data->i2c_bus_name));
+
+    int interval_sec = private_data->update_interval_ms / 1000;
+    if (synapse_config_get_int_from_node(TAG, config_node, "update_interval_sec", &interval_sec))
+    {
+        private_data->update_interval_ms = interval_sec * 1000;
+    }
+
+    // The I2C address is typically fixed for this sensor, but we can make it configurable if needed.
+    // synapse_config_get_int_from_node(TAG, config_node, "i2c_address", (int*)&private_data->i2c_address);
+
+    ESP_LOGI(TAG, "Config parsed for '%s': Interval=%lums, I2C Bus='%s'",
+             private_data->instance_name, private_data->update_interval_ms, private_data->i2c_bus_name);
 
     return ESP_OK;
 }

@@ -12,6 +12,7 @@ set(SRCS
     "src/service_locator.c"
     "src/system_manager.c"
     "src/task_pool_manager.c"
+    "src/synapse_utils.c"
 )
 
 # --- Synapse Build Automation ---

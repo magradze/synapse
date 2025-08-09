@@ -296,21 +296,27 @@ static void ota_task(void *pvParameters)
 
 static esp_err_t parse_config(const cJSON *config, ota_update_manager_private_data_t *p_data)
 {
-    if (!p_data) return ESP_ERR_INVALID_ARG;
-
-    // Default მნიშვნელობები
-    p_data->pre_check_min_heap_kb = 80;
-
-    if (!config) return ESP_OK;
-
-    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    if (cJSON_IsObject(config_node))
+    if (!p_data || !config)
     {
-        const cJSON *heap_kb = cJSON_GetObjectItem(config_node, "pre_check_min_heap_kb");
-        if (cJSON_IsNumber(heap_kb))
-        {
-            p_data->pre_check_min_heap_kb = heap_kb->valueint;
-        }
+        return ESP_ERR_INVALID_ARG;
     }
+
+    // --- Step 1: Set default values ---
+    p_data->pre_check_min_heap_kb = 80; // Default minimum required heap in KB
+
+    // --- Step 2: Get the main "config" node ---
+    const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    if (!config_node)
+    {
+        ESP_LOGD(TAG, "No 'config' object in JSON. Using default values.");
+        return ESP_OK;
+    }
+
+    // --- Step 3: Use utility function to override default if present ---
+    synapse_config_get_int_from_node(TAG, config_node, "pre_check_min_heap_kb",
+                                     (int *)&p_data->pre_check_min_heap_kb);
+
+    ESP_LOGI(TAG, "Config parsed: OTA pre-check min heap is %" PRIu32 " KB", p_data->pre_check_min_heap_kb);
+
     return ESP_OK;
 }

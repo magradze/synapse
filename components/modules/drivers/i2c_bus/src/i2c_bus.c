@@ -219,29 +219,41 @@ static void i2c_bus_deinit(module_t *self)
 
 static esp_err_t parse_config(const cJSON *config_node, i2c_bus_private_data_t *private_data)
 {
-    if (!config_node)
-        return ESP_ERR_INVALID_ARG;
-
-    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    const cJSON *port_node = cJSON_GetObjectItem(config_node, "port");
-    const cJSON *sda_node = cJSON_GetObjectItem(config_node, "sda_pin");
-    const cJSON *scl_node = cJSON_GetObjectItem(config_node, "scl_pin");
-    const cJSON *speed_node = cJSON_GetObjectItem(config_node, "clk_speed_hz");
-    const cJSON *scan_node = cJSON_GetObjectItem(config_node, "scan_on_init");
-
-    if (!cJSON_IsString(name_node) || !cJSON_IsNumber(port_node) ||
-        !cJSON_IsNumber(sda_node) || !cJSON_IsNumber(scl_node) || !cJSON_IsNumber(speed_node))
+    if (!config_node || !private_data)
     {
-        ESP_LOGE(TAG, "Required config parameters are missing or have incorrect types.");
         return ESP_ERR_INVALID_ARG;
     }
 
-    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
-    private_data->port = (i2c_port_t)port_node->valueint;
-    private_data->sda_pin = (gpio_num_t)sda_node->valueint;
-    private_data->scl_pin = (gpio_num_t)scl_node->valueint;
-    private_data->clk_speed_hz = (uint32_t)speed_node->valueint;
-    private_data->scan_on_init = cJSON_IsTrue(scan_node); // Handles NULL or false
+    // --- Set default values ---
+    // Most parameters are required, but we can set a default for scan_on_init
+    private_data->scan_on_init = false;
+
+    // --- Use utility functions to parse values ---
+    bool name_ok = synapse_config_get_string_from_node(TAG, config_node, "instance_name",
+                                                       private_data->instance_name, sizeof(private_data->instance_name));
+
+    bool port_ok = synapse_config_get_int_from_node(TAG, config_node, "port",
+                                                    (int *)&private_data->port);
+
+    bool sda_ok = synapse_config_get_int_from_node(TAG, config_node, "sda_pin",
+                                                   (int *)&private_data->sda_pin);
+
+    bool scl_ok = synapse_config_get_int_from_node(TAG, config_node, "scl_pin",
+                                                   (int *)&private_data->scl_pin);
+
+    bool speed_ok = synapse_config_get_int_from_node(TAG, config_node, "clk_speed_hz",
+                                                     (int *)&private_data->clk_speed_hz);
+
+    // Optional parameter
+    synapse_config_get_bool_from_node(TAG, config_node, "scan_on_init",
+                                      &private_data->scan_on_init);
+
+    // --- Validate that all required parameters were found ---
+    if (!name_ok || !port_ok || !sda_ok || !scl_ok || !speed_ok)
+    {
+        ESP_LOGE(TAG, "One or more required config parameters are missing for I2C bus.");
+        return ESP_ERR_INVALID_ARG;
+    }
 
     return ESP_OK;
 }

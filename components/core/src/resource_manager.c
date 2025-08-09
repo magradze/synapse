@@ -27,7 +27,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 
-DEFINE_COMPONENT_TAG("RESOURCE_MANAGER");
+DEFINE_COMPONENT_TAG("RESOURCE_MANAGER", SYNAPSE_LOG_COLOR_BLUE);
 
 #define MAX_RESOURCES_PER_POOL 64 // Bitmap-ის ზომიდან გამომდინარე (uint64_t)
 

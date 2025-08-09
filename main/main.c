@@ -8,7 +8,7 @@
 #include "system_manager.h"
 #include "logging.h"
 
-DEFINE_COMPONENT_TAG("MAIN");
+DEFINE_COMPONENT_TAG("MAIN", SYNAPSE_LOG_COLOR_BRIGHT_BLUE);
 
 void app_main(void)
 {

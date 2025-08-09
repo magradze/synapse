@@ -15,7 +15,7 @@
 #include "freertos/semphr.h"
 #include "base_module.h"
 
-DEFINE_COMPONENT_TAG("MODULE_HELPERS");
+DEFINE_COMPONENT_TAG("MODULE_HELPERS", SYNAPSE_LOG_COLOR_BLUE);
 
 esp_err_t synapse_module_helper_simple_enable(struct module_t *module)
 {

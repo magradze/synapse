@@ -19,7 +19,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-DEFINE_COMPONENT_TAG("EVENT_BUS");
+DEFINE_COMPONENT_TAG("EVENT_BUS", SYNAPSE_LOG_COLOR_BLUE);
 
 // --- შიდა სტრუქტურები ---
 

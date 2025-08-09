@@ -350,45 +350,44 @@ static esp_err_t api_unregister_custom_check(const char *check_name)
 static esp_err_t parse_config(const cJSON *config, health_monitor_private_data_t *private_data)
 {
     if (!private_data || !config)
+    {
         return ESP_ERR_INVALID_ARG;
+    }
 
-    // Default მნიშვნელობები
+    // --- Step 1: Set default values ---
     private_data->thresholds.check_interval_sec = 60;
     private_data->thresholds.min_free_heap_kb = 20;
     private_data->thresholds.min_task_stack_hwm_bytes = 256;
-    strncpy(private_data->instance_name, "health_monitor", sizeof(private_data->instance_name) - 1);
+    // Default instance_name is set from Kconfig in _create, but we can have a fallback.
+    synapse_safe_strncpy(private_data->instance_name, "health_monitor", sizeof(private_data->instance_name));
 
+    // --- Step 2: Get the main "config" node ---
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (!config_node)
     {
-        ESP_LOGW(TAG, "No 'config' object found. Using default values.");
-        return ESP_OK;
+        ESP_LOGW(TAG, "No 'config' object in JSON. Using default values for everything.");
+        return ESP_OK; // Not a fatal error, defaults will be used.
     }
 
-    // --- ახალი: ვკითხულობთ instance_name-ს ---
-    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    if (cJSON_IsString(name_node))
-    {
-        strncpy(private_data->instance_name, name_node->valuestring, sizeof(private_data->instance_name) - 1);
-    }
+    // --- Step 3: Use utility functions to override defaults ---
+    synapse_config_get_string_from_node(TAG, config_node, "instance_name",
+                                        private_data->instance_name, sizeof(private_data->instance_name));
 
-    const cJSON *interval = cJSON_GetObjectItem(config_node, "check_interval_sec");
-    if (cJSON_IsNumber(interval))
-        private_data->thresholds.check_interval_sec = interval->valueint;
+    synapse_config_get_int_from_node(TAG, config_node, "check_interval_sec",
+                                     (int *)&private_data->thresholds.check_interval_sec);
 
     const cJSON *thresholds_node = cJSON_GetObjectItem(config_node, "thresholds");
     if (cJSON_IsObject(thresholds_node))
     {
-        const cJSON *heap = cJSON_GetObjectItem(thresholds_node, "min_free_heap_kb");
-        if (cJSON_IsNumber(heap))
-            private_data->thresholds.min_free_heap_kb = heap->valueint;
+        synapse_config_get_int_from_node(TAG, thresholds_node, "min_free_heap_kb",
+                                         (int *)&private_data->thresholds.min_free_heap_kb);
 
-        const cJSON *stack = cJSON_GetObjectItem(thresholds_node, "min_task_stack_hwm_bytes");
-        if (cJSON_IsNumber(stack))
-            private_data->thresholds.min_task_stack_hwm_bytes = stack->valueint;
+        synapse_config_get_int_from_node(TAG, thresholds_node, "min_task_stack_hwm_bytes",
+                                         (int *)&private_data->thresholds.min_task_stack_hwm_bytes);
     }
 
-    ESP_LOGI(TAG, "Config parsed: Interval=%u, MinHeap=%uKB, MinStackHWM=%uB",
+    ESP_LOGI(TAG, "Config parsed for '%s': Interval=%us, MinHeap=%ukB, MinStackHWM=%uB",
+             private_data->instance_name,
              (unsigned int)private_data->thresholds.check_interval_sec,
              (unsigned int)private_data->thresholds.min_free_heap_kb,
              (unsigned int)private_data->thresholds.min_task_stack_hwm_bytes);

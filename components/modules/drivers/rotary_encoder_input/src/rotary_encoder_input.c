@@ -20,12 +20,14 @@ DEFINE_COMPONENT_TAG("ROTARY_ENCODER", SYNAPSE_LOG_COLOR_MAGENTA);
 
 // --- Internal Data Structures ---
 
-typedef enum {
+typedef enum
+{
     CONTROL_TYPE_GPIO,
     CONTROL_TYPE_EXPANDER
 } control_type_t;
 
-typedef struct {
+typedef struct
+{
     // --- Module Identification & Configuration ---
     module_t *self;
     char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
@@ -68,11 +70,13 @@ module_t *rotary_encoder_input_create(const cJSON *config)
 {
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
     rotary_private_data_t *private_data = (rotary_private_data_t *)calloc(1, sizeof(rotary_private_data_t));
-    if (!module || !private_data) {
+    if (!module || !private_data)
+    {
         ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
         free(private_data);
-        if (config) cJSON_Delete((cJSON *)config);
+        if (config)
+            cJSON_Delete((cJSON *)config);
         return NULL;
     }
 
@@ -89,7 +93,8 @@ module_t *rotary_encoder_input_create(const cJSON *config)
     private_data->self = module; // Store back-pointer for the job context
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    if (parse_config(config_node, private_data) != ESP_OK) {
+    if (parse_config(config_node, private_data) != ESP_OK)
+    {
         ESP_LOGE(TAG, "Configuration parsing failed");
         rotary_encoder_input_deinit(module);
         return NULL;
@@ -113,7 +118,8 @@ static esp_err_t rotary_encoder_input_init(module_t *self)
     rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing Rotary Encoder module '%s'", self->name);
 
-    if (private_data->control_type == CONTROL_TYPE_GPIO) {
+    if (private_data->control_type == CONTROL_TYPE_GPIO)
+    {
         synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
         synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
         synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_sw, self->name);
@@ -126,9 +132,12 @@ static esp_err_t rotary_encoder_input_init(module_t *self)
         };
         io_conf.pin_bit_mask = (1ULL << private_data->pin_a) | (1ULL << private_data->pin_b) | (1ULL << private_data->pin_sw);
         gpio_config(&io_conf);
-    } else { // Expander Mode
+    }
+    else
+    { // Expander Mode
         private_data->expander_handle = (mcp23017_handle_t *)synapse_service_get(private_data->expander_service_name);
-        if (!private_data->expander_handle) {
+        if (!private_data->expander_handle)
+        {
             ESP_LOGE(TAG, "Expander service '%s' not found!", private_data->expander_service_name);
             return ESP_ERR_NOT_FOUND;
         }
@@ -172,7 +181,8 @@ static esp_err_t rotary_encoder_input_start(module_t *self)
 
 static void rotary_encoder_input_deinit(module_t *self)
 {
-    if (!self) return;
+    if (!self)
+        return;
     rotary_private_data_t *private_data = (rotary_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Deinitializing '%s'.", self->name);
 
@@ -184,7 +194,8 @@ static void rotary_encoder_input_deinit(module_t *self)
             private_data->job_handle = NULL;
         }
 
-        if (private_data->control_type == CONTROL_TYPE_GPIO) {
+        if (private_data->control_type == CONTROL_TYPE_GPIO)
+        {
             synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_a, self->name);
             synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_b, self->name);
             synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->pin_sw, self->name);
@@ -244,11 +255,12 @@ static void rotary_poll_job(void *user_context)
 static void publish_button_event(const char *button_name)
 {
     synapse_button_payload_t *payload = calloc(1, sizeof(synapse_button_payload_t));
-    if (!payload) {
+    if (!payload)
+    {
         ESP_LOGE(TAG, "Failed to allocate memory for button payload");
         return;
     }
-    
+
     snprintf(payload->button_name, sizeof(payload->button_name), "%s", button_name);
 
     event_data_wrapper_t *wrapper;
@@ -267,55 +279,59 @@ static void publish_button_event(const char *button_name)
 
 static esp_err_t parse_config(const cJSON *config_node, rotary_private_data_t *private_data)
 {
-    if (!config_node) return ESP_ERR_INVALID_ARG;
-
-    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    if (!cJSON_IsString(name_node)) return ESP_ERR_INVALID_ARG;
-    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
-
-    const cJSON *control_type_node = cJSON_GetObjectItem(config_node, "control_type");
-    if (cJSON_IsString(control_type_node) && strcmp(control_type_node->valuestring, "expander") == 0) {
-        private_data->control_type = CONTROL_TYPE_EXPANDER;
-        const cJSON *expander_service_node = cJSON_GetObjectItem(config_node, "expander_service");
-        if (!cJSON_IsString(expander_service_node)) {
-            ESP_LOGE(TAG, "'expander_service' is required for expander control type");
-            return ESP_ERR_INVALID_ARG;
-        }
-        snprintf(private_data->expander_service_name, sizeof(private_data->expander_service_name), "%s", expander_service_node->valuestring);
-    } else {
-        private_data->control_type = CONTROL_TYPE_GPIO;
-    }
-
-    const cJSON *pin_a_node = cJSON_GetObjectItem(config_node, "pin_a");
-    const cJSON *pin_b_node = cJSON_GetObjectItem(config_node, "pin_b");
-    const cJSON *pin_sw_node = cJSON_GetObjectItem(config_node, "pin_sw");
-    if (!cJSON_IsNumber(pin_a_node) || !cJSON_IsNumber(pin_b_node) || !cJSON_IsNumber(pin_sw_node)) {
-        ESP_LOGE(TAG, "pin_a, pin_b, and pin_sw are required numeric parameters");
+    if (!config_node || !private_data)
+    {
         return ESP_ERR_INVALID_ARG;
     }
-    private_data->pin_a = pin_a_node->valueint;
-    private_data->pin_b = pin_b_node->valueint;
-    private_data->pin_sw = pin_sw_node->valueint;
 
-    const cJSON *btn_name_node = cJSON_GetObjectItem(config_node, "button_name");
-    if (cJSON_IsString(btn_name_node)) {
-        snprintf(private_data->button_name, sizeof(private_data->button_name), "%s", btn_name_node->valuestring);
-    } else {
-        snprintf(private_data->button_name, sizeof(private_data->button_name), "OK");
+    // --- Step 1: Set default values ---
+    private_data->control_type = CONTROL_TYPE_GPIO;
+    synapse_safe_strncpy(private_data->button_name, "OK", sizeof(private_data->button_name));
+    private_data->active_level = 0;
+    private_data->polling_interval_ms = CONFIG_ROTARY_ENCODER_POLLING_MS;
+
+    // --- Step 2: Parse main config values ---
+    bool name_ok = synapse_config_get_string_from_node(TAG, config_node, "instance_name",
+                                                       private_data->instance_name, sizeof(private_data->instance_name));
+
+    char control_type_str[16] = "gpio";
+    synapse_config_get_string_from_node(TAG, config_node, "control_type",
+                                        control_type_str, sizeof(control_type_str));
+    if (strcmp(control_type_str, "expander") == 0)
+    {
+        private_data->control_type = CONTROL_TYPE_EXPANDER;
     }
 
-    const cJSON *level_node = cJSON_GetObjectItem(config_node, "active_level");
-    private_data->active_level = cJSON_IsNumber(level_node) ? level_node->valueint : 0;
+    // --- Step 3: Parse pin numbers ---
+    bool pin_a_ok = synapse_config_get_int_from_node(TAG, config_node, "pin_a", (int *)&private_data->pin_a);
+    bool pin_b_ok = synapse_config_get_int_from_node(TAG, config_node, "pin_b", (int *)&private_data->pin_b);
+    bool pin_sw_ok = synapse_config_get_int_from_node(TAG, config_node, "pin_sw", (int *)&private_data->pin_sw);
 
-    // --- ახალი: ვკითხულობთ polling interval-ს ---
-    const cJSON *interval_node = cJSON_GetObjectItem(config_node, "polling_interval_ms");
-    if (cJSON_IsNumber(interval_node))
+    // --- Step 4: Parse optional parameters ---
+    synapse_config_get_string_from_node(TAG, config_node, "button_name",
+                                        private_data->button_name, sizeof(private_data->button_name));
+
+    synapse_config_get_int_from_node(TAG, config_node, "active_level", (int *)&private_data->active_level);
+
+    synapse_config_get_int_from_node(TAG, config_node, "polling_interval_ms", (int *)&private_data->polling_interval_ms);
+
+    // --- Step 5: Validate required parameters ---
+    if (!name_ok || !pin_a_ok || !pin_b_ok || !pin_sw_ok)
     {
-        private_data->polling_interval_ms = interval_node->valueint;
+        ESP_LOGE(TAG, "Required config parameters (instance_name, pin_a, pin_b, pin_sw) are missing.");
+        return ESP_ERR_INVALID_ARG;
     }
-    else
+
+    // Special validation for expander mode
+    if (private_data->control_type == CONTROL_TYPE_EXPANDER)
     {
-        private_data->polling_interval_ms = CONFIG_ROTARY_ENCODER_POLLING_MS; // ვიღებთ Kconfig-იდან
+        bool service_name_ok = synapse_config_get_string_from_node(TAG, config_node, "expander_service",
+                                                                   private_data->expander_service_name, sizeof(private_data->expander_service_name));
+        if (!service_name_ok)
+        {
+            ESP_LOGE(TAG, "'expander_service' is required for expander control type.");
+            return ESP_ERR_INVALID_ARG;
+        }
     }
 
     return ESP_OK;

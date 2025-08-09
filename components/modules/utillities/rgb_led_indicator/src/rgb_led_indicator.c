@@ -285,30 +285,38 @@ static void rgb_led_indicator_deinit(module_t *self)
     ESP_LOGI(TAG, "Module deinitialized successfully.");
 }
 
-static esp_err_t parse_config(const cJSON *config, rgb_led_private_data_t *private_data)
+static esp_err_t parse_config(const cJSON *config_node, rgb_led_private_data_t *private_data)
 {
-    if (!config)
-        return ESP_ERR_INVALID_ARG;
-    const cJSON *sr_service = cJSON_GetObjectItem(config, "sr_writer_service");
-    const cJSON *red_pin = cJSON_GetObjectItem(config, "red_pin");
-    const cJSON *green_pin = cJSON_GetObjectItem(config, "green_pin");
-    const cJSON *blue_pin = cJSON_GetObjectItem(config, "blue_pin");
-
-    if (!cJSON_IsString(sr_service) || !cJSON_IsNumber(red_pin) || !cJSON_IsNumber(green_pin) || !cJSON_IsNumber(blue_pin))
+    if (!config_node || !private_data)
     {
-        ESP_LOGE(TAG, "sr_writer_service, red_pin, green_pin, and blue_pin must be specified in config");
         return ESP_ERR_INVALID_ARG;
     }
 
-    snprintf(private_data->sr_writer_service_name, sizeof(private_data->sr_writer_service_name), "%s", sr_service->valuestring);
-    private_data->red_pin = red_pin->valueint;
-    private_data->green_pin = green_pin->valueint;
-    private_data->blue_pin = blue_pin->valueint;
-    private_data->is_common_anode = cJSON_IsTrue(cJSON_GetObjectItem(config, "is_common_anode"));
+    // --- Step 1: Set default values ---
+    private_data->is_common_anode = false;
+
+    // --- Step 2: Use utility functions to parse values ---
+    bool service_ok = synapse_config_get_string_from_node(TAG, config_node, "sr_writer_service",
+                                                          private_data->sr_writer_service_name, sizeof(private_data->sr_writer_service_name));
+
+    bool red_ok = synapse_config_get_int_from_node(TAG, config_node, "red_pin", (int *)&private_data->red_pin);
+    bool green_ok = synapse_config_get_int_from_node(TAG, config_node, "green_pin", (int *)&private_data->green_pin);
+    bool blue_ok = synapse_config_get_int_from_node(TAG, config_node, "blue_pin", (int *)&private_data->blue_pin);
+
+    // Optional parameter
+    synapse_config_get_bool_from_node(TAG, config_node, "is_common_anode", &private_data->is_common_anode);
+
+    // --- Step 3: Validate that all required parameters were found ---
+    if (!service_ok || !red_ok || !green_ok || !blue_ok)
+    {
+        ESP_LOGE(TAG, "Required config parameters (sr_writer_service, red_pin, green_pin, blue_pin) are missing.");
+        return ESP_ERR_INVALID_ARG;
+    }
 
     ESP_LOGI(TAG, "Config parsed: SR_Service='%s', R=%d, G=%d, B=%d, CommonAnode=%s",
              private_data->sr_writer_service_name, private_data->red_pin, private_data->green_pin, private_data->blue_pin,
              private_data->is_common_anode ? "true" : "false");
+
     return ESP_OK;
 }
 

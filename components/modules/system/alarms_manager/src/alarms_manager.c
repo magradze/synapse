@@ -401,7 +401,10 @@ static alarm_action_type_t action_str_to_type(const char *str) {
 
 static esp_err_t parse_config(const cJSON *config, alarms_manager_private_data_t *p_data)
 {
-    if (!config || !p_data) return ESP_ERR_INVALID_ARG;
+    if (!config || !p_data)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (!config_node) {
@@ -423,26 +426,30 @@ static esp_err_t parse_config(const cJSON *config, alarms_manager_private_data_t
             break;
         }
         alarm_rule_t *rule = &p_data->rules[p_data->rule_count];
-        memset(rule, 0, sizeof(alarm_rule_t)); // Clear the rule structure
+        memset(rule, 0, sizeof(alarm_rule_t));
 
-        cJSON *name = cJSON_GetObjectItem(rule_json, "name");
-        if (cJSON_IsString(name)) strncpy(rule->name, name->valuestring, sizeof(rule->name) - 1);
+        // --- Parse Rule Properties using Utils ---
+        bool name_ok = synapse_config_get_string_from_node(TAG, rule_json, "name", rule->name, sizeof(rule->name));
+        bool trigger_ok = synapse_config_get_string_from_node(TAG, rule_json, "trigger_event", rule->trigger_event, sizeof(rule->trigger_event));
 
-        cJSON *trigger = cJSON_GetObjectItem(rule_json, "trigger_event");
-        if (cJSON_IsString(trigger)) strncpy(rule->trigger_event, trigger->valuestring, sizeof(rule->trigger_event) - 1);
+        // Optional condition properties
+        synapse_config_get_string_from_node(TAG, rule_json, "condition_payload_key", rule->condition_key, sizeof(rule->condition_key));
+        synapse_config_get_string_from_node(TAG, rule_json, "condition_payload_value", rule->condition_value, sizeof(rule->condition_value));
 
-        cJSON *cond_key = cJSON_GetObjectItem(rule_json, "condition_payload_key");
-        if (cJSON_IsString(cond_key)) strncpy(rule->condition_key, cond_key->valuestring, sizeof(rule->condition_key) - 1);
+        // Properties with defaults
+        rule->threshold_count = 1;
+        rule->time_window_sec = 0;
+        synapse_config_get_int_from_node(TAG, rule_json, "threshold_count", (int *)&rule->threshold_count);
+        synapse_config_get_int_from_node(TAG, rule_json, "time_window_sec", (int *)&rule->time_window_sec);
 
-        cJSON *cond_val = cJSON_GetObjectItem(rule_json, "condition_payload_value");
-        if (cJSON_IsString(cond_val)) strncpy(rule->condition_value, cond_val->valuestring, sizeof(rule->condition_value) - 1);
+        // A rule is only valid if it has a name and a trigger event
+        if (!name_ok || !trigger_ok)
+        {
+            ESP_LOGE(TAG, "Skipping invalid alarm rule: 'name' and 'trigger_event' are required.");
+            continue;
+        }
 
-        cJSON *thresh = cJSON_GetObjectItem(rule_json, "threshold_count");
-        rule->threshold_count = cJSON_IsNumber(thresh) ? thresh->valueint : 1;
-
-        cJSON *window = cJSON_GetObjectItem(rule_json, "time_window_sec");
-        rule->time_window_sec = cJSON_IsNumber(window) ? window->valueint : 0;
-
+        // --- Parse Actions Sub-array ---
         const cJSON *actions_array = cJSON_GetObjectItem(rule_json, "actions");
         if (cJSON_IsArray(actions_array)) {
             rule->action_count = 0;
@@ -455,39 +462,28 @@ static esp_err_t parse_config(const cJSON *config, alarms_manager_private_data_t
                 alarm_action_t *action = &rule->actions[rule->action_count];
                 memset(action, 0, sizeof(alarm_action_t));
 
-                cJSON *type = cJSON_GetObjectItem(action_json, "type");
-                if (cJSON_IsString(type)) {
-                    action->type = action_str_to_type(type->valuestring);
-                }
+                char action_type_str[32] = "";
+                synapse_config_get_string_from_node(TAG, action_json, "type", action_type_str, sizeof(action_type_str));
+                action->type = action_str_to_type(action_type_str);
 
-                cJSON *service = cJSON_GetObjectItem(action_json, "service_name");
-                if (cJSON_IsString(service)) strncpy(action->service_name, service->valuestring, sizeof(action->service_name) - 1);
+                synapse_config_get_string_from_node(TAG, action_json, "service_name", action->service_name, sizeof(action->service_name));
 
                 switch (action->type) {
                     case ALARM_ACTION_LOG_CRITICAL:
-                        {
-                            cJSON *msg = cJSON_GetObjectItem(action_json, "message");
-                            if (cJSON_IsString(msg)) strncpy(action->params.log_message, msg->valuestring, sizeof(action->params.log_message) - 1);
-                        }
+                        synapse_config_get_string_from_node(TAG, action_json, "message", action->params.log_message, sizeof(action->params.log_message));
                         break;
                     case ALARM_ACTION_SET_LED:
-                        {
-                            cJSON *r = cJSON_GetObjectItem(action_json, "r");
-                            cJSON *g = cJSON_GetObjectItem(action_json, "g");
-                            cJSON *b = cJSON_GetObjectItem(action_json, "b");
-                            if (cJSON_IsNumber(r)) action->params.led_color.r = r->valueint;
-                            if (cJSON_IsNumber(g)) action->params.led_color.g = g->valueint;
-                            if (cJSON_IsNumber(b)) action->params.led_color.b = b->valueint;
-                        }
+                        synapse_config_get_int_from_node(TAG, action_json, "r", (int *)&action->params.led_color.r);
+                        synapse_config_get_int_from_node(TAG, action_json, "g", (int *)&action->params.led_color.g);
+                        synapse_config_get_int_from_node(TAG, action_json, "b", (int *)&action->params.led_color.b);
                         break;
                     case ALARM_ACTION_REBOOT_SYSTEM:
-                        {
-                            cJSON *delay = cJSON_GetObjectItem(action_json, "delay_ms");
-                            action->params.reboot_params.delay_ms = cJSON_IsNumber(delay) ? delay->valueint : 500;
-                        }
+                        action->params.reboot_params.delay_ms = 500; // Default
+                        synapse_config_get_int_from_node(TAG, action_json, "delay_ms", (int *)&action->params.reboot_params.delay_ms);
                         break;
                     default:
-                        break;
+                        ESP_LOGW(TAG, "Unknown or unsupported action type '%s' for rule '%s'", action_type_str, rule->name);
+                        continue; // Skip this invalid action
                 }
                 rule->action_count++;
             }

@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
   <div class="headertitle"><div class="title">პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1933"></a> </p>
-<h1><a class="anchor" id="autotoc_md1934"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1941"></a> </p>
+<h1><a class="anchor" id="autotoc_md1942"></a>
 1. ❓ პრობლემის აღწერა</h1>
 <p>თქვენ ქმნით მოდულს (მაგ., <code>Module A</code>), რომელიც იყენებს სხვა მოდულის (<code>Module B</code>) სერვისს <code>Dependency Injection</code>-ის (DI) მეშვეობით. <code>Module B</code>-ს Service API (<code>module_b_api_t</code>) ფუნქციები პირველ პარამეტრად იღებენ <code>void* context</code>-ს, რომელიც სინამდვილეში <code>Module B</code>-ს <code>module_t*</code> ობიექტის მისამართი უნდა იყოს.</p>
 <p>თქვენს <code>Module A</code>-ში, DI-ს მეშვეობით, წარმატებით მიიღეთ <code>module_b_api_t*</code> ობიექტი, მაგრამ არ გაქვთ წვდომა <code>Module B</code>-ს <code>module_t*</code> ობიექტზე, რომელიც კონტექსტად უნდა გადასცეთ.</p>
@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
 <div class="line"> </div>
 <div class="line"><span class="comment">// როგორ მივიღო &quot;context&quot; ამ გამოძახებისთვის?</span></div>
 <div class="line">private_data-&gt;service_b_api-&gt;do_something(CONTEXT_IS_MISSING, ...);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1935"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1943"></a>
 2. ❌ არასწორი (მაგრამ მაცდური) გადაწყვეტები</h1>
 <ol type="1">
 <li><p class="startli">**<code>Hardcoded</code> სახელით მოძიება:**</p>
@@ -117,10 +117,10 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1936"></a>
+<h1><a class="anchor" id="autotoc_md1944"></a>
 3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია</h1>
 <p>Synapse Framework-ის DI მექანიზმი შექმნილია ამ პრობლემის ელეგანტურად გადასაჭრელად. გამოსავალია, მოითხოვოთ <b>ორივე რესურსის</b> ინექცირება: როგორც სერვისის API-ს, ისე თავად მოდულის <code>handle</code>-ის.</p>
-<h2><a class="anchor" id="autotoc_md1937"></a>
+<h2><a class="anchor" id="autotoc_md1945"></a>
 ეტაპი 1: &lt;tt&gt;private_data&lt;/tt&gt; სტრუქტურის გაფართოება</h2>
 <p>თქვენი მოდულის (<code>Module A</code>) <code>private_data</code> სტრუქტურაში დაამატეთ ორივე მაჩვენებელი:</p>
 <div class="fragment"><div class="line"><span class="comment">// module_a.h</span></div>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
 <div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a>*       service_b_handle;   <span class="comment">// მოდულის handle-ისთვის (კონტექსტი)</span></div>
 <div class="line"> </div>
 <div class="line">} module_a_private_data_t;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1938"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1946"></a>
 ეტაპი 2: &lt;tt&gt;dependency_map&lt;/tt&gt;-ის განსაზღვრა</h2>
 <p>თქვენი მოდულის <code>.c</code> ფაილში, აღწერეთ ორივე დამოკიდებულება <code>dependency_map</code>-ში:</p>
 <div class="fragment"><div class="line"><span class="comment">// module_a.c</span></div>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
 <div class="line">    {NULL, 0}</div>
 <div class="line">};</div>
 <div class="ttc" id="astructmodule__dependency__t_html"><div class="ttname"><a href="structmodule__dependency__t.html">module_dependency_t</a></div><div class="ttdoc">Describes a single service dependency for a module.</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1939"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1947"></a>
 ეტაპი 3: &lt;tt&gt;config.json&lt;/tt&gt;-ის კონფიგურაცია</h2>
 <p>თქვენი მოდულის <code>config.json</code>-ში, მიუთითეთ, თუ რომელი სერვისი და რომელი მოდული უნდა იქნას ინექცირებული. ხშირ შემთხვევაში, მათი <code>instance_name</code> ერთმანეთს ემთხვევა.</p>
 <div class="fragment"><div class="line">// module_a/config.json</div>
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
 <div class="line">        &quot;service_b_handle_name&quot;: &quot;main_b&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1940"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1948"></a>
 ეტაპი 4: გამოყენება</h2>
 <p>ახლა, თქვენს კოდში შეგიძლიათ უსაფრთხოდ და <code>hardcode</code>-ის გარეშე გამოიძახოთ სერვისის ფუნქცია:</p>
 <div class="fragment"><div class="line"><span class="comment">// module_a.c</span></div>
@@ -166,7 +166,7 @@ $(document).ready(function(){initNavTree('md_docs_2troubleshooting_2dependency__
 <div class="line">        );</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1941"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1949"></a>
 4. 💬 დასკვნა</h1>
 <p>მიუხედავად იმისა, რომ <code>module_t*</code> ტიპის პირდაპირი შენახვა მცირე დამოკიდებულებას ქმნის ფრეიმვორქის საბაზისო სტრუქტურაზე, ეს არის <b>გამართლებული და პრაგმატული კომპრომისი</b>. ის საშუალებას გვაძლევს, შევინარჩუნოთ API-ების მოქნილობა (<code>context</code>-ის გადაცემის შესაძლებლობა) და ამავდროულად, თავიდან ავიცილოთ <code>hardcoded</code> დამოკიდებულებები, რაც ფრეიმვორქის ერთ-ერთი მთავარი პრინციპია. </p>
 </div></div><!-- contents -->

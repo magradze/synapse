@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
   <div class="headertitle"><div class="title">კონფიგურაციის მართვის წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1179"></a> </p>
-<h1><a class="anchor" id="autotoc_md1180"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1181"></a> </p>
+<h1><a class="anchor" id="autotoc_md1182"></a>
 ძირითადი პრინციპი</h1>
 <p>**(განახლებულია)** <b>ყველა runtime კონფიგურაციული პარამეტრი უნდა იყოს მოდულის საკუთარ <code>config.json</code> ფაილში. კოდში hardcoded მნიშვნელობები დაუშვებელია.</b></p>
-<h1><a class="anchor" id="autotoc_md1181"></a>
+<h1><a class="anchor" id="autotoc_md1183"></a>
 კონფიგურაციის სტრუქტურა და წყაროები</h1>
 <p>**(სრულად განახლებულია)**</p>
 <p>Synapse Framework v5.0.0-დან იყენებს <b>დეცენტრალიზებულ</b> კონფიგურაციის მოდელს:</p>
@@ -128,10 +128,10 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <p class="startli"><code>json [ { "type": "wifi_manager", "enabled": true, "config": { "instance_name": "main_wifi" } } ] </code></p>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1182"></a>
+<h1><a class="anchor" id="autotoc_md1184"></a>
 კონფიგურაციის წვდომის პატერნები</h1>
 <p>**(განახლებულია)** მიუხედავად იმისა, რომ კონფიგურაცია ფიზიკურად დაყოფილია, <code>Config Manager</code> runtime-ში აწყობს ერთიან, ლოგიკურ სტრუქტურას. ამიტომ, პარამეტრებზე წვდომის API უცვლელი რჩება.</p>
-<h2><a class="anchor" id="autotoc_md1183"></a>
+<h2><a class="anchor" id="autotoc_md1185"></a>
 &lt;tt&gt;synapse_config_get_*&lt;/tt&gt; ფუნქციების გამოყენება</h2>
 <p>წვდომა ხდება <b>წერტილით გამოყოფილი გასაღებით (dot-notation)</b>:</p>
 <ol type="1">
@@ -146,10 +146,10 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <div class="line"><span class="comment">// `main_light` ინსტანციის `pin` პარამეტრის წაკითხვა</span></div>
 <div class="line"><span class="keywordtype">int</span> relay_pin;</div>
 <div class="line">synapse_config_get_int(<span class="stringliteral">&quot;main_light.pin&quot;</span>, &amp;relay_pin);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1184"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1186"></a>
 კონფიგურაციის პარსინგი მოდულის შიგნით</h1>
 <p>თითოეული მოდულის <code>_create</code> ფუნქცია იღებს თავისი კონფიგურაციის სრულ JSON ობიექტს (<code>{"type": ..., "enabled": ..., "config": ...}</code>).</p>
-<h2><a class="anchor" id="autotoc_md1185"></a>
+<h2><a class="anchor" id="autotoc_md1187"></a>
 &lt;tt&gt;parse_config&lt;/tt&gt; ფუნქცია</h2>
 <p>რეკომენდებულია, თითოეულ მოდულს ჰქონდეს <code>static esp_err_t parse_config(const cJSON *config_node, private_data_t *p_data)</code> ფუნქცია.</p>
 <div class="fragment"><div class="line"><span class="comment">// relay_actuator.c-ში</span></div>
@@ -172,13 +172,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructrelay__private__data__t_html"><div class="ttname"><a href="structrelay__private__data__t.html">relay_private_data_t</a></div><div class="ttdef"><b>Definition</b> relay_actuator.c:55</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1186"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1188"></a>
 Default მნიშვნელობები და ვალიდაცია</h1>
 <ul>
 <li>**"სიმართლის წყარო" default-ებისთვის არის <code>Kconfig</code>**. მოდულმა <code>parse_config</code> ფუნქციაში ჯერ უნდა მიანიჭოს <code>Kconfig</code>-იდან წამოღებული მნიშვნელობა და შემდეგ სცადოს მისი გადაფარვა <code>config.json</code>-იდან.</li>
 <li><b>ვალიდაცია:</b> <code>_create</code> ფუნქცია პასუხისმგებელია, შეამოწმოს ყველა სავალდებულო პარამეტრის არსებობა და დააბრუნოს შეცდომა, თუ რომელიმე აკლია.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1187"></a>
+<h1><a class="anchor" id="autotoc_md1189"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>
@@ -192,7 +192,7 @@ Default მნიშვნელობები და ვალიდაცი�
 <li>განსაზღვრეთ მოდულის default კონფიგურაცია მის საკუთარ <code>config.json</code> ფაილში.</li>
 <li>გამოიყენეთ <code>Kconfig</code> build-დროის default-ებისთვის.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1188"></a>
+<h1><a class="anchor" id="autotoc_md1190"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>კონფიგურაცია დეცენტრალიზებულია:</b> თითოეული მოდული პასუხისმგებელია თავის default კონფიგურაციაზე.</li>

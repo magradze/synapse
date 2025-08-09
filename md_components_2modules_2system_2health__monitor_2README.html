@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მოდული: Health Monitor</title>
+<title>Synapse ESP Framework: 🩺 მოდული: Health Monitor</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,104 +90,113 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მოდული: Health Monitor</div></div>
+  <div class="headertitle"><div class="title">🩺 მოდული: Health Monitor</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md163"></a> </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md163"></a> <b>🗂️ კატეგორია:</b> <code>system</code> <br  />
+ <b>✒️ ავტორი:</b> Synapse Framework Team <br  />
+ <b>🔖 ვერსია:</b> 2.0.0</p>
 <h1><a class="anchor" id="autotoc_md164"></a>
-1. მიმოხილვა</h1>
-<p><b>მოდულის სახელი:</b> <code>health_monitor</code> <br  />
- <b>კატეგორია:</b> <code>system</code> <br  />
- <b>ვერსია:</b> 1.0.0 <br  />
- <b>ავტორი:</b> Synapse Framework Team</p>
-<p><code>Health Monitor</code> მოდული არის Synapse Framework-ის სასიცოცხლოდ მნიშვნელოვანი კომპონენტი, რომელიც უზრუნველყოფს სისტემის მდგრადობის, საიმედოობისა და თვითდიაგნოსტიკის მექანიზმებს რეალურ დროში. ის მუდმივად აკვირდება სისტემის კრიტიკულ პარამეტრებს, როგორიცაა მეხსიერების გამოყენება და ტასკების მდგომარეობა, აღმოაჩენს ანომალიებს და ახდენს შესაბამის რეაგირებას ივენთების გამოქვეყნებით.</p>
+1. 📜 მიმოხილვა</h1>
+<p><code>Health Monitor</code> მოდული არის Synapse Framework-ის <b>სისტემის მდგრადობის მცველი</b>. მისი მთავარი ამოცანაა, ფონურ რეჟიმში, რეალურ დროში აკონტროლოს სისტემის კრიტიკული პარამეტრები, აღმოაჩინოს პოტენციური პრობლემები (როგორიცაა მეხსიერების გაჟონვა ან ტასკების სტეკის გადავსება) მათ კრიტიკულ ფაზაში გადასვლამდე და შეატყობინოს სისტემის სხვა ნაწილებს მოსალოდნელი საფრთხის შესახებ.</p>
+<p>ეს მოდული არის პრევენციული დიაგნოსტიკის ფუნდამენტური ინსტრუმენტი, რომელიც მნიშვნელოვნად ზრდის მოწყობილობის საიმედოობას გრძელვადიან პერსპექტივაში.</p>
 <h1><a class="anchor" id="autotoc_md165"></a>
-2. წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
+2. ❗ წინაპირობები და &lt;tt&gt;menuconfig&lt;/tt&gt;</h1>
 <p>ამ მოდულის სრული ფუნქციონირებისთვის, განსაკუთრებით ტასკების სტატუსის მონიტორინგისთვის, აუცილებელია ESP-IDF-ის კონფიგურაციაში (<code>menuconfig</code>) შემდეგი ოფციების ჩართვა:</p>
 <ol type="1">
 <li>გაუშვით <code>idf.py menuconfig</code>.</li>
-<li>გადადით <code>Component config</code> &mdash;&gt; <code>FreeRTOS</code> &mdash;&gt; <code>Kernel</code>.</li>
-<li>ჩართეთ (<code>[y]</code>) შემდეგი ორი ოფცია:<ul>
-<li><code>Enable FreeRTOS-specific stats formatting</code></li>
+<li>გადადით <code>Component config</code> &mdash;&gt; <code>FreeRTOS</code> &mdash;&gt;</li>
+<li>ჩართეთ (<code>[y]</code>) შემდეგი ოფცია:<ul>
 <li><code>Enable generation of run time stats</code></li>
 </ul>
 </li>
 </ol>
-<p><b>გაფრთხილება:</b> ამ ოფციების ჩართვის გარეშე, <code>uxTaskGetSystemState</code> ფუნქცია არ იქნება ხელმისაწვდომი და პროექტის კომპილაცია დასრულდება <code>undefined reference</code> შეცდომით.</p>
+<p><b>გაფრთხილება:</b> ამ ოფციის ჩართვის გარეშე, <code>uxTaskGetSystemState</code> ფუნქცია არ იქნება ხელმისაწვდომი და პროექტის კომპილაცია დასრულდება <code>undefined reference</code> შეცდომით.</p>
 <h1><a class="anchor" id="autotoc_md166"></a>
-3. არქიტექტურული პრინციპები</h1>
+3. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
-<li><b>პერიოდული მონიტორინგი:</b> მოდულს აქვს საკუთარი FreeRTOS ტასკი, რომელიც კონფიგურირებადი ინტერვალით ამოწმებს სისტემის "პულსს".</li>
+<li><b>რესურსების ოპტიმიზაცია:</b> მოდული <b>არ ქმნის საკუთარ ტასკს</b>. ამის ნაცვლად, ის თავის პერიოდულ შემოწმების ლოგიკას არეგისტრირებს <code>core</code>-ის **<code>Task Pool Manager</code>**-ში, როგორც "დავალება" (<code>Job</code>). ეს მიდგომა ზოგავს ~3KB ოპერატიულ მეხსიერებას და ამცირებს სისტემის საერთო დატვირთვას.</li>
 <li><b>ზღვრული მნიშვნელობები (Thresholds):</b> ყველა მონიტორინგის ქვეშ მყოფ პარამეტრს აქვს კონფიგურირებადი ზღვრული მნიშვნელობა.</li>
-<li><b>ივენთებზე დაფუძნებული რეაგირება:</b> პრობლემის აღმოჩენისას, მოდული აქვეყნებს <code>SYSTEM_HEALTH_ALERT</code> ივენთს Event Bus-ზე.</li>
-<li><b>გაფართოებადობა:</b> სხვა მოდულებს შეუძლიათ დაარეგისტრირონ საკუთარი "ჯანმრთელობის შემოწმების" ფუნქციები.</li>
-<li><b>Service-driven:</b> მოდული აწვდის <code><a class="el" href="structhealth__api__t.html" title="Health Monitor-ის საჯარო Service API სტრუქტურა.">health_api_t</a></code> სერვისს <code>Service Locator</code>-ის მეშვეობით.</li>
+<li><b>ივენთებზე დაფუძნებული რეაგირება:</b> პრობლემის აღმოჩენისას, მოდული აქვეყნებს <code>SYSTEM_HEALTH_ALERT</code> ივენთს <code>Event Bus</code>-ზე, რაზეც სხვა მოდულებს (მაგ., <code>alarms_manager</code>) შეუძლიათ რეაგირება.</li>
+<li><b>გაფართოებადობა:</b> სხვა მოდულებს შეუძლიათ, დაარეგისტრირონ საკუთარი "ჯანმრთელობის შემოწმების" ფუნქციები <code>Service API</code>-ს მეშვეობით.</li>
+<li><b>კონტექსტზე-დამოკიდებულება:</b> მოდული "ჭკვიანია" და შეუძლია, დროებით გათიშოს გარკვეული შემოწმებები (მაგ., მეხსიერების კონტროლი <code>provisioning</code>-ის დროს), რათა თავიდან აიცილოს ცრუ განგაშები.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md167"></a>
-4. კონფიგურაცია</h1>
-<p>მოდულის კონფიგურაცია ხდება <code>system_config.json</code> ფაილის საშუალებით.</p>
+4. ⚙️ კონფიგურაცია</h1>
+<p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით.</p>
 <p><b>კონფიგურაციის მაგალითი:</b></p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;type&quot;: &quot;health_monitor&quot;,</div>
-<div class="line">    &quot;enabled&quot;: true,</div>
-<div class="line">    &quot;config&quot;: {</div>
-<div class="line">        &quot;instance_name&quot;: &quot;main_health_monitor&quot;,</div>
-<div class="line">        &quot;check_interval_sec&quot;: 60,</div>
-<div class="line">        &quot;thresholds&quot;: {</div>
-<div class="line">            &quot;min_free_heap_kb&quot;: 40,</div>
-<div class="line">            &quot;task_stack_watermark_percent&quot;: 90</div>
+<div class="fragment"><div class="line">[</div>
+<div class="line">    {</div>
+<div class="line">        &quot;type&quot;: &quot;health_monitor&quot;,</div>
+<div class="line">        &quot;enabled&quot;: true,</div>
+<div class="line">        &quot;config&quot;: {</div>
+<div class="line">            &quot;instance_name&quot;: &quot;health_monitor&quot;,</div>
+<div class="line">            &quot;check_interval_sec&quot;: 60,</div>
+<div class="line">            &quot;thresholds&quot;: {</div>
+<div class="line">                &quot;min_free_heap_kb&quot;: 20,</div>
+<div class="line">                &quot;min_task_stack_hwm_bytes&quot;: 256</div>
+<div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">}</div>
+<div class="line">]</div>
 </div><!-- fragment --><p><b>კონფიგურაციის პარამეტრები:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">პარამეტრი   </th><th class="markdownTableHeadLeft">ტიპი   </th><th class="markdownTableHeadLeft">აღწერა   </th><th class="markdownTableHeadCenter">სავალდებულო   </th><th class="markdownTableHeadLeft">Default    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მოდულის ინსტანციის უნიკალური სახელი.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>main_health_monitor</code>    </td></tr>
+<td class="markdownTableBodyLeft"><code>instance_name</code>   </td><td class="markdownTableBodyLeft">სტრიქონი   </td><td class="markdownTableBodyLeft">მოდულის ინსტანციის უნიკალური სახელი.   </td><td class="markdownTableBodyCenter">✅   </td><td class="markdownTableBodyLeft">-    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>check_interval_sec</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">შემოწმების ინტერვალი წამებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>30</code>    </td></tr>
+<td class="markdownTableBodyLeft"><code>check_interval_sec</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">შემოწმების ინტერვალი წამებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>60</code>    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><code>thresholds</code>   </td><td class="markdownTableBodyLeft">ობიექტი   </td><td class="markdownTableBodyLeft">ზღვრული მნიშვნელობების კონტეინერი.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft">-    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><code>thresholds.min_free_heap_kb</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">თავისუფალი მეხსიერების მინიმალური ზღვარი კილობაიტებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>50</code>    </td></tr>
+<td class="markdownTableBodyLeft"><code>thresholds.min_free_heap_kb</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">თავისუფალი მეხსიერების მინიმალური ზღვარი კილობაიტებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>20</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>thresholds.task_stack_watermark_percent</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ტასკის სტეკის გამოყენების მაქსიმალური ზღვარი პროცენტებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>85</code>   </td></tr>
+<td class="markdownTableBodyLeft"><code>thresholds.min_task_stack_hwm_bytes</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">ტასკის სტეკის დარჩენილი თავისუფალი ადგილის მინიმალური ზღვარი ბაიტებში.   </td><td class="markdownTableBodyCenter">❌   </td><td class="markdownTableBodyLeft"><code>256</code>   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md168"></a>
-5. Service API (&lt;tt&gt;health_api_t&lt;/tt&gt;)</h1>
+5. 🔌 Service API (&lt;tt&gt;health_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა <code>Health Monitor</code>-ის API-ზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: <code>SYNAPSE_SERVICE_TYPE_HEALTH_API</code>.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>esp_err_t get_system_health_report(cJSON **report);</code>** <br  />
  აბრუნებს სისტემის ჯანმრთელობის სრულ რეპორტს cJSON ობიექტის სახით. რეპორტი შეიცავს ინფორმაციას მეხსიერების, uptime-ისა და ყველა აქტიური ტასკის შესახებ. <b>მნიშვნელოვანია:</b> გამომძახებელმა უნდა გაათავისუფლოს დაბრუნებული <code>cJSON</code> ობიექტი <code>cJSON_Delete()</code>-ის გამოყენებით.</li>
 <li>**<code>esp_err_t register_custom_check(const char* check_name, health_check_fn_t check_fn, void* context);</code>** <br  />
- არეგისტრირებს ახალ, მომხმარებლის მიერ განსაზღვრულ შემოწმების ფუნქციას. ეს საშუალებას აძლევს სხვა მოდულებს, ჩართონ საკუთარი ლოგიკა <code>Health Monitor</code>-ის პერიოდულ შემოწმებებში.</li>
+ არეგისტრირებს ახალ, მომხმარებლის მიერ განსაზღვრულ შემოწმების ფუნქციას.</li>
 <li>**<code>esp_err_t unregister_custom_check(const char* check_name);</code>** <br  />
- შლის რეგისტრირებულ შემოწმებას. (ამჟამად არ არის იმპლემენტირებული).</li>
+ შლის რეგისტრირებულ შემოწმებას.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md169"></a>
-6. გამოქვეყნებული ივენთები</h1>
+6. 📢 ივენთები</h1>
+<h2><a class="anchor" id="autotoc_md170"></a>
+გამოქვეყნებული ივენთები</h2>
 <ul>
 <li>**<code>SYSTEM_HEALTH_ALERT</code>**<ul>
 <li><b>როდის ქვეყნდება:</b> როდესაც რომელიმე მონიტორინგის ქვეშ მყოფი პარამეტრი გადასცდება დაწესებულ ზღვარს.</li>
 <li><b>Payload (cJSON სტრიქონი):</b><ul>
-<li><b>მეხსიერების პრობლემა:</b> <code>{"alert_type":"LOW_HEAP_MEMORY", "value_kb":35}</code></li>
-<li><b>სტეკის პრობლემა:</b> <code>{"alert_type":"HIGH_STACK_USAGE", "task_name":"some_task", "usage_percent":92}</code></li>
+<li><b>მეხსიერების პრობლემა:</b> <code>{"alert_type":"LOW_HEAP_MEMORY", "value_kb":18}</code></li>
+<li><b>სტეკის პრობლემა:</b> <code>{"alert_type":"LOW_STACK_SPACE", "task_name":"some_task", "remaining_bytes":200}</code></li>
 <li><b>Custom შემოწმების პრობლემა:</b> <code>{"alert_type":"CUSTOM_CHECK_FAILED", "check_name":"my_db_check"}</code></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md170"></a>
+<h2><a class="anchor" id="autotoc_md171"></a>
+გამოწერილი ივენთები</h2>
+<ul>
+<li>**<code>PROV_STARTED</code>**: ამ ივენთის მიღებისას, მოდული დროებით თიშავს მეხსიერების შემოწმებას.</li>
+<li>**<code>PROV_ENDED</code>**: ამ ივენთის მიღებისას, მოდული ანახლებს მეხსიერების შემოწმებას.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md172"></a>
 7. 💡 გამოყენების მაგალითი</h1>
-<p><code>ota_update_module</code>-ს სურს, განახლების დაწყებამდე შეამოწმოს, არის თუ არა სისტემაში საკმარისი რესურსი.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="health__interface_8h.html">health_interface.h</a>&quot;</span> <span class="comment">// პირობითი ინტერფეისის ფაილი</span></div>
+<p><code>ota_update_manager</code>-ს სურს, განახლების დაწყებამდე შეამოწმოს, არის თუ არა სისტემაში საკმარისი რესურსი.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="synapse_8h.html">synapse.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="health__interface_8h.html">health_interface.h</a>&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> start_ota_if_healthy() {</div>
-<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_health_monitor&quot;</span>);</div>
+<div class="line">    <span class="comment">// ვიყენებთ lookup_by_type-ს, რათა თავიდან ავიცილოთ hardcoded სახელი</span></div>
+<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> handle = <a class="code hl_function" href="service__locator_8h.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a>(SYNAPSE_SERVICE_TYPE_HEALTH_API);</div>
 <div class="line">    <span class="keywordflow">if</span> (!handle) {</div>
 <div class="line">        ESP_LOGW(TAG, <span class="stringliteral">&quot;Health Monitor service not found. Skipping health check.&quot;</span>);</div>
 <div class="line">        <span class="comment">// ... განაგრძე OTA ...</span></div>
@@ -199,8 +208,10 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">if</span> (health_api-&gt;<a class="code hl_variable" href="structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b">get_system_health_report</a>(&amp;report) == ESP_OK &amp;&amp; report) {</div>
 <div class="line">        <span class="keyword">const</span> cJSON *heap = cJSON_GetObjectItem(report, <span class="stringliteral">&quot;min_free_heap_bytes&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">if</span> (cJSON_IsNumber(heap) &amp;&amp; heap-&gt;valueint &lt; 80000) { <span class="comment">// თუ 80KB-ზე ნაკლებია</span></div>
-<div class="line">            ESP_LOGE(TAG, <span class="stringliteral">&quot;Not enough memory for OTA update. Aborting.&quot;</span>);</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// შევამოწმოთ, თუ თავისუფალი მეხსიერება 80KB-ზე ნაკლებია</span></div>
+<div class="line">        <span class="keywordflow">if</span> (cJSON_IsNumber(heap) &amp;&amp; heap-&gt;valueint &lt; 80000) { </div>
+<div class="line">            ESP_LOGE(TAG, <span class="stringliteral">&quot;Not enough free memory for OTA update. Aborting.&quot;</span>);</div>
 <div class="line">            cJSON_Delete(report);</div>
 <div class="line">            <span class="keywordflow">return</span>;</div>
 <div class="line">        }</div>
@@ -210,11 +221,11 @@ $(document).ready(function(){initNavTree('md_components_2modules_2system_2health
 <div class="line">    <span class="comment">// ... სისტემა ჯანმრთელია, ვიწყებთ OTA-ს ...</span></div>
 <div class="line">}</div>
 <div class="ttc" id="ahealth__interface_8h_html"><div class="ttname"><a href="health__interface_8h.html">health_interface.h</a></div><div class="ttdoc">Health Monitor მოდულის საჯარო სერვისის API-ს &quot;კონტრაქტი&quot;.</div></div>
-<div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
+<div class="ttc" id="aservice__locator_8h_html_adbc62ae164e5c44764e195118403ad96"><div class="ttname"><a href="service__locator_8h.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a></div><div class="ttdeci">service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type)</div><div class="ttdoc">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს</div><div class="ttdef"><b>Definition</b> service_locator.c:248</div></div>
 <div class="ttc" id="astructhealth__api__t_html"><div class="ttname"><a href="structhealth__api__t.html">health_api_t</a></div><div class="ttdoc">Health Monitor-ის საჯარო Service API სტრუქტურა.</div><div class="ttdef"><b>Definition</b> health_interface.h:39</div></div>
 <div class="ttc" id="astructhealth__api__t_html_a50abcc64550890f281f6fcf4634fdf5b"><div class="ttname"><a href="structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b">health_api_t::get_system_health_report</a></div><div class="ttdeci">esp_err_t(* get_system_health_report)(cJSON **report)</div><div class="ttdoc">აბრუნებს სისტემის ჯანმრთელობის სრულ რეპორტს JSON ფორმატში.</div><div class="ttdef"><b>Definition</b> health_interface.h:46</div></div>
+<div class="ttc" id="asynapse_8h_html"><div class="ttname"><a href="synapse_8h.html">synapse.h</a></div><div class="ttdoc">Synapse ESP Framework - The Main Public Header.</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

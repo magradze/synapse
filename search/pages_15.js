@@ -10,8 +10,8 @@ var searchData=
   ['resource_20usage_20guide_7',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
   ['rest_20api_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20rest_20api_8',['REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)',['../md_docs_2integration_2integration__rest.html',1,'']]],
   ['review_20guidelines_9',['Synapse Review Guidelines',['../md_docs_2contributing_2review__guidelines.html',1,'']]],
-  ['rgb_5fled_5findicator_20tt_10',['💡 მოდული: &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]],
+  ['rgb_5fled_5findicator_20tt_10',['💡 მოდული: &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utillities_2rgb__led__indicator_2README.html',1,'']]],
   ['rotary_5fencoder_5finput_20tt_11',['🔘 მოდული: &lt;tt&gt;rotary_encoder_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html',1,'']]],
   ['router_20api_20reference_12',['Synapse Command Router API Reference',['../md_docs_2api__reference_2command__router__api.html',1,'']]],
-  ['router_20system_20shell_13',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]]
+  ['router_20system_20shell_13',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utillities_2command__router_2README.html',1,'']]]
 ];

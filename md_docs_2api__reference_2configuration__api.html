@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2configuration
   <div class="headertitle"><div class="title">Synapse Configuration Manager API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md323"></a> </p>
-<h1><a class="anchor" id="autotoc_md324"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md325"></a> </p>
+<h1><a class="anchor" id="autotoc_md326"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის კონფიგურაციის მენეჯერის (<code>Config Manager</code>) API-ს. ეს API უზრუნველყოფს ერთიან, უსაფრთხო და მოქნილ წვდომას სისტემის ყველა კონფიგურაციულ პარამეტრზე, რომლებიც runtime-ში <b>ერთიანდება</b> ბაზისური <code>system_config.json</code>-ისა და მოდულების ინდივიდუალური <code>config.json</code> ფაილებიდან.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md326"></a>
+<h1><a class="anchor" id="autotoc_md328"></a>
 🔑 გასაღების ფორმატი (Dot-Notation)</h1>
 <p>ყველა <code>synapse_config_get_*</code> ფუნქცია იყენებს <b>წერტილით გამოყოფილ გასაღებს (dot-notation)</b> პარამეტრების მისაღებად. ფორმატი დამოკიდებულია იმაზე, გლობალურ პარამეტრს ითხოვთ თუ კონკრეტული მოდულისას.</p>
 <ul>
@@ -106,42 +106,42 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2configuration
 <li><b>მოდულის პარამეტრისთვის:</b> <code>"instance_name.parameter_name"</code> <em>მაგალითი:</em> <code>"main_broker.broker_uri"</code> ან <code>"indoor_sensor.update_interval_sec"</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md328"></a>
+<h1><a class="anchor" id="autotoc_md330"></a>
 ⚙️ ძირითადი API ფუნქციები</h1>
-<h2><a class="anchor" id="autotoc_md329"></a>
+<h2><a class="anchor" id="autotoc_md331"></a>
 &lt;tt&gt;esp_err_t synapse_config_get_string(const char *key, char *buffer, size_t buffer_size)&lt;/tt&gt;</h2>
 <ul>
 <li>კითხულობს სტრიქონის ტიპის პარამეტრს მეხსიერებაში აწყობილი კონფიგურაციიდან მითითებული <code>key</code>-ს მიხედვით.</li>
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, <code>ESP_ERR_NOT_FOUND</code> თუ გასაღები ვერ მოიძებნა, <code>ESP_ERR_NVS_TYPE_MISMATCH</code> თუ ტიპი არასწორია.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md330"></a>
+<h2><a class="anchor" id="autotoc_md332"></a>
 &lt;tt&gt;esp_err_t synapse_config_get_int(const char *key, int *out_value)&lt;/tt&gt;</h2>
 <ul>
 <li>კითხულობს მთელი რიცხვის (<code>int</code>) ტიპის პარამეტრს.</li>
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, ან შესაბამის შეცდომის კოდს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md331"></a>
+<h2><a class="anchor" id="autotoc_md333"></a>
 &lt;tt&gt;esp_err_t synapse_config_get_bool(const char *key, bool *out_value)&lt;/tt&gt;</h2>
 <ul>
 <li>კითხულობს ლოგიკური (<code>bool</code>) ტიპის პარამეტრს.</li>
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, ან შესაბამის შეცდომის კოდს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md332"></a>
+<h2><a class="anchor" id="autotoc_md334"></a>
 &lt;tt&gt;esp_err_t synapse_config_save(void)&lt;/tt&gt;</h2>
 <ul>
 <li>ინახავს მეხსიერებაში არსებულ სრულ, აწყობილ კონფიგურაციას NVS მუდმივ მეხსიერებაში. ეს სასარგებლოა, თუ runtime-ში მოხდა კონფიგურაციის ცვლილება.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md334"></a>
+<h1><a class="anchor" id="autotoc_md336"></a>
 🚀 გამოყენების მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md335"></a>
+<h2><a class="anchor" id="autotoc_md337"></a>
 გლობალური პარამეტრის წაკითხვა</h2>
 <div class="fragment"><div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
 <div class="line">esp_err_t ret = synapse_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
 <div class="line"><span class="keywordflow">if</span> (ret == ESP_OK) {</div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Device prefix is: %s&quot;</span>, device_prefix);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md336"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md338"></a>
 მოდულის პარამეტრის წაკითხვა</h2>
 <div class="fragment"><div class="line"><span class="comment">// დავუშვათ, ჩვენ ვიმყოფებით მოდულში, რომლის instance_name არის &quot;main_broker&quot;</span></div>
 <div class="line"> </div>

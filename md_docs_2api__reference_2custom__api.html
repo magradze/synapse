@@ -93,38 +93,38 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2custom__api.h
   <div class="headertitle"><div class="title">Synapse Custom API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md366"></a> </p>
-<h1><a class="anchor" id="autotoc_md367"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md368"></a> </p>
+<h1><a class="anchor" id="autotoc_md369"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი განკუთვნილია მომხმარებლის მიერ დამატებული ან გაფართოებული (custom) API-ების აღწერისთვის, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md369"></a>
+<h1><a class="anchor" id="autotoc_md371"></a>
 Custom Module API</h1>
-<h2><a class="anchor" id="autotoc_md370"></a>
+<h2><a class="anchor" id="autotoc_md372"></a>
 module_t *custom_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი custom მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md371"></a>
+<h2><a class="anchor" id="autotoc_md373"></a>
 esp_err_t custom_module_do_action(module_t *module, const char *action, const void *params);</h2>
 <ul>
 <li>ასრულებს მომხმარებლის მიერ განსაზღვრულ მოქმედებას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md372"></a>
+<h2><a class="anchor" id="autotoc_md374"></a>
 esp_err_t custom_module_get_status(module_t *module, custom_status_t *status);</h2>
 <ul>
 <li>აბრუნებს custom მოდულის მიმდინარე სტატუსს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md374"></a>
+<h1><a class="anchor" id="autotoc_md376"></a>
 Custom Event API</h1>
-<h2><a class="anchor" id="autotoc_md375"></a>
+<h2><a class="anchor" id="autotoc_md377"></a>
 Custom Event-ის იდენტიფიკატორი</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define CUSTOM_EVENT_ID 0x4001</span></div>
 </div><!-- fragment --><ul>
 <li>უნიკალური იდენტიფიკატორი custom event-ისთვის.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md376"></a>
+<h2><a class="anchor" id="autotoc_md378"></a>
 Custom Event-ის მონაცემების სტრუქტურა</h2>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line">    <span class="keywordtype">int</span> value;</div>
@@ -133,20 +133,20 @@ Custom Event-ის მონაცემების სტრუქტურ�
 </div><!-- fragment --><ul>
 <li>custom event-ის მონაცემების სტრუქტურა.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md377"></a>
+<h2><a class="anchor" id="autotoc_md379"></a>
 static void custom_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს custom event-ს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md379"></a>
+<h1><a class="anchor" id="autotoc_md381"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md381"></a>
+<h1><a class="anchor" id="autotoc_md383"></a>
 მაგალითები</h1>
 <p><b>Custom მოქმედების შესრულება:</b> </p><div class="fragment"><div class="line">custom_module_do_action(module, <span class="stringliteral">&quot;reset&quot;</span>, NULL);</div>
 </div><!-- fragment --><p><b>Custom event-ის გამოქვეყნება:</b> </p><div class="fragment"><div class="line">custom_event_data_t my_event = { .value = 42, .description = <span class="stringliteral">&quot;Test&quot;</span> };</div>

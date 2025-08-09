@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (Create Your First Module)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1966"></a> </p>
-<h1><a class="anchor" id="autotoc_md1967"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1974"></a> </p>
+<h1><a class="anchor" id="autotoc_md1975"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით, მათ შორის, როგორ დავამატოთ CLI ბრძანება უსაფრთხოდ, კონფლიქტების გარეშე.</p>
-<h1><a class="anchor" id="autotoc_md1968"></a>
+<h1><a class="anchor" id="autotoc_md1976"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li><b>ამოცანა:</b> შევქმნათ მარტივი "მისალმების" მოდული, სახელად <code>greeter_module</code>.</li>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </li>
 <li><b>კატეგორია:</b> <code>utilities</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1969"></a>
+<h1><a class="anchor" id="autotoc_md1977"></a>
 2. მოდულის ჩონჩხის გენერაცია</h1>
 <p>ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს.</p>
 <ol type="1">
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </li>
 </ol>
 <p>სკრიპტი შექმნის ყველა საჭირო ფაილს, მათ შორის <code>config.json</code>-ს, <code>components/modules/utilities/greeter_module/</code> დირექტორიაში.</p>
-<h1><a class="anchor" id="autotoc_md1970"></a>
+<h1><a class="anchor" id="autotoc_md1978"></a>
 3. კონფიგურაცია</h1>
 <ol type="1">
 <li><p class="startli"><b>Runtime კონფიგურაცია:</b> გახსენით ახლად შექმნილი <code>greeter_module/config.json</code> და შეავსეთ ის:</p>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div><!-- fragment --></li>
 <li><b>Build-დროის კონფიგურაცია:</b> გაუშვით <code>idf.py menuconfig</code>, გადადით <code>Component config</code> -&gt; <code>Synapse Framework</code> -&gt; <code>Modules</code> -&gt; <code>Greeter Module</code> და დარწმუნდით, რომ მოდული ჩართულია (<code>[*] Enable Greeter Module</code>).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1971"></a>
+<h1><a class="anchor" id="autotoc_md1979"></a>
 4. კოდის იმპლემენტაცია</h1>
 <p>ახლა სრულად ჩავანაცვლოთ <code>greeter_module.c</code> ფაილის შიგთავსი. სკრიპტმა დააგენერირა ჩონჩხი, მაგრამ ჩვენ მას სრულად შევავსებთ ჩვენი ლოგიკით.</p>
 <p>**<code>src/greeter_module.c</code> (საბოლოო ვერსია):**</p>
@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_define" href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;GREETER_MODULE&quot;</span>);</div>
+<div class="line"><a class="code hl_define" href="logging_8h.html#af160fa445a164fd78ca93d8127dc7f90">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;GREETER_MODULE&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Event names used by this module</span></div>
 <div class="line"><span class="preprocessor">#define GREETING_TIMER_TICK &quot;GREETING_TIMER_TICK&quot;</span></div>
@@ -328,7 +328,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="aevent__bus_8h_html_aad4a2793a40d367c4463bd46dd5418c8"><div class="ttname"><a href="event__bus_8h.html#aad4a2793a40d367c4463bd46dd5418c8">synapse_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t synapse_event_bus_unsubscribe(const char *event_name, struct module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:427</div></div>
 <div class="ttc" id="aevent__data__wrapper_8h_html_a7e7afc7b7e7d96ee15905b61d8836cb1"><div class="ttname"><a href="event__data__wrapper_8h.html#a7e7afc7b7e7d96ee15905b61d8836cb1">synapse_event_data_wrap</a></div><div class="ttdeci">esp_err_t synapse_event_data_wrap(const void *payload, void(*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)</div><div class="ttdoc">ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:21</div></div>
 <div class="ttc" id="aevent__data__wrapper_8h_html_acbfc3de4d3a066b2adf4d8033f7cb994"><div class="ttname"><a href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a></div><div class="ttdeci">esp_err_t synapse_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
-<div class="ttc" id="alogging_8h_html_a7ece332eb67f0652fb4b9af20392c0f9"><div class="ttname"><a href="logging_8h.html#a7ece332eb67f0652fb4b9af20392c0f9">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name)</div><div class="ttdoc">განსაზღვრავს ლოკალურ, სტატიკურ TAG ცვლადს ლოგირებისთვის.</div><div class="ttdef"><b>Definition</b> logging.h:41</div></div>
+<div class="ttc" id="alogging_8h_html_af160fa445a164fd78ca93d8127dc7f90"><div class="ttname"><a href="logging_8h.html#af160fa445a164fd78ca93d8127dc7f90">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name, color)</div><div class="ttdoc">Defines a local, static, color-coded TAG variable for logging.</div><div class="ttdef"><b>Definition</b> logging.h:60</div></div>
 <div class="ttc" id="amodule__registry_8h_html_add9cd65d2672c1ff7570108b03e32da9"><div class="ttname"><a href="module__registry_8h.html#add9cd65d2672c1ff7570108b03e32da9">synapse_module_registry_find_by_name</a></div><div class="ttdeci">module_t * synapse_module_registry_find_by_name(const char *name)</div><div class="ttdoc">პოულობს დარეგისტრირებულ მოდულს უნიკალური instance სახელით.</div><div class="ttdef"><b>Definition</b> module_registry.c:143</div></div>
 <div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
 <div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
@@ -348,7 +348,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="asynapse_8h_html"><div class="ttname"><a href="synapse_8h.html">synapse.h</a></div><div class="ttdoc">Synapse ESP Framework - The Main Public Header.</div></div>
 <div class="ttc" id="atimer__interface_8h_html"><div class="ttname"><a href="timer__interface_8h.html">timer_interface.h</a></div><div class="ttdoc">Public Service API contract for the System Timer Service module.</div></div>
 <div class="ttc" id="atimer__interface_8h_html_aa1aadaa5d00c8ff5bcb440686f924609"><div class="ttname"><a href="timer__interface_8h.html#aa1aadaa5d00c8ff5bcb440686f924609">synapse_timer_handle_t</a></div><div class="ttdeci">void * synapse_timer_handle_t</div><div class="ttdoc">Opaque handle to a scheduled timer.</div><div class="ttdef"><b>Definition</b> timer_interface.h:25</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1972"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1980"></a>
 5. ტესტირება</h1>
 <ol type="1">
 <li><p class="startli"><b>ააწყვეთ და ჩაწერეთ firmware:</b></p>

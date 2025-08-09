@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md51"></a> <b>🗂️ კატეგორია:</b> <code>drivers</code> <br  />
  <b>✒️ ავტორი:</b> Giorgi Magradze &amp; Synapse AI Expert <br  />
- <b>🔖 ვერსია:</b> 2.1.0</p>
+ <b>🔖 ვერსია:</b> 2.2.0</p>
 <h1><a class="anchor" id="autotoc_md52"></a>
 1. 📜 მიმოხილვა</h1>
 <p><code>i2c_bus</code> არის Synapse Framework-ის <b>ფუნდამენტური აპარატურული დრაივერის მოდული</b>. ის უზრუნველყოფს ცენტრალიზებულ, უსაფრთხო და ნაკად-დაცულ (thread-safe) ინტერფეისს ESP32-ის I2C (Inter-Integrated Circuit) პერიფერიასთან სამუშაოდ.</p>
@@ -103,16 +103,16 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <h1><a class="anchor" id="autotoc_md53"></a>
 2. 🏛️ არქიტექტურული პრინციპები</h1>
 <ul>
-<li><b>純粋なサービスプロバイダー (Pure Service Provider):</b> ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module.">i2c_bus_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
-<li><b>リソースの安全性 (Resource Safety):</b> 🛡️ <code>init</code> ფაზაში, მოდული იყენებს <code>Resource Manager</code>-ს, რათა ექსკლუზიურად დაიკავოს (დალოქოს) როგორც I2C პორტი, ისე კონფიგურაციაში მითითებული SDA და SCL GPIO პინები. ეს გარანტიას იძლევა, რომ სხვა მოდული შემთხვევით ვერ გამოიყენებს ამ რესურსებს.</li>
-<li><b>スレッドセーフティ (Thread-Safety):</b> 🔒 თითოეული I2C ოპერაცია (<code>write</code>, <code>read</code>, <code>scan</code>) დაცულია <code>Mutex</code>-ით. ეს უზრუნველყოფს, რომ მრავალტასკიან გარემოშიც კი, I2C ავტობუსზე ერთდროულად მხოლოდ ერთი ტრანზაქცია შესრულდება, რაც იცავს მონაცემთა მთლიანობას.</li>
-<li><b>最新のドライバー (Modern Driver):</b> 🚀 მოდული იყენებს ESP-IDF v5.x-ის თანამედროვე, <code>i2c_master.h</code>-ზე დაფუძნებულ დრაივერს, რაც უზრუნველყოფს უკეთეს წარმადობას, მოქნილობას და მომავალთან თავსებადობას.</li>
-<li><b>早期初期化 (Early Initialization):</b> 📉 <code>init_level: 10</code> უზრუნველყოფს, რომ I2C ავტობუსი ინიციალიზდება სისტემის გაშვების ძალიან ადრეულ ეტაპზე, რათა ის ხელმისაწვდომი იყოს ყველა მასზე დამოკიდებული მოდულისთვის.</li>
+<li><b>სუფთა სერვისის მომწოდებელი (Pure Service Provider):</b> ⚙️ მოდული არის სუფთა "სერვისის მომწოდებელი". ის არეგისტრირებს <code><a class="el" href="structi2c__bus__api__t.html" title="The public Service API structure for the I2C Bus module.">i2c_bus_api_t</a></code> სერვისს <code>Service Locator</code>-ში და არ არის დამოკიდებული სხვა აპლიკაციის დონის მოდულებზე.</li>
+<li><b>რესურსების უსაფრთხოება (Resource Safety):</b> 🛡️ <code>init</code> ფაზაში, მოდული იყენებს <code>Resource Manager</code>-ს, რათა ექსკლუზიურად დაიკავოს (დალოქოს) როგორც I2C პორტი, ისე კონფიგურაციაში მითითებული SDA და SCL GPIO პინები.</li>
+<li><b>ნაკად-უსაფრთხოება (Thread-Safety):</b> 🔒 თითოეული I2C ოპერაცია (<code>write</code>, <code>read</code>, <code>scan</code>) დაცულია <code>Mutex</code>-ით, რაც უზრუნველყოფს I2C ავტობუსის უსაფრთხო გამოყენებას მრავალტასკიან გარემოში.</li>
+<li><b>თანამედროვე დრაივერი (Modern Driver):</b> 🚀 მოდული იყენებს ESP-IDF v5.x-ის თანამედროვე, <code>i2c_master.h</code>-ზე დაფუძნებულ დრაივერს.</li>
+<li><b>გამართული სიცოცხლის ციკლი (Proper Lifecycle):</b> 🔄 <code>init</code> ფაზაში ხდება მხოლოდ რესურსების მომზადება. აქტიური ოპერაციები, როგორიცაა ავტობუსის სკანირება, სრულდება <code>start</code> ფაზაში, რაც გამორიცხავს <code>race condition</code>-ებს სისტემის ჩატვირთვისას.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md54"></a>
 3. ⚙️ კონფიგურაცია (&lt;tt&gt;config.json&lt;/tt&gt;)</h1>
 <p>მოდულის კონფიგურაცია ხდება მისი <code>config.json</code> ფაილის საშუალებით. შესაძლებელია სისტემაში რამდენიმე, სხვადასხვა I2C ავტობუსის ერთდროულად კონფიგურირება.</p>
-<p><b>კონფიგურაციის მაგალითი (ერთი ავტობუსი):</b></p>
+<p><b>კონფიგურაციის მაგალითი:</b></p>
 <div class="fragment"><div class="line">[</div>
 <div class="line">  {</div>
 <div class="line">    &quot;type&quot;: &quot;i2c_bus&quot;,</div>
@@ -122,7 +122,8 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <div class="line">      &quot;port&quot;: 0,</div>
 <div class="line">      &quot;sda_pin&quot;: 21,</div>
 <div class="line">      &quot;scl_pin&quot;: 22,</div>
-<div class="line">      &quot;clk_speed_hz&quot;: 100000</div>
+<div class="line">      &quot;clk_speed_hz&quot;: 100000,</div>
+<div class="line">      &quot;scan_on_init&quot;: true</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">]</div>
@@ -139,11 +140,13 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyLeft"><code>scl_pin</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">SCL ხაზისთვის განკუთვნილი GPIO პინის ნომერი.   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><code>clk_speed_hz</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">I2C საათის სიხშირე ჰერცებში (მაგ., <code>100000</code> Standard Mode-სთვის, <code>400000</code> Fast Mode-სთვის).   </td><td class="markdownTableBodyCenter">✅   </td></tr>
+<td class="markdownTableBodyLeft"><code>clk_speed_hz</code>   </td><td class="markdownTableBodyLeft">რიცხვი   </td><td class="markdownTableBodyLeft">I2C საათის სიხშირე ჰერცებში (მაგ., <code>100000</code> Standard Mode-სთვის).   </td><td class="markdownTableBodyCenter">✅    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><code>scan_on_init</code>   </td><td class="markdownTableBodyLeft">ლოგიკური   </td><td class="markdownTableBodyLeft">თუ <code>true</code>, მოდული <code>start</code> ფაზაში ავტომატურად დაასკანერებს ავტობუსს.   </td><td class="markdownTableBodyCenter">❌   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md55"></a>
 4. 🔌 Service API (&lt;tt&gt;i2c_bus_api_t&lt;/tt&gt;)</h1>
-<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>SYNAPSE_SERVICE_TYPE_I2C_BUS_API</code>**.</p>
+<p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Dependency Injection</code>-ის ან <code>Service Locator</code>-ის მეშვეობით. სერვისის ტიპი: **<code>SYNAPSE_SERVICE_TYPE_I2C_BUS_API</code>**.</p>
 <p><b>API ფუნქციები:</b></p>
 <ul>
 <li>**<code>esp_err_t write(context, device_address, write_data, data_size);</code>** <br  />
@@ -151,7 +154,7 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 <li>**<code>esp_err_t read(context, device_address, read_data, data_size);</code>** <br  />
  ⬅️ კითხულობს მონაცემებს I2C მოწყობილობიდან.</li>
 <li>**<code>esp_err_t write_read(context, device_address, write_data, write_size, read_data, read_size);</code>** <br  />
- 🔄 ასრულებს კომბინირებულ write-read ტრანზაქციას (მაგ., რეგისტრის წასაკითხად).</li>
+ 🔄 ასრულებს კომბინირებულ write-read ტრანზაქციას.</li>
 <li>**<code>void scan(context);</code>** <br  />
  📡 ასკანერებს ავტობუსს და ლოგში ბეჭდავს ყველა აღმოჩენილი მოწყობილობის მისამართს.</li>
 <li>**<code>i2c_port_t get_port(context);</code>** <br  />
@@ -159,56 +162,72 @@ $(document).ready(function(){initNavTree('md_components_2modules_2drivers_2i2c__
 </ul>
 <h1><a class="anchor" id="autotoc_md56"></a>
 5. 💡 გამოყენების მაგალითი</h1>
-<p>წარმოვიდგინოთ, <code>ssd1306_oled_display</code> მოდულს სურს, გამოიყენოს I2C ავტობუსი, რომლის <code>instance_name</code> არის <code>"main_i2c_bus"</code>.</p>
-<p>**<code>ssd1306_oled_display.c</code>-ში, <code>init</code> ფუნქციაში:**</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="i2c__bus__interface_8h.html">i2c_bus_interface.h</a>&quot;</span> <span class="comment">// ★★★ მნიშვნელოვანია ინტერფეისის ჩართვა ★★★</span></div>
+<p>წარმოვიდგინოთ, <code>ssd1306_driver</code> მოდულს სურს, გამოიყენოს I2C ავტობუსი.</p>
+<p><b>1. <code>ssd1306_driver/config.json</code>-ში დამოკიდებულების აღწერა:</b></p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;type&quot;: &quot;ssd1306_driver&quot;,</div>
+<div class="line">    &quot;config&quot;: {</div>
+<div class="line">        &quot;instance_name&quot;: &quot;main_ssd1306_driver&quot;,</div>
+<div class="line">        &quot;i2c_bus_service&quot;: &quot;main_i2c_bus&quot;,</div>
+<div class="line">        &quot;i2c_address&quot;: 60</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>2. <code><a class="el" href="ssd1306__driver_8c.html" title="Low-level driver implementation for SSD1306 OLED displays.">ssd1306_driver.c</a></code>-ში <code>dependency_map</code>-ის შექმნა:</b></p>
+<div class="fragment"><div class="line"><span class="comment">// private_data სტრუქტურა</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    <a class="code hl_struct" href="structi2c__bus__handle__t.html">i2c_bus_handle_t</a> *i2c_bus; <span class="comment">// ინექცირებული handle-ის შესანახი ველი</span></div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">} <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a>;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ...</span></div>
+<div class="line"><span class="comment">// დამოკიდებულების რუკა</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structmodule__dependency__t.html">module_dependency_t</a> s_dependencies[] = {</div>
+<div class="line">    {<span class="stringliteral">&quot;i2c_bus_service&quot;</span>, offsetof(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a>, i2c_bus)},</div>
+<div class="line">    {NULL, 0}</div>
+<div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
+<div class="line"><span class="comment">// _create ფუნქციაში</span></div>
+<div class="line"><span class="keyword">module</span>-&gt;dependency_map = s_dependencies;</div>
+<div class="ttc" id="astructi2c__bus__handle__t_html"><div class="ttname"><a href="structi2c__bus__handle__t.html">i2c_bus_handle_t</a></div><div class="ttdoc">The handle returned by the Service Locator for an I2C bus service.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:82</div></div>
+<div class="ttc" id="astructmodule__dependency__t_html"><div class="ttname"><a href="structmodule__dependency__t.html">module_dependency_t</a></div><div class="ttdoc">Describes a single service dependency for a module.</div><div class="ttdef"><b>Definition</b> base_module.h:122</div></div>
+<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
+</div><!-- fragment --><p><b>3. <code><a class="el" href="ssd1306__driver_8c.html" title="Low-level driver implementation for SSD1306 OLED displays.">ssd1306_driver.c</a></code>-ში სერვისის გამოყენება:</b></p>
+<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *private_data = (<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// 1. 🤝 ვიღებთ I2C სერვისის handle-ს Service Locator-იდან</span></div>
-<div class="line">    private_data-&gt;i2c_bus_service = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_i2c_bus&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">if</span> (!private_data-&gt;i2c_bus_service) {</div>
-<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;I2C bus service &#39;main_i2c_bus&#39; not found!&quot;</span>);</div>
-<div class="line">        <span class="keywordflow">return</span> ESP_ERR_NOT_FOUND;</div>
+<div class="line">    <span class="comment">// 1. 🤝 ვამოწმებთ, რომ სერვისის handle-ი წარმატებით იქნა ინექცირებული</span></div>
+<div class="line">    <span class="keywordflow">if</span> (!private_data-&gt;i2c_bus) {</div>
+<div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Dependency injection failed: i2c_bus service is NULL!&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> ESP_ERR_INVALID_STATE;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// 2. 📡 ვასკანერებთ ავტობუსს, რომ დავრწმუნდეთ, რომ ეკრანი ჩანს</span></div>
-<div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Performing diagnostic scan on the acquired I2C bus...&quot;</span>);</div>
-<div class="line">    private_data-&gt;i2c_bus_service-&gt;api-&gt;scan(private_data-&gt;i2c_bus_service-&gt;context);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// ... (დანარჩენი ინიციალიზაციის ლოგიკა) ...</span></div>
+<div class="line">    <span class="comment">// 2. 📡 ვასკანერებთ ავტობუსს (არასავალდებულო, დიაგნოსტიკისთვის)</span></div>
+<div class="line">    private_data-&gt;i2c_bus-&gt;api-&gt;scan(private_data-&gt;i2c_bus-&gt;context);</div>
+<div class="line">    </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// ...</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// 3. ✍️ მონაცემების ჩაწერა (მაგალითი)</span></div>
+<div class="line"><span class="comment">// 3. ✍️ მონაცემების ჩაწერა</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> send_display_command(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *private_data, uint8_t cmd) {</div>
-<div class="line">    <span class="keywordflow">if</span> (private_data-&gt;i2c_bus_service) {</div>
+<div class="line">    <span class="keywordflow">if</span> (private_data-&gt;i2c_bus) {</div>
 <div class="line">        uint8_t buffer[] = {0x00, cmd};</div>
-<div class="line">        private_data-&gt;i2c_bus_service-&gt;api-&gt;write(</div>
-<div class="line">            private_data-&gt;i2c_bus_service-&gt;context, <span class="comment">// გადავცემთ კონტექსტს</span></div>
+<div class="line">        private_data-&gt;i2c_bus-&gt;<a class="code hl_variable" href="structi2c__bus__handle__t.html#a6ade555c3f7844f561a075620d504250">api</a>-&gt;<a class="code hl_variable" href="structi2c__bus__api__t.html#a3140f136900ac2717859b19eed32fffb">write</a>(</div>
+<div class="line">            private_data-&gt;i2c_bus-&gt;<a class="code hl_variable" href="structi2c__bus__handle__t.html#a7db21756e594bb94b77d2e6176c0b56b">context</a>, <span class="comment">// გადავცემთ კონტექსტს</span></div>
 <div class="line">            private_data-&gt;i2c_address,</div>
 <div class="line">            buffer,</div>
 <div class="line">            <span class="keyword">sizeof</span>(buffer)</div>
 <div class="line">        );</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="ai2c__bus__interface_8h_html"><div class="ttname"><a href="i2c__bus__interface_8h.html">i2c_bus_interface.h</a></div><div class="ttdoc">Public Service API contract for the I2C Bus module.</div></div>
-<div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
+<div class="ttc" id="astructi2c__bus__api__t_html_a3140f136900ac2717859b19eed32fffb"><div class="ttname"><a href="structi2c__bus__api__t.html#a3140f136900ac2717859b19eed32fffb">i2c_bus_api_t::write</a></div><div class="ttdeci">esp_err_t(* write)(void *context, uint8_t device_address, const uint8_t *write_data, size_t data_size)</div><div class="ttdoc">Writes data to a specific I2C device on the bus.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:38</div></div>
+<div class="ttc" id="astructi2c__bus__handle__t_html_a6ade555c3f7844f561a075620d504250"><div class="ttname"><a href="structi2c__bus__handle__t.html#a6ade555c3f7844f561a075620d504250">i2c_bus_handle_t::api</a></div><div class="ttdeci">const i2c_bus_api_t * api</div><div class="ttdoc">Pointer to the table of I2C API functions.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:83</div></div>
+<div class="ttc" id="astructi2c__bus__handle__t_html_a7db21756e594bb94b77d2e6176c0b56b"><div class="ttname"><a href="structi2c__bus__handle__t.html#a7db21756e594bb94b77d2e6176c0b56b">i2c_bus_handle_t::context</a></div><div class="ttdeci">void * context</div><div class="ttdoc">Opaque context pointer for the API functions.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:84</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
-<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md57"></a>
 6. ❗ მნიშვნელოვანი შენიშვნები</h1>
 <ul>
-<li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> ნებისმიერმა მოდულმა, რომელიც იყენებს <code>i2c_bus</code>-ის სერვისს, თავის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა დაამატოს <code>interfaces</code> (და არა <code>i2c_bus</code>), რათა მიიღოს წვდომა <code><a class="el" href="i2c__bus__interface_8h.html" title="Public Service API contract for the I2C Bus module.">i2c_bus_interface.h</a></code>-ზე.</li>
-<li><b>რესურსების გათავისუფლება:</b> <code>deinit</code> ფუნქცია ავტომატურად ათავისუფლებს დაკავებულ GPIO პინებსა და I2C პორტს, რაც უზრუნველყოფს სისტემის სისუფთავეს. </li>
+<li><b>დამოკიდებულება <code>CMakeLists.txt</code>-ში:</b> ნებისმიერმა მოდულმა, რომელიც იყენებს <code>i2c_bus</code>-ის სერვისს, თავის <code>CMakeLists.txt</code> ფაილში, <code>REQUIRES</code> სექციაში უნდა დაამატოს <code>i2c_bus_interface</code>, რათა მიიღოს წვდომა <code><a class="el" href="i2c__bus__interface_8h.html" title="Public Service API contract for the I2C Bus module.">i2c_bus_interface.h</a></code>-ზე.</li>
+<li><b>რესურსების გათავისუფლება:</b> <code>deinit</code> ფუნქცია ავტომატურად ათავისუფლებს დაკავებულ GPIO პინებსა და I2C პორტს. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

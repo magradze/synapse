@@ -1,7 +1,7 @@
-<map id="components/modules/utilities/system_timer/src/system_timer.c" name="components/modules/utilities/system_timer/src/system_timer.c">
-<area shape="rect" id="Node000001" title="A centralized service for scheduling event publishing." alt="" coords="2397,5,2566,60"/>
+<map id="components/modules/utillities/system_timer/src/system_timer.c" name="components/modules/utillities/system_timer/src/system_timer.c">
+<area shape="rect" id="Node000001" title="A centralized service for scheduling event publishing." alt="" coords="2395,5,2568,60"/>
 <area shape="rect" id="Node000002" href="$synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="948,108,1036,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2397,42,1050,119,1050,113,2396,36"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2394,42,1050,119,1049,113,2394,36"/>
 <area shape="rect" id="Node000015" title=" " alt="" coords="2355,255,2426,280"/>
 <area shape="poly" id="edge75_Node000001_Node000015" title=" " alt="" coords="2485,60,2482,129,2473,170,2458,208,2442,230,2422,248,2419,244,2438,227,2454,205,2468,168,2476,129,2480,60"/>
 <area shape="rect" id="Node000016" title=" " alt="" coords="2481,255,2551,280"/>
@@ -9,7 +9,7 @@
 <area shape="rect" id="Node000033" href="$system__timer_8h.html" title="A centralized service for scheduling events." alt="" coords="2000,181,2123,207"/>
 <area shape="poly" id="edge65_Node000001_Node000033" title=" " alt="" coords="2413,63,2105,179,2103,174,2412,58"/>
 <area shape="rect" id="Node000034" href="$timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="777,255,911,280"/>
-<area shape="poly" id="edge69_Node000001_Node000034" title=" " alt="" coords="2397,36,1998,40,1730,47,1448,58,1178,76,943,102,847,119,769,138,713,159,693,171,681,183,674,195,675,206,680,216,691,225,724,240,764,251,763,256,722,245,688,229,676,219,670,207,669,194,677,180,690,167,710,154,768,133,846,114,943,97,1178,71,1448,53,1730,41,1998,35,2396,31"/>
+<area shape="poly" id="edge69_Node000001_Node000034" title=" " alt="" coords="2394,36,1995,40,1727,47,1446,58,1176,76,942,103,847,119,769,138,713,159,693,171,681,183,674,195,675,206,680,216,691,225,724,240,764,251,763,256,722,245,688,229,676,219,670,207,669,194,677,180,690,167,710,154,767,133,846,114,942,97,1176,71,1446,53,1727,41,1995,35,2394,31"/>
 <area shape="rect" id="Node000035" title=" " alt="" coords="2569,108,2668,133"/>
 <area shape="poly" id="edge73_Node000001_Node000035" title=" " alt="" coords="2525,58,2590,98,2587,103,2522,62"/>
 <area shape="rect" id="Node000036" title=" " alt="" coords="2693,108,2779,133"/>
@@ -36,7 +36,7 @@
 <area shape="poly" id="edge39_Node000002_Node000023" title=" " alt="" coords="948,124,747,124,471,129,335,137,217,147,128,163,99,173,82,183,76,193,75,202,80,211,89,219,116,235,150,248,148,253,114,240,85,224,75,214,70,203,71,191,78,179,97,168,127,158,216,142,335,131,471,124,747,118,948,119"/>
 <area shape="rect" id="Node000024" href="$task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="691,181,853,207"/>
 <area shape="poly" id="edge41_Node000002_Node000024" title=" " alt="" coords="951,136,815,179,813,174,949,131"/>
-<area shape="rect" id="Node000025" href="$logging_8h.html" title="Synapse ESP Framework&#45;ის ლოგირების დამხმარე ინტერფეისი." alt="" coords="533,181,616,207"/>
+<area shape="rect" id="Node000025" href="$logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="533,181,616,207"/>
 <area shape="poly" id="edge43_Node000002_Node000025" title=" " alt="" coords="948,132,630,186,629,181,947,127"/>
 <area shape="rect" id="Node000027" href="$event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1115,255,1282,280"/>
 <area shape="poly" id="edge45_Node000002_Node000027" title=" " alt="" coords="986,135,971,169,969,188,975,205,994,219,1024,231,1102,250,1101,255,1023,236,991,224,971,208,964,189,966,168,982,133"/>

@@ -10,7 +10,7 @@ var searchData=
   ['code_7',['API-სა და კოდის ტერმინები (Glossary — API &amp; Code)',['../md_docs_2glossary_2glossary__api.html',1,'']]],
   ['code_20of_20conduct_8',['ქცევის კოდექსი (Code of Conduct)',['../md_docs_2contributing_2code__of__conduct.html',1,'']]],
   ['command_20router_20api_20reference_9',['Synapse Command Router API Reference',['../md_docs_2api__reference_2command__router__api.html',1,'']]],
-  ['command_20router_20system_20shell_10',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
+  ['command_20router_20system_20shell_10',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utillities_2command__router_2README.html',1,'']]],
   ['commit_20message_20guidelines_11',['Synapse Commit Message Guidelines',['../md_docs_2contributing_2commit__message__guidelines.html',1,'']]],
   ['common_20issues_20solutions_12',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
   ['communication_20choices_13',['კომუნიკაციის არქიტექტურული არჩევანი (Communication Choices)',['../md_docs_2design__decisions_2communication__choices.html',1,'']]],

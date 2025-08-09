@@ -10,7 +10,7 @@ var searchData=
   ['კომუნიკაციის_20არქიტექტურული_20არჩევანი_20communication_20choices_7',['კომუნიკაციის არქიტექტურული არჩევანი (Communication Choices)',['../md_docs_2design__decisions_2communication__choices.html',1,'']]],
   ['კომუნიკაციის_20პატერნების_20წესები_8',['კომუნიკაციის პატერნების წესები',['../md_docs_2convention_2communication__patterns.html',1,'']]],
   ['კომუნიკაციის_20პატერნები_20communication_20patterns_9',['კომუნიკაციის პატერნები (Communication Patterns)',['../md_docs_2structure_2communication__patterns.html',1,'']]],
-  ['კონვენცია_10',['მოდულის სტრუქტურის კონვენცია',['../md_docs_2convention_2module__structure.html',1,'']]],
+  ['კონვენცია_10',['კონვენცია',['../md_docs_2convention_2logging__colors.html',1,'ლოგირების ფერთა სქემის კონვენცია'],['../md_docs_2convention_2module__structure.html',1,'მოდულის სტრუქტურის კონვენცია']]],
   ['კონვენციების_20ავტომატური_20შემმოწმებელი_20tt_20check_5fconventions_20py_20tt_11',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
   ['კონვენციები_20და_20სტანდარტები_12',['კონვენციები და სტანდარტები',['../conventions_docs.html',1,'']]],
   ['კონტექსტი_20სერვისის_20api_20ს_20გამოძახებისას_13',['პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?',['../md_docs_2troubleshooting_2dependency__injection__and__context.html',1,'']]],

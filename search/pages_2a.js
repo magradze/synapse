@@ -28,6 +28,7 @@ var searchData=
   ['სტრუქტურა_25',['არქიტექტურა და სტრუქტურა',['../structure_docs.html',1,'']]],
   ['სტრუქტურა_20directory_20structure_26',['საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)',['../md_docs_2structure_2directory__structure.html',1,'']]],
   ['სტრუქტურის_20კონვენცია_27',['მოდულის სტრუქტურის კონვენცია',['../md_docs_2convention_2module__structure.html',1,'']]],
-  ['სწრაფი_20სტარტი_20getting_20started_28',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
-  ['ს_20გამოძახებისას_29',['პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?',['../md_docs_2troubleshooting_2dependency__injection__and__context.html',1,'']]]
+  ['სქემის_20კონვენცია_28',['ლოგირების ფერთა სქემის კონვენცია',['../md_docs_2convention_2logging__colors.html',1,'']]],
+  ['სწრაფი_20სტარტი_20getting_20started_29',['სწრაფი სტარტი (Getting Started)',['../md_docs_2tutorials_2getting__started.html',1,'']]],
+  ['ს_20გამოძახებისას_30',['პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?',['../md_docs_2troubleshooting_2dependency__injection__and__context.html',1,'']]]
 ];

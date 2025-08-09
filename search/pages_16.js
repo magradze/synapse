@@ -15,7 +15,7 @@ var searchData=
   ['service_20api_20reference_12',['service api reference',['../md_docs_2api__reference_2device__identity__api.html',1,'Synapse Device Identity Service API Reference'],['../md_docs_2api__reference_2mqtt__api.html',1,'Synapse MQTT Manager Service API Reference'],['../md_docs_2api__reference_2wifi__api.html',1,'Synapse WiFi Manager Service API Reference']]],
   ['setup_20guide_13',['Synapse Local Setup Guide',['../md_docs_2contributing_2local__setup.html',1,'']]],
   ['shared_20task_20pool_14',['რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)',['../md_docs_2convention_2task__pool__pattern.html',1,'']]],
-  ['shell_15',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
+  ['shell_15',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utillities_2command__router_2README.html',1,'']]],
   ['sn74hc595n_5fwriter_20tt_16',['💾 მოდული: &lt;tt&gt;sn74hc595n_writer&lt;/tt&gt;',['../md_components_2modules_2drivers_2sn74hc595n__writer_2README.html',1,'']]],
   ['solutions_17',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
   ['spi_5fbus_20tt_18',['🚌 მოდული: &lt;tt&gt;spi_bus&lt;/tt&gt;',['../md_components_2modules_2drivers_2spi__bus_2README.html',1,'']]],
@@ -71,6 +71,6 @@ var searchData=
   ['system_20alarms_20manager_68',['🚨 მოდული: System Alarms Manager',['../md_components_2modules_2system_2alarms__manager_2README.html',1,'']]],
   ['system_20configuration_69',['სისტემის კონფიგურაცია (System Configuration)',['../md_docs_2tutorials_2system__configuration.html',1,'']]],
   ['system_20module_20api_20reference_70',['Synapse System Module API Reference',['../md_docs_2api__reference_2system__api.html',1,'']]],
-  ['system_20shell_71',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utilities_2command__router_2README.html',1,'']]],
-  ['system_5ftimer_20tt_72',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utilities_2system__timer_2README.html',1,'']]]
+  ['system_20shell_71',['⚙️ მოდული: Command Router &amp; System Shell',['../md_components_2modules_2utillities_2command__router_2README.html',1,'']]],
+  ['system_5ftimer_20tt_72',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utillities_2system__timer_2README.html',1,'']]]
 ];

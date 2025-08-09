@@ -19,7 +19,7 @@ var searchData=
   ['tt_20mcp23017_5fio_5fexpander_20tt_16',['🔄 მოდული: &lt;tt&gt;mcp23017_io_expander&lt;/tt&gt;',['../md_components_2modules_2drivers_2mcp23017__io__expander_2README.html',1,'']]],
   ['tt_20mqtt_5fmanager_20tt_17',['☁️ მოდული: &lt;tt&gt;mqtt_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2mqtt__manager_2README.html',1,'']]],
   ['tt_20relay_5factuator_20tt_18',['🔌 მოდული: &lt;tt&gt;relay_actuator&lt;/tt&gt;',['../md_components_2modules_2actuators_2relay__actuator_2README.html',1,'']]],
-  ['tt_20rgb_5fled_5findicator_20tt_19',['💡 მოდული: &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utilities_2rgb__led__indicator_2README.html',1,'']]],
+  ['tt_20rgb_5fled_5findicator_20tt_19',['💡 მოდული: &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utillities_2rgb__led__indicator_2README.html',1,'']]],
   ['tt_20rotary_5fencoder_5finput_20tt_20',['🔘 მოდული: &lt;tt&gt;rotary_encoder_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html',1,'']]],
   ['tt_20security_5fstatus_5freporter_20tt_21',['🛡️ მოდული: &lt;tt&gt;security_status_reporter&lt;/tt&gt;',['../md_components_2modules_2security_2security__status__reporter_2README.html',1,'']]],
   ['tt_20self_5ftest_5fmanager_20tt_22',['🩺 მოდული: &lt;tt&gt;self_test_manager&lt;/tt&gt;',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html',1,'']]],
@@ -29,11 +29,11 @@ var searchData=
   ['tt_20spi_5fbus_20tt_26',['🚌 მოდული: &lt;tt&gt;spi_bus&lt;/tt&gt;',['../md_components_2modules_2drivers_2spi__bus_2README.html',1,'']]],
   ['tt_20ssd1306_5fdriver_20tt_27',['📺 მოდული: &lt;tt&gt;ssd1306_driver&lt;/tt&gt;',['../md_components_2modules_2displays_2ssd1306__driver_2README.html',1,'']]],
   ['tt_20storage_5fmanager_20tt_28',['💾 მოდული &lt;tt&gt;storage_manager&lt;/tt&gt;',['../md_components_2modules_2storage_2storage__manager_2README.html',1,'']]],
-  ['tt_20system_5ftimer_20tt_29',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utilities_2system__timer_2README.html',1,'']]],
+  ['tt_20system_5ftimer_20tt_29',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utillities_2system__timer_2README.html',1,'']]],
   ['tt_20time_5fof_5fflight_5fsensor_20tt_30',['🔬 მოდული: &lt;tt&gt;time_of_flight_sensor&lt;/tt&gt;',['../md_components_2modules_2sensors_2time__of__flight__sensor_2README.html',1,'']]],
   ['tt_20time_5fsync_20tt_31',['⏱️ მოდული: &lt;tt&gt;time_sync&lt;/tt&gt;',['../md_components_2modules_2system_2time__sync_2README.html',1,'']]],
   ['tt_20timer_5ftest_20tt_32',['🧪 მოდული &lt;tt&gt;timer_test&lt;/tt&gt;',['../md_components_2modules_2testing_2timer__test__module_2README.html',1,'']]],
-  ['tt_20ui_5fmanager_20tt_33',['🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;',['../md_components_2modules_2utilities_2ui__manager_2README.html',1,'']]],
+  ['tt_20ui_5fmanager_20tt_33',['🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;',['../md_components_2modules_2utillities_2ui__manager_2README.html',1,'']]],
   ['tt_20watchdog_5fmanager_20tt_34',['🐕 მოდული: &lt;tt&gt;watchdog_manager&lt;/tt&gt;',['../md_components_2modules_2system_2watchdog__manager_2README.html',1,'']]],
   ['tt_20wifi_5fmanager_20tt_35',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]]
 ];

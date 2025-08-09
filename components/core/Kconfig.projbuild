@@ -33,11 +33,11 @@ menu "Synapse Framework"
     rsource "../modules/system/watchdog_manager/Kconfig"
     rsource "../modules/testing/sensor_simulator/Kconfig"
     rsource "../modules/testing/timer_test_module/Kconfig"
-    rsource "../modules/utilities/command_router/Kconfig"
-    rsource "../modules/utilities/logger_module/Kconfig"
-    rsource "../modules/utilities/rgb_led_indicator/Kconfig"
-    rsource "../modules/utilities/system_timer/Kconfig"
-    rsource "../modules/utilities/ui_manager/Kconfig"
+    rsource "../modules/utillities/command_router/Kconfig"
+    rsource "../modules/utillities/logger_module/Kconfig"
+    rsource "../modules/utillities/rgb_led_indicator/Kconfig"
+    rsource "../modules/utillities/system_timer/Kconfig"
+    rsource "../modules/utillities/ui_manager/Kconfig"
 
     endmenu
 endmenu

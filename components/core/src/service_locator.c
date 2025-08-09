@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <sys/queue.h> // SLIST-ისთვის
 
-DEFINE_COMPONENT_TAG("SERVICE_LOCATOR");
+DEFINE_COMPONENT_TAG("SERVICE_LOCATOR", SYNAPSE_LOG_COLOR_BLUE);
 
 /**
  * @internal

@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['წარმადობისა_20და_20რესურსების_20არქიტექტურული_20კომპრომისები_20performance_20trade_20offs_0',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],
-  ['წარმადობისთვის_20performance_20best_20practices_1',['საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)',['../md_docs_2performance_2performance__best__practices.html',1,'']]],
-  ['წარმადობის_20სახელმძღვანელო_2',['Performance (წარმადობის სახელმძღვანელო)',['../md_docs_2performance_2performance__index.html',1,'']]],
-  ['წარმადობის_20ტერმინები_20glossary_20—_20security_20performance_3',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
-  ['წესები_4',['წესები',['../md_docs_2convention_2function__naming.html',1,'ფუნქციების დასახელების წესები'],['../md_docs_2convention_2variable__naming.html',1,'ცვლადების დასახელების წესები'],['../md_docs_2convention_2error__handling.html',1,'Error Handling-ის წესები']]],
-  ['წესები_20v2_200_5',['კომუნიკაციის პატერნების წესები (v2.0)',['../md_docs_2convention_2communication__patterns.html',1,'']]]
+  ['ჩანაწერის_20შაბლონი_20decision_20record_20template_0',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
+  ['ჩატარების_20სახელმძღვანელო_20performance_20benchmarks_20guide_1',['ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)',['../md_docs_2performance_2performance__benchmarks.html',1,'']]]
 ];

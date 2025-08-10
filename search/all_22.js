@@ -1,7 +1,7 @@
 var searchData=
 [
   ['warning_20level_0',['2. ESP_LOGW - Warning Level',['../md_docs_2convention_2logging__standards.html#autotoc_md1338',1,'']]],
-  ['watchdog_1',['watchdog',['../md_components_2modules_2system_2connectivity__watchdog_2README.html',1,'🛰️ მოდული: Connectivity Watchdog'],['../md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1956',1,'1. Stack Overflow და Task Watchdog']]],
+  ['watchdog_1',['watchdog',['../md_components_2modules_2system_2connectivity__watchdog_2README.html',1,'🛰️ მოდული: Connectivity Watchdog'],['../md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1962',1,'1. Stack Overflow და Task Watchdog']]],
   ['watchdog_20module_20api_2',['Watchdog Module API',['../md_docs_2api__reference_2system__api.html#autotoc_md698',1,'']]],
   ['watchdog_5fapi_5ft_3',['watchdog_api_t',['../structwatchdog__api__t.html',1,'']]],
   ['watchdog_5fapi_5ft_20tt_4',['4. 🔌 Service API (&lt;tt&gt;watchdog_api_t&lt;/tt&gt;)',['../md_components_2modules_2system_2watchdog__manager_2README.html#autotoc_md192',1,'']]],
@@ -16,7 +16,7 @@ var searchData=
   ['watchdog_5fmodule_5fset_5ftimeout_20uint32_5ft_20timeout_5fms_13',['esp_err_t watchdog_module_set_timeout(uint32_t timeout_ms);',['../md_docs_2api__reference_2system__api.html#autotoc_md701',1,'']]],
   ['websocket_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20websocket_14',['WebSocket ინტეგრაციის სახელმძღვანელო (Integration — WebSocket)',['../md_docs_2integration_2integration__websocket.html',1,'']]],
   ['websocket_20მოდულის_20ჰიპოთეტური_20ინტეგრაცია_15',['5.2. WebSocket მოდულის (ჰიპოთეტური) ინტეგრაცია',['../md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md148',1,'']]],
-  ['websocket_20integration_16',['5. WebSocket Integration',['../md_docs_2tutorials_2integration__example.html#autotoc_md2062',1,'']]],
+  ['websocket_20integration_16',['5. WebSocket Integration',['../md_docs_2tutorials_2integration__example.html#autotoc_md2068',1,'']]],
   ['why_20how_17',['Why/How',['../md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md825',1,'']]],
   ['width_18',['width',['../structdisplay__info__t.html#a0705ff40372b1ce7bcc15df7e5905567',1,'display_info_t']]],
   ['wifi_20api_20ს_20გამოყენების_20მაგალითი_19',['💡 WiFi API-ს გამოყენების მაგალითი',['../md_docs_2api__reference_2communication__api.html#autotoc_md323',1,'']]],
@@ -30,7 +30,7 @@ var searchData=
   ['wifi_5fget_5fstatus_5fcmd_5fpayload_5ft_27',['wifi_get_status_cmd_payload_t',['../structwifi__get__status__cmd__payload__t.html',1,'']]],
   ['wifi_5ficons_2eh_28',['wifi_icons.h',['../wifi__icons_8h.html',1,'']]],
   ['wifi_5finterface_2eh_29',['wifi_interface.h',['../wifi__interface_8h.html',1,'']]],
-  ['wifi_5fmanager_20tt_30',['wifi_manager tt',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;'],['../md_docs_2convention_2promise__pattern.html#autotoc_md1378',1,'5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., &lt;tt&gt;wifi_manager&lt;/tt&gt;)'],['../md_docs_2tutorials_2advanced__usage.html#autotoc_md2031',1,'5.1. სერვისის მომწოდებლის API (&lt;tt&gt;wifi_manager&lt;/tt&gt;)']]],
+  ['wifi_5fmanager_20tt_30',['wifi_manager tt',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;'],['../md_docs_2convention_2promise__pattern.html#autotoc_md1378',1,'5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., &lt;tt&gt;wifi_manager&lt;/tt&gt;)'],['../md_docs_2tutorials_2advanced__usage.html#autotoc_md2037',1,'5.1. სერვისის მომწოდებლის API (&lt;tt&gt;wifi_manager&lt;/tt&gt;)']]],
   ['wifi_5fmanager_20tt_20და_20tt_20command_5frouter_20tt_31',['💡 პრაქტიკული მაგალითი: &lt;tt&gt;wifi_manager&lt;/tt&gt; და &lt;tt&gt;command_router&lt;/tt&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md1312',1,'']]],
   ['wifi_5fmanager_2ec_32',['wifi_manager.c',['../wifi__manager_8c.html',1,'']]],
   ['wifi_5fmanager_2eh_33',['wifi_manager.h',['../wifi__manager_8h.html',1,'']]],

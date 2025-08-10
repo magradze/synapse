@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_0',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['ხშირად_20დასმული_20კითხვები_20faq_1',['ხშირად დასმული კითხვები faq',['../md_docs_2contributing_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)'],['../md_docs_2structure_2faq.html',1,'ხშირად დასმული კითხვები (FAQ)']]],
-  ['ხშირად_20დასმული_20კითხვები_20troubleshooting_20faq_2',['ხშირად დასმული კითხვები (Troubleshooting FAQ)',['../md_docs_2troubleshooting_2faq.html',1,'']]]
+  ['ცვლადების_20დასახელების_20წესები_0',['ცვლადების დასახელების წესები',['../md_docs_2convention_2variable__naming.html',1,'']]],
+  ['ცვლილებების_20ისტორია_20changelog_1',['ცვლილებების ისტორია (Changelog)',['../md_docs_2changelog_2v5.html',1,'']]],
+  ['ცვლილებების_20ჟურნალი_20—_202025_2006_2024_2',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
+  ['ციკლი_20და_20ინიციალიზაცია_20v2_200_3',['მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (v2.0)',['../md_docs_2structure_2lifecycle__and__init.html',1,'']]]
 ];

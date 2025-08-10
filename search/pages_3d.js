@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📡_20synapse_20communication_20module_20api_20reference_0',['📡 Synapse Communication Module API Reference',['../md_docs_2api__reference_2communication__api.html',1,'']]]
+  ['💡_20მოდული_3a_20tt_20rgb_5fled_5findicator_20tt_0',['💡 მოდული: &lt;tt&gt;rgb_led_indicator&lt;/tt&gt;',['../md_components_2modules_2utillities_2rgb__led__indicator_2README.html',1,'']]]
 ];

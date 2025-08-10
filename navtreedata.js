@@ -1149,7 +1149,8 @@ var NAVTREE =
     ] ],
     [ "Synapse Contributing Reference Index", "md_docs_2contributing_2contributing__index.html", [
       [ "ძირითადი სახელმძღვანელოები", "md_docs_2contributing_2contributing__index.html#autotoc_md1102", null ],
-      [ "შაბლონები", "md_docs_2contributing_2contributing__index.html#autotoc_md1103", null ]
+      [ "შაბლონები", "md_docs_2contributing_2contributing__index.html#autotoc_md1103", null ],
+      [ "ინსტრუმენტები", "md_docs_2contributing_2contributing__index.html#autotoc_md1104", null ]
     ] ],
     [ "კონვენციების ავტომატური შემმოწმებელი (<tt>check_conventions.py</tt>)", "md_docs_2contributing_2convention__linter__guide.html", [
       [ "1. შესავალი", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1106", null ],
@@ -1912,136 +1913,143 @@ var NAVTREE =
       [ "6. 🚨 მნიშვნელოვანი შენიშვნები", "md_docs_2tools_2create__module.html#autotoc_md1950", null ],
       [ "🎯 შეჯამება", "md_docs_2tools_2create__module.html#autotoc_md1952", null ]
     ] ],
+    [ "📝 <tt>JSON</tt> ვალიდატორი (<tt>validate_jsons.py</tt>)", "md_docs_2tools_2json__validator.html", [
+      [ "1. 🎯 დანიშნულება", "md_docs_2tools_2json__validator.html#autotoc_md1954", null ],
+      [ "2. 🏛️ არქიტექტურა", "md_docs_2tools_2json__validator.html#autotoc_md1955", null ],
+      [ "3. 🛠️ გამოყენება", "md_docs_2tools_2json__validator.html#autotoc_md1956", null ],
+      [ "4. ✍️ როგორ დავამატოთ ვალიდაცია ახალ მოდულს?", "md_docs_2tools_2json__validator.html#autotoc_md1957", null ]
+    ] ],
+    [ "Tools & Scripts", "md_docs_2tools_2tools__index.html", null ],
     [ "Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)", "md_docs_2troubleshooting_2advanced__diagnostics.html", [
-      [ "მიზანი", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1954", null ],
-      [ "1. Stack Overflow და Task Watchdog", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1956", null ],
-      [ "2. Heap Corruption და Memory Leak", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1957", null ],
-      [ "3. Core Dumps და Crash Reporting", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1958", null ],
-      [ "4. Custom Health Checks", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1959", null ],
-      [ "5. Peripheral Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1960", null ],
-      [ "6. Network Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1961", null ],
-      [ "7. Performance Metrics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1962", null ]
+      [ "მიზანი", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1960", null ],
+      [ "1. Stack Overflow და Task Watchdog", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1962", null ],
+      [ "2. Heap Corruption და Memory Leak", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1963", null ],
+      [ "3. Core Dumps და Crash Reporting", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1964", null ],
+      [ "4. Custom Health Checks", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1965", null ],
+      [ "5. Peripheral Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1966", null ],
+      [ "6. Network Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1967", null ],
+      [ "7. Performance Metrics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1968", null ]
     ] ],
     [ "გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues & Solutions)", "md_docs_2troubleshooting_2common__issues.html", [
-      [ "მიზანი", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1965", null ],
-      [ "1. ბილდის შეცდომები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1967", [
-        [ "პრობლემა: მოდული არ იბილდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1968", null ],
-        [ "პრობლემა: include file not found", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1969", null ]
+      [ "მიზანი", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1971", null ],
+      [ "1. ბილდის შეცდომები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1973", [
+        [ "პრობლემა: მოდული არ იბილდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1974", null ],
+        [ "პრობლემა: include file not found", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1975", null ]
       ] ],
-      [ "2. კონფიგურაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1971", [
-        [ "პრობლემა: მოდული არ ინიციალიზდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1972", null ],
-        [ "პრობლემა: default მნიშვნელობები არ მუშაობს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1973", null ]
+      [ "2. კონფიგურაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1977", [
+        [ "პრობლემა: მოდული არ ინიციალიზდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1978", null ],
+        [ "პრობლემა: default მნიშვნელობები არ მუშაობს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1979", null ]
       ] ],
-      [ "3. კომუნიკაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1975", [
-        [ "პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1976", null ],
-        [ "პრობლემა: Service Locator-ით API არ იძებნება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1977", null ]
+      [ "3. კომუნიკაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1981", [
+        [ "პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1982", null ],
+        [ "პრობლემა: Service Locator-ით API არ იძებნება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1983", null ]
       ] ],
-      [ "4. ლოგირების და შეცდომების დიაგნოსტიკა", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1979", [
-        [ "პრობლემა: ლოგები არ ჩანს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1980", null ],
-        [ "პრობლემა: შეცდომის კოდი არ იკითხება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1981", null ]
+      [ "4. ლოგირების და შეცდომების დიაგნოსტიკა", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1985", [
+        [ "პრობლემა: ლოგები არ ჩანს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1986", null ],
+        [ "პრობლემა: შეცდომის კოდი არ იკითხება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1987", null ]
       ] ],
-      [ "5. Runtime პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1983", [
-        [ "პრობლემა: მოდული არ რეაგირებს enable/disable-ზე", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1984", null ],
-        [ "პრობლემა: რესურსების გაჟონვა (memory leak)", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1985", null ],
-        [ "პრობლემა: სისტემის კრახი <tt>Stack Overflow in task Tmr Svc</tt> შეცდომით", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1987", null ],
-        [ "პრობლემა: სისტემის კრახი <tt>LoadProhibited</tt> ან <tt>assert failed: heap_caps_free</tt>", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1988", null ]
+      [ "5. Runtime პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1989", [
+        [ "პრობლემა: მოდული არ რეაგირებს enable/disable-ზე", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1990", null ],
+        [ "პრობლემა: რესურსების გაჟონვა (memory leak)", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1991", null ],
+        [ "პრობლემა: სისტემის კრახი <tt>Stack Overflow in task Tmr Svc</tt> შეცდომით", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1993", null ],
+        [ "პრობლემა: სისტემის კრახი <tt>LoadProhibited</tt> ან <tt>assert failed: heap_caps_free</tt>", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1994", null ]
       ] ],
-      [ "6. დამატებითი რჩევები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1990", null ]
+      [ "6. დამატებითი რჩევები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1996", null ]
     ] ],
     [ "Debugging Guide (დიბაგინგის სახელმძღვანელო)", "md_docs_2troubleshooting_2debugging__guide.html", [
-      [ "მიზანი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1993", null ],
-      [ "1. ლოგირების ჩართვა და გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1995", null ],
-      [ "2. Debug Build-ის კონფიგურაცია", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1996", null ],
-      [ "3. GDB და Breakpoint-ების გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1997", null ],
-      [ "4. Task და Stack Usage მონიტორინგი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1998", null ],
-      [ "5. Heap და Memory Usage", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1999", null ],
-      [ "6. Event და Service Debugging", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2000", null ],
-      [ "7. Assertion-ები და Error Checking", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2001", null ],
-      [ "8. დამატებითი ინსტრუმენტები", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2002", null ]
+      [ "მიზანი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1999", null ],
+      [ "1. ლოგირების ჩართვა და გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2001", null ],
+      [ "2. Debug Build-ის კონფიგურაცია", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2002", null ],
+      [ "3. GDB და Breakpoint-ების გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2003", null ],
+      [ "4. Task და Stack Usage მონიტორინგი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2004", null ],
+      [ "5. Heap და Memory Usage", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2005", null ],
+      [ "6. Event და Service Debugging", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2006", null ],
+      [ "7. Assertion-ები და Error Checking", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2007", null ],
+      [ "8. დამატებითი ინსტრუმენტები", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2008", null ]
     ] ],
     [ "პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?", "md_docs_2troubleshooting_2dependency__injection__and__context.html", [
-      [ "1. ❓ პრობლემის აღწერა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2005", null ],
-      [ "2. ❌ არასწორი (მაგრამ მაცდური) გადაწყვეტები", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2006", null ],
-      [ "3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2007", [
-        [ "ეტაპი 1: <tt>private_data</tt> სტრუქტურის გაფართოება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2008", null ],
-        [ "ეტაპი 2: <tt>dependency_map</tt>-ის განსაზღვრა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2009", null ],
-        [ "ეტაპი 3: <tt>config.json</tt>-ის კონფიგურაცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2010", null ],
-        [ "ეტაპი 4: გამოყენება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2011", null ]
+      [ "1. ❓ პრობლემის აღწერა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2011", null ],
+      [ "2. ❌ არასწორი (მაგრამ მაცდური) გადაწყვეტები", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2012", null ],
+      [ "3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2013", [
+        [ "ეტაპი 1: <tt>private_data</tt> სტრუქტურის გაფართოება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2014", null ],
+        [ "ეტაპი 2: <tt>dependency_map</tt>-ის განსაზღვრა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2015", null ],
+        [ "ეტაპი 3: <tt>config.json</tt>-ის კონფიგურაცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2016", null ],
+        [ "ეტაპი 4: გამოყენება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2017", null ]
       ] ],
-      [ "4. 💬 დასკვნა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2012", null ]
+      [ "4. 💬 დასკვნა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2018", null ]
     ] ],
     [ "ხშირად დასმული კითხვები (Troubleshooting FAQ)", "md_docs_2troubleshooting_2faq.html", [
-      [ "1. რატომ არ იბილდება ჩემი მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md2014", null ],
-      [ "2. რატომ არ ჩანს ლოგები?", "md_docs_2troubleshooting_2faq.html#autotoc_md2015", null ],
-      [ "3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?", "md_docs_2troubleshooting_2faq.html#autotoc_md2016", null ],
-      [ "4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?", "md_docs_2troubleshooting_2faq.html#autotoc_md2017", null ],
-      [ "5. რატომ არ ინიციალიზდება მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md2018", null ],
-      [ "6. როგორ გავიგო რომელი მოდული იწვევს პრობლემას?", "md_docs_2troubleshooting_2faq.html#autotoc_md2019", null ],
-      [ "7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?", "md_docs_2troubleshooting_2faq.html#autotoc_md2020", null ],
-      [ "8. როგორ დავადგინო კონფიგურაციის შეცდომა?", "md_docs_2troubleshooting_2faq.html#autotoc_md2021", null ],
-      [ "9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?", "md_docs_2troubleshooting_2faq.html#autotoc_md2022", null ]
+      [ "1. რატომ არ იბილდება ჩემი მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md2020", null ],
+      [ "2. რატომ არ ჩანს ლოგები?", "md_docs_2troubleshooting_2faq.html#autotoc_md2021", null ],
+      [ "3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?", "md_docs_2troubleshooting_2faq.html#autotoc_md2022", null ],
+      [ "4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?", "md_docs_2troubleshooting_2faq.html#autotoc_md2023", null ],
+      [ "5. რატომ არ ინიციალიზდება მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md2024", null ],
+      [ "6. როგორ გავიგო რომელი მოდული იწვევს პრობლემას?", "md_docs_2troubleshooting_2faq.html#autotoc_md2025", null ],
+      [ "7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?", "md_docs_2troubleshooting_2faq.html#autotoc_md2026", null ],
+      [ "8. როგორ დავადგინო კონფიგურაციის შეცდომა?", "md_docs_2troubleshooting_2faq.html#autotoc_md2027", null ],
+      [ "9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?", "md_docs_2troubleshooting_2faq.html#autotoc_md2028", null ]
     ] ],
     [ "Advanced Usage (გაფართოებული გამოყენება)", "md_docs_2tutorials_2advanced__usage.html", [
-      [ "მიზანი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2025", null ],
-      [ "1. მრავალმოდულიანი კონფიგურაცია", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2026", null ],
-      [ "2. მოდულის დინამიური ჩართვა/გამორთვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2027", null ],
-      [ "3. Runtime Reconfiguration", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2028", null ],
-      [ "4. Custom Event-ების გამოყენება", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2029", null ],
-      [ "5. ასინქრონული ოპერაციების მართვა (Promise Pattern)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2030", [
-        [ "5.1. სერვისის მომწოდებლის API (<tt>wifi_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2031", null ],
-        [ "5.2. მომხმარებლის ლოგიკა (<tt>ui_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2032", null ]
+      [ "მიზანი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2031", null ],
+      [ "1. მრავალმოდულიანი კონფიგურაცია", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2032", null ],
+      [ "2. მოდულის დინამიური ჩართვა/გამორთვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2033", null ],
+      [ "3. Runtime Reconfiguration", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2034", null ],
+      [ "4. Custom Event-ების გამოყენება", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2035", null ],
+      [ "5. ასინქრონული ოპერაციების მართვა (Promise Pattern)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2036", [
+        [ "5.1. სერვისის მომწოდებლის API (<tt>wifi_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2037", null ],
+        [ "5.2. მომხმარებლის ლოგიკა (<tt>ui_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2038", null ]
       ] ],
-      [ "6. მოდულის სტატუსის მონიტორინგი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2033", null ],
-      [ "7. ოპტიმიზაცია და რესურსების მართვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2034", null ],
-      [ "8. Best Practices", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2035", null ]
+      [ "6. მოდულის სტატუსის მონიტორინგი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2039", null ],
+      [ "7. ოპტიმიზაცია და რესურსების მართვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2040", null ],
+      [ "8. Best Practices", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2041", null ]
     ] ],
     [ "პირველი საკუთარი მოდულის შექმნა (v2.0)", "md_docs_2tutorials_2create__first__module.html", [
-      [ "მიზანი", "md_docs_2tutorials_2create__first__module.html#autotoc_md2038", null ],
-      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2create__first__module.html#autotoc_md2039", null ],
-      [ "2. მოდულის ჩონჩხის გენერაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2040", null ],
-      [ "3. კონფიგურაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2041", null ],
-      [ "4. კოდის იმპლემენტაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2042", null ],
-      [ "5. ტესტირება", "md_docs_2tutorials_2create__first__module.html#autotoc_md2045", null ]
+      [ "მიზანი", "md_docs_2tutorials_2create__first__module.html#autotoc_md2044", null ],
+      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2create__first__module.html#autotoc_md2045", null ],
+      [ "2. მოდულის ჩონჩხის გენერაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2046", null ],
+      [ "3. კონფიგურაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2047", null ],
+      [ "4. კოდის იმპლემენტაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2048", null ],
+      [ "5. ტესტირება", "md_docs_2tutorials_2create__first__module.html#autotoc_md2051", null ]
     ] ],
     [ "სწრაფი სტარტი (Getting Started)", "md_docs_2tutorials_2getting__started.html", [
-      [ "მიზანი", "md_docs_2tutorials_2getting__started.html#autotoc_md2048", null ],
-      [ "1. გარემოს მომზადება", "md_docs_2tutorials_2getting__started.html#autotoc_md2049", null ],
-      [ "2. პროექტის სტრუქტურის გაცნობა", "md_docs_2tutorials_2getting__started.html#autotoc_md2050", null ],
-      [ "3. პირველი მოდულის ჩართვა", "md_docs_2tutorials_2getting__started.html#autotoc_md2051", null ],
-      [ "4. ბილდი და ფლეში", "md_docs_2tutorials_2getting__started.html#autotoc_md2052", null ],
-      [ "5. ლოგების ნახვა და ტესტირება", "md_docs_2tutorials_2getting__started.html#autotoc_md2053", null ],
-      [ "6. დამატებითი რესურსები", "md_docs_2tutorials_2getting__started.html#autotoc_md2054", null ]
+      [ "მიზანი", "md_docs_2tutorials_2getting__started.html#autotoc_md2054", null ],
+      [ "1. გარემოს მომზადება", "md_docs_2tutorials_2getting__started.html#autotoc_md2055", null ],
+      [ "2. პროექტის სტრუქტურის გაცნობა", "md_docs_2tutorials_2getting__started.html#autotoc_md2056", null ],
+      [ "3. პირველი მოდულის ჩართვა", "md_docs_2tutorials_2getting__started.html#autotoc_md2057", null ],
+      [ "4. ბილდი და ფლეში", "md_docs_2tutorials_2getting__started.html#autotoc_md2058", null ],
+      [ "5. ლოგების ნახვა და ტესტირება", "md_docs_2tutorials_2getting__started.html#autotoc_md2059", null ],
+      [ "6. დამატებითი რესურსები", "md_docs_2tutorials_2getting__started.html#autotoc_md2060", null ]
     ] ],
     [ "ინტეგრაციის მაგალითი (Integration Example)", "md_docs_2tutorials_2integration__example.html", [
-      [ "მიზანი", "md_docs_2tutorials_2integration__example.html#autotoc_md2057", null ],
-      [ "1. ინტეგრაციის საჭიროების განსაზღვრა", "md_docs_2tutorials_2integration__example.html#autotoc_md2058", null ],
-      [ "2. საჭირო მოდულების ჩართვა და კონფიგურაცია", "md_docs_2tutorials_2integration__example.html#autotoc_md2059", null ],
-      [ "3. MQTT Integration (Publish/Subscribe)", "md_docs_2tutorials_2integration__example.html#autotoc_md2060", null ],
-      [ "4. REST API Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2061", null ],
-      [ "5. WebSocket Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2062", null ],
-      [ "6. Best Practices", "md_docs_2tutorials_2integration__example.html#autotoc_md2063", null ],
-      [ "7. Troubleshooting", "md_docs_2tutorials_2integration__example.html#autotoc_md2064", null ]
+      [ "მიზანი", "md_docs_2tutorials_2integration__example.html#autotoc_md2063", null ],
+      [ "1. ინტეგრაციის საჭიროების განსაზღვრა", "md_docs_2tutorials_2integration__example.html#autotoc_md2064", null ],
+      [ "2. საჭირო მოდულების ჩართვა და კონფიგურაცია", "md_docs_2tutorials_2integration__example.html#autotoc_md2065", null ],
+      [ "3. MQTT Integration (Publish/Subscribe)", "md_docs_2tutorials_2integration__example.html#autotoc_md2066", null ],
+      [ "4. REST API Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2067", null ],
+      [ "5. WebSocket Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2068", null ],
+      [ "6. Best Practices", "md_docs_2tutorials_2integration__example.html#autotoc_md2069", null ],
+      [ "7. Troubleshooting", "md_docs_2tutorials_2integration__example.html#autotoc_md2070", null ]
     ] ],
     [ "მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension & Feature Addition)", "md_docs_2tutorials_2module__extension.html", [
-      [ "მიზანი", "md_docs_2tutorials_2module__extension.html#autotoc_md2067", null ],
-      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2module__extension.html#autotoc_md2068", null ],
-      [ "2. სტრუქტურის დაცვა", "md_docs_2tutorials_2module__extension.html#autotoc_md2069", null ],
-      [ "3. ახალი API ან ფუნქციის დამატება", "md_docs_2tutorials_2module__extension.html#autotoc_md2070", null ],
-      [ "4. კონფიგურაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2071", null ],
-      [ "5. კომუნიკაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2072", null ],
-      [ "6. ტესტირება და ლოგირება", "md_docs_2tutorials_2module__extension.html#autotoc_md2073", null ],
-      [ "7. დოკუმენტაციის განახლება", "md_docs_2tutorials_2module__extension.html#autotoc_md2074", null ],
-      [ "Best Practices", "md_docs_2tutorials_2module__extension.html#autotoc_md2075", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2tutorials_2module__extension.html#autotoc_md2076", null ]
+      [ "მიზანი", "md_docs_2tutorials_2module__extension.html#autotoc_md2073", null ],
+      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2module__extension.html#autotoc_md2074", null ],
+      [ "2. სტრუქტურის დაცვა", "md_docs_2tutorials_2module__extension.html#autotoc_md2075", null ],
+      [ "3. ახალი API ან ფუნქციის დამატება", "md_docs_2tutorials_2module__extension.html#autotoc_md2076", null ],
+      [ "4. კონფიგურაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2077", null ],
+      [ "5. კომუნიკაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2078", null ],
+      [ "6. ტესტირება და ლოგირება", "md_docs_2tutorials_2module__extension.html#autotoc_md2079", null ],
+      [ "7. დოკუმენტაციის განახლება", "md_docs_2tutorials_2module__extension.html#autotoc_md2080", null ],
+      [ "Best Practices", "md_docs_2tutorials_2module__extension.html#autotoc_md2081", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2tutorials_2module__extension.html#autotoc_md2082", null ]
     ] ],
     [ "სისტემის კონფიგურაცია (System Configuration)", "md_docs_2tutorials_2system__configuration.html", [
-      [ "🎯 მიზანი", "md_docs_2tutorials_2system__configuration.html#autotoc_md2079", null ],
-      [ "1. კონფიგურაციის ფაილების როლები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2081", null ],
-      [ "2. <tt>config.json</tt>-ის სტრუქტურა და მაგალითები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2083", null ],
-      [ "3. მოდულის კონფიგურაციის ობიექტის აღწერა", "md_docs_2tutorials_2system__configuration.html#autotoc_md2085", null ],
-      [ "4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2087", null ],
-      [ "5. კონფიგურაციის ვალიდაცია და Default-ები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2089", null ],
-      [ "6. საუკეთესო პრაქტიკები (Best Practices)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2091", null ]
+      [ "🎯 მიზანი", "md_docs_2tutorials_2system__configuration.html#autotoc_md2085", null ],
+      [ "1. კონფიგურაციის ფაილების როლები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2087", null ],
+      [ "2. <tt>config.json</tt>-ის სტრუქტურა და მაგალითები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2089", null ],
+      [ "3. მოდულის კონფიგურაციის ობიექტის აღწერა", "md_docs_2tutorials_2system__configuration.html#autotoc_md2091", null ],
+      [ "4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2093", null ],
+      [ "5. კონფიგურაციის ვალიდაცია და Default-ები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2095", null ],
+      [ "6. საუკეთესო პრაქტიკები (Best Practices)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2097", null ]
     ] ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -2083,11 +2091,11 @@ var NAVTREEINDEX =
 "md_docs_2api__reference_2drivers__api.html#autotoc_md445",
 "md_docs_2changelog_2CHANGELOG__2025-06-24.html",
 "md_docs_2contributing_2contributing__guide.html#autotoc_md1097",
-"md_docs_2convention_2variable__naming.html#autotoc_md1401",
-"md_docs_2security_2security__guidelines.html#autotoc_md1811",
-"mqtt__topics__generated_8h.html#a71006e4007fa0ac0b74fb552c6b8ba98",
-"structalarm__rule__t.html",
-"structsystem__manager__api__t.html#a402ede4ddd5f00bdad179ec8e85d5e9e"
+"md_docs_2convention_2variable__naming.html#autotoc_md1400",
+"md_docs_2security_2security__guidelines.html#autotoc_md1810",
+"mqtt__manager_8c.html",
+"storage__manager_8c.html",
+"structsynapse__service__status__payload__t.html#a2de66c7d9d352c7a4cdbd394152f2702"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

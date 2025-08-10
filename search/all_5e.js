@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📋_20რა_20არის_20tt_20create_5fmodule_20py_20tt_0',['1. 📋 რა არის &lt;tt&gt;create_module.py&lt;/tt&gt;?',['../md_docs_2tools_2create__module.html#autotoc_md1941',1,'']]]
+  ['📊_20ინიციალიზაციის_20დონეების_20რეკომენდებული_20დიაპაზონები_0',['📊 ინიციალიზაციის დონეების რეკომენდებული დიაპაზონები',['../md_docs_2convention_2initialization__levels.html#autotoc_md1313',1,'']]]
 ];

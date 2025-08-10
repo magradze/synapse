@@ -6,7 +6,7 @@ var searchData=
   ['✅_20როდის_20გამოვიყენოთ_20tt_20task_20pool_20tt_20და_20როდის_20საკუთარი_20ტასკი_3',['5. ✅ როდის გამოვიყენოთ &lt;tt&gt;Task Pool&lt;/tt&gt; და როდის საკუთარი ტასკი?',['../md_docs_2convention_2task__pool__pattern.html#autotoc_md1389',1,'']]],
   ['✅_20საუკეთესო_20პრაქტიკები_4',['✅ საუკეთესო პრაქტიკები',['../md_docs_2convention_2module__structure.html#autotoc_md1371',1,'6. ✅ საუკეთესო პრაქტიკები'],['../md_docs_2convention_2configuration__management.html#autotoc_md1258',1,'7. ✅ საუკეთესო პრაქტიკები']]],
   ['✅_20სწორი_5',['✅ სწორი',['../md_docs_2convention_2variable__naming.html#autotoc_md1411',1,'']]],
-  ['✅_20სწორი_20არქიტექტურული_20პატერნი_3a_20ორმაგი_20ინექცია_6',['3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია',['../md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2007',1,'']]],
+  ['✅_20სწორი_20არქიტექტურული_20პატერნი_3a_20ორმაგი_20ინექცია_6',['3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია',['../md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2013',1,'']]],
   ['✅_20strong_20დოკუმენტაციის_20ხარისხი_3a_20strong_7',['✅ &lt;strong&gt;დოკუმენტაციის ხარისხი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md1110',1,'']]],
   ['✅_20strong_20ლოგირების_20სტანდარტი_3a_20strong_8',['✅ &lt;strong&gt;ლოგირების სტანდარტი:&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md1109',1,'']]],
   ['✅_20strong_20მოდულების_20იზოლაცია_20ყველაზე_20მნიშვნელოვანი_20შემოწმება_20_3a_20strong_9',['✅ &lt;strong&gt;მოდულების იზოლაცია (ყველაზე მნიშვნელოვანი შემოწმება):&lt;/strong&gt;',['../md_docs_2contributing_2convention__linter__guide.html#autotoc_md1111',1,'']]],

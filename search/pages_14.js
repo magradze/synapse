@@ -1,26 +1,10 @@
 var searchData=
 [
-  ['pattern_0',['asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)',['../md_docs_2convention_2promise__pattern.html',1,'']]],
-  ['patterns_1',['კომუნიკაციის პატერნები (Communication Patterns)',['../md_docs_2structure_2communication__patterns.html',1,'']]],
-  ['payloads_20event_5fpayloads_20h_2',['API რეფერენსი: Event Payloads (event_payloads.h)',['../md_docs_2api__reference_2event__payloads__api.html',1,'']]],
-  ['performance_3',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
-  ['performance_20წარმადობის_20სახელმძღვანელო_4',['Performance (წარმადობის სახელმძღვანელო)',['../md_docs_2performance_2performance__index.html',1,'']]],
-  ['performance_20—_20display_20modules_5',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
-  ['performance_20benchmarks_20guide_6',['ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)',['../md_docs_2performance_2performance__benchmarks.html',1,'']]],
-  ['performance_20best_20practices_7',['საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)',['../md_docs_2performance_2performance__best__practices.html',1,'']]],
-  ['performance_20optimization_20guide_8',['ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)',['../md_docs_2performance_2performance__optimization.html',1,'']]],
-  ['performance_20resource_20usage_20guide_9',['რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)',['../md_docs_2performance_2performance__resource__usage.html',1,'']]],
-  ['performance_20trade_20offs_10',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],
-  ['policy_20უსაფრთხოების_20ხარვეზების_20აღმოჩენისა_20და_20შეტყობინების_20პროცედურა_11',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['pool_12',['რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)',['../md_docs_2convention_2task__pool__pattern.html',1,'']]],
-  ['pool_20manager_20api_20reference_13',['Synapse Task Pool Manager API Reference',['../md_docs_2api__reference_2task__pool__api.html',1,'']]],
-  ['practices_14',['practices',['../md_docs_2performance_2performance__best__practices.html',1,'საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)'],['../md_docs_2security_2security__best__practices.html',1,'უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)']]],
-  ['practices_20extending_20the_20framework_15',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
-  ['project_20overview_16',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],
-  ['promise_20manager_20api_20reference_17',['Synapse Promise Manager API Reference',['../md_docs_2api__reference_2promise__api.html',1,'']]],
-  ['promise_20pattern_18',['asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)',['../md_docs_2convention_2promise__pattern.html',1,'']]],
-  ['provisioning_20module_20api_20reference_19',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]],
-  ['pull_20request_20template_20',['Synapse Pull Request Template',['../md_docs_2contributing_2pull__request__template.html',1,'']]],
-  ['py_20tt_21',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
-  ['py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_22',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]]
+  ['of_20conduct_0',['ქცევის კოდექსი (Code of Conduct)',['../md_docs_2contributing_2code__of__conduct.html',1,'']]],
+  ['offs_1',['წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)',['../md_docs_2design__decisions_2performance__tradeoffs.html',1,'']]],
+  ['optimization_20guide_2',['ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)',['../md_docs_2performance_2performance__optimization.html',1,'']]],
+  ['ota_20over_20the_20air_20module_20api_20reference_3',['Synapse OTA (Over-the-Air) Module API Reference',['../md_docs_2api__reference_2ota__api.html',1,'']]],
+  ['ota_20update_20manager_4',['მოდული: OTA Update Manager',['../md_components_2modules_2system_2ota__update__manager_2README.html',1,'']]],
+  ['over_20the_20air_20module_20api_20reference_5',['Synapse OTA (Over-the-Air) Module API Reference',['../md_docs_2api__reference_2ota__api.html',1,'']]],
+  ['overview_6',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]]
 ];

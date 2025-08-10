@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📶_20მოდული_20tt_20wifi_5fmanager_20tt_0',['📶 მოდული &lt;tt&gt;wifi_manager&lt;/tt&gt;',['../md_components_2modules_2communications_2wifi__manager_2README.html',1,'']]]
+  ['📝_20tt_20json_20tt_20ვალიდატორი_20tt_20validate_5fjsons_20py_20tt_0',['📝 &lt;tt&gt;JSON&lt;/tt&gt; ვალიდატორი (&lt;tt&gt;validate_jsons.py&lt;/tt&gt;)',['../md_docs_2tools_2json__validator.html',1,'']]]
 ];

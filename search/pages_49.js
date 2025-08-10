@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🛡️_20მოდული_3a_20tt_20security_5fstatus_5freporter_20tt_0',['🛡️ მოდული: &lt;tt&gt;security_status_reporter&lt;/tt&gt;',['../md_components_2modules_2security_2security__status__reporter_2README.html',1,'']]],
-  ['🛡️_20security_20status_20api_20reference_1',['🛡️ Security Status API Reference',['../md_docs_2api__reference_2security__api.html',1,'']]]
+  ['🚀_20მოდულების_20ინიციალიზაციის_20დონეები_20initialization_20levels_0',['🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)',['../md_docs_2convention_2initialization__levels.html',1,'']]],
+  ['🚀_20tt_20create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_1',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]]
 ];

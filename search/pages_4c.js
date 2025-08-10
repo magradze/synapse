@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🩺_20მოდული_3a_20health_20monitor_0',['🩺 მოდული: Health Monitor',['../md_components_2modules_2system_2health__monitor_2README.html',1,'']]],
-  ['🩺_20მოდული_3a_20tt_20self_5ftest_5fmanager_20tt_1',['🩺 მოდული: &lt;tt&gt;self_test_manager&lt;/tt&gt;',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html',1,'']]]
+  ['🛡️_20მოდული_3a_20tt_20security_5fstatus_5freporter_20tt_0',['🛡️ მოდული: &lt;tt&gt;security_status_reporter&lt;/tt&gt;',['../md_components_2modules_2security_2security__status__reporter_2README.html',1,'']]],
+  ['🛡️_20security_20status_20api_20reference_1',['🛡️ Security Status API Reference',['../md_docs_2api__reference_2security__api.html',1,'']]]
 ];

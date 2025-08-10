@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gdb_20და_20breakpoint_20ების_20გამოყენება_0',['3. GDB და Breakpoint-ების გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1997',1,'']]],
+  ['gdb_20და_20breakpoint_20ების_20გამოყენება_0',['3. GDB და Breakpoint-ების გამოყენება',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2003',1,'']]],
   ['generate_5fmqtt_5ftopics_1',['generate_mqtt_topics',['../namespacegenerate__mqtt__topics.html',1,'']]],
   ['generate_5ftopic_5fdefines_2',['generate_topic_defines',['../namespacegenerate__mqtt__topics.html#a155412cdaa45b16a0a5c3cfaf05f27c0',1,'generate_mqtt_topics']]],
   ['get_5fall_5fmodules_3',['get_all_modules',['../structsystem__manager__api__t.html#ab8bea01e2fe57fa651cf7a4b4185ff4a',1,'system_manager_api_t']]],
@@ -31,8 +31,8 @@ var searchData=
   ['glossary_20—_20security_20performance_28',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
   ['gpio_20tt_20რეჟიმისთვის_29',['gpio tt რეჟიმისთვის',['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html#autotoc_md72',1,'3.1. კონფიგურაცია &lt;tt&gt;GPIO&lt;/tt&gt; რეჟიმისთვის'],['../md_components_2modules_2drivers_2button__input_2README.html#autotoc_md46',1,'3.1. კონფიგურაცია &lt;tt&gt;GPIO&lt;/tt&gt; რეჟიმისთვის']]],
   ['graceful_20degradation_30',['2. Graceful Degradation',['../md_docs_2convention_2error__handling.html#autotoc_md1286',1,'']]],
-  ['greeter_5finterface_20h_20tt_31',['**4.1. ინტერფეისის შექმნა (&lt;tt&gt;greeter_interface.h&lt;/tt&gt;)**',['../md_docs_2tutorials_2create__first__module.html#autotoc_md2043',1,'']]],
-  ['greeter_5fmodule_20c_20tt_32',['**4.2. მოდულის იმპლემენტაცია (&lt;tt&gt;greeter_module.c&lt;/tt&gt;)**',['../md_docs_2tutorials_2create__first__module.html#autotoc_md2044',1,'']]],
+  ['greeter_5finterface_20h_20tt_31',['**4.1. ინტერფეისის შექმნა (&lt;tt&gt;greeter_interface.h&lt;/tt&gt;)**',['../md_docs_2tutorials_2create__first__module.html#autotoc_md2049',1,'']]],
+  ['greeter_5fmodule_20c_20tt_32',['**4.2. მოდულის იმპლემენტაცია (&lt;tt&gt;greeter_module.c&lt;/tt&gt;)**',['../md_docs_2tutorials_2create__first__module.html#autotoc_md2050',1,'']]],
   ['guard_20clause_20api_20tt_20synapse_5futils_20h_20tt_33',['2. Guard Clause API (&lt;tt&gt;synapse_utils.h&lt;/tt&gt;)',['../md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md300',1,'']]],
   ['guard_20clause_20validation_20helpers_34',['3. Guard Clause &amp; Validation Helpers',['../md_docs_2api__reference_2utils__api.html#autotoc_md764',1,'']]],
   ['guard_20clauses_20კონვენცია_35',['Assertions და Guard Clauses კონვენცია',['../md_docs_2convention_2assertion__and__guards.html',1,'']]],

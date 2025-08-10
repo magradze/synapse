@@ -8,9 +8,6 @@
 #include "synapse_utils.h"
 #include <string.h>
 
-// Use a generic tag for the utility library itself
-DEFINE_COMPONENT_TAG("SYNAPSE_UTILS", SYNAPSE_LOG_COLOR_BRIGHT_BLUE);
-
 // =========================================================================
 //      Safe String Handling
 // =========================================================================

@@ -105,13 +105,18 @@ esp_err_t synapse_system_init(void)
     }
     ESP_LOGI(TAG, "Task Pool Manager initialized.");
 
-    err = synapse_service_register("system_manager", SYNAPSE_SERVICE_TYPE_SYSTEM_API, &system_manager_service_api);
+    err = synapse_service_register_with_status(
+        "system_manager",
+        SYNAPSE_SERVICE_TYPE_SYSTEM_API,
+        &system_manager_service_api,
+        SERVICE_STATUS_ACTIVE // System Manager service is active as soon as core init is done.
+    );
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to register System Manager service: %s", esp_err_to_name(err));
         return err;
     }
-    ESP_LOGI(TAG, "System Manager service registered.");
+    ESP_LOGI(TAG, "System Manager service registered and active.");
 
     err = synapse_module_registry_init();
     if (err != ESP_OK)
@@ -132,35 +137,45 @@ esp_err_t synapse_system_start(void)
     esp_err_t err;
     ESP_LOGI(TAG, "--- Starting all operational modules ---");
 
-    // --- STAGE 1: Initialize modules in sequence, injecting dependencies just-in-time ---
+    // --- STAGE 1: Initialize modules in sequence ---
     for (uint8_t i = 0; i < s_registered_module_count; i++)
     {
         module_t *module = (module_t *)s_registered_modules[i];
 
-        // Step 1.1: Resolve and inject dependencies for the current module.
-        // Because modules are sorted by init_level, any required service from a
-        // lower-level module will have already been registered in its own init phase.
         err = resolve_dependencies_for_module(module);
         if (err != ESP_OK)
         {
             ESP_LOGE(TAG, "Failed to resolve dependencies for module '%s'. Disabling it.", module->name);
             module->status = MODULE_STATUS_ERROR;
-            continue; // Skip to the next module
+            // Set service status to ERROR as well, if the service was registered
+            synapse_service_set_status(module->name, SERVICE_STATUS_ERROR);
+            continue;
         }
 
-        // Step 1.2: Initialize the module itself.
         if (module && module->base.init)
         {
             ESP_LOGI(TAG, "Initializing module: '%s' (level %d)", module->name, module->init_level);
+
+            // Set status to INITIALIZING only if the service exists
+            if (synapse_service_get(module->name) != NULL)
+            {
+                synapse_service_set_status(module->name, SERVICE_STATUS_INITIALIZING);
+            }
+
             err = module->base.init(module);
             if (err != ESP_OK)
             {
                 ESP_LOGE(TAG, "Failed to initialize module '%s': %s. Disabling it.", module->name, esp_err_to_name(err));
                 module->status = MODULE_STATUS_ERROR;
+                if (synapse_service_get(module->name) != NULL)
+                {
+                    synapse_service_set_status(module->name, SERVICE_STATUS_ERROR);
+                }
             }
             else
             {
                 module->status = MODULE_STATUS_INITIALIZED;
+                // Status remains INITIALIZING until start() is complete
             }
         }
     }
@@ -177,40 +192,30 @@ esp_err_t synapse_system_start(void)
             {
                 ESP_LOGE(TAG, "Failed to start module '%s': %s", module->name, esp_err_to_name(err));
                 module->status = MODULE_STATUS_ERROR;
+                if (synapse_service_get(module->name) != NULL)
+                {
+                    synapse_service_set_status(module->name, SERVICE_STATUS_ERROR);
+                }
             }
             else
             {
                 module->status = MODULE_STATUS_RUNNING;
+                // Now, set service status to ACTIVE if it exists
+                if (synapse_service_get(module->name) != NULL)
+                {
+                    synapse_service_set_status(module->name, SERVICE_STATUS_ACTIVE);
+                }
             }
         }
     }
 
     ESP_LOGI(TAG, "--- System is running. ---");
 
-    // --- STAGE 3: Notify system that startup is complete ---
     ESP_LOGI(TAG, "Publishing SYNAPSE_EVENT_SYSTEM_START_COMPLETE event.");
     synapse_event_bus_post(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, NULL);
 
     return ESP_OK;
 }
-
-/**
- * @internal
- * @brief Scans a single module's configuration and injects its service dependencies.
- * @details This function scans the configuration of the provided module, looking for keys
- *          that end with the "_service" suffix. For each such key found, it
- *          retrieves the corresponding service from the Service Locator and
- *          injects the service handle into the module's private_data structure.
- *
- *          **Injection Convention:**
- *          This mechanism relies on a strict convention. The module's `private_data`
- *          struct MUST declare a pointer for the service handle as its VERY FIRST member.
- *          The name of this pointer does not matter, but its position is critical.
- *
- * @param[in] module The module instance to process.
- * @return ESP_OK on success, or ESP_FAIL if a dependency cannot be resolved.
- */
-// ფაილი: system_manager.c
 
 static esp_err_t resolve_dependencies_for_module(module_t *module)
 {
@@ -242,21 +247,35 @@ static esp_err_t resolve_dependencies_for_module(module_t *module)
         const char *name_to_find = name_node->valuestring;
         void *handle_to_inject = NULL;
 
-        // --- ახალი ლოგიკა: ვარჩევთ, სერვისია თუ მოდულის handle ---
         if (strstr(dep->config_key, "_service") != NULL)
         {
-            // This is a service dependency
             ESP_LOGD(TAG, "Module '%s' depends on SERVICE '%s'. Resolving...", module->name, name_to_find);
+
+#if CONFIG_SYNAPSE_SERVICE_LOCATOR_STRICT_MODE
+            service_status_t dep_status;
+            esp_err_t status_err = synapse_service_get_status(name_to_find, &dep_status);
+
+            if (status_err != ESP_OK)
+            {
+                ESP_LOGE(TAG, "FATAL (Strict Mode): Dependency service '%s' for module '%s' not found!", name_to_find, module->name);
+                return ESP_FAIL;
+            }
+            if (dep_status != SERVICE_STATUS_ACTIVE)
+            {
+                ESP_LOGE(TAG, "FATAL (Strict Mode): Dependency service '%s' for module '%s' is not ACTIVE (current: %s).",
+                         name_to_find, module->name, service_status_to_string(dep_status));
+                return ESP_FAIL;
+            }
+#endif
             handle_to_inject = synapse_service_get(name_to_find);
             if (!handle_to_inject)
-            {
+            { // This check is redundant in strict mode, but good for safety
                 ESP_LOGE(TAG, "FATAL: Service '%s' not found for module '%s'!", name_to_find, module->name);
                 return ESP_FAIL;
             }
         }
         else if (strstr(dep->config_key, "_handle") != NULL)
         {
-            // This is a module handle dependency
             ESP_LOGD(TAG, "Module '%s' depends on MODULE HANDLE '%s'. Resolving...", module->name, name_to_find);
             handle_to_inject = synapse_module_registry_find_by_name(name_to_find);
             if (!handle_to_inject)
@@ -390,6 +409,9 @@ void synapse_system_shutdown(void)
         module_t *module = (module_t *)s_registered_modules[i];
         if (module && module->base.deinit)
         {
+            // Set status to STOPPING before calling deinit()
+            synapse_service_set_status(module->name, SERVICE_STATUS_STOPPING);
+
             ESP_LOGI(TAG, "Deinitializing module: '%s' (level %d)...", module->name, module->init_level);
 
             deinit_task_params_t params = {

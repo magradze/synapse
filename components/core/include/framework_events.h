@@ -60,4 +60,10 @@
 // --- System Shutdown Events ---
 #define SYNAPSE_EVENT_SYSTEM_SHUTDOWN_REQUESTED "SYNAPSE_SYSTEM_SHUTDOWN_REQUESTED"
 
+/**
+ * @brief Published by the Service Locator whenever a service changes its state.
+ * @details The payload should be of type synapse_service_status_payload_t.
+ */
+#define SYNAPSE_EVENT_SERVICE_STATUS_CHANGED "SERVICE_STATUS_CHANGED"
+
 #endif // FRAMEWORK_EVENTS_H

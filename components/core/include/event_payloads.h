@@ -15,6 +15,7 @@
 #define SYNAPSE_EVENT_PAYLOADS_H
 
 #include "framework_config.h" // Kconfig-ის პარამეტრებისთვის
+#include "service_status.h"
 #include <sdkconfig.h>
 #include <stdlib.h> // for free(), malloc()
 #include <string.h> // for strncpy()
@@ -104,6 +105,29 @@ typedef struct
      */
     char button_name[16];
 } synapse_button_payload_t;
+
+/**
+ * @struct synapse_service_status_payload_t (NEW)
+ * @brief Defines the data structure for the SYNAPSE_EVENT_SERVICE_STATUS_CHANGED event.
+ */
+typedef struct
+{
+    /**
+     * @brief The name of the service whose status has changed.
+     */
+    char service_name[CONFIG_SYNAPSE_SERVICE_NAME_MAX_LENGTH];
+
+    /**
+     * @brief The previous status of the service.
+     */
+    service_status_t old_status;
+
+    /**
+     * @brief The new, current status of the service.
+     */
+    service_status_t new_status;
+
+} synapse_service_status_payload_t;
 
 // =========================================================================
 //                      Cleanup (მეხსიერების გასუფთავების) ფუნქციები

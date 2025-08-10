@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2relay__api.ht
   <div class="headertitle"><div class="title">🔌 Relay Actuator API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md614"></a> </p>
-<h1><a class="anchor" id="autotoc_md615"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md615"></a> </p>
+<h1><a class="anchor" id="autotoc_md616"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code>relay_actuator</code> მოდულის საჯარო ინტერფეისებს, რომელთა მეშვეობითაც შესაძლებელია მისი მართვა.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md617"></a>
+<h1><a class="anchor" id="autotoc_md618"></a>
 1. ⌨️ CLI (Command Line Interface)</h1>
 <p><code>relay_actuator</code> მოდულის მართვის ძირითადი მეთოდი არის <code>Command Router</code>-ის მეშვეობით რეგისტრირებული <code>relay</code> ბრძანება.</p>
 <ul>
@@ -125,23 +125,23 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2relay__api.ht
 <div class="line"># &quot;main_light&quot; რელეს მდგომარეობის შეცვლა</div>
 <div class="line">SYNAPSE&gt; relay main_light toggle</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md619"></a>
+<h1><a class="anchor" id="autotoc_md620"></a>
 2. 📡 MQTT ინტერფეისი</h1>
 <p>მოდულის მართვა და მონიტორინგი შესაძლებელია MQTT-ით, <code>mqtt_manager</code>-თან ინტეგრაციის წყალობით.</p>
-<h2><a class="anchor" id="autotoc_md620"></a>
+<h2><a class="anchor" id="autotoc_md621"></a>
 ბრძანების გაგზავნა</h2>
 <ul>
 <li><b>Topic:</b> <code>synapse/devices/{device_id}/cmd/in</code></li>
 <li><b>Payload:</b> იგივე სტრიქონი, რაც CLI-ში. მაგალითად: <code>"relay main_light on"</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md621"></a>
+<h2><a class="anchor" id="autotoc_md622"></a>
 სტატუსის მიღება</h2>
 <ul>
 <li><b>Topic:</b> <code>synapse/devices/{id}/state/relay/{instance_name}/status</code></li>
 <li><b>Payload:</b> <code>{"state":"on"}</code> ან <code>{"state":"off"}</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md623"></a>
+<h1><a class="anchor" id="autotoc_md624"></a>
 3. 📢 ივენთები (Events)</h1>
 <ul>
 <li>**<code>SYNAPSE_EVENT_RELAY_STATE_CHANGED</code>**: ეს ივენთი ქვეყნდება <code>Event Bus</code>-ზე ყოველ ჯერზე, როდესაც რელეს მდგომარეობა იცვლება. მისი <code>payload</code> არის <code><a class="el" href="structsynapse__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">synapse_telemetry_payload_t</a></code> ტიპის, რომელიც შეიცავს რელეს <code>instance_name</code>-ს და მის ახალ სტატუსს JSON ფორმატში. </li>

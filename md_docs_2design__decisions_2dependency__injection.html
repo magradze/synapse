@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
   <div class="headertitle"><div class="title">არქიტექტურული გადაწყვეტილება: დამოკიდებულებების ინექცია (Dependency Injection)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1476"></a> </p>
-<h1><a class="anchor" id="autotoc_md1477"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1478"></a> </p>
+<h1><a class="anchor" id="autotoc_md1479"></a>
 1. კონტექსტი</h1>
 <p>Synapse Framework-ის ერთ-ერთი მთავარი მიზანია მოდულებს შორის მაქსიმალური იზოლაციის მიღწევა. საწყის ვერსიებში, მოდული, რომელსაც სჭირდებოდა სხვა მოდულის სერვისი, იძახებდა <code>synapse_service_get("service_instance_name")</code> ფუნქციას თავის <code>_init</code> ფაზაში.</p>
 <p><b>პრობლემა:</b> ეს მიდგომა, მიუხედავად იმისა, რომ მუშაობს, ქმნის რამდენიმე არქიტექტურულ გამოწვევას:</p>
@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 <li><b>ტესტირების გართულება:</b> შეუძლებელია მოდულის იზოლირებულად ტესტირება "ყალბი" (mock) სერვისის მარტივად ჩანაცვლებით.</li>
 <li>**"ვინ ვის შემდეგ?" პრობლემა:** დეველოპერი თავად უნდა ზრუნავდეს <code>init_level</code>-ების სწორად დალაგებაზე, რათა სერვისის მომხმარებელი არ ცდილობდეს სერვისის გამოყენებას მის ინიციალიზაციამდე.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1478"></a>
+<h1><a class="anchor" id="autotoc_md1480"></a>
 2. გადაწყვეტილება</h1>
 <p>მიღებულ იქნა გადაწყვეტილება, დაინერგოს <b>კონფიგურაციაზე-დაფუძნებული დამოკიდებულებების ინექციის (Configuration-based Dependency Injection)</b> მექანიზმი.</p>
 <p>ამ მოდელის მიხედვით, <code>System Manager</code> სისტემის გაშვებისას, მოდულების <code>_init</code> ფუნქციების გამოძახებამდე, ასრულებს შემდეგ მოქმედებებს:</p>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 <li><b>ინექცია:</b> "შეჰყავს" (injects) ნაპოვნი <code>handle</code> პირდაპირ მომხმარებელი მოდულის <code>private_data</code> სტრუქტურაში.</li>
 </ol>
 <p>შედეგად, როდესაც მოდულის <code>_init</code> ფუნქცია გამოიძახება, მას უკვე გამზადებული და ვალიდური <code>handle</code> ხვდება თავის <code>private_data</code>-ში.</p>
-<h1><a class="anchor" id="autotoc_md1479"></a>
+<h1><a class="anchor" id="autotoc_md1481"></a>
 3. არგუმენტები და მოტივაცია</h1>
 <ul>
 <li><b>სრული იზოლაცია (Inversion of Control):</b> მოდული აღარ არის პასუხისმგებელი თავისი დამოკიდებულებების მოძიებაზე. ამ პასუხისმგებლობას თავის თავზე იღებს ფრეიმვორქი (<code>System Manager</code>). მოდული უბრალოდ აცხადებს, რა სჭირდება და იღებს მას.</li>
@@ -122,9 +122,9 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 <li><b>კონფიგურაციის მოქნილობა:</b> დამოკიდებულებები იმართება ცენტრალიზებულად, <code>config.json</code> ფაილებით. სერვისის სახელის შეცვლა არ საჭიროებს კოდში ცვლილების შეტანას.</li>
 <li><b>გამარტივებული მოდულის კოდი:</b> მოდულების <code>_init</code> ფუნქციები თავისუფლდება <code>synapse_service_get</code> გამოძახებებისგან და ხდება უფრო სუფთა და ფოკუსირებული.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1480"></a>
+<h1><a class="anchor" id="autotoc_md1482"></a>
 4. შედეგები და გავლენა</h1>
-<h2><a class="anchor" id="autotoc_md1481"></a>
+<h2><a class="anchor" id="autotoc_md1483"></a>
 4.1. კონვენცია მოდულის დეველოპერებისთვის</h2>
 <p>ამ მექანიზმის გამართულად მუშაობისთვის, მოდულის დეველოპერმა უნდა დაიცვას <b>ორი მკაცრი კონვენცია</b>:</p>
 <ol type="1">
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 </div><!-- fragment --><p class="startli"><em>ეს კონვენცია საშუალებას აძლევს <code>System Manager</code>-ს, უსაფრთხოდ და ზოგადად ჩაწეროს <code>handle</code>-ის მისამართი <code>private_data</code>-ს დასაწყისში, სტრუქტურის შიდა განლაგების ცოდნის გარეშე.</em></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1482"></a>
+<h2><a class="anchor" id="autotoc_md1484"></a>
 4.2. გამოყენების მაგალითი</h2>
 <p>**ძველი მიდგომა (<code>button_input_init</code>-ში):**</p>
 <div class="fragment"><div class="line"><span class="comment">// მოდული თავად ეძებს სერვისს</span></div>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2dependency
 <div class="line">}</div>
 <div class="line"><span class="comment">// handle უკვე მზადაა გამოსაყენებლად</span></div>
 <div class="line">private_data-&gt;expander_handle-&gt;api-&gt;set_pin_direction(...);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1483"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1485"></a>
 5. დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a href="../../components/core/src/system_manager.c">system_manager.c</a></li>

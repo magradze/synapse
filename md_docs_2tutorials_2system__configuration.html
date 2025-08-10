@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
   <div class="headertitle"><div class="title">სისტემის კონფიგურაცია (System Configuration)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2084"></a> </p>
-<h1><a class="anchor" id="autotoc_md2085"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2086"></a> </p>
+<h1><a class="anchor" id="autotoc_md2087"></a>
 🎯 მიზანი</h1>
 <p>ეს სახელმძღვანელო დაგეხმარებათ სწორად და სტანდარტულად აღწეროთ და მართოთ სისტემის და მოდულების runtime კონფიგურაცია Synapse Framework-ში. v5.0.0-დან ფრეიმვორქი იყენებს <b>დეცენტრალიზებულ</b> მოდელს, სადაც თითოეული მოდული პასუხისმგებელია თავის default კონფიგურაციაზე.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2087"></a>
+<h1><a class="anchor" id="autotoc_md2089"></a>
 1. კონფიგურაციის ფაილების როლები</h1>
 <ul>
 <li>**<code>Kconfig</code>:** განსაზღვრავს, რომელი მოდულების კოდი მოხვდება firmware-ში. ეს არის <b>build-დროის</b> კონფიგურაცია.</li>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <li>**<code>{module_name}/config.json</code>:** თითოეული მოდულის <b>default runtime კონფიგურაცია</b>. ეს არის მთავარი ადგილი, სადაც უნდა აღწეროთ თქვენი მოდულის პარამეტრები.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2089"></a>
+<h1><a class="anchor" id="autotoc_md2091"></a>
 2. &lt;tt&gt;config.json&lt;/tt&gt;-ის სტრუქტურა და მაგალითები</h1>
 <p>თითოეული მოდულის <code>config.json</code> ფაილი უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი არის ობიექტი, რომელიც აღწერს მოდულის ერთ ინსტანციას.</p>
 <p>**<code>relay_actuator/config.json</code> (ორი ინსტანციის მაგალითი):**</p>
@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <div class="line">  }</div>
 <div class="line">]</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2091"></a>
+<h1><a class="anchor" id="autotoc_md2093"></a>
 3. მოდულის კონფიგურაციის ობიექტის აღწერა</h1>
 <ul>
 <li>**<code>type</code>:** მოდულის ტიპი. ეს სტრიქონი <b>ზუსტად უნდა ემთხვეოდეს</b> მოდულის <code>module.json</code> ფაილში არსებულ <code>name</code> ველს.</li>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <li>**<code>instance_name</code>:** <code>config</code> ობიექტის შიგნით არსებული <b>უნიკალური</b> სახელი, რომელიც ამ მოდულის კონკრეტულ მაგალითს (instance) აღნიშნავს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2093"></a>
+<h1><a class="anchor" id="autotoc_md2095"></a>
 4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)</h1>
 <p>მიუხედავად დეცენტრალიზაციისა, <code>Config Manager</code> runtime-ში აწყობს ერთიან ლოგიკურ ხეს, ამიტომ პარამეტრებზე წვდომის API უცვლელი რჩება.</p>
 <ul>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <div class="line">    <span class="comment">// Handle error</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md2095"></a>
+<h1><a class="anchor" id="autotoc_md2097"></a>
 5. კონფიგურაციის ვალიდაცია და Default-ები</h1>
 <ul>
 <li>**<code>_create</code> ფუნქცია:** თითოეული მოდულის <code>_create</code> ფუნქცია პასუხისმგებელია, წაიკითხოს და დაავალიდიროს თავისი კონფიგურაცია.</li>
@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2system__configurat
 <li><b>ლოგირება:</b> ყველა შეცდომა (მაგ., სავალდებულო პარამეტრის არარსებობა) და გაფრთხილება (მაგ., default მნიშვნელობის გამოყენება) უნდა დაილოგოს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md2097"></a>
+<h1><a class="anchor" id="autotoc_md2099"></a>
 6. საუკეთესო პრაქტიკები (Best Practices)</h1>
 <ul>
 <li><b>აღწერითი სახელები:</b> გამოიყენეთ მხოლოდ დესკრიპტიული და კონტექსტური სახელები პარამეტრებისთვის.</li>

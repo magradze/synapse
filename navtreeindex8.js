@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"module__registry_8h.html#add9cd65d2672c1ff7570108b03e32da9":[162,0,0,0,0,11,0],
+"module__registry_8h_source.html":[162,0,0,0,0,11],
 "mqtt__manager_8c.html":[162,0,0,2,1,0,1,0],
 "mqtt__manager_8c.html#a279c0dec5f7de06404136f5a2ae33a19":[162,0,0,2,1,0,1,0,3],
 "mqtt__manager_8h.html":[162,0,0,2,1,0,0,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "storage__backend__spiffs_8h.html":[162,0,0,2,7,0,0,2],
 "storage__backend__spiffs_8h.html#a8150c7e864f41c3155e374856952cda6":[162,0,0,2,7,0,0,2,0],
 "storage__backend__spiffs_8h.html#aa915a6b21aaba13093a8b7ba060c7106":[162,0,0,2,7,0,0,2,1],
-"storage__backend__spiffs_8h_source.html":[162,0,0,2,7,0,0,2],
-"storage__interface_8h.html":[162,0,0,1,0,16],
-"storage__interface_8h_source.html":[162,0,0,1,0,16]
+"storage__backend__spiffs_8h_source.html":[162,0,0,2,7,0,0,2]
 };

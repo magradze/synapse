@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2module__api.h
 <ul>
 <li><b>როლი:</b> ქმნის მოდულის ახალ ინსტანციას. ეს არის მოდულის "კონსტრუქტორი".</li>
 <li><b>არგუმენტები:</b> <code>config</code> - მაჩვენებელი მოდულის სრულ კონფიგურაციის cJSON ობიექტზე (<code>{"type": ..., "config": ...}</code>).</li>
-<li><b>მფლობელობა (Ownership):</b> **(მნიშვნელოვანი!)** ეს ფუნქცია იღებს <code>config</code> ობიექტის მფლობელობას. მან უნდა შეინახოს ეს მაჩვენებელი <code>module-&gt;current_config</code>-ში და არ უნდა გააკეთოს მისი დუბლირება.</li>
+<li><b>მფლობელობა (Ownership):</b> **(მნიშვნელოვანი!)** ეს ფუნქცია პასუხისმგებელია, შექმნას გადაცემული <code>config</code> ობიექტის <b>დამოუკიდებელი ასლი</b> <code>cJSON_Duplicate()</code>-ის გამოყენებით და შეინახოს ის <code>module-&gt;current_config</code>-ში.</li>
 <li><b>აბრუნებს:</b> <code>module_t*</code> წარმატების შემთხვევაში, <code>NULL</code> შეცდომისას.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md518"></a>
@@ -119,9 +119,9 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2module__api.h
 <h2><a class="anchor" id="autotoc_md520"></a>
 &lt;tt&gt;static void {module_name}_deinit(module_t *self);&lt;/tt&gt;</h2>
 <ul>
-<li><b>როლი:</b> ასუფთავებს ყველა გამოყოფილ რესურსს.</li>
-<li><b>მფლობელობა (Ownership):</b> **(მნიშვნელოვანი!)** ამ ფუნქციამ უნდა გაათავისუფლოს <code>self-&gt;current_config</code>-ის მეხსიერება <code>cJSON_Delete()</code>-ის გამოძახებით.</li>
-<li><b>გამოიძახება:</b> როდესაც მოდული ნადგურდება.</li>
+<li><b>როლი:</b> ასუფთავებს მოდულის მიერ გამოყოფილ <b>ყველა შიდა რესურსს</b>.</li>
+<li><b>მფლობელობა (Ownership):</b> **(მნიშვნელოვანი!)** ამ ფუნქციამ უნდა გაათავისუფლოს <code>self-&gt;current_config</code>-ის (რომელიც <code>_create</code>-ში დაკოპირდა) და <code>self-&gt;private_data</code>-ს მეხსიერება. მან <b>არ უნდა</b> გამოიძახოს <code>free(self)</code>, რადგან ამაზე <code>System Manager</code>-ი ზრუნავს.</li>
+<li><b>გამოიძახება:</b> <code>System Manager</code>-ის მიერ, "Graceful Shutdown" პროცესის დროს.</li>
 </ul>
 <hr  />
 <h1><a class="anchor" id="autotoc_md522"></a>
@@ -171,6 +171,13 @@ Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md535"></a>
+&lt;tt&gt;static void {module_name}_debug_print(module_t *self);&lt;/tt&gt;</h2>
+<ul>
+<li><b>როლი:</b> (არასავალდებულო) ბეჭდავს მოდულის დეტალურ, დიაგნოსტიკურ ინფორმაციას კონსოლში.</li>
+<li><b>გამოიძახება:</b> <code>Command Router</code>-ის მიერ, როდესაც მომხმარებელი შეასრულებს <code>modules --info &lt;instance_name&gt;</code> ბრძანებას.</li>
+<li><b>იმპლემენტაცია:</b> ამ ფუნქციამ უნდა დაბეჭდოს <code>private_data</code> სტრუქტურის მნიშვნელოვანი ველები (სტატუსი, კონფიგურაციის პარამეტრები, შიდა მდგომარეობის ცვლადები) ადამიანისთვის გასაგებ ფორმატში.</li>
 </ul>
 <hr  />
 <p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a> და [structure] დოკუმენტები. </p>

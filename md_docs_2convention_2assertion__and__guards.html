@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2assertion__and__g
   <div class="headertitle"><div class="title">Assertions და Guard Clauses კონვენცია</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1199"></a> <b>სტატუსი:</b> საუკეთესო პრაქტიკა (Best Practice) <b>ვერსია:</b> 1.0.0</p>
-<h1><a class="anchor" id="autotoc_md1200"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1200"></a> <b>სტატუსი:</b> საუკეთესო პრაქტიკა (Best Practice) <b>ვერსია:</b> 1.0.0</p>
+<h1><a class="anchor" id="autotoc_md1201"></a>
 1. 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი განსაზღვრავს Synapse Framework-ში კოდის მდგრადობისა და გამართვის გასაუმჯობესებლად განკუთვნილი ორი ძირითადი პატერნის — <b>Assertions</b> (<code>SYNAPSE_ASSERT</code>) და <b>Guard Clauses</b> (<code>SYNAPSE_GUARD</code>) — გამოყენების სტანდარტულ კონვენციას.</p>
 <p>ამ პატერნების სწორი გამოყენება კოდს ხდის უფრო უსაფრთხოს, თვით-დოკუმენტირებადს და მნიშვნელოვნად ამარტივებს ლოგიკური შეცდომების აღმოჩენას დეველოპმენტის ეტაპზე.</p>
-<h1><a class="anchor" id="autotoc_md1201"></a>
+<h1><a class="anchor" id="autotoc_md1202"></a>
 2. 🤔 ფუნდამენტური განსხვავება: Assertion vs. Error Handling</h1>
 <p>სანამ მაკროებს განვიხილავთ, კრიტიკულად მნიშვნელოვანია, გავიაზროთ განსხვავება ამ ორ კონცეფციას შორის:</p>
 <ul>
@@ -120,17 +120,17 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2assertion__and__g
 <blockquote class="doxtable">
 <p>&zwj;<b>ოქროს წესი:</b> გამოიყენეთ <code>if</code> მოსალოდნელი შეცდომებისთვის და <code>SYNAPSE_ASSERT</code> — პროგრამული ბაგების გამოსავლენად. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1202"></a>
+<h1><a class="anchor" id="autotoc_md1203"></a>
 3. &lt;tt&gt;SYNAPSE_ASSERT&lt;/tt&gt; მაკრო</h1>
 <p><code>SYNAPSE_ASSERT</code> არის მძლავრი ინსტრუმენტი დეველოპმენტის ფაზაში ლოგიკური შეცდომების მომენტალური იდენტიფიცირებისთვის.</p>
-<h2><a class="anchor" id="autotoc_md1203"></a>
+<h2><a class="anchor" id="autotoc_md1204"></a>
 3.1. როდის გამოვიყენოთ?</h2>
 <ul>
 <li>ფუნქციის დასაწყისში, კრიტიკულად მნიშვნელოვანი არგუმენტების (<code>NULL</code> მაჩვენებლების) შესამოწმებლად.</li>
 <li>კოდის იმ ნაწილებში, რომლებიც ლოგიკურად მიუღწევადი უნდა იყოს.</li>
 <li>შიდა მდგომარეობის (internal state) ვალიდურობის შესამოწმებლად კრიტიკული ოპერაციის შესრულებამდე.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1204"></a>
+<h2><a class="anchor" id="autotoc_md1205"></a>
 3.2. გამოყენების მაგალითები</h2>
 <p><b>არგუმენტის ვალიდაცია:</b></p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> some_critical_function(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* self, user_data_t* data) {</div>
@@ -149,19 +149,19 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2assertion__and__g
 <div class="line">        SYNAPSE_ASSERT(<span class="keyword">false</span>, <span class="stringliteral">&quot;Unhandled state: %d&quot;</span>, state);</div>
 <div class="line">        <span class="keywordflow">break</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1205"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1206"></a>
 3.3. ქცევა &lt;tt&gt;release&lt;/tt&gt; რეჟიმში</h2>
 <p><code>menuconfig</code>-ში <code>CONFIG_SYNAPSE_ENABLE_ASSERTS</code>-ის გამორთვისას, <code>SYNAPSE_ASSERT</code> მაკრო გარდაიქმნება ცარიელ ოპერაციად (<code>(void)0</code>) და <b>სრულად ქრება</b> საბოლოო firmware-იდან. ის არანაირ გავლენას არ ახდენს წარმადობაზე.</p>
-<h1><a class="anchor" id="autotoc_md1206"></a>
+<h1><a class="anchor" id="autotoc_md1207"></a>
 4. &lt;tt&gt;SYNAPSE_GUARD&lt;/tt&gt; მაკროები</h1>
 <p><code>SYNAPSE_GUARD</code> და <code>SYNAPSE_GUARD_VOID</code> არის "სინტაქსური შაქარი", რომელიც ამარტივებს <code>Error Handling</code>-ის <code>if</code> ბლოკების წერას და კოდს უფრო კომპაქტურს ხდის.</p>
-<h2><a class="anchor" id="autotoc_md1207"></a>
+<h2><a class="anchor" id="autotoc_md1208"></a>
 4.1. როდის გამოვიყენოთ?</h2>
 <ul>
 <li>ფუნქციის დასაწყისში, <code>runtime</code> პირობების სწრაფი შემოწმებისთვის.</li>
 <li>როდესაც შეცდომის შემთხვევაში საჭიროა მხოლოდ ლოგის დაბეჭდვა და ფუნქციიდან დაუყოვნებლივ გამოსვლა.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1208"></a>
+<h2><a class="anchor" id="autotoc_md1209"></a>
 4.2. გამოყენების მაგალითები</h2>
 <p><b>ფუნქცია, რომელიც აბრუნებს <code>esp_err_t</code>-ს:</b></p>
 <div class="fragment"><div class="line">esp_err_t process_data(<span class="keywordtype">void</span>* handle, <span class="keywordtype">int</span> size) {</div>
@@ -180,9 +180,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2assertion__and__g
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:160</div></div>
+<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:163</div></div>
 <div class="ttc" id="asynapse__utils_8h_html_ae462ff126792b1b37559f411f624916f"><div class="ttname"><a href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">SYNAPSE_GUARD_VOID</a></div><div class="ttdeci">#define SYNAPSE_GUARD_VOID(condition, tag, format,...)</div><div class="ttdoc">A guard macro similar to SYNAPSE_GUARD but for functions that return void.</div><div class="ttdef"><b>Definition</b> synapse_utils.h:132</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1209"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1210"></a>
 4.3. როდის &lt;strong&gt;არ&lt;/strong&gt; გამოვიყენოთ &lt;tt&gt;SYNAPSE_GUARD&lt;/tt&gt;?</h2>
 <p><b>არ გამოიყენოთ</b> <code>SYNAPSE_GUARD</code>, თუ შეცდომის დამუშავება მოითხოვს <b>ერთზე მეტ მოქმედებას</b>. მაგალითად, თუ შეცდომისას საჭიროა <code>mutex</code>-ის გათავისუფლება ან მეხსიერების გასუფთავება, გამოიყენეთ სტანდარტული <code>if</code> ბლოკი.</p>
 <p><b>ცუდი მაგალითი (არ გააკეთოთ):</b></p>

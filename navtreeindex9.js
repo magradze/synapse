@@ -1,5 +1,7 @@
 var NAVTREEINDEX9 =
 {
+"storage__interface_8h.html":[162,0,0,1,0,16],
+"storage__interface_8h_source.html":[162,0,0,1,0,16],
 "storage__manager_8c.html":[162,0,0,2,7,0,1,3],
 "storage__manager_8c.html#a81569f9eeedf0881c1fbd785982311fc":[162,0,0,2,7,0,1,3,1],
 "storage__manager_8h.html":[162,0,0,2,7,0,0,3],
@@ -115,13 +117,14 @@ var NAVTREEINDEX9 =
 "structmodule__dependency__t.html#a59c3ee80fc361f3a40271d7461c574f9":[161,0,43,1],
 "structmodule__factory__map__t.html":[161,0,44],
 "structmodule__t.html":[161,0,45],
-"structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196":[161,0,45,5],
-"structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2":[161,0,45,7],
+"structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196":[161,0,45,6],
+"structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2":[161,0,45,8],
 "structmodule__t.html#a5a1305713cce543522141d618ca463da":[161,0,45,1],
-"structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d":[161,0,45,6],
-"structmodule__t.html#ab9b6f71a2c7831d471692dbe25afaa14":[161,0,45,4],
-"structmodule__t.html#ae50465ce0627de2f517d79199fd276c7":[161,0,45,3],
-"structmodule__t.html#ae6209faec074954640ba0eafd259670d":[161,0,45,2],
+"structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d":[161,0,45,7],
+"structmodule__t.html#ab9b6f71a2c7831d471692dbe25afaa14":[161,0,45,5],
+"structmodule__t.html#ad3ed1dcb54c71b7dcbf5e6fc1fcec0d5":[161,0,45,2],
+"structmodule__t.html#ae50465ce0627de2f517d79199fd276c7":[161,0,45,4],
+"structmodule__t.html#ae6209faec074954640ba0eafd259670d":[161,0,45,3],
 "structmodule__t.html#aebce5933d1dc8eaa718b0a90a7e1aaed":[161,0,45,0],
 "structmqtt__manager__config__t.html":[161,0,46],
 "structmqtt__manager__private__data__t.html":[161,0,47],
@@ -246,8 +249,5 @@ var NAVTREEINDEX9 =
 "structsynapse__connectivity__payload__t.html#a7d3b6aac3698a4e1cddcb8d10b8f2f8c":[161,0,85,0],
 "structsynapse__health__pong__payload__t.html":[161,0,86],
 "structsynapse__health__pong__payload__t.html#a1e9fd4ba570a485a7ef3a57d46381348":[161,0,86,0],
-"structsynapse__job__t.html":[161,0,87],
-"structsynapse__module__control__payload__t.html":[161,0,88],
-"structsynapse__module__control__payload__t.html#a258abe73b95df3bc79cb7eeb45924d90":[161,0,88,0],
-"structsynapse__service__status__payload__t.html":[161,0,89]
+"structsynapse__job__t.html":[161,0,87]
 };

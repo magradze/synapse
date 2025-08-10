@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
   <div class="headertitle"><div class="title">მოდულის სტრუქტურის კონვენცია</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1360"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <b>ვერსია:</b> 2.0.0</p>
-<h1><a class="anchor" id="autotoc_md1361"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1361"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <b>ვერსია:</b> 2.0.0</p>
+<h1><a class="anchor" id="autotoc_md1362"></a>
 1. 📜 მიმოხილვა</h1>
 <p>ეს დოკუმენტი განსაზღვრავს Synapse Framework-ის მოდულების ფაილური და კოდის სტრუქტურის <b>ერთიან, სავალდებულო სტანდარტს</b>. ამ კონვენციის ზედმიწევნით დაცვა უზრუნველყოფს კოდის ერთგვაროვნებას, ამარტივებს ავტომატური ინსტრუმენტების (<code>create_module.py</code>, CMake სკრიპტები) მუშაობას და აჩქარებს ახალი დეველოპერების ადაპტაციას.</p>
-<h1><a class="anchor" id="autotoc_md1362"></a>
+<h1><a class="anchor" id="autotoc_md1363"></a>
 2. 📂 საქაღალდის სტრუქტურა</h1>
-<h2><a class="anchor" id="autotoc_md1363"></a>
+<h2><a class="anchor" id="autotoc_md1364"></a>
 2.1. სტანდარტული მოდულის სტრუქტურა</h2>
 <p>ყველა მოდული უნდა მისდევდეს შემდეგ იერარქიას. ფაილები, რომლებიც მონიშნულია <code>(არასავალდებულო)</code>-თი, იქმნება მხოლოდ საჭიროების შემთხვევაში, მოდულის არქეტიპიდან გამომდინარე.</p>
 <div class="fragment"><div class="line">components/modules/{category}/{module_name}/</div>
@@ -116,13 +116,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">    ├── {module_name}_api.c      # (არასავალდებულო, თუ აქვს Service API)</div>
 <div class="line">    ├── {module_name}_cmd.c      # (არასავალდებულო, თუ აქვს CLI ბრძანებები)</div>
 <div class="line">    └── {module_name}_events.c   # (არასავალდებულო, თუ ამუშავებს ივენთებს)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1364"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1365"></a>
 2.2. კატეგორიები</h2>
 <p>მოდულები უნდა განთავსდეს შესაბამის კატეგორიის დირექტორიაში <code>components/modules/</code>-ის ქვეშ:</p>
 <div class="fragment"><div class="line">actuators/ communications/ displays/ drivers/ provisioning/ security/ sensors/ storage/ system/ testing/ utilities/</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1365"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1366"></a>
 3. 📄 ფაილების დანიშნულება და შინაარსი</h1>
-<h2><a class="anchor" id="autotoc_md1366"></a>
+<h2><a class="anchor" id="autotoc_md1367"></a>
 3.1. &lt;tt&gt;src/&lt;/tt&gt; დირექტორიის დანაწევრება</h2>
 <p>მოდულის კოდის წაკითხვადობისა და მართვადობის გასაუმჯობესებლად, <code>src</code> დირექტორიაში კოდი იყოფა ლოგიკური პასუხისმგებლობების მიხედვით:</p>
 <ul>
@@ -132,20 +132,37 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <li>**<code>{module_name}_cmd.c</code>:** (არასავალდებულო) შეიცავს <code>Command Router</code>-ისთვის განკუთვნილი CLI ბრძანებების <code>handler</code> ფუნქციების იმპლემენტაციას.</li>
 <li>**<code>{module_name}_events.c</code>:** (არასავალდებულო) შეიცავს <code>Event Bus</code>-იდან მიღებული ივენთების და/ან ESP-IDF-ის სისტემური ივენთების დამმუშავებელ ფუნქციებს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1367"></a>
+<h2><a class="anchor" id="autotoc_md1368"></a>
 3.2. კონფიგურაციის ფაილები</h2>
 <ul>
 <li>**<code>config.json</code>:** განსაზღვრავს მოდულის <b>default runtime კონფიგურაციას</b>. ის უნდა შეიცავდეს JSON მასივს, რომლის თითოეული ელემენტი აღწერს მოდულის ერთ ინსტანციას. ეს ფაილი ავტომატურად ერთიანდება სისტემის საერთო კონფიგურაციაში.</li>
 <li>**<code>module.json</code>:** შეიცავს მოდულის მეტამონაცემებს build-სისტემისთვის (<code>name</code>, <code>version</code>, <code>init_function</code>, <code>init_level</code> და ა.შ.).</li>
 <li>**<code>Kconfig</code>:** განსაზღვრავს build-დროის კონფიგურაციის პარამეტრებს, რომლებიც ხელმისაწვდომია <code>idf.py menuconfig</code>-ში. მთავარი პარამეტრია <code>CONFIG_MODULE_{MODULE_NAME_UPPER}_ENABLED</code>, რომელიც რთავს ან თიშავს მოდულის კომპილაციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1368"></a>
+<h2><a class="anchor" id="autotoc_md1369"></a>
 3.3. დოკუმენტაცია</h2>
 <ul>
 <li>**<code>README.md</code>:** მოდულის დეტალური დოკუმენტაცია. უნდა შეიცავდეს მიმოხილვას, არქიტექტურულ პრინციპებს, კონფიგურაციის პარამეტრების აღწერას, Service API-ს, ივენთების, CLI ბრძანებების და გამოყენების მაგალითების სექციებს.</li>
 <li>**<code>include/{module_name}.h</code>:** საჯარო ჰედერი. უნდა შეიცავდეს მხოლოდ <code>_create</code> factory ფუნქციის დეკლარაციას და Doxygen-ის სტილის დოკუმენტაციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1369"></a>
+<h2><a class="anchor" id="autotoc_md1370"></a>
+3.4. კოდის სტრუქტურა (&lt;tt&gt;_create&lt;/tt&gt; ფუნქცია)</h2>
+<p>მოდულის <code>_create</code> ფუნქცია არის მისი მთავარი "შესასვლელი წერტილი". მან უნდა დაიცვას შემდეგი ლოგიკური თანმიმდევრობა:</p>
+<ol type="1">
+<li><b>მეხსიერების გამოყოფა:</b> <code>calloc</code>-ით გამოიყოფა მეხსიერება <code><a class="el" href="structmodule__t.html" title="The primary structure defining a framework module.">module_t</a></code> და <code>private_data_t</code> სტრუქტურებისთვის.</li>
+<li><b>კონფიგურაციის დუბლირება:</b> <code>cJSON_Duplicate</code>-ით იქმნება გადაცემული კონფიგურაციის დამოუკიდებელი ასლი.</li>
+<li><b>დამოკიდებულებების რუკის მინიჭება:</b> <code>module-&gt;dependency_map</code>-ს ენიჭება <code>static const <a class="el" href="structmodule__dependency__t.html" title="Describes a single service dependency for a module.">module_dependency_t</a></code> მასივის მისამართი.</li>
+<li><b>კონფიგურაციის პარსინგი:</b> გამოიძახება <code>parse_config</code> ფუნქცია.</li>
+<li><b>სახელის მინიჭება:</b> <code>snprintf</code>-ით <code>module-&gt;name</code>-ს ენიჭება <code>instance_name</code>.</li>
+<li><b>სერვისის რეგისტრაცია:</b> (თუ მოდული <code>Service Provider</code>-ია) <code>synapse_service_register_with_status</code>-ით ხდება სერვისის რეგისტრაცია.</li>
+<li>**<code>base</code> ფუნქციების მინიჭება:** <code>module-&gt;base</code> სტრუქტურის ველებს ენიჭება შესაბამისი <code>lifecycle</code> ფუნქციების მისამართები.</li>
+</ol>
+<p><b>ახალი, არასავალდებულო <code>debug_print</code> ფუნქცია:</b></p>
+<ul>
+<li><code>base</code> სტრუქტურას დაემატა <code>debug_print</code> ფუნქციის მაჩვენებელი.</li>
+<li>თუ მოდულს სურს, ჰქონდეს <code>modules --info</code> ბრძანების მხარდაჭერა, მან უნდა მოახდინოს ამ ფუნქციის იმპლემენტაცია და მიანიჭოს ის <code>_create</code> ფუნქციაში.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1371"></a>
 4. &lt;tt&gt;CMakeLists.txt&lt;/tt&gt;-ის სტრუქტურა</h1>
 <p>Synapse Framework-ი იყენებს **"ჭკვიანი" პირობითი კომპილაციის** მექანიზმს, რათა უზრუნველყოს, რომ <code>menuconfig</code>-ში გამორთული მოდულები არ მოხვდნენ საბოლოო firmware-ში. ყველა მოდულის <code>CMakeLists.txt</code> ფაილი უნდა მისდევდეს ამ სტანდარტულ შაბლონს.</p>
 <div class="fragment"><div class="line"># {Module Name} CMake Configuration</div>
@@ -199,7 +216,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 <div class="line">        REQUIRES synapse</div>
 <div class="line">    )</div>
 <div class="line">endif()</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1370"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1372"></a>
 5. ❌ აკრძალული პრაქტიკები</h1>
 <ul>
 <li><b>არასდროს:</b><ul>
@@ -210,14 +227,15 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2module__structure
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1371"></a>
+<h1><a class="anchor" id="autotoc_md1373"></a>
 6. ✅ საუკეთესო პრაქტიკები</h1>
 <ul>
 <li><b>ყოველთვის:</b><ul>
 <li>გამოიყენეთ <code>create_module.py</code> სკრიპტი ახალი მოდულის ჩონჩხის შესაქმნელად.</li>
 <li>აღწერეთ სერვისებზე დამოკიდებულებები <code>dependency_map</code>-ის საშუალებით.</li>
 <li><code>_deinit</code> ფუნქციამ უნდა გაათავისუფლოს <code>module-&gt;current_config</code> და <code>private_data</code>.</li>
-<li>დაიცავით Doxygen-ის სტანდარტი ყველა ჰედერ ფაილსა და საჯარო ფუნქციაში. </li>
+<li>დაიცავით Doxygen-ის სტანდარტი ყველა ჰედერ ფაილსა და საჯარო ფუნქციაში.</li>
+<li>(არასავალდებულო) დააიმპლემენტეთ <code>debug_print</code> ფუნქცია, რათა გაამარტივოთ მოდულის დიაგნოსტიკა CLI-დან. </li>
 </ul>
 </li>
 </ul>

@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
   <div class="headertitle"><div class="title">კონფიგურაციის მართვის კონვენცია</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1249"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <b>ვერსია:</b> 2.0.0</p>
-<h1><a class="anchor" id="autotoc_md1250"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1250"></a> <b>სტატუსი:</b> უმკაცრესი მოთხოვნა (Mandatory) <b>ვერსია:</b> 2.0.0</p>
+<h1><a class="anchor" id="autotoc_md1251"></a>
 1. 📜 ძირითადი პრინციპი</h1>
 <p><b>ყველა runtime კონფიგურაციული პარამეტრი უნდა იყოს მოდულის საკუთარ <code>config.json</code> ფაილში. კოდში <code>hardcoded</code> მნიშვნელობები დაუშვებელია.</b></p>
-<h1><a class="anchor" id="autotoc_md1251"></a>
+<h1><a class="anchor" id="autotoc_md1252"></a>
 2. 📂 კონფიგურაციის წყაროები და იერარქია</h1>
 <p>Synapse Framework-ი იყენებს მრავალშრიან, დეცენტრალიზებულ კონფიგურაციის მოდელს. პარამეტრების საბოლოო მნიშვნელობა განისაზღვრება შემდეგი პრიორიტეტის მიხედვით (მაღლიდან დაბლისკენ):</p>
 <ol type="1">
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1252"></a>
+<h1><a class="anchor" id="autotoc_md1253"></a>
 3. 🏗️ კონფიგურაციის სტრუქტურა</h1>
 <p>მიუხედავად იმისა, რომ კონფიგურაცია ფიზიკურად დაყოფილია, <code>Config Manager</code> runtime-ში აწყობს ერთიან, ლოგიკურ სტრუქტურას.</p>
 <p>**მაგალითი (<code>relay_actuator/config.json</code>):**</p>
@@ -133,17 +133,17 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">]</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1253"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1254"></a>
 4. 📝 კონფიგურაციის პარსინგის პატერნი</h1>
 <p>თითოეული მოდულის <code>_create</code> ფუნქცია იღებს თავისი კონფიგურაციის სრულ JSON ობიექტს. ამ ობიექტის დასამუშავებლად, ყველა მოდულმა უნდა გამოიყენოს სტანდარტული, 3-ნაბიჯიანი პატერნი <code>parse_config</code> ფუნქციაში.</p>
-<h2><a class="anchor" id="autotoc_md1254"></a>
+<h2><a class="anchor" id="autotoc_md1255"></a>
 &lt;tt&gt;parse_config&lt;/tt&gt; ფუნქციის 3-ნაბიჯიანი ლოგიკა</h2>
 <ol type="1">
 <li><b>ნაბიჯი 1: Default მნიშვნელობების დაყენება:</b> ფუნქციის დასაწყისში, <code>private_data</code> სტრუქტურის ველებს მიანიჭეთ <code>default</code> მნიშვნელობები, როგორც წესი, <code>Kconfig</code>-იდან.</li>
 <li><b>ნაბიჯი 2: JSON-იდან გადაწერა:</b> გამოიყენეთ <code><a class="el" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library.">synapse_utils.h</a></code>-ში განსაზღვრული დამხმარე ფუნქციები (<code>synapse_config_get_string_from_node</code>, <code>..._get_int_...</code> და ა.შ.), რათა სცადოთ <code>default</code> მნიშვნელობების გადაწერა <code>config.json</code>-იდან მოსული მნიშვნელობებით.</li>
 <li><b>ნაბიჯი 3: საბოლოო ვალიდაცია:</b> ფუნქციის ბოლოს, შეამოწმეთ, რომ ყველა <b>სავალდებულო</b> პარამეტრმა მიიღო ვალიდური მნიშვნელობა. თუ რომელიმე სავალდებულო პარამეტრი არ არის განსაზღვრული, დააბრუნეთ შეცდომა.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1255"></a>
+<h2><a class="anchor" id="autotoc_md1256"></a>
 &lt;tt&gt;parse_config&lt;/tt&gt; ფუნქციის მაგალითი</h2>
 <div class="fragment"><div class="line"><span class="comment">// health_monitor.c-ში</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t parse_config(<span class="keyword">const</span> cJSON *config_node, <a class="code hl_struct" href="structhealth__monitor__private__data__t.html">health_monitor_private_data_t</a> *p_data) {</div>
@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <div class="line">}</div>
 <div class="ttc" id="astructhealth__monitor__private__data__t_html"><div class="ttname"><a href="structhealth__monitor__private__data__t.html">health_monitor_private_data_t</a></div><div class="ttdef"><b>Definition</b> health_monitor.c:46</div></div>
 <div class="ttc" id="asynapse__utils_8h_html_aa70b5e48e2691258a8f42faebdb83ff1"><div class="ttname"><a href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a></div><div class="ttdeci">bool synapse_config_get_int_from_node(const char *tag, const cJSON *json_node, const char *key, int *out_value)</div><div class="ttdoc">Safely retrieves an integer value from a cJSON object.</div><div class="ttdef"><b>Definition</b> synapse_utils.c:46</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1256"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1257"></a>
 5. 🌐 კონფიგურაციაზე წვდომა სხვა მოდულებიდან</h1>
 <p>სხვა მოდულის კონფიგურაციის პარამეტრზე წვდომა უნდა მოხდეს <b>მხოლოდ</b> <code>Config Manager</code>-ის API-ს საშუალებით, <b>წერტილით გამოყოფილი გასაღების (dot-notation)</b> გამოყენებით.</p>
 <ul>
@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <div class="fragment"><div class="line"><span class="comment">// `main_light` ინსტანციის `pin` პარამეტრის წაკითხვა</span></div>
 <div class="line"><span class="keywordtype">int</span> relay_pin;</div>
 <div class="line">synapse_config_get_int(<span class="stringliteral">&quot;main_light.pin&quot;</span>, &amp;relay_pin);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1257"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1258"></a>
 6. ❌ აკრძალული პრაქტიკები</h1>
 <ul>
 <li><b>არასდროს:</b><ul>
@@ -188,7 +188,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1258"></a>
+<h1><a class="anchor" id="autotoc_md1259"></a>
 7. ✅ საუკეთესო პრაქტიკები</h1>
 <ul>
 <li><b>ყოველთვის:</b><ul>

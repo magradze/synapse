@@ -1,5 +1,8 @@
 var NAVTREEINDEX10 =
 {
+"structsynapse__module__control__payload__t.html":[161,0,88],
+"structsynapse__module__control__payload__t.html#a258abe73b95df3bc79cb7eeb45924d90":[161,0,88,0],
+"structsynapse__service__status__payload__t.html":[161,0,89],
 "structsynapse__service__status__payload__t.html#a2de66c7d9d352c7a4cdbd394152f2702":[161,0,89,1],
 "structsynapse__service__status__payload__t.html#abc2a1bed3fe805f132bb5d22669d998e":[161,0,89,2],
 "structsynapse__service__status__payload__t.html#af0002554cfcaeb7a1cfb8429cf422e67":[161,0,89,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX10 =
 "wifi__manager_8h.html#a5100b2f029e2c1e6e8212bd03703667e":[162,0,0,2,1,1,0,0,0],
 "wifi__manager_8h_source.html":[162,0,0,2,1,1,0,0],
 "wifi__manager__api_8c.html":[162,0,0,2,1,1,1,1],
-"wifi__manager__cmd_8c.html":[162,0,0,2,1,1,1,2],
-"wifi__manager__events_8c.html":[162,0,0,2,1,1,1,3],
-"wifi__manager__internal_8h.html":[162,0,0,2,1,1,1,4],
-"wifi__manager__internal_8h_source.html":[162,0,0,2,1,1,1,4]
+"wifi__manager__cmd_8c.html":[162,0,0,2,1,1,1,2]
 };

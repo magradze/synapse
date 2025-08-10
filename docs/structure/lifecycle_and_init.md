@@ -1,103 +1,63 @@
-# მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle & Initialization)
+# მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (v2.0)
 
 ## მიზანი
 
-მოდულის სიცოცხლის ციკლის მართვის მიზანია უზრუნველყოს თითოეული მოდულის სწორი ინიციალიზაცია, რესურსების გამოყოფა, ჩართვა/გამორთვა და უსაფრთხო გათავისუფლება სისტემის მუშაობის განმავლობაში.
+მოდულის სიცოცხლის ციკლის მართვის მიზანია უზრუნველყოს თითოეული მოდულის (და მასთან დაკავშირებული სერვისის) სწორი ინიციალიზაცია, რესურსების გამოყოფა, გააქტიურება და უსაფრთხო გათავისუფლება.
 
-## სიცოცხლის ციკლის ეტაპები
+## სიცოცხლის ციკლის ეტაპები და სერვისის სტატუსები
 
-1. **Create** — მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)
-2. **Init** — ინიციალიზაცია (მაგ: static esp_err_t ssd1306_init)
-3. **Enable/Disable** — ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)
-4. **Deinit** — რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)
+1. **Create** (`_create` ფუნქცია)
+    - `System Manager`-ის მიერ `Module Factory`-ს გამოძახება.
+    - მეხსიერების გამოყოფა, კონფიგურაციის დუბლირება.
+    - **სერვისის რეგისტრაცია `SERVICE_STATUS_REGISTERED` სტატუსით.**
 
-## დეტალური აღწერა
+2. **Init** (`_init` ფუნქცია)
+    - `System Manager` ცვლის სერვისის სტატუსს `SERVICE_STATUS_INITIALIZING`-ზე.
+    - ხდება რესურსების დაკავება, `Dependency Injection`-ით მიღებული `handle`-ების ვალიდაცია, ივენთებზე გამოწერა.
+    - წარმატების შემთხვევაში, მოდულის სტატუსი ხდება `MODULE_STATUS_INITIALIZED`.
 
-### 1. Create
+3. **Start** (`_start` ფუნქცია)
+    - `System Manager`-ის მიერ გამოძახება.
+    - აქტიური ოპერაციების დაწყება (მაგ., ტასკის გაშვება).
+    - წარმატების შემთხვევაში, მოდულის სტატუსი ხდება `MODULE_STATUS_RUNNING` და `System Manager` ცვლის სერვისის სტატუსს **`SERVICE_STATUS_ACTIVE`**-ზე.
 
-- ხდება მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა
-- გამოიყენება Factory-ის მიერ
-- მაგალითი:
+4. **Deinit** (`_deinit` ფუნქცია)
+    - `System Manager` (Graceful Shutdown-ისას) ცვლის სერვისის სტატუსს `SERVICE_STATUS_STOPPING`-ზე.
+    - ხდება ყველა რესურსის (მეხსიერება, `mutex`-ები, ივენთების გამოწერები, სერვისის რეგისტრაცია) გათავისუფლება.
 
-  ```c
-  module_t *ssd1306_module_create(const cJSON *config);
-  ```
-
-### 2. Init
-
-- ხდება hardware-ის ან სხვა რესურსების ინიციალიზაცია
-- ყველა აუცილებელი პარამეტრი მოწმდება და ინახება
-- მაგალითი:
-
-  ```c
-  static esp_err_t ssd1306_init(module_t *module);
-  ```
-
-### 3. Enable/Disable
-
-- უზრუნველყოფს მოდულის აქტივაციას ან დროებით გათიშვას
-- გამოიყენება სისტემის ან მომხმარებლის მიერ
-- მაგალითი:
-
-  ```c
-  static esp_err_t ssd1306_enable(module_t *module);
-  static esp_err_t ssd1306_disable(module_t *module);
-  ```
-
-### 4. Deinit
-
-- ხდება ყველა გამოყოფილი რესურსის გათავისუფლება
-- გამოიყენება სისტემის გათიშვის ან მოდულის ამოღებისას
-- მაგალითი:
-
-  ```c
-  static esp_err_t ssd1306_deinit(module_t *module);
-  ```
-
-## სიცოცხლის ციკლის დიაგრამა
+## სიცოცხლის ციკლის დიაგრამა (განახლებული)
 
 ```mermaid
 graph TD
     subgraph "System Startup / Module Factory"
         A(Start) --> B{Config Parsing};
         B -- OK --> C(synapse_module_create);
-        B -- Fail --> D[Module Disabled];
+        C -- "Service registered" --> D[Status: REGISTERED];
+        B -- Fail --> Z[Module Not Created];
     end
 
-    subgraph "Module Lifecycle Management"
-        C --> E{Init};
-        E -- OK --> F[Initialized / Inactive];
-        E -- Fail --> G[Error State];
-
-        F --> H{Enable};
-        H -- OK --> I[Enabled / Running];
-        H -- Fail --> G;
-
-        I -- Disable --> J[Disabled / Suspended];
-        J -- Enable --> I;
-
-        I -- Reconfigure --> K{Reconfigure};
-        K -- OK --> I;
-        K -- Fail --> G;
-
-        J -- Reconfigure --> L{Reconfigure};
-        L -- OK --> J;
-        L -- Fail --> G;
+    subgraph "System Manager: Init Phase"
+        D --> E{Set Status: INITIALIZING};
+        E --> F(module->base.init);
+        F -- OK --> G[Module Status: INITIALIZED];
+        F -- Fail --> H[Status: ERROR];
     end
 
-    subgraph "System Shutdown / Module Unload"
-        I -- Deinit --> M{Deinit};
-        J -- Deinit --> M;
-        G -- Deinit --> M;
-
-        M -- OK --> N(Resources Freed);
-        M -- Fail --> O[Cleanup Error];
+    subgraph "System Manager: Start Phase"
+        G --> I(module->base.start);
+        I -- OK --> J{Set Status: ACTIVE};
+        J --> K[Module Status: RUNNING];
+        I -- Fail --> H;
+    end
+    
+    subgraph "System Shutdown"
+         K -- Shutdown --> L{Set Status: STOPPING};
+         L --> M(module->base.deinit);
+         M --> N[Resources Freed];
     end
 
-    style D fill:#f9f,stroke:#333,stroke-width:2px
-    style G fill:#ff6347,stroke:#333,stroke-width:2px
-    style O fill:#ff6347,stroke:#333,stroke-width:2px
-    style I fill:#90ee90,stroke:#333,stroke-width:2px
+    style H fill:#ff6347,stroke:#333,stroke-width:2px
+    style K fill:#90ee90,stroke:#333,stroke-width:2px
 ```
 
 ## მაგალითი მოდულის სიცოცხლის ციკლის მართვის

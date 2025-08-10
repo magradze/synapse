@@ -56,8 +56,6 @@ module_t *sn74hc595n_writer_create(const cJSON *config)
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
@@ -93,7 +91,21 @@ module_t *sn74hc595n_writer_create(const cJSON *config)
     module->base.start = NULL;
     module->base.handle_event = NULL;
 
-    ESP_LOGI(TAG, "SN74HC595N writer module '%s' created.", module->name);
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_SN74HC595N_WRITER_API,
+        &private_data->service_handle,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        sn74hc595n_writer_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "SN74HC595N writer module '%s' created and service registered.", module->name);
     return module;
 }
 
@@ -136,13 +148,7 @@ static esp_err_t sn74hc595n_writer_init(module_t *self)
     gpio_config(&io_conf);
     gpio_set_level(private_data->latch_pin, 0);
 
-    ret = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_SN74HC595N_WRITER_API, &private_data->service_handle);
-    if (ret != ESP_OK)
-    {
-        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->latch_pin, private_data->instance_name);
-        private_data->spi_bus_handle->api->remove_device(private_data->spi_bus_handle->context, private_data->spi_device_handle);
-        return ret;
-    }
+    // Service registration removed from here
 
     ESP_LOGI(TAG, "SN74HC595N writer '%s' initialized.", self->name);
     return ESP_OK;

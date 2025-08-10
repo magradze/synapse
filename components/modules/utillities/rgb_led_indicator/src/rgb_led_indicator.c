@@ -89,6 +89,7 @@ static rgb_led_api_t rgb_led_service_api = {
 
 module_t *rgb_led_indicator_create(const cJSON *config)
 {
+    // --- 1. მეხსიერების გამოყოფა ---
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
     rgb_led_private_data_t *private_data = (rgb_led_private_data_t *)calloc(1, sizeof(rgb_led_private_data_t));
     if (!module || !private_data)
@@ -96,45 +97,70 @@ module_t *rgb_led_indicator_create(const cJSON *config)
         ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
         free(private_data);
-        if (config)
-            cJSON_Delete((cJSON *)config);
+        // `config` ობიექტის მფლობელობა ეკუთვნის გამომძახებელს (Module Factory),
+        // ამიტომ აქ მისი წაშლა არ არის საჭირო, თუ ის არ არის დუბლირებული.
         return NULL;
     }
 
     module->private_data = private_data;
+
+    // --- 2. კონფიგურაციის დუბლირება (მფლობელობის აღება) ---
     module->current_config = cJSON_Duplicate(config, true);
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
     }
 
+    // --- 3. კონფიგურაციის პარსინგი და ვალიდაცია ---
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (parse_config(config_node, private_data) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to parse configuration");
-        rgb_led_indicator_deinit(module);
+        rgb_led_indicator_deinit(module); // deinit გაასუფთავებს ყველაფერს, მათ შორის current_config-ს.
         return NULL;
     }
 
+    // --- 4. მოდულის საბაზისო ველების შევსება ---
     snprintf(module->name, sizeof(module->name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
-    module->init_level = 60;
+    module->init_level = 60; // მნიშვნელოვანია, რომ ეს იყოს სწორად განსაზღვრული
     module->status = MODULE_STATUS_UNINITIALIZED;
+
+    // --- 5. სიცოცხლის ციკლის ფუნქციების მინიჭება ---
     module->base.init = rgb_led_indicator_init;
     module->base.start = rgb_led_indicator_start;
     module->base.handle_event = rgb_led_indicator_handle_event;
     module->base.deinit = rgb_led_indicator_deinit;
-    module->base.enable = NULL;
+    module->base.enable = NULL; // ეს მოდული არ უჭერს მხარს runtime enable/disable-ს
     module->base.disable = NULL;
-    module->base.reconfigure = NULL;
-    module->base.get_status = NULL;
+    module->base.reconfigure = NULL; // არ უჭერს მხარს reconfigure-ს
+    module->base.get_status = NULL;  // გამოიყენებს default სტატუსის ველს
 
+    // --- 6. სერვისის რეგისტრაცია (ახალი ლოგიკა) ---
+    // რეგისტრაცია ხდება create ფაზაში, რათა System Manager-მა შეძლოს მისი სტატუსის მართვა init-ის დაწყებამდე.
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_RGB_LED_API,
+        &rgb_led_service_api,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        rgb_led_indicator_deinit(module); // deinit გამოიძახებს სრულ გასუფთავებას.
+        return NULL;
+    }
+
+    // --- 7. გლობალური ინსტანციის მინიჭება (თუ საჭიროა) ---
+    // შენიშვნა: გლობალური ცვლადების გამოყენება არ არის რეკომენდებული Synapse-ის არქიტექტურაში.
+    // თუ შესაძლებელია, უმჯობესია ამისგან თავის არიდება და Service Locator-ზე დაყრდნობა.
     global_rgb_led_instance = module;
+
     ESP_LOGI(TAG, "Rgb_Led_Indicator module created: '%s'", module->name);
+
+    // --- 8. მოდულის ობიექტის დაბრუნება ---
     return module;
 }
 
@@ -164,7 +190,6 @@ static esp_err_t rgb_led_indicator_init(module_t *self)
     synapse_event_bus_subscribe("WIFI_EVENT_CONNECTED", self);
     synapse_event_bus_subscribe("SYSTEM_HEALTH_ALERT", self);
 
-    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_RGB_LED_API, &rgb_led_service_api);
     register_cli_commands(self);
     set_led_color(private_data, 0, 0, 0);
 

@@ -106,11 +106,23 @@ module_t *relay_actuator_create(const cJSON *config)
 
     module->private_data = private_data;
 
+    // --- Configuration Handling (Corrected Pattern) ---
+    // 1. Duplicate the config first to take ownership.
+    module->current_config = cJSON_Duplicate(config, true);
+    if (!module->current_config)
+    {
+        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+        free(private_data);
+        free(module);
+        return NULL;
+    }
+
+    // 2. Pass the original config object to the parser.
     if (parse_relay_config(config, private_data) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to parse configuration. Aborting creation.");
-        free(private_data);
-        free(module);
+        // Use deinit for full cleanup, as config is now duplicated
+        relay_module_deinit(module);
         return NULL;
     }
 
@@ -123,6 +135,20 @@ module_t *relay_actuator_create(const cJSON *config)
     module->base.deinit = relay_module_deinit;
     module->base.handle_event = relay_module_handle_event;
 
+    // --- Service Registration ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_RELAY_API,
+        (void *)&relay_service_api,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s).", module->name, esp_err_to_name(ret));
+        relay_module_deinit(module);
+        return NULL;
+    }
+
     if (relay_instance_count < CONFIG_RELAY_ACTUATOR_MAX_INSTANCES)
     {
         relay_instances[relay_instance_count++] = module;
@@ -130,8 +156,8 @@ module_t *relay_actuator_create(const cJSON *config)
     else
     {
         ESP_LOGE(TAG, "Cannot create more relay instances, limit reached.");
-        free(private_data);
-        free(module);
+        synapse_service_unregister(module->name); // Unregister the just-registered service
+        relay_module_deinit(module);
         return NULL;
     }
 
@@ -146,6 +172,7 @@ static esp_err_t relay_module_init(module_t *self)
     relay_private_data_t *private_data = (relay_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing module: %s", self->name);
 
+    // --- Lock Hardware Resource ---
     esp_err_t err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
     if (err != ESP_OK)
     {
@@ -155,19 +182,11 @@ static esp_err_t relay_module_init(module_t *self)
         return err;
     }
 
+    // --- Configure Hardware ---
     gpio_config_t io_conf = {.pin_bit_mask = (1ULL << private_data->gpio_pin), .mode = GPIO_MODE_OUTPUT};
     gpio_config(&io_conf);
 
-    // Register the service API for this specific instance
-    esp_err_t service_err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_RELAY_API, (void *)&relay_service_api);
-    if (service_err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to register relay service for '%s'", self->name);
-        // Cleanup locked resource before failing
-        synapse_resource_release(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->gpio_pin, self->name);
-        return service_err;
-    }
-
+    // --- Subscribe to Events ---
     synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
     self->status = MODULE_STATUS_INITIALIZED;

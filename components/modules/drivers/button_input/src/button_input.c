@@ -91,8 +91,6 @@ module_t *button_input_create(const cJSON *config)
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
@@ -117,6 +115,57 @@ module_t *button_input_create(const cJSON *config)
     ESP_LOGI(TAG, "Button Input module '%s' created with %d buttons (mode: %s).",
              module->name, private_data->button_count, private_data->control_type == CONTROL_TYPE_GPIO ? "GPIO" : "Expander");
     return module;
+}
+
+static esp_err_t button_input_init(module_t *self)
+{
+    button_input_private_data_t *private_data = (button_input_private_data_t *)self->private_data;
+    ESP_LOGI(TAG, "Initializing Button Input module '%s'", self->name);
+
+    if (private_data->control_type == CONTROL_TYPE_GPIO)
+    {
+        private_data->gpio_evt_queue = xQueueCreate(GPIO_INTR_QUEUE_LEN, sizeof(module_t *));
+        if (!private_data->gpio_evt_queue)
+            return ESP_ERR_NO_MEM;
+
+        gpio_install_isr_service(0);
+        for (int i = 0; i < private_data->button_count; i++)
+        {
+            button_config_t *btn = &private_data->buttons[i];
+            synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, btn->pin, self->name);
+            gpio_config_t io_conf = {
+                .pin_bit_mask = (1ULL << btn->pin),
+                .mode = GPIO_MODE_INPUT,
+                .pull_up_en = (btn->active_level == 0),
+                .pull_down_en = (btn->active_level == 1),
+                .intr_type = GPIO_INTR_ANYEDGE,
+            };
+            gpio_config(&io_conf);
+            gpio_isr_handler_add(btn->pin, gpio_isr_handler, (void *)self);
+            ESP_LOGI(TAG, "Button '%s' configured on GPIO %d", btn->name, btn->pin);
+        }
+    }
+    else // Expander Mode
+    {
+        if (!private_data->expander_handle)
+        {
+            ESP_LOGE(TAG, "Dependency injection failed: expander_handle is NULL for '%s'!", self->name);
+            return ESP_ERR_INVALID_STATE;
+        }
+
+        for (int i = 0; i < private_data->button_count; i++)
+        {
+            button_config_t *btn = &private_data->buttons[i];
+            private_data->expander_handle->api->set_pin_direction(private_data->expander_handle->context, btn->pin, MCP23017_DIRECTION_INPUT);
+            private_data->expander_handle->api->set_pin_pullup(private_data->expander_handle->context, btn->pin, true);
+            btn->last_state = !(bool)btn->active_level;
+            btn->last_state_change_time = 0;
+            ESP_LOGI(TAG, "Button '%s' configured on Expander Pin %d", btn->name, btn->pin);
+        }
+    }
+
+    self->status = MODULE_STATUS_INITIALIZED;
+    return ESP_OK;
 }
 
 static void publish_button_event(const char *button_name)
@@ -211,59 +260,6 @@ static void button_task(void *pvParameters)
             }
         }
     }
-}
-
-static esp_err_t button_input_init(module_t *self)
-{
-    button_input_private_data_t *private_data = (button_input_private_data_t *)self->private_data;
-    ESP_LOGI(TAG, "Initializing Button Input module '%s'", self->name);
-
-    if (private_data->control_type == CONTROL_TYPE_GPIO)
-    {
-        private_data->gpio_evt_queue = xQueueCreate(GPIO_INTR_QUEUE_LEN, sizeof(module_t *));
-        if (!private_data->gpio_evt_queue)
-            return ESP_ERR_NO_MEM;
-
-        gpio_install_isr_service(0);
-        for (int i = 0; i < private_data->button_count; i++)
-        {
-            button_config_t *btn = &private_data->buttons[i];
-            synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, btn->pin, self->name);
-            gpio_config_t io_conf = {
-                .pin_bit_mask = (1ULL << btn->pin),
-                .mode = GPIO_MODE_INPUT,
-                .pull_up_en = (btn->active_level == 0),
-                .pull_down_en = (btn->active_level == 1),
-                .intr_type = GPIO_INTR_ANYEDGE,
-            };
-            gpio_config(&io_conf);
-            // Pass the module instance pointer as the ISR argument
-            gpio_isr_handler_add(btn->pin, gpio_isr_handler, (void *)self);
-            ESP_LOGI(TAG, "Button '%s' configured on GPIO %d", btn->name, btn->pin);
-        }
-    }
-    else // Expander Mode
-    {
-        // Validate the injected handle
-        if (!private_data->expander_handle)
-        {
-            ESP_LOGE(TAG, "Dependency injection failed: expander_handle is NULL for '%s'!", self->name);
-            return ESP_ERR_INVALID_STATE;
-        }
-
-        for (int i = 0; i < private_data->button_count; i++)
-        {
-            button_config_t *btn = &private_data->buttons[i];
-            private_data->expander_handle->api->set_pin_direction(private_data->expander_handle->context, btn->pin, MCP23017_DIRECTION_INPUT);
-            private_data->expander_handle->api->set_pin_pullup(private_data->expander_handle->context, btn->pin, true);
-            btn->last_state = !(bool)btn->active_level;
-            btn->last_state_change_time = 0;
-            ESP_LOGI(TAG, "Button '%s' configured on Expander Pin %d", btn->name, btn->pin);
-        }
-    }
-
-    self->status = MODULE_STATUS_INITIALIZED;
-    return ESP_OK;
 }
 
 static esp_err_t button_input_start(module_t *self)

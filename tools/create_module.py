@@ -309,7 +309,9 @@ typedef struct {{
 
         deinit_task_logic = ""
         if self.is_event_producer:
-            deinit_task_logic = "    if (private_data->task_handle) vTaskDelete(private_data->task_handle);"
+            deinit_task_logic += "    if (private_data->task_handle) vTaskDelete(private_data->task_handle);\n"
+        if self.is_service_provider:
+            deinit_task_logic += "    synapse_service_unregister(self->name);\n"
 
         task_implementation = ""
         if self.is_event_producer:
@@ -327,6 +329,24 @@ void {self.module_name}_task(void *pvParameters)
         vTaskDelay(pdMS_TO_TICKS(5000));
     }}
 }}"""
+
+        service_registration_logic = ""
+        if self.is_service_provider:
+            service_registration_logic = f"""
+    // Register the service in the create phase
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_CUSTOM_API, // TODO: Replace with the correct service type enum
+        &private_data->service_api,
+        SERVICE_STATUS_REGISTERED
+    );
+
+    if (ret != ESP_OK) {{
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s).", module->name, esp_err_to_name(ret));
+        {self.module_name}_deinit(module);
+        return NULL;
+    }}
+"""
 
         return f"""/**
  * @file {self.module_name}.c
@@ -350,7 +370,6 @@ module_t* {self.module_name}_create(const cJSON *config)
     if (!module || !private_data) {{
         ESP_LOGE(TAG, "Failed to allocate memory for {self.module_name} module");
         free(module); free(private_data);
-        if (config) cJSON_Delete((cJSON*)config);
         return NULL;
     }}
 
@@ -358,8 +377,6 @@ module_t* {self.module_name}_create(const cJSON *config)
     module->current_config = cJSON_Duplicate(config, true);
     if (!module->current_config) {{
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
@@ -367,6 +384,7 @@ module_t* {self.module_name}_create(const cJSON *config)
     module->init_level = {self.params['init_level']};
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
+    // TODO: Implement robust parsing using synapse_utils here.
     const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
     snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
@@ -375,7 +393,7 @@ module_t* {self.module_name}_create(const cJSON *config)
     module->base.start = {self.module_name}_start;
     module->base.deinit = {self.module_name}_deinit;
 {handle_event_assignment}
-
+{service_registration_logic}
     ESP_LOGI(TAG, "{self.module_title} ('%s') created.", module->name);
     return module;
 }}

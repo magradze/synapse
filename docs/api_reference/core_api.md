@@ -1,52 +1,51 @@
 # Synapse Core API Reference
 
-## Service Locator API
+## ⚙️ Service Locator API (v2.0 - State-Aware)
 
-### synapse_service_register
+Service Locator-ი უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით. v2.0-დან ის ასევე აღრიცხავს თითოეული სერვისის სიცოცხლის ციკლის სტატუსს.
 
-```c
-esp_err_t synapse_service_register(const char *service_name, synapse_service_type_t service_type, service_handle_t service_api_handle);
-```
+### `esp_err_t synapse_service_register_with_status(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle, service_status_t initial_status);`
 
-- რეგისტრირებს ახალ სერვისს Service Locator-ში.
-- არგუმენტები: უნიკალური სახელი, ტიპი, API-ის მაჩვენებელი.
-- აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_INVALID_ARG ან ESP_ERR_NO_MEM შეცდომისას.
+- **აღწერა:** არეგისტრირებს ახალ სერვისს `Service Locator`-ში მითითებული საწყისი სტატუსით. ეს არის სერვისის რეგისტრაციის **რეკომენდებული** მეთოდი.
+- **გამოძახების ადგილი:** მოდულის `_create` ფუნქცია.
+- **არგუმენტები:**
+  - `service_name`: სერვისის უნიკალური სახელი (როგორც წესი, მოდულის `instance_name`).
+  - `service_type`: სერვისის ტიპი `synapse_service_type_t` enum-იდან.
+  - `service_handle`: მაჩვენებელი სერვისის API სტრუქტურაზე.
+  - `initial_status`: სერვისის საწყისი სტატუსი (როგორც წესი, `SERVICE_STATUS_REGISTERED`).
+- **აბრუნებს:** `ESP_OK` წარმატების შემთხვევაში, ან შეცდომის კოდს.
 
-### synapse_service_unregister
+### `esp_err_t synapse_service_set_status(const char *service_name, service_status_t new_status);`
 
-```c
-esp_err_t synapse_service_unregister(const char *service_name);
-```
+- **აღწერა:** ცვლის უკვე რეგისტრირებული სერვისის სტატუსს. სტატუსის ცვლილებისას, ავტომატურად აქვეყნებს `SYNAPSE_EVENT_SERVICE_STATUS_CHANGED` ივენთს `Event Bus`-ზე.
+- **გამოძახების ადგილი:** როგორც წესი, გამოიძახება `System Manager`-ის მიერ მოდულის სიცოცხლის ციკლის სხვადასხვა ეტაპზე.
+- **არგუმენტები:**
+  - `service_name`: სერვისის სახელი.
+  - `new_status`: ახალი სტატუსი `service_status_t` enum-იდან.
+- **აბრუნებს:** `ESP_OK` წარმატების შემთხვევაში, `ESP_ERR_NOT_FOUND` თუ სერვისი ვერ მოიძებნა.
 
-- აუქმებს სერვისის რეგისტრაციას და ათავისუფლებს დაკავშირებულ რესურსებს.
-- არგუმენტები: რეგისტრაციიდან მოსახსნელი სერვისის უნიკალური სახელი.
-- აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_NOT_FOUND თუ სერვისი ვერ მოიძებნა.
+### `esp_err_t synapse_service_get_status(const char *service_name, service_status_t *out_status);`
 
-### synapse_service_get
+- **აღწერა:** აბრუნებს სერვისის მიმდინარე სტატუსს.
+- **არგუმენტები:**
+  - `service_name`: სერვისის სახელი.
+  - `out_status`: მაჩვენებელი, სადაც ჩაიწერება სერვისის სტატუსი.
+- **აბრუნებს:** `ESP_OK` წარმატების შემთხვევაში.
 
-```c
-service_handle_t synapse_service_get(const char *service_name);
-```
+### `service_handle_t synapse_service_get(const char *service_name);`
 
-- აბრუნებს სერვისის API-ს მაჩვენებელს სახელით.
+- **აღწერა:** აბრუნებს სერვისის `handle`-ს (API სტრუქტურის მაჩვენებელს) მისი სახელით.
+- **მნიშვნელოვანია:** ეს ფუნქცია აბრუნებს `handle`-ს, თუ სერვისი რეგისტრირებულია, **განურჩევლად მისი სტატუსისა**. `System Manager` (`Strict Mode`-ში) უზრუნველყოფს, რომ მოდული, რომელიც ამ `handle`-ს გამოიყენებს, მხოლოდ მაშინ დაიწყებს მუშაობას, როდესაც სერვისი `ACTIVE` გახდება.
 
-### synapse_service_get_type
+### `esp_err_t synapse_service_unregister(const char *service_name);`
 
-```c
-esp_err_t synapse_service_get_type(const char *service_name, synapse_service_type_t *out_service_type);
-```
+- **აღწერა:** აუქმებს სერვისის რეგისტრაციას.
+- **გამოძახების ადგილი:** როგორც წესი, გამოიძახება მოდულის `deinit` ფუნქციაში, თუ სერვისი დინამიურად უნდა მოიხსნას.
 
-- აბრუნებს სერვისის ტიპს სახელით.
+### `__attribute__((deprecated))` `esp_err_t synapse_service_register(...)`
 
-### synapse_service_lookup_by_type
-
-```c
-service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type);
-```
-
-- ეძებს და აბრუნებს პირველ ნაპოვნ სერვისს მითითებული ტიპის მიხედვით.
-- არგუმენტები: მოსაძებნი სერვისის ტიპი (enum).
-- აბრუნებს: ნაპოვნი სერვისის handle, ან NULL თუ ვერ მოიძებნა.
+- **სტატუსი:** მოძველებული (Deprecated).
+- **აღწერა:** ძველი რეგისტრაციის ფუნქცია. უკუთავსებადობისთვის ის კვლავ მუშაობს და შიდა დონეზე იძახებს `synapse_service_register_with_status`-ს `SERVICE_STATUS_REGISTERED` სტატუსით. თავი აარიდეთ მის გამოყენებას ახალ კოდში.
 
 ---
 

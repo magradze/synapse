@@ -85,9 +85,8 @@ module_t *health_monitor_create(const cJSON *config)
     if (!module || !private_data)
     {
         ESP_LOGE(TAG, "Failed to allocate memory for module structures.");
-        free(module); // It's safe to call free on NULL
+        free(module);
         free(private_data);
-        // The original config is managed by the Module Registry, so we don't delete it here.
         return NULL;
     }
 
@@ -109,10 +108,7 @@ module_t *health_monitor_create(const cJSON *config)
     if (parse_config(module->current_config, private_data) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to parse configuration for health_monitor.");
-        // Perform a full cleanup as config was already duplicated
-        cJSON_Delete(module->current_config);
-        free(private_data);
-        free(module);
+        health_monitor_deinit(module); // Use deinit for full cleanup
         return NULL;
     }
 
@@ -125,21 +121,39 @@ module_t *health_monitor_create(const cJSON *config)
     module->base.start = health_monitor_start;
     module->base.deinit = health_monitor_deinit;
     module->base.handle_event = health_monitor_handle_event;
-    // Note: get_status is not assigned here, it seems to be missing from the original file.
+    // Note: get_status is not assigned.
+
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_HEALTH_API,
+        &health_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        health_monitor_deinit(module);
+        return NULL;
+    }
 
     // 7. Set the global instance for the Service API
     global_health_monitor_instance = module;
 
-    ESP_LOGI(TAG, "Health_Monitor module created: '%s'", module->name);
+    ESP_LOGI(TAG, "Health_Monitor module '%s' created and service registered.", module->name);
     return module;
 }
 
 static esp_err_t health_monitor_init(module_t *self)
 {
     ESP_LOGI(TAG, "Initializing health_monitor module: %s", self->name);
-    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_HEALTH_API, &health_service_api);
+
+    // Service registration is now in _create, so it's removed from here.
+
+    // Subscribe to events
     synapse_event_bus_subscribe("PROV_STARTED", self);
     synapse_event_bus_subscribe("PROV_ENDED", self);
+
     self->status = MODULE_STATUS_INITIALIZED;
     ESP_LOGI(TAG, "Health_Monitor module initialized successfully");
     return ESP_OK;

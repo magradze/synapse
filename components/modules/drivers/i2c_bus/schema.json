@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "I2C Bus Config Schema",
+    "description": "Defines the structure for an i2c_bus config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "i2c_bus" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "port": { "type": "integer", "enum": [0, 1] },
+                "sda_pin": { "type": "integer", "minimum": 0 },
+                "scl_pin": { "type": "integer", "minimum": 0 },
+                "clk_speed_hz": { "type": "integer", "minimum": 1000 }
+            },
+            "required": ["instance_name", "port", "sda_pin", "scl_pin", "clk_speed_hz"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

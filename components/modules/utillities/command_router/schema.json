@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Command Router Config Schema",
+    "description": "Defines the structure for a command_router config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "command_router" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "enable_serial_shell": { "type": "boolean" },
+                "serial_shell_prompt": { "type": "string" }
+            },
+            "required": ["instance_name"]
+        }
+    },
+    "required": ["type", "config"]
+}

@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MQTT Manager Config Schema",
+    "description": "Defines the structure for an mqtt_manager config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "mqtt_manager" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "broker_uri": { "type": "string", "format": "uri" },
+                "username": { "type": "string" },
+                "password": { "type": "string" },
+                "base_topic_prefix": { "type": "string" },
+                "lwt_topic": { "type": "string" },
+                "lwt_message": { "type": "string" },
+                "lwt_qos": { "type": "integer", "enum": [0, 1, 2] },
+                "lwt_retain": { "type": "boolean" }
+            },
+            "required": ["instance_name", "broker_uri"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

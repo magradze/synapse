@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UI Manager Config Schema",
+    "description": "Defines the structure for a ui_manager config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "ui_manager" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "display_driver_service": { "type": "string" },
+                "wifi_service": { "type": "string" },
+                "wifi_module_handle": { "type": "string" }
+            },
+            "required": ["instance_name", "display_driver_service", "wifi_service", "wifi_module_handle"]
+        }
+    },
+    "required": ["type", "config"]
+}

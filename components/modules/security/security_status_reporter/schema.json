@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Security Status Reporter Config Schema",
+    "description": "Defines the structure for a security_status_reporter config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "security_status_reporter" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 }
+            },
+            "required": ["instance_name"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

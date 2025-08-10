@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Storage Manager Config Schema",
+    "description": "Defines the structure for a storage_manager config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "storage_manager" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 }
+            },
+            "required": ["instance_name"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

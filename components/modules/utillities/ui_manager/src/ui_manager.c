@@ -29,16 +29,6 @@ static const module_dependency_t s_dependencies[] = {
     {NULL, 0} // Terminator
 };
 
-/**
- * @brief Creates a new instance of the UI Manager module.
- * @details This is the factory function for the module, called by the Module Factory.
- *          It allocates memory for the module and its private data, takes ownership
- *          of the provided config object, parses the instance name, and sets up
- *          the module's base lifecycle function pointers.
- * @param[in] config A pointer to the cJSON configuration object for this instance.
- *                   The function takes ownership of this object.
- * @return A pointer to the newly created module_t structure, or NULL on failure.
- */
 module_t *ui_manager_create(const cJSON *config)
 {
     module_t *module = calloc(1, sizeof(module_t));
@@ -77,62 +67,6 @@ module_t *ui_manager_create(const cJSON *config)
     return module;
 }
 
-/**
- * @brief Deinitializes the UI Manager module instance.
- * @details This function is responsible for cleaning up all resources allocated
- *          by the module. It cancels any active timers, unsubscribes from all
- *          Event Bus events, and frees all allocated memory, including the
- *          private data structure and the configuration object.
- * @param[in] self A pointer to the module instance to deinitialize.
- */
-static void ui_manager_deinit(module_t *self)
-{
-    if (!self)
-        return;
-    ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
-
-    if (private_data->ui_task_handle)
-    {
-        vTaskDelete(private_data->ui_task_handle);
-        private_data->ui_task_handle = NULL;
-    }
-    if (private_data->ui_cmd_queue)
-    {
-        vQueueDelete(private_data->ui_cmd_queue);
-        private_data->ui_cmd_queue = NULL;
-    }
-
-    if (private_data->timer)
-    {
-        if (private_data->screen_off_timer)
-            private_data->timer->cancel_event(private_data->screen_off_timer);
-        if (private_data->home_screen_timer)
-            private_data->timer->cancel_event(private_data->home_screen_timer);
-        if (private_data->wifi_status_timer)
-            private_data->timer->cancel_event(private_data->wifi_status_timer);
-    }
-    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_BUTTON_PRESSED, self);
-    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_WIFI_STATUS_READY, self);
-    synapse_event_bus_unsubscribe(SCREEN_OFF_TIMER_EVENT, self);
-    synapse_event_bus_unsubscribe("UI_HOME_UPDATE", self);
-    synapse_event_bus_unsubscribe(WIFI_STATUS_TIMER_EVENT, self);
-    synapse_event_bus_unsubscribe(SPLASH_SCREEN_TIMER_EVENT, self);
-    if (self->current_config)
-        cJSON_Delete(self->current_config);
-    free(private_data);
-
-    ESP_LOGI(TAG, "UI Manager deinitialized.");
-}
-
-/**
- * @brief Initializes the UI Manager module instance.
- * @details This function is called by the System Manager after the module is created.
- *          It acquires handles to all required services (display, system manager, timer, etc.)
- *          from the Service Locator. It also subscribes to all necessary system events
- *          and sets the initial state of the UI to `UI_STATE_SPLASH`.
- * @param[in] self A pointer to the module instance.
- * @return ESP_OK on success, or an error code if required services are not found.
- */
 static esp_err_t ui_manager_init(module_t *self)
 {
     ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
@@ -180,15 +114,6 @@ static esp_err_t ui_manager_init(module_t *self)
     return ESP_OK;
 }
 
-/**
- * @brief Starts the UI Manager's operation.
- * @details Called by the System Manager after all modules have been initialized.
- *          This function retrieves the display's physical dimensions and font metrics,
- *          schedules the initial timer for the splash screen, and performs the first
- *          render of the UI.
- * @param[in] self A pointer to the module instance.
- * @return ESP_OK on success.
- */
 static esp_err_t ui_manager_start(module_t *self)
 {
     ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
@@ -223,6 +148,45 @@ static esp_err_t ui_manager_start(module_t *self)
 
     ESP_LOGI(TAG, "UI Manager started, showing splash screen.");
     return ESP_OK;
+}
+
+static void ui_manager_deinit(module_t *self)
+{
+    if (!self)
+        return;
+    ui_manager_private_data_t *private_data = (ui_manager_private_data_t *)self->private_data;
+
+    if (private_data->ui_task_handle)
+    {
+        vTaskDelete(private_data->ui_task_handle);
+        private_data->ui_task_handle = NULL;
+    }
+    if (private_data->ui_cmd_queue)
+    {
+        vQueueDelete(private_data->ui_cmd_queue);
+        private_data->ui_cmd_queue = NULL;
+    }
+
+    if (private_data->timer)
+    {
+        if (private_data->screen_off_timer)
+            private_data->timer->cancel_event(private_data->screen_off_timer);
+        if (private_data->home_screen_timer)
+            private_data->timer->cancel_event(private_data->home_screen_timer);
+        if (private_data->wifi_status_timer)
+            private_data->timer->cancel_event(private_data->wifi_status_timer);
+    }
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_BUTTON_PRESSED, self);
+    synapse_event_bus_unsubscribe(SYNAPSE_EVENT_WIFI_STATUS_READY, self);
+    synapse_event_bus_unsubscribe(SCREEN_OFF_TIMER_EVENT, self);
+    synapse_event_bus_unsubscribe("UI_HOME_UPDATE", self);
+    synapse_event_bus_unsubscribe(WIFI_STATUS_TIMER_EVENT, self);
+    synapse_event_bus_unsubscribe(SPLASH_SCREEN_TIMER_EVENT, self);
+    if (self->current_config)
+        cJSON_Delete(self->current_config);
+    free(private_data);
+
+    ESP_LOGI(TAG, "UI Manager deinitialized.");
 }
 
 /**

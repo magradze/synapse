@@ -67,47 +67,41 @@ module_t *ota_update_manager_create(const cJSON *config)
     ESP_LOGI(TAG, "Creating ota_update_manager module instance");
 
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module)
-    {
-        ESP_LOGE(TAG, "Failed to allocate memory for module");
-        return NULL;
-    }
-
     ota_update_manager_private_data_t *private_data = (ota_update_manager_private_data_t *)calloc(1, sizeof(ota_update_manager_private_data_t));
-    if (!private_data)
+    if (!module || !private_data)
     {
-        ESP_LOGE(TAG, "Failed to allocate memory for private data");
-        free(module);
-        return NULL;
-    }
-
-    private_data->ota_in_progress = false;
-    module->private_data = private_data;
-
-    const char *instance_name = CONFIG_OTA_UPDATE_MANAGER_DEFAULT_INSTANCE_NAME;
-    if (config)
-    {
-        const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-        if (cJSON_IsObject(config_node))
-        {
-            const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-            if (cJSON_IsString(name_node) && name_node->valuestring)
-            {
-                instance_name = name_node->valuestring;
-            }
-        }
-    }
-
-    snprintf(module->name, sizeof(module->name), "%s", instance_name);
-    strncpy(private_data->instance_name, instance_name, sizeof(private_data->instance_name) - 1);
-
-    if (parse_config(config, private_data) != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to parse configuration for %s", module->name);
+        ESP_LOGE(TAG, "Failed to allocate memory for module structures");
         free(private_data);
         free(module);
         return NULL;
     }
+
+    module->private_data = private_data;
+    private_data->ota_in_progress = false;
+
+    // --- Configuration Handling ---
+    // Create a copy of the config first to ensure it's always available for deinit
+    if (config)
+    {
+        module->current_config = cJSON_Duplicate(config, true);
+        if (!module->current_config)
+        {
+            ESP_LOGE(TAG, "Failed to duplicate configuration object.");
+            free(private_data);
+            free(module);
+            return NULL;
+        }
+    }
+
+    // Parse the configuration
+    if (parse_config(module->current_config, private_data) != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to parse configuration for OTA manager.");
+        ota_update_manager_deinit(module); // Use deinit for full cleanup
+        return NULL;
+    }
+
+    snprintf(module->name, sizeof(module->name), "%s", private_data->instance_name);
 
     module->init_level = 80;
     module->status = MODULE_STATUS_UNINITIALIZED;
@@ -120,19 +114,29 @@ module_t *ota_update_manager_create(const cJSON *config)
     module->base.reconfigure = NULL;
     module->base.handle_event = NULL;
 
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_OTA_API,
+        &ota_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        ota_update_manager_deinit(module);
+        return NULL;
+    }
+
     global_ota_instance = module;
 
-    ESP_LOGI(TAG, "OTA Update Manager module created: '%s'", instance_name);
+    ESP_LOGI(TAG, "OTA Update Manager module '%s' created and service registered.", module->name);
     return module;
 }
 
-// =============================================================================
-// Base Module & Lifecycle Functions
-// =============================================================================
 static esp_err_t ota_update_manager_init(module_t *self)
 {
     ESP_LOGI(TAG, "Initializing OTA Update Manager.");
-    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_OTA_API, &ota_service_api);
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }

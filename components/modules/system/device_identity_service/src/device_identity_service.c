@@ -91,23 +91,16 @@ static cmd_t device_info_command;
 //                      Module Lifecycle Implementation
 // =========================================================================
 
-/**
- * @brief Creates a new instance of the Device Identity Service module.
- * @see device_identity_service.h
- */
 module_t *device_identity_service_create(const cJSON *config)
 {
     ESP_LOGI(TAG, "Creating Device Identity Service module instance...");
 
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module) {
-        ESP_LOGE(TAG, "Failed to allocate memory for module_t.");
-        return NULL;
-    }
-
     device_identity_private_data_t *private_data = (device_identity_private_data_t *)calloc(1, sizeof(device_identity_private_data_t));
-    if (!private_data) {
-        ESP_LOGE(TAG, "Failed to allocate memory for private_data.");
+    if (!module || !private_data)
+    {
+        ESP_LOGE(TAG, "Failed to allocate memory for module structures.");
+        free(private_data);
         free(module);
         return NULL;
     }
@@ -121,22 +114,20 @@ module_t *device_identity_service_create(const cJSON *config)
         return NULL;
     }
 
-    char instance_name_buffer[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
-    strncpy(instance_name_buffer, CONFIG_DEVICE_IDENTITY_SERVICE_DEFAULT_INSTANCE_NAME, sizeof(instance_name_buffer) - 1);
-    instance_name_buffer[sizeof(instance_name_buffer) - 1] = '\0';
-
+    // --- Configuration Parsing & Default Value Handling ---
+    const char *instance_name_ptr = CONFIG_DEVICE_IDENTITY_SERVICE_DEFAULT_INSTANCE_NAME;
     if (config) {
         const cJSON *config_node = cJSON_GetObjectItem(config, "config");
         if (cJSON_IsObject(config_node)) {
             const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
             if (cJSON_IsString(name_node) && name_node->valuestring) {
-                strncpy(instance_name_buffer, name_node->valuestring, sizeof(instance_name_buffer) - 1);
+                instance_name_ptr = name_node->valuestring;
             }
         }
         module->current_config = cJSON_Duplicate(config, true);
     }
 
-    snprintf(module->name, sizeof(module->name), "%s", instance_name_buffer);
+    snprintf(module->name, sizeof(module->name), "%s", instance_name_ptr);
     module->status = MODULE_STATUS_UNINITIALIZED;
     module->init_level = 20;
 
@@ -149,24 +140,33 @@ module_t *device_identity_service_create(const cJSON *config)
     module->base.get_status = NULL;
     module->base.handle_event = device_identity_handle_event;
 
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API,
+        &identity_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        device_identity_deinit(module); // Use deinit for full cleanup
+        return NULL;
+    }
+
     global_identity_service_instance = module;
 
-    ESP_LOGI(TAG, "Device Identity Service module '%s' created.", module->name);
+    ESP_LOGI(TAG, "Device Identity Service module '%s' created and service registered.", module->name);
     return module;
 }
 
-/**
- * @internal
- * @brief Initializes the Device Identity Service module.
- * @param[in] self Pointer to the module instance.
- * @return ESP_OK on success, or an error code on failure.
- */
 static esp_err_t device_identity_init(module_t *self)
 {
     if (!self || !self->private_data) return ESP_ERR_INVALID_ARG;
     device_identity_private_data_t *p_data = (device_identity_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Initializing Device Identity Service: %s", self->name);
 
+    // --- Retrieve and cache device identifiers ---
     uint8_t mac[6];
     esp_efuse_mac_get_default(mac);
     snprintf(p_data->device_id, sizeof(p_data->device_id),
@@ -179,21 +179,21 @@ static esp_err_t device_identity_init(module_t *self)
     ESP_LOGI(TAG, "Device ID: %s", p_data->device_id);
     ESP_LOGI(TAG, "Firmware Version: %s", p_data->firmware_version);
 
-    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_DEVICE_IDENTITY_API, &identity_service_api);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register Device Identity service: %s", esp_err_to_name(err));
-        return err;
-    }
+    // Service registration is now in _create, so it's removed from here.
 
-    err = synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
+    // --- Subscribe to events needed for runtime logic ---
+    esp_err_t err = synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to subscribe to system start event: %s", esp_err_to_name(err));
-        synapse_service_unregister(self->name);
+        // The service is already registered, so we don't unregister it here.
+        // The error will propagate up to System Manager.
         return err;
     }
 
+    // This module becomes active right after initialization.
+    // System Manager will set the service status to ACTIVE after start() succeeds.
     self->status = MODULE_STATUS_RUNNING;
-    ESP_LOGI(TAG, "Device Identity Service initialized and service registered.");
+    ESP_LOGI(TAG, "Device Identity Service initialized.");
     return ESP_OK;
 }
 

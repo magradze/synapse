@@ -1,27 +1,24 @@
-# კომუნიკაციის პატერნების წესები
+# კომუნიკაციის პატერნების წესები (v2.0)
 
-## ძირითადი პრინციპი: მაქსიმალური იზოლაცია
+## ძირითადი პრინციპი: მაქსიმალური იზოლაცია და პროგნოზირებადი გაშვება
 
-**FUNDAMENTAL RULE:** Synapse ESP Framework-ში უნდა შენარჩუნდეს მაქსიმალური იზოლაცია მოდულებს შორის.
+**FUNDAMENTAL RULE:** Synapse ESP Framework-ში მოდულებს შორის უნდა შენარჩუნდეს მაქსიმალური იზოლაცია. ახალი, **State-Aware Service Locator**-ის წყალობით, ამას ემატება სისტემის პროგნოზირებადი და უსაფრთხო გაშვების გარანტია.
 
-## სამი ძირითადი პატერნი
+## ოთხი ძირითადი პატერნი
 
-### 1. Service Locator Pattern
+### 1. Service Locator Pattern (State-Aware)
 
-- **გამოიყენება:** პირდაპირი, სინქრონული API გამოძახებებისთვის.
+- **გამოიყენება:** პირდაპირი, სინქრონული API გამოძახებებისთვის, **სერვისის მზადყოფნის გარანტიით.**
 - **როდის ვიყენებთ:**
-  - როდესაც ერთ მოდულს სჭირდება მეორე მოდულის კონკრეტული ფუნქციის **დაუყოვნებლივ** გამოძახება.
-  - მაგალითად: `ota_manager`-ს სჭირდება `rgb_led_indicator`-ის ფერის შეცვლა.
-- **მაგალითი:**
-
-    ```c
-    // MQTT module calls display API directly
-    service_handle_t display_service_handle = synapse_service_get("main_display");
-    if (display_service_handle) {
-        ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
-        ssd1306_service_api->disable();
-    }
-    ```
+  - როდესაც ერთ მოდულს სჭირდება მეორე მოდულის კონკრეტული ფუნქციის გამოძახება.
+  - ფრეიმვორქი (`System Manager`) უზრუნველყოფს, რომ მომხმარებელი მოდული არ დაიწყებს მუშაობას, სანამ მისი დამოკიდებულება (სერვისი) არ მიაღწევს `ACTIVE` სტატუსს.
+- **პატერნის აღწერა:**
+    1. **რეგისტრაცია (`_create` ფაზაში):** Service Provider მოდული თავის `_create` ფუნქციაში არეგისტრირებს სერვისს `synapse_service_register_with_status` ფუნქციით და საწყისი სტატუსით `SERVICE_STATUS_REGISTERED`.
+    2. **სტატუსის მართვა (`System Manager`):** სისტემის გაშვებისას `System Manager` ავტომატურად ცვლის სერვისის სტატუსს:
+        - `init`-ის დაწყებამდე -> `SERVICE_STATUS_INITIALIZING`
+        - `start`-ის წარმატებით დასრულების შემდეგ -> `SERVICE_STATUS_ACTIVE`
+        - შეცდომის შემთხვევაში -> `SERVICE_STATUS_ERROR`
+    3. **გამოყენება (Dependency Injection):** Service Consumer მოდული იღებს სერვისის `handle`-ს `Dependency Injection`-ის მეშვეობით. მას არ სჭირდება სტატუსის შემოწმება, რადგან `System Manager`-მა უკვე უზრუნველყო სერვისის მზადყოფნა.
 
 ### 2. Event Bus Pattern
 
@@ -177,56 +174,46 @@ static void system_manager_handle_event(module_t *module, const char *event_name
 
 ## სწორი იმპლემენტაცია
 
-### Service Locator-ის გამოყენება
+### Service Locator-ის გამოყენება (ახალი პატერნი)
 
-#### 1. Service Registration (Display Module)
+#### 1. Service Registration (`_create` ფუნქციაში)
 
 ```c
-// ssd1306_module.c
-static ssd1306_api_t ssd1306_service_api = {
-    .enable = ssd1306_api_enable,
-    .disable = ssd1306_api_disable,
-    .clear = ssd1306_api_clear,
-    .write_text = ssd1306_api_write_text
-};
+// in some_provider_module.c
+module_t *some_provider_create(const cJSON *config) {
+    // ... module creation logic ...
 
-module_t *ssd1306_module_create(const cJSON *config) {
-    // ... module creation ...
-    // Register API in Service Locator
-    esp_err_t operation_result = synapse_service_register(module->name, SYNAPSE_SERVICE_TYPE_DISPLAY_API, &ssd1306_service_api);
-    if (operation_result != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register service API");
-        // ... cleanup ...
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_SOME_API,
+        &s_some_api_table,
+        SERVICE_STATUS_REGISTERED // Always register with this initial state
+    );
+
+    if (ret != ESP_OK) {
+        // Handle registration failure...
         return NULL;
     }
+
     return module;
 }
 ```
 
-#### 2. Service Usage (MQTT Module)
+#### 2. Service Usage (სხვა მოდულში)
 
 ```c
-// mqtt_module.c - NO direct includes of other modules!
-static esp_err_t handle_display_command(const char *module_instance_name, const char *action) {
-    service_handle_t display_service_handle = synapse_service_get(module_instance_name);
-    if (!display_service_handle) {
-        ESP_LOGW(TAG, "Service not found: %s", module_instance_name);
-        return ESP_ERR_NOT_FOUND;
-    }
-    
-    synapse_service_type_t service_type;
-    if (synapse_service_get_type(module_instance_name, &service_type) != ESP_OK || service_type != SYNAPSE_SERVICE_TYPE_DISPLAY_API) {
-        ESP_LOGW(TAG, "Invalid service type for %s", module_instance_name);
-        return ESP_ERR_INVALID_ARG;
+// in some_consumer_module.c
+static esp_err_t some_consumer_init(module_t *self) {
+    // The handle was injected by the System Manager, which already
+    // verified that the service is ACTIVE (in strict mode).
+    if (!private_data->injected_service_handle) {
+        return ESP_ERR_INVALID_STATE; // DI failed
     }
 
-    ssd1306_api_t *ssd1306_service_api = (ssd1306_api_t *)display_service_handle;
-    if (strcmp(action, "enable") == 0) {
-        return ssd1306_service_api->enable();
-    } else if (strcmp(action, "disable") == 0) {
-        return ssd1306_service_api->disable();
-    }
-    return ESP_ERR_INVALID_ARG;
+    // It's safe to use the API directly.
+    private_data->injected_service_handle->api->do_something(...);
+
+    return ESP_OK;
 }
 ```
 

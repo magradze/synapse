@@ -111,15 +111,6 @@ static esp_err_t send_data(ssd1306_private_data_t *private_data, const uint8_t *
     return ret;
 }
 
-/**
- * @brief Creates a new instance of the SSD1306 driver module.
- * @details This function is the entry point for the Module Factory. It allocates
- *          memory for the module, parses its configuration, and sets up its
- *          base lifecycle function pointers.
- * @param[in] config A cJSON object containing the configuration for this instance.
- *                   The function takes ownership of this object.
- * @return A pointer to the newly created module_t instance, or NULL on failure.
- */
 module_t* ssd1306_driver_create(const cJSON *config) {
     module_t *module = calloc(1, sizeof(module_t));
     ssd1306_private_data_t *private_data = calloc(1, sizeof(ssd1306_private_data_t));
@@ -127,7 +118,6 @@ module_t* ssd1306_driver_create(const cJSON *config) {
         ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
         free(private_data);
-        if (config) cJSON_Delete((cJSON*)config);
         return NULL;
     }
 
@@ -136,8 +126,6 @@ module_t* ssd1306_driver_create(const cJSON *config) {
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
@@ -148,57 +136,84 @@ module_t* ssd1306_driver_create(const cJSON *config) {
 
     // Parse config
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    snprintf(module->name, sizeof(module->name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
-    private_data->i2c_addr = (uint8_t)strtol(cJSON_GetObjectItem(config_node, "i2c_addr")->valuestring, NULL, 16);
-    private_data->width = cJSON_GetObjectItem(config_node, "width")->valueint;
-    private_data->height = cJSON_GetObjectItem(config_node, "height")->valueint;
-    private_data->reset_pin = cJSON_GetObjectItem(config_node, "reset_pin")->valueint;
+    // Add NULL checks for safety
+    if (config_node)
+    {
+        const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+        if (cJSON_IsString(name_node))
+        {
+            snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
+        }
+
+        const cJSON *addr_node = cJSON_GetObjectItem(config_node, "i2c_addr");
+        if (cJSON_IsString(addr_node))
+        {
+            private_data->i2c_addr = (uint8_t)strtol(addr_node->valuestring, NULL, 16);
+        }
+
+        const cJSON *width_node = cJSON_GetObjectItem(config_node, "width");
+        if (cJSON_IsNumber(width_node))
+        {
+            private_data->width = width_node->valueint;
+        }
+
+        const cJSON *height_node = cJSON_GetObjectItem(config_node, "height");
+        if (cJSON_IsNumber(height_node))
+        {
+            private_data->height = height_node->valueint;
+        }
+
+        const cJSON *reset_pin_node = cJSON_GetObjectItem(config_node, "reset_pin");
+        if (cJSON_IsNumber(reset_pin_node))
+        {
+            private_data->reset_pin = reset_pin_node->valueint;
+        }
+    }
 
     module->base.init = ssd1306_driver_init;
     module->base.deinit = ssd1306_driver_deinit;
 
+    // API and Handle setup
+    private_data->service_handle.api = &ssd1306_api_table;
+    private_data->service_handle.context = private_data;
+
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_DISPLAY_API,
+        &private_data->service_handle,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        ssd1306_driver_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "SSD1306 Driver module '%s' created and service registered.", module->name);
     return module;
 }
 
-/**
- * @internal
- * @brief Deinitializes the SSD1306 driver module instance.
- * @details This function is responsible for cleaning up all resources allocated
- *          by the module. It unregisters the service from the Service Locator
- *          and frees all allocated memory, including the screen buffer, private
- *          data, and the configuration object.
- * @param[in] self A pointer to the module instance to deinitialize.
- */
-static void ssd1306_driver_deinit(module_t *self) {
-    if (!self) return;
-    ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
-
-    synapse_service_unregister(self->name);
-
-    if (private_data->screen_buffer) {
-        free(private_data->screen_buffer);
-    }
-    if (self->current_config) {
-        cJSON_Delete(self->current_config);
-    }
-    free(private_data);
-    ESP_LOGI(TAG, "SSD1306 driver deinitialized.");
-}
-
-/**
- * @internal
- * @brief Initializes the SSD1306 driver module instance.
- * @details This function is called by the System Manager. It acquires the I2C bus
- *          service, allocates the screen buffer, performs the hardware initialization
- *          sequence by sending commands to the display, and finally registers its
- *          own service API with the Service Locator.
- * @param[in] self A pointer to the module instance.
- * @return ESP_OK on success, or an error code on failure.
- */
-static esp_err_t ssd1306_driver_init(module_t *self) {
+static esp_err_t ssd1306_driver_init(module_t *self)
+{
     ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
     const cJSON *config_node = cJSON_GetObjectItem(self->current_config, "config");
-    const char* i2c_bus_service_name = cJSON_GetObjectItem(config_node, "i2c_bus_service")->valuestring;
+
+    // This check is important, as config might be malformed.
+    if (!config_node)
+    {
+        ESP_LOGE(TAG, "Module '%s' has no 'config' object.", self->name);
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    const cJSON *i2c_bus_service_name_node = cJSON_GetObjectItem(config_node, "i2c_bus_service");
+    if (!cJSON_IsString(i2c_bus_service_name_node))
+    {
+        ESP_LOGE(TAG, "Config for '%s' is missing 'i2c_bus_service' key.", self->name);
+        return ESP_ERR_INVALID_ARG;
+    }
+    const char *i2c_bus_service_name = i2c_bus_service_name_node->valuestring;
 
     private_data->i2c_bus = synapse_service_get(i2c_bus_service_name);
     if (!private_data->i2c_bus) {
@@ -214,6 +229,7 @@ static esp_err_t ssd1306_driver_init(module_t *self) {
     }
     memset(private_data->screen_buffer, 0, private_data->buffer_size);
 
+    // --- Hardware Initialization Commands ---
     send_cmd(private_data, SSD1306_DISPLAY_OFF);
     send_cmd(private_data, SSD1306_SET_DISPLAY_CLOCK_DIV);
     send_cmd(private_data, 0x80);
@@ -240,12 +256,39 @@ static esp_err_t ssd1306_driver_init(module_t *self) {
     send_cmd(private_data, SSD1306_NORMAL_DISPLAY);
     send_cmd(private_data, SSD1306_DISPLAY_ON);
 
-    private_data->service_handle.api = &ssd1306_api_table;
-    private_data->service_handle.context = private_data;
-    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_DISPLAY_API, &private_data->service_handle);
+    // Service registration is now in _create, so it's removed from here.
 
     ESP_LOGI(TAG, "SSD1306 driver '%s' initialized on I2C addr 0x%02X", self->name, private_data->i2c_addr);
     return ESP_OK;
+}
+
+/**
+ * @internal
+ * @brief Deinitializes the SSD1306 driver module instance.
+ * @details This function is responsible for cleaning up all resources allocated
+ *          by the module. It unregisters the service from the Service Locator
+ *          and frees all allocated memory, including the screen buffer, private
+ *          data, and the configuration object.
+ * @param[in] self A pointer to the module instance to deinitialize.
+ */
+static void ssd1306_driver_deinit(module_t *self)
+{
+    if (!self)
+        return;
+    ssd1306_private_data_t *private_data = (ssd1306_private_data_t *)self->private_data;
+
+    synapse_service_unregister(self->name);
+
+    if (private_data->screen_buffer)
+    {
+        free(private_data->screen_buffer);
+    }
+    if (self->current_config)
+    {
+        cJSON_Delete(self->current_config);
+    }
+    free(private_data);
+    ESP_LOGI(TAG, "SSD1306 driver deinitialized.");
 }
 
 /**

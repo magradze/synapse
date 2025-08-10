@@ -68,6 +68,7 @@ module_t *i2c_bus_create(const cJSON *config)
         return NULL;
     }
 
+    module->private_data = private_data;
     module->current_config = cJSON_Duplicate(config, true);
     if (!module->current_config)
     {
@@ -76,7 +77,6 @@ module_t *i2c_bus_create(const cJSON *config)
         free(module);
         return NULL;
     }
-    module->private_data = private_data;
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (parse_config(config_node, private_data) != ESP_OK)
@@ -96,13 +96,27 @@ module_t *i2c_bus_create(const cJSON *config)
     private_data->service_api.get_port = i2c_bus_api_get_port;
 
     private_data->service_handle.api = &private_data->service_api;
-    private_data->service_handle.context = module; // Pass module as context
+    private_data->service_handle.context = module;
 
     module->base.init = i2c_bus_init;
-    module->base.start = i2c_bus_start; // Assign start function
+    module->base.start = i2c_bus_start;
     module->base.deinit = i2c_bus_deinit;
 
-    ESP_LOGI(TAG, "I2C Bus module '%s' created.", module->name);
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_I2C_BUS_API,
+        &private_data->service_handle, // Pass the handle, not the API directly
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        i2c_bus_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "I2C Bus module '%s' created and service registered.", module->name);
     return module;
 }
 
@@ -116,22 +130,20 @@ static esp_err_t i2c_bus_init(module_t *self)
     ESP_LOGI(TAG, "Initializing I2C bus '%s' on port %d (SDA:%d, SCL:%d)",
              private_data->instance_name, private_data->port, private_data->sda_pin, private_data->scl_pin);
 
+    // Resource locking remains here
     err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_I2C_PORT, private_data->port, private_data->instance_name);
     if (err != ESP_OK)
-    {
         return err;
-    }
+
     err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->sda_pin, private_data->instance_name);
     if (err != ESP_OK)
-    {
         return err;
-    }
+
     err = synapse_resource_lock(SYNAPSE_RESOURCE_TYPE_GPIO, private_data->scl_pin, private_data->instance_name);
     if (err != ESP_OK)
-    {
         return err;
-    }
 
+    // Hardware initialization remains here
     i2c_master_bus_config_t i2c_bus_config = {
         .i2c_port = private_data->port,
         .sda_io_num = private_data->sda_pin,
@@ -151,24 +163,15 @@ static esp_err_t i2c_bus_init(module_t *self)
     if (!private_data->bus_mutex)
     {
         ESP_LOGE(TAG, "Failed to create mutex for I2C bus '%s'", private_data->instance_name);
-        i2c_del_master_bus(private_data->bus_handle); // Clean up allocated bus
+        i2c_del_master_bus(private_data->bus_handle);
         return ESP_ERR_NO_MEM;
     }
 
-    err = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_I2C_BUS_API, &private_data->service_handle);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to register I2C bus service '%s': %s", private_data->instance_name, esp_err_to_name(err));
-        vSemaphoreDelete(private_data->bus_mutex);
-        i2c_del_master_bus(private_data->bus_handle);
-        return err;
-    }
+    // Service registration is now in _create, so it's removed from here.
 
-    ESP_LOGI(TAG, "I2C bus '%s' initialized and service registered.", private_data->instance_name);
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
 }
-
 static esp_err_t i2c_bus_start(module_t *self)
 {
     i2c_bus_private_data_t *private_data = (i2c_bus_private_data_t *)self->private_data;

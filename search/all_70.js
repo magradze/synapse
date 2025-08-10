@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔳_20qr_20code_20provisioning_20api_0',['🔳 QR Code Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md578',1,'']]]
+  ['🔵_20ble_20provisioning_20service_20api_20იმპლემენტირებულია_0',['🔵 BLE Provisioning Service API (იმპლემენტირებულია)',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md569',1,'']]]
 ];

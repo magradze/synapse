@@ -100,9 +100,7 @@ $(document).ready(function(){initNavTree('service__locator_8c.html',''); initRes
 
 <p>Service Locator პატერნის იმპლემენტაცია.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="service__locator_8h_source.html">service_locator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="logging_8h_source.html">logging.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="framework__config_8h_source.html">framework_config.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="synapse_8h_source.html">synapse.h</a>&quot;</code><br />
 <code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
 <code>#include &quot;freertos/semphr.h&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -113,31 +111,116 @@ Include dependency graph for service_locator.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="service__locator_8c__incl.png" border="0" usemap="#acomponents_2core_2src_2service__locator_8c" alt=""/></div>
 <map name="acomponents_2core_2src_2service__locator_8c" id="acomponents_2core_2src_2service__locator_8c">
-<area shape="rect" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="623,5,781,45"/>
-<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="104,93,236,119"/>
-<area shape="poly" title=" " alt="" coords="623,41,250,96,249,90,623,36"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="261,93,343,119"/>
-<area shape="poly" title=" " alt="" coords="624,44,358,96,357,91,623,39"/>
-<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="368,93,519,119"/>
-<area shape="poly" title=" " alt="" coords="641,48,495,92,493,87,639,43"/>
-<area shape="rect" title=" " alt="" coords="543,93,693,119"/>
-<area shape="poly" title=" " alt="" coords="683,48,642,86,639,82,680,44"/>
-<area shape="rect" title=" " alt="" coords="717,93,855,119"/>
-<area shape="poly" title=" " alt="" coords="724,44,765,82,762,86,721,48"/>
-<area shape="rect" title=" " alt="" coords="879,93,949,119"/>
-<area shape="poly" title=" " alt="" coords="754,43,871,86,869,91,752,48"/>
-<area shape="rect" title=" " alt="" coords="973,93,1044,119"/>
-<area shape="poly" title=" " alt="" coords="776,43,961,90,959,95,775,48"/>
-<area shape="rect" title=" " alt="" coords="1068,93,1168,119"/>
-<area shape="poly" title=" " alt="" coords="781,39,1055,90,1054,95,780,44"/>
-<area shape="rect" title=" " alt="" coords="5,167,87,192"/>
-<area shape="poly" title=" " alt="" coords="151,121,79,162,77,157,149,116"/>
-<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="111,167,235,192"/>
-<area shape="poly" title=" " alt="" coords="173,119,174,153,169,153,168,119"/>
-<area shape="rect" title=" " alt="" coords="260,167,344,192"/>
-<area shape="poly" title=" " alt="" coords="305,119,305,153,299,153,299,119"/>
-<area shape="rect" title=" " alt="" coords="408,167,479,192"/>
-<area shape="poly" title=" " alt="" coords="446,119,446,153,441,153,441,119"/>
+<area shape="rect" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="2059,5,2216,45"/>
+<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1496,93,1584,119"/>
+<area shape="poly" title=" " alt="" coords="2059,40,1598,100,1598,94,2058,34"/>
+<area shape="rect" title=" " alt="" coords="626,313,777,339"/>
+<area shape="poly" title=" " alt="" coords="2059,30,1835,35,1511,46,1135,66,751,96,654,100,564,96,480,90,404,89,334,97,303,107,273,122,245,141,218,167,194,200,172,241,167,253,171,263,187,269,224,276,341,291,612,315,612,320,340,296,223,281,186,274,167,267,162,253,167,239,190,198,214,164,241,137,270,117,301,102,333,92,403,84,481,85,564,91,654,95,751,91,1134,60,1511,41,1835,30,2059,25"/>
+<area shape="rect" title=" " alt="" coords="801,313,938,339"/>
+<area shape="poly" title=" " alt="" coords="2059,31,1722,39,1498,49,1264,62,1039,80,843,103,763,117,697,133,649,150,621,168,616,179,621,190,649,212,706,243,833,305,831,310,703,248,646,216,617,194,611,179,617,165,646,145,696,128,762,112,843,98,1038,74,1263,56,1498,43,1722,34,2058,25"/>
+<area shape="rect" title=" " alt="" coords="2655,240,2726,265"/>
+<area shape="poly" title=" " alt="" coords="2217,32,2345,48,2494,75,2565,92,2628,113,2678,137,2711,165,2718,180,2719,197,2708,228,2703,227,2713,196,2713,182,2707,168,2675,142,2626,118,2564,98,2493,80,2345,53,2216,37"/>
+<area shape="rect" title=" " alt="" coords="2750,240,2821,265"/>
+<area shape="poly" title=" " alt="" coords="2216,25,2300,30,2400,41,2508,61,2613,91,2678,119,2703,138,2733,165,2757,195,2776,226,2771,229,2753,198,2729,168,2700,142,2675,124,2611,96,2507,66,2400,47,2300,36,2216,31"/>
+<area shape="rect" title=" " alt="" coords="2823,93,2923,119"/>
+<area shape="poly" title=" " alt="" coords="2216,30,2478,54,2804,91,2810,91,2809,97,2804,96,2477,59,2216,36"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="1195,240,1317,265"/>
+<area shape="poly" title=" " alt="" coords="1496,111,1357,116,1179,126,1019,143,964,155,935,169,930,179,935,190,1024,209,1182,236,1181,242,1023,214,932,194,925,179,931,165,962,150,1018,138,1178,121,1357,110,1496,106"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1782,240,1906,265"/>
+<area shape="poly" title=" " alt="" coords="1585,105,1631,109,1686,119,1742,136,1794,165,1820,194,1837,226,1833,228,1816,197,1790,169,1740,141,1684,124,1630,114,1584,110"/>
+<area shape="rect" href="service__status_8h.html" title="Defines the lifecycle status for services in the Service Locator." alt="" coords="1959,240,2087,265"/>
+<area shape="poly" title=" " alt="" coords="1584,104,1684,106,1808,114,1869,122,1924,132,1970,146,2002,165,2013,178,2020,194,2026,226,2020,227,2015,196,2008,181,1998,169,1968,151,1923,137,1868,127,1807,119,1684,111,1584,110"/>
+<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="1279,167,1435,192"/>
+<area shape="poly" title=" " alt="" coords="1512,121,1401,164,1399,159,1510,116"/>
+<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="2559,167,2697,192"/>
+<area shape="poly" title=" " alt="" coords="1584,106,1975,123,2255,140,2546,164,2546,169,2254,145,1974,128,1584,111"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1855,167,1987,192"/>
+<area shape="poly" title=" " alt="" coords="1585,113,1847,162,1846,167,1584,118"/>
+<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="5,240,107,265"/>
+<area shape="poly" title=" " alt="" coords="1496,110,1254,112,895,119,528,137,375,151,261,169,213,183,167,200,90,236,88,231,164,195,211,178,259,164,374,146,528,132,895,114,1254,106,1496,105"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="854,240,991,265"/>
+<area shape="poly" title=" " alt="" coords="1496,111,1352,115,1166,125,999,142,941,154,922,161,911,168,905,181,903,196,912,227,907,228,898,196,899,180,907,165,920,157,940,149,998,137,1166,120,1352,110,1496,105"/>
+<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="1016,240,1171,265"/>
+<area shape="poly" title=" " alt="" coords="1496,111,1355,115,1173,125,1010,143,954,155,935,161,925,169,917,180,917,190,922,199,932,208,965,223,1006,235,1005,240,963,228,929,213,918,203,911,191,912,178,921,165,933,157,952,150,1009,137,1173,120,1355,110,1496,106"/>
+<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="945,167,1092,192"/>
+<area shape="poly" title=" " alt="" coords="1496,116,1106,169,1105,164,1495,111"/>
+<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="182,240,333,265"/>
+<area shape="poly" title=" " alt="" coords="1496,111,1221,116,826,127,462,145,340,156,303,162,284,169,274,181,266,195,260,227,255,226,261,194,269,178,281,164,301,157,340,151,462,139,826,122,1221,111,1496,105"/>
+<area shape="rect" href="task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="1459,167,1621,192"/>
+<area shape="poly" title=" " alt="" coords="1536,119,1534,153,1529,153,1530,119"/>
+<area shape="rect" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="2063,167,2185,192"/>
+<area shape="poly" title=" " alt="" coords="1584,110,2032,164,2049,166,2049,172,2032,169,1584,116"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="2452,167,2535,192"/>
+<area shape="poly" title=" " alt="" coords="1584,105,1725,109,1934,119,2182,136,2438,164,2438,169,2181,141,1934,124,1725,114,1584,111"/>
+<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="510,240,677,265"/>
+<area shape="poly" title=" " alt="" coords="1496,110,1295,112,1018,119,881,126,761,137,670,151,639,159,620,169,610,181,603,195,596,226,591,225,598,193,605,178,617,165,637,154,668,146,760,132,880,121,1018,114,1295,106,1496,105"/>
+<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="1116,167,1255,192"/>
+<area shape="poly" title=" " alt="" coords="1496,119,1256,167,1255,161,1495,114"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="1645,167,1779,192"/>
+<area shape="poly" title=" " alt="" coords="1569,116,1672,159,1670,164,1567,121"/>
+<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="631,167,769,192"/>
+<area shape="poly" title=" " alt="" coords="1496,113,1199,133,788,169,783,170,783,165,788,164,1199,128,1496,107"/>
+<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="295,167,505,192"/>
+<area shape="poly" title=" " alt="" coords="1496,113,575,169,519,173,518,168,574,164,1496,107"/>
+<area shape="rect" href="task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="2209,167,2428,192"/>
+<area shape="poly" title=" " alt="" coords="1585,109,2186,164,2195,165,2195,170,2185,169,1584,115"/>
+<area shape="rect" title=" " alt="" coords="2209,313,2305,339"/>
+<area shape="poly" title=" " alt="" coords="1317,256,2196,318,2196,323,1317,261"/>
+<area shape="rect" title=" " alt="" coords="1052,313,1135,339"/>
+<area shape="poly" title=" " alt="" coords="1231,268,1134,310,1131,305,1229,263"/>
+<area shape="rect" title=" " alt="" coords="1190,313,1261,339"/>
+<area shape="poly" title=" " alt="" coords="1253,267,1238,302,1233,300,1248,265"/>
+<area shape="rect" title=" " alt="" coords="431,313,513,339"/>
+<area shape="poly" title=" " alt="" coords="1196,266,1183,268,527,323,527,318,1182,263,1195,261"/>
+<area shape="rect" title=" " alt="" coords="1535,313,1609,339"/>
+<area shape="poly" title=" " alt="" coords="1307,263,1523,311,1522,316,1306,268"/>
+<area shape="poly" title=" " alt="" coords="1196,266,1183,268,988,292,791,316,790,310,988,287,1182,263,1195,261"/>
+<area shape="poly" title=" " alt="" coords="1196,268,945,313,944,308,1195,262"/>
+<area shape="poly" title=" " alt="" coords="2628,193,2615,230,2603,250,2587,267,2567,279,2539,288,2468,304,2320,323,2319,317,2468,299,2537,283,2564,274,2584,263,2599,247,2611,228,2623,191"/>
+<area shape="poly" title=" " alt="" coords="2623,194,2591,232,2569,252,2542,268,2486,281,2389,292,2121,310,1834,321,1623,326,1623,321,1833,315,2121,304,2388,287,2485,276,2540,263,2566,248,2588,228,2618,190"/>
+<area shape="poly" title=" " alt="" coords="2560,193,2547,195,2100,246,2100,241,2546,189,2559,188"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="2378,240,2529,265"/>
+<area shape="poly" title=" " alt="" coords="2601,194,2496,237,2494,232,2599,190"/>
+<area shape="poly" title=" " alt="" coords="2640,191,2673,228,2669,231,2636,194"/>
+<area shape="poly" title=" " alt="" coords="2654,190,2748,232,2746,237,2652,194"/>
+<area shape="poly" title=" " alt="" coords="2378,267,2367,268,2132,284,1811,301,1275,325,1275,320,1811,296,2131,279,2366,263,2377,262"/>
+<area shape="poly" title=" " alt="" coords="1855,190,1792,195,1139,204,714,217,567,228,521,235,499,242,488,254,481,269,475,300,470,299,476,267,484,251,496,238,520,230,566,223,713,212,1139,198,1792,189,1855,184"/>
+<area shape="poly" title=" " alt="" coords="1911,194,1869,232,1865,229,1907,190"/>
+<area shape="poly" title=" " alt="" coords="1939,190,1996,230,1993,234,1936,194"/>
+<area shape="poly" title=" " alt="" coords="107,260,418,313,417,318,107,265"/>
+<area shape="rect" title=" " alt="" coords="176,313,251,339"/>
+<area shape="poly" title=" " alt="" coords="82,263,176,305,174,310,80,268"/>
+<area shape="poly" title=" " alt="" coords="951,263,1054,306,1052,310,949,268"/>
+<area shape="poly" title=" " alt="" coords="854,267,527,319,526,314,853,262"/>
+<area shape="poly" title=" " alt="" coords="992,261,1004,263,1297,295,1522,317,1521,323,1297,301,1004,268,991,266"/>
+<area shape="poly" title=" " alt="" coords="888,268,751,312,749,307,886,263"/>
+<area shape="poly" title=" " alt="" coords="916,267,888,304,884,301,912,264"/>
+<area shape="poly" title=" " alt="" coords="1096,266,1096,300,1091,300,1091,266"/>
+<area shape="poly" title=" " alt="" coords="1116,263,1193,304,1191,309,1113,268"/>
+<area shape="poly" title=" " alt="" coords="1016,266,1003,268,527,321,526,316,1002,263,1015,261"/>
+<area shape="poly" title=" " alt="" coords="1058,189,1205,233,1204,239,1056,195"/>
+<area shape="poly" title=" " alt="" coords="945,188,650,213,516,228,474,236,455,242,449,255,448,270,460,301,455,302,443,270,444,253,452,238,472,230,516,223,649,208,945,183"/>
+<area shape="poly" title=" " alt="" coords="1093,189,1205,209,1329,237,1440,272,1532,306,1530,311,1438,277,1327,243,1204,214,1092,194"/>
+<area shape="poly" title=" " alt="" coords="293,263,425,306,423,311,291,268"/>
+<area shape="poly" title=" " alt="" coords="1544,166,1546,132,1551,133,1550,167"/>
+<area shape="poly" title=" " alt="" coords="2062,170,2056,169,1597,116,1598,110,2056,164,2063,165"/>
+<area shape="poly" title=" " alt="" coords="2127,192,2122,229,2114,250,2100,267,2074,279,2027,289,1894,305,1623,325,1622,319,1893,300,2026,283,2072,274,2097,263,2110,247,2117,228,2122,192"/>
+<area shape="rect" title=" " alt="" coords="2270,240,2354,265"/>
+<area shape="poly" title=" " alt="" coords="2465,195,2355,237,2353,232,2463,190"/>
+<area shape="poly" title=" " alt="" coords="677,259,890,281,1147,311,1177,315,1176,320,1146,316,890,286,677,265"/>
+<area shape="poly" title=" " alt="" coords="575,268,505,309,502,304,572,263"/>
+<area shape="poly" title=" " alt="" coords="612,263,674,303,671,308,609,268"/>
+<area shape="poly" title=" " alt="" coords="638,263,812,307,811,312,637,268"/>
+<area shape="poly" title=" " alt="" coords="533,268,265,318,264,313,532,263"/>
+<area shape="poly" title=" " alt="" coords="1199,190,1237,228,1233,232,1195,194"/>
+<area shape="poly" title=" " alt="" coords="1645,194,1331,242,1330,237,1644,189"/>
+<area shape="poly" title=" " alt="" coords="1702,194,1595,305,1591,302,1699,191"/>
+<area shape="poly" title=" " alt="" coords="770,186,1182,237,1181,243,769,191"/>
+<area shape="poly" title=" " alt="" coords="631,187,566,194,498,204,440,220,419,230,405,242,400,257,406,274,422,290,441,304,438,308,418,294,402,276,394,258,400,238,416,226,438,215,497,199,565,188,630,182"/>
+<area shape="poly" title=" " alt="" coords="703,192,704,300,698,300,697,192"/>
+<area shape="poly" title=" " alt="" coords="716,190,847,302,844,306,712,194"/>
+<area shape="poly" title=" " alt="" coords="378,194,294,236,292,231,376,190"/>
+<area shape="poly" title=" " alt="" coords="2209,169,1597,115,1598,109,2209,164"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -157,20 +240,29 @@ Functions</h2></td></tr>
 <tr class="memitem:a33cd40a3b535a485fdb1b5449f656f5e" id="r_a33cd40a3b535a485fdb1b5449f656f5e"><td class="memItemLeft" align="right" valign="top"><a id="a33cd40a3b535a485fdb1b5449f656f5e" name="a33cd40a3b535a485fdb1b5449f656f5e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DEFINE_COMPONENT_TAG</b> (&quot;SERVICE_LOCATOR&quot;, SYNAPSE_LOG_COLOR_BLUE)</td></tr>
 <tr class="separator:a33cd40a3b535a485fdb1b5449f656f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa48f1c919af62ed40e3e038ad56868ab" id="r_aa48f1c919af62ed40e3e038ad56868ab"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#aa48f1c919af62ed40e3e038ad56868ab">synapse_service_register</a> (const char *service_name, <a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type, <a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_handle)</td></tr>
-<tr class="memdesc:aa48f1c919af62ed40e3e038ad56868ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.  <br /></td></tr>
+<tr class="memitem:aa48f1c919af62ed40e3e038ad56868ab" id="r_aa48f1c919af62ed40e3e038ad56868ab"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#aa48f1c919af62ed40e3e038ad56868ab">synapse_service_register</a> (const char *service_name, <a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type, service_handle_t service_handle)</td></tr>
+<tr class="memdesc:aa48f1c919af62ed40e3e038ad56868ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">ახალი სერვისის რეგისტრაცია.  <br /></td></tr>
 <tr class="separator:aa48f1c919af62ed40e3e038ad56868ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2817be6ada658a341e4c4850dca12c49" id="r_a2817be6ada658a341e4c4850dca12c49"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#a2817be6ada658a341e4c4850dca12c49">synapse_service_unregister</a> (const char *service_name)</td></tr>
-<tr class="memdesc:a2817be6ada658a341e4c4850dca12c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">სერვისის რეგისტრაციის გაუქმება მისი სახელით.  <br /></td></tr>
+<tr class="memitem:a2817be6ada658a341e4c4850dca12c49" id="r_a2817be6ada658a341e4c4850dca12c49"><td class="memItemLeft" align="right" valign="top"><a id="a2817be6ada658a341e4c4850dca12c49" name="a2817be6ada658a341e4c4850dca12c49"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>synapse_service_unregister</b> (const char *service_name)</td></tr>
 <tr class="separator:a2817be6ada658a341e4c4850dca12c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae30c325959d3c6854ea7918eba866d4" id="r_aae30c325959d3c6854ea7918eba866d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a> (const char *service_name)</td></tr>
-<tr class="memdesc:aae30c325959d3c6854ea7918eba866d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს რეგისტრირებულ სერვისს სახელით  <br /></td></tr>
+<tr class="memitem:a0a6e5781926f6d6160cab16cf48334b4" id="r_a0a6e5781926f6d6160cab16cf48334b4"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4">synapse_service_register_with_status</a> (const char *service_name, <a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type, service_handle_t service_handle, <a class="el" href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196">service_status_t</a> initial_status)</td></tr>
+<tr class="memdesc:a0a6e5781926f6d6160cab16cf48334b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new service with a specific initial status. (NEW)  <br /></td></tr>
+<tr class="separator:a0a6e5781926f6d6160cab16cf48334b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafeb37bb2a6708eb28287253730d62ff" id="r_aafeb37bb2a6708eb28287253730d62ff"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff">synapse_service_set_status</a> (const char *service_name, <a class="el" href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196">service_status_t</a> new_status)</td></tr>
+<tr class="memdesc:aafeb37bb2a6708eb28287253730d62ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the operational status of a registered service. (NEW)  <br /></td></tr>
+<tr class="separator:aafeb37bb2a6708eb28287253730d62ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bb4675bb30ad8b4299060ee1528ccbe" id="r_a9bb4675bb30ad8b4299060ee1528ccbe"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#a9bb4675bb30ad8b4299060ee1528ccbe">synapse_service_get_status</a> (const char *service_name, <a class="el" href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196">service_status_t</a> *out_status)</td></tr>
+<tr class="memdesc:a9bb4675bb30ad8b4299060ee1528ccbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current operational status of a registered service. (NEW)  <br /></td></tr>
+<tr class="separator:a9bb4675bb30ad8b4299060ee1528ccbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae30c325959d3c6854ea7918eba866d4" id="r_aae30c325959d3c6854ea7918eba866d4"><td class="memItemLeft" align="right" valign="top"><a id="aae30c325959d3c6854ea7918eba866d4" name="aae30c325959d3c6854ea7918eba866d4"></a>
+service_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>synapse_service_get</b> (const char *service_name)</td></tr>
 <tr class="separator:aae30c325959d3c6854ea7918eba866d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4441bcf4d7c9af56b3f7ed46b8ae37f0" id="r_a4441bcf4d7c9af56b3f7ed46b8ae37f0"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#a4441bcf4d7c9af56b3f7ed46b8ae37f0">synapse_service_get_type</a> (const char *service_name, <a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> *out_service_type)</td></tr>
-<tr class="memdesc:a4441bcf4d7c9af56b3f7ed46b8ae37f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს სერვისის ტიპს <code>enum</code> სახით.  <br /></td></tr>
+<tr class="memitem:a4441bcf4d7c9af56b3f7ed46b8ae37f0" id="r_a4441bcf4d7c9af56b3f7ed46b8ae37f0"><td class="memItemLeft" align="right" valign="top"><a id="a4441bcf4d7c9af56b3f7ed46b8ae37f0" name="a4441bcf4d7c9af56b3f7ed46b8ae37f0"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>synapse_service_get_type</b> (const char *service_name, <a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> *out_service_type)</td></tr>
 <tr class="separator:a4441bcf4d7c9af56b3f7ed46b8ae37f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbc62ae164e5c44764e195118403ad96" id="r_adbc62ae164e5c44764e195118403ad96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="service__locator_8c.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a> (<a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type)</td></tr>
-<tr class="memdesc:adbc62ae164e5c44764e195118403ad96"><td class="mdescLeft">&#160;</td><td class="mdescRight">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს  <br /></td></tr>
+<tr class="memitem:adbc62ae164e5c44764e195118403ad96" id="r_adbc62ae164e5c44764e195118403ad96"><td class="memItemLeft" align="right" valign="top"><a id="adbc62ae164e5c44764e195118403ad96" name="adbc62ae164e5c44764e195118403ad96"></a>
+service_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>synapse_service_lookup_by_type</b> (<a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type)</td></tr>
 <tr class="separator:adbc62ae164e5c44764e195118403ad96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -187,63 +279,14 @@ Functions</h2></td></tr>
 </ul>
 <p>იმპლემენტაცია იყენებს ცალმხრივად დაკავშირებულ სიას (singly-linked list) რეგისტრირებული სერვისების შესანახად და mutex-ს ერთდროული წვდომის უსაფრთხოდ სამართავად. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aae30c325959d3c6854ea7918eba866d4" name="aae30c325959d3c6854ea7918eba866d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae30c325959d3c6854ea7918eba866d4">&#9670;&#160;</a></span>synapse_service_get()</h2>
+<a id="a9bb4675bb30ad8b4299060ee1528ccbe" name="a9bb4675bb30ad8b4299060ee1528ccbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bb4675bb30ad8b4299060ee1528ccbe">&#9670;&#160;</a></span>synapse_service_get_status()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> synapse_service_get </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>service_name</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>აბრუნებს რეგისტრირებულ სერვისს სახელით </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>მოსაძებნი სერვისის სახელი</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>service_handle_t </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">სერვისის</td><td>API სტრუქტურაზე მაჩვენებელი თუ სერვისი მოიძებნა </td></tr>
-    <tr><td class="paramname">NULL</td><td>თუ ასეთი სახელით სერვისი არ არის რეგისტრირებული </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="service__locator_8c_aae30c325959d3c6854ea7918eba866d4_icgraph.png" border="0" usemap="#aservice__locator_8c_aae30c325959d3c6854ea7918eba866d4_icgraph" alt=""/></div>
-<map name="aservice__locator_8c_aae30c325959d3c6854ea7918eba866d4_icgraph" id="aservice__locator_8c_aae30c325959d3c6854ea7918eba866d4_icgraph">
-<area shape="rect" title="აბრუნებს რეგისტრირებულ სერვისს სახელით" alt="" coords="615,42,773,67"/>
-<area shape="rect" href="ui__screens_8c.html#a3660eb426382f4100fc635af4cbbbeff" title="Renders the module control screen for a selected module." alt="" coords="395,5,567,45"/>
-<area shape="poly" title=" " alt="" coords="600,44,567,40,567,35,601,39"/>
-<area shape="rect" href="ui__events_8c.html#a469449dd73689152450606d4d611be8f" title="The main event handler function for the UI Manager module." alt="" coords="5,45,141,70"/>
-<area shape="poly" title=" " alt="" coords="601,60,567,60,142,60,142,55,567,55,601,54"/>
-<area shape="rect" href="ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function." alt="" coords="189,17,347,42"/>
-<area shape="poly" title=" " alt="" coords="381,30,347,31,347,25,381,25"/>
-<area shape="poly" title=" " alt="" coords="176,45,142,50,141,45,175,40"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a4441bcf4d7c9af56b3f7ed46b8ae37f0" name="a4441bcf4d7c9af56b3f7ed46b8ae37f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4441bcf4d7c9af56b3f7ed46b8ae37f0">&#9670;&#160;</a></span>synapse_service_get_type()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_err_t synapse_service_get_type </td>
+          <td class="memname">esp_err_t synapse_service_get_status </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>service_name</em>, </td>
@@ -251,8 +294,8 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> *&#160;</td>
-          <td class="paramname"><em>out_service_type</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196">service_status_t</a> *&#160;</td>
+          <td class="paramname"><em>out_status</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -262,72 +305,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>აბრუნებს სერვისის ტიპს <code>enum</code> სახით. </p>
-<p>ეძებს სერვისს მისი სახელით და აბრუნებს მის <code>synapse_service_type_t</code> ტიპს. ეს საშუალებას გაძლევთ, პროგრამულად შეამოწმოთ, თუ რა ტიპის სერვისთან გაქვთ საქმე.</p>
+<p>Gets the current operational status of a registered service. (NEW) </p>
+<p>This function is thread-safe.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>მოსაძებნი სერვისის სახელი. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">out_service_type</td><td>მაჩვენებელი, სადაც ჩაიწერება ნაპოვნი სერვისის ტიპი.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>The name of the service to query. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">out_status</td><td>A pointer where the current status will be stored. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>თუ სერვისი მოიძებნა და ტიპი წარმატებით იქნა მიღებული. </td></tr>
-    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>service_name</code> ან <code>out_service_type</code> არის NULL. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>თუ მითითებული სახელით სერვისი ვერ მოიძებნა. </td></tr>
-    <tr><td class="paramname">ESP_ERR_TIMEOUT</td><td>თუ mutex-ის დაკავება ვერ მოხერხდა. </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="service__locator_8c_a4441bcf4d7c9af56b3f7ed46b8ae37f0_icgraph.png" border="0" usemap="#aservice__locator_8c_a4441bcf4d7c9af56b3f7ed46b8ae37f0_icgraph" alt=""/></div>
-<map name="aservice__locator_8c_a4441bcf4d7c9af56b3f7ed46b8ae37f0_icgraph" id="aservice__locator_8c_a4441bcf4d7c9af56b3f7ed46b8ae37f0_icgraph">
-<area shape="rect" title="აბრუნებს სერვისის ტიპს enum სახით." alt="" coords="615,42,809,67"/>
-<area shape="rect" href="ui__screens_8c.html#a3660eb426382f4100fc635af4cbbbeff" title="Renders the module control screen for a selected module." alt="" coords="395,5,567,45"/>
-<area shape="poly" title=" " alt="" coords="601,43,567,39,567,34,601,38"/>
-<area shape="rect" href="ui__events_8c.html#a469449dd73689152450606d4d611be8f" title="The main event handler function for the UI Manager module." alt="" coords="5,45,141,70"/>
-<area shape="poly" title=" " alt="" coords="601,60,567,60,142,60,142,55,567,55,601,54"/>
-<area shape="rect" href="ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function." alt="" coords="189,17,347,42"/>
-<area shape="poly" title=" " alt="" coords="381,30,347,31,347,25,381,25"/>
-<area shape="poly" title=" " alt="" coords="176,45,142,50,141,45,175,40"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="adbc62ae164e5c44764e195118403ad96" name="adbc62ae164e5c44764e195118403ad96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbc62ae164e5c44764e195118403ad96">&#9670;&#160;</a></span>synapse_service_lookup_by_type()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> synapse_service_lookup_by_type </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a>&#160;</td>
-          <td class="paramname"><em>service_type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს </p>
-<p>ეს სასარგებლოა, როცა მოდულს სჭირდება კონკრეტული ტიპის სერვისი, მაგრამ არ აინტერესებს კონკრეტული პროვაიდერი.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_type</td><td>მოსაძებნი სერვისის ტიპი (მაგ: "display_api")</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>service_handle_t </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">სერვისის</td><td>API სტრუქტურაზე მაჩვენებელი თუ შესაბამისი ტიპის სერვისი მოიძებნა </td></tr>
-    <tr><td class="paramname">NULL</td><td>თუ ასეთი ტიპის სერვისი არ არის რეგისტრირებული </td></tr>
+    <tr><td class="paramname">ESP_OK</td><td>on success. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>if the service does not exist. </td></tr>
   </table>
   </dd>
 </dl>
@@ -355,7 +346,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a>&#160;</td>
+          <td class="paramtype">service_handle_t&#160;</td>
           <td class="paramname"><em>service_handle</em>&#160;</td>
         </tr>
         <tr>
@@ -366,73 +357,270 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით. </p>
-<p>ეს ფუნქცია ამატებს სერვისს ცენტრალურ რეესტრში. რეგისტრაცია არ განხორციელდება, თუ ამ სახელით სერვისი უკვე არსებობს. ოპერაცია ნაკად-უსაფრთხოა (thread-safe).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>სერვისის უნიკალური სახელი (მაგ: მოდულის <code>instance_name</code>). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_type</td><td>სერვისის ტიპი <code>synapse_service_type_t</code> enum-იდან (მაგ: <code>SERVICE_TYPE_DISPLAY_API</code>). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_handle</td><td>მაჩვენებელი სერვისის API სტრუქტურაზე.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ოპერაციის წარმატების კოდი. </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">ESP_OK</td><td>სერვისი წარმატებით დარეგისტრირდა. </td></tr>
-    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>თუ <code>service_name</code>, <code>service_handle</code> არის NULL, ან <code>service_type</code> არავალიდურია. </td></tr>
-    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>თუ მეხსიერება ვერ გამოიყო ახალი სერვისისთვის. </td></tr>
-    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>თუ ამ სახელით სერვისი უკვე დარეგისტრირებულია. </td></tr>
-    <tr><td class="paramname">ESP_ERR_TIMEOUT</td><td>თუ mutex-ის დაკავება ვერ მოხერხდა. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>ახალი სერვისის რეგისტრაცია. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>This function is deprecated and will be removed in future versions. Use <a class="el" href="service__locator_8h.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)">synapse_service_register_with_status()</a> instead. It registers the service with a default status of REGISTERED. </dd></dl>
 <div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="service__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_icgraph.png" border="0" usemap="#aservice__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_icgraph" alt=""/></div>
-<map name="aservice__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_icgraph" id="aservice__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_icgraph">
-<area shape="rect" title="ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით." alt="" coords="212,31,399,56"/>
-<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="5,5,164,31"/>
-<area shape="poly" title=" " alt="" coords="198,34,164,30,164,24,198,28"/>
-<area shape="rect" href="wifi__manager_8c.html#a5100b2f029e2c1e6e8212bd03703667e" title="Creates a new instance of the wifi_manager module." alt="" coords="5,55,164,80"/>
-<area shape="poly" title=" " alt="" coords="198,58,164,61,164,56,198,52"/>
+<div class="center"><img src="service__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_cgraph.png" border="0" usemap="#aservice__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_cgraph" alt=""/></div>
+<map name="aservice__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_cgraph" id="aservice__locator_8c_aa48f1c919af62ed40e3e038ad56868ab_cgraph">
+<area shape="rect" title="ახალი სერვისის რეგისტრაცია." alt="" coords="5,77,192,102"/>
+<area shape="rect" href="service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="240,69,427,109"/>
+<area shape="poly" title=" " alt="" coords="192,87,226,87,226,92,192,92"/>
+<area shape="rect" href="service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="475,69,632,109"/>
+<area shape="poly" title=" " alt="" coords="427,87,461,87,461,92,427,92"/>
+<area shape="rect" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="685,26,870,51"/>
+<area shape="poly" title=" " alt="" coords="631,69,707,52,708,57,633,74"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="923,69,1079,109"/>
+<area shape="poly" title=" " alt="" coords="632,87,909,87,909,92,632,92"/>
+<area shape="rect" href="event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="680,127,875,153"/>
+<area shape="poly" title=" " alt="" coords="633,104,708,122,707,127,631,110"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="923,5,1079,45"/>
+<area shape="poly" title=" " alt="" coords="870,30,909,28,909,33,870,36"/>
+<area shape="poly" title=" " alt="" coords="835,49,910,66,909,71,834,54"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a2817be6ada658a341e4c4850dca12c49" name="a2817be6ada658a341e4c4850dca12c49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2817be6ada658a341e4c4850dca12c49">&#9670;&#160;</a></span>synapse_service_unregister()</h2>
+<a id="a0a6e5781926f6d6160cab16cf48334b4" name="a0a6e5781926f6d6160cab16cf48334b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a6e5781926f6d6160cab16cf48334b4">&#9670;&#160;</a></span>synapse_service_register_with_status()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">esp_err_t synapse_service_unregister </td>
+          <td class="memname">esp_err_t synapse_service_register_with_status </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>service_name</em></td><td>)</td>
+          <td class="paramname"><em>service_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a>&#160;</td>
+          <td class="paramname"><em>service_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">service_handle_t&#160;</td>
+          <td class="paramname"><em>service_handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196">service_status_t</a>&#160;</td>
+          <td class="paramname"><em>initial_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>სერვისის რეგისტრაციის გაუქმება მისი სახელით. </p>
-<p>ეს ფუნქცია შლის მითითებული სახელის მქონე სერვისს სერვის ლოკატორიდან, რის შემდეგაც ის აღარ იქნება ხელმისაწვდომი მოძიებისთვის ან გამოყენებისთვის. თუ სერვისი ვერ მოიძებნა, დაბრუნდება შესაბამისი შეცდომის კოდი.</p>
+<p>Registers a new service with a specific initial status. (NEW) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>სერვისის სახელი, რომლის რეგისტრაციაც უნდა გაუქმდეს. უნდა იყოს null-ით დასრულებული სტრიქონი.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>The unique name of the service. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_type</td><td>The type of the service from the synapse_service_type_t enum. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_handle</td><td>A pointer to the service's API structure. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">initial_status</td><td>The initial status of the service (typically SERVICE_STATUS_REGISTERED).</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li>ESP_OK: სერვისი წარმატებით გაუქმდა.</li>
-<li>ESP_ERR_NOT_FOUND: მითითებული სახელის მქონე სერვისი ვერ მოიძებნა.</li>
-<li>ESP_ERR_INVALID_ARG: service_name არგუმენტი არის NULL ან არასწორია.</li>
-<li>სხვა esp_err_t კოდები საჭიროებისამებრ. </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>If the service was registered successfully. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_ARG</td><td>If any argument is invalid. </td></tr>
+    <tr><td class="paramname">ESP_ERR_INVALID_STATE</td><td>If a service with this name already exists. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NO_MEM</td><td>If memory allocation failed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="service__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_cgraph.png" border="0" usemap="#aservice__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_cgraph" alt=""/></div>
+<map name="aservice__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_cgraph" id="aservice__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_cgraph">
+<area shape="rect" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="5,69,192,109"/>
+<area shape="rect" href="service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="240,69,397,109"/>
+<area shape="poly" title=" " alt="" coords="192,87,226,87,226,92,192,92"/>
+<area shape="rect" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="450,26,635,51"/>
+<area shape="poly" title=" " alt="" coords="397,69,472,52,473,57,398,74"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="688,69,844,109"/>
+<area shape="poly" title=" " alt="" coords="397,87,674,87,674,92,397,92"/>
+<area shape="rect" href="event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="445,127,640,153"/>
+<area shape="poly" title=" " alt="" coords="398,104,473,122,472,127,397,110"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="688,5,844,45"/>
+<area shape="poly" title=" " alt="" coords="636,30,674,28,674,33,636,36"/>
+<area shape="poly" title=" " alt="" coords="600,49,675,66,674,71,599,54"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="service__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_icgraph.png" border="0" usemap="#aservice__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_icgraph" alt=""/></div>
+<map name="aservice__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_icgraph" id="aservice__locator_8c_a0a6e5781926f6d6160cab16cf48334b4_icgraph">
+<area shape="rect" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="252,505,439,545"/>
+<area shape="rect" href="command__router_8c.html#a837534e591162e28da0c47a84a8b9eb4" title="Creates a new instance of the Command Router module." alt="" coords="14,5,195,31"/>
+<area shape="poly" title=" " alt="" coords="342,491,338,401,331,344,320,281,302,217,278,155,245,96,202,45,184,33,187,29,206,41,249,93,283,152,308,216,325,280,337,343,344,401,347,490"/>
+<area shape="rect" href="device__identity__service_8c.html#a9687f2ed1bc8ee6d3697dd399376d97f" title="Creates a new instance of the Device Identity Service module." alt="" coords="17,55,193,95"/>
+<area shape="poly" title=" " alt="" coords="340,491,331,413,310,311,292,257,269,203,239,153,202,109,187,98,190,93,206,105,243,150,273,201,297,255,315,310,337,412,345,490"/>
+<area shape="rect" href="health__monitor_8c.html#a0d3e7c97a79ff4d129bfc2c868e1a6cf" title="ქმნის ახალ health_monitor მოდულის ინსტანციას." alt="" coords="20,120,189,145"/>
+<area shape="poly" title=" " alt="" coords="339,491,328,421,305,331,288,284,265,238,237,195,202,159,185,148,188,143,206,155,241,192,270,235,293,282,310,329,334,420,344,490"/>
+<area shape="rect" href="i2c__bus_8c.html#aaf4e532bca146a2a6707a509e03b5aba" title="Factory function to create a new instance of the I2C Bus module." alt="" coords="45,169,164,195"/>
+<area shape="poly" title=" " alt="" coords="336,492,323,431,298,354,280,314,259,276,233,240,202,209,184,198,163,191,165,185,186,193,206,205,237,237,263,273,285,312,303,352,328,429,342,490"/>
+<area shape="rect" href="mcp23017__io__expander_8c.html#ad3c9581aba0aa112f9b5ef81668e6cdd" title="Creates a new mcp23017_io_expander module instance." alt="" coords="16,219,193,259"/>
+<area shape="poly" title=" " alt="" coords="332,493,315,444,288,385,250,325,228,298,202,273,184,262,187,257,206,269,232,294,255,322,292,382,320,442,337,491"/>
+<area shape="rect" href="ota__update__manager_8c.html#a792fc2704dda3f70481bb8073fcc1c4e" title="ქმნის ახალ ota_update_manager მოდულის ინსტანციას" alt="" coords="25,283,185,323"/>
+<area shape="poly" title=" " alt="" coords="326,494,305,457,277,415,243,373,202,337,182,326,184,321,206,333,247,370,282,412,310,455,331,491"/>
+<area shape="rect" href="relay__actuator_8c.html#a57a9879a72789576f6d8d87dd4641088" title="Creates a new instance of the Relay Actuator module." alt="" coords="23,348,187,373"/>
+<area shape="poly" title=" " alt="" coords="319,495,270,439,238,411,203,387,177,376,179,371,205,382,241,407,273,435,323,492"/>
+<area shape="rect" href="rgb__led__indicator_8c.html#af7ab099c2a16ab7a894d97a3a01f3d31" title="ქმნის ახალ rgb_led_indicator მოდულის ინსტანციას" alt="" coords="13,397,196,423"/>
+<area shape="poly" title=" " alt="" coords="306,499,258,467,203,438,167,425,169,420,205,433,261,462,309,494"/>
+<area shape="rect" href="security__status__reporter_8c.html#aa31c71380a03edac967fe88a8293a287" title="ქმნის ახალ security_status_reporter მოდულის ინსტანციას" alt="" coords="15,447,195,487"/>
+<area shape="poly" title=" " alt="" coords="247,504,189,490,190,485,248,499"/>
+<area shape="rect" href="sn74hc595n__writer_8c.html#a238fe05618a0329bac0448e22ebf31b9" title="Creates a new instance of the SN74HC595N Writer module." alt="" coords="8,512,201,537"/>
+<area shape="poly" title=" " alt="" coords="238,527,202,527,202,522,238,522"/>
+<area shape="rect" href="spi__bus_8c.html#ae3a80e44f738156819152fc9374c6e81" title="Creates a new instance of the SPI Bus module." alt="" coords="45,561,164,587"/>
+<area shape="poly" title=" " alt="" coords="239,549,165,565,164,559,238,544"/>
+<area shape="rect" href="ssd1306__driver_8c.html#a57b7aba7486f7b1bbd57aec7ba62e493" title="Creates a new instance of the SSD1306 driver module." alt="" coords="20,611,189,636"/>
+<area shape="poly" title=" " alt="" coords="301,554,255,578,205,600,165,613,163,608,203,596,253,573,298,549"/>
+<area shape="rect" href="storage__manager_8c.html#a81569f9eeedf0881c1fbd785982311fc" title="ქმნის ახალ storage_manager მოდულის ინსტანციას" alt="" coords="13,660,197,685"/>
+<area shape="poly" title=" " alt="" coords="319,557,269,605,238,629,205,650,174,662,172,657,203,645,235,625,266,601,316,553"/>
+<area shape="rect" href="service__locator_8c.html#aa48f1c919af62ed40e3e038ad56868ab" title="ახალი სერვისის რეგისტრაცია." alt="" coords="11,709,198,735"/>
+<area shape="poly" title=" " alt="" coords="329,558,280,630,245,667,205,699,178,712,176,707,203,694,242,663,275,626,324,555"/>
+<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="25,759,184,784"/>
+<area shape="poly" title=" " alt="" coords="335,558,316,602,288,653,252,705,206,748,182,761,179,756,202,744,248,701,284,650,311,599,330,556"/>
+<area shape="rect" href="system__timer_8c.html#af68d73ecc7f69d8ee9b7b9491440f91e" title="ქმნის ახალ system_timer მოდულის ინსტანციას" alt="" coords="25,808,185,833"/>
+<area shape="poly" title=" " alt="" coords="339,559,323,612,296,676,258,742,233,771,206,797,184,810,181,806,202,793,229,768,253,739,291,674,318,610,334,557"/>
+<area shape="rect" href="time__sync_8c.html#a7a7c79f52ee4aa89c8df7f917afae423" title="ქმნის ახალ time_sync მოდულის ინსტანციას." alt="" coords="36,857,173,883"/>
+<area shape="poly" title=" " alt="" coords="342,559,328,620,303,698,286,739,264,778,237,815,206,847,175,863,172,859,202,843,233,811,259,775,281,736,298,696,323,619,337,558"/>
+<area shape="rect" href="watchdog__manager_8c.html#aecae8dc408fc872d6d54f1eba2d035a1" title="Creates a new instance of the Watchdog Manager module." alt="" coords="5,907,204,932"/>
+<area shape="poly" title=" " alt="" coords="344,559,333,629,310,720,292,768,269,815,241,858,206,896,186,909,183,904,202,892,237,855,265,812,287,766,305,719,328,628,339,558"/>
+<area shape="rect" href="wifi__manager_8c.html#a5100b2f029e2c1e6e8212bd03703667e" title="Creates a new instance of the wifi_manager module." alt="" coords="25,956,184,981"/>
+<area shape="poly" title=" " alt="" coords="346,558,338,637,317,741,299,797,275,851,245,901,206,945,186,959,183,954,202,941,240,898,271,848,294,795,312,740,333,636,340,558"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aafeb37bb2a6708eb28287253730d62ff" name="aafeb37bb2a6708eb28287253730d62ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafeb37bb2a6708eb28287253730d62ff">&#9670;&#160;</a></span>synapse_service_set_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t synapse_service_set_status </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>service_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196">service_status_t</a>&#160;</td>
+          <td class="paramname"><em>new_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the operational status of a registered service. (NEW) </p>
+<p>This function is thread-safe. When the status changes, it will post a SYNAPSE_EVENT_SERVICE_STATUS_CHANGED event to the Event Bus.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">service_name</td><td>The name of the service to update. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">new_status</td><td>The new status to set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ESP_OK</td><td>on success. </td></tr>
+    <tr><td class="paramname">ESP_ERR_NOT_FOUND</td><td>if the service does not exist. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="service__locator_8c_aafeb37bb2a6708eb28287253730d62ff_cgraph.png" border="0" usemap="#aservice__locator_8c_aafeb37bb2a6708eb28287253730d62ff_cgraph" alt=""/></div>
+<map name="aservice__locator_8c_aafeb37bb2a6708eb28287253730d62ff_cgraph" id="aservice__locator_8c_aafeb37bb2a6708eb28287253730d62ff_cgraph">
+<area shape="rect" title="Sets the operational status of a registered service. (NEW)" alt="" coords="5,69,163,109"/>
+<area shape="rect" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="215,26,401,51"/>
+<area shape="poly" title=" " alt="" coords="162,69,237,52,239,57,163,74"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="453,69,609,109"/>
+<area shape="poly" title=" " alt="" coords="163,87,439,87,439,92,163,92"/>
+<area shape="rect" href="event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="211,127,405,153"/>
+<area shape="poly" title=" " alt="" coords="163,104,239,122,237,127,162,110"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="453,5,609,45"/>
+<area shape="poly" title=" " alt="" coords="401,30,440,28,440,33,401,36"/>
+<area shape="poly" title=" " alt="" coords="366,49,441,66,439,71,364,54"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="service__locator_8c_aafeb37bb2a6708eb28287253730d62ff_icgraph.png" border="0" usemap="#aservice__locator_8c_aafeb37bb2a6708eb28287253730d62ff_icgraph" alt=""/></div>
+<map name="aservice__locator_8c_aafeb37bb2a6708eb28287253730d62ff_icgraph" id="aservice__locator_8c_aafeb37bb2a6708eb28287253730d62ff_icgraph">
+<area shape="rect" title="Sets the operational status of a registered service. (NEW)" alt="" coords="501,562,659,602"/>
+<area shape="rect" href="service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="259,505,446,545"/>
+<area shape="poly" title=" " alt="" coords="487,561,432,547,433,542,488,556"/>
+<area shape="rect" href="system__manager_8c.html#a6e344fb76d747db9d27998e62d9e3dac" title="Initiates a graceful shutdown of the system." alt="" coords="252,569,453,595"/>
+<area shape="poly" title=" " alt="" coords="487,585,454,585,454,579,487,579"/>
+<area shape="rect" href="system__manager_8c.html#a651e9c9cf8b0563b7f4f31be1ea506e3" title="სისტემის და ყველა დარეგისტრირებული მოდულის გაშვება." alt="" coords="269,619,437,644"/>
+<area shape="poly" title=" " alt="" coords="488,605,413,621,411,616,487,599"/>
+<area shape="rect" href="command__router_8c.html#a837534e591162e28da0c47a84a8b9eb4" title="Creates a new instance of the Command Router module." alt="" coords="14,5,195,31"/>
+<area shape="poly" title=" " alt="" coords="349,491,344,401,336,344,323,281,305,217,279,154,245,96,202,45,184,33,187,29,206,41,250,93,284,152,310,215,329,280,341,343,349,401,354,490"/>
+<area shape="rect" href="device__identity__service_8c.html#a9687f2ed1bc8ee6d3697dd399376d97f" title="Creates a new instance of the Device Identity Service module." alt="" coords="17,55,193,95"/>
+<area shape="poly" title=" " alt="" coords="347,491,337,413,313,311,294,256,270,203,240,153,202,109,186,97,190,93,206,105,244,150,275,201,299,254,318,309,342,412,352,490"/>
+<area shape="rect" href="health__monitor_8c.html#a0d3e7c97a79ff4d129bfc2c868e1a6cf" title="ქმნის ახალ health_monitor მოდულის ინსტანციას." alt="" coords="20,120,189,145"/>
+<area shape="poly" title=" " alt="" coords="345,491,334,421,309,331,290,284,266,238,237,195,202,159,185,148,188,143,206,155,241,192,271,235,295,281,314,329,339,420,351,490"/>
+<area shape="rect" href="i2c__bus_8c.html#aaf4e532bca146a2a6707a509e03b5aba" title="Factory function to create a new instance of the I2C Bus module." alt="" coords="45,169,164,195"/>
+<area shape="poly" title=" " alt="" coords="343,492,328,431,301,354,283,314,260,276,234,240,202,209,184,198,164,191,165,186,186,193,206,205,238,237,265,273,287,312,306,352,333,429,348,490"/>
+<area shape="rect" href="mcp23017__io__expander_8c.html#ad3c9581aba0aa112f9b5ef81668e6cdd" title="Creates a new mcp23017_io_expander module instance." alt="" coords="16,219,193,259"/>
+<area shape="poly" title=" " alt="" coords="338,493,320,444,291,385,252,325,228,298,202,273,184,262,187,257,206,269,232,294,256,322,295,382,324,442,343,491"/>
+<area shape="rect" href="ota__update__manager_8c.html#a792fc2704dda3f70481bb8073fcc1c4e" title="ქმნის ახალ ota_update_manager მოდულის ინსტანციას" alt="" coords="25,283,185,323"/>
+<area shape="poly" title=" " alt="" coords="332,494,310,457,280,415,244,374,202,338,182,326,184,321,206,333,248,370,285,412,315,454,337,491"/>
+<area shape="rect" href="relay__actuator_8c.html#a57a9879a72789576f6d8d87dd4641088" title="Creates a new instance of the Relay Actuator module." alt="" coords="23,348,187,373"/>
+<area shape="poly" title=" " alt="" coords="326,496,273,440,239,411,203,387,176,376,178,371,205,382,243,407,277,436,329,492"/>
+<area shape="rect" href="rgb__led__indicator_8c.html#af7ab099c2a16ab7a894d97a3a01f3d31" title="ქმნის ახალ rgb_led_indicator მოდულის ინსტანციას" alt="" coords="13,397,196,423"/>
+<area shape="poly" title=" " alt="" coords="311,499,261,467,203,438,166,425,167,420,205,433,263,463,314,495"/>
+<area shape="rect" href="security__status__reporter_8c.html#aa31c71380a03edac967fe88a8293a287" title="ქმნის ახალ security_status_reporter მოდულის ინსტანციას" alt="" coords="15,447,195,487"/>
+<area shape="poly" title=" " alt="" coords="252,504,191,490,192,485,253,499"/>
+<area shape="rect" href="sn74hc595n__writer_8c.html#a238fe05618a0329bac0448e22ebf31b9" title="Creates a new instance of the SN74HC595N Writer module." alt="" coords="8,512,201,537"/>
+<area shape="poly" title=" " alt="" coords="246,527,201,527,201,522,246,522"/>
+<area shape="rect" href="spi__bus_8c.html#ae3a80e44f738156819152fc9374c6e81" title="Creates a new instance of the SPI Bus module." alt="" coords="45,561,164,587"/>
+<area shape="poly" title=" " alt="" coords="247,548,165,565,164,560,246,543"/>
+<area shape="rect" href="ssd1306__driver_8c.html#a57b7aba7486f7b1bbd57aec7ba62e493" title="Creates a new instance of the SSD1306 driver module." alt="" coords="20,611,189,636"/>
+<area shape="poly" title=" " alt="" coords="266,553,253,559,239,569,230,579,220,590,205,600,173,613,171,608,203,596,217,586,226,576,236,565,251,554,263,548"/>
+<area shape="rect" href="storage__manager_8c.html#a81569f9eeedf0881c1fbd785982311fc" title="ქმნის ახალ storage_manager მოდულის ინსტანციას" alt="" coords="13,660,197,685"/>
+<area shape="poly" title=" " alt="" coords="260,554,254,559,237,580,231,603,224,627,206,649,184,662,181,658,202,645,219,624,226,602,232,578,250,555,257,550"/>
+<area shape="rect" href="service__locator_8c.html#aa48f1c919af62ed40e3e038ad56868ab" title="ახალი სერვისის რეგისტრაცია." alt="" coords="11,709,198,735"/>
+<area shape="poly" title=" " alt="" coords="258,555,254,558,241,575,234,592,231,627,228,663,220,681,206,699,187,711,184,707,202,695,216,678,223,662,226,627,229,591,236,573,250,555,255,551"/>
+<area shape="rect" href="system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="25,759,184,784"/>
+<area shape="poly" title=" " alt="" coords="258,555,254,558,238,582,231,605,230,628,231,652,233,676,232,700,224,724,206,748,186,762,183,758,202,744,219,722,226,699,228,676,226,652,224,628,225,604,233,579,250,555,254,551"/>
+<area shape="rect" href="system__timer_8c.html#af68d73ecc7f69d8ee9b7b9491440f91e" title="ქმნის ახალ system_timer მოდულის ინსტანციას" alt="" coords="25,808,185,833"/>
+<area shape="poly" title=" " alt="" coords="257,555,254,558,235,588,227,617,227,647,232,676,236,706,235,737,227,767,206,797,186,811,183,807,202,793,222,765,230,736,230,707,226,677,222,647,222,617,230,586,250,555,253,551"/>
+<area shape="rect" href="time__sync_8c.html#a7a7c79f52ee4aa89c8df7f917afae423" title="ქმნის ახალ time_sync მოდულის ინსტანციას." alt="" coords="36,857,173,883"/>
+<area shape="poly" title=" " alt="" coords="257,555,254,558,232,594,224,630,225,665,232,701,238,737,239,773,230,810,206,846,191,858,174,866,172,861,189,854,202,843,225,808,234,773,233,738,226,702,220,666,218,629,227,592,250,555,253,552"/>
+<area shape="rect" href="watchdog__manager_8c.html#aecae8dc408fc872d6d54f1eba2d035a1" title="Creates a new instance of the Watchdog Manager module." alt="" coords="5,907,204,932"/>
+<area shape="poly" title=" " alt="" coords="257,555,254,558,239,580,229,601,220,643,223,684,232,726,240,768,243,810,234,853,222,874,206,896,190,909,186,905,202,892,218,871,229,851,238,810,235,769,227,727,218,685,215,642,224,599,234,577,250,555,253,552"/>
+<area shape="rect" href="wifi__manager_8c.html#a5100b2f029e2c1e6e8212bd03703667e" title="Creates a new instance of the wifi_manager module." alt="" coords="25,956,184,981"/>
+<area shape="poly" title=" " alt="" coords="257,555,254,558,237,583,225,607,219,632,217,656,221,704,232,752,243,800,247,848,244,873,237,897,225,922,206,947,186,961,183,957,202,943,220,919,232,895,239,872,242,848,238,801,227,753,216,704,211,656,214,631,220,606,232,580,250,555,253,552"/>
+</map>
+</div>
 
 </div>
 </div>

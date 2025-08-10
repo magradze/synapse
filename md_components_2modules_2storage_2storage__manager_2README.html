@@ -166,7 +166,7 @@ Key-Value ოპერაციები</h2>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="storage__interface_8h.html">storage_interface.h</a>&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> save_homepage() {</div>
-<div class="line">    <a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *storage = (<a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_storage&quot;</span>);</div>
+<div class="line">    <a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *storage = (<a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *)synapse_service_get(<span class="stringliteral">&quot;main_storage&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (!storage) <span class="keywordflow">return</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span>* html_content = <span class="stringliteral">&quot;&lt;h1&gt;Welcome to Synapse!&lt;/h1&gt;&quot;</span>;</div>
@@ -177,7 +177,6 @@ Key-Value ოპერაციები</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astorage__interface_8h_html"><div class="ttname"><a href="storage__interface_8h.html">storage_interface.h</a></div><div class="ttdoc">Public Service API contract for the Storage Manager module.</div></div>
 <div class="ttc" id="astructstorage__api__t_html"><div class="ttname"><a href="structstorage__api__t.html">storage_api_t</a></div><div class="ttdoc">The public Service API structure for the Storage Manager.</div><div class="ttdef"><b>Definition</b> storage_interface.h:24</div></div>
 <div class="ttc" id="astructstorage__api__t_html_a2b1e5f5932275b92b01be2bb1eb9c3ac"><div class="ttname"><a href="structstorage__api__t.html#a2b1e5f5932275b92b01be2bb1eb9c3ac">storage_api_t::write_file</a></div><div class="ttdeci">esp_err_t(* write_file)(const char *file_path, const void *data, size_t size)</div><div class="ttdoc">Writes data to a file in the selected backend.</div><div class="ttdef"><b>Definition</b> storage_interface.h:97</div></div>
@@ -186,7 +185,7 @@ Key-Value ოპერაციები</h2>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="storage__interface_8h.html">storage_interface.h</a>&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> save_wifi_ssid(<span class="keyword">const</span> <span class="keywordtype">char</span>* ssid) {</div>
-<div class="line">    <a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *storage = (<a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *)<a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_storage&quot;</span>);</div>
+<div class="line">    <a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *storage = (<a class="code hl_struct" href="structstorage__api__t.html">storage_api_t</a> *)synapse_service_get(<span class="stringliteral">&quot;main_storage&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (!storage) <span class="keywordflow">return</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Key-Value API-ს გამოყენება</span></div>

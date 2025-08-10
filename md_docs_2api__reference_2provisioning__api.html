@@ -93,18 +93,18 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2provisioning_
   <div class="headertitle"><div class="title">📲 Synapse Provisioning Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md565"></a> </p>
-<h1><a class="anchor" id="autotoc_md566"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md566"></a> </p>
+<h1><a class="anchor" id="autotoc_md567"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის provisioning (მოწყობილობის კონფიგურაციისა და პირველადი დაყენების) მოდულების სტანდარტულ API-ებს და არქიტექტურულ პატერნებს.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md568"></a>
+<h1><a class="anchor" id="autotoc_md569"></a>
 🔵 BLE Provisioning Service API (იმპლემენტირებულია)</h1>
 <p>ეს სექცია აღწერს <code>ble_provisioning</code> მოდულის მიერ მოწოდებულ, რეალურად არსებულ სერვისის API-ს.</p>
 <p><b>სერვისის ტიპი:</b> <code>SYNAPSE_SERVICE_TYPE_CUSTOM_API</code> <br  />
  <b>ინტერფეისის სტრუქტურა:</b> <code><a class="el" href="structble__prov__api__t.html" title="The public Service API structure for the BLE Provisioning module.">ble_prov_api_t</a></code> (განსაზღვრულია <code><a class="el" href="ble__prov__interface_8h.html" title="Public Service API contract for the BLE Provisioning module.">ble_prov_interface.h</a></code>-ში)</p>
 <p>სერვისის მისაღებად გამოიყენეთ <code>synapse_service_get("main_ble_prov")</code> (ან თქვენს <code>system_config.json</code>-ში მითითებული <code>instance_name</code>).</p>
-<h2><a class="anchor" id="autotoc_md569"></a>
+<h2><a class="anchor" id="autotoc_md570"></a>
 ძირითადი ფუნქციები</h2>
 <ul>
 <li>**<code>bool is_provisioning_active(void);</code>** <br  />
@@ -113,131 +113,131 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2provisioning_
  🚀 იწყებს provisioning-ის პროცესს პროგრამულად.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md571"></a>
+<h1><a class="anchor" id="autotoc_md572"></a>
 📡 SoftAP Provisioning Module API</h1>
-<h2><a class="anchor" id="autotoc_md572"></a>
+<h2><a class="anchor" id="autotoc_md573"></a>
 module_t *softap_prov_module_create(const cJSON*config)</h2>
 <ul>
 <li>ქმნის ახალი SoftAP Provisioning მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md573"></a>
+<h2><a class="anchor" id="autotoc_md574"></a>
 esp_err_t softap_prov_module_start(module_t *module)</h2>
 <ul>
 <li>იწყებს SoftAP provisioning პროცესს (მოწყობილობა ქმნის WiFi AP-ს).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md574"></a>
+<h2><a class="anchor" id="autotoc_md575"></a>
 esp_err_t softap_prov_module_stop(module_t *module)</h2>
 <ul>
 <li>აჩერებს SoftAP provisioning პროცესს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md575"></a>
+<h2><a class="anchor" id="autotoc_md576"></a>
 esp_err_t softap_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)</h2>
 <ul>
 <li>აყენებს WiFi credentials SoftAP provisioning-ისთვის.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md576"></a>
+<h2><a class="anchor" id="autotoc_md577"></a>
 esp_err_t softap_prov_module_get_status(module_t *module, softap_prov_status_t*status)</h2>
 <ul>
 <li>აბრუნებს provisioning პროცესის მიმდინარე სტატუსს.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md578"></a>
+<h1><a class="anchor" id="autotoc_md579"></a>
 🔳 QR Code Provisioning API</h1>
-<h2><a class="anchor" id="autotoc_md579"></a>
+<h2><a class="anchor" id="autotoc_md580"></a>
 esp_err_t qr_code_prov_generate(const char *ssid, const char*password, char *qr_code_buffer, size_t buffer_size)</h2>
 <ul>
 <li>ქმნის QR კოდს WiFi credentials-ით ან სხვა საჭირო მონაცემებით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md580"></a>
+<h2><a class="anchor" id="autotoc_md581"></a>
 esp_err_t qr_code_prov_display(const char *qr_code_buffer)</h2>
 <ul>
 <li>აჩვენებს QR კოდს ეკრანზე ან სხვა ინტერფეისით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md582"></a>
+<h1><a class="anchor" id="autotoc_md583"></a>
 🔌 Serial Provisioning API</h1>
-<h2><a class="anchor" id="autotoc_md583"></a>
+<h2><a class="anchor" id="autotoc_md584"></a>
 module_t *serial_prov_module_create(const cJSON*config)</h2>
 <ul>
 <li>ქმნის ახალი Serial Provisioning მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md584"></a>
+<h2><a class="anchor" id="autotoc_md585"></a>
 esp_err_t serial_prov_module_start(module_t *module)</h2>
 <ul>
 <li>იწყებს Serial provisioning პროცესს (UART/USB).</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md585"></a>
+<h2><a class="anchor" id="autotoc_md586"></a>
 esp_err_t serial_prov_module_stop(module_t *module)</h2>
 <ul>
 <li>აჩერებს Serial provisioning პროცესს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md586"></a>
+<h2><a class="anchor" id="autotoc_md587"></a>
 esp_err_t serial_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)</h2>
 <ul>
 <li>აყენებს WiFi credentials Serial provisioning-ისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md588"></a>
+<h1><a class="anchor" id="autotoc_md589"></a>
 ☁️ Cloud Provisioning API</h1>
-<h2><a class="anchor" id="autotoc_md589"></a>
+<h2><a class="anchor" id="autotoc_md590"></a>
 module_t *cloud_prov_module_create(const cJSON*config)</h2>
 <ul>
 <li>ქმნის ახალი Cloud Provisioning მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md590"></a>
+<h2><a class="anchor" id="autotoc_md591"></a>
 esp_err_t cloud_prov_module_start(module_t *module)</h2>
 <ul>
 <li>იწყებს provisioning პროცესს ღრუბლოვანი სერვისის მეშვეობით.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md591"></a>
+<h2><a class="anchor" id="autotoc_md592"></a>
 esp_err_t cloud_prov_module_stop(module_t *module)</h2>
 <ul>
 <li>აჩერებს provisioning პროცესს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md592"></a>
+<h2><a class="anchor" id="autotoc_md593"></a>
 esp_err_t cloud_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)</h2>
 <ul>
 <li>აყენებს WiFi credentials Cloud provisioning-ისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md594"></a>
+<h1><a class="anchor" id="autotoc_md595"></a>
 NFC Provisioning API</h1>
-<h2><a class="anchor" id="autotoc_md595"></a>
+<h2><a class="anchor" id="autotoc_md596"></a>
 module_t *nfc_prov_module_create(const cJSON*config)</h2>
 <ul>
 <li>ქმნის ახალი NFC Provisioning მოდულის ინსტანციას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md596"></a>
+<h2><a class="anchor" id="autotoc_md597"></a>
 esp_err_t nfc_prov_module_start(module_t *module)</h2>
 <ul>
 <li>იწყებს NFC provisioning პროცესს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md597"></a>
+<h2><a class="anchor" id="autotoc_md598"></a>
 esp_err_t nfc_prov_module_stop(module_t *module)</h2>
 <ul>
 <li>აჩერებს NFC provisioning პროცესს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md598"></a>
+<h2><a class="anchor" id="autotoc_md599"></a>
 esp_err_t nfc_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)</h2>
 <ul>
 <li>აყენებს WiFi credentials NFC provisioning-ისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md600"></a>
+<h1><a class="anchor" id="autotoc_md601"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md602"></a>
+<h1><a class="anchor" id="autotoc_md603"></a>
 მაგალითები</h1>
 <p><b>BLE Provisioning პროცესის დაწყება:</b></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="service__locator_8h.html">service_locator.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="ble__prov__interface_8h.html">ble_prov_interface.h</a>&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> check_provisioning_status() {</div>
-<div class="line">    <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> prov_handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_ble_prov&quot;</span>);</div>
+<div class="line">    service_handle_t prov_handle = synapse_service_get(<span class="stringliteral">&quot;main_ble_prov&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (prov_handle) {</div>
 <div class="line">        <a class="code hl_struct" href="structble__prov__api__t.html">ble_prov_api_t</a> *prov_api = (<a class="code hl_struct" href="structble__prov__api__t.html">ble_prov_api_t</a> *)prov_handle;</div>
 <div class="line">        <span class="keywordflow">if</span> (prov_api-&gt;<a class="code hl_variable" href="structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e">is_provisioning_active</a>()) {</div>
@@ -249,8 +249,6 @@ Naming &amp; Structure</h1>
 <div class="line">}</div>
 <div class="ttc" id="able__prov__interface_8h_html"><div class="ttname"><a href="ble__prov__interface_8h.html">ble_prov_interface.h</a></div><div class="ttdoc">Public Service API contract for the BLE Provisioning module.</div></div>
 <div class="ttc" id="aservice__locator_8h_html"><div class="ttname"><a href="service__locator_8h.html">service_locator.h</a></div><div class="ttdoc">Framework-ის სერვის ლოკატორის საჯარო API.</div></div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructble__prov__api__t_html"><div class="ttname"><a href="structble__prov__api__t.html">ble_prov_api_t</a></div><div class="ttdoc">The public Service API structure for the BLE Provisioning module.</div><div class="ttdef"><b>Definition</b> ble_prov_interface.h:23</div></div>
 <div class="ttc" id="astructble__prov__api__t_html_aaf6157ba3bf6c8d06b905075bc8b039e"><div class="ttname"><a href="structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e">ble_prov_api_t::is_provisioning_active</a></div><div class="ttdeci">bool(* is_provisioning_active)(void)</div><div class="ttdoc">Checks if the BLE provisioning process is currently active.</div><div class="ttdef"><b>Definition</b> ble_prov_interface.h:35</div></div>
 </div><!-- fragment --><p><b>WiFi Credentials-ის დაყენება:</b></p>

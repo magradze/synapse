@@ -89,6 +89,7 @@ var annotated_dup =
     [ "synapse_health_pong_payload_t", "structsynapse__health__pong__payload__t.html", "structsynapse__health__pong__payload__t" ],
     [ "synapse_job_t", "structsynapse__job__t.html", null ],
     [ "synapse_module_control_payload_t", "structsynapse__module__control__payload__t.html", "structsynapse__module__control__payload__t" ],
+    [ "synapse_service_status_payload_t", "structsynapse__service__status__payload__t.html", "structsynapse__service__status__payload__t" ],
     [ "synapse_telemetry_payload_t", "structsynapse__telemetry__payload__t.html", "structsynapse__telemetry__payload__t" ],
     [ "system_manager_api_t", "structsystem__manager__api__t.html", "structsystem__manager__api__t" ],
     [ "system_timer_config_t", "structsystem__timer__config__t.html", "structsystem__timer__config__t" ],

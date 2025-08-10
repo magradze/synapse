@@ -1,0 +1,16 @@
+<map id="synapse_service_register" name="synapse_service_register">
+<area shape="rect" id="Node000001" title="ახალი სერვისის რეგისტრაცია." alt="" coords="5,77,192,102"/>
+<area shape="rect" id="Node000002" href="$service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="240,69,427,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,87,226,87,226,92,192,92"/>
+<area shape="rect" id="Node000003" href="$service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="475,69,632,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="427,87,461,87,461,92,427,92"/>
+<area shape="rect" id="Node000004" href="$event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="685,26,870,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="631,69,707,52,708,57,633,74"/>
+<area shape="rect" id="Node000006" href="$event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="923,69,1079,109"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="632,87,909,87,909,92,632,92"/>
+<area shape="rect" id="Node000007" href="$event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="680,127,875,153"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="633,104,708,122,707,127,631,110"/>
+<area shape="rect" id="Node000005" href="$event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="923,5,1079,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="870,30,909,28,909,33,870,36"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="835,49,910,66,909,71,834,54"/>
+</map>

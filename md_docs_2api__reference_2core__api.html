@@ -95,54 +95,67 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2core__api.htm
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md339"></a> </p>
 <h1><a class="anchor" id="autotoc_md340"></a>
-Service Locator API</h1>
+⚙️ Service Locator API (v2.0 - State-Aware)</h1>
+<p>Service Locator-ი უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით. v2.0-დან ის ასევე აღრიცხავს თითოეული სერვისის სიცოცხლის ციკლის სტატუსს.</p>
 <h2><a class="anchor" id="autotoc_md341"></a>
-synapse_service_register</h2>
-<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#aa48f1c919af62ed40e3e038ad56868ab">synapse_service_register</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name, <a class="code hl_enumeration" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type, <a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> service_api_handle);</div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aa48f1c919af62ed40e3e038ad56868ab"><div class="ttname"><a href="service__locator_8h.html#aa48f1c919af62ed40e3e038ad56868ab">synapse_service_register</a></div><div class="ttdeci">esp_err_t synapse_service_register(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle)</div><div class="ttdoc">ახალი სერვისის რეგისტრაცია უნიკალური სახელით და ტიპით.</div><div class="ttdef"><b>Definition</b> service_locator.c:85</div></div>
-<div class="ttc" id="aservice__types_8h_html_aa1c3d5038eb4d9433e4109c5d61f47b1"><div class="ttname"><a href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a></div><div class="ttdeci">synapse_service_type_t</div><div class="ttdoc">სერვისის ტიპების ცენტრალიზებული ჩამონათვალი.</div><div class="ttdef"><b>Definition</b> service_types.h:25</div></div>
-</div><!-- fragment --><ul>
-<li>რეგისტრირებს ახალ სერვისს Service Locator-ში.</li>
-<li>არგუმენტები: უნიკალური სახელი, ტიპი, API-ის მაჩვენებელი.</li>
-<li>აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_INVALID_ARG ან ESP_ERR_NO_MEM შეცდომისას.</li>
+&lt;tt&gt;esp_err_t synapse_service_register_with_status(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle, service_status_t initial_status);&lt;/tt&gt;</h2>
+<ul>
+<li><b>აღწერა:</b> არეგისტრირებს ახალ სერვისს <code>Service Locator</code>-ში მითითებული საწყისი სტატუსით. ეს არის სერვისის რეგისტრაციის <b>რეკომენდებული</b> მეთოდი.</li>
+<li><b>გამოძახების ადგილი:</b> მოდულის <code>_create</code> ფუნქცია.</li>
+<li><b>არგუმენტები:</b><ul>
+<li><code>service_name</code>: სერვისის უნიკალური სახელი (როგორც წესი, მოდულის <code>instance_name</code>).</li>
+<li><code>service_type</code>: სერვისის ტიპი <code>synapse_service_type_t</code> enum-იდან.</li>
+<li><code>service_handle</code>: მაჩვენებელი სერვისის API სტრუქტურაზე.</li>
+<li><code>initial_status</code>: სერვისის საწყისი სტატუსი (როგორც წესი, <code>SERVICE_STATUS_REGISTERED</code>).</li>
+</ul>
+</li>
+<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, ან შეცდომის კოდს.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md342"></a>
-synapse_service_unregister</h2>
-<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#a2817be6ada658a341e4c4850dca12c49">synapse_service_unregister</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name);</div>
-<div class="ttc" id="aservice__locator_8h_html_a2817be6ada658a341e4c4850dca12c49"><div class="ttname"><a href="service__locator_8h.html#a2817be6ada658a341e4c4850dca12c49">synapse_service_unregister</a></div><div class="ttdeci">esp_err_t synapse_service_unregister(const char *service_name)</div><div class="ttdoc">სერვისის რეგისტრაციის გაუქმება მისი სახელით.</div><div class="ttdef"><b>Definition</b> service_locator.c:129</div></div>
-</div><!-- fragment --><ul>
-<li>აუქმებს სერვისის რეგისტრაციას და ათავისუფლებს დაკავშირებულ რესურსებს.</li>
-<li>არგუმენტები: რეგისტრაციიდან მოსახსნელი სერვისის უნიკალური სახელი.</li>
-<li>აბრუნებს: ESP_OK წარმატების შემთხვევაში, ESP_ERR_NOT_FOUND თუ სერვისი ვერ მოიძებნა.</li>
+&lt;tt&gt;esp_err_t synapse_service_set_status(const char *service_name, service_status_t new_status);&lt;/tt&gt;</h2>
+<ul>
+<li><b>აღწერა:</b> ცვლის უკვე რეგისტრირებული სერვისის სტატუსს. სტატუსის ცვლილებისას, ავტომატურად აქვეყნებს <code>SYNAPSE_EVENT_SERVICE_STATUS_CHANGED</code> ივენთს <code>Event Bus</code>-ზე.</li>
+<li><b>გამოძახების ადგილი:</b> როგორც წესი, გამოიძახება <code>System Manager</code>-ის მიერ მოდულის სიცოცხლის ციკლის სხვადასხვა ეტაპზე.</li>
+<li><b>არგუმენტები:</b><ul>
+<li><code>service_name</code>: სერვისის სახელი.</li>
+<li><code>new_status</code>: ახალი სტატუსი <code>service_status_t</code> enum-იდან.</li>
+</ul>
+</li>
+<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში, <code>ESP_ERR_NOT_FOUND</code> თუ სერვისი ვერ მოიძებნა.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md343"></a>
-synapse_service_get</h2>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name);</div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
-</div><!-- fragment --><ul>
-<li>აბრუნებს სერვისის API-ს მაჩვენებელს სახელით.</li>
+&lt;tt&gt;esp_err_t synapse_service_get_status(const char *service_name, service_status_t *out_status);&lt;/tt&gt;</h2>
+<ul>
+<li><b>აღწერა:</b> აბრუნებს სერვისის მიმდინარე სტატუსს.</li>
+<li><b>არგუმენტები:</b><ul>
+<li><code>service_name</code>: სერვისის სახელი.</li>
+<li><code>out_status</code>: მაჩვენებელი, სადაც ჩაიწერება სერვისის სტატუსი.</li>
+</ul>
+</li>
+<li><b>აბრუნებს:</b> <code>ESP_OK</code> წარმატების შემთხვევაში.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md344"></a>
-synapse_service_get_type</h2>
-<div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="service__locator_8h.html#a4441bcf4d7c9af56b3f7ed46b8ae37f0">synapse_service_get_type</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *service_name, <a class="code hl_enumeration" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> *out_service_type);</div>
-<div class="ttc" id="aservice__locator_8h_html_a4441bcf4d7c9af56b3f7ed46b8ae37f0"><div class="ttname"><a href="service__locator_8h.html#a4441bcf4d7c9af56b3f7ed46b8ae37f0">synapse_service_get_type</a></div><div class="ttdeci">esp_err_t synapse_service_get_type(const char *service_name, synapse_service_type_t *out_service_type)</div><div class="ttdoc">აბრუნებს სერვისის ტიპს enum სახით.</div><div class="ttdef"><b>Definition</b> service_locator.c:214</div></div>
-</div><!-- fragment --><ul>
-<li>აბრუნებს სერვისის ტიპს სახელით.</li>
+&lt;tt&gt;service_handle_t synapse_service_get(const char *service_name);&lt;/tt&gt;</h2>
+<ul>
+<li><b>აღწერა:</b> აბრუნებს სერვისის <code>handle</code>-ს (API სტრუქტურის მაჩვენებელს) მისი სახელით.</li>
+<li><b>მნიშვნელოვანია:</b> ეს ფუნქცია აბრუნებს <code>handle</code>-ს, თუ სერვისი რეგისტრირებულია, <b>განურჩევლად მისი სტატუსისა</b>. <code>System Manager</code> (<code>Strict Mode</code>-ში) უზრუნველყოფს, რომ მოდული, რომელიც ამ <code>handle</code>-ს გამოიყენებს, მხოლოდ მაშინ დაიწყებს მუშაობას, როდესაც სერვისი <code>ACTIVE</code> გახდება.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md345"></a>
-synapse_service_lookup_by_type</h2>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> <a class="code hl_function" href="service__locator_8h.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a>(<a class="code hl_enumeration" href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a> service_type);</div>
-<div class="ttc" id="aservice__locator_8h_html_adbc62ae164e5c44764e195118403ad96"><div class="ttname"><a href="service__locator_8h.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a></div><div class="ttdeci">service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type)</div><div class="ttdoc">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს</div><div class="ttdef"><b>Definition</b> service_locator.c:248</div></div>
-</div><!-- fragment --><ul>
-<li>ეძებს და აბრუნებს პირველ ნაპოვნ სერვისს მითითებული ტიპის მიხედვით.</li>
-<li>არგუმენტები: მოსაძებნი სერვისის ტიპი (enum).</li>
-<li>აბრუნებს: ნაპოვნი სერვისის handle, ან NULL თუ ვერ მოიძებნა.</li>
+&lt;tt&gt;esp_err_t synapse_service_unregister(const char *service_name);&lt;/tt&gt;</h2>
+<ul>
+<li><b>აღწერა:</b> აუქმებს სერვისის რეგისტრაციას.</li>
+<li><b>გამოძახების ადგილი:</b> როგორც წესი, გამოიძახება მოდულის <code>deinit</code> ფუნქციაში, თუ სერვისი დინამიურად უნდა მოიხსნას.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md346"></a>
+&lt;tt&gt;__attribute__((deprecated))&lt;/tt&gt; &lt;tt&gt;esp_err_t synapse_service_register(...)&lt;/tt&gt;</h2>
+<ul>
+<li><b>სტატუსი:</b> მოძველებული (Deprecated).</li>
+<li><b>აღწერა:</b> ძველი რეგისტრაციის ფუნქცია. უკუთავსებადობისთვის ის კვლავ მუშაობს და შიდა დონეზე იძახებს <code>synapse_service_register_with_status</code>-ს <code>SERVICE_STATUS_REGISTERED</code> სტატუსით. თავი აარიდეთ მის გამოყენებას ახალ კოდში.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md347"></a>
+<h1><a class="anchor" id="autotoc_md348"></a>
 Event Bus API</h1>
-<h2><a class="anchor" id="autotoc_md348"></a>
+<h2><a class="anchor" id="autotoc_md349"></a>
 &lt;tt&gt;synapse_event_bus_post&lt;/tt&gt;</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *data_wrapper);</div>
 <div class="ttc" id="aevent__bus_8h_html_a4be3ec71e70f06b05b780b9883094387"><div class="ttname"><a href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a></div><div class="ttdeci">esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:331</div></div>
@@ -152,7 +165,7 @@ Event Bus API</h1>
 <li>**<code>event_name</code>:** ივენთის უნიკალური სახელი (სტრიქონი).</li>
 <li>**<code>data_wrapper</code>:** მაჩვენებელი "შეფუთულ" მონაცემებზე. თუ მონაცემები არ არის საჭირო, გადაეცემა <code>NULL</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md349"></a>
+<h2><a class="anchor" id="autotoc_md350"></a>
 &lt;tt&gt;synapse_event_bus_subscribe&lt;/tt&gt;</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8h.html#a4966efcc89039732d2764e0637da8bbd">synapse_event_bus_subscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 <div class="ttc" id="aevent__bus_8h_html_a4966efcc89039732d2764e0637da8bbd"><div class="ttname"><a href="event__bus_8h.html#a4966efcc89039732d2764e0637da8bbd">synapse_event_bus_subscribe</a></div><div class="ttdeci">esp_err_t synapse_event_bus_subscribe(const char *event_name, struct module_t *module)</div><div class="ttdoc">არეგისტრირებს მოდულს, როგორც კონკრეტული ივენთის გამომწერს.</div><div class="ttdef"><b>Definition</b> event_bus.c:367</div></div>
@@ -162,7 +175,7 @@ Event Bus API</h1>
 <li>**<code>event_name</code>:** ივენთის სახელი, რომელზეც ხდება გამოწერა. <code>*</code> (wildcard) გამოიწერს ყველა ივენთს.</li>
 <li>**<code>module</code>:** მაჩვენებელი გამომწერ მოდულზე.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md350"></a>
+<h2><a class="anchor" id="autotoc_md351"></a>
 &lt;tt&gt;synapse_event_bus_unsubscribe&lt;/tt&gt;</h2>
 <div class="fragment"><div class="line">esp_err_t <a class="code hl_function" href="event__bus_8h.html#aad4a2793a40d367c4463bd46dd5418c8">synapse_event_bus_unsubscribe</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keyword">struct</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 <div class="ttc" id="aevent__bus_8h_html_aad4a2793a40d367c4463bd46dd5418c8"><div class="ttname"><a href="event__bus_8h.html#aad4a2793a40d367c4463bd46dd5418c8">synapse_event_bus_unsubscribe</a></div><div class="ttdeci">esp_err_t synapse_event_bus_unsubscribe(const char *event_name, struct module_t *module)</div><div class="ttdoc">აუქმებს მოდულის გამოწერას კონკრეტულ ივენთზე. ★★★ (ახალი) ★★★</div><div class="ttdef"><b>Definition</b> event_bus.c:427</div></div>
@@ -172,24 +185,24 @@ Event Bus API</h1>
 <li>**<code>module</code>:** მაჩვენებელი მოდულზე, რომელიც აუქმებს გამოწერას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md352"></a>
+<h1><a class="anchor" id="autotoc_md353"></a>
 Module Register API</h1>
-<h2><a class="anchor" id="autotoc_md353"></a>
+<h2><a class="anchor" id="autotoc_md354"></a>
 synapse_module_register</h2>
 <div class="fragment"><div class="line">esp_err_t synapse_module_register(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name, <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
 </div><!-- fragment --><ul>
 <li>რეგისტრირებს ახალ მოდულს სისტემაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md354"></a>
+<h2><a class="anchor" id="autotoc_md355"></a>
 synapse_module_find_by_name</h2>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *synapse_module_find_by_name(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name);</div>
 </div><!-- fragment --><ul>
 <li>პოულობს მოდულს instance_name-ით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md356"></a>
+<h1><a class="anchor" id="autotoc_md357"></a>
 Module Factory API</h1>
-<h2><a class="anchor" id="autotoc_md357"></a>
+<h2><a class="anchor" id="autotoc_md358"></a>
 synapse_module_factory_create</h2>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="module__factory_8h.html#a6805f2afdd869574d6ae21de42a97e92">synapse_module_factory_create</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *type, <span class="keyword">const</span> cJSON *config);</div>
 <div class="ttc" id="amodule__factory_8h_html_a6805f2afdd869574d6ae21de42a97e92"><div class="ttname"><a href="module__factory_8h.html#a6805f2afdd869574d6ae21de42a97e92">synapse_module_factory_create</a></div><div class="ttdeci">module_t * synapse_module_factory_create(const char *module_type, const cJSON *config)</div><div class="ttdoc">მოდულის შემქმნელი (factory) ფუნქციის ტიპი.</div><div class="ttdef"><b>Definition</b> module_factory.c:44</div></div>
@@ -197,21 +210,21 @@ synapse_module_factory_create</h2>
 <li>ქმნის მოდულის ახალ ინსტანციას ტიპისა და კონფიგურაციის მიხედვით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md359"></a>
+<h1><a class="anchor" id="autotoc_md360"></a>
 Configuration Manager API</h1>
-<h2><a class="anchor" id="autotoc_md360"></a>
+<h2><a class="anchor" id="autotoc_md361"></a>
 synapse_config_get_string</h2>
 <div class="fragment"><div class="line">esp_err_t synapse_config_get_string(<span class="keyword">const</span> <span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *value, <span class="keywordtype">size_t</span> size);</div>
 </div><!-- fragment --><ul>
 <li>კითხულობს სტრიქონის ტიპის პარამეტრს კონფიგურაციიდან.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md361"></a>
+<h2><a class="anchor" id="autotoc_md362"></a>
 synapse_config_get_int</h2>
 <div class="fragment"><div class="line">esp_err_t synapse_config_get_int(<span class="keyword">const</span> <span class="keywordtype">char</span> *key, <span class="keywordtype">int</span> *value);</div>
 </div><!-- fragment --><ul>
 <li>კითხულობს მთელი რიცხვის ტიპის პარამეტრს.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md362"></a>
+<h2><a class="anchor" id="autotoc_md363"></a>
 synapse_config_get_module_config</h2>
 <div class="fragment"><div class="line"><span class="keyword">const</span> cJSON *<a class="code hl_function" href="config__manager_8h.html#aea13d4ccca1a00b44aab8fd2050677e2">synapse_config_get_module_config</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *module_instance_name);</div>
 <div class="ttc" id="aconfig__manager_8h_html_aea13d4ccca1a00b44aab8fd2050677e2"><div class="ttname"><a href="config__manager_8h.html#aea13d4ccca1a00b44aab8fd2050677e2">synapse_config_get_module_config</a></div><div class="ttdeci">const cJSON * synapse_config_get_module_config(const char *module_name)</div><div class="ttdoc">აბრუნებს მოდულის კონფიგურაციის cJSON ობიექტს.</div></div>
@@ -219,15 +232,15 @@ synapse_config_get_module_config</h2>
 <li>აბრუნებს მოდულის სრულ კონფიგურაციას instance_name-ით.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md364"></a>
+<h1><a class="anchor" id="autotoc_md365"></a>
 Logging API</h1>
-<h2><a class="anchor" id="autotoc_md365"></a>
+<h2><a class="anchor" id="autotoc_md366"></a>
 DEFINE_COMPONENT_TAG</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define DEFINE_COMPONENT_TAG(NAME)</span></div>
 </div><!-- fragment --><ul>
 <li>განსაზღვრავს კომპონენტის უნიკალურ ტეგს ლოგირებისთვის.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md366"></a>
+<h2><a class="anchor" id="autotoc_md367"></a>
 ESP_LOGE, ESP_LOGW, ESP_LOGI, ESP_LOGD, ESP_LOGV</h2>
 <ul>
 <li>გამოიყენეთ შესაბამისი log level-ისთვის.</li>

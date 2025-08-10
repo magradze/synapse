@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2utils__api.ht
   <div class="headertitle"><div class="title">Synapse Utils API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md744"></a> </p>
-<h1><a class="anchor" id="autotoc_md745"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md745"></a> </p>
+<h1><a class="anchor" id="autotoc_md746"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code><a class="el" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library.">synapse_utils.h</a></code>-ში თავმოყრილი დამხმარე ფუნქციების API-ს. ეს ბიბლიოთეკა შეიცავს ხშირად გამოყენებად, უსაფრთხო ფუნქციებს, რომლებიც ამარტივებენ მოდულების წერას და ამცირებენ კოდის დუბლირებას.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md747"></a>
+<h1><a class="anchor" id="autotoc_md748"></a>
 1. უსაფრთხო სტრიქონების მართვა</h1>
-<h2><a class="anchor" id="autotoc_md748"></a>
+<h2><a class="anchor" id="autotoc_md749"></a>
 &lt;tt&gt;char* synapse_safe_strncpy(char *dest, const char *src, size_t size);&lt;/tt&gt;</h2>
 <p><code>strncpy</code>-ის უსაფრთხო ვერსია, რომელიც <b>ყოველთვის უზრუნველყოფს</b> დანიშნულების ბუფერის <code>null-termination</code>-ს.</p>
 <ul>
@@ -110,10 +110,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2utils__api.ht
 <li><b>აბრუნებს:</b> მაჩვენებელს <code>dest</code> ბუფერზე.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md750"></a>
+<h1><a class="anchor" id="autotoc_md751"></a>
 2. კონფიგურაციის პარსინგის დამხმარე ფუნქციები</h1>
 <p>ეს ფუნქციები შექმნილია <code>parse_config</code> ფუნქციებში გამოსაყენებლად, რათა უსაფრთხოდ და მარტივად წაიკითხოთ პარამეტრები <code>cJSON</code> ობიექტიდან.</p>
-<h2><a class="anchor" id="autotoc_md751"></a>
+<h2><a class="anchor" id="autotoc_md752"></a>
 &lt;tt&gt;bool synapse_config_get_string_from_node(const char* tag, const cJSON *json_node, const char *key, char *dest, size_t dest_size);&lt;/tt&gt;</h2>
 <p>უსაფრთხოდ კითხულობს სტრიქონს <code>cJSON</code> კვანძიდან. თუ გასაღები არ არსებობს ან არასწორი ტიპისაა, <code>dest</code> ბუფერი უცვლელი რჩება.</p>
 <ul>
@@ -124,14 +124,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2utils__api.ht
 <li>**<code>dest_size</code>**: ბუფერის სრული ზომა.</li>
 <li><b>აბრუნებს:</b> <code>true</code> თუ წაკითხვა წარმატებით დასრულდა, <code>false</code> წინააღმდეგ შემთხვევაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md752"></a>
+<h2><a class="anchor" id="autotoc_md753"></a>
 &lt;tt&gt;bool synapse_config_get_int_from_node(const char* tag, const cJSON *json_node, const char *key, int *out_value);&lt;/tt&gt;</h2>
 <p>უსაფრთხოდ კითხულობს <code>int</code> ტიპის რიცხვს. თუ გასაღები არ არსებობს ან არასწორი ტიპისაა, <code>out_value</code> არ იცვლება.</p>
 <ul>
 <li>**<code>out_value</code>**: მაჩვენებელი <code>int</code> ცვლადზე, სადაც ჩაიწერება შედეგი.</li>
 <li><b>აბრუნებს:</b> <code>true</code> თუ წაკითხვა წარმატებით დასრულდა, <code>false</code> წინააღმდეგ შემთხვევაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md753"></a>
+<h2><a class="anchor" id="autotoc_md754"></a>
 &lt;tt&gt;bool synapse_config_get_bool_from_node(const char* tag, const cJSON *json_node, const char *key, bool *out_value);&lt;/tt&gt;</h2>
 <p>უსაფრთხოდ კითხულობს <code>bool</code> ტიპის მნიშვნელობას. თუ გასაღები არ არსებობს ან არასწორი ტიპისაა, <code>out_value</code> არ იცვლება.</p>
 <ul>

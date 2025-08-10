@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ეკრანის_20მოდულების_20ოპტიმიზაცია_20performance_20—_20display_20modules_0',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]]
+  ['თავსებადობის_20არქიტექტურული_20გადაწყვეტილებები_20migration_20compatibility_0',['მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration &amp; Compatibility)',['../md_docs_2design__decisions_2migration__and__compatibility.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🌐_20კონფიგურაციაზე_20წვდომა_20სხვა_20მოდულებიდან_0',['5. 🌐 კონფიგურაციაზე წვდომა სხვა მოდულებიდან',['../md_docs_2convention_2configuration__management.html#autotoc_md1198',1,'']]]
+  ['🌡️_20მოდული_3a_20tt_20sensor_5faggregator_20tt_0',['🌡️ მოდული: &lt;tt&gt;sensor_aggregator&lt;/tt&gt;',['../md_components_2modules_2sensors_2sensor__aggregator_2README.html',1,'']]]
 ];

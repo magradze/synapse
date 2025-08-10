@@ -1,15 +1,5 @@
 var searchData=
 [
-  ['—_20არქიტექტურის_20მიმოხილვა_0',['Synapse ESP Framework — არქიტექტურის მიმოხილვა',['../md_docs_2design__decisions_2architecture__overview.html',1,'']]],
-  ['—_202025_2006_2024_1',['ცვლილებების ჟურნალი — 2025-06-24',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html',1,'']]],
-  ['—_20api_20code_2',['API-სა და კოდის ტერმინები (Glossary — API &amp; Code)',['../md_docs_2glossary_2glossary__api.html',1,'']]],
-  ['—_20architecture_3',['არქიტექტურული ტერმინები (Glossary — Architecture)',['../md_docs_2glossary_2glossary__architecture.html',1,'']]],
-  ['—_20cloud_4',['Cloud ინტეგრაციის სახელმძღვანელო (Integration — Cloud)',['../md_docs_2integration_2integration__cloud.html',1,'']]],
-  ['—_20configuration_20storage_5',['კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration &amp; Storage)',['../md_docs_2glossary_2glossary__config.html',1,'']]],
-  ['—_20display_20modules_6',['ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)',['../md_docs_2performance_2performance__display.html',1,'']]],
-  ['—_20documentation_20module_20design_20checklist_7',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]],
-  ['—_20mqtt_8',['MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)',['../md_docs_2integration_2integration__mqtt.html',1,'']]],
-  ['—_20rest_20api_9',['REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)',['../md_docs_2integration_2integration__rest.html',1,'']]],
-  ['—_20security_20performance_10',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
-  ['—_20websocket_11',['WebSocket ინტეგრაციის სახელმძღვანელო (Integration — WebSocket)',['../md_docs_2integration_2integration__websocket.html',1,'']]]
+  ['⌨️_20cli_20ბრძანებები_20command_20line_20interface_0',['⌨️ cli ბრძანებები command line interface',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html#autotoc_md32',1,'4. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2actuators_2relay__actuator_2README.html#autotoc_md5',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md97',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2utillities_2rgb__led__indicator_2README.html#autotoc_md248',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md27',1,'6. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2system_2device__identity__service_2README.html#autotoc_md160',1,'7. ⌨️ CLI ბრძანებები (Command Line Interface)']]],
+  ['⌨️_20cli_20command_20line_20interface_1',['⌨️ cli command line interface',['../md_docs_2api__reference_2relay__api.html#autotoc_md608',1,'1. ⌨️ CLI (Command Line Interface)'],['../md_docs_2api__reference_2security__api.html#autotoc_md642',1,'2. ⌨️ CLI (Command Line Interface)']]]
 ];

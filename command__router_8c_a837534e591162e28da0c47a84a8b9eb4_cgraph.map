@@ -1,0 +1,16 @@
+<map id="command_router_create" name="command_router_create">
+<area shape="rect" id="Node000001" title="Creates a new instance of the Command Router module." alt="" coords="5,77,187,102"/>
+<area shape="rect" id="Node000002" href="$service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="235,69,421,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,87,221,87,221,92,187,92"/>
+<area shape="rect" id="Node000003" href="$service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="469,69,627,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="422,87,456,87,456,92,422,92"/>
+<area shape="rect" id="Node000004" href="$event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="679,26,865,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="626,69,701,52,703,57,627,74"/>
+<area shape="rect" id="Node000006" href="$event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="917,69,1073,109"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="627,87,903,87,903,92,627,92"/>
+<area shape="rect" id="Node000007" href="$event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="675,127,869,153"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="627,104,703,122,701,127,626,110"/>
+<area shape="rect" id="Node000005" href="$event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="917,5,1073,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="865,30,904,28,904,33,865,36"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="830,49,905,66,903,71,828,54"/>
+</map>

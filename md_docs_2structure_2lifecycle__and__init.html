@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Synapse ESP Framework: მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)</title>
+<title>Synapse ESP Framework: მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (v2.0)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,105 +90,73 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (Lifecycle &amp; Initialization)</div></div>
+  <div class="headertitle"><div class="title">მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (v2.0)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1857"></a> </p>
-<h1><a class="anchor" id="autotoc_md1858"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1892"></a> </p>
+<h1><a class="anchor" id="autotoc_md1893"></a>
 მიზანი</h1>
-<p>მოდულის სიცოცხლის ციკლის მართვის მიზანია უზრუნველყოს თითოეული მოდულის სწორი ინიციალიზაცია, რესურსების გამოყოფა, ჩართვა/გამორთვა და უსაფრთხო გათავისუფლება სისტემის მუშაობის განმავლობაში.</p>
-<h1><a class="anchor" id="autotoc_md1859"></a>
-სიცოცხლის ციკლის ეტაპები</h1>
+<p>მოდულის სიცოცხლის ციკლის მართვის მიზანია უზრუნველყოს თითოეული მოდულის (და მასთან დაკავშირებული სერვისის) სწორი ინიციალიზაცია, რესურსების გამოყოფა, გააქტიურება და უსაფრთხო გათავისუფლება.</p>
+<h1><a class="anchor" id="autotoc_md1894"></a>
+სიცოცხლის ციკლის ეტაპები და სერვისის სტატუსები</h1>
 <ol type="1">
-<li><b>Create</b> — მოდულის ობიექტის შექმნა (მაგ: ssd1306_module_create)</li>
-<li><b>Init</b> — ინიციალიზაცია (მაგ: static esp_err_t ssd1306_init)</li>
-<li><b>Enable/Disable</b> — ჩართვა/გამორთვა (მაგ: static esp_err_t ssd1306_enable/disable)</li>
-<li><b>Deinit</b> — რესურსების გათავისუფლება (მაგ: static esp_err_t ssd1306_deinit)</li>
+<li><b>Create</b> (<code>_create</code> ფუნქცია)<ul>
+<li><code>System Manager</code>-ის მიერ <code>Module Factory</code>-ს გამოძახება.</li>
+<li>მეხსიერების გამოყოფა, კონფიგურაციის დუბლირება.</li>
+<li><b>სერვისის რეგისტრაცია <code>SERVICE_STATUS_REGISTERED</code> სტატუსით.</b></li>
+</ul>
+</li>
+<li><b>Init</b> (<code>_init</code> ფუნქცია)<ul>
+<li><code>System Manager</code> ცვლის სერვისის სტატუსს <code>SERVICE_STATUS_INITIALIZING</code>-ზე.</li>
+<li>ხდება რესურსების დაკავება, <code>Dependency Injection</code>-ით მიღებული <code>handle</code>-ების ვალიდაცია, ივენთებზე გამოწერა.</li>
+<li>წარმატების შემთხვევაში, მოდულის სტატუსი ხდება <code>MODULE_STATUS_INITIALIZED</code>.</li>
+</ul>
+</li>
+<li><b>Start</b> (<code>_start</code> ფუნქცია)<ul>
+<li><code>System Manager</code>-ის მიერ გამოძახება.</li>
+<li>აქტიური ოპერაციების დაწყება (მაგ., ტასკის გაშვება).</li>
+<li>წარმატების შემთხვევაში, მოდულის სტატუსი ხდება <code>MODULE_STATUS_RUNNING</code> და <code>System Manager</code> ცვლის სერვისის სტატუსს **<code>SERVICE_STATUS_ACTIVE</code>**-ზე.</li>
+</ul>
+</li>
+<li><b>Deinit</b> (<code>_deinit</code> ფუნქცია)<ul>
+<li><code>System Manager</code> (Graceful Shutdown-ისას) ცვლის სერვისის სტატუსს <code>SERVICE_STATUS_STOPPING</code>-ზე.</li>
+<li>ხდება ყველა რესურსის (მეხსიერება, <code>mutex</code>-ები, ივენთების გამოწერები, სერვისის რეგისტრაცია) გათავისუფლება.</li>
+</ul>
+</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1860"></a>
-დეტალური აღწერა</h1>
-<h2><a class="anchor" id="autotoc_md1861"></a>
-1. Create</h2>
-<ul>
-<li>ხდება მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა</li>
-<li>გამოიყენება Factory-ის მიერ</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config);</div>
-<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1862"></a>
-2. Init</h2>
-<ul>
-<li>ხდება hardware-ის ან სხვა რესურსების ინიციალიზაცია</li>
-<li>ყველა აუცილებელი პარამეტრი მოწმდება და ინახება</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1863"></a>
-3. Enable/Disable</h2>
-<ul>
-<li>უზრუნველყოფს მოდულის აქტივაციას ან დროებით გათიშვას</li>
-<li>გამოიყენება სისტემის ან მომხმარებლის მიერ</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_enable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-<div class="line"><span class="keyword">static</span> esp_err_t ssd1306_disable(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1864"></a>
-4. Deinit</h2>
-<ul>
-<li>ხდება ყველა გამოყოფილი რესურსის გათავისუფლება</li>
-<li>გამოიყენება სისტემის გათიშვის ან მოდულის ამოღებისას</li>
-<li><p class="startli">მაგალითი:</p>
-<div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module);</div>
-</div><!-- fragment --></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md1865"></a>
-სიცოცხლის ციკლის დიაგრამა</h1>
+<h1><a class="anchor" id="autotoc_md1895"></a>
+სიცოცხლის ციკლის დიაგრამა (განახლებული)</h1>
 <div class="fragment"><div class="line">graph TD</div>
 <div class="line">    subgraph &quot;System Startup / Module Factory&quot;</div>
 <div class="line">        A(Start) --&gt; B{Config Parsing};</div>
 <div class="line">        B -- OK --&gt; C(synapse_module_create);</div>
-<div class="line">        B -- Fail --&gt; D[Module Disabled];</div>
+<div class="line">        C -- &quot;Service registered&quot; --&gt; D[Status: REGISTERED];</div>
+<div class="line">        B -- Fail --&gt; Z[Module Not Created];</div>
 <div class="line">    end</div>
 <div class="line"> </div>
-<div class="line">    subgraph &quot;Module Lifecycle Management&quot;</div>
-<div class="line">        C --&gt; E{Init};</div>
-<div class="line">        E -- OK --&gt; F[Initialized / Inactive];</div>
-<div class="line">        E -- Fail --&gt; G[Error State];</div>
-<div class="line"> </div>
-<div class="line">        F --&gt; H{Enable};</div>
-<div class="line">        H -- OK --&gt; I[Enabled / Running];</div>
-<div class="line">        H -- Fail --&gt; G;</div>
-<div class="line"> </div>
-<div class="line">        I -- Disable --&gt; J[Disabled / Suspended];</div>
-<div class="line">        J -- Enable --&gt; I;</div>
-<div class="line"> </div>
-<div class="line">        I -- Reconfigure --&gt; K{Reconfigure};</div>
-<div class="line">        K -- OK --&gt; I;</div>
-<div class="line">        K -- Fail --&gt; G;</div>
-<div class="line"> </div>
-<div class="line">        J -- Reconfigure --&gt; L{Reconfigure};</div>
-<div class="line">        L -- OK --&gt; J;</div>
-<div class="line">        L -- Fail --&gt; G;</div>
+<div class="line">    subgraph &quot;System Manager: Init Phase&quot;</div>
+<div class="line">        D --&gt; E{Set Status: INITIALIZING};</div>
+<div class="line">        E --&gt; F(module-&gt;base.init);</div>
+<div class="line">        F -- OK --&gt; G[Module Status: INITIALIZED];</div>
+<div class="line">        F -- Fail --&gt; H[Status: ERROR];</div>
 <div class="line">    end</div>
 <div class="line"> </div>
-<div class="line">    subgraph &quot;System Shutdown / Module Unload&quot;</div>
-<div class="line">        I -- Deinit --&gt; M{Deinit};</div>
-<div class="line">        J -- Deinit --&gt; M;</div>
-<div class="line">        G -- Deinit --&gt; M;</div>
-<div class="line"> </div>
-<div class="line">        M -- OK --&gt; N(Resources Freed);</div>
-<div class="line">        M -- Fail --&gt; O[Cleanup Error];</div>
+<div class="line">    subgraph &quot;System Manager: Start Phase&quot;</div>
+<div class="line">        G --&gt; I(module-&gt;base.start);</div>
+<div class="line">        I -- OK --&gt; J{Set Status: ACTIVE};</div>
+<div class="line">        J --&gt; K[Module Status: RUNNING];</div>
+<div class="line">        I -- Fail --&gt; H;</div>
+<div class="line">    end</div>
+<div class="line">    </div>
+<div class="line">    subgraph &quot;System Shutdown&quot;</div>
+<div class="line">         K -- Shutdown --&gt; L{Set Status: STOPPING};</div>
+<div class="line">         L --&gt; M(module-&gt;base.deinit);</div>
+<div class="line">         M --&gt; N[Resources Freed];</div>
 <div class="line">    end</div>
 <div class="line"> </div>
-<div class="line">    style D fill:#f9f,stroke:#333,stroke-width:2px</div>
-<div class="line">    style G fill:#ff6347,stroke:#333,stroke-width:2px</div>
-<div class="line">    style O fill:#ff6347,stroke:#333,stroke-width:2px</div>
-<div class="line">    style I fill:#90ee90,stroke:#333,stroke-width:2px</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1866"></a>
+<div class="line">    style H fill:#ff6347,stroke:#333,stroke-width:2px</div>
+<div class="line">    style K fill:#90ee90,stroke:#333,stroke-width:2px</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1896"></a>
 მაგალითი მოდულის სიცოცხლის ციკლის მართვის</h1>
 <div class="fragment"><div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *ssd1306_module_create(<span class="keyword">const</span> cJSON *config) {</div>
 <div class="line">    <span class="comment">// ... კონფიგურაციის დამუშავება ...</span></div>
@@ -217,8 +185,9 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2lifecycle__and__in
 <div class="line">    <span class="comment">// ... free resources ...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
+<div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1867"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1897"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

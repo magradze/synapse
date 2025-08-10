@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2security__api
   <div class="headertitle"><div class="title">🛡️ Security Status API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md635"></a> </p>
-<h1><a class="anchor" id="autotoc_md636"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md636"></a> </p>
+<h1><a class="anchor" id="autotoc_md637"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code>security_status_reporter</code> მოდულის მიერ მოწოდებულ Service API-ს.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md638"></a>
+<h1><a class="anchor" id="autotoc_md639"></a>
 1. 🔌 Service API (&lt;tt&gt;security_status_api_t&lt;/tt&gt;)</h1>
 <p>სხვა მოდულებს შეუძლიათ მიიღონ წვდომა ამ სერვისზე <code>Service Locator</code>-ის მეშვეობით, <code>SYNAPSE_SERVICE_TYPE_SECURITY_API</code> ტიპის გამოყენებით.</p>
 <p><b>ინტერფეისის ჰედერი:</b> <code><a class="el" href="security__status__interface_8h.html" title="Public Service API contract for the Security Status Reporter module.">security_status_interface.h</a></code></p>
-<h2><a class="anchor" id="autotoc_md639"></a>
+<h2><a class="anchor" id="autotoc_md640"></a>
 API ფუნქციები</h2>
 <ul>
 <li>**<code>bool is_secure_boot_enabled(void);</code>**<ul>
@@ -117,18 +117,16 @@ API ფუნქციები</h2>
 </li>
 </ul>
 <p>**გამოყენების მაგალითი (<code>selftest_manager</code>-ში):**</p>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> sec_handle = <a class="code hl_function" href="service__locator_8h.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a>(SYNAPSE_SERVICE_TYPE_SECURITY_API);</div>
+<div class="fragment"><div class="line">service_handle_t sec_handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_SECURITY_API);</div>
 <div class="line"><span class="keywordflow">if</span> (sec_handle) {</div>
 <div class="line">    <a class="code hl_struct" href="structsecurity__status__api__t.html">security_status_api_t</a> *sec_api = (<a class="code hl_struct" href="structsecurity__status__api__t.html">security_status_api_t</a> *)sec_handle;</div>
 <div class="line">    <span class="keywordtype">bool</span> sb_enabled = sec_api-&gt;<a class="code hl_variable" href="structsecurity__status__api__t.html#a88ddda9666c725c944a43f9ef662bd8a">is_secure_boot_enabled</a>();</div>
 <div class="line">    printf(<span class="stringliteral">&quot;Secure Boot status: %s\n&quot;</span>, sb_enabled ? <span class="stringliteral">&quot;ENABLED&quot;</span> : <span class="stringliteral">&quot;DISABLED&quot;</span>);</div>
 <div class="line">}</div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_adbc62ae164e5c44764e195118403ad96"><div class="ttname"><a href="service__locator_8h.html#adbc62ae164e5c44764e195118403ad96">synapse_service_lookup_by_type</a></div><div class="ttdeci">service_handle_t synapse_service_lookup_by_type(synapse_service_type_t service_type)</div><div class="ttdoc">აბრუნებს მითითებული ტიპის პირველ რეგისტრირებულ სერვისს</div><div class="ttdef"><b>Definition</b> service_locator.c:248</div></div>
 <div class="ttc" id="astructsecurity__status__api__t_html"><div class="ttname"><a href="structsecurity__status__api__t.html">security_status_api_t</a></div><div class="ttdoc">The public Service API structure for the Security Status Reporter.</div><div class="ttdef"><b>Definition</b> security_status_interface.h:30</div></div>
 <div class="ttc" id="astructsecurity__status__api__t_html_a88ddda9666c725c944a43f9ef662bd8a"><div class="ttname"><a href="structsecurity__status__api__t.html#a88ddda9666c725c944a43f9ef662bd8a">security_status_api_t::is_secure_boot_enabled</a></div><div class="ttdeci">bool(* is_secure_boot_enabled)(void)</div><div class="ttdoc">Checks if Secure Boot is enabled on the device.</div><div class="ttdef"><b>Definition</b> security_status_interface.h:40</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md641"></a>
+<h1><a class="anchor" id="autotoc_md642"></a>
 2. ⌨️ CLI (Command Line Interface)</h1>
 <ul>
 <li><b>ბრძანება:</b> <code>security status</code></li>

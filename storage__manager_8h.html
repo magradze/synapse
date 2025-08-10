@@ -184,15 +184,28 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>მაჩვენებელი შექმნილ მოდულზე ან NULL შეცდომისას</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>შექმნილი მოდული უნდა დარეგისტრირდეს system_manager-ში </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>მეხსიერება უნდა გათავისუფლდეს module-&gt;base.destroy() ფუნქციით</dd></dl>
-<p>ქმნის ახალ storage_manager მოდულის ინსტანციას</p>
-<p>This function allocates memory for the module and its private data, sets the instance name based on configuration, and assigns the lifecycle function pointers. It does not initialize the backend; that is handled in the <code>init</code> phase. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the module's configuration. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A pointer to the created module (<code>module_t*</code>), or NULL on failure. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>მეხსიერება უნდა გათავისუფლდეს module-&gt;base.destroy() ფუნქციით </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="storage__manager_8h_a81569f9eeedf0881c1fbd785982311fc_cgraph.png" border="0" usemap="#astorage__manager_8h_a81569f9eeedf0881c1fbd785982311fc_cgraph" alt=""/></div>
+<map name="astorage__manager_8h_a81569f9eeedf0881c1fbd785982311fc_cgraph" id="astorage__manager_8h_a81569f9eeedf0881c1fbd785982311fc_cgraph">
+<area shape="rect" title="ქმნის ახალ storage_manager მოდულის ინსტანციას" alt="" coords="5,77,189,102"/>
+<area shape="rect" href="service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="237,69,424,109"/>
+<area shape="poly" title=" " alt="" coords="190,87,224,87,224,92,190,92"/>
+<area shape="rect" href="service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="472,69,629,109"/>
+<area shape="poly" title=" " alt="" coords="424,87,458,87,458,92,424,92"/>
+<area shape="rect" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="682,26,867,51"/>
+<area shape="poly" title=" " alt="" coords="629,69,704,52,705,57,630,74"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="920,69,1076,109"/>
+<area shape="poly" title=" " alt="" coords="629,87,906,87,906,92,629,92"/>
+<area shape="rect" href="event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="677,127,872,153"/>
+<area shape="poly" title=" " alt="" coords="630,104,705,122,704,127,629,110"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="920,5,1076,45"/>
+<area shape="poly" title=" " alt="" coords="868,30,906,28,906,33,868,36"/>
+<area shape="poly" title=" " alt="" coords="832,49,907,66,906,71,831,54"/>
+</map>
+</div>
 
 </div>
 </div>

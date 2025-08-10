@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔵_20ble_20provisioning_20service_20api_20იმპლემენტირებულია_0',['🔵 BLE Provisioning Service API (იმპლემენტირებულია)',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md568',1,'']]]
+  ['🖥️_20მოდული_3a_20tt_20ui_5fmanager_20tt_0',['🖥️ მოდული: &lt;tt&gt;ui_manager&lt;/tt&gt;',['../md_components_2modules_2utillities_2ui__manager_2README.html',1,'']]]
 ];

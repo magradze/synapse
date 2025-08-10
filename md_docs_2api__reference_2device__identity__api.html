@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2device__ident
   <div class="headertitle"><div class="title">Synapse Device Identity Service API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md385"></a> </p>
-<h1><a class="anchor" id="autotoc_md386"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md386"></a> </p>
+<h1><a class="anchor" id="autotoc_md387"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის <code>Device Identity Service</code>-ის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md388"></a>
+<h1><a class="anchor" id="autotoc_md389"></a>
 Device Identity Service API</h1>
-<h2><a class="anchor" id="autotoc_md389"></a>
+<h2><a class="anchor" id="autotoc_md390"></a>
 &lt;tt&gt;const char* get_device_id(void);&lt;/tt&gt;</h2>
 <ul>
 <li><b>აღწერა:</b> აბრუნებს მოწყობილობის უნიკალურ ID-ს, რომელიც გენერირებულია MAC მისამართისგან.</li>
@@ -108,7 +108,7 @@ Device Identity Service API</h1>
 <li><b><dl class="section note"><dt>Note</dt><dd>: დაბრუნებული სტრიქონის მეხსიერების მართვაზე პასუხისმგებელია თავად სერვისი. გამომძახებელმა <b>არ უნდა</b> სცადოს მისი გათავისუფლება (<code>free</code>).</dd></dl>
 </b></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md390"></a>
+<h2><a class="anchor" id="autotoc_md391"></a>
 &lt;tt&gt;const char* get_firmware_version(void);&lt;/tt&gt;</h2>
 <p><b></b></p>
 <p><b></p><ul>
@@ -120,7 +120,7 @@ Device Identity Service API</h1>
 </ul>
 <p></b></p>
 <p><b><b></b></b></p>
-<h1><a class="anchor" id="autotoc_md392"></a>
+<h1><a class="anchor" id="autotoc_md393"></a>
 Naming &amp; Structure</h1>
 <p><b><b></b></b></p>
 <p><b><b></p><ul>
@@ -131,23 +131,21 @@ Naming &amp; Structure</h1>
 <p><b><b></p><hr  />
 <p></b></b></p>
 <p><b><b></b></b></p>
-<h1><a class="anchor" id="autotoc_md394"></a>
+<h1><a class="anchor" id="autotoc_md395"></a>
 მაგალითები</h1>
 <p><b><b></b></b></p>
 <p><b><b><b>მოწყობილობის ID-ის მიღება:</b></b></b></p>
-<p><b><b></p><div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> id_service = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_identity_service&quot;</span>);</div>
+<p><b><b></p><div class="fragment"><div class="line">service_handle_t id_service = synapse_service_get(<span class="stringliteral">&quot;main_identity_service&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (id_service) {</div>
 <div class="line">    <a class="code hl_struct" href="structdevice__identity__api__t.html">device_identity_api_t</a> *id_api = (<a class="code hl_struct" href="structdevice__identity__api__t.html">device_identity_api_t</a> *)id_service;</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span>* device_id = id_api-&gt;<a class="code hl_variable" href="structdevice__identity__api__t.html#a6ce92f397b78dbb4ad6fc610966d1b64">get_device_id</a>();</div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;My unique device ID is: %s&quot;</span>, device_id);</div>
 <div class="line">}</div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructdevice__identity__api__t_html"><div class="ttname"><a href="structdevice__identity__api__t.html">device_identity_api_t</a></div><div class="ttdoc">The public Service API structure for the Device Identity Service.</div><div class="ttdef"><b>Definition</b> device_identity_interface.h:22</div></div>
 <div class="ttc" id="astructdevice__identity__api__t_html_a6ce92f397b78dbb4ad6fc610966d1b64"><div class="ttname"><a href="structdevice__identity__api__t.html#a6ce92f397b78dbb4ad6fc610966d1b64">device_identity_api_t::get_device_id</a></div><div class="ttdeci">const char *(* get_device_id)(void)</div><div class="ttdoc">Retrieves the unique device identifier string.</div><div class="ttdef"><b>Definition</b> device_identity_interface.h:32</div></div>
 </div><!-- fragment --><p></b></b></p>
 <p><b><b><b>Firmware ვერსიის მიღება:</b></b></b></p>
-<p><b><b></p><div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> id_service = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_identity_service&quot;</span>);</div>
+<p><b><b></p><div class="fragment"><div class="line">service_handle_t id_service = synapse_service_get(<span class="stringliteral">&quot;main_identity_service&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (id_service) {</div>
 <div class="line">    <a class="code hl_struct" href="structdevice__identity__api__t.html">device_identity_api_t</a> *id_api = (<a class="code hl_struct" href="structdevice__identity__api__t.html">device_identity_api_t</a> *)id_service;</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">char</span>* fw_version = id_api-&gt;<a class="code hl_variable" href="structdevice__identity__api__t.html#aa6ac323b1353ebb091c3407cc4cebf43">get_firmware_version</a>();</div>

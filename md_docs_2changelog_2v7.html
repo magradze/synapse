@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
   <div class="headertitle"><div class="title">[7.2.0] - 2025-08-28</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md973"></a> </p>
-<h2><a class="anchor" id="autotoc_md974"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md974"></a> </p>
+<h2><a class="anchor" id="autotoc_md975"></a>
 ✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)</h2>
 <ul>
 <li><b>feat(core):</b> 🚀 დაინერგა უსაფრთხო, <code>dependency_map</code>-ზე დაფუძნებული <b>Dependency Injection</b> მექანიზმი.<ul>
@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md975"></a>
+<h2><a class="anchor" id="autotoc_md976"></a>
 🔄 შეცვლილი და გაუმჯობესებული (Changed &amp; Improved)</h2>
 <ul>
 <li><b>refactor(ui_manager):</b> 🧠 <code>ui_manager</code> მოდული სრულად გადაკეთდა და ახლა იყენებს <b>გამოყოფილ FreeRTOS ტასკს</b> UI-ს ლოგიკის დასამუშავებლად.<ul>
@@ -120,21 +120,21 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md976"></a>
+<h2><a class="anchor" id="autotoc_md977"></a>
 🐛 შესწორებები (Bug Fixes)</h2>
 <ul>
 <li><b>fix(core):</b> 🐞 აღმოიფხვრა კრიტიკული <code>Guru Meditation Error (LoadProhibited)</code> და <code>assert failed: heap_caps_free</code> შეცდომები, რომლებიც გამოწვეული იყო მეხსიერების არასწორი მართვით <code>System Manager</code>-სა და <code>Event Bus</code>-ში.</li>
 <li><b>fix(modules):</b> 🔧 განახლდა ყველა მოდული, რომელიც იყენებს სერვისებზე დამოკიდებულებას (<code>button_input</code>, <code>relay_actuator</code>, <code>rgb_led_indicator</code> და ა.შ.), რათა მათ მოახდინონ <code>dependency_map</code>-ის დეკლარირება და გამოიყენონ ინექცირებული <code>handle</code>-ები.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md977"></a>
+<h2><a class="anchor" id="autotoc_md978"></a>
 📄 დოკუმენტაცია (Documentation)</h2>
 <ul>
 <li><b>docs(core, convention):</b> ✍️ განახლდა <code><a class="el" href="base__module_8h.html" title="Defines the base module interface and status types.">base_module.h</a></code>, <code><a class="el" href="system__manager_8c.html" title="Implements the System Manager component.">system_manager.c</a></code>, <code>module_structure.md</code> და შეიქმნა <code>dependency_injection.md</code> დოკუმენტი, რათა სრულად აისახოს ახალი, <code>dependency_map</code>-ზე დაფუძნებული ინექციის მექანიზმი.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md979"></a>
+<h1><a class="anchor" id="autotoc_md980"></a>
 [7.1.0] - 2025-08-27</h1>
-<h2><a class="anchor" id="autotoc_md980"></a>
+<h2><a class="anchor" id="autotoc_md981"></a>
 ✨ გაუმჯობესებები (Improvements)</h2>
 <ul>
 <li><b>refactor(core):</b> 🚀 დაინერგა უსაფრთხო, <code>dependency_map</code>-ზე დაფუძნებული <b>Dependency Injection</b> მექანიზმი.<ul>
@@ -143,22 +143,22 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md981"></a>
+<h2><a class="anchor" id="autotoc_md982"></a>
 🐛 შესწორებები (Bug Fixes)</h2>
 <ul>
 <li><b>fix(core):</b> 🐞 აღმოიფხვრა კრიტიკული <code>Guru Meditation Error (LoadProhibited)</code>, რომელიც გამოწვეული იყო <code>System Manager</code>-ის მიერ მეხსიერების არასწორ მისამართზე წერით. ახალი, <code>dependency_map</code>-ზე დაფუძნებული ინექციის მექანიზმი ამ პრობლემას სრულად აგვარებს.</li>
 <li><b>fix(modules):</b> 🔧 განახლდა ყველა მოდული, რომელიც იყენებს სერვისებზე დამოკიდებულებას (<code>button_input</code>, <code>relay_actuator</code>, <code>rgb_led_indicator</code> და ა.შ.), რათა მათ მოახდინონ <code>dependency_map</code>-ის დეკლარირება და გამოიყენონ ინექცირებული <code>handle</code>-ები.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md982"></a>
+<h2><a class="anchor" id="autotoc_md983"></a>
 📄 დოკუმენტაცია (Documentation)</h2>
 <ul>
 <li><b>docs(core):</b> ✍️ განახლდა <code><a class="el" href="base__module_8h.html" title="Defines the base module interface and status types.">base_module.h</a></code> და <code><a class="el" href="system__manager_8c.html" title="Implements the System Manager component.">system_manager.c</a></code> ფაილები ახალი <code>dependency_map</code> სტრუქტურისა და ინექციის ლოგიკის დეტალური Doxygen დოკუმენტაციით.</li>
 <li><b>docs(design):</b> ✍️ განახლდა <code>dependency_injection.md</code> დოკუმენტი, რათა ასახავდეს ახალ, <code>offsetof()</code>-ზე დაფუძნებულ, უსაფრთხო მიდგომას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md984"></a>
+<h1><a class="anchor" id="autotoc_md985"></a>
 [7.0.0] - 2025-08-26</h1>
-<h2><a class="anchor" id="autotoc_md985"></a>
+<h2><a class="anchor" id="autotoc_md986"></a>
 💥 არქიტექტურული ცვლილებები (Breaking Changes &amp; Refactoring)</h2>
 <ul>
 <li><b>refactor(core):</b> 🏛️ განხორციელდა ფრეიმვორქის ბირთვის API-ს სრული რეორგანიზაცია და ცენტრალიზაცია, რათა გაუმჯობესდეს კოდის სტრუქტურა, შემცირდეს დამოკიდებულებები და გამარტივდეს მოდულების წერის პროცესი.<ul>
@@ -172,14 +172,14 @@ $(document).ready(function(){initNavTree('md_docs_2changelog_2v7.html',''); init
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md986"></a>
+<h2><a class="anchor" id="autotoc_md987"></a>
 🔄 შეცვლილი</h2>
 <ul>
 <li><b>refactor(modules):</b> 🧹 განახლდა პროექტში არსებული ყველა მოდული, რათა გამოეყენებინათ ახალი, ერთიანი <code>#include "synapse.h"</code> ჰედერი, მრავალი <code>core</code> ჰედერის ნაცვლად.</li>
 <li><b>refactor(scripts):</b> 🤖 განახლდა <code>create_module.py</code> სკრიპტი. ის ახლა აგენერირებს კოდის შაბლონებს, რომლებიც თავიდანვე იყენებენ <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code>-ს და შეესაბამებიან მეხსიერების მართვის გაუმჯობესებულ პრაქტიკას.</li>
 </ul>
 <hr  />
-<h3><a class="anchor" id="autotoc_md988"></a>
+<h3><a class="anchor" id="autotoc_md989"></a>
 ძველი ვერსიების ისტორია</h3>
 <p><a class="el" href="md_docs_2changelog_2v5.html">(v1.0.0 - v5.8.0)</a> <a class="el" href="md_docs_2changelog_2v6.html">(v6.0.0 - v6.2.0)</a> </p>
 </div></div><!-- contents -->

@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
   <div class="headertitle"><div class="title">Core კომპონენტები (Core Components)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1804"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1806"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1839"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1841"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ის ბირთვის (core) ძირითად კომპონენტებს, მათ დანიშნულებას, მთავარ ფუნქციებსა და გამოყენების მაგალითებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1808"></a>
+<h1><a class="anchor" id="autotoc_md1843"></a>
 ძირითადი კომპონენტები</h1>
-<h2><a class="anchor" id="autotoc_md1809"></a>
+<h2><a class="anchor" id="autotoc_md1844"></a>
 1. Service Locator</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.</li>
@@ -111,18 +111,16 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 </ul>
 </li>
 <li><p class="startli"><b>მაგალითი:</b></p>
-<div class="fragment"><div class="line"><a class="code hl_typedef" href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a> display_service_handle = <a class="code hl_function" href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a>(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
+<div class="fragment"><div class="line">service_handle_t display_service_handle = synapse_service_get(<span class="stringliteral">&quot;main_display&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (display_service_handle) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *ssd1306_service_api = (<a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> *)display_service_handle;</div>
 <div class="line">    ssd1306_service_api-&gt;<a class="code hl_variable" href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">enable</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="aservice__locator_8h_html_a22cfccb1af1e87fc6ab4e00a5640f047"><div class="ttname"><a href="service__locator_8h.html#a22cfccb1af1e87fc6ab4e00a5640f047">service_handle_t</a></div><div class="ttdeci">void * service_handle_t</div><div class="ttdoc">გენერიკული ტიპი, რომელიც წარმოადგენს რეგისტრირებული სერვისის ჰენდლს</div><div class="ttdef"><b>Definition</b> service_locator.h:31</div></div>
-<div class="ttc" id="aservice__locator_8h_html_aae30c325959d3c6854ea7918eba866d4"><div class="ttname"><a href="service__locator_8h.html#aae30c325959d3c6854ea7918eba866d4">synapse_service_get</a></div><div class="ttdeci">service_handle_t synapse_service_get(const char *service_name)</div><div class="ttdoc">აბრუნებს რეგისტრირებულ სერვისს სახელით</div><div class="ttdef"><b>Definition</b> service_locator.c:181</div></div>
 <div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:23</div></div>
 <div class="ttc" id="astructssd1306__api__t_html_a49c18ab20520fe0db6e0bf9bf5170d79"><div class="ttname"><a href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">ssd1306_api_t::enable</a></div><div class="ttdeci">esp_err_t(* enable)(void *context)</div><div class="ttdoc">Enables the display.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:29</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1810"></a>
+<h2><a class="anchor" id="autotoc_md1845"></a>
 2. Event Bus</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს broadcast/notification ტიპის კომუნიკაციას მოდულებს შორის.</li>
@@ -138,7 +136,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <div class="ttc" id="aevent__bus_8h_html_a4be3ec71e70f06b05b780b9883094387"><div class="ttname"><a href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a></div><div class="ttdeci">esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:331</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1811"></a>
+<h2><a class="anchor" id="autotoc_md1846"></a>
 3. Module Register</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას და მართვას.</li>
@@ -149,7 +147,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1812"></a>
+<h2><a class="anchor" id="autotoc_md1847"></a>
 4. Module Factory</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების დინამიურ შექმნას და ინიციალიზაციას კონფიგურაციის მიხედვით.</li>
@@ -159,7 +157,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1813"></a>
+<h2><a class="anchor" id="autotoc_md1848"></a>
 5. Configuration Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.</li>
@@ -173,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <div class="line">synapse_config_get_string(<span class="stringliteral">&quot;main_broker.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1814"></a>
+<h2><a class="anchor" id="autotoc_md1849"></a>
 6. Logging</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სტანდარტიზებულ და კონტექსტურ ლოგირებას ყველა კომპონენტსა და მოდულში.</li>
@@ -189,11 +187,11 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 </div><!-- fragment --></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1816"></a>
+<h1><a class="anchor" id="autotoc_md1851"></a>
 ფასადის ინტერფეისი (&lt;tt&gt;synapse.h&lt;/tt&gt;)</h1>
 <p><code>core</code> კომპონენტის ყველა ზემოთ ჩამოთვლილი ნაწილი და მათი საჯარო API გაერთიანებულია ერთ, ცენტრალურ ჰედერ ფაილში — <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code>. ეს "ფასადის" პატერნი უზრუნველყოფს, რომ მოდულებს ჰქონდეთ ერთი, სტაბილური და მარტივი წვდომის წერტილი ფრეიმვორქის ბირთვის ფუნქციონალთან.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1818"></a>
+<h1><a class="anchor" id="autotoc_md1853"></a>
 ურთიერთქმედება მოდულებთან</h1>
 <ul>
 <li>ყველა მოდული <code>core</code>-ის კომპონენტებს იყენებს ერთიანი <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code> ჰედერის და მისი public API-ების მეშვეობით.</li>
@@ -201,7 +199,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2core__components.h
 <li><code>core</code> უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას, კონფიგურაციას და ლოგირებას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1820"></a>
+<h1><a class="anchor" id="autotoc_md1855"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

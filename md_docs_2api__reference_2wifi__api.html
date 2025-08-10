@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2wifi__api.htm
   <div class="headertitle"><div class="title">Synapse WiFi Manager Service API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md767"></a> </p>
-<h1><a class="anchor" id="autotoc_md768"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md768"></a> </p>
+<h1><a class="anchor" id="autotoc_md769"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის <code>WiFi Manager</code>-ის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md770"></a>
+<h1><a class="anchor" id="autotoc_md771"></a>
 WiFi Manager API</h1>
 <p>ამჟამად, <code>wifi_manager</code> მოდული არ აწვდის საჯარო Service API-ს სხვა მოდულებისთვის. მისი სრული მართვა და სტატუსის მიღება ხდება <code>Event Bus</code>-ზე გამოქვეყნებული ივენთების და <code>Command Router</code>-ის მეშვეობით რეგისტრირებული CLI ბრძანებების საშუალებით.</p>
 <p>ეს არქიტექტურული გადაწყვეტილება ხელს უწყობს მოდულებს შორის მაქსიმალურ იზოლაციას.</p>
-<h2><a class="anchor" id="autotoc_md771"></a>
+<h2><a class="anchor" id="autotoc_md772"></a>
 სამომავლო გაფართოება</h2>
 <p>თუ მომავალში გაჩნდება საჭიროება, რომ სხვა მოდულმა სინქრონულად მოითხოვოს WiFi-ს სტატუსი, შესაძლებელია შემდეგი API-ს დამატება:</p>
 <div class="fragment"><div class="line"><span class="comment">// პოტენციური API სტრუქტურა</span></div>
@@ -114,14 +114,14 @@ WiFi Manager API</h1>
 <div class="line">} <a class="code hl_struct" href="structwifi__api__t.html">wifi_api_t</a>;</div>
 <div class="ttc" id="astructwifi__api__t_html"><div class="ttname"><a href="structwifi__api__t.html">wifi_api_t</a></div><div class="ttdef"><b>Definition</b> wifi_interface.h:19</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md773"></a>
+<h1><a class="anchor" id="autotoc_md774"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md775"></a>
+<h1><a class="anchor" id="autotoc_md776"></a>
 მაგალითები</h1>
 <p>ამჟამად API არ არსებობს. მოდულის მართვა ხდება ივენთებით და CLI ბრძანებებით.</p>
 <p><b>სტატუსის მოთხოვნა (არაპირდაპირი გზა):</b></p>
@@ -132,7 +132,7 @@ Naming &amp; Structure</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 2. დაელოდეთ SYNAPSE_EVENT_WIFI_STATUS_READY ივენთს თქვენი მოდულის handle_event-ში</span></div>
 <div class="ttc" id="aevent__bus_8h_html_a4be3ec71e70f06b05b780b9883094387"><div class="ttname"><a href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a></div><div class="ttdeci">esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:331</div></div>
-<div class="ttc" id="astructsynapse__command__payload__t_html"><div class="ttname"><a href="structsynapse__command__payload__t.html">synapse_command_payload_t</a></div><div class="ttdoc">Defines the data structure for the SYNAPSE_EVENT_EXECUTE_COMMAND_STRING event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:68</div></div>
+<div class="ttc" id="astructsynapse__command__payload__t_html"><div class="ttname"><a href="structsynapse__command__payload__t.html">synapse_command_payload_t</a></div><div class="ttdoc">Defines the data structure for the SYNAPSE_EVENT_EXECUTE_COMMAND_STRING event.</div><div class="ttdef"><b>Definition</b> event_payloads.h:69</div></div>
 </div><!-- fragment --><hr  />
 <p>დამატებითი დეტალებისთვის იხილეთ <a class="el" href="md_docs_2api__reference_2core__api.html">core_api.md</a>, <a class="el" href="md_docs_2api__reference_2module__api.html">module_api.md</a> და structure.md დოკუმენტები. </p>
 </div></div><!-- contents -->

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['changelog_0',['changelog',['../md_docs_2changelog_2v5.html',1,'ცვლილებების ისტორია (Changelog)'],['../md_docs_2changelog_2CHANGELOG__2025-06-28.html',1,'Changelog'],['../md_docs_2changelog_2v6.html',1,'CHANGELOG']]],
+  ['changelog_0',['changelog',['../md_docs_2changelog_2v5.html',1,'ცვლილებების ისტორია (Changelog)'],['../md_docs_2changelog_2CHANGELOG__2025-06-28.html',1,'Changelog'],['../md_docs_2changelog_2v6.html',1,'CHANGELOG'],['../md_docs_2changelog_2v9.html',1,'CHANGELOG']]],
   ['changelog_202025_2006_2026_1',['CHANGELOG - 2025-06-26',['../md_docs_2changelog_2CHANGELOG__2025-06-26.html',1,'']]],
   ['changelog_3a_20led_5fblinker_20ინიციალიზაციის_20პრობლემის_20დიაგნოსტიკა_20და_20გამოსწორება_2',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
   ['check_5fconventions_20py_20tt_3',['კონვენციების ავტომატური შემმოწმებელი (&lt;tt&gt;check_conventions.py&lt;/tt&gt;)',['../md_docs_2contributing_2convention__linter__guide.html',1,'']]],
@@ -31,7 +31,6 @@ var searchData=
   ['convention_20reference_20index_28',['Synapse Convention Reference Index',['../md_docs_2convention_2convention__index.html',1,'']]],
   ['core_20კომპონენტები_20core_20components_29',['core კომპონენტები core components',['../md_docs_2design__decisions_2core__components.html',1,'Core კომპონენტები (Core Components)'],['../md_docs_2structure_2core__components.html',1,'Core კომპონენტები (Core Components)']]],
   ['core_20api_20reference_30',['Synapse Core API Reference',['../md_docs_2api__reference_2core__api.html',1,'']]],
-  ['create_20your_20first_20module_31',['პირველი საკუთარი მოდულის შექმნა (Create Your First Module)',['../md_docs_2tutorials_2create__first__module.html',1,'']]],
-  ['create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_32',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]],
-  ['custom_20api_20reference_33',['Synapse Custom API Reference',['../md_docs_2api__reference_2custom__api.html',1,'']]]
+  ['create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_31',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]],
+  ['custom_20api_20reference_32',['Synapse Custom API Reference',['../md_docs_2api__reference_2custom__api.html',1,'']]]
 ];

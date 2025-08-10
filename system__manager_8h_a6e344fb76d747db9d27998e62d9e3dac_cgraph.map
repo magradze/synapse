@@ -1,9 +1,15 @@
 <map id="synapse_system_shutdown" name="synapse_system_shutdown">
-<area shape="rect" id="Node000001" title="Initiates a graceful shutdown of the system." alt="" coords="5,45,207,70"/>
-<area shape="rect" id="Node000002" href="$event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="255,45,440,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,55,241,55,241,60,207,60"/>
-<area shape="rect" id="Node000003" href="$event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="488,5,644,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="434,42,474,36,475,41,435,47"/>
-<area shape="rect" id="Node000004" href="$event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="488,69,644,109"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="435,67,475,73,474,79,434,73"/>
+<area shape="rect" id="Node000001" title="Initiates a graceful shutdown of the system." alt="" coords="5,51,207,77"/>
+<area shape="rect" id="Node000002" href="$event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="465,23,650,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,55,451,40,451,45,207,60"/>
+<area shape="rect" id="Node000005" href="$service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="255,72,412,112"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="208,74,241,78,241,83,207,79"/>
+<area shape="rect" id="Node000003" href="$event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="703,5,859,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="650,29,689,27,689,32,650,34"/>
+<area shape="rect" id="Node000004" href="$event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="703,69,859,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="612,46,690,65,688,70,611,51"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="411,70,492,50,493,55,413,75"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="412,89,689,87,689,93,412,94"/>
+<area shape="rect" id="Node000006" href="$event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="460,127,655,153"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="413,106,485,122,484,127,412,111"/>
 </map>

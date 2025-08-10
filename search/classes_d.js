@@ -30,8 +30,9 @@ var searchData=
   ['synapse_5fhealth_5fpong_5fpayload_5ft_27',['synapse_health_pong_payload_t',['../structsynapse__health__pong__payload__t.html',1,'']]],
   ['synapse_5fjob_5ft_28',['synapse_job_t',['../structsynapse__job__t.html',1,'']]],
   ['synapse_5fmodule_5fcontrol_5fpayload_5ft_29',['synapse_module_control_payload_t',['../structsynapse__module__control__payload__t.html',1,'']]],
-  ['synapse_5ftelemetry_5fpayload_5ft_30',['synapse_telemetry_payload_t',['../structsynapse__telemetry__payload__t.html',1,'']]],
-  ['system_5fmanager_5fapi_5ft_31',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
-  ['system_5ftimer_5fconfig_5ft_32',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
-  ['system_5ftimer_5fprivate_5fdata_5ft_33',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
+  ['synapse_5fservice_5fstatus_5fpayload_5ft_30',['synapse_service_status_payload_t',['../structsynapse__service__status__payload__t.html',1,'']]],
+  ['synapse_5ftelemetry_5fpayload_5ft_31',['synapse_telemetry_payload_t',['../structsynapse__telemetry__payload__t.html',1,'']]],
+  ['system_5fmanager_5fapi_5ft_32',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]],
+  ['system_5ftimer_5fconfig_5ft_33',['system_timer_config_t',['../structsystem__timer__config__t.html',1,'']]],
+  ['system_5ftimer_5fprivate_5fdata_5ft_34',['system_timer_private_data_t',['../structsystem__timer__private__data__t.html',1,'']]]
 ];

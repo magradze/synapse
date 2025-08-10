@@ -1,0 +1,88 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Synapse Module Metadata Schema",
+    "description": "Defines the structure for a module.json file.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The machine-readable name of the module type.",
+            "pattern": "^[a-z0-9_]+$"
+        },
+        "version": {
+            "type": "string",
+            "description": "The semantic version of the module.",
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+        },
+        "description": {
+            "type": "string",
+            "description": "A human-readable description of the module."
+        },
+        "author": {
+            "type": "string",
+            "description": "The author or team responsible for the module."
+        },
+        "init_function": {
+            "type": "string",
+            "description": "The name of the C factory function (e.g., 'my_module_create').",
+            "pattern": "^[a-zA-Z0-9_]+_create$"
+        },
+        "init_level": {
+            "type": "integer",
+            "description": "The initialization priority level (lower is earlier).",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "type": {
+            "type": "string",
+            "description": "The category of the module."
+        },
+        "build_enabled": {
+            "type": "boolean",
+            "description": "Whether the module should be considered for build by default."
+        },
+        "conditional_config": {
+            "type": "string",
+            "description": "The Kconfig variable that enables/disables this module.",
+            "pattern": "^CONFIG_[A-Z0-9_]+$"
+        },
+        "mqtt_interface": {
+            "type": "object",
+            "properties": {
+                "publishes": { "type": "object" },
+                "subscribes": { "type": "object" }
+            },
+            "additionalProperties": false
+        },
+        "dependencies": {
+            "type": "array",
+            "description": "List of other module dependencies.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "runtime_commands": {
+            "type": "object",
+            "description": "Mapping of runtime commands to their handler functions.",
+            "properties": {
+                "start": { "type": ["string", "null"] },
+                "stop": { "type": ["string", "null"] },
+                "enable": { "type": ["string", "null"] },
+                "disable": { "type": ["string", "null"] },
+                "reconfigure": { "type": ["string", "null"] },
+                "status": { "type": ["string", "null"] },
+                "handle_event": { "type": ["string", "null"] }
+            },
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "name",
+        "version",
+        "description",
+        "init_function",
+        "init_level",
+        "conditional_config"
+    ],
+    "additionalProperties": false
+}

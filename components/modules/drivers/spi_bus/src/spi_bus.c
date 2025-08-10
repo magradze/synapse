@@ -56,8 +56,6 @@ module_t *spi_bus_create(const cJSON *config)
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
@@ -94,7 +92,21 @@ module_t *spi_bus_create(const cJSON *config)
     module->base.start = NULL;
     module->base.handle_event = NULL;
 
-    ESP_LOGI(TAG, "SPI Bus module '%s' created.", module->name);
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_SPI_BUS_API,
+        &private_data->service_handle,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        spi_bus_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "SPI Bus module '%s' created and service registered.", module->name);
     return module;
 }
 
@@ -131,13 +143,7 @@ static esp_err_t spi_bus_init(module_t *self)
         goto fail_sclk;
     }
 
-    ret = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_SPI_BUS_API, &private_data->service_handle);
-    if (ret != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to register SPI bus service: %s", esp_err_to_name(ret));
-        spi_bus_free(private_data->host);
-        goto fail_sclk;
-    }
+    // Service registration removed from here
 
     ESP_LOGI(TAG, "SPI bus '%s' on host %d initialized successfully.", private_data->instance_name, private_data->host);
     return ESP_OK;

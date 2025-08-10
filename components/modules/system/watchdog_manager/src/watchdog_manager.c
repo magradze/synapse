@@ -82,12 +82,6 @@ static watchdog_api_t watchdog_service_api = {
 // Module Lifecycle Implementation
 // =============================================================================
 
-/**
- * @brief Creates a new instance of the Watchdog Manager module.
- * @param[in] config Module configuration from system_config.json. This function
- *                   takes ownership of the config pointer.
- * @return A pointer to the created module, or NULL on failure.
- */
 module_t *watchdog_manager_create(const cJSON *config)
 {
     ESP_LOGI(TAG, "Creating Watchdog Manager module instance");
@@ -99,9 +93,6 @@ module_t *watchdog_manager_create(const cJSON *config)
         ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
         free(private_data);
-        // Since we are about to own `config`, we must free it on failure.
-        if (config)
-            cJSON_Delete((cJSON *)config);
         return NULL;
     }
 
@@ -110,22 +101,19 @@ module_t *watchdog_manager_create(const cJSON *config)
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
-    } // Take ownership of the config object
+    }
 
     private_data->client_list_mutex = xSemaphoreCreateMutex();
     if (!private_data->client_list_mutex)
     {
         ESP_LOGE(TAG, "Failed to create client list mutex");
-        watchdog_manager_deinit(module); // Use deinit for consistent cleanup
+        watchdog_manager_deinit(module);
         return NULL;
     }
 
-    // --- START OF CORRECTED CONFIGURATION & NAME PARSING ---
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (!config_node)
     {
@@ -134,45 +122,47 @@ module_t *watchdog_manager_create(const cJSON *config)
         return NULL;
     }
 
-    // 1. Parse instance_name FIRST
     const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
     const char *instance_name = cJSON_IsString(name_node) ? name_node->valuestring : CONFIG_WATCHDOG_MANAGER_DEFAULT_INSTANCE_NAME;
 
-    // 2. Copy the name to both the module's public name and private data
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", instance_name);
 
-    // 3. Parse the rest of the configuration
     if (parse_config(config_node, private_data) != ESP_OK)
     {
         ESP_LOGE(TAG, "Failed to parse configuration for '%s'.", module->name);
         watchdog_manager_deinit(module);
         return NULL;
     }
-    // --- END OF CORRECTED LOGIC ---
 
-    module->init_level = 36; // Should be after System Timer (35)
+    module->init_level = 36;
     module->status = MODULE_STATUS_UNINITIALIZED;
 
     module->base.init = watchdog_manager_init;
     module->base.start = watchdog_manager_start;
     module->base.deinit = watchdog_manager_deinit;
-    module->base.handle_event = NULL; // This module does not need to handle events
+    module->base.handle_event = NULL;
+
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_WATCHDOG_API,
+        &watchdog_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        watchdog_manager_deinit(module);
+        return NULL;
+    }
 
     watchdog_manager_self = module;
 
-    ESP_LOGI(TAG, "Watchdog Manager module '%s' created.", module->name);
+    ESP_LOGI(TAG, "Watchdog Manager module '%s' created and service registered.", module->name);
     return module;
 }
 
-/**
- * @internal
- * @brief Initializes the Watchdog Manager module.
- * @details Registers the service API and verifies that the underlying ESP-IDF
- *          Task Watchdog Timer (TWDT) is enabled in the project configuration.
- * @param[in] self A pointer to the module instance.
- * @return ESP_OK on success, or ESP_FAIL if the TWDT is not configured.
- */
 static esp_err_t watchdog_manager_init(module_t *self)
 {
     ESP_LOGI(TAG, "Initializing Watchdog Manager.");
@@ -182,7 +172,8 @@ static esp_err_t watchdog_manager_init(module_t *self)
     return ESP_FAIL;
 #endif
 
-    synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_WATCHDOG_API, &watchdog_service_api);
+    // Service registration is now in _create, so it's removed from here.
+
     ESP_LOGI(TAG, "Task Watchdog Timer is configured to be initialized by the system.");
 
     self->status = MODULE_STATUS_INITIALIZED;

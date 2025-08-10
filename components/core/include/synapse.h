@@ -34,6 +34,7 @@ extern "C" {
 
 #include "base_module.h"      // Defines the basic module structure (module_t) and its lifecycle.
 #include "service_types.h"    // Provides the centralized enum for all service types (synapse_service_type_t).
+#include "service_status.h"   // Provides the centralized enum for all service statuses (service_status_t).
 #include "framework_events.h" // Defines the names of standardized, framework-wide events.
 #include "event_payloads.h"   // Defines the data structures (payloads) for standard events.
 

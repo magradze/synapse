@@ -101,23 +101,16 @@ static struct {
 //                      Module Lifecycle Implementation
 // =========================================================================
 
-/**
- * @brief Creates a new instance of the Command Router module.
- * @see command_router.h
- */
 module_t *command_router_create(const cJSON *config)
 {
     ESP_LOGI(TAG, "Creating Command Router module instance...");
 
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module) {
-        ESP_LOGE(TAG, "Failed to allocate memory for module_t.");
-        return NULL;
-    }
-
     cmd_router_private_data_t *private_data = (cmd_router_private_data_t *)calloc(1, sizeof(cmd_router_private_data_t));
-    if (!private_data) {
-        ESP_LOGE(TAG, "Failed to allocate memory for private_data.");
+    if (!module || !private_data)
+    {
+        ESP_LOGE(TAG, "Failed to allocate memory for module structures.");
+        free(private_data);
         free(module);
         return NULL;
     }
@@ -134,25 +127,34 @@ module_t *command_router_create(const cJSON *config)
         return NULL;
     }
 
+    // --- Configuration Parsing (Corrected) ---
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     const char *instance_name = CONFIG_COMMAND_ROUTER_DEFAULT_INSTANCE_NAME;
+
+    // Set defaults from Kconfig first
     private_data->serial_shell_enabled = CONFIG_COMMAND_ROUTER_ENABLE_SERIAL_SHELL;
     strncpy(private_data->prompt, CONFIG_COMMAND_ROUTER_PROMPT, sizeof(private_data->prompt) - 1);
-    private_data->prompt[sizeof(private_data->prompt) - 1] = '\0'; // Ensure null-termination
 
+    // Override with values from config.json if they exist
     if (cJSON_IsObject(config_node)) {
         const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-        if (cJSON_IsString(name_node)) instance_name = name_node->valuestring;
+        if (cJSON_IsString(name_node))
+        {
+            instance_name = name_node->valuestring;
+        }
 
         const cJSON *shell_node = cJSON_GetObjectItem(config_node, "enable_serial_shell");
-        if (cJSON_IsBool(shell_node)) private_data->serial_shell_enabled = cJSON_IsTrue(shell_node);
+        if (cJSON_IsBool(shell_node))
+        {
+            private_data->serial_shell_enabled = cJSON_IsTrue(shell_node);
+        }
 
         const cJSON *prompt_node = cJSON_GetObjectItem(config_node, "serial_shell_prompt");
         if (cJSON_IsString(prompt_node)) {
             strncpy(private_data->prompt, prompt_node->valuestring, sizeof(private_data->prompt) - 1);
-            private_data->prompt[sizeof(private_data->prompt) - 1] = '\0';
         }
     }
+    private_data->prompt[sizeof(private_data->prompt) - 1] = '\0'; // Ensure null-termination
 
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
@@ -162,52 +164,81 @@ module_t *command_router_create(const cJSON *config)
     module->base.deinit = command_router_deinit;
     module->base.handle_event = command_router_handle_event;
 
+    // --- Service Registration (Corrected for new pattern) ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API,
+        &command_router_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        command_router_deinit(module);
+        return NULL;
+    }
+
     global_cmd_router_instance = module;
 
-    ESP_LOGI(TAG, "Command Router module '%s' created.", module->name);
+    ESP_LOGI(TAG, "Command Router module '%s' created and service registered.", module->name);
     return module;
 }
 
-/**
- * @internal
- * @brief Initializes the Command Router module.
- * @details This function registers the module's service API, registers all
- *          built-in commands, and subscribes to the command execution event.
- * @param self Pointer to the module instance.
- * @return ESP_OK on success, or an error code on failure.
- */
 static esp_err_t command_router_init(module_t *self)
 {
     if (!self) return ESP_ERR_INVALID_ARG;
     ESP_LOGI(TAG, "Initializing Command Router module: %s", self->name);
 
-    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_CMD_ROUTER_API, &command_router_service_api);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register Command Router service: %s", esp_err_to_name(err));
-        return err;
-    }
+    // Service registration is now in _create, so it's removed from here.
 
-    static cmd_t help_cmd;
-    help_cmd = (cmd_t){"help", "Show list of available commands", "help", 1, 1, cmd_handler_help, self};
-    
-    static cmd_t modules_cmd;
-    modules_cmd = (cmd_t){"modules", "List all registered modules and their status", "modules", 1, 1, cmd_handler_modules, self};
+    // --- Correct way to initialize static structs with runtime values ---
+    static cmd_t help_cmd = {
+        .command = "help",
+        .help = "Show list of available commands",
+        .usage = "help",
+        .min_args = 1,
+        .max_args = 1,
+        .handler = cmd_handler_help
+        // .context will be set below
+    };
+    help_cmd.context = self;
 
-    static cmd_t nvs_inspect_cmd;
-    nvs_inspect_cmd = (cmd_t){"nvs_inspect", "Inspect NVS entries", "nvs_inspect", 1, 2, cmd_handler_nvs_inspect, self};
+    static cmd_t modules_cmd = {
+        .command = "modules",
+        .help = "List all registered modules and their status",
+        .usage = "modules",
+        .min_args = 1,
+        .max_args = 1,
+        .handler = cmd_handler_modules};
+    modules_cmd.context = self;
 
-    static cmd_t reboot_cmd;
-    reboot_cmd = (cmd_t){"reboot", "Reboot the device", "reboot", 1, 1, cmd_handler_reboot, self};
-    
+    static cmd_t nvs_inspect_cmd = {
+        .command = "nvs_inspect",
+        .help = "Inspect NVS entries",
+        .usage = "nvs_inspect",
+        .min_args = 1,
+        .max_args = 2,
+        .handler = cmd_handler_nvs_inspect};
+    nvs_inspect_cmd.context = self;
+
+    static cmd_t reboot_cmd = {
+        .command = "reboot",
+        .help = "Reboot the device",
+        .usage = "reboot",
+        .min_args = 1,
+        .max_args = 1,
+        .handler = cmd_handler_reboot};
+    reboot_cmd.context = self;
+
+    // Register the commands
     service_api_register_command(&help_cmd);
     service_api_register_command(&modules_cmd);
     service_api_register_command(&nvs_inspect_cmd);
     service_api_register_command(&reboot_cmd);
 
-    err = synapse_event_bus_subscribe(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, self);
+    esp_err_t err = synapse_event_bus_subscribe(SYNAPSE_EVENT_EXECUTE_COMMAND_STRING, self);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to subscribe to command events: %s", esp_err_to_name(err));
-        synapse_service_unregister(self->name);
         return err;
     }
 
@@ -732,10 +763,7 @@ static esp_err_t cmd_handler_reboot(int argc, char **argv, void *context)
     // This part of the code will not be reached
     return ESP_OK;
 }
-/**
- * @internal
- * @brief Registers all commands from our internal list to the esp_console system.
- */
+
 static esp_err_t register_all_commands_to_console(void)
 {
     if (!global_cmd_router_instance) return ESP_ERR_INVALID_STATE;

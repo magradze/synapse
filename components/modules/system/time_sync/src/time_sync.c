@@ -31,14 +31,14 @@ static esp_err_t api_get_time(time_t *current_time);
 static void time_sync_notification_cb(struct timeval *tv);
 static void start_sntp_sync(void);
 
-// --- Module Create & Deinit ---
 module_t* time_sync_create(const cJSON *config) {
     module_t *module = calloc(1, sizeof(module_t));
     time_sync_private_data_t *private_data = calloc(1, sizeof(time_sync_private_data_t));
     if (!module || !private_data) {
         ESP_LOGE(TAG, "Failed to allocate memory");
-        free(module); free(private_data);
-        if (config) cJSON_Delete((cJSON*)config);
+        free(module);
+        free(private_data);
+        // We do not delete config here as it is owned by the factory
         return NULL;
     }
 
@@ -47,17 +47,24 @@ module_t* time_sync_create(const cJSON *config) {
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
     }
+
     private_data->module = module;
     module->init_level = 40;
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    snprintf(module->name, sizeof(module->name), "%s", cJSON_GetObjectItem(config_node, "instance_name")->valuestring);
+    // Ensure config_node is not NULL before accessing its members
+    if (config_node)
+    {
+        const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+        if (cJSON_IsString(name_node) && name_node->valuestring)
+        {
+            snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
+        }
+    }
 
     module->base.init = time_sync_init;
     module->base.deinit = time_sync_deinit;
@@ -66,35 +73,29 @@ module_t* time_sync_create(const cJSON *config) {
     private_data->is_synced = false;
     private_data->service_api.get_time = api_get_time;
 
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_TIME_SYNC_API,
+        &private_data->service_api,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        time_sync_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "Time Sync module '%s' created and service registered.", module->name);
     return module;
 }
 
-static void time_sync_deinit(module_t *self)
-{
-    if (!self)
-        return;
-    ESP_LOGI(TAG, "Deinitializing Time Sync module.");
-    esp_sntp_stop();
-    synapse_service_unregister(self->name);
-    synapse_event_bus_unsubscribe(EVT_WIFI_IP_ASSIGNED, self);
-    if (self->private_data)
-        free(self->private_data);
-    if (self->current_config)
-        cJSON_Delete(self->current_config);
-}
-
-// --- Module Lifecycle & Event Handling ---
 static esp_err_t time_sync_init(module_t *self)
 {
-    time_sync_private_data_t *private_data = (time_sync_private_data_t *)self->private_data;
+    // Service registration is now in _create, so it's removed from here.
 
-    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_TIME_SYNC_API, &private_data->service_api);
-    if (err != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to register time_sync service!");
-        return err;
-    }
-
+    // Subscribe to events
     synapse_event_bus_subscribe(EVT_WIFI_IP_ASSIGNED, self);
 
     // Set timezone from config
@@ -111,9 +112,23 @@ static esp_err_t time_sync_init(module_t *self)
         ESP_LOGW(TAG, "Timezone not found in config. Using default UTC.");
     }
 
-    ESP_LOGI(TAG, "Time Sync service registered. Waiting for IP address.");
+    ESP_LOGI(TAG, "Time Sync module initialized. Waiting for IP address to sync.");
     self->status = MODULE_STATUS_INITIALIZED;
     return ESP_OK;
+}
+
+static void time_sync_deinit(module_t *self)
+{
+    if (!self)
+        return;
+    ESP_LOGI(TAG, "Deinitializing Time Sync module.");
+    esp_sntp_stop();
+    synapse_service_unregister(self->name);
+    synapse_event_bus_unsubscribe(EVT_WIFI_IP_ASSIGNED, self);
+    if (self->private_data)
+        free(self->private_data);
+    if (self->current_config)
+        cJSON_Delete(self->current_config);
 }
 
 static void time_sync_handle_event(module_t *self, const char *event_name, void *event_data)

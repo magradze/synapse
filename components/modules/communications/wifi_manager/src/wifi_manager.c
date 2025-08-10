@@ -30,32 +30,50 @@ module_t *wifi_manager_create(const cJSON *config)
         ESP_LOGE(TAG, "Failed to allocate memory");
         free(module);
         free(private_data);
-        if (config)
-            cJSON_Delete((cJSON *)config);
         return NULL;
     }
 
+    module->private_data = private_data;
     module->current_config = cJSON_Duplicate(config, true);
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
     }
-    module->private_data = private_data;
+
     module->dependency_map = s_dependencies;
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
-    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
-    snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
-    snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
+    // Ensure config_node is valid before accessing
+    if (config_node)
+    {
+        const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+        if (cJSON_IsString(name_node) && name_node->valuestring)
+        {
+            snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
+            snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
+        }
+    }
 
+    // --- Service API and Handle Setup ---
     private_data->service_api.get_status_async = wifi_api_get_status_async;
     private_data->service_api.is_connected = wifi_api_is_connected;
-    synapse_service_register(module->name, SYNAPSE_SERVICE_TYPE_WIFI_API, &private_data->service_api);
+
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_WIFI_API,
+        &private_data->service_api,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        wifi_manager_deinit(module);
+        return NULL;
+    }
 
     module->init_level = 40;
     module->base.init = wifi_manager_init;
@@ -63,11 +81,10 @@ module_t *wifi_manager_create(const cJSON *config)
     module->base.deinit = wifi_manager_deinit;
     module->base.handle_event = wifi_manager_handle_event;
 
-    ESP_LOGI(TAG, "WiFi Manager module created: '%s'", module->name);
+    ESP_LOGI(TAG, "WiFi Manager module '%s' created and service registered.", module->name);
     return module;
 }
 
-// --- Lifecycle Functions ---
 static esp_err_t wifi_manager_init(module_t *self)
 {
     wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
@@ -86,17 +103,20 @@ static esp_err_t wifi_manager_init(module_t *self)
         return ESP_ERR_NO_MEM;
     }
 
+    // --- ESP-IDF WiFi Stack Initialization ---
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     esp_netif_create_default_wifi_sta();
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
+    // --- Register Event Handlers ---
     ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, self));
     ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &ip_event_handler, self));
 
     private_data->reconnect_timer = xTimerCreate("wifi_reconnect", pdMS_TO_TICKS(5000), pdFALSE, self, reconnect_timer_callback);
 
+    // --- Subscribe to Synapse Events ---
     synapse_event_bus_subscribe("PROV_CREDENTIALS_RECEIVED", self);
     synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 

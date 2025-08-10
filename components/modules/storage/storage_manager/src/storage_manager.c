@@ -59,32 +59,20 @@ static void storage_manager_deinit(module_t *self);
 //                      Module Lifecycle Implementation
 // =========================================================================
 
-/**
- * @brief Creates a new instance of the Storage Manager module.
- * @details This function allocates memory for the module and its private data,
- *          sets the instance name based on configuration, and assigns the
- *          lifecycle function pointers. It does not initialize the backend;
- *          that is handled in the `init` phase.
- * @param[in] config A cJSON object containing the module's configuration.
- * @return A pointer to the created module (`module_t*`), or NULL on failure.
- */
 module_t *storage_manager_create(const cJSON *config)
 {
     ESP_LOGI(TAG, "Creating storage_manager module instance...");
-    
+
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module) {
-        ESP_LOGE(TAG, "Failed to allocate memory for module_t.");
-        return NULL;
-    }
-    
     storage_manager_private_data_t *private_data = (storage_manager_private_data_t *)calloc(1, sizeof(storage_manager_private_data_t));
-    if (!private_data) {
-        ESP_LOGE(TAG, "Failed to allocate memory for private_data.");
+    if (!module || !private_data)
+    {
+        ESP_LOGE(TAG, "Failed to allocate memory for module structures.");
+        free(private_data);
         free(module);
         return NULL;
     }
-    
+
     module->state_mutex = xSemaphoreCreateMutex();
     if (!module->state_mutex) {
         ESP_LOGE(TAG, "Failed to create state mutex.");
@@ -110,11 +98,8 @@ module_t *storage_manager_create(const cJSON *config)
     strncpy(private_data->instance_name, instance_name, sizeof(private_data->instance_name) - 1);
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
-    
-    // This is a fundamental service, so it should initialize early.
-    module->init_level = 20; 
-    
-    // This module is a simple service provider.
+    module->init_level = 20;
+
     module->base.init = storage_manager_init;
     module->base.deinit = storage_manager_deinit;
     module->base.start = NULL;
@@ -123,22 +108,27 @@ module_t *storage_manager_create(const cJSON *config)
     module->base.disable = NULL;
     module->base.reconfigure = NULL;
     module->base.get_status = NULL;
-    
-    ESP_LOGI(TAG, "Storage Manager module '%s' created.", module->name);
+
+    // --- Service Registration Moved to Create Phase ---
+    // Note: We register the POINTER to the API table in private_data.
+    // The actual API table will be populated by the backend during the init phase.
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_NVRAM_API, // This should probably be a more generic type
+        &private_data->active_storage_api,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        storage_manager_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "Storage Manager module '%s' created and service registered.", module->name);
     return module;
 }
 
-/**
- * @internal
- * @brief Initializes the Storage Manager module and its selected backend.
- * @details This function is the core of the module's setup. It uses compile-time
- *          Kconfig flags to determine which storage backend to initialize. It then
- *          calls the appropriate backend's `init` function, which populates the
- *          `active_storage_api` structure. Finally, it registers this unified API
- *          with the Service Locator.
- * @param[in] self Pointer to the module instance.
- * @return ESP_OK on success, or an error code on failure.
- */
 static esp_err_t storage_manager_init(module_t *self)
 {
     if (!self || !self->private_data) {
@@ -161,28 +151,22 @@ static esp_err_t storage_manager_init(module_t *self)
         ESP_LOGI(TAG, "Selected backend: SD Card");
         err = storage_backend_sd_init(&private_data->active_storage_api);
     #else
-        #error "No storage backend selected in Kconfig! Please enable one."
-        // This will cause a compile-time error if no backend is chosen.
-    #endif
+#error "No storage backend selected in Kconfig! Please enable one."
+#endif
 
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize the selected storage backend.");
-        self->status = MODULE_STATUS_ERROR;
-        return err;
-    }
+        if (err != ESP_OK)
+        {
+            ESP_LOGE(TAG, "Failed to initialize the selected storage backend.");
+            self->status = MODULE_STATUS_ERROR;
+            return err;
+        }
 
-    // Register the now-active service API with the Service Locator.
-    err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_NVRAM_API, &private_data->active_storage_api);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register Storage Manager service: %s", esp_err_to_name(err));
-        self->status = MODULE_STATUS_ERROR;
-        return err;
-    }
-    
-    // This module is considered "running" as soon as it's initialized.
-    self->status = MODULE_STATUS_RUNNING; 
-    ESP_LOGI(TAG, "Storage Manager initialized and service registered successfully.");
-    return ESP_OK;
+        // Service is now registered in the _create function.
+        // The pointer registered there now points to a valid, initialized API table.
+
+        self->status = MODULE_STATUS_RUNNING;
+        ESP_LOGI(TAG, "Storage Manager initialized successfully.");
+        return ESP_OK;
 }
 
 /**

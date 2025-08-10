@@ -68,26 +68,19 @@ static timer_api_t timer_service_api = {
 //                      Module Lifecycle Implementation
 // =========================================================================
 
-/**
- * @brief Creates a new instance of the System Timer Service module.
- * @see system_timer.h
- */
 module_t *system_timer_create(const cJSON *config) {
     ESP_LOGI(TAG, "Creating System Timer Service module...");
-    
+
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module) {
-        ESP_LOGE(TAG, "Failed to allocate memory for module_t.");
-        return NULL;
-    }
-    
     system_timer_private_data_t *private_data = (system_timer_private_data_t *)calloc(1, sizeof(system_timer_private_data_t));
-    if (!private_data) {
-        ESP_LOGE(TAG, "Failed to allocate memory for private_data.");
+    if (!module || !private_data)
+    {
+        ESP_LOGE(TAG, "Failed to allocate memory");
+        free(private_data);
         free(module);
         return NULL;
     }
-    
+
     private_data->pool_mutex = xSemaphoreCreateMutex();
     if (!private_data->pool_mutex) {
         ESP_LOGE(TAG, "Failed to create pool mutex.");
@@ -97,7 +90,8 @@ module_t *system_timer_create(const cJSON *config) {
     }
     
     module->private_data = private_data;
-    
+
+    // --- Configuration Parsing (Corrected) ---
     const char *instance_name = CONFIG_SYSTEM_TIMER_DEFAULT_INSTANCE_NAME;
     if (config) {
         const cJSON *config_node = cJSON_GetObjectItem(config, "config");
@@ -112,46 +106,43 @@ module_t *system_timer_create(const cJSON *config) {
     
     snprintf(module->name, sizeof(module->name), "%s", instance_name);
     module->status = MODULE_STATUS_UNINITIALIZED;
-    
-    module->init_level = 35; // System service level, after core services but before most app modules.
-    
+    module->init_level = 35;
+
     module->base.init = system_timer_init;
     module->base.deinit = system_timer_deinit;
-    // This is a pure service module, it does not need start, event handling, etc.
     module->base.start = NULL;
     module->base.handle_event = NULL;
     module->base.enable = NULL;
     module->base.disable = NULL;
     module->base.reconfigure = NULL;
     module->base.get_status = NULL;
-    
+
+    // --- Service Registration (Corrected for new pattern) ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_TIMER_API,
+        &timer_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        system_timer_deinit(module);
+        return NULL;
+    }
+
     global_timer_service_instance = module;
-    ESP_LOGI(TAG, "System Timer Service module '%s' created.", module->name);
+    ESP_LOGI(TAG, "System Timer Service module '%s' created and service registered.", module->name);
     return module;
 }
 
-/**
- * @internal
- * @brief Initializes the System Timer module.
- * @details This function registers the module's API with the Service Locator,
- *          making it available to other modules.
- * @param self Pointer to the module instance.
- * @return ESP_OK on success, or an error code on failure.
- */
 static esp_err_t system_timer_init(module_t *self) {
     ESP_LOGI(TAG, "Initializing System Timer Service: %s", self->name);
-
-    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_TIMER_API, &timer_service_api);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register System Timer service: %s", esp_err_to_name(err));
-        return err;
-    }
-    
+    // The module is a pure service, so it can be considered running after init.
     self->status = MODULE_STATUS_RUNNING;
-    ESP_LOGI(TAG, "System Timer service registered successfully.");
+    ESP_LOGI(TAG, "System Timer service is active.");
     return ESP_OK;
 }
-
 /**
  * @internal
  * @brief Deinitializes the module, cancelling all active timers and freeing resources.

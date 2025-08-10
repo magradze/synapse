@@ -72,8 +72,6 @@ module_t *mcp23017_io_expander_create(const cJSON *config)
     if (!module->current_config)
     {
         ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        // Note: This assumes 'private_data' and 'module' are allocated.
-        // Manual check might be needed for each file's cleanup logic.
         free(private_data);
         free(module);
         return NULL;
@@ -108,7 +106,21 @@ module_t *mcp23017_io_expander_create(const cJSON *config)
     module->base.init = mcp23017_io_expander_init;
     module->base.deinit = mcp23017_io_expander_deinit;
 
-    ESP_LOGI(TAG, "MCP23017 Expander module '%s' created.", module->name);
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_MCP23017_EXPANDER_API,
+        &private_data->service_handle,
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        mcp23017_io_expander_deinit(module);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "MCP23017 Expander module '%s' created and service registered.", module->name);
     return module;
 }
 
@@ -123,8 +135,6 @@ static esp_err_t mcp23017_io_expander_init(module_t *self)
         return ESP_ERR_NOT_FOUND;
     }
 
-    // Configure MCP23017 to default state (all pins as inputs)
-    // Set BANK=0, MIRROR=0, SEQOP=1, DISSLW=0, HAEN=0, ODR=0, INTPOL=0
     esp_err_t ret = write_register(private_data, MCP23017_REG_IOCON, 0b00100000);
     if (ret != ESP_OK)
     {
@@ -132,7 +142,6 @@ static esp_err_t mcp23017_io_expander_init(module_t *self)
         return ret;
     }
 
-    // Set all pins to input
     ret = write_register(private_data, MCP23017_REG_IODIRA, 0xFF);
     if (ret == ESP_OK)
     {
@@ -146,13 +155,7 @@ static esp_err_t mcp23017_io_expander_init(module_t *self)
     private_data->iodir_cache[0] = 0xFF;
     private_data->iodir_cache[1] = 0xFF;
 
-    // Register our service
-    ret = synapse_service_register(private_data->instance_name, SYNAPSE_SERVICE_TYPE_MCP23017_EXPANDER_API, &private_data->service_handle);
-    if (ret != ESP_OK)
-    {
-        ESP_LOGE(TAG, "Failed to register MCP23017 service '%s'", private_data->instance_name);
-        return ret;
-    }
+    // Service registration removed from here
 
     ESP_LOGI(TAG, "MCP23017 Expander '%s' on I2C addr 0x%02X initialized.", self->name, private_data->i2c_addr);
     return ESP_OK;

@@ -76,22 +76,25 @@ static module_t *security_status_self = NULL;
 module_t *security_status_reporter_create(const cJSON *config)
 {
     ESP_LOGI(TAG, "Creating security_status_reporter module instance");
-    
+
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
-    if (!module) {
-        ESP_LOGE(TAG, "Failed to allocate memory for module");
-        return NULL;
-    }
-    
     security_status_private_data_t *private_data = (security_status_private_data_t *)calloc(1, sizeof(security_status_private_data_t));
-    if (!private_data) {
-        ESP_LOGE(TAG, "Failed to allocate memory for private data");
+    if (!module || !private_data)
+    {
+        ESP_LOGE(TAG, "Failed to allocate memory for module structures");
+        free(private_data);
         free(module);
         return NULL;
     }
-    
+
     module->private_data = private_data;
-    
+
+    // Create an independent copy of the config if it exists
+    if (config)
+    {
+        module->current_config = cJSON_Duplicate(config, true);
+    }
+
     const char *instance_name = CONFIG_SECURITY_STATUS_REPORTER_DEFAULT_INSTANCE_NAME;
     if (config) {
         const cJSON *config_node = cJSON_GetObjectItem(config, "config");
@@ -111,15 +114,28 @@ module_t *security_status_reporter_create(const cJSON *config)
     module->base.init = security_status_reporter_init;
     module->base.deinit = security_status_reporter_deinit;
     module->base.handle_event = security_status_reporter_handle_event;
-    // This is a service module, no start/stop/enable/disable logic needed.
     module->base.start = NULL;
     module->base.enable = NULL;
     module->base.disable = NULL;
     module->base.reconfigure = NULL;
     module->base.get_status = NULL;
-    
+
+    // --- Service Registration Moved to Create Phase ---
+    esp_err_t ret = synapse_service_register_with_status(
+        module->name,
+        SYNAPSE_SERVICE_TYPE_SECURITY_API,
+        &security_service_api, // Assuming global static API struct
+        SERVICE_STATUS_REGISTERED);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to register service for '%s' (%s). Cleaning up.", module->name, esp_err_to_name(ret));
+        security_status_reporter_deinit(module);
+        return NULL;
+    }
+
     security_status_self = module;
-    ESP_LOGI(TAG, "Security Status Reporter module created: '%s'", instance_name);
+    ESP_LOGI(TAG, "Security Status Reporter module '%s' created and service registered.", module->name);
     return module;
 }
 
@@ -137,18 +153,15 @@ static esp_err_t security_status_reporter_init(module_t *self)
     ESP_LOGI(TAG, "Security Status: Secure Boot is %s", private_data->secure_boot_enabled ? "ENABLED" : "DISABLED");
     ESP_LOGI(TAG, "Security Status: Flash Encryption is %s", private_data->flash_encryption_enabled ? "ENABLED" : "DISABLED");
 
-    // Register the service API
-    esp_err_t err = synapse_service_register(self->name, SYNAPSE_SERVICE_TYPE_SECURITY_API, &security_service_api);
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to register Security Status service: %s", esp_err_to_name(err));
-        return err;
-    }
+    // Service registration is now in _create, so it's removed from here.
 
     // Subscribe to event to register CLI command later
     synapse_event_bus_subscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);
 
+    // This is a pure service, so it can be considered running after init.
+    // System Manager will set the service status to ACTIVE.
     self->status = MODULE_STATUS_RUNNING;
-    ESP_LOGI(TAG, "Module initialized and service registered successfully.");
+    ESP_LOGI(TAG, "Module initialized successfully.");
     return ESP_OK;
 }
 

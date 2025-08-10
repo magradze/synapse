@@ -284,54 +284,73 @@ static esp_err_t parse_config(const cJSON *config_node, rotary_private_data_t *p
         return ESP_ERR_INVALID_ARG;
     }
 
-    // --- Step 1: Set default values ---
-    private_data->control_type = CONTROL_TYPE_GPIO;
-    synapse_safe_strncpy(private_data->button_name, "OK", sizeof(private_data->button_name));
-    private_data->active_level = 0;
+    // --- Step 1: Set default values from Kconfig ---
+    private_data->active_level = 0; // Default active level
     private_data->polling_interval_ms = CONFIG_ROTARY_ENCODER_POLLING_MS;
+    synapse_safe_strncpy(private_data->button_name, "OK", sizeof(private_data->button_name));
 
-    // --- Step 2: Parse main config values ---
-    bool name_ok = synapse_config_get_string_from_node(TAG, config_node, "instance_name",
-                                                       private_data->instance_name, sizeof(private_data->instance_name));
+    // --- Step 2: Parse instance name (required) ---
+    const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
+    if (!cJSON_IsString(name_node) || !name_node->valuestring)
+    {
+        ESP_LOGE(TAG, "Required config 'instance_name' is missing or not a string.");
+        return ESP_ERR_INVALID_ARG;
+    }
+    synapse_safe_strncpy(private_data->instance_name, name_node->valuestring, sizeof(private_data->instance_name));
 
-    char control_type_str[16] = "gpio";
-    synapse_config_get_string_from_node(TAG, config_node, "control_type",
-                                        control_type_str, sizeof(control_type_str));
-    if (strcmp(control_type_str, "expander") == 0)
+    // --- Step 3: Parse control type and set the mode ---
+    const cJSON *type_node = cJSON_GetObjectItem(config_node, "control_type");
+    if (cJSON_IsString(type_node) && strcmp(type_node->valuestring, "expander") == 0)
     {
         private_data->control_type = CONTROL_TYPE_EXPANDER;
     }
-
-    // --- Step 3: Parse pin numbers ---
-    bool pin_a_ok = synapse_config_get_int_from_node(TAG, config_node, "pin_a", (int *)&private_data->pin_a);
-    bool pin_b_ok = synapse_config_get_int_from_node(TAG, config_node, "pin_b", (int *)&private_data->pin_b);
-    bool pin_sw_ok = synapse_config_get_int_from_node(TAG, config_node, "pin_sw", (int *)&private_data->pin_sw);
-
-    // --- Step 4: Parse optional parameters ---
-    synapse_config_get_string_from_node(TAG, config_node, "button_name",
-                                        private_data->button_name, sizeof(private_data->button_name));
-
-    synapse_config_get_int_from_node(TAG, config_node, "active_level", (int *)&private_data->active_level);
-
-    synapse_config_get_int_from_node(TAG, config_node, "polling_interval_ms", (int *)&private_data->polling_interval_ms);
-
-    // --- Step 5: Validate required parameters ---
-    if (!name_ok || !pin_a_ok || !pin_b_ok || !pin_sw_ok)
+    else
     {
-        ESP_LOGE(TAG, "Required config parameters (instance_name, pin_a, pin_b, pin_sw) are missing.");
-        return ESP_ERR_INVALID_ARG;
+        private_data->control_type = CONTROL_TYPE_GPIO; // Default is GPIO
     }
 
-    // Special validation for expander mode
+    // --- Step 4: Parse pin numbers (required) ---
+    const cJSON *pin_a_node = cJSON_GetObjectItem(config_node, "pin_a");
+    const cJSON *pin_b_node = cJSON_GetObjectItem(config_node, "pin_b");
+    const cJSON *pin_sw_node = cJSON_GetObjectItem(config_node, "pin_sw");
+    if (!cJSON_IsNumber(pin_a_node) || !cJSON_IsNumber(pin_b_node) || !cJSON_IsNumber(pin_sw_node))
+    {
+        ESP_LOGE(TAG, "Required config parameters (pin_a, pin_b, pin_sw) are missing or not numbers.");
+        return ESP_ERR_INVALID_ARG;
+    }
+    private_data->pin_a = pin_a_node->valueint;
+    private_data->pin_b = pin_b_node->valueint;
+    private_data->pin_sw = pin_sw_node->valueint;
+
+    // --- Step 5: Parse optional parameters ---
+    const cJSON *btn_name_node = cJSON_GetObjectItem(config_node, "button_name");
+    if (cJSON_IsString(btn_name_node))
+    {
+        synapse_safe_strncpy(private_data->button_name, btn_name_node->valuestring, sizeof(private_data->button_name));
+    }
+
+    const cJSON *active_level_node = cJSON_GetObjectItem(config_node, "active_level");
+    if (cJSON_IsNumber(active_level_node))
+    {
+        private_data->active_level = active_level_node->valueint;
+    }
+
+    const cJSON *polling_node = cJSON_GetObjectItem(config_node, "polling_interval_ms");
+    if (cJSON_IsNumber(polling_node))
+    {
+        private_data->polling_interval_ms = polling_node->valueint;
+    }
+
+    // --- Step 6: Validate expander-specific parameters ---
     if (private_data->control_type == CONTROL_TYPE_EXPANDER)
     {
-        bool service_name_ok = synapse_config_get_string_from_node(TAG, config_node, "expander_service",
-                                                                   private_data->expander_service_name, sizeof(private_data->expander_service_name));
-        if (!service_name_ok)
+        const cJSON *service_name_node = cJSON_GetObjectItem(config_node, "expander_service");
+        if (!cJSON_IsString(service_name_node) || !service_name_node->valuestring)
         {
-            ESP_LOGE(TAG, "'expander_service' is required for expander control type.");
+            ESP_LOGE(TAG, "'expander_service' is required for 'expander' control type.");
             return ESP_ERR_INVALID_ARG;
         }
+        synapse_safe_strncpy(private_data->expander_service_name, service_name_node->valuestring, sizeof(private_data->expander_service_name));
     }
 
     return ESP_OK;

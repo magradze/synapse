@@ -164,6 +164,7 @@ class ArchetypeGenerator(TemplateGenerator):
         files = {
             "module.json": self._generate_module_json(),
             "config.json": self._generate_config_json(),
+            "schema.json": self._generate_schema_json(),
             "Kconfig": self._generate_kconfig(),
             "README.md": self._generate_readme(),
             f"include/{self.module_name}.h": self._generate_public_header(),
@@ -528,6 +529,32 @@ void {self.module_name}_handle_event(module_t *self, const char *event_name, voi
 }}
 """
 
+    def _generate_schema_json(self) -> str:
+        """Generates a boilerplate schema.json for the module's config."""
+        schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": f"{self.module_title} Config Schema",
+            "description": f"Defines the structure for a {self.module_name} config.json entry.",
+            "type": "object",
+            "properties": {
+                "type": {"const": self.module_name},
+                "enabled": {"type": "boolean"},
+                "config": {
+                    "type": "object",
+                    "properties": {
+                        "instance_name": {"type": "string", "minLength": 1}
+                        # TODO: Add schema definitions for your module's specific config parameters here.
+                        # Example:
+                        # "pin": { "type": "integer", "minimum": 0 },
+                        # "update_interval": { "type": "number", "minimum": 1 }
+                    },
+                    "required": ["instance_name"],
+                    "additionalProperties": False
+                }
+            },
+            "required": ["type", "config"]
+        }
+        return json.dumps(schema, indent=4, ensure_ascii=False)
 # --- Main Execution Logic ---
 
 def create_module_files(params: Dict):

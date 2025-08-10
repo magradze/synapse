@@ -16,6 +16,9 @@ set(SRCS
 )
 
 # --- Synapse Build Automation ---
+# Include and run the script to validate module configurations
+include(${CMAKE_CURRENT_LIST_DIR}/validate_configs.cmake)
+validate_synapse_configs() # This function sets up the validation target
 
 # ჩასვით და გაუშვით სკრიპტი, რომელიც აგროვებს დეცენტრალიზებულ კონფიგურაციებს
 include(${CMAKE_CURRENT_LIST_DIR}/collect_configs.cmake)

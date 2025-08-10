@@ -487,6 +487,12 @@ CONFIG_SYNAPSE_TASK_POOL_TASK_PRIORITY=10
 # end of Task Pool Manager Configuration
 
 #
+# Debugging & Assertions
+#
+CONFIG_SYNAPSE_ENABLE_ASSERTS=y
+# end of Debugging & Assertions
+
+#
 # Modules
 #
 
@@ -2607,6 +2613,11 @@ CONFIG_WIFI_PROV_STA_ALL_CHANNEL_SCAN=y
 # Task Pool Manager Configuration
 #
 # end of Task Pool Manager Configuration
+
+#
+# Debugging & Assertions
+#
+# end of Debugging & Assertions
 
 #
 # Relay Actuator

@@ -208,7 +208,7 @@ static esp_err_t command_router_init(module_t *self)
         .help = "List all registered modules and their status",
         .usage = "modules",
         .min_args = 1,
-        .max_args = 1,
+        .max_args = 3,
         .handler = cmd_handler_modules};
     modules_cmd.context = self;
 
@@ -657,17 +657,43 @@ static esp_err_t cmd_handler_help(int argc, char **argv, void *context)
 
 static esp_err_t cmd_handler_modules(int argc, char **argv, void *context)
 {
-    service_handle_t handle = synapse_service_get("system_manager");
-    if (!handle) {
-        printf("Error: System Manager service not available.\n");
-        return ESP_ERR_NOT_FOUND;
+    // --- Check for --info argument ---
+    if (argc == 3 && strcmp(argv[1], "--info") == 0)
+    {
+        const char *module_name = argv[2];
+        module_t *module = synapse_module_registry_find_by_name(module_name);
+
+        if (!module)
+        {
+            printf("Error: Module '%s' not found.\n", module_name);
+            return ESP_ERR_NOT_FOUND;
+        }
+
+        if (module->base.debug_print)
+        {
+            // Call the module's specific debug print function
+            module->base.debug_print(module);
+        }
+        else
+        {
+            printf("Module '%s' does not provide detailed debug information.\n", module_name);
+        }
+        return ESP_OK;
     }
 
-    synapse_service_type_t service_type;
-    if (synapse_service_get_type("system_manager", &service_type) != ESP_OK || service_type != SYNAPSE_SERVICE_TYPE_SYSTEM_API)
+    // --- Default behavior: List all modules ---
+    if (argc != 1)
     {
-        printf("Error: Invalid service type for 'system_manager'.\n");
-        return ESP_ERR_INVALID_STATE;
+        printf("Usage: modules [--info <instance_name>]\n");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    // Use lookup_by_type to avoid hardcoding the service name
+    service_handle_t handle = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_SYSTEM_API);
+    if (!handle)
+    {
+        printf("Error: System Manager service not available.\n");
+        return ESP_ERR_NOT_FOUND;
     }
 
     system_manager_api_t *sys_api = (system_manager_api_t *)handle;
@@ -692,7 +718,7 @@ static esp_err_t cmd_handler_modules(int argc, char **argv, void *context)
     for (uint8_t i = 0; i < module_count; i++) {
         const module_t *module = modules[i];
         if (module) {
-            const char *status_str = "UNKNOWN";
+            const char *status_str;
             switch (module->status) {
                 case MODULE_STATUS_UNINITIALIZED: status_str = "Uninitialized"; break;
                 case MODULE_STATUS_INITIALIZED:   status_str = "Initialized";   break;
@@ -701,7 +727,8 @@ static esp_err_t cmd_handler_modules(int argc, char **argv, void *context)
                 case MODULE_STATUS_ERROR:         status_str = "Error";         break;
                 default:                          status_str = "Unknown";       break;
             }
-            printf("  %-32s | %s\n", module->name, status_str);
+            // Ensure module name is not NULL before printing
+            printf("  %-32s | %s\n", (module->name[0] != '\0') ? module->name : "<NO NAME>", status_str);
         }
     }
     printf("--------------------------------------------------\n");

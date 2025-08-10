@@ -18,9 +18,7 @@
  *          რეგისტრირებული სერვისების შესანახად და mutex-ს ერთდროული წვდომის
  *          უსაფრთხოდ სამართავად.
  */
-#include "service_locator.h"
-#include "logging.h"
-#include "framework_config.h" // Kconfig პარამეტრებისთვის
+#include "synapse.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include <string.h>
@@ -41,8 +39,10 @@ DEFINE_COMPONENT_TAG("SERVICE_LOCATOR", SYNAPSE_LOG_COLOR_BLUE);
 typedef struct service_entry_t {
     char name[CONFIG_SYNAPSE_SERVICE_NAME_MAX_LENGTH]; /**< @brief სერვისის უნიკალური სახელი. */
     synapse_service_type_t type;                       /**< @brief სერვისის ტიპი (enum). */
-    void *service_handle;                          /**< @brief მაჩვენებელი სერვისის API სტრუქტურაზე. */
-    SLIST_ENTRY(service_entry_t) entries;          /**< @brief მაჩვენებელი სიის შემდეგ ელემენტზე. */
+    service_status_t status;                           /**< @brief სერვისის სტატუსი (enum). */
+    void *service_handle;                              /**< @brief მაჩვენებელი სერვისის API სტრუქტურაზე. */
+    SLIST_ENTRY(service_entry_t)
+    entries; /**< @brief მაჩვენებელი სიის შემდეგ ელემენტზე. */
 } service_entry_t;
 
 /**
@@ -84,46 +84,10 @@ esp_err_t synapse_service_locator_init(void)
 
 esp_err_t synapse_service_register(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle)
 {
-    if (!service_name || !service_handle) {
-        ESP_LOGE(TAG, "რეგისტრაცია ვერ მოხერხდა: არასწორი არგუმენტები (სახელი ან handle არის NULL).");
-        return ESP_ERR_INVALID_ARG;
-    }
-
-    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_SEMAPHORE_TIMEOUT_MS)) != pdTRUE)
-    {
-        ESP_LOGE(TAG, "რეგისტრაციისთვის service registry mutex-ის დაკავება ვერ მოხერხდა.");
-        return ESP_ERR_TIMEOUT;
-    }
-
-    // შევამოწმოთ, ხომ არ არის უკვე რეგისტრირებული სერვისი იგივე სახელით
-    service_entry_t *it;
-    SLIST_FOREACH(it, &service_registry_head, entries) {
-        if (strcmp(it->name, service_name) == 0) {
-            ESP_LOGE(TAG, "სერვისი სახელით '%s' უკვე რეგისტრირებულია!", service_name);
-            xSemaphoreGive(service_registry_mutex);
-            return ESP_ERR_INVALID_STATE;
-        }
-    }
-
-    // შევქმნათ ახალი ჩანაწერი
-    service_entry_t *new_entry = malloc(sizeof(service_entry_t));
-    if (!new_entry) {
-        ESP_LOGE(TAG, "ახალი სერვისის ('%s') ჩანაწერისთვის მეხსიერების გამოყოფა ვერ მოხერხდა.", service_name);
-        xSemaphoreGive(service_registry_mutex);
-        return ESP_ERR_NO_MEM;
-    }
-
-    strncpy(new_entry->name, service_name, sizeof(new_entry->name) - 1);
-    new_entry->name[sizeof(new_entry->name) - 1] = '\0';
-    new_entry->type = service_type;
-    new_entry->service_handle = service_handle;
-
-    SLIST_INSERT_HEAD(&service_registry_head, new_entry, entries);
-
-    xSemaphoreGive(service_registry_mutex);
-
-    ESP_LOGI(TAG, "სერვისი '%s' (ტიპი: '%s') წარმატებით დარეგისტრირდა.", service_name, synapse_service_type_to_string(service_type));
-    return ESP_OK;
+    // This wrapper maintains backward compatibility.
+    // A service registered this way is considered immediately REGISTERED.
+    // The System Manager will then transition it to ACTIVE upon successful startup.
+    return synapse_service_register_with_status(service_name, service_type, service_handle, SERVICE_STATUS_REGISTERED);
 }
 
 esp_err_t synapse_service_unregister(const char *service_name)
@@ -176,6 +140,159 @@ esp_err_t synapse_service_unregister(const char *service_name)
     xSemaphoreGive(service_registry_mutex);
     ESP_LOGW(TAG, "სერვისი '%s' ვერ მოიძებნა რეგისტრაციის გაუქმებისას.", service_name);
     return ESP_ERR_NOT_FOUND;
+}
+
+esp_err_t synapse_service_register_with_status(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle, service_status_t initial_status)
+{
+    if (!service_name || !service_handle)
+    {
+        ESP_LOGE(TAG, "Register failed: invalid arguments (name or handle is NULL).");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to take service registry mutex for registration.");
+        return ESP_ERR_TIMEOUT;
+    }
+
+    // Check for duplicates
+    service_entry_t *it;
+    SLIST_FOREACH(it, &service_registry_head, entries)
+    {
+        if (strcmp(it->name, service_name) == 0)
+        {
+            ESP_LOGE(TAG, "Service with name '%s' is already registered!", service_name);
+            xSemaphoreGive(service_registry_mutex);
+            return ESP_ERR_INVALID_STATE;
+        }
+    }
+
+    service_entry_t *new_entry = malloc(sizeof(service_entry_t));
+    if (!new_entry)
+    {
+        ESP_LOGE(TAG, "Failed to allocate memory for new service entry ('%s').", service_name);
+        xSemaphoreGive(service_registry_mutex);
+        return ESP_ERR_NO_MEM;
+    }
+
+    strncpy(new_entry->name, service_name, sizeof(new_entry->name) - 1);
+    new_entry->name[sizeof(new_entry->name) - 1] = '\0';
+    new_entry->type = service_type;
+    new_entry->service_handle = service_handle;
+    new_entry->status = initial_status; // <<< ვიყენებთ გადაცემულ სტატუსს
+
+    SLIST_INSERT_HEAD(&service_registry_head, new_entry, entries);
+
+    xSemaphoreGive(service_registry_mutex);
+
+    ESP_LOGI(TAG, "Service '%s' (type: '%s') registered with status: %s.",
+             service_name,
+             synapse_service_type_to_string(service_type),
+             service_status_to_string(initial_status));
+
+    // Post event about the new service registration
+    synapse_service_set_status(service_name, initial_status);
+
+    return ESP_OK;
+}
+
+esp_err_t synapse_service_set_status(const char *service_name, service_status_t new_status)
+{
+    if (!service_name)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to take mutex to set status for '%s'.", service_name);
+        return ESP_ERR_TIMEOUT;
+    }
+
+    service_entry_t *it;
+    esp_err_t result = ESP_ERR_NOT_FOUND;
+    SLIST_FOREACH(it, &service_registry_head, entries)
+    {
+        if (strcmp(it->name, service_name) == 0)
+        {
+            if (it->status != new_status)
+            {
+                service_status_t old_status = it->status;
+                it->status = new_status;
+
+                ESP_LOGI(TAG, "Status changed for service '%s': %s -> %s",
+                         service_name,
+                         service_status_to_string(old_status),
+                         service_status_to_string(new_status));
+
+                // Post event to the event bus
+                synapse_service_status_payload_t *payload = malloc(sizeof(synapse_service_status_payload_t));
+                if (payload)
+                {
+                    strncpy(payload->service_name, service_name, sizeof(payload->service_name) - 1);
+                    payload->service_name[sizeof(payload->service_name) - 1] = '\0';
+                    payload->old_status = old_status;
+                    payload->new_status = new_status;
+
+                    event_data_wrapper_t *wrapper;
+                    if (synapse_event_data_wrap(payload, synapse_payload_common_free, &wrapper) == ESP_OK)
+                    {
+                        synapse_event_bus_post(SYNAPSE_EVENT_SERVICE_STATUS_CHANGED, wrapper);
+                        synapse_event_data_release(wrapper);
+                    }
+                    else
+                    {
+                        free(payload);
+                    }
+                }
+            }
+            result = ESP_OK;
+            break;
+        }
+    }
+
+    if (result == ESP_ERR_NOT_FOUND)
+    {
+        ESP_LOGW(TAG, "Service '%s' not found to set status.", service_name);
+    }
+
+    xSemaphoreGive(service_registry_mutex);
+    return result;
+}
+
+esp_err_t synapse_service_get_status(const char *service_name, service_status_t *out_status)
+{
+    if (!service_name || !out_status)
+    {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (xSemaphoreTake(service_registry_mutex, pdMS_TO_TICKS(CONFIG_SYNAPSE_MUTEX_TIMEOUT_MS)) != pdTRUE)
+    {
+        ESP_LOGE(TAG, "Failed to take mutex to get status for '%s'.", service_name);
+        return ESP_ERR_TIMEOUT;
+    }
+
+    service_entry_t *it;
+    esp_err_t result = ESP_ERR_NOT_FOUND;
+    SLIST_FOREACH(it, &service_registry_head, entries)
+    {
+        if (strcmp(it->name, service_name) == 0)
+        {
+            *out_status = it->status;
+            result = ESP_OK;
+            break;
+        }
+    }
+
+    if (result == ESP_ERR_NOT_FOUND)
+    {
+        ESP_LOGW(TAG, "Service '%s' not found to get status.", service_name);
+    }
+
+    xSemaphoreGive(service_registry_mutex);
+    return result;
 }
 
 service_handle_t synapse_service_get(const char *service_name)

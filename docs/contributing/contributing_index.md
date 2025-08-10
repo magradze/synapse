@@ -5,6 +5,7 @@
 ---
 
 ## ძირითადი სახელმძღვანელოები
+
 - [contributing_guide.md](contributing_guide.md) — კონტრიბუციის პროცესი, წესები და საუკეთესო პრაქტიკები
 - [code_of_conduct.md](code_of_conduct.md) — ქცევის კოდექსი კონტრიბუტორებისთვის
 - [review_guidelines.md](review_guidelines.md) — კოდის მიმოხილვის სახელმძღვანელო და კრიტერიუმები
@@ -14,10 +15,13 @@
 - [faq.md](faq.md) — ხშირად დასმული კითხვები კონტრიბუციასთან დაკავშირებით
 
 ## შაბლონები
+
 - [pull_request_template.md](pull_request_template.md) — Pull Request-ის შაბლონი
 - [issue_template.md](issue_template.md) — Issue-ის შექმნის შაბლონი
 
----
+## ინსტრუმენტები
+
+- [Module Generator (`create_module.py`)](../tools/create_module.md)
+- [JSON Validator (`validate_jsons.py`)](../tools/json_validator.md)
 
 ყველა კონტრიბუციის დოკუმენტი მიჰყვება საერთო სტრუქტურასა და სტანდარტებს. დამატებითი კითხვებისთვის იხილეთ შესაბამისი დოკუმენტაცია ან მიმართეთ გუნდის დოკუმენტაციის პასუხისმგებელ პირს.
-

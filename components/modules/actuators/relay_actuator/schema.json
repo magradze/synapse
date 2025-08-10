@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Relay Actuator Config Schema",
+    "description": "Defines the structure for a relay_actuator config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "relay_actuator" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "gpio_pin": { "type": "integer", "minimum": 0 },
+                "active_level": { "type": "integer", "enum": [0, 1] },
+                "initial_state": { "type": "string", "enum": ["on", "off", "last"] }
+            },
+            "required": ["instance_name", "gpio_pin"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

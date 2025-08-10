@@ -47,3 +47,46 @@
 
 - **`out_value`**: მაჩვენებელი `bool` ცვლადზე, სადაც ჩაიწერება შედეგი.
 - **აბრუნებს:** `true` თუ წაკითხვა წარმატებით დასრულდა, `false` წინააღმდეგ შემთხვევაში.
+
+## 3. Guard Clause & Validation Helpers
+
+ეს მაკროები ამარტივებენ ფუნქციის დასაწყისში პირობების შემოწმებას და შეცდომის შემთხვევაში ფუნქციიდან გამოსვლას. დეტალური ინფორმაციისთვის, თუ **როდის** უნდა გამოიყენოთ ისინი, იხილეთ [Assertions და Guard Clauses კონვენცია](../convention/assertion_and_guards.md).
+
+### `SYNAPSE_GUARD(condition, tag, ret_val, format, ...)`
+
+ამოწმებს პირობას (`condition`). თუ პირობა მცდარია, ის `ESP_LOGE`-ს გამოყენებით ბეჭდავს შეცდომის შეტყობინებას და ასრულებს `return ret_val;`-ს.
+
+- **`condition`**: შესამოწმებელი ლოგიკური გამოსახულება.
+- **`tag`**: გამომძახებელი მოდულის ლოგირების `TAG`.
+- **`ret_val`**: მნიშვნელობა, რომელიც უნდა დაბრუნდეს ფუნქციიდან, თუ პირობა მცდარია (მაგ., `ESP_ERR_INVALID_ARG`, `NULL`, `false`).
+- **`format`**: `printf`-ის სტილის ფორმატირების სტრიქონი ლოგისთვის.
+- **`...`**: (არასავალდებულო) ცვლადი არგუმენტები `format` სტრიქონისთვის.
+
+**მაგალითი:**
+
+```c
+esp_err_t process_data(data_packet_t *packet) {
+    // თუ packet არის NULL, დაიბეჭდება Error ლოგი და ფუნქცია დააბრუნებს ESP_ERR_INVALID_ARG-ს.
+    SYNAPSE_GUARD(packet != NULL, TAG, ESP_ERR_INVALID_ARG, "Data packet is NULL, cannot process.");
+
+    // ... დანარჩენი ლოგიკა ...
+    return ESP_OK;
+}
+```
+
+### `SYNAPSE_GUARD_VOID(condition, tag, format, ...)`
+
+`SYNAPSE_GUARD`-ის ვერსია იმ ფუნქციებისთვის, რომლებიც აბრუნებენ `void`-ს. თუ პირობა მცდარია, ის ბეჭდავს ლოგს და ასრულებს `return;`-ს.
+
+- **პარამეტრები:** იგივეა, რაც `SYNAPSE_GUARD`-ის, `ret_val`-ის გარდა.
+
+**მაგალითი:**
+
+```c
+void update_ui(ui_handle_t *ui) {
+    // თუ ui არის NULL, დაიბეჭდება Error ლოგი და ფუნქცია დაასრულებს მუშაობას.
+    SYNAPSE_GUARD_VOID(ui != NULL, TAG, "UI handle is NULL, cannot update.");
+
+    // ... დანარჩენი ლოგიკა ...
+}
+```

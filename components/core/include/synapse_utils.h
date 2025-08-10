@@ -88,6 +88,56 @@ bool synapse_config_get_int_from_node(const char* tag, const cJSON *json_node, c
  */
 bool synapse_config_get_bool_from_node(const char* tag, const cJSON *json_node, const char *key, bool *out_value);
 
+// =========================================================================
+//      Guard Clause & Validation Helpers
+// =========================================================================
+
+/**
+ * @brief A guard macro to check a condition and return on failure.
+ *
+ * @details This macro simplifies error checking at the beginning of functions.
+ *          If the `condition` is false, it logs an error message using the
+ *          provided `tag` and `format`, and then executes a `return` statement
+ *          with the specified `ret_val`.
+ *
+ * @param condition The condition to check. Execution continues if true.
+ * @param tag The logging tag to use for the error message.
+ * @param ret_val The value to return if the condition is false.
+ * @param format A printf-style format string for the error message.
+ * @param ... Variable arguments for the format string.
+ *
+ * @example
+ * // Instead of:
+ * // if (handle == NULL) {
+ * //     ESP_LOGE(TAG, "Handle cannot be NULL!");
+ * //     return ESP_ERR_INVALID_ARG;
+ * // }
+ * //
+ * // Use this:
+ * SYNAPSE_GUARD(handle != NULL, TAG, ESP_ERR_INVALID_ARG, "Handle cannot be NULL!");
+ */
+#define SYNAPSE_GUARD(condition, tag, ret_val, format, ...) \
+  do                                                        \
+  {                                                         \
+    if (!(condition))                                       \
+    {                                                       \
+      ESP_LOGE(tag, format, ##__VA_ARGS__);                 \
+      return ret_val;                                       \
+    }                                                       \
+  } while (0)
+
+/**
+ * @brief A guard macro similar to SYNAPSE_GUARD but for functions that return void.
+ */
+#define SYNAPSE_GUARD_VOID(condition, tag, format, ...) \
+  do                                                    \
+  {                                                     \
+    if (!(condition))                                   \
+    {                                                   \
+      ESP_LOGE(tag, format, ##__VA_ARGS__);             \
+      return;                                           \
+    }                                                   \
+  } while (0)
 
 #ifdef __cplusplus
 }

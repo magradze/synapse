@@ -13,6 +13,7 @@
 - [promise_api.md](promise_api.md) — ასინქრონული ოპერაციების მართვის (Promise) API
 - [task_pool_api.md](task_pool_api.md) — ტასკების გაზიარების მენეჯერის (Task Pool) API
 - [utils_api.md](utils_api.md) — დამხმარე ფუნქციების (Utils) ბიბლიოთეკის API
+- [assert_and_guards_api.md](assert_and_guards_api.md) — Assertions და Guards API
 
 ## Module API
 

@@ -264,3 +264,18 @@
                 Priority for the background worker tasks.
 
     endmenu
+
+    menu "Debugging & Assertions"
+
+        config SYNAPSE_ENABLE_ASSERTS
+            bool "Enable Synapse Assertions"
+            default y
+            help
+                Enable custom SYNAPSE_ASSERT() macros. When enabled, these asserts
+                will check for critical logical errors during development and halt
+                the system with a descriptive message if an assertion fails.
+                
+                Disable this for release builds to remove the assertion checks
+                and slightly improve performance and reduce code size.
+
+    endmenu

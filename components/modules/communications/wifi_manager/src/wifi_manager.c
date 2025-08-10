@@ -13,6 +13,7 @@ DEFINE_COMPONENT_TAG("WIFI_MANAGER", SYNAPSE_LOG_COLOR_CYAN);
 static esp_err_t wifi_manager_init(module_t *self);
 static esp_err_t wifi_manager_start(module_t *self);
 static void wifi_manager_deinit(module_t *self);
+static void wifi_manager_debug_print(module_t *self);
 
 // --- Dependency Map ---
 static const module_dependency_t s_dependencies[] = {
@@ -80,6 +81,7 @@ module_t *wifi_manager_create(const cJSON *config)
     module->base.start = wifi_manager_start;
     module->base.deinit = wifi_manager_deinit;
     module->base.handle_event = wifi_manager_handle_event;
+    module->base.debug_print = wifi_manager_debug_print;
 
     ESP_LOGI(TAG, "WiFi Manager module '%s' created and service registered.", module->name);
     return module;
@@ -300,4 +302,23 @@ esp_err_t load_credentials(module_t *self)
     }
     private_data->has_saved_credentials = (err == ESP_OK);
     return err;
+}
+
+static void wifi_manager_debug_print(module_t *self)
+{
+    wifi_manager_private_data_t *private_data = (wifi_manager_private_data_t *)self->private_data;
+
+    printf("--- Debug Info for '%s' ---\n", self->name);
+    printf("  - Status: %d (%s)\n", self->status,
+           self->status == MODULE_STATUS_RUNNING ? "Running" : "Not Running");
+    printf("  - Is Connected: %s\n", private_data->is_connected ? "Yes" : "No");
+    printf("  - Has Saved Credentials: %s\n", private_data->has_saved_credentials ? "Yes" : "No");
+    if (private_data->has_saved_credentials)
+    {
+        printf("  - SSID: %s\n", (char *)private_data->wifi_config.sta.ssid);
+    }
+    printf("  - Reconnect Retries: %d\n", private_data->retry_num);
+    printf("  - Task Handle: %p\n", private_data->task_handle);
+    printf("  - Command Queue: %p\n", private_data->cmd_queue);
+    printf("------------------------------------------\n");
 }

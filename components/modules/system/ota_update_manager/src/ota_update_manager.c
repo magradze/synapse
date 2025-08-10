@@ -48,7 +48,7 @@ static esp_err_t ota_update_manager_init(module_t *self);
 static esp_err_t ota_update_manager_start(module_t *self);
 static void ota_update_manager_deinit(module_t *self);
 static module_status_t ota_update_manager_get_status(module_t *self);
-static esp_err_t parse_config(const cJSON *config, ota_update_manager_private_data_t *p_data);
+static esp_err_t parse_config(const cJSON *config, ota_update_manager_private_data_t *private_data);
 
 static void ota_task(void *pvParameters);
 static esp_err_t api_start_update(const char *firmware_url);
@@ -150,25 +150,29 @@ static esp_err_t ota_update_manager_start(module_t *self)
 
 static void ota_update_manager_deinit(module_t *self)
 {
-    if (!self) return;
+    if (!self)
+        return;
     ESP_LOGI(TAG, "Deinitializing %s module", self->name);
-    ota_update_manager_private_data_t *p_data = (ota_update_manager_private_data_t *)self->private_data;
+    ota_update_manager_private_data_t *private_data = (ota_update_manager_private_data_t *)self->private_data;
 
-    if (p_data && p_data->ota_task_handle)
+    if (private_data && private_data->ota_task_handle)
     {
-        vTaskDelete(p_data->ota_task_handle);
+        vTaskDelete(private_data->ota_task_handle);
     }
-    if (p_data && p_data->update_url)
+    if (private_data && private_data->update_url)
     {
-        free(p_data->update_url);
+        free(private_data->update_url);
     }
 
     synapse_service_unregister(self->name);
     global_ota_instance = NULL;
 
-    if (self->private_data) free(self->private_data);
-    if (self->current_config) cJSON_Delete(self->current_config);
-    if (self->state_mutex) vSemaphoreDelete(self->state_mutex);
+    if (self->private_data)
+        free(self->private_data);
+    if (self->current_config)
+        cJSON_Delete(self->current_config);
+    if (self->state_mutex)
+        vSemaphoreDelete(self->state_mutex);
 }
 
 static module_status_t ota_update_manager_get_status(module_t *self)
@@ -186,9 +190,9 @@ static esp_err_t api_start_update(const char *firmware_url)
         return ESP_ERR_INVALID_ARG;
     }
 
-    ota_update_manager_private_data_t *p_data = (ota_update_manager_private_data_t *)global_ota_instance->private_data;
+    ota_update_manager_private_data_t *private_data = (ota_update_manager_private_data_t *)global_ota_instance->private_data;
 
-    if (p_data->ota_in_progress)
+    if (private_data->ota_in_progress)
     {
         ESP_LOGE(TAG, "OTA update is already in progress.");
         return ESP_ERR_INVALID_STATE;
@@ -203,10 +207,10 @@ static esp_err_t api_start_update(const char *firmware_url)
         if (health_api->get_system_health_report(&report) == ESP_OK && report)
         {
             const cJSON *heap = cJSON_GetObjectItem(report, "free_heap_bytes");
-            if (cJSON_IsNumber(heap) && heap->valueint < (p_data->pre_check_min_heap_kb * 1024))
+            if (cJSON_IsNumber(heap) && heap->valueint < (private_data->pre_check_min_heap_kb * 1024))
             {
                 ESP_LOGE(TAG, "Not enough memory for OTA update. Required: %lu KB, Available: %d bytes. Aborting.",
-                         p_data->pre_check_min_heap_kb, heap->valueint);
+                         private_data->pre_check_min_heap_kb, heap->valueint);
                 cJSON_Delete(report);
                 return ESP_ERR_NO_MEM;
             }
@@ -215,12 +219,12 @@ static esp_err_t api_start_update(const char *firmware_url)
     }
 
     // 2. URL-ის კოპირება
-    if (p_data->update_url)
+    if (private_data->update_url)
     {
-        free(p_data->update_url);
+        free(private_data->update_url);
     }
-    p_data->update_url = strdup(firmware_url);
-    if (!p_data->update_url)
+    private_data->update_url = strdup(firmware_url);
+    if (!private_data->update_url)
     {
         return ESP_ERR_NO_MEM;
     }
@@ -232,13 +236,13 @@ static esp_err_t api_start_update(const char *firmware_url)
         8192, // OTA-ს სჭირდება დიდი სტეკი
         global_ota_instance,
         5,
-        &p_data->ota_task_handle);
+        &private_data->ota_task_handle);
 
     if (task_created != pdPASS)
     {
         ESP_LOGE(TAG, "Failed to create OTA task");
-        free(p_data->update_url);
-        p_data->update_url = NULL;
+        free(private_data->update_url);
+        private_data->update_url = NULL;
         return ESP_FAIL;
     }
 
@@ -251,19 +255,20 @@ static esp_err_t api_start_update(const char *firmware_url)
 static void ota_task(void *pvParameters)
 {
     module_t *self = (module_t *)pvParameters;
-    ota_update_manager_private_data_t *p_data = (ota_update_manager_private_data_t *)self->private_data;
+    ota_update_manager_private_data_t *private_data = (ota_update_manager_private_data_t *)self->private_data;
 
-    p_data->ota_in_progress = true;
+    private_data->ota_in_progress = true;
 
     // ვიზუალური ინდიკაცია და ივენთი
-    ESP_LOGI(TAG, "Starting OTA update from: %s", p_data->update_url);
+    ESP_LOGI(TAG, "Starting OTA update from: %s", private_data->update_url);
     synapse_event_bus_post(EVT_OTA_STARTED, NULL);
     service_handle_t led_handle = synapse_service_get("status_led");
     rgb_led_api_t *led_api = led_handle ? (rgb_led_api_t *)led_handle : NULL;
-    if (led_api) led_api->start_pulse(0, 0, 255, 2000); // ლურჯი პულსაცია
+    if (led_api)
+        led_api->start_pulse(0, 0, 255, 2000); // ლურჯი პულსაცია
 
     esp_http_client_config_t config = {
-        .url = p_data->update_url,
+        .url = private_data->update_url,
         .crt_bundle_attach = esp_crt_bundle_attach, // HTTPS-ისთვის
         .keep_alive_enable = true,
     };
@@ -278,7 +283,8 @@ static void ota_task(void *pvParameters)
     {
         ESP_LOGI(TAG, "OTA Update successful! Rebooting...");
         synapse_event_bus_post(EVT_OTA_SUCCESS, NULL);
-        if (led_api) led_api->set_color(0, 255, 0); // მწვანე
+        if (led_api)
+            led_api->set_color(0, 255, 0); // მწვანე
         vTaskDelay(pdMS_TO_TICKS(2000));
         esp_restart();
     }
@@ -286,41 +292,48 @@ static void ota_task(void *pvParameters)
     {
         ESP_LOGE(TAG, "OTA Update failed: %s", esp_err_to_name(ret));
         synapse_event_bus_post(EVT_OTA_FAILED, NULL);
-        if (led_api) led_api->start_blink(255, 0, 0, 200); // სწრაფი წითელი ციმციმი
+        if (led_api)
+            led_api->start_blink(255, 0, 0, 200); // სწრაფი წითელი ციმციმი
         // არ ვათავისუფლებთ კონტროლს, რათა შეცდომა ხილული დარჩეს
     }
 
     // ტასკის დასრულება
-    p_data->ota_in_progress = false;
-    free(p_data->update_url);
-    p_data->update_url = NULL;
-    p_data->ota_task_handle = NULL;
+    private_data->ota_in_progress = false;
+    free(private_data->update_url);
+    private_data->update_url = NULL;
+    private_data->ota_task_handle = NULL;
     vTaskDelete(NULL);
 }
 
-static esp_err_t parse_config(const cJSON *config, ota_update_manager_private_data_t *p_data)
+static esp_err_t parse_config(const cJSON *config, ota_update_manager_private_data_t *private_data)
 {
-    if (!p_data || !config)
+    if (!private_data || !config)
     {
         return ESP_ERR_INVALID_ARG;
     }
 
     // --- Step 1: Set default values ---
-    p_data->pre_check_min_heap_kb = 80; // Default minimum required heap in KB
+    private_data->pre_check_min_heap_kb = 80; // Default minimum required heap in KB
+    // Set a default instance name in case it's missing in the config
+    synapse_safe_strncpy(private_data->instance_name, "main_ota_manager", sizeof(private_data->instance_name));
 
     // --- Step 2: Get the main "config" node ---
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     if (!config_node)
     {
-        ESP_LOGD(TAG, "No 'config' object in JSON. Using default values.");
+        ESP_LOGW(TAG, "No 'config' object in JSON. Using default values.");
         return ESP_OK;
     }
 
-    // --- Step 3: Use utility function to override default if present ---
-    synapse_config_get_int_from_node(TAG, config_node, "pre_check_min_heap_kb",
-                                     (int *)&p_data->pre_check_min_heap_kb);
+    // --- Step 3: Use utility functions to parse values ---
+    synapse_config_get_string_from_node(TAG, config_node, "instance_name",
+                                        private_data->instance_name, sizeof(private_data->instance_name));
 
-    ESP_LOGI(TAG, "Config parsed: OTA pre-check min heap is %" PRIu32 " KB", p_data->pre_check_min_heap_kb);
+    synapse_config_get_int_from_node(TAG, config_node, "pre_check_min_heap_kb",
+                                     (int *)&private_data->pre_check_min_heap_kb);
+
+    ESP_LOGI(TAG, "Config parsed for '%s': OTA pre-check min heap is %" PRIu32 " KB",
+             private_data->instance_name, private_data->pre_check_min_heap_kb);
 
     return ESP_OK;
 }

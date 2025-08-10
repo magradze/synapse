@@ -23,8 +23,9 @@ var searchData=
   ['და_20შეტყობინების_20პროცედურა_20',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
   ['და_20წარმადობის_20ტერმინები_20glossary_20—_20security_20performance_21',['უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security &amp; Performance)',['../md_docs_2glossary_2glossary__security.html',1,'']]],
   ['და_20best_20practices_20extending_20the_20framework_22',['ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)',['../md_docs_2structure_2extending__framework.html',1,'']]],
-  ['დიაგნოსტიკა_23',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
-  ['დიაგნოსტიკა_20და_20გამოსწორება_24',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
-  ['დიბაგინგის_20სახელმძღვანელო_25',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
-  ['დონეები_20initialization_20levels_26',['🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)',['../md_docs_2convention_2initialization__levels.html',1,'']]]
+  ['და_20guard_20clauses_20კონვენცია_23',['Assertions და Guard Clauses კონვენცია',['../md_docs_2convention_2assertion__and__guards.html',1,'']]],
+  ['დიაგნოსტიკა_24',['Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)',['../md_docs_2troubleshooting_2advanced__diagnostics.html',1,'']]],
+  ['დიაგნოსტიკა_20და_20გამოსწორება_25',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
+  ['დიბაგინგის_20სახელმძღვანელო_26',['Debugging Guide (დიბაგინგის სახელმძღვანელო)',['../md_docs_2troubleshooting_2debugging__guide.html',1,'']]],
+  ['დონეები_20initialization_20levels_27',['🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)',['../md_docs_2convention_2initialization__levels.html',1,'']]]
 ];

@@ -93,57 +93,57 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2module__extension.
   <div class="headertitle"><div class="title">მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension &amp; Feature Addition)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2043"></a> </p>
-<h1><a class="anchor" id="autotoc_md2044"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2066"></a> </p>
+<h1><a class="anchor" id="autotoc_md2067"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ გააფართოოთ არსებული მოდული ან დაამატოთ ახალი ფუნქციონალი Synapse Framework-ში naming, structure და communication კონვენციების დაცვით.</p>
-<h1><a class="anchor" id="autotoc_md2045"></a>
+<h1><a class="anchor" id="autotoc_md2068"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li>განსაზღვრეთ, გჭირდებათ თუ არა ახალი ფუნქციონალი არსებული მოდულში თუ სჯობს ახალი მოდულის შექმნა</li>
 <li>თუ ფუნქციონალი სპეციფიკურია და არ ეხება სხვა მოდულებს, გააფართოვეთ არსებული მოდული</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2046"></a>
+<h1><a class="anchor" id="autotoc_md2069"></a>
 2. სტრუქტურის დაცვა</h1>
 <ul>
 <li>ყველა ცვლილება შეიტანეთ შესაბამის src/ ან include/ ფაილებში</li>
 <li>დაიცავით <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> და <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a></li>
 <li>გამოიყენეთ მხოლოდ დესკრიპტიული სახელები</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2047"></a>
+<h1><a class="anchor" id="autotoc_md2070"></a>
 3. ახალი API ან ფუნქციის დამატება</h1>
 <ul>
 <li>დაამატეთ ახალი public API მხოლოდ საჭიროების შემთხვევაში</li>
 <li>გამოიყენეთ სწორი function_naming კონვენცია (მაგ: ssd1306_api_set_contrast)</li>
 <li>აღწერეთ ახალი ფუნქცია header-ში Doxygen სტანდარტით</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2048"></a>
+<h1><a class="anchor" id="autotoc_md2071"></a>
 4. კონფიგურაციის გაფართოება</h1>
 <ul>
 <li>თუ საჭიროა ახალი პარამეტრი, დაამატეთ module.json-ში და აღწერეთ system_config.json-ში</li>
 <li>განაახლეთ parse_module_config ფუნქცია ახალი პარამეტრის დასამუშავებლად</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2049"></a>
+<h1><a class="anchor" id="autotoc_md2072"></a>
 5. კომუნიკაციის გაფართოება</h1>
 <ul>
 <li>თუ საჭიროა ახალი მოვლენა, დაამატეთ შესაბამისი event ID და გამოიყენეთ event_bus_post/event_bus_subscribe</li>
 <li>თუ საჭიროა ახალი service API, განაახლეთ service_api სტრუქტურა და Service Locator-ში რეგისტრაცია</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2050"></a>
+<h1><a class="anchor" id="autotoc_md2073"></a>
 6. ტესტირება და ლოგირება</h1>
 <ul>
 <li>დაამატეთ ლოგირება ყველა ახალ ფუნქციაში (ESP_LOGI, ESP_LOGE და სხვ.)</li>
 <li>გამოიყენეთ დეტალური კონტექსტი ლოგებში</li>
 <li>ჩაატარეთ ტესტირება ყველა ახალ ფუნქციონალზე</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2051"></a>
+<h1><a class="anchor" id="autotoc_md2074"></a>
 7. დოკუმენტაციის განახლება</h1>
 <ul>
 <li>განაახლეთ README.md მოდულის საქაღალდეში</li>
 <li>აღწერეთ ახალი API, პარამეტრები და გამოყენების მაგალითები</li>
 <li>საჭიროების შემთხვევაში განაახლეთ <a href="../api_reference/">api_reference</a> და [convention] დოკუმენტები</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2052"></a>
+<h1><a class="anchor" id="autotoc_md2075"></a>
 Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ public API-ები მოდულებს შორის</li>
@@ -151,7 +151,7 @@ Best Practices</h1>
 <li>არ გამოიყენოთ hardcoded მნიშვნელობები</li>
 <li>დაიცავით naming და structure სტანდარტები</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2053"></a>
+<h1><a class="anchor" id="autotoc_md2076"></a>
 აკრძალული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>პირდაპირი დამოკიდებულება სხვა მოდულზე</li>

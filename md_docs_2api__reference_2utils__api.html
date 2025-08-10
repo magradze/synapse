@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2utils__api.ht
   <div class="headertitle"><div class="title">Synapse Utils API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md745"></a> </p>
-<h1><a class="anchor" id="autotoc_md746"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md754"></a> </p>
+<h1><a class="anchor" id="autotoc_md755"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code><a class="el" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library.">synapse_utils.h</a></code>-ში თავმოყრილი დამხმარე ფუნქციების API-ს. ეს ბიბლიოთეკა შეიცავს ხშირად გამოყენებად, უსაფრთხო ფუნქციებს, რომლებიც ამარტივებენ მოდულების წერას და ამცირებენ კოდის დუბლირებას.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md748"></a>
+<h1><a class="anchor" id="autotoc_md757"></a>
 1. უსაფრთხო სტრიქონების მართვა</h1>
-<h2><a class="anchor" id="autotoc_md749"></a>
+<h2><a class="anchor" id="autotoc_md758"></a>
 &lt;tt&gt;char* synapse_safe_strncpy(char *dest, const char *src, size_t size);&lt;/tt&gt;</h2>
 <p><code>strncpy</code>-ის უსაფრთხო ვერსია, რომელიც <b>ყოველთვის უზრუნველყოფს</b> დანიშნულების ბუფერის <code>null-termination</code>-ს.</p>
 <ul>
@@ -110,10 +110,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2utils__api.ht
 <li><b>აბრუნებს:</b> მაჩვენებელს <code>dest</code> ბუფერზე.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md751"></a>
+<h1><a class="anchor" id="autotoc_md760"></a>
 2. კონფიგურაციის პარსინგის დამხმარე ფუნქციები</h1>
 <p>ეს ფუნქციები შექმნილია <code>parse_config</code> ფუნქციებში გამოსაყენებლად, რათა უსაფრთხოდ და მარტივად წაიკითხოთ პარამეტრები <code>cJSON</code> ობიექტიდან.</p>
-<h2><a class="anchor" id="autotoc_md752"></a>
+<h2><a class="anchor" id="autotoc_md761"></a>
 &lt;tt&gt;bool synapse_config_get_string_from_node(const char* tag, const cJSON *json_node, const char *key, char *dest, size_t dest_size);&lt;/tt&gt;</h2>
 <p>უსაფრთხოდ კითხულობს სტრიქონს <code>cJSON</code> კვანძიდან. თუ გასაღები არ არსებობს ან არასწორი ტიპისაა, <code>dest</code> ბუფერი უცვლელი რჩება.</p>
 <ul>
@@ -124,21 +124,56 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2utils__api.ht
 <li>**<code>dest_size</code>**: ბუფერის სრული ზომა.</li>
 <li><b>აბრუნებს:</b> <code>true</code> თუ წაკითხვა წარმატებით დასრულდა, <code>false</code> წინააღმდეგ შემთხვევაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md753"></a>
+<h2><a class="anchor" id="autotoc_md762"></a>
 &lt;tt&gt;bool synapse_config_get_int_from_node(const char* tag, const cJSON *json_node, const char *key, int *out_value);&lt;/tt&gt;</h2>
 <p>უსაფრთხოდ კითხულობს <code>int</code> ტიპის რიცხვს. თუ გასაღები არ არსებობს ან არასწორი ტიპისაა, <code>out_value</code> არ იცვლება.</p>
 <ul>
 <li>**<code>out_value</code>**: მაჩვენებელი <code>int</code> ცვლადზე, სადაც ჩაიწერება შედეგი.</li>
 <li><b>აბრუნებს:</b> <code>true</code> თუ წაკითხვა წარმატებით დასრულდა, <code>false</code> წინააღმდეგ შემთხვევაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md754"></a>
+<h2><a class="anchor" id="autotoc_md763"></a>
 &lt;tt&gt;bool synapse_config_get_bool_from_node(const char* tag, const cJSON *json_node, const char *key, bool *out_value);&lt;/tt&gt;</h2>
 <p>უსაფრთხოდ კითხულობს <code>bool</code> ტიპის მნიშვნელობას. თუ გასაღები არ არსებობს ან არასწორი ტიპისაა, <code>out_value</code> არ იცვლება.</p>
 <ul>
 <li>**<code>out_value</code>**: მაჩვენებელი <code>bool</code> ცვლადზე, სადაც ჩაიწერება შედეგი.</li>
-<li><b>აბრუნებს:</b> <code>true</code> თუ წაკითხვა წარმატებით დასრულდა, <code>false</code> წინააღმდეგ შემთხვევაში. </li>
+<li><b>აბრუნებს:</b> <code>true</code> თუ წაკითხვა წარმატებით დასრულდა, <code>false</code> წინააღმდეგ შემთხვევაში.</li>
 </ul>
-</div></div><!-- contents -->
+<h1><a class="anchor" id="autotoc_md764"></a>
+3. Guard Clause &amp; Validation Helpers</h1>
+<p>ეს მაკროები ამარტივებენ ფუნქციის დასაწყისში პირობების შემოწმებას და შეცდომის შემთხვევაში ფუნქციიდან გამოსვლას. დეტალური ინფორმაციისთვის, თუ <b>როდის</b> უნდა გამოიყენოთ ისინი, იხილეთ <a class="el" href="md_docs_2convention_2assertion__and__guards.html">Assertions და Guard Clauses კონვენცია</a>.</p>
+<h2><a class="anchor" id="autotoc_md765"></a>
+&lt;tt&gt;SYNAPSE_GUARD(condition, tag, ret_val, format, ...)&lt;/tt&gt;</h2>
+<p>ამოწმებს პირობას (<code>condition</code>). თუ პირობა მცდარია, ის <code>ESP_LOGE</code>-ს გამოყენებით ბეჭდავს შეცდომის შეტყობინებას და ასრულებს <code>return ret_val;</code>-ს.</p>
+<ul>
+<li>**<code>condition</code>**: შესამოწმებელი ლოგიკური გამოსახულება.</li>
+<li>**<code>tag</code>**: გამომძახებელი მოდულის ლოგირების <code>TAG</code>.</li>
+<li>**<code>ret_val</code>**: მნიშვნელობა, რომელიც უნდა დაბრუნდეს ფუნქციიდან, თუ პირობა მცდარია (მაგ., <code>ESP_ERR_INVALID_ARG</code>, <code>NULL</code>, <code>false</code>).</li>
+<li>**<code>format</code>**: <code>printf</code>-ის სტილის ფორმატირების სტრიქონი ლოგისთვის.</li>
+<li>**<code>...</code>**: (არასავალდებულო) ცვლადი არგუმენტები <code>format</code> სტრიქონისთვის.</li>
+</ul>
+<p><b>მაგალითი:</b></p>
+<div class="fragment"><div class="line">esp_err_t process_data(data_packet_t *packet) {</div>
+<div class="line">    <span class="comment">// თუ packet არის NULL, დაიბეჭდება Error ლოგი და ფუნქცია დააბრუნებს ESP_ERR_INVALID_ARG-ს.</span></div>
+<div class="line">    SYNAPSE_GUARD(packet != NULL, TAG, ESP_ERR_INVALID_ARG, <span class="stringliteral">&quot;Data packet is NULL, cannot process.&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ... დანარჩენი ლოგიკა ...</span></div>
+<div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md766"></a>
+&lt;tt&gt;SYNAPSE_GUARD_VOID(condition, tag, format, ...)&lt;/tt&gt;</h2>
+<p><code>SYNAPSE_GUARD</code>-ის ვერსია იმ ფუნქციებისთვის, რომლებიც აბრუნებენ <code>void</code>-ს. თუ პირობა მცდარია, ის ბეჭდავს ლოგს და ასრულებს <code>return;</code>-ს.</p>
+<ul>
+<li><b>პარამეტრები:</b> იგივეა, რაც <code>SYNAPSE_GUARD</code>-ის, <code>ret_val</code>-ის გარდა.</li>
+</ul>
+<p><b>მაგალითი:</b></p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> update_ui(ui_handle_t *ui) {</div>
+<div class="line">    <span class="comment">// თუ ui არის NULL, დაიბეჭდება Error ლოგი და ფუნქცია დაასრულებს მუშაობას.</span></div>
+<div class="line">    <a class="code hl_define" href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">SYNAPSE_GUARD_VOID</a>(ui != NULL, TAG, <span class="stringliteral">&quot;UI handle is NULL, cannot update.&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// ... დანარჩენი ლოგიკა ...</span></div>
+<div class="line">}</div>
+<div class="ttc" id="asynapse__utils_8h_html_ae462ff126792b1b37559f411f624916f"><div class="ttname"><a href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">SYNAPSE_GUARD_VOID</a></div><div class="ttdeci">#define SYNAPSE_GUARD_VOID(condition, tag, format,...)</div><div class="ttdoc">A guard macro similar to SYNAPSE_GUARD but for functions that return void.</div><div class="ttdef"><b>Definition</b> synapse_utils.h:132</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

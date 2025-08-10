@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2event__payloa
   <div class="headertitle"><div class="title">API რეფერენსი: Event Payloads (event_payloads.h)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md465"></a> </p>
-<h1><a class="anchor" id="autotoc_md466"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md474"></a> </p>
+<h1><a class="anchor" id="autotoc_md475"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს სტანდარტული მონაცემთა სტრუქტურებს (payloads), რომლებიც გამოიყენება Synapse Framework-ის Event Bus-ში, როგორც ივენთებთან ასოცირებული მონაცემები. ეს სტრუქტურები უზრუნველყოფენ ტიპიზირებულ და უსაფრთხო მონაცემთა გაცვლას მოდულებს შორის.</p>
-<h1><a class="anchor" id="autotoc_md467"></a>
+<h1><a class="anchor" id="autotoc_md476"></a>
 Payload სტრუქტურები</h1>
 <p>ქვემოთ მოცემულია ძირითადი payload სტრუქტურები და მათი დანიშნულება.</p>
-<h2><a class="anchor" id="autotoc_md468"></a>
+<h2><a class="anchor" id="autotoc_md477"></a>
 synapse_telemetry_payload_t</h2>
 <p>ეს სტრუქტურა გამოიყენება ტელემეტრიული მონაცემების ან ბრძანებების გადასაცემად.</p>
 <ul>
@@ -108,20 +108,20 @@ synapse_telemetry_payload_t</h2>
 <li><code>const char* json_data</code>: მონაცემები JSON ფორმატის სტრიქონში.</li>
 <li><code>void* user_context</code>: დამატებითი, მომხმარებლის მიერ განსაზღვრული კონტექსტი.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md469"></a>
+<h2><a class="anchor" id="autotoc_md478"></a>
 synapse_config_updated_payload_t</h2>
 <p>გამოიყენება <code>FRAMEWORK_EVENT_CONFIG_UPDATED</code> ივენთთან ერთად, რათა ამცნოს მოდულებს კონფიგურაციის ცვლილების შესახებ.</p>
 <ul>
 <li><code>const char* module_name</code>: იმ მოდულის სახელი, ვისი კონფიგურაციაც განახლდა.</li>
 <li><code>const cJSON* new_config</code>: cJSON ობიექტი, რომელიც შეიცავს ახალ კონფიგურაციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md470"></a>
+<h1><a class="anchor" id="autotoc_md479"></a>
 მეხსიერების მართვის ფუნქციები</h1>
 <p>Payload-ების დინამიური ბუნებიდან გამომდინარე, აუცილებელია მეხსიერების სწორი მართვა. <code>synapse_event_data_wrap</code> ფუნქციასთან ერთად გამოიყენება სპეციალური გასუფთავების ფუნქციები.</p>
-<h2><a class="anchor" id="autotoc_md471"></a>
+<h2><a class="anchor" id="autotoc_md480"></a>
 synapse_payload_common_free</h2>
 <p>ეს არის ზოგადი დანიშნულების ფუნქცია, რომელიც ათავისუფლებს <code>calloc</code>-ით გამოყოფილ მეხსიერებას payload-ისთვის. ის უნდა გამოიყენოთ მარტივი სტრუქტურებისთვის, რომლებიც არ შეიცავენ დამატებით დინამიურ მეხსიერებას.</p>
-<h2><a class="anchor" id="autotoc_md472"></a>
+<h2><a class="anchor" id="autotoc_md481"></a>
 synapse_telemetry_payload_free</h2>
 <p>ეს ფუნქცია სპეციალურად <code><a class="el" href="structsynapse__telemetry__payload__t.html" title="ზოგადი სტრუქტურა ტელემეტრიული მონაცემების გადასაცემად.">synapse_telemetry_payload_t</a></code> სტრუქტურისთვისაა შექმნილი. ის ათავისუფლებს არა მხოლოდ თავად სტრუქტურას, არამედ მის შიგნით არსებულ <code>module_name</code> და <code>json_data</code> სტრიქონებსაც, რომლებიც დინამიურად არის გამოყოფილი.</p>
 <p><b>გამოყენების მაგალითი:</b></p>

@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
   <div class="headertitle"><div class="title">პირველი საკუთარი მოდულის შექმნა (v2.0)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2014"></a> </p>
-<h1><a class="anchor" id="autotoc_md2015"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2037"></a> </p>
+<h1><a class="anchor" id="autotoc_md2038"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ შექმნათ ახალი, სრულფასოვანი მოდული Synapse ESP Framework-ში. ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს, რათა ავტომატურად დავაგენერიროთ მოდულის ჩონჩხი და შემდეგ შევავსოთ ის საბაზისო ლოგიკით. ეს გაკვეთილი ასევე მოიცავს სერვისის რეგისტრაციის ახალ, საუკეთესო პრაქტიკას.</p>
-<h1><a class="anchor" id="autotoc_md2016"></a>
+<h1><a class="anchor" id="autotoc_md2039"></a>
 1. საჭიროების განსაზღვრა</h1>
 <ul>
 <li><b>ამოცანა:</b> შევქმნათ მარტივი "მისალმების" მოდული, სახელად <code>greeter_module</code>, რომელიც ამჯერად იქნება Service Provider-იც.</li>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </li>
 <li><b>კატეგორია:</b> <code>utilities</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2017"></a>
+<h1><a class="anchor" id="autotoc_md2040"></a>
 2. მოდულის ჩონჩხის გენერაცია</h1>
 <p>ხელით ფაილების შექმნის ნაცვლად, ჩვენ გამოვიყენებთ <code>create_module.py</code> სკრიპტს.</p>
 <ol type="1">
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2018"></a>
+<h1><a class="anchor" id="autotoc_md2041"></a>
 3. კონფიგურაცია</h1>
 <ol type="1">
 <li><p class="startli"><b>Runtime კონფიგურაცია:</b> გახსენით ახლად შექმნილი <code>greeter_module/config.json</code> და შეავსეთ ის:</p>
@@ -143,10 +143,10 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 </div><!-- fragment --></li>
 <li><b>Build-დროის კონფიგურაცია:</b> გაუშვით <code>idf.py menuconfig</code>, გადადით <code>Component config</code> -&gt; <code>Synapse Framework</code> -&gt; <code>Modules</code> -&gt; <code>Greeter Module</code> და დარწმუნდით, რომ მოდული ჩართულია (<code>[*] Enable Greeter Module</code>).</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md2019"></a>
+<h1><a class="anchor" id="autotoc_md2042"></a>
 4. კოდის იმპლემენტაცია</h1>
 <p>ახლა შევავსოთ გენერირებული ფაილები ჩვენი ლოგიკით.</p>
-<h3><a class="anchor" id="autotoc_md2020"></a>
+<h3><a class="anchor" id="autotoc_md2043"></a>
 **4.1. ინტერფეისის შექმნა (&lt;tt&gt;greeter_interface.h&lt;/tt&gt;)**</h3>
 <p>რადგან ჩვენი მოდული Service Provider-ია, მას სჭირდება საჯარო "კონტრაქტი". შევქმნათ ახალი ფაილი: <code>components/interfaces/include/greeter_interface.h</code></p>
 <div class="fragment"><div class="line"><span class="preprocessor">#ifndef GREETER_INTERFACE_H</span></div>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#endif </span><span class="comment">// GREETER_INTERFACE_H</span></div>
 <div class="ttc" id="asynapse_8h_html"><div class="ttname"><a href="synapse_8h.html">synapse.h</a></div><div class="ttdoc">Synapse ESP Framework - The Main Public Header.</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md2021"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md2044"></a>
 **4.2. მოდულის იმპლემენტაცია (&lt;tt&gt;greeter_module.c&lt;/tt&gt;)**</h3>
 <p>განვაახლოთ <code>greeter_module.c</code> ფაილის შიგთავსი.</p>
 <div class="fragment"><div class="line"> </div>
@@ -325,7 +325,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="ttc" id="asynapse__utils_8h_html_a240c9bec50dd32c0be839ab6a4d5decc"><div class="ttname"><a href="synapse__utils_8h.html#a240c9bec50dd32c0be839ab6a4d5decc">synapse_config_get_string_from_node</a></div><div class="ttdeci">bool synapse_config_get_string_from_node(const char *tag, const cJSON *json_node, const char *key, char *dest, size_t dest_size)</div><div class="ttdoc">Safely retrieves a string value from a cJSON object.</div><div class="ttdef"><b>Definition</b> synapse_utils.c:30</div></div>
 <div class="ttc" id="atask__pool__manager_8h_html_a431a85109a972dfe31d5c2a7167c8f0b"><div class="ttname"><a href="task__pool__manager_8h.html#a431a85109a972dfe31d5c2a7167c8f0b">synapse_task_pool_schedule_job</a></div><div class="ttdeci">synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void *user_context, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules a new job for execution by the task pool.</div><div class="ttdef"><b>Definition</b> task_pool_manager.c:88</div></div>
 <div class="ttc" id="atask__pool__manager_8h_html_a4f4a978a64cf383da083abae40a3f323"><div class="ttname"><a href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323">synapse_task_pool_cancel_job</a></div><div class="ttdeci">esp_err_t synapse_task_pool_cancel_job(synapse_job_handle_t handle)</div><div class="ttdoc">Cancels a previously scheduled job.</div><div class="ttdef"><b>Definition</b> task_pool_manager.c:117</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2022"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2045"></a>
 5. ტესტირება</h1>
 <ol type="1">
 <li><b>ააწყვეთ და ჩაწერეთ firmware:</b> <code>idf.py build flash monitor</code></li>

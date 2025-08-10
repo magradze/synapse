@@ -131,4 +131,5 @@ var menudata={children:[
 {text:"i",url:"globals_defs.html#index_i"},
 {text:"l",url:"globals_defs.html#index_l"},
 {text:"m",url:"globals_defs.html#index_m"},
-{text:"s",url:"globals_defs.html#index_s"}]}]}]}]}
+{text:"s",url:"globals_defs.html#index_s"}]}]}]},
+{text:"Examples",url:"examples.html"}]}

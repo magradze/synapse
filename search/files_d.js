@@ -34,12 +34,13 @@ var searchData=
   ['storage_5fmanager_2ec_31',['storage_manager.c',['../storage__manager_8c.html',1,'']]],
   ['storage_5fmanager_2eh_32',['storage_manager.h',['../storage__manager_8h.html',1,'']]],
   ['synapse_2eh_33',['synapse.h',['../synapse_8h.html',1,'']]],
-  ['synapse_5futils_2ec_34',['synapse_utils.c',['../synapse__utils_8c.html',1,'']]],
-  ['synapse_5futils_2eh_35',['synapse_utils.h',['../synapse__utils_8h.html',1,'']]],
-  ['system_5fevent_5fids_2eh_36',['system_event_ids.h',['../system__event__ids_8h.html',1,'']]],
-  ['system_5fmanager_2ec_37',['system_manager.c',['../system__manager_8c.html',1,'']]],
-  ['system_5fmanager_2eh_38',['system_manager.h',['../system__manager_8h.html',1,'']]],
-  ['system_5fmanager_5finterface_2eh_39',['system_manager_interface.h',['../system__manager__interface_8h.html',1,'']]],
-  ['system_5ftimer_2ec_40',['system_timer.c',['../system__timer_8c.html',1,'']]],
-  ['system_5ftimer_2eh_41',['system_timer.h',['../system__timer_8h.html',1,'']]]
+  ['synapse_5fassert_2eh_34',['synapse_assert.h',['../synapse__assert_8h.html',1,'']]],
+  ['synapse_5futils_2ec_35',['synapse_utils.c',['../synapse__utils_8c.html',1,'']]],
+  ['synapse_5futils_2eh_36',['synapse_utils.h',['../synapse__utils_8h.html',1,'']]],
+  ['system_5fevent_5fids_2eh_37',['system_event_ids.h',['../system__event__ids_8h.html',1,'']]],
+  ['system_5fmanager_2ec_38',['system_manager.c',['../system__manager_8c.html',1,'']]],
+  ['system_5fmanager_2eh_39',['system_manager.h',['../system__manager_8h.html',1,'']]],
+  ['system_5fmanager_5finterface_2eh_40',['system_manager_interface.h',['../system__manager__interface_8h.html',1,'']]],
+  ['system_5ftimer_2ec_41',['system_timer.c',['../system__timer_8c.html',1,'']]],
+  ['system_5ftimer_2eh_42',['system_timer.h',['../system__timer_8h.html',1,'']]]
 ];

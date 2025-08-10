@@ -369,1226 +369,1254 @@ var NAVTREE =
       [ "Module API", "md_docs_2api__reference_2api__index.html#autotoc_md291", null ],
       [ "System & Extensions", "md_docs_2api__reference_2api__index.html#autotoc_md292", null ]
     ] ],
-    [ "Synapse Command Router API Reference", "md_docs_2api__reference_2command__router__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2command__router__api.html#autotoc_md295", null ],
-      [ "⚙️ API სტრუქტურა (<tt>cmd_router_api_t</tt>)", "md_docs_2api__reference_2command__router__api.html#autotoc_md297", null ],
-      [ "📚 API ფუნქციები", "md_docs_2api__reference_2command__router__api.html#autotoc_md299", [
-        [ "<tt>esp_err_t register_command(const cmd_t *command)</tt>", "md_docs_2api__reference_2command__router__api.html#autotoc_md300", null ],
-        [ "<tt>esp_err_t unregister_command(const char *command_name)</tt>", "md_docs_2api__reference_2command__router__api.html#autotoc_md302", null ],
-        [ "<tt>bool is_command_registered(const char *command_name)</tt>", "md_docs_2api__reference_2command__router__api.html#autotoc_md304", null ]
+    [ "Synapse Assertions & Guards API Reference", "md_docs_2api__reference_2assert__and__guards__api.html", [
+      [ "🎯 მიზანი", "md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md295", null ],
+      [ "1. Assertion API (<tt>synapse_assert.h</tt>)", "md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md297", [
+        [ "<tt>SYNAPSE_ASSERT(condition, format, ...)</tt>", "md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md298", null ]
       ] ],
-      [ "📖 დამხმარე სტრუქტურა (<tt>cmd_t</tt>)", "md_docs_2api__reference_2command__router__api.html#autotoc_md306", null ],
-      [ "💡 გამოყენების პატერნი: კონფლიქტისგან დაცული რეგისტრაცია", "md_docs_2api__reference_2command__router__api.html#autotoc_md308", null ]
+      [ "2. Guard Clause API (<tt>synapse_utils.h</tt>)", "md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md300", [
+        [ "<tt>SYNAPSE_GUARD(condition, tag, ret_val, format, ...)</tt>", "md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md301", null ],
+        [ "<tt>SYNAPSE_GUARD_VOID(condition, tag, format, ...)</tt>", "md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md302", null ]
+      ] ]
+    ] ],
+    [ "Synapse Command Router API Reference", "md_docs_2api__reference_2command__router__api.html", [
+      [ "🎯 მიზანი", "md_docs_2api__reference_2command__router__api.html#autotoc_md304", null ],
+      [ "⚙️ API სტრუქტურა (<tt>cmd_router_api_t</tt>)", "md_docs_2api__reference_2command__router__api.html#autotoc_md306", null ],
+      [ "📚 API ფუნქციები", "md_docs_2api__reference_2command__router__api.html#autotoc_md308", [
+        [ "<tt>esp_err_t register_command(const cmd_t *command)</tt>", "md_docs_2api__reference_2command__router__api.html#autotoc_md309", null ],
+        [ "<tt>esp_err_t unregister_command(const char *command_name)</tt>", "md_docs_2api__reference_2command__router__api.html#autotoc_md311", null ],
+        [ "<tt>bool is_command_registered(const char *command_name)</tt>", "md_docs_2api__reference_2command__router__api.html#autotoc_md313", null ]
+      ] ],
+      [ "📖 დამხმარე სტრუქტურა (<tt>cmd_t</tt>)", "md_docs_2api__reference_2command__router__api.html#autotoc_md315", null ],
+      [ "💡 გამოყენების პატერნი: კონფლიქტისგან დაცული რეგისტრაცია", "md_docs_2api__reference_2command__router__api.html#autotoc_md317", null ]
     ] ],
     [ "📡 Synapse Communication Module API Reference", "md_docs_2api__reference_2communication__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2communication__api.html#autotoc_md310", null ],
-      [ "📶 WiFi Manager Service API", "md_docs_2api__reference_2communication__api.html#autotoc_md312", [
-        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2communication__api.html#autotoc_md313", null ],
-        [ "💡 WiFi API-ს გამოყენების მაგალითი", "md_docs_2api__reference_2communication__api.html#autotoc_md314", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2communication__api.html#autotoc_md319", null ],
+      [ "📶 WiFi Manager Service API", "md_docs_2api__reference_2communication__api.html#autotoc_md321", [
+        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2communication__api.html#autotoc_md322", null ],
+        [ "💡 WiFi API-ს გამოყენების მაგალითი", "md_docs_2api__reference_2communication__api.html#autotoc_md323", null ]
       ] ],
-      [ "☁️ MQTT Client Service API", "md_docs_2api__reference_2communication__api.html#autotoc_md316", [
-        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2communication__api.html#autotoc_md317", null ],
-        [ "💡 MQTT API-ს გამოყენების მაგალითი", "md_docs_2api__reference_2communication__api.html#autotoc_md318", null ]
+      [ "☁️ MQTT Client Service API", "md_docs_2api__reference_2communication__api.html#autotoc_md325", [
+        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2communication__api.html#autotoc_md326", null ],
+        [ "💡 MQTT API-ს გამოყენების მაგალითი", "md_docs_2api__reference_2communication__api.html#autotoc_md327", null ]
       ] ],
-      [ "⚡ ESP-NOW Service API", "md_docs_2api__reference_2communication__api.html#autotoc_md320", [
-        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2communication__api.html#autotoc_md321", null ]
+      [ "⚡ ESP-NOW Service API", "md_docs_2api__reference_2communication__api.html#autotoc_md329", [
+        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2communication__api.html#autotoc_md330", null ]
       ] ],
-      [ "📜 Naming & Structure კონვენციები", "md_docs_2api__reference_2communication__api.html#autotoc_md323", null ]
+      [ "📜 Naming & Structure კონვენციები", "md_docs_2api__reference_2communication__api.html#autotoc_md332", null ]
     ] ],
     [ "Synapse Configuration Manager API Reference", "md_docs_2api__reference_2configuration__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2configuration__api.html#autotoc_md326", null ],
-      [ "🔑 გასაღების ფორმატი (Dot-Notation)", "md_docs_2api__reference_2configuration__api.html#autotoc_md328", null ],
-      [ "⚙️ ძირითადი API ფუნქციები", "md_docs_2api__reference_2configuration__api.html#autotoc_md330", [
-        [ "<tt>esp_err_t synapse_config_get_string(const char *key, char *buffer, size_t buffer_size)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md331", null ],
-        [ "<tt>esp_err_t synapse_config_get_int(const char *key, int *out_value)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md332", null ],
-        [ "<tt>esp_err_t synapse_config_get_bool(const char *key, bool *out_value)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md333", null ],
-        [ "<tt>esp_err_t synapse_config_save(void)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md334", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2configuration__api.html#autotoc_md335", null ],
+      [ "🔑 გასაღების ფორმატი (Dot-Notation)", "md_docs_2api__reference_2configuration__api.html#autotoc_md337", null ],
+      [ "⚙️ ძირითადი API ფუნქციები", "md_docs_2api__reference_2configuration__api.html#autotoc_md339", [
+        [ "<tt>esp_err_t synapse_config_get_string(const char *key, char *buffer, size_t buffer_size)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md340", null ],
+        [ "<tt>esp_err_t synapse_config_get_int(const char *key, int *out_value)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md341", null ],
+        [ "<tt>esp_err_t synapse_config_get_bool(const char *key, bool *out_value)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md342", null ],
+        [ "<tt>esp_err_t synapse_config_save(void)</tt>", "md_docs_2api__reference_2configuration__api.html#autotoc_md343", null ]
       ] ],
-      [ "🚀 გამოყენების მაგალითები", "md_docs_2api__reference_2configuration__api.html#autotoc_md336", [
-        [ "გლობალური პარამეტრის წაკითხვა", "md_docs_2api__reference_2configuration__api.html#autotoc_md337", null ],
-        [ "მოდულის პარამეტრის წაკითხვა", "md_docs_2api__reference_2configuration__api.html#autotoc_md338", null ]
+      [ "🚀 გამოყენების მაგალითები", "md_docs_2api__reference_2configuration__api.html#autotoc_md345", [
+        [ "გლობალური პარამეტრის წაკითხვა", "md_docs_2api__reference_2configuration__api.html#autotoc_md346", null ],
+        [ "მოდულის პარამეტრის წაკითხვა", "md_docs_2api__reference_2configuration__api.html#autotoc_md347", null ]
       ] ]
     ] ],
     [ "Synapse Core API Reference", "md_docs_2api__reference_2core__api.html", [
-      [ "⚙️ Service Locator API (v2.0 - State-Aware)", "md_docs_2api__reference_2core__api.html#autotoc_md340", [
-        [ "<tt>esp_err_t synapse_service_register_with_status(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle, service_status_t initial_status);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md341", null ],
-        [ "<tt>esp_err_t synapse_service_set_status(const char *service_name, service_status_t new_status);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md342", null ],
-        [ "<tt>esp_err_t synapse_service_get_status(const char *service_name, service_status_t *out_status);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md343", null ],
-        [ "<tt>service_handle_t synapse_service_get(const char *service_name);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md344", null ],
-        [ "<tt>esp_err_t synapse_service_unregister(const char *service_name);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md345", null ],
-        [ "<tt>__attribute__((deprecated))</tt> <tt>esp_err_t synapse_service_register(...)</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md346", null ]
+      [ "⚙️ Service Locator API (v2.0 - State-Aware)", "md_docs_2api__reference_2core__api.html#autotoc_md349", [
+        [ "<tt>esp_err_t synapse_service_register_with_status(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle, service_status_t initial_status);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md350", null ],
+        [ "<tt>esp_err_t synapse_service_set_status(const char *service_name, service_status_t new_status);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md351", null ],
+        [ "<tt>esp_err_t synapse_service_get_status(const char *service_name, service_status_t *out_status);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md352", null ],
+        [ "<tt>service_handle_t synapse_service_get(const char *service_name);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md353", null ],
+        [ "<tt>esp_err_t synapse_service_unregister(const char *service_name);</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md354", null ],
+        [ "<tt>__attribute__((deprecated))</tt> <tt>esp_err_t synapse_service_register(...)</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md355", null ]
       ] ],
-      [ "Event Bus API", "md_docs_2api__reference_2core__api.html#autotoc_md348", [
-        [ "<tt>synapse_event_bus_post</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md349", null ],
-        [ "<tt>synapse_event_bus_subscribe</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md350", null ],
-        [ "<tt>synapse_event_bus_unsubscribe</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md351", null ]
+      [ "Event Bus API", "md_docs_2api__reference_2core__api.html#autotoc_md357", [
+        [ "<tt>synapse_event_bus_post</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md358", null ],
+        [ "<tt>synapse_event_bus_subscribe</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md359", null ],
+        [ "<tt>synapse_event_bus_unsubscribe</tt>", "md_docs_2api__reference_2core__api.html#autotoc_md360", null ]
       ] ],
-      [ "Module Register API", "md_docs_2api__reference_2core__api.html#autotoc_md353", [
-        [ "synapse_module_register", "md_docs_2api__reference_2core__api.html#autotoc_md354", null ],
-        [ "synapse_module_find_by_name", "md_docs_2api__reference_2core__api.html#autotoc_md355", null ]
+      [ "Module Register API", "md_docs_2api__reference_2core__api.html#autotoc_md362", [
+        [ "synapse_module_register", "md_docs_2api__reference_2core__api.html#autotoc_md363", null ],
+        [ "synapse_module_find_by_name", "md_docs_2api__reference_2core__api.html#autotoc_md364", null ]
       ] ],
-      [ "Module Factory API", "md_docs_2api__reference_2core__api.html#autotoc_md357", [
-        [ "synapse_module_factory_create", "md_docs_2api__reference_2core__api.html#autotoc_md358", null ]
+      [ "Module Factory API", "md_docs_2api__reference_2core__api.html#autotoc_md366", [
+        [ "synapse_module_factory_create", "md_docs_2api__reference_2core__api.html#autotoc_md367", null ]
       ] ],
-      [ "Configuration Manager API", "md_docs_2api__reference_2core__api.html#autotoc_md360", [
-        [ "synapse_config_get_string", "md_docs_2api__reference_2core__api.html#autotoc_md361", null ],
-        [ "synapse_config_get_int", "md_docs_2api__reference_2core__api.html#autotoc_md362", null ],
-        [ "synapse_config_get_module_config", "md_docs_2api__reference_2core__api.html#autotoc_md363", null ]
+      [ "Configuration Manager API", "md_docs_2api__reference_2core__api.html#autotoc_md369", [
+        [ "synapse_config_get_string", "md_docs_2api__reference_2core__api.html#autotoc_md370", null ],
+        [ "synapse_config_get_int", "md_docs_2api__reference_2core__api.html#autotoc_md371", null ],
+        [ "synapse_config_get_module_config", "md_docs_2api__reference_2core__api.html#autotoc_md372", null ]
       ] ],
-      [ "Logging API", "md_docs_2api__reference_2core__api.html#autotoc_md365", [
-        [ "DEFINE_COMPONENT_TAG", "md_docs_2api__reference_2core__api.html#autotoc_md366", null ],
-        [ "ESP_LOGE, ESP_LOGW, ESP_LOGI, ESP_LOGD, ESP_LOGV", "md_docs_2api__reference_2core__api.html#autotoc_md367", null ]
+      [ "Logging API", "md_docs_2api__reference_2core__api.html#autotoc_md374", [
+        [ "DEFINE_COMPONENT_TAG", "md_docs_2api__reference_2core__api.html#autotoc_md375", null ],
+        [ "ESP_LOGE, ESP_LOGW, ESP_LOGI, ESP_LOGD, ESP_LOGV", "md_docs_2api__reference_2core__api.html#autotoc_md376", null ]
       ] ]
     ] ],
     [ "Synapse Custom API Reference", "md_docs_2api__reference_2custom__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2custom__api.html#autotoc_md370", null ],
-      [ "Custom Module API", "md_docs_2api__reference_2custom__api.html#autotoc_md372", [
-        [ "module_t *custom_module_create(const cJSON *config);", "md_docs_2api__reference_2custom__api.html#autotoc_md373", null ],
-        [ "esp_err_t custom_module_do_action(module_t *module, const char *action, const void *params);", "md_docs_2api__reference_2custom__api.html#autotoc_md374", null ],
-        [ "esp_err_t custom_module_get_status(module_t *module, custom_status_t *status);", "md_docs_2api__reference_2custom__api.html#autotoc_md375", null ]
+      [ "მიზანი", "md_docs_2api__reference_2custom__api.html#autotoc_md379", null ],
+      [ "Custom Module API", "md_docs_2api__reference_2custom__api.html#autotoc_md381", [
+        [ "module_t *custom_module_create(const cJSON *config);", "md_docs_2api__reference_2custom__api.html#autotoc_md382", null ],
+        [ "esp_err_t custom_module_do_action(module_t *module, const char *action, const void *params);", "md_docs_2api__reference_2custom__api.html#autotoc_md383", null ],
+        [ "esp_err_t custom_module_get_status(module_t *module, custom_status_t *status);", "md_docs_2api__reference_2custom__api.html#autotoc_md384", null ]
       ] ],
-      [ "Custom Event API", "md_docs_2api__reference_2custom__api.html#autotoc_md377", [
-        [ "Custom Event-ის იდენტიფიკატორი", "md_docs_2api__reference_2custom__api.html#autotoc_md378", null ],
-        [ "Custom Event-ის მონაცემების სტრუქტურა", "md_docs_2api__reference_2custom__api.html#autotoc_md379", null ],
-        [ "static void custom_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2custom__api.html#autotoc_md380", null ]
+      [ "Custom Event API", "md_docs_2api__reference_2custom__api.html#autotoc_md386", [
+        [ "Custom Event-ის იდენტიფიკატორი", "md_docs_2api__reference_2custom__api.html#autotoc_md387", null ],
+        [ "Custom Event-ის მონაცემების სტრუქტურა", "md_docs_2api__reference_2custom__api.html#autotoc_md388", null ],
+        [ "static void custom_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2custom__api.html#autotoc_md389", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2custom__api.html#autotoc_md382", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2custom__api.html#autotoc_md384", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2custom__api.html#autotoc_md391", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2custom__api.html#autotoc_md393", null ]
     ] ],
     [ "Synapse Device Identity Service API Reference", "md_docs_2api__reference_2device__identity__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2device__identity__api.html#autotoc_md387", null ],
-      [ "Device Identity Service API", "md_docs_2api__reference_2device__identity__api.html#autotoc_md389", [
-        [ "<tt>const char* get_device_id(void);</tt>", "md_docs_2api__reference_2device__identity__api.html#autotoc_md390", null ],
-        [ "<tt>const char* get_firmware_version(void);</tt>", "md_docs_2api__reference_2device__identity__api.html#autotoc_md391", null ]
+      [ "მიზანი", "md_docs_2api__reference_2device__identity__api.html#autotoc_md396", null ],
+      [ "Device Identity Service API", "md_docs_2api__reference_2device__identity__api.html#autotoc_md398", [
+        [ "<tt>const char* get_device_id(void);</tt>", "md_docs_2api__reference_2device__identity__api.html#autotoc_md399", null ],
+        [ "<tt>const char* get_firmware_version(void);</tt>", "md_docs_2api__reference_2device__identity__api.html#autotoc_md400", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2device__identity__api.html#autotoc_md393", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2device__identity__api.html#autotoc_md395", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2device__identity__api.html#autotoc_md402", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2device__identity__api.html#autotoc_md404", null ]
     ] ],
     [ "Synapse Display Module API Reference", "md_docs_2api__reference_2display__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2display__api.html#autotoc_md398", null ],
-      [ "მოდულის შექმნა და სიცოცხლის ციკლი", "md_docs_2api__reference_2display__api.html#autotoc_md400", [
-        [ "module_t <em>ssd1306_module_create(const cJSON *config);", "md_docs_2api__reference_2display__api.html#autotoc_md401", null ],
-        [ "static esp_err_t ssd1306_init(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md402", null ],
-        [ "static esp_err_t ssd1306_enable(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md403", null ],
-        [ "static esp_err_t ssd1306_disable(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md404", null ],
-        [ "static esp_err_t ssd1306_deinit(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md405", null ]
+      [ "მიზანი", "md_docs_2api__reference_2display__api.html#autotoc_md407", null ],
+      [ "მოდულის შექმნა და სიცოცხლის ციკლი", "md_docs_2api__reference_2display__api.html#autotoc_md409", [
+        [ "module_t <em>ssd1306_module_create(const cJSON *config);", "md_docs_2api__reference_2display__api.html#autotoc_md410", null ],
+        [ "static esp_err_t ssd1306_init(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md411", null ],
+        [ "static esp_err_t ssd1306_enable(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md412", null ],
+        [ "static esp_err_t ssd1306_disable(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md413", null ],
+        [ "static esp_err_t ssd1306_deinit(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md414", null ]
       ] ],
-      [ "Service API (Service Locator-ისთვის)", "md_docs_2api__reference_2display__api.html#autotoc_md407", [
-        [ "esp_err_t ssd1306_api_enable(void);", "md_docs_2api__reference_2display__api.html#autotoc_md408", null ],
-        [ "esp_err_t ssd1306_api_disable(void);", "md_docs_2api__reference_2display__api.html#autotoc_md409", null ],
-        [ "esp_err_t ssd1306_api_clear(void);", "md_docs_2api__reference_2display__api.html#autotoc_md410", null ],
-        [ "esp_err_t ssd1306_api_write_text(const char *text, uint8_t line);", "md_docs_2api__reference_2display__api.html#autotoc_md411", null ]
+      [ "Service API (Service Locator-ისთვის)", "md_docs_2api__reference_2display__api.html#autotoc_md416", [
+        [ "esp_err_t ssd1306_api_enable(void);", "md_docs_2api__reference_2display__api.html#autotoc_md417", null ],
+        [ "esp_err_t ssd1306_api_disable(void);", "md_docs_2api__reference_2display__api.html#autotoc_md418", null ],
+        [ "esp_err_t ssd1306_api_clear(void);", "md_docs_2api__reference_2display__api.html#autotoc_md419", null ],
+        [ "esp_err_t ssd1306_api_write_text(const char *text, uint8_t line);", "md_docs_2api__reference_2display__api.html#autotoc_md420", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2display__api.html#autotoc_md413", [
-        [ "static void ssd1306_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2display__api.html#autotoc_md414", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2display__api.html#autotoc_md422", [
+        [ "static void ssd1306_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2display__api.html#autotoc_md423", null ]
       ] ],
-      [ "Configuration Parsing API", "md_docs_2api__reference_2display__api.html#autotoc_md416", [
-        [ "static esp_err_t parse_ssd1306_config(const cJSON *config, ssd1306_private_data_t *ssd1306_data);", "md_docs_2api__reference_2display__api.html#autotoc_md417", null ]
+      [ "Configuration Parsing API", "md_docs_2api__reference_2display__api.html#autotoc_md425", [
+        [ "static esp_err_t parse_ssd1306_config(const cJSON *config, ssd1306_private_data_t *ssd1306_data);", "md_docs_2api__reference_2display__api.html#autotoc_md426", null ]
       ] ],
-      [ "Status & Monitoring API", "md_docs_2api__reference_2display__api.html#autotoc_md419", [
-        [ "static module_status_t ssd1306_get_status(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md420", null ]
+      [ "Status & Monitoring API", "md_docs_2api__reference_2display__api.html#autotoc_md428", [
+        [ "static module_status_t ssd1306_get_status(module_t *module);", "md_docs_2api__reference_2display__api.html#autotoc_md429", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2display__api.html#autotoc_md422", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2display__api.html#autotoc_md424", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2display__api.html#autotoc_md431", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2display__api.html#autotoc_md433", null ]
     ] ],
     [ "Synapse Drivers Module API Reference", "md_docs_2api__reference_2drivers__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2drivers__api.html#autotoc_md427", null ],
-      [ "I2C Bus Driver API", "md_docs_2api__reference_2drivers__api.html#autotoc_md429", [
-        [ "module_t *i2c_bus_module_create(const cJSON *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md430", null ],
-        [ "esp_err_t i2c_bus_init(i2c_bus_handle_t *i2c_bus_handle, const i2c_bus_config_t *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md431", null ],
-        [ "esp_err_t i2c_bus_read(i2c_bus_handle_t *i2c_bus_handle, uint8_t device_address, uint8_t *data, size_t data_length);", "md_docs_2api__reference_2drivers__api.html#autotoc_md432", null ],
-        [ "esp_err_t i2c_bus_write(i2c_bus_handle_t *i2c_bus_handle, uint8_t device_address, const uint8_t *data, size_t data_length);", "md_docs_2api__reference_2drivers__api.html#autotoc_md433", null ],
-        [ "esp_err_t i2c_bus_scan(i2c_bus_handle_t *i2c_bus_handle);", "md_docs_2api__reference_2drivers__api.html#autotoc_md434", null ]
+      [ "მიზანი", "md_docs_2api__reference_2drivers__api.html#autotoc_md436", null ],
+      [ "I2C Bus Driver API", "md_docs_2api__reference_2drivers__api.html#autotoc_md438", [
+        [ "module_t *i2c_bus_module_create(const cJSON *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md439", null ],
+        [ "esp_err_t i2c_bus_init(i2c_bus_handle_t *i2c_bus_handle, const i2c_bus_config_t *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md440", null ],
+        [ "esp_err_t i2c_bus_read(i2c_bus_handle_t *i2c_bus_handle, uint8_t device_address, uint8_t *data, size_t data_length);", "md_docs_2api__reference_2drivers__api.html#autotoc_md441", null ],
+        [ "esp_err_t i2c_bus_write(i2c_bus_handle_t *i2c_bus_handle, uint8_t device_address, const uint8_t *data, size_t data_length);", "md_docs_2api__reference_2drivers__api.html#autotoc_md442", null ],
+        [ "esp_err_t i2c_bus_scan(i2c_bus_handle_t *i2c_bus_handle);", "md_docs_2api__reference_2drivers__api.html#autotoc_md443", null ]
       ] ],
-      [ "SPI Bus Driver API", "md_docs_2api__reference_2drivers__api.html#autotoc_md436", [
-        [ "module_t *spi_bus_module_create(const cJSON *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md437", null ],
-        [ "esp_err_t spi_bus_init(spi_bus_handle_t *spi_bus_handle, const spi_bus_config_t *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md438", null ],
-        [ "esp_err_t spi_bus_transfer(spi_bus_handle_t *spi_bus_handle, const uint8_t *tx_data, uint8_t *rx_data, size_t data_length);", "md_docs_2api__reference_2drivers__api.html#autotoc_md439", null ]
+      [ "SPI Bus Driver API", "md_docs_2api__reference_2drivers__api.html#autotoc_md445", [
+        [ "module_t *spi_bus_module_create(const cJSON *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md446", null ],
+        [ "esp_err_t spi_bus_init(spi_bus_handle_t *spi_bus_handle, const spi_bus_config_t *config);", "md_docs_2api__reference_2drivers__api.html#autotoc_md447", null ],
+        [ "esp_err_t spi_bus_transfer(spi_bus_handle_t *spi_bus_handle, const uint8_t *tx_data, uint8_t *rx_data, size_t data_length);", "md_docs_2api__reference_2drivers__api.html#autotoc_md448", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2drivers__api.html#autotoc_md441", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2drivers__api.html#autotoc_md443", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2drivers__api.html#autotoc_md450", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2drivers__api.html#autotoc_md452", null ]
     ] ],
     [ "Synapse Event Bus API Reference", "md_docs_2api__reference_2event__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2event__api.html#autotoc_md446", null ],
-      [ "Event Bus API", "md_docs_2api__reference_2event__api.html#autotoc_md448", [
-        [ "<tt>esp_err_t synapse_event_bus_init(void)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md449", null ],
-        [ "<tt>esp_err_t synapse_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md450", null ],
-        [ "<tt>esp_err_t synapse_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md451", null ],
-        [ "<tt>esp_err_t synapse_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md452", null ]
+      [ "მიზანი", "md_docs_2api__reference_2event__api.html#autotoc_md455", null ],
+      [ "Event Bus API", "md_docs_2api__reference_2event__api.html#autotoc_md457", [
+        [ "<tt>esp_err_t synapse_event_bus_init(void)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md458", null ],
+        [ "<tt>esp_err_t synapse_event_bus_post(core_framework_event_id_t event_id, event_data_wrapper_t *data_wrapper)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md459", null ],
+        [ "<tt>esp_err_t synapse_event_bus_subscribe(core_framework_event_id_t event_id, struct module_t *module)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md460", null ],
+        [ "<tt>esp_err_t synapse_event_bus_unsubscribe(core_framework_event_id_t event_id, struct module_t *module)</tt>", "md_docs_2api__reference_2event__api.html#autotoc_md461", null ]
       ] ],
-      [ "ივენთის მონაცემების მართვა (Reference Counting)", "md_docs_2api__reference_2event__api.html#autotoc_md454", null ],
-      [ "Event Handler-ის მაგალითი", "md_docs_2api__reference_2event__api.html#autotoc_md456", null ],
-      [ "Custom Event-ების აღწერა", "md_docs_2api__reference_2event__api.html#autotoc_md458", [
-        [ "მაგალითი Custom Event-ის აღწერისა", "md_docs_2api__reference_2event__api.html#autotoc_md459", null ]
+      [ "ივენთის მონაცემების მართვა (Reference Counting)", "md_docs_2api__reference_2event__api.html#autotoc_md463", null ],
+      [ "Event Handler-ის მაგალითი", "md_docs_2api__reference_2event__api.html#autotoc_md465", null ],
+      [ "Custom Event-ების აღწერა", "md_docs_2api__reference_2event__api.html#autotoc_md467", [
+        [ "მაგალითი Custom Event-ის აღწერისა", "md_docs_2api__reference_2event__api.html#autotoc_md468", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2event__api.html#autotoc_md461", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2event__api.html#autotoc_md463", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2event__api.html#autotoc_md470", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2event__api.html#autotoc_md472", null ]
     ] ],
     [ "API რეფერენსი: Event Payloads (event_payloads.h)", "md_docs_2api__reference_2event__payloads__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md466", null ],
-      [ "Payload სტრუქტურები", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md467", [
-        [ "synapse_telemetry_payload_t", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md468", null ],
-        [ "synapse_config_updated_payload_t", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md469", null ]
+      [ "მიზანი", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md475", null ],
+      [ "Payload სტრუქტურები", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md476", [
+        [ "synapse_telemetry_payload_t", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md477", null ],
+        [ "synapse_config_updated_payload_t", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md478", null ]
       ] ],
-      [ "მეხსიერების მართვის ფუნქციები", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md470", [
-        [ "synapse_payload_common_free", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md471", null ],
-        [ "synapse_telemetry_payload_free", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md472", null ]
+      [ "მეხსიერების მართვის ფუნქციები", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md479", [
+        [ "synapse_payload_common_free", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md480", null ],
+        [ "synapse_telemetry_payload_free", "md_docs_2api__reference_2event__payloads__api.html#autotoc_md481", null ]
       ] ]
     ] ],
     [ "Synapse Health Monitor Module API Reference", "md_docs_2api__reference_2health__monitor__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md474", null ],
-      [ "Health Monitor Module API", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md476", [
-        [ "module_t *health_monitor_module_create(const cJSON *config);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md477", null ],
-        [ "esp_err_t health_monitor_module_start(module_t *module);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md478", null ],
-        [ "esp_err_t health_monitor_module_stop(module_t *module);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md479", null ],
-        [ "esp_err_t health_monitor_module_get_status(module_t *module, health_status_t *status);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md480", null ],
-        [ "esp_err_t health_monitor_module_register_check(module_t *module, health_check_fn_t check_fn);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md481", null ]
+      [ "მიზანი", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md483", null ],
+      [ "Health Monitor Module API", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md485", [
+        [ "module_t *health_monitor_module_create(const cJSON *config);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md486", null ],
+        [ "esp_err_t health_monitor_module_start(module_t *module);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md487", null ],
+        [ "esp_err_t health_monitor_module_stop(module_t *module);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md488", null ],
+        [ "esp_err_t health_monitor_module_get_status(module_t *module, health_status_t *status);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md489", null ],
+        [ "esp_err_t health_monitor_module_register_check(module_t *module, health_check_fn_t check_fn);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md490", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md483", [
-        [ "static void health_monitor_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md484", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md492", [
+        [ "static void health_monitor_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md493", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md486", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md488", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md495", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2health__monitor__api.html#autotoc_md497", null ]
     ] ],
     [ "Synapse Local Control Module API Reference", "md_docs_2api__reference_2local__ctrl__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md491", null ],
-      [ "Local Control Module API", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md493", [
-        [ "module_t *local_ctrl_module_create(const cJSON *config);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md494", null ],
-        [ "esp_err_t local_ctrl_module_start(module_t *module);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md495", null ],
-        [ "esp_err_t local_ctrl_module_stop(module_t *module);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md496", null ],
-        [ "esp_err_t local_ctrl_module_register_endpoint(const char *uri, http_method_t method, local_ctrl_handler_t handler);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md497", null ]
+      [ "მიზანი", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md500", null ],
+      [ "Local Control Module API", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md502", [
+        [ "module_t *local_ctrl_module_create(const cJSON *config);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md503", null ],
+        [ "esp_err_t local_ctrl_module_start(module_t *module);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md504", null ],
+        [ "esp_err_t local_ctrl_module_stop(module_t *module);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md505", null ],
+        [ "esp_err_t local_ctrl_module_register_endpoint(const char *uri, http_method_t method, local_ctrl_handler_t handler);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md506", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md499", [
-        [ "static void local_ctrl_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md500", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md508", [
+        [ "static void local_ctrl_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md509", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md502", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md504", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md511", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2local__ctrl__api.html#autotoc_md513", null ]
     ] ],
     [ "Synapse Module API Reference", "md_docs_2api__reference_2module__api.html", [
-      [ "მოდულის შექმნა და სიცოცხლის ციკლი", "md_docs_2api__reference_2module__api.html#autotoc_md507", [
-        [ "<tt>module_t *{module_name}_create(const cJSON *config);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md508", null ],
-        [ "<tt>static esp_err_t {module_name}_init(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md509", null ],
-        [ "<tt>static esp_err_t {module_name}_start(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md510", null ],
-        [ "<tt>static void {module_name}_deinit(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md511", null ]
+      [ "მოდულის შექმნა და სიცოცხლის ციკლი", "md_docs_2api__reference_2module__api.html#autotoc_md516", [
+        [ "<tt>module_t *{module_name}_create(const cJSON *config);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md517", null ],
+        [ "<tt>static esp_err_t {module_name}_init(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md518", null ],
+        [ "<tt>static esp_err_t {module_name}_start(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md519", null ],
+        [ "<tt>static void {module_name}_deinit(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md520", null ]
       ] ],
-      [ "Service API (Service Locator-ისთვის)", "md_docs_2api__reference_2module__api.html#autotoc_md513", [
-        [ "<tt>esp_err_t {module_name}_api_{action}(...);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md514", null ]
+      [ "Service API (Service Locator-ისთვის)", "md_docs_2api__reference_2module__api.html#autotoc_md522", [
+        [ "<tt>esp_err_t {module_name}_api_{action}(...);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md523", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2module__api.html#autotoc_md516", [
-        [ "<tt>static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md517", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2module__api.html#autotoc_md525", [
+        [ "<tt>static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md526", null ]
       ] ],
-      [ "Configuration Parsing API", "md_docs_2api__reference_2module__api.html#autotoc_md519", [
-        [ "<tt>static esp_err_t parse_{module_name}_config(const cJSON *config_node, {module_name}_private_data_t *p_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md520", null ]
+      [ "Configuration Parsing API", "md_docs_2api__reference_2module__api.html#autotoc_md528", [
+        [ "<tt>static esp_err_t parse_{module_name}_config(const cJSON *config_node, {module_name}_private_data_t *p_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md529", null ]
       ] ],
-      [ "Status & Monitoring API", "md_docs_2api__reference_2module__api.html#autotoc_md522", [
-        [ "<tt>static module_status_t {module_name}_get_status(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md523", null ]
+      [ "Status & Monitoring API", "md_docs_2api__reference_2module__api.html#autotoc_md531", [
+        [ "<tt>static module_status_t {module_name}_get_status(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md532", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2module__api.html#autotoc_md525", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2module__api.html#autotoc_md534", null ]
     ] ],
     [ "Synapse MQTT Manager Service API Reference", "md_docs_2api__reference_2mqtt__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2mqtt__api.html#autotoc_md528", null ],
-      [ "MQTT Manager API", "md_docs_2api__reference_2mqtt__api.html#autotoc_md530", [
-        [ "სამომავლო გაფართოება", "md_docs_2api__reference_2mqtt__api.html#autotoc_md531", null ]
+      [ "მიზანი", "md_docs_2api__reference_2mqtt__api.html#autotoc_md537", null ],
+      [ "MQTT Manager API", "md_docs_2api__reference_2mqtt__api.html#autotoc_md539", [
+        [ "სამომავლო გაფართოება", "md_docs_2api__reference_2mqtt__api.html#autotoc_md540", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2mqtt__api.html#autotoc_md533", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2mqtt__api.html#autotoc_md535", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2mqtt__api.html#autotoc_md542", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2mqtt__api.html#autotoc_md544", null ]
     ] ],
     [ "Synapse OTA (Over-the-Air) Module API Reference", "md_docs_2api__reference_2ota__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2ota__api.html#autotoc_md538", null ],
-      [ "OTA Module API", "md_docs_2api__reference_2ota__api.html#autotoc_md540", [
-        [ "module_t *ota_module_create(const cJSON *config);", "md_docs_2api__reference_2ota__api.html#autotoc_md541", null ],
-        [ "esp_err_t ota_module_start_update(const char *url);", "md_docs_2api__reference_2ota__api.html#autotoc_md542", null ],
-        [ "esp_err_t ota_module_get_status(ota_status_t *status);", "md_docs_2api__reference_2ota__api.html#autotoc_md543", null ],
-        [ "esp_err_t ota_module_abort(void);", "md_docs_2api__reference_2ota__api.html#autotoc_md544", null ]
+      [ "მიზანი", "md_docs_2api__reference_2ota__api.html#autotoc_md547", null ],
+      [ "OTA Module API", "md_docs_2api__reference_2ota__api.html#autotoc_md549", [
+        [ "module_t *ota_module_create(const cJSON *config);", "md_docs_2api__reference_2ota__api.html#autotoc_md550", null ],
+        [ "esp_err_t ota_module_start_update(const char *url);", "md_docs_2api__reference_2ota__api.html#autotoc_md551", null ],
+        [ "esp_err_t ota_module_get_status(ota_status_t *status);", "md_docs_2api__reference_2ota__api.html#autotoc_md552", null ],
+        [ "esp_err_t ota_module_abort(void);", "md_docs_2api__reference_2ota__api.html#autotoc_md553", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2ota__api.html#autotoc_md546", [
-        [ "static void ota_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2ota__api.html#autotoc_md547", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2ota__api.html#autotoc_md555", [
+        [ "static void ota_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2ota__api.html#autotoc_md556", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2ota__api.html#autotoc_md549", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2ota__api.html#autotoc_md551", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2ota__api.html#autotoc_md558", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2ota__api.html#autotoc_md560", null ]
     ] ],
     [ "Synapse Promise Manager API Reference", "md_docs_2api__reference_2promise__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2promise__api.html#autotoc_md554", null ],
-      [ "1. Consumer Types (მომხმარებლისთვის)", "md_docs_2api__reference_2promise__api.html#autotoc_md556", [
-        [ "<tt>promise_then_cb</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md557", null ],
-        [ "<tt>promise_catch_cb</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md558", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2promise__api.html#autotoc_md563", null ],
+      [ "1. Consumer Types (მომხმარებლისთვის)", "md_docs_2api__reference_2promise__api.html#autotoc_md565", [
+        [ "<tt>promise_then_cb</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md566", null ],
+        [ "<tt>promise_catch_cb</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md567", null ]
       ] ],
-      [ "2. Provider API (სერვისის მომწოდებლისთვის)", "md_docs_2api__reference_2promise__api.html#autotoc_md560", [
-        [ "<tt>promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md561", null ],
-        [ "<tt>esp_err_t synapse_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md562", null ],
-        [ "<tt>esp_err_t synapse_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md563", null ]
+      [ "2. Provider API (სერვისის მომწოდებლისთვის)", "md_docs_2api__reference_2promise__api.html#autotoc_md569", [
+        [ "<tt>promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md570", null ],
+        [ "<tt>esp_err_t synapse_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md571", null ],
+        [ "<tt>esp_err_t synapse_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));</tt>", "md_docs_2api__reference_2promise__api.html#autotoc_md572", null ]
       ] ],
-      [ "💡 გამოყენების მაგალითი", "md_docs_2api__reference_2promise__api.html#autotoc_md565", null ]
+      [ "💡 გამოყენების მაგალითი", "md_docs_2api__reference_2promise__api.html#autotoc_md574", null ]
     ] ],
     [ "📲 Synapse Provisioning Module API Reference", "md_docs_2api__reference_2provisioning__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2provisioning__api.html#autotoc_md567", null ],
-      [ "🔵 BLE Provisioning Service API (იმპლემენტირებულია)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md569", [
-        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2provisioning__api.html#autotoc_md570", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2provisioning__api.html#autotoc_md576", null ],
+      [ "🔵 BLE Provisioning Service API (იმპლემენტირებულია)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md578", [
+        [ "ძირითადი ფუნქციები", "md_docs_2api__reference_2provisioning__api.html#autotoc_md579", null ]
       ] ],
-      [ "📡 SoftAP Provisioning Module API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md572", [
-        [ "module_t *softap_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md573", null ],
-        [ "esp_err_t softap_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md574", null ],
-        [ "esp_err_t softap_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md575", null ],
-        [ "esp_err_t softap_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md576", null ],
-        [ "esp_err_t softap_prov_module_get_status(module_t *module, softap_prov_status_t*status)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md577", null ]
+      [ "📡 SoftAP Provisioning Module API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md581", [
+        [ "module_t *softap_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md582", null ],
+        [ "esp_err_t softap_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md583", null ],
+        [ "esp_err_t softap_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md584", null ],
+        [ "esp_err_t softap_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md585", null ],
+        [ "esp_err_t softap_prov_module_get_status(module_t *module, softap_prov_status_t*status)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md586", null ]
       ] ],
-      [ "🔳 QR Code Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md579", [
-        [ "esp_err_t qr_code_prov_generate(const char *ssid, const char*password, char *qr_code_buffer, size_t buffer_size)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md580", null ],
-        [ "esp_err_t qr_code_prov_display(const char *qr_code_buffer)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md581", null ]
+      [ "🔳 QR Code Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md588", [
+        [ "esp_err_t qr_code_prov_generate(const char *ssid, const char*password, char *qr_code_buffer, size_t buffer_size)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md589", null ],
+        [ "esp_err_t qr_code_prov_display(const char *qr_code_buffer)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md590", null ]
       ] ],
-      [ "🔌 Serial Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md583", [
-        [ "module_t *serial_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md584", null ],
-        [ "esp_err_t serial_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md585", null ],
-        [ "esp_err_t serial_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md586", null ],
-        [ "esp_err_t serial_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md587", null ]
+      [ "🔌 Serial Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md592", [
+        [ "module_t *serial_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md593", null ],
+        [ "esp_err_t serial_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md594", null ],
+        [ "esp_err_t serial_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md595", null ],
+        [ "esp_err_t serial_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md596", null ]
       ] ],
-      [ "☁️ Cloud Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md589", [
-        [ "module_t *cloud_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md590", null ],
-        [ "esp_err_t cloud_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md591", null ],
-        [ "esp_err_t cloud_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md592", null ],
-        [ "esp_err_t cloud_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md593", null ]
+      [ "☁️ Cloud Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md598", [
+        [ "module_t *cloud_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md599", null ],
+        [ "esp_err_t cloud_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md600", null ],
+        [ "esp_err_t cloud_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md601", null ],
+        [ "esp_err_t cloud_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md602", null ]
       ] ],
-      [ "NFC Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md595", [
-        [ "module_t *nfc_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md596", null ],
-        [ "esp_err_t nfc_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md597", null ],
-        [ "esp_err_t nfc_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md598", null ],
-        [ "esp_err_t nfc_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md599", null ]
+      [ "NFC Provisioning API", "md_docs_2api__reference_2provisioning__api.html#autotoc_md604", [
+        [ "module_t *nfc_prov_module_create(const cJSON*config)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md605", null ],
+        [ "esp_err_t nfc_prov_module_start(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md606", null ],
+        [ "esp_err_t nfc_prov_module_stop(module_t *module)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md607", null ],
+        [ "esp_err_t nfc_prov_module_set_credentials(module_t *module, const char*ssid, const char *password)", "md_docs_2api__reference_2provisioning__api.html#autotoc_md608", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2provisioning__api.html#autotoc_md601", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2provisioning__api.html#autotoc_md603", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2provisioning__api.html#autotoc_md610", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2provisioning__api.html#autotoc_md612", null ]
     ] ],
     [ "🔌 Relay Actuator API Reference", "md_docs_2api__reference_2relay__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2relay__api.html#autotoc_md606", null ],
-      [ "1. ⌨️ CLI (Command Line Interface)", "md_docs_2api__reference_2relay__api.html#autotoc_md608", null ],
-      [ "2. 📡 MQTT ინტერფეისი", "md_docs_2api__reference_2relay__api.html#autotoc_md610", [
-        [ "ბრძანების გაგზავნა", "md_docs_2api__reference_2relay__api.html#autotoc_md611", null ],
-        [ "სტატუსის მიღება", "md_docs_2api__reference_2relay__api.html#autotoc_md612", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2relay__api.html#autotoc_md615", null ],
+      [ "1. ⌨️ CLI (Command Line Interface)", "md_docs_2api__reference_2relay__api.html#autotoc_md617", null ],
+      [ "2. 📡 MQTT ინტერფეისი", "md_docs_2api__reference_2relay__api.html#autotoc_md619", [
+        [ "ბრძანების გაგზავნა", "md_docs_2api__reference_2relay__api.html#autotoc_md620", null ],
+        [ "სტატუსის მიღება", "md_docs_2api__reference_2relay__api.html#autotoc_md621", null ]
       ] ],
-      [ "3. 📢 ივენთები (Events)", "md_docs_2api__reference_2relay__api.html#autotoc_md614", null ]
+      [ "3. 📢 ივენთები (Events)", "md_docs_2api__reference_2relay__api.html#autotoc_md623", null ]
     ] ],
     [ "Synapse Resource Manager API Reference", "md_docs_2api__reference_2resource__manager__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md617", null ],
-      [ "სამართავი რესურსების ტიპები", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md619", null ],
-      [ "API ფუნქციები", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md621", [
-        [ "<tt>esp_err_t synapse_resource_manager_init(void)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md622", null ],
-        [ "<tt>esp_err_t synapse_resource_lock(synapse_resource_type_t type, uint8_t resource_id, const char *owner)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md624", null ],
-        [ "<tt>esp_err_t synapse_resource_release(synapse_resource_type_t type, uint8_t resource_id, const char *owner)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md626", null ],
-        [ "<tt>bool synapse_resource_is_locked(synapse_resource_type_t type, uint8_t resource_id)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md628", null ],
-        [ "<tt>const char *synapse_resource_get_owner(synapse_resource_type_t type, uint8_t resource_id)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md630", null ]
+      [ "მიზანი", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md626", null ],
+      [ "სამართავი რესურსების ტიპები", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md628", null ],
+      [ "API ფუნქციები", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md630", [
+        [ "<tt>esp_err_t synapse_resource_manager_init(void)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md631", null ],
+        [ "<tt>esp_err_t synapse_resource_lock(synapse_resource_type_t type, uint8_t resource_id, const char *owner)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md633", null ],
+        [ "<tt>esp_err_t synapse_resource_release(synapse_resource_type_t type, uint8_t resource_id, const char *owner)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md635", null ],
+        [ "<tt>bool synapse_resource_is_locked(synapse_resource_type_t type, uint8_t resource_id)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md637", null ],
+        [ "<tt>const char *synapse_resource_get_owner(synapse_resource_type_t type, uint8_t resource_id)</tt>", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md639", null ]
       ] ],
-      [ "გამოყენების მაგალითი", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md632", null ],
-      [ "საუკეთესო პრაქტიკები", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md634", null ]
+      [ "გამოყენების მაგალითი", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md641", null ],
+      [ "საუკეთესო პრაქტიკები", "md_docs_2api__reference_2resource__manager__api.html#autotoc_md643", null ]
     ] ],
     [ "🛡️ Security Status API Reference", "md_docs_2api__reference_2security__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2security__api.html#autotoc_md637", null ],
-      [ "1. 🔌 Service API (<tt>security_status_api_t</tt>)", "md_docs_2api__reference_2security__api.html#autotoc_md639", [
-        [ "API ფუნქციები", "md_docs_2api__reference_2security__api.html#autotoc_md640", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2security__api.html#autotoc_md646", null ],
+      [ "1. 🔌 Service API (<tt>security_status_api_t</tt>)", "md_docs_2api__reference_2security__api.html#autotoc_md648", [
+        [ "API ფუნქციები", "md_docs_2api__reference_2security__api.html#autotoc_md649", null ]
       ] ],
-      [ "2. ⌨️ CLI (Command Line Interface)", "md_docs_2api__reference_2security__api.html#autotoc_md642", null ]
+      [ "2. ⌨️ CLI (Command Line Interface)", "md_docs_2api__reference_2security__api.html#autotoc_md651", null ]
     ] ],
     [ "Synapse Sensor Module API Reference", "md_docs_2api__reference_2sensor__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2sensor__api.html#autotoc_md644", null ],
-      [ "მოდულის შექმნა და სიცოცხლის ციკლი", "md_docs_2api__reference_2sensor__api.html#autotoc_md646", [
-        [ "module_t <em>dht22_module_create(const cJSON *config);", "md_docs_2api__reference_2sensor__api.html#autotoc_md647", null ],
-        [ "static esp_err_t dht22_init(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md648", null ],
-        [ "static esp_err_t dht22_enable(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md649", null ],
-        [ "static esp_err_t dht22_disable(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md650", null ],
-        [ "static esp_err_t dht22_deinit(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md651", null ]
+      [ "მიზანი", "md_docs_2api__reference_2sensor__api.html#autotoc_md653", null ],
+      [ "მოდულის შექმნა და სიცოცხლის ციკლი", "md_docs_2api__reference_2sensor__api.html#autotoc_md655", [
+        [ "module_t <em>dht22_module_create(const cJSON *config);", "md_docs_2api__reference_2sensor__api.html#autotoc_md656", null ],
+        [ "static esp_err_t dht22_init(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md657", null ],
+        [ "static esp_err_t dht22_enable(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md658", null ],
+        [ "static esp_err_t dht22_disable(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md659", null ],
+        [ "static esp_err_t dht22_deinit(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md660", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2sensor__api.html#autotoc_md653", [
-        [ "static void dht22_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2sensor__api.html#autotoc_md654", null ],
-        [ "static esp_err_t publish_sensor_data(dht22_private_data_t *dht22_data, float temperature, float humidity);", "md_docs_2api__reference_2sensor__api.html#autotoc_md655", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2sensor__api.html#autotoc_md662", [
+        [ "static void dht22_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2sensor__api.html#autotoc_md663", null ],
+        [ "static esp_err_t publish_sensor_data(dht22_private_data_t *dht22_data, float temperature, float humidity);", "md_docs_2api__reference_2sensor__api.html#autotoc_md664", null ]
       ] ],
-      [ "Configuration Parsing API", "md_docs_2api__reference_2sensor__api.html#autotoc_md657", [
-        [ "static esp_err_t parse_dht22_config(const cJSON *config, dht22_private_data_t *dht22_data);", "md_docs_2api__reference_2sensor__api.html#autotoc_md658", null ]
+      [ "Configuration Parsing API", "md_docs_2api__reference_2sensor__api.html#autotoc_md666", [
+        [ "static esp_err_t parse_dht22_config(const cJSON *config, dht22_private_data_t *dht22_data);", "md_docs_2api__reference_2sensor__api.html#autotoc_md667", null ]
       ] ],
-      [ "Status & Monitoring API", "md_docs_2api__reference_2sensor__api.html#autotoc_md660", [
-        [ "static module_status_t dht22_get_status(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md661", null ]
+      [ "Status & Monitoring API", "md_docs_2api__reference_2sensor__api.html#autotoc_md669", [
+        [ "static module_status_t dht22_get_status(module_t *module);", "md_docs_2api__reference_2sensor__api.html#autotoc_md670", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2sensor__api.html#autotoc_md663", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2sensor__api.html#autotoc_md665", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2sensor__api.html#autotoc_md672", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2sensor__api.html#autotoc_md674", null ]
     ] ],
     [ "💾 Synapse Storage Manager API Reference", "md_docs_2api__reference_2storage__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2storage__api.html#autotoc_md668", null ],
-      [ "⚙️ API-ს სტრუქტურა (<tt>storage_api_t</tt>)", "md_docs_2api__reference_2storage__api.html#autotoc_md670", [
-        [ "🔑 Key-Value ოპერაციები", "md_docs_2api__reference_2storage__api.html#autotoc_md671", null ],
-        [ "🗂️ ფაილური ოპერაციები", "md_docs_2api__reference_2storage__api.html#autotoc_md673", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2storage__api.html#autotoc_md677", null ],
+      [ "⚙️ API-ს სტრუქტურა (<tt>storage_api_t</tt>)", "md_docs_2api__reference_2storage__api.html#autotoc_md679", [
+        [ "🔑 Key-Value ოპერაციები", "md_docs_2api__reference_2storage__api.html#autotoc_md680", null ],
+        [ "🗂️ ფაილური ოპერაციები", "md_docs_2api__reference_2storage__api.html#autotoc_md682", null ]
       ] ],
-      [ "💡 გამოყენების მაგალითი", "md_docs_2api__reference_2storage__api.html#autotoc_md675", null ]
+      [ "💡 გამოყენების მაგალითი", "md_docs_2api__reference_2storage__api.html#autotoc_md684", null ]
     ] ],
     [ "Synapse System Module API Reference", "md_docs_2api__reference_2system__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2system__api.html#autotoc_md678", null ],
-      [ "OTA Module API", "md_docs_2api__reference_2system__api.html#autotoc_md680", [
-        [ "module_t *ota_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md681", null ],
-        [ "esp_err_t ota_module_start_update(const char *url);", "md_docs_2api__reference_2system__api.html#autotoc_md682", null ],
-        [ "esp_err_t ota_module_get_status(ota_status_t *status);", "md_docs_2api__reference_2system__api.html#autotoc_md683", null ]
+      [ "მიზანი", "md_docs_2api__reference_2system__api.html#autotoc_md687", null ],
+      [ "OTA Module API", "md_docs_2api__reference_2system__api.html#autotoc_md689", [
+        [ "module_t *ota_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md690", null ],
+        [ "esp_err_t ota_module_start_update(const char *url);", "md_docs_2api__reference_2system__api.html#autotoc_md691", null ],
+        [ "esp_err_t ota_module_get_status(ota_status_t *status);", "md_docs_2api__reference_2system__api.html#autotoc_md692", null ]
       ] ],
-      [ "Version Module API", "md_docs_2api__reference_2system__api.html#autotoc_md685", [
-        [ "module_t *version_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md686", null ],
-        [ "esp_err_t version_module_get_firmware_version(char *version_str, size_t size);", "md_docs_2api__reference_2system__api.html#autotoc_md687", null ]
+      [ "Version Module API", "md_docs_2api__reference_2system__api.html#autotoc_md694", [
+        [ "module_t *version_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md695", null ],
+        [ "esp_err_t version_module_get_firmware_version(char *version_str, size_t size);", "md_docs_2api__reference_2system__api.html#autotoc_md696", null ]
       ] ],
-      [ "Watchdog Module API", "md_docs_2api__reference_2system__api.html#autotoc_md689", [
-        [ "module_t *watchdog_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md690", null ],
-        [ "esp_err_t watchdog_module_feed(void);", "md_docs_2api__reference_2system__api.html#autotoc_md691", null ],
-        [ "esp_err_t watchdog_module_set_timeout(uint32_t timeout_ms);", "md_docs_2api__reference_2system__api.html#autotoc_md692", null ]
+      [ "Watchdog Module API", "md_docs_2api__reference_2system__api.html#autotoc_md698", [
+        [ "module_t *watchdog_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md699", null ],
+        [ "esp_err_t watchdog_module_feed(void);", "md_docs_2api__reference_2system__api.html#autotoc_md700", null ],
+        [ "esp_err_t watchdog_module_set_timeout(uint32_t timeout_ms);", "md_docs_2api__reference_2system__api.html#autotoc_md701", null ]
       ] ],
-      [ "Diagnostics Module API", "md_docs_2api__reference_2system__api.html#autotoc_md694", [
-        [ "module_t *diagnostics_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md695", null ],
-        [ "esp_err_t diagnostics_module_run_tests(void);", "md_docs_2api__reference_2system__api.html#autotoc_md696", null ],
-        [ "esp_err_t diagnostics_module_get_report(char *report_buffer, size_t buffer_size);", "md_docs_2api__reference_2system__api.html#autotoc_md697", null ]
+      [ "Diagnostics Module API", "md_docs_2api__reference_2system__api.html#autotoc_md703", [
+        [ "module_t *diagnostics_module_create(const cJSON *config);", "md_docs_2api__reference_2system__api.html#autotoc_md704", null ],
+        [ "esp_err_t diagnostics_module_run_tests(void);", "md_docs_2api__reference_2system__api.html#autotoc_md705", null ],
+        [ "esp_err_t diagnostics_module_get_report(char *report_buffer, size_t buffer_size);", "md_docs_2api__reference_2system__api.html#autotoc_md706", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2system__api.html#autotoc_md699", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2system__api.html#autotoc_md701", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2system__api.html#autotoc_md708", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2system__api.html#autotoc_md710", null ]
     ] ],
     [ "Synapse Task Pool Manager API Reference", "md_docs_2api__reference_2task__pool__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2task__pool__api.html#autotoc_md704", null ],
-      [ "API-ს ტიპები და სტრუქტურები", "md_docs_2api__reference_2task__pool__api.html#autotoc_md706", [
-        [ "<tt>synapse_job_handle_t</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md707", null ],
-        [ "<tt>synapse_job_cb</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md708", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2task__pool__api.html#autotoc_md713", null ],
+      [ "API-ს ტიპები და სტრუქტურები", "md_docs_2api__reference_2task__pool__api.html#autotoc_md715", [
+        [ "<tt>synapse_job_handle_t</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md716", null ],
+        [ "<tt>synapse_job_cb</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md717", null ]
       ] ],
-      [ "API-ს ფუნქციები", "md_docs_2api__reference_2task__pool__api.html#autotoc_md710", [
-        [ "<tt>synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void* user_context, uint32_t interval_ms, bool is_periodic);</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md711", null ],
-        [ "<tt>esp_err_t synapse_task_pool_cancel_job(synapse_job_handle_t handle);</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md712", null ]
+      [ "API-ს ფუნქციები", "md_docs_2api__reference_2task__pool__api.html#autotoc_md719", [
+        [ "<tt>synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void* user_context, uint32_t interval_ms, bool is_periodic);</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md720", null ],
+        [ "<tt>esp_err_t synapse_task_pool_cancel_job(synapse_job_handle_t handle);</tt>", "md_docs_2api__reference_2task__pool__api.html#autotoc_md721", null ]
       ] ],
-      [ "💡 გამოყენების მაგალითი", "md_docs_2api__reference_2task__pool__api.html#autotoc_md714", null ]
+      [ "💡 გამოყენების მაგალითი", "md_docs_2api__reference_2task__pool__api.html#autotoc_md723", null ]
     ] ],
     [ "Synapse Time Sync Module API Reference", "md_docs_2api__reference_2time__sync__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2time__sync__api.html#autotoc_md716", null ],
-      [ "Time Sync Module API", "md_docs_2api__reference_2time__sync__api.html#autotoc_md718", [
-        [ "module_t *time_sync_module_create(const cJSON *config);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md719", null ],
-        [ "esp_err_t time_sync_module_start(module_t *module);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md720", null ],
-        [ "esp_err_t time_sync_module_stop(module_t *module);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md721", null ],
-        [ "esp_err_t time_sync_module_set_server(module_t *module, const char *server_url);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md722", null ],
-        [ "esp_err_t time_sync_module_get_time(time_t *current_time);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md723", null ]
+      [ "მიზანი", "md_docs_2api__reference_2time__sync__api.html#autotoc_md725", null ],
+      [ "Time Sync Module API", "md_docs_2api__reference_2time__sync__api.html#autotoc_md727", [
+        [ "module_t *time_sync_module_create(const cJSON *config);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md728", null ],
+        [ "esp_err_t time_sync_module_start(module_t *module);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md729", null ],
+        [ "esp_err_t time_sync_module_stop(module_t *module);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md730", null ],
+        [ "esp_err_t time_sync_module_set_server(module_t *module, const char *server_url);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md731", null ],
+        [ "esp_err_t time_sync_module_get_time(time_t *current_time);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md732", null ]
       ] ],
-      [ "Event Handling API", "md_docs_2api__reference_2time__sync__api.html#autotoc_md725", [
-        [ "static void time_sync_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md726", null ]
+      [ "Event Handling API", "md_docs_2api__reference_2time__sync__api.html#autotoc_md734", [
+        [ "static void time_sync_handle_event(module_t *module, int32_t event_id, void *event_data);", "md_docs_2api__reference_2time__sync__api.html#autotoc_md735", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2time__sync__api.html#autotoc_md728", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2time__sync__api.html#autotoc_md730", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2time__sync__api.html#autotoc_md737", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2time__sync__api.html#autotoc_md739", null ]
     ] ],
     [ "Synapse Utility Module API Reference", "md_docs_2api__reference_2utility__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2utility__api.html#autotoc_md733", null ],
-      [ "Logger Module API", "md_docs_2api__reference_2utility__api.html#autotoc_md735", [
-        [ "module_t *logger_module_create(const cJSON *config);", "md_docs_2api__reference_2utility__api.html#autotoc_md736", null ],
-        [ "esp_err_t logger_module_log_info(const char *message);", "md_docs_2api__reference_2utility__api.html#autotoc_md737", null ],
-        [ "esp_err_t logger_module_log_warning(const char *message);", "md_docs_2api__reference_2utility__api.html#autotoc_md738", null ],
-        [ "esp_err_t logger_module_log_error(const char *message);", "md_docs_2api__reference_2utility__api.html#autotoc_md739", null ]
+      [ "მიზანი", "md_docs_2api__reference_2utility__api.html#autotoc_md742", null ],
+      [ "Logger Module API", "md_docs_2api__reference_2utility__api.html#autotoc_md744", [
+        [ "module_t *logger_module_create(const cJSON *config);", "md_docs_2api__reference_2utility__api.html#autotoc_md745", null ],
+        [ "esp_err_t logger_module_log_info(const char *message);", "md_docs_2api__reference_2utility__api.html#autotoc_md746", null ],
+        [ "esp_err_t logger_module_log_warning(const char *message);", "md_docs_2api__reference_2utility__api.html#autotoc_md747", null ],
+        [ "esp_err_t logger_module_log_error(const char *message);", "md_docs_2api__reference_2utility__api.html#autotoc_md748", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2utility__api.html#autotoc_md741", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2utility__api.html#autotoc_md743", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2utility__api.html#autotoc_md750", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2utility__api.html#autotoc_md752", null ]
     ] ],
     [ "Synapse Utils API Reference", "md_docs_2api__reference_2utils__api.html", [
-      [ "🎯 მიზანი", "md_docs_2api__reference_2utils__api.html#autotoc_md746", null ],
-      [ "1. უსაფრთხო სტრიქონების მართვა", "md_docs_2api__reference_2utils__api.html#autotoc_md748", [
-        [ "<tt>char* synapse_safe_strncpy(char *dest, const char *src, size_t size);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md749", null ]
+      [ "🎯 მიზანი", "md_docs_2api__reference_2utils__api.html#autotoc_md755", null ],
+      [ "1. უსაფრთხო სტრიქონების მართვა", "md_docs_2api__reference_2utils__api.html#autotoc_md757", [
+        [ "<tt>char* synapse_safe_strncpy(char *dest, const char *src, size_t size);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md758", null ]
       ] ],
-      [ "2. კონფიგურაციის პარსინგის დამხმარე ფუნქციები", "md_docs_2api__reference_2utils__api.html#autotoc_md751", [
-        [ "<tt>bool synapse_config_get_string_from_node(const char* tag, const cJSON *json_node, const char *key, char *dest, size_t dest_size);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md752", null ],
-        [ "<tt>bool synapse_config_get_int_from_node(const char* tag, const cJSON *json_node, const char *key, int *out_value);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md753", null ],
-        [ "<tt>bool synapse_config_get_bool_from_node(const char* tag, const cJSON *json_node, const char *key, bool *out_value);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md754", null ]
+      [ "2. კონფიგურაციის პარსინგის დამხმარე ფუნქციები", "md_docs_2api__reference_2utils__api.html#autotoc_md760", [
+        [ "<tt>bool synapse_config_get_string_from_node(const char* tag, const cJSON *json_node, const char *key, char *dest, size_t dest_size);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md761", null ],
+        [ "<tt>bool synapse_config_get_int_from_node(const char* tag, const cJSON *json_node, const char *key, int *out_value);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md762", null ],
+        [ "<tt>bool synapse_config_get_bool_from_node(const char* tag, const cJSON *json_node, const char *key, bool *out_value);</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md763", null ]
+      ] ],
+      [ "3. Guard Clause & Validation Helpers", "md_docs_2api__reference_2utils__api.html#autotoc_md764", [
+        [ "<tt>SYNAPSE_GUARD(condition, tag, ret_val, format, ...)</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md765", null ],
+        [ "<tt>SYNAPSE_GUARD_VOID(condition, tag, format, ...)</tt>", "md_docs_2api__reference_2utils__api.html#autotoc_md766", null ]
       ] ]
     ] ],
     [ "Synapse Version Module API Reference", "md_docs_2api__reference_2version__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2version__api.html#autotoc_md756", null ],
-      [ "Version Module API", "md_docs_2api__reference_2version__api.html#autotoc_md758", [
-        [ "module_t *version_module_create(const cJSON *config);", "md_docs_2api__reference_2version__api.html#autotoc_md759", null ],
-        [ "esp_err_t version_module_get_firmware_version(char *version_str, size_t size);", "md_docs_2api__reference_2version__api.html#autotoc_md760", null ],
-        [ "esp_err_t version_module_get_build_date(char *date_str, size_t size);", "md_docs_2api__reference_2version__api.html#autotoc_md761", null ],
-        [ "esp_err_t version_module_get_build_time(char *time_str, size_t size);", "md_docs_2api__reference_2version__api.html#autotoc_md762", null ]
+      [ "მიზანი", "md_docs_2api__reference_2version__api.html#autotoc_md768", null ],
+      [ "Version Module API", "md_docs_2api__reference_2version__api.html#autotoc_md770", [
+        [ "module_t *version_module_create(const cJSON *config);", "md_docs_2api__reference_2version__api.html#autotoc_md771", null ],
+        [ "esp_err_t version_module_get_firmware_version(char *version_str, size_t size);", "md_docs_2api__reference_2version__api.html#autotoc_md772", null ],
+        [ "esp_err_t version_module_get_build_date(char *date_str, size_t size);", "md_docs_2api__reference_2version__api.html#autotoc_md773", null ],
+        [ "esp_err_t version_module_get_build_time(char *time_str, size_t size);", "md_docs_2api__reference_2version__api.html#autotoc_md774", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2version__api.html#autotoc_md764", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2version__api.html#autotoc_md766", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2version__api.html#autotoc_md776", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2version__api.html#autotoc_md778", null ]
     ] ],
     [ "Synapse WiFi Manager Service API Reference", "md_docs_2api__reference_2wifi__api.html", [
-      [ "მიზანი", "md_docs_2api__reference_2wifi__api.html#autotoc_md769", null ],
-      [ "WiFi Manager API", "md_docs_2api__reference_2wifi__api.html#autotoc_md771", [
-        [ "სამომავლო გაფართოება", "md_docs_2api__reference_2wifi__api.html#autotoc_md772", null ]
+      [ "მიზანი", "md_docs_2api__reference_2wifi__api.html#autotoc_md781", null ],
+      [ "WiFi Manager API", "md_docs_2api__reference_2wifi__api.html#autotoc_md783", [
+        [ "სამომავლო გაფართოება", "md_docs_2api__reference_2wifi__api.html#autotoc_md784", null ]
       ] ],
-      [ "Naming & Structure", "md_docs_2api__reference_2wifi__api.html#autotoc_md774", null ],
-      [ "მაგალითები", "md_docs_2api__reference_2wifi__api.html#autotoc_md776", null ]
+      [ "Naming & Structure", "md_docs_2api__reference_2wifi__api.html#autotoc_md786", null ],
+      [ "მაგალითები", "md_docs_2api__reference_2wifi__api.html#autotoc_md788", null ]
     ] ],
     [ "CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html", [
-      [ "პრობლემა", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md779", null ],
-      [ "დიაგნოსტიკა", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md780", null ],
-      [ "მიზეზი", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md781", null ],
-      [ "გამოსავალი", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md782", null ],
-      [ "ცვლილებები კოდში", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md783", null ],
-      [ "რეკომენდაცია", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md784", null ]
+      [ "პრობლემა", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md791", null ],
+      [ "დიაგნოსტიკა", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md792", null ],
+      [ "მიზეზი", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md793", null ],
+      [ "გამოსავალი", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md794", null ],
+      [ "ცვლილებები კოდში", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md795", null ],
+      [ "რეკომენდაცია", "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md796", null ]
     ] ],
     [ "ცვლილებების ჟურნალი — 2025-06-24", "md_docs_2changelog_2CHANGELOG__2025-06-24.html", [
-      [ "დამატებული და განახლებული ფაილები", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md787", [
-        [ "[core/CMakeLists.txt]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md788", null ],
-        [ "[core/collect_modules.cmake]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md789", null ],
-        [ "[core/include/system_manager.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md790", null ],
-        [ "[interfaces/include/base_module.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md791", null ],
-        [ "[core/include/service_locator.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md792", null ],
-        [ "[core/include/module_registry.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md793", null ],
-        [ "[core/include/event_bus.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md794", null ],
-        [ "[core/include/config_manager.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md795", null ],
-        [ "[core/include/system_event_ids.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md796", null ],
-        [ "[core/include/resource_manager.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md797", null ],
-        [ "[core/include/framework_config.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md798", null ],
-        [ "[interfaces/include/logging.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md799", null ],
-        [ "[interfaces/include/service_types.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md800", null ],
-        [ "[interfaces/include/telemetry_events.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md801", null ],
-        [ "[README.md]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md802", null ],
-        [ "[.gitignore]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md803", null ]
+      [ "დამატებული და განახლებული ფაილები", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md799", [
+        [ "[core/CMakeLists.txt]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md800", null ],
+        [ "[core/collect_modules.cmake]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md801", null ],
+        [ "[core/include/system_manager.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md802", null ],
+        [ "[interfaces/include/base_module.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md803", null ],
+        [ "[core/include/service_locator.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md804", null ],
+        [ "[core/include/module_registry.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md805", null ],
+        [ "[core/include/event_bus.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md806", null ],
+        [ "[core/include/config_manager.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md807", null ],
+        [ "[core/include/system_event_ids.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md808", null ],
+        [ "[core/include/resource_manager.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md809", null ],
+        [ "[core/include/framework_config.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md810", null ],
+        [ "[interfaces/include/logging.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md811", null ],
+        [ "[interfaces/include/service_types.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md812", null ],
+        [ "[interfaces/include/telemetry_events.h]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md813", null ],
+        [ "[README.md]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md814", null ],
+        [ "[.gitignore]", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md815", null ]
       ] ],
-      [ "ძირითადი ცვლილებები", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md805", null ]
+      [ "ძირითადი ცვლილებები", "md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md817", null ]
     ] ],
     [ "CHANGELOG - 2025-06-26", "md_docs_2changelog_2CHANGELOG__2025-06-26.html", [
-      [ "[Major] Module System Automation & Refactor", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md808", [
-        [ "Added", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md809", null ],
-        [ "Changed", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md810", null ],
-        [ "Fixed", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md811", null ],
-        [ "Detailed File Changes", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md812", null ],
-        [ "Why/How", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md813", null ],
-        [ "Testing", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md814", null ]
+      [ "[Major] Module System Automation & Refactor", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md820", [
+        [ "Added", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md821", null ],
+        [ "Changed", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md822", null ],
+        [ "Fixed", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md823", null ],
+        [ "Detailed File Changes", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md824", null ],
+        [ "Why/How", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md825", null ],
+        [ "Testing", "md_docs_2changelog_2CHANGELOG__2025-06-26.html#autotoc_md826", null ]
       ] ]
     ] ],
     [ "Changelog", "md_docs_2changelog_2CHANGELOG__2025-06-28.html", [
-      [ "[2.0.0] - 2025-06-28", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md816", [
-        [ "დამატებულია", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md817", null ],
-        [ "შეცვლილია", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md818", null ],
-        [ "ცნობილი პრობლემები", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md819", null ]
+      [ "[2.0.0] - 2025-06-28", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md828", [
+        [ "დამატებულია", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md829", null ],
+        [ "შეცვლილია", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md830", null ],
+        [ "ცნობილი პრობლემები", "md_docs_2changelog_2CHANGELOG__2025-06-28.html#autotoc_md831", null ]
       ] ]
     ] ],
     [ "ცვლილებების ისტორია (Changelog)", "md_docs_2changelog_2v5.html", [
-      [ "[5.8.0] - 2025-07-31", "md_docs_2changelog_2v5.html#autotoc_md821", [
-        [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md822", null ],
-        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md823", null ]
-      ] ],
-      [ "[5.7.0] - 2025-07-30", "md_docs_2changelog_2v5.html#autotoc_md825", [
-        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md826", null ]
-      ] ],
-      [ "[5.6.0] - 2025-08-16", "md_docs_2changelog_2v5.html#autotoc_md827", [
-        [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md828", null ],
-        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md829", null ]
-      ] ],
-      [ "[5.5.1] - 2025-08-16", "md_docs_2changelog_2v5.html#autotoc_md830", [
-        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md831", null ]
-      ] ],
-      [ "[5.5.0] - 2025-08-15", "md_docs_2changelog_2v5.html#autotoc_md833", [
+      [ "[5.8.0] - 2025-07-31", "md_docs_2changelog_2v5.html#autotoc_md833", [
         [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md834", null ],
-        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md835", null ],
-        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md836", null ]
+        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md835", null ]
       ] ],
-      [ "[5.4.0] - 2025-08-14", "md_docs_2changelog_2v5.html#autotoc_md838", [
-        [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md839", null ],
-        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md840", null ],
-        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md841", null ]
+      [ "[5.7.0] - 2025-07-30", "md_docs_2changelog_2v5.html#autotoc_md837", [
+        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md838", null ]
       ] ],
-      [ "[5.3.0] - 2025-07-29", "md_docs_2changelog_2v5.html#autotoc_md842", [
-        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md843", null ],
-        [ "🔄 Changed (შეცვლილი და გაუმჯობესებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md844", null ],
-        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md845", null ]
+      [ "[5.6.0] - 2025-08-16", "md_docs_2changelog_2v5.html#autotoc_md839", [
+        [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md840", null ],
+        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md841", null ]
       ] ],
-      [ "[5.2.0] - 2025-07-28", "md_docs_2changelog_2v5.html#autotoc_md847", [
-        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md848", null ],
-        [ "🔄 Changed (შეცვლილი და გაუმჯობესებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md849", null ],
-        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md850", null ]
+      [ "[5.5.1] - 2025-08-16", "md_docs_2changelog_2v5.html#autotoc_md842", [
+        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md843", null ]
       ] ],
-      [ "[5.1.0] - 2025-07-28", "md_docs_2changelog_2v5.html#autotoc_md852", [
-        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md853", null ],
-        [ "🔄 Changed (შეცვლილი და გაუმჯობესებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md854", null ],
-        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md855", null ]
+      [ "[5.5.0] - 2025-08-15", "md_docs_2changelog_2v5.html#autotoc_md845", [
+        [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md846", null ],
+        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md847", null ],
+        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md848", null ]
       ] ],
-      [ "[5.0.1] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md857", [
-        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md858", null ],
-        [ "🔄 Changed (შეცვლილი ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md859", null ],
-        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md860", null ]
+      [ "[5.4.0] - 2025-08-14", "md_docs_2changelog_2v5.html#autotoc_md850", [
+        [ "✨ დამატებული ფუნქციონალი (Added)", "md_docs_2changelog_2v5.html#autotoc_md851", null ],
+        [ "🔄 შეცვლილი და გაუმჯობესებული ფუნქციონალი (Changed)", "md_docs_2changelog_2v5.html#autotoc_md852", null ],
+        [ "🐛 გამოსწორებული შეცდომები (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md853", null ]
       ] ],
-      [ "[5.0.0] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md861", [
-        [ "💥 Breaking Changes", "md_docs_2changelog_2v5.html#autotoc_md862", null ],
-        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md863", null ],
-        [ "🔄 Changed (შეცვლილი ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md864", null ],
-        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md865", null ]
+      [ "[5.3.0] - 2025-07-29", "md_docs_2changelog_2v5.html#autotoc_md854", [
+        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md855", null ],
+        [ "🔄 Changed (შეცვლილი და გაუმჯობესებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md856", null ],
+        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md857", null ]
       ] ],
-      [ "[4.2.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md866", [
-        [ "✨ დამატებულია (Added)", "md_docs_2changelog_2v5.html#autotoc_md867", null ],
-        [ "🔄 შეცვლილია (Changed)", "md_docs_2changelog_2v5.html#autotoc_md868", null ],
-        [ "🐞 გასწორებულია (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md869", null ]
+      [ "[5.2.0] - 2025-07-28", "md_docs_2changelog_2v5.html#autotoc_md859", [
+        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md860", null ],
+        [ "🔄 Changed (შეცვლილი და გაუმჯობესებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md861", null ],
+        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md862", null ]
       ] ],
-      [ "[v4.1.0] - 2025-07-19", "md_docs_2changelog_2v5.html#autotoc_md870", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md871", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md872", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md873", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md874", null ]
+      [ "[5.1.0] - 2025-07-28", "md_docs_2changelog_2v5.html#autotoc_md864", [
+        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md865", null ],
+        [ "🔄 Changed (შეცვლილი და გაუმჯობესებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md866", null ],
+        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md867", null ]
       ] ],
-      [ "[v4.0.0] - 2025-07-19", "md_docs_2changelog_2v5.html#autotoc_md875", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md876", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md877", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md878", null ]
+      [ "[5.0.1] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md869", [
+        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md870", null ],
+        [ "🔄 Changed (შეცვლილი ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md871", null ],
+        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md872", null ]
       ] ],
-      [ "[v3.9.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md879", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md880", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md881", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md882", null ]
+      [ "[5.0.0] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md873", [
+        [ "💥 Breaking Changes", "md_docs_2changelog_2v5.html#autotoc_md874", null ],
+        [ "✨ Added (დამატებული ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md875", null ],
+        [ "🔄 Changed (შეცვლილი ფუნქციონალი)", "md_docs_2changelog_2v5.html#autotoc_md876", null ],
+        [ "🐛 Fixed (გამოსწორებული შეცდომები)", "md_docs_2changelog_2v5.html#autotoc_md877", null ]
       ] ],
-      [ "[v3.8.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md883", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md884", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md885", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md886", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md887", null ]
+      [ "[4.2.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md878", [
+        [ "✨ დამატებულია (Added)", "md_docs_2changelog_2v5.html#autotoc_md879", null ],
+        [ "🔄 შეცვლილია (Changed)", "md_docs_2changelog_2v5.html#autotoc_md880", null ],
+        [ "🐞 გასწორებულია (Fixed)", "md_docs_2changelog_2v5.html#autotoc_md881", null ]
       ] ],
-      [ "[v3.7.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md888", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md889", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md890", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md891", null ]
+      [ "[v4.1.0] - 2025-07-19", "md_docs_2changelog_2v5.html#autotoc_md882", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md883", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md884", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md885", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md886", null ]
       ] ],
-      [ "[v3.6.0] - 2025-07-17", "md_docs_2changelog_2v5.html#autotoc_md892", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md893", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md894", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md895", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md896", null ]
+      [ "[v4.0.0] - 2025-07-19", "md_docs_2changelog_2v5.html#autotoc_md887", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md888", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md889", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md890", null ]
       ] ],
-      [ "[v3.5.0] - 2025-07-16", "md_docs_2changelog_2v5.html#autotoc_md897", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md898", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md899", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md900", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md901", null ]
+      [ "[v3.9.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md891", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md892", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md893", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md894", null ]
       ] ],
-      [ "[v3.4.0] - 2025-07-13", "md_docs_2changelog_2v5.html#autotoc_md902", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md903", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md904", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md905", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md906", null ]
+      [ "[v3.8.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md895", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md896", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md897", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md898", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md899", null ]
       ] ],
-      [ "[v3.3.0] - 2025-07-10", "md_docs_2changelog_2v5.html#autotoc_md907", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md908", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md909", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md910", null ]
+      [ "[v3.7.0] - 2025-07-18", "md_docs_2changelog_2v5.html#autotoc_md900", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md901", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md902", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md903", null ]
       ] ],
-      [ "[v3.2.1] - 2025-07-08", "md_docs_2changelog_2v5.html#autotoc_md911", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md912", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md913", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md914", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md915", null ]
+      [ "[v3.6.0] - 2025-07-17", "md_docs_2changelog_2v5.html#autotoc_md904", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md905", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md906", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md907", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md908", null ]
       ] ],
-      [ "[v3.2.0] - 2025-07-08", "md_docs_2changelog_2v5.html#autotoc_md916", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md917", null ],
+      [ "[v3.5.0] - 2025-07-16", "md_docs_2changelog_2v5.html#autotoc_md909", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md910", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md911", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md912", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md913", null ]
+      ] ],
+      [ "[v3.4.0] - 2025-07-13", "md_docs_2changelog_2v5.html#autotoc_md914", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md915", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md916", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md917", null ],
         [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md918", null ]
       ] ],
-      [ "[v3.1.0] - 2025-07-06", "md_docs_2changelog_2v5.html#autotoc_md919", [
+      [ "[v3.3.0] - 2025-07-10", "md_docs_2changelog_2v5.html#autotoc_md919", [
         [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md920", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md921", null ]
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md921", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md922", null ]
       ] ],
-      [ "[v3.0.0] - 2025-07-05", "md_docs_2changelog_2v5.html#autotoc_md922", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md923", null ],
-        [ "♻️ რეფაქტორინგი და გაუმჯობესებები (Refactoring & Improvements)", "md_docs_2changelog_2v5.html#autotoc_md924", null ],
+      [ "[v3.2.1] - 2025-07-08", "md_docs_2changelog_2v5.html#autotoc_md923", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md924", null ],
         [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md925", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md926", null ]
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v5.html#autotoc_md926", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md927", null ]
       ] ],
-      [ "[2.8.0] - 2025-07-05", "md_docs_2changelog_2v5.html#autotoc_md927", [
-        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md928", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md929", null ],
+      [ "[v3.2.0] - 2025-07-08", "md_docs_2changelog_2v5.html#autotoc_md928", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md929", null ],
         [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md930", null ]
       ] ],
-      [ "[2.7.0] - 2025-07-05", "md_docs_2changelog_2v5.html#autotoc_md931", [
+      [ "[v3.1.0] - 2025-07-06", "md_docs_2changelog_2v5.html#autotoc_md931", [
         [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md932", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md933", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md934", null ]
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md933", null ]
       ] ],
-      [ "[2.6.0] - 2025-07-04", "md_docs_2changelog_2v5.html#autotoc_md935", [
-        [ "✨ დამატებულია", "md_docs_2changelog_2v5.html#autotoc_md936", null ],
-        [ "🛠️ შეცვლილია", "md_docs_2changelog_2v5.html#autotoc_md937", null ],
-        [ "🐛 გასწორებულია", "md_docs_2changelog_2v5.html#autotoc_md938", null ]
+      [ "[v3.0.0] - 2025-07-05", "md_docs_2changelog_2v5.html#autotoc_md934", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md935", null ],
+        [ "♻️ რეფაქტორინგი და გაუმჯობესებები (Refactoring & Improvements)", "md_docs_2changelog_2v5.html#autotoc_md936", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md937", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md938", null ]
       ] ],
-      [ "[v2.5.0] - 2025-07-02", "md_docs_2changelog_2v5.html#autotoc_md939", [
-        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md940", null ]
+      [ "[2.8.0] - 2025-07-05", "md_docs_2changelog_2v5.html#autotoc_md939", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md940", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md941", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md942", null ]
       ] ],
-      [ "[v2.4.0] - 2025-07-02", "md_docs_2changelog_2v5.html#autotoc_md941", [
-        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md942", null ],
-        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md943", null ]
+      [ "[2.7.0] - 2025-07-05", "md_docs_2changelog_2v5.html#autotoc_md943", [
+        [ "✨ ახალი ფუნქციები (Features)", "md_docs_2changelog_2v5.html#autotoc_md944", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v5.html#autotoc_md945", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v5.html#autotoc_md946", null ]
       ] ],
-      [ "[v2.3.0] - 2025-07-02", "md_docs_2changelog_2v5.html#autotoc_md945", [
-        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md946", null ],
-        [ "🏗️ ინფრასტრუქტურა", "md_docs_2changelog_2v5.html#autotoc_md947", null ]
+      [ "[2.6.0] - 2025-07-04", "md_docs_2changelog_2v5.html#autotoc_md947", [
+        [ "✨ დამატებულია", "md_docs_2changelog_2v5.html#autotoc_md948", null ],
+        [ "🛠️ შეცვლილია", "md_docs_2changelog_2v5.html#autotoc_md949", null ],
+        [ "🐛 გასწორებულია", "md_docs_2changelog_2v5.html#autotoc_md950", null ]
       ] ],
-      [ "[v2.2.0] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md948", [
-        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md949", null ],
-        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md950", null ]
+      [ "[v2.5.0] - 2025-07-02", "md_docs_2changelog_2v5.html#autotoc_md951", [
+        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md952", null ]
       ] ],
-      [ "[v2.1.1] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md951", [
-        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md952", null ],
-        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md953", null ]
+      [ "[v2.4.0] - 2025-07-02", "md_docs_2changelog_2v5.html#autotoc_md953", [
+        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md954", null ],
+        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md955", null ]
       ] ],
-      [ "[v2.1.0] - 2025-06-30", "md_docs_2changelog_2v5.html#autotoc_md955", [
-        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md956", null ],
-        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md957", null ],
-        [ "♻️ რეფაქტორინგი", "md_docs_2changelog_2v5.html#autotoc_md958", null ]
+      [ "[v2.3.0] - 2025-07-02", "md_docs_2changelog_2v5.html#autotoc_md957", [
+        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md958", null ],
+        [ "🏗️ ინფრასტრუქტურა", "md_docs_2changelog_2v5.html#autotoc_md959", null ]
+      ] ],
+      [ "[v2.2.0] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md960", [
+        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md961", null ],
+        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md962", null ]
+      ] ],
+      [ "[v2.1.1] - 2025-07-01", "md_docs_2changelog_2v5.html#autotoc_md963", [
+        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md964", null ],
+        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md965", null ]
+      ] ],
+      [ "[v2.1.0] - 2025-06-30", "md_docs_2changelog_2v5.html#autotoc_md967", [
+        [ "✨ ახალი ფუნქციონალი", "md_docs_2changelog_2v5.html#autotoc_md968", null ],
+        [ "🐛 შეცდომების გასწორება", "md_docs_2changelog_2v5.html#autotoc_md969", null ],
+        [ "♻️ რეფაქტორინგი", "md_docs_2changelog_2v5.html#autotoc_md970", null ]
       ] ]
     ] ],
     [ "CHANGELOG", "md_docs_2changelog_2v6.html", [
-      [ "[6.2.0] - 2025-08-24", "md_docs_2changelog_2v6.html#autotoc_md960", [
-        [ "✨ დამატებული", "md_docs_2changelog_2v6.html#autotoc_md961", null ],
-        [ "🔄 შეცვლილი", "md_docs_2changelog_2v6.html#autotoc_md962", null ]
+      [ "[6.2.0] - 2025-08-24", "md_docs_2changelog_2v6.html#autotoc_md972", [
+        [ "✨ დამატებული", "md_docs_2changelog_2v6.html#autotoc_md973", null ],
+        [ "🔄 შეცვლილი", "md_docs_2changelog_2v6.html#autotoc_md974", null ]
       ] ],
-      [ "[6.1.0] - 2025-08-22", "md_docs_2changelog_2v6.html#autotoc_md964", null ],
-      [ "✨ დამატებული", "md_docs_2changelog_2v6.html#autotoc_md965", [
-        [ "🔄 შეცვლილი", "md_docs_2changelog_2v6.html#autotoc_md966", null ],
-        [ "📄 დოკუმენტაცია", "md_docs_2changelog_2v6.html#autotoc_md967", null ]
+      [ "[6.1.0] - 2025-08-22", "md_docs_2changelog_2v6.html#autotoc_md976", null ],
+      [ "✨ დამატებული", "md_docs_2changelog_2v6.html#autotoc_md977", [
+        [ "🔄 შეცვლილი", "md_docs_2changelog_2v6.html#autotoc_md978", null ],
+        [ "📄 დოკუმენტაცია", "md_docs_2changelog_2v6.html#autotoc_md979", null ]
       ] ],
-      [ "[6.0.0] - 2025-08-21", "md_docs_2changelog_2v6.html#autotoc_md969", [
-        [ "✨ დამატებული", "md_docs_2changelog_2v6.html#autotoc_md970", null ],
-        [ "🔄 შეცვლილი", "md_docs_2changelog_2v6.html#autotoc_md971", null ],
-        [ "📄 დოკუმენტაცია", "md_docs_2changelog_2v6.html#autotoc_md972", null ]
+      [ "[6.0.0] - 2025-08-21", "md_docs_2changelog_2v6.html#autotoc_md981", [
+        [ "✨ დამატებული", "md_docs_2changelog_2v6.html#autotoc_md982", null ],
+        [ "🔄 შეცვლილი", "md_docs_2changelog_2v6.html#autotoc_md983", null ],
+        [ "📄 დოკუმენტაცია", "md_docs_2changelog_2v6.html#autotoc_md984", null ]
       ] ]
     ] ],
     [ "[7.2.0] - 2025-08-28", "md_docs_2changelog_2v7.html", [
-      [ "[7.1.0] - 2025-08-27", "md_docs_2changelog_2v7.html#autotoc_md980", [
-        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v7.html#autotoc_md975", null ],
-        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v7.html#autotoc_md976", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v7.html#autotoc_md977", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v7.html#autotoc_md978", null ],
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v7.html#autotoc_md981", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v7.html#autotoc_md982", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v7.html#autotoc_md983", null ]
+      [ "[7.1.0] - 2025-08-27", "md_docs_2changelog_2v7.html#autotoc_md992", [
+        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v7.html#autotoc_md987", null ],
+        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v7.html#autotoc_md988", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v7.html#autotoc_md989", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v7.html#autotoc_md990", null ],
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v7.html#autotoc_md993", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v7.html#autotoc_md994", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v7.html#autotoc_md995", null ]
       ] ],
-      [ "[7.0.0] - 2025-08-26", "md_docs_2changelog_2v7.html#autotoc_md985", [
-        [ "💥 არქიტექტურული ცვლილებები (Breaking Changes & Refactoring)", "md_docs_2changelog_2v7.html#autotoc_md986", null ],
-        [ "🔄 შეცვლილი", "md_docs_2changelog_2v7.html#autotoc_md987", [
-          [ "ძველი ვერსიების ისტორია", "md_docs_2changelog_2v7.html#autotoc_md989", null ]
+      [ "[7.0.0] - 2025-08-26", "md_docs_2changelog_2v7.html#autotoc_md997", [
+        [ "💥 არქიტექტურული ცვლილებები (Breaking Changes & Refactoring)", "md_docs_2changelog_2v7.html#autotoc_md998", null ],
+        [ "🔄 შეცვლილი", "md_docs_2changelog_2v7.html#autotoc_md999", [
+          [ "ძველი ვერსიების ისტორია", "md_docs_2changelog_2v7.html#autotoc_md1001", null ]
         ] ]
       ] ]
     ] ],
     [ "[8.1.0] - 2025-08-30", "md_docs_2changelog_2v8.html", [
-      [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v8.html#autotoc_md991", [
-        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v8.html#autotoc_md992", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v8.html#autotoc_md993", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v8.html#autotoc_md994", null ]
+      [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v8.html#autotoc_md1003", [
+        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v8.html#autotoc_md1004", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v8.html#autotoc_md1005", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v8.html#autotoc_md1006", null ]
       ] ],
-      [ "[8.0.0] - 2025-08-07", "md_docs_2changelog_2v8.html#autotoc_md996", [
-        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v8.html#autotoc_md997", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v8.html#autotoc_md998", null ]
+      [ "[8.0.0] - 2025-08-07", "md_docs_2changelog_2v8.html#autotoc_md1008", [
+        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v8.html#autotoc_md1009", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v8.html#autotoc_md1010", null ]
       ] ]
     ] ],
     [ "CHANGELOG", "md_docs_2changelog_2v9.html", [
-      [ "[9.5.3] - 2025-09-11", "md_docs_2changelog_2v9.html#autotoc_md1001", [
-        [ "✨ არქიტექტურული გაუმჯობესებები და DX (Architectural & Developer Experience Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1002", null ],
-        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v9.html#autotoc_md1003", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1004", null ]
+      [ "[9.5.3] - 2025-09-11", "md_docs_2changelog_2v9.html#autotoc_md1013", [
+        [ "✨ არქიტექტურული გაუმჯობესებები და DX (Architectural & Developer Experience Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1014", null ],
+        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v9.html#autotoc_md1015", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1016", null ]
       ] ],
-      [ "[9.5.2] - 2025-08-09", "md_docs_2changelog_2v9.html#autotoc_md1006", [
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1007", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1008", null ]
+      [ "[9.5.2] - 2025-08-09", "md_docs_2changelog_2v9.html#autotoc_md1018", [
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1019", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1020", null ]
       ] ],
-      [ "[9.5.0] - 2025-08-09", "md_docs_2changelog_2v9.html#autotoc_md1010", [
-        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v9.html#autotoc_md1011", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1012", null ]
-      ] ],
-      [ "[9.4.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1014", [
-        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1015", null ]
-      ] ],
-      [ "[9.3.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1017", [
-        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1018", null ],
-        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v9.html#autotoc_md1019", null ],
-        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v9.html#autotoc_md1020", null ]
-      ] ],
-      [ "[9.2.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1022", [
-        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1023", null ],
+      [ "[9.5.0] - 2025-08-09", "md_docs_2changelog_2v9.html#autotoc_md1022", [
+        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v9.html#autotoc_md1023", null ],
         [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1024", null ]
       ] ],
-      [ "[9.1.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1026", [
-        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1027", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1028", null ]
+      [ "[9.4.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1026", [
+        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1027", null ]
       ] ],
-      [ "[9.0.0] - 2025-08-07", "md_docs_2changelog_2v9.html#autotoc_md1030", [
-        [ "💥 არქიტექტურული ცვლილებები (Breaking Changes & Refactoring)", "md_docs_2changelog_2v9.html#autotoc_md1031", null ],
-        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1032", null ]
+      [ "[9.3.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1029", [
+        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1030", null ],
+        [ "🔄 შეცვლილი და გაუმჯობესებული (Changed & Improved)", "md_docs_2changelog_2v9.html#autotoc_md1031", null ],
+        [ "🐛 შესწორებები (Bug Fixes)", "md_docs_2changelog_2v9.html#autotoc_md1032", null ]
+      ] ],
+      [ "[9.2.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1034", [
+        [ "✨ გაუმჯობესებები (Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1035", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1036", null ]
+      ] ],
+      [ "[9.1.0] - 2025-08-08", "md_docs_2changelog_2v9.html#autotoc_md1038", [
+        [ "✨ არქიტექტურული გაუმჯობესებები (Architectural Improvements)", "md_docs_2changelog_2v9.html#autotoc_md1039", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1040", null ]
+      ] ],
+      [ "[9.0.0] - 2025-08-07", "md_docs_2changelog_2v9.html#autotoc_md1042", [
+        [ "💥 არქიტექტურული ცვლილებები (Breaking Changes & Refactoring)", "md_docs_2changelog_2v9.html#autotoc_md1043", null ],
+        [ "📄 დოკუმენტაცია (Documentation)", "md_docs_2changelog_2v9.html#autotoc_md1044", null ]
       ] ]
     ] ],
     [ "Synapse Branching Strategy", "md_docs_2contributing_2branching__strategy.html", [
-      [ "მიმოხილვა", "md_docs_2contributing_2branching__strategy.html#autotoc_md1036", null ],
-      [ "ძირითადი ბრენჩები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1038", null ],
-      [ "ბრენჩის სახელდების წესები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1040", null ],
-      [ "სამუშაო პროცესი", "md_docs_2contributing_2branching__strategy.html#autotoc_md1042", null ],
-      [ "საუკეთესო პრაქტიკები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1044", null ],
-      [ "რესურსები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1046", null ]
+      [ "მიმოხილვა", "md_docs_2contributing_2branching__strategy.html#autotoc_md1048", null ],
+      [ "ძირითადი ბრენჩები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1050", null ],
+      [ "ბრენჩის სახელდების წესები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1052", null ],
+      [ "სამუშაო პროცესი", "md_docs_2contributing_2branching__strategy.html#autotoc_md1054", null ],
+      [ "საუკეთესო პრაქტიკები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1056", null ],
+      [ "რესურსები", "md_docs_2contributing_2branching__strategy.html#autotoc_md1058", null ]
     ] ],
     [ "ქცევის კოდექსი (Code of Conduct)", "md_docs_2contributing_2code__of__conduct.html", [
-      [ "მიზანი", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1050", null ],
-      [ "ძირითადი პრინციპები", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1052", null ],
-      [ "დაუშვებელი ქცევა", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1054", null ],
-      [ "პასუხისმგებლობები", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1056", null ],
-      [ "დარღვევის შემთხვევაში მოქმედება", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1058", null ],
-      [ "დამატებითი რესურსები", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1060", null ]
+      [ "მიზანი", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1062", null ],
+      [ "ძირითადი პრინციპები", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1064", null ],
+      [ "დაუშვებელი ქცევა", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1066", null ],
+      [ "პასუხისმგებლობები", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1068", null ],
+      [ "დარღვევის შემთხვევაში მოქმედება", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1070", null ],
+      [ "დამატებითი რესურსები", "md_docs_2contributing_2code__of__conduct.html#autotoc_md1072", null ]
     ] ],
     [ "Synapse Commit Message Guidelines", "md_docs_2contributing_2commit__message__guidelines.html", [
-      [ "მიმოხილვა", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1064", null ],
-      [ "ძირითადი სტრუქტურა", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1066", null ],
-      [ "სათაურის წერის წესები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1068", null ],
-      [ "დეტალური აღწერის წერის წესები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1070", null ],
-      [ "Footer-ის წერის წესები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1072", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1074", null ],
-      [ "რესურსები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1076", null ]
+      [ "მიმოხილვა", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1076", null ],
+      [ "ძირითადი სტრუქტურა", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1078", null ],
+      [ "სათაურის წერის წესები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1080", null ],
+      [ "დეტალური აღწერის წერის წესები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1082", null ],
+      [ "Footer-ის წერის წესები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1084", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1086", null ],
+      [ "რესურსები", "md_docs_2contributing_2commit__message__guidelines.html#autotoc_md1088", null ]
     ] ],
     [ "კონტრიბუციის სახელმძღვანელო (Contributing Guide)", "md_docs_2contributing_2contributing__guide.html", [
-      [ "მიზანი", "md_docs_2contributing_2contributing__guide.html#autotoc_md1079", null ],
-      [ "1. კონტრიბუციის პროცესი", "md_docs_2contributing_2contributing__guide.html#autotoc_md1081", null ],
-      [ "2. კოდის სტანდარტები", "md_docs_2contributing_2contributing__guide.html#autotoc_md1082", null ],
-      [ "3. დოკუმენტაციის მოთხოვნები", "md_docs_2contributing_2contributing__guide.html#autotoc_md1083", null ],
-      [ "4. Pull Request-ის მიმოხილვა", "md_docs_2contributing_2contributing__guide.html#autotoc_md1084", null ],
-      [ "5. Best Practices", "md_docs_2contributing_2contributing__guide.html#autotoc_md1085", null ],
-      [ "6. აკრძალული პრაქტიკები", "md_docs_2contributing_2contributing__guide.html#autotoc_md1086", null ]
+      [ "მიზანი", "md_docs_2contributing_2contributing__guide.html#autotoc_md1091", null ],
+      [ "1. კონტრიბუციის პროცესი", "md_docs_2contributing_2contributing__guide.html#autotoc_md1093", null ],
+      [ "2. კოდის სტანდარტები", "md_docs_2contributing_2contributing__guide.html#autotoc_md1094", null ],
+      [ "3. დოკუმენტაციის მოთხოვნები", "md_docs_2contributing_2contributing__guide.html#autotoc_md1095", null ],
+      [ "4. Pull Request-ის მიმოხილვა", "md_docs_2contributing_2contributing__guide.html#autotoc_md1096", null ],
+      [ "5. Best Practices", "md_docs_2contributing_2contributing__guide.html#autotoc_md1097", null ],
+      [ "6. აკრძალული პრაქტიკები", "md_docs_2contributing_2contributing__guide.html#autotoc_md1098", null ]
     ] ],
     [ "Synapse Contributing Reference Index", "md_docs_2contributing_2contributing__index.html", [
-      [ "ძირითადი სახელმძღვანელოები", "md_docs_2contributing_2contributing__index.html#autotoc_md1090", null ],
-      [ "შაბლონები", "md_docs_2contributing_2contributing__index.html#autotoc_md1091", null ]
+      [ "ძირითადი სახელმძღვანელოები", "md_docs_2contributing_2contributing__index.html#autotoc_md1102", null ],
+      [ "შაბლონები", "md_docs_2contributing_2contributing__index.html#autotoc_md1103", null ]
     ] ],
     [ "კონვენციების ავტომატური შემმოწმებელი (<tt>check_conventions.py</tt>)", "md_docs_2contributing_2convention__linter__guide.html", [
-      [ "1. შესავალი", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1094", null ],
-      [ "2. რას ამოწმებს სკრიპტი?", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1095", null ],
-      [ "3. როგორ გამოვიყენოთ ლოკალურად?", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1100", null ],
-      [ "4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1102", null ],
-      [ "5. როგორ გამოვასწოროთ გავრცელებული შეცდომები?", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1103", null ]
+      [ "1. შესავალი", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1106", null ],
+      [ "2. რას ამოწმებს სკრიპტი?", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1107", null ],
+      [ "3. როგორ გამოვიყენოთ ლოკალურად?", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1112", null ],
+      [ "4. ინტეგრაცია GitHub Actions-თან (ავტომატური შემოწმება)", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1114", null ],
+      [ "5. როგორ გამოვასწოროთ გავრცელებული შეცდომები?", "md_docs_2contributing_2convention__linter__guide.html#autotoc_md1115", null ]
     ] ],
     [ "ხშირად დასმული კითხვები (FAQ)", "md_docs_2contributing_2faq.html", [
-      [ "1. როგორ დავიწყო კონტრიბუცია Synapse Framework-ში?", "md_docs_2contributing_2faq.html#autotoc_md1106", null ],
-      [ "2. რა სტანდარტებს და კონვენციებს უნდა დავიცვა?", "md_docs_2contributing_2faq.html#autotoc_md1107", null ],
-      [ "3. როგორ შევქმნა Pull Request?", "md_docs_2contributing_2faq.html#autotoc_md1108", null ],
-      [ "4. როგორ მოვამზადო ლოკალური გარემო?", "md_docs_2contributing_2faq.html#autotoc_md1109", null ],
-      [ "5. როგორ გავუშვა ტესტები?", "md_docs_2contributing_2faq.html#autotoc_md1110", null ],
-      [ "6. როგორ მოვაგვარო გარემოს ან ბილდის პრობლემები?", "md_docs_2contributing_2faq.html#autotoc_md1111", null ],
-      [ "7. სად ვიპოვო დოკუმენტაციის სტრუქტურის და სტანდარტების შესახებ ინფორმაცია?", "md_docs_2contributing_2faq.html#autotoc_md1112", null ],
-      [ "8. როგორ დავამატო ან განვაახლო დოკუმენტაცია?", "md_docs_2contributing_2faq.html#autotoc_md1113", null ],
-      [ "9. როგორ დავიცვა ქცევის კოდექსი?", "md_docs_2contributing_2faq.html#autotoc_md1114", null ],
-      [ "10. ვის მივმართო დამატებითი კითხვების ან პრობლემების შემთხვევაში?", "md_docs_2contributing_2faq.html#autotoc_md1115", null ]
+      [ "1. როგორ დავიწყო კონტრიბუცია Synapse Framework-ში?", "md_docs_2contributing_2faq.html#autotoc_md1118", null ],
+      [ "2. რა სტანდარტებს და კონვენციებს უნდა დავიცვა?", "md_docs_2contributing_2faq.html#autotoc_md1119", null ],
+      [ "3. როგორ შევქმნა Pull Request?", "md_docs_2contributing_2faq.html#autotoc_md1120", null ],
+      [ "4. როგორ მოვამზადო ლოკალური გარემო?", "md_docs_2contributing_2faq.html#autotoc_md1121", null ],
+      [ "5. როგორ გავუშვა ტესტები?", "md_docs_2contributing_2faq.html#autotoc_md1122", null ],
+      [ "6. როგორ მოვაგვარო გარემოს ან ბილდის პრობლემები?", "md_docs_2contributing_2faq.html#autotoc_md1123", null ],
+      [ "7. სად ვიპოვო დოკუმენტაციის სტრუქტურის და სტანდარტების შესახებ ინფორმაცია?", "md_docs_2contributing_2faq.html#autotoc_md1124", null ],
+      [ "8. როგორ დავამატო ან განვაახლო დოკუმენტაცია?", "md_docs_2contributing_2faq.html#autotoc_md1125", null ],
+      [ "9. როგორ დავიცვა ქცევის კოდექსი?", "md_docs_2contributing_2faq.html#autotoc_md1126", null ],
+      [ "10. ვის მივმართო დამატებითი კითხვების ან პრობლემების შემთხვევაში?", "md_docs_2contributing_2faq.html#autotoc_md1127", null ]
     ] ],
     [ "Synapse Issue Template", "md_docs_2contributing_2issue__template.html", [
-      [ "მიმოხილვა", "md_docs_2contributing_2issue__template.html#autotoc_md1119", null ],
-      [ "ძირითადი ინფორმაცია", "md_docs_2contributing_2issue__template.html#autotoc_md1121", null ],
-      [ "დეტალური აღწერა", "md_docs_2contributing_2issue__template.html#autotoc_md1123", null ],
-      [ "გამეორების ნაბიჯები (თუ ეს ბაგია)", "md_docs_2contributing_2issue__template.html#autotoc_md1125", null ],
-      [ "მოსალოდნელი შედეგი", "md_docs_2contributing_2issue__template.html#autotoc_md1127", null ],
-      [ "ფაქტობრივი შედეგი", "md_docs_2contributing_2issue__template.html#autotoc_md1129", null ],
-      [ "გარემოს ინფორმაცია", "md_docs_2contributing_2issue__template.html#autotoc_md1131", null ],
-      [ "დამატებითი ინფორმაცია", "md_docs_2contributing_2issue__template.html#autotoc_md1133", null ],
-      [ "რესურსები", "md_docs_2contributing_2issue__template.html#autotoc_md1135", null ]
+      [ "მიმოხილვა", "md_docs_2contributing_2issue__template.html#autotoc_md1131", null ],
+      [ "ძირითადი ინფორმაცია", "md_docs_2contributing_2issue__template.html#autotoc_md1133", null ],
+      [ "დეტალური აღწერა", "md_docs_2contributing_2issue__template.html#autotoc_md1135", null ],
+      [ "გამეორების ნაბიჯები (თუ ეს ბაგია)", "md_docs_2contributing_2issue__template.html#autotoc_md1137", null ],
+      [ "მოსალოდნელი შედეგი", "md_docs_2contributing_2issue__template.html#autotoc_md1139", null ],
+      [ "ფაქტობრივი შედეგი", "md_docs_2contributing_2issue__template.html#autotoc_md1141", null ],
+      [ "გარემოს ინფორმაცია", "md_docs_2contributing_2issue__template.html#autotoc_md1143", null ],
+      [ "დამატებითი ინფორმაცია", "md_docs_2contributing_2issue__template.html#autotoc_md1145", null ],
+      [ "რესურსები", "md_docs_2contributing_2issue__template.html#autotoc_md1147", null ]
     ] ],
     [ "Synapse Local Setup Guide", "md_docs_2contributing_2local__setup.html", [
-      [ "მიმოხილვა", "md_docs_2contributing_2local__setup.html#autotoc_md1139", null ],
-      [ "სისტემური მოთხოვნები", "md_docs_2contributing_2local__setup.html#autotoc_md1141", null ],
-      [ "ESP-IDF-ის ინსტალაცია", "md_docs_2contributing_2local__setup.html#autotoc_md1143", null ],
-      [ "პროექტის კლონირება", "md_docs_2contributing_2local__setup.html#autotoc_md1145", null ],
-      [ "sdkconfig ფაილის კონფიგურაცია", "md_docs_2contributing_2local__setup.html#autotoc_md1147", null ],
-      [ "პროექტის აგება და გაშვება", "md_docs_2contributing_2local__setup.html#autotoc_md1149", null ],
-      [ "ტესტირება", "md_docs_2contributing_2local__setup.html#autotoc_md1151", null ],
-      [ "პრობლემების შემთხვევაში", "md_docs_2contributing_2local__setup.html#autotoc_md1153", null ],
-      [ "რესურსები", "md_docs_2contributing_2local__setup.html#autotoc_md1155", null ]
+      [ "მიმოხილვა", "md_docs_2contributing_2local__setup.html#autotoc_md1151", null ],
+      [ "სისტემური მოთხოვნები", "md_docs_2contributing_2local__setup.html#autotoc_md1153", null ],
+      [ "ESP-IDF-ის ინსტალაცია", "md_docs_2contributing_2local__setup.html#autotoc_md1155", null ],
+      [ "პროექტის კლონირება", "md_docs_2contributing_2local__setup.html#autotoc_md1157", null ],
+      [ "sdkconfig ფაილის კონფიგურაცია", "md_docs_2contributing_2local__setup.html#autotoc_md1159", null ],
+      [ "პროექტის აგება და გაშვება", "md_docs_2contributing_2local__setup.html#autotoc_md1161", null ],
+      [ "ტესტირება", "md_docs_2contributing_2local__setup.html#autotoc_md1163", null ],
+      [ "პრობლემების შემთხვევაში", "md_docs_2contributing_2local__setup.html#autotoc_md1165", null ],
+      [ "რესურსები", "md_docs_2contributing_2local__setup.html#autotoc_md1167", null ]
     ] ],
     [ "Synapse Pull Request Template", "md_docs_2contributing_2pull__request__template.html", [
-      [ "მიმოხილვა", "md_docs_2contributing_2pull__request__template.html#autotoc_md1159", null ],
-      [ "ძირითადი ინფორმაცია", "md_docs_2contributing_2pull__request__template.html#autotoc_md1161", null ],
-      [ "ცვლილებების დეტალური აღწერა", "md_docs_2contributing_2pull__request__template.html#autotoc_md1163", null ],
-      [ "ტესტირება და ვალიდაცია", "md_docs_2contributing_2pull__request__template.html#autotoc_md1165", null ],
-      [ "მიმოხილვის რეკომენდაციები", "md_docs_2contributing_2pull__request__template.html#autotoc_md1167", null ],
-      [ "დამატებითი ინფორმაცია", "md_docs_2contributing_2pull__request__template.html#autotoc_md1169", null ],
-      [ "რესურსები", "md_docs_2contributing_2pull__request__template.html#autotoc_md1171", null ]
+      [ "მიმოხილვა", "md_docs_2contributing_2pull__request__template.html#autotoc_md1171", null ],
+      [ "ძირითადი ინფორმაცია", "md_docs_2contributing_2pull__request__template.html#autotoc_md1173", null ],
+      [ "ცვლილებების დეტალური აღწერა", "md_docs_2contributing_2pull__request__template.html#autotoc_md1175", null ],
+      [ "ტესტირება და ვალიდაცია", "md_docs_2contributing_2pull__request__template.html#autotoc_md1177", null ],
+      [ "მიმოხილვის რეკომენდაციები", "md_docs_2contributing_2pull__request__template.html#autotoc_md1179", null ],
+      [ "დამატებითი ინფორმაცია", "md_docs_2contributing_2pull__request__template.html#autotoc_md1181", null ],
+      [ "რესურსები", "md_docs_2contributing_2pull__request__template.html#autotoc_md1183", null ]
     ] ],
     [ "Synapse Review Guidelines", "md_docs_2contributing_2review__guidelines.html", [
-      [ "მიმოხილვის მიზანი", "md_docs_2contributing_2review__guidelines.html#autotoc_md1175", null ],
-      [ "მიმოხილვის პროცესი", "md_docs_2contributing_2review__guidelines.html#autotoc_md1177", null ],
-      [ "მიმოხილვის კრიტერიუმები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1179", null ],
-      [ "საუკეთესო პრაქტიკები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1181", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1183", null ],
-      [ "რესურსები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1185", null ]
+      [ "მიმოხილვის მიზანი", "md_docs_2contributing_2review__guidelines.html#autotoc_md1187", null ],
+      [ "მიმოხილვის პროცესი", "md_docs_2contributing_2review__guidelines.html#autotoc_md1189", null ],
+      [ "მიმოხილვის კრიტერიუმები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1191", null ],
+      [ "საუკეთესო პრაქტიკები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1193", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1195", null ],
+      [ "რესურსები", "md_docs_2contributing_2review__guidelines.html#autotoc_md1197", null ]
+    ] ],
+    [ "Assertions და Guard Clauses კონვენცია", "md_docs_2convention_2assertion__and__guards.html", [
+      [ "1. 🎯 მიზანი", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1200", null ],
+      [ "2. 🤔 ფუნდამენტური განსხვავება: Assertion vs. Error Handling", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1201", null ],
+      [ "3. <tt>SYNAPSE_ASSERT</tt> მაკრო", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1202", [
+        [ "3.1. როდის გამოვიყენოთ?", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1203", null ],
+        [ "3.2. გამოყენების მაგალითები", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1204", null ],
+        [ "3.3. ქცევა <tt>release</tt> რეჟიმში", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1205", null ]
+      ] ],
+      [ "4. <tt>SYNAPSE_GUARD</tt> მაკროები", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1206", [
+        [ "4.1. როდის გამოვიყენოთ?", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1207", null ],
+        [ "4.2. გამოყენების მაგალითები", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1208", null ],
+        [ "4.3. როდის <strong>არ</strong> გამოვიყენოთ <tt>SYNAPSE_GUARD</tt>?", "md_docs_2convention_2assertion__and__guards.html#autotoc_md1209", null ]
+      ] ]
     ] ],
     [ "9. Doxygen კომენტარების სტანდარტი (v1.0)", "md_docs_2convention_2coding__doxygen__standard.html", [
-      [ "1. შესავალი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1188", null ],
-      [ "2. ფაილის სათაურის (Header) კომენტარი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1189", [
-        [ "2.1. სტრუქტურა", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1190", null ],
-        [ "2.2. მაგალითი (<tt>i2c_bus_module.h</tt>)", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1191", null ]
+      [ "1. შესავალი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1211", null ],
+      [ "2. ფაილის სათაურის (Header) კომენტარი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1212", [
+        [ "2.1. სტრუქტურა", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1213", null ],
+        [ "2.2. მაგალითი (<tt>i2c_bus_module.h</tt>)", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1214", null ]
       ] ],
-      [ "3. ფუნქციის კომენტარი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1192", [
-        [ "3.1. სტრუქტურა", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1193", null ],
-        [ "3.2. მაგალითი (<tt>service_locator.h</tt>)", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1194", null ]
+      [ "3. ფუნქციის კომენტარი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1215", [
+        [ "3.1. სტრუქტურა", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1216", null ],
+        [ "3.2. მაგალითი (<tt>service_locator.h</tt>)", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1217", null ]
       ] ],
-      [ "4. სტრუქტურების და ტიპების კომენტარები", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1195", [
-        [ "4.1. სტრუქტურის მაგალითი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1196", null ]
+      [ "4. სტრუქტურების და ტიპების კომენტარები", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1218", [
+        [ "4.1. სტრუქტურის მაგალითი", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1219", null ]
       ] ],
-      [ "5. Doxygen ტეგების გამოყენების წესები", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1197", null ]
+      [ "5. Doxygen ტეგების გამოყენების წესები", "md_docs_2convention_2coding__doxygen__standard.html#autotoc_md1220", null ]
     ] ],
     [ "კომუნიკაციის პატერნების წესები (v2.0)", "md_docs_2convention_2communication__patterns.html", [
-      [ "ძირითადი პრინციპი: მაქსიმალური იზოლაცია და პროგნოზირებადი გაშვება", "md_docs_2convention_2communication__patterns.html#autotoc_md1199", null ],
-      [ "ოთხი ძირითადი პატერნი", "md_docs_2convention_2communication__patterns.html#autotoc_md1200", [
-        [ "1. Service Locator Pattern (State-Aware)", "md_docs_2convention_2communication__patterns.html#autotoc_md1201", null ],
-        [ "2. Event Bus Pattern", "md_docs_2convention_2communication__patterns.html#autotoc_md1202", null ],
-        [ "3. Command Router Pattern", "md_docs_2convention_2communication__patterns.html#autotoc_md1203", null ],
-        [ "4. Promise Pattern (ახალი)", "md_docs_2convention_2communication__patterns.html#autotoc_md1204", null ]
+      [ "ძირითადი პრინციპი: მაქსიმალური იზოლაცია და პროგნოზირებადი გაშვება", "md_docs_2convention_2communication__patterns.html#autotoc_md1222", null ],
+      [ "ოთხი ძირითადი პატერნი", "md_docs_2convention_2communication__patterns.html#autotoc_md1223", [
+        [ "1. Service Locator Pattern (State-Aware)", "md_docs_2convention_2communication__patterns.html#autotoc_md1224", null ],
+        [ "2. Event Bus Pattern", "md_docs_2convention_2communication__patterns.html#autotoc_md1225", null ],
+        [ "3. Command Router Pattern", "md_docs_2convention_2communication__patterns.html#autotoc_md1226", null ],
+        [ "4. Promise Pattern (ახალი)", "md_docs_2convention_2communication__patterns.html#autotoc_md1227", null ]
       ] ],
-      [ "კომუნიკაციის ტიპები", "md_docs_2convention_2communication__patterns.html#autotoc_md1205", [
-        [ "Direct API Communication (Service Locator)", "md_docs_2convention_2communication__patterns.html#autotoc_md1206", null ],
-        [ "Broadcast Communication (Event Bus)", "md_docs_2convention_2communication__patterns.html#autotoc_md1207", null ]
+      [ "კომუნიკაციის ტიპები", "md_docs_2convention_2communication__patterns.html#autotoc_md1228", [
+        [ "Direct API Communication (Service Locator)", "md_docs_2convention_2communication__patterns.html#autotoc_md1229", null ],
+        [ "Broadcast Communication (Event Bus)", "md_docs_2convention_2communication__patterns.html#autotoc_md1230", null ]
       ] ],
-      [ "აკრძალული პატერნები", "md_docs_2convention_2communication__patterns.html#autotoc_md1208", [
-        [ "❌ პირდაპირი დამოკიდებულებები", "md_docs_2convention_2communication__patterns.html#autotoc_md1209", null ],
-        [ "❌ პატერნების არასწორი შერევა", "md_docs_2convention_2communication__patterns.html#autotoc_md1210", null ],
-        [ "❌ System Manager MQTT Handling", "md_docs_2convention_2communication__patterns.html#autotoc_md1211", null ]
+      [ "აკრძალული პატერნები", "md_docs_2convention_2communication__patterns.html#autotoc_md1231", [
+        [ "❌ პირდაპირი დამოკიდებულებები", "md_docs_2convention_2communication__patterns.html#autotoc_md1232", null ],
+        [ "❌ პატერნების არასწორი შერევა", "md_docs_2convention_2communication__patterns.html#autotoc_md1233", null ],
+        [ "❌ System Manager MQTT Handling", "md_docs_2convention_2communication__patterns.html#autotoc_md1234", null ]
       ] ],
-      [ "სწორი იმპლემენტაცია", "md_docs_2convention_2communication__patterns.html#autotoc_md1212", [
-        [ "Service Locator-ის გამოყენება (ახალი პატერნი)", "md_docs_2convention_2communication__patterns.html#autotoc_md1213", [
-          [ "1. Service Registration (<tt>_create</tt> ფუნქციაში)", "md_docs_2convention_2communication__patterns.html#autotoc_md1214", null ],
-          [ "2. Service Usage (სხვა მოდულში)", "md_docs_2convention_2communication__patterns.html#autotoc_md1215", null ]
+      [ "სწორი იმპლემენტაცია", "md_docs_2convention_2communication__patterns.html#autotoc_md1235", [
+        [ "Service Locator-ის გამოყენება (ახალი პატერნი)", "md_docs_2convention_2communication__patterns.html#autotoc_md1236", [
+          [ "1. Service Registration (<tt>_create</tt> ფუნქციაში)", "md_docs_2convention_2communication__patterns.html#autotoc_md1237", null ],
+          [ "2. Service Usage (სხვა მოდულში)", "md_docs_2convention_2communication__patterns.html#autotoc_md1238", null ]
         ] ],
-        [ "Event Bus-ის გამოყენება", "md_docs_2convention_2communication__patterns.html#autotoc_md1216", [
-          [ "1. Event Publishing (Sensor Module)", "md_docs_2convention_2communication__patterns.html#autotoc_md1217", null ],
-          [ "2. Event Subscription (MQTT Module)", "md_docs_2convention_2communication__patterns.html#autotoc_md1218", null ]
+        [ "Event Bus-ის გამოყენება", "md_docs_2convention_2communication__patterns.html#autotoc_md1239", [
+          [ "1. Event Publishing (Sensor Module)", "md_docs_2convention_2communication__patterns.html#autotoc_md1240", null ],
+          [ "2. Event Subscription (MQTT Module)", "md_docs_2convention_2communication__patterns.html#autotoc_md1241", null ]
         ] ]
       ] ],
-      [ "დინამიური MQTT თემები <tt>{module_name}</tt> Placeholder-ით", "md_docs_2convention_2communication__patterns.html#autotoc_md1219", [
-        [ "პატერნის აღწერა", "md_docs_2convention_2communication__patterns.html#autotoc_md1220", null ]
+      [ "დინამიური MQTT თემები <tt>{module_name}</tt> Placeholder-ით", "md_docs_2convention_2communication__patterns.html#autotoc_md1242", [
+        [ "პატერნის აღწერა", "md_docs_2convention_2communication__patterns.html#autotoc_md1243", null ]
       ] ],
-      [ "პატერნის არჩევის გზამკვლევი", "md_docs_2convention_2communication__patterns.html#autotoc_md1221", [
-        [ "Service Locator-ის გამოყენება", "md_docs_2convention_2communication__patterns.html#autotoc_md1222", null ],
-        [ "Event Bus-ის გამოყენება", "md_docs_2convention_2communication__patterns.html#autotoc_md1223", null ]
+      [ "პატერნის არჩევის გზამკვლევი", "md_docs_2convention_2communication__patterns.html#autotoc_md1244", [
+        [ "Service Locator-ის გამოყენება", "md_docs_2convention_2communication__patterns.html#autotoc_md1245", null ],
+        [ "Event Bus-ის გამოყენება", "md_docs_2convention_2communication__patterns.html#autotoc_md1246", null ]
       ] ],
-      [ "Architecture Diagram", "md_docs_2convention_2communication__patterns.html#autotoc_md1224", null ],
-      [ "შეჯამება", "md_docs_2convention_2communication__patterns.html#autotoc_md1225", null ]
+      [ "Architecture Diagram", "md_docs_2convention_2communication__patterns.html#autotoc_md1247", null ],
+      [ "შეჯამება", "md_docs_2convention_2communication__patterns.html#autotoc_md1248", null ]
     ] ],
     [ "კონფიგურაციის მართვის კონვენცია", "md_docs_2convention_2configuration__management.html", [
-      [ "1. 📜 ძირითადი პრინციპი", "md_docs_2convention_2configuration__management.html#autotoc_md1227", null ],
-      [ "2. 📂 კონფიგურაციის წყაროები და იერარქია", "md_docs_2convention_2configuration__management.html#autotoc_md1228", null ],
-      [ "3. 🏗️ კონფიგურაციის სტრუქტურა", "md_docs_2convention_2configuration__management.html#autotoc_md1229", null ],
-      [ "4. 📝 კონფიგურაციის პარსინგის პატერნი", "md_docs_2convention_2configuration__management.html#autotoc_md1230", [
-        [ "<tt>parse_config</tt> ფუნქციის 3-ნაბიჯიანი ლოგიკა", "md_docs_2convention_2configuration__management.html#autotoc_md1231", null ],
-        [ "<tt>parse_config</tt> ფუნქციის მაგალითი", "md_docs_2convention_2configuration__management.html#autotoc_md1232", null ]
+      [ "1. 📜 ძირითადი პრინციპი", "md_docs_2convention_2configuration__management.html#autotoc_md1250", null ],
+      [ "2. 📂 კონფიგურაციის წყაროები და იერარქია", "md_docs_2convention_2configuration__management.html#autotoc_md1251", null ],
+      [ "3. 🏗️ კონფიგურაციის სტრუქტურა", "md_docs_2convention_2configuration__management.html#autotoc_md1252", null ],
+      [ "4. 📝 კონფიგურაციის პარსინგის პატერნი", "md_docs_2convention_2configuration__management.html#autotoc_md1253", [
+        [ "<tt>parse_config</tt> ფუნქციის 3-ნაბიჯიანი ლოგიკა", "md_docs_2convention_2configuration__management.html#autotoc_md1254", null ],
+        [ "<tt>parse_config</tt> ფუნქციის მაგალითი", "md_docs_2convention_2configuration__management.html#autotoc_md1255", null ]
       ] ],
-      [ "5. 🌐 კონფიგურაციაზე წვდომა სხვა მოდულებიდან", "md_docs_2convention_2configuration__management.html#autotoc_md1233", null ],
-      [ "6. ❌ აკრძალული პრაქტიკები", "md_docs_2convention_2configuration__management.html#autotoc_md1234", null ],
-      [ "7. ✅ საუკეთესო პრაქტიკები", "md_docs_2convention_2configuration__management.html#autotoc_md1235", null ]
+      [ "5. 🌐 კონფიგურაციაზე წვდომა სხვა მოდულებიდან", "md_docs_2convention_2configuration__management.html#autotoc_md1256", null ],
+      [ "6. ❌ აკრძალული პრაქტიკები", "md_docs_2convention_2configuration__management.html#autotoc_md1257", null ],
+      [ "7. ✅ საუკეთესო პრაქტიკები", "md_docs_2convention_2configuration__management.html#autotoc_md1258", null ]
     ] ],
     [ "Synapse Convention Reference Index", "md_docs_2convention_2convention__index.html", [
-      [ "Coding & Documentation", "md_docs_2convention_2convention__index.html#autotoc_md1238", null ],
-      [ "Naming & Structure", "md_docs_2convention_2convention__index.html#autotoc_md1239", null ],
-      [ "Patterns & Management", "md_docs_2convention_2convention__index.html#autotoc_md1240", null ]
+      [ "Coding & Documentation", "md_docs_2convention_2convention__index.html#autotoc_md1261", null ],
+      [ "Naming & Structure", "md_docs_2convention_2convention__index.html#autotoc_md1262", null ],
+      [ "Patterns & Management", "md_docs_2convention_2convention__index.html#autotoc_md1263", null ]
     ] ],
     [ "Error Handling-ის წესები", "md_docs_2convention_2error__handling.html", [
-      [ "ძირითადი პრინციპები", "md_docs_2convention_2error__handling.html#autotoc_md1243", [
-        [ "1. ESP Error Codes გამოყენება", "md_docs_2convention_2error__handling.html#autotoc_md1244", null ],
-        [ "2. Comprehensive Error Checking", "md_docs_2convention_2error__handling.html#autotoc_md1245", null ]
+      [ "ძირითადი პრინციპები", "md_docs_2convention_2error__handling.html#autotoc_md1266", [
+        [ "1. ESP Error Codes გამოყენება", "md_docs_2convention_2error__handling.html#autotoc_md1267", null ],
+        [ "2. Comprehensive Error Checking", "md_docs_2convention_2error__handling.html#autotoc_md1268", null ]
       ] ],
-      [ "Standard Error Codes", "md_docs_2convention_2error__handling.html#autotoc_md1246", [
-        [ "Framework-Specific Errors", "md_docs_2convention_2error__handling.html#autotoc_md1247", null ],
-        [ "Common ESP Error Codes", "md_docs_2convention_2error__handling.html#autotoc_md1248", null ]
+      [ "Standard Error Codes", "md_docs_2convention_2error__handling.html#autotoc_md1269", [
+        [ "Framework-Specific Errors", "md_docs_2convention_2error__handling.html#autotoc_md1270", null ],
+        [ "Common ESP Error Codes", "md_docs_2convention_2error__handling.html#autotoc_md1271", null ]
       ] ],
-      [ "Error Handling Patterns", "md_docs_2convention_2error__handling.html#autotoc_md1249", [
-        [ "1. Parameter Validation", "md_docs_2convention_2error__handling.html#autotoc_md1250", null ],
-        [ "2. Resource Allocation Checking", "md_docs_2convention_2error__handling.html#autotoc_md1251", null ],
-        [ "3. Service Locator Error Handling", "md_docs_2convention_2error__handling.html#autotoc_md1252", null ],
-        [ "4. Configuration Parsing Error Handling", "md_docs_2convention_2error__handling.html#autotoc_md1253", null ],
-        [ "5. Hardware Operation Error Handling", "md_docs_2convention_2error__handling.html#autotoc_md1254", null ]
+      [ "Error Handling Patterns", "md_docs_2convention_2error__handling.html#autotoc_md1272", [
+        [ "1. Parameter Validation", "md_docs_2convention_2error__handling.html#autotoc_md1273", null ],
+        [ "2. Resource Allocation Checking", "md_docs_2convention_2error__handling.html#autotoc_md1274", null ],
+        [ "3. Service Locator Error Handling", "md_docs_2convention_2error__handling.html#autotoc_md1275", null ],
+        [ "4. Configuration Parsing Error Handling", "md_docs_2convention_2error__handling.html#autotoc_md1276", null ],
+        [ "5. Hardware Operation Error Handling", "md_docs_2convention_2error__handling.html#autotoc_md1277", null ]
       ] ],
-      [ "Cleanup and Resource Management", "md_docs_2convention_2error__handling.html#autotoc_md1255", [
-        [ "1. Proper Cleanup on Errors", "md_docs_2convention_2error__handling.html#autotoc_md1256", null ],
-        [ "2. Resource Cleanup Functions", "md_docs_2convention_2error__handling.html#autotoc_md1257", null ]
+      [ "Cleanup and Resource Management", "md_docs_2convention_2error__handling.html#autotoc_md1278", [
+        [ "1. Proper Cleanup on Errors", "md_docs_2convention_2error__handling.html#autotoc_md1279", null ],
+        [ "2. Resource Cleanup Functions", "md_docs_2convention_2error__handling.html#autotoc_md1280", null ]
       ] ],
-      [ "Logging Standards", "md_docs_2convention_2error__handling.html#autotoc_md1258", [
-        [ "1. Error Levels", "md_docs_2convention_2error__handling.html#autotoc_md1259", null ],
-        [ "2. Error Context Information", "md_docs_2convention_2error__handling.html#autotoc_md1260", null ]
+      [ "Logging Standards", "md_docs_2convention_2error__handling.html#autotoc_md1281", [
+        [ "1. Error Levels", "md_docs_2convention_2error__handling.html#autotoc_md1282", null ],
+        [ "2. Error Context Information", "md_docs_2convention_2error__handling.html#autotoc_md1283", null ]
       ] ],
-      [ "Error Recovery Strategies", "md_docs_2convention_2error__handling.html#autotoc_md1261", [
-        [ "1. Retry Logic", "md_docs_2convention_2error__handling.html#autotoc_md1262", null ],
-        [ "2. Graceful Degradation", "md_docs_2convention_2error__handling.html#autotoc_md1263", null ]
+      [ "Error Recovery Strategies", "md_docs_2convention_2error__handling.html#autotoc_md1284", [
+        [ "1. Retry Logic", "md_docs_2convention_2error__handling.html#autotoc_md1285", null ],
+        [ "2. Graceful Degradation", "md_docs_2convention_2error__handling.html#autotoc_md1286", null ]
       ] ],
-      [ "შეჯამება", "md_docs_2convention_2error__handling.html#autotoc_md1264", null ]
+      [ "შეჯამება", "md_docs_2convention_2error__handling.html#autotoc_md1287", null ]
     ] ],
     [ "ფუნქციების დასახელების წესები", "md_docs_2convention_2function__naming.html", [
-      [ "ძირითადი პრინციპები", "md_docs_2convention_2function__naming.html#autotoc_md1266", [
-        [ "1. სტრუქტურა", "md_docs_2convention_2function__naming.html#autotoc_md1267", null ],
-        [ "2. Scope პრეფიქსები", "md_docs_2convention_2function__naming.html#autotoc_md1268", [
-          [ "Public API ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1269", null ],
-          [ "Static/Private ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1270", null ],
-          [ "Framework API ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1271", null ]
+      [ "ძირითადი პრინციპები", "md_docs_2convention_2function__naming.html#autotoc_md1289", [
+        [ "1. სტრუქტურა", "md_docs_2convention_2function__naming.html#autotoc_md1290", null ],
+        [ "2. Scope პრეფიქსები", "md_docs_2convention_2function__naming.html#autotoc_md1291", [
+          [ "Public API ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1292", null ],
+          [ "Static/Private ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1293", null ],
+          [ "Framework API ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1294", null ]
         ] ]
       ] ],
-      [ "მოდულის ტიპების მიხედვით", "md_docs_2convention_2function__naming.html#autotoc_md1272", [
-        [ "1. Service Locator", "md_docs_2convention_2function__naming.html#autotoc_md1273", null ],
-        [ "2. Event Bus", "md_docs_2convention_2function__naming.html#autotoc_md1274", null ],
-        [ "3. Display Modules", "md_docs_2convention_2function__naming.html#autotoc_md1275", null ],
-        [ "4. Communication Modules", "md_docs_2convention_2function__naming.html#autotoc_md1276", null ],
-        [ "5. Sensor Modules", "md_docs_2convention_2function__naming.html#autotoc_md1277", null ]
+      [ "მოდულის ტიპების მიხედვით", "md_docs_2convention_2function__naming.html#autotoc_md1295", [
+        [ "1. Service Locator", "md_docs_2convention_2function__naming.html#autotoc_md1296", null ],
+        [ "2. Event Bus", "md_docs_2convention_2function__naming.html#autotoc_md1297", null ],
+        [ "3. Display Modules", "md_docs_2convention_2function__naming.html#autotoc_md1298", null ],
+        [ "4. Communication Modules", "md_docs_2convention_2function__naming.html#autotoc_md1299", null ],
+        [ "5. Sensor Modules", "md_docs_2convention_2function__naming.html#autotoc_md1300", null ]
       ] ],
-      [ "სპეციალური კონვენციები", "md_docs_2convention_2function__naming.html#autotoc_md1278", [
-        [ "1. Module Lifecycle ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1279", null ],
-        [ "2. Runtime Management ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1280", null ],
-        [ "3. Event Handler ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1281", null ],
-        [ "4. Task ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1282", null ]
+      [ "სპეციალური კონვენციები", "md_docs_2convention_2function__naming.html#autotoc_md1301", [
+        [ "1. Module Lifecycle ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1302", null ],
+        [ "2. Runtime Management ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1303", null ],
+        [ "3. Event Handler ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1304", null ],
+        [ "4. Task ფუნქციები", "md_docs_2convention_2function__naming.html#autotoc_md1305", null ]
       ] ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2convention_2function__naming.html#autotoc_md1283", null ],
-      [ "მაგალითი სრული მოდული", "md_docs_2convention_2function__naming.html#autotoc_md1284", null ]
+      [ "აკრძალული პრაქტიკები", "md_docs_2convention_2function__naming.html#autotoc_md1306", null ],
+      [ "მაგალითი სრული მოდული", "md_docs_2convention_2function__naming.html#autotoc_md1307", null ]
     ] ],
     [ "🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)", "md_docs_2convention_2initialization__levels.html", [
-      [ "🎯 მიზანი", "md_docs_2convention_2initialization__levels.html#autotoc_md1286", null ],
-      [ "⚙️ როგორ მუშაობს?", "md_docs_2convention_2initialization__levels.html#autotoc_md1287", null ],
-      [ "📜 ოქროს წესი", "md_docs_2convention_2initialization__levels.html#autotoc_md1288", [
-        [ "💡 პრაქტიკული მაგალითი: <tt>wifi_manager</tt> და <tt>command_router</tt>", "md_docs_2convention_2initialization__levels.html#autotoc_md1289", null ]
+      [ "🎯 მიზანი", "md_docs_2convention_2initialization__levels.html#autotoc_md1309", null ],
+      [ "⚙️ როგორ მუშაობს?", "md_docs_2convention_2initialization__levels.html#autotoc_md1310", null ],
+      [ "📜 ოქროს წესი", "md_docs_2convention_2initialization__levels.html#autotoc_md1311", [
+        [ "💡 პრაქტიკული მაგალითი: <tt>wifi_manager</tt> და <tt>command_router</tt>", "md_docs_2convention_2initialization__levels.html#autotoc_md1312", null ]
       ] ],
-      [ "📊 ინიციალიზაციის დონეების რეკომენდებული დიაპაზონები", "md_docs_2convention_2initialization__levels.html#autotoc_md1290", [
-        [ "📦 <strong>დონე 1: ფუნდამენტური დრაივერები და რესურსები (0-19)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1292", null ],
-        [ "🛠️ <strong>დონე 2: საბაზისო სისტემური სერვისები (20-39)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1294", null ],
-        [ "📡 <strong>დონე 3: ქსელი, კონტროლი და კომუნიკაცია (40-59)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1296", null ],
-        [ "💡 <strong>დონე 4: აპლიკაციის ლოგიკა და პერიფერია (60-79)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1298", null ],
-        [ "🧩 <strong>დონე 5: მაღალი დონის კომპოზიტური მოდულები (80-100)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1300", null ]
+      [ "📊 ინიციალიზაციის დონეების რეკომენდებული დიაპაზონები", "md_docs_2convention_2initialization__levels.html#autotoc_md1313", [
+        [ "📦 <strong>დონე 1: ფუნდამენტური დრაივერები და რესურსები (0-19)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1315", null ],
+        [ "🛠️ <strong>დონე 2: საბაზისო სისტემური სერვისები (20-39)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1317", null ],
+        [ "📡 <strong>დონე 3: ქსელი, კონტროლი და კომუნიკაცია (40-59)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1319", null ],
+        [ "💡 <strong>დონე 4: აპლიკაციის ლოგიკა და პერიფერია (60-79)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1321", null ],
+        [ "🧩 <strong>დონე 5: მაღალი დონის კომპოზიტური მოდულები (80-100)</strong>", "md_docs_2convention_2initialization__levels.html#autotoc_md1323", null ]
       ] ],
-      [ "📝 როგორ განვსაზღვროთ <tt>init_level</tt> ახალი მოდულისთვის?", "md_docs_2convention_2initialization__levels.html#autotoc_md1302", null ]
+      [ "📝 როგორ განვსაზღვროთ <tt>init_level</tt> ახალი მოდულისთვის?", "md_docs_2convention_2initialization__levels.html#autotoc_md1325", null ]
     ] ],
     [ "ლოგირების ფერთა სქემის კონვენცია", "md_docs_2convention_2logging__colors.html", [
-      [ "1. 🎯 მიზანი", "md_docs_2convention_2logging__colors.html#autotoc_md1304", null ],
-      [ "2. ⚙️ ტექნიკური იმპლემენტაცია", "md_docs_2convention_2logging__colors.html#autotoc_md1305", null ],
-      [ "3. 🎨 ფერთა სქემა", "md_docs_2convention_2logging__colors.html#autotoc_md1306", [
-        [ "**სრული ფერების სია (<tt>logging.h</tt>-დან)**", "md_docs_2convention_2logging__colors.html#autotoc_md1308", null ]
+      [ "1. 🎯 მიზანი", "md_docs_2convention_2logging__colors.html#autotoc_md1327", null ],
+      [ "2. ⚙️ ტექნიკური იმპლემენტაცია", "md_docs_2convention_2logging__colors.html#autotoc_md1328", null ],
+      [ "3. 🎨 ფერთა სქემა", "md_docs_2convention_2logging__colors.html#autotoc_md1329", [
+        [ "**სრული ფერების სია (<tt>logging.h</tt>-დან)**", "md_docs_2convention_2logging__colors.html#autotoc_md1331", null ]
       ] ]
     ] ],
     [ "Logging-ის სტანდარტები", "md_docs_2convention_2logging__standards.html", [
-      [ "Component Tag Definition", "md_docs_2convention_2logging__standards.html#autotoc_md1310", [
-        [ "სტანდარტული ფორმატი", "md_docs_2convention_2logging__standards.html#autotoc_md1311", null ],
-        [ "მაგალითები", "md_docs_2convention_2logging__standards.html#autotoc_md1312", null ]
+      [ "Component Tag Definition", "md_docs_2convention_2logging__standards.html#autotoc_md1333", [
+        [ "სტანდარტული ფორმატი", "md_docs_2convention_2logging__standards.html#autotoc_md1334", null ],
+        [ "მაგალითები", "md_docs_2convention_2logging__standards.html#autotoc_md1335", null ]
       ] ],
-      [ "Log Levels", "md_docs_2convention_2logging__standards.html#autotoc_md1313", [
-        [ "1. ESP_LOGE - Error Level", "md_docs_2convention_2logging__standards.html#autotoc_md1314", null ],
-        [ "2. ESP_LOGW - Warning Level", "md_docs_2convention_2logging__standards.html#autotoc_md1315", null ],
-        [ "3. ESP_LOGI - Info Level", "md_docs_2convention_2logging__standards.html#autotoc_md1316", null ],
-        [ "4. ESP_LOGD - Debug Level", "md_docs_2convention_2logging__standards.html#autotoc_md1317", null ],
-        [ "5. ESP_LOGV - Verbose Level", "md_docs_2convention_2logging__standards.html#autotoc_md1318", null ]
+      [ "Log Levels", "md_docs_2convention_2logging__standards.html#autotoc_md1336", [
+        [ "1. ESP_LOGE - Error Level", "md_docs_2convention_2logging__standards.html#autotoc_md1337", null ],
+        [ "2. ESP_LOGW - Warning Level", "md_docs_2convention_2logging__standards.html#autotoc_md1338", null ],
+        [ "3. ESP_LOGI - Info Level", "md_docs_2convention_2logging__standards.html#autotoc_md1339", null ],
+        [ "4. ESP_LOGD - Debug Level", "md_docs_2convention_2logging__standards.html#autotoc_md1340", null ],
+        [ "5. ESP_LOGV - Verbose Level", "md_docs_2convention_2logging__standards.html#autotoc_md1341", null ]
       ] ],
-      [ "Logging Patterns", "md_docs_2convention_2logging__standards.html#autotoc_md1319", [
-        [ "1. Module Lifecycle Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1320", null ],
-        [ "2. Service Registration Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1321", null ],
-        [ "3. Configuration Parsing Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1322", null ],
-        [ "4. Hardware Operation Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1323", null ],
-        [ "5. Event Handling Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1324", null ],
-        [ "6. Error Context Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1325", null ]
+      [ "Logging Patterns", "md_docs_2convention_2logging__standards.html#autotoc_md1342", [
+        [ "1. Module Lifecycle Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1343", null ],
+        [ "2. Service Registration Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1344", null ],
+        [ "3. Configuration Parsing Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1345", null ],
+        [ "4. Hardware Operation Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1346", null ],
+        [ "5. Event Handling Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1347", null ],
+        [ "6. Error Context Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1348", null ]
       ] ],
-      [ "Runtime State Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1326", [
-        [ "1. Module Enable/Disable", "md_docs_2convention_2logging__standards.html#autotoc_md1327", null ],
-        [ "2. Task State Changes", "md_docs_2convention_2logging__standards.html#autotoc_md1328", null ]
+      [ "Runtime State Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1349", [
+        [ "1. Module Enable/Disable", "md_docs_2convention_2logging__standards.html#autotoc_md1350", null ],
+        [ "2. Task State Changes", "md_docs_2convention_2logging__standards.html#autotoc_md1351", null ]
       ] ],
-      [ "Performance Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1329", [
-        [ "1. Operation Timing", "md_docs_2convention_2logging__standards.html#autotoc_md1330", null ],
-        [ "2. Memory Usage", "md_docs_2convention_2logging__standards.html#autotoc_md1331", null ]
+      [ "Performance Logging", "md_docs_2convention_2logging__standards.html#autotoc_md1352", [
+        [ "1. Operation Timing", "md_docs_2convention_2logging__standards.html#autotoc_md1353", null ],
+        [ "2. Memory Usage", "md_docs_2convention_2logging__standards.html#autotoc_md1354", null ]
       ] ],
-      [ "Log Message Format Standards", "md_docs_2convention_2logging__standards.html#autotoc_md1332", [
-        [ "1. Consistent Formatting", "md_docs_2convention_2logging__standards.html#autotoc_md1333", null ],
-        [ "2. Parameter Naming", "md_docs_2convention_2logging__standards.html#autotoc_md1334", null ]
+      [ "Log Message Format Standards", "md_docs_2convention_2logging__standards.html#autotoc_md1355", [
+        [ "1. Consistent Formatting", "md_docs_2convention_2logging__standards.html#autotoc_md1356", null ],
+        [ "2. Parameter Naming", "md_docs_2convention_2logging__standards.html#autotoc_md1357", null ]
       ] ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2convention_2logging__standards.html#autotoc_md1335", null ],
-      [ "შეჯამება", "md_docs_2convention_2logging__standards.html#autotoc_md1336", null ]
+      [ "აკრძალული პრაქტიკები", "md_docs_2convention_2logging__standards.html#autotoc_md1358", null ],
+      [ "შეჯამება", "md_docs_2convention_2logging__standards.html#autotoc_md1359", null ]
     ] ],
     [ "მოდულის სტრუქტურის კონვენცია", "md_docs_2convention_2module__structure.html", [
-      [ "1. 📜 მიმოხილვა", "md_docs_2convention_2module__structure.html#autotoc_md1338", null ],
-      [ "2. 📂 საქაღალდის სტრუქტურა", "md_docs_2convention_2module__structure.html#autotoc_md1339", [
-        [ "2.1. სტანდარტული მოდულის სტრუქტურა", "md_docs_2convention_2module__structure.html#autotoc_md1340", null ],
-        [ "2.2. კატეგორიები", "md_docs_2convention_2module__structure.html#autotoc_md1341", null ]
+      [ "1. 📜 მიმოხილვა", "md_docs_2convention_2module__structure.html#autotoc_md1361", null ],
+      [ "2. 📂 საქაღალდის სტრუქტურა", "md_docs_2convention_2module__structure.html#autotoc_md1362", [
+        [ "2.1. სტანდარტული მოდულის სტრუქტურა", "md_docs_2convention_2module__structure.html#autotoc_md1363", null ],
+        [ "2.2. კატეგორიები", "md_docs_2convention_2module__structure.html#autotoc_md1364", null ]
       ] ],
-      [ "3. 📄 ფაილების დანიშნულება და შინაარსი", "md_docs_2convention_2module__structure.html#autotoc_md1342", [
-        [ "3.1. <tt>src/</tt> დირექტორიის დანაწევრება", "md_docs_2convention_2module__structure.html#autotoc_md1343", null ],
-        [ "3.2. კონფიგურაციის ფაილები", "md_docs_2convention_2module__structure.html#autotoc_md1344", null ],
-        [ "3.3. დოკუმენტაცია", "md_docs_2convention_2module__structure.html#autotoc_md1345", null ]
+      [ "3. 📄 ფაილების დანიშნულება და შინაარსი", "md_docs_2convention_2module__structure.html#autotoc_md1365", [
+        [ "3.1. <tt>src/</tt> დირექტორიის დანაწევრება", "md_docs_2convention_2module__structure.html#autotoc_md1366", null ],
+        [ "3.2. კონფიგურაციის ფაილები", "md_docs_2convention_2module__structure.html#autotoc_md1367", null ],
+        [ "3.3. დოკუმენტაცია", "md_docs_2convention_2module__structure.html#autotoc_md1368", null ]
       ] ],
-      [ "4. <tt>CMakeLists.txt</tt>-ის სტრუქტურა", "md_docs_2convention_2module__structure.html#autotoc_md1346", null ],
-      [ "5. ❌ აკრძალული პრაქტიკები", "md_docs_2convention_2module__structure.html#autotoc_md1347", null ],
-      [ "6. ✅ საუკეთესო პრაქტიკები", "md_docs_2convention_2module__structure.html#autotoc_md1348", null ]
+      [ "4. <tt>CMakeLists.txt</tt>-ის სტრუქტურა", "md_docs_2convention_2module__structure.html#autotoc_md1369", null ],
+      [ "5. ❌ აკრძალული პრაქტიკები", "md_docs_2convention_2module__structure.html#autotoc_md1370", null ],
+      [ "6. ✅ საუკეთესო პრაქტიკები", "md_docs_2convention_2module__structure.html#autotoc_md1371", null ]
     ] ],
     [ "asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)", "md_docs_2convention_2promise__pattern.html", [
-      [ "1. 🎯 მიზანი", "md_docs_2convention_2promise__pattern.html#autotoc_md1350", null ],
-      [ "2. 🤔 პრობლემა: რატომ გვჭირდება Promise-ები?", "md_docs_2convention_2promise__pattern.html#autotoc_md1351", null ],
-      [ "3. 💡 გადაწყვეტა: Promise პატერნი", "md_docs_2convention_2promise__pattern.html#autotoc_md1352", null ],
-      [ "4. ⚙️ როგორ მუშაობს იმპლემენტაცია?", "md_docs_2convention_2promise__pattern.html#autotoc_md1353", null ],
-      [ "5. 📝 გამოყენების პატერნი", "md_docs_2convention_2promise__pattern.html#autotoc_md1354", [
-        [ "5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., <tt>wifi_manager</tt>)", "md_docs_2convention_2promise__pattern.html#autotoc_md1355", null ],
-        [ "5.2. მომხმარებლის მხარე (Consumer - მაგ., <tt>ui_manager</tt>)", "md_docs_2convention_2promise__pattern.html#autotoc_md1356", null ]
+      [ "1. 🎯 მიზანი", "md_docs_2convention_2promise__pattern.html#autotoc_md1373", null ],
+      [ "2. 🤔 პრობლემა: რატომ გვჭირდება Promise-ები?", "md_docs_2convention_2promise__pattern.html#autotoc_md1374", null ],
+      [ "3. 💡 გადაწყვეტა: Promise პატერნი", "md_docs_2convention_2promise__pattern.html#autotoc_md1375", null ],
+      [ "4. ⚙️ როგორ მუშაობს იმპლემენტაცია?", "md_docs_2convention_2promise__pattern.html#autotoc_md1376", null ],
+      [ "5. 📝 გამოყენების პატერნი", "md_docs_2convention_2promise__pattern.html#autotoc_md1377", [
+        [ "5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., <tt>wifi_manager</tt>)", "md_docs_2convention_2promise__pattern.html#autotoc_md1378", null ],
+        [ "5.2. მომხმარებლის მხარე (Consumer - მაგ., <tt>ui_manager</tt>)", "md_docs_2convention_2promise__pattern.html#autotoc_md1379", null ]
       ] ],
-      [ "6. ✅ როდის გამოვიყენოთ Promise და როდის Event Bus?", "md_docs_2convention_2promise__pattern.html#autotoc_md1357", null ]
+      [ "6. ✅ როდის გამოვიყენოთ Promise და როდის Event Bus?", "md_docs_2convention_2promise__pattern.html#autotoc_md1380", null ]
     ] ],
     [ "რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)", "md_docs_2convention_2task__pool__pattern.html", [
-      [ "1. 🎯 მიზანი", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1359", null ],
-      [ "2. 🤔 პრობლემა: \"ერთი მოდული = ერთი ტასკი\" ანტი-პატერნი", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1360", null ],
-      [ "3. 💡 გადაწყვეტა: <tt>Task Pool Manager</tt>", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1361", null ],
-      [ "4. 📝 გამოყენების პატერნი", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1362", [
-        [ "4.1. მოდულის <tt>private_data</tt> სტრუქტურა", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1363", null ],
-        [ "4.2. სამუშაო ფუნქციის (<tt>Job</tt>) იმპლემენტაცია", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1364", null ],
-        [ "4.3. <tt>_start</tt> და <tt>_deinit</tt> ფუნქციები", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1365", null ]
+      [ "1. 🎯 მიზანი", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1382", null ],
+      [ "2. 🤔 პრობლემა: \"ერთი მოდული = ერთი ტასკი\" ანტი-პატერნი", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1383", null ],
+      [ "3. 💡 გადაწყვეტა: <tt>Task Pool Manager</tt>", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1384", null ],
+      [ "4. 📝 გამოყენების პატერნი", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1385", [
+        [ "4.1. მოდულის <tt>private_data</tt> სტრუქტურა", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1386", null ],
+        [ "4.2. სამუშაო ფუნქციის (<tt>Job</tt>) იმპლემენტაცია", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1387", null ],
+        [ "4.3. <tt>_start</tt> და <tt>_deinit</tt> ფუნქციები", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1388", null ]
       ] ],
-      [ "5. ✅ როდის გამოვიყენოთ <tt>Task Pool</tt> და როდის საკუთარი ტასკი?", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1366", null ]
+      [ "5. ✅ როდის გამოვიყენოთ <tt>Task Pool</tt> და როდის საკუთარი ტასკი?", "md_docs_2convention_2task__pool__pattern.html#autotoc_md1389", null ]
     ] ],
     [ "ცვლადების დასახელების წესები", "md_docs_2convention_2variable__naming.html", [
-      [ "ძირითადი პრინციპები", "md_docs_2convention_2variable__naming.html#autotoc_md1368", [
-        [ "1. დესკრიპტიული სახელები", "md_docs_2convention_2variable__naming.html#autotoc_md1369", null ],
-        [ "2. აკრძალული პრეფიქსები", "md_docs_2convention_2variable__naming.html#autotoc_md1370", null ],
-        [ "3. სწორი მიდგომა", "md_docs_2convention_2variable__naming.html#autotoc_md1371", [
-          [ "Service Locator", "md_docs_2convention_2variable__naming.html#autotoc_md1372", null ],
-          [ "Event Bus", "md_docs_2convention_2variable__naming.html#autotoc_md1373", null ],
-          [ "Module Registry", "md_docs_2convention_2variable__naming.html#autotoc_md1374", null ],
-          [ "Display Modules", "md_docs_2convention_2variable__naming.html#autotoc_md1375", null ]
+      [ "ძირითადი პრინციპები", "md_docs_2convention_2variable__naming.html#autotoc_md1391", [
+        [ "1. დესკრიპტიული სახელები", "md_docs_2convention_2variable__naming.html#autotoc_md1392", null ],
+        [ "2. აკრძალული პრეფიქსები", "md_docs_2convention_2variable__naming.html#autotoc_md1393", null ],
+        [ "3. სწორი მიდგომა", "md_docs_2convention_2variable__naming.html#autotoc_md1394", [
+          [ "Service Locator", "md_docs_2convention_2variable__naming.html#autotoc_md1395", null ],
+          [ "Event Bus", "md_docs_2convention_2variable__naming.html#autotoc_md1396", null ],
+          [ "Module Registry", "md_docs_2convention_2variable__naming.html#autotoc_md1397", null ],
+          [ "Display Modules", "md_docs_2convention_2variable__naming.html#autotoc_md1398", null ]
         ] ],
-        [ "4. კონვენციები", "md_docs_2convention_2variable__naming.html#autotoc_md1376", [
-          [ "Global ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1377", null ],
-          [ "Static ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1378", null ],
-          [ "Mutex/Semaphore ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1379", null ],
-          [ "Queue ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1380", null ],
-          [ "API Structure ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1381", null ]
+        [ "4. კონვენციები", "md_docs_2convention_2variable__naming.html#autotoc_md1399", [
+          [ "Global ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1400", null ],
+          [ "Static ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1401", null ],
+          [ "Mutex/Semaphore ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1402", null ],
+          [ "Queue ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1403", null ],
+          [ "API Structure ცვლადები", "md_docs_2convention_2variable__naming.html#autotoc_md1404", null ]
         ] ]
       ] ],
-      [ "მაგალითები", "md_docs_2convention_2variable__naming.html#autotoc_md1382", [
-        [ "Config Manager", "md_docs_2convention_2variable__naming.html#autotoc_md1383", null ],
-        [ "I2C Bus Module", "md_docs_2convention_2variable__naming.html#autotoc_md1384", null ],
-        [ "MQTT Module", "md_docs_2convention_2variable__naming.html#autotoc_md1385", null ]
+      [ "მაგალითები", "md_docs_2convention_2variable__naming.html#autotoc_md1405", [
+        [ "Config Manager", "md_docs_2convention_2variable__naming.html#autotoc_md1406", null ],
+        [ "I2C Bus Module", "md_docs_2convention_2variable__naming.html#autotoc_md1407", null ],
+        [ "MQTT Module", "md_docs_2convention_2variable__naming.html#autotoc_md1408", null ]
       ] ],
-      [ "Private Data Pointer Naming", "md_docs_2convention_2variable__naming.html#autotoc_md1386", [
-        [ "❌ არასწორი", "md_docs_2convention_2variable__naming.html#autotoc_md1387", null ],
-        [ "✅ სწორი", "md_docs_2convention_2variable__naming.html#autotoc_md1388", null ]
+      [ "Private Data Pointer Naming", "md_docs_2convention_2variable__naming.html#autotoc_md1409", [
+        [ "❌ არასწორი", "md_docs_2convention_2variable__naming.html#autotoc_md1410", null ],
+        [ "✅ სწორი", "md_docs_2convention_2variable__naming.html#autotoc_md1411", null ]
       ] ],
-      [ "შეჯამება", "md_docs_2convention_2variable__naming.html#autotoc_md1389", null ]
+      [ "შეჯამება", "md_docs_2convention_2variable__naming.html#autotoc_md1412", null ]
     ] ],
     [ "Synapse ESP Framework — არქიტექტურის მიმოხილვა", "md_docs_2design__decisions_2architecture__overview.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1391", null ],
-      [ "ძირითადი არქიტექტურული პრინციპები", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1392", null ],
-      [ "არქიტექტურული ფენები და ძირითადი კომპონენტები", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1393", null ],
-      [ "მოდულებს შორის კომუნიკაციის პატერნები", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1394", null ],
-      [ "სიცოცხლის ციკლი", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1395", null ],
-      [ "საქაღალდეებისა და ფაილების სტრუქტურა", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1396", null ],
-      [ "არქიტექტურული დიაგრამა (მოკლე)", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1397", null ],
-      [ "სტანდარტები და დოკუმენტაცია", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1398", null ],
-      [ "დასკვნა", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1399", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1414", null ],
+      [ "ძირითადი არქიტექტურული პრინციპები", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1415", null ],
+      [ "არქიტექტურული ფენები და ძირითადი კომპონენტები", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1416", null ],
+      [ "მოდულებს შორის კომუნიკაციის პატერნები", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1417", null ],
+      [ "სიცოცხლის ციკლი", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1418", null ],
+      [ "საქაღალდეებისა და ფაილების სტრუქტურა", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1419", null ],
+      [ "არქიტექტურული დიაგრამა (მოკლე)", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1420", null ],
+      [ "სტანდარტები და დოკუმენტაცია", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1421", null ],
+      [ "დასკვნა", "md_docs_2design__decisions_2architecture__overview.html#autotoc_md1422", null ]
     ] ],
     [ "კომუნიკაციის არქიტექტურული არჩევანი (Communication Choices)", "md_docs_2design__decisions_2communication__choices.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1402", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1404", null ],
-      [ "არჩეული გადაწყვეტილება", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1406", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1408", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1410", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1412", [
-        [ "Service Locator", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1413", null ],
-        [ "Event Bus", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1414", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1425", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1427", null ],
+      [ "არჩეული გადაწყვეტილება", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1429", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1431", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1433", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1435", [
+        [ "Service Locator", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1436", null ],
+        [ "Event Bus", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1437", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1416", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1418", null ],
-      [ "Event Bus Pattern", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1420", [
-        [ "არქიტექტურული ცვლილება: Enum-დან სტრიქონებზე გადასვლა", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1421", null ],
-        [ "ფრეიმვორქის API-სთან წვდომა: Facade Pattern (<tt>synapse.h</tt>)", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1422", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1439", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1441", null ],
+      [ "Event Bus Pattern", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1443", [
+        [ "არქიტექტურული ცვლილება: Enum-დან სტრიქონებზე გადასვლა", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1444", null ],
+        [ "ფრეიმვორქის API-სთან წვდომა: Facade Pattern (<tt>synapse.h</tt>)", "md_docs_2design__decisions_2communication__choices.html#autotoc_md1445", null ]
       ] ]
     ] ],
     [ "Core კომპონენტები (Core Components)", "md_docs_2design__decisions_2core__components.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2core__components.html#autotoc_md1426", null ],
-      [ "ძირითადი კომპონენტები", "md_docs_2design__decisions_2core__components.html#autotoc_md1428", [
-        [ "1. Service Locator", "md_docs_2design__decisions_2core__components.html#autotoc_md1429", null ],
-        [ "2. Event Bus", "md_docs_2design__decisions_2core__components.html#autotoc_md1430", null ],
-        [ "3. Module Register", "md_docs_2design__decisions_2core__components.html#autotoc_md1431", null ],
-        [ "4. Module Factory", "md_docs_2design__decisions_2core__components.html#autotoc_md1432", null ],
-        [ "5. Configuration Manager", "md_docs_2design__decisions_2core__components.html#autotoc_md1433", null ],
-        [ "6. Logging", "md_docs_2design__decisions_2core__components.html#autotoc_md1434", null ],
-        [ "7. Promise Manager", "md_docs_2design__decisions_2core__components.html#autotoc_md1435", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2core__components.html#autotoc_md1449", null ],
+      [ "ძირითადი კომპონენტები", "md_docs_2design__decisions_2core__components.html#autotoc_md1451", [
+        [ "1. Service Locator", "md_docs_2design__decisions_2core__components.html#autotoc_md1452", null ],
+        [ "2. Event Bus", "md_docs_2design__decisions_2core__components.html#autotoc_md1453", null ],
+        [ "3. Module Register", "md_docs_2design__decisions_2core__components.html#autotoc_md1454", null ],
+        [ "4. Module Factory", "md_docs_2design__decisions_2core__components.html#autotoc_md1455", null ],
+        [ "5. Configuration Manager", "md_docs_2design__decisions_2core__components.html#autotoc_md1456", null ],
+        [ "6. Logging", "md_docs_2design__decisions_2core__components.html#autotoc_md1457", null ],
+        [ "7. Promise Manager", "md_docs_2design__decisions_2core__components.html#autotoc_md1458", null ]
       ] ],
-      [ "ურთიერთქმედება მოდულებთან", "md_docs_2design__decisions_2core__components.html#autotoc_md1437", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2core__components.html#autotoc_md1439", null ]
+      [ "ურთიერთქმედება მოდულებთან", "md_docs_2design__decisions_2core__components.html#autotoc_md1460", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2core__components.html#autotoc_md1462", null ]
     ] ],
     [ "არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)", "md_docs_2design__decisions_2decision__record__template.html", [
-      [ "გადაწყვეტილების ID", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1443", null ],
-      [ "თარიღი", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1444", null ],
-      [ "სტატუსი", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1445", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1446", null ],
-      [ "გადაწყვეტილება", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1447", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1448", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1449", null ],
-      [ "განხორციელების ნაბიჯები", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1450", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1451", null ]
+      [ "გადაწყვეტილების ID", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1466", null ],
+      [ "თარიღი", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1467", null ],
+      [ "სტატუსი", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1468", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1469", null ],
+      [ "გადაწყვეტილება", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1470", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1471", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1472", null ],
+      [ "განხორციელების ნაბიჯები", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1473", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2decision__record__template.html#autotoc_md1474", null ]
     ] ],
     [ "არქიტექტურული გადაწყვეტილება: დამოკიდებულებების ინექცია (Dependency Injection)", "md_docs_2design__decisions_2dependency__injection.html", [
-      [ "1. კონტექსტი", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1454", null ],
-      [ "2. გადაწყვეტილება", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1455", null ],
-      [ "3. არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1456", null ],
-      [ "4. შედეგები და გავლენა", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1457", [
-        [ "4.1. კონვენცია მოდულის დეველოპერებისთვის", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1458", null ],
-        [ "4.2. გამოყენების მაგალითი", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1459", null ]
+      [ "1. კონტექსტი", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1477", null ],
+      [ "2. გადაწყვეტილება", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1478", null ],
+      [ "3. არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1479", null ],
+      [ "4. შედეგები და გავლენა", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1480", [
+        [ "4.1. კონვენცია მოდულის დეველოპერებისთვის", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1481", null ],
+        [ "4.2. გამოყენების მაგალითი", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1482", null ]
       ] ],
-      [ "5. დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1460", null ]
+      [ "5. დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2dependency__injection.html#autotoc_md1483", null ]
     ] ],
     [ "Synapse Design Decisions", "md_docs_2design__decisions_2design__decisions__index.html", [
-      [ "ძირითადი დოკუმენტები", "md_docs_2design__decisions_2design__decisions__index.html#autotoc_md1463", null ]
+      [ "ძირითადი დოკუმენტები", "md_docs_2design__decisions_2design__decisions__index.html#autotoc_md1486", null ]
     ] ],
     [ "შეცდომების დამუშავების არქიტექტურული გადაწყვეტილებები (Error Handling Decisions)", "md_docs_2design__decisions_2error__handling__decisions.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1467", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1469", null ],
-      [ "არჩეული გადაწყვეტილება", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1471", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1473", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1475", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1477", [
-        [ "პარამეტრების ვალიდაცია", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1478", null ],
-        [ "რესურსების გამოყოფის შემოწმება", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1479", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1490", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1492", null ],
+      [ "არჩეული გადაწყვეტილება", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1494", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1496", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1498", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1500", [
+        [ "პარამეტრების ვალიდაცია", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1501", null ],
+        [ "რესურსების გამოყოფის შემოწმება", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1502", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1481", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1483", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1504", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2error__handling__decisions.html#autotoc_md1506", null ]
     ] ],
     [ "გაფართოებადობისა და მოდულარობის არქიტექტურული გადაწყვეტილებები (Extensibility & Modularity)", "md_docs_2design__decisions_2extensibility__and__modularity.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1487", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1489", null ],
-      [ "არჩეული სტრატეგიები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1491", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1493", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1495", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1497", [
-        [ "ახალი მოდულის დამატება", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1498", null ],
-        [ "Public API-ის გამოყენება", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1499", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1510", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1512", null ],
+      [ "არჩეული სტრატეგიები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1514", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1516", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1518", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1520", [
+        [ "ახალი მოდულის დამატება", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1521", null ],
+        [ "Public API-ის გამოყენება", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1522", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1501", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1503", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1524", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2extensibility__and__modularity.html#autotoc_md1526", null ]
     ] ],
     [ "მიგრაციისა და თავსებადობის არქიტექტურული გადაწყვეტილებები (Migration & Compatibility)", "md_docs_2design__decisions_2migration__and__compatibility.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1507", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1509", null ],
-      [ "არჩეული სტრატეგიები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1511", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1513", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1515", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1517", [
-        [ "სქემის ვერსიონირება", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1518", null ],
-        [ "Deprecated API-ის მონიშვნა", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1519", null ],
-        [ "მიგრაციის სკრიპტის გამოყენება", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1520", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1530", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1532", null ],
+      [ "არჩეული სტრატეგიები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1534", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1536", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1538", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1540", [
+        [ "სქემის ვერსიონირება", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1541", null ],
+        [ "Deprecated API-ის მონიშვნა", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1542", null ],
+        [ "მიგრაციის სკრიპტის გამოყენება", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1543", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1522", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1524", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1545", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2migration__and__compatibility.html#autotoc_md1547", null ]
     ] ],
     [ "წარმადობისა და რესურსების არქიტექტურული კომპრომისები (Performance Trade-offs)", "md_docs_2design__decisions_2performance__tradeoffs.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1528", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1530", null ],
-      [ "არჩეული სტრატეგიები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1532", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1534", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1536", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1538", [
-        [ "მოდულის გამორთვა ბილდიდან", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1539", null ],
-        [ "Static allocation", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1540", null ],
-        [ "Lazy initialization", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1541", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1551", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1553", null ],
+      [ "არჩეული სტრატეგიები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1555", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1557", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1559", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1561", [
+        [ "მოდულის გამორთვა ბილდიდან", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1562", null ],
+        [ "Static allocation", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1563", null ],
+        [ "Lazy initialization", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1564", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1543", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1545", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1566", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2performance__tradeoffs.html#autotoc_md1568", null ]
     ] ],
     [ "უსაფრთხოების არქიტექტურული გადაწყვეტილებები (Security Considerations)", "md_docs_2design__decisions_2security__considerations.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1549", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1551", null ],
-      [ "არჩეული გადაწყვეტილებები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1553", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1555", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1557", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1559", [
-        [ "TLS/SSL ჩართვა MQTT-ში", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1560", null ],
-        [ "OTA განახლების სიგნირება", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1561", null ],
-        [ "ლოგირების კონტროლი", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1562", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1572", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1574", null ],
+      [ "არჩეული გადაწყვეტილებები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1576", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1578", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1580", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1582", [
+        [ "TLS/SSL ჩართვა MQTT-ში", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1583", null ],
+        [ "OTA განახლების სიგნირება", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1584", null ],
+        [ "ლოგირების კონტროლი", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1585", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1564", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1566", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1587", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2security__considerations.html#autotoc_md1589", null ]
     ] ],
     [ "მონაცემთა შენახვის არქიტექტურული არჩევანი (Storage Strategy)", "md_docs_2design__decisions_2storage__strategy.html", [
-      [ "მიზანი", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1570", null ],
-      [ "კონტექსტი", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1572", null ],
-      [ "არჩეული გადაწყვეტილება", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1574", null ],
-      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1576", null ],
-      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1578", null ],
-      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1580", [
-        [ "NVS-ში სტრიქონის შენახვა", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1581", null ],
-        [ "NVS-დან სტრიქონის წაკითხვა", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1582", null ],
-        [ "Flash-ში მონაცემების შენახვა (OTA)", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1583", null ]
+      [ "მიზანი", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1593", null ],
+      [ "კონტექსტი", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1595", null ],
+      [ "არჩეული გადაწყვეტილება", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1597", null ],
+      [ "არგუმენტები და მოტივაცია", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1599", null ],
+      [ "შედეგები და გავლენა", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1601", null ],
+      [ "გამოყენების მაგალითები", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1603", [
+        [ "NVS-ში სტრიქონის შენახვა", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1604", null ],
+        [ "NVS-დან სტრიქონის წაკითხვა", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1605", null ],
+        [ "Flash-ში მონაცემების შენახვა (OTA)", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1606", null ]
       ] ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1585", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1587", null ]
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1608", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2design__decisions_2storage__strategy.html#autotoc_md1610", null ]
     ] ],
     [ "doxygen_main_pages", "md_docs_2doxygen__main__pages.html", null ],
     [ "არქიტექტურა და სტრუქტურა", "structure_docs.html", [
@@ -1625,395 +1653,395 @@ var NAVTREE =
     ] ],
     [ "api", "md_docs_2glossary_2api.html", null ],
     [ "API-სა და კოდის ტერმინები (Glossary — API & Code)", "md_docs_2glossary_2glossary__api.html", [
-      [ "მიზანი", "md_docs_2glossary_2glossary__api.html#autotoc_md1591", null ]
+      [ "მიზანი", "md_docs_2glossary_2glossary__api.html#autotoc_md1614", null ]
     ] ],
     [ "არქიტექტურული ტერმინები (Glossary — Architecture)", "md_docs_2glossary_2glossary__architecture.html", [
-      [ "მიზანი", "md_docs_2glossary_2glossary__architecture.html#autotoc_md1596", null ]
+      [ "მიზანი", "md_docs_2glossary_2glossary__architecture.html#autotoc_md1619", null ]
     ] ],
     [ "კონფიგურაციისა და შენახვის ტერმინები (Glossary — Configuration & Storage)", "md_docs_2glossary_2glossary__config.html", [
-      [ "მიზანი", "md_docs_2glossary_2glossary__config.html#autotoc_md1601", null ]
+      [ "მიზანი", "md_docs_2glossary_2glossary__config.html#autotoc_md1624", null ]
     ] ],
     [ "Glossary (ტერმინები)", "md_docs_2glossary_2glossary__index.html", [
-      [ "მიზანი", "md_docs_2glossary_2glossary__index.html#autotoc_md1606", null ],
-      [ "თემატური ტერმინების დოკუმენტები", "md_docs_2glossary_2glossary__index.html#autotoc_md1608", null ],
-      [ "გამოყენების წესი", "md_docs_2glossary_2glossary__index.html#autotoc_md1610", null ]
+      [ "მიზანი", "md_docs_2glossary_2glossary__index.html#autotoc_md1629", null ],
+      [ "თემატური ტერმინების დოკუმენტები", "md_docs_2glossary_2glossary__index.html#autotoc_md1631", null ],
+      [ "გამოყენების წესი", "md_docs_2glossary_2glossary__index.html#autotoc_md1633", null ]
     ] ],
     [ "უსაფრთხოების და წარმადობის ტერმინები (Glossary — Security & Performance)", "md_docs_2glossary_2glossary__security.html", [
-      [ "მიზანი", "md_docs_2glossary_2glossary__security.html#autotoc_md1614", null ]
+      [ "მიზანი", "md_docs_2glossary_2glossary__security.html#autotoc_md1637", null ]
     ] ],
     [ "Cloud ინტეგრაციის სახელმძღვანელო (Integration — Cloud)", "md_docs_2integration_2integration__cloud.html", [
-      [ "მიზანი", "md_docs_2integration_2integration__cloud.html#autotoc_md1619", null ],
-      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__cloud.html#autotoc_md1621", null ],
-      [ "Best Practices", "md_docs_2integration_2integration__cloud.html#autotoc_md1623", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__cloud.html#autotoc_md1625", null ]
+      [ "მიზანი", "md_docs_2integration_2integration__cloud.html#autotoc_md1642", null ],
+      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__cloud.html#autotoc_md1644", null ],
+      [ "Best Practices", "md_docs_2integration_2integration__cloud.html#autotoc_md1646", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__cloud.html#autotoc_md1648", null ]
     ] ],
     [ "Integration Index (ინტეგრაციის სახელმძღვანელოების ინდექსი)", "md_docs_2integration_2integration__index.html", [
-      [ "მიზანი", "md_docs_2integration_2integration__index.html#autotoc_md1629", null ],
-      [ "თემატური ინტეგრაციის სახელმძღვანელოები", "md_docs_2integration_2integration__index.html#autotoc_md1631", null ],
-      [ "გამოყენების წესი", "md_docs_2integration_2integration__index.html#autotoc_md1633", null ]
+      [ "მიზანი", "md_docs_2integration_2integration__index.html#autotoc_md1652", null ],
+      [ "თემატური ინტეგრაციის სახელმძღვანელოები", "md_docs_2integration_2integration__index.html#autotoc_md1654", null ],
+      [ "გამოყენების წესი", "md_docs_2integration_2integration__index.html#autotoc_md1656", null ]
     ] ],
     [ "MQTT ინტეგრაციის სახელმძღვანელო (Integration — MQTT)", "md_docs_2integration_2integration__mqtt.html", [
-      [ "მიზანი", "md_docs_2integration_2integration__mqtt.html#autotoc_md1637", null ],
-      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__mqtt.html#autotoc_md1639", null ],
-      [ "Best Practices", "md_docs_2integration_2integration__mqtt.html#autotoc_md1641", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__mqtt.html#autotoc_md1643", null ]
+      [ "მიზანი", "md_docs_2integration_2integration__mqtt.html#autotoc_md1660", null ],
+      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__mqtt.html#autotoc_md1662", null ],
+      [ "Best Practices", "md_docs_2integration_2integration__mqtt.html#autotoc_md1664", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__mqtt.html#autotoc_md1666", null ]
     ] ],
     [ "REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)", "md_docs_2integration_2integration__rest.html", [
-      [ "მიზანი", "md_docs_2integration_2integration__rest.html#autotoc_md1647", null ],
-      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__rest.html#autotoc_md1649", null ],
-      [ "Best Practices", "md_docs_2integration_2integration__rest.html#autotoc_md1651", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__rest.html#autotoc_md1653", null ]
+      [ "მიზანი", "md_docs_2integration_2integration__rest.html#autotoc_md1670", null ],
+      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__rest.html#autotoc_md1672", null ],
+      [ "Best Practices", "md_docs_2integration_2integration__rest.html#autotoc_md1674", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__rest.html#autotoc_md1676", null ]
     ] ],
     [ "WebSocket ინტეგრაციის სახელმძღვანელო (Integration — WebSocket)", "md_docs_2integration_2integration__websocket.html", [
-      [ "მიზანი", "md_docs_2integration_2integration__websocket.html#autotoc_md1657", null ],
-      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__websocket.html#autotoc_md1659", null ],
-      [ "Best Practices", "md_docs_2integration_2integration__websocket.html#autotoc_md1661", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__websocket.html#autotoc_md1663", null ]
+      [ "მიზანი", "md_docs_2integration_2integration__websocket.html#autotoc_md1680", null ],
+      [ "ძირითადი ნაბიჯები", "md_docs_2integration_2integration__websocket.html#autotoc_md1682", null ],
+      [ "Best Practices", "md_docs_2integration_2integration__websocket.html#autotoc_md1684", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2integration_2integration__websocket.html#autotoc_md1686", null ]
     ] ],
     [ "✅ Synapse Framework — Documentation & Module Design Checklist", "md_docs_2internal_2synapse__checklist.html", [
-      [ "1. API Naming & Structure", "md_docs_2internal_2synapse__checklist.html#autotoc_md1666", null ],
-      [ "2. Module Implementation", "md_docs_2internal_2synapse__checklist.html#autotoc_md1667", null ],
-      [ "3. Communication Integration (MQTT/WiFi/ESP-NOW)", "md_docs_2internal_2synapse__checklist.html#autotoc_md1668", null ],
-      [ "4. Core Interaction", "md_docs_2internal_2synapse__checklist.html#autotoc_md1669", null ],
-      [ "5. Documentation", "md_docs_2internal_2synapse__checklist.html#autotoc_md1670", null ],
-      [ "6. Quality & Security", "md_docs_2internal_2synapse__checklist.html#autotoc_md1671", null ],
-      [ "7. Testability", "md_docs_2internal_2synapse__checklist.html#autotoc_md1672", null ]
+      [ "1. API Naming & Structure", "md_docs_2internal_2synapse__checklist.html#autotoc_md1689", null ],
+      [ "2. Module Implementation", "md_docs_2internal_2synapse__checklist.html#autotoc_md1690", null ],
+      [ "3. Communication Integration (MQTT/WiFi/ESP-NOW)", "md_docs_2internal_2synapse__checklist.html#autotoc_md1691", null ],
+      [ "4. Core Interaction", "md_docs_2internal_2synapse__checklist.html#autotoc_md1692", null ],
+      [ "5. Documentation", "md_docs_2internal_2synapse__checklist.html#autotoc_md1693", null ],
+      [ "6. Quality & Security", "md_docs_2internal_2synapse__checklist.html#autotoc_md1694", null ],
+      [ "7. Testability", "md_docs_2internal_2synapse__checklist.html#autotoc_md1695", null ]
     ] ],
     [ "ბენჩმარკების ჩატარების სახელმძღვანელო (Performance Benchmarks Guide)", "md_docs_2performance_2performance__benchmarks.html", [
-      [ "მიზანი", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1675", null ],
-      [ "ბენჩმარკის ჩატარების ძირითადი ნაბიჯები", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1677", null ],
-      [ "მაგალითები", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1679", [
-        [ "სენსორის კითხვა", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1680", null ],
-        [ "MQTT publish latency", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1681", null ]
+      [ "მიზანი", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1698", null ],
+      [ "ბენჩმარკის ჩატარების ძირითადი ნაბიჯები", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1700", null ],
+      [ "მაგალითები", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1702", [
+        [ "სენსორის კითხვა", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1703", null ],
+        [ "MQTT publish latency", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1704", null ]
       ] ],
-      [ "Best Practices", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1683", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1685", null ]
+      [ "Best Practices", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1706", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__benchmarks.html#autotoc_md1708", null ]
     ] ],
     [ "საუკეთესო პრაქტიკები წარმადობისთვის (Performance Best Practices)", "md_docs_2performance_2performance__best__practices.html", [
-      [ "მიზანი", "md_docs_2performance_2performance__best__practices.html#autotoc_md1689", null ],
-      [ "ძირითადი რეკომენდაციები", "md_docs_2performance_2performance__best__practices.html#autotoc_md1691", null ],
-      [ "მაგალითები", "md_docs_2performance_2performance__best__practices.html#autotoc_md1693", null ],
-      [ "Best Practices", "md_docs_2performance_2performance__best__practices.html#autotoc_md1695", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__best__practices.html#autotoc_md1697", null ]
+      [ "მიზანი", "md_docs_2performance_2performance__best__practices.html#autotoc_md1712", null ],
+      [ "ძირითადი რეკომენდაციები", "md_docs_2performance_2performance__best__practices.html#autotoc_md1714", null ],
+      [ "მაგალითები", "md_docs_2performance_2performance__best__practices.html#autotoc_md1716", null ],
+      [ "Best Practices", "md_docs_2performance_2performance__best__practices.html#autotoc_md1718", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__best__practices.html#autotoc_md1720", null ]
     ] ],
     [ "ეკრანის მოდულების ოპტიმიზაცია (Performance — Display Modules)", "md_docs_2performance_2performance__display.html", [
-      [ "მიზანი", "md_docs_2performance_2performance__display.html#autotoc_md1701", null ],
-      [ "ოპტიმიზაციის რეკომენდაციები", "md_docs_2performance_2performance__display.html#autotoc_md1703", null ],
-      [ "მაგალითები", "md_docs_2performance_2performance__display.html#autotoc_md1705", [
-        [ "Refresh interval-ის ოპტიმიზაცია", "md_docs_2performance_2performance__display.html#autotoc_md1706", null ],
-        [ "Conditional redraw", "md_docs_2performance_2performance__display.html#autotoc_md1707", null ]
+      [ "მიზანი", "md_docs_2performance_2performance__display.html#autotoc_md1724", null ],
+      [ "ოპტიმიზაციის რეკომენდაციები", "md_docs_2performance_2performance__display.html#autotoc_md1726", null ],
+      [ "მაგალითები", "md_docs_2performance_2performance__display.html#autotoc_md1728", [
+        [ "Refresh interval-ის ოპტიმიზაცია", "md_docs_2performance_2performance__display.html#autotoc_md1729", null ],
+        [ "Conditional redraw", "md_docs_2performance_2performance__display.html#autotoc_md1730", null ]
       ] ],
-      [ "Best Practices", "md_docs_2performance_2performance__display.html#autotoc_md1709", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__display.html#autotoc_md1711", null ]
+      [ "Best Practices", "md_docs_2performance_2performance__display.html#autotoc_md1732", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__display.html#autotoc_md1734", null ]
     ] ],
     [ "Performance (წარმადობის სახელმძღვანელო)", "md_docs_2performance_2performance__index.html", [
-      [ "მიზანი", "md_docs_2performance_2performance__index.html#autotoc_md1715", null ],
-      [ "თემატური performance სახელმძღვანელოები", "md_docs_2performance_2performance__index.html#autotoc_md1717", null ],
-      [ "გამოყენების წესი", "md_docs_2performance_2performance__index.html#autotoc_md1719", null ]
+      [ "მიზანი", "md_docs_2performance_2performance__index.html#autotoc_md1738", null ],
+      [ "თემატური performance სახელმძღვანელოები", "md_docs_2performance_2performance__index.html#autotoc_md1740", null ],
+      [ "გამოყენების წესი", "md_docs_2performance_2performance__index.html#autotoc_md1742", null ]
     ] ],
     [ "ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)", "md_docs_2performance_2performance__optimization.html", [
-      [ "მიზანი", "md_docs_2performance_2performance__optimization.html#autotoc_md1723", null ],
-      [ "კოდის ოპტიმიზაცია", "md_docs_2performance_2performance__optimization.html#autotoc_md1725", null ],
-      [ "კონფიგურაციის ოპტიმიზაცია", "md_docs_2performance_2performance__optimization.html#autotoc_md1727", null ],
-      [ "მოდულების ოპტიმიზაცია", "md_docs_2performance_2performance__optimization.html#autotoc_md1729", null ],
-      [ "მაგალითები", "md_docs_2performance_2performance__optimization.html#autotoc_md1731", [
-        [ "Static allocation", "md_docs_2performance_2performance__optimization.html#autotoc_md1732", null ],
-        [ "Lazy initialization", "md_docs_2performance_2performance__optimization.html#autotoc_md1733", null ]
+      [ "მიზანი", "md_docs_2performance_2performance__optimization.html#autotoc_md1746", null ],
+      [ "კოდის ოპტიმიზაცია", "md_docs_2performance_2performance__optimization.html#autotoc_md1748", null ],
+      [ "კონფიგურაციის ოპტიმიზაცია", "md_docs_2performance_2performance__optimization.html#autotoc_md1750", null ],
+      [ "მოდულების ოპტიმიზაცია", "md_docs_2performance_2performance__optimization.html#autotoc_md1752", null ],
+      [ "მაგალითები", "md_docs_2performance_2performance__optimization.html#autotoc_md1754", [
+        [ "Static allocation", "md_docs_2performance_2performance__optimization.html#autotoc_md1755", null ],
+        [ "Lazy initialization", "md_docs_2performance_2performance__optimization.html#autotoc_md1756", null ]
       ] ],
-      [ "Best Practices", "md_docs_2performance_2performance__optimization.html#autotoc_md1735", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__optimization.html#autotoc_md1737", null ]
+      [ "Best Practices", "md_docs_2performance_2performance__optimization.html#autotoc_md1758", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__optimization.html#autotoc_md1760", null ]
     ] ],
     [ "რესურსების გამოყენების სახელმძღვანელო (Performance Resource Usage Guide)", "md_docs_2performance_2performance__resource__usage.html", [
-      [ "მიზანი", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1741", null ],
-      [ "RAM-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1743", null ],
-      [ "Flash-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1744", null ],
-      [ "CPU-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1745", null ],
-      [ "Stack-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1746", null ],
-      [ "მონიტორინგის მაგალითები", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1748", [
-        [ "RAM", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1749", null ],
-        [ "Stack", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1750", null ]
+      [ "მიზანი", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1764", null ],
+      [ "RAM-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1766", null ],
+      [ "Flash-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1767", null ],
+      [ "CPU-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1768", null ],
+      [ "Stack-ის გამოყენება", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1769", null ],
+      [ "მონიტორინგის მაგალითები", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1771", [
+        [ "RAM", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1772", null ],
+        [ "Stack", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1773", null ]
       ] ],
-      [ "Best Practices", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1752", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1754", null ]
+      [ "Best Practices", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1775", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2performance_2performance__resource__usage.html#autotoc_md1777", null ]
     ] ],
     [ "უსაფრთხოების საუკეთესო პრაქტიკები (Security Best Practices)", "md_docs_2security_2security__best__practices.html", [
-      [ "მიზანი", "md_docs_2security_2security__best__practices.html#autotoc_md1758", null ],
-      [ "ძირითადი რეკომენდაციები", "md_docs_2security_2security__best__practices.html#autotoc_md1760", null ],
-      [ "მაგალითები", "md_docs_2security_2security__best__practices.html#autotoc_md1762", [
-        [ "TLS/SSL ჩართვა MQTT-ში", "md_docs_2security_2security__best__practices.html#autotoc_md1763", null ],
-        [ "OTA განახლების სიგნირება", "md_docs_2security_2security__best__practices.html#autotoc_md1764", null ],
-        [ "ლოგირების კონტროლი", "md_docs_2security_2security__best__practices.html#autotoc_md1765", null ]
+      [ "მიზანი", "md_docs_2security_2security__best__practices.html#autotoc_md1781", null ],
+      [ "ძირითადი რეკომენდაციები", "md_docs_2security_2security__best__practices.html#autotoc_md1783", null ],
+      [ "მაგალითები", "md_docs_2security_2security__best__practices.html#autotoc_md1785", [
+        [ "TLS/SSL ჩართვა MQTT-ში", "md_docs_2security_2security__best__practices.html#autotoc_md1786", null ],
+        [ "OTA განახლების სიგნირება", "md_docs_2security_2security__best__practices.html#autotoc_md1787", null ],
+        [ "ლოგირების კონტროლი", "md_docs_2security_2security__best__practices.html#autotoc_md1788", null ]
       ] ],
-      [ "Best Practices", "md_docs_2security_2security__best__practices.html#autotoc_md1767", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__best__practices.html#autotoc_md1769", null ]
+      [ "Best Practices", "md_docs_2security_2security__best__practices.html#autotoc_md1790", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__best__practices.html#autotoc_md1792", null ]
     ] ],
     [ "უსაფრთხოების შემოწმების სია (Security Checklist)", "md_docs_2security_2security__checklist.html", [
-      [ "მიზანი", "md_docs_2security_2security__checklist.html#autotoc_md1773", null ],
-      [ "Release Checklist", "md_docs_2security_2security__checklist.html#autotoc_md1775", null ],
-      [ "Code Review Checklist", "md_docs_2security_2security__checklist.html#autotoc_md1776", null ],
-      [ "Best Practices", "md_docs_2security_2security__checklist.html#autotoc_md1778", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__checklist.html#autotoc_md1780", null ]
+      [ "მიზანი", "md_docs_2security_2security__checklist.html#autotoc_md1796", null ],
+      [ "Release Checklist", "md_docs_2security_2security__checklist.html#autotoc_md1798", null ],
+      [ "Code Review Checklist", "md_docs_2security_2security__checklist.html#autotoc_md1799", null ],
+      [ "Best Practices", "md_docs_2security_2security__checklist.html#autotoc_md1801", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__checklist.html#autotoc_md1803", null ]
     ] ],
     [ "უსაფრთხოების სახელმძღვანელოები (Security Guidelines)", "md_docs_2security_2security__guidelines.html", [
-      [ "მიზანი", "md_docs_2security_2security__guidelines.html#autotoc_md1784", null ],
-      [ "TLS/SSL", "md_docs_2security_2security__guidelines.html#autotoc_md1786", null ],
-      [ "Authentication & Authorization", "md_docs_2security_2security__guidelines.html#autotoc_md1787", null ],
-      [ "Input Validation", "md_docs_2security_2security__guidelines.html#autotoc_md1788", null ],
-      [ "Credentials Management", "md_docs_2security_2security__guidelines.html#autotoc_md1789", null ],
-      [ "OTA და Firmware Security", "md_docs_2security_2security__guidelines.html#autotoc_md1790", null ],
-      [ "Logging", "md_docs_2security_2security__guidelines.html#autotoc_md1791", null ],
-      [ "Best Practices", "md_docs_2security_2security__guidelines.html#autotoc_md1793", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__guidelines.html#autotoc_md1795", null ]
+      [ "მიზანი", "md_docs_2security_2security__guidelines.html#autotoc_md1807", null ],
+      [ "TLS/SSL", "md_docs_2security_2security__guidelines.html#autotoc_md1809", null ],
+      [ "Authentication & Authorization", "md_docs_2security_2security__guidelines.html#autotoc_md1810", null ],
+      [ "Input Validation", "md_docs_2security_2security__guidelines.html#autotoc_md1811", null ],
+      [ "Credentials Management", "md_docs_2security_2security__guidelines.html#autotoc_md1812", null ],
+      [ "OTA და Firmware Security", "md_docs_2security_2security__guidelines.html#autotoc_md1813", null ],
+      [ "Logging", "md_docs_2security_2security__guidelines.html#autotoc_md1814", null ],
+      [ "Best Practices", "md_docs_2security_2security__guidelines.html#autotoc_md1816", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__guidelines.html#autotoc_md1818", null ]
     ] ],
     [ "Security Index (უსაფრთხოების სახელმძღვანელოების ინდექსი)", "md_docs_2security_2security__index.html", [
-      [ "მიზანი", "md_docs_2security_2security__index.html#autotoc_md1799", null ],
-      [ "თემატური უსაფრთხოების სახელმძღვანელოები", "md_docs_2security_2security__index.html#autotoc_md1801", null ],
-      [ "გამოყენების წესი", "md_docs_2security_2security__index.html#autotoc_md1803", null ]
+      [ "მიზანი", "md_docs_2security_2security__index.html#autotoc_md1822", null ],
+      [ "თემატური უსაფრთხოების სახელმძღვანელოები", "md_docs_2security_2security__index.html#autotoc_md1824", null ],
+      [ "გამოყენების წესი", "md_docs_2security_2security__index.html#autotoc_md1826", null ]
     ] ],
     [ "Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)", "md_docs_2security_2security__vulnerability__disclosure.html", [
-      [ "მიზანი", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1807", null ],
-      [ "ხარვეზის აღმოჩენა", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1809", null ],
-      [ "შეტყობინების პროცედურა", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1810", null ],
-      [ "რეაგირება", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1811", null ],
-      [ "პასუხისმგებლობა და ეთიკა", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1812", null ],
-      [ "საკონტაქტო ინფორმაცია", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1814", null ],
-      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1816", null ]
+      [ "მიზანი", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1830", null ],
+      [ "ხარვეზის აღმოჩენა", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1832", null ],
+      [ "შეტყობინების პროცედურა", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1833", null ],
+      [ "რეაგირება", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1834", null ],
+      [ "პასუხისმგებლობა და ეთიკა", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1835", null ],
+      [ "საკონტაქტო ინფორმაცია", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1837", null ],
+      [ "დაკავშირებული დოკუმენტები", "md_docs_2security_2security__vulnerability__disclosure.html#autotoc_md1839", null ]
     ] ],
     [ "კომუნიკაციის პატერნები (Communication Patterns)", "md_docs_2structure_2communication__patterns.html", [
-      [ "მიზანი", "md_docs_2structure_2communication__patterns.html#autotoc_md1819", null ],
-      [ "ძირითადი პატერნები", "md_docs_2structure_2communication__patterns.html#autotoc_md1820", [
-        [ "1. Service Locator Pattern", "md_docs_2structure_2communication__patterns.html#autotoc_md1821", null ],
-        [ "2. Event Bus Pattern", "md_docs_2structure_2communication__patterns.html#autotoc_md1822", null ]
+      [ "მიზანი", "md_docs_2structure_2communication__patterns.html#autotoc_md1842", null ],
+      [ "ძირითადი პატერნები", "md_docs_2structure_2communication__patterns.html#autotoc_md1843", [
+        [ "1. Service Locator Pattern", "md_docs_2structure_2communication__patterns.html#autotoc_md1844", null ],
+        [ "2. Event Bus Pattern", "md_docs_2structure_2communication__patterns.html#autotoc_md1845", null ]
       ] ],
-      [ "სწორი გამოყენების წესები", "md_docs_2structure_2communication__patterns.html#autotoc_md1823", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2structure_2communication__patterns.html#autotoc_md1824", null ],
-      [ "მაგალითები", "md_docs_2structure_2communication__patterns.html#autotoc_md1825", [
-        [ "Service Locator", "md_docs_2structure_2communication__patterns.html#autotoc_md1826", null ],
-        [ "Event Bus", "md_docs_2structure_2communication__patterns.html#autotoc_md1827", null ]
+      [ "სწორი გამოყენების წესები", "md_docs_2structure_2communication__patterns.html#autotoc_md1846", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2structure_2communication__patterns.html#autotoc_md1847", null ],
+      [ "მაგალითები", "md_docs_2structure_2communication__patterns.html#autotoc_md1848", [
+        [ "Service Locator", "md_docs_2structure_2communication__patterns.html#autotoc_md1849", null ],
+        [ "Event Bus", "md_docs_2structure_2communication__patterns.html#autotoc_md1850", null ]
       ] ]
     ] ],
     [ "კონფიგურაციის მართვის პროცესი (Configuration Flow)", "md_docs_2structure_2configuration__flow.html", [
-      [ "მიზანი", "md_docs_2structure_2configuration__flow.html#autotoc_md1830", null ],
-      [ "კონფიგურაციის წყაროები", "md_docs_2structure_2configuration__flow.html#autotoc_md1831", null ],
-      [ "კონფიგურაციის სტრუქტურა", "md_docs_2structure_2configuration__flow.html#autotoc_md1832", null ],
-      [ "კონფიგურაციის დამუშავების ეტაპები", "md_docs_2structure_2configuration__flow.html#autotoc_md1833", null ],
-      [ "კონფიგურაციის წვდომის მაგალითები", "md_docs_2structure_2configuration__flow.html#autotoc_md1834", null ],
-      [ "ვალიდაცია და Default მნიშვნელობები", "md_docs_2structure_2configuration__flow.html#autotoc_md1835", null ],
-      [ "Runtime Reconfiguration", "md_docs_2structure_2configuration__flow.html#autotoc_md1836", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2configuration__flow.html#autotoc_md1837", null ]
+      [ "მიზანი", "md_docs_2structure_2configuration__flow.html#autotoc_md1853", null ],
+      [ "კონფიგურაციის წყაროები", "md_docs_2structure_2configuration__flow.html#autotoc_md1854", null ],
+      [ "კონფიგურაციის სტრუქტურა", "md_docs_2structure_2configuration__flow.html#autotoc_md1855", null ],
+      [ "კონფიგურაციის დამუშავების ეტაპები", "md_docs_2structure_2configuration__flow.html#autotoc_md1856", null ],
+      [ "კონფიგურაციის წვდომის მაგალითები", "md_docs_2structure_2configuration__flow.html#autotoc_md1857", null ],
+      [ "ვალიდაცია და Default მნიშვნელობები", "md_docs_2structure_2configuration__flow.html#autotoc_md1858", null ],
+      [ "Runtime Reconfiguration", "md_docs_2structure_2configuration__flow.html#autotoc_md1859", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2configuration__flow.html#autotoc_md1860", null ]
     ] ],
     [ "Core კომპონენტები (Core Components)", "md_docs_2structure_2core__components.html", [
-      [ "მიზანი", "md_docs_2structure_2core__components.html#autotoc_md1841", null ],
-      [ "ძირითადი კომპონენტები", "md_docs_2structure_2core__components.html#autotoc_md1843", [
-        [ "1. Service Locator", "md_docs_2structure_2core__components.html#autotoc_md1844", null ],
-        [ "2. Event Bus", "md_docs_2structure_2core__components.html#autotoc_md1845", null ],
-        [ "3. Module Register", "md_docs_2structure_2core__components.html#autotoc_md1846", null ],
-        [ "4. Module Factory", "md_docs_2structure_2core__components.html#autotoc_md1847", null ],
-        [ "5. Configuration Manager", "md_docs_2structure_2core__components.html#autotoc_md1848", null ],
-        [ "6. Logging", "md_docs_2structure_2core__components.html#autotoc_md1849", null ]
+      [ "მიზანი", "md_docs_2structure_2core__components.html#autotoc_md1864", null ],
+      [ "ძირითადი კომპონენტები", "md_docs_2structure_2core__components.html#autotoc_md1866", [
+        [ "1. Service Locator", "md_docs_2structure_2core__components.html#autotoc_md1867", null ],
+        [ "2. Event Bus", "md_docs_2structure_2core__components.html#autotoc_md1868", null ],
+        [ "3. Module Register", "md_docs_2structure_2core__components.html#autotoc_md1869", null ],
+        [ "4. Module Factory", "md_docs_2structure_2core__components.html#autotoc_md1870", null ],
+        [ "5. Configuration Manager", "md_docs_2structure_2core__components.html#autotoc_md1871", null ],
+        [ "6. Logging", "md_docs_2structure_2core__components.html#autotoc_md1872", null ]
       ] ],
-      [ "ფასადის ინტერფეისი (<tt>synapse.h</tt>)", "md_docs_2structure_2core__components.html#autotoc_md1851", null ],
-      [ "ურთიერთქმედება მოდულებთან", "md_docs_2structure_2core__components.html#autotoc_md1853", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2core__components.html#autotoc_md1855", null ]
+      [ "ფასადის ინტერფეისი (<tt>synapse.h</tt>)", "md_docs_2structure_2core__components.html#autotoc_md1874", null ],
+      [ "ურთიერთქმედება მოდულებთან", "md_docs_2structure_2core__components.html#autotoc_md1876", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2core__components.html#autotoc_md1878", null ]
     ] ],
     [ "საქაღალდეებისა და ფაილების სტრუქტურა (Directory Structure)", "md_docs_2structure_2directory__structure.html", [
-      [ "ძირითადი სტრუქტურა", "md_docs_2structure_2directory__structure.html#autotoc_md1858", null ],
-      [ "ძირითადი საქაღალდეების აღწერა", "md_docs_2structure_2directory__structure.html#autotoc_md1859", null ],
-      [ "<tt>modules</tt> საქაღალდის სტრუქტურა", "md_docs_2structure_2directory__structure.html#autotoc_md1860", null ],
-      [ "თითოეული მოდულის სტრუქტურა", "md_docs_2structure_2directory__structure.html#autotoc_md1861", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2directory__structure.html#autotoc_md1862", null ]
+      [ "ძირითადი სტრუქტურა", "md_docs_2structure_2directory__structure.html#autotoc_md1881", null ],
+      [ "ძირითადი საქაღალდეების აღწერა", "md_docs_2structure_2directory__structure.html#autotoc_md1882", null ],
+      [ "<tt>modules</tt> საქაღალდის სტრუქტურა", "md_docs_2structure_2directory__structure.html#autotoc_md1883", null ],
+      [ "თითოეული მოდულის სტრუქტურა", "md_docs_2structure_2directory__structure.html#autotoc_md1884", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2directory__structure.html#autotoc_md1885", null ]
     ] ],
     [ "შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling & Logging)", "md_docs_2structure_2error__handling__and__logging.html", [
-      [ "მიზანი", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1865", null ],
-      [ "შეცდომების დამუშავების პრინციპები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1866", null ],
-      [ "შეცდომების კოდები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1867", null ],
-      [ "შეცდომების დამუშავების მაგალითები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1868", null ],
-      [ "ლოგირების სტანდარტები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1869", null ],
-      [ "ლოგირების მაგალითები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1870", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1871", null ]
+      [ "მიზანი", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1888", null ],
+      [ "შეცდომების დამუშავების პრინციპები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1889", null ],
+      [ "შეცდომების კოდები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1890", null ],
+      [ "შეცდომების დამუშავების მაგალითები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1891", null ],
+      [ "ლოგირების სტანდარტები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1892", null ],
+      [ "ლოგირების მაგალითები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1893", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2error__handling__and__logging.html#autotoc_md1894", null ]
     ] ],
     [ "ფრეიმვორქის გაფართოება და Best Practices (Extending the Framework)", "md_docs_2structure_2extending__framework.html", [
-      [ "მიზანი", "md_docs_2structure_2extending__framework.html#autotoc_md1874", null ],
-      [ "ახალი მოდულის დამატების პროცესი", "md_docs_2structure_2extending__framework.html#autotoc_md1875", null ],
-      [ "Best Practices", "md_docs_2structure_2extending__framework.html#autotoc_md1876", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2structure_2extending__framework.html#autotoc_md1877", null ],
-      [ "მაგალითი ახალი მოდულის დამატების", "md_docs_2structure_2extending__framework.html#autotoc_md1878", null ]
+      [ "მიზანი", "md_docs_2structure_2extending__framework.html#autotoc_md1897", null ],
+      [ "ახალი მოდულის დამატების პროცესი", "md_docs_2structure_2extending__framework.html#autotoc_md1898", null ],
+      [ "Best Practices", "md_docs_2structure_2extending__framework.html#autotoc_md1899", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2structure_2extending__framework.html#autotoc_md1900", null ],
+      [ "მაგალითი ახალი მოდულის დამატების", "md_docs_2structure_2extending__framework.html#autotoc_md1901", null ]
     ] ],
     [ "ხშირად დასმული კითხვები (FAQ)", "md_docs_2structure_2faq.html", [
-      [ "1. როგორ დავამატო ახალი მოდული?", "md_docs_2structure_2faq.html#autotoc_md1881", null ],
-      [ "2. შეიძლება თუ არა ერთი და იმავე ტიპის რამდენიმე მოდულის დამატება?", "md_docs_2structure_2faq.html#autotoc_md1882", null ],
-      [ "3. როგორ ხდება მოდულებს შორის კომუნიკაცია?", "md_docs_2structure_2faq.html#autotoc_md1883", null ],
-      [ "4. როგორ მივიღო ან შევცვალო მოდულის კონფიგურაცია?", "md_docs_2structure_2faq.html#autotoc_md1884", null ],
-      [ "5. როგორ დავამატო ახალი გლობალური პარამეტრი?", "md_docs_2structure_2faq.html#autotoc_md1885", null ],
-      [ "6. როგორ დავიცვა naming და structure სტანდარტები?", "md_docs_2structure_2faq.html#autotoc_md1886", null ],
-      [ "7. როგორ ხდება შეცდომების დამუშავება და ლოგირება?", "md_docs_2structure_2faq.html#autotoc_md1887", null ],
-      [ "8. როგორ დავამატო ახალი კატეგორია მოდულებისთვის?", "md_docs_2structure_2faq.html#autotoc_md1888", null ],
-      [ "9. როგორ დავამატო დოკუმენტაცია ან განვაახლო არსებული?", "md_docs_2structure_2faq.html#autotoc_md1889", null ],
-      [ "10. როგორ დავიწყო პროექტის გამოყენება?", "md_docs_2structure_2faq.html#autotoc_md1890", null ]
+      [ "1. როგორ დავამატო ახალი მოდული?", "md_docs_2structure_2faq.html#autotoc_md1904", null ],
+      [ "2. შეიძლება თუ არა ერთი და იმავე ტიპის რამდენიმე მოდულის დამატება?", "md_docs_2structure_2faq.html#autotoc_md1905", null ],
+      [ "3. როგორ ხდება მოდულებს შორის კომუნიკაცია?", "md_docs_2structure_2faq.html#autotoc_md1906", null ],
+      [ "4. როგორ მივიღო ან შევცვალო მოდულის კონფიგურაცია?", "md_docs_2structure_2faq.html#autotoc_md1907", null ],
+      [ "5. როგორ დავამატო ახალი გლობალური პარამეტრი?", "md_docs_2structure_2faq.html#autotoc_md1908", null ],
+      [ "6. როგორ დავიცვა naming და structure სტანდარტები?", "md_docs_2structure_2faq.html#autotoc_md1909", null ],
+      [ "7. როგორ ხდება შეცდომების დამუშავება და ლოგირება?", "md_docs_2structure_2faq.html#autotoc_md1910", null ],
+      [ "8. როგორ დავამატო ახალი კატეგორია მოდულებისთვის?", "md_docs_2structure_2faq.html#autotoc_md1911", null ],
+      [ "9. როგორ დავამატო დოკუმენტაცია ან განვაახლო არსებული?", "md_docs_2structure_2faq.html#autotoc_md1912", null ],
+      [ "10. როგორ დავიწყო პროექტის გამოყენება?", "md_docs_2structure_2faq.html#autotoc_md1913", null ]
     ] ],
     [ "მოდულის სიცოცხლის ციკლი და ინიციალიზაცია (v2.0)", "md_docs_2structure_2lifecycle__and__init.html", [
-      [ "მიზანი", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1893", null ],
-      [ "სიცოცხლის ციკლის ეტაპები და სერვისის სტატუსები", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1894", null ],
-      [ "სიცოცხლის ციკლის დიაგრამა (განახლებული)", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1895", null ],
-      [ "მაგალითი მოდულის სიცოცხლის ციკლის მართვის", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1896", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1897", null ]
+      [ "მიზანი", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1916", null ],
+      [ "სიცოცხლის ციკლის ეტაპები და სერვისის სტატუსები", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1917", null ],
+      [ "სიცოცხლის ციკლის დიაგრამა (განახლებული)", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1918", null ],
+      [ "მაგალითი მოდულის სიცოცხლის ციკლის მართვის", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1919", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2lifecycle__and__init.html#autotoc_md1920", null ]
     ] ],
     [ "მოდულების არქიტექტურა (Module Architecture)", "md_docs_2structure_2module__architecture.html", [
-      [ "ძირითადი პრინციპები", "md_docs_2structure_2module__architecture.html#autotoc_md1900", null ],
-      [ "მოდულის ტიპები", "md_docs_2structure_2module__architecture.html#autotoc_md1901", null ],
-      [ "მოდულების ურთიერთქმედება", "md_docs_2structure_2module__architecture.html#autotoc_md1902", null ],
-      [ "მოდულის სიცოცხლის ციკლი (Lifecycle)", "md_docs_2structure_2module__architecture.html#autotoc_md1903", null ],
-      [ "მოდულის სტრუქტურის მაგალითი", "md_docs_2structure_2module__architecture.html#autotoc_md1904", [
-        [ "<tt>_create</tt> ფუნქციის კონტრაქტი", "md_docs_2structure_2module__architecture.html#autotoc_md1905", null ]
+      [ "ძირითადი პრინციპები", "md_docs_2structure_2module__architecture.html#autotoc_md1923", null ],
+      [ "მოდულის ტიპები", "md_docs_2structure_2module__architecture.html#autotoc_md1924", null ],
+      [ "მოდულების ურთიერთქმედება", "md_docs_2structure_2module__architecture.html#autotoc_md1925", null ],
+      [ "მოდულის სიცოცხლის ციკლი (Lifecycle)", "md_docs_2structure_2module__architecture.html#autotoc_md1926", null ],
+      [ "მოდულის სტრუქტურის მაგალითი", "md_docs_2structure_2module__architecture.html#autotoc_md1927", [
+        [ "<tt>_create</tt> ფუნქციის კონტრაქტი", "md_docs_2structure_2module__architecture.html#autotoc_md1928", null ]
       ] ],
-      [ "მოდულის გაფართოება/დამატება", "md_docs_2structure_2module__architecture.html#autotoc_md1906", null ],
-      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2module__architecture.html#autotoc_md1907", null ]
+      [ "მოდულის გაფართოება/დამატება", "md_docs_2structure_2module__architecture.html#autotoc_md1929", null ],
+      [ "აკრძალული და რეკომენდებული პრაქტიკები", "md_docs_2structure_2module__architecture.html#autotoc_md1930", null ]
     ] ],
     [ "🚀 <tt>create_module.py</tt>: Synapse მოდულის გენერატორი (v3.1)", "md_docs_2tools_2create__module.html", [
-      [ "1. 📋 რა არის <tt>create_module.py</tt>?", "md_docs_2tools_2create__module.html#autotoc_md1918", null ],
-      [ "2. 🎯 რას აკეთებს?", "md_docs_2tools_2create__module.html#autotoc_md1919", [
-        [ "✅ გენერირებული ფაილები (10+ ფაილი)", "md_docs_2tools_2create__module.html#autotoc_md1920", null ],
-        [ "✅ ავტომატური ინტეგრაცია", "md_docs_2tools_2create__module.html#autotoc_md1921", null ]
+      [ "1. 📋 რა არის <tt>create_module.py</tt>?", "md_docs_2tools_2create__module.html#autotoc_md1941", null ],
+      [ "2. 🎯 რას აკეთებს?", "md_docs_2tools_2create__module.html#autotoc_md1942", [
+        [ "✅ გენერირებული ფაილები (10+ ფაილი)", "md_docs_2tools_2create__module.html#autotoc_md1943", null ],
+        [ "✅ ავტომატური ინტეგრაცია", "md_docs_2tools_2create__module.html#autotoc_md1944", null ]
       ] ],
-      [ "3. 🛠️ გამოყენების რეჟიმები", "md_docs_2tools_2create__module.html#autotoc_md1922", [
-        [ "3.1. ინტერაქტიული რეჟიმი (რეკომენდებული)", "md_docs_2tools_2create__module.html#autotoc_md1923", null ],
-        [ "3.2. ბრძანების ხაზის რეჟიმი (ავტომატიზაციისთვის)", "md_docs_2tools_2create__module.html#autotoc_md1924", null ]
+      [ "3. 🛠️ გამოყენების რეჟიმები", "md_docs_2tools_2create__module.html#autotoc_md1945", [
+        [ "3.1. ინტერაქტიული რეჟიმი (რეკომენდებული)", "md_docs_2tools_2create__module.html#autotoc_md1946", null ],
+        [ "3.2. ბრძანების ხაზის რეჟიმი (ავტომატიზაციისთვის)", "md_docs_2tools_2create__module.html#autotoc_md1947", null ]
       ] ],
-      [ "4. 🏛️ არქეტიპები (Archetypes)", "md_docs_2tools_2create__module.html#autotoc_md1925", null ],
-      [ "5. 🔄 სრული სამუშაო პროცესი (Workflow)", "md_docs_2tools_2create__module.html#autotoc_md1926", null ],
-      [ "6. 🚨 მნიშვნელოვანი შენიშვნები", "md_docs_2tools_2create__module.html#autotoc_md1927", null ],
-      [ "🎯 შეჯამება", "md_docs_2tools_2create__module.html#autotoc_md1929", null ]
+      [ "4. 🏛️ არქეტიპები (Archetypes)", "md_docs_2tools_2create__module.html#autotoc_md1948", null ],
+      [ "5. 🔄 სრული სამუშაო პროცესი (Workflow)", "md_docs_2tools_2create__module.html#autotoc_md1949", null ],
+      [ "6. 🚨 მნიშვნელოვანი შენიშვნები", "md_docs_2tools_2create__module.html#autotoc_md1950", null ],
+      [ "🎯 შეჯამება", "md_docs_2tools_2create__module.html#autotoc_md1952", null ]
     ] ],
     [ "Advanced Diagnostics (გაფართოებული დიაგნოსტიკა)", "md_docs_2troubleshooting_2advanced__diagnostics.html", [
-      [ "მიზანი", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1931", null ],
-      [ "1. Stack Overflow და Task Watchdog", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1933", null ],
-      [ "2. Heap Corruption და Memory Leak", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1934", null ],
-      [ "3. Core Dumps და Crash Reporting", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1935", null ],
-      [ "4. Custom Health Checks", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1936", null ],
-      [ "5. Peripheral Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1937", null ],
-      [ "6. Network Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1938", null ],
-      [ "7. Performance Metrics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1939", null ]
+      [ "მიზანი", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1954", null ],
+      [ "1. Stack Overflow და Task Watchdog", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1956", null ],
+      [ "2. Heap Corruption და Memory Leak", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1957", null ],
+      [ "3. Core Dumps და Crash Reporting", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1958", null ],
+      [ "4. Custom Health Checks", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1959", null ],
+      [ "5. Peripheral Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1960", null ],
+      [ "6. Network Diagnostics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1961", null ],
+      [ "7. Performance Metrics", "md_docs_2troubleshooting_2advanced__diagnostics.html#autotoc_md1962", null ]
     ] ],
     [ "გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues & Solutions)", "md_docs_2troubleshooting_2common__issues.html", [
-      [ "მიზანი", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1942", null ],
-      [ "1. ბილდის შეცდომები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1944", [
-        [ "პრობლემა: მოდული არ იბილდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1945", null ],
-        [ "პრობლემა: include file not found", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1946", null ]
+      [ "მიზანი", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1965", null ],
+      [ "1. ბილდის შეცდომები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1967", [
+        [ "პრობლემა: მოდული არ იბილდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1968", null ],
+        [ "პრობლემა: include file not found", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1969", null ]
       ] ],
-      [ "2. კონფიგურაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1948", [
-        [ "პრობლემა: მოდული არ ინიციალიზდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1949", null ],
-        [ "პრობლემა: default მნიშვნელობები არ მუშაობს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1950", null ]
+      [ "2. კონფიგურაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1971", [
+        [ "პრობლემა: მოდული არ ინიციალიზდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1972", null ],
+        [ "პრობლემა: default მნიშვნელობები არ მუშაობს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1973", null ]
       ] ],
-      [ "3. კომუნიკაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1952", [
-        [ "პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1953", null ],
-        [ "პრობლემა: Service Locator-ით API არ იძებნება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1954", null ]
+      [ "3. კომუნიკაციის პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1975", [
+        [ "პრობლემა: Event Bus-ზე მოვლენები არ ვრცელდება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1976", null ],
+        [ "პრობლემა: Service Locator-ით API არ იძებნება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1977", null ]
       ] ],
-      [ "4. ლოგირების და შეცდომების დიაგნოსტიკა", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1956", [
-        [ "პრობლემა: ლოგები არ ჩანს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1957", null ],
-        [ "პრობლემა: შეცდომის კოდი არ იკითხება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1958", null ]
+      [ "4. ლოგირების და შეცდომების დიაგნოსტიკა", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1979", [
+        [ "პრობლემა: ლოგები არ ჩანს", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1980", null ],
+        [ "პრობლემა: შეცდომის კოდი არ იკითხება", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1981", null ]
       ] ],
-      [ "5. Runtime პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1960", [
-        [ "პრობლემა: მოდული არ რეაგირებს enable/disable-ზე", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1961", null ],
-        [ "პრობლემა: რესურსების გაჟონვა (memory leak)", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1962", null ],
-        [ "პრობლემა: სისტემის კრახი <tt>Stack Overflow in task Tmr Svc</tt> შეცდომით", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1964", null ],
-        [ "პრობლემა: სისტემის კრახი <tt>LoadProhibited</tt> ან <tt>assert failed: heap_caps_free</tt>", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1965", null ]
+      [ "5. Runtime პრობლემები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1983", [
+        [ "პრობლემა: მოდული არ რეაგირებს enable/disable-ზე", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1984", null ],
+        [ "პრობლემა: რესურსების გაჟონვა (memory leak)", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1985", null ],
+        [ "პრობლემა: სისტემის კრახი <tt>Stack Overflow in task Tmr Svc</tt> შეცდომით", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1987", null ],
+        [ "პრობლემა: სისტემის კრახი <tt>LoadProhibited</tt> ან <tt>assert failed: heap_caps_free</tt>", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1988", null ]
       ] ],
-      [ "6. დამატებითი რჩევები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1967", null ]
+      [ "6. დამატებითი რჩევები", "md_docs_2troubleshooting_2common__issues.html#autotoc_md1990", null ]
     ] ],
     [ "Debugging Guide (დიბაგინგის სახელმძღვანელო)", "md_docs_2troubleshooting_2debugging__guide.html", [
-      [ "მიზანი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1970", null ],
-      [ "1. ლოგირების ჩართვა და გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1972", null ],
-      [ "2. Debug Build-ის კონფიგურაცია", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1973", null ],
-      [ "3. GDB და Breakpoint-ების გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1974", null ],
-      [ "4. Task და Stack Usage მონიტორინგი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1975", null ],
-      [ "5. Heap და Memory Usage", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1976", null ],
-      [ "6. Event და Service Debugging", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1977", null ],
-      [ "7. Assertion-ები და Error Checking", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1978", null ],
-      [ "8. დამატებითი ინსტრუმენტები", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1979", null ]
+      [ "მიზანი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1993", null ],
+      [ "1. ლოგირების ჩართვა და გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1995", null ],
+      [ "2. Debug Build-ის კონფიგურაცია", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1996", null ],
+      [ "3. GDB და Breakpoint-ების გამოყენება", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1997", null ],
+      [ "4. Task და Stack Usage მონიტორინგი", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1998", null ],
+      [ "5. Heap და Memory Usage", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1999", null ],
+      [ "6. Event და Service Debugging", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2000", null ],
+      [ "7. Assertion-ები და Error Checking", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2001", null ],
+      [ "8. დამატებითი ინსტრუმენტები", "md_docs_2troubleshooting_2debugging__guide.html#autotoc_md2002", null ]
     ] ],
     [ "პრობლემა: როგორ გადავცეთ კონტექსტი სერვისის API-ს გამოძახებისას?", "md_docs_2troubleshooting_2dependency__injection__and__context.html", [
-      [ "1. ❓ პრობლემის აღწერა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1982", null ],
-      [ "2. ❌ არასწორი (მაგრამ მაცდური) გადაწყვეტები", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1983", null ],
-      [ "3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1984", [
-        [ "ეტაპი 1: <tt>private_data</tt> სტრუქტურის გაფართოება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1985", null ],
-        [ "ეტაპი 2: <tt>dependency_map</tt>-ის განსაზღვრა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1986", null ],
-        [ "ეტაპი 3: <tt>config.json</tt>-ის კონფიგურაცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1987", null ],
-        [ "ეტაპი 4: გამოყენება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1988", null ]
+      [ "1. ❓ პრობლემის აღწერა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2005", null ],
+      [ "2. ❌ არასწორი (მაგრამ მაცდური) გადაწყვეტები", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2006", null ],
+      [ "3. ✅ სწორი არქიტექტურული პატერნი: ორმაგი ინექცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2007", [
+        [ "ეტაპი 1: <tt>private_data</tt> სტრუქტურის გაფართოება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2008", null ],
+        [ "ეტაპი 2: <tt>dependency_map</tt>-ის განსაზღვრა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2009", null ],
+        [ "ეტაპი 3: <tt>config.json</tt>-ის კონფიგურაცია", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2010", null ],
+        [ "ეტაპი 4: გამოყენება", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2011", null ]
       ] ],
-      [ "4. 💬 დასკვნა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md1989", null ]
+      [ "4. 💬 დასკვნა", "md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2012", null ]
     ] ],
     [ "ხშირად დასმული კითხვები (Troubleshooting FAQ)", "md_docs_2troubleshooting_2faq.html", [
-      [ "1. რატომ არ იბილდება ჩემი მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md1991", null ],
-      [ "2. რატომ არ ჩანს ლოგები?", "md_docs_2troubleshooting_2faq.html#autotoc_md1992", null ],
-      [ "3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?", "md_docs_2troubleshooting_2faq.html#autotoc_md1993", null ],
-      [ "4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?", "md_docs_2troubleshooting_2faq.html#autotoc_md1994", null ],
-      [ "5. რატომ არ ინიციალიზდება მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md1995", null ],
-      [ "6. როგორ გავიგო რომელი მოდული იწვევს პრობლემას?", "md_docs_2troubleshooting_2faq.html#autotoc_md1996", null ],
-      [ "7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?", "md_docs_2troubleshooting_2faq.html#autotoc_md1997", null ],
-      [ "8. როგორ დავადგინო კონფიგურაციის შეცდომა?", "md_docs_2troubleshooting_2faq.html#autotoc_md1998", null ],
-      [ "9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?", "md_docs_2troubleshooting_2faq.html#autotoc_md1999", null ]
+      [ "1. რატომ არ იბილდება ჩემი მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md2014", null ],
+      [ "2. რატომ არ ჩანს ლოგები?", "md_docs_2troubleshooting_2faq.html#autotoc_md2015", null ],
+      [ "3. რატომ ვერ პოულობს Service Locator-ი ჩემს სერვისს?", "md_docs_2troubleshooting_2faq.html#autotoc_md2016", null ],
+      [ "4. რატომ არ ვრცელდება Event Bus-ზე მოვლენები?", "md_docs_2troubleshooting_2faq.html#autotoc_md2017", null ],
+      [ "5. რატომ არ ინიციალიზდება მოდული?", "md_docs_2troubleshooting_2faq.html#autotoc_md2018", null ],
+      [ "6. როგორ გავიგო რომელი მოდული იწვევს პრობლემას?", "md_docs_2troubleshooting_2faq.html#autotoc_md2019", null ],
+      [ "7. როგორ გამოვასწორო რესურსების გაჟონვა (memory leak)?", "md_docs_2troubleshooting_2faq.html#autotoc_md2020", null ],
+      [ "8. როგორ დავადგინო კონფიგურაციის შეცდომა?", "md_docs_2troubleshooting_2faq.html#autotoc_md2021", null ],
+      [ "9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?", "md_docs_2troubleshooting_2faq.html#autotoc_md2022", null ]
     ] ],
     [ "Advanced Usage (გაფართოებული გამოყენება)", "md_docs_2tutorials_2advanced__usage.html", [
-      [ "მიზანი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2002", null ],
-      [ "1. მრავალმოდულიანი კონფიგურაცია", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2003", null ],
-      [ "2. მოდულის დინამიური ჩართვა/გამორთვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2004", null ],
-      [ "3. Runtime Reconfiguration", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2005", null ],
-      [ "4. Custom Event-ების გამოყენება", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2006", null ],
-      [ "5. ასინქრონული ოპერაციების მართვა (Promise Pattern)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2007", [
-        [ "5.1. სერვისის მომწოდებლის API (<tt>wifi_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2008", null ],
-        [ "5.2. მომხმარებლის ლოგიკა (<tt>ui_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2009", null ]
+      [ "მიზანი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2025", null ],
+      [ "1. მრავალმოდულიანი კონფიგურაცია", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2026", null ],
+      [ "2. მოდულის დინამიური ჩართვა/გამორთვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2027", null ],
+      [ "3. Runtime Reconfiguration", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2028", null ],
+      [ "4. Custom Event-ების გამოყენება", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2029", null ],
+      [ "5. ასინქრონული ოპერაციების მართვა (Promise Pattern)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2030", [
+        [ "5.1. სერვისის მომწოდებლის API (<tt>wifi_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2031", null ],
+        [ "5.2. მომხმარებლის ლოგიკა (<tt>ui_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2032", null ]
       ] ],
-      [ "6. მოდულის სტატუსის მონიტორინგი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2010", null ],
-      [ "7. ოპტიმიზაცია და რესურსების მართვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2011", null ],
-      [ "8. Best Practices", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2012", null ]
+      [ "6. მოდულის სტატუსის მონიტორინგი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2033", null ],
+      [ "7. ოპტიმიზაცია და რესურსების მართვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2034", null ],
+      [ "8. Best Practices", "md_docs_2tutorials_2advanced__usage.html#autotoc_md2035", null ]
     ] ],
     [ "პირველი საკუთარი მოდულის შექმნა (v2.0)", "md_docs_2tutorials_2create__first__module.html", [
-      [ "მიზანი", "md_docs_2tutorials_2create__first__module.html#autotoc_md2015", null ],
-      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2create__first__module.html#autotoc_md2016", null ],
-      [ "2. მოდულის ჩონჩხის გენერაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2017", null ],
-      [ "3. კონფიგურაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2018", null ],
-      [ "4. კოდის იმპლემენტაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2019", null ],
-      [ "5. ტესტირება", "md_docs_2tutorials_2create__first__module.html#autotoc_md2022", null ]
+      [ "მიზანი", "md_docs_2tutorials_2create__first__module.html#autotoc_md2038", null ],
+      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2create__first__module.html#autotoc_md2039", null ],
+      [ "2. მოდულის ჩონჩხის გენერაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2040", null ],
+      [ "3. კონფიგურაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2041", null ],
+      [ "4. კოდის იმპლემენტაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md2042", null ],
+      [ "5. ტესტირება", "md_docs_2tutorials_2create__first__module.html#autotoc_md2045", null ]
     ] ],
     [ "სწრაფი სტარტი (Getting Started)", "md_docs_2tutorials_2getting__started.html", [
-      [ "მიზანი", "md_docs_2tutorials_2getting__started.html#autotoc_md2025", null ],
-      [ "1. გარემოს მომზადება", "md_docs_2tutorials_2getting__started.html#autotoc_md2026", null ],
-      [ "2. პროექტის სტრუქტურის გაცნობა", "md_docs_2tutorials_2getting__started.html#autotoc_md2027", null ],
-      [ "3. პირველი მოდულის ჩართვა", "md_docs_2tutorials_2getting__started.html#autotoc_md2028", null ],
-      [ "4. ბილდი და ფლეში", "md_docs_2tutorials_2getting__started.html#autotoc_md2029", null ],
-      [ "5. ლოგების ნახვა და ტესტირება", "md_docs_2tutorials_2getting__started.html#autotoc_md2030", null ],
-      [ "6. დამატებითი რესურსები", "md_docs_2tutorials_2getting__started.html#autotoc_md2031", null ]
+      [ "მიზანი", "md_docs_2tutorials_2getting__started.html#autotoc_md2048", null ],
+      [ "1. გარემოს მომზადება", "md_docs_2tutorials_2getting__started.html#autotoc_md2049", null ],
+      [ "2. პროექტის სტრუქტურის გაცნობა", "md_docs_2tutorials_2getting__started.html#autotoc_md2050", null ],
+      [ "3. პირველი მოდულის ჩართვა", "md_docs_2tutorials_2getting__started.html#autotoc_md2051", null ],
+      [ "4. ბილდი და ფლეში", "md_docs_2tutorials_2getting__started.html#autotoc_md2052", null ],
+      [ "5. ლოგების ნახვა და ტესტირება", "md_docs_2tutorials_2getting__started.html#autotoc_md2053", null ],
+      [ "6. დამატებითი რესურსები", "md_docs_2tutorials_2getting__started.html#autotoc_md2054", null ]
     ] ],
     [ "ინტეგრაციის მაგალითი (Integration Example)", "md_docs_2tutorials_2integration__example.html", [
-      [ "მიზანი", "md_docs_2tutorials_2integration__example.html#autotoc_md2034", null ],
-      [ "1. ინტეგრაციის საჭიროების განსაზღვრა", "md_docs_2tutorials_2integration__example.html#autotoc_md2035", null ],
-      [ "2. საჭირო მოდულების ჩართვა და კონფიგურაცია", "md_docs_2tutorials_2integration__example.html#autotoc_md2036", null ],
-      [ "3. MQTT Integration (Publish/Subscribe)", "md_docs_2tutorials_2integration__example.html#autotoc_md2037", null ],
-      [ "4. REST API Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2038", null ],
-      [ "5. WebSocket Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2039", null ],
-      [ "6. Best Practices", "md_docs_2tutorials_2integration__example.html#autotoc_md2040", null ],
-      [ "7. Troubleshooting", "md_docs_2tutorials_2integration__example.html#autotoc_md2041", null ]
+      [ "მიზანი", "md_docs_2tutorials_2integration__example.html#autotoc_md2057", null ],
+      [ "1. ინტეგრაციის საჭიროების განსაზღვრა", "md_docs_2tutorials_2integration__example.html#autotoc_md2058", null ],
+      [ "2. საჭირო მოდულების ჩართვა და კონფიგურაცია", "md_docs_2tutorials_2integration__example.html#autotoc_md2059", null ],
+      [ "3. MQTT Integration (Publish/Subscribe)", "md_docs_2tutorials_2integration__example.html#autotoc_md2060", null ],
+      [ "4. REST API Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2061", null ],
+      [ "5. WebSocket Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md2062", null ],
+      [ "6. Best Practices", "md_docs_2tutorials_2integration__example.html#autotoc_md2063", null ],
+      [ "7. Troubleshooting", "md_docs_2tutorials_2integration__example.html#autotoc_md2064", null ]
     ] ],
     [ "მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension & Feature Addition)", "md_docs_2tutorials_2module__extension.html", [
-      [ "მიზანი", "md_docs_2tutorials_2module__extension.html#autotoc_md2044", null ],
-      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2module__extension.html#autotoc_md2045", null ],
-      [ "2. სტრუქტურის დაცვა", "md_docs_2tutorials_2module__extension.html#autotoc_md2046", null ],
-      [ "3. ახალი API ან ფუნქციის დამატება", "md_docs_2tutorials_2module__extension.html#autotoc_md2047", null ],
-      [ "4. კონფიგურაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2048", null ],
-      [ "5. კომუნიკაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2049", null ],
-      [ "6. ტესტირება და ლოგირება", "md_docs_2tutorials_2module__extension.html#autotoc_md2050", null ],
-      [ "7. დოკუმენტაციის განახლება", "md_docs_2tutorials_2module__extension.html#autotoc_md2051", null ],
-      [ "Best Practices", "md_docs_2tutorials_2module__extension.html#autotoc_md2052", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2tutorials_2module__extension.html#autotoc_md2053", null ]
+      [ "მიზანი", "md_docs_2tutorials_2module__extension.html#autotoc_md2067", null ],
+      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2module__extension.html#autotoc_md2068", null ],
+      [ "2. სტრუქტურის დაცვა", "md_docs_2tutorials_2module__extension.html#autotoc_md2069", null ],
+      [ "3. ახალი API ან ფუნქციის დამატება", "md_docs_2tutorials_2module__extension.html#autotoc_md2070", null ],
+      [ "4. კონფიგურაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2071", null ],
+      [ "5. კომუნიკაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md2072", null ],
+      [ "6. ტესტირება და ლოგირება", "md_docs_2tutorials_2module__extension.html#autotoc_md2073", null ],
+      [ "7. დოკუმენტაციის განახლება", "md_docs_2tutorials_2module__extension.html#autotoc_md2074", null ],
+      [ "Best Practices", "md_docs_2tutorials_2module__extension.html#autotoc_md2075", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2tutorials_2module__extension.html#autotoc_md2076", null ]
     ] ],
     [ "სისტემის კონფიგურაცია (System Configuration)", "md_docs_2tutorials_2system__configuration.html", [
-      [ "🎯 მიზანი", "md_docs_2tutorials_2system__configuration.html#autotoc_md2056", null ],
-      [ "1. კონფიგურაციის ფაილების როლები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2058", null ],
-      [ "2. <tt>config.json</tt>-ის სტრუქტურა და მაგალითები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2060", null ],
-      [ "3. მოდულის კონფიგურაციის ობიექტის აღწერა", "md_docs_2tutorials_2system__configuration.html#autotoc_md2062", null ],
-      [ "4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2064", null ],
-      [ "5. კონფიგურაციის ვალიდაცია და Default-ები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2066", null ],
-      [ "6. საუკეთესო პრაქტიკები (Best Practices)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2068", null ]
+      [ "🎯 მიზანი", "md_docs_2tutorials_2system__configuration.html#autotoc_md2079", null ],
+      [ "1. კონფიგურაციის ფაილების როლები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2081", null ],
+      [ "2. <tt>config.json</tt>-ის სტრუქტურა და მაგალითები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2083", null ],
+      [ "3. მოდულის კონფიგურაციის ობიექტის აღწერა", "md_docs_2tutorials_2system__configuration.html#autotoc_md2085", null ],
+      [ "4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2087", null ],
+      [ "5. კონფიგურაციის ვალიდაცია და Default-ები", "md_docs_2tutorials_2system__configuration.html#autotoc_md2089", null ],
+      [ "6. საუკეთესო პრაქტიკები (Best Practices)", "md_docs_2tutorials_2system__configuration.html#autotoc_md2091", null ]
     ] ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -2042,23 +2070,24 @@ var NAVTREE =
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
-    ] ]
+    ] ],
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"alarms__manager_8c.html",
-"functions_t.html",
-"md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md147",
-"md_docs_2api__reference_2event__api.html#autotoc_md449",
-"md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md798",
-"md_docs_2contributing_2faq.html#autotoc_md1106",
-"md_docs_2design__decisions_2communication__choices.html#autotoc_md1402",
-"md_docs_2structure_2communication__patterns.html#autotoc_md1823",
-"promise__manager_8c.html#af2afb27ca6f5baeef0e2c06f8d617dff",
-"structcmd__t.html#ac7a005b9404a6bc0a07c5cbbe08977cb",
-"structtimer__entry__t.html#a148cad4ac19324e5daa3dcb1fd8b08ab"
+"_2home_2runner_2work_2synapse-esp_2synapse-esp_2components_2core_2include_2synapse_utils_8h-example.html",
+"functions_r.html",
+"md_components_2modules_2system_2connectivity__watchdog_2README.html#autotoc_md145",
+"md_docs_2api__reference_2drivers__api.html#autotoc_md445",
+"md_docs_2changelog_2CHANGELOG__2025-06-24.html",
+"md_docs_2contributing_2contributing__guide.html#autotoc_md1097",
+"md_docs_2convention_2variable__naming.html#autotoc_md1401",
+"md_docs_2security_2security__guidelines.html#autotoc_md1811",
+"mqtt__topics__generated_8h.html#a71006e4007fa0ac0b74fb552c6b8ba98",
+"structalarm__rule__t.html",
+"structsystem__manager__api__t.html#a402ede4ddd5f00bdad179ec8e85d5e9e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

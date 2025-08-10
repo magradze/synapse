@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
   <div class="headertitle"><div class="title">ინტეგრაციის მაგალითი (Integration Example)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2033"></a> </p>
-<h1><a class="anchor" id="autotoc_md2034"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2056"></a> </p>
+<h1><a class="anchor" id="autotoc_md2057"></a>
 მიზანი</h1>
 <p>ეს სახელმძღვანელო გაჩვენებთ, როგორ ინტეგრირდეთ Synapse Framework-ში სხვადასხვა გარე სისტემასთან ან სერვისთან (მაგალითად, MQTT, REST API, WebSocket) naming, structure და communication კონვენციების დაცვით.</p>
-<h1><a class="anchor" id="autotoc_md2035"></a>
+<h1><a class="anchor" id="autotoc_md2058"></a>
 1. ინტეგრაციის საჭიროების განსაზღვრა</h1>
 <ul>
 <li>განსაზღვრეთ, რომელი გარე სერვისთან გსურთ დაკავშირება (მაგ: MQTT ბროკერი, REST API, WebSocket სერვერი)</li>
 <li>აირჩიეთ შესაბამისი მოდული ან შექმენით ახალი</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2036"></a>
+<h1><a class="anchor" id="autotoc_md2059"></a>
 2. საჭირო მოდულების ჩართვა და კონფიგურაცია</h1>
 <ul>
 <li>ჩართეთ საჭირო მოდული system_config.json-ში</li>
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2037"></a>
+<h1><a class="anchor" id="autotoc_md2060"></a>
 3. MQTT Integration (Publish/Subscribe)</h1>
 <p><b>Publish:</b> </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *topic = <span class="stringliteral">&quot;/synapse/device/relay1/state&quot;</span>;</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *payload = <span class="stringliteral">&quot;{\&quot;state\&quot;:\&quot;on\&quot;}&quot;</span>;</div>
@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="line">mqtt_module_subscribe(<span class="stringliteral">&quot;/synapse/device/relay1/cmd&quot;</span>, mqtt_handle_command);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2038"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2061"></a>
 4. REST API Integration</h1>
 <p><b>HTTP GET:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;esp_http_client.h&quot;</span></div>
 <div class="line"> </div>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
 <div class="line">    esp_http_client_cleanup(client);</div>
 <div class="line">    <span class="keywordflow">return</span> ret;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2039"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2062"></a>
 5. WebSocket Integration</h1>
 <p><b>WebSocket კავშირის დამყარება და შეტყობინების გაგზავნა:</b> </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;esp_websocket_client.h&quot;</span></div>
 <div class="line"> </div>
@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
 <div class="line">    esp_websocket_client_stop(client);</div>
 <div class="line">    esp_websocket_client_destroy(client);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2040"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2063"></a>
 6. Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ public API-ები მოდულებს შორის</li>
@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2integration__examp
 <li>ყველა ინტეგრაცია აღწერეთ დოკუმენტაციაში</li>
 <li>გამოიყენეთ დეტალური ლოგირება და შეცდომების დამუშავება</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2041"></a>
+<h1><a class="anchor" id="autotoc_md2064"></a>
 7. Troubleshooting</h1>
 <ul>
 <li>დარწმუნდით, რომ ყველა საჭირო მოდული ჩართულია და სწორად კონფიგურირებულია</li>

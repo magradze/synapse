@@ -126,12 +126,37 @@ $(document).ready(function(){initNavTree('synapse__utils_8h_source.html',''); in
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keywordtype">bool</span> <a class="code hl_function" href="synapse__utils_8h.html#a1a2bf54e86e59bd449fe109e9c0bf565">synapse_config_get_bool_from_node</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* tag, <span class="keyword">const</span> cJSON *json_node, <span class="keyword">const</span> <span class="keywordtype">char</span> *key, <span class="keywordtype">bool</span> *out_value);</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_UTILS_H</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">// =========================================================================</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">//      Guard Clause &amp; Validation Helpers</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">// =========================================================================</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#define SYNAPSE_GUARD(condition, tag, ret_val, format, ...) \</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">  do                                                        \</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor">  {                                                         \</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">    if (!(condition))                                       \</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">    {                                                       \</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">      ESP_LOGE(tag, format, ##__VA_ARGS__);                 \</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">      return ret_val;                                       \</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="preprocessor">    }                                                       \</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="foldopen" id="foldopen00132" data-start="" data-end="">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">  132</a></span><span class="preprocessor">#define SYNAPSE_GUARD_VOID(condition, tag, format, ...) \</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">  do                                                    \</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">  {                                                     \</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">    if (!(condition))                                   \</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="preprocessor">    {                                                   \</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">      ESP_LOGE(tag, format, ##__VA_ARGS__);             \</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="preprocessor">      return;                                           \</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">    }                                                   \</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">  } while (0)</span></div>
+</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">#endif </span><span class="comment">// SYNAPSE_UTILS_H</span></div>
 <div class="ttc" id="asynapse_8h_html"><div class="ttname"><a href="synapse_8h.html">synapse.h</a></div><div class="ttdoc">Synapse ESP Framework - The Main Public Header.</div></div>
 <div class="ttc" id="asynapse__utils_8h_html_a1a2bf54e86e59bd449fe109e9c0bf565"><div class="ttname"><a href="synapse__utils_8h.html#a1a2bf54e86e59bd449fe109e9c0bf565">synapse_config_get_bool_from_node</a></div><div class="ttdeci">bool synapse_config_get_bool_from_node(const char *tag, const cJSON *json_node, const char *key, bool *out_value)</div><div class="ttdoc">Safely retrieves a boolean value from a cJSON object.</div><div class="ttdef"><b>Definition</b> synapse_utils.c:62</div></div>
 <div class="ttc" id="asynapse__utils_8h_html_a240c9bec50dd32c0be839ab6a4d5decc"><div class="ttname"><a href="synapse__utils_8h.html#a240c9bec50dd32c0be839ab6a4d5decc">synapse_config_get_string_from_node</a></div><div class="ttdeci">bool synapse_config_get_string_from_node(const char *tag, const cJSON *json_node, const char *key, char *dest, size_t dest_size)</div><div class="ttdoc">Safely retrieves a string value from a cJSON object.</div><div class="ttdef"><b>Definition</b> synapse_utils.c:30</div></div>

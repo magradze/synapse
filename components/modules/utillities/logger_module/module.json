@@ -7,7 +7,7 @@
   "init_function": "logger_module_create",
   "init_level": 1,
   "build_enabled": true,
-  "conditional_config": "CONFIG_MODULE_LOGGER_MODULE_ENABLED",
+  "conditional_config": "CONFIG_MODULE_LOGGER_ENABLED",
   "runtime_commands": {
     "start": "Start logging",
     "stop": "Stop logging",

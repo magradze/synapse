@@ -52,6 +52,7 @@ extern "C" {
 #include "promise_manager.h"  // For consuming asynchronous operations using a clean, promise-based pattern (synapse_promise_*).
 #include "task_pool_manager.h" // For scheduling jobs to be executed by a shared pool of worker tasks (synapse_task_pool_*).
 #include "synapse_utils.h"     // For common utility functions (synapse_safe_strncpy, synapse_config_get_string_from_node, etc.).
+#include "synapse_assert.h"    // For custom assertion macros (SYNAPSE_ASSERT).
 
   // =================================================================================================
   //      SECTION 3: UTILITIES & INTERNAL MECHANISMS

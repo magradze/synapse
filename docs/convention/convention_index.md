@@ -23,6 +23,7 @@
 - [promise_pattern.md](promise_pattern.md) — ასინქრონული ოპერაციების მართვის პატერნი (Promise)
 - [task_pool_pattern.md](task_pool_pattern.md) — რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)
 - [logging_colors.md](logging_colors.md) — ლოგირების ფერთა სქემის კონვენცია
+- [assertions_and_guards.md](assertions_and_guards.md) — Assertions და Guards-ის გამოყენების წესები
 
 ---
 

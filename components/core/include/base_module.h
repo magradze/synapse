@@ -155,6 +155,9 @@ struct module_t
         module_reconfigure_fn reconfigure;
         module_get_status_fn get_status;
         module_event_handler_fn handle_event;
+
+        /** @brief A function for debugging and printing module information. */
+        void (*debug_print)(struct module_t *self);
     } base;
 
     void *private_data;                        /**< @brief A pointer to the module's internal, private data structure. */

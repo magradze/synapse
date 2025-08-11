@@ -200,10 +200,15 @@ esp_err_t synapse_system_start(void)
             else
             {
                 module->status = MODULE_STATUS_RUNNING;
-                // Now, set service status to ACTIVE if it exists
                 if (synapse_service_get(module->name) != NULL)
                 {
                     synapse_service_set_status(module->name, SERVICE_STATUS_ACTIVE);
+                }
+
+                if (module->base.ui_init)
+                {
+                    ESP_LOGI(TAG, "Initializing UI for module '%s'", module->name);
+                    module->base.ui_init(module);
                 }
             }
         }
@@ -407,6 +412,13 @@ void synapse_system_shutdown(void)
     for (int i = s_registered_module_count - 1; i >= 0; i--)
     {
         module_t *module = (module_t *)s_registered_modules[i];
+
+        if (module && module->base.ui_deinit)
+        {
+            ESP_LOGI(TAG, "Deinitializing UI for module '%s'", module->name);
+            module->base.ui_deinit(module);
+        }
+
         if (module && module->base.deinit)
         {
             // Set status to STOPPING before calling deinit()

@@ -27,6 +27,7 @@ extern "C"
 
     // --- Display Services ---
     SYNAPSE_SERVICE_TYPE_DISPLAY_API,
+    SYNAPSE_SERVICE_TYPE_UI_MANAGER_API,
 
     // --- Communication Bus Services ---
     SYNAPSE_SERVICE_TYPE_I2C_BUS_API,
@@ -120,6 +121,8 @@ extern "C"
     // Display Services
     case SYNAPSE_SERVICE_TYPE_DISPLAY_API:
       return "display_api";
+    case SYNAPSE_SERVICE_TYPE_UI_MANAGER_API:
+      return "ui_manager_api";
 
     // Communication Bus Services
     case SYNAPSE_SERVICE_TYPE_I2C_BUS_API:

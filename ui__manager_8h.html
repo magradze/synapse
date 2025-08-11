@@ -91,164 +91,130 @@ $(document).ready(function(){initNavTree('ui__manager_8h.html',''); initResizabl
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">ui_manager.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Main header for the UI Manager module, defining core structures, enums, and constants.  
+<p>Public factory function for the UI Manager module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="base__module_8h_source.html">base_module.h</a>&quot;</code><br />
-<code>#include &quot;cJSON.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="display__driver__interface_8h_source.html">display_driver_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="system__manager__interface_8h_source.html">system_manager_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="timer__interface_8h_source.html">timer_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="time__sync__interface_8h_source.html">time_sync_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="wifi__interface_8h_source.html">wifi_interface.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="synapse_8h_source.html">synapse.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui_manager.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui__manager_8h__incl.png" border="0" usemap="#acomponents_2modules_2utillities_2ui__manager_2include_2ui__manager_8h" alt=""/></div>
 <map name="acomponents_2modules_2utillities_2ui__manager_2include_2ui__manager_8h" id="acomponents_2modules_2utillities_2ui__manager_2include_2ui__manager_8h">
-<area shape="rect" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="434,5,599,60"/>
-<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="937,328,1059,353"/>
-<area shape="poly" title=" " alt="" coords="561,58,870,252,971,318,968,323,867,257,558,62"/>
-<area shape="rect" title=" " alt="" coords="1983,401,2056,427"/>
-<area shape="poly" title=" " alt="" coords="600,32,1216,38,1656,46,2121,60,2565,79,2940,107,3088,124,3200,144,3273,166,3292,178,3299,192,3299,269,3296,281,3287,293,3255,313,3204,331,3139,347,2971,372,2772,390,2562,402,2361,409,2070,415,2070,410,2361,404,2562,397,2772,384,2971,366,3138,341,3203,326,3253,308,3284,289,3291,279,3294,268,3294,193,3288,182,3270,170,3199,149,3087,129,2940,112,2565,85,2121,65,1656,51,1216,43,599,37"/>
-<area shape="rect" href="display__driver__interface_8h.html" title="Universal Service API contract for display drivers." alt="" coords="5,328,196,353"/>
-<area shape="poly" title=" " alt="" coords="434,50,357,72,318,89,282,110,253,133,226,160,178,217,140,273,115,317,110,314,136,270,173,214,222,156,249,129,279,106,316,84,355,67,433,45"/>
-<area shape="rect" href="system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="411,255,623,280"/>
-<area shape="poly" title=" " alt="" coords="519,60,519,241,514,241,514,60"/>
-<area shape="rect" href="timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="220,328,355,353"/>
-<area shape="poly" title=" " alt="" coords="434,43,398,51,362,64,329,83,301,110,287,134,278,160,271,217,275,271,283,314,278,315,269,272,266,217,273,159,282,131,297,106,325,79,359,59,397,46,433,37"/>
-<area shape="rect" href="time__sync__interface_8h.html" title="Public Service API contract for the Time Sync module." alt="" coords="311,108,477,133"/>
-<area shape="poly" title=" " alt="" coords="481,62,424,102,421,98,478,58"/>
-<area shape="rect" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="1421,108,1543,133"/>
-<area shape="poly" title=" " alt="" coords="600,39,1408,110,1407,115,599,44"/>
-<area shape="rect" title=" " alt="" coords="1862,401,1958,427"/>
-<area shape="poly" title=" " alt="" coords="1059,345,1124,351,1320,364,1474,372,1627,382,1824,399,1848,401,1848,407,1823,404,1627,387,1473,378,1320,370,1123,356,1059,350"/>
-<area shape="rect" title=" " alt="" coords="415,401,498,427"/>
-<area shape="poly" title=" " alt="" coords="937,351,753,374,525,404,512,406,511,401,524,399,752,368,937,346"/>
-<area shape="rect" title=" " alt="" coords="536,401,607,427"/>
-<area shape="poly" title=" " alt="" coords="938,355,620,407,620,402,937,349"/>
-<area shape="rect" title=" " alt="" coords="859,401,940,427"/>
-<area shape="poly" title=" " alt="" coords="984,356,928,395,925,391,981,351"/>
-<area shape="poly" title=" " alt="" coords="1059,345,1124,351,1360,362,1545,365,1731,373,1841,383,1969,399,1969,404,1840,388,1731,378,1545,371,1359,368,1123,356,1059,351"/>
-<area shape="rect" title=" " alt="" coords="1508,401,1659,427"/>
-<area shape="poly" title=" " alt="" coords="1059,347,1495,399,1494,405,1059,352"/>
-<area shape="rect" title=" " alt="" coords="1281,401,1419,427"/>
-<area shape="poly" title=" " alt="" coords="1055,351,1280,396,1279,401,1054,356"/>
-<area shape="poly" title=" " alt="" coords="158,351,402,399,401,404,157,356"/>
-<area shape="poly" title=" " alt="" coords="186,351,510,399,523,401,522,406,510,404,185,356"/>
-<area shape="poly" title=" " alt="" coords="196,350,208,351,845,406,845,411,207,356,196,355"/>
-<area shape="rect" title=" " alt="" coords="63,401,138,427"/>
-<area shape="poly" title=" " alt="" coords="103,354,103,388,98,388,98,354"/>
-<area shape="poly" title=" " alt="" coords="594,277,924,326,924,331,594,283"/>
-<area shape="poly" title=" " alt="" coords="526,279,548,327,568,387,563,389,544,329,521,281"/>
-<area shape="poly" title=" " alt="" coords="542,278,700,351,776,376,846,396,845,402,775,381,698,356,540,283"/>
-<area shape="poly" title=" " alt="" coords="316,351,417,393,415,398,314,356"/>
-<area shape="poly" title=" " alt="" coords="334,351,523,398,522,403,332,356"/>
-<area shape="poly" title=" " alt="" coords="355,349,368,351,845,405,845,410,367,356,355,354"/>
-<area shape="poly" title=" " alt="" coords="384,135,367,156,353,182,348,212,356,236,375,257,401,278,444,295,519,318,641,351,846,399,844,404,640,356,518,323,442,300,398,282,371,261,352,239,343,213,347,181,362,153,380,132"/>
-<area shape="rect" title=" " alt="" coords="362,181,426,207"/>
-<area shape="poly" title=" " alt="" coords="397,134,397,168,391,168,391,134"/>
-<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1875,181,1963,207"/>
-<area shape="poly" title=" " alt="" coords="1544,129,1862,181,1861,186,1543,135"/>
-<area shape="poly" title=" " alt="" coords="1875,198,1678,200,1408,207,1275,215,1158,225,1070,239,1040,247,1022,257,1012,269,1006,283,1000,314,995,314,1000,282,1008,266,1019,253,1038,243,1069,234,1158,220,1275,209,1408,202,1678,194,1875,193"/>
-<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="2813,328,2937,353"/>
-<area shape="poly" title=" " alt="" coords="1964,193,2219,198,2582,208,2913,226,3024,238,3058,245,3076,253,3086,270,3085,285,3075,298,3057,308,3008,324,2952,334,2951,329,3006,319,3054,303,3071,294,3080,283,3081,271,3072,257,3057,250,3023,243,2913,231,2582,214,2219,203,1964,199"/>
-<area shape="rect" href="service__status_8h.html" title="Defines the lifecycle status for services in the Service Locator." alt="" coords="2318,328,2446,353"/>
-<area shape="poly" title=" " alt="" coords="1964,193,2059,195,2176,204,2285,222,2328,235,2358,253,2370,266,2377,282,2384,314,2379,315,2372,284,2365,269,2355,257,2326,240,2284,227,2175,209,2058,201,1963,198"/>
-<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="1841,255,1997,280"/>
-<area shape="poly" title=" " alt="" coords="1922,207,1922,241,1917,241,1917,207"/>
-<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="2207,255,2344,280"/>
-<area shape="poly" title=" " alt="" coords="1964,201,2205,249,2204,255,1963,207"/>
-<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="2420,255,2552,280"/>
-<area shape="poly" title=" " alt="" coords="1964,198,2401,252,2407,253,2406,258,2400,257,1963,203"/>
-<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1765,328,1866,353"/>
-<area shape="poly" title=" " alt="" coords="1892,209,1860,228,1832,256,1821,285,1817,315,1812,314,1816,284,1828,253,1857,224,1890,204"/>
-<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="1552,328,1689,353"/>
-<area shape="poly" title=" " alt="" coords="1875,200,1808,206,1731,216,1663,233,1638,244,1621,256,1614,269,1612,284,1615,314,1610,315,1606,284,1609,268,1617,253,1635,239,1661,227,1730,211,1807,200,1875,195"/>
-<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="379,328,534,353"/>
-<area shape="poly" title=" " alt="" coords="1875,198,1549,200,1065,207,825,215,618,225,468,239,423,248,401,257,395,271,400,287,413,303,430,318,426,322,410,306,396,289,390,271,397,253,421,242,467,234,617,220,825,209,1065,202,1549,194,1875,193"/>
-<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="1195,255,1342,280"/>
-<area shape="poly" title=" " alt="" coords="1876,202,1356,257,1355,252,1875,197"/>
-<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="711,328,861,353"/>
-<area shape="poly" title=" " alt="" coords="1875,199,1441,215,1185,233,1078,244,999,257,949,271,901,289,821,324,819,319,899,284,948,266,997,252,1078,239,1184,227,1440,210,1875,194"/>
-<area shape="rect" href="task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="2021,255,2183,280"/>
-<area shape="poly" title=" " alt="" coords="1943,204,2053,247,2052,252,1941,209"/>
-<area shape="rect" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="3137,255,3259,280"/>
-<area shape="poly" title=" " alt="" coords="1964,193,2427,208,2762,225,3106,252,3123,254,3123,259,3106,257,2762,231,2427,213,1964,199"/>
-<area shape="rect" href="synapse__assert_8h.html" title="Custom assertion macro for the Synapse Framework." alt="" coords="2684,255,2819,280"/>
-<area shape="poly" title=" " alt="" coords="1964,195,2256,215,2670,252,2670,257,2255,220,1963,201"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="2577,255,2659,280"/>
-<area shape="poly" title=" " alt="" coords="1964,195,2214,213,2385,229,2563,252,2562,257,2385,235,2214,218,1963,200"/>
-<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1361,328,1528,353"/>
-<area shape="poly" title=" " alt="" coords="1876,202,1752,220,1677,236,1604,257,1533,289,1475,323,1472,318,1531,284,1602,252,1676,230,1751,214,1875,197"/>
-<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="1033,255,1171,280"/>
-<area shape="poly" title=" " alt="" coords="1875,201,1590,221,1185,257,1185,252,1589,215,1875,195"/>
-<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="1631,255,1765,280"/>
-<area shape="poly" title=" " alt="" coords="1885,209,1747,253,1746,248,1883,204"/>
-<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="1366,255,1505,280"/>
-<area shape="poly" title=" " alt="" coords="1875,204,1519,257,1518,251,1875,199"/>
-<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="647,255,856,280"/>
-<area shape="poly" title=" " alt="" coords="1875,200,1466,220,876,257,870,258,870,252,875,252,1466,215,1875,195"/>
-<area shape="rect" href="task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="2843,255,3062,280"/>
-<area shape="poly" title=" " alt="" coords="1964,195,2318,217,2820,252,2829,253,2829,258,2819,257,2317,222,1964,201"/>
-<area shape="poly" title=" " alt="" coords="2271,282,2245,319,2226,339,2203,356,2114,376,1972,404,1971,399,2113,371,2201,351,2222,335,2241,315,2267,279"/>
-<area shape="poly" title=" " alt="" coords="2277,281,2270,317,2261,338,2248,355,2206,383,2160,401,2112,411,2070,415,2069,410,2111,406,2158,396,2204,379,2244,351,2257,335,2265,316,2272,280"/>
-<area shape="poly" title=" " alt="" coords="2294,278,2355,318,2352,323,2291,282"/>
-<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="1135,328,1285,353"/>
-<area shape="poly" title=" " alt="" coords="2207,281,2196,283,1958,302,1773,311,1588,317,1350,331,1299,334,1299,329,1350,325,1588,312,1773,306,1958,297,2195,277,2206,276"/>
-<area shape="rect" title=" " alt="" coords="2024,328,2095,353"/>
-<area shape="poly" title=" " alt="" coords="2241,283,2108,326,2106,321,2240,277"/>
-<area shape="rect" title=" " alt="" coords="2119,328,2189,353"/>
-<area shape="poly" title=" " alt="" coords="2257,282,2187,323,2184,319,2254,278"/>
-<area shape="poly" title=" " alt="" coords="1135,353,621,410,620,405,1134,348"/>
-<area shape="poly" title=" " alt="" coords="2489,281,2483,318,2474,339,2459,356,2255,369,1803,386,954,414,953,408,1803,381,2255,363,2457,351,2470,336,2478,317,2483,280"/>
-<area shape="poly" title=" " alt="" coords="2549,277,2800,323,2799,328,2548,283"/>
-<area shape="poly" title=" " alt="" coords="2471,282,2412,322,2409,318,2468,278"/>
-<area shape="poly" title=" " alt="" coords="1765,350,1702,356,1271,390,954,412,953,406,1271,385,1702,351,1764,345"/>
-<area shape="rect" title=" " alt="" coords="1737,401,1811,427"/>
-<area shape="poly" title=" " alt="" coords="1811,355,1790,391,1785,388,1806,352"/>
-<area shape="poly" title=" " alt="" coords="1552,355,1541,356,1386,368,1255,375,1033,378,810,382,679,390,525,404,512,406,511,400,524,399,679,385,810,377,1032,373,1255,369,1386,363,1540,351,1551,350"/>
-<area shape="poly" title=" " alt="" coords="1552,355,1541,356,1208,390,954,411,953,406,1207,385,1540,351,1551,349"/>
-<area shape="poly" title=" " alt="" coords="1690,350,1969,399,1968,404,1689,355"/>
-<area shape="poly" title=" " alt="" coords="1617,355,1598,391,1593,388,1612,352"/>
-<area shape="poly" title=" " alt="" coords="1578,356,1408,400,1406,395,1577,351"/>
-<area shape="poly" title=" " alt="" coords="459,354,459,388,454,388,454,354"/>
-<area shape="poly" title=" " alt="" coords="476,351,542,392,540,396,474,356"/>
-<area shape="poly" title=" " alt="" coords="528,351,845,401,844,407,527,356"/>
-<area shape="poly" title=" " alt="" coords="1226,283,1056,327,1054,322,1225,277"/>
-<area shape="poly" title=" " alt="" coords="1195,282,1028,308,959,321,927,330,917,342,910,357,903,388,898,386,905,355,913,339,925,326,958,316,1027,303,1195,277"/>
-<area shape="poly" title=" " alt="" coords="1342,276,1354,277,1434,284,1503,286,1620,284,1676,285,1735,291,1802,304,1879,325,1912,339,1944,356,1996,391,1993,395,1941,361,1910,344,1877,331,1801,309,1735,296,1676,290,1620,289,1503,291,1434,289,1354,283,1342,281"/>
-<area shape="poly" title=" " alt="" coords="806,351,871,392,868,396,803,356"/>
-<area shape="poly" title=" " alt="" coords="2078,257,1967,214,1969,209,2080,252"/>
-<area shape="poly" title=" " alt="" coords="3175,283,3087,320,3031,340,2972,356,2890,369,2781,380,2519,397,2070,414,2070,409,2519,392,2781,375,2889,364,2971,351,3029,335,3085,315,3173,278"/>
-<area shape="poly" title=" " alt="" coords="3136,258,3130,257,2788,231,2453,214,1977,199,1977,194,2454,208,2788,226,3130,252,3137,253"/>
-<area shape="poly" title=" " alt="" coords="2820,277,2899,297,2931,311,2952,326,2958,341,2952,355,2934,363,2900,369,2789,379,2467,392,1972,404,1971,404,1971,399,1971,399,2467,387,2789,374,2899,364,2933,358,2948,351,2953,341,2948,330,2929,315,2897,302,2818,283"/>
-<area shape="rect" title=" " alt="" coords="2576,328,2660,353"/>
-<area shape="poly" title=" " alt="" coords="2731,282,2653,324,2651,319,2729,278"/>
-<area shape="rect" title=" " alt="" coords="2685,328,2789,353"/>
-<area shape="poly" title=" " alt="" coords="2752,281,2744,315,2739,314,2746,280"/>
-<area shape="poly" title=" " alt="" coords="2621,280,2621,314,2615,314,2615,280"/>
-<area shape="poly" title=" " alt="" coords="1362,351,621,411,620,406,1361,346"/>
-<area shape="poly" title=" " alt="" coords="1362,355,954,408,953,403,1361,350"/>
-<area shape="poly" title=" " alt="" coords="1468,351,1550,393,1547,397,1466,356"/>
-<area shape="poly" title=" " alt="" coords="1431,355,1378,395,1375,391,1428,351"/>
-<area shape="poly" title=" " alt="" coords="1498,351,1724,399,1723,404,1497,356"/>
-<area shape="poly" title=" " alt="" coords="1087,282,1028,322,1025,318,1084,278"/>
-<area shape="poly" title=" " alt="" coords="1631,278,1073,334,1072,329,1630,273"/>
-<area shape="poly" title=" " alt="" coords="1766,272,1853,289,1899,305,1942,326,1978,355,2006,388,2002,391,1975,359,1939,330,1897,310,1851,295,1765,277"/>
-<area shape="poly" title=" " alt="" coords="1366,283,1072,330,1072,325,1365,277"/>
-<area shape="poly" title=" " alt="" coords="1366,282,1232,306,1124,331,1098,342,1072,356,950,400,949,395,1070,351,1096,338,1122,325,1231,301,1365,277"/>
-<area shape="poly" title=" " alt="" coords="1505,272,1563,279,1622,290,1672,305,1691,315,1704,326,1710,338,1711,350,1696,370,1670,387,1639,399,1637,395,1668,382,1693,366,1705,349,1705,340,1700,330,1688,320,1670,310,1620,295,1562,284,1505,277"/>
-<area shape="poly" title=" " alt="" coords="1408,282,1377,301,1363,314,1352,329,1345,358,1347,388,1342,388,1340,358,1348,327,1359,311,1374,297,1405,278"/>
-<area shape="poly" title=" " alt="" coords="759,279,777,314,772,317,755,282"/>
-<area shape="poly" title=" " alt="" coords="2843,257,2342,222,1977,201,1977,196,2342,217,2843,252"/>
+<area shape="rect" title="Public factory function for the UI Manager module." alt="" coords="1415,5,1581,60"/>
+<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1454,108,1542,133"/>
+<area shape="poly" title=" " alt="" coords="1501,60,1501,94,1495,94,1495,60"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="435,255,556,280"/>
+<area shape="poly" title=" " alt="" coords="1454,125,1342,128,1183,137,1000,155,816,184,777,196,739,209,561,254,559,249,737,204,776,190,815,179,1000,149,1183,132,1341,123,1454,120"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1672,255,1796,280"/>
+<area shape="poly" title=" " alt="" coords="1529,131,1577,152,1629,179,1675,211,1713,243,1710,247,1672,216,1626,184,1575,156,1527,136"/>
+<area shape="rect" href="service__status_8h.html" title="Defines the lifecycle status for services in the Service Locator." alt="" coords="1469,255,1597,280"/>
+<area shape="poly" title=" " alt="" coords="1491,135,1474,168,1471,187,1474,206,1487,227,1505,244,1502,248,1483,230,1469,208,1465,187,1469,166,1487,133"/>
+<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="2295,181,2451,207"/>
+<area shape="poly" title=" " alt="" coords="1542,122,1847,142,2281,179,2281,184,1847,147,1542,127"/>
+<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="1271,181,1408,207"/>
+<area shape="poly" title=" " alt="" coords="1474,136,1379,178,1377,173,1471,131"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1484,181,1616,207"/>
+<area shape="poly" title=" " alt="" coords="1509,132,1536,169,1531,172,1504,135"/>
+<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1995,255,2097,280"/>
+<area shape="poly" title=" " alt="" coords="1542,121,1641,127,1764,138,1882,155,1930,166,1966,179,1986,192,2005,208,2033,241,2029,245,2001,212,1983,196,1964,184,1929,171,1881,160,1764,143,1640,132,1542,127"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="221,255,359,280"/>
+<area shape="poly" title=" " alt="" coords="1454,126,900,144,593,161,481,172,416,184,370,210,317,248,314,244,367,206,414,179,480,167,592,156,900,139,1454,120"/>
+<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="771,255,926,280"/>
+<area shape="poly" title=" " alt="" coords="1454,133,1363,154,1259,184,1230,197,1200,209,1085,233,940,256,939,250,1084,228,1199,204,1228,192,1257,179,1362,149,1453,128"/>
+<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="827,181,974,207"/>
+<area shape="poly" title=" " alt="" coords="1454,130,990,184,988,184,987,179,990,179,1454,124"/>
+<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="1820,255,1971,280"/>
+<area shape="poly" title=" " alt="" coords="1531,131,1664,179,1731,204,1851,247,1849,252,1729,209,1662,184,1530,136"/>
+<area shape="rect" href="task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="2475,181,2636,207"/>
+<area shape="poly" title=" " alt="" coords="1543,121,1917,140,2181,157,2452,179,2461,180,2461,185,2451,184,2181,162,1917,145,1542,127"/>
+<area shape="rect" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="230,181,353,207"/>
+<area shape="poly" title=" " alt="" coords="1454,125,1014,140,696,158,366,183,366,178,695,152,1014,135,1454,120"/>
+<area shape="rect" href="synapse__assert_8h.html" title="Custom assertion macro for the Synapse Framework." alt="" coords="2028,181,2163,207"/>
+<area shape="poly" title=" " alt="" coords="1542,124,2009,179,2014,179,2014,185,2008,184,1542,130"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="2187,181,2270,207"/>
+<area shape="poly" title=" " alt="" coords="1542,121,1806,138,1986,155,2174,179,2173,184,1986,161,1805,144,1542,127"/>
+<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="580,255,747,280"/>
+<area shape="poly" title=" " alt="" coords="1454,129,1338,147,1268,163,1200,184,1177,197,1153,209,761,257,760,252,1152,204,1175,192,1198,179,1267,158,1337,142,1453,124"/>
+<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="1002,181,1141,207"/>
+<area shape="poly" title=" " alt="" coords="1454,132,1154,182,1153,176,1454,127"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="428,181,563,207"/>
+<area shape="poly" title=" " alt="" coords="1454,126,1096,144,841,161,577,184,576,179,841,156,1095,139,1454,121"/>
+<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="587,181,726,207"/>
+<area shape="poly" title=" " alt="" coords="1454,128,1164,150,764,184,740,186,739,181,763,179,1163,145,1453,123"/>
+<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="1743,181,1952,207"/>
+<area shape="poly" title=" " alt="" coords="1543,128,1778,176,1777,181,1542,134"/>
+<area shape="rect" href="task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="2661,181,2879,207"/>
+<area shape="poly" title=" " alt="" coords="1542,121,1987,141,2308,158,2637,179,2647,179,2646,185,2637,184,2307,163,1987,146,1542,126"/>
+<area shape="rect" title=" " alt="" coords="1383,328,1479,353"/>
+<area shape="poly" title=" " alt="" coords="557,276,568,277,782,296,949,304,1117,310,1332,325,1370,329,1369,335,1331,331,1116,316,949,309,782,302,567,283,556,281"/>
+<area shape="rect" title=" " alt="" coords="551,328,634,353"/>
+<area shape="poly" title=" " alt="" coords="513,278,567,317,564,322,509,282"/>
+<area shape="rect" title=" " alt="" coords="736,328,807,353"/>
+<area shape="poly" title=" " alt="" coords="540,277,723,324,722,329,539,283"/>
+<area shape="rect" title=" " alt="" coords="1099,328,1180,353"/>
+<area shape="poly" title=" " alt="" coords="557,276,568,277,859,311,1085,332,1085,337,859,316,567,283,556,281"/>
+<area shape="rect" title=" " alt="" coords="107,328,180,353"/>
+<area shape="poly" title=" " alt="" coords="439,283,194,332,193,327,438,277"/>
+<area shape="rect" title=" " alt="" coords="215,328,365,353"/>
+<area shape="poly" title=" " alt="" coords="463,283,337,326,335,321,462,277"/>
+<area shape="rect" title=" " alt="" coords="389,328,527,353"/>
+<area shape="poly" title=" " alt="" coords="492,282,473,317,468,315,487,279"/>
+<area shape="poly" title=" " alt="" coords="1358,205,1383,226,1407,253,1421,284,1430,314,1425,315,1416,286,1402,256,1380,229,1355,209"/>
+<area shape="poly" title=" " alt="" coords="1271,202,1153,209,676,217,381,230,272,241,234,249,210,257,193,269,179,284,157,316,153,313,174,280,190,265,207,252,233,244,271,236,381,225,676,212,1153,204,1271,197"/>
+<area shape="poly" title=" " alt="" coords="1371,204,1489,247,1488,252,1370,209"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="951,255,1101,280"/>
+<area shape="poly" title=" " alt="" coords="1290,209,1091,254,1089,249,1288,204"/>
+<area shape="rect" title=" " alt="" coords="1228,255,1299,280"/>
+<area shape="poly" title=" " alt="" coords="1329,209,1288,247,1284,243,1325,205"/>
+<area shape="rect" title=" " alt="" coords="1323,255,1393,280"/>
+<area shape="poly" title=" " alt="" coords="1345,206,1354,241,1349,242,1340,208"/>
+<area shape="poly" title=" " alt="" coords="986,283,821,328,820,323,984,277"/>
+<area shape="poly" title=" " alt="" coords="1570,205,1589,220,1608,239,1617,260,1617,271,1610,282,1194,335,1194,330,1607,278,1612,270,1612,261,1603,242,1586,224,1566,209"/>
+<area shape="poly" title=" " alt="" coords="1581,204,1692,247,1690,252,1579,209"/>
+<area shape="poly" title=" " alt="" coords="1550,208,1541,242,1536,241,1545,206"/>
+<area shape="poly" title=" " alt="" coords="1996,281,1984,283,1773,303,1609,310,1444,316,1233,331,1194,335,1193,330,1232,325,1444,311,1608,305,1773,298,1983,277,1995,276"/>
+<area shape="rect" title=" " alt="" coords="1245,328,1319,353"/>
+<area shape="poly" title=" " alt="" coords="1996,281,1984,283,1812,301,1678,309,1544,316,1372,331,1333,335,1332,330,1371,325,1543,311,1678,304,1812,296,1983,277,1995,276"/>
+<area shape="poly" title=" " alt="" coords="339,277,539,324,537,329,338,283"/>
+<area shape="poly" title=" " alt="" coords="359,272,422,277,1085,332,1085,338,422,283,359,277"/>
+<area shape="poly" title=" " alt="" coords="268,282,181,324,178,320,265,278"/>
+<area shape="poly" title=" " alt="" coords="293,280,293,314,287,314,287,280"/>
+<area shape="poly" title=" " alt="" coords="318,278,419,320,417,325,316,282"/>
+<area shape="poly" title=" " alt="" coords="808,283,648,327,646,322,807,277"/>
+<area shape="poly" title=" " alt="" coords="838,282,796,320,792,317,834,278"/>
+<area shape="poly" title=" " alt="" coords="896,277,1086,324,1085,329,895,283"/>
+<area shape="poly" title=" " alt="" coords="836,209,570,256,569,250,835,204"/>
+<area shape="poly" title=" " alt="" coords="971,204,1087,227,1135,240,1160,253,1167,268,1167,285,1157,316,1152,315,1162,284,1162,269,1156,257,1133,245,1086,232,969,209"/>
+<area shape="poly" title=" " alt="" coords="827,203,429,233,166,257,156,269,150,283,145,315,140,314,145,282,152,266,163,252,429,228,827,198"/>
+<area shape="poly" title=" " alt="" coords="1820,281,1808,283,1646,298,1520,307,1233,331,1194,335,1193,330,1232,325,1520,302,1646,293,1807,277,1820,276"/>
+<area shape="poly" title=" " alt="" coords="2475,184,2205,162,1941,146,1555,127,1556,121,1941,140,2206,157,2475,179"/>
+<area shape="poly" title=" " alt="" coords="353,182,383,179,695,154,1001,137,1440,121,1440,126,1001,142,696,159,384,184,353,188"/>
+<area shape="poly" title=" " alt="" coords="230,202,169,209,104,220,48,236,28,245,15,256,9,268,9,278,15,287,26,297,58,313,94,325,92,330,56,318,23,301,11,291,4,279,4,267,11,253,25,241,47,231,103,215,168,204,229,197"/>
+<area shape="poly" title=" " alt="" coords="2105,206,2119,242,2120,263,2111,282,2098,290,2078,298,2018,310,1846,328,1651,337,1494,341,1493,336,1651,332,1845,322,2017,305,2076,293,2096,286,2107,278,2114,262,2114,243,2100,208"/>
+<area shape="rect" title=" " alt="" coords="2300,255,2384,280"/>
+<area shape="poly" title=" " alt="" coords="2136,204,2290,248,2288,253,2134,209"/>
+<area shape="rect" title=" " alt="" coords="2171,255,2275,280"/>
+<area shape="poly" title=" " alt="" coords="2117,204,2192,245,2189,250,2115,209"/>
+<area shape="poly" title=" " alt="" coords="2248,204,2314,245,2311,250,2245,209"/>
+<area shape="poly" title=" " alt="" coords="682,278,744,318,741,323,679,282"/>
+<area shape="poly" title=" " alt="" coords="740,277,1085,329,1085,334,739,283"/>
+<area shape="poly" title=" " alt="" coords="604,283,364,328,363,323,603,277"/>
+<area shape="poly" title=" " alt="" coords="631,283,505,326,503,321,630,277"/>
+<area shape="poly" title=" " alt="" coords="747,276,760,277,1192,325,1231,330,1231,335,1191,331,759,283,747,281"/>
+<area shape="poly" title=" " alt="" coords="1002,207,986,209,780,232,570,257,569,252,779,227,986,204,1002,202"/>
+<area shape="poly" title=" " alt="" coords="498,207,498,241,493,241,493,207"/>
+<area shape="poly" title=" " alt="" coords="428,205,206,231,109,245,65,257,61,264,60,272,68,289,86,305,108,319,105,324,83,309,64,292,55,273,56,263,62,253,108,240,205,225,427,200"/>
+<area shape="poly" title=" " alt="" coords="632,209,535,251,533,247,630,204"/>
+<area shape="poly" title=" " alt="" coords="726,198,954,219,1057,235,1094,243,1114,253,1126,266,1134,282,1141,314,1136,315,1129,284,1122,269,1111,257,1092,248,1056,240,953,224,726,203"/>
+<area shape="poly" title=" " alt="" coords="588,208,574,209,490,213,381,214,327,218,278,225,238,238,211,256,206,265,205,272,214,289,232,305,254,319,251,324,228,309,209,292,200,273,201,263,207,253,235,233,277,220,326,213,381,209,490,207,574,204,587,202"/>
+<area shape="poly" title=" " alt="" coords="596,209,489,233,445,246,424,256,419,270,421,286,440,316,435,319,416,287,413,270,420,253,443,241,488,228,595,204"/>
+<area shape="poly" title=" " alt="" coords="1857,206,1882,242,1878,245,1853,209"/>
+<area shape="poly" title=" " alt="" coords="2660,184,2333,163,2013,146,1556,127,1556,121,2013,141,2333,158,2660,179"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -256,277 +222,41 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui__manager_8h__dep__incl.png" border="0" usemap="#acomponents_2modules_2utillities_2ui__manager_2include_2ui__manager_8hdep" alt=""/></div>
 <map name="acomponents_2modules_2utillities_2ui__manager_2include_2ui__manager_8hdep" id="acomponents_2modules_2utillities_2ui__manager_2include_2ui__manager_8hdep">
-<area shape="rect" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="245,5,411,60"/>
-<area shape="rect" href="ui__events_8h.html" title="Handles all incoming events for the UI Manager." alt="" coords="9,108,172,163"/>
-<area shape="poly" title=" " alt="" coords="255,68,154,110,151,105,253,63"/>
-<area shape="rect" href="ui__manager_8c.html" title="Main orchestrator for the UI system." alt="" coords="192,211,355,265"/>
-<area shape="poly" title=" " alt="" coords="270,70,251,88,237,109,231,135,235,161,245,187,257,209,252,212,240,189,230,163,226,134,232,107,247,85,266,66"/>
-<area shape="rect" href="ui__menu_8h.html" title="Manages menu state, navigation, and rendering for the UI Manager." alt="" coords="247,108,409,163"/>
-<area shape="poly" title=" " alt="" coords="331,74,331,108,325,108,325,74"/>
-<area shape="rect" href="ui__screens_8h.html" title="Declares the rendering functions for all UI screens and common components." alt="" coords="433,108,596,163"/>
-<area shape="poly" title=" " alt="" coords="390,64,467,105,464,110,387,69"/>
+<area shape="rect" title="Public factory function for the UI Manager module." alt="" coords="123,5,288,60"/>
+<area shape="rect" href="ui__manager_8c.html" title="Main orchestrator for the Modular UI system." alt="" coords="5,211,168,265"/>
+<area shape="poly" title=" " alt="" coords="186,73,105,211,100,209,181,70"/>
+<area shape="rect" href="ui__manager__internal_8h.html" title="Internal shared definitions for the UI Manager module." alt="" coords="176,108,371,163"/>
+<area shape="poly" title=" " alt="" coords="233,70,258,106,253,109,229,73"/>
+<area shape="poly" title=" " alt="" coords="214,171,137,213,134,208,212,167"/>
+<area shape="rect" href="ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="192,211,355,265"/>
+<area shape="poly" title=" " alt="" coords="276,176,276,211,271,211,271,176"/>
+<area shape="rect" href="ui__menu_8c.html" title="Implements the dynamic main menu logic for the UI Manager." alt="" coords="379,211,541,265"/>
+<area shape="poly" title=" " alt="" coords="335,167,412,208,410,213,333,171"/>
 <area shape="rect" href="ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="565,211,728,265"/>
-<area shape="poly" title=" " alt="" coords="424,34,472,41,521,54,569,76,610,106,628,130,639,158,649,210,643,211,634,159,623,133,606,110,566,80,519,59,471,46,424,39"/>
-<area shape="rect" href="ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="5,211,168,265"/>
-<area shape="poly" title=" " alt="" coords="92,177,90,211,85,210,86,176"/>
-<area shape="poly" title=" " alt="" coords="151,167,227,208,224,213,149,172"/>
-<area shape="poly" title=" " alt="" coords="254,170,151,213,149,208,252,165"/>
-<area shape="poly" title=" " alt="" coords="309,176,290,212,285,209,305,174"/>
-<area shape="rect" href="ui__menu_8c.html" title="Implements menu logic for the UI Manager." alt="" coords="379,211,541,265"/>
-<area shape="poly" title=" " alt="" coords="375,169,427,208,424,213,372,173"/>
-<area shape="poly" title=" " alt="" coords="440,170,337,213,335,208,438,165"/>
-<area shape="poly" title=" " alt="" coords="496,176,477,212,472,209,491,174"/>
-<area shape="poly" title=" " alt="" coords="561,169,614,208,610,213,558,173"/>
+<area shape="poly" title=" " alt="" coords="385,163,554,208,566,211,565,216,553,213,384,168"/>
 </map>
 </div>
 </div>
 <p><a href="ui__manager_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui__cmd__t.html">ui_cmd_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The structure for a command sent to the UI task's queue.  <a href="structui__cmd__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmenu__item__t.html">menu_item_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single item within a static menu.  <a href="structmenu__item__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstatic__menu__t.html">static_menu_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a complete static menu, containing a title and a list of items.  <a href="structstatic__menu__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The central private data structure holding the entire state of the UI Manager.  <a href="structui__manager__private__data__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a90b9d491759ce40a2b74d503b65e3c0b" id="r_a90b9d491759ce40a2b74d503b65e3c0b"><td class="memItemLeft" align="right" valign="top"><a id="a90b9d491759ce40a2b74d503b65e3c0b" name="a90b9d491759ce40a2b74d503b65e3c0b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SCREEN_OFF_TIMEOUT_MS</b>&#160;&#160;&#160;30000</td></tr>
-<tr class="separator:a90b9d491759ce40a2b74d503b65e3c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a903aa30dd67d006a9a91da26b4e50a06" id="r_a903aa30dd67d006a9a91da26b4e50a06"><td class="memItemLeft" align="right" valign="top"><a id="a903aa30dd67d006a9a91da26b4e50a06" name="a903aa30dd67d006a9a91da26b4e50a06"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>HOME_SCREEN_UPDATE_INTERVAL_MS</b>&#160;&#160;&#160;1000</td></tr>
-<tr class="separator:a903aa30dd67d006a9a91da26b4e50a06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad29b7c40cca7dd714c8af0e5b20e7758" id="r_ad29b7c40cca7dd714c8af0e5b20e7758"><td class="memItemLeft" align="right" valign="top"><a id="ad29b7c40cca7dd714c8af0e5b20e7758" name="ad29b7c40cca7dd714c8af0e5b20e7758"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>WIFI_STATUS_UPDATE_INTERVAL_MS</b>&#160;&#160;&#160;5000</td></tr>
-<tr class="separator:ad29b7c40cca7dd714c8af0e5b20e7758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67455cea5e3533090cb0baf155a1de00" id="r_a67455cea5e3533090cb0baf155a1de00"><td class="memItemLeft" align="right" valign="top"><a id="a67455cea5e3533090cb0baf155a1de00" name="a67455cea5e3533090cb0baf155a1de00"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_COOLDOWN_MS</b>&#160;&#160;&#160;200</td></tr>
-<tr class="separator:a67455cea5e3533090cb0baf155a1de00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5a6b85c15c82896d8451effb8b05ea3" id="r_ae5a6b85c15c82896d8451effb8b05ea3"><td class="memItemLeft" align="right" valign="top"><a id="ae5a6b85c15c82896d8451effb8b05ea3" name="ae5a6b85c15c82896d8451effb8b05ea3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_MENU_ITEMS</b>&#160;&#160;&#160;CONFIG_SYNAPSE_MAX_MODULES</td></tr>
-<tr class="separator:ae5a6b85c15c82896d8451effb8b05ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8799bf98228cebda331e93da1ac8036f" id="r_a8799bf98228cebda331e93da1ac8036f"><td class="memItemLeft" align="right" valign="top"><a id="a8799bf98228cebda331e93da1ac8036f" name="a8799bf98228cebda331e93da1ac8036f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_VISIBLE_MENU_ITEMS</b>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:a8799bf98228cebda331e93da1ac8036f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5906add82f78792a2ac095fa9b2f0059" id="r_a5906add82f78792a2ac095fa9b2f0059"><td class="memItemLeft" align="right" valign="top"><a id="a5906add82f78792a2ac095fa9b2f0059" name="a5906add82f78792a2ac095fa9b2f0059"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SCREEN_OFF_TIMER_EVENT</b>&#160;&#160;&#160;&quot;UI_SCREEN_OFF_TIMER&quot;</td></tr>
-<tr class="separator:a5906add82f78792a2ac095fa9b2f0059"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00daa282600d0f6f7dbea87d064349fe" id="r_a00daa282600d0f6f7dbea87d064349fe"><td class="memItemLeft" align="right" valign="top"><a id="a00daa282600d0f6f7dbea87d064349fe" name="a00daa282600d0f6f7dbea87d064349fe"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SPLASH_SCREEN_TIMER_EVENT</b>&#160;&#160;&#160;&quot;UI_SPLASH_END&quot;</td></tr>
-<tr class="separator:a00daa282600d0f6f7dbea87d064349fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d17948e61cc73d4b98349405bdefc4" id="r_a51d17948e61cc73d4b98349405bdefc4"><td class="memItemLeft" align="right" valign="top"><a id="a51d17948e61cc73d4b98349405bdefc4" name="a51d17948e61cc73d4b98349405bdefc4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>WIFI_STATUS_TIMER_EVENT</b>&#160;&#160;&#160;&quot;UI_WIFI_STATUS_TIMER&quot;</td></tr>
-<tr class="separator:a51d17948e61cc73d4b98349405bdefc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfa84c538153d936d979be3d300139e8" id="r_adfa84c538153d936d979be3d300139e8"><td class="memItemLeft" align="right" valign="top"><a id="adfa84c538153d936d979be3d300139e8" name="adfa84c538153d936d979be3d300139e8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MODULE_CONTROL_ACTION_TIMER_EVENT</b>&#160;&#160;&#160;&quot;UI_MODULE_ACTION_TIMER&quot;</td></tr>
-<tr class="separator:adfa84c538153d936d979be3d300139e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:affe816a12ce1b157a325adf74ceb1d08" id="r_affe816a12ce1b157a325adf74ceb1d08"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui__manager_8h.html#affe816a12ce1b157a325adf74ceb1d08">ui_cmd_type_t</a> { <a class="el" href="ui__manager_8h.html#affe816a12ce1b157a325adf74ceb1d08a080e05a29aa0fa56cac4d074d2589304">UI_CMD_PROCESS_EVENT</a>
- }</td></tr>
-<tr class="memdesc:affe816a12ce1b157a325adf74ceb1d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the types of commands that can be sent to the UI task's queue.  <a href="ui__manager_8h.html#affe816a12ce1b157a325adf74ceb1d08">More...</a><br /></td></tr>
-<tr class="separator:affe816a12ce1b157a325adf74ceb1d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcd2bef455b38c51622e67d5c9ca6fb6" id="r_abcd2bef455b38c51622e67d5c9ca6fb6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6">ui_state_t</a> { <br />
-&#160;&#160;<a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a34b8e78b35ca15858cfe5eddb277cbf4">UI_STATE_SPLASH</a>
-, <a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6ac4f583a523a38e0a38a1398af8c9b6f5">UI_STATE_HOME</a>
-, <a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a83428a07b2010df3ea8eea54b670c482">UI_STATE_MAIN_MENU</a>
-, <a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a670bbf30f56274e12784d01c25164121">UI_STATE_MODULES_MENU</a>
-, <br />
-&#160;&#160;<a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a7c1cd52de998182096856dd2882a5484">UI_STATE_MODULE_CONTROL</a>
-, <a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6a1a7dbbae8fc86d0809b4a271d759e2c3">UI_STATE_SETTINGS_MENU</a>
-<br />
- }</td></tr>
-<tr class="memdesc:abcd2bef455b38c51622e67d5c9ca6fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the possible states (screens) of the user interface.  <a href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6">More...</a><br /></td></tr>
-<tr class="separator:abcd2bef455b38c51622e67d5c9ca6fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ab3acd0c1283fdcdcf7d76113dcd702d9" id="r_ab3acd0c1283fdcdcf7d76113dcd702d9"><td class="memItemLeft" align="right" valign="top"><a id="ab3acd0c1283fdcdcf7d76113dcd702d9" name="ab3acd0c1283fdcdcf7d76113dcd702d9"></a>
+typedef struct <a class="el" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ui_manager_private_data_t</b></td></tr>
+<tr class="separator:ab3acd0c1283fdcdcf7d76113dcd702d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae371e530d074697724cac90f069c253c" id="r_ae371e530d074697724cac90f069c253c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodule__t.html">module_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui__manager_8h.html#ae371e530d074697724cac90f069c253c">ui_manager_create</a> (const cJSON *config)</td></tr>
 <tr class="memdesc:ae371e530d074697724cac90f069c253c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the UI Manager module.  <br /></td></tr>
 <tr class="separator:ae371e530d074697724cac90f069c253c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a093af2fea1ff15543b2b9d7609a87e71" id="r_a093af2fea1ff15543b2b9d7609a87e71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui__manager_8h.html#a093af2fea1ff15543b2b9d7609a87e71">render_current_state</a> (<a class="el" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a> *private_data)</td></tr>
-<tr class="memdesc:a093af2fea1ff15543b2b9d7609a87e71"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main rendering orchestrator function.  <br /></td></tr>
-<tr class="separator:a093af2fea1ff15543b2b9d7609a87e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af34942bb9de4ca5702cca0195deb934a" id="r_af34942bb9de4ca5702cca0195deb934a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ui__manager_8h.html#af34942bb9de4ca5702cca0195deb934a">reset_screen_off_timer</a> (<a class="el" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a> *private_data)</td></tr>
-<tr class="memdesc:af34942bb9de4ca5702cca0195deb934a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the screen's auto-off timer.  <br /></td></tr>
-<tr class="separator:af34942bb9de4ca5702cca0195deb934a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Main header for the UI Manager module, defining core structures, enums, and constants. </p>
-<p>This file serves as the central hub for the UI system's definitions. It declares the main private data structure that holds the UI state, enumerations for different screens, and prototypes for the module's public and shared internal functions. All other UI-related source files (<code><a class="el" href="ui__events_8c.html" title="Implements the main event handling logic for the UI Manager.">ui_events.c</a></code>, <code><a class="el" href="ui__menu_8c.html" title="Implements menu logic for the UI Manager.">ui_menu.c</a></code>, etc.) include this header to access the shared state and definitions. </p><dl class="section author"><dt>Author</dt><dd>Synapse Framework Team </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>4.3.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-08-14 </dd></dl>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="affe816a12ce1b157a325adf74ceb1d08" name="affe816a12ce1b157a325adf74ceb1d08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affe816a12ce1b157a325adf74ceb1d08">&#9670;&#160;</a></span>ui_cmd_type_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="ui__manager_8h.html#affe816a12ce1b157a325adf74ceb1d08">ui_cmd_type_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Defines the types of commands that can be sent to the UI task's queue. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="affe816a12ce1b157a325adf74ceb1d08a080e05a29aa0fa56cac4d074d2589304" name="affe816a12ce1b157a325adf74ceb1d08a080e05a29aa0fa56cac4d074d2589304"></a>UI_CMD_PROCESS_EVENT&#160;</td><td class="fielddoc"><p>A command to process an event from the Event Bus. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<a id="abcd2bef455b38c51622e67d5c9ca6fb6" name="abcd2bef455b38c51622e67d5c9ca6fb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcd2bef455b38c51622e67d5c9ca6fb6">&#9670;&#160;</a></span>ui_state_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="ui__manager_8h.html#abcd2bef455b38c51622e67d5c9ca6fb6">ui_state_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Defines the possible states (screens) of the user interface. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abcd2bef455b38c51622e67d5c9ca6fb6a34b8e78b35ca15858cfe5eddb277cbf4" name="abcd2bef455b38c51622e67d5c9ca6fb6a34b8e78b35ca15858cfe5eddb277cbf4"></a>UI_STATE_SPLASH&#160;</td><td class="fielddoc"><p>The initial splash screen shown on startup. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="abcd2bef455b38c51622e67d5c9ca6fb6ac4f583a523a38e0a38a1398af8c9b6f5" name="abcd2bef455b38c51622e67d5c9ca6fb6ac4f583a523a38e0a38a1398af8c9b6f5"></a>UI_STATE_HOME&#160;</td><td class="fielddoc"><p>The main home screen, showing time and status. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="abcd2bef455b38c51622e67d5c9ca6fb6a83428a07b2010df3ea8eea54b670c482" name="abcd2bef455b38c51622e67d5c9ca6fb6a83428a07b2010df3ea8eea54b670c482"></a>UI_STATE_MAIN_MENU&#160;</td><td class="fielddoc"><p>The top-level menu. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="abcd2bef455b38c51622e67d5c9ca6fb6a670bbf30f56274e12784d01c25164121" name="abcd2bef455b38c51622e67d5c9ca6fb6a670bbf30f56274e12784d01c25164121"></a>UI_STATE_MODULES_MENU&#160;</td><td class="fielddoc"><p>The sub-menu listing all available modules. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="abcd2bef455b38c51622e67d5c9ca6fb6a7c1cd52de998182096856dd2882a5484" name="abcd2bef455b38c51622e67d5c9ca6fb6a7c1cd52de998182096856dd2882a5484"></a>UI_STATE_MODULE_CONTROL&#160;</td><td class="fielddoc"><p>The control screen for a selected module. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="abcd2bef455b38c51622e67d5c9ca6fb6a1a7dbbae8fc86d0809b4a271d759e2c3" name="abcd2bef455b38c51622e67d5c9ca6fb6a1a7dbbae8fc86d0809b4a271d759e2c3"></a>UI_STATE_SETTINGS_MENU&#160;</td><td class="fielddoc"><p>The sub-menu for system settings. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a093af2fea1ff15543b2b9d7609a87e71" name="a093af2fea1ff15543b2b9d7609a87e71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a093af2fea1ff15543b2b9d7609a87e71">&#9670;&#160;</a></span>render_current_state()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void render_current_state </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a> *&#160;</td>
-          <td class="paramname"><em>private_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The main rendering orchestrator function. </p>
-<p>This function is called whenever the UI needs to be redrawn. It checks the current UI state and calls the appropriate rendering function for that specific screen (e.g., <code>render_home_screen</code>, <code>ui_menu_render</code>). </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">private_data</td><td>A pointer to the module's private data structure.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function is called whenever the UI needs to be redrawn. It checks the current UI state and calls the appropriate rendering function for that specific screen (e.g., <code>render_splash_screen</code>, <code>render_home_screen</code>, or <code>ui_menu_render</code>). It is responsible for clearing the screen before drawing and pushing the final buffer to the display. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">private_data</td><td>A pointer to the module's private data structure. </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_cgraph.png" border="0" usemap="#aui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_cgraph" alt=""/></div>
-<map name="aui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_cgraph" id="aui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_cgraph">
-<area shape="rect" title="The main rendering orchestrator function." alt="" coords="5,112,163,137"/>
-<area shape="rect" href="ui__screens_8c.html#a376f0da5f8fa958e09b7a5adfc084950" title="Renders the status header at the top of the screen." alt="" coords="239,5,355,31"/>
-<area shape="poly" title=" " alt="" coords="100,110,147,75,210,40,227,33,229,37,212,44,150,80,103,114"/>
-<area shape="rect" href="ui__screens_8c.html#aa073835a483ffe68580ffdec8bc36910" title="Renders the main home screen." alt="" coords="217,55,376,80"/>
-<area shape="poly" title=" " alt="" coords="131,109,235,81,236,86,133,115"/>
-<area shape="rect" href="ui__screens_8c.html#a3660eb426382f4100fc635af4cbbbeff" title="Renders the module control screen for a selected module." alt="" coords="211,105,383,145"/>
-<area shape="poly" title=" " alt="" coords="163,122,197,122,197,127,163,127"/>
-<area shape="rect" href="ui__screens_8c.html#a1d1f8173dcde1f8ca44070f3353a3457" title="Renders the initial splash screen." alt="" coords="215,169,378,195"/>
-<area shape="poly" title=" " alt="" coords="133,135,236,163,235,168,131,140"/>
-<area shape="rect" href="ui__menu_8c.html#aee91a4cf96bb6ccb531596a5c846115b" title="Renders the currently active menu screen." alt="" coords="233,219,360,244"/>
-<area shape="poly" title=" " alt="" coords="103,135,150,170,212,205,229,212,227,217,210,210,147,174,100,140"/>
-<area shape="rect" href="ui__screens_8c.html#a96f4ec2d25f38fd55d514150af179086" title="Renders a generic button in the footer area (bottom&#45;right)." alt="" coords="435,57,593,83"/>
-<area shape="poly" title=" " alt="" coords="376,66,421,66,421,72,376,71"/>
-<area shape="poly" title=" " alt="" coords="376,102,449,83,450,89,377,107"/>
-<area shape="rect" href="ui__screens_8c.html#a286a2994fdaba38f2a9f81af4fa515ae" title="Formats a module name for display." alt="" coords="431,111,597,136"/>
-<area shape="poly" title=" " alt="" coords="383,121,417,121,417,127,383,127"/>
-<area shape="rect" href="system__manager_8c.html#a430b1843223b31cd11b9b00e4a55f0f3" title="აბრუნებს მოდულის სტატუსს." alt="" coords="434,161,594,201"/>
-<area shape="poly" title=" " alt="" coords="376,142,423,155,422,160,374,147"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_icgraph.png" border="0" usemap="#aui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_icgraph" alt=""/></div>
-<map name="aui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_icgraph" id="aui__manager_8h_a093af2fea1ff15543b2b9d7609a87e71_icgraph">
-<area shape="rect" title="The main rendering orchestrator function." alt="" coords="189,5,347,31"/>
-<area shape="rect" href="ui__events_8c.html#a469449dd73689152450606d4d611be8f" title="The main event handler function for the UI Manager module." alt="" coords="5,5,141,31"/>
-<area shape="poly" title=" " alt="" coords="176,21,141,21,141,15,176,15"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="af34942bb9de4ca5702cca0195deb934a" name="af34942bb9de4ca5702cca0195deb934a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af34942bb9de4ca5702cca0195deb934a">&#9670;&#160;</a></span>reset_screen_off_timer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void reset_screen_off_timer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__manager__private__data__t.html">ui_manager_private_data_t</a> *&#160;</td>
-          <td class="paramname"><em>private_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Resets the screen's auto-off timer. </p>
-<p>This function cancels any existing screen-off timer and schedules a new one. It should be called whenever there is user activity to prevent the screen from turning off. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">private_data</td><td>A pointer to the module's private data structure.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function cancels any existing screen-off timer and schedules a new one. It should be called whenever there is user activity (like a button press) to prevent the screen from turning off prematurely. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">private_data</td><td>A pointer to the module's private data structure. </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ui__manager_8h_af34942bb9de4ca5702cca0195deb934a_icgraph.png" border="0" usemap="#aui__manager_8h_af34942bb9de4ca5702cca0195deb934a_icgraph" alt=""/></div>
-<map name="aui__manager_8h_af34942bb9de4ca5702cca0195deb934a_icgraph" id="aui__manager_8h_af34942bb9de4ca5702cca0195deb934a_icgraph">
-<area shape="rect" title="Resets the screen&#39;s auto&#45;off timer." alt="" coords="189,5,360,31"/>
-<area shape="rect" href="ui__events_8c.html#a469449dd73689152450606d4d611be8f" title="The main event handler function for the UI Manager module." alt="" coords="5,5,141,31"/>
-<area shape="poly" title=" " alt="" coords="176,21,142,21,142,15,176,15"/>
-</map>
-</div>
-
-</div>
-</div>
+<div class="textblock"><p>Public factory function for the UI Manager module. </p>
+<dl class="section author"><dt>Author</dt><dd>Synapse Framework Team </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>6.0.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-09-12 </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="ae371e530d074697724cac90f069c253c" name="ae371e530d074697724cac90f069c253c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae371e530d074697724cac90f069c253c">&#9670;&#160;</a></span>ui_manager_create()</h2>
 
@@ -546,11 +276,36 @@ Here is the caller graph for this function:</div>
 <p>Creates a new instance of the UI Manager module. </p>
 <p>This is the factory function for the module, called by the Module Factory. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the configuration for this instance. The function takes ownership of this object. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>A cJSON object containing the configuration for this instance. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the newly created <a class="el" href="structmodule__t.html" title="The primary structure defining a framework module.">module_t</a> instance, or NULL on failure. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="ui__manager_8h_ae371e530d074697724cac90f069c253c_cgraph.png" border="0" usemap="#aui__manager_8h_ae371e530d074697724cac90f069c253c_cgraph" alt=""/></div>
+<map name="aui__manager_8h_ae371e530d074697724cac90f069c253c_cgraph" id="aui__manager_8h_ae371e530d074697724cac90f069c253c_cgraph">
+<area shape="rect" title="Creates a new instance of the UI Manager module." alt="" coords="5,45,152,70"/>
+<area shape="rect" href="synapse__utils_8c.html#a240c9bec50dd32c0be839ab6a4d5decc" title="Safely retrieves a string value from a cJSON object." alt="" coords="218,5,369,45"/>
+<area shape="poly" title=" " alt="" coords="152,44,204,36,205,41,153,49"/>
+<area shape="rect" href="service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="200,69,387,109"/>
+<area shape="poly" title=" " alt="" coords="153,66,187,71,186,76,152,71"/>
+<area shape="rect" href="synapse__utils_8c.html#a72f8a9d3efa74d60fe280932c365961b" title="A safe version of strncpy that guarantees null&#45;termination." alt="" coords="435,13,601,38"/>
+<area shape="poly" title=" " alt="" coords="369,23,421,23,421,28,369,28"/>
+<area shape="rect" href="service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="439,69,597,109"/>
+<area shape="poly" title=" " alt="" coords="387,87,426,87,426,92,387,92"/>
+<area shape="rect" href="event__bus_8c.html#a8dfeeb1152a63bfed8ae50f64d93be4c" title="აქვეყნებს ივენთს Event Bus&#45;ზე ასინქრონულად." alt="" coords="654,26,839,51"/>
+<area shape="poly" title=" " alt="" coords="597,69,675,52,676,57,598,74"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="892,69,1048,109"/>
+<area shape="poly" title=" " alt="" coords="597,87,878,87,878,92,597,92"/>
+<area shape="rect" href="event__data__wrapper_8c.html#a7e7afc7b7e7d96ee15905b61d8836cb1" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="649,127,844,153"/>
+<area shape="poly" title=" " alt="" coords="598,104,676,122,675,127,597,109"/>
+<area shape="rect" href="event__data__wrapper_8c.html#aba8f7b19a262a42f93d57693defd1bdb" title="ზრდის wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="892,5,1048,45"/>
+<area shape="poly" title=" " alt="" coords="840,30,878,28,878,33,840,36"/>
+<area shape="poly" title=" " alt="" coords="804,49,879,66,878,71,803,54"/>
+</map>
+</div>
 
 </div>
 </div>

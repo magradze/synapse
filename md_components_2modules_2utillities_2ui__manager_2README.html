@@ -103,9 +103,9 @@ $(document).ready(function(){initNavTree('md_components_2modules_2utillities_2ui
 <ul>
 <li><b>გამოყოფილი ტასკი (Dedicated Task):</b> UI-სთან დაკავშირებული ყველა "მძიმე" ოპერაცია (მენიუს აგება, ეკრანის გადახატვა) სრულდება მოდულის საკუთარ, გამოყოფილ FreeRTOS ტასკში. <code>Event Handler</code>-ი მხოლოდ ბრძანებებს აგზავნის ამ ტასკის რიგში, რაც **სრულად აღმოფხვრის სისტემური ტასკების (<code>Tmr Svc</code>) სტეკის გადავსების რისკს** და აუმჯობესებს სისტემის საერთო რეაგირებას.</li>
 <li><b>დანაწევრებული ლოგიკა:</b> მოდული დაფუძნებულია დანაწევრებულ არქიტექტურაზე:<ul>
-<li>**<code><a class="el" href="ui__manager_8c.html" title="Main orchestrator for the UI system.">ui_manager.c</a></code> (დირიჟორი):** მართავს მოდულის სიცოცხლის ციკლს, დამოკიდებულებებს და საკუთარ ტასკს.</li>
+<li>**<code><a class="el" href="ui__manager_8c.html" title="Main orchestrator for the Modular UI system.">ui_manager.c</a></code> (დირიჟორი):** მართავს მოდულის სიცოცხლის ციკლს, დამოკიდებულებებს და საკუთარ ტასკს.</li>
 <li>**<code><a class="el" href="ui__events_8c.html" title="Implements the main event handling logic for the UI Manager.">ui_events.c</a></code> (ივენთების დამმუშავებელი):** იღებს ივენთებს და აგზავნის ბრძანებებს <code>ui_task</code>-ში.</li>
-<li>**<code><a class="el" href="ui__menu_8c.html" title="Implements menu logic for the UI Manager.">ui_menu.c</a></code> (მენიუს ლოგიკა):** შეიცავს მენიუს სტრუქტურას და ნავიგაციის ლოგიკას.</li>
+<li>**<code><a class="el" href="ui__menu_8c.html" title="Implements the dynamic main menu logic for the UI Manager.">ui_menu.c</a></code> (მენიუს ლოგიკა):** შეიცავს მენიუს სტრუქტურას და ნავიგაციის ლოგიკას.</li>
 <li>**<code><a class="el" href="ui__screens_8c.html" title="Implements rendering functions for different UI screens.">ui_screens.c</a></code> (ეკრანების ხატვა):** პასუხისმგებელია ეკრანების ვიზუალურ კომპონენტებზე.</li>
 </ul>
 </li>

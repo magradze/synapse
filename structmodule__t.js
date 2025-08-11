@@ -8,5 +8,7 @@ var structmodule__t =
     [ "name", "structmodule__t.html#ab9b6f71a2c7831d471692dbe25afaa14", null ],
     [ "private_data", "structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196", null ],
     [ "state_mutex", "structmodule__t.html#aab517ed6d3ea95d081a3c5c93b59529d", null ],
-    [ "status", "structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2", null ]
+    [ "status", "structmodule__t.html#a521c1f2803108c52ea071a5d44f3f8a2", null ],
+    [ "ui_deinit", "structmodule__t.html#a095d2bfe8874a81240204744d5c05f5a", null ],
+    [ "ui_init", "structmodule__t.html#a41ecf606248377da5553a25c9554b8d5", null ]
 ];

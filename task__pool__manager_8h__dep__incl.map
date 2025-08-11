@@ -1,111 +1,114 @@
 <map id="components/core/include/task_pool_manager.h" name="components/core/include/task_pool_manager.h">
-<area shape="rect" id="Node000001" title="Public API for the Shared Task Pool Manager." alt="" coords="3452,5,3637,45"/>
-<area shape="rect" id="Node000002" href="$synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="3452,93,3637,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3539,59,3540,93,3534,93,3533,59"/>
+<area shape="rect" id="Node000001" title="Public API for the Shared Task Pool Manager." alt="" coords="3739,5,3924,45"/>
+<area shape="rect" id="Node000002" href="$synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="3739,93,3924,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3825,59,3826,93,3821,93,3820,59"/>
 <area shape="rect" id="Node000006" href="$task__pool__manager_8c.html" title="Implementation of the Shared Task Pool Manager." alt="" coords="5,313,169,353"/>
-<area shape="poly" id="edge59_Node000001_Node000006" title=" " alt="" coords="3438,30,2681,38,2141,47,1567,61,1015,81,538,107,346,123,194,141,89,161,57,172,39,183,29,197,26,213,27,231,33,248,51,283,73,312,68,315,47,286,28,251,22,232,21,213,24,195,35,179,54,167,88,156,193,136,346,118,538,102,1014,76,1567,56,2141,42,2681,33,3438,25"/>
-<area shape="poly" id="edge5_Node000002_Node000001" title=" " alt="" coords="3551,80,3550,46,3555,46,3556,80"/>
-<area shape="rect" id="Node000003" href="$synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="7676,196,7861,236"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="3651,112,4473,114,5722,122,6362,130,6935,142,7382,158,7540,168,7645,179,7706,193,7704,198,7644,184,7539,173,7381,163,6935,147,6362,136,5722,127,4473,119,3651,117"/>
+<area shape="poly" id="edge62_Node000001_Node000006" title=" " alt="" coords="3725,30,2913,35,2328,43,1704,56,1103,76,584,102,374,119,209,138,94,160,58,171,39,183,29,197,26,213,27,231,33,248,51,283,73,312,68,315,47,286,28,250,22,232,21,213,24,195,35,179,56,166,92,155,208,133,374,114,583,97,1103,70,1704,51,2328,38,2913,30,3725,24"/>
+<area shape="poly" id="edge4_Node000002_Node000001" title=" " alt="" coords="3837,80,3836,46,3842,46,3843,80"/>
+<area shape="rect" id="Node000003" href="$synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="8740,196,8925,236"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="3938,113,4942,119,6494,132,7963,152,8468,165,8629,171,8716,179,8773,193,8772,198,8715,184,8629,177,8468,170,7963,158,6494,138,4942,124,3938,118"/>
 <area shape="rect" id="Node000005" href="$task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="49,196,272,236"/>
-<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="3438,118,2766,123,1777,135,827,155,479,168,273,184,208,199,207,193,272,179,478,163,827,150,1777,130,2765,118,3438,113"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="3725,118,3000,122,1921,133,881,153,498,167,363,175,273,184,208,199,207,193,272,179,362,170,498,162,881,148,1921,128,3000,117,3725,112"/>
 <area shape="rect" id="Node000007" href="$service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="297,196,454,236"/>
-<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="3438,118,2801,121,1873,130,1403,139,984,150,658,165,543,174,467,184,418,198,417,193,465,179,542,169,658,160,984,145,1403,133,1873,125,2801,115,3438,112"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="3725,117,3035,119,2016,128,1499,136,1037,148,678,164,551,173,467,184,418,198,417,193,465,179,550,168,677,158,1037,142,1499,131,2016,122,3035,114,3725,112"/>
 <area shape="rect" id="Node000008" href="$system__manager_8c.html" title="Implements the System Manager component." alt="" coords="478,196,635,236"/>
-<area shape="poly" id="edge10_Node000002_Node000008" title=" " alt="" coords="3438,118,2835,122,1963,132,1523,140,1132,152,827,166,719,175,648,184,600,198,598,193,647,179,719,169,827,161,1132,146,1523,135,1963,127,2835,116,3438,112"/>
-<area shape="rect" id="Node000009" href="$wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="951,196,1128,236"/>
-<area shape="poly" id="edge11_Node000002_Node000009" title=" " alt="" coords="3438,119,2929,126,2215,139,1540,159,1293,171,1148,184,1091,198,1090,193,1147,179,1293,165,1540,153,2215,134,2928,120,3438,113"/>
-<area shape="rect" id="Node000010" href="$wifi__manager__internal_8h.html" title="Internal declarations for the WiFi Manager module." alt="" coords="641,299,843,368"/>
-<area shape="poly" id="edge25_Node000002_Node000010" title=" " alt="" coords="3438,118,2855,121,2030,130,1624,139,1273,150,1017,165,937,174,895,184,876,197,865,213,855,232,839,252,786,301,782,297,835,249,850,229,860,210,872,194,893,179,936,169,1017,160,1273,145,1623,133,2030,125,2855,115,3438,112"/>
-<area shape="rect" id="Node000018" href="$ui__manager_8c.html" title="Main orchestrator for the UI system." alt="" coords="1031,423,1194,478"/>
-<area shape="poly" id="edge56_Node000002_Node000018" title=" " alt="" coords="3438,118,2850,123,2023,135,1621,144,1279,155,1039,168,969,176,940,183,935,194,932,214,931,271,936,329,947,367,961,380,984,394,1043,421,1040,426,981,399,958,384,942,369,931,330,925,271,926,214,930,193,936,179,968,171,1038,163,1279,150,1621,139,2023,130,2849,118,3438,113"/>
-<area shape="rect" id="Node000022" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="1699,423,1862,478"/>
-<area shape="poly" id="edge58_Node000002_Node000022" title=" " alt="" coords="3438,118,3152,121,2792,131,2619,140,2468,151,2353,166,2313,174,2287,184,2270,198,2262,215,2253,234,2237,253,2192,286,2144,315,2043,365,1946,404,1863,430,1861,425,1944,399,2041,360,2141,311,2189,281,2234,249,2249,231,2257,213,2266,195,2285,179,2312,169,2352,160,2468,146,2619,134,2792,126,3151,116,3438,112"/>
-<area shape="rect" id="Node000017" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="1146,306,1309,361"/>
-<area shape="poly" id="edge55_Node000002_Node000017" title=" " alt="" coords="3439,118,2902,125,2160,138,1496,157,1281,170,1219,177,1193,184,1184,196,1180,211,1182,243,1195,276,1211,305,1206,307,1190,278,1177,244,1175,210,1179,194,1190,179,1218,171,1280,164,1495,152,2160,132,2902,119,3439,113"/>
-<area shape="rect" id="Node000023" href="$relay__actuator_8c.html" title="Implementation of the Relay Actuator module." alt="" coords="1204,189,1389,243"/>
-<area shape="poly" id="edge21_Node000002_Node000023" title=" " alt="" coords="3438,117,3017,117,2428,124,2121,132,1834,144,1587,161,1401,184,1370,191,1369,186,1400,179,1587,156,1834,139,2121,127,2428,119,3017,112,3438,111"/>
-<area shape="rect" id="Node000024" href="$mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing." alt="" coords="1413,189,1633,243"/>
-<area shape="poly" id="edge22_Node000002_Node000024" title=" " alt="" coords="3438,118,3061,122,2543,132,2025,152,1809,166,1646,184,1610,191,1609,186,1646,179,1809,161,2025,146,2543,127,3061,116,3438,113"/>
-<area shape="rect" id="Node000025" href="$wifi__manager_8h.html" title="WiFi connection management." alt="" coords="659,181,825,251"/>
-<area shape="poly" id="edge23_Node000002_Node000025" title=" " alt="" coords="3438,118,2872,124,2062,136,1292,155,1010,168,844,184,826,188,824,183,843,179,1010,163,1292,150,2062,130,2871,118,3438,113"/>
-<area shape="rect" id="Node000026" href="$self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="1658,181,1829,251"/>
-<area shape="poly" id="edge26_Node000002_Node000026" title=" " alt="" coords="3438,117,3096,120,2634,130,2397,138,2175,149,1985,165,1841,184,1830,186,1828,181,1840,179,1984,159,2175,144,2396,133,2634,124,3095,115,3438,112"/>
-<area shape="rect" id="Node000027" href="$ssd1306__driver_8c.html" title="Low&#45;level driver implementation for SSD1306 OLED displays." alt="" coords="1853,189,2036,243"/>
-<area shape="poly" id="edge27_Node000002_Node000027" title=" " alt="" coords="3438,118,3134,123,2733,135,2337,154,2173,168,2049,184,2019,191,2017,186,2048,179,2173,162,2337,149,2733,129,3134,118,3438,113"/>
-<area shape="rect" id="Node000028" href="$button__input_8c.html" title="A module to handle hardware button presses from GPIO or I/O expanders." alt="" coords="2061,189,2223,243"/>
-<area shape="poly" id="edge28_Node000002_Node000028" title=" " alt="" coords="3438,119,3170,125,2825,137,2488,156,2348,169,2243,184,2213,191,2212,186,2241,179,2348,164,2487,151,2825,132,3170,120,3438,114"/>
-<area shape="rect" id="Node000029" href="$i2c__bus_8h.html" title="Public header for the I2C Bus module." alt="" coords="7425,189,7600,243"/>
-<area shape="poly" id="edge29_Node000002_Node000029" title=" " alt="" coords="3651,112,4432,113,5608,121,6210,129,6747,141,7166,157,7315,167,7413,179,7444,186,7443,191,7412,184,7314,173,7166,162,6747,146,6210,134,5608,126,4432,118,3651,117"/>
-<area shape="rect" id="Node000030" href="$i2c__bus_8c.html" title="Implementation of the I2C Bus module using the new ESP&#45;IDF v5.x driver." alt="" coords="7467,306,7630,361"/>
-<area shape="poly" id="edge31_Node000002_Node000030" title=" " alt="" coords="3651,112,4528,111,5843,117,6495,125,7053,137,7448,155,7564,166,7598,172,7614,179,7625,194,7628,211,7627,228,7621,245,7601,279,7577,308,7573,304,7597,276,7616,243,7621,227,7623,211,7620,196,7611,183,7596,177,7563,171,7448,160,7053,143,6495,130,5843,123,4528,117,3651,117"/>
-<area shape="rect" id="Node000031" href="$mcp23017__io__expander_8c.html" title="Implementation of the MCP23017 I/O Expander module." alt="" coords="2299,181,2484,251"/>
-<area shape="poly" id="edge32_Node000002_Node000031" title=" " alt="" coords="3438,121,2948,143,2687,161,2579,172,2497,184,2485,187,2484,181,2496,179,2579,167,2687,156,2948,138,3438,115"/>
-<area shape="rect" id="Node000032" href="$rotary__encoder__input_8c.html" title="A universal module to handle rotary encoder inputs using the Task Pool Manager." alt="" coords="2509,181,2695,251"/>
-<area shape="poly" id="edge33_Node000002_Node000032" title=" " alt="" coords="3438,118,3293,123,3110,133,2909,153,2708,184,2696,186,2695,181,2707,179,2908,147,3109,128,3292,117,3438,113"/>
-<area shape="rect" id="Node000033" href="$sn74hc595n__writer_8c.html" title="Implementation of the SN74HC595N shift register driver module." alt="" coords="2720,181,2892,251"/>
-<area shape="poly" id="edge34_Node000002_Node000033" title=" " alt="" coords="3439,121,3327,128,3193,140,3049,158,2905,184,2893,187,2892,182,2904,179,3048,153,3193,134,3327,123,3438,116"/>
-<area shape="rect" id="Node000034" href="$spi__bus_8c.html" title="Implementation of the SPI Bus module." alt="" coords="2917,189,3079,243"/>
-<area shape="poly" id="edge35_Node000002_Node000034" title=" " alt="" coords="3439,127,3274,148,3182,164,3092,184,3067,191,3066,186,3091,179,3181,159,3274,143,3438,122"/>
-<area shape="rect" id="Node000035" href="$security__status__reporter_8c.html" title="Reports Secure Boot and Flash Encryption status." alt="" coords="3104,181,3311,251"/>
-<area shape="poly" id="edge36_Node000002_Node000035" title=" " alt="" coords="3469,140,3312,186,3310,181,3468,135"/>
-<area shape="rect" id="Node000036" href="$sensor__aggregator_8c.html" title="Implementation of the Sensor Aggregator module." alt="" coords="3335,189,3536,243"/>
-<area shape="poly" id="edge37_Node000002_Node000036" title=" " alt="" coords="3516,145,3466,190,3462,186,3512,141"/>
-<area shape="rect" id="Node000037" href="$time__of__flight__sensor_8c.html" title="Driver for I2C&#45;based Time&#45;of&#45;Flight (TOF) distance sensor VL6180X." alt="" coords="3561,181,3750,251"/>
-<area shape="poly" id="edge38_Node000002_Node000037" title=" " alt="" coords="3577,141,3620,179,3616,183,3574,144"/>
-<area shape="rect" id="Node000038" href="$storage__backend__nvs_8c.html" title="NVS (Non&#45;Volatile Storage) backend implementation for the Storage Manager." alt="" coords="3774,189,3974,243"/>
-<area shape="poly" id="edge39_Node000002_Node000038" title=" " alt="" coords="3620,135,3789,186,3787,191,3618,140"/>
-<area shape="rect" id="Node000039" href="$storage__backend__sd_8c.html" title="SD Card (FAT filesystem) backend for the Storage Manager." alt="" coords="3999,189,4192,243"/>
-<area shape="poly" id="edge40_Node000002_Node000039" title=" " alt="" coords="3651,124,3810,146,3987,179,4015,186,4014,191,3985,184,3809,151,3651,129"/>
-<area shape="rect" id="Node000040" href="$storage__backend__spiffs_8c.html" title="SPIFFS (SPI Flash File System) backend for the Storage Manager." alt="" coords="4216,189,4428,243"/>
-<area shape="poly" id="edge41_Node000002_Node000040" title=" " alt="" coords="3651,117,3904,137,4054,155,4204,179,4236,186,4235,191,4203,184,4054,160,3904,142,3651,122"/>
-<area shape="rect" id="Node000041" href="$storage__manager_8c.html" title="Centralized, multi&#45;backend storage management service." alt="" coords="4452,189,4645,243"/>
-<area shape="poly" id="edge42_Node000002_Node000041" title=" " alt="" coords="3652,112,3806,116,4003,127,4222,146,4332,161,4440,179,4471,186,4470,191,4439,184,4331,166,4221,152,4003,132,3806,122,3651,118"/>
-<area shape="rect" id="Node000042" href="$alarms__manager_8c.html" title="Implementation of the System Alarms Manager module." alt="" coords="4669,189,4857,243"/>
-<area shape="poly" id="edge43_Node000002_Node000042" title=" " alt="" coords="3651,115,4172,137,4453,155,4569,166,4657,179,4688,186,4687,191,4656,184,4568,172,4452,160,4172,142,3651,120"/>
-<area shape="rect" id="Node000043" href="$connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="4881,181,5080,251"/>
-<area shape="poly" id="edge44_Node000002_Node000043" title=" " alt="" coords="3651,114,3923,121,4274,134,4618,153,4761,165,4869,179,4881,181,4880,186,4868,184,4760,170,4618,158,4274,139,3923,126,3651,119"/>
-<area shape="rect" id="Node000044" href="$device__identity__service_8c.html" title="Implementation of the Device Identity Service module with CLI support." alt="" coords="5105,181,5307,251"/>
-<area shape="poly" id="edge45_Node000002_Node000044" title=" " alt="" coords="3651,113,3965,119,4380,130,4792,150,4962,163,5092,179,5105,181,5104,186,5091,184,4962,168,4791,155,4380,136,3964,124,3651,119"/>
-<area shape="rect" id="Node000045" href="$health__monitor_8c.html" title="Monitors system health using the Shared Task Pool Manager." alt="" coords="5332,189,5509,243"/>
-<area shape="poly" id="edge46_Node000002_Node000045" title=" " alt="" coords="3651,112,4006,115,4489,124,4737,132,4969,144,5169,159,5320,179,5351,186,5349,191,5319,184,5168,165,4969,149,4737,138,4488,129,4006,120,3651,117"/>
-<area shape="rect" id="Node000046" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="5534,189,5750,243"/>
-<area shape="poly" id="edge47_Node000002_Node000046" title=" " alt="" coords="3651,112,4042,116,4583,125,4863,134,5125,145,5350,160,5521,179,5558,186,5557,191,5520,184,5350,165,5124,150,4863,139,4583,131,4042,121,3651,118"/>
-<area shape="rect" id="Node000047" href="$time__sync_8c.html" title="SNTP&#45;based implementation of the Time Sync module." alt="" coords="5774,189,5942,243"/>
-<area shape="poly" id="edge48_Node000002_Node000047" title=" " alt="" coords="3652,113,4127,120,4784,134,5403,153,5629,165,5762,179,5792,186,5790,191,5762,184,5628,170,5403,158,4784,139,4127,126,3651,119"/>
-<area shape="rect" id="Node000048" href="$watchdog__manager_8c.html" title="Intelligent watchdog timer management with heartbeat monitoring." alt="" coords="5967,189,6173,243"/>
-<area shape="poly" id="edge49_Node000002_Node000048" title=" " alt="" coords="3651,111,4118,111,4785,118,5133,126,5460,138,5742,156,5954,179,5989,186,5988,191,5954,184,5741,161,5460,144,5133,131,4785,123,4118,117,3651,117"/>
-<area shape="rect" id="Node000049" href="$sensor__simulator_8c.html" title="Simulates sensor data for testing purposes." alt="" coords="6198,189,6385,243"/>
-<area shape="poly" id="edge50_Node000002_Node000049" title=" " alt="" coords="3651,113,4207,119,4997,132,5747,151,6022,164,6185,179,6217,186,6216,191,6184,184,6022,169,5747,157,4997,137,4207,125,3651,118"/>
-<area shape="rect" id="Node000050" href="$command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="6409,189,6625,243"/>
-<area shape="poly" id="edge51_Node000002_Node000050" title=" " alt="" coords="3651,113,4246,119,5102,132,5920,152,6220,164,6397,179,6433,186,6432,191,6396,184,6219,170,5920,157,5102,138,4246,125,3651,118"/>
-<area shape="rect" id="Node000051" href="$logger__module_8c.html" title="ლოგერ მოდულის იმპლემენტაცია &#45; ცენტრალიზებული ლოგირება და ივენთების მონიტორინგი" alt="" coords="6649,189,6829,243"/>
-<area shape="poly" id="edge52_Node000002_Node000051" title=" " alt="" coords="3651,112,4290,117,5223,127,5695,136,6116,147,6444,161,6560,170,6637,179,6669,186,6668,191,6636,184,6559,175,6443,167,6116,153,5695,141,5223,133,4290,122,3651,118"/>
-<area shape="rect" id="Node000052" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა (Shift Register ვერსია)" alt="" coords="6854,181,7017,251"/>
-<area shape="poly" id="edge53_Node000002_Node000052" title=" " alt="" coords="3651,112,4328,115,5325,124,5831,132,6282,144,6634,159,6758,168,6841,179,6854,182,6853,187,6840,184,6758,174,6634,165,6282,149,5831,138,5325,129,4328,120,3651,117"/>
-<area shape="rect" id="Node000053" href="$system__timer_8c.html" title="A centralized service for scheduling event publishing." alt="" coords="7041,189,7214,243"/>
-<area shape="poly" id="edge54_Node000002_Node000053" title=" " alt="" coords="3651,112,4362,115,5418,124,5955,132,6435,143,6809,159,6941,168,7029,179,7060,186,7058,191,7028,184,6941,174,6808,164,6435,149,5955,137,5418,129,4362,120,3651,117"/>
-<area shape="rect" id="Node000020" href="$ui__menu_8c.html" title="Implements menu logic for the UI Manager." alt="" coords="7238,189,7401,243"/>
-<area shape="poly" id="edge57_Node000002_Node000020" title=" " alt="" coords="3651,112,4398,113,5516,121,6086,129,6596,141,6993,157,7133,167,7226,179,7255,186,7254,191,7226,184,7133,172,6992,162,6595,146,6086,134,5516,126,4398,118,3651,117"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="7714,194,7668,184,7562,173,7401,163,6947,147,6365,135,5715,127,4452,119,3638,117,3638,112,4452,114,5715,122,6365,130,6947,142,7402,158,7562,168,7669,179,7715,189"/>
-<area shape="rect" id="Node000004" href="$synapse__utils_8c.html" title="Implementation of the Synapse core utility library." alt="" coords="7690,313,7847,353"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="7771,250,7771,313,7766,313,7766,250"/>
-<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="243,190,296,179,503,163,854,150,1807,130,2793,118,3452,113,3452,118,2794,123,1807,135,854,155,504,168,297,184,244,195"/>
-<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="144,249,102,314,97,312,139,246"/>
-<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="979,243,830,301,828,296,977,238"/>
-<area shape="rect" id="Node000015" href="$ui__manager_8h.html" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="957,306,1122,361"/>
-<area shape="poly" id="edge17_Node000009_Node000015" title=" " alt="" coords="1042,250,1042,306,1037,306,1037,250"/>
-<area shape="poly" id="edge20_Node000009_Node000017" title=" " alt="" coords="1083,241,1186,304,1183,308,1080,245"/>
-<area shape="rect" id="Node000011" href="$wifi__manager_8c.html" title="Main lifecycle and task management for the WiFi Manager module." alt="" coords="795,423,1007,478"/>
-<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="801,374,866,421,863,425,798,378"/>
-<area shape="rect" id="Node000012" href="$wifi__manager__api_8c.html" title="Implements the public Service API for the WiFi Manager module." alt="" coords="31,423,271,478"/>
-<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="628,355,464,383,284,419,252,426,251,421,283,413,463,378,627,350"/>
-<area shape="rect" id="Node000013" href="$wifi__manager__cmd_8c.html" title="Implements the CLI command handlers for the WiFi Manager module." alt="" coords="295,423,543,478"/>
-<area shape="poly" id="edge15_Node000010_Node000013" title=" " alt="" coords="636,375,494,426,492,421,634,370"/>
-<area shape="rect" id="Node000014" href="$wifi__manager__events_8c.html" title="Implements the event handlers for the WiFi Manager module." alt="" coords="567,416,770,485"/>
-<area shape="poly" id="edge16_Node000010_Node000014" title=" " alt="" coords="715,381,692,417,688,414,711,379"/>
-<area shape="poly" id="edge18_Node000015_Node000018" title=" " alt="" coords="1066,371,1098,422,1094,424,1061,374"/>
-<area shape="poly" id="edge19_Node000015_Node000022" title=" " alt="" coords="1122,362,1135,365,1290,396,1445,418,1587,433,1699,442,1699,447,1586,438,1445,424,1289,401,1133,371,1120,367"/>
-<area shape="poly" id="edge24_Node000025_Node000010" title=" " alt="" coords="745,265,745,298,739,298,739,265"/>
-<area shape="poly" id="edge30_Node000029_Node000030" title=" " alt="" coords="7527,256,7543,305,7538,306,7522,257"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="3725,117,3069,120,2107,129,1620,138,1185,149,847,165,727,174,648,184,599,198,598,193,647,179,727,168,846,159,1185,144,1620,132,2107,124,3069,115,3725,112"/>
+<area shape="rect" id="Node000009" href="$ui__interface_8h.html" title="Defines the public API and contracts for the Modular UI system." alt="" coords="1203,196,1374,236"/>
+<area shape="poly" id="edge10_Node000002_Node000009" title=" " alt="" coords="3725,118,3207,125,2481,138,1793,158,1541,170,1393,184,1338,199,1336,193,1392,179,1541,165,1793,152,2480,133,3207,120,3725,113"/>
+<area shape="rect" id="Node000010" href="$relay__actuator__ui_8c.html" title="Implements the UI components for the Relay Actuator module." alt="" coords="1073,306,1259,361"/>
+<area shape="poly" id="edge21_Node000002_Node000010" title=" " alt="" coords="3725,118,3130,124,2294,137,1539,156,1294,169,1223,176,1193,184,1174,210,1164,242,1162,276,1164,305,1159,306,1157,276,1159,241,1169,208,1190,179,1222,171,1294,164,1539,151,2293,131,3130,119,3725,113"/>
+<area shape="rect" id="Node000011" href="$wifi__manager__ui_8c.html" title="Implements the UI components for the WiFi Manager module." alt="" coords="919,416,1151,471"/>
+<area shape="poly" id="edge26_Node000002_Node000011" title=" " alt="" coords="3725,117,3136,120,2303,129,1892,138,1538,149,1280,165,1199,174,1157,184,1132,204,1104,236,1063,300,1052,330,1045,361,1039,416,1033,415,1040,360,1047,328,1058,297,1100,233,1128,200,1154,179,1198,168,1279,159,1538,144,1892,133,2303,124,3136,115,3725,112"/>
+<area shape="rect" id="Node000012" href="$ui__manager_8c.html" title="Main orchestrator for the Modular UI system." alt="" coords="1521,306,1683,361"/>
+<area shape="poly" id="edge59_Node000002_Node000012" title=" " alt="" coords="3725,118,3190,125,2451,138,1790,157,1576,170,1515,177,1489,183,1479,199,1477,214,1481,230,1490,249,1514,280,1546,304,1542,308,1510,284,1485,252,1476,232,1471,214,1474,197,1486,179,1513,171,1576,164,1790,152,2451,132,3190,120,3725,113"/>
+<area shape="rect" id="Node000015" href="$ui__menu_8c.html" title="Implements the dynamic main menu logic for the UI Manager." alt="" coords="1334,306,1497,361"/>
+<area shape="poly" id="edge60_Node000002_Node000015" title=" " alt="" coords="3725,117,3196,118,2463,125,2105,133,1797,145,1574,162,1505,172,1470,184,1446,209,1431,242,1423,276,1419,306,1413,305,1417,275,1426,240,1442,206,1467,179,1504,167,1573,156,1797,140,2105,128,2463,120,3196,112,3725,112"/>
+<area shape="rect" id="Node000017" href="$wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="660,196,837,236"/>
+<area shape="poly" id="edge15_Node000002_Node000017" title=" " alt="" coords="3725,118,3106,122,2208,133,1754,142,1350,153,1036,167,924,175,851,184,797,199,795,193,849,179,924,170,1035,162,1350,148,1754,137,2208,128,3106,117,3725,113"/>
+<area shape="rect" id="Node000018" href="$wifi__manager__internal_8h.html" title="Internal declarations for the WiFi Manager module." alt="" coords="795,299,998,368"/>
+<area shape="poly" id="edge25_Node000002_Node000018" title=" " alt="" coords="3725,117,3125,120,2272,129,1852,138,1489,149,1224,164,1141,174,1098,184,1079,198,1068,214,1058,233,1041,253,1005,279,968,301,965,296,1002,274,1038,249,1054,230,1064,212,1075,194,1096,179,1140,168,1224,159,1489,144,1852,132,2272,124,3125,115,3725,112"/>
+<area shape="rect" id="Node000023" href="$relay__actuator_8c.html" title="Implementation of the Relay Actuator module&#39;s lifecycle and core logic." alt="" coords="1689,189,1875,243"/>
+<area shape="poly" id="edge18_Node000002_Node000023" title=" " alt="" coords="3725,117,3339,119,2808,128,2533,136,2276,148,2055,163,1888,184,1856,191,1855,186,1887,179,2054,158,2275,142,2533,131,2808,122,3339,114,3725,112"/>
+<area shape="rect" id="Node000024" href="$relay__actuator__cmd_8c.html" title="CLI command handler for the Relay Actuator module." alt="" coords="1899,189,2089,243"/>
+<area shape="poly" id="edge19_Node000002_Node000024" title=" " alt="" coords="3725,118,3378,121,2908,131,2441,151,2248,166,2101,184,2069,191,2068,186,2100,179,2247,160,2441,146,2908,126,3378,116,3725,112"/>
+<area shape="rect" id="Node000025" href="$relay__actuator__events_8c.html" title="Event handler for the Relay Actuator module." alt="" coords="2113,189,2318,243"/>
+<area shape="poly" id="edge20_Node000002_Node000025" title=" " alt="" coords="3725,119,3419,125,3017,136,2620,156,2455,169,2330,184,2297,191,2296,186,2330,179,2455,163,2619,150,3017,131,3419,119,3724,113"/>
+<area shape="rect" id="Node000026" href="$mqtt__manager_8c.html" title="Manages MQTT connection, command forwarding, and status publishing." alt="" coords="2343,189,2563,243"/>
+<area shape="poly" id="edge22_Node000002_Node000026" title=" " alt="" coords="3725,120,3135,141,2811,160,2677,171,2576,184,2540,191,2539,186,2575,179,2677,166,2811,155,3135,136,3725,115"/>
+<area shape="rect" id="Node000027" href="$wifi__manager_8h.html" title="WiFi connection management." alt="" coords="862,181,1027,251"/>
+<area shape="poly" id="edge23_Node000002_Node000027" title=" " alt="" coords="3725,118,3143,123,2307,135,1510,155,1218,168,1046,184,1028,188,1027,183,1046,179,1218,163,1510,149,2307,130,3143,118,3725,113"/>
+<area shape="rect" id="Node000028" href="$self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="2587,181,2758,251"/>
+<area shape="poly" id="edge27_Node000002_Node000028" title=" " alt="" coords="3725,120,3229,141,2963,160,2854,171,2770,184,2759,187,2758,181,2770,179,2853,166,2963,155,3228,136,3725,115"/>
+<area shape="rect" id="Node000029" href="$ssd1306__driver_8c.html" title="Low&#45;level driver implementation for SSD1306 OLED displays." alt="" coords="2783,189,2965,243"/>
+<area shape="poly" id="edge28_Node000002_Node000029" title=" " alt="" coords="3725,118,3577,122,3390,132,3184,152,3080,166,2979,184,2949,191,2948,186,2977,179,3079,161,3183,147,3390,127,3577,116,3725,112"/>
+<area shape="rect" id="Node000030" href="$button__input_8c.html" title="A module to handle hardware button presses from GPIO or I/O expanders." alt="" coords="2990,189,3153,243"/>
+<area shape="poly" id="edge29_Node000002_Node000030" title=" " alt="" coords="3725,121,3610,127,3471,139,3321,158,3172,184,3144,191,3143,186,3171,179,3320,152,3471,134,3610,122,3725,116"/>
+<area shape="rect" id="Node000031" href="$i2c__bus_8h.html" title="Public header for the I2C Bus module." alt="" coords="3228,189,3403,243"/>
+<area shape="poly" id="edge30_Node000002_Node000031" title=" " alt="" coords="3725,129,3578,151,3416,184,3390,191,3388,186,3415,179,3577,146,3725,124"/>
+<area shape="rect" id="Node000032" href="$i2c__bus_8c.html" title="Implementation of the I2C Bus module using the new ESP&#45;IDF v5.x driver." alt="" coords="3171,306,3334,361"/>
+<area shape="poly" id="edge32_Node000002_Node000032" title=" " alt="" coords="3725,121,3580,129,3421,141,3287,160,3242,171,3218,183,3210,196,3206,211,3208,244,3220,276,3236,304,3232,307,3216,278,3203,245,3201,210,3205,194,3215,179,3240,166,3286,154,3420,136,3579,124,3725,116"/>
+<area shape="rect" id="Node000033" href="$mcp23017__io__expander_8c.html" title="Implementation of the MCP23017 I/O Expander module." alt="" coords="3427,181,3612,251"/>
+<area shape="poly" id="edge33_Node000002_Node000033" title=" " alt="" coords="3761,140,3613,187,3611,182,3759,135"/>
+<area shape="rect" id="Node000034" href="$rotary__encoder__input_8c.html" title="A universal module to handle rotary encoder inputs using the Task Pool Manager." alt="" coords="3637,181,3823,251"/>
+<area shape="poly" id="edge34_Node000002_Node000034" title=" " alt="" coords="3805,145,3766,183,3762,179,3801,141"/>
+<area shape="rect" id="Node000035" href="$sn74hc595n__writer_8c.html" title="Implementation of the SN74HC595N shift register driver module." alt="" coords="3848,181,4020,251"/>
+<area shape="poly" id="edge35_Node000002_Node000035" title=" " alt="" coords="3862,141,3901,179,3898,183,3858,145"/>
+<area shape="rect" id="Node000036" href="$spi__bus_8c.html" title="Implementation of the SPI Bus module." alt="" coords="4045,189,4207,243"/>
+<area shape="poly" id="edge36_Node000002_Node000036" title=" " alt="" coords="3903,135,4034,179,4055,186,4053,191,4032,184,3901,140"/>
+<area shape="rect" id="Node000037" href="$security__status__reporter_8c.html" title="Reports Secure Boot and Flash Encryption status." alt="" coords="4232,181,4439,251"/>
+<area shape="poly" id="edge37_Node000002_Node000037" title=" " alt="" coords="3938,127,4073,149,4220,179,4232,182,4231,187,4219,184,4072,154,3937,132"/>
+<area shape="rect" id="Node000038" href="$sensor__aggregator_8c.html" title="Implementation of the Sensor Aggregator module." alt="" coords="4463,189,4664,243"/>
+<area shape="poly" id="edge38_Node000002_Node000038" title=" " alt="" coords="3938,118,4174,138,4314,155,4452,179,4482,186,4481,191,4451,184,4313,160,4174,143,3937,123"/>
+<area shape="rect" id="Node000039" href="$time__of__flight__sensor_8c.html" title="Driver for I2C&#45;based Time&#45;of&#45;Flight (TOF) distance sensor VL6180X." alt="" coords="4689,181,4878,251"/>
+<area shape="poly" id="edge39_Node000002_Node000039" title=" " alt="" coords="3938,113,4085,117,4270,128,4474,147,4677,179,4689,181,4688,186,4676,184,4473,153,4269,133,4084,123,3938,118"/>
+<area shape="rect" id="Node000040" href="$storage__backend__nvs_8c.html" title="NVS (Non&#45;Volatile Storage) backend implementation for the Storage Manager." alt="" coords="4902,189,5102,243"/>
+<area shape="poly" id="edge40_Node000002_Node000040" title=" " alt="" coords="3938,111,4119,113,4357,122,4623,142,4758,158,4890,179,4923,186,4922,191,4890,184,4758,163,4623,147,4356,127,4119,118,3938,116"/>
+<area shape="rect" id="Node000041" href="$storage__backend__sd_8c.html" title="SD Card (FAT filesystem) backend for the Storage Manager." alt="" coords="5127,189,5320,243"/>
+<area shape="poly" id="edge41_Node000002_Node000041" title=" " alt="" coords="3938,114,4202,121,4541,134,4873,153,5010,165,5114,179,5147,186,5146,191,5114,184,5009,170,4872,158,4541,139,4202,127,3938,120"/>
+<area shape="rect" id="Node000042" href="$storage__backend__spiffs_8c.html" title="SPIFFS (SPI Flash File System) backend for the Storage Manager." alt="" coords="5344,189,5556,243"/>
+<area shape="poly" id="edge42_Node000002_Node000042" title=" " alt="" coords="3938,114,4243,120,4646,132,5043,151,5208,164,5333,179,5368,186,5367,191,5332,184,5207,169,5043,156,4646,137,4243,125,3938,119"/>
+<area shape="rect" id="Node000043" href="$storage__manager_8c.html" title="Centralized, multi&#45;backend storage management service." alt="" coords="5580,189,5773,243"/>
+<area shape="poly" id="edge43_Node000002_Node000043" title=" " alt="" coords="3938,112,4287,116,4758,126,5227,146,5422,160,5569,179,5602,186,5601,191,5568,184,5421,166,5227,151,4758,131,4287,121,3938,118"/>
+<area shape="rect" id="Node000044" href="$alarms__manager_8c.html" title="Implementation of the System Alarms Manager module." alt="" coords="5797,189,5985,243"/>
+<area shape="poly" id="edge44_Node000002_Node000044" title=" " alt="" coords="3938,112,4326,114,4860,122,5137,130,5395,142,5618,158,5786,179,5818,186,5817,191,5786,184,5618,163,5395,147,5136,136,4860,127,4325,119,3938,117"/>
+<area shape="rect" id="Node000045" href="$connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="6009,181,6208,251"/>
+<area shape="poly" id="edge45_Node000002_Node000045" title=" " alt="" coords="3938,112,4363,112,4959,120,5269,128,5559,140,5809,157,5998,179,6009,181,6008,186,5998,184,5809,162,5559,146,5269,134,4958,125,4363,118,3938,117"/>
+<area shape="rect" id="Node000046" href="$device__identity__service_8c.html" title="Implementation of the Device Identity Service module with CLI support." alt="" coords="6233,181,6435,251"/>
+<area shape="poly" id="edge46_Node000002_Node000046" title=" " alt="" coords="3938,111,4402,111,5063,118,5408,126,5732,138,6011,155,6221,179,6233,181,6232,186,6220,184,6010,161,5731,143,5408,131,5063,123,4402,116,3938,117"/>
+<area shape="rect" id="Node000047" href="$health__monitor_8c.html" title="Monitors system health using the Shared Task Pool Manager." alt="" coords="6460,189,6637,243"/>
+<area shape="poly" id="edge47_Node000002_Node000047" title=" " alt="" coords="3938,113,4489,119,5271,131,6015,151,6287,164,6448,179,6479,186,6478,191,6447,184,6286,169,6014,156,5271,136,4488,124,3938,118"/>
+<area shape="rect" id="Node000048" href="$ota__update__manager_8c.html" title="Handles secure Over&#45;The&#45;Air firmware updates." alt="" coords="6662,189,6878,243"/>
+<area shape="poly" id="edge48_Node000002_Node000048" title=" " alt="" coords="3938,113,4526,119,5372,132,6179,152,6475,164,6650,179,6687,186,6685,191,6650,184,6475,170,6179,157,5372,138,4526,125,3937,118"/>
+<area shape="rect" id="Node000049" href="$time__sync_8c.html" title="SNTP&#45;based implementation of the Time Sync module." alt="" coords="6902,189,7070,243"/>
+<area shape="poly" id="edge49_Node000002_Node000049" title=" " alt="" coords="3938,112,4571,116,5493,126,5960,135,6376,146,6699,161,6814,169,6890,179,6920,186,6919,191,6890,184,6814,175,6699,166,6375,152,5960,140,5493,132,4571,121,3938,118"/>
+<area shape="rect" id="Node000050" href="$watchdog__manager_8c.html" title="Intelligent watchdog timer management with heartbeat monitoring." alt="" coords="7095,189,7301,243"/>
+<area shape="poly" id="edge50_Node000002_Node000050" title=" " alt="" coords="3938,113,4606,117,5589,129,6531,149,6878,162,7001,170,7082,179,7118,186,7117,191,7082,184,7000,175,6878,168,6531,154,5588,134,4606,123,3938,118"/>
+<area shape="rect" id="Node000051" href="$sensor__simulator_8c.html" title="Simulates sensor data for testing purposes." alt="" coords="7326,189,7513,243"/>
+<area shape="poly" id="edge51_Node000002_Node000051" title=" " alt="" coords="3938,112,4649,115,5704,125,6241,133,6720,145,7094,160,7226,169,7314,179,7347,186,7346,191,7314,184,7226,174,7094,165,6720,150,6241,139,5704,130,4649,121,3938,118"/>
+<area shape="rect" id="Node000052" href="$command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="7537,189,7753,243"/>
+<area shape="poly" id="edge52_Node000002_Node000052" title=" " alt="" coords="3938,112,4687,116,5808,126,6380,135,6891,146,7290,161,7431,169,7525,179,7562,186,7561,191,7524,184,7431,175,7290,166,6891,152,6380,140,5808,132,4687,121,3938,118"/>
+<area shape="rect" id="Node000053" href="$logger__module_8c.html" title="ლოგერ მოდულის იმპლემენტაცია &#45; ცენტრალიზებული ლოგირება და ივენთების მონიტორინგი" alt="" coords="7777,189,7957,243"/>
+<area shape="poly" id="edge53_Node000002_Node000053" title=" " alt="" coords="3938,112,4730,113,5927,121,6539,129,7087,141,7514,157,7665,167,7765,179,7797,186,7796,191,7764,184,7664,173,7513,163,7086,146,6539,134,5927,126,4730,119,3938,117"/>
+<area shape="rect" id="Node000054" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა (Shift Register ვერსია)" alt="" coords="7982,181,8145,251"/>
+<area shape="poly" id="edge54_Node000002_Node000054" title=" " alt="" coords="3938,112,4767,111,6029,117,6676,125,7254,137,7705,155,7865,166,7970,179,7982,181,7981,186,7970,184,7864,171,7705,160,7254,142,6676,130,6029,122,4767,116,3938,117"/>
+<area shape="rect" id="Node000055" href="$system__timer_8c.html" title="A centralized service for scheduling event publishing." alt="" coords="8169,189,8342,243"/>
+<area shape="poly" id="edge55_Node000002_Node000055" title=" " alt="" coords="3937,112,4799,111,6121,117,6798,125,7405,137,7879,155,8046,166,8157,179,8188,186,8186,191,8156,184,8046,171,7878,160,7405,142,6798,130,6121,122,4799,116,3937,117"/>
+<area shape="rect" id="Node000056" href="$ui__manager_8h.html" title="Public factory function for the UI Manager module." alt="" coords="1499,189,1665,243"/>
+<area shape="poly" id="edge56_Node000002_Node000056" title=" " alt="" coords="3725,119,3262,126,2624,139,2025,159,1806,171,1677,184,1649,191,1647,186,1676,179,1806,165,2025,153,2624,134,3262,121,3725,113"/>
+<area shape="rect" id="Node000014" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="8366,189,8529,243"/>
+<area shape="poly" id="edge58_Node000002_Node000014" title=" " alt="" coords="3938,113,4876,119,6310,132,7663,152,8127,164,8275,171,8354,179,8383,186,8382,191,8354,184,8275,177,8127,170,7663,157,6310,137,4876,124,3938,118"/>
+<area shape="rect" id="Node000016" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="8553,189,8715,243"/>
+<area shape="poly" id="edge61_Node000002_Node000016" title=" " alt="" coords="3938,113,4911,118,6406,131,7818,151,8304,164,8458,171,8541,179,8570,186,8569,191,8540,184,8458,176,8304,169,7818,156,6406,136,4911,124,3938,118"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="8782,194,8739,184,8652,177,8488,170,7975,157,6485,137,4918,124,3924,118,3924,112,4918,119,6485,132,7975,152,8489,165,8652,171,8740,179,8783,189"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="243,190,296,179,387,170,523,162,908,148,1952,128,3029,117,3738,112,3739,118,3029,122,1953,133,908,153,524,167,387,175,297,184,244,195"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="144,249,102,314,97,312,139,246"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="1260,248,1196,308,1192,304,1256,244"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="1297,249,1298,278,1296,309,1288,341,1272,370,1247,393,1217,412,1185,425,1152,434,1151,429,1183,420,1215,407,1244,389,1268,366,1283,339,1291,309,1293,278,1291,250"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="1353,238,1531,303,1530,308,1351,243"/>
+<area shape="poly" id="edge14_Node000009_Node000015" title=" " alt="" coords="1321,243,1388,304,1385,308,1318,247"/>
+<area shape="poly" id="edge16_Node000017_Node000018" title=" " alt="" coords="786,243,855,297,852,301,782,247"/>
+<area shape="poly" id="edge17_Node000018_Node000011" title=" " alt="" coords="952,374,1003,414,1000,418,949,379"/>
+<area shape="poly" id="edge24_Node000027_Node000018" title=" " alt="" coords="928,264,913,299,908,297,923,262"/>
+<area shape="poly" id="edge31_Node000031_Node000032" title=" " alt="" coords="3297,257,3269,307,3265,304,3292,254"/>
+<area shape="poly" id="edge57_Node000056_Node000012" title=" " alt="" coords="1592,256,1600,305,1595,306,1586,257"/>
 </map>

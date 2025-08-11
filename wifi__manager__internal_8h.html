@@ -251,15 +251,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="wifi__manager__internal_8h__dep__incl.png" border="0" usemap="#acomponents_2modules_2communications_2wifi__manager_2src_2wifi__manager__internal_8hdep" alt=""/></div>
 <map name="acomponents_2modules_2communications_2wifi__manager_2src_2wifi__manager__internal_8hdep" id="acomponents_2modules_2communications_2wifi__manager_2src_2wifi__manager__internal_8hdep">
-<area shape="rect" title="Internal declarations for the WiFi Manager module." alt="" coords="394,5,597,75"/>
+<area shape="rect" title="Internal declarations for the WiFi Manager module." alt="" coords="529,5,731,75"/>
 <area shape="rect" href="wifi__manager_8c.html" title="Main lifecycle and task management for the WiFi Manager module." alt="" coords="5,130,217,185"/>
-<area shape="poly" title=" " alt="" coords="382,78,200,132,198,127,380,73"/>
+<area shape="poly" title=" " alt="" coords="516,65,379,92,231,125,203,132,201,127,229,120,378,87,515,60"/>
 <area shape="rect" href="wifi__manager__api_8c.html" title="Implements the public Service API for the WiFi Manager module." alt="" coords="242,130,482,185"/>
-<area shape="poly" title=" " alt="" coords="448,86,394,132,391,128,444,82"/>
+<area shape="poly" title=" " alt="" coords="541,83,424,132,422,128,538,78"/>
 <area shape="rect" href="wifi__manager__cmd_8c.html" title="Implements the CLI command handlers for the WiFi Manager module." alt="" coords="506,130,754,185"/>
-<area shape="poly" title=" " alt="" coords="547,82,601,128,598,132,543,86"/>
+<area shape="poly" title=" " alt="" coords="633,89,633,130,627,130,627,89"/>
 <area shape="rect" href="wifi__manager__events_8c.html" title="Implements the event handlers for the WiFi Manager module." alt="" coords="778,123,981,192"/>
-<area shape="poly" title=" " alt="" coords="610,73,778,123,777,128,609,78"/>
+<area shape="poly" title=" " alt="" coords="716,78,808,120,805,125,714,83"/>
+<area shape="rect" href="wifi__manager__ui_8c.html" title="Implements the UI components for the WiFi Manager module." alt="" coords="1005,130,1237,185"/>
+<area shape="poly" title=" " alt="" coords="745,63,993,120,1023,127,1021,133,992,125,744,69"/>
 </map>
 </div>
 </div>
@@ -276,10 +278,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a0f09b1ae124b76c1cf2850529ccc0204" id="r_a0f09b1ae124b76c1cf2850529ccc0204"><td class="memItemLeft" align="right" valign="top"><a id="a0f09b1ae124b76c1cf2850529ccc0204" name="a0f09b1ae124b76c1cf2850529ccc0204"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>wifi_cmd_type_t</b> { <b>WIFI_CMD_CONNECT</b>
-, <b>WIFI_CMD_DISCONNECT</b>
-, <b>WIFI_CMD_RECONNECT_TIMER_FIRED</b>
-, <b>WIFI_CMD_GET_STATUS_ASYNC</b>
+<tr class="memitem:a0f09b1ae124b76c1cf2850529ccc0204" id="r_a0f09b1ae124b76c1cf2850529ccc0204"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wifi__manager__internal_8h.html#a0f09b1ae124b76c1cf2850529ccc0204">wifi_cmd_type_t</a> { <a class="el" href="wifi__manager__internal_8h.html#a0f09b1ae124b76c1cf2850529ccc0204a3d9066bf957010362a93cafb484248c3">WIFI_CMD_CONNECT</a>
+, <a class="el" href="wifi__manager__internal_8h.html#a0f09b1ae124b76c1cf2850529ccc0204a3267f8cb186befa2b560f2d33a404d50">WIFI_CMD_DISCONNECT</a>
+, <a class="el" href="wifi__manager__internal_8h.html#a0f09b1ae124b76c1cf2850529ccc0204a3febeca9f62cfb3c49579e4158f60890">WIFI_CMD_RECONNECT_TIMER_FIRED</a>
+, <a class="el" href="wifi__manager__internal_8h.html#a0f09b1ae124b76c1cf2850529ccc0204a8c592bfe1ac683d6b193b03b9c7bc10c">WIFI_CMD_GET_STATUS_ASYNC</a>
  }</td></tr>
 <tr class="separator:a0f09b1ae124b76c1cf2850529ccc0204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -321,6 +323,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_event_handler</b
 <tr class="memitem:a1a9c46aa624e84aed87074009f90c6d6" id="r_a1a9c46aa624e84aed87074009f90c6d6"><td class="memItemLeft" align="right" valign="top"><a id="a1a9c46aa624e84aed87074009f90c6d6" name="a1a9c46aa624e84aed87074009f90c6d6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ip_event_handler</b> (void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)</td></tr>
 <tr class="separator:a1a9c46aa624e84aed87074009f90c6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc4832c2f13adcbcae27b8fad0dcc63e" id="r_afc4832c2f13adcbcae27b8fad0dcc63e"><td class="memItemLeft" align="right" valign="top"><a id="afc4832c2f13adcbcae27b8fad0dcc63e" name="afc4832c2f13adcbcae27b8fad0dcc63e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_ui_init</b> (<a class="el" href="structmodule__t.html">module_t</a> *self)</td></tr>
+<tr class="separator:afc4832c2f13adcbcae27b8fad0dcc63e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb89fdb1762128cb71f63411f29ee1c5" id="r_afb89fdb1762128cb71f63411f29ee1c5"><td class="memItemLeft" align="right" valign="top"><a id="afb89fdb1762128cb71f63411f29ee1c5" name="afb89fdb1762128cb71f63411f29ee1c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_ui_deinit</b> (<a class="el" href="structmodule__t.html">module_t</a> *self)</td></tr>
+<tr class="separator:afb89fdb1762128cb71f63411f29ee1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Internal declarations for the WiFi Manager module. </p>
@@ -328,7 +336,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ip_event_handler</b> 
 <dl class="section version"><dt>Version</dt><dd>1.3.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-09-03</dd></dl>
 <p>This header is for internal use within the wifi_manager module's source files. It defines the private data structure, internal command types, and forward-declares ALL functions that are shared across the module's different C files. It should NOT be included by any external module. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a0f09b1ae124b76c1cf2850529ccc0204" name="a0f09b1ae124b76c1cf2850529ccc0204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f09b1ae124b76c1cf2850529ccc0204">&#9670;&#160;</a></span>wifi_cmd_type_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="wifi__manager__internal_8h.html#a0f09b1ae124b76c1cf2850529ccc0204">wifi_cmd_type_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0f09b1ae124b76c1cf2850529ccc0204a3d9066bf957010362a93cafb484248c3" name="a0f09b1ae124b76c1cf2850529ccc0204a3d9066bf957010362a93cafb484248c3"></a>WIFI_CMD_CONNECT&#160;</td><td class="fielddoc"><p>Command to initiate a connection to the configured AP. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0f09b1ae124b76c1cf2850529ccc0204a3267f8cb186befa2b560f2d33a404d50" name="a0f09b1ae124b76c1cf2850529ccc0204a3267f8cb186befa2b560f2d33a404d50"></a>WIFI_CMD_DISCONNECT&#160;</td><td class="fielddoc"><p>Command to disconnect from the current AP. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0f09b1ae124b76c1cf2850529ccc0204a3febeca9f62cfb3c49579e4158f60890" name="a0f09b1ae124b76c1cf2850529ccc0204a3febeca9f62cfb3c49579e4158f60890"></a>WIFI_CMD_RECONNECT_TIMER_FIRED&#160;</td><td class="fielddoc"><p>Internal command triggered by the reconnect timer. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0f09b1ae124b76c1cf2850529ccc0204a8c592bfe1ac683d6b193b03b9c7bc10c" name="a0f09b1ae124b76c1cf2850529ccc0204a8c592bfe1ac683d6b193b03b9c7bc10c"></a>WIFI_CMD_GET_STATUS_ASYNC&#160;</td><td class="fielddoc"><p>Command to asynchronously fetch the current WiFi status. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

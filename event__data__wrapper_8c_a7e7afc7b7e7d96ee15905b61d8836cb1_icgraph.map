@@ -1,49 +1,51 @@
 <map id="synapse_event_data_wrap" name="synapse_event_data_wrap">
-<area shape="rect" id="Node000001" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="707,569,901,595"/>
-<area shape="rect" id="Node000002" href="$service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="501,562,659,602"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="693,585,659,585,659,579,693,579"/>
-<area shape="rect" id="Node000003" href="$service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="259,505,446,545"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="487,561,432,547,433,542,488,556"/>
-<area shape="rect" id="Node000023" href="$system__manager_8c.html#a6e344fb76d747db9d27998e62d9e3dac" title="Initiates a graceful shutdown of the system." alt="" coords="252,569,453,595"/>
-<area shape="poly" id="edge22_Node000002_Node000023" title=" " alt="" coords="487,585,454,585,454,579,487,579"/>
-<area shape="rect" id="Node000024" href="$system__manager_8c.html#a651e9c9cf8b0563b7f4f31be1ea506e3" title="სისტემის და ყველა დარეგისტრირებული მოდულის გაშვება." alt="" coords="269,619,437,644"/>
-<area shape="poly" id="edge23_Node000002_Node000024" title=" " alt="" coords="488,605,413,621,411,616,487,599"/>
+<area shape="rect" id="Node000001" title="ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას." alt="" coords="707,595,901,620"/>
+<area shape="rect" id="Node000002" href="$service__locator_8c.html#aafeb37bb2a6708eb28287253730d62ff" title="Sets the operational status of a registered service. (NEW)" alt="" coords="501,587,659,627"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="693,610,659,610,659,605,693,605"/>
+<area shape="rect" id="Node000003" href="$service__locator_8c.html#a0a6e5781926f6d6160cab16cf48334b4" title="Registers a new service with a specific initial status. (NEW)" alt="" coords="259,530,446,570"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="487,587,432,573,433,567,488,582"/>
+<area shape="rect" id="Node000024" href="$system__manager_8c.html#a6e344fb76d747db9d27998e62d9e3dac" title="Initiates a graceful shutdown of the system." alt="" coords="252,595,453,620"/>
+<area shape="poly" id="edge23_Node000002_Node000024" title=" " alt="" coords="487,610,454,610,454,605,487,605"/>
+<area shape="rect" id="Node000025" href="$system__manager_8c.html#a651e9c9cf8b0563b7f4f31be1ea506e3" title="სისტემის და ყველა დარეგისტრირებული მოდულის გაშვება." alt="" coords="269,644,437,669"/>
+<area shape="poly" id="edge24_Node000002_Node000025" title=" " alt="" coords="488,630,413,647,411,641,487,625"/>
 <area shape="rect" id="Node000004" href="$command__router_8c.html#a837534e591162e28da0c47a84a8b9eb4" title="Creates a new instance of the Command Router module." alt="" coords="14,5,195,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="349,491,344,401,336,344,323,281,305,217,279,154,245,96,202,45,184,33,187,29,206,41,250,93,284,152,310,215,329,280,341,343,349,401,354,490"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="349,516,346,423,339,362,327,296,308,228,282,161,247,99,202,45,184,33,187,29,206,41,252,96,287,159,313,226,332,294,344,361,351,422,355,516"/>
 <area shape="rect" id="Node000005" href="$device__identity__service_8c.html#a9687f2ed1bc8ee6d3697dd399376d97f" title="Creates a new instance of the Device Identity Service module." alt="" coords="17,55,193,95"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="347,491,337,413,313,311,294,256,270,203,240,153,202,109,186,97,190,93,206,105,244,150,275,201,299,254,318,309,342,412,352,490"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="347,517,339,435,316,325,298,267,273,210,241,156,202,109,187,98,190,93,206,105,246,153,278,207,303,265,322,324,344,434,353,516"/>
 <area shape="rect" id="Node000006" href="$health__monitor_8c.html#a0d3e7c97a79ff4d129bfc2c868e1a6cf" title="ქმნის ახალ health_monitor მოდულის ინსტანციას." alt="" coords="20,120,189,145"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="345,491,334,421,309,331,290,284,266,238,237,195,202,159,185,148,188,143,206,155,241,192,271,235,295,281,314,329,339,420,351,490"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="346,517,336,442,312,345,294,294,269,244,239,199,202,159,185,148,188,143,206,155,243,195,274,242,298,292,317,344,341,441,352,516"/>
 <area shape="rect" id="Node000007" href="$i2c__bus_8c.html#aaf4e532bca146a2a6707a509e03b5aba" title="Factory function to create a new instance of the I2C Bus module." alt="" coords="45,169,164,195"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="343,492,328,431,301,354,283,314,260,276,234,240,202,209,184,198,164,191,165,186,186,193,206,205,238,237,265,273,287,312,306,352,333,429,348,490"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="344,517,331,452,305,368,286,325,263,282,235,243,202,209,184,198,163,190,165,185,186,193,206,205,239,240,268,280,291,322,310,366,336,450,349,516"/>
 <area shape="rect" id="Node000008" href="$mcp23017__io__expander_8c.html#ad3c9581aba0aa112f9b5ef81668e6cdd" title="Creates a new mcp23017_io_expander module instance." alt="" coords="16,219,193,259"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="338,493,320,444,291,385,252,325,228,298,202,273,184,262,187,257,206,269,232,294,256,322,295,382,324,442,343,491"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="340,518,323,464,294,398,255,331,230,300,202,273,184,262,187,257,206,269,234,297,259,328,299,396,328,462,345,516"/>
 <area shape="rect" id="Node000009" href="$ota__update__manager_8c.html#a792fc2704dda3f70481bb8073fcc1c4e" title="ქმნის ახალ ota_update_manager მოდულის ინსტანციას" alt="" coords="25,283,185,323"/>
-<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="332,494,310,457,280,415,244,374,202,338,182,326,184,321,206,333,248,370,285,412,315,454,337,491"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="335,518,314,477,284,428,247,379,202,337,182,326,185,321,206,333,251,376,289,425,318,474,339,516"/>
 <area shape="rect" id="Node000010" href="$relay__actuator_8c.html#a57a9879a72789576f6d8d87dd4641088" title="Creates a new instance of the Relay Actuator module." alt="" coords="23,348,187,373"/>
-<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="326,496,273,440,239,411,203,387,176,376,178,371,205,382,243,407,277,436,329,492"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="330,520,278,452,242,417,203,387,179,376,181,371,205,382,246,412,282,448,334,517"/>
 <area shape="rect" id="Node000011" href="$rgb__led__indicator_8c.html#af7ab099c2a16ab7a894d97a3a01f3d31" title="ქმნის ახალ rgb_led_indicator მოდულის ინსტანციას" alt="" coords="13,397,196,423"/>
-<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="311,499,261,467,203,438,166,425,167,420,205,433,263,463,314,495"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="320,523,267,479,236,457,203,438,170,425,172,420,205,433,239,452,271,474,323,518"/>
 <area shape="rect" id="Node000012" href="$security__status__reporter_8c.html#aa31c71380a03edac967fe88a8293a287" title="ქმნის ახალ security_status_reporter მოდულის ინსტანციას" alt="" coords="15,447,195,487"/>
-<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="252,504,191,490,192,485,253,499"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="280,528,203,502,167,490,169,485,205,497,282,523"/>
 <area shape="rect" id="Node000013" href="$sn74hc595n__writer_8c.html#a238fe05618a0329bac0448e22ebf31b9" title="Creates a new instance of the SN74HC595N Writer module." alt="" coords="8,512,201,537"/>
-<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="246,527,201,527,201,522,246,522"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="246,542,201,537,202,532,246,536"/>
 <area shape="rect" id="Node000014" href="$spi__bus_8c.html#ae3a80e44f738156819152fc9374c6e81" title="Creates a new instance of the SPI Bus module." alt="" coords="45,561,164,587"/>
-<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="247,548,165,565,164,560,246,543"/>
+<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="246,563,165,571,164,566,245,558"/>
 <area shape="rect" id="Node000015" href="$ssd1306__driver_8c.html#a57b7aba7486f7b1bbd57aec7ba62e493" title="Creates a new instance of the SSD1306 driver module." alt="" coords="20,611,189,636"/>
-<area shape="poly" id="edge14_Node000003_Node000015" title=" " alt="" coords="266,553,253,559,239,569,230,579,220,590,205,600,173,613,171,608,203,596,217,586,226,576,236,565,251,554,263,548"/>
+<area shape="poly" id="edge14_Node000003_Node000015" title=" " alt="" coords="277,577,253,585,205,601,159,613,157,608,203,595,251,579,275,572"/>
 <area shape="rect" id="Node000016" href="$storage__manager_8c.html#a81569f9eeedf0881c1fbd785982311fc" title="ქმნის ახალ storage_manager მოდულის ინსტანციას" alt="" coords="13,660,197,685"/>
-<area shape="poly" id="edge15_Node000003_Node000016" title=" " alt="" coords="260,554,254,559,237,580,231,603,224,627,206,649,184,662,181,658,202,645,219,624,226,602,232,578,250,555,257,550"/>
+<area shape="poly" id="edge15_Node000003_Node000016" title=" " alt="" coords="262,579,254,584,239,600,231,616,222,633,206,650,180,662,177,658,202,645,218,630,226,614,234,597,250,580,259,574"/>
 <area shape="rect" id="Node000017" href="$service__locator_8c.html#aa48f1c919af62ed40e3e038ad56868ab" title="ახალი სერვისის რეგისტრაცია." alt="" coords="11,709,198,735"/>
-<area shape="poly" id="edge16_Node000003_Node000017" title=" " alt="" coords="258,555,254,558,241,575,234,592,231,627,228,663,220,681,206,699,187,711,184,707,202,695,216,678,223,662,226,627,229,591,236,573,250,555,255,551"/>
+<area shape="poly" id="edge16_Node000003_Node000017" title=" " alt="" coords="259,580,254,584,242,598,236,611,231,640,226,670,219,684,206,699,185,712,182,707,202,695,214,681,221,668,226,639,231,610,238,595,250,580,256,576"/>
 <area shape="rect" id="Node000018" href="$system__manager_8c.html#a21907f2ac4378ce9202eb71681467583" title="სისტემის ბირთვის ინიციალიზაცია." alt="" coords="25,759,184,784"/>
-<area shape="poly" id="edge17_Node000003_Node000018" title=" " alt="" coords="258,555,254,558,238,582,231,605,230,628,231,652,233,676,232,700,224,724,206,748,186,762,183,758,202,744,219,722,226,699,228,676,226,652,224,628,225,604,233,579,250,555,254,551"/>
+<area shape="poly" id="edge17_Node000003_Node000018" title=" " alt="" coords="258,580,254,584,239,604,232,624,231,665,230,706,222,727,206,748,186,761,183,757,202,744,217,725,224,705,226,665,227,623,235,601,250,580,254,576"/>
 <area shape="rect" id="Node000019" href="$system__timer_8c.html#af68d73ecc7f69d8ee9b7b9491440f91e" title="ქმნის ახალ system_timer მოდულის ინსტანციას" alt="" coords="25,808,185,833"/>
-<area shape="poly" id="edge18_Node000003_Node000019" title=" " alt="" coords="257,555,254,558,235,588,227,617,227,647,232,676,236,706,235,737,227,767,206,797,186,811,183,807,202,793,222,765,230,736,230,707,226,677,222,647,222,617,230,586,250,555,253,551"/>
+<area shape="poly" id="edge18_Node000003_Node000019" title=" " alt="" coords="257,581,254,584,236,610,229,636,229,663,231,689,234,716,233,743,225,770,206,797,186,811,183,807,202,793,220,768,228,742,229,716,226,690,223,663,224,635,231,608,250,580,253,577"/>
 <area shape="rect" id="Node000020" href="$time__sync_8c.html#a7a7c79f52ee4aa89c8df7f917afae423" title="ქმნის ახალ time_sync მოდულის ინსტანციას." alt="" coords="36,857,173,883"/>
-<area shape="poly" id="edge19_Node000003_Node000020" title=" " alt="" coords="257,555,254,558,232,594,224,630,225,665,232,701,238,737,239,773,230,810,206,846,191,858,174,866,172,861,189,854,202,843,225,808,234,773,233,738,226,702,220,666,218,629,227,592,250,555,253,552"/>
-<area shape="rect" id="Node000021" href="$watchdog__manager_8c.html#aecae8dc408fc872d6d54f1eba2d035a1" title="Creates a new instance of the Watchdog Manager module." alt="" coords="5,907,204,932"/>
-<area shape="poly" id="edge20_Node000003_Node000021" title=" " alt="" coords="257,555,254,558,239,580,229,601,220,643,223,684,232,726,240,768,243,810,234,853,222,874,206,896,190,909,186,905,202,892,218,871,229,851,238,810,235,769,227,727,218,685,215,642,224,599,234,577,250,555,253,552"/>
-<area shape="rect" id="Node000022" href="$wifi__manager_8c.html#a5100b2f029e2c1e6e8212bd03703667e" title="Creates a new instance of the wifi_manager module." alt="" coords="25,956,184,981"/>
-<area shape="poly" id="edge21_Node000003_Node000022" title=" " alt="" coords="257,555,254,558,237,583,225,607,219,632,217,656,221,704,232,752,243,800,247,848,244,873,237,897,225,922,206,947,186,961,183,957,202,943,220,919,232,895,239,872,242,848,238,801,227,753,216,704,211,656,214,631,220,606,232,580,250,555,253,552"/>
+<area shape="poly" id="edge19_Node000003_Node000020" title=" " alt="" coords="257,580,254,584,233,616,226,649,226,681,232,714,237,747,237,780,228,813,206,846,191,858,175,866,173,861,189,853,202,843,224,811,232,779,231,747,226,715,221,682,220,648,228,614,250,580,253,577"/>
+<area shape="rect" id="Node000021" href="$ui__manager_8c.html#ae371e530d074697724cac90f069c253c" title="Creates a new instance of the UI Manager module." alt="" coords="31,907,178,932"/>
+<area shape="poly" id="edge20_Node000003_Node000021" title=" " alt="" coords="257,581,254,584,240,603,230,623,222,661,224,700,232,739,239,777,241,817,232,856,221,876,206,896,180,913,177,909,202,892,217,873,227,854,236,816,234,778,227,740,219,701,217,661,225,621,235,601,250,580,253,577"/>
+<area shape="rect" id="Node000022" href="$watchdog__manager_8c.html#aecae8dc408fc872d6d54f1eba2d035a1" title="Creates a new instance of the Watchdog Manager module." alt="" coords="5,956,204,981"/>
+<area shape="poly" id="edge21_Node000003_Node000022" title=" " alt="" coords="257,580,254,584,238,607,227,629,221,652,218,674,222,719,232,763,242,808,245,853,242,876,235,899,223,922,206,945,190,958,186,954,202,941,219,919,230,897,237,875,240,853,236,809,227,764,217,719,213,674,216,651,222,627,233,604,250,580,253,577"/>
+<area shape="rect" id="Node000023" href="$wifi__manager_8c.html#a5100b2f029e2c1e6e8212bd03703667e" title="Creates a new instance of the wifi_manager module." alt="" coords="25,1005,184,1031"/>
+<area shape="poly" id="edge22_Node000003_Node000023" title=" " alt="" coords="257,580,254,584,236,610,224,636,217,662,215,687,220,738,232,789,245,840,249,891,246,917,239,943,226,970,206,996,186,1011,183,1006,202,992,221,967,234,941,241,916,244,891,239,841,227,790,215,739,210,687,212,661,219,634,231,607,250,580,253,577"/>
 </map>

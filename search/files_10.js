@@ -10,5 +10,6 @@ var searchData=
   ['wifi_5fmanager_5fapi_2ec_7',['wifi_manager_api.c',['../wifi__manager__api_8c.html',1,'']]],
   ['wifi_5fmanager_5fcmd_2ec_8',['wifi_manager_cmd.c',['../wifi__manager__cmd_8c.html',1,'']]],
   ['wifi_5fmanager_5fevents_2ec_9',['wifi_manager_events.c',['../wifi__manager__events_8c.html',1,'']]],
-  ['wifi_5fmanager_5finternal_2eh_10',['wifi_manager_internal.h',['../wifi__manager__internal_8h.html',1,'']]]
+  ['wifi_5fmanager_5finternal_2eh_10',['wifi_manager_internal.h',['../wifi__manager__internal_8h.html',1,'']]],
+  ['wifi_5fmanager_5fui_2ec_11',['wifi_manager_ui.c',['../wifi__manager__ui_8c.html',1,'']]]
 ];

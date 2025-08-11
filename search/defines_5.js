@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['ssd1306_5flarge_5ffont_5fheight_0',['SSD1306_LARGE_FONT_HEIGHT',['../ssd1306__fonts_8h.html#a1d5ff1d6f7bc5cbd79d55d373dce5b7b',1,'ssd1306_fonts.h']]],
-  ['ssd1306_5flarge_5ffont_5fwidth_1',['SSD1306_LARGE_FONT_WIDTH',['../ssd1306__fonts_8h.html#ab555da078bc3650f7e551b87defa0fe6',1,'ssd1306_fonts.h']]],
-  ['ssd1306_5fsmall_5ffont_5fheight_2',['SSD1306_SMALL_FONT_HEIGHT',['../ssd1306__fonts_8h.html#af699587acf645b37e682d2203beb00ec',1,'ssd1306_fonts.h']]],
-  ['ssd1306_5fsmall_5ffont_5fwidth_3',['SSD1306_SMALL_FONT_WIDTH',['../ssd1306__fonts_8h.html#a32e3da4b5e8433f56f6593d69ed6e824',1,'ssd1306_fonts.h']]],
-  ['synapse_5fevent_5fconnectivity_5festablished_4',['SYNAPSE_EVENT_CONNECTIVITY_ESTABLISHED',['../framework__events_8h.html#a3ab2587249657a7da12bc5e70469d30e',1,'framework_events.h']]],
-  ['synapse_5fevent_5fconnectivity_5flost_5',['SYNAPSE_EVENT_CONNECTIVITY_LOST',['../framework__events_8h.html#ad9ecf117f47172dfce6a3046488ae209',1,'framework_events.h']]],
-  ['synapse_5fevent_5fservice_5fstatus_5fchanged_6',['SYNAPSE_EVENT_SERVICE_STATUS_CHANGED',['../framework__events_8h.html#a1824c136aa981b604230140ebf094f3c',1,'framework_events.h']]],
-  ['synapse_5fguard_5fvoid_7',['SYNAPSE_GUARD_VOID',['../synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f',1,'synapse_utils.h']]]
+  ['logger_5fconsole_5foutput_5fenabled_0',['LOGGER_CONSOLE_OUTPUT_ENABLED',['../logger__module__config_8h.html#ac07384e32aa977e981ee16e260267e50',1,'logger_module_config.h']]],
+  ['logger_5fdefault_5finstance_5fname_1',['LOGGER_DEFAULT_INSTANCE_NAME',['../logger__module__config_8h.html#a75d92458c36a0b39cdc223497ee9fc57',1,'logger_module_config.h']]],
+  ['logger_5fevent_5fbuffer_5fsize_2',['LOGGER_EVENT_BUFFER_SIZE',['../logger__module__config_8h.html#a86c211625d4964b996fa89a04dcbcc44',1,'logger_module_config.h']]],
+  ['logger_5fif_5fconsole_5foutput_3',['LOGGER_IF_CONSOLE_OUTPUT',['../logger__module__config_8h.html#ab48a8903d26363ce73662dbe50cc36fc',1,'logger_module_config.h']]],
+  ['logger_5fif_5fenabled_4',['LOGGER_IF_ENABLED',['../logger__module__config_8h.html#ab55c2f1ca3d1d500997a31928ce9d40b',1,'logger_module_config.h']]],
+  ['logger_5fif_5fruntime_5fcontrol_5',['LOGGER_IF_RUNTIME_CONTROL',['../logger__module__config_8h.html#a4ec4fb113c07e93e7f7da8870aede999',1,'logger_module_config.h']]],
+  ['logger_5finstance_5fname_5fmax_5flen_6',['LOGGER_INSTANCE_NAME_MAX_LEN',['../logger__module__config_8h.html#a3d2b792852bc6dca45c3a24daeac84f1',1,'logger_module_config.h']]],
+  ['logger_5fmax_5fevent_5fdata_5fsize_7',['LOGGER_MAX_EVENT_DATA_SIZE',['../logger__module__config_8h.html#a0203b63d11e3a6acb0f3eb289242d104',1,'logger_module_config.h']]],
+  ['logger_5fmodule_5fenabled_8',['LOGGER_MODULE_ENABLED',['../logger__module__config_8h.html#a1fad97e02379876ec92171a17a0a043c',1,'logger_module_config.h']]],
+  ['logger_5fruntime_5fcontrol_5fenabled_9',['LOGGER_RUNTIME_CONTROL_ENABLED',['../logger__module__config_8h.html#a61fc94d0902cdbb23ba3a87f0735d623',1,'logger_module_config.h']]]
 ];

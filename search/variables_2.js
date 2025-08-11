@@ -3,11 +3,13 @@ var searchData=
   ['cancel_5fevent_0',['cancel_event',['../structtimer__api__t.html#af9ed59cd22b446f8189145a48608ae7c',1,'timer_api_t']]],
   ['check_5fname_1',['check_name',['../structsynapse__connectivity__payload__t.html#a7d3b6aac3698a4e1cddcb8d10b8f2f8c',1,'synapse_connectivity_payload_t']]],
   ['clear_2',['clear',['../structdisplay__driver__api__t.html#a4b742913cfbee68a1a90fa888e212f6b',1,'display_driver_api_t::clear'],['../structssd1306__api__t.html#a89a760ac07563034035c4169c3e16f6d',1,'ssd1306_api_t::clear']]],
-  ['command_3',['command',['../structcmd__t.html#a0120d5191bad85cf51f4fc04037847d7',1,'cmd_t']]],
-  ['command_5fstring_4',['command_string',['../structsynapse__command__payload__t.html#abed093840403cd30fa9033907f71a98a',1,'synapse_command_payload_t']]],
-  ['config_5fkey_5',['config_key',['../structmodule__dependency__t.html#a04dcf42fdafe441169331e2ec4693c2c',1,'module_dependency_t']]],
-  ['context_6',['context',['../structcmd__t.html#ad7693338cba9ccd134ff26e85ef048b0',1,'cmd_t::context'],['../structdisplay__driver__handle__t.html#a69e0605ec10f8a12fa16a8c486b82439',1,'display_driver_handle_t::context'],['../structi2c__bus__handle__t.html#a7db21756e594bb94b77d2e6176c0b56b',1,'i2c_bus_handle_t::context'],['../structsn74hc595n__writer__handle__t.html#a5220cbd141fafbd8a9e1fb749399e02f',1,'sn74hc595n_writer_handle_t::context'],['../structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658',1,'ssd1306_handle_t::context']]],
-  ['count_7',['count',['../structevent__subscription__list__t.html#a6eb88a33a31666f9d212fb46c0bfc732',1,'event_subscription_list_t::count'],['../structsensor__runtime__data__t.html#a55944e8e2016618097399a28808bfa67',1,'sensor_runtime_data_t::count']]],
-  ['current_5fconfig_8',['current_config',['../structmodule__t.html#a5a1305713cce543522141d618ca463da',1,'module_t']]],
-  ['current_5fstate_9',['current_state',['../structui__manager__private__data__t.html#a27b5e54fd8c533963b86c30d07d3023f',1,'ui_manager_private_data_t']]]
+  ['cmd_5fqueue_3',['cmd_queue',['../structwifi__manager__private__data__t.html#a38407631c22bdb4e9eda3ded4af6e514',1,'wifi_manager_private_data_t']]],
+  ['command_4',['command',['../structcmd__t.html#a0120d5191bad85cf51f4fc04037847d7',1,'cmd_t']]],
+  ['command_5fstring_5',['command_string',['../structsynapse__command__payload__t.html#abed093840403cd30fa9033907f71a98a',1,'synapse_command_payload_t']]],
+  ['component_5fdata_6',['component_data',['../structregistered__component__node__t.html#a5559b4f061fc46967b46f4ac56ea40aa',1,'registered_component_node_t']]],
+  ['config_5fkey_7',['config_key',['../structmodule__dependency__t.html#a04dcf42fdafe441169331e2ec4693c2c',1,'module_dependency_t']]],
+  ['context_8',['context',['../structcmd__t.html#ad7693338cba9ccd134ff26e85ef048b0',1,'cmd_t::context'],['../structssd1306__handle__t.html#a88da8e9a145017a5bef918669a3e8658',1,'ssd1306_handle_t::context'],['../structsn74hc595n__writer__handle__t.html#a5220cbd141fafbd8a9e1fb749399e02f',1,'sn74hc595n_writer_handle_t::context'],['../structi2c__bus__handle__t.html#a7db21756e594bb94b77d2e6176c0b56b',1,'i2c_bus_handle_t::context'],['../structdisplay__driver__handle__t.html#a69e0605ec10f8a12fa16a8c486b82439',1,'display_driver_handle_t::context']]],
+  ['count_9',['count',['../structevent__subscription__list__t.html#a6eb88a33a31666f9d212fb46c0bfc732',1,'event_subscription_list_t::count'],['../structsensor__runtime__data__t.html#a55944e8e2016618097399a28808bfa67',1,'sensor_runtime_data_t::count']]],
+  ['current_5fconfig_10',['current_config',['../structmodule__t.html#a5a1305713cce543522141d618ca463da',1,'module_t']]],
+  ['current_5fstate_11',['current_state',['../structrelay__private__data__t.html#a4c90b500337f9fe34213f03730dff3eb',1,'relay_private_data_t::current_state'],['../structui__manager__private__data__t.html#a27b5e54fd8c533963b86c30d07d3023f',1,'ui_manager_private_data_t::current_state']]]
 ];

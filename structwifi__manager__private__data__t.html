@@ -113,33 +113,43 @@ Collaboration diagram for wifi_manager_private_data_t:</div>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7745282ae692ddd2f8c7dd95109af42c" id="r_a7745282ae692ddd2f8c7dd95109af42c"><td class="memItemLeft" align="right" valign="top"><a id="a7745282ae692ddd2f8c7dd95109af42c" name="a7745282ae692ddd2f8c7dd95109af42c"></a>
 <a class="el" href="structstorage__api__t.html">storage_api_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>storage_handle</b></td></tr>
+<tr class="memdesc:a7745282ae692ddd2f8c7dd95109af42c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Injected: Handle to the storage service for credentials. <br /></td></tr>
 <tr class="separator:a7745282ae692ddd2f8c7dd95109af42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a410cbc96ee068753ebcbbcc17021a2fd" id="r_a410cbc96ee068753ebcbbcc17021a2fd"><td class="memItemLeft" align="right" valign="top"><a id="a410cbc96ee068753ebcbbcc17021a2fd" name="a410cbc96ee068753ebcbbcc17021a2fd"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>instance_name</b> [CONFIG_WIFI_MANAGER_INSTANCE_NAME_MAX_LEN]</td></tr>
+<tr class="memdesc:a410cbc96ee068753ebcbbcc17021a2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique name of this module instance. <br /></td></tr>
 <tr class="separator:a410cbc96ee068753ebcbbcc17021a2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa82eef4cf2a106f616644c4c7f65217b" id="r_aa82eef4cf2a106f616644c4c7f65217b"><td class="memItemLeft" align="right" valign="top"><a id="aa82eef4cf2a106f616644c4c7f65217b" name="aa82eef4cf2a106f616644c4c7f65217b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_connected</b></td></tr>
+<tr class="memdesc:aa82eef4cf2a106f616644c4c7f65217b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime flag indicating if the device is currently connected to an AP and has an IP. <br /></td></tr>
 <tr class="separator:aa82eef4cf2a106f616644c4c7f65217b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed8c81c7097c0478d0b268743dd74002" id="r_aed8c81c7097c0478d0b268743dd74002"><td class="memItemLeft" align="right" valign="top"><a id="aed8c81c7097c0478d0b268743dd74002" name="aed8c81c7097c0478d0b268743dd74002"></a>
 wifi_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_config</b></td></tr>
+<tr class="memdesc:aed8c81c7097c0478d0b268743dd74002"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current WiFi configuration (SSID/password). <br /></td></tr>
 <tr class="separator:aed8c81c7097c0478d0b268743dd74002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48dc764c888eb74dd5a34a69c501eb39" id="r_a48dc764c888eb74dd5a34a69c501eb39"><td class="memItemLeft" align="right" valign="top"><a id="a48dc764c888eb74dd5a34a69c501eb39" name="a48dc764c888eb74dd5a34a69c501eb39"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>retry_num</b></td></tr>
+<tr class="memdesc:a48dc764c888eb74dd5a34a69c501eb39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter for connection retry attempts. <br /></td></tr>
 <tr class="separator:a48dc764c888eb74dd5a34a69c501eb39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5819407a543d19fd65e2a969672a1a65" id="r_a5819407a543d19fd65e2a969672a1a65"><td class="memItemLeft" align="right" valign="top"><a id="a5819407a543d19fd65e2a969672a1a65" name="a5819407a543d19fd65e2a969672a1a65"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>has_saved_credentials</b></td></tr>
+<tr class="memdesc:a5819407a543d19fd65e2a969672a1a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating if valid credentials were loaded from storage. <br /></td></tr>
 <tr class="separator:a5819407a543d19fd65e2a969672a1a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96cb87a8d26324c031aeae375555ebd4" id="r_a96cb87a8d26324c031aeae375555ebd4"><td class="memItemLeft" align="right" valign="top"><a id="a96cb87a8d26324c031aeae375555ebd4" name="a96cb87a8d26324c031aeae375555ebd4"></a>
 TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>task_handle</b></td></tr>
+<tr class="memdesc:a96cb87a8d26324c031aeae375555ebd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle to the dedicated WiFi processing task. <br /></td></tr>
 <tr class="separator:a96cb87a8d26324c031aeae375555ebd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38407631c22bdb4e9eda3ded4af6e514" id="r_a38407631c22bdb4e9eda3ded4af6e514"><td class="memItemLeft" align="right" valign="top"><a id="a38407631c22bdb4e9eda3ded4af6e514" name="a38407631c22bdb4e9eda3ded4af6e514"></a>
 QueueHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>cmd_queue</b></td></tr>
+<tr class="memdesc:a38407631c22bdb4e9eda3ded4af6e514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue for sending commands to the WiFi task. <br /></td></tr>
 <tr class="separator:a38407631c22bdb4e9eda3ded4af6e514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef01a8a3fc9ecce091332e1bf326212" id="r_a4ef01a8a3fc9ecce091332e1bf326212"><td class="memItemLeft" align="right" valign="top"><a id="a4ef01a8a3fc9ecce091332e1bf326212" name="a4ef01a8a3fc9ecce091332e1bf326212"></a>
 TimerHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>reconnect_timer</b></td></tr>
+<tr class="memdesc:a4ef01a8a3fc9ecce091332e1bf326212"><td class="mdescLeft">&#160;</td><td class="mdescRight">FreeRTOS timer for scheduling reconnection attempts. <br /></td></tr>
 <tr class="separator:a4ef01a8a3fc9ecce091332e1bf326212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c51791830bcd1d361249a5de6f34f68" id="r_a2c51791830bcd1d361249a5de6f34f68"><td class="memItemLeft" align="right" valign="top"><a id="a2c51791830bcd1d361249a5de6f34f68" name="a2c51791830bcd1d361249a5de6f34f68"></a>
 <a class="el" href="structwifi__api__t.html">wifi_api_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>service_api</b></td></tr>
+<tr class="memdesc:a2c51791830bcd1d361249a5de6f34f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">The structure containing the public Service API function pointers. <br /></td></tr>
 <tr class="separator:a2c51791830bcd1d361249a5de6f34f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>

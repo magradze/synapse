@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
   <div class="headertitle"><div class="title">Synapse ESP Framework — არქიტექტურის მიმოხილვა</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1415"></a> </p>
-<h1><a class="anchor" id="autotoc_md1416"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1439"></a> </p>
+<h1><a class="anchor" id="autotoc_md1440"></a>
 მიზანი</h1>
 <p>Synapse ESP Framework-ის არქიტექტურა შექმნილია იმისთვის, რომ უზრუნველყოს მოდულური, გაფართოებადი და სტანდარტიზებული ჩაშენებული სისტემების (embedded systems) განვითარება ESP-IDF ეკოსისტემაში. მთავარი პრინციპებია მოდულურობა, იზოლაცია, ავტომატიზაცია და მაღალი ხარისხის კოდის უზრუნველყოფა.</p>
-<h1><a class="anchor" id="autotoc_md1417"></a>
+<h1><a class="anchor" id="autotoc_md1441"></a>
 ძირითადი არქიტექტურული პრინციპები</h1>
 <ul>
 <li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>ავტომატიზაცია:</b> მოდულების აღმოჩენა, build-სისტემაში ინტეგრაცია და <code>Module Factory</code>-ის გენერაცია სრულად ავტომატიზირებულია CMake სკრიპტების გამოყენებით.</li>
 <li><b>დოკუმენტირებულობა:</b> ყველა არქიტექტურული გადაწყვეტილება და სტანდარტი აღწერილია შესაბამის დოკუმენტებში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1418"></a>
+<h1><a class="anchor" id="autotoc_md1442"></a>
 არქიტექტურული ფენები და ძირითადი კომპონენტები</h1>
 <ol type="1">
 <li><b>Core (ბირთვი):</b><ul>
@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1419"></a>
+<h1><a class="anchor" id="autotoc_md1443"></a>
 მოდულებს შორის კომუნიკაციის პატერნები</h1>
 <ul>
 <li>**Facade Pattern (<code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code>):** **(ახალი!)** ფრეიმვორქის ბირთვის ყველა საჯარო API გაერთიანებულია ერთ, ცენტრალურ ჰედერ ფაილში — <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code>. მოდულებს შეუძლიათ, მიიღონ წვდომა ფრეიმვორქის სრულ ფუნქციონალზე მხოლოდ ერთი <code>#include "synapse.h"</code> დირექტივით.</li>
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>Event Bus Pattern:</b> გამოიყენება broadcast/notification სცენარებისთვის, როცა ერთზე მეტ მოდულს სჭირდება ერთი მოვლენის მიღება.</li>
 <li><b>აკრძალულია:</b> პირდაპირი დამოკიდებულება მოდულებს შორის და სხვა მოდულის header-ის პირდაპირი ჩასმა (<code>#include</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1420"></a>
+<h1><a class="anchor" id="autotoc_md1444"></a>
 სიცოცხლის ციკლი</h1>
 <ul>
 <li><b>Create:</b> მოდულის ობიექტის შექმნა და კონფიგურაციის გადაცემა.</li>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>Start:</b> მოდულის აქტიური მუშაობის დაწყება (მაგ., ტასკის გაშვება).</li>
 <li><b>Deinit:</b> ყველა გამოყოფილი რესურსის გათავისუფლება.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1421"></a>
+<h1><a class="anchor" id="autotoc_md1445"></a>
 საქაღალდეებისა და ფაილების სტრუქტურა</h1>
 <ul>
 <li><b>main/</b> — მთავარი აპლიკაცია (<code>app_main</code> და ძირითადი ლოგიკა).</li>
@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li><b>configs/</b> — ბაზისური <code>system_config.json</code> ფაილი.</li>
 <li><b>docs/</b> — დოკუმენტაცია და სტანდარტები.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1422"></a>
+<h1><a class="anchor" id="autotoc_md1446"></a>
 არქიტექტურული დიაგრამა (მოკლე)</h1>
 <div class="fragment"><div class="line">┌──────────────┐      Service Locator     ┌──────────────┐</div>
 <div class="line">│   Module A   │ ───────────────────────► │   Module B   │</div>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <div class="line">┌──────────────┐</div>
 <div class="line">│   Module C   │</div>
 <div class="line">└──────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1423"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1447"></a>
 სტანდარტები და დოკუმენტაცია</h1>
 <p>ყველა naming, structure, communication და სხვა წესები აღწერილია შესაბამის convention დოკუმენტებში:</p>
 <ul>
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2architectu
 <li>logging_standards.md</li>
 <li>coding_doxygen_standard.md</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1424"></a>
+<h1><a class="anchor" id="autotoc_md1448"></a>
 დასკვნა</h1>
 <p>Synapse ESP Framework-ის არქიტექტურა უზრუნველყოფს მოქნილ, სტანდარტიზებულ და გაფართოებად ჩაშენებულ სისტემებს, სადაც თითოეული მოდული დამოუკიდებელია, ადვილად ტესტირებადი და დოკუმენტირებულია. ყველა გადაწყვეტილება და სტანდარტი დეტალურადაა აღწერილი დოკუმენტაციაში, რაც ამარტივებს როგორც ახალ, ისე გამოცდილ დეველოპერებს ჩართვას და განვითარებას. </p>
 </div></div><!-- contents -->

@@ -99,167 +99,161 @@ $(document).ready(function(){initNavTree('ui__events_8c.html',''); initResizable
 <p>Implements the main event handling logic for the UI Manager.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="synapse_8h_source.html">synapse.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ui__events_8h_source.html">ui_events.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ui__menu_8h_source.html">ui_menu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ui__manager__internal_8h_source.html">ui_manager_internal.h</a>&quot;</code><br />
 <code>#include &quot;esp_timer.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="relay__interface_8h_source.html">relay_interface.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="wifi__interface_8h_source.html">wifi_interface.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ui_events.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui__events_8c__incl.png" border="0" usemap="#acomponents_2modules_2utillities_2ui__manager_2src_2ui__events_8c" alt=""/></div>
 <map name="acomponents_2modules_2utillities_2ui__manager_2src_2ui__events_8c" id="acomponents_2modules_2utillities_2ui__manager_2src_2ui__events_8c">
-<area shape="rect" title="Implements the main event handling logic for the UI Manager." alt="" coords="1195,5,1358,60"/>
-<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1790,328,1878,353"/>
-<area shape="poly" title=" " alt="" coords="1320,58,1443,131,1644,240,1800,319,1797,324,1642,244,1440,136,1317,62"/>
-<area shape="rect" href="ui__events_8h.html" title="Handles all incoming events for the UI Manager." alt="" coords="1068,108,1165,133"/>
-<area shape="poly" title=" " alt="" coords="1229,62,1151,104,1149,99,1226,58"/>
-<area shape="rect" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="1256,255,1379,280"/>
-<area shape="poly" title=" " alt="" coords="1285,60,1295,108,1317,241,1311,242,1290,108,1280,61"/>
-<area shape="rect" href="ui__menu_8h.html" title="Manages menu state, navigation, and rendering for the UI Manager." alt="" coords="1190,108,1280,133"/>
-<area shape="poly" title=" " alt="" coords="1266,61,1249,97,1244,94,1261,59"/>
-<area shape="rect" title=" " alt="" coords="1454,108,1552,133"/>
-<area shape="poly" title=" " alt="" coords="1346,58,1461,101,1459,106,1345,63"/>
-<area shape="rect" href="relay__interface_8h.html" title="Public Service API contract for the Relay Actuator module." alt="" coords="752,475,884,500"/>
-<area shape="poly" title=" " alt="" coords="1195,43,978,63,714,95,591,116,490,140,451,153,422,166,404,179,398,193,398,342,403,372,418,392,441,408,471,424,571,444,738,471,737,476,571,450,469,429,438,412,414,396,398,374,392,342,392,192,399,176,419,161,449,148,489,135,590,111,713,90,978,57,1195,37"/>
-<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="1869,475,1990,500"/>
-<area shape="poly" title=" " alt="" coords="1878,340,1957,344,2051,353,2135,370,2167,383,2189,400,2201,423,2196,442,2179,457,2152,468,2080,482,2004,488,2004,482,2079,476,2150,463,2176,452,2192,439,2196,423,2185,403,2165,388,2134,376,2050,358,1957,349,1878,345"/>
-<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="2521,475,2645,500"/>
-<area shape="poly" title=" " alt="" coords="1878,340,2040,344,2255,354,2452,372,2521,384,2561,399,2572,412,2580,428,2586,460,2580,461,2574,430,2568,415,2557,404,2520,389,2451,377,2255,360,2040,350,1878,345"/>
-<area shape="rect" href="service__status_8h.html" title="Defines the lifecycle status for services in the Service Locator." alt="" coords="2670,475,2798,500"/>
-<area shape="poly" title=" " alt="" coords="1878,340,2379,359,2641,376,2728,387,2755,393,2769,399,2777,415,2775,433,2756,465,2752,462,2770,431,2771,416,2765,403,2753,398,2727,392,2640,382,2379,364,1878,346"/>
-<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="1257,401,1413,427"/>
-<area shape="poly" title=" " alt="" coords="1790,351,1427,402,1426,397,1789,346"/>
-<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="2882,401,3020,427"/>
-<area shape="poly" title=" " alt="" coords="1878,342,2262,363,2812,399,2869,403,2869,408,2812,404,2262,369,1878,347"/>
-<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="2624,401,2756,427"/>
-<area shape="poly" title=" " alt="" coords="1878,342,2182,362,2605,399,2611,399,2610,405,2604,404,2182,367,1878,347"/>
-<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="1010,475,1111,500"/>
-<area shape="poly" title=" " alt="" coords="1789,346,1559,351,1239,363,948,380,852,391,822,397,809,403,804,414,809,425,832,436,880,449,997,473,996,478,879,454,831,441,805,429,799,414,805,399,821,392,851,386,948,375,1239,357,1559,346,1789,340"/>
-<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="1676,475,1813,500"/>
-<area shape="poly" title=" " alt="" coords="1789,346,1654,351,1482,361,1327,378,1274,390,1246,403,1241,414,1246,425,1402,445,1662,474,1661,480,1401,450,1243,429,1236,414,1242,399,1272,385,1326,373,1481,356,1654,345,1789,340"/>
-<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="572,475,727,500"/>
-<area shape="poly" title=" " alt="" coords="1790,345,1493,348,1061,357,848,364,664,374,531,387,490,395,471,403,464,415,463,425,469,435,480,444,515,459,560,470,558,475,514,464,477,448,465,438,458,427,458,413,468,399,489,390,530,382,663,369,847,359,1061,351,1493,343,1790,340"/>
-<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="2028,401,2175,427"/>
-<area shape="poly" title=" " alt="" coords="1877,351,2046,395,2045,400,1876,356"/>
-<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="1136,475,1286,500"/>
-<area shape="poly" title=" " alt="" coords="1789,346,1650,351,1472,362,1310,379,1254,390,1225,403,1216,415,1211,430,1210,461,1204,460,1206,429,1211,413,1221,399,1253,385,1309,374,1471,356,1650,346,1789,341"/>
-<area shape="rect" href="task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="1437,401,1598,427"/>
-<area shape="poly" title=" " alt="" coords="1790,353,1576,401,1574,396,1789,348"/>
-<area shape="rect" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="3044,401,3167,427"/>
-<area shape="poly" title=" " alt="" coords="1878,340,2341,354,2675,371,3019,399,3031,400,3030,405,3019,404,2675,376,2340,359,1878,345"/>
-<area shape="rect" href="synapse__assert_8h.html" title="Custom assertion macro for the Synapse Framework." alt="" coords="3298,401,3433,427"/>
-<area shape="poly" title=" " alt="" coords="1878,340,2092,342,2436,351,2852,368,3070,382,3285,399,3285,404,3069,387,2852,374,2436,356,2092,347,1878,345"/>
-<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="3191,401,3274,427"/>
-<area shape="poly" title=" " alt="" coords="1878,340,2495,358,2882,376,3048,387,3177,399,3177,404,3047,392,2882,381,2495,364,1878,346"/>
-<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1464,475,1630,500"/>
-<area shape="poly" title=" " alt="" coords="1789,346,1652,351,1476,361,1318,378,1264,390,1236,403,1231,414,1236,425,1249,436,1268,446,1322,461,1386,472,1450,478,1450,484,1385,477,1321,466,1267,451,1246,440,1231,428,1225,414,1232,399,1262,385,1317,373,1476,355,1652,345,1789,340"/>
-<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="1866,401,2004,427"/>
-<area shape="poly" title=" " alt="" coords="1851,351,1909,391,1906,395,1848,356"/>
-<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="2413,401,2548,427"/>
-<area shape="poly" title=" " alt="" coords="1878,343,2098,365,2400,399,2399,404,2097,370,1878,349"/>
-<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="2250,401,2388,427"/>
-<area shape="poly" title=" " alt="" coords="1878,346,2236,398,2236,403,1878,351"/>
-<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="820,401,1029,427"/>
-<area shape="poly" title=" " alt="" coords="1790,348,1049,404,1043,404,1043,399,1048,399,1789,342"/>
-<area shape="rect" href="task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="1623,401,1842,427"/>
-<area shape="poly" title=" " alt="" coords="1812,356,1754,395,1751,390,1809,351"/>
-<area shape="rect" title=" " alt="" coords="3130,548,3226,573"/>
-<area shape="poly" title=" " alt="" coords="1991,489,3115,553,3115,558,1991,495"/>
-<area shape="rect" title=" " alt="" coords="692,548,775,573"/>
-<area shape="poly" title=" " alt="" coords="1869,498,1825,503,1518,524,1218,541,789,560,789,555,1218,536,1518,519,1824,497,1868,493"/>
-<area shape="rect" title=" " alt="" coords="445,548,516,573"/>
-<area shape="poly" title=" " alt="" coords="1869,499,1825,503,1503,523,1253,531,1002,538,680,551,529,559,529,554,680,545,1002,533,1253,526,1503,517,1824,497,1868,493"/>
-<area shape="rect" title=" " alt="" coords="1096,548,1177,573"/>
-<area shape="poly" title=" " alt="" coords="1869,498,1825,503,1191,558,1190,552,1824,497,1869,493"/>
-<area shape="rect" title=" " alt="" coords="2444,548,2517,573"/>
-<area shape="poly" title=" " alt="" coords="1991,494,2430,550,2430,556,1990,499"/>
-<area shape="rect" title=" " alt="" coords="1672,548,1822,573"/>
-<area shape="poly" title=" " alt="" coords="1901,503,1791,545,1789,540,1899,498"/>
-<area shape="rect" title=" " alt="" coords="1850,548,1988,573"/>
-<area shape="poly" title=" " alt="" coords="1931,501,1925,535,1920,534,1925,500"/>
-<area shape="poly" title=" " alt="" coords="2991,424,3043,444,3096,472,3133,503,3162,535,3158,539,3130,507,3093,477,3041,449,2989,429"/>
-<area shape="poly" title=" " alt="" coords="2984,424,3014,438,3042,456,3058,478,3058,490,3051,502,3024,516,2973,527,2827,544,2663,555,2531,561,2531,555,2663,550,2827,539,2972,522,3022,511,3048,498,3053,488,3053,479,3039,460,3012,443,2982,429"/>
-<area shape="poly" title=" " alt="" coords="2917,429,2783,473,2781,468,2915,424"/>
-<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="24,475,174,500"/>
-<area shape="poly" title=" " alt="" coords="2882,423,2767,429,2375,441,2043,444,1478,439,1206,437,913,441,581,453,188,477,188,472,580,448,913,435,1206,432,1478,433,2043,439,2375,436,2767,424,2882,418"/>
-<area shape="rect" title=" " alt="" coords="2968,475,3038,500"/>
-<area shape="poly" title=" " alt="" coords="2962,425,2989,462,2984,465,2957,429"/>
-<area shape="rect" title=" " alt="" coords="2873,475,2944,500"/>
-<area shape="poly" title=" " alt="" coords="2946,428,2924,464,2920,462,2942,426"/>
-<area shape="poly" title=" " alt="" coords="161,497,432,548,431,553,160,503"/>
-<area shape="poly" title=" " alt="" coords="2624,424,2559,429,2316,436,2003,438,1842,441,1691,448,1558,459,1452,477,1424,489,1396,502,1287,533,1191,553,1190,548,1286,528,1394,498,1422,484,1450,472,1557,454,1690,443,1842,436,2003,433,2316,430,2559,424,2623,419"/>
-<area shape="poly" title=" " alt="" coords="2674,429,2613,469,2610,465,2671,424"/>
-<area shape="poly" title=" " alt="" coords="2699,426,2722,462,2717,464,2695,428"/>
-<area shape="poly" title=" " alt="" coords="1074,498,1116,537,1112,540,1071,502"/>
-<area shape="rect" title=" " alt="" coords="1318,548,1392,573"/>
-<area shape="poly" title=" " alt="" coords="1108,497,1305,545,1304,550,1107,503"/>
-<area shape="poly" title=" " alt="" coords="1676,499,1642,503,1148,539,789,559,789,554,1147,534,1641,497,1675,494"/>
-<area shape="poly" title=" " alt="" coords="1675,499,1191,556,1190,550,1675,494"/>
-<area shape="poly" title=" " alt="" coords="1813,493,1857,497,2430,552,2430,557,1856,503,1813,498"/>
-<area shape="poly" title=" " alt="" coords="1747,500,1749,534,1743,535,1742,500"/>
-<area shape="poly" title=" " alt="" coords="1773,498,1879,540,1877,545,1771,502"/>
-<area shape="poly" title=" " alt="" coords="665,498,711,537,708,541,661,502"/>
-<area shape="poly" title=" " alt="" coords="623,502,522,545,520,540,621,498"/>
-<area shape="poly" title=" " alt="" coords="728,497,1082,549,1081,554,727,503"/>
-<area shape="poly" title=" " alt="" coords="2075,429,1971,472,1969,467,2073,424"/>
-<area shape="poly" title=" " alt="" coords="2028,428,2017,429,1916,437,1830,440,1684,438,1614,439,1539,445,1455,456,1357,477,1328,488,1299,502,1183,546,1181,541,1297,498,1325,483,1356,472,1454,451,1539,439,1613,434,1684,433,1830,434,1916,432,2016,424,2028,423"/>
-<area shape="poly" title=" " alt="" coords="2133,424,2439,541,2437,546,2131,429"/>
-<area shape="poly" title=" " alt="" coords="1201,502,1160,540,1157,537,1197,498"/>
-<area shape="poly" title=" " alt="" coords="1575,399,1776,354,1777,359,1576,404"/>
-<area shape="poly" title=" " alt="" coords="3044,404,3043,404,2701,377,2367,359,2083,349,1891,345,1891,340,2083,344,2367,354,2702,371,3043,399,3044,399"/>
-<area shape="poly" title=" " alt="" coords="3107,427,3099,465,3089,485,3074,502,3043,514,2989,524,2836,541,2531,560,2530,555,2836,536,2988,519,3042,509,3071,498,3085,482,3094,463,3102,426"/>
-<area shape="poly" title=" " alt="" coords="3363,428,3345,464,3331,484,3314,502,3275,528,3234,546,3232,541,3273,523,3311,498,3327,481,3341,461,3359,425"/>
-<area shape="rect" title=" " alt="" coords="3216,475,3300,500"/>
-<area shape="poly" title=" " alt="" coords="3350,429,3288,469,3285,465,3347,424"/>
-<area shape="rect" title=" " alt="" coords="3375,475,3479,500"/>
-<area shape="poly" title=" " alt="" coords="3378,425,3410,462,3406,466,3374,429"/>
-<area shape="poly" title=" " alt="" coords="3239,426,3252,461,3246,463,3234,428"/>
-<area shape="poly" title=" " alt="" coords="1463,497,530,559,529,553,1463,492"/>
-<area shape="poly" title=" " alt="" coords="1481,503,1191,553,1190,547,1481,497"/>
-<area shape="poly" title=" " alt="" coords="1580,498,1702,541,1700,546,1578,503"/>
-<area shape="poly" title=" " alt="" coords="1607,497,1846,543,1845,548,1606,503"/>
-<area shape="poly" title=" " alt="" coords="1517,503,1400,545,1398,540,1515,498"/>
-<area shape="poly" title=" " alt="" coords="1937,427,1934,461,1929,461,1931,427"/>
-<area shape="poly" title=" " alt="" coords="2413,428,2401,429,2005,480,2004,474,2400,424,2412,422"/>
-<area shape="poly" title=" " alt="" coords="2483,427,2483,534,2478,534,2478,427"/>
-<area shape="poly" title=" " alt="" coords="2257,429,2004,475,2003,470,2256,424"/>
-<area shape="poly" title=" " alt="" coords="2250,424,2187,429,2068,436,1967,437,1794,434,1711,435,1623,440,1524,454,1408,477,1377,489,1347,502,1191,548,1190,543,1345,498,1375,484,1406,472,1523,449,1623,435,1711,429,1794,428,1967,431,2068,430,2187,424,2249,419"/>
-<area shape="poly" title=" " alt="" coords="2279,429,2002,503,1812,548,1810,542,2001,497,2277,424"/>
-<area shape="poly" title=" " alt="" coords="2314,428,2287,465,2267,486,2244,502,2184,529,2121,546,2058,557,2002,561,2001,556,2057,551,2119,541,2182,524,2242,498,2264,482,2283,462,2310,425"/>
-<area shape="poly" title=" " alt="" coords="971,424,1152,469,1151,474,970,429"/>
-<area shape="poly" title=" " alt="" coords="1754,399,1812,360,1815,364,1757,403"/>
-<area shape="rect" href="ui__manager_8h.html" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="1061,181,1172,207"/>
-<area shape="poly" title=" " alt="" coords="1119,134,1119,168,1114,168,1114,134"/>
-<area shape="poly" title=" " alt="" coords="1121,206,1133,250,1156,310,1173,343,1193,374,1217,402,1246,424,1268,436,1296,446,1363,459,1442,467,1527,470,1695,469,1824,472,1856,475,1855,480,1824,477,1695,475,1527,475,1441,472,1362,465,1294,451,1266,441,1243,429,1214,405,1189,377,1168,345,1151,313,1128,251,1116,208"/>
-<area shape="poly" title=" " alt="" coords="1172,196,1524,219,2038,263,2296,291,2523,324,2618,341,2696,360,2755,379,2791,399,2813,423,2826,448,2826,475,2812,502,2792,517,2764,529,2689,546,2605,556,2531,561,2531,555,2604,550,2688,541,2762,524,2790,512,2808,498,2821,474,2820,449,2809,426,2788,403,2753,384,2695,365,2617,346,2522,329,2295,296,2037,268,1523,225,1172,201"/>
-<area shape="rect" href="display__driver__interface_8h.html" title="Universal Service API contract for display drivers." alt="" coords="198,475,389,500"/>
-<area shape="poly" title=" " alt="" coords="1061,198,950,205,803,224,723,241,643,264,565,293,491,330,439,364,391,402,317,467,313,463,387,398,436,360,488,326,562,288,641,259,722,236,802,219,949,199,1060,193"/>
-<area shape="rect" href="system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="482,401,694,427"/>
-<area shape="poly" title=" " alt="" coords="1061,206,964,226,855,257,782,289,714,330,616,395,613,391,711,326,780,284,853,252,962,220,1060,201"/>
-<area shape="rect" href="timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="413,475,548,500"/>
-<area shape="poly" title=" " alt="" coords="1061,204,936,223,862,238,790,257,735,272,685,281,598,297,560,310,524,330,490,360,457,403,452,417,453,432,466,462,461,464,448,433,447,416,453,400,487,356,521,326,558,305,597,292,684,276,734,266,789,252,861,233,935,218,1060,199"/>
-<area shape="rect" href="time__sync__interface_8h.html" title="Public Service API contract for the Time Sync module." alt="" coords="866,255,1033,280"/>
-<area shape="poly" title=" " alt="" coords="1091,209,990,252,988,247,1088,204"/>
-<area shape="poly" title=" " alt="" coords="1150,204,1273,247,1271,253,1148,209"/>
-<area shape="poly" title=" " alt="" coords="365,497,679,548,678,553,364,503"/>
-<area shape="poly" title=" " alt="" coords="325,498,438,541,436,545,323,503"/>
-<area shape="poly" title=" " alt="" coords="389,496,401,497,791,531,1082,553,1082,558,791,536,400,503,389,502"/>
-<area shape="rect" title=" " alt="" coords="256,548,331,573"/>
-<area shape="poly" title=" " alt="" coords="296,500,296,534,291,534,291,500"/>
-<area shape="poly" title=" " alt="" coords="695,418,807,424,1316,443,1539,453,1825,472,1855,475,1855,480,1824,477,1538,458,1316,449,807,429,694,424"/>
-<area shape="poly" title=" " alt="" coords="482,421,346,428,199,439,76,455,35,465,13,476,8,487,13,498,29,504,66,511,183,527,432,552,431,558,182,532,66,516,27,509,9,502,3,487,9,473,33,460,75,450,198,433,346,423,482,416"/>
-<area shape="poly" title=" " alt="" coords="674,424,781,443,896,472,926,484,955,498,1086,542,1084,547,953,502,923,489,894,477,779,448,673,429"/>
-<area shape="poly" title=" " alt="" coords="522,497,680,542,678,547,520,503"/>
-<area shape="poly" title=" " alt="" coords="483,500,483,534,478,534,478,500"/>
-<area shape="poly" title=" " alt="" coords="548,496,561,497,855,530,1082,552,1082,557,854,535,560,503,548,501"/>
-<area shape="poly" title=" " alt="" coords="924,282,875,307,824,342,804,362,792,382,789,403,799,425,813,442,828,452,861,459,899,462,944,472,999,498,1098,540,1096,545,997,502,942,477,898,467,860,465,826,457,810,446,794,428,784,404,787,381,800,358,820,338,872,302,921,278"/>
-<area shape="rect" title=" " alt="" coords="918,328,982,353"/>
-<area shape="poly" title=" " alt="" coords="952,280,952,314,947,314,947,280"/>
-<area shape="poly" title=" " alt="" coords="1380,275,1398,277,1776,329,1775,334,1397,283,1379,280"/>
-<area shape="poly" title=" " alt="" coords="1217,136,1149,176,1146,172,1215,131"/>
-<area shape="poly" title=" " alt="" coords="806,502,760,541,756,537,802,498"/>
-<area shape="poly" title=" " alt="" coords="869,497,1083,545,1082,550,868,503"/>
+<area shape="rect" title="Implements the main event handling logic for the UI Manager." alt="" coords="2645,5,2808,60"/>
+<area shape="rect" href="synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="1477,255,1565,280"/>
+<area shape="poly" title=" " alt="" coords="2645,52,1949,184,1580,257,1578,252,1947,179,2644,47"/>
+<area shape="rect" href="ui__manager__internal_8h.html" title="Internal shared definitions for the UI Manager module." alt="" coords="2643,108,2811,133"/>
+<area shape="poly" title=" " alt="" coords="2729,60,2729,94,2724,94,2724,60"/>
+<area shape="rect" title=" " alt="" coords="2835,108,2933,133"/>
+<area shape="poly" title=" " alt="" coords="2776,58,2852,99,2850,104,2773,62"/>
+<area shape="rect" href="base__module_8h.html" title="Defines the base module interface and status types." alt="" coords="2197,401,2318,427"/>
+<area shape="poly" title=" " alt="" coords="1565,267,1695,271,1867,281,2035,298,2104,310,2156,326,2181,339,2204,355,2240,389,2236,393,2200,359,2178,343,2154,330,2103,316,2035,303,1867,286,1695,276,1565,272"/>
+<area shape="rect" href="service__types_8h.html" title="Synapse ESP Framework &#45; ცენტრალიზებული სერვისის ტიპების განსაზღვრებები." alt="" coords="1415,401,1539,427"/>
+<area shape="poly" title=" " alt="" coords="1520,281,1487,389,1482,387,1515,280"/>
+<area shape="rect" href="service__status_8h.html" title="Defines the lifecycle status for services in the Service Locator." alt="" coords="1212,401,1340,427"/>
+<area shape="poly" title=" " alt="" coords="1477,271,1435,274,1387,284,1341,301,1319,314,1301,330,1291,343,1285,357,1279,388,1274,387,1280,356,1286,340,1297,326,1316,310,1338,297,1386,278,1434,269,1477,265"/>
+<area shape="rect" href="framework__events_8h.html" title="Defines standardized, framework&#45;wide event identifiers." alt="" coords="153,328,309,353"/>
+<area shape="poly" title=" " alt="" coords="1477,272,1014,288,675,305,323,331,322,325,675,300,1013,283,1477,267"/>
+<area shape="rect" href="event__payloads_8h.html" title="ტელემეტრიისა და სისტემური ივენთების მონაცემთა სტრუქტურები." alt="" coords="1098,328,1235,353"/>
+<area shape="poly" title=" " alt="" coords="1478,280,1238,328,1237,323,1477,275"/>
+<area shape="rect" href="service__locator_8h.html" title="Framework&#45;ის სერვის ლოკატორის საჯარო API." alt="" coords="1311,328,1443,353"/>
+<area shape="poly" title=" " alt="" coords="1499,282,1414,324,1412,319,1497,278"/>
+<area shape="rect" href="event__bus_8h.html" title="Event Bus კომპონენტის Public API." alt="" coords="444,401,545,427"/>
+<area shape="poly" title=" " alt="" coords="1477,273,1136,290,941,307,861,318,801,331,776,342,750,356,665,379,559,402,558,397,664,374,748,351,773,338,799,325,860,313,941,302,1135,285,1477,267"/>
+<area shape="rect" href="config__manager_8h.html" title="კონფიგურაციის მენეჯერის API." alt="" coords="2445,401,2582,427"/>
+<area shape="poly" title=" " alt="" coords="1566,267,1792,273,2107,284,2393,302,2488,313,2517,319,2532,326,2541,341,2541,358,2530,390,2525,389,2536,357,2536,343,2529,330,2516,324,2487,318,2392,307,2107,290,1792,278,1566,272"/>
+<area shape="rect" href="resource__manager_8h.html" title="რესურსების (GPIO, I2C, SPI და სხვა) მართვის Public API" alt="" coords="2809,401,2964,427"/>
+<area shape="poly" title=" " alt="" coords="1566,266,1861,270,2290,279,2503,287,2687,297,2819,309,2861,317,2882,326,2891,340,2896,356,2895,387,2890,387,2891,356,2886,342,2878,330,2859,322,2819,315,2686,302,2503,292,2290,284,1860,275,1566,272"/>
+<area shape="rect" href="system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="1996,328,2143,353"/>
+<area shape="poly" title=" " alt="" coords="1566,272,1983,325,1982,330,1565,277"/>
+<area shape="rect" href="promise__manager_8h.html" title="Public API for consuming asynchronous operations using a Promise pattern." alt="" coords="570,401,721,427"/>
+<area shape="poly" title=" " alt="" coords="1477,273,1402,277,1304,287,1194,304,1086,331,1060,343,1034,356,978,369,900,382,735,405,734,400,899,377,977,364,1032,351,1058,338,1084,325,1193,299,1303,282,1401,272,1477,267"/>
+<area shape="rect" href="task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="333,328,494,353"/>
+<area shape="poly" title=" " alt="" coords="1477,273,1081,290,798,307,508,330,507,324,798,302,1081,285,1477,267"/>
+<area shape="rect" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="5,328,128,353"/>
+<area shape="poly" title=" " alt="" coords="1477,271,1270,274,942,282,548,299,343,312,142,329,142,324,343,307,548,294,942,276,1270,268,1477,266"/>
+<area shape="rect" href="synapse__assert_8h.html" title="Custom assertion macro for the Synapse Framework." alt="" coords="1519,328,1654,353"/>
+<area shape="poly" title=" " alt="" coords="1534,279,1569,316,1565,320,1530,282"/>
+<area shape="rect" href="logging_8h.html" title="Synapse ESP Framework&#39;s enhanced logging interface with color support." alt="" coords="1679,328,1761,353"/>
+<area shape="poly" title=" " alt="" coords="1554,278,1675,321,1674,326,1552,283"/>
+<area shape="rect" href="event__data__wrapper_8h.html" title="Event Bus&#45;ისთვის მონაცემთა შეფუთვის (Wrapper) და Reference Counting&#45;ის API." alt="" coords="1954,401,2121,427"/>
+<area shape="poly" title=" " alt="" coords="1566,273,1663,293,1774,326,1801,338,1826,351,1902,376,1974,395,1973,401,1901,381,1824,356,1798,343,1772,330,1661,299,1565,279"/>
+<area shape="rect" href="module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="2217,328,2356,353"/>
+<area shape="poly" title=" " alt="" coords="1566,269,1833,291,2199,325,2204,326,2203,331,2198,331,1833,296,1565,275"/>
+<area shape="rect" href="module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="1837,328,1971,353"/>
+<area shape="poly" title=" " alt="" coords="1566,274,1830,323,1829,328,1565,279"/>
+<area shape="rect" href="module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="2380,328,2519,353"/>
+<area shape="poly" title=" " alt="" coords="1566,268,1894,287,2126,303,2366,325,2366,331,2125,309,1894,292,1565,273"/>
+<area shape="rect" href="promise__manager__internal_8h.html" title="Internal Core API for creating and fulfilling promises." alt="" coords="813,328,1022,353"/>
+<area shape="poly" title=" " alt="" coords="1477,277,1028,329,1028,324,1477,271"/>
+<area shape="rect" href="task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="519,328,737,353"/>
+<area shape="poly" title=" " alt="" coords="1478,274,751,330,751,325,1477,269"/>
+<area shape="rect" title=" " alt="" coords="1529,475,1625,500"/>
+<area shape="poly" title=" " alt="" coords="2197,424,1639,482,1639,477,2196,419"/>
+<area shape="rect" title=" " alt="" coords="2845,475,2928,500"/>
+<area shape="poly" title=" " alt="" coords="2319,418,2540,439,2820,472,2832,474,2831,479,2820,477,2539,444,2318,423"/>
+<area shape="rect" title=" " alt="" coords="2737,475,2807,500"/>
+<area shape="poly" title=" " alt="" coords="2319,421,2723,477,2722,482,2318,426"/>
+<area shape="rect" title=" " alt="" coords="2499,475,2581,500"/>
+<area shape="poly" title=" " alt="" coords="2303,424,2487,470,2485,475,2302,429"/>
+<area shape="rect" title=" " alt="" coords="1854,475,1927,500"/>
+<area shape="poly" title=" " alt="" coords="2199,429,1941,479,1940,474,2198,424"/>
+<area shape="rect" title=" " alt="" coords="2163,475,2314,500"/>
+<area shape="poly" title=" " alt="" coords="2257,428,2248,462,2243,461,2252,426"/>
+<area shape="rect" title=" " alt="" coords="2338,475,2475,500"/>
+<area shape="poly" title=" " alt="" coords="2282,424,2371,466,2369,471,2280,429"/>
+<area shape="poly" title=" " alt="" coords="1098,354,906,383,792,403,788,414,793,425,806,434,829,442,900,455,995,466,1105,473,1334,481,1515,483,1515,489,1334,487,1105,479,994,471,899,461,828,447,804,438,789,428,782,414,789,399,906,377,1098,349"/>
+<area shape="poly" title=" " alt="" coords="1098,355,934,381,867,394,836,403,832,414,836,424,966,435,1262,452,1840,481,1840,486,1262,458,966,441,833,429,826,414,833,399,865,389,933,376,1097,349"/>
+<area shape="poly" title=" " alt="" coords="1186,351,1248,391,1245,396,1183,356"/>
+<area shape="rect" href="framework__config_8h.html" title="Framework&#45;ის გლობალური კონფიგურაციის მაკროები" alt="" coords="1037,401,1187,427"/>
+<area shape="poly" title=" " alt="" coords="1160,355,1131,392,1127,389,1156,352"/>
+<area shape="rect" title=" " alt="" coords="942,401,1013,427"/>
+<area shape="poly" title=" " alt="" coords="1137,356,1022,399,1020,394,1135,351"/>
+<area shape="rect" title=" " alt="" coords="847,401,918,427"/>
+<area shape="poly" title=" " alt="" coords="1122,356,932,403,931,398,1120,351"/>
+<area shape="poly" title=" " alt="" coords="1188,423,1200,424,1412,439,1591,448,1896,456,2201,459,2593,472,2723,480,2723,485,2593,477,2201,464,1896,461,1591,454,1412,445,1200,429,1188,428"/>
+<area shape="poly" title=" " alt="" coords="1380,353,1384,390,1391,409,1404,425,1429,436,1469,446,1588,460,1742,467,1916,470,2259,469,2395,469,2486,472,2486,478,2395,475,2259,475,1916,475,1742,473,1587,465,1468,451,1427,441,1401,429,1387,412,1379,391,1374,354"/>
+<area shape="poly" title=" " alt="" coords="1395,351,1451,391,1448,395,1392,356"/>
+<area shape="poly" title=" " alt="" coords="1363,356,1305,395,1302,391,1360,351"/>
+<area shape="poly" title=" " alt="" coords="546,423,558,424,849,447,1097,454,1316,451,1520,443,1725,435,1944,434,2193,445,2486,472,2485,477,2193,450,1944,439,1725,441,1520,448,1316,456,1097,459,849,452,557,429,545,428"/>
+<area shape="rect" title=" " alt="" coords="944,475,1019,500"/>
+<area shape="poly" title=" " alt="" coords="546,422,558,424,931,477,930,482,557,429,545,427"/>
+<area shape="poly" title=" " alt="" coords="2574,424,2833,473,2832,478,2573,429"/>
+<area shape="poly" title=" " alt="" coords="2520,426,2533,461,2528,463,2515,428"/>
+<area shape="poly" title=" " alt="" coords="2445,426,1941,483,1941,478,2444,421"/>
+<area shape="poly" title=" " alt="" coords="2470,429,2297,474,2296,469,2469,424"/>
+<area shape="poly" title=" " alt="" coords="2498,429,2437,469,2434,465,2495,424"/>
+<area shape="poly" title=" " alt="" coords="2889,427,2889,461,2884,461,2884,427"/>
+<area shape="poly" title=" " alt="" coords="2870,429,2804,470,2801,465,2867,424"/>
+<area shape="poly" title=" " alt="" coords="2832,429,2595,478,2593,472,2830,424"/>
+<area shape="poly" title=" " alt="" coords="2100,351,2215,394,2213,399,2099,356"/>
+<area shape="poly" title=" " alt="" coords="2083,352,2126,388,2155,408,2186,424,2229,440,2265,450,2331,458,2400,462,2486,472,2486,477,2399,467,2331,464,2264,455,2227,445,2184,429,2152,413,2123,393,2079,356"/>
+<area shape="poly" title=" " alt="" coords="2032,356,1988,375,1944,403,1920,432,1903,463,1899,460,1916,429,1941,399,1985,370,2030,351"/>
+<area shape="poly" title=" " alt="" coords="721,418,835,424,1085,432,1298,433,1660,427,1835,427,2023,432,2235,446,2486,472,2485,477,2235,451,2022,437,1835,432,1660,432,1298,438,1085,437,835,429,721,423"/>
+<area shape="poly" title=" " alt="" coords="494,328,518,325,796,304,1068,287,1463,268,1463,274,1068,292,796,309,519,331,494,333"/>
+<area shape="poly" title=" " alt="" coords="128,328,152,325,346,309,544,295,927,278,1250,269,1463,266,1464,272,1250,274,927,283,544,301,346,314,152,331,128,334"/>
+<area shape="poly" title=" " alt="" coords="106,351,249,389,340,408,432,424,615,446,769,458,906,465,1033,466,1298,465,1454,466,1637,472,1840,481,1840,486,1637,477,1453,472,1298,470,1033,472,906,470,769,464,614,451,432,429,339,414,247,394,104,356"/>
+<area shape="poly" title=" " alt="" coords="1589,354,1582,461,1576,461,1583,354"/>
+<area shape="rect" title=" " alt="" coords="1743,401,1827,427"/>
+<area shape="poly" title=" " alt="" coords="1619,351,1741,394,1739,399,1618,356"/>
+<area shape="rect" title=" " alt="" coords="1615,401,1719,427"/>
+<area shape="poly" title=" " alt="" coords="1601,351,1645,390,1642,394,1598,355"/>
+<area shape="poly" title=" " alt="" coords="1733,352,1767,389,1764,393,1729,355"/>
+<area shape="poly" title=" " alt="" coords="2121,421,2724,479,2723,484,2121,426"/>
+<area shape="poly" title=" " alt="" coords="2121,423,2311,447,2486,472,2485,477,2310,452,2121,428"/>
+<area shape="poly" title=" " alt="" coords="2071,424,2194,467,2192,473,2069,429"/>
+<area shape="poly" title=" " alt="" coords="2097,424,2334,469,2333,475,2096,429"/>
+<area shape="poly" title=" " alt="" coords="1954,424,1032,485,1032,480,1953,418"/>
+<area shape="poly" title=" " alt="" coords="2284,355,2270,390,2265,388,2279,353"/>
+<area shape="poly" title=" " alt="" coords="1961,351,2187,396,2186,401,1960,356"/>
+<area shape="poly" title=" " alt="" coords="1905,354,1900,402,1895,461,1890,461,1895,401,1900,353"/>
+<area shape="poly" title=" " alt="" coords="2419,356,2303,399,2301,394,2418,351"/>
+<area shape="poly" title=" " alt="" coords="2520,351,2562,368,2581,382,2597,400,2602,418,2597,436,2585,453,2570,468,2566,464,2581,450,2592,434,2597,418,2592,403,2578,386,2560,373,2518,355"/>
+<area shape="poly" title=" " alt="" coords="2435,356,2332,429,2270,470,2267,465,2329,424,2432,351"/>
+<area shape="poly" title=" " alt="" coords="2448,355,2417,462,2411,461,2443,353"/>
+<area shape="poly" title=" " alt="" coords="874,356,703,400,702,395,873,351"/>
+<area shape="poly" title=" " alt="" coords="737,328,768,325,1464,271,1464,276,768,331,738,333"/>
+<area shape="rect" href="ui__manager_8h.html" title="Public factory function for the UI Manager module." alt="" coords="1959,181,2070,207"/>
+<area shape="poly" title=" " alt="" coords="2643,133,2084,188,2083,183,2642,128"/>
+<area shape="rect" href="ui__interface_8h.html" title="Defines the public API and contracts for the Modular UI system." alt="" coords="2801,181,2911,207"/>
+<area shape="poly" title=" " alt="" coords="2749,131,2824,172,2821,177,2746,136"/>
+<area shape="rect" href="display__driver__interface_8h.html" title="Universal Service API contract for display drivers." alt="" coords="3147,401,3338,427"/>
+<area shape="poly" title=" " alt="" coords="2811,129,2894,147,2937,161,2979,179,3019,202,3057,229,3128,287,3186,344,3226,389,3222,392,3182,348,3124,291,3054,233,3016,206,2976,184,2936,166,2893,152,2810,134"/>
+<area shape="rect" title=" " alt="" coords="2677,181,2777,207"/>
+<area shape="poly" title=" " alt="" coords="2729,134,2729,168,2724,168,2724,134"/>
+<area shape="rect" href="system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="2655,328,2867,353"/>
+<area shape="poly" title=" " alt="" coords="2795,131,2873,151,2905,164,2926,180,2936,203,2935,225,2923,246,2904,266,2855,300,2804,325,2802,320,2853,295,2901,262,2919,243,2929,223,2931,203,2922,183,2903,169,2871,156,2793,136"/>
+<area shape="rect" href="timer__interface_8h.html" title="Public Service API contract for the System Timer Service module." alt="" coords="2989,401,3123,427"/>
+<area shape="poly" title=" " alt="" coords="2793,131,2882,151,2922,165,2948,179,2972,202,2992,229,3022,286,3043,342,3054,387,3049,388,3037,344,3017,288,2987,232,2968,206,2945,183,2919,170,2881,157,2791,136"/>
+<area shape="rect" href="time__sync__interface_8h.html" title="Public Service API contract for the Time Sync module." alt="" coords="2486,181,2653,207"/>
+<area shape="poly" title=" " alt="" coords="2702,136,2608,178,2606,173,2700,131"/>
+<area shape="rect" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="2257,181,2380,207"/>
+<area shape="poly" title=" " alt="" coords="2662,136,2394,182,2393,177,2661,131"/>
+<area shape="poly" title=" " alt="" coords="1959,206,1579,260,1579,255,1959,201"/>
+<area shape="poly" title=" " alt="" coords="2801,208,2790,209,2612,226,2430,240,2078,257,1779,266,1580,268,1580,263,1779,260,2078,252,2430,234,2611,221,2789,204,2800,203"/>
+<area shape="poly" title=" " alt="" coords="2878,204,3212,392,3209,397,2875,209"/>
+<area shape="poly" title=" " alt="" coords="3186,429,2942,478,2941,472,3185,424"/>
+<area shape="poly" title=" " alt="" coords="3158,429,2834,477,2821,479,2820,474,2833,472,3157,424"/>
+<area shape="poly" title=" " alt="" coords="3148,428,3136,429,2594,483,2594,478,3136,424,3147,423"/>
+<area shape="rect" title=" " alt="" coords="3205,475,3280,500"/>
+<area shape="poly" title=" " alt="" coords="3245,427,3245,461,3240,461,3240,427"/>
+<area shape="poly" title=" " alt="" coords="2681,356,2332,405,2331,400,2680,351"/>
+<area shape="poly" title=" " alt="" coords="2765,354,2773,461,2767,461,2760,354"/>
+<area shape="poly" title=" " alt="" coords="2756,355,2730,391,2691,429,2643,456,2594,474,2593,469,2641,451,2688,425,2726,387,2752,352"/>
+<area shape="poly" title=" " alt="" coords="3030,429,2928,472,2926,467,3028,424"/>
+<area shape="poly" title=" " alt="" coords="3011,429,2821,476,2820,471,3010,424"/>
+<area shape="poly" title=" " alt="" coords="2989,428,2976,429,2595,481,2594,476,2976,424,2988,422"/>
+<area shape="poly" title=" " alt="" coords="2579,206,2599,244,2620,300,2627,332,2630,364,2627,397,2617,428,2599,452,2577,470,2574,465,2596,448,2612,425,2622,396,2625,364,2622,333,2615,302,2594,246,2574,208"/>
+<area shape="rect" title=" " alt="" coords="2656,255,2720,280"/>
+<area shape="poly" title=" " alt="" coords="2590,204,2658,245,2655,250,2587,209"/>
+<area shape="poly" title=" " alt="" coords="2257,203,1579,264,1579,258,2257,198"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -275,8 +269,8 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implements the main event handling logic for the UI Manager. </p>
 <dl class="section author"><dt>Author</dt><dd>Synapse Framework Team </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>2.0.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2025-08-12 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>3.1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-09-12 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a469449dd73689152450606d4d611be8f" name="a469449dd73689152450606d4d611be8f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a469449dd73689152450606d4d611be8f">&#9670;&#160;</a></span>ui_events_handle()</h2>
@@ -311,17 +305,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The main event handler function for the UI Manager module. </p>
-<p>This function is registered as the module's <code>handle_event</code> callback and is called by the Event Bus for every subscribed event. It serves as the central processing unit for all incoming events.</p>
-<p>Its responsibilities include:</p><ul>
-<li>Handling the splash screen timer and transitioning to the home screen.</li>
-<li>Managing screen wake-up and resetting the auto-off timer upon user activity.</li>
-<li>Debouncing button presses to prevent multiple triggers.</li>
-<li>Dispatching button press events to the appropriate handler (e.g., <code>ui_menu_handle_navigation</code>).</li>
-<li>Triggering periodic requests for system status updates (e.g., WiFi).</li>
-<li>Processing status update responses and flagging the UI for a re-render.</li>
-<li>Handling the screen auto-off event.</li>
-<li>Ensuring <code>synapse_event_data_release</code> is called on all event data wrappers.</li>
-</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">self</td><td>A pointer to the <code>ui_manager</code> module instance. </td></tr>
@@ -335,34 +318,29 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ui__events_8c_a469449dd73689152450606d4d611be8f_cgraph.png" border="0" usemap="#aui__events_8c_a469449dd73689152450606d4d611be8f_cgraph" alt=""/></div>
 <map name="aui__events_8c_a469449dd73689152450606d4d611be8f_cgraph" id="aui__events_8c_a469449dd73689152450606d4d611be8f_cgraph">
-<area shape="rect" title="The main event handler function for the UI Manager module." alt="" coords="5,219,141,244"/>
-<area shape="rect" href="ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function." alt="" coords="213,112,371,137"/>
-<area shape="poly" title=" " alt="" coords="87,217,130,182,188,148,211,139,213,144,191,152,133,187,90,221"/>
-<area shape="rect" href="ui__manager_8c.html#af34942bb9de4ca5702cca0195deb934a" title="Resets the screen&#39;s auto&#45;off timer." alt="" coords="207,161,377,187"/>
-<area shape="poly" title=" " alt="" coords="119,216,189,197,225,187,226,193,190,202,120,221"/>
-<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="214,211,370,251"/>
-<area shape="poly" title=" " alt="" coords="142,229,200,229,200,234,142,234"/>
-<area shape="rect" href="ui__menu_8c.html#af9e0671c853f47ec58169dcd2c77e89a" title="Processes button presses when the UI is in a menu state." alt="" coords="189,276,395,301"/>
-<area shape="poly" title=" " alt="" coords="120,242,190,261,226,270,225,275,189,266,119,247"/>
-<area shape="rect" href="ui__menu_8c.html#af51f507525224bfd88368c2704ad9fdc" title="Populates the dynamic menu with the list of currently running modules." alt="" coords="199,325,385,351"/>
-<area shape="poly" title=" " alt="" coords="90,242,133,277,191,312,209,319,207,324,188,316,130,281,87,246"/>
-<area shape="rect" href="ui__screens_8c.html#a376f0da5f8fa958e09b7a5adfc084950" title="Renders the status header at the top of the screen." alt="" coords="471,5,587,31"/>
-<area shape="poly" title=" " alt="" coords="312,110,369,76,442,40,461,32,463,37,444,44,371,80,314,114"/>
-<area shape="rect" href="ui__screens_8c.html#aa073835a483ffe68580ffdec8bc36910" title="Renders the main home screen." alt="" coords="449,55,608,80"/>
-<area shape="poly" title=" " alt="" coords="345,109,462,81,463,86,346,115"/>
-<area shape="rect" href="ui__screens_8c.html#a3660eb426382f4100fc635af4cbbbeff" title="Renders the module control screen for a selected module." alt="" coords="443,105,615,145"/>
-<area shape="poly" title=" " alt="" coords="371,122,429,122,429,127,371,127"/>
-<area shape="rect" href="ui__screens_8c.html#a1d1f8173dcde1f8ca44070f3353a3457" title="Renders the initial splash screen." alt="" coords="447,169,610,195"/>
-<area shape="poly" title=" " alt="" coords="346,135,463,163,462,169,345,140"/>
-<area shape="rect" href="ui__menu_8c.html#aee91a4cf96bb6ccb531596a5c846115b" title="Renders the currently active menu screen." alt="" coords="465,219,592,244"/>
-<area shape="poly" title=" " alt="" coords="369,135,396,148,412,162,421,177,429,192,444,205,455,211,452,216,441,209,425,195,416,180,408,166,393,152,366,140"/>
-<area shape="rect" href="ui__screens_8c.html#a96f4ec2d25f38fd55d514150af179086" title="Renders a generic button in the footer area (bottom&#45;right)." alt="" coords="667,57,825,83"/>
-<area shape="poly" title=" " alt="" coords="608,66,653,66,653,72,608,71"/>
-<area shape="poly" title=" " alt="" coords="608,102,681,83,682,89,609,107"/>
-<area shape="rect" href="ui__screens_8c.html#a286a2994fdaba38f2a9f81af4fa515ae" title="Formats a module name for display." alt="" coords="663,111,829,136"/>
-<area shape="poly" title=" " alt="" coords="615,121,649,121,649,127,615,127"/>
-<area shape="rect" href="system__manager_8c.html#a430b1843223b31cd11b9b00e4a55f0f3" title="აბრუნებს მოდულის სტატუსს." alt="" coords="666,161,826,201"/>
-<area shape="poly" title=" " alt="" coords="608,142,655,155,654,160,606,147"/>
+<area shape="rect" title="The main event handler function for the UI Manager module." alt="" coords="5,157,141,182"/>
+<area shape="rect" href="ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function. Calls the appropriate screen/component renderer." alt="" coords="213,78,371,103"/>
+<area shape="poly" title=" " alt="" coords="97,154,139,133,188,112,214,104,215,109,190,117,141,138,99,159"/>
+<area shape="rect" href="ui__manager_8c.html#af34942bb9de4ca5702cca0195deb934a" title="Resets the screen&#39;s auto&#45;off timer upon user activity." alt="" coords="207,127,377,153"/>
+<area shape="poly" title=" " alt="" coords="141,157,192,151,193,156,142,163"/>
+<area shape="rect" href="event__data__wrapper_8c.html#acbfc3de4d3a066b2adf4d8033f7cb994" title="ამცირებს wrapper&#45;ის მფლობელების (references) რაოდენობას ერთით." alt="" coords="214,177,370,217"/>
+<area shape="poly" title=" " alt="" coords="142,175,201,183,200,188,141,181"/>
+<area shape="rect" href="ui__menu_8c.html#af9e0671c853f47ec58169dcd2c77e89a" title="Processes button presses when the UI is in a menu or component state." alt="" coords="189,242,395,267"/>
+<area shape="poly" title=" " alt="" coords="97,180,139,203,190,227,217,236,216,241,188,232,137,208,94,184"/>
+<area shape="rect" href="ui__screens_8c.html#a286a2994fdaba38f2a9f81af4fa515ae" title="Formats a snake_case module name into a Title Case string for display." alt="" coords="653,42,820,67"/>
+<area shape="poly" title=" " alt="" coords="311,75,367,42,404,26,442,13,487,5,524,3,606,13,649,22,690,35,689,40,648,28,605,18,523,8,488,10,443,18,406,30,370,47,313,80"/>
+<area shape="rect" href="ui__screens_8c.html#a17bd3571730556948eb5369bfc41b2be" title="Renders the status header at the top of the screen." alt="" coords="466,29,582,54"/>
+<area shape="poly" title=" " alt="" coords="352,75,452,54,453,59,353,80"/>
+<area shape="rect" href="ui__screens_8c.html#aa073835a483ffe68580ffdec8bc36910" title="Renders the main home screen." alt="" coords="445,177,603,202"/>
+<area shape="poly" title=" " alt="" coords="370,101,396,112,412,125,421,138,430,151,444,163,455,169,453,174,441,167,426,154,417,141,408,129,393,117,368,106"/>
+<area shape="rect" href="ui__screens_8c.html#a1d1f8173dcde1f8ca44070f3353a3457" title="Renders the initial splash screen." alt="" coords="443,127,605,153"/>
+<area shape="poly" title=" " alt="" coords="353,101,451,122,450,127,352,106"/>
+<area shape="rect" href="ui__menu_8c.html#aee91a4cf96bb6ccb531596a5c846115b" title="Renders the currently active menu screen by iterating through registered components." alt="" coords="461,78,587,103"/>
+<area shape="poly" title=" " alt="" coords="371,88,447,88,447,93,371,93"/>
+<area shape="rect" href="ui__screens_8c.html#a96f4ec2d25f38fd55d514150af179086" title="Renders a generic button in the footer area (bottom&#45;right)." alt="" coords="657,115,816,141"/>
+<area shape="poly" title=" " alt="" coords="568,174,678,142,679,147,570,179"/>
+<area shape="poly" title=" " alt="" coords="587,77,648,67,649,72,588,82"/>
+<area shape="poly" title=" " alt="" coords="588,99,651,110,650,115,587,104"/>
 </map>
 </div>
 

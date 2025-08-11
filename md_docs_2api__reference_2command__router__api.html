@@ -213,8 +213,8 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2command__rout
 <li>შედეგად, ბრძანებას არეგისტრირებს მხოლოდ პირველი ინსტანცია, რომელიც ამ კოდს გაუშვებს.</li>
 </ol>
 <p></b></b></b></b></b></b></b></p>
-<p><b><b><b><b><b><b><b>**<code><a class="el" href="relay__actuator_8c.html" title="Implementation of the Relay Actuator module.">relay_actuator.c</a></code>-ის მაგალითი:**</b></b></b></b></b></b></b></p>
-<p><b><b><b><b><b><b><b>```c // In <a class="el" href="relay__actuator_8c.html" title="Implementation of the Relay Actuator module.">relay_actuator.c</a></b></b></b></b></b></b></b></p>
+<p><b><b><b><b><b><b><b>**<code><a class="el" href="relay__actuator_8c.html" title="Implementation of the Relay Actuator module&#39;s lifecycle and core logic.">relay_actuator.c</a></code>-ის მაგალითი:**</b></b></b></b></b></b></b></p>
+<p><b><b><b><b><b><b><b>```c // In <a class="el" href="relay__actuator_8c.html" title="Implementation of the Relay Actuator module&#39;s lifecycle and core logic.">relay_actuator.c</a></b></b></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b>// 1. Handler-ის შექმნა (ის ზოგადია და არ არის დამოკიდებული კონკრეტულ ინსტანციაზე) static esp_err_t generic_relay_cmd_handler(int argc, char **argv, void &lt;em&gt;context) { const char instance_name = argv[1]; const char* action = argv[2];</b></b></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b> // იპოვე კონკრეტული რელეს სერვისი Service Locator-ით service_handle_t handle = synapse_service_get(instance_name); if (!handle) { printf("Error: Relay with name '%s' not found.\n", instance_name); return ESP_ERR_NOT_FOUND; }</b></b></b></b></b></b></b></p>
 <p><b><b><b><b><b><b><b> // ... გამოიძახე სერვისის API ... return ESP_OK; }</b></b></b></b></b></b></b></p>

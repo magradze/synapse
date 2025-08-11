@@ -1,27 +1,15 @@
 <map id="components/interfaces/include/time_sync_interface.h" name="components/interfaces/include/time_sync_interface.h">
-<area shape="rect" id="Node000001" title="Public Service API contract for the Time Sync module." alt="" coords="121,5,343,45"/>
-<area shape="rect" id="Node000002" href="$time__sync_8c.html" title="SNTP&#45;based implementation of the Time Sync module." alt="" coords="53,93,221,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,57,166,95,162,91,201,53"/>
-<area shape="rect" id="Node000003" href="$ui__manager_8h.html" title="Main header for the UI Manager module, defining core structures, enums, and constants." alt="" coords="245,93,411,148"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,53,303,91,299,95,259,57"/>
-<area shape="rect" id="Node000004" href="$ui__events_8h.html" title="Handles all incoming events for the UI Manager." alt="" coords="9,196,172,251"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="255,156,154,198,151,193,253,151"/>
-<area shape="rect" id="Node000006" href="$ui__manager_8c.html" title="Main orchestrator for the UI system." alt="" coords="192,299,355,353"/>
-<area shape="poly" id="edge14_Node000003_Node000006" title=" " alt="" coords="270,158,251,176,237,197,231,223,235,249,245,275,257,297,252,300,240,277,230,251,226,222,232,195,247,173,266,154"/>
-<area shape="rect" id="Node000007" href="$ui__menu_8h.html" title="Manages menu state, navigation, and rendering for the UI Manager." alt="" coords="247,196,409,251"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="331,162,331,196,325,196,325,162"/>
-<area shape="rect" id="Node000009" href="$ui__screens_8h.html" title="Declares the rendering functions for all UI screens and common components." alt="" coords="433,196,596,251"/>
-<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="390,152,467,193,464,198,387,157"/>
-<area shape="rect" id="Node000010" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="565,299,728,353"/>
-<area shape="poly" id="edge15_Node000003_Node000010" title=" " alt="" coords="424,122,472,129,521,142,569,164,610,194,628,218,639,246,649,298,643,299,634,247,623,221,606,198,566,168,519,147,471,134,424,127"/>
-<area shape="rect" id="Node000005" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="5,299,168,353"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="92,265,90,299,85,298,86,264"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="151,255,227,296,224,301,149,260"/>
-<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="254,258,151,301,149,296,252,253"/>
-<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="309,264,290,300,285,297,305,262"/>
-<area shape="rect" id="Node000008" href="$ui__menu_8c.html" title="Implements menu logic for the UI Manager." alt="" coords="379,299,541,353"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="375,257,427,296,424,301,372,261"/>
-<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="440,258,337,301,335,296,438,253"/>
-<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="496,264,477,300,472,297,491,262"/>
-<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="561,257,614,296,610,301,558,261"/>
+<area shape="rect" id="Node000001" title="Public Service API contract for the Time Sync module." alt="" coords="153,5,375,45"/>
+<area shape="rect" id="Node000002" href="$time__sync_8c.html" title="SNTP&#45;based implementation of the Time Sync module." alt="" coords="77,93,245,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,56,192,95,188,91,232,52"/>
+<area shape="rect" id="Node000003" href="$ui__manager__internal_8h.html" title="Internal shared definitions for the UI Manager module." alt="" coords="269,93,464,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,52,340,91,336,95,293,56"/>
+<area shape="rect" id="Node000004" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="5,196,168,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="282,155,161,198,159,193,280,150"/>
+<area shape="rect" id="Node000005" href="$ui__manager_8c.html" title="Main orchestrator for the Modular UI system." alt="" coords="192,196,355,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="335,160,300,198,296,194,331,157"/>
+<area shape="rect" id="Node000006" href="$ui__menu_8c.html" title="Implements the dynamic main menu logic for the UI Manager." alt="" coords="379,196,541,251"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="403,157,438,194,434,198,399,160"/>
+<area shape="rect" id="Node000007" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="565,196,728,251"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="453,150,575,193,573,198,451,155"/>
 </map>

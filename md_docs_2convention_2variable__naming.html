@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2variable__naming.
   <div class="headertitle"><div class="title">ცვლადების დასახელების წესები</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1392"></a> </p>
-<h1><a class="anchor" id="autotoc_md1393"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1416"></a> </p>
+<h1><a class="anchor" id="autotoc_md1417"></a>
 ძირითადი პრინციპები</h1>
-<h2><a class="anchor" id="autotoc_md1394"></a>
+<h2><a class="anchor" id="autotoc_md1418"></a>
 1. დესკრიპტიული სახელები</h2>
 <ul>
 <li>ცვლადის სახელი უნდა ასახავდეს მის <b>ნამდვილ დანიშნულებას</b></li>
 <li>კონტექსტი უნდა იყოს ნათელი სახელიდან</li>
 <li>თავიდან ავირიდოთ ზოგადი პრეფიქსები</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1395"></a>
+<h2><a class="anchor" id="autotoc_md1419"></a>
 2. აკრძალული პრეფიქსები</h2>
 <p>❌ <b>არ გამოვიყენოთ:</b></p>
 <ul>
@@ -113,9 +113,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2variable__naming.
 <li><code>p_</code> (pointer)</li>
 <li><code>p</code> (როგორც private data pointer - არასაკმარისად დესკრიპტიული)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1396"></a>
+<h2><a class="anchor" id="autotoc_md1420"></a>
 3. სწორი მიდგომა</h2>
-<h3><a class="anchor" id="autotoc_md1397"></a>
+<h3><a class="anchor" id="autotoc_md1421"></a>
 Service Locator</h3>
 <div class="fragment"><div class="line"><span class="comment">// ❌ არასწორი</span></div>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structservice__entry__t.html">service_entry_t</a> *service_registry_head;</div>
@@ -125,7 +125,7 @@ Service Locator</h3>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structservice__entry__t.html">service_entry_t</a> *service_locator_registry_head;</div>
 <div class="line"><span class="keyword">static</span> SemaphoreHandle_t service_locator_mutex;</div>
 <div class="ttc" id="astructservice__entry__t_html"><div class="ttname"><a href="structservice__entry__t.html">service_entry_t</a></div><div class="ttdef"><b>Definition</b> service_locator.c:39</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1398"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1422"></a>
 Event Bus</h3>
 <div class="fragment"><div class="line"><span class="comment">// ❌ არასწორი</span></div>
 <div class="line"><span class="keyword">static</span> QueueHandle_t g_event_queue;</div>
@@ -134,7 +134,7 @@ Event Bus</h3>
 <div class="line"><span class="comment">// ✅ სწორი</span></div>
 <div class="line"><span class="keyword">static</span> QueueHandle_t event_bus_message_queue;</div>
 <div class="line"><span class="keyword">static</span> SemaphoreHandle_t event_bus_mutex;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1399"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1423"></a>
 Module Registry</h3>
 <div class="fragment"><div class="line"><span class="comment">// ❌ არასწორი</span></div>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *registered_modules[MAX_MODULES];</div>
@@ -144,7 +144,7 @@ Module Registry</h3>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *module_registry_list[MAX_MODULES];</div>
 <div class="line"><span class="keyword">static</span> uint8_t registered_modules_count;</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1400"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1424"></a>
 Display Modules</h3>
 <div class="fragment"><div class="line"><span class="comment">// ❌ არასწორი</span></div>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *g_ssd1306_module;</div>
@@ -154,64 +154,64 @@ Display Modules</h3>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structmodule__t.html">module_t</a> *global_ssd1306_instance;</div>
 <div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structssd1306__api__t.html">ssd1306_api_t</a> ssd1306_service_api;</div>
 <div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:23</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1401"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1425"></a>
 4. კონვენციები</h2>
-<h3><a class="anchor" id="autotoc_md1402"></a>
+<h3><a class="anchor" id="autotoc_md1426"></a>
 Global ცვლადები</h3>
 <ul>
 <li><code>global_</code> პრეფიქსი მხოლოდ მაშინ როცა ნამდვილად საჭიროა</li>
 <li>უმჯობესია კონკრეტული კონტექსტი: <code>ssd1306_service_api</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1403"></a>
+<h3><a class="anchor" id="autotoc_md1427"></a>
 Static ცვლადები</h3>
 <ul>
 <li>მოდულის სახელი + ფუნქცია: <code>event_bus_message_queue</code></li>
 <li>კომპონენტის სახელი + როლი: <code>service_locator_mutex</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1404"></a>
+<h3><a class="anchor" id="autotoc_md1428"></a>
 Mutex/Semaphore ცვლადები</h3>
 <ul>
 <li><code>_mutex</code> სუფიქსი</li>
 <li>კონტექსტი წინ: <code>config_storage_mutex</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1405"></a>
+<h3><a class="anchor" id="autotoc_md1429"></a>
 Queue ცვლადები</h3>
 <ul>
 <li><code>_queue</code> სუფიქსი</li>
 <li>მიზანი წინ: <code>event_bus_message_queue</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1406"></a>
+<h3><a class="anchor" id="autotoc_md1430"></a>
 API Structure ცვლადები</h3>
 <ul>
 <li><code>_service_api</code> სუფიქსი</li>
 <li>მოდულის სახელი წინ: <code>lcd1602_service_api</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1407"></a>
+<h1><a class="anchor" id="autotoc_md1431"></a>
 მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1408"></a>
+<h2><a class="anchor" id="autotoc_md1432"></a>
 Config Manager</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> SemaphoreHandle_t config_storage_mutex;</div>
 <div class="line"><span class="keyword">static</span> config_data_t stored_config_data;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1409"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1433"></a>
 I2C Bus Module</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="structi2c__bus__handle__t.html">i2c_bus_handle_t</a> i2c_bus_service_handle;</div>
 <div class="line"><span class="keyword">static</span> SemaphoreHandle_t i2c_bus_access_mutex;</div>
 <div class="ttc" id="astructi2c__bus__handle__t_html"><div class="ttname"><a href="structi2c__bus__handle__t.html">i2c_bus_handle_t</a></div><div class="ttdoc">The handle returned by the Service Locator for an I2C bus service.</div><div class="ttdef"><b>Definition</b> i2c_bus_interface.h:82</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1410"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1434"></a>
 MQTT Module</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> mqtt_private_data_t mqtt_connection_data;</div>
 <div class="line"><span class="keyword">static</span> TaskHandle_t mqtt_processing_task;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1411"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1435"></a>
 Private Data Pointer Naming</h1>
-<h2><a class="anchor" id="autotoc_md1412"></a>
+<h2><a class="anchor" id="autotoc_md1436"></a>
 ❌ არასწორი</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *p = (<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *)module-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line">    <span class="comment">// რა არის p? გამოცნობა საჭიროა! 🤔</span></div>
 <div class="line">}</div>
-<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:163</div></div>
+<div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:176</div></div>
 <div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1413"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1437"></a>
 ✅ სწორი</h2>
 <div class="fragment"><div class="line"><span class="keyword">static</span> esp_err_t ssd1306_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module) {</div>
 <div class="line">    <a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *private_data = (<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a> *)module-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
@@ -222,7 +222,7 @@ Private Data Pointer Naming</h1>
 <div class="line">    </div>
 <div class="line">    <span class="comment">// ნათელია რა არის! ✨</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1414"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1438"></a>
 შეჯამება</h1>
 <p><b>მთავარი წესი:</b> ცვლადის სახელმა უნდა უპასუხოს კითხვას - "რა არის ეს და რისთვის გამოიყენება?"</p>
 <p><b>არ გვიყვარს თვალების დათხრა და გამოცნობა! გვიყვარს სიცხადე! 😊</b></p>

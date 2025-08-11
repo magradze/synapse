@@ -1,12 +1,12 @@
 <map id="render_footer_button" name="render_footer_button">
-<area shape="rect" id="Node000001" title="Renders a generic button in the footer area (bottom&#45;right)." alt="" coords="615,35,773,60"/>
-<area shape="rect" id="Node000002" href="$ui__screens_8c.html#aa073835a483ffe68580ffdec8bc36910" title="Renders the main home screen." alt="" coords="401,5,560,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="600,37,560,32,561,26,601,32"/>
-<area shape="rect" id="Node000005" href="$ui__screens_8c.html#a3660eb426382f4100fc635af4cbbbeff" title="Renders the module control screen for a selected module." alt="" coords="395,55,567,95"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="601,62,567,67,567,61,600,57"/>
-<area shape="rect" id="Node000003" href="$ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function." alt="" coords="189,35,347,60"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="388,33,347,39,347,34,387,28"/>
-<area shape="rect" id="Node000004" href="$ui__events_8c.html#a469449dd73689152450606d4d611be8f" title="The main event handler function for the UI Manager module." alt="" coords="5,35,141,60"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="176,50,141,50,141,45,176,45"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="381,65,347,60,347,55,382,60"/>
+<area shape="rect" id="Node000001" title="Renders a generic button in the footer area (bottom&#45;right)." alt="" coords="601,31,760,56"/>
+<area shape="rect" id="Node000002" href="$ui__screens_8c.html#aa073835a483ffe68580ffdec8bc36910" title="Renders the main home screen." alt="" coords="395,5,553,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="587,35,553,30,554,25,588,29"/>
+<area shape="rect" id="Node000005" href="$ui__menu_8c.html#aee91a4cf96bb6ccb531596a5c846115b" title="Renders the currently active menu screen by iterating through registered components." alt="" coords="411,55,537,80"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="588,57,538,63,538,57,587,51"/>
+<area shape="rect" id="Node000003" href="$ui__manager_8c.html#a093af2fea1ff15543b2b9d7609a87e71" title="The main rendering orchestrator function. Calls the appropriate screen/component renderer." alt="" coords="189,31,347,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="382,32,347,36,346,31,381,27"/>
+<area shape="rect" id="Node000004" href="$ui__events_8c.html#a469449dd73689152450606d4d611be8f" title="The main event handler function for the UI Manager module." alt="" coords="5,31,141,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="176,46,141,46,141,41,176,41"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="397,61,347,55,347,50,397,56"/>
 </map>

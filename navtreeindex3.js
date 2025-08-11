@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"md_docs_2api__reference_2drivers__api.html#autotoc_md443":[40,1,4],
 "md_docs_2api__reference_2drivers__api.html#autotoc_md445":[40,2],
 "md_docs_2api__reference_2drivers__api.html#autotoc_md446":[40,2,0],
 "md_docs_2api__reference_2drivers__api.html#autotoc_md447":[40,2,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md792":[62,0],
 "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md793":[62,1],
 "md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md794":[62,2],
-"md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md795":[62,3],
-"md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md796":[62,4]
+"md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html#autotoc_md795":[62,3]
 };

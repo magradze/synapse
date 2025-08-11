@@ -4,6 +4,7 @@ var service__types_8h =
     [ "synapse_service_type_t", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1", [
       [ "SYNAPSE_SERVICE_TYPE_UNKNOWN", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1a60a2982429e06ad9d5ab7c0bf05c777c", null ],
       [ "SYNAPSE_SERVICE_TYPE_DISPLAY_API", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1ac9e927e213367d115f18dac804d24181", null ],
+      [ "SYNAPSE_SERVICE_TYPE_UI_MANAGER_API", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1a0a0d10044d563d79b00709763421f376", null ],
       [ "SYNAPSE_SERVICE_TYPE_I2C_BUS_API", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1aa64b8f8163cfd1c7a5c6cd5cddca63e1", null ],
       [ "SYNAPSE_SERVICE_TYPE_SPI_BUS_API", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1a4789533c33838567da2922ecc2ec5a38", null ],
       [ "SYNAPSE_SERVICE_TYPE_UART_API", "service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1adc6fd47f19e38a3a514070ec8937d65f", null ],

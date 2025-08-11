@@ -18,6 +18,7 @@ if(NOT DEFINED CONFIG_MODULE_UI_MANAGER_ENABLED OR CONFIG_MODULE_UI_MANAGER_ENAB
     
     idf_component_register(
         SRCS "src/ui_manager.c"
+            "src/ui_manager_internal.h"
             "src/ui_assets.c"
             "src/ui_menu.c"
             "src/ui_events.c"

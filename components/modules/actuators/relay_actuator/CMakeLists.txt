@@ -16,6 +16,9 @@ if(DEFINED CONFIG_MODULE_RELAY_ACTUATOR_ENABLED)
         message(STATUS "Relay Actuator Module: ENABLED - კომპილირდება სრული ფუნქციონალით")
         idf_component_register(
             SRCS "src/relay_actuator.c"
+            "src/relay_actuator_ui.c"
+            "src/relay_actuator_cmd.c"
+            "src/relay_actuator_events.c"
             INCLUDE_DIRS "include"
             REQUIRES 
                 core 

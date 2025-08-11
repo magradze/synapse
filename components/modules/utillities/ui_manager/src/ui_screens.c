@@ -7,8 +7,7 @@
  */
 
 #include "synapse.h"
-#include "ui_manager.h"
-#include "ui_screens.h"
+#include "ui_manager_internal.h"
 #include "roboto_bold_24.h"
 #include "roboto_bold_24_digits.h"
 #include "wifi_icons.h"
@@ -33,13 +32,23 @@ void format_module_name(const char *original, char *formatted, size_t size);
  *          function determines which icon to display based on the cached WiFi
  *          status and calls the `draw_bitmap` helper to render it.
  * @param[in] private_data A pointer to the main UI Manager's private data structure.
+ * @param[in] title The title text to display on the left side of the header.
  */
-void render_header(ui_manager_private_data_t *private_data)
+void render_header(ui_manager_private_data_t *private_data, const char *title)
 {
-    const uint8_t *icon = NULL;
+    const display_driver_api_t *display = private_data->display->api;
+    void *context = private_data->display->context;
 
+    // Draw title on the left
+    if (title)
+    {
+        display->draw_formatted_text(context, 2, 1, 1, title);
+    }
+
+    // Draw WiFi icon on the right
+    const uint8_t *icon = NULL;
     bool connected = private_data->wifi_connected;
-    int rssi = private_data->wifi_rssi;
+    int32_t rssi = private_data->wifi_rssi;
 
     if (connected)
     {
@@ -59,11 +68,8 @@ void render_header(ui_manager_private_data_t *private_data)
 
     if (icon)
     {
-        draw_bitmap(private_data, 2, 1, icon, WIFI_ICON_WIDTH, WIFI_ICON_HEIGHT, 1);
+        draw_bitmap(private_data, private_data->display_width - WIFI_ICON_WIDTH - 2, 1, icon, WIFI_ICON_WIDTH, WIFI_ICON_HEIGHT, 1);
     }
-
-    // Placeholder for battery icon
-    // draw_bitmap(private_data, private_data->display_width - 8 - 2, 1, icon_battery_full, 8, 8, 1);
 }
 
 /**
@@ -304,76 +310,21 @@ static void draw_large_digits_string(ui_manager_private_data_t *private_data, in
 }
 
 /**
- * @brief Renders the control screen for a selected module.
- * @details This function displays the module's name, status, and provides an action button
- *          if the module is a relay. It uses the display driver to render text and buttons.
- * @param[in] private_data A pointer to the main UI Manager's private data structure.
- * @note If no module is selected, it displays an error message.
- */
-void render_module_control_screen(ui_manager_private_data_t *private_data)
-{
-    const display_driver_api_t *display = private_data->display->api;
-    void *context = private_data->display->context;
-    const module_t *module = private_data->selected_control_module;
-
-    int start_y = 16;
-    int line_height = 12;
-
-    if (!module)
-    {
-        display->draw_formatted_text(context, 2, start_y, 1, "Error: No module selected.");
-        render_footer_button(private_data, "BACK", true);
-        return;
-    }
-
-    char formatted_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
-    format_module_name(module->name, formatted_name, sizeof(formatted_name));
-    display->draw_formatted_text(context, 2, start_y, 1, "Module: %s", formatted_name);
-
-    module_status_t status;
-    synapse_module_get_status(module->name, &status);
-    const char *status_str = (status == MODULE_STATUS_RUNNING) ? "Running" : "Disabled";
-    display->draw_formatted_text(context, 2, start_y + line_height, 1, "Status: %s", status_str);
-
-    bool is_action_selected = (private_data->selected_item_index == 0);
-    bool is_back_selected = (private_data->selected_item_index == 1);
-
-    synapse_service_type_t type;
-    if (synapse_service_get_type(module->name, &type) == ESP_OK && type == SYNAPSE_SERVICE_TYPE_RELAY_API)
-    {
-        relay_api_t *relay_api = synapse_service_get(module->name);
-        if (relay_api)
-        {
-            bool state = relay_api->get_state((void *)module);
-            const char *action_text = state ? "Turn Off" : "Turn On";
-
-            if (is_action_selected)
-            {
-                display->draw_formatted_text(context, 2, start_y + (line_height * 2), 1, "> %s", action_text);
-            }
-            else
-            {
-                display->draw_formatted_text(context, 10, start_y + (line_height * 2), 1, "%s", action_text);
-            }
-        }
-    }
-    else
-    {
-        display->draw_formatted_text(context, 2, start_y + (line_height * 2), 1, "No actions available.");
-    }
-
-    render_footer_button(private_data, "BACK", is_back_selected);
-}
-
-/**
- * @brief Formats a module name for display.
- * @param[in] original The original module name string.
- * @param[out] formatted The buffer to store the formatted name.
+ * @brief Formats a snake_case module name into a Title Case string for display.
+ * @param[in] original The original module name (e.g., "relay_actuator").
+ * @param[out] formatted The buffer to store the formatted name (e.g., "Relay Actuator").
  * @param[in] size The size of the formatted buffer.
  */
 void format_module_name(const char *original, char *formatted, size_t size)
 {
-    int i = 0;
+    if (!original || !formatted || size == 0)
+    {
+        if (formatted && size > 0)
+            formatted[0] = '\0';
+        return;
+    }
+
+    size_t i = 0;
     bool capitalize = true;
     while (*original && i < size - 1)
     {

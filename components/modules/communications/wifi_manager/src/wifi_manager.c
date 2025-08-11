@@ -83,6 +83,9 @@ module_t *wifi_manager_create(const cJSON *config)
     module->base.handle_event = wifi_manager_handle_event;
     module->base.debug_print = wifi_manager_debug_print;
 
+    module->base.ui_init = wifi_ui_init;
+    module->base.ui_deinit = wifi_ui_deinit;
+
     ESP_LOGI(TAG, "WiFi Manager module '%s' created and service registered.", module->name);
     return module;
 }

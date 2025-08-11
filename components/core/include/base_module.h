@@ -158,6 +158,19 @@ struct module_t
 
         /** @brief A function for debugging and printing module information. */
         void (*debug_print)(struct module_t *self);
+
+        /**
+         * @brief (Optional) Called after the module's start() function succeeds.
+         *        Used to register UI components with the UI Manager.
+         */
+        void (*ui_init)(struct module_t *self);
+
+        /**
+         * @brief (Optional) Called before the module's deinit() function.
+         *        Used to unregister UI components from the UI Manager.
+         */
+        void (*ui_deinit)(struct module_t *self);
+
     } base;
 
     void *private_data;                        /**< @brief A pointer to the module's internal, private data structure. */

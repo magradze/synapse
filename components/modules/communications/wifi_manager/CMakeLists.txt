@@ -19,6 +19,7 @@ if(DEFINED CONFIG_MODULE_WIFI_MANAGER_ENABLED)
                 "src/wifi_manager_api.c"
                 "src/wifi_manager_cmd.c"
                 "src/wifi_manager_events.c"
+                "src/wifi_manager_ui.c"
             INCLUDE_DIRS "include"
             REQUIRES 
                 core 

@@ -97,6 +97,8 @@ class TemplateGenerator:
         self.module_title = params['module_title']
         self.author = params['author']
         self.description = params['description']
+        self.deps = params.get('deps', [])
+        self.creation_date = params.get('creation_date', 'YYYY-MM-DD')
 
     def generate(self) -> Dict[str, str]:
         """Generates content for all required module files."""
@@ -129,25 +131,35 @@ class TemplateGenerator:
         return json.dumps(config_data, indent=4, ensure_ascii=False)
 
     def _generate_kconfig(self) -> str:
-        return f"""config CONFIG_MODULE_{self.module_upper}_ENABLED
-    bool "Enable {self.module_title} Module"
-    default y
-    help
-        Enables the {self.module_name} module, which provides functionality for:
-        {self.description}.
+        return f"""menu "{self.module_title}"
 
-if CONFIG_MODULE_{self.module_upper}_ENABLED
+    config MODULE_{self.module_upper}_ENABLED
+        bool "Enable {self.module_title} Module"
+        default y
+        help
+            Enables the {self.module_name} module for {self.description}.
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
 
-# TODO: Add any module-specific Kconfig options here.
-# Example:
-# config {self.module_upper}_TASK_STACK_SIZE
-#     int "Task Stack Size"
-#     default 3072
-#     help
-#         Stack size for the {self.module_name} background task.
+    config {self.module_upper}_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_{self.module_name}"
+        depends on MODULE_{self.module_upper}_ENABLED
+        help
+            Default instance name for the {self.module_name} module.
 
-endif # CONFIG_MODULE_{self.module_upper}_ENABLED
+    config {self.module_upper}_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_{self.module_upper}_ENABLED
+        help
+            Maximum length for the {self.module_name} module instance name string.
+
+endmenu
 """
+
 
 class ArchetypeGenerator(TemplateGenerator):
     """Generates code based on selected archetypes and the modular source structure."""
@@ -158,6 +170,7 @@ class ArchetypeGenerator(TemplateGenerator):
         self.is_event_producer = "event" in archetype
         self.is_service_provider = "service" in archetype
         self.is_command_handler = "command" in archetype
+        self.with_ui = self.params.get('with_ui', False)
 
     def generate(self) -> Dict[str, str]:
         """Generates a dictionary of filenames and their content based on the archetype."""
@@ -178,28 +191,76 @@ class ArchetypeGenerator(TemplateGenerator):
             files[f"src/{self.module_name}_cmd.c"] = self._generate_cmd_source()
         if self.is_event_producer or self.is_command_handler:
             files[f"src/{self.module_name}_events.c"] = self._generate_events_source()
+        if self.with_ui:
+            files[f"src/{self.module_name}_ui.c"] = self._generate_ui_source()
             
         files["CMakeLists.txt"] = self._generate_cmake(list(files.keys()))
         return files
 
-    def _generate_cmake(self, generated_files: List[str]) -> str:
-        src_files = sorted([f for f in generated_files if f.startswith("src/") and f.endswith(".c")])
-        src_list = "\n".join([f'        "{f}"' for f in src_files])
-        
-        deps = self.params['deps']
-        requires_list = "\n".join([f"        {dep}" for dep in deps])
-        
+    def _generate_cmake(self, all_files: List[str]) -> str:
+        # --- NEW: Dynamically find source files from the generated file list ---
+        src_files = [f'"{path}"' for path in all_files if path.startswith("src/") and path.endswith(".c")]
+        src_list = "\n                ".join(src_files)
+        # --------------------------------------------------------------------
+
+        # Prepare dependencies list
+        requires_list = "core\n                interfaces"
+        if self.deps:
+            # Assuming deps are public interfaces for simplicity
+            deps_formatted = "\n                ".join(self.deps)
+            requires_list += f"\n                {deps_formatted}"
+
         return f"""# {self.module_title} Module CMake Configuration
-idf_component_register(
-    SRCS
-{src_list}
-    INCLUDE_DIRS "include"
-    REQUIRES
-        synapse
-        {requires_list}
-    PRIV_REQUIRES
-        json
-)
+# Component for {self.description}.
+# Author: Synapse Framework Team
+# Version: 1.0.0
+
+# SMART CONDITIONAL COMPILATION SYSTEM:
+# 1. If the CONFIG variable does not exist yet (configure stage), register a placeholder.
+# 2. If the CONFIG variable exists and is enabled, register with full functionality.
+# 3. If the CONFIG variable exists and is disabled, register an empty placeholder.
+
+if(DEFINED CONFIG_MODULE_{self.module_upper}_ENABLED)
+    # CONFIG variable exists - check its value
+    if(CONFIG_MODULE_{self.module_upper}_ENABLED)
+        # Module is ENABLED - full registration
+        message(STATUS "{self.module_title} Module: ENABLED - Compiling with full functionality")
+        idf_component_register(
+            SRCS
+                {src_list}
+            INCLUDE_DIRS "include" "src"
+            REQUIRES 
+                {requires_list}
+            PRIV_REQUIRES
+                json
+        )
+    else()
+        # Module is DISABLED - register an empty placeholder
+        message(STATUS "{self.module_title} Module: DISABLED - Compiling an empty placeholder")
+        
+        # Create an empty source file to prevent CMake from failing
+        set(EMPTY_SOURCE_CONTENT "// {self.module_name} module disabled by Kconfig\\n// This is an empty placeholder to prevent CMake errors.\\n")
+        file(WRITE "${{CMAKE_CURRENT_BINARY_DIR}}/empty_{self.module_name}.c" "${{EMPTY_SOURCE_CONTENT}}")
+        
+        idf_component_register(
+            SRCS "${{CMAKE_CURRENT_BINARY_DIR}}/empty_{self.module_name}.c"
+            INCLUDE_DIRS "include"  # Header is still needed for the factory
+            REQUIRES core interfaces
+        )
+    endif()
+else()
+    # CONFIG variable does not exist yet (configure stage) - temporary registration
+    message(STATUS "{self.module_title} Module: CONFIGURE STAGE - Registering temporarily")
+    idf_component_register(
+        SRCS "src/{self.module_name}.c" # Register at least one file to satisfy CMake
+        INCLUDE_DIRS "include" "src"
+        REQUIRES 
+            core 
+            interfaces
+        PRIV_REQUIRES
+            json
+    )
+endif()
 """
 
     def _generate_readme(self) -> str:
@@ -256,10 +317,13 @@ module_t* {self.module_name}_create(const cJSON *config);
 """
 
     def _generate_internal_header(self) -> str:
+        # Start with the basic header content
         internal_header = f"""/**
  * @file {self.module_name}_internal.h
  * @brief Internal declarations for the {self.module_title}.
  * @author {self.author}
+ * @version 1.0.0
+ * @date {self.creation_date}
  */
 #ifndef {self.module_upper}_INTERNAL_H
 #define {self.module_upper}_INTERNAL_H
@@ -267,29 +331,47 @@ module_t* {self.module_name}_create(const cJSON *config);
 #include "{self.module_name}.h"
 #include "synapse.h"
 """
+        # Conditionally include the service interface header
         if self.is_service_provider:
             internal_header += f'#include "{self.module_name}_interface.h" // IMPORTANT: Create this file in components/interfaces/include\n'
         
+        # Conditionally include the UI interface header
+        if self.with_ui:
+            internal_header += '#include "ui_interface.h"\n'
+
+        # Start the private data struct definition
         internal_header += f"""
 // --- Private Data Structure ---
 typedef struct {{
     char instance_name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH];
 """
+        # Add fields based on archetype and UI flag
         if self.is_event_producer:
-            internal_header += "    TaskHandle_t task_handle;\n"
+            internal_header += "    TaskHandle_t task_handle; // Handle for the main processing task\n"
         if self.is_service_provider:
-            internal_header += f"    {self.module_name}_api_t service_api;\n"
+            internal_header += f"    {self.module_name}_api_t service_api; // Instance of the service API table\n"
+        if self.with_ui:
+            internal_header += "    ui_manager_api_t* ui_api; // Cached handle to the UI Manager service\n"
+        
         internal_header += f"""    // TODO: Add other private data fields here.
 }} {self.module_name}_private_data_t;
 
 // --- Forward Declarations for functions shared across .c files ---
 """
+        # Add forward declarations based on archetype and UI flag
         if self.is_event_producer:
             internal_header += f"void {self.module_name}_task(void *pvParameters);\n"
         if self.is_command_handler:
             internal_header += "void register_cli_commands(module_t *self);\n"
         if self.is_event_producer or self.is_command_handler:
             internal_header += f"void {self.module_name}_handle_event(module_t *self, const char *event_name, void *event_data);\n"
+        
+        if self.with_ui:
+            internal_header += f"""
+// --- UI Lifecycle Hooks ---
+void {self.module_name}_ui_init(module_t* self);
+void {self.module_name}_ui_deinit(module_t* self);
+"""
 
         internal_header += f"\n#endif // {self.module_upper}_INTERNAL_H\n"
         return internal_header
@@ -299,14 +381,19 @@ typedef struct {{
         if self.is_event_producer or self.is_command_handler:
             handle_event_assignment = f"    module->base.handle_event = {self.module_name}_handle_event;"
 
+        ui_hooks_assignment = ""
+        if self.with_ui:
+            ui_hooks_assignment = f"""    module->base.ui_init = {self.module_name}_ui_init;
+    module->base.ui_deinit = {self.module_name}_ui_deinit;"""
+
         start_task_logic = ""
         if self.is_event_producer:
             start_task_logic = f"""
+    // Example of starting a dedicated task.
+    // For simple periodic jobs, consider using the Task Pool Manager service instead.
     BaseType_t ret = xTaskCreate({self.module_name}_task, self->name, 4096, self, 5, &private_data->task_handle);
-    if (ret != pdPASS) {{
-        ESP_LOGE(TAG, "Failed to create task for {self.module_name}.");
-        return ESP_FAIL;
-    }}"""
+    SYNAPSE_GUARD(ret == pdPASS, TAG, ESP_FAIL, "Failed to create task for {self.module_name}.");
+"""
 
         deinit_task_logic = ""
         if self.is_event_producer:
@@ -321,7 +408,8 @@ typedef struct {{
 void {self.module_name}_task(void *pvParameters)
 {{
     module_t *self = (module_t *)pvParameters;
-    ESP_LOGI(TAG, "Task for %s started.", self->name);
+    // {self.module_name}_private_data_t *private_data = ({self.module_name}_private_data_t *)self->private_data;
+    ESP_LOGI(TAG, "Task for '%s' started.", self->name);
 
     while (1) {{
         // TODO: Implement your main task logic here (e.g., sensor reading).
@@ -334,29 +422,44 @@ void {self.module_name}_task(void *pvParameters)
         service_registration_logic = ""
         if self.is_service_provider:
             service_registration_logic = f"""
+    // TODO: Initialize your service API function pointers here.
+    // private_data->service_api.my_function = my_api_function_impl;
+
     // Register the service in the create phase
     esp_err_t ret = synapse_service_register_with_status(
         module->name,
-        SYNAPSE_SERVICE_TYPE_CUSTOM_API, // TODO: Replace with the correct service type enum
+        SYNAPSE_SERVICE_TYPE_CUSTOM_API, // IMPORTANT: Replace with the correct service type enum
         &private_data->service_api,
         SERVICE_STATUS_REGISTERED
     );
 
     if (ret != ESP_OK) {{
         ESP_LOGE(TAG, "Failed to register service for '%s' (%s).", module->name, esp_err_to_name(ret));
-        {self.module_name}_deinit(module);
+        {self.module_name}_deinit(module); // Use the generated deinit for cleanup
         return NULL;
     }}
 """
-
         return f"""/**
  * @file {self.module_name}.c
- * @brief Main lifecycle and task management for the {self.module_title}.
+ * @brief Implements the lifecycle and core logic for the {self.module_title}.
  * @author {self.author}
+ * @version 1.0.0
+ * @date {self.creation_date}
+ *
+ * @details
+ * This module is responsible for {self.description}.
+ * It follows the standard Synapse module architecture, including:
+ *  - Creation via the Module Factory.
+ *  - Lifecycle management (init, start, deinit) by the System Manager.
+ *  - Interaction with other modules via the Service Locator and Event Bus.
+ *
+ * @note This file contains the core lifecycle functions. Service API, CLI, and
+ *       event handling logic are separated into respective `_api.c`,
+ *       `_cmd.c`, and `_events.c` files.
  */
 #include "{self.module_name}_internal.h"
 
-DEFINE_COMPONENT_TAG("{self.module_upper}");
+DEFINE_COMPONENT_TAG("{self.module_upper}", SYNAPSE_LOG_COLOR_YELLOW); // Default color
 
 // --- Forward Declarations for static functions in this file ---
 static esp_err_t {self.module_name}_init(module_t *self);
@@ -368,24 +471,17 @@ module_t* {self.module_name}_create(const cJSON *config)
 {{
     module_t *module = (module_t *)calloc(1, sizeof(module_t));
     {self.module_name}_private_data_t *private_data = ({self.module_name}_private_data_t *)calloc(1, sizeof({self.module_name}_private_data_t));
-    if (!module || !private_data) {{
-        ESP_LOGE(TAG, "Failed to allocate memory for {self.module_name} module");
-        free(module); free(private_data);
-        return NULL;
-    }}
+    SYNAPSE_GUARD(module && private_data, TAG, NULL, "Failed to allocate memory for {self.module_name} module");
 
     module->private_data = private_data;
     module->current_config = cJSON_Duplicate(config, true);
-    if (!module->current_config) {{
-        ESP_LOGE(TAG, "Failed to duplicate configuration object.");
-        free(private_data);
-        free(module);
-        return NULL;
-    }}
+    SYNAPSE_GUARD(module->current_config, TAG, NULL, "Failed to duplicate configuration object.");
+    
     module->init_level = {self.params['init_level']};
 
     const cJSON *config_node = cJSON_GetObjectItem(config, "config");
     // TODO: Implement robust parsing using synapse_utils here.
+    // Example: synapse_config_get_string_from_node(TAG, config_node, "instance_name", module->name, sizeof(module->name));
     const cJSON *name_node = cJSON_GetObjectItem(config_node, "instance_name");
     snprintf(module->name, sizeof(module->name), "%s", name_node->valuestring);
     snprintf(private_data->instance_name, sizeof(private_data->instance_name), "%s", name_node->valuestring);
@@ -394,6 +490,7 @@ module_t* {self.module_name}_create(const cJSON *config)
     module->base.start = {self.module_name}_start;
     module->base.deinit = {self.module_name}_deinit;
 {handle_event_assignment}
+{ui_hooks_assignment}
 {service_registration_logic}
     ESP_LOGI(TAG, "{self.module_title} ('%s') created.", module->name);
     return module;
@@ -425,11 +522,11 @@ static void {self.module_name}_deinit(module_t *self)
     {self.module_name}_private_data_t *private_data = ({self.module_name}_private_data_t *)self->private_data;
 {deinit_task_logic}
     
-    // TODO: Unsubscribe from events and unregister services here.
+    // TODO: Unsubscribe from events here.
 
     if (self->current_config) cJSON_Delete(self->current_config);
     free(self->private_data);
-    
+    self->private_data = NULL;
 }}
 {task_implementation}
 """
@@ -442,7 +539,7 @@ static void {self.module_name}_deinit(module_t *self)
  */
 #include "{self.module_name}_internal.h"
 
-DEFINE_COMPONENT_TAG("{self.module_upper}_API");
+DEFINE_COMPONENT_TAG("{self.module_upper}_API", SYNAPSE_LOG_COLOR_YELLOW); // Default color
 
 // TODO: Implement your service API functions here.
 // These functions will be assigned to the service_api struct in the main .c file.
@@ -465,7 +562,7 @@ DEFINE_COMPONENT_TAG("{self.module_upper}_API");
 #include "{self.module_name}_internal.h"
 #include "cmd_router_interface.h"
 
-DEFINE_COMPONENT_TAG("{self.module_upper}_CMD");
+DEFINE_COMPONENT_TAG("{self.module_upper}_CMD", SYNAPSE_LOG_COLOR_YELLOW); // Default color
 
 static esp_err_t {self.module_name}_cmd_handler(int argc, char **argv, void *context)
 {{
@@ -511,7 +608,7 @@ void register_cli_commands(module_t *self)
  */
 #include "{self.module_name}_internal.h"
 
-DEFINE_COMPONENT_TAG("{self.module_upper}_EVENTS");
+DEFINE_COMPONENT_TAG("{self.module_upper}_EVENTS", SYNAPSE_LOG_COLOR_YELLOW); // Default color
 
 void {self.module_name}_handle_event(module_t *self, const char *event_name, void *event_data)
 {{
@@ -525,6 +622,81 @@ void {self.module_name}_handle_event(module_t *self, const char *event_name, voi
 
     if (event_data) {{
         synapse_event_data_release((event_data_wrapper_t *)event_data);
+    }}
+}}
+"""
+
+    def _generate_ui_source(self) -> str:
+        return f"""/**
+ * @file {self.module_name}_ui.c
+ * @brief Implements the UI components for the {self.module_title}.
+ * @author {self.author}
+ */
+#include "{self.module_name}_internal.h"
+#include "ui_interface.h"
+
+DEFINE_COMPONENT_TAG("{self.module_upper}_UI", SYNAPSE_LOG_COLOR_YELLOW); // Default color
+
+// --- Forward Declarations for Callbacks ---
+static void {self.module_name}_render_screen_cb(module_t* self, ui_context_t* context);
+static void {self.module_name}_event_cb(module_t* self, ui_event_t* event);
+
+// --- UI Component Definition ---
+static const ui_component_t s_{self.module_name}_screen = {{
+    .id = "{self.module_name}_screen",
+    .type = UI_COMP_SCREEN,
+    .menu_text = "{self.module_title}",
+    .render_cb = {self.module_name}_render_screen_cb,
+    .event_cb = {self.module_name}_event_cb,
+}};
+
+static const ui_component_t* s_{self.module_name}_ui_components[] = {{ &s_{self.module_name}_screen, NULL }};
+
+// --- UI Lifecycle Functions ---
+void {self.module_name}_ui_init(module_t* self)
+{{
+    {self.module_name}_private_data_t* p_data = ({self.module_name}_private_data_t*)self->private_data;
+    
+    p_data->ui_api = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_UI_MANAGER_API);
+    
+    if (p_data->ui_api) {{
+        p_data->ui_api->register_components(self, s_test_module_ui_components);
+    }} else {{
+        ESP_LOGE(TAG, "UI Manager service not found for module '%s'", self->name);
+    }}
+}}
+
+void {self.module_name}_ui_deinit(module_t* self)
+{{
+    ui_manager_api_t* ui_api = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_UI_MANAGER_API);
+    if (ui_api) {{
+        ui_api->unregister_components(self);
+    }}
+}}
+
+// --- Callback Implementations ---
+static void {self.module_name}_render_screen_cb(module_t* self, ui_context_t* context)
+{{
+    {self.module_name}_private_data_t* p_data = ({self.module_name}_private_data_t*)self->private_data;
+    const display_driver_api_t* display = context->display->api;
+    void* disp_ctx = context->display->context;
+
+    display->draw_formatted_text(disp_ctx, 2, 16, 1, "Welcome to {self.module_title}!");
+    
+    if (p_data->ui_api) {{
+        // On this simple screen, BACK is always the selected action
+        p_data->ui_api->draw_footer_button(context, "BACK", true);
+    }}
+}}
+
+static void {self.module_name}_event_cb(module_t* self, ui_event_t* event)
+{{
+    ESP_LOGI(TAG, "Event received in {self.module_title}: %s", event->button_name);
+    
+    // TODO: Implement your event handling logic here.
+
+    if (strcmp(event->button_name, "BACK") == 0 || strcmp(event->button_name, "OK") == 0) {{
+        synapse_event_bus_post("UI_NAVIGATE_BACK", NULL);
     }}
 }}
 """
@@ -596,13 +768,14 @@ def main():
         description="Synapse Framework Module Generator v3.1",
         formatter_class=argparse.RawTextHelpFormatter
     )
-    parser.add_argument("module_title", nargs='?', default=None, help="The full, human-readable name of the module (e.g., 'OLED Display').\nIf omitted, interactive mode will be launched.")
+    parser.add_argument("module_title", nargs='?', default=None, help="The full, human-readable name of the module (e.g., 'My Awesome Module').\nIf omitted, interactive mode will be launched.")
     parser.add_argument("-c", "--category", choices=CATEGORIES.keys(), help="The module's category.")
     parser.add_argument("-a", "--archetype", choices=ARCHETYPES.keys(), help="The module's archetype (code template type).")
     parser.add_argument("-d", "--description", help="A short description of the module.")
     parser.add_argument("--author", help="The author of the module.")
     parser.add_argument("--init_level", type=int, help="The initialization level (priority).")
     parser.add_argument("--deps", help="Comma-separated list of public ESP-IDF/component dependencies (e.g., 'esp_http_client').")
+    parser.add_argument("--with-ui", action='store_true', help="Generate a UI component stub (_ui.c) for this module.")
     
     args = parser.parse_args()
     params = {}
@@ -614,17 +787,20 @@ def main():
         params['module_title'] = args.module_title
         params['category'] = args.category
         params['archetype'] = args.archetype
+        params['with_ui'] = args.with_ui
         params['description'] = args.description
         params['author'] = args.author or get_git_user_name()
         params['init_level'] = args.init_level or 60
         params['deps'] = [dep.strip() for dep in args.deps.split(',')] if args.deps else []
     else:
         print("--- Synapse Module Generator (Interactive Mode) ---")
-        while not (module_title := prompt_for_input("Enter the full module name (e.g., 'OLED Display')")):
+        while not (module_title := prompt_for_input("Enter the full module name (e.g., 'My Awesome Module')")):
             print("! Module name is required.")
         params['module_title'] = module_title
         params['category'] = prompt_for_choice("Select a category", CATEGORIES)
         params['archetype'] = prompt_for_choice("Select a module archetype", ARCHETYPES)
+        ui_input = prompt_for_input("Does this module need a UI component? (y/N)", "n").lower()
+        params['with_ui'] = (ui_input == 'y')
         params['description'] = prompt_for_input("Enter a short description", f"A module for {params['module_title']}")
         params['author'] = prompt_for_input("Enter the author", get_git_user_name())
         params['init_level'] = int(prompt_for_input("Enter the initialization level", "60"))
@@ -632,6 +808,9 @@ def main():
         params['deps'] = [dep.strip() for dep in deps_input.split(',')] if deps_input else []
 
     params['module_name'] = params['module_title'].lower().replace(' ', '_').replace('-', '_')
+    
+    from datetime import datetime
+    params['creation_date'] = datetime.now().strftime("%Y-%m-%d")
     
     create_module_files(params)
 

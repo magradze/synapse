@@ -58,3 +58,6 @@
 [submodule "components/modules/diagnostics/self_test_manager"]
 	path = components/modules/diagnostics/self_test_manager
 	url = git@github.com:magradze/self_test_manager.git
+[submodule "components/modules/communications/mqtt_manager"]
+	path = components/modules/communications/mqtt_manager
+	url = git@github.com:magradze/mqtt_manager.git

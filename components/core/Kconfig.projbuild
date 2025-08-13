@@ -10,6 +10,7 @@ menu "Synapse Framework"
     # --- Module Configuration ---
     menu "Modules"
             rsource "../modules/actuators/relay_actuator/Kconfig"
+    rsource "../modules/actuators/test_module/Kconfig"
     rsource "../modules/communications/mqtt_manager/Kconfig"
     rsource "../modules/communications/wifi_manager/Kconfig"
     rsource "../modules/diagnostics/self_test_manager/Kconfig"

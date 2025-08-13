@@ -146,22 +146,22 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2configuration__ma
 <h2><a class="anchor" id="autotoc_md1025"></a>
 &lt;tt&gt;parse_config&lt;/tt&gt; ფუნქციის მაგალითი</h2>
 <div class="fragment"><div class="line"><span class="comment">// health_monitor.c-ში</span></div>
-<div class="line"><span class="keyword">static</span> esp_err_t parse_config(<span class="keyword">const</span> cJSON *config_node, health_monitor_private_data_t *p_data) {</div>
+<div class="line"><span class="keyword">static</span> esp_err_t parse_config(<span class="keyword">const</span> cJSON *config_node, health_monitor_private_data_t *private_data) {</div>
 <div class="line">    <span class="comment">// ნაბიჯი 1: Default მნიშვნელობების დაყენება Kconfig-იდან</span></div>
-<div class="line">    p_data-&gt;check_interval_sec = CONFIG_HEALTH_MONITOR_DEFAULT_INTERVAL;</div>
-<div class="line">    p_data-&gt;min_free_heap_kb = CONFIG_HEALTH_MONITOR_DEFAULT_HEAP_KB;</div>
+<div class="line">    private_data-&gt;check_interval_sec = CONFIG_HEALTH_MONITOR_DEFAULT_INTERVAL;</div>
+<div class="line">    private_data-&gt;min_free_heap_kb = CONFIG_HEALTH_MONITOR_DEFAULT_HEAP_KB;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ნაბიჯი 2: JSON-იდან გადაწერის მცდელობა synapse_utils-ის გამოყენებით</span></div>
-<div class="line">    <a class="code hl_function" href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a>(TAG, config_node, <span class="stringliteral">&quot;check_interval_sec&quot;</span>, (<span class="keywordtype">int</span>*)&amp;p_data-&gt;check_interval_sec);</div>
+<div class="line">    <a class="code hl_function" href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a>(TAG, config_node, <span class="stringliteral">&quot;check_interval_sec&quot;</span>, (<span class="keywordtype">int</span>*)&amp;private_data-&gt;check_interval_sec);</div>
 <div class="line">    </div>
 <div class="line">    <span class="keyword">const</span> cJSON *thresholds = cJSON_GetObjectItem(config_node, <span class="stringliteral">&quot;thresholds&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">if</span> (thresholds) {</div>
-<div class="line">        <a class="code hl_function" href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a>(TAG, thresholds, <span class="stringliteral">&quot;min_free_heap_kb&quot;</span>, (<span class="keywordtype">int</span>*)&amp;p_data-&gt;min_free_heap_kb);</div>
+<div class="line">        <a class="code hl_function" href="synapse__utils_8h.html#aa70b5e48e2691258a8f42faebdb83ff1">synapse_config_get_int_from_node</a>(TAG, thresholds, <span class="stringliteral">&quot;min_free_heap_kb&quot;</span>, (<span class="keywordtype">int</span>*)&amp;private_data-&gt;min_free_heap_kb);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ნაბიჯი 3: ვალიდაცია (ამ შემთხვევაში, პარამეტრები არასავალდებულოა)</span></div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Health Monitor configured: Interval=%us, Min Heap=%ukB&quot;</span>, </div>
-<div class="line">             p_data-&gt;check_interval_sec, p_data-&gt;min_free_heap_kb);</div>
+<div class="line">             private_data-&gt;check_interval_sec, private_data-&gt;min_free_heap_kb);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>

@@ -272,7 +272,7 @@ var NAVTREE =
         [ "<tt>static void {module_name}_handle_event(module_t *self, const char *event_name, void *event_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md262", null ]
       ] ],
       [ "Configuration Parsing API", "md_docs_2api__reference_2module__api.html#autotoc_md264", [
-        [ "<tt>static esp_err_t parse_{module_name}_config(const cJSON *config_node, {module_name}_private_data_t *p_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md265", null ]
+        [ "<tt>static esp_err_t parse_{module_name}_config(const cJSON *config_node, {module_name}_private_data_t *private_data);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md265", null ]
       ] ],
       [ "Status & Monitoring API", "md_docs_2api__reference_2module__api.html#autotoc_md267", [
         [ "<tt>static module_status_t {module_name}_get_status(module_t *self);</tt>", "md_docs_2api__reference_2module__api.html#autotoc_md268", null ]

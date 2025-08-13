@@ -175,8 +175,8 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2assertion__and__g
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> update_display(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* self) {</div>
 <div class="line">    <a class="code hl_define" href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">SYNAPSE_GUARD_VOID</a>(self != NULL, TAG, <span class="stringliteral">&quot;Module handle is NULL&quot;</span>);</div>
 <div class="line">    </div>
-<div class="line">    ui_private_data_t* p_data = (ui_private_data_t*)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
-<div class="line">    <a class="code hl_define" href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">SYNAPSE_GUARD_VOID</a>(p_data-&gt;is_initialized, TAG, <span class="stringliteral">&quot;Cannot update display, not initialized&quot;</span>);</div>
+<div class="line">    ui_private_data_t* private_data = (ui_private_data_t*)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">    <a class="code hl_define" href="synapse__utils_8h.html#ae462ff126792b1b37559f411f624916f">SYNAPSE_GUARD_VOID</a>(private_data-&gt;is_initialized, TAG, <span class="stringliteral">&quot;Cannot update display, not initialized&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">}</div>

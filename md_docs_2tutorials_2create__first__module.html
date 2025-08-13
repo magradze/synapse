@@ -232,19 +232,19 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="comment">// API Implementation</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t greeter_api_get_text(<span class="keywordtype">void</span> *context, <span class="keyword">const</span> <span class="keywordtype">char</span> **out_text) {</div>
 <div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *self = (<a class="code hl_struct" href="structmodule__t.html">module_t</a> *)context;</div>
-<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
-<div class="line">    *out_text = p_data-&gt;greeting_text;</div>
+<div class="line">    greeter_private_data_t *private_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">    *out_text = private_data-&gt;greeting_text;</div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Job Callback</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeting_job_callback(<span class="keywordtype">void</span> *context) {</div>
 <div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *self = (<a class="code hl_struct" href="structmodule__t.html">module_t</a> *)context;</div>
-<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">    greeter_private_data_t *private_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;Posting greeting message from &#39;%s&#39;&quot;</span>, self-&gt;name);</div>
 <div class="line">    </div>
 <div class="line">    <span class="comment">// Post event with payload</span></div>
-<div class="line">    <span class="keywordtype">char</span> *payload = strdup(p_data-&gt;greeting_text);</div>
+<div class="line">    <span class="keywordtype">char</span> *payload = strdup(private_data-&gt;greeting_text);</div>
 <div class="line">    <a class="code hl_struct" href="structevent__data__wrapper__t.html">event_data_wrapper_t</a> *wrapper;</div>
 <div class="line">    <span class="keywordflow">if</span> (<a class="code hl_function" href="event__data__wrapper_8h.html#a7e7afc7b7e7d96ee15905b61d8836cb1">synapse_event_data_wrap</a>(payload, free, &amp;wrapper) == ESP_OK) {</div>
 <div class="line">        <a class="code hl_function" href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a>(GREETING_MESSAGE_READY, wrapper);</div>
@@ -263,11 +263,11 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="comment">// Start Function</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t greeter_module_start(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    ESP_LOGI(TAG, <span class="stringliteral">&quot;&#39;%s&#39; starting...&quot;</span>, self-&gt;<a class="code hl_variable" href="structmodule__t.html#ab9b6f71a2c7831d471692dbe25afaa14">name</a>);</div>
-<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">    greeter_private_data_t *private_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line">    </div>
 <div class="line">    <span class="comment">// Schedule a job using the Task Pool Manager</span></div>
-<div class="line">    p_data-&gt;greeting_job = <a class="code hl_function" href="task__pool__manager_8h.html#a431a85109a972dfe31d5c2a7167c8f0b">synapse_task_pool_schedule_job</a>(greeting_job_callback, self, 5000, <span class="keyword">true</span>);</div>
-<div class="line">    <span class="keywordflow">if</span> (!p_data-&gt;greeting_job) {</div>
+<div class="line">    private_data-&gt;greeting_job = <a class="code hl_function" href="task__pool__manager_8h.html#a431a85109a972dfe31d5c2a7167c8f0b">synapse_task_pool_schedule_job</a>(greeting_job_callback, self, 5000, <span class="keyword">true</span>);</div>
+<div class="line">    <span class="keywordflow">if</span> (!private_data-&gt;greeting_job) {</div>
 <div class="line">        ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to schedule greeting job!&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">return</span> ESP_FAIL;</div>
 <div class="line">    }</div>
@@ -290,10 +290,10 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2create__first__mod
 <div class="line"><span class="comment">// Deinit Function</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> greeter_module_deinit(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!self) <span class="keywordflow">return</span>;</div>
-<div class="line">    greeter_private_data_t *p_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
+<div class="line">    greeter_private_data_t *private_data = (greeter_private_data_t *)self-&gt;<a class="code hl_variable" href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">private_data</a>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (p_data &amp;&amp; p_data-&gt;greeting_job) {</div>
-<div class="line">        <a class="code hl_function" href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323">synapse_task_pool_cancel_job</a>(p_data-&gt;greeting_job);</div>
+<div class="line">    <span class="keywordflow">if</span> (private_data &amp;&amp; private_data-&gt;greeting_job) {</div>
+<div class="line">        <a class="code hl_function" href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323">synapse_task_pool_cancel_job</a>(private_data-&gt;greeting_job);</div>
 <div class="line">    }</div>
 <div class="line">    </div>
 <div class="line">    <a class="code hl_function" href="event__bus_8h.html#aad4a2793a40d367c4463bd46dd5418c8">synapse_event_bus_unsubscribe</a>(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);</div>

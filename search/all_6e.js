@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['🔘_20მოდული_3a_20tt_20button_5finput_20tt_0',['🔘 მოდული: &lt;tt&gt;button_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2button__input_2README.html',1,'']]],
-  ['🔘_20მოდული_3a_20tt_20rotary_5fencoder_5finput_20tt_1',['🔘 მოდული: &lt;tt&gt;rotary_encoder_input&lt;/tt&gt;',['../md_components_2modules_2drivers_2rotary__encoder__input_2README.html',1,'']]]
+  ['🤔_20პრობლემა_3a_20ერთი_20მოდული_20ერთი_20ტასკი_20ანტი_20პატერნი_0',['2. 🤔 პრობლემა: &quot;ერთი მოდული = ერთი ტასკი&quot; ანტი-პატერნი',['../md_docs_2convention_2task__pool__pattern.html#autotoc_md1145',1,'']]],
+  ['🤔_20პრობლემა_3a_20რატომ_20გვჭირდება_20promise_20ები_1',['2. 🤔 პრობლემა: რატომ გვჭირდება Promise-ები?',['../md_docs_2convention_2promise__pattern.html#autotoc_md1136',1,'']]],
+  ['🤔_20ფუნდამენტური_20განსხვავება_3a_20assertion_20vs_20error_20handling_2',['2. 🤔 ფუნდამენტური განსხვავება: Assertion vs. Error Handling',['../md_docs_2convention_2assertion__and__guards.html#autotoc_md962',1,'']]]
 ];

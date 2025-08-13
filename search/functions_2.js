@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['command_5frouter_5fcreate_0',['command_router_create',['../command__router_8h.html#a837534e591162e28da0c47a84a8b9eb4',1,'command_router_create(const cJSON *config):&#160;command_router.c'],['../command__router_8c.html#a837534e591162e28da0c47a84a8b9eb4',1,'command_router_create(const cJSON *config):&#160;command_router.c']]],
-  ['connectivity_5fwatchdog_5fcreate_1',['connectivity_watchdog_create',['../connectivity__watchdog_8h.html#ac69d5f0e6cb0523c7eb412d70349e17e',1,'connectivity_watchdog_create(const cJSON *config):&#160;connectivity_watchdog.c'],['../connectivity__watchdog_8c.html#ac69d5f0e6cb0523c7eb412d70349e17e',1,'connectivity_watchdog_create(const cJSON *config):&#160;connectivity_watchdog.c']]]
+  ['main_0',['main',['../namespacegenerate__mqtt__topics.html#a57f427bf6ab3178e29e28a2279900a73',1,'generate_mqtt_topics']]]
 ];

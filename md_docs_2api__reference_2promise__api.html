@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
   <div class="headertitle"><div class="title">Synapse Promise Manager API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md563"></a> </p>
-<h1><a class="anchor" id="autotoc_md564"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md299"></a> </p>
+<h1><a class="anchor" id="autotoc_md300"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code>Promise Manager</code>-ის API-ს, რომელიც ხელმისაწვდომია <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code> ჰედერის მეშვეობით. ეს API იყოფა ორ ნაწილად:</p>
 <ol type="1">
@@ -103,10 +103,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 </ol>
 <p><b>არქიტექტურული ცვლილება (v2.0.0):</b> <code>Promise</code> პატერნი გამარტივდა. <code>then()</code> და <code>catch()</code> ფუნქციები ამოღებულია. ამის ნაცვლად, <code>callback</code> ფუნქციები პირდაპირ გადაეცემა ასინქრონული ოპერაციის გამშვებ ფუნქციას, რაც სრულად აღმოფხვრის <code>race condition</code>-ისა და <code>deadlock</code>-ის რისკებს.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md566"></a>
+<h1><a class="anchor" id="autotoc_md302"></a>
 1. Consumer Types (მომხმარებლისთვის)</h1>
 <p>ეს არის <code>callback</code> ფუნქციების ტიპები, რომლებიც უნდა შექმნათ თქვენს მოდულში და გადასცეთ ისეთ ასინქრონულ API ფუნქციებს, როგორიცაა <code>wifi_api_get_status_async</code>.</p>
-<h2><a class="anchor" id="autotoc_md567"></a>
+<h2><a class="anchor" id="autotoc_md303"></a>
 &lt;tt&gt;promise_then_cb&lt;/tt&gt;</h2>
 <p>ფუნქციის ტიპი, რომელიც გამოიყენება წარმატებული შედეგის დასამუშავებლად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="promise__manager_8h.html#a8b4021307655879de50bf9fb83140e45">promise_then_cb</a>)(<span class="keywordtype">void</span>* result_data, <span class="keywordtype">void</span>* user_context);</div>
@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li>**<code>result_data</code>**: მაჩვენებელი შედეგის მონაცემებზე. <code>callback</code> ფუნქცია პასუხისმგებელია მის სწორ ტიპზე მიყვანაზე (casting). <b>მნიშვნელოვანია:</b> <code>callback</code>-მა უნდა იცოდეს, <code>result_data</code>-ს მეხსიერება დინამიურია თუ სტატიკური.</li>
 <li>**<code>user_context</code>**: მომხმარებლის მიერ განსაზღვრული კონტექსტი, რომელიც ასინქრონული ფუნქციის გამოძახებისას გადაეცა.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md568"></a>
+<h2><a class="anchor" id="autotoc_md304"></a>
 &lt;tt&gt;promise_catch_cb&lt;/tt&gt;</h2>
 <p>ფუნქციის ტიპი, რომელიც გამოიყენება შეცდომის დასამუშავებლად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="promise__manager_8h.html#ae9229038eb3572aba3c551df7197de39">promise_catch_cb</a>)(<span class="keywordtype">void</span>* error_data, <span class="keywordtype">void</span>* user_context);</div>
@@ -125,10 +125,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li>**<code>user_context</code>**: მომხმარებლის კონტექსტი.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md570"></a>
+<h1><a class="anchor" id="autotoc_md306"></a>
 2. Provider API (სერვისის მომწოდებლისთვის)</h1>
 <p>ეს ფუნქციები განკუთვნილია მხოლოდ იმ მოდულებისთვის, რომლებიც თავად ქმნიან ასინქრონულ, <code>Promise</code>-ზე დაფუძნებულ API-ს. მათზე წვდომისთვის საჭიროა <code>#include "promise_manager_internal.h"</code>.</p>
-<h2><a class="anchor" id="autotoc_md571"></a>
+<h2><a class="anchor" id="autotoc_md307"></a>
 &lt;tt&gt;promise_handle_t synapse_promise_create(promise_then_cb then_cb, promise_catch_cb catch_cb, void* user_context);&lt;/tt&gt;</h2>
 <p>ქმნის ახალ <code>Promise</code> ობიექტს <code>PENDING</code> (მომლოდინე) მდგომარეობაში, უკვე წინასწარ დარეგისტრირებული <code>callback</code> ფუნქციებით.</p>
 <ul>
@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li>**<code>user_context</code>**: (არასავალდებულო) მაჩვენებელი, რომელიც გადაეცემა <code>callback</code> ფუნქციებს.</li>
 <li><b>აბრუნებს:</b> ახალი <code>Promise</code>-ის <code>handle</code>-ს, ან <code>NULL</code> მეხსიერების გამოყოფის შეცდომის შემთხვევაში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md572"></a>
+<h2><a class="anchor" id="autotoc_md308"></a>
 &lt;tt&gt;esp_err_t synapse_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
 <p>ასრულებს <code>Promise</code>-ს წარმატებით და გადასცემს შედეგს. ეს გამოიწვევს <code>Promise Manager</code>-ის მიერ <code>then_cb</code> <code>callback</code>-ის გამოძახებას.</p>
 <ul>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li>**<code>free_fn</code>**: (არასავალდებულო) ფუნქცია, რომელიც გამოიყენება <code>result_data</code>-ს გასათავისუფლებლად. <b>თუ <code>NULL</code>-ია, <code>Promise Manager</code>-ი ჩათვლის, რომ მეხსიერება სტატიკურია და არ შეეცდება მის გათავისუფლებას.</b></li>
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> თუ <code>Promise</code> წარმატებით დაემატა შესრულების რიგში.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md573"></a>
+<h2><a class="anchor" id="autotoc_md309"></a>
 &lt;tt&gt;esp_err_t synapse_promise_reject(promise_handle_t handle, void* error_data, void (*free_fn)(void*));&lt;/tt&gt;</h2>
 <p>ასრულებს <code>Promise</code>-ს შეცდომით. ეს გამოიწვევს <code>catch_cb</code> <code>callback</code>-ის გამოძახებას.</p>
 <ul>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2promise__api.
 <li><b>აბრუნებს:</b> <code>ESP_OK</code> თუ <code>Promise</code> წარმატებით დაემატა შესრულების რიგში.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md575"></a>
+<h1><a class="anchor" id="autotoc_md311"></a>
 💡 გამოყენების მაგალითი</h1>
 <p>იხილეთ <a class="el" href="md_docs_2convention_2promise__pattern.html">promise_pattern.md</a> დეტალური გამოყენების მაგალითისთვის. </p>
 </div></div><!-- contents -->

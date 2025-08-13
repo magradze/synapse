@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__opt
   <div class="headertitle"><div class="title">ოპტიმიზაციის სახელმძღვანელოები (Performance Optimization Guide)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1770"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1772"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1506"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1508"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი წარმოადგენს Synapse ESP Framework-ის ოპტიმიზაციის სახელმძღვანელოს — კოდის, კონფიგურაციისა და მოდულების ოპტიმიზაციის რჩევებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1774"></a>
+<h1><a class="anchor" id="autotoc_md1510"></a>
 კოდის ოპტიმიზაცია</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ საჭირო მოდულები და ფუნქციები</li>
@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__opt
 <li>გამოიყენეთ inline ფუნქციები მცირე ოპერაციებისთვის</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1776"></a>
+<h1><a class="anchor" id="autotoc_md1512"></a>
 კონფიგურაციის ოპტიმიზაცია</h1>
 <ul>
 <li>გამორთეთ არასაჭირო მოდულები Kconfig-ით</li>
@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__opt
 <li>დააყენეთ ოპტიმალური მნიშვნელობები stack/queue ზომებისთვის</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1778"></a>
+<h1><a class="anchor" id="autotoc_md1514"></a>
 მოდულების ოპტიმიზაცია</h1>
 <ul>
 <li>გამოიყენეთ lazy initialization რესურსების დაზოგვისთვის</li>
@@ -125,22 +125,21 @@ $(document).ready(function(){initNavTree('md_docs_2performance_2performance__opt
 <li>მონიტორინგი ჩართეთ მხოლოდ საჭიროების შემთხვევაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1780"></a>
+<h1><a class="anchor" id="autotoc_md1516"></a>
 მაგალითები</h1>
-<h2><a class="anchor" id="autotoc_md1781"></a>
+<h2><a class="anchor" id="autotoc_md1517"></a>
 Static allocation</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define COMMAND_QUEUE_SIZE 8</span></div>
 <div class="line"><span class="keyword">static</span> QueueHandle_t command_queue;</div>
 <div class="line">command_queue = xQueueCreate(COMMAND_QUEUE_SIZE, <span class="keyword">sizeof</span>(command_t));</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1782"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1518"></a>
 Lazy initialization</h2>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (!global_ssd1306_instance) {</div>
-<div class="line">    global_ssd1306_instance = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structssd1306__private__data__t.html">ssd1306_private_data_t</a>));</div>
+<div class="line">    global_ssd1306_instance = malloc(<span class="keyword">sizeof</span>(ssd1306_private_data_t));</div>
 <div class="line">    <span class="comment">// ...init...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="astructssd1306__private__data__t_html"><div class="ttname"><a href="structssd1306__private__data__t.html">ssd1306_private_data_t</a></div><div class="ttdef"><b>Definition</b> ssd1306_driver.c:45</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md1784"></a>
+<h1><a class="anchor" id="autotoc_md1520"></a>
 Best Practices</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ საჭირო რესურსები</li>
@@ -148,7 +147,7 @@ Best Practices</h1>
 <li>აღწერეთ ყველა ოპტიმიზაციის ნაბიჯი დოკუმენტაციაში</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1786"></a>
+<h1><a class="anchor" id="autotoc_md1522"></a>
 დაკავშირებული დოკუმენტები</h1>
 <ul>
 <li><a class="el" href="md_docs_2performance_2performance__index.html">performance_index.md</a></li>

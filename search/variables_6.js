@@ -11,10 +11,8 @@ var searchData=
   ['get_5fport_8',['get_port',['../structi2c__bus__api__t.html#a36876a389a52b85f7e31acaeec19cff5',1,'i2c_bus_api_t']]],
   ['get_5fsmall_5ffont_5fmetrics_9',['get_small_font_metrics',['../structdisplay__driver__api__t.html#aafddf3e759194b9264d597665a439754',1,'display_driver_api_t']]],
   ['get_5fstate_10',['get_state',['../structrelay__api__t.html#acba1597e1ea7261e4f1080ef4d146bf9',1,'relay_api_t']]],
-  ['get_5fstatus_11',['get_status',['../structwifi__queue__msg__t.html#a14ce81f18241d8287387c2df2820f054',1,'wifi_queue_msg_t']]],
-  ['get_5fstatus_5fasync_12',['get_status_async',['../structwifi__api__t.html#ad4d85495a0b01837f53eb6362726686d',1,'wifi_api_t']]],
-  ['get_5fstring_13',['get_string',['../structstorage__api__t.html#aa12449cfc6a8bd24760deedbe5419a7b',1,'storage_api_t']]],
-  ['get_5fsystem_5fhealth_5freport_14',['get_system_health_report',['../structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b',1,'health_api_t']]],
-  ['get_5ftime_15',['get_time',['../structtime__sync__api__t.html#a3f81908285e822b53367e9f5e25fa477',1,'time_sync_api_t']]],
-  ['gpio_5fpin_16',['gpio_pin',['../structrelay__private__data__t.html#a0352249bf6366a64409f734249a6f359',1,'relay_private_data_t']]]
+  ['get_5fstatus_5fasync_11',['get_status_async',['../structwifi__api__t.html#ad4d85495a0b01837f53eb6362726686d',1,'wifi_api_t']]],
+  ['get_5fstring_12',['get_string',['../structstorage__api__t.html#aa12449cfc6a8bd24760deedbe5419a7b',1,'storage_api_t']]],
+  ['get_5fsystem_5fhealth_5freport_13',['get_system_health_report',['../structhealth__api__t.html#a50abcc64550890f281f6fcf4634fdf5b',1,'health_api_t']]],
+  ['get_5ftime_14',['get_time',['../structtime__sync__api__t.html#a3f81908285e822b53367e9f5e25fa477',1,'time_sync_api_t']]]
 ];

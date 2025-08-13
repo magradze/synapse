@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🎨_20ფერთა_20სქემა_0',['3. 🎨 ფერთა სქემა',['../md_docs_2convention_2logging__colors.html#autotoc_md1354',1,'']]]
+  ['🐞_20გასწორებულია_20fixed_0',['🐞 გასწორებულია (Fixed)',['../md_docs_2changelog_2v5.html#autotoc_md642',1,'']]]
 ];

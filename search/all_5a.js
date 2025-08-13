@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💬_20დასკვნა_0',['4. 💬 დასკვნა',['../md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2044',1,'']]]
+  ['📖_20დამხმარე_20სტრუქტურა_20tt_20cmd_5ft_20tt_0',['📖 დამხმარე სტრუქტურა (&lt;tt&gt;cmd_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md51',1,'']]]
 ];

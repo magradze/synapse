@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['📺_20მოდული_3a_20tt_20ssd1306_5fdriver_20tt_0',['📺 მოდული: &lt;tt&gt;ssd1306_driver&lt;/tt&gt;',['../md_components_2modules_2displays_2ssd1306__driver_2README.html',1,'']]]
+  ['🚀_20გამოყენების_20მაგალითები_0',['🚀 გამოყენების მაგალითები',['../md_docs_2api__reference_2configuration__api.html#autotoc_md81',1,'']]],
+  ['🚀_20მოდულების_20ინიციალიზაციის_20დონეები_20initialization_20levels_1',['🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)',['../md_docs_2convention_2initialization__levels.html',1,'']]],
+  ['🚀_20tt_20create_5fmodule_20py_20tt_20_3a_20synapse_20მოდულის_20გენერატორი_20v3_201_2',['🚀 &lt;tt&gt;create_module.py&lt;/tt&gt;: Synapse მოდულის გენერატორი (v3.1)',['../md_docs_2tools_2create__module.html',1,'']]]
 ];

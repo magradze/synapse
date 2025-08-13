@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🆔_20მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_0',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]]
+  ['🏗️_20ინფრასტრუქტურა_0',['🏗️ ინფრასტრუქტურა',['../md_docs_2changelog_2v5.html#autotoc_md720',1,'']]],
+  ['🏗️_20კონფიგურაციის_20სტრუქტურა_1',['3. 🏗️ კონფიგურაციის სტრუქტურა',['../md_docs_2convention_2configuration__management.html#autotoc_md1013',1,'']]]
 ];

@@ -150,10 +150,12 @@ $(document).ready(function(){initNavTree('ui__interface_8h_source.html',''); ini
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="structui__manager__api__t.html#af4b690d7698369f98203ff202c4f4e12">   89</a></span>    esp_err_t (*register_components)(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* owner, <span class="keyword">const</span> <a class="code hl_struct" href="structui__component__t.html">ui_component_t</a>** components);</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structui__manager__api__t.html#a639e4834232c203ca393db2ff2f5fefa">   96</a></span>    esp_err_t (*unregister_components)(<a class="code hl_struct" href="structmodule__t.html">module_t</a>* owner);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>} <a class="code hl_struct" href="structui__manager__api__t.html">ui_manager_api_t</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="structui__manager__api__t.html#a6adcaef832d1cb61ac763d440b7a8eee">  104</a></span>    void (*draw_footer_button)(<a class="code hl_struct" href="structui__context__t.html">ui_context_t</a> *context, <span class="keyword">const</span> <span class="keywordtype">char</span> *text, <span class="keywordtype">bool</span> is_selected);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>} <a class="code hl_struct" href="structui__manager__api__t.html">ui_manager_api_t</a>;</div>
 </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif </span><span class="comment">// UI_INTERFACE_H</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#endif </span><span class="comment">// UI_INTERFACE_H</span></div>
 <div class="ttc" id="adisplay__driver__interface_8h_html"><div class="ttname"><a href="display__driver__interface_8h.html">display_driver_interface.h</a></div><div class="ttdoc">Universal Service API contract for display drivers.</div></div>
 <div class="ttc" id="astructdisplay__driver__handle__t_html"><div class="ttname"><a href="structdisplay__driver__handle__t.html">display_driver_handle_t</a></div><div class="ttdoc">The handle returned by the Service Locator for a display driver service.</div><div class="ttdef"><b>Definition</b> display_driver_interface.h:171</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>

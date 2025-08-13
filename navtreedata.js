@@ -2125,7 +2125,7 @@ var NAVTREEINDEX =
 "module__factory_8c.html#a6805f2afdd869574d6ae21de42a97e92",
 "ssd1306__fonts_8h.html#a24962f041dd729e2c8d79b4e08806fce",
 "structssd1306__handle__t.html",
-"ui__interface_8h.html#abbd7e139f5423a9a7a404249c92dc12c"
+"ui__interface_8h.html#a7f951370fe8b7755308acb58c0cc6d57"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

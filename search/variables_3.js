@@ -11,9 +11,10 @@ var searchData=
   ['display_8',['display',['../structui__manager__private__data__t.html#ad55ebd82945832f173291bb7954654f1',1,'ui_manager_private_data_t::display'],['../structui__context__t.html#ac2ccdab0565987bfaba64437c49cccfe',1,'ui_context_t::display']]],
   ['display_5fheight_9',['display_height',['../structui__manager__private__data__t.html#a9951c71a96ba1e72368ed5e9c57c829f',1,'ui_manager_private_data_t']]],
   ['display_5fwidth_10',['display_width',['../structui__manager__private__data__t.html#a2aa8d1df79108b5e7f640a2892fbb174',1,'ui_manager_private_data_t']]],
-  ['draw_5fformatted_5ftext_11',['draw_formatted_text',['../structdisplay__driver__api__t.html#af18ea5ba5e39137aa600ac37145e4881',1,'display_driver_api_t']]],
-  ['draw_5fhline_12',['draw_hline',['../structssd1306__api__t.html#ad2194b894a903ae8650b7e74d67a4326',1,'ssd1306_api_t']]],
-  ['draw_5fpixel_13',['draw_pixel',['../structdisplay__driver__api__t.html#a4e515cdc6f8ce592678d6a9c373a2212',1,'display_driver_api_t::draw_pixel'],['../structssd1306__api__t.html#af89b9713df1eabb336865dbef81268b9',1,'ssd1306_api_t::draw_pixel']]],
-  ['draw_5frect_14',['draw_rect',['../structssd1306__api__t.html#a598059dfc2bc2b4f00f3354a3094b96b',1,'ssd1306_api_t']]],
-  ['draw_5fvline_15',['draw_vline',['../structssd1306__api__t.html#a80346e9cd1699cf9caadf1709d05dc35',1,'ssd1306_api_t']]]
+  ['draw_5ffooter_5fbutton_11',['draw_footer_button',['../structui__manager__api__t.html#a6adcaef832d1cb61ac763d440b7a8eee',1,'ui_manager_api_t']]],
+  ['draw_5fformatted_5ftext_12',['draw_formatted_text',['../structdisplay__driver__api__t.html#af18ea5ba5e39137aa600ac37145e4881',1,'display_driver_api_t']]],
+  ['draw_5fhline_13',['draw_hline',['../structssd1306__api__t.html#ad2194b894a903ae8650b7e74d67a4326',1,'ssd1306_api_t']]],
+  ['draw_5fpixel_14',['draw_pixel',['../structdisplay__driver__api__t.html#a4e515cdc6f8ce592678d6a9c373a2212',1,'display_driver_api_t::draw_pixel'],['../structssd1306__api__t.html#af89b9713df1eabb336865dbef81268b9',1,'ssd1306_api_t::draw_pixel']]],
+  ['draw_5frect_15',['draw_rect',['../structssd1306__api__t.html#a598059dfc2bc2b4f00f3354a3094b96b',1,'ssd1306_api_t']]],
+  ['draw_5fvline_16',['draw_vline',['../structssd1306__api__t.html#a80346e9cd1699cf9caadf1709d05dc35',1,'ssd1306_api_t']]]
 ];

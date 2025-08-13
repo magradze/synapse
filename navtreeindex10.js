@@ -93,8 +93,9 @@ var NAVTREEINDEX10 =
 "structui__event__t.html":[162,0,105],
 "structui__event__t.html#a2546e509db482dab3cabddb91958cb2f":[162,0,105,0],
 "structui__manager__api__t.html":[162,0,106],
-"structui__manager__api__t.html#a639e4834232c203ca393db2ff2f5fefa":[162,0,106,1],
-"structui__manager__api__t.html#af4b690d7698369f98203ff202c4f4e12":[162,0,106,0],
+"structui__manager__api__t.html#a639e4834232c203ca393db2ff2f5fefa":[162,0,106,2],
+"structui__manager__api__t.html#a6adcaef832d1cb61ac763d440b7a8eee":[162,0,106,0],
+"structui__manager__api__t.html#af4b690d7698369f98203ff202c4f4e12":[162,0,106,1],
 "structui__manager__private__data__t.html":[162,0,107],
 "structui__manager__private__data__t.html#a08cd65dae189f9e0f155c04623f2bb4a":[162,0,107,6],
 "structui__manager__private__data__t.html#a27b5e54fd8c533963b86c30d07d3023f":[162,0,107,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX10 =
 "ui__assets_8h_source.html":[163,0,0,2,10,4,0,2],
 "ui__events_8c.html":[163,0,0,2,10,4,1,1],
 "ui__events_8c.html#a469449dd73689152450606d4d611be8f":[163,0,0,2,10,4,1,1,0],
-"ui__interface_8h.html":[163,0,0,1,0,20],
-"ui__interface_8h.html#a7f951370fe8b7755308acb58c0cc6d57":[163,0,0,1,0,20,5]
+"ui__interface_8h.html":[163,0,0,1,0,20]
 };

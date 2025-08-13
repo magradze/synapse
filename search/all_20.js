@@ -12,7 +12,7 @@ var searchData=
   ['ui_5fevent_5ft_9',['ui_event_t',['../structui__event__t.html',1,'']]],
   ['ui_5finit_10',['ui_init',['../structmodule__t.html#a41ecf606248377da5553a25c9554b8d5',1,'module_t']]],
   ['ui_5finterface_2eh_11',['ui_interface.h',['../ui__interface_8h.html',1,'']]],
-  ['ui_5fmanager_20tt_12',['ui_manager tt',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1809',1,'5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)'],['../md_docs_2convention_2promise__pattern.html#autotoc_md1150',1,'5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)']]],
+  ['ui_5fmanager_20tt_12',['ui_manager tt',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1818',1,'5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)'],['../md_docs_2convention_2promise__pattern.html#autotoc_md1150',1,'5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)']]],
   ['ui_5fmanager_5fapi_5ft_13',['ui_manager_api_t',['../structui__manager__api__t.html',1,'']]],
   ['ui_5frender_5fcb_5ft_14',['ui_render_cb_t',['../ui__interface_8h.html#a7f951370fe8b7755308acb58c0cc6d57',1,'ui_interface.h']]],
   ['uint32_5ft_20interval_5fms_20bool_20is_5fperiodic_20tt_15',['&lt;tt&gt;synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void* user_context, uint32_t interval_ms, bool is_periodic);&lt;/tt&gt;',['../md_docs_2api__reference_2task__pool__api.html#autotoc_md457',1,'']]],

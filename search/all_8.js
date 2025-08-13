@@ -9,6 +9,6 @@ var searchData=
   ['8_200_202025_2007_2018_6',['[v3.8.0] - 2025-07-18',['../md_docs_2changelog_2v5.html#autotoc_md656',1,'']]],
   ['8_200_202025_2007_2031_7',['[5.8.0] - 2025-07-31',['../md_docs_2changelog_2v5.html#autotoc_md594',1,'']]],
   ['8_201_200_202025_2008_2030_8',['[8.1.0] - 2025-08-30',['../md_docs_2changelog_2v8.html',1,'']]],
-  ['8_20best_20practices_9',['8. Best Practices',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1812',1,'']]],
+  ['8_20best_20practices_9',['8. Best Practices',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1821',1,'']]],
   ['80_20100_20strong_10',['🧩 &lt;strong&gt;დონე 5: მაღალი დონის კომპოზიტური მოდულები (80-100)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md1093',1,'']]]
 ];

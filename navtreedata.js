@@ -1712,67 +1712,78 @@ var NAVTREE =
       [ "8. როგორ დავადგინო კონფიგურაციის შეცდომა?", "md_docs_2troubleshooting_2faq.html#autotoc_md1798", null ],
       [ "9. როგორ დავამატო ახალი კითხვა ამ FAQ-ში?", "md_docs_2troubleshooting_2faq.html#autotoc_md1799", null ]
     ] ],
+    [ "გაკვეთილი: მზა მოდულის დამატება თქვენს Synapse პროექტში", "md_docs_2tutorials_2adding__a__module.html", [
+      [ "1. 🎯 მიზანი", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1802", null ],
+      [ "2. 📋 წინაპირობები", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1803", null ],
+      [ "3. 🚀 მოდულის დამატების ნაბიჯები", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1804", [
+        [ "ეტაპი 1: მოდულის დამატება <tt>git submodule</tt> ბრძანებით", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1805", null ],
+        [ "ეტაპი 2: ცვლილებების შენახვა (Commit & Push)", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1806", null ],
+        [ "ეტაპი 3: მოდულის ჩართვა <tt>menuconfig</tt>-ში", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1807", null ],
+        [ "ეტაპი 4: მოდულის კონფიგურაცია <tt>config.json</tt>-ში", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1808", null ],
+        [ "ეტაპი 5: პროექტის აწყობა", "md_docs_2tutorials_2adding__a__module.html#autotoc_md1809", null ]
+      ] ]
+    ] ],
     [ "Advanced Usage (გაფართოებული გამოყენება)", "md_docs_2tutorials_2advanced__usage.html", [
-      [ "მიზანი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1802", null ],
-      [ "1. მრავალმოდულიანი კონფიგურაცია", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1803", null ],
-      [ "2. მოდულის დინამიური ჩართვა/გამორთვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1804", null ],
-      [ "3. Runtime Reconfiguration", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1805", null ],
-      [ "4. Custom Event-ების გამოყენება", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1806", null ],
-      [ "5. ასინქრონული ოპერაციების მართვა (Promise Pattern)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1807", [
-        [ "5.1. სერვისის მომწოდებლის API (<tt>wifi_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1808", null ],
-        [ "5.2. მომხმარებლის ლოგიკა (<tt>ui_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1809", null ]
+      [ "მიზანი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1811", null ],
+      [ "1. მრავალმოდულიანი კონფიგურაცია", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1812", null ],
+      [ "2. მოდულის დინამიური ჩართვა/გამორთვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1813", null ],
+      [ "3. Runtime Reconfiguration", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1814", null ],
+      [ "4. Custom Event-ების გამოყენება", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1815", null ],
+      [ "5. ასინქრონული ოპერაციების მართვა (Promise Pattern)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1816", [
+        [ "5.1. სერვისის მომწოდებლის API (<tt>wifi_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1817", null ],
+        [ "5.2. მომხმარებლის ლოგიკა (<tt>ui_manager</tt>)", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1818", null ]
       ] ],
-      [ "6. მოდულის სტატუსის მონიტორინგი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1810", null ],
-      [ "7. ოპტიმიზაცია და რესურსების მართვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1811", null ],
-      [ "8. Best Practices", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1812", null ]
+      [ "6. მოდულის სტატუსის მონიტორინგი", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1819", null ],
+      [ "7. ოპტიმიზაცია და რესურსების მართვა", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1820", null ],
+      [ "8. Best Practices", "md_docs_2tutorials_2advanced__usage.html#autotoc_md1821", null ]
     ] ],
     [ "პირველი საკუთარი მოდულის შექმნა (v2.0)", "md_docs_2tutorials_2create__first__module.html", [
-      [ "მიზანი", "md_docs_2tutorials_2create__first__module.html#autotoc_md1815", null ],
-      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2create__first__module.html#autotoc_md1816", null ],
-      [ "2. მოდულის ჩონჩხის გენერაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md1817", null ],
-      [ "3. კონფიგურაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md1818", null ],
-      [ "4. კოდის იმპლემენტაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md1819", null ],
-      [ "5. ტესტირება", "md_docs_2tutorials_2create__first__module.html#autotoc_md1822", null ]
+      [ "მიზანი", "md_docs_2tutorials_2create__first__module.html#autotoc_md1824", null ],
+      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2create__first__module.html#autotoc_md1825", null ],
+      [ "2. მოდულის ჩონჩხის გენერაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md1826", null ],
+      [ "3. კონფიგურაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md1827", null ],
+      [ "4. კოდის იმპლემენტაცია", "md_docs_2tutorials_2create__first__module.html#autotoc_md1828", null ],
+      [ "5. ტესტირება", "md_docs_2tutorials_2create__first__module.html#autotoc_md1831", null ]
     ] ],
     [ "სწრაფი სტარტი (Getting Started)", "md_docs_2tutorials_2getting__started.html", [
-      [ "მიზანი", "md_docs_2tutorials_2getting__started.html#autotoc_md1825", null ],
-      [ "1. გარემოს მომზადება", "md_docs_2tutorials_2getting__started.html#autotoc_md1826", null ],
-      [ "2. პროექტის სტრუქტურის გაცნობა", "md_docs_2tutorials_2getting__started.html#autotoc_md1827", null ],
-      [ "3. პირველი მოდულის ჩართვა", "md_docs_2tutorials_2getting__started.html#autotoc_md1828", null ],
-      [ "4. ბილდი და ფლეში", "md_docs_2tutorials_2getting__started.html#autotoc_md1829", null ],
-      [ "5. ლოგების ნახვა და ტესტირება", "md_docs_2tutorials_2getting__started.html#autotoc_md1830", null ],
-      [ "6. დამატებითი რესურსები", "md_docs_2tutorials_2getting__started.html#autotoc_md1831", null ]
+      [ "მიზანი", "md_docs_2tutorials_2getting__started.html#autotoc_md1834", null ],
+      [ "1. გარემოს მომზადება", "md_docs_2tutorials_2getting__started.html#autotoc_md1835", null ],
+      [ "2. პროექტის სტრუქტურის გაცნობა", "md_docs_2tutorials_2getting__started.html#autotoc_md1836", null ],
+      [ "3. პირველი მოდულის ჩართვა", "md_docs_2tutorials_2getting__started.html#autotoc_md1837", null ],
+      [ "4. ბილდი და ფლეში", "md_docs_2tutorials_2getting__started.html#autotoc_md1838", null ],
+      [ "5. ლოგების ნახვა და ტესტირება", "md_docs_2tutorials_2getting__started.html#autotoc_md1839", null ],
+      [ "6. დამატებითი რესურსები", "md_docs_2tutorials_2getting__started.html#autotoc_md1840", null ]
     ] ],
     [ "ინტეგრაციის მაგალითი (Integration Example)", "md_docs_2tutorials_2integration__example.html", [
-      [ "მიზანი", "md_docs_2tutorials_2integration__example.html#autotoc_md1834", null ],
-      [ "1. ინტეგრაციის საჭიროების განსაზღვრა", "md_docs_2tutorials_2integration__example.html#autotoc_md1835", null ],
-      [ "2. საჭირო მოდულების ჩართვა და კონფიგურაცია", "md_docs_2tutorials_2integration__example.html#autotoc_md1836", null ],
-      [ "3. MQTT Integration (Publish/Subscribe)", "md_docs_2tutorials_2integration__example.html#autotoc_md1837", null ],
-      [ "4. REST API Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md1838", null ],
-      [ "5. WebSocket Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md1839", null ],
-      [ "6. Best Practices", "md_docs_2tutorials_2integration__example.html#autotoc_md1840", null ],
-      [ "7. Troubleshooting", "md_docs_2tutorials_2integration__example.html#autotoc_md1841", null ]
+      [ "მიზანი", "md_docs_2tutorials_2integration__example.html#autotoc_md1843", null ],
+      [ "1. ინტეგრაციის საჭიროების განსაზღვრა", "md_docs_2tutorials_2integration__example.html#autotoc_md1844", null ],
+      [ "2. საჭირო მოდულების ჩართვა და კონფიგურაცია", "md_docs_2tutorials_2integration__example.html#autotoc_md1845", null ],
+      [ "3. MQTT Integration (Publish/Subscribe)", "md_docs_2tutorials_2integration__example.html#autotoc_md1846", null ],
+      [ "4. REST API Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md1847", null ],
+      [ "5. WebSocket Integration", "md_docs_2tutorials_2integration__example.html#autotoc_md1848", null ],
+      [ "6. Best Practices", "md_docs_2tutorials_2integration__example.html#autotoc_md1849", null ],
+      [ "7. Troubleshooting", "md_docs_2tutorials_2integration__example.html#autotoc_md1850", null ]
     ] ],
     [ "მოდულის გაფართოება ან ფუნქციონალის დამატება (Module Extension & Feature Addition)", "md_docs_2tutorials_2module__extension.html", [
-      [ "მიზანი", "md_docs_2tutorials_2module__extension.html#autotoc_md1844", null ],
-      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2module__extension.html#autotoc_md1845", null ],
-      [ "2. სტრუქტურის დაცვა", "md_docs_2tutorials_2module__extension.html#autotoc_md1846", null ],
-      [ "3. ახალი API ან ფუნქციის დამატება", "md_docs_2tutorials_2module__extension.html#autotoc_md1847", null ],
-      [ "4. კონფიგურაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md1848", null ],
-      [ "5. კომუნიკაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md1849", null ],
-      [ "6. ტესტირება და ლოგირება", "md_docs_2tutorials_2module__extension.html#autotoc_md1850", null ],
-      [ "7. დოკუმენტაციის განახლება", "md_docs_2tutorials_2module__extension.html#autotoc_md1851", null ],
-      [ "Best Practices", "md_docs_2tutorials_2module__extension.html#autotoc_md1852", null ],
-      [ "აკრძალული პრაქტიკები", "md_docs_2tutorials_2module__extension.html#autotoc_md1853", null ]
+      [ "მიზანი", "md_docs_2tutorials_2module__extension.html#autotoc_md1853", null ],
+      [ "1. საჭიროების განსაზღვრა", "md_docs_2tutorials_2module__extension.html#autotoc_md1854", null ],
+      [ "2. სტრუქტურის დაცვა", "md_docs_2tutorials_2module__extension.html#autotoc_md1855", null ],
+      [ "3. ახალი API ან ფუნქციის დამატება", "md_docs_2tutorials_2module__extension.html#autotoc_md1856", null ],
+      [ "4. კონფიგურაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md1857", null ],
+      [ "5. კომუნიკაციის გაფართოება", "md_docs_2tutorials_2module__extension.html#autotoc_md1858", null ],
+      [ "6. ტესტირება და ლოგირება", "md_docs_2tutorials_2module__extension.html#autotoc_md1859", null ],
+      [ "7. დოკუმენტაციის განახლება", "md_docs_2tutorials_2module__extension.html#autotoc_md1860", null ],
+      [ "Best Practices", "md_docs_2tutorials_2module__extension.html#autotoc_md1861", null ],
+      [ "აკრძალული პრაქტიკები", "md_docs_2tutorials_2module__extension.html#autotoc_md1862", null ]
     ] ],
     [ "სისტემის კონფიგურაცია (System Configuration)", "md_docs_2tutorials_2system__configuration.html", [
-      [ "🎯 მიზანი", "md_docs_2tutorials_2system__configuration.html#autotoc_md1856", null ],
-      [ "1. კონფიგურაციის ფაილების როლები", "md_docs_2tutorials_2system__configuration.html#autotoc_md1858", null ],
-      [ "2. <tt>config.json</tt>-ის სტრუქტურა და მაგალითები", "md_docs_2tutorials_2system__configuration.html#autotoc_md1860", null ],
-      [ "3. მოდულის კონფიგურაციის ობიექტის აღწერა", "md_docs_2tutorials_2system__configuration.html#autotoc_md1862", null ],
-      [ "4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)", "md_docs_2tutorials_2system__configuration.html#autotoc_md1864", null ],
-      [ "5. კონფიგურაციის ვალიდაცია და Default-ები", "md_docs_2tutorials_2system__configuration.html#autotoc_md1866", null ],
-      [ "6. საუკეთესო პრაქტიკები (Best Practices)", "md_docs_2tutorials_2system__configuration.html#autotoc_md1868", null ]
+      [ "🎯 მიზანი", "md_docs_2tutorials_2system__configuration.html#autotoc_md1865", null ],
+      [ "1. კონფიგურაციის ფაილების როლები", "md_docs_2tutorials_2system__configuration.html#autotoc_md1867", null ],
+      [ "2. <tt>config.json</tt>-ის სტრუქტურა და მაგალითები", "md_docs_2tutorials_2system__configuration.html#autotoc_md1869", null ],
+      [ "3. მოდულის კონფიგურაციის ობიექტის აღწერა", "md_docs_2tutorials_2system__configuration.html#autotoc_md1871", null ],
+      [ "4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)", "md_docs_2tutorials_2system__configuration.html#autotoc_md1873", null ],
+      [ "5. კონფიგურაციის ვალიდაცია და Default-ები", "md_docs_2tutorials_2system__configuration.html#autotoc_md1875", null ],
+      [ "6. საუკეთესო პრაქტიკები (Best Practices)", "md_docs_2tutorials_2system__configuration.html#autotoc_md1877", null ]
     ] ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -1813,8 +1824,9 @@ var NAVTREEINDEX =
 "md_docs_2changelog_2v9.html#autotoc_md788",
 "md_docs_2convention_2logging__standards.html#autotoc_md1119",
 "md_docs_2performance_2performance__best__practices.html#autotoc_md1491",
-"md_docs_2tutorials_2getting__started.html#autotoc_md1831",
-"structfont__metrics__t.html"
+"md_docs_2tutorials_2create__first__module.html#autotoc_md1828",
+"structevent__message__t.html#ab0fd512edacbe40572034f5859190e08",
+"ui__interface_8h.html#ae7f2e727f128aa1b9d923a06976d86a1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

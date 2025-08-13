@@ -7,7 +7,7 @@ var searchData=
   ['read_5ffile_4',['read_file',['../structstorage__api__t.html#af31e61ac9fa245b6a7bf4f541a3876ce',1,'storage_api_t']]],
   ['readme_20md_5',['[README.md]',['../md_docs_2changelog_2CHANGELOG__2025-06-24.html#autotoc_md551',1,'']]],
   ['reboot_5fsystem_6',['reboot_system',['../structsystem__manager__api__t.html#a402ede4ddd5f00bdad179ec8e85d5e9e',1,'system_manager_api_t']]],
-  ['reconfiguration_7',['reconfiguration',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1805',1,'3. Runtime Reconfiguration'],['../md_docs_2structure_2configuration__flow.html#autotoc_md1630',1,'Runtime Reconfiguration']]],
+  ['reconfiguration_7',['reconfiguration',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1814',1,'3. Runtime Reconfiguration'],['../md_docs_2structure_2configuration__flow.html#autotoc_md1630',1,'Runtime Reconfiguration']]],
   ['record_20template_8',['არქიტექტურული გადაწყვეტილების ჩანაწერის შაბლონი (Decision Record Template)',['../md_docs_2design__decisions_2decision__record__template.html',1,'']]],
   ['recovery_20strategies_9',['Error Recovery Strategies',['../md_docs_2convention_2error__handling.html#autotoc_md1054',1,'']]],
   ['redraw_10',['Conditional redraw',['../md_docs_2performance_2performance__display.html#autotoc_md1501',1,'']]],
@@ -66,7 +66,7 @@ var searchData=
   ['resource_5fmanager_2eh_63',['resource_manager.h',['../resource__manager_8h.html',1,'']]],
   ['resource_5fpool_5ft_64',['resource_pool_t',['../structresource__pool__t.html',1,'']]],
   ['rest_20api_20ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20rest_20api_65',['REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)',['../md_docs_2integration_2integration__rest.html',1,'']]],
-  ['rest_20api_20integration_66',['4. REST API Integration',['../md_docs_2tutorials_2integration__example.html#autotoc_md1838',1,'']]],
+  ['rest_20api_20integration_66',['4. REST API Integration',['../md_docs_2tutorials_2integration__example.html#autotoc_md1847',1,'']]],
   ['result_5fdata_20void_20free_5ffn_20void_20tt_67',['&lt;tt&gt;esp_err_t synapse_promise_resolve(promise_handle_t handle, void* result_data, void (*free_fn)(void*));&lt;/tt&gt;',['../md_docs_2api__reference_2promise__api.html#autotoc_md308',1,'']]],
   ['ret_5fval_20format_20tt_68',['ret_val format tt',['../md_docs_2api__reference_2assert__and__guards__api.html#autotoc_md37',1,'&lt;tt&gt;SYNAPSE_GUARD(condition, tag, ret_val, format, ...)&lt;/tt&gt;'],['../md_docs_2api__reference_2utils__api.html#autotoc_md502',1,'&lt;tt&gt;SYNAPSE_GUARD(condition, tag, ret_val, format, ...)&lt;/tt&gt;']]],
   ['retry_20logic_69',['1. Retry Logic',['../md_docs_2convention_2error__handling.html#autotoc_md1055',1,'']]],
@@ -78,7 +78,7 @@ var searchData=
   ['router_20pattern_75',['3. Command Router Pattern',['../md_docs_2convention_2communication__patterns.html#autotoc_md996',1,'']]],
   ['runtime_20პრობლემები_76',['5. Runtime პრობლემები',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1760',1,'']]],
   ['runtime_20management_20ფუნქციები_77',['2. Runtime Management ფუნქციები',['../md_docs_2convention_2function__naming.html#autotoc_md1073',1,'']]],
-  ['runtime_20reconfiguration_78',['runtime reconfiguration',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1805',1,'3. Runtime Reconfiguration'],['../md_docs_2structure_2configuration__flow.html#autotoc_md1630',1,'Runtime Reconfiguration']]],
+  ['runtime_20reconfiguration_78',['runtime reconfiguration',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1814',1,'3. Runtime Reconfiguration'],['../md_docs_2structure_2configuration__flow.html#autotoc_md1630',1,'Runtime Reconfiguration']]],
   ['runtime_20state_20logging_79',['Runtime State Logging',['../md_docs_2convention_2logging__standards.html#autotoc_md1119',1,'']]],
   ['rx_5fdata_20size_5ft_20data_5flength_80',['esp_err_t spi_bus_transfer(spi_bus_handle_t *spi_bus_handle, const uint8_t *tx_data, uint8_t *rx_data, size_t data_length);',['../md_docs_2api__reference_2drivers__api.html#autotoc_md184',1,'']]]
 ];

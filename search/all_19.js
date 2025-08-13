@@ -15,7 +15,7 @@ var searchData=
   ['nfc_5fprov_5fmodule_5fstart_20module_5ft_20module_12',['esp_err_t nfc_prov_module_start(module_t *module)',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md343',1,'']]],
   ['nfc_5fprov_5fmodule_5fstop_20module_5ft_20module_13',['esp_err_t nfc_prov_module_stop(module_t *module)',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md344',1,'']]],
   ['not_20found_14',['პრობლემა: include file not found',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1746',1,'']]],
-  ['notation_15',['notation',['../md_docs_2api__reference_2configuration__api.html#autotoc_md73',1,'🔑 გასაღების ფორმატი (Dot-Notation)'],['../md_docs_2tutorials_2system__configuration.html#autotoc_md1864',1,'4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)']]],
+  ['notation_15',['notation',['../md_docs_2api__reference_2configuration__api.html#autotoc_md73',1,'🔑 გასაღების ფორმატი (Dot-Notation)'],['../md_docs_2tutorials_2system__configuration.html#autotoc_md1873',1,'4. პარამეტრებზე წვდომა კოდიდან (Dot-Notation)']]],
   ['now_16',['3. Communication Integration (MQTT/WiFi/ESP-NOW)',['../md_docs_2internal_2synapse__checklist.html#autotoc_md1462',1,'']]],
   ['now_20service_20api_17',['⚡ ESP-NOW Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md65',1,'']]],
   ['nvs_20დან_20სტრიქონის_20წაკითხვა_18',['NVS-დან სტრიქონის წაკითხვა',['../md_docs_2design__decisions_2storage__strategy.html#autotoc_md1376',1,'']]],

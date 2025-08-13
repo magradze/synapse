@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['ლოგების_20ნახვა_20და_20ტესტირება_0',['5. ლოგების ნახვა და ტესტირება',['../md_docs_2tutorials_2getting__started.html#autotoc_md1830',1,'']]],
+  ['ლოგების_20ნახვა_20და_20ტესტირება_0',['5. ლოგების ნახვა და ტესტირება',['../md_docs_2tutorials_2getting__started.html#autotoc_md1839',1,'']]],
   ['ლოგები_1',['2. რატომ არ ჩანს ლოგები?',['../md_docs_2troubleshooting_2faq.html#autotoc_md1792',1,'']]],
   ['ლოგები_20არ_20ჩანს_2',['პრობლემა: ლოგები არ ჩანს',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1757',1,'']]],
   ['ლოგიკა_3',['&lt;tt&gt;parse_config&lt;/tt&gt; ფუნქციის 3-ნაბიჯიანი ლოგიკა',['../md_docs_2convention_2configuration__management.html#autotoc_md1024',1,'']]],
   ['ლოგიკა_20და_20პერიფერია_2060_2079_20strong_4',['💡 &lt;strong&gt;დონე 4: აპლიკაციის ლოგიკა და პერიფერია (60-79)&lt;/strong&gt;',['../md_docs_2convention_2initialization__levels.html#autotoc_md1091',1,'']]],
-  ['ლოგიკა_20tt_20ui_5fmanager_20tt_5',['5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1809',1,'']]],
-  ['ლოგირება_6',['ლოგირება',['../structure_docs.html#struct_error_sec',1,'შეცდომების დამუშავება და ლოგირება'],['../md_docs_2tutorials_2module__extension.html#autotoc_md1850',1,'6. ტესტირება და ლოგირება'],['../md_docs_2structure_2faq.html#autotoc_md1681',1,'7. როგორ ხდება შეცდომების დამუშავება და ლოგირება?']]],
+  ['ლოგიკა_20tt_20ui_5fmanager_20tt_5',['5.2. მომხმარებლის ლოგიკა (&lt;tt&gt;ui_manager&lt;/tt&gt;)',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1818',1,'']]],
+  ['ლოგირება_6',['ლოგირება',['../structure_docs.html#struct_error_sec',1,'შეცდომების დამუშავება და ლოგირება'],['../md_docs_2tutorials_2module__extension.html#autotoc_md1859',1,'6. ტესტირება და ლოგირება'],['../md_docs_2structure_2faq.html#autotoc_md1681',1,'7. როგორ ხდება შეცდომების დამუშავება და ლოგირება?']]],
   ['ლოგირების_20და_20შეცდომების_20დიაგნოსტიკა_7',['4. ლოგირების და შეცდომების დიაგნოსტიკა',['../md_docs_2troubleshooting_2common__issues.html#autotoc_md1756',1,'']]],
   ['ლოგირების_20კონტროლი_8',['ლოგირების კონტროლი',['../md_docs_2security_2security__best__practices.html#autotoc_md1559',1,'ლოგირების კონტროლი'],['../md_docs_2design__decisions_2security__considerations.html#autotoc_md1356',1,'ლოგირების კონტროლი']]],
   ['ლოგირების_20მაგალითები_9',['ლოგირების მაგალითები',['../md_docs_2structure_2error__handling__and__logging.html#autotoc_md1664',1,'']]],

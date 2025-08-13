@@ -134,7 +134,7 @@ var searchData=
   ['esp_5flogw_20warning_20level_131',['2. ESP_LOGW - Warning Level',['../md_docs_2convention_2logging__standards.html#autotoc_md1108',1,'']]],
   ['event_20და_20service_20debugging_132',['6. Event და Service Debugging',['../md_docs_2troubleshooting_2debugging__guide.html#autotoc_md1777',1,'']]],
   ['event_20ების_20აღწერა_133',['Custom Event-ების აღწერა',['../md_docs_2api__reference_2event__api.html#autotoc_md203',1,'']]],
-  ['event_20ების_20გამოყენება_134',['4. Custom Event-ების გამოყენება',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1806',1,'']]],
+  ['event_20ების_20გამოყენება_134',['4. Custom Event-ების გამოყენება',['../md_docs_2tutorials_2advanced__usage.html#autotoc_md1815',1,'']]],
   ['event_20ის_20აღწერისა_135',['მაგალითი Custom Event-ის აღწერისა',['../md_docs_2api__reference_2event__api.html#autotoc_md204',1,'']]],
   ['event_20ის_20იდენტიფიკატორი_136',['Custom Event-ის იდენტიფიკატორი',['../md_docs_2api__reference_2custom__api.html#autotoc_md123',1,'']]],
   ['event_20ის_20მონაცემების_20სტრუქტურა_137',['Custom Event-ის მონაცემების სტრუქტურა',['../md_docs_2api__reference_2custom__api.html#autotoc_md124',1,'']]],

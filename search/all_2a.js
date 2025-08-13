@@ -10,5 +10,6 @@ var searchData=
   ['თემები_20tt_20module_5fname_20tt_20placeholder_20ით_7',['დინამიური MQTT თემები &lt;tt&gt;{module_name}&lt;/tt&gt; Placeholder-ით',['../md_docs_2convention_2communication__patterns.html#autotoc_md1012',1,'']]],
   ['თითოეული_20მოდულის_20სტრუქტურა_8',['თითოეული მოდულის სტრუქტურა',['../md_docs_2structure_2directory__structure.html#autotoc_md1655',1,'']]],
   ['თუ_20არა_20ერთი_20და_20იმავე_20ტიპის_20რამდენიმე_20მოდულის_20დამატება_9',['2. შეიძლება თუ არა ერთი და იმავე ტიპის რამდენიმე მოდულის დამატება?',['../md_docs_2structure_2faq.html#autotoc_md1676',1,'']]],
-  ['თუ_20ეს_20ბაგია_10',['გამეორების ნაბიჯები (თუ ეს ბაგია)',['../md_docs_2contributing_2issue__template.html#autotoc_md898',1,'']]]
+  ['თუ_20ეს_20ბაგია_10',['გამეორების ნაბიჯები (თუ ეს ბაგია)',['../md_docs_2contributing_2issue__template.html#autotoc_md898',1,'']]],
+  ['თქვენს_20synapse_20პროექტში_11',['გაკვეთილი: მზა მოდულის დამატება თქვენს Synapse პროექტში',['../md_docs_2tutorials_2adding__a__module.html',1,'']]]
 ];

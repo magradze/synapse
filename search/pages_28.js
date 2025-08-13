@@ -11,6 +11,7 @@ var searchData=
   ['პრობლემები_20და_20გადაჭრის_20გზები_20common_20issues_20solutions_8',['გავრცელებული პრობლემები და გადაჭრის გზები (Common Issues &amp; Solutions)',['../md_docs_2troubleshooting_2common__issues.html',1,'']]],
   ['პრობლემის_20დიაგნოსტიკა_20და_20გამოსწორება_9',['CHANGELOG: led_blinker ინიციალიზაციის პრობლემის დიაგნოსტიკა და გამოსწორება',['../md_docs_2changelog_22025-06-26-led__blinker-nvs-debug.html',1,'']]],
   ['პროექტის_20მიმოხილვა_20project_20overview_10',['პროექტის მიმოხილვა (Project Overview)',['../index.html',1,'']]],
-  ['პროცედურა_11',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
-  ['პროცესი_20configuration_20flow_12',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]]
+  ['პროექტში_11',['გაკვეთილი: მზა მოდულის დამატება თქვენს Synapse პროექტში',['../md_docs_2tutorials_2adding__a__module.html',1,'']]],
+  ['პროცედურა_12',['Vulnerability Disclosure Policy (უსაფრთხოების ხარვეზების აღმოჩენისა და შეტყობინების პროცედურა)',['../md_docs_2security_2security__vulnerability__disclosure.html',1,'']]],
+  ['პროცესი_20configuration_20flow_13',['კონფიგურაციის მართვის პროცესი (Configuration Flow)',['../md_docs_2structure_2configuration__flow.html',1,'']]]
 ];

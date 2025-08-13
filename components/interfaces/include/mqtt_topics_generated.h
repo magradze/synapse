@@ -17,9 +17,9 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-08-12 23:47:20 UTC
- * @note თემების რაოდენობა: 9
- * @note დამუშავებული მოდულები: button_input, connectivity_watchdog, device_identity_service, i2c_bus, mcp23017_io_expander, mqtt_manager, relay_actuator, rotary_encoder_input, security_status_reporter, self_test_manager, sensor_aggregator, sn74hc595n_writer, spi_bus, ssd1306_driver, test_module, time_of_flight_sensor, time_sync, ui_manager, wifi_manager
+ * @note გენერირების თარიღი: 2025-08-13 02:32:37 UTC
+ * @note თემების რაოდენობა: 0
+ * @note დამუშავებული მოდულები: 
  * @version 1.0
  * @author MindLab Auto-Generation System
  */
@@ -37,26 +37,10 @@ extern "C"
    * @brief ავტომატურად გენერირებული MQTT თემების კონსტანტები
    * @details ქვემოთ მოცემული თემები ავტომატურად შეგროვდა module.json ფაილებიდან:
    *
-   * - MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO: .../state/device/info
- * - MQTT_TOPIC_PUB_SECURITY_STATUS_REPORTER_SECURITY_STATUS: .../state/security/status
- * - MQTT_TOPIC_SUB_SECURITY_STATUS_REPORTER_SECURITY_STATUS_CONTROL: .../control/security/status
- * - MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT: .../data/selftest/report
- * - MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN: .../cmd/in
- * - MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS: .../state/wifi/status
- * - MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT: .../data/wifi/scan_result
- * - MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT: .../data/sensors/aggregated
- * - MQTT_TOPIC_PUB_RELAY_ACTUATOR_STATE_CHANGED: .../state/relay/{module_name}/status
+  
    */
 
-  #define MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO "synapse/devices/%s/state/device/info"
-#define MQTT_TOPIC_PUB_SECURITY_STATUS_REPORTER_SECURITY_STATUS "synapse/devices/%s/state/security/status"
-#define MQTT_TOPIC_SUB_SECURITY_STATUS_REPORTER_SECURITY_STATUS_CONTROL "synapse/devices/%s/control/security/status"
-#define MQTT_TOPIC_PUB_SELF_TEST_MANAGER_SELFTEST_REPORT "synapse/devices/%s/data/selftest/report"
-#define MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN "synapse/devices/%s/cmd/in"
-#define MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS "synapse/devices/%s/state/wifi/status"
-#define MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT "synapse/devices/%s/data/wifi/scan_result"
-#define MQTT_TOPIC_PUB_SENSOR_AGGREGATOR_AGGREGATED_REPORT "synapse/devices/%s/data/sensors/aggregated"
-#define MQTT_TOPIC_PUB_RELAY_ACTUATOR_STATE_CHANGED "synapse/devices/%s/state/relay/{module_name}/status"
+  
 
 // =============================================================================
 // დამხმარე მაკროები (თავსებადი ხელით შექმნილ mqtt_topics.h-თან)
@@ -85,9 +69,9 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-12 23:47:20 UTC"
-#define MQTT_TOPICS_TOTAL_COUNT 9
-#define MQTT_TOPICS_GENERATED_FROM_MODULES "button_input, connectivity_watchdog, device_identity_service, i2c_bus, mcp23017_io_expander, mqtt_manager, relay_actuator, rotary_encoder_input, security_status_reporter, self_test_manager, sensor_aggregator, sn74hc595n_writer, spi_bus, ssd1306_driver, test_module, time_of_flight_sensor, time_sync, ui_manager, wifi_manager"
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-13 02:32:37 UTC"
+#define MQTT_TOPICS_TOTAL_COUNT 0
+#define MQTT_TOPICS_GENERATED_FROM_MODULES ""
 
 #ifdef __cplusplus
 }

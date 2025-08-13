@@ -1,0 +1,50 @@
+menu "Logger"
+
+    config MODULE_LOGGER_ENABLED
+        bool "Enable Logger Module"
+        default y
+        help
+            Enables the logger module for centralized event monitoring and debugging.
+            When enabled, the module captures all events from the Event Bus and 
+            outputs them to the serial console. This is useful for system debugging
+            and monitoring. If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config LOGGER_CONSOLE_OUTPUT_ENABLED
+        bool "Enable Console Output"
+        default y
+        depends on MODULE_LOGGER_ENABLED
+        help
+            Enables console output for the logger module. When enabled, 
+            all captured events will be printed to the serial console.
+            Disable this to reduce console spam while keeping event 
+            monitoring active.
+
+    config LOGGER_RUNTIME_CONTROL_ENABLED
+        bool "Enable Runtime Control"
+        default y
+        depends on MODULE_LOGGER_ENABLED
+        help
+            Enables runtime control of the logger module through framework 
+            command events. When enabled, the module can be dynamically 
+            enabled/disabled and reconfigured without restarting the system.
+
+    config LOGGER_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_logger"
+        depends on MODULE_LOGGER_ENABLED
+        help
+            Default instance name for the logger module. This name is used
+            to identify the module in runtime commands and configuration.
+
+    config LOGGER_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_LOGGER_ENABLED
+        help
+            Maximum length for the logger module instance name string,
+            including null terminator. Adjust based on your naming 
+            requirements vs memory usage.
+
+endmenu

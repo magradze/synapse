@@ -9,6 +9,7 @@ menu "Synapse Framework"
 
     # --- Module Configuration ---
     menu "Modules"
-        
+            rsource "../modules/utilities/logger_module/Kconfig"
+
     endmenu
 endmenu

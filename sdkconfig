@@ -495,6 +495,17 @@ CONFIG_SYNAPSE_ENABLE_ASSERTS=y
 #
 # Modules
 #
+
+#
+# Logger
+#
+CONFIG_MODULE_LOGGER_ENABLED=y
+CONFIG_LOGGER_CONSOLE_OUTPUT_ENABLED=y
+CONFIG_LOGGER_RUNTIME_CONTROL_ENABLED=y
+CONFIG_LOGGER_DEFAULT_INSTANCE_NAME="main_logger"
+CONFIG_LOGGER_INSTANCE_NAME_MAX_LEN=32
+# end of Logger
+# end of Modules
 # end of Synapse Framework
 
 #
@@ -2331,6 +2342,11 @@ CONFIG_WIFI_PROV_STA_ALL_CHANNEL_SCAN=y
 # Debugging & Assertions
 #
 # end of Debugging & Assertions
+
+#
+# Logger
+#
+# end of Logger
 # end of Component config
 
 # CONFIG_IDF_EXPERIMENTAL_FEATURES is not set

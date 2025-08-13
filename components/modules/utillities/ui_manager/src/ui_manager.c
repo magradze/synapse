@@ -21,6 +21,8 @@
 
 DEFINE_COMPONENT_TAG("UI_MANAGER", SYNAPSE_LOG_COLOR_YELLOW);
 
+static module_t *s_ui_manager_instance = NULL;
+
 // --- Forward Declarations for static functions ---
 static esp_err_t ui_manager_init(module_t *self);
 static esp_err_t ui_manager_start(module_t *self);
@@ -47,10 +49,20 @@ static esp_err_t register_components_impl(module_t *owner, const ui_component_t 
  */
 static esp_err_t unregister_components_impl(module_t *owner);
 
+/**
+ * @internal
+ * @brief Service API implementation for drawing a footer button.
+ * @details This function is part of the service API table and is called by
+ *          other modules to draw a footer button in the UI.
+ * @see ui_manager_api_t
+ */
+static void draw_footer_button_impl(ui_context_t *context, const char *text, bool is_selected);
+
 // --- Service API Table ---
 static ui_manager_api_t s_ui_manager_api = {
     .register_components = register_components_impl,
     .unregister_components = unregister_components_impl,
+    .draw_footer_button = draw_footer_button_impl,
 };
 
 // --- Dependency Map ---
@@ -96,6 +108,9 @@ module_t *ui_manager_create(const cJSON *config)
         ui_manager_deinit(module); // Cleanup on failure
         return NULL;
     }
+
+    s_ui_manager_instance = module;
+    ESP_LOGW(TAG, "ui_manager_create: s_ui_manager_instance SET to %p", s_ui_manager_instance);
 
     return module;
 }
@@ -227,6 +242,9 @@ static void ui_manager_deinit(module_t *self)
     free(private_data);
     self->private_data = NULL;
 
+    s_ui_manager_instance = NULL;
+    ESP_LOGW(TAG, "ui_manager_deinit: s_ui_manager_instance CLEARED");
+
     ESP_LOGI(TAG, "UI Manager deinitialized successfully.");
 }
 
@@ -268,17 +286,41 @@ void render_current_state(ui_manager_private_data_t *private_data)
         ui_menu_render(private_data);
         break;
     case UI_STATE_COMPONENT_ACTIVE:
-        if (private_data->active_component && private_data->active_component->component_data->render_cb)
+        if (private_data->active_component &&
+            private_data->active_component->owner_module &&
+            private_data->active_component->component_data)
         {
-            // Format the module name for the header
-            char formatted_title[32];
-            format_module_name(private_data->active_component->owner_module->name, formatted_title, sizeof(formatted_title));
-            render_header(private_data, formatted_title); // Use formatted module name as title
+            if (private_data->active_component->component_data->render_cb)
+            {
+                char formatted_title[32];
+                // --- CORRECTED NULL/EMPTY CHECK ---
+                if (private_data->active_component->owner_module->name[0] != '\0')
+                {
+                    format_module_name(private_data->active_component->owner_module->name, formatted_title, sizeof(formatted_title));
+                    render_header(private_data, formatted_title);
+                }
+                else
+                {
+                    render_header(private_data, "Error");
+                }
 
-            ui_context_t render_ctx = {
-                .display = private_data->display,
-                .is_active = (private_data->selected_item_index == 0)};
-            private_data->active_component->component_data->render_cb(private_data->active_component->owner_module, &render_ctx);
+                ui_context_t render_ctx = {
+                    .display = private_data->display,
+                    .is_active = (private_data->selected_item_index == 0)};
+                private_data->active_component->component_data->render_cb(private_data->active_component->owner_module, &render_ctx);
+            }
+            else
+            {
+                ESP_LOGE(TAG, "Active component '%s' has a NULL render_cb!", private_data->active_component->component_data->id);
+                render_header(private_data, "Render Error");
+                display->draw_formatted_text(context, 2, 20, 1, "Render callback\nis not defined!");
+            }
+        }
+        else
+        {
+            ESP_LOGE(TAG, "UI_STATE_COMPONENT_ACTIVE has a NULL or corrupt active_component pointer!");
+            render_header(private_data, "Fatal Error");
+            display->draw_formatted_text(context, 2, 20, 1, "Active component\npointer is invalid!");
         }
         break;
     default:
@@ -377,4 +419,29 @@ static esp_err_t unregister_components_impl(module_t *owner)
 
     xSemaphoreGive(p_data->registry_mutex);
     return ESP_OK;
+}
+
+/**
+ * @internal
+ * @brief Service API implementation for drawing a footer button.
+ */
+static void draw_footer_button_impl(ui_context_t *context, const char *text, bool is_selected)
+{
+    ESP_LOGW(TAG, "draw_footer_button_impl: s_ui_manager_instance is %p", s_ui_manager_instance);
+    // Use the cached static pointer to our own instance. This avoids hardcoding names.
+    if (!s_ui_manager_instance)
+    {
+        ESP_LOGE(TAG, "draw_footer_button_impl called but s_ui_manager_instance is NULL!");
+        return;
+    }
+
+    ui_manager_private_data_t *p_data = (ui_manager_private_data_t *)s_ui_manager_instance->private_data;
+    if (!p_data)
+    {
+        ESP_LOGE(TAG, "draw_footer_button_impl called but private_data is NULL!");
+        return;
+    }
+
+    // Call the actual rendering function
+    render_footer_button(p_data, text, is_selected);
 }

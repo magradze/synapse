@@ -25,3 +25,6 @@
 [submodule "components/modules/system/health_monitor"]
 	path = components/modules/system/health_monitor
 	url = git@github.com:magradze/health_monitor.git
+[submodule "components/modules/system/ota_update_manager"]
+	path = components/modules/system/ota_update_manager
+	url = git@github.com:magradze/ota_update_manager.git

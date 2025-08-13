@@ -32,8 +32,8 @@ The Synapse ESP Framework is an open-source platform designed to simplify the de
 2. **Clone the Project:**
 
     ```sh
-    git clone https://github.com/IoTesseract/synapse-esp.git
-    cd synapse-esp
+    git clone https://github.com/magradze/synapse.git
+    cd synapse
     ```
 
 3. **Explore the Structure:**

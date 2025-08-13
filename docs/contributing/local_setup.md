@@ -39,8 +39,8 @@ cd esp-idf
 ## პროექტის კლონირება
 
 ```bash
-git https://github.com/IoTesseract/synapse-esp.git
-cd synapse-esp
+git clone https://github.com/magradze/synapse.git
+cd synapse
 ```
 
 ---

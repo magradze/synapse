@@ -506,6 +506,14 @@ CONFIG_RELAY_ACTUATOR_MAX_INSTANCES=5
 # end of Relay Actuator
 
 #
+# Test Module
+#
+CONFIG_MODULE_TEST_MODULE_ENABLED=y
+CONFIG_TEST_MODULE_DEFAULT_INSTANCE_NAME="main_test_module"
+CONFIG_TEST_MODULE_INSTANCE_NAME_MAX_LEN=32
+# end of Test Module
+
+#
 # MQTT Manager
 #
 CONFIG_MODULE_MQTT_MANAGER_ENABLED=y
@@ -2623,6 +2631,11 @@ CONFIG_WIFI_PROV_STA_ALL_CHANNEL_SCAN=y
 # Relay Actuator
 #
 # end of Relay Actuator
+
+#
+# Test Module
+#
+# end of Test Module
 
 #
 # MQTT Manager

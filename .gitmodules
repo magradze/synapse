@@ -13,3 +13,6 @@
 [submodule "components/modules/drivers/i2c_bus"]
 	path = components/modules/drivers/i2c_bus
 	url = git@github.com:magradze/i2c_bus.git
+[submodule "components/modules/drivers/sn74hc595n_writer"]
+	path = components/modules/drivers/sn74hc595n_writer
+	url = git@github.com:magradze/sn74hc595n_writer.git

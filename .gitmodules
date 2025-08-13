@@ -34,3 +34,6 @@
 [submodule "components/modules/system/device_identity_service"]
 	path = components/modules/system/device_identity_service
 	url = git@github.com:magradze/device_identity_service.git
+[submodule "components/modules/system/watchdog_manager"]
+	path = components/modules/system/watchdog_manager
+	url = git@github.com:magradze/watchdog_manager.git

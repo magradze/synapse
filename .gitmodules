@@ -1,3 +1,6 @@
 [submodule "components/modules/drivers/button_input"]
 	path = components/modules/drivers/button_input
 	url = git@github.com:magradze/button_input.git
+[submodule "components/modules/drivers/mcp23017_io_expander"]
+	path = components/modules/drivers/mcp23017_io_expander
+	url = git@github.com:magradze/mcp23017_io_expander.git

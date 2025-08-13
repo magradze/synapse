@@ -1,0 +1,43 @@
+<map id="components/interfaces/include/storage_interface.h" name="components/interfaces/include/storage_interface.h">
+<area shape="rect" id="Node000001" title="Public Service API contract for the Storage Manager module." alt="" coords="1971,5,2174,45"/>
+<area shape="rect" id="Node000002" href="$relay__actuator__internal_8h.html" title="Internal shared definitions for the Relay Actuator module." alt="" coords="425,101,637,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1958,37,638,122,638,117,1957,31"/>
+<area shape="rect" id="Node000007" href="$wifi__manager__internal_8h.html" title="Internal declarations for the WiFi Manager module." alt="" coords="1410,93,1613,163"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1958,44,1809,67,1645,96,1613,103,1612,98,1644,91,1808,61,1957,39"/>
+<area shape="rect" id="Node000013" href="$self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="1657,93,1827,163"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1991,52,1840,96,1828,100,1827,95,1839,91,1990,46"/>
+<area shape="rect" id="Node000014" href="$sensor__aggregator_8c.html" title="Implementation of the Sensor Aggregator module." alt="" coords="1852,101,2053,155"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="2041,56,1986,102,1982,98,2038,52"/>
+<area shape="rect" id="Node000015" href="$storage__backend__nvs_8h.html" title="Header for the NVS storage backend implementation." alt="" coords="2078,101,2307,155"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="2108,52,2163,98,2159,102,2104,56"/>
+<area shape="rect" id="Node000017" href="$storage__backend__sd_8h.html" title="Header for the SD Card storage backend implementation." alt="" coords="2331,101,2553,155"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="2156,46,2320,91,2347,98,2346,103,2319,96,2155,52"/>
+<area shape="rect" id="Node000019" href="$storage__backend__spiffs_8h.html" title="Header for the SPIFFS storage backend implementation." alt="" coords="2577,93,2771,163"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="2188,34,2367,56,2467,72,2565,91,2578,94,2576,99,2564,96,2466,77,2366,61,2188,40"/>
+<area shape="rect" id="Node000021" href="$storage__manager_8c.html" title="Centralized, multi&#45;backend storage management service." alt="" coords="2795,101,2988,155"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="2188,28,2311,34,2461,46,2623,64,2784,91,2814,98,2813,103,2783,96,2622,70,2460,51,2311,39,2187,33"/>
+<area shape="rect" id="Node000003" href="$relay__actuator_8c.html" title="Implementation of the Relay Actuator module&#39;s lifecycle and core logic." alt="" coords="5,218,191,273"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="413,160,204,213,179,221,178,215,203,208,412,154"/>
+<area shape="rect" id="Node000004" href="$relay__actuator__cmd_8c.html" title="CLI command handler for the Relay Actuator module." alt="" coords="215,218,405,273"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="470,164,362,220,359,216,468,159"/>
+<area shape="rect" id="Node000005" href="$relay__actuator__events_8c.html" title="Event handler for the Relay Actuator module." alt="" coords="429,218,634,273"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="534,169,534,218,529,218,529,169"/>
+<area shape="rect" id="Node000006" href="$relay__actuator__ui_8c.html" title="Implements the UI components for the Relay Actuator module." alt="" coords="659,218,844,273"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="595,159,702,216,700,220,592,164"/>
+<area shape="rect" id="Node000008" href="$wifi__manager_8c.html" title="Main lifecycle and task management for the WiFi Manager module." alt="" coords="868,218,1080,273"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1397,152,1252,179,1093,213,1065,221,1063,215,1092,208,1251,174,1396,146"/>
+<area shape="rect" id="Node000009" href="$wifi__manager__api_8c.html" title="Implements the public Service API for the WiFi Manager module." alt="" coords="1105,218,1345,273"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="1416,170,1291,220,1289,215,1414,165"/>
+<area shape="rect" id="Node000010" href="$wifi__manager__cmd_8c.html" title="Implements the CLI command handlers for the WiFi Manager module." alt="" coords="1369,218,1617,273"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="1506,177,1500,218,1494,217,1501,176"/>
+<area shape="rect" id="Node000011" href="$wifi__manager__events_8c.html" title="Implements the event handlers for the WiFi Manager module." alt="" coords="1641,211,1843,280"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="1592,167,1676,208,1673,213,1590,171"/>
+<area shape="rect" id="Node000012" href="$wifi__manager__ui_8c.html" title="Implements the UI components for the WiFi Manager module." alt="" coords="1867,218,2099,273"/>
+<area shape="poly" id="edge11_Node000007_Node000012" title=" " alt="" coords="1627,156,1645,160,1856,208,1885,215,1884,221,1855,213,1644,165,1625,161"/>
+<area shape="rect" id="Node000016" href="$storage__backend__nvs_8c.html" title="NVS (Non&#45;Volatile Storage) backend implementation for the Storage Manager." alt="" coords="2123,218,2323,273"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="2206,168,2219,217,2214,218,2201,169"/>
+<area shape="rect" id="Node000018" href="$storage__backend__sd_8c.html" title="SD Card (FAT filesystem) backend for the Storage Manager." alt="" coords="2348,218,2541,273"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="2446,169,2447,218,2441,218,2440,169"/>
+<area shape="rect" id="Node000020" href="$storage__backend__spiffs_8c.html" title="SPIFFS (SPI Flash File System) backend for the Storage Manager." alt="" coords="2568,218,2780,273"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="2677,177,2677,218,2671,218,2671,177"/>
+</map>

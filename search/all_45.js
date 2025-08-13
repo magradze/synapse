@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['⚡_20esp_20now_20service_20api_0',['⚡ ESP-NOW Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md65',1,'']]]
+  ['♻️_20რეფაქტორინგი_0',['♻️ რეფაქტორინგი',['../md_docs_2changelog_2v5.html#autotoc_md995',1,'']]],
+  ['♻️_20რეფაქტორინგი_20და_20გაუმჯობესებები_20refactoring_20improvements_1',['♻️ რეფაქტორინგი და გაუმჯობესებები (Refactoring &amp; Improvements)',['../md_docs_2changelog_2v5.html#autotoc_md961',1,'']]]
 ];

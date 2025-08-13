@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2error__handling__a
   <div class="headertitle"><div class="title">შეცდომების დამუშავება და ლოგირების სტანდარტები (Error Handling &amp; Logging)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1658"></a> </p>
-<h1><a class="anchor" id="autotoc_md1659"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1922"></a> </p>
+<h1><a class="anchor" id="autotoc_md1923"></a>
 მიზანი</h1>
 <p>სისტემის საიმედოობისა და დიაგნოსტიკის გასაუმჯობესებლად აუცილებელია შეცდომების სწორი დამუშავება და სტანდარტიზებული ლოგირება ყველა მოდულსა და კომპონენტში.</p>
-<h1><a class="anchor" id="autotoc_md1660"></a>
+<h1><a class="anchor" id="autotoc_md1924"></a>
 შეცდომების დამუშავების პრინციპები</h1>
 <ul>
 <li>გამოიყენეთ მხოლოდ esp_err_t ტიპის დაბრუნებადი მნიშვნელობები</li>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2error__handling__a
 <li>ყველა ფუნქციაში შეამოწმეთ პარამეტრების ვალიდურობა და რესურსების გამოყოფა</li>
 <li>ყველა შეცდომა და მნიშვნელოვანი მოვლენა უნდა ჩაიწეროს ლოგში</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1661"></a>
+<h1><a class="anchor" id="autotoc_md1925"></a>
 შეცდომების კოდები</h1>
 <ul>
 <li>ESP_OK — წარმატება</li>
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2error__handling__a
 <li>ESP_ERR_NOT_SUPPORTED — ოპერაცია არ არის მხარდაჭერილი</li>
 <li>ESP_ERR_SYNAPSE_* — Framework-ის სპეციფიკური შეცდომები</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1662"></a>
+<h1><a class="anchor" id="autotoc_md1926"></a>
 შეცდომების დამუშავების მაგალითები</h1>
 <div class="fragment"><div class="line">esp_err_t ssd1306_api_write_text(<span class="keyword">const</span> <span class="keywordtype">char</span> *text, uint8_t line) {</div>
 <div class="line">    <span class="keywordflow">if</span> (!text) {</div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2error__handling__a
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1663"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1927"></a>
 ლოგირების სტანდარტები</h1>
 <ul>
 <li>გამოიყენეთ DEFINE_COMPONENT_TAG("MODULE_NAME") ყველა მოდულში</li>
@@ -145,14 +145,14 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2error__handling__a
 <li>გამოიყენეთ დესკრიპტიული ცვლადების სახელები ლოგში</li>
 <li>შეცდომის კოდები ყოველთვის გამოიტანეთ esp_err_to_name(ret)-ით</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1664"></a>
+<h1><a class="anchor" id="autotoc_md1928"></a>
 ლოგირების მაგალითები</h1>
 <div class="fragment"><div class="line"><a class="code hl_define" href="logging_8h.html#af160fa445a164fd78ca93d8127dc7f90">DEFINE_COMPONENT_TAG</a>(<span class="stringliteral">&quot;MQTT_MODULE&quot;</span>);</div>
 <div class="line">ESP_LOGI(TAG, <span class="stringliteral">&quot;MQTT connected to broker: %s&quot;</span>, broker_url);</div>
 <div class="line">ESP_LOGE(TAG, <span class="stringliteral">&quot;Failed to connect: %s&quot;</span>, esp_err_to_name(operation_result));</div>
 <div class="line">ESP_LOGW(TAG, <span class="stringliteral">&quot;Configuration key &#39;%s&#39; not found, using default: %d&quot;</span>, config_key, default_value);</div>
 <div class="ttc" id="alogging_8h_html_af160fa445a164fd78ca93d8127dc7f90"><div class="ttname"><a href="logging_8h.html#af160fa445a164fd78ca93d8127dc7f90">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name, color)</div><div class="ttdoc">Defines a local, static, color-coded TAG variable for logging.</div><div class="ttdef"><b>Definition</b> logging.h:60</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1665"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1929"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p><ul>
 <li>არალოგიკური ან ზოგადი ლოგები ("Error", "OK")</li>

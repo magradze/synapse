@@ -1,0 +1,19 @@
+<map id="components/interfaces/include/cmd_router_interface.h" name="components/interfaces/include/cmd_router_interface.h">
+<area shape="rect" id="Node000001" title="Public Service API contract for the Command Router module." alt="" coords="795,5,1023,45"/>
+<area shape="rect" id="Node000002" href="$relay__actuator_8c.html" title="Implementation of the Relay Actuator module&#39;s lifecycle and core logic." alt="" coords="5,101,191,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="781,33,659,40,514,52,358,70,204,96,175,103,173,98,203,91,357,65,513,46,659,35,781,28"/>
+<area shape="rect" id="Node000003" href="$relay__actuator__events_8c.html" title="Event handler for the Relay Actuator module." alt="" coords="215,101,421,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="781,42,615,64,433,96,403,103,402,98,432,91,614,58,781,37"/>
+<area shape="rect" id="Node000004" href="$wifi__manager__cmd_8c.html" title="Implements the CLI command handlers for the WiFi Manager module." alt="" coords="445,101,693,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="832,52,658,103,657,98,831,47"/>
+<area shape="rect" id="Node000005" href="$self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="717,93,887,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="880,57,840,95,836,91,877,53"/>
+<area shape="rect" id="Node000006" href="$security__status__reporter_8c.html" title="Reports Secure Boot and Flash Encryption status." alt="" coords="912,93,1119,163"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="941,53,981,91,978,95,937,57"/>
+<area shape="rect" id="Node000007" href="$device__identity__service_8c.html" title="Implementation of the Device Identity Service module with CLI support." alt="" coords="1143,93,1346,163"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="985,47,1144,94,1142,99,984,52"/>
+<area shape="rect" id="Node000008" href="$command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="1370,101,1586,155"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1037,39,1191,60,1359,91,1389,98,1388,103,1357,96,1190,66,1036,44"/>
+<area shape="rect" id="Node000009" href="$rgb__led__indicator_8c.html" title="RGB LED ინდიკატორის მართვა (Shift Register ვერსია)" alt="" coords="1610,93,1773,163"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1037,27,1156,33,1298,45,1449,63,1599,91,1610,94,1609,99,1597,96,1448,69,1297,50,1156,38,1036,32"/>
+</map>

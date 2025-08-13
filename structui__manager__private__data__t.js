@@ -1,0 +1,28 @@
+var structui__manager__private__data__t =
+[
+    [ "SLIST_HEAD", "structui__manager__private__data__t.html#ab806b519b4cbd0a0b2ad89205de14f80", null ],
+    [ "active_component", "structui__manager__private__data__t.html#a86424980da82206bec99e42b14470f55", null ],
+    [ "current_state", "structui__manager__private__data__t.html#a27b5e54fd8c533963b86c30d07d3023f", null ],
+    [ "display", "structui__manager__private__data__t.html#ad55ebd82945832f173291bb7954654f1", null ],
+    [ "display_height", "structui__manager__private__data__t.html#a9951c71a96ba1e72368ed5e9c57c829f", null ],
+    [ "display_width", "structui__manager__private__data__t.html#a2aa8d1df79108b5e7f640a2892fbb174", null ],
+    [ "home_screen_timer", "structui__manager__private__data__t.html#a08cd65dae189f9e0f155c04623f2bb4a", null ],
+    [ "is_screen_on", "structui__manager__private__data__t.html#a4ee4ce7e83997733d0f1a0a0cab5a543", null ],
+    [ "last_button_press_time", "structui__manager__private__data__t.html#aa09a3406a2047fb041ed6ede8fa0ad4a", null ],
+    [ "previous_menu_selection", "structui__manager__private__data__t.html#acb411d2d2d4497db2b125a6d98959f51", null ],
+    [ "registry_mutex", "structui__manager__private__data__t.html#a95b00585769b7328b4a82932dcdab309", null ],
+    [ "screen_off_timer", "structui__manager__private__data__t.html#a51f763c6ffcc48cc42dc0839f836dbdc", null ],
+    [ "selected_item_index", "structui__manager__private__data__t.html#afdb45006f9b8a7456aa1ed1e010c3d40", null ],
+    [ "small_font_metrics", "structui__manager__private__data__t.html#a6041a88c678126145f9b23e686171f4d", null ],
+    [ "system_manager", "structui__manager__private__data__t.html#a84592e951e8c692996a44fe194d305a9", null ],
+    [ "time_sync", "structui__manager__private__data__t.html#a399f3bdff6c7a3bf7ffe8587e52b494b", null ],
+    [ "timer", "structui__manager__private__data__t.html#a54cfcac066a4adbb227aa346c8b7aeca", null ],
+    [ "top_visible_item", "structui__manager__private__data__t.html#a6ebaaf2558a4fd03fc0e8d44918f04f5", null ],
+    [ "ui_cmd_queue", "structui__manager__private__data__t.html#aadf23fd6c0f3bb919147cc46d599f7d6", null ],
+    [ "ui_task_handle", "structui__manager__private__data__t.html#acd29a294f3161e61f1a114a8280445c0", null ],
+    [ "wifi_connected", "structui__manager__private__data__t.html#ad6da87b32cee6a414523d18c2b5c8748", null ],
+    [ "wifi_module_handle", "structui__manager__private__data__t.html#a7f945a4b383ef6341679d410d6eef179", null ],
+    [ "wifi_rssi", "structui__manager__private__data__t.html#ab361dc7522622b4c8b95169316369f2b", null ],
+    [ "wifi_service", "structui__manager__private__data__t.html#a8ec1e727b7c0d3a5459f354747e0c821", null ],
+    [ "wifi_status_timer", "structui__manager__private__data__t.html#ade34781106eba00144df323d02c1f7d4", null ]
+];

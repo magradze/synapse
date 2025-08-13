@@ -1,5 +1,23 @@
 <map id="components/interfaces/include/system_manager_interface.h" name="components/interfaces/include/system_manager_interface.h">
-<area shape="rect" id="Node000001" title="Public Service API contract for the System Manager." alt="" coords="5,5,196,60"/>
-<area shape="rect" id="Node000002" href="$system__manager_8c.html" title="Implements the System Manager component." alt="" coords="22,108,179,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,74,103,108,98,108,98,74"/>
+<area shape="rect" id="Node000001" title="Public Service API contract for the System Manager." alt="" coords="489,5,679,60"/>
+<area shape="rect" id="Node000002" href="$system__manager_8c.html" title="Implements the System Manager component." alt="" coords="5,123,163,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="476,51,332,75,175,111,131,125,129,120,174,105,331,70,475,46"/>
+<area shape="rect" id="Node000003" href="$self__test__manager_8c.html" title="Implementation of the Self Test Manager module." alt="" coords="187,108,357,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="496,67,359,114,357,109,494,62"/>
+<area shape="rect" id="Node000004" href="$alarms__manager_8c.html" title="Implementation of the System Alarms Manager module." alt="" coords="382,115,570,170"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="549,72,504,117,501,113,546,68"/>
+<area shape="rect" id="Node000005" href="$connectivity__watchdog_8c.html" title="Implementation of the universal Connectivity Watchdog module." alt="" coords="594,108,793,177"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="623,68,661,106,657,110,619,72"/>
+<area shape="rect" id="Node000006" href="$command__router_8c.html" title="Command Router &amp; System Shell Module Implementation (FIXED)" alt="" coords="817,115,1033,170"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="681,62,843,113,842,118,679,67"/>
+<area shape="rect" id="Node000007" href="$ui__manager__internal_8h.html" title="Internal shared definitions for the UI Manager module." alt="" coords="1057,115,1252,170"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="694,45,860,69,1046,105,1074,113,1073,118,1045,111,859,75,693,50"/>
+<area shape="rect" id="Node000008" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="793,225,956,280"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1075,177,944,228,942,223,1073,172"/>
+<area shape="rect" id="Node000009" href="$ui__manager_8c.html" title="Main orchestrator for the Modular UI system." alt="" coords="980,225,1143,280"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="1125,182,1086,227,1082,223,1121,179"/>
+<area shape="rect" id="Node000010" href="$ui__menu_8c.html" title="Implements the dynamic main menu logic for the UI Manager." alt="" coords="1167,225,1329,280"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="1189,179,1227,223,1223,227,1185,182"/>
+<area shape="rect" id="Node000011" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="1353,225,1516,280"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="1236,172,1368,223,1366,228,1234,177"/>
 </map>

@@ -93,21 +93,21 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2task__pool__a
   <div class="headertitle"><div class="title">Synapse Task Pool Manager API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md449"></a> </p>
-<h1><a class="anchor" id="autotoc_md450"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md713"></a> </p>
+<h1><a class="anchor" id="autotoc_md714"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code>Task Pool Manager</code>-ის საჯარო API-ს, რომელიც ხელმისაწვდომია <code><a class="el" href="synapse_8h.html" title="Synapse ESP Framework - The Main Public Header.">synapse.h</a></code> ჰედერის მეშვეობით. ეს API საშუალებას აძლევს მოდულებს, შეასრულონ ფონური, ერთჯერადი ან პერიოდული სამუშაოები <code>core</code>-ის მიერ მართვად, გაზიარებულ ტასკებში, საკუთარი FreeRTOS ტასკის შექმნის გარეშე.</p>
 <p>ეს პატერნი რეკომენდებულია რესურსების (განსაკუთრებით RAM-ის) ოპტიმიზაციისთვის.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md452"></a>
+<h1><a class="anchor" id="autotoc_md716"></a>
 API-ს ტიპები და სტრუქტურები</h1>
-<h2><a class="anchor" id="autotoc_md453"></a>
+<h2><a class="anchor" id="autotoc_md717"></a>
 &lt;tt&gt;synapse_job_handle_t&lt;/tt&gt;</h2>
 <p>ეს არის "გაუმჭვირვალე" (opaque) <code>handle</code>-ი, რომელიც წარმოადგენს დაგეგმილ სამუშაოს (<code>Job</code>). თქვენ იღებთ მას <code>synapse_task_pool_schedule_job</code> ფუნქციის გამოძახებისას და იყენებთ <code>synapse_task_pool_cancel_job</code> ფუნქციაში სამუშაოს გასაუქმებლად.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structsynapse__job__t.html">synapse_job_t</a>* <a class="code hl_typedef" href="task__pool__manager_8h.html#aa66f647dc86661ec0359cd9cdf28d683">synapse_job_handle_t</a>;</div>
 <div class="ttc" id="astructsynapse__job__t_html"><div class="ttname"><a href="structsynapse__job__t.html">synapse_job_t</a></div><div class="ttdef"><b>Definition</b> task_pool_manager.c:22</div></div>
 <div class="ttc" id="atask__pool__manager_8h_html_aa66f647dc86661ec0359cd9cdf28d683"><div class="ttname"><a href="task__pool__manager_8h.html#aa66f647dc86661ec0359cd9cdf28d683">synapse_job_handle_t</a></div><div class="ttdeci">struct synapse_job_t * synapse_job_handle_t</div><div class="ttdoc">Opaque handle to a scheduled job.</div><div class="ttdef"><b>Definition</b> task_pool_manager.h:25</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md454"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md718"></a>
 &lt;tt&gt;synapse_job_cb&lt;/tt&gt;</h2>
 <p>ეს არის <code>callback</code> ფუნქციის ტიპი, რომელიც უნდა შექმნათ თქვენს მოდულში. <code>Task Pool Manager</code>-ის "მუშა" ტასკი გამოიძახებს ამ ფუნქციას, როდესაც სამუშაოს შესრულების დრო მოვა.</p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="task__pool__manager_8h.html#a1b05da998c16d0d11e8d8fa240e836cf">synapse_job_cb</a>)(<span class="keywordtype">void</span>* user_context);</div>
@@ -119,11 +119,11 @@ API-ს ტიპები და სტრუქტურები</h1>
 <hr  />
 <p></b></p>
 <p><b></b></p>
-<h1><a class="anchor" id="autotoc_md456"></a>
+<h1><a class="anchor" id="autotoc_md720"></a>
 API-ს ფუნქციები</h1>
 <p><b></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md457"></a>
+<h2><a class="anchor" id="autotoc_md721"></a>
 &lt;tt&gt;synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void* user_context, uint32_t interval_ms, bool is_periodic);&lt;/tt&gt;</h2>
 <p><b></b></p>
 <p><b>აგეგმარებს ახალ სამუშაოს (<code>Job</code>) <code>Task Pool</code>-ში შესასრულებლად.</b></p>
@@ -140,7 +140,7 @@ API-ს ფუნქციები</h1>
 </ul>
 <p></b></p>
 <p><b></b></p>
-<h2><a class="anchor" id="autotoc_md458"></a>
+<h2><a class="anchor" id="autotoc_md722"></a>
 &lt;tt&gt;esp_err_t synapse_task_pool_cancel_job(synapse_job_handle_t handle);&lt;/tt&gt;</h2>
 <p><b></b></p>
 <p><b>აუქმებს ადრე დაგეგმილ პერიოდულ ან ერთჯერად სამუშაოს. ეს ფუნქცია აუცილებლად უნდა გამოიძახოთ მოდულის <code>deinit</code> ფაზაში.</b></p>
@@ -157,7 +157,7 @@ API-ს ფუნქციები</h1>
 <p><b></p><hr  />
 <p></b></p>
 <p><b></b></p>
-<h1><a class="anchor" id="autotoc_md460"></a>
+<h1><a class="anchor" id="autotoc_md724"></a>
 💡 გამოყენების მაგალითი</h1>
 <p><b></b></p>
 <p><b>იხილეთ <a class="el" href="md_docs_2convention_2task__pool__pattern.html">task_pool_pattern.md</a> დეტალური გამოყენების მაგალითისთვის. </b></p>

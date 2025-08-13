@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📲_20synapse_20provisioning_20module_20api_20reference_0',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]]
+  ['📖_20დამხმარე_20სტრუქტურა_20tt_20cmd_5ft_20tt_0',['📖 დამხმარე სტრუქტურა (&lt;tt&gt;cmd_t&lt;/tt&gt;)',['../md_docs_2api__reference_2command__router__api.html#autotoc_md315',1,'']]]
 ];

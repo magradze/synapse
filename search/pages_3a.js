@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📲_20synapse_20provisioning_20module_20api_20reference_0',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]]
+  ['🆔_20მოდული_3a_20tt_20device_5fidentity_5fservice_20tt_0',['🆔 მოდული: &lt;tt&gt;device_identity_service&lt;/tt&gt;',['../md_components_2modules_2system_2device__identity__service_2README.html',1,'']]]
 ];

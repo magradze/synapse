@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2task__pool__patte
   <div class="headertitle"><div class="title">რესურსების ოპტიმიზაციის პატერნი (Shared Task Pool)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1152"></a> <b>სტატუსი:</b> საუკეთესო პრაქტიკა (Best Practice) <b>ავტორი:</b> Synapse Framework Team</p>
-<h1><a class="anchor" id="autotoc_md1153"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1416"></a> <b>სტატუსი:</b> საუკეთესო პრაქტიკა (Best Practice) <b>ავტორი:</b> Synapse Framework Team</p>
+<h1><a class="anchor" id="autotoc_md1417"></a>
 1. 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ში <b>რესურსების ოპტიმიზაციის</b> სტანდარტულ პატერნს, რომელიც დაფუძნებულია **<code>Task Pool Manager</code>** (გაზიარებული ტასკების მენეჯერი) სერვისის გამოყენებაზე. ამ პატერნის მიზანია, რადიკალურად შეამციროს სისტემის მიერ მოხმარებული ოპერატიული მეხსიერება (RAM) და გააუმჯობესოს საერთო წარმადობა.</p>
 <p>ეს კონვენცია განსაკუთრებით მნიშვნელოვანია იმ მოდულებისთვის, რომლებიც ასრულებენ <b>მცირე, პერიოდულ, არაბლოკირებად</b> სამუშაოს.</p>
-<h1><a class="anchor" id="autotoc_md1154"></a>
+<h1><a class="anchor" id="autotoc_md1418"></a>
 2. 🤔 პრობლემა: "ერთი მოდული = ერთი ტასკი" ანტი-პატერნი</h1>
 <p>ჩაშენებულ სისტემებში, განსაკუთრებით ESP32-ზე, მეხსიერება შეზღუდული რესურსია. გავრცელებული, მაგრამ არაეფექტური მიდგომაა, როდესაც თითოეული მოდული, რომელსაც ფონური სამუშაო სჭირდება, ქმნის საკუთარ FreeRTOS ტასკს.</p>
 <p><b>პრობლემის არსი:</b></p>
@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2task__pool__patte
 <li><b>წარმადობის შემცირება:</b> რაც მეტია ტასკი, მით მეტ დროს ხარჯავს FreeRTOS-ის <code>scheduler</code>-ი მათ შორის გადართვაზე (Context Switching), რაც ამცირებს სასარგებლო სამუშაოს შესრულების დროს.</li>
 <li><b>არაეფექტურობა:</b> ამ ტასკების უმეტესობა 99% დროის განმავლობაში "იძინებს" (<code>vTaskDelay</code>) და უბრალოდ ადგილს იკავებს მეხსიერებაში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1155"></a>
+<h1><a class="anchor" id="autotoc_md1419"></a>
 3. 💡 გადაწყვეტა: &lt;tt&gt;Task Pool Manager&lt;/tt&gt;</h1>
 <p>Synapse Framework-ი ამ პრობლემას ჭრის <code>Task Pool Manager</code> <code>core</code> სერვისის მეშვეობით. ეს არის "მუშა ტასკების" (Worker Tasks) ერთობლიობა, რომელიც მზად არის, შეასრულოს ნებისმიერი "დავალება" (<code>Job</code>), რომელსაც მას მოდულები მიაწვდიან.</p>
 <p><b>პატერნის ლოგიკა:</b></p>
@@ -124,9 +124,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2task__pool__patte
 <li><code>Task Pool Manager</code>-ი თავად ზრუნავს ამ ფუნქციის პერიოდულად, მითითებული ინტერვალით გამოძახებაზე თავისი ერთ-ერთი "მუშა" ტასკის კონტექსტიდან.</li>
 <li><code>_deinit</code> ფუნქციაში, მოდული იძახებს <code><a class="el" href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323" title="Cancels a previously scheduled job.">synapse_task_pool_cancel_job()</a></code>-ს, რათა გააუქმოს დაგეგმილი სამუშაო.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1156"></a>
+<h1><a class="anchor" id="autotoc_md1420"></a>
 4. 📝 გამოყენების პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md1157"></a>
+<h2><a class="anchor" id="autotoc_md1421"></a>
 4.1. მოდულის &lt;tt&gt;private_data&lt;/tt&gt; სტრუქტურა</h2>
 <div class="fragment"><div class="line"><span class="comment">// my_sensor.c</span></div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2task__pool__patte
 <div class="line">    <a class="code hl_struct" href="structsynapse__job__t.html">synapse_job_handle_t</a> job_handle; <span class="comment">// ვინახავთ handle-ს სამუშაოს გასაუქმებლად</span></div>
 <div class="line">} my_sensor_private_data_t;</div>
 <div class="ttc" id="astructsynapse__job__t_html"><div class="ttname"><a href="structsynapse__job__t.html">synapse_job_t</a></div><div class="ttdef"><b>Definition</b> task_pool_manager.c:22</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1158"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1422"></a>
 4.2. სამუშაო ფუნქციის (&lt;tt&gt;Job&lt;/tt&gt;) იმპლემენტაცია</h2>
 <p>ეს ფუნქცია არ შეიცავს <code>while</code> ციკლს.</p>
 <div class="fragment"><div class="line"><span class="comment">// my_sensor.c</span></div>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2task__pool__patte
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
 <div class="ttc" id="astructmodule__t_html_a2e4e556e94d9d5402250b0524a7c0196"><div class="ttname"><a href="structmodule__t.html#a2e4e556e94d9d5402250b0524a7c0196">module_t::private_data</a></div><div class="ttdeci">void * private_data</div><div class="ttdoc">A pointer to the module's internal, private data structure.</div><div class="ttdef"><b>Definition</b> base_module.h:176</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1159"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1423"></a>
 4.3. &lt;tt&gt;_start&lt;/tt&gt; და &lt;tt&gt;_deinit&lt;/tt&gt; ფუნქციები</h2>
 <div class="fragment"><div class="line"><span class="comment">// my_sensor.c</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t my_sensor_start(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self)</div>
@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2task__pool__patte
 <div class="ttc" id="abase__module_8h_html_a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c"><div class="ttname"><a href="base__module_8h.html#a36f9e7c6bebb796ae91a95e61b7ee65faee77b0ed7b64d925cf09eacdf4bc1c4c">MODULE_STATUS_RUNNING</a></div><div class="ttdeci">@ MODULE_STATUS_RUNNING</div><div class="ttdoc">The module is running and fully operational.</div><div class="ttdef"><b>Definition</b> base_module.h:39</div></div>
 <div class="ttc" id="atask__pool__manager_8h_html_a431a85109a972dfe31d5c2a7167c8f0b"><div class="ttname"><a href="task__pool__manager_8h.html#a431a85109a972dfe31d5c2a7167c8f0b">synapse_task_pool_schedule_job</a></div><div class="ttdeci">synapse_job_handle_t synapse_task_pool_schedule_job(synapse_job_cb job_function, void *user_context, uint32_t interval_ms, bool is_periodic)</div><div class="ttdoc">Schedules a new job for execution by the task pool.</div><div class="ttdef"><b>Definition</b> task_pool_manager.c:88</div></div>
 <div class="ttc" id="atask__pool__manager_8h_html_a4f4a978a64cf383da083abae40a3f323"><div class="ttname"><a href="task__pool__manager_8h.html#a4f4a978a64cf383da083abae40a3f323">synapse_task_pool_cancel_job</a></div><div class="ttdeci">esp_err_t synapse_task_pool_cancel_job(synapse_job_handle_t handle)</div><div class="ttdoc">Cancels a previously scheduled job.</div><div class="ttdef"><b>Definition</b> task_pool_manager.c:117</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1160"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1424"></a>
 5. ✅ როდის გამოვიყენოთ &lt;tt&gt;Task Pool&lt;/tt&gt; და როდის საკუთარი ტასკი?</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

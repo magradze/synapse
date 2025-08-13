@@ -1,0 +1,19 @@
+<map id="components/interfaces/include/ui_interface.h" name="components/interfaces/include/ui_interface.h">
+<area shape="rect" id="Node000001" title="Defines the public API and contracts for the Modular UI system." alt="" coords="399,5,570,45"/>
+<area shape="rect" id="Node000002" href="$relay__actuator__ui_8c.html" title="Implements the UI components for the Relay Actuator module." alt="" coords="5,93,191,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,51,204,96,192,99,190,94,203,91,391,46"/>
+<area shape="rect" id="Node000003" href="$wifi__manager__ui_8c.html" title="Implements the UI components for the WiFi Manager module." alt="" coords="215,93,447,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="443,55,376,96,373,91,440,50"/>
+<area shape="rect" id="Node000004" href="$ui__manager_8c.html" title="Main orchestrator for the Modular UI system." alt="" coords="258,196,421,251"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="487,60,481,104,473,128,461,150,435,177,404,198,401,193,432,173,457,146,468,126,476,103,482,59"/>
+<area shape="rect" id="Node000005" href="$ui__manager__internal_8h.html" title="Internal shared definitions for the UI Manager module." alt="" coords="522,93,717,148"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="525,51,583,91,580,95,522,55"/>
+<area shape="rect" id="Node000007" href="$ui__menu_8c.html" title="Implements the dynamic main menu logic for the UI Manager." alt="" coords="818,196,981,251"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="584,42,657,62,730,91,771,114,810,142,873,193,870,198,807,146,768,119,728,96,655,67,583,47"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="535,155,413,198,411,193,533,150"/>
+<area shape="rect" id="Node000006" href="$ui__events_8c.html" title="Implements the main event handling logic for the UI Manager." alt="" coords="445,196,607,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="587,160,552,198,548,194,583,157"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="706,150,827,193,825,198,704,155"/>
+<area shape="rect" id="Node000008" href="$ui__screens_8c.html" title="Implements rendering functions for different UI screens." alt="" coords="631,196,794,251"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="655,157,690,194,686,198,651,160"/>
+</map>

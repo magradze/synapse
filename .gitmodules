@@ -79,3 +79,6 @@
 [submodule "components/modules/actuators/relay_actuator"]
 	path = components/modules/actuators/relay_actuator
 	url = git@github.com:magradze/relay_actuator.git
+[submodule "components/modules/testing/sensor_simulator"]
+	path = components/modules/testing/sensor_simulator
+	url = git@github.com:magradze/sensor_simulator.git

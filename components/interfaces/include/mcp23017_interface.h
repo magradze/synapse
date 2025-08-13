@@ -1,7 +1,7 @@
 /**
  * @file mcp23017_interface.h
  * @brief Public Service API contract for the MCP23017 I/O Expander module.
- * @author Synapse Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-08-21
  */

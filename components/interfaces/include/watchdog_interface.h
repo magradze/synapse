@@ -1,7 +1,7 @@
 /**
  * @file watchdog_interface.h
  * @brief Public Service API contract for the Watchdog Manager module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-02
  * @details This header defines the abstract interface for the Watchdog Manager,

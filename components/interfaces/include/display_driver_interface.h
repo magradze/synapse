@@ -5,7 +5,7 @@
  *          (e.g., SSD1306, ST7789) in the Synapse Framework must implement.
  *          Its purpose is to completely decouple high-level UI logic (from ui_manager)
  *          from the low-level hardware implementation.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.1.0
  * @date 2025-07-31
  */

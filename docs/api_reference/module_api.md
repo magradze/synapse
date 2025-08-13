@@ -53,7 +53,7 @@
 
 ## Configuration Parsing API
 
-### `static esp_err_t parse_{module_name}_config(const cJSON *config_node, {module_name}_private_data_t *p_data);`
+### `static esp_err_t parse_{module_name}_config(const cJSON *config_node, {module_name}_private_data_t *private_data);`
 
 - **როლი:** კითხულობს და ამოწმებს მოდულის კონფიგურაციას.
 - **არგუმენტები:** `config_node` - მაჩვენებელი `config` ობიექტის შიგთავსზე (და არა სრულ ობიექტზე).

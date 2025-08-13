@@ -148,19 +148,19 @@ module_t *greeter_module_create(const cJSON *config) {
 // API Implementation
 static esp_err_t greeter_api_get_text(void *context, const char **out_text) {
     module_t *self = (module_t *)context;
-    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
-    *out_text = p_data->greeting_text;
+    greeter_private_data_t *private_data = (greeter_private_data_t *)self->private_data;
+    *out_text = private_data->greeting_text;
     return ESP_OK;
 }
 
 // Job Callback
 static void greeting_job_callback(void *context) {
     module_t *self = (module_t *)context;
-    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
+    greeter_private_data_t *private_data = (greeter_private_data_t *)self->private_data;
     ESP_LOGI(TAG, "Posting greeting message from '%s'", self->name);
     
     // Post event with payload
-    char *payload = strdup(p_data->greeting_text);
+    char *payload = strdup(private_data->greeting_text);
     event_data_wrapper_t *wrapper;
     if (synapse_event_data_wrap(payload, free, &wrapper) == ESP_OK) {
         synapse_event_bus_post(GREETING_MESSAGE_READY, wrapper);
@@ -179,11 +179,11 @@ static esp_err_t greeter_module_init(module_t *self) {
 // Start Function
 static esp_err_t greeter_module_start(module_t *self) {
     ESP_LOGI(TAG, "'%s' starting...", self->name);
-    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
+    greeter_private_data_t *private_data = (greeter_private_data_t *)self->private_data;
     
     // Schedule a job using the Task Pool Manager
-    p_data->greeting_job = synapse_task_pool_schedule_job(greeting_job_callback, self, 5000, true);
-    if (!p_data->greeting_job) {
+    private_data->greeting_job = synapse_task_pool_schedule_job(greeting_job_callback, self, 5000, true);
+    if (!private_data->greeting_job) {
         ESP_LOGE(TAG, "Failed to schedule greeting job!");
         return ESP_FAIL;
     }
@@ -206,10 +206,10 @@ static void greeter_module_handle_event(module_t *self, const char *event_name, 
 // Deinit Function
 static void greeter_module_deinit(module_t *self) {
     if (!self) return;
-    greeter_private_data_t *p_data = (greeter_private_data_t *)self->private_data;
+    greeter_private_data_t *private_data = (greeter_private_data_t *)self->private_data;
 
-    if (p_data && p_data->greeting_job) {
-        synapse_task_pool_cancel_job(p_data->greeting_job);
+    if (private_data && private_data->greeting_job) {
+        synapse_task_pool_cancel_job(private_data->greeting_job);
     }
     
     synapse_event_bus_unsubscribe(SYNAPSE_EVENT_SYSTEM_START_COMPLETE, self);

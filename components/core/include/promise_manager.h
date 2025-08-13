@@ -1,7 +1,7 @@
 /**
  * @file promise_manager.h
  * @brief Public API for consuming asynchronous operations using a Promise pattern.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 2.0.0
  * @date 2025-08-30
  * @details This header defines the types used for promise-based operations.

@@ -1,7 +1,7 @@
 /**
  * @file wifi_interface.h
  * @brief Public Service API contract for the WiFi Manager module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 2.0.0
  * @date 2025-08-30
  */

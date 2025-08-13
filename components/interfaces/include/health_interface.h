@@ -1,7 +1,7 @@
 /**
  * @file health_interface.h
  * @brief Health Monitor მოდულის საჯარო სერვისის API-ს "კონტრაქტი".
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-01
  * @details ეს ჰედერი განსაზღვრავს Health Monitor სერვისის აბსტრაქტულ

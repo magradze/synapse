@@ -1,7 +1,7 @@
 /**
  * @file promise_manager_internal.h
  * @brief Internal Core API for creating and fulfilling promises.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 2.0.0
  * @date 2025-08-30
  * @details This header is for use by service provider modules that implement

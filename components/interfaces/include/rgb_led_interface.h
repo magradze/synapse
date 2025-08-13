@@ -1,7 +1,7 @@
 /**
  * @file rgb_led_interface.h
  * @brief Public Service API contract for the RGB LED Indicator module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-01
  * @details This header defines the abstract interface (API structure) for the

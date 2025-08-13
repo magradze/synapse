@@ -1,7 +1,7 @@
 /**
  * @file ui_interface.h
  * @brief Defines the public API and contracts for the Modular UI system.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-09-12
  *

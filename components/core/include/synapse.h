@@ -1,7 +1,7 @@
 /**
  * @file synapse.h
  * @brief Synapse ESP Framework - The Main Public Header.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.1.0
  * @date 2025-08-29
  *

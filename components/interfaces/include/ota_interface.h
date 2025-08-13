@@ -1,7 +1,7 @@
 /**
  * @file ota_interface.h
  * @brief Public Service API contract for the OTA Update Manager module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  */
 #ifndef SYNAPSE_OTA_INTERFACE_H

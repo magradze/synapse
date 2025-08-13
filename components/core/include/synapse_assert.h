@@ -1,7 +1,7 @@
 /**
  * @file synapse_assert.h
  * @brief Custom assertion macro for the Synapse Framework.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-09-10
  * @details Provides a powerful assertion macro that can be enabled or disabled

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['⚡_20esp_20now_20service_20api_0',['⚡ ESP-NOW Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md329',1,'']]]
+  ['✍️_20როგორ_20დავამატოთ_20ვალიდაცია_20ახალ_20მოდულს_0',['4. ✍️ როგორ დავამატოთ ვალიდაცია ახალ მოდულს?',['../md_docs_2tools_2json__validator.html#autotoc_md1728',1,'']]]
 ];

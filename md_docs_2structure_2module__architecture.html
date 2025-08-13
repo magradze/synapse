@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
   <div class="headertitle"><div class="title">მოდულების არქიტექტურა (Module Architecture)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1957"></a> </p>
-<h1><a class="anchor" id="autotoc_md1958"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1693"></a> </p>
+<h1><a class="anchor" id="autotoc_md1694"></a>
 ძირითადი პრინციპები</h1>
 <ul>
 <li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს <code>Kconfig</code>-ის მეშვეობით.</li>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <li><b>სტანდარტიზაცია:</b> ყველა მოდული მიჰყვება ერთიან naming, structure და communication სტანდარტებს.</li>
 <li><b>გაფართოებადობა:</b> ახალი მოდულის დამატება შესაძლებელია მინიმალური ძალისხმევით, <code>create_module.py</code> სკრიპტის გამოყენებით.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1959"></a>
+<h1><a class="anchor" id="autotoc_md1695"></a>
 მოდულის ტიპები</h1>
 <ol type="1">
 <li><b>Service Provider Module:</b><ul>
@@ -121,14 +121,14 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1960"></a>
+<h1><a class="anchor" id="autotoc_md1696"></a>
 მოდულების ურთიერთქმედება</h1>
 <ul>
 <li><b>Service Locator:</b> გამოიყენება კონკრეტული API-ს მისაღებად და პირდაპირი, სინქრონული ფუნქციური გამოძახებისთვის.</li>
 <li><b>Event Bus:</b> გამოიყენება broadcast/notification სცენარებისთვის, ასინქრონული კომუნიკაციისთვის.</li>
 <li><b>აკრძალულია:</b> პირდაპირი <code>#include</code> სხვა მოდულის ჰედერების.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1961"></a>
+<h1><a class="anchor" id="autotoc_md1697"></a>
 მოდულის სიცოცხლის ციკლი (Lifecycle)</h1>
 <ol type="1">
 <li><b>Create:</b> <code>Module Factory</code> იძახებს მოდულის <code>_create(config)</code> ფუნქციას. მოდული იღებს თავისი კონფიგურაციის ობიექტის <b>მფლობელობას</b>.</li>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <li><b>Start:</b> <code>System Manager</code> იძახებს <code>start(self)</code> ფუნქციას. აქ იწყება მოდულის აქტიური მუშაობა (მაგ., ტასკის გაშვება).</li>
 <li><b>Deinit:</b> <code>System Manager</code> (მომავალში) ან სისტემის გამორთვისას გამოიძახება <code>deinit(self)</code> ფუნქცია. აქ ხდება ყველა გამოყოფილი რესურსის (მათ შორის კონფიგურაციის ობიექტის) გათავისუფლება.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1962"></a>
+<h1><a class="anchor" id="autotoc_md1698"></a>
 მოდულის სტრუქტურის მაგალითი</h1>
 <div class="fragment"><div class="line">components/modules/displays/rgb_led_indicator/</div>
 <div class="line">├── CMakeLists.txt</div>
@@ -148,11 +148,11 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <div class="line">│   └── rgb_led_indicator.h</div>
 <div class="line">└── src/</div>
 <div class="line">    └── rgb_led_indicator.c</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1963"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1699"></a>
 &lt;tt&gt;_create&lt;/tt&gt; ფუნქციის კონტრაქტი</h2>
 <p>ყველა მოდულის <code>_create</code> ფუნქციამ უნდა დაიცვას მეხსიერების მართვის ახალი წესი.</p>
 <div class="fragment"><div class="line"><span class="comment">// src/rgb_led_indicator.c-ში</span></div>
-<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *<a class="code hl_function" href="rgb__led__indicator_8h.html#af7ab099c2a16ab7a894d97a3a01f3d31">rgb_led_indicator_create</a>(<span class="keyword">const</span> cJSON *config) {</div>
+<div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *rgb_led_indicator_create(<span class="keyword">const</span> cJSON *config) {</div>
 <div class="line">    <span class="comment">// 1. მეხსიერების გამოყოფა</span></div>
 <div class="line">    <a class="code hl_struct" href="structmodule__t.html">module_t</a> *<span class="keyword">module</span> = (module_t *)calloc(1, sizeof(module_t));</div>
 <div class="line">    <span class="comment">// ...</span></div>
@@ -179,9 +179,8 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">module</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="argb__led__indicator_8h_html_af7ab099c2a16ab7a894d97a3a01f3d31"><div class="ttname"><a href="rgb__led__indicator_8h.html#af7ab099c2a16ab7a894d97a3a01f3d31">rgb_led_indicator_create</a></div><div class="ttdeci">module_t * rgb_led_indicator_create(const cJSON *config)</div><div class="ttdoc">ქმნის ახალ rgb_led_indicator მოდულის ინსტანციას</div><div class="ttdef"><b>Definition</b> rgb_led_indicator.c:90</div></div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1964"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1700"></a>
 მოდულის გაფართოება/დამატება</h1>
 <ol type="1">
 <li>გამოიყენეთ <code>python3 tools/create_module.py</code> სკრიპტი ახალი მოდულის ჩონჩხის დასაგენერირებლად.</li>
@@ -189,7 +188,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2module__architectu
 <li>შეავსეთ <code>_create</code>, <code>init</code>, <code>start</code>, <code>deinit</code> და <code>handle_event</code> ფუნქციები თქვენი ლოგიკით.</li>
 <li>ჩართეთ მოდული <code>idf.py menuconfig</code>-ში.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1965"></a>
+<h1><a class="anchor" id="autotoc_md1701"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

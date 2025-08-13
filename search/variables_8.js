@@ -2,15 +2,11 @@ var searchData=
 [
   ['id_0',['id',['../structui__component__t.html#a541964e8324400994a136961d8603449',1,'ui_component_t']]],
   ['init_5flevel_1',['init_level',['../structmodule__t.html#ae50465ce0627de2f517d79199fd276c7',1,'module_t']]],
-  ['initial_5fstate_2',['initial_state',['../structrelay__private__data__t.html#ac4135f6501366f927f2690a7cb69e1eb',1,'relay_private_data_t']]],
-  ['instance_5fname_3',['instance_name',['../structsystem__timer__config__t.html#a4d94e98b4a21a44ce45942a5a1c10c63',1,'system_timer_config_t::instance_name'],['../structtimer__test__module__config__t.html#acc612fedbe5f4fd6ca32b793675b4d96',1,'timer_test_module_config_t::instance_name'],['../structsensor__simulator__private__data__t.html#a03c242a109f030dd5b6aebafccde7fad',1,'sensor_simulator_private_data_t::instance_name'],['../structsensor__simulator__config__t.html#a5d440e3fcb71891937d86e0400a71fe6',1,'sensor_simulator_config_t::instance_name'],['../structota__update__manager__config__t.html#ae32f3379b88120838509139b3da15a6f',1,'ota_update_manager_config_t::instance_name'],['../structstorage__manager__private__data__t.html#a39ace7077791727bce36120f2899ff4f',1,'storage_manager_private_data_t::instance_name'],['../structstorage__manager__config__t.html#aa5659bb87d45f79f44089bedb1d23a4e',1,'storage_manager_config_t::instance_name'],['../structsecurity__status__reporter__config__t.html#a6ff64974417bb59b6e848ae780ba4e29',1,'security_status_reporter_config_t::instance_name'],['../structself__test__private__data__t.html#abfd5cc4667d20d775063552a7e0cdd5b',1,'self_test_private_data_t::instance_name'],['../structwifi__manager__private__data__t.html#a410cbc96ee068753ebcbbcc17021a2fd',1,'wifi_manager_private_data_t::instance_name']]],
-  ['is_5factive_4',['is_active',['../structui__context__t.html#a78ae254b86a9ba23595e64cf5ddb90ab',1,'ui_context_t::is_active'],['../structtimer__entry__t.html#a148cad4ac19324e5daa3dcb1fd8b08ab',1,'timer_entry_t::is_active']]],
-  ['is_5fcolor_5',['is_color',['../structdisplay__info__t.html#ab47f8096d9a1be6cdcd559206ab478c5',1,'display_info_t']]],
-  ['is_5fcommand_5fregistered_6',['is_command_registered',['../structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec',1,'cmd_router_api_t']]],
-  ['is_5fconnected_7',['is_connected',['../structwifi__api__t.html#a43df8edbe4004fa64d66c072a1f971c9',1,'wifi_api_t::is_connected'],['../structwifi__manager__private__data__t.html#aa82eef4cf2a106f616644c4c7f65217b',1,'wifi_manager_private_data_t::is_connected']]],
-  ['is_5fflash_5fencryption_5fenabled_8',['is_flash_encryption_enabled',['../structsecurity__status__api__t.html#a935bfb3d13a5c2df3ad281af3851cca0',1,'security_status_api_t']]],
-  ['is_5fled_5fon_9',['is_led_on',['../structtimer__test__module__private__data__t.html#ad2051d9f1445c38ae3701feaed0868e9',1,'timer_test_module_private_data_t']]],
-  ['is_5fprovisioning_5factive_10',['is_provisioning_active',['../structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e',1,'ble_prov_api_t']]],
-  ['is_5fscreen_5fon_11',['is_screen_on',['../structui__manager__private__data__t.html#a4ee4ce7e83997733d0f1a0a0cab5a543',1,'ui_manager_private_data_t']]],
-  ['is_5fsecure_5fboot_5fenabled_12',['is_secure_boot_enabled',['../structsecurity__status__api__t.html#a88ddda9666c725c944a43f9ef662bd8a',1,'security_status_api_t']]]
+  ['is_5factive_2',['is_active',['../structui__context__t.html#a78ae254b86a9ba23595e64cf5ddb90ab',1,'ui_context_t']]],
+  ['is_5fcolor_3',['is_color',['../structdisplay__info__t.html#ab47f8096d9a1be6cdcd559206ab478c5',1,'display_info_t']]],
+  ['is_5fcommand_5fregistered_4',['is_command_registered',['../structcmd__router__api__t.html#afc9179a2e07c021b813573e7148879ec',1,'cmd_router_api_t']]],
+  ['is_5fconnected_5',['is_connected',['../structwifi__api__t.html#a43df8edbe4004fa64d66c072a1f971c9',1,'wifi_api_t']]],
+  ['is_5fflash_5fencryption_5fenabled_6',['is_flash_encryption_enabled',['../structsecurity__status__api__t.html#a935bfb3d13a5c2df3ad281af3851cca0',1,'security_status_api_t']]],
+  ['is_5fprovisioning_5factive_7',['is_provisioning_active',['../structble__prov__api__t.html#aaf6157ba3bf6c8d06b905075bc8b039e',1,'ble_prov_api_t']]],
+  ['is_5fsecure_5fboot_5fenabled_8',['is_secure_boot_enabled',['../structsecurity__status__api__t.html#a88ddda9666c725c944a43f9ef662bd8a',1,'security_status_api_t']]]
 ];

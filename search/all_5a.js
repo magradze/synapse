@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['💬_20დასკვნა_0',['4. 💬 დასკვნა',['../md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2053',1,'']]]
+  ['📋_20რა_20არის_20tt_20create_5fmodule_20py_20tt_0',['1. 📋 რა არის &lt;tt&gt;create_module.py&lt;/tt&gt;?',['../md_docs_2tools_2create__module.html#autotoc_md1712',1,'']]],
+  ['📋_20წინაპირობები_1',['2. 📋 წინაპირობები',['../md_docs_2tutorials_2adding__a__module.html#autotoc_md1803',1,'']]]
 ];

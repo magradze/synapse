@@ -93,20 +93,20 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2adding__a__module.
   <div class="headertitle"><div class="title">გაკვეთილი: მზა მოდულის დამატება თქვენს Synapse პროექტში</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2065"></a> </p>
-<h1><a class="anchor" id="autotoc_md2066"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1801"></a> </p>
+<h1><a class="anchor" id="autotoc_md1802"></a>
 1. 🎯 მიზანი</h1>
 <p>ეს სახელმძღვანელო განკუთვნილია დეველოპერებისთვის, რომლებსაც სურთ, თავიანთ Synapse Framework-ზე დაფუძნებულ პროექტში დაამატონ უკვე არსებული, სხვა დეველოპერის მიერ შექმნილი მოდული.</p>
 <p>Synapse-ის ეკოსისტემაში მოდულები, როგორც წესი, დამოუკიდებელი Git რეპოზიტორიებია. მათი პროექტში ინტეგრაცია ხდება <b>Git Submodule</b>-ის სტანდარტული და საიმედო მექანიზმით.</p>
-<h1><a class="anchor" id="autotoc_md2067"></a>
+<h1><a class="anchor" id="autotoc_md1803"></a>
 2. 📋 წინაპირობები</h1>
 <ul>
 <li>თქვენ უკვე გაქვთ Synapse Framework-ის ლოკალური პროექტი.</li>
 <li>თქვენ გაქვთ იმ მოდულის Git რეპოზიტორიის URL, რომლის დამატებაც გსურთ (მაგ., <code><a href="https://github.com/some-author/synapse_module_bme280.git">https://github.com/some-author/synapse_module_bme280.git</a></code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2068"></a>
+<h1><a class="anchor" id="autotoc_md1804"></a>
 3. 🚀 მოდულის დამატების ნაბიჯები</h1>
-<h2><a class="anchor" id="autotoc_md2069"></a>
+<h2><a class="anchor" id="autotoc_md1805"></a>
 ეტაპი 1: მოდულის დამატება &lt;tt&gt;git submodule&lt;/tt&gt; ბრძანებით</h2>
 <ol type="1">
 <li><b>გახსენით ტერმინალი</b> თქვენი Synapse პროექტის მთავარ (root) დირექტორიაში.</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2adding__a__module.
 <p class="startli"><code>bash git submodule add <a href="https://github.com/some-author/synapse_module_bme280.git">https://github.com/some-author/synapse_module_bme280.git</a> components/modules/sensors/bme280_sensor </code></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md2070"></a>
+<h2><a class="anchor" id="autotoc_md1806"></a>
 ეტაპი 2: ცვლილებების შენახვა (Commit &amp; Push)</h2>
 <p><code>submodule</code>-ის დამატების შემდეგ, Git-მა შექმნა ახალი <code>.gitmodules</code> ფაილი (ან განაახლა არსებული) და დაამატა ჩანაწერი მოდულის შესახებ. ახლა ეს ცვლილება უნდა შეინახოთ თქვენს მთავარ რეპოზიტორიაში.</p>
 <div class="fragment"><div class="line"># დაამატეთ ცვლილებები Git-ის ინდექსში</div>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2adding__a__module.
 <div class="line"> </div>
 <div class="line"># ატვირთეთ ცვლილებები თქვენს remote რეპოზიტორიაზე</div>
 <div class="line">git push</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2071"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1807"></a>
 ეტაპი 3: მოდულის ჩართვა &lt;tt&gt;menuconfig&lt;/tt&gt;-ში</h2>
 <p>Synapse-ის build სისტემა ავტომატურად აღმოაჩენს ახალ მოდულს, მაგრამ ის გამორთულია ნაგულისხმევად.</p>
 <ol type="1">
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2adding__a__module.
 </li>
 <li><b>შეინახეთ და გამოდით.</b></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md2072"></a>
+<h2><a class="anchor" id="autotoc_md1808"></a>
 ეტაპი 4: მოდულის კონფიგურაცია &lt;tt&gt;config.json&lt;/tt&gt;-ში</h2>
 <p>ახლა, როდესაც მოდული ჩართულია, თქვენ უნდა დაამატოთ მისი კონფიგურაცია თქვენი აპლიკაციისთვის.</p>
 <ol type="1">
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('md_docs_2tutorials_2adding__a__module.
 <div class="line">        &quot;i2c_bus_service&quot;: &quot;main_i2c_bus&quot;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2073"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1809"></a>
 ეტაპი 5: პროექტის აწყობა</h2>
 <div class="fragment"><div class="line">idf.py build</div>
 </div><!-- fragment --><p><b>მზად არის!</b> თქვენ წარმატებით დაამატეთ და დააკონფიგურირეთ ახალი მოდული თქვენს პროექტში. </p>

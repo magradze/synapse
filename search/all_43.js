@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['⏱️_20მოდული_20tt_20system_5ftimer_20tt_0',['⏱️ მოდული &lt;tt&gt;system_timer&lt;/tt&gt;',['../md_components_2modules_2utillities_2system__timer_2README.html',1,'']]],
-  ['⏱️_20მოდული_3a_20tt_20time_5fsync_20tt_1',['⏱️ მოდული: &lt;tt&gt;time_sync&lt;/tt&gt;',['../md_components_2modules_2system_2time__sync_2README.html',1,'']]]
+  ['♻️_20რეფაქტორინგი_0',['♻️ რეფაქტორინგი',['../md_docs_2changelog_2v5.html#autotoc_md731',1,'']]],
+  ['♻️_20რეფაქტორინგი_20და_20გაუმჯობესებები_20refactoring_20improvements_1',['♻️ რეფაქტორინგი და გაუმჯობესებები (Refactoring &amp; Improvements)',['../md_docs_2changelog_2v5.html#autotoc_md697',1,'']]]
 ];

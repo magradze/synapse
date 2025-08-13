@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['ui_5fevents_5fhandle_0',['ui_events_handle',['../ui__events_8c.html#a469449dd73689152450606d4d611be8f',1,'ui_events_handle(module_t *self, const char *event_name, void *event_data):&#160;ui_events.c'],['../ui__manager__internal_8h.html#a469449dd73689152450606d4d611be8f',1,'ui_events_handle(module_t *self, const char *event_name, void *event_data):&#160;ui_events.c']]],
-  ['ui_5fmanager_5fcreate_1',['ui_manager_create',['../ui__manager_8h.html#ae371e530d074697724cac90f069c253c',1,'ui_manager_create(const cJSON *config):&#160;ui_manager.c'],['../ui__manager_8c.html#ae371e530d074697724cac90f069c253c',1,'ui_manager_create(const cJSON *config):&#160;ui_manager.c']]],
-  ['ui_5fmenu_5fhandle_5fnavigation_2',['ui_menu_handle_navigation',['../ui__manager__internal_8h.html#af9e0671c853f47ec58169dcd2c77e89a',1,'ui_menu_handle_navigation(ui_manager_private_data_t *private_data, const char *button_name):&#160;ui_menu.c'],['../ui__menu_8c.html#af9e0671c853f47ec58169dcd2c77e89a',1,'ui_menu_handle_navigation(ui_manager_private_data_t *private_data, const char *button_name):&#160;ui_menu.c']]],
-  ['ui_5fmenu_5frender_3',['ui_menu_render',['../ui__manager__internal_8h.html#aee91a4cf96bb6ccb531596a5c846115b',1,'ui_menu_render(ui_manager_private_data_t *private_data):&#160;ui_menu.c'],['../ui__menu_8c.html#aee91a4cf96bb6ccb531596a5c846115b',1,'ui_menu_render(ui_manager_private_data_t *private_data):&#160;ui_menu.c']]]
-];

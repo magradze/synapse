@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['⌨️_20cli_20ბრძანებები_20command_20line_20interface_0',['⌨️ cli ბრძანებები command line interface',['../md_components_2modules_2diagnostics_2self__test__manager_2README.html#autotoc_md32',1,'4. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2actuators_2relay__actuator_2README.html#autotoc_md5',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2security_2security__status__reporter_2README.html#autotoc_md97',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2utillities_2rgb__led__indicator_2README.html#autotoc_md248',1,'5. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2communications_2wifi__manager_2README.html#autotoc_md27',1,'6. ⌨️ CLI ბრძანებები (Command Line Interface)'],['../md_components_2modules_2system_2device__identity__service_2README.html#autotoc_md160',1,'7. ⌨️ CLI ბრძანებები (Command Line Interface)']]],
-  ['⌨️_20cli_20command_20line_20interface_1',['⌨️ cli command line interface',['../md_docs_2api__reference_2relay__api.html#autotoc_md618',1,'1. ⌨️ CLI (Command Line Interface)'],['../md_docs_2api__reference_2security__api.html#autotoc_md652',1,'2. ⌨️ CLI (Command Line Interface)']]]
+  ['☁️_20cloud_20provisioning_20api_0',['☁️ Cloud Provisioning API',['../md_docs_2api__reference_2provisioning__api.html#autotoc_md335',1,'']]],
+  ['☁️_20mqtt_20client_20service_20api_1',['☁️ MQTT Client Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md61',1,'']]]
 ];

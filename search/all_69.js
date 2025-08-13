@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📲_20synapse_20provisioning_20module_20api_20reference_0',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]]
+  ['🗂️_20ფაილური_20ოპერაციები_0',['🗂️ ფაილური ოპერაციები',['../md_docs_2api__reference_2storage__api.html#autotoc_md419',1,'']]]
 ];

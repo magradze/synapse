@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
   <div class="headertitle"><div class="title">Core კომპონენტები (Core Components)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1482"></a> </p><hr  />
-<h1><a class="anchor" id="autotoc_md1484"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1218"></a> </p><hr  />
+<h1><a class="anchor" id="autotoc_md1220"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse ESP Framework-ის ბირთვის (core) ძირითად კომპონენტებს, მათ დანიშნულებას, მთავარ ფუნქციებსა და გამოყენების მაგალითებს naming/structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1486"></a>
+<h1><a class="anchor" id="autotoc_md1222"></a>
 ძირითადი კომპონენტები</h1>
-<h2><a class="anchor" id="autotoc_md1487"></a>
+<h2><a class="anchor" id="autotoc_md1223"></a>
 1. Service Locator</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულებს შორის API-ს მოძიებასა და გამოძახებას იზოლაციის დაცვით.</li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="ttc" id="astructssd1306__api__t_html_a49c18ab20520fe0db6e0bf9bf5170d79"><div class="ttname"><a href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">ssd1306_api_t::enable</a></div><div class="ttdeci">esp_err_t(* enable)(void *context)</div><div class="ttdoc">Enables the display.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:29</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1488"></a>
+<h2><a class="anchor" id="autotoc_md1224"></a>
 2. Event Bus</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს broadcast/notification ტიპის კომუნიკაციას მოდულებს შორის.</li>
@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="line">event_bus_subscribe(TELEMETRY_EVENT_SENSOR_DATA, mqtt_handle_sensor_data);</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1489"></a>
+<h2><a class="anchor" id="autotoc_md1225"></a>
 3. Module Register</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას და მართვას.</li>
@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1490"></a>
+<h2><a class="anchor" id="autotoc_md1226"></a>
 4. Module Factory</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს მოდულების დინამიურ შექმნას და ინიციალიზაციას კონფიგურაციის მიხედვით.</li>
@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1491"></a>
+<h2><a class="anchor" id="autotoc_md1227"></a>
 5. Configuration Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სისტემის და მოდულების კონფიგურაციის სტანდარტიზებულ მართვას.</li>
@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="line">synapse_config_get_string(<span class="stringliteral">&quot;mqtt_module.config.broker_uri&quot;</span>, broker_url, <span class="keyword">sizeof</span>(broker_url));</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1492"></a>
+<h2><a class="anchor" id="autotoc_md1228"></a>
 6. Logging</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს სტანდარტიზებულ და კონტექსტურ ლოგირებას ყველა კომპონენტსა და მოდულში.</li>
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <div class="ttc" id="alogging_8h_html_af160fa445a164fd78ca93d8127dc7f90"><div class="ttname"><a href="logging_8h.html#af160fa445a164fd78ca93d8127dc7f90">DEFINE_COMPONENT_TAG</a></div><div class="ttdeci">#define DEFINE_COMPONENT_TAG(component_name, color)</div><div class="ttdoc">Defines a local, static, color-coded TAG variable for logging.</div><div class="ttdef"><b>Definition</b> logging.h:60</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1493"></a>
+<h2><a class="anchor" id="autotoc_md1229"></a>
 7. Promise Manager</h2>
 <ul>
 <li><b>როლი:</b> უზრუნველყოფს ასინქრონული "მოთხოვნა-პასუხის" ოპერაციების მართვას სუფთა და სტრუქტურირებული <code>Promise</code> პატერნის გამოყენებით.</li>
@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 </li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1495"></a>
+<h1><a class="anchor" id="autotoc_md1231"></a>
 ურთიერთქმედება მოდულებთან</h1>
 <ul>
 <li>ყველა მოდული core-ის კომპონენტებს იყენებს მხოლოდ მათი public API-ების მეშვეობით.</li>
@@ -223,7 +223,7 @@ $(document).ready(function(){initNavTree('md_docs_2design__decisions_2core__comp
 <li>core უზრუნველყოფს მოდულების რეგისტრაციას, ინიციალიზაციას, კონფიგურაციას და ლოგირებას.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md1497"></a>
+<h1><a class="anchor" id="autotoc_md1233"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

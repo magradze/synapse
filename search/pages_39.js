@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['✅_20synapse_20framework_20—_20documentation_20module_20design_20checklist_0',['✅ Synapse Framework — Documentation &amp; Module Design Checklist',['../md_docs_2internal_2synapse__checklist.html',1,'']]]
+  ['📡_20synapse_20communication_20module_20api_20reference_0',['📡 Synapse Communication Module API Reference',['../md_docs_2api__reference_2communication__api.html',1,'']]]
 ];

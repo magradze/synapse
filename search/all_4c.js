@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['❓_20პრობლემის_20აღწერა_0',['1. ❓ პრობლემის აღწერა',['../md_docs_2troubleshooting_2dependency__injection__and__context.html#autotoc_md2046',1,'']]]
+  ['🎨_20ფერთა_20სქემა_0',['3. 🎨 ფერთა სქემა',['../md_docs_2convention_2logging__colors.html#autotoc_md1099',1,'']]]
 ];

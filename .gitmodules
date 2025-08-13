@@ -64,3 +64,6 @@
 [submodule "components/modules/communications/wifi_manager"]
 	path = components/modules/communications/wifi_manager
 	url = git@github.com:magradze/wifi_manager.git
+[submodule "components/modules/sensors/time_of_flight_sensor"]
+	path = components/modules/sensors/time_of_flight_sensor
+	url = git@github.com:magradze/time_of_flight_sensor.git

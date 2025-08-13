@@ -37,3 +37,6 @@
 [submodule "components/modules/system/watchdog_manager"]
 	path = components/modules/system/watchdog_manager
 	url = git@github.com:magradze/watchdog_manager.git
+[submodule "components/modules/security/security_status_reporter"]
+	path = components/modules/security/security_status_reporter
+	url = git@github.com:magradze/security_status_reporter.git

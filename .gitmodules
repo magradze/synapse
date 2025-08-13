@@ -76,3 +76,6 @@
 [submodule "components/modules/displays/ssd1306_driver"]
 	path = components/modules/displays/ssd1306_driver
 	url = git@github.com:magradze/ssd1306_driver.git
+[submodule "components/modules/actuators/relay_actuator"]
+	path = components/modules/actuators/relay_actuator
+	url = git@github.com:magradze/relay_actuator.git

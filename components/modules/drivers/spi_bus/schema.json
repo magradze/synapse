@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SPI Bus Config Schema",
+    "description": "Defines the structure for a spi_bus config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "spi_bus" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "spi_host": { "type": "integer" },
+                "miso_pin": { "type": "integer" },
+                "mosi_pin": { "type": "integer" },
+                "sclk_pin": { "type": "integer" },
+                "dma_chan": { "type": "integer" }
+            },
+            "required": ["instance_name", "spi_host", "miso_pin", "mosi_pin", "sclk_pin"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

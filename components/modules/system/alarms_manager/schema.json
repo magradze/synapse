@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Alarms Manager Config Schema",
+    "description": "Defines the structure for an alarms_manager config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "alarms_manager" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "alarms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": { "type": "string" },
+                            "trigger_event": { "type": "string" },
+                            "condition_payload_key": { "type": "string" },
+                            "condition_payload_value": { "type": "string" },
+                            "threshold_count": { "type": "integer" },
+                            "time_window_sec": { "type": "integer" },
+                            "actions": {
+                                "type": "array",
+                                "items": { "type": "object" }
+                            }
+                        },
+                        "required": ["name", "trigger_event", "actions"]
+                    }
+                }
+            },
+            "required": ["instance_name", "alarms"]
+        }
+    },
+    "required": ["type", "config"]
+}

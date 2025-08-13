@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SSD1306 Driver Config Schema",
+    "description": "Defines the structure for an ssd1306_driver config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "ssd1306_driver" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "i2c_bus_service": { "type": "string", "minLength": 1 },
+                "i2c_addr": { "type": "string", "pattern": "^0x[0-9a-fA-F]{2}$" },
+                "width": { "type": "integer", "const": 128 },
+                "height": { "type": "integer", "const": 64 },
+                "reset_pin": { "type": "integer" }
+            },
+            "required": ["instance_name", "i2c_bus_service", "i2c_addr"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

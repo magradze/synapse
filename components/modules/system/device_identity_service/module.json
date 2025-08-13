@@ -1,0 +1,27 @@
+{
+    "name": "device_identity_service",
+    "version": "1.0.0",
+    "description": "Provides unique device identifiers and firmware information.",
+    "author": "Synapse Framework Team",
+    "init_function": "device_identity_service_create",
+    "init_level": 20,
+    "dependencies": [],
+    "type": "device_identity_service",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_DEVICE_IDENTITY_SERVICE_ENABLED",
+    "runtime_commands": {
+        "start": "device_identity_service_start",
+        "stop": "device_identity_service_disable",
+        "enable": "device_identity_service_enable",
+        "disable": "device_identity_service_disable",
+        "reconfigure": "device_identity_service_reconfigure",
+        "status": "device_identity_service_get_status",
+        "handle_event": "device_identity_service_handle_event"
+    },
+    "mqtt_interface": {
+        "publishes": {
+            "INFO": "state/device/info"
+        },
+        "subscribes": {}
+    }
+}

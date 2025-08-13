@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Rotary Encoder Input Config Schema",
+    "description": "Defines the structure for a rotary_encoder_input config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "rotary_encoder_input" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "control_type": { "type": "string", "enum": ["gpio", "expander"] },
+                "expander_service": { "type": "string" },
+                "pin_a": { "type": "integer", "minimum": 0 },
+                "pin_b": { "type": "integer", "minimum": 0 },
+                "pin_sw": { "type": "integer", "minimum": 0 },
+                "button_name": { "type": "string" },
+                "active_level": { "type": "integer", "enum": [0, 1] }
+            },
+            "required": ["instance_name", "pin_a", "pin_b", "pin_sw"]
+        }
+    },
+    "required": ["type", "config"]
+}

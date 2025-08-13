@@ -1,0 +1,85 @@
+menu "Sensor Aggregator"
+
+    config MODULE_SENSOR_AGGREGATOR_ENABLED
+        bool "Enable Sensor Aggregator Module"
+        default y
+        help
+            Enables the sensor_aggregator module for Aggregates data from multiple sensors into a single report..
+            When enabled, the module provides full functionality.
+            If disabled, the module code will not be included in 
+            the final firmware, saving memory and processing resources.
+
+    config SENSOR_AGGREGATOR_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_sensor_aggregator"
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            Default instance name for the sensor_aggregator module.
+
+    config SENSOR_AGGREGATOR_INSTANCE_NAME_MAX_LEN
+        int "Maximum Instance Name Length"
+        default 32
+        range 8 64
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            Maximum length for the sensor_aggregator module instance name string.
+
+    config SENSOR_AGGREGATOR_MAX_SENSORS
+        int "Maximum sensors to aggregate"
+        default 10
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            The maximum number of individual sensor events that the aggregator can listen for.
+
+    config SENSOR_AGGREGATOR_EVENT_NAME_MAX_LEN
+        int "Maximum length for sensor event names"
+        default 48
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            The maximum buffer size for storing the names of events that the
+            aggregator subscribes to.
+
+    config SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        bool "Enable offline data buffering"
+        default y
+        depends on MODULE_SENSOR_AGGREGATOR_ENABLED
+        help
+            If enabled, the aggregator will cache reports to the filesystem
+            when the device is offline and send them when connectivity is restored.
+            Requires a filesystem backend (SPIFFS or SD Card) for Storage Manager.
+
+    config SENSOR_AGGREGATOR_CACHE_DIR
+        string "Cache directory for buffered reports"
+        default "/spiffs/aggr_cache"
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The directory path where offline reports will be stored.
+
+    config SENSOR_AGGREGATOR_MAX_CACHED_FILES
+        int "Maximum number of cached report files"
+        default 50
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The maximum number of report files to store offline. When the limit
+            is reached, the oldest files may be deleted.
+
+    config SENSOR_AGGREGATOR_PATH_BUFFER_SIZE
+        int "File Path Buffer Size"
+        default 128
+        range 64 256
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The buffer size in bytes for constructing file paths when reading
+            or writing cached reports. Should be large enough for the cache
+            directory path plus the longest possible filename.
+
+    config SENSOR_AGGREGATOR_FILE_BUFFER_SIZE
+        int "File Read Buffer Size"
+        default 1024
+        range 256 4096
+        depends on SENSOR_AGGREGATOR_BUFFERING_ENABLED
+        help
+            The buffer size in bytes for reading a single cached report file
+            from the filesystem. This value limits the maximum size of a
+            single aggregated report that can be buffered.
+endmenu

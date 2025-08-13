@@ -1,0 +1,15 @@
+{
+    "name": "time_of_flight_sensor",
+    "version": "1.0.0",
+    "description": "Driver for I2C-based Time-of-Flight (TOF) distance sensors like VL53L0X.",
+    "author": "Giorgi Magradze",
+    "init_function": "time_of_flight_sensor_create",
+    "init_level": 60,
+    "type": "sensors",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_TIME_OF_FLIGHT_SENSOR_ENABLED",
+    "mqtt_interface": {
+        "publishes": {},
+        "subscribes": {}
+    }
+}

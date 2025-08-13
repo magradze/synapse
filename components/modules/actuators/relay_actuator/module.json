@@ -1,0 +1,16 @@
+{
+    "name": "relay_actuator",
+    "version": "1.0.0",
+    "description": "Controls a single-channel relay via GPIO.",
+    "author": "Synapse Framework Team",
+    "init_function": "relay_actuator_create",
+    "init_level": 60,
+    "type": "actuators",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_RELAY_ACTUATOR_ENABLED",
+    "mqtt_interface": {
+        "publishes": {
+            "state_changed": "state/relay/{module_name}/status"
+        }
+    }
+}

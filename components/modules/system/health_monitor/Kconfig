@@ -1,0 +1,39 @@
+menu "Health Monitor"
+
+    config MODULE_HEALTH_MONITOR_ENABLED
+        bool "Enable Health Monitor Module"
+        default y
+        help
+            Enables the Health Monitor module for system metrics tracking.
+
+    if MODULE_HEALTH_MONITOR_ENABLED
+
+        config HEALTH_MONITOR_DEFAULT_INSTANCE_NAME
+            string "Default Instance Name"
+            default "main_health_monitor"
+            help
+                Default instance name for the health monitor module.
+
+        config HEALTH_MONITOR_INSTANCE_NAME_MAX_LEN
+            int "Maximum Instance Name Length"
+            default 32
+            range 8 64
+            help
+                Maximum length for the health monitor module instance name.
+
+        config HEALTH_MONITOR_TASK_STACK_SIZE
+            int "Task Stack Size"
+            default 4096
+            help
+                Stack size for the health monitor background task.
+
+        config HEALTH_MONITOR_TASK_PRIORITY
+            int "Task Priority"
+            default 5
+            range 1 24
+            help
+                Priority for the health monitor background task.
+
+    endif # MODULE_HEALTH_MONITOR_ENABLED
+
+endmenu

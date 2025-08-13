@@ -1,0 +1,30 @@
+menu "Time of Flight Sensor"
+
+    config MODULE_TIME_OF_FLIGHT_SENSOR_ENABLED
+        bool "Enable Time of Flight Sensor Module"
+        default n
+        help
+            Enables the driver for I2C-based Time-of-Flight (TOF) distance sensors like VL53L0X.
+
+    if MODULE_TIME_OF_FLIGHT_SENSOR_ENABLED
+
+    config TOF_SENSOR_DEFAULT_INSTANCE_NAME
+        string "Default Instance Name"
+        default "main_tof_sensor"
+        help
+            Default instance name for the TOF sensor module.
+
+    config TOF_SENSOR_DEFAULT_I2C_BUS
+        string "Default I2C Bus Service Name"
+        default "main_i2c_bus"
+        help
+            The instance_name of the i2c_bus service this sensor should use.
+
+    config TOF_SENSOR_DEFAULT_UPDATE_INTERVAL
+        int "Default Update Interval (seconds)"
+        default 10
+        help
+            The default interval in seconds for reading sensor data.
+
+    endif # MODULE_TIME_OF_FLIGHT_SENSOR_ENABLED
+endmenu

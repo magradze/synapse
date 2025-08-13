@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MCP23017 I/O Expander Config Schema",
+    "description": "Defines the structure for an mcp23017_io_expander config.json entry.",
+    "type": "object",
+    "properties": {
+        "type": { "const": "mcp23017_io_expander" },
+        "enabled": { "type": "boolean" },
+        "config": {
+            "type": "object",
+            "properties": {
+                "instance_name": { "type": "string", "minLength": 1 },
+                "i2c_bus_service": { "type": "string", "minLength": 1 },
+                "i2c_addr": { "type": "string", "pattern": "^0x[0-9a-fA-F]{2}$" }
+            },
+            "required": ["instance_name", "i2c_bus_service", "i2c_addr"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["type", "config"]
+}

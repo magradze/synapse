@@ -1,0 +1,21 @@
+{
+    "name": "alarms_manager",
+    "version": "1.0.0",
+    "description": "Alarms manager module.",
+    "author": "Synapse Framework Team",
+    "init_function": "alarms_manager_create",
+    "init_level": 38,
+    "dependencies": [],
+    "type": "system",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_ALARMS_MANAGER_ENABLED",
+    "runtime_commands": {
+        "start": "alarms_manager_start",
+        "stop": "alarms_manager_disable",
+        "enable": "alarms_manager_enable",
+        "disable": "alarms_manager_disable",
+        "reconfigure": "alarms_manager_reconfigure",
+        "status": "alarms_manager_get_status",
+        "handle_event": "alarms_manager_handle_event"
+    }
+}

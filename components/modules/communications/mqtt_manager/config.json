@@ -1,0 +1,17 @@
+[
+  {
+    "type": "mqtt_manager",
+    "enabled": true,
+    "config": {
+        "instance_name": "main_mqtt_broker",
+        "broker_uri": "mqtt://192.168.1.160:1883",
+        "username": "",
+        "password": "",
+        "base_topic_prefix": "synapse/devices",
+        "lwt_topic": "lwt",
+        "lwt_message": "{\"status\":\"offline\"}",
+        "lwt_qos": 1,
+        "lwt_retain": true
+    }
+  }
+]

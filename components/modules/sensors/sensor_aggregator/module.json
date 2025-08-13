@@ -1,0 +1,26 @@
+{
+    "name": "sensor_aggregator",
+    "version": "1.0.0",
+    "description": "Aggregates data from multiple sensors into a single report.",
+    "author": "Synapse Framework Team",
+    "init_function": "sensor_aggregator_create",
+    "init_level": 48,
+    "dependencies": [],
+    "type": "sensors",
+    "build_enabled": true,
+    "conditional_config": "CONFIG_MODULE_SENSOR_AGGREGATOR_ENABLED",
+    "runtime_commands": {
+        "start": "sensor_aggregator_start",
+        "stop": "sensor_aggregator_disable",
+        "enable": "sensor_aggregator_enable",
+        "disable": "sensor_aggregator_disable",
+        "reconfigure": "sensor_aggregator_reconfigure",
+        "status": "sensor_aggregator_get_status",
+        "handle_event": "sensor_aggregator_handle_event"
+    },
+    "mqtt_interface": {
+        "publishes": {
+            "aggregated_report": "data/sensors/aggregated"
+        }
+    }
+}

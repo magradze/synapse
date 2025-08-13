@@ -1,7 +1,7 @@
 /**
  * @file synapse_utils.h
  * @brief Public API for the Synapse core utility library.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-09-11
  * @details This header provides a collection of common, reusable helper

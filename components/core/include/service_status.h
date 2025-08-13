@@ -1,7 +1,7 @@
 /**
  * @file service_status.h
  * @brief Defines the lifecycle status for services in the Service Locator.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 2.0.0
  * @date 2025-09-12
  *

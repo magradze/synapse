@@ -1,7 +1,7 @@
 /**
  * @file synapse_utils.c
  * @brief Implementation of the Synapse core utility library.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-09-11
  */

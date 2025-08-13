@@ -1,7 +1,7 @@
 /**
  * @file device_identity_interface.h
  * @brief Public Service API contract for the Device Identity Service.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-09
  */

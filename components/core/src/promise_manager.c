@@ -1,7 +1,7 @@
 /**
  * @file promise_manager.c
  * @brief Implementation of the asynchronous Promise Manager.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 2.0.0
  * @date 2025-08-30
  * @details This component manages the lifecycle of promises. It uses a dedicated

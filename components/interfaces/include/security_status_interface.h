@@ -1,7 +1,7 @@
 /**
  * @file security_status_interface.h
  * @brief Public Service API contract for the Security Status Reporter module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-18
  * @details This header defines the abstract interface (API structure) for the

@@ -1,7 +1,7 @@
 /**
  * @file task_pool_manager.c
  * @brief Implementation of the Shared Task Pool Manager.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-09-06
  */

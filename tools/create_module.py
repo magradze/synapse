@@ -10,7 +10,7 @@ necessary files, including modular C sources, headers, build scripts, and
 configuration templates, ensuring perfect alignment with the framework's
 rigorous architectural conventions.
 
-Author: Synapse Framework Team
+Author: Giorgi Magradze
 Version: 3.1.0
 """
 
@@ -57,7 +57,7 @@ def get_git_user_name() -> str:
         result = subprocess.run(['git', 'config', 'user.name'], capture_output=True, text=True, check=True)
         return result.stdout.strip()
     except (subprocess.CalledProcessError, FileNotFoundError):
-        return "Synapse Framework Team"
+        return "Giorgi Magradze"
 
 def prompt_for_input(prompt_text: str, default: Optional[str] = None) -> str:
     """Prompts the user for text input with an optional default value."""
@@ -212,7 +212,7 @@ class ArchetypeGenerator(TemplateGenerator):
 
         return f"""# {self.module_title} Module CMake Configuration
 # Component for {self.description}.
-# Author: Synapse Framework Team
+# Author: Giorgi Magradze
 # Version: 1.0.0
 
 # SMART CONDITIONAL COMPILATION SYSTEM:
@@ -655,12 +655,12 @@ static const ui_component_t* s_{self.module_name}_ui_components[] = {{ &s_{self.
 // --- UI Lifecycle Functions ---
 void {self.module_name}_ui_init(module_t* self)
 {{
-    {self.module_name}_private_data_t* p_data = ({self.module_name}_private_data_t*)self->private_data;
+    {self.module_name}_private_data_t* private_data = ({self.module_name}_private_data_t*)self->private_data;
     
-    p_data->ui_api = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_UI_MANAGER_API);
+    private_data->ui_api = synapse_service_lookup_by_type(SYNAPSE_SERVICE_TYPE_UI_MANAGER_API);
     
-    if (p_data->ui_api) {{
-        p_data->ui_api->register_components(self, s_test_module_ui_components);
+    if (private_data->ui_api) {{
+        private_data->ui_api->register_components(self, s_test_module_ui_components);
     }} else {{
         ESP_LOGE(TAG, "UI Manager service not found for module '%s'", self->name);
     }}
@@ -677,15 +677,15 @@ void {self.module_name}_ui_deinit(module_t* self)
 // --- Callback Implementations ---
 static void {self.module_name}_render_screen_cb(module_t* self, ui_context_t* context)
 {{
-    {self.module_name}_private_data_t* p_data = ({self.module_name}_private_data_t*)self->private_data;
+    {self.module_name}_private_data_t* private_data = ({self.module_name}_private_data_t*)self->private_data;
     const display_driver_api_t* display = context->display->api;
     void* disp_ctx = context->display->context;
 
     display->draw_formatted_text(disp_ctx, 2, 16, 1, "Welcome to {self.module_title}!");
     
-    if (p_data->ui_api) {{
+    if (private_data->ui_api) {{
         // On this simple screen, BACK is always the selected action
-        p_data->ui_api->draw_footer_button(context, "BACK", true);
+        private_data->ui_api->draw_footer_button(context, "BACK", true);
     }}
 }}
 

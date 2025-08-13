@@ -1,7 +1,7 @@
 /**
  * @file task_pool_manager.h
  * @brief Public API for the Shared Task Pool Manager.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-09-06
  * @details This core component provides a pool of worker tasks to execute

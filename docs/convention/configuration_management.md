@@ -57,22 +57,22 @@ Synapse Framework-ი იყენებს მრავალშრიან, �
 
 ```c
 // health_monitor.c-ში
-static esp_err_t parse_config(const cJSON *config_node, health_monitor_private_data_t *p_data) {
+static esp_err_t parse_config(const cJSON *config_node, health_monitor_private_data_t *private_data) {
     // ნაბიჯი 1: Default მნიშვნელობების დაყენება Kconfig-იდან
-    p_data->check_interval_sec = CONFIG_HEALTH_MONITOR_DEFAULT_INTERVAL;
-    p_data->min_free_heap_kb = CONFIG_HEALTH_MONITOR_DEFAULT_HEAP_KB;
+    private_data->check_interval_sec = CONFIG_HEALTH_MONITOR_DEFAULT_INTERVAL;
+    private_data->min_free_heap_kb = CONFIG_HEALTH_MONITOR_DEFAULT_HEAP_KB;
 
     // ნაბიჯი 2: JSON-იდან გადაწერის მცდელობა synapse_utils-ის გამოყენებით
-    synapse_config_get_int_from_node(TAG, config_node, "check_interval_sec", (int*)&p_data->check_interval_sec);
+    synapse_config_get_int_from_node(TAG, config_node, "check_interval_sec", (int*)&private_data->check_interval_sec);
     
     const cJSON *thresholds = cJSON_GetObjectItem(config_node, "thresholds");
     if (thresholds) {
-        synapse_config_get_int_from_node(TAG, thresholds, "min_free_heap_kb", (int*)&p_data->min_free_heap_kb);
+        synapse_config_get_int_from_node(TAG, thresholds, "min_free_heap_kb", (int*)&private_data->min_free_heap_kb);
     }
 
     // ნაბიჯი 3: ვალიდაცია (ამ შემთხვევაში, პარამეტრები არასავალდებულოა)
     ESP_LOGI(TAG, "Health Monitor configured: Interval=%us, Min Heap=%ukB", 
-             p_data->check_interval_sec, p_data->min_free_heap_kb);
+             private_data->check_interval_sec, private_data->min_free_heap_kb);
 
     return ESP_OK;
 }

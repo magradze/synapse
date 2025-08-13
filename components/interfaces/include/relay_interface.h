@@ -1,7 +1,7 @@
 /**
  * @file relay_interface.h
  * @brief Public Service API contract for the Relay Actuator module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-19
  * @details This header defines the abstract interface (API structure) for a

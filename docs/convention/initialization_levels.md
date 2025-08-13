@@ -1,7 +1,7 @@
 # 🚀 მოდულების ინიციალიზაციის დონეები (Initialization Levels)
 
 **სტატუსი:** მკაცრი რეკომენდაცია (Strongly Recommended)  
-**ავტორი:** Synapse Framework Team
+**ავტორი:** Giorgi Magradze
 
 ## 🎯 მიზანი
 

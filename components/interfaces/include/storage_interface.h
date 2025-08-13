@@ -1,7 +1,7 @@
 /**
  * @file storage_interface.h
  * @brief Public Service API contract for the Storage Manager module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-05
  */

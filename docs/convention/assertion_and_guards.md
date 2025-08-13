@@ -95,8 +95,8 @@ esp_err_t process_data(void* handle, int size) {
 void update_display(module_t* self) {
     SYNAPSE_GUARD_VOID(self != NULL, TAG, "Module handle is NULL");
     
-    ui_private_data_t* p_data = (ui_private_data_t*)self->private_data;
-    SYNAPSE_GUARD_VOID(p_data->is_initialized, TAG, "Cannot update display, not initialized");
+    ui_private_data_t* private_data = (ui_private_data_t*)self->private_data;
+    SYNAPSE_GUARD_VOID(private_data->is_initialized, TAG, "Cannot update display, not initialized");
 
     // ...
 }

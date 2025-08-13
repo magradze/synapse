@@ -1,7 +1,7 @@
 /**
  * @file logging.h
  * @brief Synapse ESP Framework's enhanced logging interface with color support.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 3.0.0
  * @date 2025-09-10
  *

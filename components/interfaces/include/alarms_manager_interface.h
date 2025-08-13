@@ -1,7 +1,7 @@
 /**
  * @file alarms_manager_interface.h
  * @brief Public Service API contract for the Alarms Manager module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-07-13
  * @details This header defines the abstract interface for the Alarms Manager.

@@ -1,7 +1,7 @@
 /**
  * @file time_sync_interface.h
  * @brief Public Service API contract for the Time Sync module.
- * @author Synapse Framework Team
+ * @author Giorgi Magradze
  * @version 1.0.0
  * @date 2025-08-02
  */

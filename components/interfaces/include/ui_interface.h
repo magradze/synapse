@@ -94,6 +94,14 @@ typedef struct {
      * @return ESP_OK on success.
      */
     esp_err_t (*unregister_components)(module_t* owner);
+
+    /**
+     * @brief (NEW) Renders a standardized footer button using the UI Manager's style.
+     * @param context The UI context provided to the component's render callback.
+     * @param text The text to display inside the button (e.g., "BACK").
+     * @param is_selected True if the button should be rendered in a highlighted state.
+     */
+    void (*draw_footer_button)(ui_context_t *context, const char *text, bool is_selected);
 } ui_manager_api_t;
 
 #endif // UI_INTERFACE_H

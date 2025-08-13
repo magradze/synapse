@@ -10,3 +10,6 @@
 [submodule "components/modules/drivers/spi_bus"]
 	path = components/modules/drivers/spi_bus
 	url = git@github.com:magradze/spi_bus.git
+[submodule "components/modules/drivers/i2c_bus"]
+	path = components/modules/drivers/i2c_bus
+	url = git@github.com:magradze/i2c_bus.git

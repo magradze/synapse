@@ -31,3 +31,6 @@
 [submodule "components/modules/system/time_sync"]
 	path = components/modules/system/time_sync
 	url = git@github.com:magradze/time_sync.git
+[submodule "components/modules/system/device_identity_service"]
+	path = components/modules/system/device_identity_service
+	url = git@github.com:magradze/device_identity_service.git

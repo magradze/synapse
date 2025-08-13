@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['📜_20მიმოხილვა_0',['1. 📜 მიმოხილვა',['../md_docs_2convention_2module__structure.html#autotoc_md1122',1,'']]],
-  ['📜_20ოქროს_20წესი_1',['📜 ოქროს წესი',['../md_docs_2convention_2initialization__levels.html#autotoc_md1072',1,'']]],
-  ['📜_20ძირითადი_20პრინციპი_2',['1. 📜 ძირითადი პრინციპი',['../md_docs_2convention_2configuration__management.html#autotoc_md1011',1,'']]],
-  ['📜_20naming_20structure_20კონვენციები_3',['📜 Naming &amp; Structure კონვენციები',['../md_docs_2api__reference_2communication__api.html#autotoc_md68',1,'']]]
+  ['📚_20api_20ფუნქციები_0',['📚 API ფუნქციები',['../md_docs_2api__reference_2command__router__api.html#autotoc_md71',1,'']]]
 ];

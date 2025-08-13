@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📶_20wifi_20manager_20service_20api_0',['📶 WiFi Manager Service API',['../md_docs_2api__reference_2communication__api.html#autotoc_md57',1,'']]]
+  ['📲_20synapse_20provisioning_20module_20api_20reference_0',['📲 Synapse Provisioning Module API Reference',['../md_docs_2api__reference_2provisioning__api.html',1,'']]]
 ];

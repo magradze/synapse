@@ -12,6 +12,7 @@ var searchData=
   ['ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20rest_20api_9',['REST API ინტეგრაციის სახელმძღვანელო (Integration — REST API)',['../md_docs_2integration_2integration__rest.html',1,'']]],
   ['ინტეგრაციის_20სახელმძღვანელო_20integration_20—_20websocket_10',['WebSocket ინტეგრაციის სახელმძღვანელო (Integration — WebSocket)',['../md_docs_2integration_2integration__websocket.html',1,'']]],
   ['ისტორია_20changelog_11',['ცვლილებების ისტორია (Changelog)',['../md_docs_2changelog_2v5.html',1,'']]],
-  ['ის_20სტანდარტები_12',['Logging-ის სტანდარტები',['../md_docs_2convention_2logging__standards.html',1,'']]],
-  ['ის_20წესები_13',['Error Handling-ის წესები',['../md_docs_2convention_2error__handling.html',1,'']]]
+  ['ის_20საშუალებით_12',['მოდულების მართვა Git Submodule-ის საშუალებით',['../md_docs_2contributing_2managing__modules.html',1,'']]],
+  ['ის_20სტანდარტები_13',['Logging-ის სტანდარტები',['../md_docs_2convention_2logging__standards.html',1,'']]],
+  ['ის_20წესები_14',['Error Handling-ის წესები',['../md_docs_2convention_2error__handling.html',1,'']]]
 ];

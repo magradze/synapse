@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2assert__and__
   <div class="headertitle"><div class="title">Synapse Assertions &amp; Guards API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md30"></a> </p>
-<h1><a class="anchor" id="autotoc_md31"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md57"></a> </p>
+<h1><a class="anchor" id="autotoc_md58"></a>
 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს <code><a class="el" href="synapse__assert_8h.html" title="Custom assertion macro for the Synapse Framework.">synapse_assert.h</a></code> და <code><a class="el" href="synapse__utils_8h.html" title="Public API for the Synapse core utility library.">synapse_utils.h</a></code>-ში განსაზღვრული მაკროების API-ს, რომლებიც განკუთვნილია კოდის მდგრადობის გასაუმჯობესებლად.</p>
 <ul>
@@ -103,10 +103,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2assert__and__
 </ul>
 <p>დეტალური ინფორმაციისთვის, თუ <b>როდის</b> უნდა გამოიყენოთ თითოეული მათგანი, იხილეთ <a class="el" href="md_docs_2convention_2assertion__and__guards.html">Assertions და Guard Clauses კონვენცია</a>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md33"></a>
+<h1><a class="anchor" id="autotoc_md60"></a>
 1. Assertion API (&lt;tt&gt;synapse_assert.h&lt;/tt&gt;)</h1>
 <p>ეს მაკრო აქტიურია მხოლოდ მაშინ, როდესაც <code>menuconfig</code>-ში ჩართულია <code>CONFIG_SYNAPSE_ENABLE_ASSERTS</code> ოფცია. <code>release</code> ბილდებში ის არანაირ კოდს არ აგენერირებს.</p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md61"></a>
 &lt;tt&gt;SYNAPSE_ASSERT(condition, format, ...)&lt;/tt&gt;</h2>
 <p>ამოწმებს პირობას (<code>condition</code>). თუ პირობა მცდარია (<code>false</code>), ის ბეჭდავს ფორმატირებულ შეტყობინებას, ფაილის სახელს, ხაზის ნომერს და დაუყოვნებლივ აჩერებს სისტემის მუშაობას (<code>panic</code>).</p>
 <ul>
@@ -125,10 +125,10 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2assert__and__
 <div class="line">    SYNAPSE_ASSERT(user-&gt;id &gt; 0, <span class="stringliteral">&quot;Invalid user ID: %d&quot;</span>, user-&gt;id);</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md63"></a>
 2. Guard Clause API (&lt;tt&gt;synapse_utils.h&lt;/tt&gt;)</h1>
 <p>ეს მაკროები ყოველთვის აქტიურია და წარმოადგენს <code>if-return</code> ბლოკების კომპაქტურ ალტერნატივას.</p>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md64"></a>
 &lt;tt&gt;SYNAPSE_GUARD(condition, tag, ret_val, format, ...)&lt;/tt&gt;</h2>
 <p>ამოწმებს პირობას (<code>condition</code>). თუ პირობა მცდარია, ის <code>ESP_LOGE</code>-ს გამოყენებით ბეჭდავს შეცდომის შეტყობინებას და ასრულებს <code>return ret_val;</code>-ს.</p>
 <ul>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2assert__and__
 <div class="line">    <span class="comment">// ... დანარჩენი ლოგიკა ...</span></div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md38"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md65"></a>
 &lt;tt&gt;SYNAPSE_GUARD_VOID(condition, tag, format, ...)&lt;/tt&gt;</h2>
 <p><code>SYNAPSE_GUARD</code>-ის ვერსია იმ ფუნქციებისთვის, რომლებიც აბრუნებენ <code>void</code>-ს. თუ პირობა მცდარია, ის ბეჭდავს ლოგს და ასრულებს <code>return;</code>-ს.</p>
 <ul>

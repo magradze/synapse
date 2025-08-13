@@ -93,13 +93,13 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
   <div class="headertitle"><div class="title">კომუნიკაციის პატერნების წესები (v2.0)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md982"></a> </p>
-<h1><a class="anchor" id="autotoc_md983"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1018"></a> </p>
+<h1><a class="anchor" id="autotoc_md1019"></a>
 ძირითადი პრინციპი: მაქსიმალური იზოლაცია და პროგნოზირებადი გაშვება</h1>
 <p><b>FUNDAMENTAL RULE:</b> Synapse ESP Framework-ში მოდულებს შორის უნდა შენარჩუნდეს მაქსიმალური იზოლაცია. ახალი, <b>State-Aware Service Locator</b>-ის წყალობით, ამას ემატება სისტემის პროგნოზირებადი და უსაფრთხო გაშვების გარანტია.</p>
-<h1><a class="anchor" id="autotoc_md984"></a>
+<h1><a class="anchor" id="autotoc_md1020"></a>
 ოთხი ძირითადი პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md985"></a>
+<h2><a class="anchor" id="autotoc_md1021"></a>
 1. Service Locator Pattern (State-Aware)</h2>
 <ul>
 <li><b>გამოიყენება:</b> პირდაპირი, სინქრონული API გამოძახებებისთვის, <b>სერვისის მზადყოფნის გარანტიით.</b></li>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 </ol>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md986"></a>
+<h2><a class="anchor" id="autotoc_md1022"></a>
 2. Event Bus Pattern</h2>
 <ul>
 <li><b>გამოიყენება:</b> ასინქრონული, "გამოაქვეყნე-გამოიწერე" (Publish/Subscribe) სცენარებისთვის.</li>
@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 <div class="ttc" id="aevent__bus_8h_html_a4be3ec71e70f06b05b780b9883094387"><div class="ttname"><a href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a></div><div class="ttdeci">esp_err_t synapse_event_bus_post(const char *event_name, struct event_data_wrapper_t *data_wrapper)</div><div class="ttdoc">აქვეყნებს ივენთს Event Bus-ზე ასინქრონულად.</div><div class="ttdef"><b>Definition</b> event_bus.c:331</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md987"></a>
+<h2><a class="anchor" id="autotoc_md1023"></a>
 3. Command Router Pattern</h2>
 <ul>
 <li><b>გამოიყენება:</b> მომხმარებლის მიერ ინიცირებული, ტექსტური ბრძანებების ცენტრალიზებული მართვისთვის.</li>
@@ -174,7 +174,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 <div class="ttc" id="astructcmd__t_html_a0120d5191bad85cf51f4fc04037847d7"><div class="ttname"><a href="structcmd__t.html#a0120d5191bad85cf51f4fc04037847d7">cmd_t::command</a></div><div class="ttdeci">const char * command</div><div class="ttdoc">The command name (e.g., &quot;relay&quot;, &quot;wifi&quot;). This is what the user types.</div><div class="ttdef"><b>Definition</b> cmd_router_interface.h:33</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md988"></a>
+<h2><a class="anchor" id="autotoc_md1024"></a>
 4. Promise Pattern (ახალი)</h2>
 <ul>
 <li><b>გამოიყენება:</b> მიზანმიმართული, ასინქრონული "მოთხოვნა-პასუხის" (Request-Response) ოპერაციებისთვის.</li>
@@ -205,9 +205,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2communication__pa
 <div class="ttc" id="astructpromise__t_html"><div class="ttname"><a href="structpromise__t.html">promise_t</a></div><div class="ttdef"><b>Definition</b> promise_manager.c:39</div></div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md989"></a>
+<h1><a class="anchor" id="autotoc_md1025"></a>
 კომუნიკაციის ტიპები</h1>
-<h2><a class="anchor" id="autotoc_md990"></a>
+<h2><a class="anchor" id="autotoc_md1026"></a>
 Direct API Communication (Service Locator)</h2>
 <div class="fragment"><div class="line">[MQTT Module] --API call--&gt; [Display Module]</div>
 <div class="line">              --API call--&gt; [Relay Module]</div>
@@ -227,7 +227,7 @@ Direct API Communication (Service Locator)</h2>
 <div class="ttc" id="aservice__types_8h_html_aa1c3d5038eb4d9433e4109c5d61f47b1"><div class="ttname"><a href="service__types_8h.html#aa1c3d5038eb4d9433e4109c5d61f47b1">synapse_service_type_t</a></div><div class="ttdeci">synapse_service_type_t</div><div class="ttdoc">სერვისის ტიპების ცენტრალიზებული ჩამონათვალი.</div><div class="ttdef"><b>Definition</b> service_types.h:25</div></div>
 <div class="ttc" id="astructssd1306__api__t_html"><div class="ttname"><a href="structssd1306__api__t.html">ssd1306_api_t</a></div><div class="ttdoc">The public Service API structure for an SSD1306 display module.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:23</div></div>
 <div class="ttc" id="astructssd1306__api__t_html_a49c18ab20520fe0db6e0bf9bf5170d79"><div class="ttname"><a href="structssd1306__api__t.html#a49c18ab20520fe0db6e0bf9bf5170d79">ssd1306_api_t::enable</a></div><div class="ttdeci">esp_err_t(* enable)(void *context)</div><div class="ttdoc">Enables the display.</div><div class="ttdef"><b>Definition</b> ssd1306_interface.h:29</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md991"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1027"></a>
 Broadcast Communication (Event Bus)</h2>
 <div class="fragment"><div class="line">[DHT22 Sensor] --event--&gt; [Event Bus] --event--&gt; [MQTT Module]</div>
 <div class="line">                                    --event--&gt; [Display Module]</div>
@@ -247,9 +247,9 @@ Broadcast Communication (Event Bus)</h2>
 <div class="ttc" id="aevent__data__wrapper_8h_html_a7e7afc7b7e7d96ee15905b61d8836cb1"><div class="ttname"><a href="event__data__wrapper_8h.html#a7e7afc7b7e7d96ee15905b61d8836cb1">synapse_event_data_wrap</a></div><div class="ttdeci">esp_err_t synapse_event_data_wrap(const void *payload, void(*free_fn)(void *payload), event_data_wrapper_t **wrapper_out)</div><div class="ttdoc">ქმნის ახალ &quot;შეფუთულ&quot; მონაცემთა ობიექტს (wrapper) და ამყარებს საწყის მფლობელობას.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:21</div></div>
 <div class="ttc" id="aevent__data__wrapper_8h_html_acbfc3de4d3a066b2adf4d8033f7cb994"><div class="ttname"><a href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a></div><div class="ttdeci">esp_err_t synapse_event_data_release(event_data_wrapper_t *wrapper)</div><div class="ttdoc">ამცირებს wrapper-ის მფლობელების (references) რაოდენობას ერთით.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.c:75</div></div>
 <div class="ttc" id="astructevent__data__wrapper__t_html"><div class="ttname"><a href="structevent__data__wrapper__t.html">event_data_wrapper_t</a></div><div class="ttdoc">ზოგადი &quot;შეფუთვა&quot; (wrapper) ნებისმიერი ივენთის მონაცემებისთვის.</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:31</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md992"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1028"></a>
 აკრძალული პატერნები</h1>
-<h2><a class="anchor" id="autotoc_md993"></a>
+<h2><a class="anchor" id="autotoc_md1029"></a>
 ❌ პირდაპირი დამოკიდებულებები</h2>
 <div class="fragment"><div class="line"><span class="comment">// NEVER DO THIS</span></div>
 <div class="line"><span class="preprocessor">#include &quot;ssd1306_module.h&quot;</span>  <span class="comment">// Direct dependency! Violates isolation!</span></div>
@@ -257,13 +257,13 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// In MQTT module</span></div>
 <div class="line">ssd1306_api_enable();  <span class="comment">// Direct function call - BAD!</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md994"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1030"></a>
 ❌ პატერნების არასწორი შერევა</h2>
 <div class="fragment"><div class="line"><span class="comment">// DON&#39;T MIX - choose one pattern per use case</span></div>
 <div class="line"><span class="comment">// Wrong: using both Event Bus AND Service Locator for the same purpose</span></div>
 <div class="line"><a class="code hl_function" href="event__bus_8h.html#a4be3ec71e70f06b05b780b9883094387">synapse_event_bus_post</a>(<span class="stringliteral">&quot;DISPLAY_ENABLE_EVENT&quot;</span>, NULL);  <span class="comment">// Event Bus</span></div>
 <div class="line">display_api-&gt;enable();                       <span class="comment">// Service Locator</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md995"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1031"></a>
 ❌ System Manager MQTT Handling</h2>
 <div class="fragment"><div class="line"><span class="comment">// NEVER DO THIS - System Manager must not handle MQTT</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> system_manager_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keywordtype">void</span> *event_data) {</div>
@@ -272,11 +272,11 @@ Broadcast Communication (Event Bus)</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="astructmodule__t_html"><div class="ttname"><a href="structmodule__t.html">module_t</a></div><div class="ttdoc">The primary structure defining a framework module.</div><div class="ttdef"><b>Definition</b> base_module.h:136</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md996"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1032"></a>
 სწორი იმპლემენტაცია</h1>
-<h2><a class="anchor" id="autotoc_md997"></a>
+<h2><a class="anchor" id="autotoc_md1033"></a>
 Service Locator-ის გამოყენება (ახალი პატერნი)</h2>
-<h3><a class="anchor" id="autotoc_md998"></a>
+<h3><a class="anchor" id="autotoc_md1034"></a>
 1. Service Registration (&lt;tt&gt;_create&lt;/tt&gt; ფუნქციაში)</h3>
 <div class="fragment"><div class="line"><span class="comment">// in some_provider_module.c</span></div>
 <div class="line"><a class="code hl_struct" href="structmodule__t.html">module_t</a> *some_provider_create(<span class="keyword">const</span> cJSON *config) {</div>
@@ -299,7 +299,7 @@ Service Locator-ის გამოყენება (ახალი პატ
 <div class="ttc" id="aservice__locator_8h_html_a0a6e5781926f6d6160cab16cf48334b4"><div class="ttname"><a href="service__locator_8h.html#a0a6e5781926f6d6160cab16cf48334b4">synapse_service_register_with_status</a></div><div class="ttdeci">esp_err_t synapse_service_register_with_status(const char *service_name, synapse_service_type_t service_type, service_handle_t service_handle, service_status_t initial_status)</div><div class="ttdoc">Registers a new service with a specific initial status. (NEW)</div><div class="ttdef"><b>Definition</b> service_locator.c:145</div></div>
 <div class="ttc" id="aservice__status_8h_html_ad0a7280c0097dc51b4e04d31ae802196a1367c7073a72d7521e6974c02a76d505"><div class="ttname"><a href="service__status_8h.html#ad0a7280c0097dc51b4e04d31ae802196a1367c7073a72d7521e6974c02a76d505">SERVICE_STATUS_REGISTERED</a></div><div class="ttdeci">@ SERVICE_STATUS_REGISTERED</div><div class="ttdoc">The service has been created and registered, but not yet initialized.</div><div class="ttdef"><b>Definition</b> service_status.h:25</div></div>
 <div class="ttc" id="astructmodule__t_html_ab9b6f71a2c7831d471692dbe25afaa14"><div class="ttname"><a href="structmodule__t.html#ab9b6f71a2c7831d471692dbe25afaa14">module_t::name</a></div><div class="ttdeci">char name[CONFIG_SYNAPSE_MODULE_NAME_MAX_LENGTH]</div><div class="ttdoc">The unique instance name of the module.</div><div class="ttdef"><b>Definition</b> base_module.h:137</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md999"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1035"></a>
 2. Service Usage (სხვა მოდულში)</h3>
 <div class="fragment"><div class="line"><span class="comment">// in some_consumer_module.c</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t some_consumer_init(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *self) {</div>
@@ -314,9 +314,9 @@ Service Locator-ის გამოყენება (ახალი პატ
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> ESP_OK;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1000"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1036"></a>
 Event Bus-ის გამოყენება</h2>
-<h3><a class="anchor" id="autotoc_md1001"></a>
+<h3><a class="anchor" id="autotoc_md1037"></a>
 1. Event Publishing (Sensor Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// dht22_module.c</span></div>
 <div class="line"><span class="keyword">static</span> esp_err_t publish_sensor_reading(dht22_private_data_t *dht22_data, <span class="keywordtype">float</span> temperature, <span class="keywordtype">float</span> humidity) {</div>
@@ -327,7 +327,7 @@ Event Bus-ის გამოყენება</h2>
 <div class="line">    <a class="code hl_function" href="event__data__wrapper_8h.html#acbfc3de4d3a066b2adf4d8033f7cb994">synapse_event_data_release</a>(wrapper);</div>
 <div class="line">    <span class="keywordflow">return</span> err;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1002"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md1038"></a>
 2. Event Subscription (MQTT Module)</h3>
 <div class="fragment"><div class="line"><span class="comment">// mqtt_module.c</span></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> mqtt_handle_event(<a class="code hl_struct" href="structmodule__t.html">module_t</a> *module, <span class="keyword">const</span> <span class="keywordtype">char</span> *event_name, <span class="keywordtype">void</span> *event_data) {</div>
@@ -343,10 +343,10 @@ Event Bus-ის გამოყენება</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="astructevent__data__wrapper__t_html_a6c3ad9b3de41cb310482e9173c26232b"><div class="ttname"><a href="structevent__data__wrapper__t.html#a6c3ad9b3de41cb310482e9173c26232b">event_data_wrapper_t::payload</a></div><div class="ttdeci">void * payload</div><div class="ttdoc">მაჩვენებელი რეალურ მონაცემებზე (მაგ., telemetry_data_t*).</div><div class="ttdef"><b>Definition</b> event_data_wrapper.h:34</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1003"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1039"></a>
 დინამიური MQTT თემები &lt;tt&gt;{module_name}&lt;/tt&gt; Placeholder-ით</h1>
 <p><code>mqtt_manager</code> მოდული მხარს უჭერს დინამიური თემების გენერაციას, რაც განსაკუთრებით სასარგებლოა, როდესაც სისტემაში გვაქვს ერთი ტიპის რამდენიმე მოწყობილობა (მაგ., რამდენიმე რელე).</p>
-<h2><a class="anchor" id="autotoc_md1004"></a>
+<h2><a class="anchor" id="autotoc_md1040"></a>
 პატერნის აღწერა</h2>
 <ol type="1">
 <li><p class="startli">**<code>module.json</code>:** მოდული, რომლის სტატუსის გამოქვეყნებაც გვინდა (მაგ., <code>relay_actuator</code>), თავის <code>module.json</code>-ში, <code>mqtt_interface</code>-ის <code>publishes</code> სექციაში, განსაზღვრავს თემის შაბლონს, რომელიც შეიცავს <code>{module_name}</code> placeholder-ს.</p>
@@ -359,15 +359,15 @@ Event Bus-ის გამოყენება</h2>
 <li><b>საბოლოო თემა:</b> შედეგად, იქმნება უნიკალური თემა თითოეული ინსტანციისთვის, მაგ., <code>.../state/relay/main_light/status</code>.</li>
 </ol>
 <p>ეს პატერნი უზრუნველყოფს მაქსიმალურ მოქნილობას და გამორიცხავს <code>mqtt_manager</code>-ში <code>hardcoded</code> ლოგიკის საჭიროებას.</p>
-<h1><a class="anchor" id="autotoc_md1005"></a>
+<h1><a class="anchor" id="autotoc_md1041"></a>
 პატერნის არჩევის გზამკვლევი</h1>
-<h2><a class="anchor" id="autotoc_md1006"></a>
+<h2><a class="anchor" id="autotoc_md1042"></a>
 Service Locator-ის გამოყენება</h2>
 <p>✅ **<code>ota_manager</code> → <code>rgb_led_indicator</code> <code>set_color</code>** ✅ **<code>wifi_manager</code> → <code>storage_manager</code> <code>set_string</code>** ✅ <b>ნებისმიერი პირდაპირი, სინქრონული API გამოძახება</b></p>
-<h2><a class="anchor" id="autotoc_md1007"></a>
+<h2><a class="anchor" id="autotoc_md1043"></a>
 Event Bus-ის გამოყენება</h2>
 <p>✅ **<code>dht22_sensor</code> → <code>logger</code>, <code>mqtt_manager</code>, <code>aggregator</code>** ✅ **<code>wifi_manager</code> → <code>WIFI_EVENT_CONNECTED</code> (სისტემური შეტყობინება)** ✅ **<code>system_timer</code> → ნებისმიერი დაგეგმილი მოქმედება** ✅ <b>ნებისმიერი ასინქრონული, "ერთი-მრავალთან" სცენარი</b></p>
-<h1><a class="anchor" id="autotoc_md1008"></a>
+<h1><a class="anchor" id="autotoc_md1044"></a>
 Architecture Diagram</h1>
 <div class="fragment"><div class="line">sequenceDiagram</div>
 <div class="line">    participant User as MQTT Client</div>
@@ -407,7 +407,7 @@ Architecture Diagram</h1>
 <div class="line">┌─────────────────┐</div>
 <div class="line">│ Logger Module   │</div>
 <div class="line">└─────────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1009"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1045"></a>
 შეჯამება</h1>
 <ol type="1">
 <li><b>Service Locator</b> = პირდაპირი, სინქრონული API გამოძახებები.</li>

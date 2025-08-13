@@ -94,10 +94,10 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_docs_2structure_2project__overview"></a> </p>
-<h1><a class="anchor" id="autotoc_md1695"></a>
+<h1><a class="anchor" id="autotoc_md1731"></a>
 მიზანი</h1>
 <p>Synapse ESP Framework-ის მიზანია უზრუნველყოს მოდულური, გაფართოებადი და ავტომატიზირებული ჩაშენებული სისტემების (embedded systems) პლატფორმა ESP-IDF ეკოსისტემისთვის. ფრეიმვორქი საშუალებას აძლევს დეველოპერებს მინიმალური ძალისხმევით შექმნან, ჩართონ ან გამორთონ სხვადასხვა ფუნქციონალი (სენსორები, აქტუატორები, კომუნიკაციები და სხვა), მიიღონ მაქსიმალურად მცირე და ოპტიმიზირებული firmware და უზრუნველყონ კოდის მაღალი ხარისხი.</p>
-<h1><a class="anchor" id="autotoc_md1696"></a>
+<h1><a class="anchor" id="autotoc_md1732"></a>
 არქიტექტურული ხედვა</h1>
 <ul>
 <li><b>მოდულურობა:</b> ყველა ფუნქციონალი წარმოდგენილია დამოუკიდებელი მოდულების სახით, რომლებიც შეიძლება ჩაერთოს ან გამოირთოს კონფიგურაციით.</li>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li><b>სტანდარტიზაცია:</b> ყველა კოდის ნაწილი და დოკუმენტაცია მიჰყვება მკაცრ naming, structure და communication კონვენციებს.</li>
 <li><b>კონფიგურაციაზე-დაფუძნებული დიზაინი (Configuration-Driven):</b> **(ახალი)** სისტემის ქცევა და მოდულების შემადგენლობა იმართება დეკლარაციულად, JSON კონფიგურაციის ფაილებით, რაც ამცირებს კოდში ცვლილებების საჭიროებას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1697"></a>
+<h1><a class="anchor" id="autotoc_md1733"></a>
 ძირითადი პრინციპები</h1>
 <ol type="1">
 <li><b>მაქსიმალური იზოლაცია</b> — მოდულებს შორის მხოლოდ განსაზღვრული არხებით ხდება ურთიერთქმედება.</li>
@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li><b>კოდის ერთგვაროვნება</b> — ყველა მოდული და ინფრასტრუქტურა მიჰყვება ერთიან naming და structure სტანდარტებს.</li>
 <li><b>დოკუმენტირებული არქიტექტურა</b> — ყველა არქიტექტურული გადაწყვეტილება და სტანდარტი აღწერილია შესაბამის დოკუმენტებში.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md1698"></a>
+<h1><a class="anchor" id="autotoc_md1734"></a>
 ძირითადი კომპონენტები</h1>
 <ul>
 <li><b>Core</b> — ბირთვი, რომელიც მოიცავს <code>Service Locator</code>-ს, <code>Event Bus</code>-ს, <code>Module Registry</code>-ს, <code>Config Manager</code>-ს და სხვა ინფრასტრუქტურულ ნაწილებს.</li>
@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li><b>Modules</b> — კატეგორიებად დაყოფილი ფუნქციონალური გაფართოებები (სენსორები, აქტუატორები, კომუნიკაციები და ა.შ.).</li>
 <li><b>Configuration</b> — **(განახლებულია)** მოქნილი და <b>დეცენტრალიზებული</b> კონფიგურაციის სისტემა, რომელიც ეფუძნება <code>Kconfig</code>-ს, ბაზისურ <code>system_config.json</code>-ს და თითოეული მოდულის საკუთარ <code>config.json</code> ფაილს.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1699"></a>
+<h1><a class="anchor" id="autotoc_md1735"></a>
 არქიტექტურული დიაგრამა (მოკლე)</h1>
 <div class="fragment"><div class="line">┌──────────────┐      Service Locator     ┌──────────────┐</div>
 <div class="line">│   Module A   │ ───────────────────────► │   Module B   │</div>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line">┌──────────────┐</div>
 <div class="line">│   Module C   │</div>
 <div class="line">└──────────────┘</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1700"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1736"></a>
 სტანდარტებზე დაყრდნობით</h1>
 <p>ყველა დეტალი, naming, structure, communication და სხვა წესები აღწერილია შესაბამის convention დოკუმენტებში:</p>
 <ul>

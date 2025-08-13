@@ -1,55 +1,59 @@
 <map id="components/core/include/base_module.h" name="components/core/include/base_module.h">
-<area shape="rect" id="Node000001" title="Defines the base module interface and status types." alt="" coords="697,5,882,45"/>
-<area shape="rect" id="Node000002" href="$generated__module__factory_8h_source.html" title=" " alt="" coords="5,93,216,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="684,41,235,96,217,99,216,93,234,91,683,36"/>
-<area shape="rect" id="Node000003" href="$module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="501,93,686,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="735,53,637,96,635,91,733,48"/>
-<area shape="rect" id="Node000004" href="$synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="698,189,883,229"/>
-<area shape="poly" id="edge25_Node000001_Node000004" title=" " alt="" coords="770,58,753,94,750,113,753,133,765,162,779,187,775,190,760,164,748,134,745,113,748,93,765,56"/>
-<area shape="rect" id="Node000015" href="$module__registry_8c.html" title="მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია." alt="" coords="305,189,463,229"/>
-<area shape="poly" id="edge30_Node000001_Node000015" title=" " alt="" coords="683,36,564,45,438,58,333,75,299,85,281,95,274,107,273,119,278,131,287,144,315,167,347,186,344,191,312,171,283,147,273,134,268,120,269,106,277,91,297,80,332,70,437,53,563,40,683,31"/>
-<area shape="rect" id="Node000016" href="$module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="971,93,1157,133"/>
-<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="864,47,1005,91,1003,96,862,52"/>
-<area shape="rect" id="Node000017" href="$module__helpers_8c.html" title="მოდულების დამხმარე (Helper) ფუნქციების იმპლემენტაცია." alt="" coords="1051,189,1208,229"/>
-<area shape="poly" id="edge29_Node000001_Node000017" title=" " alt="" coords="896,28,976,34,1058,46,1127,65,1153,77,1171,92,1178,103,1181,116,1176,143,1164,168,1148,190,1144,187,1159,166,1171,141,1176,117,1173,105,1167,95,1150,81,1125,70,1057,51,976,40,896,33"/>
-<area shape="rect" id="Node000018" href="$module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="291,93,477,133"/>
-<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="688,51,473,96,472,91,686,46"/>
-<area shape="rect" id="Node000019" href="$system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="762,93,947,133"/>
-<area shape="poly" id="edge26_Node000001_Node000019" title=" " alt="" coords="814,55,842,91,838,95,810,58"/>
-<area shape="rect" id="Node000020" href="$event__bus_8c.html" title="Event Bus კომპონენტის იმპლემენტაცია." alt="" coords="1232,93,1389,133"/>
-<area shape="poly" id="edge28_Node000001_Node000020" title=" " alt="" coords="896,40,1214,91,1232,94,1231,99,1213,96,895,45"/>
-<area shape="rect" id="Node000021" href="$system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="1330,181,1521,236"/>
-<area shape="poly" id="edge31_Node000001_Node000021" title=" " alt="" coords="896,29,1040,37,1197,51,1331,68,1377,79,1403,91,1418,111,1427,135,1430,181,1425,181,1421,136,1413,114,1400,95,1375,84,1330,74,1197,56,1039,43,896,34"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="647,137,752,186,750,191,644,142"/>
-<area shape="rect" id="Node000014" href="$module__factory_8c.html" title="მოდულების შემქმნელი (Factory) კომპონენტის იმპლემენტაცია." alt="" coords="515,189,672,229"/>
-<area shape="poly" id="edge17_Node000003_Node000014" title=" " alt="" coords="596,147,596,189,591,189,591,147"/>
-<area shape="poly" id="edge18_Node000003_Node000015" title=" " alt="" coords="540,141,427,191,425,186,537,136"/>
-<area shape="rect" id="Node000005" href="$synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="1135,284,1321,324"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="886,229,1136,282,1135,287,885,234"/>
-<area shape="rect" id="Node000007" href="$task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="926,284,1111,324"/>
-<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="843,232,966,281,964,286,841,237"/>
-<area shape="rect" id="Node000009" href="$task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="679,284,902,324"/>
-<area shape="poly" id="edge10_Node000004_Node000009" title=" " alt="" coords="785,242,786,284,781,284,779,242"/>
-<area shape="rect" id="Node000010" href="$service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="101,284,259,324"/>
-<area shape="poly" id="edge13_Node000004_Node000010" title=" " alt="" coords="706,234,684,239,569,256,478,264,387,271,271,287,259,289,259,283,270,281,386,266,477,259,568,250,684,233,705,229"/>
-<area shape="rect" id="Node000011" href="$system__manager_8c.html" title="Implements the System Manager component." alt="" coords="1347,284,1504,324"/>
-<area shape="poly" id="edge14_Node000004_Node000011" title=" " alt="" coords="897,220,1100,246,1334,281,1347,284,1346,289,1333,287,1099,251,897,225"/>
-<area shape="rect" id="Node000012" href="$ui__interface_8h.html" title="Defines the public API and contracts for the Modular UI system." alt="" coords="283,284,453,324"/>
-<area shape="poly" id="edge15_Node000004_Node000012" title=" " alt="" coords="702,234,685,239,454,288,453,283,683,233,701,229"/>
-<area shape="rect" id="Node000013" href="$wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="478,284,655,324"/>
-<area shape="poly" id="edge16_Node000004_Node000013" title=" " alt="" coords="734,236,613,286,611,281,732,231"/>
-<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="1134,284,883,231,884,225,1135,279"/>
-<area shape="rect" id="Node000006" href="$synapse__utils_8c.html" title="Implementation of the Synapse core utility library." alt="" coords="1149,372,1307,412"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="1231,338,1231,372,1225,372,1225,338"/>
-<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="967,281,843,231,845,226,969,276"/>
-<area shape="rect" id="Node000008" href="$task__pool__manager_8c.html" title="Implementation of the Shared Task Pool Manager." alt="" coords="823,372,987,412"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="984,334,932,374,929,370,981,330"/>
-<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="797,270,795,229,801,229,802,270"/>
-<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="829,330,882,370,878,374,825,334"/>
-<area shape="poly" id="edge20_Node000016_Node000004" title=" " alt="" coords="997,140,847,191,845,186,995,135"/>
-<area shape="poly" id="edge21_Node000016_Node000017" title=" " alt="" coords="1087,143,1118,187,1114,190,1083,146"/>
-<area shape="poly" id="edge23_Node000018_Node000004" title=" " alt="" coords="485,134,685,179,715,186,714,191,683,184,483,139"/>
-<area shape="poly" id="edge24_Node000018_Node000015" title=" " alt="" coords="387,147,387,189,381,189,381,147"/>
-<area shape="poly" id="edge27_Node000019_Node000004" title=" " alt="" coords="836,146,806,190,801,187,832,143"/>
-<area shape="poly" id="edge32_Node000021_Node000011" title=" " alt="" coords="1428,250,1428,284,1423,284,1423,250"/>
+<area shape="rect" id="Node000001" title="Defines the base module interface and status types." alt="" coords="913,5,1098,45"/>
+<area shape="rect" id="Node000002" href="$generated__module__factory_8h_source.html" title=" " alt="" coords="77,101,288,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="899,36,630,57,468,74,307,96,266,103,265,98,306,91,468,69,629,52,899,30"/>
+<area shape="rect" id="Node000003" href="$module__factory_8h.html" title="მოდულების შემქმნელი (Factory) კომპონენტის Public API." alt="" coords="363,101,549,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="899,42,740,65,562,96,529,103,528,98,561,91,739,60,899,37"/>
+<area shape="rect" id="Node000004" href="$synapse_8h.html" title="Synapse ESP Framework &#45; The Main Public Header." alt="" coords="778,203,963,243"/>
+<area shape="poly" id="edge26_Node000001_Node000004" title=" " alt="" coords="1008,60,1001,104,994,128,982,150,951,182,915,206,912,201,947,178,978,146,989,126,996,103,1002,59"/>
+<area shape="rect" id="Node000016" href="$module__registry_8c.html" title="მოდულების რეგისტრაციისა და მართვის იმპლემენტაცია." alt="" coords="468,203,625,243"/>
+<area shape="poly" id="edge31_Node000001_Node000016" title=" " alt="" coords="899,32,744,39,573,52,427,70,378,82,352,95,344,108,342,120,345,133,353,146,369,157,402,171,488,201,486,206,401,176,367,162,349,150,340,135,337,120,339,106,349,91,376,77,426,65,572,46,744,34,899,27"/>
+<area shape="rect" id="Node000017" href="$module__helpers_8h.html" title="მოდულებისთვის განკუთვნილი ზოგადი დამხმარე (Helper) ფუნქციები." alt="" coords="1043,101,1229,141"/>
+<area shape="poly" id="edge20_Node000001_Node000017" title=" " alt="" coords="1045,51,1111,98,1108,103,1042,56"/>
+<area shape="rect" id="Node000018" href="$module__helpers_8c.html" title="მოდულების დამხმარე (Helper) ფუნქციების იმპლემენტაცია." alt="" coords="1123,203,1280,243"/>
+<area shape="poly" id="edge30_Node000001_Node000018" title=" " alt="" coords="1112,41,1192,62,1223,76,1243,92,1251,106,1254,121,1249,151,1235,181,1219,205,1215,202,1230,178,1244,150,1248,121,1246,107,1239,95,1220,80,1190,67,1111,46"/>
+<area shape="rect" id="Node000019" href="$module__registry_8h.html" title="მოდულების რეგისტრაციისა და მოძიების API." alt="" coords="573,101,758,141"/>
+<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="924,52,735,103,733,98,923,46"/>
+<area shape="rect" id="Node000020" href="$system__manager_8h.html" title="სისტემის მენეჯერის Public API." alt="" coords="782,101,967,141"/>
+<area shape="poly" id="edge27_Node000001_Node000020" title=" " alt="" coords="969,56,903,103,900,98,966,51"/>
+<area shape="rect" id="Node000021" href="$event__bus_8c.html" title="Event Bus კომპონენტის იმპლემენტაცია." alt="" coords="1304,101,1461,141"/>
+<area shape="poly" id="edge29_Node000001_Node000021" title=" " alt="" coords="1100,46,1286,91,1314,98,1313,103,1285,96,1099,51"/>
+<area shape="rect" id="Node000022" href="$system__manager__interface_8h.html" title="Public Service API contract for the System Manager." alt="" coords="1407,196,1598,251"/>
+<area shape="poly" id="edge32_Node000001_Node000022" title=" " alt="" coords="1112,26,1212,31,1319,42,1413,61,1449,75,1475,91,1493,115,1502,142,1507,171,1507,195,1502,196,1501,171,1497,144,1488,117,1472,95,1447,80,1412,66,1318,47,1212,36,1112,31"/>
+<area shape="rect" id="Node000023" href="$logger__module_8h.html" title="Logger Module &#45; Centralized logging and event monitoring module." alt="" coords="1536,93,1707,148"/>
+<area shape="poly" id="edge34_Node000001_Node000023" title=" " alt="" coords="1112,34,1302,57,1518,91,1536,95,1535,100,1517,96,1301,62,1112,40"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="545,141,562,145,792,201,791,206,561,151,544,147"/>
+<area shape="rect" id="Node000015" href="$module__factory_8c.html" title="მოდულების შემქმნელი (Factory) კომპონენტის იმპლემენტაცია." alt="" coords="287,203,444,243"/>
+<area shape="poly" id="edge18_Node000003_Node000015" title=" " alt="" coords="432,153,384,205,380,201,428,149"/>
+<area shape="poly" id="edge19_Node000003_Node000016" title=" " alt="" coords="484,149,532,201,528,205,480,153"/>
+<area shape="rect" id="Node000005" href="$synapse__utils_8h.html" title="Public API for the Synapse core utility library." alt="" coords="1227,306,1413,346"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="966,244,1205,296,1235,303,1234,308,1203,301,965,249"/>
+<area shape="rect" id="Node000007" href="$task__pool__manager_8h.html" title="Public API for the Shared Task Pool Manager." alt="" coords="771,306,957,346"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="863,257,861,306,855,306,857,257"/>
+<area shape="rect" id="Node000009" href="$task__pool__manager__internal_8h.html" title="Internal Core API for the Task Pool Manager." alt="" coords="981,306,1203,346"/>
+<area shape="poly" id="edge10_Node000004_Node000009" title=" " alt="" coords="919,247,1044,304,1042,308,916,252"/>
+<area shape="rect" id="Node000010" href="$service__locator_8c.html" title="Service Locator პატერნის იმპლემენტაცია." alt="" coords="5,306,163,346"/>
+<area shape="poly" id="edge13_Node000004_Node000010" title=" " alt="" coords="765,239,638,253,507,265,405,271,304,280,175,301,144,309,143,303,174,296,303,275,405,266,507,259,637,248,764,234"/>
+<area shape="rect" id="Node000011" href="$system__manager_8c.html" title="Implements the System Manager component." alt="" coords="1437,306,1595,346"/>
+<area shape="poly" id="edge14_Node000004_Node000011" title=" " alt="" coords="977,234,1221,265,1426,296,1456,303,1455,309,1425,301,1221,270,976,240"/>
+<area shape="rect" id="Node000012" href="$ui__interface_8h.html" title="Defines the public API and contracts for the Modular UI system." alt="" coords="187,306,357,346"/>
+<area shape="poly" id="edge15_Node000004_Node000012" title=" " alt="" coords="765,239,580,265,370,301,339,308,338,303,369,296,579,259,764,234"/>
+<area shape="rect" id="Node000013" href="$wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module." alt="" coords="382,306,559,346"/>
+<area shape="poly" id="edge16_Node000004_Node000013" title=" " alt="" coords="782,249,573,301,544,309,543,303,571,296,781,244"/>
+<area shape="rect" id="Node000014" href="$logger__module_8c.html" title="ლოგერ მოდულის იმპლემენტაცია &#45; ცენტრალიზებული ლოგირება და ივენთების მონიტორინგი" alt="" coords="584,299,747,353"/>
+<area shape="poly" id="edge17_Node000004_Node000014" title=" " alt="" coords="821,252,720,301,718,296,819,247"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="1244,305,1227,301,963,244,964,239,1229,296,1245,300"/>
+<area shape="rect" id="Node000006" href="$synapse__utils_8c.html" title="Implementation of the Synapse core utility library." alt="" coords="1241,401,1399,441"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="1323,360,1323,401,1317,401,1317,360"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="872,293,874,243,879,244,877,293"/>
+<area shape="rect" id="Node000008" href="$task__pool__manager_8c.html" title="Implementation of the Shared Task Pool Manager." alt="" coords="897,401,1061,441"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="899,352,957,399,954,403,896,357"/>
+<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="1044,302,918,246,921,241,1046,298"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="1060,357,1003,403,1000,399,1057,353"/>
+<area shape="poly" id="edge21_Node000017_Node000004" title=" " alt="" coords="1074,148,921,206,919,201,1072,143"/>
+<area shape="poly" id="edge22_Node000017_Node000018" title=" " alt="" coords="1158,151,1191,202,1187,205,1153,154"/>
+<area shape="poly" id="edge24_Node000019_Node000004" title=" " alt="" coords="717,144,833,201,831,206,715,149"/>
+<area shape="poly" id="edge25_Node000019_Node000016" title=" " alt="" coords="634,152,571,205,567,201,631,148"/>
+<area shape="poly" id="edge28_Node000020_Node000004" title=" " alt="" coords="876,155,874,203,869,203,871,155"/>
+<area shape="poly" id="edge33_Node000022_Node000011" title=" " alt="" coords="1511,264,1516,305,1511,306,1505,265"/>
 </map>

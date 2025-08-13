@@ -1,5 +1,22 @@
 var searchData=
 [
-  ['time_5fsync_5fapi_5ft_0',['time_sync_api_t',['../structtime__sync__api__t.html',1,'']]],
-  ['timer_5fapi_5ft_1',['timer_api_t',['../structtimer__api__t.html',1,'']]]
+  ['security_5fstatus_5fapi_5ft_0',['security_status_api_t',['../structsecurity__status__api__t.html',1,'']]],
+  ['service_5fentry_5ft_1',['service_entry_t',['../structservice__entry__t.html',1,'']]],
+  ['sn74hc595n_5fwriter_5fapi_5ft_2',['sn74hc595n_writer_api_t',['../structsn74hc595n__writer__api__t.html',1,'']]],
+  ['sn74hc595n_5fwriter_5fhandle_5ft_3',['sn74hc595n_writer_handle_t',['../structsn74hc595n__writer__handle__t.html',1,'']]],
+  ['spi_5fbus_5fapi_5ft_4',['spi_bus_api_t',['../structspi__bus__api__t.html',1,'']]],
+  ['spi_5fbus_5fhandle_5ft_5',['spi_bus_handle_t',['../structspi__bus__handle__t.html',1,'']]],
+  ['ssd1306_5fapi_5ft_6',['ssd1306_api_t',['../structssd1306__api__t.html',1,'']]],
+  ['ssd1306_5fhandle_5ft_7',['ssd1306_handle_t',['../structssd1306__handle__t.html',1,'']]],
+  ['storage_5fapi_5ft_8',['storage_api_t',['../structstorage__api__t.html',1,'']]],
+  ['synapse_5fbutton_5fpayload_5ft_9',['synapse_button_payload_t',['../structsynapse__button__payload__t.html',1,'']]],
+  ['synapse_5fcommand_5fpayload_5ft_10',['synapse_command_payload_t',['../structsynapse__command__payload__t.html',1,'']]],
+  ['synapse_5fconfig_5fupdated_5fpayload_5ft_11',['synapse_config_updated_payload_t',['../structsynapse__config__updated__payload__t.html',1,'']]],
+  ['synapse_5fconnectivity_5fpayload_5ft_12',['synapse_connectivity_payload_t',['../structsynapse__connectivity__payload__t.html',1,'']]],
+  ['synapse_5fhealth_5fpong_5fpayload_5ft_13',['synapse_health_pong_payload_t',['../structsynapse__health__pong__payload__t.html',1,'']]],
+  ['synapse_5fjob_5ft_14',['synapse_job_t',['../structsynapse__job__t.html',1,'']]],
+  ['synapse_5fmodule_5fcontrol_5fpayload_5ft_15',['synapse_module_control_payload_t',['../structsynapse__module__control__payload__t.html',1,'']]],
+  ['synapse_5fservice_5fstatus_5fpayload_5ft_16',['synapse_service_status_payload_t',['../structsynapse__service__status__payload__t.html',1,'']]],
+  ['synapse_5ftelemetry_5fpayload_5ft_17',['synapse_telemetry_payload_t',['../structsynapse__telemetry__payload__t.html',1,'']]],
+  ['system_5fmanager_5fapi_5ft_18',['system_manager_api_t',['../structsystem__manager__api__t.html',1,'']]]
 ];

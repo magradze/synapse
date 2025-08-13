@@ -93,78 +93,78 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2sensor__api.h
   <div class="headertitle"><div class="title">Synapse Sensor Module API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md389"></a> </p>
-<h1><a class="anchor" id="autotoc_md390"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md416"></a> </p>
+<h1><a class="anchor" id="autotoc_md417"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის სენსორების (sensor) მოდულების სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md392"></a>
+<h1><a class="anchor" id="autotoc_md419"></a>
 მოდულის შექმნა და სიცოცხლის ციკლი</h1>
-<h2><a class="anchor" id="autotoc_md393"></a>
+<h2><a class="anchor" id="autotoc_md420"></a>
 module_t &lt;em&gt;dht22_module_create(const cJSON *config);</h2>
 <ul>
 <li>ქმნის ახალი DHT22 სენსორის მოდულის ინსტანციას გადაცემული კონფიგურაციით.</li>
 <li>არგუმენტები: მოდულის კონფიგურაცია (cJSON ობიექტი)</li>
 <li>აბრუნებს: <a class="el" href="structmodule__t.html" title="The primary structure defining a framework module.">module_t</a> წარმატების შემთხვევაში, NULL შეცდომისას.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md394"></a>
+<h2><a class="anchor" id="autotoc_md421"></a>
 static esp_err_t dht22_init(module_t *module);</h2>
 <ul>
 <li>ახორციელებს სენსორის ინიციალიზაციას (hardware, პარამეტრები და ა.შ.)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md395"></a>
+<h2><a class="anchor" id="autotoc_md422"></a>
 static esp_err_t dht22_enable(module_t *module);</h2>
 <ul>
 <li>აქტივაციას უკეთებს სენსორს (enable logic)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md396"></a>
+<h2><a class="anchor" id="autotoc_md423"></a>
 static esp_err_t dht22_disable(module_t *module);</h2>
 <ul>
 <li>დეაქტივაციას უკეთებს სენსორს (disable logic)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md397"></a>
+<h2><a class="anchor" id="autotoc_md424"></a>
 static esp_err_t dht22_deinit(module_t *module);</h2>
 <ul>
 <li>ასუფთავებს ყველა გამოყოფილ რესურსს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md399"></a>
+<h1><a class="anchor" id="autotoc_md426"></a>
 Event Handling API</h1>
-<h2><a class="anchor" id="autotoc_md400"></a>
+<h2><a class="anchor" id="autotoc_md427"></a>
 static void dht22_handle_event(module_t *module, int32_t event_id, void *event_data);</h2>
 <ul>
 <li>ამუშავებს მიღებულ მოვლენებს Event Bus-დან (მაგ: refresh, notify)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md401"></a>
+<h2><a class="anchor" id="autotoc_md428"></a>
 static esp_err_t publish_sensor_data(dht22_private_data_t *dht22_data, float temperature, float humidity);</h2>
 <ul>
 <li>ავრცელებს სენსორის მონაცემებს Event Bus-ზე</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md403"></a>
+<h1><a class="anchor" id="autotoc_md430"></a>
 Configuration Parsing API</h1>
-<h2><a class="anchor" id="autotoc_md404"></a>
+<h2><a class="anchor" id="autotoc_md431"></a>
 static esp_err_t parse_dht22_config(const cJSON *config, dht22_private_data_t *dht22_data);</h2>
 <ul>
 <li>კითხულობს და ამოწმებს სენსორის კონფიგურაციას</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md406"></a>
+<h1><a class="anchor" id="autotoc_md433"></a>
 Status &amp; Monitoring API</h1>
-<h2><a class="anchor" id="autotoc_md407"></a>
+<h2><a class="anchor" id="autotoc_md434"></a>
 static module_status_t dht22_get_status(module_t *module);</h2>
 <ul>
 <li>აბრუნებს სენსორის მიმდინარე სტატუსს</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md409"></a>
+<h1><a class="anchor" id="autotoc_md436"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md411"></a>
+<h1><a class="anchor" id="autotoc_md438"></a>
 მაგალითები</h1>
 <p><b>სენსორის ჩართვა:</b> </p><div class="fragment"><div class="line">dht22_enable(module);</div>
 </div><!-- fragment --><p><b>მონაცემების Event Bus-ზე გამოქვეყნება:</b> </p><div class="fragment"><div class="line">publish_sensor_data(dht22_data, 23.5, 65.2);</div>

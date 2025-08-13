@@ -93,16 +93,16 @@ $(document).ready(function(){initNavTree('md_docs_2api__reference_2wifi__api.htm
   <div class="headertitle"><div class="title">Synapse WiFi Manager Service API Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md517"></a> </p>
-<h1><a class="anchor" id="autotoc_md518"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md544"></a> </p>
+<h1><a class="anchor" id="autotoc_md545"></a>
 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ის <code>WiFi Manager</code>-ის სტანდარტულ API-ს, naming და structure კონვენციების დაცვით.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md520"></a>
+<h1><a class="anchor" id="autotoc_md547"></a>
 WiFi Manager API</h1>
 <p>ამჟამად, <code>wifi_manager</code> მოდული არ აწვდის საჯარო Service API-ს სხვა მოდულებისთვის. მისი სრული მართვა და სტატუსის მიღება ხდება <code>Event Bus</code>-ზე გამოქვეყნებული ივენთების და <code>Command Router</code>-ის მეშვეობით რეგისტრირებული CLI ბრძანებების საშუალებით.</p>
 <p>ეს არქიტექტურული გადაწყვეტილება ხელს უწყობს მოდულებს შორის მაქსიმალურ იზოლაციას.</p>
-<h2><a class="anchor" id="autotoc_md521"></a>
+<h2><a class="anchor" id="autotoc_md548"></a>
 სამომავლო გაფართოება</h2>
 <p>თუ მომავალში გაჩნდება საჭიროება, რომ სხვა მოდულმა სინქრონულად მოითხოვოს WiFi-ს სტატუსი, შესაძლებელია შემდეგი API-ს დამატება:</p>
 <div class="fragment"><div class="line"><span class="comment">// პოტენციური API სტრუქტურა</span></div>
@@ -114,14 +114,14 @@ WiFi Manager API</h1>
 <div class="line">} <a class="code hl_struct" href="structwifi__api__t.html">wifi_api_t</a>;</div>
 <div class="ttc" id="astructwifi__api__t_html"><div class="ttname"><a href="structwifi__api__t.html">wifi_api_t</a></div><div class="ttdef"><b>Definition</b> wifi_interface.h:19</div></div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md523"></a>
+<h1><a class="anchor" id="autotoc_md550"></a>
 Naming &amp; Structure</h1>
 <ul>
 <li>ყველა ფუნქცია და ცვლადი უნდა მიჰყვებოდეს <a class="el" href="md_docs_2convention_2variable__naming.html">variable_naming.md</a> და <a class="el" href="md_docs_2convention_2function__naming.html">function_naming.md</a> წესებს.</li>
 <li>იხილეთ <a class="el" href="md_docs_2convention_2module__structure.html">module_structure.md</a> სრული სტრუქტურისთვის.</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md525"></a>
+<h1><a class="anchor" id="autotoc_md552"></a>
 მაგალითები</h1>
 <p>ამჟამად API არ არსებობს. მოდულის მართვა ხდება ივენთებით და CLI ბრძანებებით.</p>
 <p><b>სტატუსის მოთხოვნა (არაპირდაპირი გზა):</b></p>

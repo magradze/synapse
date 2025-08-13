@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📊_20ინიციალიზაციის_20დონეების_20რეკომენდებული_20დიაპაზონები_0',['📊 ინიციალიზაციის დონეების რეკომენდებული დიაპაზონები',['../md_docs_2convention_2initialization__levels.html#autotoc_md1074',1,'']]]
+  ['📈_20submodule_20ის_20განახლება_0',['4. 📈 Submodule-ის განახლება',['../md_docs_2contributing_2managing__modules.html#autotoc_md964',1,'']]]
 ];

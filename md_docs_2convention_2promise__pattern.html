@@ -93,12 +93,12 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
   <div class="headertitle"><div class="title">asynchronous ოპერაციების მართვის პატერნი (Promise Pattern)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1170"></a> <b>სტატუსი:</b> რეკომენდებული (Recommended) <b>ავტორი:</b> Synapse Framework Team</p>
-<h1><a class="anchor" id="autotoc_md1171"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1143"></a> <b>სტატუსი:</b> რეკომენდებული (Recommended) <b>ავტორი:</b> Synapse Framework Team</p>
+<h1><a class="anchor" id="autotoc_md1144"></a>
 1. 🎯 მიზანი</h1>
 <p>ეს დოკუმენტი აღწერს Synapse Framework-ში ასინქრონული "მოთხოვნა-პასუხის" (Request-Response) ოპერაციების მართვის სტანდარტულ პატერნს, რომელიც დაფუძნებულია <b>Promise</b> (დაპირების) კონცეფციაზე. ამ პატერნის მიზანია, ჩაანაცვლოს რთული, ივენთებზე დაფუძნებული ლოგიკა უფრო სუფთა, წაკითხვადი და ლოგიკურად გამართული კოდით.</p>
 <p>ეს პატერნი იდეალურია იმ სცენარებისთვის, როდესაც ერთი მოდული (მომხმარებელი, Consumer) აგზავნის მოთხოვნას მეორე მოდულთან (სერვისი, Provider) და ელოდება კონკრეტულ, ერთჯერად პასუხს.</p>
-<h1><a class="anchor" id="autotoc_md1172"></a>
+<h1><a class="anchor" id="autotoc_md1145"></a>
 2. 🤔 პრობლემა: რატომ გვჭირდება Promise-ები?</h1>
 <p>წარმოვიდგინოთ კლასიკური სცენარი: <code>ui_manager</code>-ს სჭირდება <code>wifi_manager</code>-ისგან მიმდინარე სტატუსის მიღება. <code>Event Bus</code>-ის გამოყენებით, პროცესი ასე გამოიყურება:</p>
 <ol type="1">
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <li><b>კონტექსტის დაკარგვა:</b> რთულია იმის მიკვლევა, თუ რომელი მოთხოვნა რომელ პასუხს შეესაბამება.</li>
 <li>**"ხმაური" <code>Event Bus</code>-ზე:** <code>SYNAPSE_EVENT_WIFI_STATUS_READY</code> იგზავნება ყველასთან, მაშინაც კი, თუ ის მხოლოდ <code>ui_manager</code>-ს სჭირდებოდა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1173"></a>
+<h1><a class="anchor" id="autotoc_md1146"></a>
 3. 💡 გადაწყვეტა: Promise პატერნი</h1>
 <p>Promise პატერნი ამ პროცესს გარდაქმნის. <code>Promise</code> არის ობიექტი, რომელიც წარმოადგენს <b>მომავალში დასრულებადი ოპერაციის შედეგს</b>.</p>
 <p><b>ახალი სამუშაო პროცესი:</b></p>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <li><b>წაკითხვადობა:</b> კოდი ხდება ბევრად უფრო ინტუიციური და ადვილად გასაგები.</li>
 <li><b>მიზანმიმართული კომუნიკაცია:</b> პასუხი მიეწოდება მხოლოდ იმას, ვინც ის მოითხოვა.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1174"></a>
+<h1><a class="anchor" id="autotoc_md1147"></a>
 4. ⚙️ როგორ მუშაობს იმპლემენტაცია?</h1>
 <p>ფრეიმვორქის ბირთვში არსებობს **<code>Promise Manager</code>** კომპონენტი, რომელიც ამ პროცესს მართავს:</p>
 <ul>
@@ -141,9 +141,9 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <li>**<code><a class="el" href="promise__manager__internal_8h.html#ada211a8f2e655e46818bf472f6bbe3a8" title="Resolves a promise with a successful result.">synapse_promise_resolve()</a></code> / <code><a class="el" href="promise__manager__internal_8h.html#a01e4cc92988e54905f3c3880df7b3f82" title="Rejects a promise with an error.">synapse_promise_reject()</a></code>:** როდესაც სერვისი დაასრულებს ოპერაციას, ის იძახებს ამ ფუნქციებიდან ერთ-ერთს.</li>
 <li>**<code>Promise Manager Task</code>:** <code>resolve</code> ან <code>reject</code> გამოძახებისას, <code>Promise Manager</code>-ი შესაბამის <code>Promise</code>-ს აგზავნის თავის შიდა რიგში. მისი გამოყოფილი FreeRTOS ტასკი იღებს ამ <code>Promise</code>-ს და უსაფრთხო, იზოლირებულ კონტექსტში იძახებს მომხმარებლის მიერ დარეგისტრირებულ <code>callback</code> ფუნქციას.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1175"></a>
+<h1><a class="anchor" id="autotoc_md1148"></a>
 5. 📝 გამოყენების პატერნი</h1>
-<h2><a class="anchor" id="autotoc_md1176"></a>
+<h2><a class="anchor" id="autotoc_md1149"></a>
 5.1. სერვისის მომწოდებლის მხარე (Provider - მაგ., &lt;tt&gt;wifi_manager&lt;/tt&gt;)</h2>
 <ol type="1">
 <li><p class="startli">**API-ს დეკლარირება (<code><a class="el" href="wifi__interface_8h.html" title="Public Service API contract for the WiFi Manager module.">wifi_interface.h</a></code>):**</p>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="ttc" id="apromise__manager__internal_8h_html_ada211a8f2e655e46818bf472f6bbe3a8"><div class="ttname"><a href="promise__manager__internal_8h.html#ada211a8f2e655e46818bf472f6bbe3a8">synapse_promise_resolve</a></div><div class="ttdeci">esp_err_t synapse_promise_resolve(promise_handle_t handle, void *result_data, void(*free_fn)(void *))</div><div class="ttdoc">Resolves a promise with a successful result.</div><div class="ttdef"><b>Definition</b> promise_manager.c:175</div></div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1177"></a>
+<h2><a class="anchor" id="autotoc_md1150"></a>
 5.2. მომხმარებლის მხარე (Consumer - მაგ., &lt;tt&gt;ui_manager&lt;/tt&gt;)</h2>
 <div class="fragment"><div class="line"><span class="comment">// ui_manager.c</span></div>
 <div class="line"> </div>
@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('md_docs_2convention_2promise__pattern.
 <div class="line">        self</div>
 <div class="line">    );</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1178"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1151"></a>
 6. ✅ როდის გამოვიყენოთ Promise და როდის Event Bus?</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">

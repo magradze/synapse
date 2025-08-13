@@ -18,7 +18,6 @@ var annotated_dup =
     [ "health_api_t", "structhealth__api__t.html", "structhealth__api__t" ],
     [ "i2c_bus_api_t", "structi2c__bus__api__t.html", "structi2c__bus__api__t" ],
     [ "i2c_bus_handle_t", "structi2c__bus__handle__t.html", "structi2c__bus__handle__t" ],
-    [ "logger_private_data_t", "structlogger__private__data__t.html", null ],
     [ "mcp23017_api_t", "structmcp23017__api__t.html", "structmcp23017__api__t" ],
     [ "mcp23017_handle_t", "structmcp23017__handle__t.html", null ],
     [ "module_dependency_t", "structmodule__dependency__t.html", "structmodule__dependency__t" ],

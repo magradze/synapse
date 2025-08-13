@@ -93,11 +93,11 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
   <div class="headertitle"><div class="title">კონფიგურაციის მართვის პროცესი (Configuration Flow)</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1650"></a> </p>
-<h1><a class="anchor" id="autotoc_md1651"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1623"></a> </p>
+<h1><a class="anchor" id="autotoc_md1624"></a>
 მიზანი</h1>
 <p>კონფიგურაციის მართვის მიზანია უზრუნველყოს მოდულების და სისტემის მოქნილი, სტანდარტიზებული და უსაფრთხო კონფიგურაცია, რომელიც ადვილად იკითხება, ვალიდირდება და გამოიყენება როგორც build-ის, ასევე runtime-ის დროს. Synapse Framework v5.0.0-დან იყენებს <b>დეცენტრალიზებულ</b> მოდელს, რაც აუმჯობესებს მოდულურობას და ხსნის 4KB NVS ლიმიტს.</p>
-<h1><a class="anchor" id="autotoc_md1652"></a>
+<h1><a class="anchor" id="autotoc_md1625"></a>
 კონფიგურაციის წყაროები</h1>
 <p>**(განახლებულია)**</p>
 <ul>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <li>**<code>{module_name}/config.json</code>:** თითოეული მოდულის <b>default runtime კონფიგურაცია</b>. ეს ფაილი შეიცავს JSON ობიექტს ან ობიექტების მასივს, რომელიც აღწერს მოდულის ერთ ან მეტ ინსტანციას.</li>
 <li><b>NVS (Non-Volatile Storage):</b> მუდმივი მეხსიერება, სადაც ინახება საბოლოო, "აწყობილი" კონფიგურაცია. სისტემა პირველ რიგში ცდილობს კონფიგურაციის წაკითხვას NVS-დან.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1653"></a>
+<h1><a class="anchor" id="autotoc_md1626"></a>
 კონფიგურაციის სტრუქტურა</h1>
 <p>**(განახლებულია)**</p>
 <p>სისტემის მუშაობისას, <code>Config Manager</code> მეხსიერებაში აწყობს ერთიან cJSON ობიექტს, რომელიც ინარჩუნებს სტანდარტულ სტრუქტურას. ეს ობიექტი იქმნება <code>system_config.json</code>-ისა და ყველა აქტიური მოდულის <code>config.json</code>-ის გაერთიანებით.</p>
@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <div class="line">        }</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1654"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1627"></a>
 კონფიგურაციის დამუშავების ეტაპები</h1>
 <p>**(სრულად განახლებულია)**</p>
 <ol type="1">
@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <div class="line">    style C fill:#f9f,stroke:#333</div>
 <div class="line">    style E fill:#f9f,stroke:#333</div>
 <div class="line">    style G fill:#b0e0e6,stroke:#333</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1655"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1628"></a>
 კონფიგურაციის წვდომის მაგალითები</h1>
 <p>**(უცვლელია)**</p>
 <div class="fragment"><div class="line"><span class="comment">// სტრიქონის წაკითხვა (instance_name.key ფორმატით)</span></div>
@@ -196,14 +196,14 @@ $(document).ready(function(){initNavTree('md_docs_2structure_2configuration__flo
 <div class="line"><span class="comment">// გლობალური პარამეტრის წაკითხვა</span></div>
 <div class="line"><span class="keywordtype">char</span> device_prefix[32];</div>
 <div class="line">ret = synapse_config_get_string(<span class="stringliteral">&quot;global_config.device.id.prefix&quot;</span>, device_prefix, <span class="keyword">sizeof</span>(device_prefix));</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1656"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1629"></a>
 ვალიდაცია და Default მნიშვნელობები</h1>
 <ul>
 <li>თითოეული მოდულის <code>_create</code> ფუნქცია პასუხისმგებელია თავისი კონფიგურაციის ვალიდაციაზე.</li>
 <li>არასწორი ან არარსებული მნიშვნელობების შემთხვევაში, მოდულმა უნდა გამოიყენოს <code>Kconfig</code>-ში განსაზღვრული ან კოდში მითითებული default მნიშვნელობები.</li>
 <li>ყველა შეცდომა ლოგირდება.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1657"></a>
+<h1><a class="anchor" id="autotoc_md1630"></a>
 Runtime Reconfiguration</h1>
 <p>**(უცვლელია)**</p>
 <ul>
@@ -211,7 +211,7 @@ Runtime Reconfiguration</h1>
 <li>გამოიყენება სპეციალური API: <code><a class="el" href="system__manager_8h.html#a482db07a0fe52e74c8873bba7c6f4c72" title="ხელახლა აკონფიგურირებს მოდულს runtime-ზე.">synapse_module_reconfigure(const char *module_name, const cJSON *new_config)</a></code>.</li>
 <li>ცვლილებები ინერგება მხოლოდ ვალიდაციის შემდეგ და ინახება NVS-ში.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1658"></a>
+<h1><a class="anchor" id="autotoc_md1631"></a>
 აკრძალული და რეკომენდებული პრაქტიკები</h1>
 <p>❌ <b>არასდროს:</b></p>
 <ul>

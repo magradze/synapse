@@ -17,7 +17,7 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-08-13 02:48:14 UTC
+ * @note გენერირების თარიღი: 2025-08-13 13:08:10 UTC
  * @note თემების რაოდენობა: 0
  * @note დამუშავებული მოდულები: 
  * @version 1.0
@@ -69,7 +69,7 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-13 02:48:14 UTC"
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-13 13:08:10 UTC"
 #define MQTT_TOPICS_TOTAL_COUNT 0
 #define MQTT_TOPICS_GENERATED_FROM_MODULES ""
 

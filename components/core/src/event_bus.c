@@ -10,7 +10,7 @@
 #include "event_bus.h"
 #include "logging.h"
 #include "base_module.h"
-#include "event_data_wrapper.h" // <--- დამატებულია სრული განმარტებისთვის
+#include "event_data_wrapper.h"
 #include "framework_config.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"

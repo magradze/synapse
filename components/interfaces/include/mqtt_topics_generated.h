@@ -17,9 +17,9 @@
  *
  * ფორმატი: mindlab/v1/{device_id}/{message_type}/{module_name}/{action}
  *
- * @note გენერირების თარიღი: 2025-08-13 13:08:10 UTC
- * @note თემების რაოდენობა: 0
- * @note დამუშავებული მოდულები: 
+ * @note გენერირების თარიღი: 2025-09-12 14:23:26 UTC
+ * @note თემების რაოდენობა: 4
+ * @note დამუშავებული მოდულები: device_identity_service, mqtt_manager, sn74hc595n_writer, spi_bus, time_sync, wifi_manager
  * @version 1.0
  * @author MindLab Auto-Generation System
  */
@@ -37,10 +37,16 @@ extern "C"
    * @brief ავტომატურად გენერირებული MQTT თემების კონსტანტები
    * @details ქვემოთ მოცემული თემები ავტომატურად შეგროვდა module.json ფაილებიდან:
    *
-  
+   * - MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO: .../state/device/info
+ * - MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN: .../cmd/in
+ * - MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS: .../state/wifi/status
+ * - MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT: .../data/wifi/scan_result
    */
 
-  
+  #define MQTT_TOPIC_PUB_DEVICE_IDENTITY_SERVICE_INFO "synapse/devices/%s/state/device/info"
+#define MQTT_TOPIC_SUB_MQTT_MANAGER_COMMAND_IN "synapse/devices/%s/cmd/in"
+#define MQTT_TOPIC_PUB_WIFI_MANAGER_STATUS "synapse/devices/%s/state/wifi/status"
+#define MQTT_TOPIC_PUB_WIFI_MANAGER_SCAN_RESULT "synapse/devices/%s/data/wifi/scan_result"
 
 // =============================================================================
 // დამხმარე მაკროები (თავსებადი ხელით შექმნილ mqtt_topics.h-თან)
@@ -69,9 +75,9 @@ extern "C"
 /**
  * @brief ავტომატური გენერაციის მეტამონაცემები
  */
-#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-08-13 13:08:10 UTC"
-#define MQTT_TOPICS_TOTAL_COUNT 0
-#define MQTT_TOPICS_GENERATED_FROM_MODULES ""
+#define MQTT_TOPICS_GENERATION_TIMESTAMP "2025-09-12 14:23:26 UTC"
+#define MQTT_TOPICS_TOTAL_COUNT 4
+#define MQTT_TOPICS_GENERATED_FROM_MODULES "device_identity_service, mqtt_manager, sn74hc595n_writer, spi_bus, time_sync, wifi_manager"
 
 #ifdef __cplusplus
 }

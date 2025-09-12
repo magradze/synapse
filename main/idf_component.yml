@@ -1,13 +1,8 @@
 ## Synapse Core Component Manifest
-name: synapse
-version: "11.0.0"
+name: magradze/synapse
+version: 1.0.0
 description: Synapse IoT Framework Core Component.
 url: https://github.com/magradze/synapse
 dependencies:
-  idf: ">=5.0"
-  esp_event: "*"
-  nvs_flash: "*"
-  json: "*"
-  driver: "*"
-  esp_wifi: "*"
-  esp_timer: "*"
+  idf: '>=5.0'
+  espressif/mdns: '*'

@@ -1,0 +1,30 @@
+[submodule "components/modules/communications/wifi_manager"]
+	path = components/modules/communications/wifi_manager
+	url = https://github.com/magradze/wifi_manager.git
+[submodule "components/modules/storage/storage_manager"]
+	path = components/modules/storage/storage_manager
+	url = https://github.com/magradze/storage_manager.git
+[submodule "components/modules/utilities/command_router"]
+	path = components/modules/utilities/command_router
+	url = https://github.com/magradze/command_router.git
+[submodule "components/modules/communications/mqtt_manager"]
+	path = components/modules/communications/mqtt_manager
+	url = https://github.com/magradze/mqtt_manager.git
+[submodule "components/modules/utilities/rgb_led_indicator"]
+	path = components/modules/utilities/rgb_led_indicator
+	url = https://github.com/magradze/rgb_led_indicator.git
+[submodule "components/modules/drivers/sn74hc595n_writer"]
+	path = components/modules/drivers/sn74hc595n_writer
+	url = https://github.com/magradze/sn74hc595n_writer.git
+[submodule "components/modules/drivers/spi_bus"]
+	path = components/modules/drivers/spi_bus
+	url = https://github.com/magradze/spi_bus.git
+[submodule "components/modules/system/device_identity_service"]
+	path = components/modules/system/device_identity_service
+	url = https://github.com/magradze/device_identity_service.git
+[submodule "components/modules/system/time_sync"]
+	path = components/modules/system/time_sync
+	url = https://github.com/magradze/time_sync.git
+[submodule "components/modules/utilities/system_timer"]
+	path = components/modules/utilities/system_timer
+	url = https://github.com/magradze/system_timer.git

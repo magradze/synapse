@@ -3,14 +3,23 @@ cmake_minimum_required(VERSION 3.16)
 # First, include the script that will scan modules and define which ones are enabled.
 include(components/core/collect_modules.cmake)
 
-# Now, set the component directories based on the output of the script.
-# This ensures only enabled modules are visible to the build system.
-set(EXTRA_COMPONENT_DIRS
+# Initialize the list of component directories
+set(SYNAPSE_COMPONENT_DIRS
     components/core
     components/interfaces
     ${ENABLED_MODULE_PATHS} # This variable is set by collect_modules.cmake
     dependencies
 )
+
+# IMPORTANT: The 'managed_components' directory is created by the component manager
+# AFTER the initial cmake run. We only add it to the path if it already exists
+# to avoid errors on the first configuration run.
+if(IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/managed_components)
+    list(PREPEND SYNAPSE_COMPONENT_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/managed_components)
+endif()
+
+# Now, set the final variable that ESP-IDF uses
+set(EXTRA_COMPONENT_DIRS ${SYNAPSE_COMPONENT_DIRS})
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(synapse-fmw)

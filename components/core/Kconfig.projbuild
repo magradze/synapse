@@ -9,7 +9,17 @@ menu "Synapse Framework"
 
     # --- Module Configuration ---
     menu "Modules"
-            rsource "../modules/utilities/logger_module/Kconfig"
+            rsource "../modules/communications/mqtt_manager/Kconfig"
+    rsource "../modules/communications/wifi_manager/Kconfig"
+    rsource "../modules/drivers/sn74hc595n_writer/Kconfig"
+    rsource "../modules/drivers/spi_bus/Kconfig"
+    rsource "../modules/storage/storage_manager/Kconfig"
+    rsource "../modules/system/device_identity_service/Kconfig"
+    rsource "../modules/system/time_sync/Kconfig"
+    rsource "../modules/utilities/command_router/Kconfig"
+    rsource "../modules/utilities/logger_module/Kconfig"
+    rsource "../modules/utilities/rgb_led_indicator/Kconfig"
+    rsource "../modules/utilities/system_timer/Kconfig"
 
     endmenu
 endmenu

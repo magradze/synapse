@@ -1,0 +1,17 @@
+dependencies:
+  espressif/mdns:
+    dependencies: []
+    source:
+      path: /home/magradze/projects/esp/synapse/synapse/managed_components/espressif__mdns
+      type: local
+    version: 1.8.2
+  idf:
+    source:
+      type: idf
+    version: 5.4.1
+direct_dependencies:
+- espressif/mdns
+- idf
+manifest_hash: 1cb872ae5c998c1f38c6c8f1121d77ca851114b9951810e7e3284f05b36c52f1
+target: esp32
+version: 2.0.0

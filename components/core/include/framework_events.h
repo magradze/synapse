@@ -24,6 +24,12 @@
 #define SYNAPSE_EVENT_WIFI_STATUS_READY "WIFI_STATUS_READY" // WiFi module reports its status
 #define SYNAPSE_EVENT_DEVICE_INFO_READY "DEVICE_INFO_READY" // Device identity service reports its information
 
+/**
+ * @brief Generic event for any module to publish its telemetry/status data.
+ * @details The payload must be of type synapse_telemetry_payload_t.
+ */
+#define SYNAPSE_EVENT_MODULE_TELEMETRY "MODULE_TELEMETRY"
+
 // --- Self Test Events ---
 #define SYNAPSE_EVENT_SELF_TEST_REPORT_READY "SYNAPSE_SELF_TEST_REPORT_READY" // Self Test Manager publishes this when a report is ready
 
